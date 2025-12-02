@@ -13,6 +13,10 @@
         padding-top: 40px;
     }
 
+    h1 {
+        margin-bottom: 10px;
+    }
+
     #kana {
         font-size: 120px;
         margin: 40px 0;
@@ -39,11 +43,38 @@
         margin-top: 20px;
         color: #444;
     }
+
+    /* Contenedor de los botones de modo */
+    #modo-container {
+        display: flex;
+        gap: 10px;
+        margin-top: 10px;
+    }
+
+    /* Botones de modo (hiragana/katakana/mezcla) */
+    .modo-btn {
+        font-size: 16px;
+        padding: 8px 14px;
+        background: #ddddff;
+        color: #333;
+    }
+
+    .modo-btn.activo {
+        background: #7d5cff;
+        color: white;
+    }
 </style>
 </head>
 <body>
 
 <h1>Repaso de Kana — Asallam Sensei</h1>
+
+<!-- Botones para seleccionar el modo -->
+<div id="modo-container">
+    <button id="btn-hiragana" class="modo-btn" onclick="setModo('hiragana')">Hiragana</button>
+    <button id="btn-katakana" class="modo-btn" onclick="setModo('katakana')">Katakana</button>
+    <button id="btn-mezcla"   class="modo-btn" onclick="setModo('mezcla')">Mezcla</button>
+</div>
 
 <div id="kana">あ</div>
 
@@ -119,7 +150,6 @@ const hiragana = [
     ["りゃ","rya"], ["りゅ","ryu"], ["りょ","ryo"]
 ];
 
-
 // ===============================
 // KATAKANA COMPLETO
 // ===============================
@@ -186,7 +216,34 @@ const katakana = [
     ["リャ","rya"], ["リュ","ryu"], ["リョ","ryo"]
 ];
 
+// ===============================
+// LÓGICA DEL JUEGO
+// ===============================
+let modoActual = "hiragana";       // "hiragana" | "katakana" | "mezcla"
+let kanaLista = hiragana;          // lista usada en cada momento
 let actual = 0;
+
+function setModo(modo) {
+    modoActual = modo;
+
+    if (modo === "hiragana") {
+        kanaLista = hiragana;
+    } else if (modo === "katakana") {
+        kanaLista = katakana;
+    } else { // mezcla
+        kanaLista = [...hiragana, ...katakana];
+    }
+
+    // actualizar estado visual de los botones
+    const botones = document.querySelectorAll(".modo-btn");
+    botones.forEach(b => b.classList.remove("activo"));
+
+    document.getElementById("btn-" + modo).classList.add("activo");
+
+    // limpiar respuesta y mostrar un nuevo kana
+    document.getElementById("respuesta").innerText = "";
+    siguienteKana();
+}
 
 function siguienteKana() {
     actual = Math.floor(Math.random() * kanaLista.length);
@@ -197,8 +254,10 @@ function siguienteKana() {
 function mostrarRomaji() {
     document.getElementById("respuesta").innerText = kanaLista[actual][1];
 }
+
+// Estado inicial: arrancar en hiragana
+setModo("hiragana");
 </script>
 
 </body>
-
 </html>
