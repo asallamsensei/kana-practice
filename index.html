@@ -263,6 +263,7 @@ function siguienteKana() {
     actual = Math.floor(Math.random() * kanaLista.length);
     document.getElementById("kana").innerText = kanaLista[actual][0];
     document.getElementById("respuesta").innerText = "";
+    document.getElementById("respuestaUsuario").value = "";
 }
 
 function mostrarRomaji() {
@@ -292,5 +293,6 @@ setModo("hiragana");
 
 </body>
 </html>
+
 
 
