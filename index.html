@@ -269,10 +269,28 @@ function mostrarRomaji() {
     document.getElementById("respuesta").innerText = kanaLista[actual][1];
 }
 
+function verificarRespuesta() {
+    const usuario = document.getElementById("respuestaUsuario").value.trim().toLowerCase();
+    const correcto = kanaLista[actual][1];
+
+    if (usuario === correcto) {
+        document.getElementById("respuesta").innerText = "Correcto ✔ (" + correcto + ")";
+    } else {
+        document.getElementById("respuesta").innerText = "Incorrecto ✘ (era: " + correcto + ")";
+    }
+
+    // limpiar el input
+    document.getElementById("respuestaUsuario").value = "";
+
+    // pasar al siguiente kana
+    siguienteKana();
+}
+
 // Estado inicial: arrancar en hiragana
 setModo("hiragana");
 </script>
 
 </body>
 </html>
+
 
