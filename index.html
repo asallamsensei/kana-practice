@@ -95,7 +95,7 @@
 <input id="respuestaUsuario" 
        type="text" 
        placeholder="Escribe el romaji aquí"
-       onkeydown="if(event.key === 'Enter') verificarRespuesta()">
+       onkeydown="manejarEnter(event)">
 
 <script>
 // ===============================
@@ -236,6 +236,7 @@ const katakana = [
 let modoActual = "hiragana";       // "hiragana" | "katakana" | "mezcla"
 let kanaLista = hiragana;          // lista usada en cada momento
 let actual = 0;
+let yaValidado = false;
 
 function setModo(modo) {
     modoActual = modo;
@@ -256,7 +257,6 @@ function setModo(modo) {
 
     // limpiar respuesta y mostrar un nuevo kana
     document.getElementById("respuesta").innerText = "";
-    siguienteKana();
 }
 
 function siguienteKana() {
@@ -264,6 +264,8 @@ function siguienteKana() {
     document.getElementById("kana").innerText = kanaLista[actual][0];
     document.getElementById("respuesta").innerText = "";
     document.getElementById("respuestaUsuario").value = "";
+    yaValidado = false;  
+    document.getElementById("respuestaUsuario").focus();
 }
 
 function mostrarRomaji() {
@@ -280,19 +282,30 @@ function verificarRespuesta() {
         document.getElementById("respuesta").innerText = "Incorrecto ✘ (era: " + correcto + ")";
     }
 
-    // limpiar el input
-    document.getElementById("respuestaUsuario").value = "";
-
-    // pasar al siguiente kana
-    siguienteKana();
+    yaValidado = true;  // señal de que ya se revisó la respuesta
 }
 
+function manejarEnter(event) {
+    if (event.key !== "Enter") return;
+
+    if (!yaValidado) {
+        // Primer Enter → revisar respuesta
+        verificarRespuesta();
+    } else {
+        // Segundo Enter → pasar al siguiente kana
+        yaValidado = false;
+        document.getElementById("respuesta").innerText = "";
+        siguienteKana();
+    }
+}
+    
 // Estado inicial: arrancar en hiragana
 setModo("hiragana");
 </script>
 
 </body>
 </html>
+
 
 
 
