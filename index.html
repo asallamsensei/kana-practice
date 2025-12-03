@@ -41,8 +41,18 @@
     #respuesta {
         font-size: 30px;
         margin-top: 20px;
-        color: #444;
     }
+    
+    .correcto {
+        color: #28a745; /* verde bonito */
+        font-weight: bold;
+    }
+    
+    .incorrecto {
+        color: #d93025; /* rojo fuerte */
+        font-weight: bold;
+    }
+
     
 #respuestaUsuario {
     margin-top: 15px;
@@ -266,6 +276,7 @@ function siguienteKana() {
     document.getElementById("respuestaUsuario").value = "";
     yaValidado = false;  
     document.getElementById("respuestaUsuario").focus();
+    document.getElementById("respuesta").className = "";
 }
 
 function mostrarRomaji() {
@@ -278,8 +289,10 @@ function verificarRespuesta() {
 
     if (usuario === correcto) {
         document.getElementById("respuesta").innerText = "Correcto ✔ (" + correcto + ")";
+        document.getElementById("respuesta").className = "correcto";   // ← AÑADIDO
     } else {
         document.getElementById("respuesta").innerText = "Incorrecto ✘ (era: " + correcto + ")";
+        document.getElementById("respuesta").className = "incorrecto"; // ← AÑADIDO
     }
 
     yaValidado = true;  // señal de que ya se revisó la respuesta
@@ -305,6 +318,7 @@ setModo("hiragana");
 
 </body>
 </html>
+
 
 
 
