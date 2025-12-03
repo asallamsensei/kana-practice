@@ -82,6 +82,12 @@
         background: #7d5cff;
         color: white;
     }
+
+    #estadisticas {
+    margin-top: 20px;
+    font-size: 22px;
+    }
+    
 </style>
 </head>
 <body>
@@ -107,6 +113,11 @@
        placeholder="Escribe el romaji aquí"
        onkeydown="manejarEnter(event)">
 
+<div id="estadisticas">
+    Aciertos: <span id="aciertos">0</span> — 
+    Errores: <span id="errores">0</span>
+</div>
+    
 <script>
 // ===============================
 // HIRAGANA COMPLETO
@@ -247,6 +258,8 @@ let modoActual = "hiragana";       // "hiragana" | "katakana" | "mezcla"
 let kanaLista = hiragana;          // lista usada en cada momento
 let actual = 0;
 let yaValidado = false;
+let aciertos = 0;
+let errores = 0;
 
 function setModo(modo) {
     modoActual = modo;
@@ -290,11 +303,13 @@ function verificarRespuesta() {
     if (usuario === correcto) {
         document.getElementById("respuesta").innerText = "Correcto ✔ (" + correcto + ")";
         document.getElementById("respuesta").className = "correcto";   // ← AÑADIDO
+        aciertos++;
     } else {
         document.getElementById("respuesta").innerText = "Incorrecto ✘ (era: " + correcto + ")";
         document.getElementById("respuesta").className = "incorrecto"; // ← AÑADIDO
+        errores++;
     }
-
+    actualizarEstadisticas();
     yaValidado = true;  // señal de que ya se revisó la respuesta
 }
 
@@ -311,13 +326,20 @@ function manejarEnter(event) {
         siguienteKana();
     }
 }
-    
+
+function actualizarEstadisticas() {
+    document.getElementById("aciertos").innerText = aciertos;
+    document.getElementById("errores").innerText = errores;
+}
+
 // Estado inicial: arrancar en hiragana
 setModo("hiragana");
+actualizarEstadisticas();
 </script>
 
 </body>
 </html>
+
 
 
 
