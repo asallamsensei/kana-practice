@@ -278,8 +278,15 @@ function setModo(modo) {
 
     document.getElementById("btn-" + modo).classList.add("activo");
 
-    // limpiar respuesta y mostrar un nuevo kana
+    // limpiar respuesta anterior
     document.getElementById("respuesta").innerText = "";
+    document.getElementById("respuesta").className = "";
+
+    // resetear estado de validación
+    yaValidado = false;
+
+    // mostrar un nuevo kana del nuevo modo
+    siguienteKana();
 }
 
 function siguienteKana() {
@@ -339,6 +346,7 @@ actualizarEstadisticas();
 
 </body>
 </html>
+
 
 
 
