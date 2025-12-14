@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Repaso de Kana - Asallam Sensei</title>
+<style>
+    body {
+        background: #f6f6ff;
+        font-family: Arial;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-top: 40px;
+    }
+
+    h1 {
+        margin-bottom: 10px;
+    }
+
+    #kana {
+        font-size: 120px;
+        margin: 40px 0;
+        font-weight: bold;
+    }
+
+    button {
+        padding: 12px 20px;
+        margin: 5px;
+        font-size: 18px;
+        border-radius: 10px;
+        border: none;
+        background: #7d5cff;
+        color: white;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background: #5d46d4;
+    }
+
+    #respuesta {
+        font-size: 30px;
+        margin-top: 20px;
+    }
+    
+    .correcto {
+        color: #28a745; /* verde bonito */
+        font-weight: bold;
+    }
+    
+    .incorrecto {
+        color: #d93025; /* rojo fuerte */
+        font-weight: bold;
+    }
+
+    
+#respuestaUsuario {
+    margin-top: 15px;
+    font-size: 22px;
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: 2px solid #aaa;
+    text-align: center;
+}
+
+    /* Contenedor de los botones de modo */
+    #modo-container {
+        display: flex;
+        gap: 10px;
+        margin-top: 10px;
+    }
+
+    /* Botones de modo (hiragana/katakana/mezcla) */
+    .modo-btn {
+        font-size: 16px;
+        padding: 8px 14px;
+        background: #ddddff;
+        color: #333;
+    }
+
+    .modo-btn.activo {
+        background: #7d5cff;
+        color: white;
+    }
+
+    #estadisticas {
+    margin-top: 20px;
+    font-size: 22px;
+    }
+    
+</style>
+</head>
+<body>
+
+<h1>Repaso de Kana — Asallam Sensei</h1>
+
+<!-- Botones para seleccionar el modo -->
+<div id="modo-container">
+    <button id="btn-hiragana" class="modo-btn" onclick="setModo('hiragana')">Hiragana</button>
+    <button id="btn-katakana" class="modo-btn" onclick="setModo('katakana')">Katakana</button>
+    <button id="btn-mezcla"   class="modo-btn" onclick="setModo('mezcla')">Mezcla</button>
+</div>
+
+<div id="kana">あ</div>
+
+<button onclick="mostrarRomaji()">Mostrar romaji</button>
+<button onclick="siguienteKana()">Siguiente</button>
+
+<div id="respuesta"></div>
+
+<input id="respuestaUsuario" 
+       type="text" 
+       placeholder="Escribe el romaji aquí"
+       onkeydown="manejarEnter(event)">
+
+<div id="estadisticas">
+    Aciertos: <span id="aciertos">0</span> — 
+    Errores: <span id="errores">0</span>
+</div>
+    
+<script>
+// ===============================
+// HIRAGANA COMPLETO
+// ===============================
+const hiragana = [
+    // Vocales
+    ["あ","a"], ["い","i"], ["う","u"], ["え","e"], ["お","o"],
+
+    // K
+    ["か","ka"], ["き","ki"], ["く","ku"], ["け","ke"], ["こ","ko"],
+    // Tenten (G)
+    ["が","ga"], ["ぎ","gi"], ["ぐ","gu"], ["げ","ge"], ["ご","go"],
+
+    // S
+    ["さ","sa"], ["し","shi"], ["す","su"], ["せ","se"], ["そ","so"],
+    // Tenten (Z)
+    ["ざ","za"], ["じ","ji"], ["ず","zu"], ["ぜ","ze"], ["ぞ","zo"],
+
+    // T
+    ["た","ta"], ["ち","chi"], ["つ","tsu"], ["て","te"], ["と","to"],
+    // Tenten (D)
+    ["だ","da"], ["ぢ","ji"], ["づ","zu"], ["で","de"], ["ど","do"],
+
+    // N
+    ["な","na"], ["に","ni"], ["ぬ","nu"], ["ね","ne"], ["の","no"],
+
+    // H
+    ["は","ha"], ["ひ","hi"], ["ふ","fu"], ["へ","he"], ["ほ","ho"],
+    // Tenten (B)
+    ["ば","ba"], ["び","bi"], ["ぶ","bu"], ["べ","be"], ["ぼ","bo"],
+    // Maru (P)
+    ["ぱ","pa"], ["ぴ","pi"], ["ぷ","pu"], ["ぺ","pe"], ["ぽ","po"],
+
+    // M
+    ["ま","ma"], ["み","mi"], ["む","mu"], ["め","me"], ["も","mo"],
+
+    // Y
+    ["や","ya"], ["ゆ","yu"], ["よ","yo"],
+
+    // R
+    ["ら","ra"], ["り","ri"], ["る","ru"], ["れ","re"], ["ろ","ro"],
+
+    // W
+    ["わ","wa"], ["を","wo"],
+
+    // N
+    ["ん","n"],
+
+    // Yoon (contracciones)
+    ["きゃ","kya"], ["きゅ","kyu"], ["きょ","kyo"],
+    ["ぎゃ","gya"], ["ぎゅ","gyu"], ["ぎょ","gyo"],
+
+    ["しゃ","sha"], ["しゅ","shu"], ["しょ","sho"],
+    ["じゃ","ja"], ["じゅ","ju"], ["じょ","jo"],
+
+    ["ちゃ","cha"], ["ちゅ","chu"], ["ちょ","cho"],
+    ["にゃ","nya"], ["にゅ","nyu"], ["にょ","nyo"],
+
+    ["ひゃ","hya"], ["ひゅ","hyu"], ["ひょ","hyo"],
+    ["びゃ","bya"], ["びゅ","byu"], ["びょ","byo"],
+    ["ぴゃ","pya"], ["ぴゅ","pyu"], ["ぴょ","pyo"],
+
+    ["みゃ","mya"], ["みゅ","myu"], ["みょ","myo"],
+
+    ["りゃ","rya"], ["りゅ","ryu"], ["りょ","ryo"]
+];
+
+// ===============================
+// KATAKANA COMPLETO
+// ===============================
+const katakana = [
+    // Vocales
+    ["ア","a"], ["イ","i"], ["ウ","u"], ["エ","e"], ["オ","o"],
+
+    // K
+    ["カ","ka"], ["キ","ki"], ["ク","ku"], ["ケ","ke"], ["コ","ko"],
+    // Tenten (G)
+    ["ガ","ga"], ["ギ","gi"], ["グ","gu"], ["ゲ","ge"], ["ゴ","go"],
+
+    // S
+    ["サ","sa"], ["シ","shi"], ["ス","su"], ["セ","se"], ["ソ","so"],
+    // Tenten (Z)
+    ["ザ","za"], ["ジ","ji"], ["ズ","zu"], ["ゼ","ze"], ["ゾ","zo"],
+
+    // T
+    ["タ","ta"], ["チ","chi"], ["ツ","tsu"], ["テ","te"], ["ト","to"],
+    // Tenten (D)
+    ["ダ","da"], ["ヂ","ji"], ["ヅ","zu"], ["デ","de"], ["ド","do"],
+
+    // N
+    ["ナ","na"], ["ニ","ni"], ["ヌ","nu"], ["ネ","ne"], ["ノ","no"],
+
+    // H
+    ["ハ","ha"], ["ヒ","hi"], ["フ","fu"], ["ヘ","he"], ["ホ","ho"],
+    // Tenten (B)
+    ["バ","ba"], ["ビ","bi"], ["ブ","bu"], ["ベ","be"], ["ボ","bo"],
+    // Maru (P)
+    ["パ","pa"], ["ピ","pi"], ["プ","pu"], ["ペ","pe"], ["ポ","po"],
+
+    // M
+    ["マ","ma"], ["ミ","mi"], ["ム","mu"], ["メ","me"], ["モ","mo"],
+
+    // Y
+    ["ヤ","ya"], ["ユ","yu"], ["ヨ","yo"],
+
+    // R
+    ["ラ","ra"], ["リ","ri"], ["ル","ru"], ["レ","re"], ["ロ","ro"],
+
+    // W
+    ["ワ","wa"], ["ヲ","wo"],
+
+    // N
+    ["ン","n"],
+
+    // Yoon (contracciones)
+    ["キャ","kya"], ["キュ","kyu"], ["キョ","kyo"],
+    ["ギャ","gya"], ["ギュ","gyu"], ["ギョ","gyo"],
+
+    ["シャ","sha"], ["シュ","shu"], ["ショ","sho"],
+    ["ジャ","ja"], ["ジュ","ju"], ["ジョ","jo"],
+
+    ["チャ","cha"], ["チュ","chu"], ["チョ","cho"],
+    ["ニャ","nya"], ["ニュ","nyu"], ["ニョ","nyo"],
+
+    ["ヒャ","hya"], ["ヒュ","hyu"], ["ヒョ","hyo"],
+    ["ビャ","bya"], ["ビュ","byu"], ["ビョ","byo"],
+    ["ピャ","pya"], ["ピュ","pyu"], ["ピョ","pyo"],
+
+    ["ミャ","mya"], ["ミュ","myu"], ["ミョ","myo"],
+
+    ["リャ","rya"], ["リュ","ryu"], ["リョ","ryo"]
+];
+
+// ===============================
+// LÓGICA DEL JUEGO
+// ===============================
+let modoActual = "hiragana";       // "hiragana" | "katakana" | "mezcla"
+let kanaLista = hiragana;          // lista usada en cada momento
+let actual = 0;
+let yaValidado = false;
+let aciertos = 0;
+let errores = 0;
+
+function setModo(modo) {
+    modoActual = modo;
+
+    if (modo === "hiragana") {
+        kanaLista = hiragana;
+    } else if (modo === "katakana") {
+        kanaLista = katakana;
+    } else { // mezcla
+        kanaLista = [...hiragana, ...katakana];
+    }
+
+    // actualizar estado visual de los botones
+    const botones = document.querySelectorAll(".modo-btn");
+    botones.forEach(b => b.classList.remove("activo"));
+
+    document.getElementById("btn-" + modo).classList.add("activo");
+
+    // limpiar respuesta anterior
+    document.getElementById("respuesta").innerText = "";
+    document.getElementById("respuesta").className = "";
+
+    // resetear estado de validación
+    yaValidado = false;
+
+    // mostrar un nuevo kana del nuevo modo
+    siguienteKana();
+}
+
+function siguienteKana() {
+    actual = Math.floor(Math.random() * kanaLista.length);
+    document.getElementById("kana").innerText = kanaLista[actual][0];
+    document.getElementById("respuesta").innerText = "";
+    document.getElementById("respuestaUsuario").value = "";
+    yaValidado = false;  
+    document.getElementById("respuestaUsuario").focus();
+    document.getElementById("respuesta").className = "";
+}
+
+function mostrarRomaji() {
+    document.getElementById("respuesta").innerText = kanaLista[actual][1];
+}
+
+function verificarRespuesta() {
+    const usuario = document.getElementById("respuestaUsuario").value.trim().toLowerCase();
+    const correcto = kanaLista[actual][1];
+
+    if (usuario === correcto) {
+        document.getElementById("respuesta").innerText = "Correcto ✔ (" + correcto + ")";
+        document.getElementById("respuesta").className = "correcto";   // ← AÑADIDO
+        aciertos++;
+    } else {
+        document.getElementById("respuesta").innerText = "Incorrecto ✘ (era: " + correcto + ")";
+        document.getElementById("respuesta").className = "incorrecto"; // ← AÑADIDO
+        errores++;
+    }
+    actualizarEstadisticas();
+    yaValidado = true;  // señal de que ya se revisó la respuesta
+}
+
+function manejarEnter(event) {
+    if (event.key !== "Enter") return;
+
+    if (!yaValidado) {
+        // Primer Enter → revisar respuesta
+        verificarRespuesta();
+    } else {
+        // Segundo Enter → pasar al siguiente kana
+        yaValidado = false;
+        document.getElementById("respuesta").innerText = "";
+        siguienteKana();
+    }
+}
+
+function actualizarEstadisticas() {
+    document.getElementById("aciertos").innerText = aciertos;
+    document.getElementById("errores").innerText = errores;
+}
+
+// Estado inicial: arrancar en hiragana
+setModo("hiragana");
+actualizarEstadisticas();
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
