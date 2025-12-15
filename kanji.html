@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Repaso de Kanji - Asallam Sensei</title>
+<style>
+    body {
+        background: #fffaf3;
+        font-family: Arial;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-top: 40px;
+    }
+
+    h1 {
+        margin-bottom: 10px;
+    }
+
+    #kanji {
+        font-size: 120px;
+        margin: 40px 0;
+        font-weight: bold;
+    }
+
+    button {
+        padding: 12px 20px;
+        margin: 5px;
+        font-size: 18px;
+        border-radius: 10px;
+        border: none;
+        background: #d97706;
+        color: white;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background: #b45309;
+    }
+
+    #respuesta {
+        font-size: 28px;
+        margin-top: 20px;
+        text-align: center;
+    }
+
+    #estadisticas {
+        margin-top: 20px;
+        font-size: 22px;
+    }
+</style>
+</head>
+<body>
+
+<h1>Repaso de Kanji — Asallam Sensei</h1>
+
+<div id="kanji">日</div>
+
+<button onclick="mostrar()">Mostrar significado</button>
+<button onclick="siguiente()">Siguiente</button>
+
+<div id="respuesta"></div>
+
+<div id="estadisticas">
+    Vistos: <span id="vistos">0</span>
+</div>
+
+<script>
+let lista = [];
+let actual = 0;
+let vistos = 0;
+
+// Cargar kanji desde JSON
+fetch("data/kanji_n5.json")
+    .then(res => res.json())
+    .then(data => {
+        lista = data;
+        siguiente();
+    });
+
+function siguiente() {
+    if (lista.length === 0) return;
+    actual = Math.floor(Math.random() * lista.length);
+    document.getElementById("kanji").innerText = lista[actual].kanji;
+    document.getElementById("respuesta").innerText = "";
+    vistos++;
+    document.getElementById("vistos").innerText = vistos;
+}
+
+function mostrar() {
+    const k = lista[actual];
+    document.getElementById("respuesta").innerHTML =
+        `Significado: <b>${k.significado}</b><br>
+         Lectura: ${k.lectura}`;
+}
+</script>
+
+</body>
+</html>
