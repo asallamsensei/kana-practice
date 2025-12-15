@@ -38,10 +38,31 @@
         background: #b45309;
     }
 
-    #respuesta {
-        font-size: 28px;
+    #opciones {
+        font-size: 24px;
         margin-top: 20px;
+        text-align: left;
+        line-height: 1.6;
+    }
+
+    #respuestaUsuario {
+        margin-top: 15px;
+        font-size: 22px;
+        padding: 8px 12px;
+        border-radius: 8px;
+        border: 2px solid #aaa;
         text-align: center;
+        width: 80px;
+    }
+
+    .correcto {
+        color: #28a745;
+        font-weight: bold;
+    }
+
+    .incorrecto {
+        color: #d93025;
+        font-weight: bold;
     }
 
     #estadisticas {
@@ -56,10 +77,18 @@
 
 <div id="kanji">日</div>
 
-<button onclick="mostrar()">Mostrar significado</button>
+<div id="opciones"></div>
+
+<input id="respuestaUsuario"
+       type="text"
+       placeholder="a / b / c"
+       maxlength="1"
+       onkeydown="manejarEnter(event)">
+
+<button onclick="comprobar()">Comprobar</button>
 <button onclick="siguiente()">Siguiente</button>
 
-<div id="respuesta"></div>
+<div id="resultado"></div>
 
 <div id="estadisticas">
     Vistos: <span id="vistos">0</span>
@@ -69,6 +98,7 @@
 let lista = [];
 let actual = 0;
 let vistos = 0;
+let correcta = "";
 
 // Cargar kanji desde JSON
 fetch("data/kanji_n5.json")
@@ -79,19 +109,56 @@ fetch("data/kanji_n5.json")
     });
 
 function siguiente() {
-    if (lista.length === 0) return;
+    if (lista.length < 3) return;
+
     actual = Math.floor(Math.random() * lista.length);
-    document.getElementById("kanji").innerText = lista[actual].kanji;
-    document.getElementById("respuesta").innerText = "";
+    const correcto = lista[actual];
+
+    // elegir dos incorrectos distintos
+    let opciones = [correcto.significado];
+    while (opciones.length < 3) {
+        const r = lista[Math.floor(Math.random() * lista.length)].significado;
+        if (!opciones.includes(r)) opciones.push(r);
+    }
+
+    // mezclar opciones
+    opciones.sort(() => Math.random() - 0.5);
+
+    const letras = ["a", "b", "c"];
+    correcta = letras[opciones.indexOf(correcto.significado)];
+
+    // mostrar
+    document.getElementById("kanji").innerText = correcto.kanji;
+    document.getElementById("opciones").innerHTML =
+        `a) ${opciones[0]}<br>
+         b) ${opciones[1]}<br>
+         c) ${opciones[2]}`;
+
+    document.getElementById("resultado").innerText = "";
+    document.getElementById("respuestaUsuario").value = "";
+    document.getElementById("respuestaUsuario").focus();
+
     vistos++;
     document.getElementById("vistos").innerText = vistos;
 }
 
-function mostrar() {
-    const k = lista[actual];
-    document.getElementById("respuesta").innerHTML =
-        `Significado: <b>${k.significado}</b><br>
-         Lectura: ${k.lectura}`;
+function comprobar() {
+    const r = document.getElementById("respuestaUsuario").value.toLowerCase().trim();
+    const res = document.getElementById("resultado");
+
+    if (r === correcta) {
+        res.innerText = "Correcto ✔";
+        res.className = "correcto";
+    } else {
+        res.innerText = `Incorrecto ✘ (era ${correcta})`;
+        res.className = "incorrecto";
+    }
+}
+
+function manejarEnter(event) {
+    if (event.key === "Enter") {
+        comprobar();
+    }
 }
 </script>
 
