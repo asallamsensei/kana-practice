@@ -65,6 +65,11 @@
         font-weight: bold;
     }
 
+    #resultado {
+        margin-top: 15px;
+        font-size: 24px;
+    }
+
     #estadisticas {
         margin-top: 20px;
         font-size: 22px;
@@ -85,8 +90,7 @@
        maxlength="1"
        onkeydown="manejarEnter(event)">
 
-<button onclick="comprobar()">Comprobar</button>
-<button onclick="siguiente()">Siguiente</button>
+<button onclick="mostrarRespuesta()">Mostrar respuesta</button>
 
 <div id="resultado"></div>
 
@@ -99,6 +103,7 @@ let lista = [];
 let actual = 0;
 let vistos = 0;
 let correcta = "";
+let yaValidado = false;
 
 // Cargar kanji desde JSON
 fetch("data/kanji_n5.json")
@@ -114,14 +119,14 @@ function siguiente() {
     actual = Math.floor(Math.random() * lista.length);
     const correcto = lista[actual];
 
-    // elegir dos incorrectos distintos
+    // generar opciones
     let opciones = [correcto.significado];
     while (opciones.length < 3) {
         const r = lista[Math.floor(Math.random() * lista.length)].significado;
         if (!opciones.includes(r)) opciones.push(r);
     }
 
-    // mezclar opciones
+    // mezclar
     opciones.sort(() => Math.random() - 0.5);
 
     const letras = ["a", "b", "c"];
@@ -138,11 +143,12 @@ function siguiente() {
     document.getElementById("respuestaUsuario").value = "";
     document.getElementById("respuestaUsuario").focus();
 
+    yaValidado = false;
     vistos++;
     document.getElementById("vistos").innerText = vistos;
 }
 
-function comprobar() {
+function verificar() {
     const r = document.getElementById("respuestaUsuario").value.toLowerCase().trim();
     const res = document.getElementById("resultado");
 
@@ -153,11 +159,24 @@ function comprobar() {
         res.innerText = `Incorrecto ✘ (era ${correcta})`;
         res.className = "incorrecto";
     }
+
+    yaValidado = true;
+}
+
+function mostrarRespuesta() {
+    const res = document.getElementById("resultado");
+    res.innerText = `Respuesta correcta: ${correcta}`;
+    res.className = "";
+    yaValidado = true;
 }
 
 function manejarEnter(event) {
-    if (event.key === "Enter") {
-        comprobar();
+    if (event.key !== "Enter") return;
+
+    if (!yaValidado) {
+        verificar();
+    } else {
+        siguiente();
     }
 }
 </script>
