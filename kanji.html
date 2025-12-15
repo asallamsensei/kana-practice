@@ -95,13 +95,15 @@
 <div id="resultado"></div>
 
 <div id="estadisticas">
-    Vistos: <span id="vistos">0</span>
+    Aciertos: <span id="aciertos">0</span> —
+    Errores: <span id="errores">0</span>
 </div>
 
 <script>
 let lista = [];
 let actual = 0;
-let vistos = 0;
+let aciertos = 0;
+let errores = 0;
 let correcta = "";
 let yaValidado = false;
 
@@ -144,8 +146,6 @@ function siguiente() {
     document.getElementById("respuestaUsuario").focus();
 
     yaValidado = false;
-    vistos++;
-    document.getElementById("vistos").innerText = vistos;
 }
 
 function verificar() {
@@ -155,9 +155,13 @@ function verificar() {
     if (r === correcta) {
         res.innerText = "Correcto ✔";
         res.className = "correcto";
+        aciertos++;
+        document.getElementById("aciertos").innerText = aciertos;
     } else {
         res.innerText = `Incorrecto ✘ (era ${correcta})`;
         res.className = "incorrecto";
+        errores++;
+        document.getElementById("errores").innerText = errores;
     }
 
     yaValidado = true;
@@ -183,3 +187,4 @@ function manejarEnter(event) {
 
 </body>
 </html>
+
