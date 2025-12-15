@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Repaso de Hangul - Asallam Sensei</title>
+<style>
+    body {
+        background: #f6fff6;
+        font-family: Arial;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-top: 40px;
+    }
+
+    h1 {
+        margin-bottom: 10px;
+    }
+
+    #hangul {
+        font-size: 120px;
+        margin: 40px 0;
+        font-weight: bold;
+    }
+
+    button {
+        padding: 12px 20px;
+        margin: 5px;
+        font-size: 18px;
+        border-radius: 10px;
+        border: none;
+        background: #2e8b57;
+        color: white;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background: #246b44;
+    }
+
+    #respuesta {
+        font-size: 30px;
+        margin-top: 20px;
+    }
+
+    .correcto {
+        color: #28a745;
+        font-weight: bold;
+    }
+
+    .incorrecto {
+        color: #d93025;
+        font-weight: bold;
+    }
+
+    #respuestaUsuario {
+        margin-top: 15px;
+        font-size: 22px;
+        padding: 8px 12px;
+        border-radius: 8px;
+        border: 2px solid #aaa;
+        text-align: center;
+    }
+
+    #estadisticas {
+        margin-top: 20px;
+        font-size: 22px;
+    }
+</style>
+</head>
+<body>
+
+<h1>Repaso de Hangul (한글) — Asallam Sensei</h1>
+
+<div id="hangul">가</div>
+
+<button onclick="mostrarRomanizacion()">Mostrar romanización</button>
+<button onclick="siguiente()">Siguiente</button>
+
+<div id="respuesta"></div>
+
+<input id="respuestaUsuario"
+       type="text"
+       placeholder="Escribe la romanización"
+       onkeydown="manejarEnter(event)">
+
+<div id="estadisticas">
+    Aciertos: <span id="aciertos">0</span> —
+    Errores: <span id="errores">0</span>
+</div>
+
+<script>
+// ===============================
+// HANGUL — SÍLABAS BÁSICAS (V1)
+// Agrupadas por vocal
+// ===============================
+const hangul = [
+
+    // ===============================
+    // Vocal ㅏ (a)
+    // ===============================
+    ["가","ga"], ["나","na"], ["다","da"], ["라","ra"], ["마","ma"],
+    ["바","ba"], ["사","sa"], ["아","a"],  ["자","ja"], ["차","cha"],
+    ["카","ka"], ["타","ta"], ["파","pa"], ["하","ha"],
+
+    // ===============================
+    // Vocal ㅓ (eo)
+    // ===============================
+    ["거","geo"], ["너","neo"], ["더","deo"], ["러","reo"], ["머","meo"],
+    ["버","beo"], ["서","seo"], ["어","eo"],  ["저","jeo"], ["처","cheo"],
+    ["커","keo"], ["터","teo"], ["퍼","peo"], ["허","heo"],
+
+    // ===============================
+    // Vocal ㅗ (o)
+    // ===============================
+    ["고","go"], ["노","no"], ["도","do"], ["로","ro"], ["모","mo"],
+    ["보","bo"], ["소","so"], ["오","o"],  ["조","jo"], ["초","cho"],
+
+    // ===============================
+    // Vocal ㅜ (u)
+    // ===============================
+    ["구","gu"], ["누","nu"], ["두","du"], ["루","ru"], ["무","mu"],
+    ["부","bu"], ["수","su"], ["우","u"],  ["주","ju"], ["추","chu"],
+
+    // ===============================
+    // Vocal ㅣ (i)
+    // ===============================
+    ["기","gi"], ["니","ni"], ["디","di"], ["리","ri"], ["미","mi"],
+    ["비","bi"], ["시","si"], ["이","i"],  ["지","ji"], ["치","chi"],
+    ["키","ki"], ["티","ti"], ["피","pi"], ["히","hi"]
+];
+
+// ===============================
+// LÓGICA DEL JUEGO
+// ===============================
+let actual = 0;
+let yaValidado = false;
+let aciertos = 0;
+let errores = 0;
+
+function siguiente() {
+    actual = Math.floor(Math.random() * hangul.length);
+    document.getElementById("hangul").innerText = hangul[actual][0];
+    document.getElementById("respuesta").innerText = "";
+    document.getElementById("respuestaUsuario").value = "";
+    document.getElementById("respuesta").className = "";
+    yaValidado = false;
+    document.getElementById("respuestaUsuario").focus();
+}
+
+function mostrarRomanizacion() {
+    document.getElementById("respuesta").innerText = hangul[actual][1];
+}
+
+function verificar() {
+    const usuario = document.getElementById("respuestaUsuario").value.trim().toLowerCase();
+    const correcto = hangul[actual][1];
+
+    if (usuario === correcto) {
+        document.getElementById("respuesta").innerText = "Correcto ✔ (" + correcto + ")";
+        document.getElementById("respuesta").className = "correcto";
+        aciertos++;
+    } else {
+        document.getElementById("respuesta").innerText = "Incorrecto ✘ (era: " + correcto + ")";
+        document.getElementById("respuesta").className = "incorrecto";
+        errores++;
+    }
+
+    actualizarEstadisticas();
+    yaValidado = true;
+}
+
+function manejarEnter(event) {
+    if (event.key !== "Enter") return;
+
+    if (!yaValidado) {
+        verificar();
+    } else {
+        siguiente();
+    }
+}
+
+function actualizarEstadisticas() {
+    document.getElementById("aciertos").innerText = aciertos;
+    document.getElementById("errores").innerText = errores;
+}
+
+// Estado inicial
+siguiente();
+actualizarEstadisticas();
+</script>
+
+</body>
+</html>
