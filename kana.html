@@ -99,6 +99,7 @@
     <button id="btn-hiragana" class="modo-btn" onclick="setModo('hiragana')">Hiragana</button>
     <button id="btn-katakana" class="modo-btn" onclick="setModo('katakana')">Katakana</button>
     <button id="btn-mezcla"   class="modo-btn" onclick="setModo('mezcla')">Mezcla</button>
+    <button id="btn-extra"    class="modo-btn" onclick="setModo('extra')">Extra</button>
 </div>
 
 <div id="kana">あ</div>
@@ -122,6 +123,7 @@
 
 let hiragana = [];
 let katakana = [];
+let extra = [];
 
 // Cargar datos desde JSON
 fetch("data/kana.json")
@@ -129,6 +131,7 @@ fetch("data/kana.json")
     .then(data => {
         hiragana = data.hiragana;
         katakana = data.katakana;
+        extra = data.Extra;
         setModo("hiragana"); // iniciar como antes
         actualizarEstadisticas();
     });
@@ -150,6 +153,8 @@ function setModo(modo) {
         kanaLista = hiragana;
     } else if (modo === "katakana") {
         kanaLista = katakana;
+    } else if (modo === "extra") {
+        kanaLista = extra;
     } else { // mezcla
         kanaLista = [...hiragana, ...katakana];
     }
@@ -228,6 +233,7 @@ actualizarEstadisticas();
 
 </body>
 </html>
+
 
 
 
