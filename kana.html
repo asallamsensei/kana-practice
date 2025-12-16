@@ -159,6 +159,11 @@ function setModo(modo) {
         kanaLista = [...hiragana, ...katakana];
     }
 
+    // 🔹 REINICIAR ESTADÍSTICAS AL CAMBIAR DE MODO
+    aciertos = 0;
+    errores = 0;
+    actualizarEstadisticas();
+    
     // actualizar estado visual de los botones
     const botones = document.querySelectorAll(".modo-btn");
     botones.forEach(b => b.classList.remove("activo"));
@@ -230,6 +235,7 @@ function actualizarEstadisticas() {
 
 </body>
 </html>
+
 
 
 
