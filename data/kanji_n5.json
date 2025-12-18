@@ -1,0 +1,96 @@
+[
+  { "kanji": "日", "significado": "día, sol" },
+  { "kanji": "一", "significado": "uno" },
+  { "kanji": "人", "significado": "persona" },
+  { "kanji": "国", "significado": "país" },
+  { "kanji": "年", "significado": "año" },
+  { "kanji": "大", "significado": "grande" },
+
+  { "kanji": "十", "significado": "diez" },
+  { "kanji": "二", "significado": "dos" },
+  { "kanji": "本", "significado": "libro, origen" },
+  { "kanji": "中", "significado": "medio, centro, dentro" },
+
+  { "kanji": "出", "significado": "salir, sacar" },
+  { "kanji": "三", "significado": "tres" },
+  { "kanji": "見", "significado": "ver, mirar" },
+  { "kanji": "月", "significado": "luna, mes" },
+  { "kanji": "長", "significado": "largo, líder, superior" },
+
+  { "kanji": "生", "significado": "vida, nacer, vivir" },
+  { "kanji": "五", "significado": "cinco" },
+  { "kanji": "時", "significado": "tiempo, hora" },
+  { "kanji": "上", "significado": "arriba, encima" },
+  { "kanji": "行", "significado": "ir, actuar, conducir, viaje" },
+
+  { "kanji": "四", "significado": "cuatro" },
+  { "kanji": "後", "significado": "detrás, después" },
+  { "kanji": "金", "significado": "oro, metal, dinero" },
+  { "kanji": "前", "significado": "delante, antes" },
+  { "kanji": "九", "significado": "nueve" },
+
+  { "kanji": "入", "significado": "entrar" },
+  { "kanji": "学", "significado": "aprender, estudiar" },
+  { "kanji": "間", "significado": "intervalo, espacio" },
+  { "kanji": "円", "significado": "yen, círculo, redondo" },
+  { "kanji": "子", "significado": "niño, niña" },
+
+  { "kanji": "東", "significado": "este (orientación)" },
+  { "kanji": "八", "significado": "ocho" },
+  { "kanji": "六", "significado": "seis" },
+  { "kanji": "下", "significado": "abajo, debajo" },
+  { "kanji": "今", "significado": "ahora" },
+
+  { "kanji": "気", "significado": "ánimo, aire, energía, espíritu, mente" },
+  { "kanji": "小", "significado": "pequeño" },
+  { "kanji": "七", "significado": "siete" },
+  { "kanji": "高", "significado": "alto, elevado, caro" },
+  { "kanji": "山", "significado": "montaña" },
+
+  { "kanji": "女", "significado": "mujer" },
+  { "kanji": "外", "significado": "afuera, exterior" },
+  { "kanji": "百", "significado": "cien" },
+  { "kanji": "先", "significado": "antes, anterior, primero, adelante" },
+  { "kanji": "名", "significado": "nombre" },
+
+  { "kanji": "川", "significado": "río" },
+  { "kanji": "千", "significado": "mil" },
+  { "kanji": "来", "significado": "venir, próximo, llegar" },
+  { "kanji": "水", "significado": "agua" },
+  { "kanji": "男", "significado": "hombre" },
+
+  { "kanji": "話", "significado": "hablar, conversar, historia" },
+  { "kanji": "校", "significado": "escuela" },
+  { "kanji": "北", "significado": "norte" },
+  { "kanji": "土", "significado": "tierra, suelo" },
+  { "kanji": "午", "significado": "mediodía" },
+
+  { "kanji": "木", "significado": "árbol, madera" },
+  { "kanji": "車", "significado": "carro, automóvil" },
+  { "kanji": "書", "significado": "escribir" },
+  { "kanji": "半", "significado": "mitad, medio" },
+  { "kanji": "白", "significado": "blanco" },
+
+  { "kanji": "天", "significado": "cielo (figurativo, clima), paraíso" },
+  { "kanji": "西", "significado": "oeste, occidente" },
+  { "kanji": "電", "significado": "electricidad" },
+  { "kanji": "火", "significado": "fuego" },
+  { "kanji": "右", "significado": "derecha" },
+
+  { "kanji": "語", "significado": "palabra, habla, idioma" },
+  { "kanji": "左", "significado": "izquierda" },
+  { "kanji": "聞", "significado": "oír, escuchar, preguntar" },
+  { "kanji": "休", "significado": "descansar" },
+  { "kanji": "食", "significado": "comer, alimento" },
+
+  { "kanji": "何", "significado": "qué" },
+  { "kanji": "南", "significado": "sur" },
+  { "kanji": "万", "significado": "diez mil" },
+  { "kanji": "毎", "significado": "cada" },
+  { "kanji": "雨", "significado": "lluvia" },
+
+  { "kanji": "母", "significado": "madre" },
+  { "kanji": "読", "significado": "leer" },
+  { "kanji": "友", "significado": "amigo" },
+  { "kanji": "父", "significado": "padre" }
+]
