@@ -14,18 +14,25 @@
     padding-top:40px;
   }
   h1{ margin-bottom:10px; text-align:center; }
+
+  /* Pregunta (JP grande por defecto) */
   #kanji{
     font-size:96px;
     margin:35px 0 10px 0;
     font-weight:bold;
     text-align:center;
+    line-height:1.1;
+    width:min(900px, 94vw);
+    word-break:break-word;
   }
-  #pista{
-    margin-top:-10px;
-    font-size:18px;
-    opacity:.75;
-    text-align:center;
+
+  /* ✅ cuando el modo sea Español → JP, achicamos la pregunta */
+  #kanji.esPregunta{
+    font-size:44px;
+    font-weight:700;
+    line-height:1.25;
   }
+
   button{
     padding:12px 20px;
     margin:5px;
@@ -37,6 +44,7 @@
     cursor:pointer;
   }
   button:hover{ background:#b45309; }
+
   #opciones{
     font-size:22px;
     margin-top:20px;
@@ -44,6 +52,7 @@
     line-height:1.7;
     width:min(520px, 92vw);
   }
+
   #respuestaUsuario{
     margin-top:15px;
     font-size:22px;
@@ -53,10 +62,13 @@
     text-align:center;
     width:90px;
   }
+
   .correcto{ color:#28a745; font-weight:bold; }
   .incorrecto{ color:#d93025; font-weight:bold; }
+
   #resultado{ margin-top:15px; font-size:22px; text-align:center; }
   #estadisticas{ margin-top:20px; font-size:20px; text-align:center; }
+
   #controles{
     display:flex;
     flex-wrap:wrap;
@@ -90,7 +102,7 @@
 <div id="controles">
   <span class="chip">
     Modo:
-    <select id="modo" onchange="reiniciarConteoYSiguiente()">
+    <select id="modo" onchange="cambiarModo()">
       <option value="jp-es" selected>JP → Español</option>
       <option value="es-jp">Español → JP</option>
     </select>
@@ -98,7 +110,6 @@
 </div>
 
 <div id="kanji">学校</div>
-<div id="pista"></div>
 
 <div id="opciones"></div>
 
@@ -128,11 +139,10 @@ let yaValidado = false;
 
 const letras = ["a","b","c"];
 
-// ✅ Cambia aquí la ruta/nombre si lo guardas en otro lado:
+// ✅ Cambia aquí si tu archivo está en otra ruta/nombre:
 fetch("data/Vocabulario_N5.json")
   .then(res => res.json())
   .then(data => {
-    // Filtrar items inválidos por si acaso
     lista = (data || []).filter(x => x && x.kanji && x.significado);
     siguiente();
   });
@@ -142,23 +152,19 @@ function getModo(){
 }
 
 function textoPregunta(item){
-  // qué se muestra grande arriba
   return getModo()==="jp-es" ? item.kanji : item.significado;
 }
 
 function textoRespuesta(item){
-  // qué se pone como opción correcta
   return getModo()==="jp-es" ? item.significado : item.kanji;
 }
 
-function setPista(item){
-  const pista = document.getElementById("pista");
-  // Pista útil: mostrar el otro campo en pequeño SOLO cuando el modo sea Español→JP
-  // (porque en ese modo la pregunta puede ser larga y el JP es lo que deben escoger)
-  if(getModo()==="es-jp"){
-    pista.innerText = "Escribe la letra de la opción en japonés.";
+function aplicarEstiloPregunta(){
+  const el = document.getElementById("kanji");
+  if (getModo()==="es-jp") {
+    el.classList.add("esPregunta");   // español más pequeño
   } else {
-    pista.innerText = "Escribe la letra del significado correcto.";
+    el.classList.remove("esPregunta"); // japonés grande
   }
 }
 
@@ -168,10 +174,9 @@ function siguiente(){
   actual = Math.floor(Math.random() * lista.length);
   const itemCorrecto = lista[actual];
 
-  const pregunta = textoPregunta(itemCorrecto);
   respuestaCorrecta = textoRespuesta(itemCorrecto);
 
-  // generar opciones (3)
+  // opciones
   let opciones = [respuestaCorrecta];
   while (opciones.length < 3) {
     const rItem = lista[Math.floor(Math.random() * lista.length)];
@@ -181,12 +186,11 @@ function siguiente(){
 
   // mezclar
   opciones.sort(() => Math.random() - 0.5);
-
   correcta = letras[opciones.indexOf(respuestaCorrecta)];
 
   // mostrar
-  document.getElementById("kanji").innerText = pregunta;
-  setPista(itemCorrecto);
+  aplicarEstiloPregunta();
+  document.getElementById("kanji").innerText = textoPregunta(itemCorrecto);
 
   document.getElementById("opciones").innerHTML =
     `a) ${opciones[0]}<br>
@@ -236,8 +240,8 @@ function manejarEnter(event){
   }
 }
 
-function reiniciarConteoYSiguiente(){
-  // opcional: al cambiar modo, reinicia y sigue
+function cambiarModo(){
+  // no toca el placeholder "a / b / c"
   yaValidado = false;
   document.getElementById("resultado").innerText = "";
   document.getElementById("respuestaUsuario").value = "";
