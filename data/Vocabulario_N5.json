@@ -1,0 +1,63 @@
+[
+  { "kanji": "学校", "significado": "escuela" },
+  { "kanji": "川", "significado": "río" },
+  { "kanji": "手", "significado": "mano" },
+  { "kanji": "戸", "significado": "puerta tradicional japonesa" },
+  { "kanji": "障子", "significado": "puerta corrediza de papel (tradicional japonesa)" },
+  { "kanji": "襖", "significado": "puerta corrediza opaca (tradicional japonesa)" },
+  { "kanji": "雨戸", "significado": "puerta exterior corrediza contra la lluvia (tradicional japonesa)" },
+  { "kanji": "ドア", "significado": "puerta de estilo occidental con bisagra" },
+  { "kanji": "メガネ", "significado": "gafas, lentes, anteojos" },
+
+  { "kanji": "タバコ", "significado": "cigarrillo (del portugués “tabaco”)" },
+  { "kanji": "赤", "significado": "rojo (sustantivo)" },
+  { "kanji": "赤い", "significado": "rojo (adjetivo)" },
+  { "kanji": "仕事", "significado": "trabajo, empleo, ocupación" },
+
+  { "kanji": "英語", "significado": "inglés (idioma)" },
+  { "kanji": "問題", "significado": "problema (en general), pregunta (de examen)" },
+  { "kanji": "部屋", "significado": "habitación" },
+  { "kanji": "子ども", "significado": "niño, niños (en general)" },
+  { "kanji": "子供", "significado": "niño, niños (forma menos preferida; puede tener matiz indeseado)" },
+
+  { "kanji": "時間", "significado": "tiempo, hora" },
+  { "kanji": "雨", "significado": "lluvia" },
+  { "kanji": "先生", "significado": "profesor / honorífico para doctores, artistas, etc." },
+  { "kanji": "年", "significado": "año, edad" },
+  { "kanji": "手紙", "significado": "carta (escrita a mano)" },
+
+  { "kanji": "電話", "significado": "teléfono" },
+  { "kanji": "水", "significado": "agua" },
+  { "kanji": "病気", "significado": "enfermedad" },
+  { "kanji": "会社", "significado": "compañía, empresa" },
+  { "kanji": "目", "significado": "ojo" },
+
+  { "kanji": "結婚", "significado": "matrimonio" },
+  { "kanji": "結婚する", "significado": "casarse (hacer matrimonio)" },
+  { "kanji": "する", "significado": "hacer (verbo base; se combina con sustantivos)" },
+
+  { "kanji": "上げる", "significado": "levantar, subir, elevar (algo físico o abstracto)" },
+  { "kanji": "あげる", "significado": "dar (a alguien de igual o menor estatus; el hablante no recibe)" },
+
+  { "kanji": "言葉", "significado": "palabra" },
+  { "kanji": "走る", "significado": "correr" },
+  { "kanji": "名前", "significado": "nombre" },
+  { "kanji": "旅行", "significado": "viaje" },
+
+  { "kanji": "道", "significado": "camino, calle, ruta" },
+  { "kanji": "飛行機", "significado": "avión" },
+  { "kanji": "映画", "significado": "película" },
+  { "kanji": "音楽", "significado": "música" },
+
+  { "kanji": "木", "significado": "árbol" },
+  { "kanji": "大学", "significado": "universidad" },
+  { "kanji": "時計", "significado": "reloj (de cualquier tipo)" },
+  { "kanji": "家族", "significado": "familia" },
+  { "kanji": "花", "significado": "flor" },
+
+  { "kanji": "猫", "significado": "gato" },
+  { "kanji": "毎日", "significado": "cada día, todos los días" },
+  { "kanji": "宿題", "significado": "tarea, deberes" },
+  { "kanji": "雪", "significado": "nieve" },
+  { "kanji": "山", "significado": "montaña" }
+]
