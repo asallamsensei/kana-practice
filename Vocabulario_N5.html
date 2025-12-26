@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Repaso de Vocabulario N5 - Asallam Sensei</title>
+<style>
+  body{
+    background:#fffaf3;
+    font-family:Arial;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    padding-top:40px;
+  }
+  h1{ margin-bottom:10px; text-align:center; }
+  #kanji{
+    font-size:96px;
+    margin:35px 0 10px 0;
+    font-weight:bold;
+    text-align:center;
+  }
+  #pista{
+    margin-top:-10px;
+    font-size:18px;
+    opacity:.75;
+    text-align:center;
+  }
+  button{
+    padding:12px 20px;
+    margin:5px;
+    font-size:18px;
+    border-radius:10px;
+    border:none;
+    background:#d97706;
+    color:white;
+    cursor:pointer;
+  }
+  button:hover{ background:#b45309; }
+  #opciones{
+    font-size:22px;
+    margin-top:20px;
+    text-align:left;
+    line-height:1.7;
+    width:min(520px, 92vw);
+  }
+  #respuestaUsuario{
+    margin-top:15px;
+    font-size:22px;
+    padding:8px 12px;
+    border-radius:8px;
+    border:2px solid #aaa;
+    text-align:center;
+    width:90px;
+  }
+  .correcto{ color:#28a745; font-weight:bold; }
+  .incorrecto{ color:#d93025; font-weight:bold; }
+  #resultado{ margin-top:15px; font-size:22px; text-align:center; }
+  #estadisticas{ margin-top:20px; font-size:20px; text-align:center; }
+  #controles{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    justify-content:center;
+    margin-top:10px;
+  }
+  .chip{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    padding:8px 12px;
+    border:1px solid #e5e7eb;
+    border-radius:999px;
+    background:white;
+    font-size:16px;
+  }
+  select{
+    font-size:16px;
+    padding:6px 10px;
+    border-radius:8px;
+    border:1px solid #ccc;
+    background:white;
+  }
+</style>
+</head>
+
+<body>
+<h1>Repaso de Vocabulario N5 — Asallam Sensei</h1>
+
+<div id="controles">
+  <span class="chip">
+    Modo:
+    <select id="modo" onchange="reiniciarConteoYSiguiente()">
+      <option value="jp-es" selected>JP → Español</option>
+      <option value="es-jp">Español → JP</option>
+    </select>
+  </span>
+</div>
+
+<div id="kanji">学校</div>
+<div id="pista"></div>
+
+<div id="opciones"></div>
+
+<button onclick="mostrarRespuesta()">Mostrar respuesta</button>
+
+<input id="respuestaUsuario"
+       type="text"
+       placeholder="a / b / c"
+       maxlength="1"
+       onkeydown="manejarEnter(event)">
+
+<div id="resultado"></div>
+
+<div id="estadisticas">
+  Aciertos: <span id="aciertos">0</span> —
+  Errores: <span id="errores">0</span>
+</div>
+
+<script>
+let lista = [];
+let actual = 0;
+let aciertos = 0;
+let errores = 0;
+let correcta = "";
+let respuestaCorrecta = "";
+let yaValidado = false;
+
+const letras = ["a","b","c"];
+
+// ✅ Cambia aquí la ruta/nombre si lo guardas en otro lado:
+fetch("data/Vocabulario_N5.json")
+  .then(res => res.json())
+  .then(data => {
+    // Filtrar items inválidos por si acaso
+    lista = (data || []).filter(x => x && x.kanji && x.significado);
+    siguiente();
+  });
+
+function getModo(){
+  return document.getElementById("modo").value; // "jp-es" o "es-jp"
+}
+
+function textoPregunta(item){
+  // qué se muestra grande arriba
+  return getModo()==="jp-es" ? item.kanji : item.significado;
+}
+
+function textoRespuesta(item){
+  // qué se pone como opción correcta
+  return getModo()==="jp-es" ? item.significado : item.kanji;
+}
+
+function setPista(item){
+  const pista = document.getElementById("pista");
+  // Pista útil: mostrar el otro campo en pequeño SOLO cuando el modo sea Español→JP
+  // (porque en ese modo la pregunta puede ser larga y el JP es lo que deben escoger)
+  if(getModo()==="es-jp"){
+    pista.innerText = "Escribe la letra de la opción en japonés.";
+  } else {
+    pista.innerText = "Escribe la letra del significado correcto.";
+  }
+}
+
+function siguiente(){
+  if (lista.length < 3) return;
+
+  actual = Math.floor(Math.random() * lista.length);
+  const itemCorrecto = lista[actual];
+
+  const pregunta = textoPregunta(itemCorrecto);
+  respuestaCorrecta = textoRespuesta(itemCorrecto);
+
+  // generar opciones (3)
+  let opciones = [respuestaCorrecta];
+  while (opciones.length < 3) {
+    const rItem = lista[Math.floor(Math.random() * lista.length)];
+    const r = textoRespuesta(rItem);
+    if (!opciones.includes(r)) opciones.push(r);
+  }
+
+  // mezclar
+  opciones.sort(() => Math.random() - 0.5);
+
+  correcta = letras[opciones.indexOf(respuestaCorrecta)];
+
+  // mostrar
+  document.getElementById("kanji").innerText = pregunta;
+  setPista(itemCorrecto);
+
+  document.getElementById("opciones").innerHTML =
+    `a) ${opciones[0]}<br>
+     b) ${opciones[1]}<br>
+     c) ${opciones[2]}`;
+
+  document.getElementById("resultado").innerText = "";
+  document.getElementById("resultado").className = "";
+  document.getElementById("respuestaUsuario").value = "";
+  document.getElementById("respuestaUsuario").focus();
+
+  yaValidado = false;
+}
+
+function verificar(){
+  const r = document.getElementById("respuestaUsuario").value.toLowerCase().trim();
+  const res = document.getElementById("resultado");
+
+  if (r === correcta) {
+    res.innerText = "Correcto ✔";
+    res.className = "correcto";
+    aciertos++;
+    document.getElementById("aciertos").innerText = aciertos;
+  } else {
+    res.innerText = `Incorrecto ✘ (era ${correcta})`;
+    res.className = "incorrecto";
+    errores++;
+    document.getElementById("errores").innerText = errores;
+  }
+
+  yaValidado = true;
+}
+
+function mostrarRespuesta(){
+  const res = document.getElementById("resultado");
+  res.innerText = `Respuesta: ${respuestaCorrecta}`;
+  res.className = "";
+}
+
+function manejarEnter(event){
+  if (event.key !== "Enter") return;
+
+  if (!yaValidado) {
+    verificar();
+  } else {
+    siguiente();
+  }
+}
+
+function reiniciarConteoYSiguiente(){
+  // opcional: al cambiar modo, reinicia y sigue
+  yaValidado = false;
+  document.getElementById("resultado").innerText = "";
+  document.getElementById("respuestaUsuario").value = "";
+  siguiente();
+}
+</script>
+</body>
+</html>
