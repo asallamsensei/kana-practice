@@ -48,18 +48,18 @@
   { "kanji": "山", "significado": "montaña" },
 
   { "kanji": "女", "significado": "mujer" },
-  { "kanji": "外", "significado": "afuera, exterior REVISAR12" },
+  { "kanji": "外", "significado": "afuera, exterior" },
   { "kanji": "百", "significado": "cien" },
   { "kanji": "先", "significado": "antes, anterior, primero, adelante" },
   { "kanji": "名", "significado": "nombre" },
 
   { "kanji": "川", "significado": "río" },
   { "kanji": "千", "significado": "mil" },
-  { "kanji": "来", "significado": "venir, próximo, llegar REVISAR13" },
+  { "kanji": "来", "significado": "venir, próximo" },
   { "kanji": "水", "significado": "agua" },
   { "kanji": "男", "significado": "hombre" },
 
-  { "kanji": "話", "significado": "hablar, conversar, historia REVISAR14" },
+  { "kanji": "話", "significado": "hablar, conversar, historia" },
   { "kanji": "校", "significado": "escuela" },
   { "kanji": "北", "significado": "norte" },
   { "kanji": "土", "significado": "tierra, suelo" },
@@ -68,7 +68,7 @@
   { "kanji": "木", "significado": "árbol, madera" },
   { "kanji": "車", "significado": "carro, automóvil" },
   { "kanji": "書", "significado": "escribir" },
-  { "kanji": "半", "significado": "mitad, medio REVISAR5" },
+  { "kanji": "半", "significado": "mitad, medio, media" },
   { "kanji": "白", "significado": "blanco" },
 
   { "kanji": "天", "significado": "cielo (figurativo, clima), paraíso" },
