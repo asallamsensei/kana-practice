@@ -51,12 +51,20 @@
     li {
       margin: 20px 0;
     }
+    #n5 {
+      margin: 14px 0;
+      padding: 10px;
+      border-radius: 6px;
+      background: #eee;
+      font-weight: bold;
+    }
   </style>
 </head>
 <body>
   <div class="container">
     <h1>Herramientas de Asallam Sensei</h1>
     <h2>Potenciado por GPT</h2>
+    <div id="n5">⏳ Cargando contador N5...</div>
     <ul>
       <li><a href="kana.html" class="button">Kana</a></li>
       <li><a href="kanji.html" class="button">Kanji de grado 1</a></li>
@@ -64,8 +72,31 @@
       <li><a href="hangul.html" class="button">한글 (Hangul)</a></li>
     </ul>
   </div>
+  <script>
+    const dates = [
+      new Date("2026-07-05T08:00:00-05:00"),
+      new Date("2026-12-06T08:00:00-05:00")
+    ];
+  
+    function left(ms){
+      if(ms <= 0) return "¡Es hoy! 🔥";
+      const s = Math.floor(ms/1000);
+      const d = Math.floor(s/86400);
+      const h = Math.floor((s%86400)/3600);
+      const m = Math.floor((s%3600)/60);
+      const ss = s%60;
+      return `${d}d ${h}h ${m}m ${ss}s`;
+    }
+  
+    function tick(){
+      const now = Date.now();
+      const next = dates.find(d => d.getTime() > now);
+      document.getElementById("n5").textContent =
+        next ? `⏳ JLPT N5: ${left(next.getTime() - now)}` : "Configura nuevas fechas del N5.";
+    }
+  
+    tick();
+    setInterval(tick, 1000);
+  </script>
 </body>
 </html>
-
-
-
