@@ -60,4 +60,95 @@
   { "kanji": "宿題", "significado": "tarea, deberes" },
   { "kanji": "雪", "significado": "nieve" },
   { "kanji": "山", "significado": "montaña" }
+
+  { "kanji": "窓", "significado": "ventana" },
+  { "kanji": "動物", "significado": "animal" },
+  { "kanji": "夜", "significado": "noche" },
+  { "kanji": "料理", "significado": "cocina (no es el cuarto), comida" },
+  { "kanji": "夏", "significado": "verano" },
+
+  { "kanji": "新聞", "significado": "periódico (medio de comunicación impreso)" },
+  { "kanji": "公園", "significado": "parque (público)" },
+  { "kanji": "意味", "significado": "significado, sentido" },
+  { "kanji": "足", "significado": "pierna, pie" },
+
+  { "kanji": "自転車", "significado": "bicicleta" },
+  { "kanji": "電車", "significado": "tren (eléctrico)" },
+  { "kanji": "散歩", "significado": "paseo (a pie, para despejarse)" },
+  { "kanji": "声", "significado": "voz" },
+
+  { "kanji": "朝", "significado": "mañana (parte del día)" },
+  { "kanji": "歌", "significado": "canción" },
+  { "kanji": "靴", "significado": "zapatos" },
+  { "kanji": "箱", "significado": "caja" },
+  { "kanji": "机", "significado": "escritorio" },
+  { "kanji": "海", "significado": "mar" },
+
+  { "kanji": "帽子", "significado": "sombrero, gorra" },
+  { "kanji": "授業", "significado": "clase, lección" },
+  { "kanji": "銀行", "significado": "banco (institución financiera)" },
+  { "kanji": "写真", "significado": "foto, fotografía" },
+
+  { "kanji": "冬", "significado": "invierno" },
+  { "kanji": "村", "significado": "aldea (pueblo rural)" },
+  { "kanji": "傘", "significado": "paraguas, sombrilla" },
+  { "kanji": "口", "significado": "boca" },
+  { "kanji": "橋", "significado": "puente" },
+  { "kanji": "春", "significado": "primavera" },
+  { "kanji": "病院", "significado": "hospital" },
+
+  { "kanji": "図書館", "significado": "biblioteca (no confundir con librería)" },
+  { "kanji": "買い物", "significado": "compras, shopping" },
+  { "kanji": "椅子", "significado": "silla" },
+
+  { "kanji": "自動車", "significado": "automóvil (término formal/técnico)" },
+  { "kanji": "色", "significado": "color" },
+  { "kanji": "卵", "significado": "huevo" },
+  { "kanji": "肉", "significado": "carne" },
+  { "kanji": "風邪", "significado": "resfriado, catarro" },
+
+  { "kanji": "掃除", "significado": "limpieza, aseo" },
+  { "kanji": "紙", "significado": "papel" },
+  { "kanji": "鍵", "significado": "llave" },
+  { "kanji": "雑誌", "significado": "revista" },
+  { "kanji": "切符", "significado": "boleto (tren/metro/bus)" },
+
+  { "kanji": "外国人", "significado": "extranjero (persona de otro país)" },
+  { "kanji": "塩", "significado": "sal (de mesa)" },
+  { "kanji": "池", "significado": "estanque" },
+  { "kanji": "耳", "significado": "oreja, oído" },
+  { "kanji": "財布", "significado": "billetera, cartera" },
+
+  { "kanji": "鉛筆", "significado": "lápiz" },
+  { "kanji": "大人", "significado": "adulto" },
+  { "kanji": "地図", "significado": "mapa" },
+  { "kanji": "砂糖", "significado": "azúcar" },
+
+  { "kanji": "夏休み", "significado": "vacaciones de verano" },
+  { "kanji": "郵便局", "significado": "oficina de correos" },
+  { "kanji": "黒", "significado": "negro" },
+  { "kanji": "台所", "significado": "cocina (lugar)" },
+
+  { "kanji": "教室", "significado": "aula, salón de clase" },
+  { "kanji": "切手", "significado": "estampilla, sello postal" },
+  { "kanji": "電気", "significado": "electricidad, luz eléctrica" },
+  { "kanji": "歯", "significado": "diente" },
+  { "kanji": "鼻", "significado": "nariz" },
+
+  { "kanji": "作文", "significado": "redacción, composición escrita" },
+  { "kanji": "紅茶", "significado": "té negro (紅 = rojo carmesí)" },
+  { "kanji": "家庭", "significado": "hogar, familia (ámbito familiar)" },
+  { "kanji": "玄関", "significado": "entrada (recibidor donde se dejan los zapatos)" },
+
+  { "kanji": "風呂", "significado": "baño, bañarse, bañera" },
+  { "kanji": "洗濯", "significado": "lavado de ropa" },
+  { "kanji": "白", "significado": "blanco" },
+  { "kanji": "緑", "significado": "verde" },
+  { "kanji": "黄色", "significado": "amarillo" },
+
+  { "kanji": "南", "significado": "sur" },
+  { "kanji": "北", "significado": "norte" },
+  { "kanji": "野菜", "significado": "verduras, vegetales" },
+  { "kanji": "冷蔵庫", "significado": "refrigerador, nevera" },
+  { "kanji": "茶色", "significado": "café (color), marrón" }
 ]
