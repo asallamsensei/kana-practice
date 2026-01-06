@@ -1,0 +1,242 @@
+[
+  {
+    "id": 1,
+    "titulo": "「きょうは学校へ行きます。」\n¿Cuál es la lectura correcta de 学校?",
+    "opciones": {
+      "a": "がっこう",
+      "b": "がくこう",
+      "c": "がっこ",
+      "d": "がこう"
+    },
+    "correcta": "a",
+    "explicacion": "学校(がっこう) = escuela."
+  },
+  {
+    "id": 2,
+    "titulo": "「窓を＿＿＿ください。」\n¿Cuál opción completa mejor la frase?",
+    "opciones": {
+      "a": "あけて",
+      "b": "あげて",
+      "c": "はしって",
+      "d": "よんで"
+    },
+    "correcta": "a",
+    "explicacion": "窓をあけてください = Por favor abra la ventana."
+  },
+  {
+    "id": 3,
+    "titulo": "「図書館で本を＿＿＿。」\n¿Cuál es la forma verbal correcta?",
+    "opciones": {
+      "a": "読みます",
+      "b": "飲みます",
+      "c": "聞きます",
+      "d": "走ります"
+    },
+    "correcta": "a",
+    "explicacion": "図書館で本を読みます = Leo un libro en la biblioteca."
+  },
+  {
+    "id": 4,
+    "titulo": "「雨の日は＿＿＿をさします。」\n¿Cuál opción completa correctamente?",
+    "opciones": {
+      "a": "傘",
+      "b": "靴",
+      "c": "鍵",
+      "d": "紙"
+    },
+    "correcta": "a",
+    "explicacion": "雨の日は傘をさします = En días de lluvia se usa paraguas."
+  },
+  {
+    "id": 5,
+    "titulo": "「これは先生の＿＿＿です。」\n¿Qué palabra completa mejor la frase?",
+    "opciones": {
+      "a": "名前",
+      "b": "病気",
+      "c": "飛行機",
+      "d": "足"
+    },
+    "correcta": "a",
+    "explicacion": "名前 = nombre."
+  },
+  {
+    "id": 6,
+    "titulo": "「わたしは毎日＿＿＿をします。」\n¿Cuál opción encaja mejor?",
+    "opciones": {
+      "a": "宿題",
+      "b": "結婚",
+      "c": "映画",
+      "d": "川"
+    },
+    "correcta": "a",
+    "explicacion": "宿題をします = Hacer tarea/deberes."
+  },
+  {
+    "id": 7,
+    "titulo": "「あの川に＿＿＿がいます。」\n¿Cuál palabra completa mejor?",
+    "opciones": {
+      "a": "猫",
+      "b": "紙",
+      "c": "電気",
+      "d": "銀行"
+    },
+    "correcta": "a",
+    "explicacion": "川 = río. 猫 = gato."
+  },
+  {
+    "id": 8,
+    "titulo": "「駅で＿＿＿を買いました。」\n(Tren/metro)\n¿Qué palabra falta?",
+    "opciones": {
+      "a": "切符",
+      "b": "切手",
+      "c": "財布",
+      "d": "砂糖"
+    },
+    "correcta": "a",
+    "explicacion": "切符 = boleto (tren/metro/bus). 切手 = estampilla."
+  },
+  {
+    "id": 9,
+    "titulo": "「部屋に＿＿＿があります。」\n¿Cuál opción completa mejor?",
+    "opciones": {
+      "a": "時計",
+      "b": "散歩",
+      "c": "問題",
+      "d": "雪"
+    },
+    "correcta": "a",
+    "explicacion": "部屋に時計があります = Hay un reloj en la habitación."
+  },
+  {
+    "id": 10,
+    "titulo": "「この問題の意味がわかりません。」\nEn esta frase, 意味 significa…",
+    "opciones": {
+      "a": "significado, sentido",
+      "b": "tiempo, hora",
+      "c": "viaje",
+      "d": "comida"
+    },
+    "correcta": "a",
+    "explicacion": "意味(いみ) = significado, sentido."
+  },
+  {
+    "id": 11,
+    "titulo": "「きのう、銀行でお金をおろしました。」\n銀行 es…",
+    "opciones": {
+      "a": "banco (institución financiera)",
+      "b": "parque (público)",
+      "c": "empresa",
+      "d": "oficina de correos"
+    },
+    "correcta": "a",
+    "explicacion": "銀行(ぎんこう) = banco."
+  },
+  {
+    "id": 12,
+    "titulo": "「電話で先生に話しました。」\n電話 significa…",
+    "opciones": {
+      "a": "teléfono",
+      "b": "carta",
+      "c": "revista",
+      "d": "mapa"
+    },
+    "correcta": "a",
+    "explicacion": "電話(でんわ) = teléfono."
+  },
+  {
+    "id": 13,
+    "titulo": "「冬は雪がふります。」\nEn esta frase, 冬 es…",
+    "opciones": {
+      "a": "invierno",
+      "b": "verano",
+      "c": "primavera",
+      "d": "noche"
+    },
+    "correcta": "a",
+    "explicacion": "冬(ふゆ) = invierno. 雪(ゆき) = nieve."
+  },
+  {
+    "id": 14,
+    "titulo": "「わたしは赤い帽子をかぶっています。」\n赤い significa…",
+    "opciones": {
+      "a": "rojo (adjetivo)",
+      "b": "rojo (sustantivo)",
+      "c": "negro",
+      "d": "verde"
+    },
+    "correcta": "a",
+    "explicacion": "赤(あか) = rojo (sustantivo). 赤い(あかい) = rojo (adjetivo)."
+  },
+  {
+    "id": 15,
+    "titulo": "「公園で子どもが遊んでいます。」\n子ども es…",
+    "opciones": {
+      "a": "niño / niños",
+      "b": "adulto",
+      "c": "extranjero",
+      "d": "familia"
+    },
+    "correcta": "a",
+    "explicacion": "子ども = niño(s). A menudo se escribe 子ども en vez de 子供."
+  },
+  {
+    "id": 16,
+    "titulo": "「きょう、会社で仕事があります。」\nEn esta frase, 仕事 significa…",
+    "opciones": {
+      "a": "trabajo, empleo, ocupación",
+      "b": "estudio",
+      "c": "viaje",
+      "d": "música"
+    },
+    "correcta": "a",
+    "explicacion": "会社 = empresa. 仕事 = trabajo."
+  },
+  {
+    "id": 17,
+    "titulo": "「朝、紅茶を飲みます。」\n¿Cuál opción es 紅茶?",
+    "opciones": {
+      "a": "té negro",
+      "b": "agua",
+      "c": "café (color)",
+      "d": "azúcar"
+    },
+    "correcta": "a",
+    "explicacion": "紅茶(こうちゃ) = té negro."
+  },
+  {
+    "id": 18,
+    "titulo": "「玄関に靴があります。」\n玄関 es…",
+    "opciones": {
+      "a": "entrada/recibidor (donde se dejan los zapatos)",
+      "b": "cocina (lugar)",
+      "c": "baño",
+      "d": "habitación"
+    },
+    "correcta": "a",
+    "explicacion": "玄関(げんかん) = entrada/recibidor."
+  },
+  {
+    "id": 19,
+    "titulo": "「駅まで自転車で行きます。」\n自転車 es…",
+    "opciones": {
+      "a": "bicicleta",
+      "b": "automóvil",
+      "c": "avión",
+      "d": "tren"
+    },
+    "correcta": "a",
+    "explicacion": "自転車(じてんしゃ) = bicicleta."
+  },
+  {
+    "id": 20,
+    "titulo": "「電車で大学へ行きます。」\n電車 es…",
+    "opciones": {
+      "a": "tren (eléctrico)",
+      "b": "avión",
+      "c": "autobús",
+      "d": "barco"
+    },
+    "correcta": "a",
+    "explicacion": "電車(でんしゃ) = tren."
+  }
+]
