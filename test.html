@@ -279,18 +279,40 @@ function cargarPregunta(){
 
   document.getElementById("enunciado").textContent = `${idx+1}. ${p.titulo}`;
 
-  const A = p.opciones?.a ?? "";
-  const B = p.opciones?.b ?? "";
-  const C = p.opciones?.c ?? "";
-  const D = p.opciones?.d ?? "";
+  // 1️⃣ Convertir opciones a array
+  let opcionesArray = [
+    { letra: "a", texto: p.opciones.a },
+    { letra: "b", texto: p.opciones.b },
+    { letra: "c", texto: p.opciones.c },
+    { letra: "d", texto: p.opciones.d }
+  ];
 
+  // 2️⃣ Mezclar opciones
+  ordenarAleatorio(opcionesArray);
+
+  // 3️⃣ Reasignar letras A/B/C/D
+  const letras = ["a","b","c","d"];
+  let opcionesRender = {};
+  let nuevaCorrecta = "";
+
+  opcionesArray.forEach((opt, i) => {
+    const letraNueva = letras[i];
+    opcionesRender[letraNueva] = opt.texto;
+
+    if(opt.letra === p.correcta){
+      nuevaCorrecta = letraNueva;
+    }
+  });
+
+  // 4️⃣ Mostrar opciones
   document.getElementById("opciones").innerHTML =
-    `A) ${escapeHtml(A)}<br>` +
-    `B) ${escapeHtml(B)}<br>` +
-    `C) ${escapeHtml(C)}<br>` +
-    `D) ${escapeHtml(D)}`;
+    `A) ${escapeHtml(opcionesRender.a)}<br>` +
+    `B) ${escapeHtml(opcionesRender.b)}<br>` +
+    `C) ${escapeHtml(opcionesRender.c)}<br>` +
+    `D) ${escapeHtml(opcionesRender.d)}`;
 
-  correcta = (p.correcta || "").toLowerCase().trim();
+  // 5️⃣ Guardar correcta real
+  correcta = nuevaCorrecta;
   explicacion = p.explicacion || "";
 
   document.getElementById("resultado").textContent = "";
@@ -298,7 +320,8 @@ function cargarPregunta(){
   document.getElementById("respuestaUsuario").value = "";
   document.getElementById("respuestaUsuario").focus();
 
-  document.getElementById("contador").textContent = `Pregunta ${idx+1} / ${preguntas.length}`;
+  document.getElementById("contador").textContent =
+    `Pregunta ${idx+1} / ${preguntas.length}`;
 }
 
 /* =========================================================
