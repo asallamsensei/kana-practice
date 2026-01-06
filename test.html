@@ -311,16 +311,21 @@ function verificar(){
   const r = document.getElementById("respuestaUsuario").value.toLowerCase().trim();
   const res = document.getElementById("resultado");
 
-  // Si está vacío: mostrar respuesta (sin sumar error)
+  // Si está vacío: mostrar respuesta (CUENTA como error)
   if(!r){
+    errores++;
+    actualizarStats();
+  
     const p = preguntas[orden[idx]];
     const textoCorrecto = (p.opciones && p.opciones[correcta]) ? p.opciones[correcta] : "";
+  
     let extra = "";
     if(explicacion && explicacion.trim().length > 0){
       extra = `\n${explicacion}`;
     }
-    res.textContent = `Respuesta: ${correcta.toUpperCase()}) ${textoCorrecto}${extra}`;
-    res.className = "";
+  
+    res.textContent = `Sin respuesta ✘ (era ${correcta.toUpperCase()})\nRespuesta: ${correcta.toUpperCase()}) ${textoCorrecto}${extra}`;
+    res.className = "incorrecto";
     yaValidado = true;
     return;
   }
