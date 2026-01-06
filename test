@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Preguntas estilo JLPT N5 — Asallam Sensei</title>
+<style>
+  body{
+    background:#fffaf3;
+    font-family: Arial, sans-serif;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    padding:40px 16px;
+  }
+  h1{ margin: 0 0 8px; text-align:center; }
+  #sub{ margin:0 0 18px; text-align:center; opacity:.85; }
+
+  .card{
+    width:min(900px, 100%);
+    background:#ffffff;
+    border-radius:14px;
+    box-shadow: 0 6px 18px rgba(0,0,0,.08);
+    padding:20px;
+    margin-bottom:18px;
+  }
+
+  /* ===== CLAVE ===== */
+  #bloqueClave{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+    align-items:center;
+  }
+  #claveInput{
+    font-size:20px;
+    padding:10px 12px;
+    border-radius:10px;
+    border:2px solid #aaa;
+    width:min(320px, 90%);
+    text-align:center;
+  }
+  #errorClave{
+    color:#d93025;
+    font-weight:bold;
+    min-height: 24px;
+    text-align:center;
+  }
+
+  /* ===== BOTONES ===== */
+  button{
+    padding:12px 20px;
+    margin: 4px;
+    font-size:18px;
+    border-radius:10px;
+    border:none;
+    background:#d97706;
+    color:white;
+    cursor:pointer;
+  }
+  button:hover{ background:#b45309; }
+  button.sec{
+    background:#374151;
+  }
+  button.sec:hover{
+    background:#111827;
+  }
+  button:disabled{
+    opacity:.45;
+    cursor:not-allowed;
+  }
+
+  /* ===== QUIZ ===== */
+  #quiz{ display:none; }
+
+  #progreso{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-bottom:10px;
+  }
+  #contador{
+    font-size:18px;
+    opacity:.9;
+  }
+
+  #enunciado{
+    font-size:22px;
+    line-height:1.55;
+    white-space:pre-wrap;
+    margin: 10px 0 14px;
+  }
+
+  .opcion{
+    display:flex;
+    gap:10px;
+    align-items:flex-start;
+    padding:12px;
+    border:2px solid #eee;
+    border-radius:12px;
+    margin:10px 0;
+    cursor:pointer;
+    user-select:none;
+  }
+  .opcion:hover{
+    border-color:#f3c27a;
+    background:#fff8ee;
+  }
+  .opcion.seleccionada{
+    border-color:#d97706;
+    background:#fff4e3;
+  }
+  .letra{
+    font-weight:bold;
+    width:30px;
+    height:30px;
+    border-radius:9px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:#f3f4f6;
+    flex:0 0 auto;
+  }
+  .texto{
+    font-size:20px;
+    line-height:1.35;
+  }
+
+  #respuestaUsuario{
+    margin-top: 8px;
+    font-size:22px;
+    padding:8px 12px;
+    border-radius:10px;
+    border:2px solid #aaa;
+    text-align:center;
+    width:110px;
+  }
+
+  #resultado{
+    margin-top:12px;
+    font-size:22px;
+    min-height: 28px;
+  }
+  .correcto{ color:#28a745; font-weight:bold; }
+  .incorrecto{ color:#d93025; font-weight:bold; }
+
+  #estadisticas{
+    margin-top:12px;
+    font-size:20px;
+  }
+
+  #nota{
+    margin-top:10px;
+    font-size:14px;
+    opacity:.7;
+  }
+
+  .mini{
+    font-size:14px;
+    opacity:.75;
+  }
+
+  .filaControles{
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+    align-items:center;
+    margin-top:10px;
+  }
+</style>
+</head>
+<body>
+
+<h1>Preguntas estilo JLPT N5 — Asallam Sensei</h1>
+<p id="sub">Parte 1: Vocabulario</p>
+
+<!-- ===== BLOQUE CLAVE ===== -->
+<div class="card" id="bloqueClave">
+  <div style="font-size:18px; opacity:.9; text-align:center;">
+    Ingresa la clave para iniciar el test:
+  </div>
+
+  <input id="claveInput" type="password" placeholder="Clave..." onkeydown="enterClave(event)" />
+
+  <div>
+    <button onclick="validarClave()">Entrar</button>
+  </div>
+
+  <div id="errorClave"></div>
+  <div id="nota">La clave es: <b>esperanza</b></div>
+  <div class="mini">Tip: en producción, quita esta pista 😄</div>
+</div>
+
+<!-- ===== QUIZ ===== -->
+<div class="card" id="quiz">
+  <div id="progreso">
+    <div id="contador">Pregunta 1 / 20</div>
+    <div>
+      <button class="sec" onclick="reiniciar()">Reiniciar</button>
+    </div>
+  </div>
+
+  <div id="enunciado"></div>
+
+  <div id="opciones"></div>
+
+  <div class="filaControles">
+    <button onclick="mostrarRespuesta()">Mostrar respuesta</button>
+
+    <input id="respuestaUsuario"
+           type="text"
+           placeholder="a / b / c / d"
+           maxlength="1"
+           onkeydown="manejarEnter(event)" />
+
+    <button class="sec" onclick="verificar()">Verificar</button>
+    <button class="sec" onclick="siguiente()">Siguiente</button>
+  </div>
+
+  <div id="resultado"></div>
+
+  <div id="estadisticas">
+    Aciertos: <span id="aciertos">0</span> —
+    Errores: <span id="errores">0</span>
+  </div>
+
+  <div class="mini" style="margin-top:10px;">
+    Atajos: Enter = verificar / siguiente (si ya verificaste). También puedes hacer clic en una opción.
+  </div>
+</div>
+
+<script>
+/* =========================================================
+   CONFIG
+   ========================================================= */
+const CLAVE_CORRECTA = "esperanza";
+
+const MODO_ALEATORIO = false;
+// false = modo examen (orden del JSON)
+// true  = modo práctica (mezclado)
+
+/*
+  El banco de preguntas se carga desde un JSON externo.
+  Crea un archivo por ejemplo:
+    data/preguntas_n5_vocab.json
+
+  Estructura esperada (ejemplo):
+  [
+    {
+      "id": 1,
+      "titulo": "「山田さんは来週東京へ行きます。」\n¿Cómo se lee 来週?",
+      "opciones": {
+        "a": "らいしゅう",
+        "b": "らいじゅう",
+        "c": "らいしゅ",
+        "d": "らいじゅ"
+      },
+      "correcta": "a",
+      "explicacion": "来週(らいしゅう) = la próxima semana"
+    }
+  ]
+*/
+const JSON_URL = "data/preguntas_n5_vocab.json";
+
+/* =========================================================
+   ESTADO
+   ========================================================= */
+let preguntas = [];
+let orden = [];
+let idx = 0;
+
+let aciertos = 0;
+let errores = 0;
+let yaValidado = false;
+
+let correcta = "";
+let explicacion = "";
+let seleccion = ""; // letra seleccionada por clic
+
+/* =========================================================
+   CLAVE
+   ========================================================= */
+function validarClave(){
+  const v = document.getElementById("claveInput").value.trim().toLowerCase();
+  const err = document.getElementById("errorClave");
+
+  if(v === CLAVE_CORRECTA){
+    err.textContent = "";
+    document.getElementById("bloqueClave").style.display = "none";
+    document.getElementById("quiz").style.display = "block";
+    iniciar();
+  }else{
+    err.textContent = "Clave incorrecta.";
+  }
+}
+
+function enterClave(e){
+  if(e.key === "Enter") validarClave();
+}
+
+/* =========================================================
+   INICIO / CARGA JSON
+   ========================================================= */
+async function iniciar(){
+  try{
+    const res = await fetch(JSON_URL, { cache: "no-store" });
+    if(!res.ok) throw new Error("No se pudo cargar el JSON. Verifica la ruta: " + JSON_URL);
+    preguntas = await res.json();
+
+    if(!Array.isArray(preguntas) || preguntas.length === 0){
+      throw new Error("El JSON está vacío o no es un arreglo.");
+    }
+
+    // Crear orden base
+    orden = [...Array(preguntas.length).keys()];
+    
+    // Mezclar solo si está activado el modo práctica
+    if (MODO_ALEATORIO) {
+      ordenarAleatorio(orden);
+    }
+
+    idx = 0;
+    aciertos = 0;
+    errores = 0;
+    actualizarStats();
+    cargarPregunta();
+  }catch(e){
+    document.getElementById("enunciado").textContent =
+      "Error cargando preguntas:\n" + e.message;
+    document.getElementById("opciones").innerHTML = "";
+  }
+}
+
+function ordenarAleatorio(arr){
+  for(let i = arr.length - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+}
+
+/* =========================================================
+   RENDER
+   ========================================================= */
+function cargarPregunta(){
+  yaValidado = false;
+  seleccion = "";
+
+  const p = preguntas[orden[idx]];
+
+  // Enunciado estilo JLPT (varias líneas)
+  document.getElementById("enunciado").textContent = `${idx+1}. ${p.titulo}`;
+
+  // Opciones
+  const letras = ["a","b","c","d"];
+  let html = "";
+  for(const l of letras){
+    const txt = (p.opciones && p.opciones[l]) ? p.opciones[l] : "";
+    html += `
+      <div class="opcion" id="opt_${l}" onclick="seleccionar('${l}')">
+        <div class="letra">${l.toUpperCase()}</div>
+        <div class="texto">${escapeHtml(txt)}</div>
+      </div>
+    `;
+  }
+  document.getElementById("opciones").innerHTML = html;
+
+  // Claves de respuesta
+  correcta = (p.correcta || "").toLowerCase().trim();
+  explicacion = p.explicacion || "";
+
+  // UI
+  document.getElementById("resultado").textContent = "";
+  document.getElementById("resultado").className = "";
+  document.getElementById("respuestaUsuario").value = "";
+  document.getElementById("respuestaUsuario").focus();
+
+  document.getElementById("contador").textContent = `Pregunta ${idx+1} / ${preguntas.length}`;
+}
+
+function seleccionar(letra){
+  if(yaValidado) return;
+
+  seleccion = letra;
+
+  // marcar visualmente
+  ["a","b","c","d"].forEach(l=>{
+    const el = document.getElementById("opt_" + l);
+    if(!el) return;
+    el.classList.toggle("seleccionada", l === letra);
+  });
+
+  // también llenar el input
+  document.getElementById("respuestaUsuario").value = letra;
+  document.getElementById("respuestaUsuario").focus();
+}
+
+function escapeHtml(str){
+  return String(str)
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
+}
+
+/* =========================================================
+   LÓGICA DEL QUIZ
+   ========================================================= */
+function verificar(){
+  if(preguntas.length === 0) return;
+
+  const input = document.getElementById("respuestaUsuario").value.toLowerCase().trim();
+  const r = (input || seleccion || "").toLowerCase().trim();
+  const res = document.getElementById("resultado");
+
+  if(!r){
+    res.textContent = "Escribe o selecciona a / b / c / d.";
+    res.className = "incorrecto";
+    return;
+  }
+
+  if(r === correcta){
+    res.textContent = "Correcto ✔";
+    res.className = "correcto";
+    aciertos++;
+  }else{
+    res.textContent = `Incorrecto ✘ (era ${correcta.toUpperCase()})`;
+    res.className = "incorrecto";
+    errores++;
+  }
+
+  actualizarStats();
+  yaValidado = true;
+}
+
+function mostrarRespuesta(){
+  if(preguntas.length === 0) return;
+  const res = document.getElementById("resultado");
+
+  const p = preguntas[orden[idx]];
+  const textoCorrecto = (p.opciones && p.opciones[correcta]) ? p.opciones[correcta] : "";
+
+  let extra = "";
+  if(explicacion && explicacion.trim().length > 0){
+    extra = `\n${explicacion}`;
+  }
+
+  res.textContent = `Respuesta: ${correcta.toUpperCase()}) ${textoCorrecto}${extra}`;
+  res.className = "";
+}
+
+function siguiente(){
+  if(preguntas.length === 0) return;
+
+  idx++;
+  if(idx >= preguntas.length){
+    // fin
+    const res = document.getElementById("resultado");
+    res.className = "";
+    res.textContent = `Fin del test. Aciertos: ${aciertos} — Errores: ${errores}`;
+    idx = preguntas.length - 1;
+    return;
+  }
+  cargarPregunta();
+}
+
+function saltar(){
+  // alias por si lo quieres
+  siguiente();
+}
+
+function manejarEnter(event){
+  if(event.key !== "Enter") return;
+
+  if(!yaValidado){
+    verificar();
+  }else{
+    siguiente();
+  }
+}
+
+function actualizarStats(){
+  document.getElementById("aciertos").textContent = aciertos;
+  document.getElementById("errores").textContent = errores;
+}
+
+function reiniciar(){
+  if(preguntas.length === 0) return;
+
+  orden = [...Array(preguntas.length).keys()];
+  if (MODO_ALEATORIO) {
+    ordenarAleatorio(orden);
+  }
+
+  idx = 0;
+  aciertos = 0;
+  errores = 0;
+  actualizarStats();
+  cargarPregunta();
+}
+</script>
+
+</body>
+</html>
