@@ -114,6 +114,7 @@
     margin-top:12px;
     font-size:22px;
     min-height: 28px;
+    white-space:pre-wrap;
   }
   .correcto{ color:#28a745; font-weight:bold; }
   .incorrecto{ color:#d93025; font-weight:bold; }
@@ -121,17 +122,6 @@
   #estadisticas{
     margin-top:12px;
     font-size:20px;
-  }
-
-  #nota{
-    margin-top:10px;
-    font-size:14px;
-    opacity:.7;
-  }
-
-  .mini{
-    font-size:14px;
-    opacity:.75;
   }
 </style>
 </head>
@@ -153,8 +143,6 @@
   </div>
 
   <div id="errorClave"></div>
-  <div id="nota">La clave es: <b>esperanza</b></div>
-  <div class="mini">Tip: en producción, quita esta pista 😄</div>
 </div>
 
 <!-- ===== QUIZ ===== -->
@@ -167,10 +155,7 @@
   </div>
 
   <div id="enunciado"></div>
-
   <div id="opciones"></div>
-
-  <button onclick="mostrarRespuesta()">Mostrar respuesta</button>
 
   <div>
     <input id="respuestaUsuario"
@@ -294,7 +279,6 @@ function cargarPregunta(){
 
   document.getElementById("enunciado").textContent = `${idx+1}. ${p.titulo}`;
 
-  // Mostrar opciones como texto (NO seleccionables)
   const A = p.opciones?.a ?? "";
   const B = p.opciones?.b ?? "";
   const C = p.opciones?.c ?? "";
@@ -319,6 +303,7 @@ function cargarPregunta(){
 
 /* =========================================================
    LÓGICA (Enter: verificar -> siguiente)
+   - Si NO escribió nada: Enter muestra la respuesta (no cuenta error)
    ========================================================= */
 function verificar(){
   if(preguntas.length === 0) return;
@@ -326,9 +311,17 @@ function verificar(){
   const r = document.getElementById("respuestaUsuario").value.toLowerCase().trim();
   const res = document.getElementById("resultado");
 
+  // Si está vacío: mostrar respuesta (sin sumar error)
   if(!r){
-    res.textContent = "Escribe a / b / c / d.";
-    res.className = "incorrecto";
+    const p = preguntas[orden[idx]];
+    const textoCorrecto = (p.opciones && p.opciones[correcta]) ? p.opciones[correcta] : "";
+    let extra = "";
+    if(explicacion && explicacion.trim().length > 0){
+      extra = `\n${explicacion}`;
+    }
+    res.textContent = `Respuesta: ${correcta.toUpperCase()}) ${textoCorrecto}${extra}`;
+    res.className = "";
+    yaValidado = true;
     return;
   }
 
@@ -344,22 +337,6 @@ function verificar(){
 
   actualizarStats();
   yaValidado = true;
-}
-
-function mostrarRespuesta(){
-  if(preguntas.length === 0) return;
-  const res = document.getElementById("resultado");
-
-  const p = preguntas[orden[idx]];
-  const textoCorrecto = (p.opciones && p.opciones[correcta]) ? p.opciones[correcta] : "";
-
-  let extra = "";
-  if(explicacion && explicacion.trim().length > 0){
-    extra = `\n${explicacion}`;
-  }
-
-  res.textContent = `Respuesta: ${correcta.toUpperCase()}) ${textoCorrecto}${extra}`;
-  res.className = "";
 }
 
 function siguiente(){
