@@ -303,7 +303,7 @@ function cargarPregunta(){
 
 /* =========================================================
    LÓGICA (Enter: verificar -> siguiente)
-   - Si NO escribió nada: Enter muestra la respuesta (no cuenta error)
+   - Si NO escribió nada: cuenta como ERROR y muestra respuesta
    ========================================================= */
 function verificar(){
   if(preguntas.length === 0) return;
@@ -311,20 +311,22 @@ function verificar(){
   const r = document.getElementById("respuestaUsuario").value.toLowerCase().trim();
   const res = document.getElementById("resultado");
 
-  // Si está vacío: mostrar respuesta (CUENTA como error)
+  // VACÍO = ERROR + mostrar respuesta
   if(!r){
     errores++;
-    actualizarStats();
-  
+    document.getElementById("errores").textContent = errores;
+
     const p = preguntas[orden[idx]];
     const textoCorrecto = (p.opciones && p.opciones[correcta]) ? p.opciones[correcta] : "";
-  
+
     let extra = "";
     if(explicacion && explicacion.trim().length > 0){
       extra = `\n${explicacion}`;
     }
-  
-    res.textContent = `Sin respuesta ✘ (era ${correcta.toUpperCase()})\nRespuesta: ${correcta.toUpperCase()}) ${textoCorrecto}${extra}`;
+
+    res.textContent =
+      `Sin respuesta ✘ (era ${correcta.toUpperCase()})\n` +
+      `Respuesta: ${correcta.toUpperCase()}) ${textoCorrecto}${extra}`;
     res.className = "incorrecto";
     yaValidado = true;
     return;
@@ -360,6 +362,8 @@ function siguiente(){
 
 function manejarEnter(event){
   if(event.key !== "Enter") return;
+
+  event.preventDefault(); // <- clave para que Enter no haga nada raro
 
   if(!yaValidado){
     verificar();
