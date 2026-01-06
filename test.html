@@ -93,49 +93,21 @@
     margin: 10px 0 14px;
   }
 
-  .opcion{
-    display:flex;
-    gap:10px;
-    align-items:flex-start;
-    padding:12px;
-    border:2px solid #eee;
-    border-radius:12px;
-    margin:10px 0;
-    cursor:pointer;
-    user-select:none;
-  }
-  .opcion:hover{
-    border-color:#f3c27a;
-    background:#fff8ee;
-  }
-  .opcion.seleccionada{
-    border-color:#d97706;
-    background:#fff4e3;
-  }
-  .letra{
-    font-weight:bold;
-    width:30px;
-    height:30px;
-    border-radius:9px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    background:#f3f4f6;
-    flex:0 0 auto;
-  }
-  .texto{
+  #opciones{
     font-size:20px;
-    line-height:1.35;
+    line-height:1.6;
+    margin-top:10px;
+    white-space:pre-wrap;
   }
 
   #respuestaUsuario{
-    margin-top: 8px;
+    margin-top: 12px;
     font-size:22px;
     padding:8px 12px;
     border-radius:10px;
     border:2px solid #aaa;
     text-align:center;
-    width:110px;
+    width:140px;
   }
 
   #resultado{
@@ -160,14 +132,6 @@
   .mini{
     font-size:14px;
     opacity:.75;
-  }
-
-  .filaControles{
-    display:flex;
-    gap:8px;
-    flex-wrap:wrap;
-    align-items:center;
-    margin-top:10px;
   }
 </style>
 </head>
@@ -206,17 +170,14 @@
 
   <div id="opciones"></div>
 
-  <div class="filaControles">
-    <button onclick="mostrarRespuesta()">Mostrar respuesta</button>
+  <button onclick="mostrarRespuesta()">Mostrar respuesta</button>
 
+  <div>
     <input id="respuestaUsuario"
            type="text"
            placeholder="a / b / c / d"
            maxlength="1"
            onkeydown="manejarEnter(event)" />
-
-    <button class="sec" onclick="verificar()">Verificar</button>
-    <button class="sec" onclick="siguiente()">Siguiente</button>
   </div>
 
   <div id="resultado"></div>
@@ -224,10 +185,6 @@
   <div id="estadisticas">
     Aciertos: <span id="aciertos">0</span> —
     Errores: <span id="errores">0</span>
-  </div>
-
-  <div class="mini" style="margin-top:10px;">
-    Atajos: Enter = verificar / siguiente (si ya verificaste). También puedes hacer clic en una opción.
   </div>
 </div>
 
@@ -241,27 +198,6 @@ const MODO_ALEATORIO = false;
 // false = modo examen (orden del JSON)
 // true  = modo práctica (mezclado)
 
-/*
-  El banco de preguntas se carga desde un JSON externo.
-  Crea un archivo por ejemplo:
-    data/preguntas_n5_vocab.json
-
-  Estructura esperada (ejemplo):
-  [
-    {
-      "id": 1,
-      "titulo": "「山田さんは来週東京へ行きます。」\n¿Cómo se lee 来週?",
-      "opciones": {
-        "a": "らいしゅう",
-        "b": "らいじゅう",
-        "c": "らいしゅ",
-        "d": "らいじゅ"
-      },
-      "correcta": "a",
-      "explicacion": "来週(らいしゅう) = la próxima semana"
-    }
-  ]
-*/
 const JSON_URL = "data/preguntas_n5_vocab.json";
 
 /* =========================================================
@@ -277,7 +213,6 @@ let yaValidado = false;
 
 let correcta = "";
 let explicacion = "";
-let seleccion = ""; // letra seleccionada por clic
 
 /* =========================================================
    CLAVE
@@ -315,7 +250,7 @@ async function iniciar(){
 
     // Crear orden base
     orden = [...Array(preguntas.length).keys()];
-    
+
     // Mezclar solo si está activado el modo práctica
     if (MODO_ALEATORIO) {
       ordenarAleatorio(orden);
@@ -329,7 +264,7 @@ async function iniciar(){
   }catch(e){
     document.getElementById("enunciado").textContent =
       "Error cargando preguntas:\n" + e.message;
-    document.getElementById("opciones").innerHTML = "";
+    document.getElementById("opciones").textContent = "";
   }
 }
 
@@ -338,62 +273,6 @@ function ordenarAleatorio(arr){
     const j = Math.floor(Math.random() * (i + 1));
     [arr[i], arr[j]] = [arr[j], arr[i]];
   }
-}
-
-/* =========================================================
-   RENDER
-   ========================================================= */
-function cargarPregunta(){
-  yaValidado = false;
-  seleccion = "";
-
-  const p = preguntas[orden[idx]];
-
-  // Enunciado estilo JLPT (varias líneas)
-  document.getElementById("enunciado").textContent = `${idx+1}. ${p.titulo}`;
-
-  // Opciones
-  const letras = ["a","b","c","d"];
-  let html = "";
-  for(const l of letras){
-    const txt = (p.opciones && p.opciones[l]) ? p.opciones[l] : "";
-    html += `
-      <div class="opcion" id="opt_${l}" onclick="seleccionar('${l}')">
-        <div class="letra">${l.toUpperCase()}</div>
-        <div class="texto">${escapeHtml(txt)}</div>
-      </div>
-    `;
-  }
-  document.getElementById("opciones").innerHTML = html;
-
-  // Claves de respuesta
-  correcta = (p.correcta || "").toLowerCase().trim();
-  explicacion = p.explicacion || "";
-
-  // UI
-  document.getElementById("resultado").textContent = "";
-  document.getElementById("resultado").className = "";
-  document.getElementById("respuestaUsuario").value = "";
-  document.getElementById("respuestaUsuario").focus();
-
-  document.getElementById("contador").textContent = `Pregunta ${idx+1} / ${preguntas.length}`;
-}
-
-function seleccionar(letra){
-  if(yaValidado) return;
-
-  seleccion = letra;
-
-  // marcar visualmente
-  ["a","b","c","d"].forEach(l=>{
-    const el = document.getElementById("opt_" + l);
-    if(!el) return;
-    el.classList.toggle("seleccionada", l === letra);
-  });
-
-  // también llenar el input
-  document.getElementById("respuestaUsuario").value = letra;
-  document.getElementById("respuestaUsuario").focus();
 }
 
 function escapeHtml(str){
@@ -406,17 +285,49 @@ function escapeHtml(str){
 }
 
 /* =========================================================
-   LÓGICA DEL QUIZ
+   RENDER
+   ========================================================= */
+function cargarPregunta(){
+  yaValidado = false;
+
+  const p = preguntas[orden[idx]];
+
+  document.getElementById("enunciado").textContent = `${idx+1}. ${p.titulo}`;
+
+  // Mostrar opciones como texto (NO seleccionables)
+  const A = p.opciones?.a ?? "";
+  const B = p.opciones?.b ?? "";
+  const C = p.opciones?.c ?? "";
+  const D = p.opciones?.d ?? "";
+
+  document.getElementById("opciones").innerHTML =
+    `A) ${escapeHtml(A)}<br>` +
+    `B) ${escapeHtml(B)}<br>` +
+    `C) ${escapeHtml(C)}<br>` +
+    `D) ${escapeHtml(D)}`;
+
+  correcta = (p.correcta || "").toLowerCase().trim();
+  explicacion = p.explicacion || "";
+
+  document.getElementById("resultado").textContent = "";
+  document.getElementById("resultado").className = "";
+  document.getElementById("respuestaUsuario").value = "";
+  document.getElementById("respuestaUsuario").focus();
+
+  document.getElementById("contador").textContent = `Pregunta ${idx+1} / ${preguntas.length}`;
+}
+
+/* =========================================================
+   LÓGICA (Enter: verificar -> siguiente)
    ========================================================= */
 function verificar(){
   if(preguntas.length === 0) return;
 
-  const input = document.getElementById("respuestaUsuario").value.toLowerCase().trim();
-  const r = (input || seleccion || "").toLowerCase().trim();
+  const r = document.getElementById("respuestaUsuario").value.toLowerCase().trim();
   const res = document.getElementById("resultado");
 
   if(!r){
-    res.textContent = "Escribe o selecciona a / b / c / d.";
+    res.textContent = "Escribe a / b / c / d.";
     res.className = "incorrecto";
     return;
   }
@@ -456,7 +367,6 @@ function siguiente(){
 
   idx++;
   if(idx >= preguntas.length){
-    // fin
     const res = document.getElementById("resultado");
     res.className = "";
     res.textContent = `Fin del test. Aciertos: ${aciertos} — Errores: ${errores}`;
@@ -464,11 +374,6 @@ function siguiente(){
     return;
   }
   cargarPregunta();
-}
-
-function saltar(){
-  // alias por si lo quieres
-  siguiente();
 }
 
 function manejarEnter(event){
