@@ -88,6 +88,15 @@
     font-size: 22px;
     }
     
+    #btn-principiante {
+      opacity: 0.45;
+    }
+    
+    #btn-principiante.activo {
+      opacity: 1;
+      background: #7d5cff;
+      color: white;
+    }
 </style>
 </head>
 <body>
@@ -100,6 +109,7 @@
     <button id="btn-katakana" class="modo-btn" onclick="setModo('katakana')">Katakana</button>
     <button id="btn-mezcla"   class="modo-btn" onclick="setModo('mezcla')">Mezcla</button>
     <button id="btn-extra"    class="modo-btn" onclick="setModo('extra')">Extra</button>
+    <button id="btn-principiante" class="modo-btn" onclick="togglePrincipiante()">Principiante</button>
 </div>
 
 <div id="kana">あ</div>
@@ -121,16 +131,41 @@
 let hiragana = [];
 let katakana = [];
 let extra = [];
+let hiraganaBase = [];
+let katakanaBase = [];
 
+let filtroPrincipiante = false;
+
+const GOJUON = [
+  "a","i","u","e","o",
+  "ka","ki","ku","ke","ko",
+  "sa","shi","su","se","so",
+  "ta","chi","tsu","te","to",
+  "na","ni","nu","ne","no",
+  "ha","hi","fu","he","ho",
+  "ma","mi","mu","me","mo",
+  "ya","yu","yo",
+  "ra","ri","ru","re","ro",
+  "wa","wo","n"
+];
+    
 // Cargar datos desde JSON
 fetch("data/kana.json")
     .then(res => res.json())
     .then(data => {
-        hiragana = data.hiragana;
-        katakana = data.katakana;
-        extra = data.Extra;
-        setModo("hiragana"); // iniciar como antes
-        actualizarEstadisticas();
+      hiraganaBase = data.hiragana;
+      katakanaBase = data.katakana;
+      extra = data.Extra; // ✅ EXTRA queda igual
+    
+      // ✅ Inicializar listas “activas” en modo normal
+      hiragana = hiraganaBase;
+      katakana = katakanaBase;
+    
+      // Si el toggle estuviera ON por alguna razón, aplica filtro
+      aplicarFiltroPrincipiante();
+    
+      setModo("hiragana");
+      actualizarEstadisticas();
     });
 
 // ===============================
@@ -163,8 +198,9 @@ function setModo(modo) {
     
     // actualizar estado visual de los botones
     const botones = document.querySelectorAll(".modo-btn");
-    botones.forEach(b => b.classList.remove("activo"));
-
+    botones.forEach(b => {
+      if (b.id !== "btn-principiante") b.classList.remove("activo");
+    });
     document.getElementById("btn-" + modo).classList.add("activo");
 
     // limpiar respuesta anterior
@@ -228,10 +264,42 @@ function actualizarEstadisticas() {
     document.getElementById("errores").innerText = errores;
 }
 
+function aplicarFiltroPrincipiante() {
+  // si está OFF → listas completas
+  if (!filtroPrincipiante) {
+    hiragana = hiraganaBase;
+    katakana = katakanaBase;
+    return;
+  }
+
+  // si está ON → solo 46 básicos (solo hira/kata)
+  hiragana = hiraganaBase.filter(k => GOJUON.includes(k[1]));
+  katakana = katakanaBase.filter(k => GOJUON.includes(k[1]));
+}
+
+function togglePrincipiante() {
+  filtroPrincipiante = !filtroPrincipiante;
+
+  // visual del botón (opaco vs activo)
+  const btn = document.getElementById("btn-principiante");
+  if (filtroPrincipiante) btn.classList.add("activo");
+  else btn.classList.remove("activo");
+
+  // aplicar filtro SOLO a hiragana/katakana (extra no se toca)
+  aplicarFiltroPrincipiante();
+
+  // si estás en extra, no hacer nada más (extra queda igual)
+  if (modoActual === "extra") return;
+
+  // refrescar el modo actual (hiragana/katakana/mezcla)
+  setModo(modoActual);
+}
+    
 </script>
 
 </body>
 </html>
+
 
 
 
