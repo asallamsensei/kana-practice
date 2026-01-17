@@ -150,5 +150,63 @@
   { "kanji": "北", "significado": "norte" },
   { "kanji": "野菜", "significado": "verduras, vegetales" },
   { "kanji": "冷蔵庫", "significado": "refrigerador, nevera" },
-  { "kanji": "茶色", "significado": "café (color), marrón" }
+  { "kanji": "茶色", "significado": "café (color), marrón" },
+
+  { "kanji": "青", "significado": "azul (a veces verde)" },
+  { "kanji": "地下鉄", "significado": "metro (ferrocarril subterráneo)" },
+  { "kanji": "西", "significado": "oeste" },
+  { "kanji": "火曜日", "significado": "martes (día del fuego)" },
+
+  { "kanji": "喫茶店", "significado": "kissaten (cafetería tradicional japonesa)" },
+  { "kanji": "昼", "significado": "mediodía, parte diurna del día" },
+  { "kanji": "持つ", "significado": "tener, sostener, llevar" },
+  { "kanji": "何", "significado": "¿qué?" },
+
+  { "kanji": "靴下", "significado": "calcetines, medias" },
+  { "kanji": "辺", "significado": "alrededores, zona, cerca de…" },
+  { "kanji": "封筒", "significado": "sobre (de carta)" },
+  { "kanji": "話す", "significado": "hablar" },
+
+  { "kanji": "映画館", "significado": "cine (lugar), sala de cine" },
+  { "kanji": "箸", "significado": "palillos (para comer)" },
+  { "kanji": "食堂", "significado": "comedor, cafetería, restaurante sencillo" },
+  { "kanji": "牛肉", "significado": "carne de res" },
+
+  { "kanji": "交差点", "significado": "cruce, intersección (de calles)" },
+  { "kanji": "頭", "significado": "cabeza" },
+  { "kanji": "曇り", "significado": "nublado (clima)" },
+  { "kanji": "漢字", "significado": "kanji (caracteres chinos)" },
+
+  { "kanji": "茶碗", "significado": "tazón (para arroz o té)" },
+  { "kanji": "背広", "significado": "traje formal" },
+  { "kanji": "私", "significado": "yo" },
+  { "kanji": "万年筆", "significado": "pluma fuente o estilográfica" },
+  { "kanji": "車", "significado": "carro, coche" },
+
+  { "kanji": "灰皿", "significado": "cenicero (cenizas + plato)" },
+  { "kanji": "大使館", "significado": "embajada" },
+  { "kanji": "百", "significado": "100" },
+  { "kanji": "豚肉", "significado": "carne de cerdo" },
+
+  { "kanji": "交番", "significado": "caseta de policía" },
+  { "kanji": "飲む", "significado": "beber, tomar (líquidos)" },
+  { "kanji": "日曜日", "significado": "domingo (día del sol)" },
+  { "kanji": "飴", "significado": "caramelo (duro)" },
+
+  { "kanji": "土曜日", "significado": "sábado (día de la tierra)" },
+  { "kanji": "月曜日", "significado": "lunes (día de la luna)" },
+  { "kanji": "金曜日", "significado": "viernes (día del metal)" },
+
+  { "kanji": "花瓶", "significado": "florero, jarrón" },
+  { "kanji": "木曜日", "significado": "jueves (día de la madera)" },
+  { "kanji": "本棚", "significado": "estantería para libros" },
+  { "kanji": "石鹸", "significado": "jabón" },
+
+  { "kanji": "誕生日", "significado": "cumpleaños" },
+  { "kanji": "かわいい", "significado": "lindo, adorable, encantador" },
+  { "kanji": "鞄", "significado": "bolso, maletín, mochila" },
+
+  { "kanji": "水曜日", "significado": "miércoles (día del agua)" },
+  { "kanji": "八百屋", "significado": "tienda de frutas y verduras (800 representa “muchísimas cosas”)" },
+  { "kanji": "成る", "significado": "convertirse en, llegar a ser" }
 ]
