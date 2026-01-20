@@ -148,7 +148,6 @@
     Aciertos: <span id="aciertos">0</span> —
     Errores: <span id="errores">0</span>
 </div>
-<div id="miniinfo"></div>
 
 <script>
 let listaCompleta = [];
@@ -252,8 +251,6 @@ function aplicarFiltro() {
     listaFiltrada = listaCompleta.filter(item => gradosSeleccionados.has(item.grado));
 
     const gradosTxt = [...gradosSeleccionados].sort((a,b)=>a-b).join(", ");
-    document.getElementById("miniinfo").innerText =
-        `Grados activos: ${gradosTxt} — Kanji en pool: ${listaFiltrada.length}`;
 
     // Si el pool queda muy pequeño, no se puede hacer multiple-choice decente
     if (listaFiltrada.length < 3) {
