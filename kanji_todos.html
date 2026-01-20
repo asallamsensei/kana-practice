@@ -196,27 +196,39 @@ function prepararUIFiltros() {
     botones.forEach(btn => {
         btn.addEventListener("click", () => {
             const g = btn.dataset.grado;
-
+        
+            const todosActivos = gradosDisponibles.every(x => gradosSeleccionados.has(x));
+        
             if (g === "all") {
-                // Toggle "Todos": si no están todos, activarlos; si ya están todos, dejarlos todos igual
+                // "Todos" siempre activa todos
                 gradosSeleccionados = new Set(gradosDisponibles);
+        
             } else {
                 const n = Number(g);
-                if (gradosSeleccionados.has(n)) {
-                    gradosSeleccionados.delete(n);
+        
+                // ✅ Si estaban todos activos y tocas uno, resetea a SOLO ese
+                if (todosActivos) {
+                    gradosSeleccionados = new Set([n]);
                 } else {
-                    gradosSeleccionados.add(n);
-                }
-                // Si quedó vacío, por seguridad volvemos a todos
-                if (gradosSeleccionados.size === 0) {
-                    gradosSeleccionados = new Set(gradosDisponibles);
+                    // comportamiento toggle normal
+                    if (gradosSeleccionados.has(n)) {
+                        gradosSeleccionados.delete(n);
+                    } else {
+                        gradosSeleccionados.add(n);
+                    }
+        
+                    // Si quedó vacío, por seguridad volvemos a todos
+                    if (gradosSeleccionados.size === 0) {
+                        gradosSeleccionados = new Set(gradosDisponibles);
+                    }
                 }
             }
-
+        
             pintarBotones();
             aplicarFiltro();
-            siguiente(); // cambia inmediatamente para que se note el filtro
+            siguiente();
         });
+
     });
 
     pintarBotones();
