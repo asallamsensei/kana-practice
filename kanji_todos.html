@@ -131,15 +131,9 @@
     <button class="btn-grado" data-grado="all">Todos</button>
 </div>
 
-<div class="pill">
-    Selecciona grados (puedes elegir varios). Enter: validar → Enter otra vez: siguiente.
-</div>
-
 <div id="kanji">日</div>
 
 <div id="opciones"></div>
-
-<button onclick="mostrarRespuesta()">Mostrar respuesta</button>
 
 <input id="respuestaUsuario"
        type="text"
@@ -292,23 +286,33 @@ function siguiente() {
 }
 
 function verificar() {
-    const r = document.getElementById("respuestaUsuario").value.toLowerCase().trim();
+    const input = document.getElementById("respuestaUsuario");
+    const r = input.value.toLowerCase().trim();
     const res = document.getElementById("resultado");
 
-    if (!["a","b","c"].includes(r)) {
-        res.innerText = "Escribe a, b o c.";
-        res.className = "";
+    // ENTER sin escribir nada → mostrar respuesta y contar como error
+    if (r === "") {
+        res.innerText = `Significado: ${significadoCorrecto}`;
+        res.className = "incorrecto";
+
+        errores++;
+        document.getElementById("errores").innerText = errores;
+
+        yaValidado = true;
         return;
     }
 
+    // Validación normal
     if (r === correcta) {
         res.innerText = "Correcto ✔";
         res.className = "correcto";
+
         aciertos++;
         document.getElementById("aciertos").innerText = aciertos;
     } else {
         res.innerText = `Incorrecto ✘ (era ${correcta})`;
         res.className = "incorrecto";
+
         errores++;
         document.getElementById("errores").innerText = errores;
     }
