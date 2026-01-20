@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Repaso de Kanji (2136) - Asallam Sensei</title>
+<style>
+    body {
+        background: #fffaf3;
+        font-family: Arial;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 30px 14px 60px;
+    }
+
+    h1 { margin: 10px 0 16px; text-align:center; }
+
+    /* Barra de filtros */
+    #filtros {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        justify-content: center;
+        margin-bottom: 10px;
+        max-width: 780px;
+    }
+
+    .btn-grado {
+        padding: 10px 14px;
+        font-size: 16px;
+        border-radius: 999px;
+        border: 2px solid #d97706;
+        background: transparent;
+        color: #7c2d12;
+        cursor: pointer;
+        user-select: none;
+        transition: 0.15s;
+    }
+
+    .btn-grado:hover { transform: translateY(-1px); }
+
+    .btn-grado.activo {
+        background: #d97706;
+        color: white;
+    }
+
+    .pill {
+        margin-top: 6px;
+        font-size: 14px;
+        color: #444;
+        text-align: center;
+        max-width: 780px;
+        line-height: 1.4;
+    }
+
+    #kanji {
+        font-size: 120px;
+        margin: 28px 0 18px;
+        font-weight: bold;
+    }
+
+    button {
+        padding: 12px 20px;
+        margin: 5px;
+        font-size: 18px;
+        border-radius: 10px;
+        border: none;
+        background: #d97706;
+        color: white;
+        cursor: pointer;
+    }
+
+    button:hover { background: #b45309; }
+
+    #opciones {
+        font-size: 24px;
+        margin-top: 12px;
+        text-align: left;
+        line-height: 1.6;
+        max-width: 780px;
+        width: min(780px, 95vw);
+    }
+
+    #respuestaUsuario {
+        margin-top: 14px;
+        font-size: 22px;
+        padding: 8px 12px;
+        border-radius: 8px;
+        border: 2px solid #aaa;
+        text-align: center;
+        width: 90px;
+    }
+
+    .correcto { color: #28a745; font-weight: bold; }
+    .incorrecto { color: #d93025; font-weight: bold; }
+
+    #resultado {
+        margin-top: 12px;
+        font-size: 24px;
+        min-height: 30px;
+        text-align: center;
+    }
+
+    #estadisticas {
+        margin-top: 18px;
+        font-size: 20px;
+        text-align: center;
+    }
+
+    #miniinfo {
+        margin-top: 6px;
+        font-size: 14px;
+        color: #555;
+        text-align: center;
+    }
+</style>
+</head>
+<body>
+
+<h1>Repaso de Kanji — Asallam Sensei</h1>
+
+<div id="filtros">
+    <button class="btn-grado" data-grado="1">1</button>
+    <button class="btn-grado" data-grado="2">2</button>
+    <button class="btn-grado" data-grado="3">3</button>
+    <button class="btn-grado" data-grado="4">4</button>
+    <button class="btn-grado" data-grado="5">5</button>
+    <button class="btn-grado" data-grado="6">6</button>
+    <button class="btn-grado" data-grado="8">8</button>
+    <button class="btn-grado" data-grado="all">Todos</button>
+</div>
+
+<div class="pill">
+    Selecciona grados (puedes elegir varios). Enter: validar → Enter otra vez: siguiente.
+</div>
+
+<div id="kanji">日</div>
+
+<div id="opciones"></div>
+
+<button onclick="mostrarRespuesta()">Mostrar respuesta</button>
+
+<input id="respuestaUsuario"
+       type="text"
+       placeholder="a / b / c"
+       maxlength="1"
+       onkeydown="manejarEnter(event)">
+
+<div id="resultado"></div>
+
+<div id="estadisticas">
+    Aciertos: <span id="aciertos">0</span> —
+    Errores: <span id="errores">0</span>
+</div>
+<div id="miniinfo"></div>
+
+<script>
+let listaCompleta = [];
+let listaFiltrada = [];
+
+let actual = 0;
+let aciertos = 0;
+let errores = 0;
+
+let correcta = "";
+let significadoCorrecto = "";
+let yaValidado = false;
+
+const gradosDisponibles = [1,2,3,4,5,6,8];
+let gradosSeleccionados = new Set(gradosDisponibles); // por defecto: todos
+
+// Cargar kanji desde JSON (2136)
+fetch("data/2136.json")
+  .then(res => res.json())
+  .then(data => {
+      // Normaliza y filtra entradas inválidas por si acaso
+      listaCompleta = (Array.isArray(data) ? data : []).filter(x =>
+          x && typeof x.kanji === "string" && x.kanji.trim() !== "" &&
+          typeof x.significado === "string" && x.significado.trim() !== "" &&
+          (typeof x.grado === "number" || typeof x.grado === "string")
+      ).map(x => ({
+          kanji: String(x.kanji).trim(),
+          significado: String(x.significado).trim(),
+          grado: Number(x.grado)
+      }));
+
+      prepararUIFiltros();
+      aplicarFiltro();
+      siguiente();
+  })
+  .catch(err => {
+      document.getElementById("resultado").innerText =
+        "No se pudo cargar data/2136.json (revisa ruta y servidor).";
+      console.error(err);
+  });
+
+function prepararUIFiltros() {
+    const botones = document.querySelectorAll(".btn-grado");
+
+    botones.forEach(btn => {
+        btn.addEventListener("click", () => {
+            const g = btn.dataset.grado;
+
+            if (g === "all") {
+                // Toggle "Todos": si no están todos, activarlos; si ya están todos, dejarlos todos igual
+                gradosSeleccionados = new Set(gradosDisponibles);
+            } else {
+                const n = Number(g);
+                if (gradosSeleccionados.has(n)) {
+                    gradosSeleccionados.delete(n);
+                } else {
+                    gradosSeleccionados.add(n);
+                }
+                // Si quedó vacío, por seguridad volvemos a todos
+                if (gradosSeleccionados.size === 0) {
+                    gradosSeleccionados = new Set(gradosDisponibles);
+                }
+            }
+
+            pintarBotones();
+            aplicarFiltro();
+            siguiente(); // cambia inmediatamente para que se note el filtro
+        });
+    });
+
+    pintarBotones();
+}
+
+function pintarBotones() {
+    const botones = document.querySelectorAll(".btn-grado");
+    const todosActivos = gradosDisponibles.every(g => gradosSeleccionados.has(g));
+
+    botones.forEach(btn => {
+        const g = btn.dataset.grado;
+        if (g === "all") {
+            btn.classList.toggle("activo", todosActivos);
+        } else {
+            btn.classList.toggle("activo", gradosSeleccionados.has(Number(g)));
+        }
+    });
+}
+
+function aplicarFiltro() {
+    listaFiltrada = listaCompleta.filter(item => gradosSeleccionados.has(item.grado));
+
+    const gradosTxt = [...gradosSeleccionados].sort((a,b)=>a-b).join(", ");
+    document.getElementById("miniinfo").innerText =
+        `Grados activos: ${gradosTxt} — Kanji en pool: ${listaFiltrada.length}`;
+
+    // Si el pool queda muy pequeño, no se puede hacer multiple-choice decente
+    if (listaFiltrada.length < 3) {
+        document.getElementById("resultado").innerText =
+          "Pool muy pequeño: activa más grados (mínimo 3 kanji).";
+    }
+}
+
+function siguiente() {
+    if (listaFiltrada.length < 3) return;
+
+    actual = Math.floor(Math.random() * listaFiltrada.length);
+    const correcto = listaFiltrada[actual];
+
+    significadoCorrecto = correcto.significado;
+
+    // Opciones
+    let opciones = [correcto.significado];
+    while (opciones.length < 3) {
+        const r = listaFiltrada[Math.floor(Math.random() * listaFiltrada.length)].significado;
+        if (!opciones.includes(r)) opciones.push(r);
+    }
+
+    // Mezclar opciones
+    opciones.sort(() => Math.random() - 0.5);
+
+    const letras = ["a","b","c"];
+    correcta = letras[opciones.indexOf(correcto.significado)];
+
+    // Mostrar
+    document.getElementById("kanji").innerText = correcto.kanji;
+    document.getElementById("opciones").innerHTML =
+        `a) ${opciones[0]}<br>
+         b) ${opciones[1]}<br>
+         c) ${opciones[2]}`;
+
+    document.getElementById("resultado").innerText = "";
+    document.getElementById("resultado").className = "";
+    document.getElementById("respuestaUsuario").value = "";
+    document.getElementById("respuestaUsuario").focus();
+
+    yaValidado = false;
+}
+
+function verificar() {
+    const r = document.getElementById("respuestaUsuario").value.toLowerCase().trim();
+    const res = document.getElementById("resultado");
+
+    if (!["a","b","c"].includes(r)) {
+        res.innerText = "Escribe a, b o c.";
+        res.className = "";
+        return;
+    }
+
+    if (r === correcta) {
+        res.innerText = "Correcto ✔";
+        res.className = "correcto";
+        aciertos++;
+        document.getElementById("aciertos").innerText = aciertos;
+    } else {
+        res.innerText = `Incorrecto ✘ (era ${correcta})`;
+        res.className = "incorrecto";
+        errores++;
+        document.getElementById("errores").innerText = errores;
+    }
+
+    yaValidado = true;
+}
+
+function mostrarRespuesta() {
+    const res = document.getElementById("resultado");
+    res.innerText = `Significado: ${significadoCorrecto}`;
+    res.className = "";
+}
+
+function manejarEnter(event) {
+    if (event.key !== "Enter") return;
+
+    if (!yaValidado) {
+        verificar();
+    } else {
+        siguiente();
+    }
+}
+</script>
+
+</body>
+</html>
