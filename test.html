@@ -177,7 +177,10 @@
 /* =========================================================
    CONFIG
    ========================================================= */
-const CLAVE_CORRECTA = "esperanza";
+const CLAVES = {
+  esperanza: 0, // Sección 0 => Preguntas 1 (1-20)
+  chorrazo: 1   // Sección 1 => Preguntas 2 (21-40)
+};
 
 const MODO_ALEATORIO = false;
 // false = modo examen (orden del JSON)
@@ -199,6 +202,8 @@ let yaValidado = false;
 let correcta = "";
 let explicacion = "";
 
+let seccionElegida = 0;
+
 /* =========================================================
    CLAVE
    ========================================================= */
@@ -206,10 +211,13 @@ function validarClave(){
   const v = document.getElementById("claveInput").value.trim().toLowerCase();
   const err = document.getElementById("errorClave");
 
-  if(v === CLAVE_CORRECTA){
+  if(v in CLAVES){
+    seccionElegida = CLAVES[v];
     err.textContent = "";
     document.getElementById("bloqueClave").style.display = "none";
     document.getElementById("quiz").style.display = "block";
+    document.getElementById("sub").textContent =
+      (seccionElegida === 0) ? "Parte 1: Vocabulario" : "Parte 2: Vocabulario";
     iniciar();
   }else{
     err.textContent = "Clave incorrecta.";
@@ -227,10 +235,22 @@ async function iniciar(){
   try{
     const res = await fetch(JSON_URL, { cache: "no-store" });
     if(!res.ok) throw new Error("No se pudo cargar el JSON. Verifica la ruta: " + JSON_URL);
-    preguntas = await res.json();
 
-    if(!Array.isArray(preguntas) || preguntas.length === 0){
-      throw new Error("El JSON está vacío o no es un arreglo.");
+    const data = await res.json();
+
+    // validar estructura
+    if(!data || !Array.isArray(data.secciones)){
+      throw new Error("El JSON no tiene 'secciones' (array).");
+    }
+    if(!data.secciones[seccionElegida] || !Array.isArray(data.secciones[seccionElegida].preguntas)){
+      throw new Error("La sección elegida no existe o no tiene 'preguntas' (array).");
+    }
+    
+    // aquí ya queda como antes: un arreglo plano de preguntas
+    preguntas = data.secciones[seccionElegida].preguntas;
+    
+    if(preguntas.length === 0){
+      throw new Error("La sección elegida está vacía.");
     }
 
     // Crear orden base
