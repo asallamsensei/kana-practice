@@ -200,6 +200,7 @@ let errores = 0;
 let yaValidado = false;
 
 let correcta = "";
+let opcionesActuales = null; // {a: "...", b:"...", c:"...", d:"..."} según el shuffle
 let explicacion = "";
 
 let seccionElegida = 0;
@@ -324,6 +325,9 @@ function cargarPregunta(){
     }
   });
 
+  // ✅ Guardar opciones actuales (ya mezcladas) para verificar/mostrar respuesta
+  opcionesActuales = opcionesRender;
+
   // 4️⃣ Mostrar opciones
   document.getElementById("opciones").innerHTML =
     `A) ${escapeHtml(opcionesRender.a)}<br>` +
@@ -359,8 +363,8 @@ function verificar(){
     errores++;
     document.getElementById("errores").textContent = errores;
 
-    const p = preguntas[orden[idx]];
-    const textoCorrecto = (p.opciones && p.opciones[correcta]) ? p.opciones[correcta] : "";
+    const textoCorrecto =
+      (opcionesActuales && opcionesActuales[correcta]) ? opcionesActuales[correcta] : "";
 
     let extra = "";
     if(explicacion && explicacion.trim().length > 0){
@@ -380,7 +384,17 @@ function verificar(){
     res.className = "correcto";
     aciertos++;
   }else{
-    res.textContent = `Incorrecto ✘ (era ${correcta.toUpperCase()})`;
+    const textoCorrecto =
+      (opcionesActuales && opcionesActuales[correcta]) ? opcionesActuales[correcta] : "";
+
+    let extra = "";
+    if(explicacion && explicacion.trim().length > 0){
+      extra = `\n${explicacion}`;
+    }
+
+    res.textContent =
+      `Incorrecto ✘ (era ${correcta.toUpperCase()})\n` +
+      `Respuesta: ${correcta.toUpperCase()}) ${textoCorrecto}${extra}`;
     res.className = "incorrecto";
     errores++;
   }
