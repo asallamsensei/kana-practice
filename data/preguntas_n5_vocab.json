@@ -322,7 +322,7 @@
         },
         {
           "id": 27,
-          "titulo": "「鞄を＿＿＿ください。」\nEn esta frase, 辺 se lee…",
+          "titulo": "「鞄を＿＿＿ください。」\n¿Cuál opción completa mejor la frase?",
           "opciones": {
             "a": "持って",
             "b": "話して",
@@ -358,7 +358,7 @@
         },
         {
           "id": 30,
-          "titulo": "「駅の辺に交番があります。」\n¿Cuál opción completa mejor la frase?",
+          "titulo": "「駅の辺に交番があります。」\nEn esta frase, 辺 se lee…",
           "opciones": {
             "a": "へん",
             "b": "あたま",
