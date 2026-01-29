@@ -133,25 +133,36 @@ let aciertos = 0;
 let errores = 0;
 let yaRespondido = false;
 
-fetch("data/verbos.json")
-  .then(r => r.json())
+fetch("./data/verbos.json", { cache: "no-store" })
+  .then(r => {
+    if (!r.ok) throw new Error("No se pudo cargar ./data/verbos.json (HTTP " + r.status + ")");
+    return r.json();
+  })
   .then(data => {
-    verbos = data || [];
+    verbos = Array.isArray(data) ? data : [];
     if(!verbos.length){
-      alert("No se encontró data de verbos.json o está vacío.");
-      return;
+      throw new Error("verbos.json está vacío o no es un array.");
     }
 
-    // Construir lista única de formas disponibles (en español) desde el JSON
     const setFormas = new Set();
     for(const v of verbos){
       for(const c of (v.conjugaciones || [])){
-        if(c.forma) setFormas.add(c.forma);
+        if(c && c.forma) setFormas.add(c.forma);
       }
     }
     formasDisponibles = Array.from(setFormas);
 
+    if(formasDisponibles.length < 2){
+      throw new Error("No hay suficientes 'forma' en el JSON.");
+    }
+
     siguiente();
+  })
+  .catch(err => {
+    const res = document.getElementById("resultado");
+    res.textContent = "ERROR: " + err.message;
+    res.className = "incorrecto";
+    console.error(err);
   });
 
 function randInt(n){ return Math.floor(Math.random() * n); }
