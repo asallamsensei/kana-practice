@@ -27,4 +27,35 @@
         "negativo": "読みませんでした"
       },
       {
-        "
+        "forma": "forma -te",
+        "afirmativo": "読んで",
+        "negativo": "読まなくて"
+      },
+      {
+        "forma": "forma potencial",
+        "afirmativo": "読める",
+        "negativo": "読めない"
+      },
+      {
+        "forma": "forma pasiva",
+        "afirmativo": "読まれる",
+        "negativo": "読まれない"
+      },
+      {
+        "forma": "forma causativa",
+        "afirmativo": "読ませる",
+        "negativo": "読ませない"
+      },
+      {
+        "forma": "forma causativa-pasiva",
+        "afirmativo": "読ませられる",
+        "negativo": "読ませられない"
+      },
+      {
+        "forma": "imperativo",
+        "afirmativo": "読め",
+        "negativo": "読むな"
+      }
+    ]
+  }
+]
