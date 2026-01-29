@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Repaso de Verbos — Asallam Sensei</title>
+<style>
+  body{
+    background:#fffaf3;
+    font-family: Arial, sans-serif;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    padding-top:40px;
+    padding-left:16px;
+    padding-right:16px;
+  }
+  h1{ margin-bottom:10px; text-align:center; }
+
+  .card{
+    width:min(900px, 100%);
+    background:#fff;
+    border-radius:14px;
+    box-shadow: 0 6px 18px rgba(0,0,0,.08);
+    padding:20px;
+    margin-top:18px;
+  }
+
+  #formaJp{
+    font-size:96px;
+    font-weight:bold;
+    text-align:center;
+    margin: 14px 0 10px;
+  }
+
+  #pista{
+    text-align:center;
+    font-size:18px;
+    opacity:.85;
+    margin-bottom:12px;
+  }
+
+  .grid{
+    display:grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap:10px;
+    margin-top:12px;
+  }
+
+  button{
+    padding:12px 16px;
+    font-size:18px;
+    border-radius:10px;
+    border:none;
+    background:#d97706;
+    color:#fff;
+    cursor:pointer;
+  }
+  button:hover{ background:#b45309; }
+
+  .secondary{
+    background:#374151;
+  }
+  .secondary:hover{ background:#111827; }
+
+  .danger{
+    background:#9ca3af;
+    color:#111;
+  }
+  .danger:hover{ background:#6b7280; }
+
+  #resultado{
+    margin-top:14px;
+    font-size:22px;
+    text-align:center;
+    min-height: 28px;
+  }
+
+  .correcto{ color:#28a745; font-weight:bold; }
+  .incorrecto{ color:#d93025; font-weight:bold; }
+
+  #estadisticas{
+    margin-top:14px;
+    font-size:20px;
+    text-align:center;
+  }
+
+  #detalle{
+    margin-top:10px;
+    font-size:18px;
+    text-align:center;
+    opacity:.9;
+    line-height:1.45;
+    min-height: 52px;
+  }
+
+  @media (max-width:520px){
+    #formaJp{ font-size:72px; }
+    .grid{ grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<h1>Repaso de Verbos — Asallam Sensei</h1>
+
+<div class="card">
+  <div id="formaJp">読んだ</div>
+  <div id="pista">Elige la forma correcta</div>
+
+  <div class="grid" id="botones"></div>
+
+  <div class="grid" style="grid-template-columns: repeat(3, minmax(0,1fr));">
+    <button class="secondary" onclick="siguiente()">Siguiente</button>
+    <button class="danger" onclick="mostrarRespuesta()">Mostrar respuesta</button>
+    <button class="secondary" onclick="reiniciar()">Reiniciar</button>
+  </div>
+
+  <div id="resultado"></div>
+  <div id="detalle"></div>
+
+  <div id="estadisticas">
+    Aciertos: <span id="aciertos">0</span> —
+    Errores: <span id="errores">0</span>
+  </div>
+</div>
+
+<script>
+let verbos = [];
+let formasDisponibles = [];      // lista global de formas (para generar distractores)
+let preguntaActual = null;       // { verbo, formaTexto, jp, polaridad, meta }
+let aciertos = 0;
+let errores = 0;
+let yaRespondido = false;
+
+fetch("data/verbos.json")
+  .then(r => r.json())
+  .then(data => {
+    verbos = data || [];
+    if(!verbos.length){
+      alert("No se encontró data de verbos.json o está vacío.");
+      return;
+    }
+
+    // Construir lista única de formas disponibles (en español) desde el JSON
+    const setFormas = new Set();
+    for(const v of verbos){
+      for(const c of (v.conjugaciones || [])){
+        if(c.forma) setFormas.add(c.forma);
+      }
+    }
+    formasDisponibles = Array.from(setFormas);
+
+    siguiente();
+  });
+
+function randInt(n){ return Math.floor(Math.random() * n); }
+
+function sampleOne(arr){
+  return arr[randInt(arr.length)];
+}
+
+function shuffle(arr){
+  // Fisher-Yates
+  for(let i = arr.length - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
+function limpiarUI(){
+  document.getElementById("resultado").textContent = "";
+  document.getElementById("resultado").className = "";
+  document.getElementById("detalle").textContent = "";
+}
+
+function construirPregunta(){
+  const v = sampleOne(verbos);
+  const conj = sampleOne(v.conjugaciones);
+
+  // Elegir aleatoriamente afirmativo o negativo
+  const polaridad = (Math.random() < 0.5) ? "afirmativo" : "negativo";
+  const jp = conj[polaridad];
+
+  return {
+    verbo: v.verbo,
+    romaji: v.romaji,
+    significado: v.significado,
+    tipo: v.tipo,
+    grupo: v.grupo,
+    forma: conj.forma,
+    polaridad,
+    jp
+  };
+}
+
+function generarOpciones(correcta, total=4){
+  // total = # de botones (4 por defecto)
+  const opciones = [correcta];
+  const pool = formasDisponibles.filter(f => f !== correcta);
+
+  while(opciones.length < total && pool.length){
+    const pick = pool.splice(randInt(pool.length), 1)[0];
+    if(!opciones.includes(pick)) opciones.push(pick);
+  }
+
+  return shuffle(opciones);
+}
+
+function renderBotones(opciones){
+  const cont = document.getElementById("botones");
+  cont.innerHTML = "";
+
+  for(const op of opciones){
+    const b = document.createElement("button");
+    b.textContent = op;
+    b.onclick = () => responder(op);
+    cont.appendChild(b);
+  }
+}
+
+function siguiente(){
+  preguntaActual = construirPregunta();
+  yaRespondido = false;
+  limpiarUI();
+
+  document.getElementById("formaJp").textContent = preguntaActual.jp;
+
+  const opciones = generarOpciones(preguntaActual.forma, 4);
+  renderBotones(opciones);
+}
+
+function responder(opcionElegida){
+  if(yaRespondido) return;
+
+  const res = document.getElementById("resultado");
+  const det = document.getElementById("detalle");
+
+  if(opcionElegida === preguntaActual.forma){
+    res.textContent = "Correcto ✔";
+    res.className = "correcto";
+    aciertos++;
+    document.getElementById("aciertos").textContent = aciertos;
+  }else{
+    res.textContent = `Incorrecto ✘ (era: ${preguntaActual.forma})`;
+    res.className = "incorrecto";
+    errores++;
+    document.getElementById("errores").textContent = errores;
+  }
+
+  det.textContent =
+    `Verbo: ${preguntaActual.verbo} (${preguntaActual.romaji}) — "${preguntaActual.significado}"\n` +
+    `Forma: ${preguntaActual.forma} — ${preguntaActual.polaridad}`;
+
+  yaRespondido = true;
+}
+
+function mostrarRespuesta(){
+  // Cuenta como error si todavía no respondió
+  if(!yaRespondido){
+    errores++;
+    document.getElementById("errores").textContent = errores;
+    yaRespondido = true;
+  }
+
+  const res = document.getElementById("resultado");
+  const det = document.getElementById("detalle");
+
+  res.textContent = `Respuesta: ${preguntaActual.forma}`;
+  res.className = "incorrecto";
+
+  det.textContent =
+    `Verbo: ${preguntaActual.verbo} (${preguntaActual.romaji}) — "${preguntaActual.significado}"\n` +
+    `Forma: ${preguntaActual.forma} — ${preguntaActual.polaridad}\n` +
+    `JP: ${preguntaActual.jp}`;
+}
+
+function reiniciar(){
+  aciertos = 0;
+  errores = 0;
+  document.getElementById("aciertos").textContent = "0";
+  document.getElementById("errores").textContent = "0";
+  siguiente();
+}
+
+// Atajo: Enter = siguiente si ya respondió; si no ha respondido, no hace nada
+document.addEventListener("keydown", (e) => {
+  if(e.key === "Enter"){
+    if(yaRespondido) siguiente();
+  }
+});
+</script>
+
+</body>
+</html>
