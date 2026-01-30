@@ -478,20 +478,262 @@
         },
         {
           "id": 40,
-          "titulo": "「青い車があります。」\n¿Cuál opción es 青?",
+          "titulo": "「青い車があります。」\n¿Cómo se lee 青 aquí?",
           "opciones": {
             "a": "あお",
             "b": "あおい",
             "c": "あか",
             "d": "しろ"
           },
+          "correcta": "b",
+          "explicacion": "Aquí 青 forma parte de 青い, así que se lee あおい (adjetivo: “azul”)."
+        }
+      ]
+    },
+    {
+      "nombre": "Preguntas 3",
+      "preguntas": [
+        {
+          "id": 41,
+          "titulo": "「夜、＿＿＿に入ります。」\n¿Cuál palabra completa mejor la frase?",
+          "opciones": {
+            "a": "風呂",
+            "b": "教室",
+            "c": "池",
+            "d": "冷蔵庫"
+          },
           "correcta": "a",
-          "explicacion": "青(あお) = azul (sustantivo). 青い(あおい) = azul (adjetivo)."
+          "explicacion": "風呂(ふろ)に入る = bañarse."
+        },
+        {
+          "id": 42,
+          "titulo": "「日曜日に＿＿＿をします。」\n(Lavar ropa)\n¿Cuál opción encaja mejor?",
+          "opciones": {
+            "a": "洗濯",
+            "b": "電気",
+            "c": "野菜",
+            "d": "歯"
+          },
+          "correcta": "a",
+          "explicacion": "洗濯(せんたく)をする = lavar ropa."
+        },
+        {
+          "id": 43,
+          "titulo": "「白いシャツを着ています。」\n白い significa…",
+          "opciones": {
+            "a": "blanco",
+            "b": "verde",
+            "c": "amarillo",
+            "d": "café"
+          },
+          "correcta": "a",
+          "explicacion": "白(しろ) = blanco (sustantivo). 白い = blanco (adjetivo)."
+        },
+        {
+          "id": 44,
+          "titulo": "「緑の公園が好きです。」\n緑 es…",
+          "opciones": {
+            "a": "verde",
+            "b": "azul",
+            "c": "negro",
+            "d": "rojo"
+          },
+          "correcta": "a",
+          "explicacion": "緑(みどり) = verde."
+        },
+        {
+          "id": 45,
+          "titulo": "「黄色い花があります。」\n黄色い se lee…",
+          "opciones": {
+            "a": "きいろい",
+            "b": "きろい",
+            "c": "おうしょく",
+            "d": "しろい"
+          },
+          "correcta": "a",
+          "explicacion": "黄色(きいろ) = amarillo. 黄色い = amarillo (adjetivo)."
+        },
+        {
+          "id": 46,
+          "titulo": "「南の町に住んでいます。」\n南 significa…",
+          "opciones": {
+            "a": "sur",
+            "b": "norte",
+            "c": "este",
+            "d": "oeste"
+          },
+          "correcta": "a",
+          "explicacion": "南(みなみ) = sur."
+        },
+        {
+          "id": 47,
+          "titulo": "「北は寒いです。」\n北 se lee…",
+          "opciones": {
+            "a": "きた",
+            "b": "みなみ",
+            "c": "にし",
+            "d": "ひがし"
+          },
+          "correcta": "a",
+          "explicacion": "北(きた) = norte."
+        },
+        {
+          "id": 48,
+          "titulo": "「毎日野菜を食べます。」\n野菜 significa…",
+          "opciones": {
+            "a": "verduras / vegetales",
+            "b": "carne",
+            "c": "fruta",
+            "d": "arroz"
+          },
+          "correcta": "a",
+          "explicacion": "野菜(やさい) = verduras, vegetales."
+        },
+        {
+          "id": 49,
+          "titulo": "「冷蔵庫に牛乳があります。」\n冷蔵庫 es…",
+          "opciones": {
+            "a": "refrigerador / nevera",
+            "b": "armario",
+            "c": "horno",
+            "d": "lavadora"
+          },
+          "correcta": "a",
+          "explicacion": "冷蔵庫(れいぞうこ) = refrigerador."
+        },
+        {
+          "id": 50,
+          "titulo": "「茶色のかばんです。」\n茶色 significa…",
+          "opciones": {
+            "a": "café / marrón",
+            "b": "amarillo",
+            "c": "verde",
+            "d": "negro"
+          },
+          "correcta": "a",
+          "explicacion": "茶色(ちゃいろ) = café, marrón."
+        },
+        {
+          "id": 51,
+          "titulo": "「先生は教室にいます。」\n教室 es…",
+          "opciones": {
+            "a": "aula / salón de clase",
+            "b": "oficina",
+            "c": "biblioteca",
+            "d": "baño"
+          },
+          "correcta": "a",
+          "explicacion": "教室(きょうしつ) = aula."
+        },
+        {
+          "id": 52,
+          "titulo": "「切手を貼ります。」\n切手 significa…",
+          "opciones": {
+            "a": "estampilla / sello postal",
+            "b": "billete",
+            "c": "sobre",
+            "d": "moneda"
+          },
+          "correcta": "a",
+          "explicacion": "切手(きって) = estampilla postal."
+        },
+        {
+          "id": 53,
+          "titulo": "「電気をつけてください。」\n電気 es…",
+          "opciones": {
+            "a": "luz / electricidad",
+            "b": "agua",
+            "c": "fuego",
+            "d": "gas"
+          },
+          "correcta": "a",
+          "explicacion": "電気(でんき) = electricidad, luz."
+        },
+        {
+          "id": 54,
+          "titulo": "「歯が痛いです。」\n歯 significa…",
+          "opciones": {
+            "a": "diente",
+            "b": "nariz",
+            "c": "oreja",
+            "d": "ojo"
+          },
+          "correcta": "a",
+          "explicacion": "歯(は) = diente."
+        },
+        {
+          "id": 55,
+          "titulo": "「鼻が高いです。」\n鼻 se lee…",
+          "opciones": {
+            "a": "はな",
+            "b": "みみ",
+            "c": "は",
+            "d": "あたま"
+          },
+          "correcta": "a",
+          "explicacion": "鼻(はな) = nariz."
+        },
+        {
+          "id": 56,
+          "titulo": "「外国人の友だちがいます。」\n外国人 significa…",
+          "opciones": {
+            "a": "extranjero",
+            "b": "profesor",
+            "c": "estudiante",
+            "d": "vecino"
+          },
+          "correcta": "a",
+          "explicacion": "外国人(がいこくじん) = extranjero."
+        },
+        {
+          "id": 57,
+          "titulo": "「スープに塩を入れます。」\n塩 es…",
+          "opciones": {
+            "a": "sal",
+            "b": "azúcar",
+            "c": "pimienta",
+            "d": "aceite"
+          },
+          "correcta": "a",
+          "explicacion": "塩(しお) = sal."
+        },
+        {
+          "id": 58,
+          "titulo": "「公園に池があります。」\n池 significa…",
+          "opciones": {
+            "a": "estanque",
+            "b": "río",
+            "c": "mar",
+            "d": "fuente"
+          },
+          "correcta": "a",
+          "explicacion": "池(いけ) = estanque."
+        },
+        {
+          "id": 59,
+          "titulo": "「耳がよく聞こえます。」\n耳 es…",
+          "opciones": {
+            "a": "oreja / oído",
+            "b": "nariz",
+            "c": "boca",
+            "d": "ojo"
+          },
+          "correcta": "a",
+          "explicacion": "耳(みみ) = oreja, oído."
+        },
+        {
+          "id": 60,
+          "titulo": "「財布を忘れました。」\n財布 significa…",
+          "opciones": {
+            "a": "billetera / cartera",
+            "b": "bolso",
+            "c": "mochila",
+            "d": "maleta"
+          },
+          "correcta": "a",
+          "explicacion": "財布(さいふ) = billetera, cartera."
         }
       ]
     }
   ]
 }
-
-
-        
