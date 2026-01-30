@@ -179,7 +179,7 @@
    ========================================================= */
 const CLAVES = {
   esperanza: 0, // Sección 0 => Preguntas 1 (1-20)
-  chorrazo: 1   // Sección 1 => Preguntas 2 (21-40)
+  chorrazo: 1,   // Sección 1 => Preguntas 2 (21-40)
   aguecuca: 2   // Sección 2 => Preguntas 3 (41-60)  
 };
 
@@ -219,7 +219,9 @@ function validarClave(){
     document.getElementById("bloqueClave").style.display = "none";
     document.getElementById("quiz").style.display = "block";
     document.getElementById("sub").textContent =
-      (seccionElegida === 0) ? "Parte 1: Vocabulario" : "Parte 2: Vocabulario : "Parte 3: Vocabulario";
+      (seccionElegida === 0) ? "Parte 1: Vocabulario"
+      : (seccionElegida === 1) ? "Parte 2: Vocabulario"
+      : "Parte 3: Vocabulario";
     iniciar();
   }else{
     err.textContent = "Clave incorrecta.";
