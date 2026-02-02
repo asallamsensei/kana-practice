@@ -125,6 +125,8 @@
     Aciertos: <span id="aciertos">0</span> — 
     Errores: <span id="errores">0</span>
 </div>
+
+<button class="modo-btn" onclick="resetStatsModo()">Reset stats</button>
     
 <script>
 
@@ -178,6 +180,48 @@ let yaValidado = false;
 let aciertos = 0;
 let errores = 0;
 
+// ===============================
+// ✅ GUARDADO (localStorage)
+// ===============================
+const STATS_KEY = "kanaStats_v1";
+
+// trae el objeto completo de stats guardado
+function cargarStats() {
+  try {
+    return JSON.parse(localStorage.getItem(STATS_KEY)) || {};
+  } catch {
+    return {};
+  }
+}
+
+// guarda el objeto completo
+function guardarStats(stats) {
+  localStorage.setItem(STATS_KEY, JSON.stringify(stats));
+}
+
+// obtiene stats del modo (si no existe, lo crea)
+function getStatsModo(modo) {
+  const stats = cargarStats();
+  if (!stats[modo]) stats[modo] = { aciertos: 0, errores: 0 };
+  return stats;
+}
+
+// carga stats del modo actual a las variables aciertos/errores
+function cargarStatsActual() {
+  const stats = getStatsModo(modoActual);
+  aciertos = stats[modoActual].aciertos || 0;
+  errores  = stats[modoActual].errores  || 0;
+  actualizarEstadisticas();
+}
+
+// guarda las variables aciertos/errores del modo actual
+function guardarStatsActual() {
+  const stats = getStatsModo(modoActual);
+  stats[modoActual].aciertos = aciertos;
+  stats[modoActual].errores = errores;
+  guardarStats(stats);
+}
+    
 function setModo(modo) {
     modoActual = modo;
 
@@ -191,10 +235,8 @@ function setModo(modo) {
         kanaLista = [...hiragana, ...katakana];
     }
 
-    // 🔹 REINICIAR ESTADÍSTICAS AL CAMBIAR DE MODO
-    aciertos = 0;
-    errores = 0;
-    actualizarEstadisticas();
+    // ✅ Cargar estadísticas guardadas para este modo
+    cargarStatsActual();
     
     // actualizar estado visual de los botones
     const botones = document.querySelectorAll(".modo-btn");
@@ -242,6 +284,7 @@ function verificarRespuesta() {
         errores++;
     }
     actualizarEstadisticas();
+    guardarStatsActual(); // ✅ guardar en localStorage
     yaValidado = true;  // señal de que ya se revisó la respuesta
 }
 
@@ -294,22 +337,15 @@ function togglePrincipiante() {
   // refrescar el modo actual (hiragana/katakana/mezcla)
   setModo(modoActual);
 }
+
+function resetStatsModo() {
+  aciertos = 0;
+  errores = 0;
+  actualizarEstadisticas();
+  guardarStatsActual();
+}
     
 </script>
 
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
