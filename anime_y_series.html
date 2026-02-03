@@ -369,7 +369,6 @@ function setModo(modo){
   };
   $(map[modo]).classList.add("activo");
 
-  $("modoInfo").innerText = "Modo: " + modoNombre(modo);
   yaValidado = false;
   limpiarResultado();
   cargarStatsActual();
@@ -395,7 +394,7 @@ function cambiarBloque(){
 
 function refrescarPills(){
   const b = DATA.bloques[bloqueIdx];
-  $("bloqueInfo").innerText = `${b.cancion} — ${b.artista || ""}`.trim();
+  document.title = `Repaso Anime Vocab — ${b?.cancion || "Asallam Sensei"}`;
 }
 
 function limpiarResultado(){
