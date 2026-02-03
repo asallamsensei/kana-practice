@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Repaso Anime Vocab — Asallam Sensei</title>
+<style>
+  :root{
+    --bg: #0b1020;
+    --card: rgba(255,255,255,.08);
+    --card2: rgba(255,255,255,.10);
+    --text: #eef2ff;
+    --muted: rgba(238,242,255,.75);
+    --accent: #7d5cff;
+    --accent2:#22c55e;
+    --danger:#ef4444;
+    --border: rgba(255,255,255,.14);
+  }
+
+  body{
+    margin:0;
+    font-family: Arial, sans-serif;
+    background: radial-gradient(1200px 700px at 20% 10%, rgba(125,92,255,.35), transparent 60%),
+                radial-gradient(900px 600px at 90% 20%, rgba(34,197,94,.22), transparent 60%),
+                radial-gradient(900px 600px at 30% 90%, rgba(239,68,68,.18), transparent 55%),
+                var(--bg);
+    color: var(--text);
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    padding:28px 14px 70px;
+  }
+
+  .wrap{ width:min(980px, 100%); }
+
+  header{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    margin-bottom:16px;
+  }
+
+  h1{
+    margin:0;
+    font-size: 26px;
+    letter-spacing:.2px;
+  }
+
+  .sub{
+    color: var(--muted);
+    font-size: 14px;
+    line-height:1.4;
+  }
+
+  .grid{
+    display:grid;
+    grid-template-columns: 1.1fr .9fr;
+    gap:14px;
+  }
+
+  @media (max-width: 860px){
+    .grid{ grid-template-columns: 1fr; }
+  }
+
+  .card{
+    background: linear-gradient(180deg, var(--card2), var(--card));
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    box-shadow: 0 18px 45px rgba(0,0,0,.35);
+    padding: 16px;
+  }
+
+  .row{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    align-items:center;
+  }
+
+  .pill{
+    padding: 8px 12px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: rgba(255,255,255,.06);
+    color: var(--muted);
+    font-size: 13px;
+  }
+
+  select, input{
+    background: rgba(255,255,255,.08);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 10px 12px;
+    border-radius: 12px;
+    outline:none;
+    font-size: 15px;
+  }
+
+  select{ cursor:pointer; }
+
+  .btn{
+    border: none;
+    border-radius: 12px;
+    padding: 11px 14px;
+    cursor: pointer;
+    color: white;
+    background: var(--accent);
+    font-weight: bold;
+    transition: .15s;
+  }
+  .btn:hover{ transform: translateY(-1px); filter: brightness(1.06); }
+
+  .btn-ghost{
+    background: rgba(255,255,255,.08);
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-weight: 700;
+  }
+
+  .btn-mode{
+    background: rgba(255,255,255,.08);
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-weight: 700;
+  }
+  .btn-mode.activo{
+    background: var(--accent);
+    border-color: transparent;
+  }
+
+  .big{
+    text-align:center;
+    padding: 20px 10px 10px;
+  }
+
+  #promptJP{
+    font-size: 52px;
+    font-weight: 900;
+    letter-spacing: .5px;
+    margin: 6px 0 8px;
+  }
+
+  #promptSub{
+    color: var(--muted);
+    font-size: 16px;
+    margin: 0 0 10px;
+    min-height: 20px;
+  }
+
+  #opciones{
+    margin-top: 10px;
+    font-size: 20px;
+    line-height: 1.7;
+    text-align:left;
+    width: fit-content;
+    margin-left:auto;
+    margin-right:auto;
+    padding: 10px 14px;
+    border-radius: 14px;
+    border: 1px dashed rgba(255,255,255,.22);
+    background: rgba(0,0,0,.18);
+  }
+
+  .opbtns{
+    display:flex;
+    justify-content:center;
+    gap:10px;
+    margin-top: 12px;
+    flex-wrap:wrap;
+  }
+
+  .opbtns button{
+    min-width: 90px;
+  }
+
+  #resultado{
+    margin-top: 12px;
+    font-size: 20px;
+    min-height: 32px;
+    text-align:center;
+    font-weight: 800;
+    white-space: pre-line;
+  }
+
+  .correcto{ color: var(--accent2); }
+  .incorrecto{ color: var(--danger); }
+
+  .stats{
+    margin-top: 12px;
+    text-align:center;
+    color: var(--muted);
+    font-size: 15px;
+  }
+
+  .sep{
+    height: 1px;
+    background: rgba(255,255,255,.10);
+    margin: 12px 0;
+  }
+
+  .hint{
+    color: rgba(238,242,255,.7);
+    font-size: 13px;
+    line-height: 1.35;
+  }
+
+  code.kbd{
+    background: rgba(255,255,255,.08);
+    border: 1px solid rgba(255,255,255,.14);
+    padding: 2px 7px;
+    border-radius: 8px;
+    font-weight: 700;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <h1>Repaso Anime Vocab — Asallam Sensei</h1>
+    <div class="sub">
+      Solo 3 opciones <b>a / b / c</b>. <br>
+      <span class="pill">Enter = validar / siguiente</span>
+      <span class="pill">Stats guardadas (local)</span>
+    </div>
+  </header>
+
+  <div class="grid">
+    <!-- Panel izquierdo: juego -->
+    <div class="card big">
+      <div id="promptJP">—</div>
+      <div id="promptSub"></div>
+
+      <div id="opciones"></div>
+
+      <div class="opbtns">
+        <button class="btn btn-ghost" onclick="responder('a')">a</button>
+        <button class="btn btn-ghost" onclick="responder('b')">b</button>
+        <button class="btn btn-ghost" onclick="responder('c')">c</button>
+      </div>
+
+      <div class="row" style="justify-content:center; margin-top: 12px;">
+        <input id="respuestaUsuario" type="text"
+               placeholder="a / b / c + Enter"
+               maxlength="1"
+               onkeydown="manejarEnter(event)">
+        <button class="btn btn-ghost" onclick="mostrarAyuda()">?</button>
+      </div>
+
+      <div id="resultado"></div>
+
+      <div class="stats">
+        Aciertos: <span id="aciertos">0</span> — Errores: <span id="errores">0</span>
+      </div>
+
+      <div class="row" style="justify-content:center; margin-top: 14px;">
+        <button class="btn" onclick="siguiente()">Siguiente</button>
+        <button class="btn btn-ghost" onclick="resetStats()">Reset stats</button>
+      </div>
+
+      <div class="sep"></div>
+      <div class="hint" id="ayuda" style="display:none;">
+        <b>Atajos:</b> <code class="kbd">a</code>/<code class="kbd">b</code>/<code class="kbd">c</code> + <code class="kbd">Enter</code> valida.
+        <code class="kbd">Enter</code> de nuevo pasa.
+      </div>
+    </div>
+
+    <!-- Panel derecho: controles -->
+    <div class="card">
+      <div class="row">
+        <span class="pill">Bloque / Canción</span>
+      </div>
+      <div class="row" style="margin-top: 8px;">
+        <select id="selectBloque" onchange="cambiarBloque()"></select>
+      </div>
+
+      <div class="sep"></div>
+
+      <div class="row">
+        <span class="pill">Modo</span>
+      </div>
+
+      <div class="row" style="margin-top: 8px;">
+        <button class="btn btn-mode" id="m-jp-es" onclick="setModo('jp_es')">JP → ES</button>
+        <button class="btn btn-mode" id="m-es-jp" onclick="setModo('es_jp')">ES → JP</button>
+        <button class="btn btn-mode" id="m-kanji" onclick="setModo('kanji_mc')">Kanji</button>
+        <button class="btn btn-mode" id="m-mix" onclick="setModo('mix')">Mix</button>
+      </div>
+
+      <div class="sep"></div>
+
+      <div class="hint">
+        En vocab, si fallas, te muestro el <b>romaji</b> como “extra”.<br>
+        (En kanji no hay romaji, solo significado).
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+let DATA = { bloques: [] };
+
+let bloqueIdx = 0;
+let modoActual = "jp_es";
+let yaValidado = false;
+
+let actual = null;
+
+let aciertos = 0;
+let errores = 0;
+
+// ====== localStorage ======
+const STATS_KEY = "animeVocabStats_mc_v1";
+
+function cargarStats() {
+  try { return JSON.parse(localStorage.getItem(STATS_KEY)) || {}; }
+  catch { return {}; }
+}
+function guardarStats(stats) {
+  localStorage.setItem(STATS_KEY, JSON.stringify(stats));
+}
+function statsKeyActual() {
+  const b = DATA.bloques[bloqueIdx];
+  const id = (b?.cancion || "bloque").toLowerCase().slice(0,60);
+  return `${id}__${modoActual}`;
+}
+function cargarStatsActual() {
+  const all = cargarStats();
+  const k = statsKeyActual();
+  const s = all[k] || { aciertos: 0, errores: 0 };
+  aciertos = s.aciertos || 0;
+  errores  = s.errores  || 0;
+  pintarStats();
+}
+function guardarStatsActual() {
+  const all = cargarStats();
+  const k = statsKeyActual();
+  all[k] = { aciertos, errores };
+  guardarStats(all);
+}
+
+// ====== UI helpers ======
+function $(id){ return document.getElementById(id); }
+
+function setModo(modo){
+  modoActual = modo;
+
+  ["jp-es","es-jp","kanji","mix"].forEach(x=>{
+    const el = $("m-" + x);
+    if(el) el.classList.remove("activo");
+  });
+
+  const map = {
+    jp_es: "m-jp-es",
+    es_jp: "m-es-jp",
+    kanji_mc: "m-kanji",
+    mix: "m-mix"
+  };
+  $(map[modo]).classList.add("activo");
+
+  yaValidado = false;
+  limpiarResultado();
+  cargarStatsActual();
+  siguiente();
+}
+
+function cambiarBloque(){
+  bloqueIdx = Number($("selectBloque").value) || 0;
+  yaValidado = false;
+  limpiarResultado();
+  cargarStatsActual();
+  refrescarPills();
+  siguiente();
+}
+
+function refrescarPills(){
+  const b = DATA.bloques[bloqueIdx];
+  document.title = `Repaso Anime Vocab — ${b?.cancion || "Asallam Sensei"}`;
+}
+
+function limpiarResultado(){
+  $("resultado").innerText = "";
+  $("resultado").className = "";
+}
+
+function pintarStats(){
+  $("aciertos").innerText = aciertos;
+  $("errores").innerText = errores;
+}
+
+function mostrarAyuda(){
+  const box = $("ayuda");
+  box.style.display = (box.style.display === "none") ? "block" : "none";
+}
+
+// ====== Random helpers ======
+function pick(arr){
+  return arr[Math.floor(Math.random()*arr.length)];
+}
+
+function shuffle(arr){
+  return arr.slice().sort(()=>Math.random()-0.5);
+}
+
+// arma 3 opciones únicas con un "correct"
+function build3Options(pool, correctValue, mapFn){
+  const opciones = [correctValue];
+
+  // intentos para evitar loops raros
+  let tries = 0;
+  while(opciones.length < 3 && tries < 200){
+    tries++;
+    const v = mapFn(pick(pool));
+    if(v != null && v !== "" && !opciones.includes(v)) opciones.push(v);
+  }
+
+  // fallback si pool está pobre
+  while(opciones.length < 3){
+    opciones.push("—");
+  }
+
+  return shuffle(opciones);
+}
+
+// ====== Generadores de preguntas (TODO MC a/b/c) ======
+function preguntaVocabJP_ES(b){
+  const pool = b.vocabulario || [];
+  if(pool.length < 3) return null;
+
+  const v = pick(pool);
+  const correct = v.es;
+
+  const opciones = build3Options(pool, correct, x => x.es);
+  const letras = ["a","b","c"];
+  const correcta = letras[opciones.indexOf(correct)];
+
+  return {
+    tipo: "vocab_jp_es",
+    prompt: v.jp,
+    sub: "Elige el significado en español",
+    opciones,
+    correcta,
+    respuesta: correct,
+    extra: v
+  };
+}
+
+function preguntaVocabES_JP(b){
+  const pool = b.vocabulario || [];
+  if(pool.length < 3) return null;
+
+  const v = pick(pool);
+  const correct = v.jp;
+
+  const opciones = build3Options(pool, correct, x => x.jp);
+  const letras = ["a","b","c"];
+  const correcta = letras[opciones.indexOf(correct)];
+
+  return {
+    tipo: "vocab_es_jp",
+    prompt: v.es,
+    sub: "Elige la forma en japonés",
+    opciones,
+    correcta,
+    respuesta: correct,
+    extra: v
+  };
+}
+
+function preguntaKanjiMC(b){
+  const pool = b.kanji || [];
+  if(pool.length < 3) return null;
+
+  const k = pick(pool);
+  const correct = k.significado;
+
+  const opciones = build3Options(pool, correct, x => x.significado);
+  const letras = ["a","b","c"];
+  const correcta = letras[opciones.indexOf(correct)];
+
+  return {
+    tipo: "kanji_mc",
+    prompt: k.kanji,
+    sub: "Elige el significado",
+    opciones,
+    correcta,
+    respuesta: correct,
+    extra: k
+  };
+}
+
+// ====== Flujo ======
+function siguiente(){
+  const b = DATA.bloques[bloqueIdx];
+  if(!b) return;
+
+  let q = null;
+
+  if(modoActual === "jp_es") q = preguntaVocabJP_ES(b);
+  else if(modoActual === "es_jp") q = preguntaVocabES_JP(b);
+  else if(modoActual === "kanji_mc") q = preguntaKanjiMC(b);
+  else {
+    // mix
+    const r = Math.random();
+    if(r < 0.45) q = preguntaVocabJP_ES(b);
+    else if(r < 0.75) q = preguntaVocabES_JP(b);
+    else q = preguntaKanjiMC(b);
+  }
+
+  // fallback por si faltan pools
+  if(!q){
+    $("promptJP").innerText = "Faltan datos en el JSON";
+    $("promptSub").innerText = "Este modo necesita mínimo 3 items en el pool.";
+    $("opciones").innerHTML = "";
+    return;
+  }
+
+  actual = q;
+
+  $("promptJP").innerText = actual.prompt;
+  $("promptSub").innerText = actual.sub || "";
+
+  $("opciones").innerHTML =
+    `a) ${actual.opciones[0]}<br>b) ${actual.opciones[1]}<br>c) ${actual.opciones[2]}`;
+
+  $("respuestaUsuario").value = "";
+  $("respuestaUsuario").placeholder = "a / b / c + Enter";
+  $("respuestaUsuario").maxLength = 1;
+
+  limpiarResultado();
+  yaValidado = false;
+  $("respuestaUsuario").focus();
+}
+
+function responder(letra){
+  if(yaValidado) return;
+  $("respuestaUsuario").value = letra;
+  verificar();
+}
+
+function verificar(){
+  const input = ($("respuestaUsuario").value || "").trim().toLowerCase();
+  const res = $("resultado");
+
+  // ENTER vacío = revelar + error
+  if(input === ""){
+    const extra = (actual.extra?.romaji && (actual.tipo==="vocab_jp_es" || actual.tipo==="vocab_es_jp"))
+      ? `\nRomaji: ${actual.extra.romaji}`
+      : "";
+    res.className = "incorrecto";
+    res.innerText = `Respuesta: ${actual.correcta}) ${actual.respuesta}${extra}`;
+    errores++;
+    pintarStats();
+    guardarStatsActual();
+    yaValidado = true;
+    return;
+  }
+
+  if(!["a","b","c"].includes(input)){
+    res.className = "incorrecto";
+    res.innerText = "Usa solo: a / b / c";
+    return;
+  }
+
+  if(input === actual.correcta){
+    res.className = "correcto";
+    res.innerText = "Correcto ✔";
+    aciertos++;
+  }else{
+    const extra = (actual.extra?.romaji && (actual.tipo==="vocab_jp_es" || actual.tipo==="vocab_es_jp"))
+      ? `\nRomaji: ${actual.extra.romaji}`
+      : "";
+    res.className = "incorrecto";
+    res.innerText = `Incorrecto ✘ (era ${actual.correcta})\nRespuesta: ${actual.correcta}) ${actual.respuesta}${extra}`;
+    errores++;
+  }
+
+  pintarStats();
+  guardarStatsActual();
+  yaValidado = true;
+}
+
+function manejarEnter(event){
+  if(event.key !== "Enter") return;
+
+  if(!yaValidado){
+    verificar();
+  } else {
+    siguiente();
+  }
+}
+
+function resetStats(){
+  aciertos = 0;
+  errores = 0;
+  pintarStats();
+  guardarStatsActual();
+}
+
+// ====== CARGA JSON ======
+fetch("data/anime_vocab.json")
+  .then(r => r.json())
+  .then(json => {
+    DATA = (json && json.bloques) ? json : { bloques: [] };
+
+    const sel = $("selectBloque");
+    sel.innerHTML = "";
+
+    DATA.bloques.forEach((b, i) => {
+      const opt = document.createElement("option");
+      opt.value = i;
+      opt.textContent = `${b.cancion} — ${b.artista || ""}`.trim();
+      sel.appendChild(opt);
+    });
+
+    bloqueIdx = 0;
+    refrescarPills();
+    setModo("jp_es");
+  })
+  .catch(err => {
+    $("promptJP").innerText = "No se pudo cargar data/anime_vocab.json";
+    $("promptSub").innerText = "Revisa la ruta y que estés en servidor (GitHub Pages / Live Server).";
+    console.error(err);
+  });
+</script>
+</body>
+</html>
