@@ -296,6 +296,9 @@
       </div>
       <div class="row" style="margin-top: 8px;">
         <div id="chipsBloques" class="chips"></div>
+        <div class="row" style="margin-top:10px;">
+          <button class="btn btn-ghost" onclick="seleccionarTodo()">Todo</button>
+        </div>
       </div>
 
       <div class="sep"></div>
@@ -372,6 +375,25 @@ function guardarStatsActual() {
   guardarStats(all);
 }
 
+function seleccionarTodo(){
+  // 1) marcar todos como activos
+  bloquesActivos = new Set(DATA.bloques.map((_, i) => i));
+
+  // 2) repintar chips
+  const cont = $("chipsBloques");
+  if(cont){
+    [...cont.children].forEach((el, idx) => {
+      el.classList.toggle("activo", bloquesActivos.has(idx));
+    });
+  }
+
+  // 3) continuar con una pregunta nueva
+  yaValidado = false;
+  limpiarResultado();
+  siguiente();
+}
+
+  
 // ====== UI helpers ======
 function $(id){ return document.getElementById(id); }
 
