@@ -86,6 +86,35 @@
     font-size: 13px;
   }
 
+  .chips{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:8px;
+}
+
+.chip{
+  padding: 9px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,.06);
+  color: var(--muted);
+  cursor:pointer;
+  user-select:none;
+  font-size: 13px;
+  font-weight: 800;
+  transition:.12s;
+}
+
+.chip:hover{ transform: translateY(-1px); }
+
+.chip.activo{
+  background: var(--accent);
+  color: white;
+  border-color: transparent;
+}
+
+  
   select, input{
     background: rgba(255,255,255,.08);
     border: 1px solid var(--border);
@@ -266,7 +295,7 @@
         <span class="pill">Canción / Serie</span>
       </div>
       <div class="row" style="margin-top: 8px;">
-        <select id="selectBloque" onchange="cambiarBloque()"></select>
+        <div id="chipsBloques" class="chips"></div>
       </div>
 
       <div class="sep"></div>
@@ -304,6 +333,9 @@ let actual = null;
 let aciertos = 0;
 let errores = 0;
 
+let bloquesActivos = new Set([0]); // por defecto, el primero activo
+
+  
 // ====== localStorage ======
 const STATS_KEY = "animeVocabStats_mc_v1";
 
@@ -315,6 +347,12 @@ function guardarStats(stats) {
   localStorage.setItem(STATS_KEY, JSON.stringify(stats));
 }
 function statsKeyActual() {
+  const activos = [...bloquesActivos].filter(i => DATA.bloques[i]);
+  if(activos.length === 0){
+    bloquesActivos.add(0);
+  }
+  const idx = pick([...bloquesActivos]);
+  bloqueIdx = idx; // actualiza el índice actual
   const b = DATA.bloques[bloqueIdx];
   const id = (b?.cancion || "bloque").toLowerCase().slice(0,60);
   return `${id}__${modoActual}`;
@@ -597,20 +635,46 @@ fetch("data/anime_vocab.json")
   .then(r => r.json())
   .then(json => {
     DATA = (json && json.bloques) ? json : { bloques: [] };
-
-    const sel = $("selectBloque");
-    sel.innerHTML = "";
-
+    const cont = $("chipsBloques");
+    cont.innerHTML = "";
+    
+    // si hay bloques, activa el primero
+    bloquesActivos = new Set(DATA.bloques.length ? [0] : []);
+    
     DATA.bloques.forEach((b, i) => {
-      const opt = document.createElement("option");
-      opt.value = i;
-      opt.textContent = `${b.cancion} — ${b.artista || ""}`.trim();
-      sel.appendChild(opt);
+      const chip = document.createElement("div");
+      chip.className = "chip" + (bloquesActivos.has(i) ? " activo" : "");
+      chip.textContent = `${b.cancion}${b.artista ? " — " + b.artista : ""}`;
+    
+      chip.onclick = () => {
+        // toggle
+        if(bloquesActivos.has(i)) bloquesActivos.delete(i);
+        else bloquesActivos.add(i);
+    
+        // nunca dejar vacío
+        if(bloquesActivos.size === 0) bloquesActivos.add(i);
+    
+        // repintar estados
+        [...cont.children].forEach((el, idx) => {
+          el.classList.toggle("activo", bloquesActivos.has(idx));
+        });
+    
+        // stats: si quieres, aquí puedes decidir:
+        // - mantener stats por modo (como ahora)
+        // - o stats por bloque (más granular)
+        // de momento: dejamos los stats como están
+        yaValidado = false;
+        limpiarResultado();
+        siguiente();
+      };
+    
+      cont.appendChild(chip);
     });
-
+    
     bloqueIdx = 0;
     refrescarPills();
     setModo("jp_es");
+
   })
   .catch(err => {
     $("promptJP").innerText = "No se pudo cargar data/anime_vocab.json";
