@@ -1,0 +1,217 @@
+{
+  "bloques": [
+    {
+      "cancion": "MIND POWER… 気",
+      "artista": "影山ヒロノブ・佐藤有香",
+      "nota": "Material elaborado por Asallam Sensei",
+      "vocabulario": [
+        {
+          "jp": "突き進む",
+          "romaji": "tsukisusumu",
+          "es": "avanzar a la fuerza, lanzarse hacia adelante"
+        },
+        {
+          "jp": "明日は無い",
+          "romaji": "asu wa nai",
+          "es": "no hay un mañana"
+        },
+        {
+          "jp": "わからない",
+          "romaji": "wakaranai",
+          "es": "no lo sé"
+        },
+        {
+          "jp": "どうするかさ！",
+          "romaji": "dō suru ka sa!",
+          "es": "¡lo importante es lo que vas a hacer!"
+        },
+        {
+          "jp": "ジャングル",
+          "romaji": "janguru",
+          "es": "jungla"
+        },
+        {
+          "jp": "未来から",
+          "romaji": "mirai kara",
+          "es": "desde el futuro"
+        },
+        {
+          "jp": "毒ヤリ",
+          "romaji": "doku yari",
+          "es": "lanza venenosa"
+        },
+        {
+          "jp": "拳",
+          "romaji": "kobushi",
+          "es": "puño"
+        },
+        {
+          "jp": "恐怖",
+          "romaji": "kyōfu",
+          "es": "miedo, terror"
+        },
+        {
+          "jp": "砂漠に",
+          "romaji": "sabaku ni",
+          "es": "en el desierto"
+        },
+        {
+          "jp": "力を集め",
+          "romaji": "chikara o atsume",
+          "es": "reúne la fuerza"
+        }
+      ],
+      "kanji": [
+        {
+          "kanji": "進",
+          "significado": "avanzar, progresar"
+        },
+        {
+          "kanji": "明",
+          "significado": "claro, brillante"
+        },
+        {
+          "kanji": "見",
+          "significado": "ver, mirar"
+        },
+        {
+          "kanji": "力",
+          "significado": "fuerza, poder"
+        },
+        {
+          "kanji": "集",
+          "significado": "reunir, juntar"
+        },
+        {
+          "kanji": "恐",
+          "significado": "temor, miedo"
+        },
+        {
+          "kanji": "怖",
+          "significado": "terror, pavor"
+        },
+        {
+          "kanji": "突",
+          "significado": "empujar, irrumpir"
+        },
+        {
+          "kanji": "刃",
+          "significado": "hoja, filo"
+        },
+        {
+          "kanji": "無",
+          "significado": "no existir, nada"
+        }
+      ]
+    },
+    {
+      "cancion": "予感… (Yokan…)",
+      "artista": "よーみ (吉田友美)",
+      "nota": "Material elaborado por Asallam Sensei",
+      "vocabulario": [
+        {
+          "jp": "瞳",
+          "romaji": "hitomi",
+          "es": "ojos, pupilas (poético)"
+        },
+        {
+          "jp": "思い",
+          "romaji": "omoi",
+          "es": "sentimiento, emoción"
+        },
+        {
+          "jp": "まっすぐ",
+          "romaji": "massugu",
+          "es": "recto; honesto; directo"
+        },
+        {
+          "jp": "強い",
+          "romaji": "tsuyoi",
+          "es": "fuerte"
+        },
+        {
+          "jp": "届いたの",
+          "romaji": "todoita no",
+          "es": "llegó, me alcanzó"
+        },
+        {
+          "jp": "守ったよ",
+          "romaji": "mamotta yo",
+          "es": "cumpliste, protegiste"
+        },
+        {
+          "jp": "風のように",
+          "romaji": "kaze no yō ni",
+          "es": "como el viento"
+        },
+        {
+          "jp": "予感",
+          "romaji": "yokan",
+          "es": "presentimiento, corazonada"
+        },
+        {
+          "jp": "約束",
+          "romaji": "yakusoku",
+          "es": "promesa"
+        },
+        {
+          "jp": "光",
+          "romaji": "hikari",
+          "es": "luz"
+        },
+        {
+          "jp": "時間",
+          "romaji": "jikan",
+          "es": "tiempo"
+        },
+        {
+          "jp": "明日へ",
+          "romaji": "ashita e",
+          "es": "hacia el mañana"
+        }
+      ],
+      "kanji": [
+        {
+          "kanji": "瞳",
+          "significado": "ojo, pupila (literario)"
+        },
+        {
+          "kanji": "思",
+          "significado": "pensar, sentir"
+        },
+        {
+          "kanji": "強",
+          "significado": "fuerte"
+        },
+        {
+          "kanji": "守",
+          "significado": "proteger, cumplir"
+        },
+        {
+          "kanji": "予",
+          "significado": "anticipar"
+        },
+        {
+          "kanji": "感",
+          "significado": "sentir, sensación"
+        },
+        {
+          "kanji": "約",
+          "significado": "promesa, compromiso"
+        },
+        {
+          "kanji": "光",
+          "significado": "luz"
+        },
+        {
+          "kanji": "時",
+          "significado": "tiempo, momento"
+        },
+        {
+          "kanji": "間",
+          "significado": "intervalo, espacio"
+        }
+      ]
+    }
+  ]
+}
