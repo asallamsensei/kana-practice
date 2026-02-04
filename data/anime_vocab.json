@@ -319,6 +319,62 @@
         { "kanji": "置", "significado": "colocar, dejar" },
         { "kanji": "去", "significado": "irse, abandonar" }
       ]
+    },
+    {
+      "cancion": "七人の侍 (Shichinin no Samurai)",
+      "artista": "Serie: 七人の侍",
+      "nota": "Material elaborado por Asallam Sensei",
+      "vocabulario": [
+        { "jp": "貴様", "romaji": "kisama", "es": "tú (arcaico; hoy suena insultante por ironía)" },
+        { "jp": "おぬし", "romaji": "onushi", "es": "tú (arcaico; usado entre iguales o inferiores)" },
+        { "jp": "もう合戦は嫌か", "romaji": "mō kassen wa iya ka", "es": "¿ya estás harto de las batallas?" },
+        { "jp": "もうよい 出て来い", "romaji": "mō yoi, dete koi", "es": "ya está, puedes salir" },
+        { "jp": "そう 別に", "romaji": "sō, betsuni", "es": "no, nada en particular" },
+        { "jp": "こんどこそ", "romaji": "kondo koso", "es": "esta vez sí (énfasis con こそ)" },
+    
+        { "jp": "三十人ほど", "romaji": "sanjū-nin hodo", "es": "como unos treinta" },
+        { "jp": "ありがたい", "romaji": "arigatai", "es": "es de agradecer" },
+        { "jp": "ところで", "romaji": "tokoro de", "es": "por cierto; a propósito" },
+        { "jp": "いやいや", "romaji": "iya iya", "es": "no no, esto no es nada (modestia)" },
+        { "jp": "助けて！", "romaji": "tasukete!", "es": "¡ayúdenme!" },
+        { "jp": "野武士", "romaji": "nobushi", "es": "bandidos armados; guerreros de campo" },
+        { "jp": "水草", "romaji": "mizukusa", "es": "hierbas acuáticas" },
+    
+        { "jp": "素直なとこ", "romaji": "sunao na toko", "es": "su franqueza; su lado franco" },
+        { "jp": "気はないかな", "romaji": "ki wa nai kana", "es": "¿no te animas?" },
+        { "jp": "せがれの敵 討たせるだ", "romaji": "segare no kataki, utaseru da", "es": "déjenla vengar a su hijo" },
+        { "jp": "侍だ", "romaji": "samurai da", "es": "lo que necesito son samuráis" },
+        { "jp": "戦", "romaji": "ikusa", "es": "batalla; campaña" }
+      ],
+      "kanji": [
+        { "kanji": "士", "significado": "guerrero, caballero, samurái" },
+        { "kanji": "合", "significado": "unir, encajar, coincidir" },
+        { "kanji": "武", "significado": "marcial, militar" },
+        { "kanji": "素", "significado": "elemental, al natural, sin adornos" },
+        { "kanji": "討", "significado": "atacar, acabar con, ajustar cuentas" },
+        { "kanji": "嫌", "significado": "no gustar, desagradar, detestar" },
+    
+        { "kanji": "三", "significado": "tres" },
+        { "kanji": "十", "significado": "diez" },
+        { "kanji": "人", "significado": "persona" },
+        { "kanji": "助", "significado": "ayudar" },
+        { "kanji": "水", "significado": "agua" },
+        { "kanji": "出", "significado": "salir, sacar" },
+        { "kanji": "来", "significado": "venir, llegar" },
+    
+        { "kanji": "草", "significado": "hierba, pasto" },
+        { "kanji": "別", "significado": "separar, distinto" },
+        { "kanji": "戦", "significado": "guerra, batalla" },
+        { "kanji": "野", "significado": "campo, silvestre" },
+        { "kanji": "侍", "significado": "samurái; servir" },
+        { "kanji": "貴", "significado": "precioso, valioso" },
+    
+        { "kanji": "敵", "significado": "enemigo, adversario" },
+        { "kanji": "様", "significado": "honorífico de alto respeto" },
+        { "kanji": "気", "significado": "ánimo, espíritu, energía" },
+        { "kanji": "直", "significado": "recto, directo; franqueza; reparar" },
+        { "kanji": "主", "significado": "señor, dueño" }
+      ]
     }
   ]
 }
