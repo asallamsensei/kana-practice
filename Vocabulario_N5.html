@@ -45,6 +45,27 @@
   }
   button:hover{ background:#b45309; }
 
+#opbtns{
+  display:flex;
+  gap:10px;
+  justify-content:center;
+  margin-top:10px;
+}
+
+.btnABC{
+  padding:10px 16px;
+  font-size:18px;
+  border-radius:10px;
+  border:none;
+  background:#f59e0b;   /* un tono similar */
+  color:white;
+  cursor:pointer;
+  min-width:64px;
+  font-weight:700;
+}
+.btnABC:hover{ background:#d97706; }
+
+  
   #opciones{
     font-size:22px;
     margin-top:20px;
@@ -115,11 +136,18 @@
 
 <button onclick="mostrarRespuesta()">Mostrar respuesta</button>
 
+<div id="opbtns">
+  <button class="btnABC" type="button" onclick="responder('a')">a</button>
+  <button class="btnABC" type="button" onclick="responder('b')">b</button>
+  <button class="btnABC" type="button" onclick="responder('c')">c</button>
+</div>
+
 <input id="respuestaUsuario"
        type="text"
        placeholder="a / b / c"
        maxlength="1"
        onkeydown="manejarEnter(event)">
+
 
 <div id="resultado"></div>
 
@@ -205,6 +233,13 @@ function siguiente(){
   yaValidado = false;
 }
 
+function responder(letra){
+  if(yaValidado) return; // si ya respondió, no permitir doble
+  document.getElementById("respuestaUsuario").value = letra;
+  verificar();
+}
+
+  
 function verificar(){
   const r = document.getElementById("respuestaUsuario").value.toLowerCase().trim();
   const res = document.getElementById("resultado");
