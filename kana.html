@@ -97,6 +97,40 @@
       background: #e03131;
       color: white;
     }
+
+    #opcionesABC, #acciones{
+      display:flex;
+      gap:10px;
+      margin-top:10px;
+      justify-content:center;
+    }
+    
+    .abc-btn{
+      font-size:18px;
+      padding:10px 16px;
+      border-radius:10px;
+      border:none;
+      background:#ddddff;
+      color:#333;
+      cursor:pointer;
+    }
+    
+    .abc-btn:hover{ background:#cfcfff; }
+    
+    .accion-btn{
+      padding:12px 18px;
+      border-radius:10px;
+      border:none;
+      background:#7d5cff;
+      color:white;
+      cursor:pointer;
+      font-size:18px;
+    }
+    
+    .accion-btn:hover{ background:#5d46d4; }
+
+
+    
 </style>
 </head>
 <body>
@@ -116,11 +150,23 @@
 
 <div id="respuesta"></div>
 
+<div id="opcionesABC">
+  <button class="abc-btn" onclick="elegirABC('a')">A</button>
+  <button class="abc-btn" onclick="elegirABC('b')">B</button>
+  <button class="abc-btn" onclick="elegirABC('c')">C</button>
+</div>
+    
 <input id="respuestaUsuario" 
        type="text" 
        placeholder="Escribe el romaji aquí"
        onkeydown="manejarEnter(event)">
 
+<div id="acciones">
+  <button class="accion-btn" onclick="mostrarRespuesta()">Mostrar respuesta</button>
+  <button class="accion-btn" onclick="siguienteDesdeBoton()">Siguiente</button>
+</div>
+
+    
 <div id="estadisticas">
     Aciertos: <span id="aciertos">0</span> — 
     Errores: <span id="errores">0</span>
@@ -344,9 +390,35 @@ function resetStatsModo() {
   actualizarEstadisticas();
   guardarStatsActual();
 }
+
+function elegirABC(letra){
+  // pone a/b/c en el input y valida como si hubiera Enter
+  document.getElementById("respuestaUsuario").value = letra;
+  if (!yaValidado) verificarRespuesta();
+}
+
+function siguienteDesdeBoton(){
+  // si no ha validado, primero valida (como primer Enter)
+  if (!yaValidado) {
+    verificarRespuesta();
+    return;
+  }
+  // si ya validó, pasa al siguiente (como segundo Enter)
+  document.getElementById("respuesta").innerText = "";
+  siguienteKana();
+}
+
+function mostrarRespuesta(){
+  // muestra el romaji (sin contar como acierto/error)
+  document.getElementById("respuesta").innerText = "Respuesta: " + kanaLista[actual][1];
+  document.getElementById("respuesta").className = "";
+}
+
+
     
 </script>
 
 </body>
 </html>
+
 
