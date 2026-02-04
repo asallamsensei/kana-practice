@@ -98,7 +98,7 @@
       color: white;
     }
 
-    .abc-btn:hover{ background:#cfcfff; }
+    
     
     .accion-btn{
       padding:12px 18px;
@@ -369,15 +369,27 @@ function resetStatsModo() {
 }
 
 function siguienteDesdeBoton(){
-  // si no ha validado, primero valida (como primer Enter)
+  // Si NO se ha respondido aún → cuenta como error (saltado)
   if (!yaValidado) {
-    verificarRespuesta();
+    const correcto = kanaLista[actual][1];
+
+    document.getElementById("respuesta").innerText =
+      "Saltado ✘ (era: " + correcto + ")";
+    document.getElementById("respuesta").className = "incorrecto";
+
+    errores++;
+    actualizarEstadisticas();
+    guardarStatsActual();
+
+    yaValidado = true;
     return;
   }
-  // si ya validó, pasa al siguiente (como segundo Enter)
+
+  // Si ya fue respondido (bien o mal) → pasar al siguiente
   document.getElementById("respuesta").innerText = "";
   siguienteKana();
 }
+
 
 function mostrarRespuesta(){
   // si ya se validó (correcto/incorrecto), no volver a penalizar
@@ -402,6 +414,7 @@ function mostrarRespuesta(){
 
 </body>
 </html>
+
 
 
 
