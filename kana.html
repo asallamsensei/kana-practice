@@ -380,10 +380,21 @@ function siguienteDesdeBoton(){
 }
 
 function mostrarRespuesta(){
-  // muestra el romaji (sin contar como acierto/error)
-  document.getElementById("respuesta").innerText = "Respuesta: " + kanaLista[actual][1];
-  document.getElementById("respuesta").className = "";
+  // si ya se validó (correcto/incorrecto), no volver a penalizar
+  if (yaValidado) return;
+
+  const correcto = kanaLista[actual][1];
+
+  document.getElementById("respuesta").innerText = "Mostrada ✘ (era: " + correcto + ")";
+  document.getElementById("respuesta").className = "incorrecto";
+
+  errores++;
+  actualizarEstadisticas();
+  guardarStatsActual();
+
+  yaValidado = true; // ya cuenta como “respondido”
 }
+
 
 
     
@@ -391,6 +402,7 @@ function mostrarRespuesta(){
 
 </body>
 </html>
+
 
 
 
