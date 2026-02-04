@@ -208,5 +208,70 @@
 
   { "kanji": "水曜日", "significado": "miércoles (día del agua)" },
   { "kanji": "八百屋", "significado": "tienda de frutas y verduras (800 representa “muchísimas cosas”)" },
-  { "kanji": "成る", "significado": "convertirse en, llegar a ser" }
+  { "kanji": "成る", "significado": "convertirse en, llegar a ser" },
+
+  { "kanji": "一番", "significado": "el número uno, el mejor" },
+  { "kanji": "ください", "significado": "por favor (para pedir algo o una acción)" },
+  { "kanji": "できる", "significado": "poder hacer, ser capaz de" },
+  
+  { "kanji": "ある", "significado": "haber, existir (cosas, no personas)" },
+  { "kanji": "今", "significado": "ahora, en este momento" },
+  { "kanji": "この", "significado": "este, esta, esto (antes de sustantivo)" },
+  { "kanji": "その", "significado": "ese, esa, eso (antes de sustantivo)" },
+  { "kanji": "外", "significado": "afuera, exterior" },
+  
+  { "kanji": "良い", "significado": "bueno, bien, correcto (forma formal)" },
+  { "kanji": "いい", "significado": "bueno, está bien, vale (muy común en conversación)" },
+  { "kanji": "より", "significado": "más que…, en comparación con…" },
+  { "kanji": "見る", "significado": "ver, mirar" },
+  
+  { "kanji": "自分", "significado": "uno mismo, sí mismo" },
+  { "kanji": "知る", "significado": "saber, conocer" },
+  { "kanji": "言う", "significado": "decir" },
+  { "kanji": "今日", "significado": "hoy" },
+  { "kanji": "誰", "significado": "¿quién?" },
+  
+  { "kanji": "勉強", "significado": "estudio, estudiar (verbo suru)" },
+  { "kanji": "話", "significado": "charla, conversación, historia, relato" },
+  { "kanji": "明日", "significado": "mañana (el día siguiente)" },
+  { "kanji": "姉", "significado": "hermana mayor (propia o de la familia)" },
+  { "kanji": "国", "significado": "país, nación" },
+  
+  { "kanji": "皆", "significado": "todos (formal)" },
+  { "kanji": "みんな", "significado": "todos (informal, muy común)" },
+  { "kanji": "新しい", "significado": "nuevo" },
+  { "kanji": "取る", "significado": "tomar, agarrar, obtener" },
+  
+  { "kanji": "昨日", "significado": "ayer (el día anterior)" },
+  { "kanji": "出る", "significado": "salir, aparecer" },
+  { "kanji": "買う", "significado": "comprar" },
+  { "kanji": "読む", "significado": "leer" },
+  { "kanji": "犬", "significado": "perro" },
+  
+  { "kanji": "お金", "significado": "dinero (forma cortés con el honorífico お)" },
+  { "kanji": "男", "significado": "hombre" },
+  { "kanji": "駅", "significado": "estación (de tren o metro)" },
+  { "kanji": "待つ", "significado": "esperar" },
+  { "kanji": "後ろ", "significado": "atrás, detrás, parte trasera" },
+  
+  { "kanji": "使う", "significado": "usar, utilizar, emplear" },
+  { "kanji": "大変", "significado": "grave, terrible, serio, difícil, mucho, muy" },
+  { "kanji": "作る", "significado": "hacer, crear, fabricar, preparar (comida)" },
+  { "kanji": "町", "significado": "pueblo, ciudad, barrio" },
+  { "kanji": "乗る", "significado": "subir, montar, tomar, abordar (un vehículo)" },
+  
+  { "kanji": "欲しい", "significado": "querer, desear (adjetivo -i)" },
+  { "kanji": "〜てほしい", "significado": "quiero que ___ / me gustaría que ___" },
+  { "kanji": "絵", "significado": "dibujo, pintura, imagen" },
+  
+  { "kanji": "あなた", "significado": "tú, usted; cariño (la esposa al esposo)" },
+  { "kanji": "行く", "significado": "ir" },
+  { "kanji": "高い", "significado": "alto, caro" },
+  { "kanji": "薬", "significado": "medicina, medicamento" },
+  
+  { "kanji": "少し", "significado": "un poco" },
+  { "kanji": "終わる", "significado": "terminarse, acabarse (intransitivo)" },
+  { "kanji": "学生", "significado": "estudiante" },
+  { "kanji": "医者", "significado": "médico, doctor" }
+  
 ]
