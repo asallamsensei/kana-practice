@@ -98,23 +98,6 @@
       color: white;
     }
 
-    #opcionesABC, #acciones{
-      display:flex;
-      gap:10px;
-      margin-top:10px;
-      justify-content:center;
-    }
-    
-    .abc-btn{
-      font-size:18px;
-      padding:10px 16px;
-      border-radius:10px;
-      border:none;
-      background:#ddddff;
-      color:#333;
-      cursor:pointer;
-    }
-    
     .abc-btn:hover{ background:#cfcfff; }
     
     .accion-btn{
@@ -149,12 +132,6 @@
 <div id="kana">あ</div>
 
 <div id="respuesta"></div>
-
-<div id="opcionesABC">
-  <button class="abc-btn" onclick="elegirABC('a')">A</button>
-  <button class="abc-btn" onclick="elegirABC('b')">B</button>
-  <button class="abc-btn" onclick="elegirABC('c')">C</button>
-</div>
     
 <input id="respuestaUsuario" 
        type="text" 
@@ -391,12 +368,6 @@ function resetStatsModo() {
   guardarStatsActual();
 }
 
-function elegirABC(letra){
-  // pone a/b/c en el input y valida como si hubiera Enter
-  document.getElementById("respuestaUsuario").value = letra;
-  if (!yaValidado) verificarRespuesta();
-}
-
 function siguienteDesdeBoton(){
   // si no ha validado, primero valida (como primer Enter)
   if (!yaValidado) {
@@ -420,5 +391,6 @@ function mostrarRespuesta(){
 
 </body>
 </html>
+
 
 
