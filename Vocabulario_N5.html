@@ -57,15 +57,31 @@
     font-size:18px;
     border-radius:10px;
     border:none;
-    background:#f59e0b;   /* un tono similar */
-    color:white;
+    background:#b94a48;        /* rojo apagado */
+    color:#fff;
     cursor:pointer;
     min-width:64px;
     font-weight:700;
   }
-  .btnABC:hover{ background:#d97706; }
+  .btnABC:hover{
+    background:#a94442;        /* un poco más oscuro */
+  }
 
-  
+  .btnNav{
+    padding:12px 20px;
+    margin:5px;
+    font-size:18px;
+    border-radius:10px;
+    border:none;
+    background:#3b82b6;      /* azul mate */
+    color:white;
+    cursor:pointer;
+    font-weight:700;
+  }
+  .btnNav:hover{
+    background:#2563eb;      /* un poco más profundo */
+  }
+
   #opciones{
     font-size:22px;
     margin-top:20px;
@@ -141,8 +157,6 @@
 
 <div id="opciones"></div>
 
-<button onclick="mostrarRespuesta()">Mostrar respuesta</button>
-
 <div id="opbtns">
   <button class="btnABC" type="button" onclick="responder('a')">a</button>
   <button class="btnABC" type="button" onclick="responder('b')">b</button>
@@ -151,12 +165,13 @@
 
 <input id="respuestaUsuario"
        type="text"
-       placeholder="a / b / c"
+       placeholder="a / b / c + Enter"
        maxlength="1"
        onkeydown="manejarEnter(event)">
-
+  
 <div id="navBtns">
-  <button type="button" onclick="accionSiguiente()">Siguiente</button>
+  <button class="btnNav" type="button" onclick="accionSiguiente()">Siguiente</button>
+  <button class="btnNav" onclick="mostrarRespuesta()">Mostrar respuesta</button>
 </div>
 
 <div id="resultado"></div>
