@@ -155,6 +155,19 @@
     font-weight: 700;
   }
 
+  .btn-danger{
+    background: rgba(239,68,68,.15);
+    border: 1px solid rgba(239,68,68,.5);
+    color: #fecaca;
+  }
+  
+  .btn-danger.activo{
+    background: var(--danger);
+    border-color: transparent;
+    color: white;
+  }
+
+  
   .btn-mode{
     background: rgba(255,255,255,.08);
     border: 1px solid var(--border);
@@ -310,8 +323,12 @@
       </div>
       <div class="row" style="margin-top: 8px;">
         <div id="chipsBloques" class="chips"></div>
-        <div class="row" style="margin-top:10px;">
-          <button class="btn btn-ghost" onclick="seleccionarTodo()">Todo</button>
+        <div class="row" style="margin-top:10px; gap:10px;">
+          <button id="btnTodo" class="btn btn-ghost btn-danger"
+                  onclick="seleccionarTodo()">Todo</button>
+        
+          <button id="btnNinguna" class="btn btn-ghost"
+                  onclick="seleccionarNinguna()">Ninguna</button>
         </div>
       </div>
 
@@ -392,17 +409,41 @@ function guardarStatsActual() {
 }
 
 function seleccionarTodo(){
-  // 1) marcar todos como activos
   bloquesActivos = new Set(DATA.bloques.map((_, i) => i));
 
-  // 2) repintar chips
+  // encender todos los chips
   const cont = $("chipsBloques");
   if(cont){
     [...cont.children].forEach((el, idx) => {
-      el.classList.toggle("activo", bloquesActivos.has(idx));
+      el.classList.add("activo");
     });
   }
 
+  // encender botón TODO (rojo)
+  $("btnTodo")?.classList.add("activo");
+
+  yaValidado = false;
+  limpiarResultado();
+  siguiente();
+}
+
+
+function seleccionarNinguna(){
+  bloquesActivos.clear();
+
+  // apagar chips visualmente
+  const cont = $("chipsBloques");
+  if(cont){
+    [...cont.children].forEach(el => el.classList.remove("activo"));
+  }
+
+  // apagar botón TODO
+  $("btnTodo")?.classList.remove("activo");
+
+  limpiarResultado();
+}
+
+  
   // 3) continuar con una pregunta nueva
   yaValidado = false;
   limpiarResultado();
@@ -702,9 +743,10 @@ fetch("data/anime_vocab.json")
     DATA.bloques.forEach((b, i) => {
       const chip = document.createElement("div");
       chip.className = "chip" + (bloquesActivos.has(i) ? " activo" : "");
-      chip.textContent = `${b.cancion}${b.artista ? " — " + b.artista : ""}`;
+      chip.textContent = b.cancion || `Bloque ${i+1}`;
     
       chip.onclick = () => {
+        $("btnTodo")?.classList.remove("activo");
         // toggle
         if(bloquesActivos.has(i)) bloquesActivos.delete(i);
         else bloquesActivos.add(i);
