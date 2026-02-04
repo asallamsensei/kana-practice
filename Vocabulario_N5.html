@@ -189,9 +189,22 @@ let errores = 0;
 let correcta = "";
 let respuestaCorrecta = "";
 let yaValidado = false;
+let focoAutomatico = false; // por defecto: NO abrir teclado
 
 const letras = ["a","b","c"];
 
+// Si el usuario toca/clickea el input, permitimos foco automático después
+document.addEventListener("pointerdown", (e) => {
+  focoAutomatico = (e.target && e.target.id === "respuestaUsuario");
+});
+
+// Si el usuario presiona teclas, asumimos que quiere modo teclado
+document.addEventListener("keydown", (e) => {
+  // si presiona a/b/c o Enter, activamos modo teclado
+  if(["a","b","c","Enter"].includes(e.key)) focoAutomatico = true;
+});
+
+  
 // ✅ Cambia aquí si tu archivo está en otra ruta/nombre:
 fetch("data/Vocabulario_N5.json")
   .then(res => res.json())
@@ -264,12 +277,16 @@ function siguiente(){
   document.getElementById("resultado").innerText = "";
   document.getElementById("resultado").className = "";
   document.getElementById("respuestaUsuario").value = "";
-//  document.getElementById("respuestaUsuario").focus();
+  if (focoAutomatico) {
+    document.getElementById("respuestaUsuario").focus();
+  }
+  
 
   yaValidado = false;
 }
 
 function responder(letra){
+  focoAutomatico = false;
   if(yaValidado) return; // si ya respondió, no permitir doble
   document.getElementById("respuestaUsuario").value = letra;
   verificar();
