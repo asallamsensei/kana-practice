@@ -4,6 +4,11 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Canciones & Series — Asallam Sensei</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
+  
 <style>
   :root{
     --bg: #0b1020;
@@ -15,6 +20,7 @@
     --accent2:#22c55e;
     --danger:#ef4444;
     --border: rgba(255,255,255,.14);
+    --font-jp: "Noto Sans JP", "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", "MS PGothic", system-ui, sans-serif;
   }
 
   body{
@@ -172,7 +178,20 @@
     margin: 6px 0 8px;
   }
 
+  /* ↓↓↓ Solo cuando el modo es ES → JP, baja el tamaño del prompt */
+  body.modo-es-jp #promptJP{
+    font-size: 40px;   /* ajusta a gusto: 38–44 suele quedar bien */
+    letter-spacing: .2px;
+    font-family: var(--font-jp);
+  }
+  
+  /* opcional: también baja un poquito las opciones en ES→JP */
+  body.modo-es-jp #opciones{
+    font-size: 18px;
+    font-family: var(--font-jp);
+  }
 
+  
   #opciones{
     margin-top: 10px;
     font-size: 20px;
@@ -411,6 +430,13 @@ document.addEventListener("keydown", (e) => {
 function setModo(modo){
   modoActual = modo;
 
+  // Clases en body para estilos por modo
+  document.body.classList.toggle("modo-es-jp", modo === "es_jp");
+  document.body.classList.toggle("modo-jp-es", modo === "jp_es");
+  
+  // Clase en body para estilos por modo
+  document.body.classList.toggle("modo-es-jp", modo === "es_jp");
+  
   ["jp-es","es-jp","kanji","mix"].forEach(x=>{
     const el = $("m-" + x);
     if(el) el.classList.remove("activo");
@@ -710,7 +736,7 @@ fetch("data/anime_vocab.json")
   })
   .catch(err => {
     $("promptJP").innerText = "No se pudo cargar data/anime_vocab.json";
-    $("promptSub").innerText = "Revisa la ruta y que estés en servidor (GitHub Pages / Live Server).";
+    $("resultado").innerText = "Revisa la ruta y que estés en servidor (GitHub Pages / Live Server).";
     console.error(err);
   });
 </script>
