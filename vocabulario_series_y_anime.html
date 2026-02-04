@@ -382,17 +382,14 @@ function cargarStats() {
 function guardarStats(stats) {
   localStorage.setItem(STATS_KEY, JSON.stringify(stats));
 }
+
 function statsKeyActual() {
-  const activos = [...bloquesActivos].filter(i => DATA.bloques[i]);
-  if(activos.length === 0){
-    bloquesActivos.add(0);
-  }
-  const idx = pick([...bloquesActivos]);
-  bloqueIdx = idx; // actualiza el índice actual
   const b = DATA.bloques[bloqueIdx];
   const id = (b?.cancion || "bloque").toLowerCase().slice(0,60);
   return `${id}__${modoActual}`;
 }
+
+  
 function cargarStatsActual() {
   const all = cargarStats();
   const k = statsKeyActual();
@@ -443,14 +440,6 @@ function seleccionarNinguna(){
   limpiarResultado();
 }
 
-  
-  // 3) continuar con una pregunta nueva
-  yaValidado = false;
-  limpiarResultado();
-  siguiente();
-}
-
-  
 // ====== UI helpers ======
 function $(id){ return document.getElementById(id); }
 
@@ -624,9 +613,19 @@ function preguntaKanjiMC(b){
 
 // ====== Flujo ======
 function siguiente(){
+  // elegir aleatorio entre los bloques activos
+  const activos = [...bloquesActivos].filter(i => DATA.bloques[i]);
+  if(activos.length === 0){
+    // si el usuario dejó “Ninguna”, no podemos preguntar
+    $("promptJP").innerText = "Selecciona una canción/serie";
+    $("opciones").innerHTML = "";
+    return;
+  }
+  bloqueIdx = pick(activos);
+
   const b = DATA.bloques[bloqueIdx];
   if(!b) return;
-
+  
   let q = null;
 
   if(modoActual === "jp_es") q = preguntaVocabJP_ES(b);
@@ -752,8 +751,7 @@ fetch("data/anime_vocab.json")
         else bloquesActivos.add(i);
     
         // nunca dejar vacío
-        if(bloquesActivos.size === 0) bloquesActivos.add(i);
-    
+            
         // repintar estados
         [...cont.children].forEach((el, idx) => {
           el.classList.toggle("activo", bloquesActivos.has(idx));
