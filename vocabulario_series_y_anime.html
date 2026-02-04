@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Repaso de Canciones & Series — Asallam Sensei</title>
+<title>Canciones & Series — Asallam Sensei</title>
 <style>
   :root{
     --bg: #0b1020;
@@ -42,10 +42,13 @@
 
   h1{
     margin:0;
-    font-size: 26px;
+    font-size:clamp(22px, 5vw, 32px);
+    margin-top:16px;
+    margin-bottom:10px;
+    text-align:center;
     letter-spacing:.2px;
   }
-
+  
   .sub{
     color: var(--muted);
     font-size: 14px;
@@ -169,12 +172,6 @@
     margin: 6px 0 8px;
   }
 
-  #promptSub{
-    color: var(--muted);
-    font-size: 16px;
-    margin: 0 0 10px;
-    min-height: 20px;
-  }
 
   #opciones{
     margin-top: 10px;
@@ -246,15 +243,14 @@
 <div class="wrap">
 
   <header>
-    <h1>Repaso de Canciones & Series — Asallam Sensei</h1>
+    <h1>Canciones & Series — Asallam Sensei</h1>
   </header>
 
   <div class="grid">
     <!-- Panel izquierdo: juego -->
     <div class="card big">
       <div id="promptJP">—</div>
-      <div id="promptSub"></div>
-
+      
       <div id="opciones"></div>
 
       <div class="opbtns">
@@ -580,7 +576,6 @@ function siguiente(){
   // fallback por si faltan pools
   if(!q){
     $("promptJP").innerText = "Faltan datos en el JSON";
-    $("promptSub").innerText = "Este modo necesita mínimo 3 items en el pool.";
     $("opciones").innerHTML = "";
     return;
   }
@@ -588,8 +583,7 @@ function siguiente(){
   actual = q;
 
   $("promptJP").innerText = actual.prompt;
-  $("promptSub").innerText = actual.sub || "";
-
+  
   $("opciones").innerHTML =
     `a) ${actual.opciones[0]}<br>b) ${actual.opciones[1]}<br>c) ${actual.opciones[2]}`;
 
