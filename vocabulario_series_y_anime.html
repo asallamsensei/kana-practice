@@ -329,7 +329,9 @@ let DATA = { bloques: [] };
 let bloqueIdx = 0;
 let modoActual = "jp_es";
 let yaValidado = false;
+let focoAutomatico = false; // por defecto: NO enfocar (evita teclado móvil)
 
+  
 let actual = null;
 
 let aciertos = 0;
@@ -396,6 +398,20 @@ function seleccionarTodo(){
 // ====== UI helpers ======
 function $(id){ return document.getElementById(id); }
 
+// Si el usuario toca/clickea el input, permitimos enfocar automáticamente
+document.addEventListener("pointerdown", (e) => {
+  focoAutomatico = (e.target && e.target.id === "respuestaUsuario");
+});
+
+// Si el usuario presiona teclas, asumimos que quiere modo teclado
+document.addEventListener("keydown", (e) => {
+  const k = (e.key || "").toLowerCase();
+  if (k === "enter" || k === "a" || k === "b" || k === "c") {
+    focoAutomatico = true;
+  }
+});
+
+  
 function setModo(modo){
   modoActual = modo;
 
@@ -583,10 +599,11 @@ function siguiente(){
 
   limpiarResultado();
   yaValidado = false;
-  $("respuestaUsuario").focus();
+  if (focoAutomatico) $("respuestaUsuario").focus();
 }
 
 function responder(letra){
+  focoAutomatico = false; // eligió con botones, no queremos teclado
   if(yaValidado) return;
   $("respuestaUsuario").value = letra;
   verificar();
