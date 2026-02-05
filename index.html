@@ -1,85 +1,343 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Herramientas de Asallam Sensei</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Herramientas — Asallam Sensei</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
+
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f4f4f9;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
+    :root{
+      --bg: #0b1020;
+      --card: rgba(255,255,255,.08);
+      --card2: rgba(255,255,255,.10);
+      --text: #eef2ff;
+      --muted: rgba(238,242,255,.75);
+      --accent: #7d5cff;
+      --accent2:#22c55e;
+      --danger:#ef4444;
+      --border: rgba(255,255,255,.14);
+      --font-jp: "Noto Sans JP", "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", "MS PGothic", system-ui, sans-serif;
     }
-    .container {
-      text-align: center;
-      background-color: white;
-      padding: 40px;
-      border-radius: 8px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+    *{ box-sizing: border-box; }
+
+    body{
+      margin:0;
+      font-family: Arial, system-ui, sans-serif;
+      background:
+        radial-gradient(1200px 700px at 20% 10%, rgba(125,92,255,.35), transparent 60%),
+        radial-gradient(900px 600px at 90% 20%, rgba(34,197,94,.22), transparent 60%),
+        radial-gradient(900px 600px at 30% 90%, rgba(239,68,68,.18), transparent 55%),
+        var(--bg);
+      color: var(--text);
+      min-height:100vh;
+      display:flex;
+      justify-content:center;
+      padding: 26px 14px 70px;
     }
-    h1 {
-      font-size: 2.5rem;
-      color: #333;
+
+    .wrap{ width:min(980px, 100%); }
+
+    header{
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      gap:12px;
+      padding-top: 6px; /* evita “mocho” arriba */
+      margin-bottom: 14px;
     }
-    h2 {
-      font-size: 1.5rem;
-      color: #555;
+
+    h1{
+      margin: 10px 0 0;
+      font-size: clamp(22px, 5vw, 34px);
+      letter-spacing: .2px;
+      text-align:center;
     }
-    .button {
-      display: inline-block;
-      padding: 10px 20px;
-      margin-top: 20px;
-      background-color: #6200ea;
-      color: white;
-      text-decoration: none;
-      border-radius: 5px;
-      font-weight: bold;
-      transition: background-color 0.3s ease;
+
+    .sub{
+      margin:0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height:1.4;
+      text-align:center;
     }
-    .button:hover {
-      background-color: #3700b3;
+
+    .grid{
+      display:grid;
+      grid-template-columns: .95fr 1.05fr;
+      gap: 14px;
     }
-    ul {
-      list-style-type: none;
-      padding: 0;
+    @media (max-width: 900px){
+      .grid{ grid-template-columns: 1fr; }
     }
-    li {
-      margin: 20px 0;
+
+    .card{
+      background: linear-gradient(180deg, var(--card2), var(--card));
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      box-shadow: 0 18px 45px rgba(0,0,0,.35);
+      padding: 16px;
     }
-    #n5 {
-      margin: 14px 0;
-      padding: 10px;
-      border-radius: 6px;
-      background: #eee;
-      font-weight: bold;
+
+    .sep{
+      height: 1px;
+      background: rgba(255,255,255,.10);
+      margin: 12px 0;
+    }
+
+    /* Perfil */
+    .profile{
+      display:flex;
+      gap: 14px;
+      align-items:center;
+    }
+    @media (max-width: 520px){
+      .profile{ flex-direction:column; text-align:center; }
+    }
+
+    .avatar{
+      width: 108px;
+      height: 108px;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,.18);
+      overflow:hidden;
+      background: rgba(255,255,255,.06);
+      box-shadow: 0 10px 25px rgba(0,0,0,.35);
+      flex: 0 0 auto;
+    }
+    .avatar img{
+      width:100%;
+      height:100%;
+      object-fit: cover;
+      display:block;
+    }
+
+    .name{
+      font-weight: 900;
+      font-size: 18px;
+      margin:0;
+      letter-spacing: .2px;
+    }
+    .phone{
+      margin: 6px 0 0;
+      color: var(--muted);
+      font-weight: 800;
+      font-size: 14px;
+    }
+    .tagline{
+      margin: 8px 0 0;
+      color: rgba(238,242,255,.72);
+      font-size: 13px;
+      line-height: 1.35;
+    }
+
+    /* JLPT pill */
+    #n5{
+      margin-top: 12px;
+      padding: 10px 12px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.18);
+      background: rgba(0,0,0,.18);
+      font-weight: 900;
+      letter-spacing: .2px;
+      text-align:center;
+    }
+    #n5.good{ border-color: rgba(34,197,94,.55); }
+    #n5.warn{ border-color: rgba(239,68,68,.55); }
+
+    /* Botones en grid */
+    .tools{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 10px;
+    }
+    @media (max-width: 520px){
+      .tools{ grid-template-columns: 1fr; }
+    }
+
+    .btn{
+      display:flex;
+      gap:10px;
+      align-items:center;
+      justify-content:space-between;
+      width:100%;
+      padding: 13px 14px;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      background: rgba(255,255,255,.06);
+      color: var(--text);
+      text-decoration:none;
+      font-weight: 900;
+      transition: .14s;
+    }
+    .btn:hover{
+      transform: translateY(-1px);
+      background: rgba(255,255,255,.09);
+      border-color: rgba(255,255,255,.22);
+    }
+
+    .btn small{
+      display:block;
+      font-weight: 700;
+      color: var(--muted);
+      font-size: 12px;
+      margin-top: 2px;
+      letter-spacing: .1px;
+    }
+
+    .icon{
+      width: 34px;
+      height: 34px;
+      border-radius: 12px;
+      display:grid;
+      place-items:center;
+      background: rgba(125,92,255,.18);
+      border: 1px solid rgba(125,92,255,.35);
+      flex: 0 0 auto;
+      font-size: 18px;
+    }
+
+    .btn.kana .icon{ background: rgba(34,197,94,.14); border-color: rgba(34,197,94,.35); }
+    .btn.kanji .icon{ background: rgba(125,92,255,.18); border-color: rgba(125,92,255,.35); }
+    .btn.joyo .icon{ background: rgba(239,68,68,.12); border-color: rgba(239,68,68,.32); }
+    .btn.n5   .icon{ background: rgba(34,197,94,.14); border-color: rgba(34,197,94,.35); }
+    .btn.media .icon{ background: rgba(125,92,255,.18); border-color: rgba(125,92,255,.35); }
+    .btn.test .icon{ background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.18); }
+
+    .rightTitle{
+      margin:0;
+      font-size: 14px;
+      color: var(--muted);
+      font-weight: 900;
+      letter-spacing: .2px;
+    }
+
+    .hint{
+      margin-top: 10px;
+      color: rgba(238,242,255,.70);
+      font-size: 13px;
+      line-height:1.35;
+    }
+
+    footer{
+      margin-top: 14px;
+      color: rgba(238,242,255,.55);
+      font-size: 12px;
+      text-align:center;
     }
   </style>
 </head>
+
 <body>
-  <div class="container">
-    <h1>Herramientas de Asallam Sensei</h1>
-    <h2>Potenciado por GPT</h2>
-    <div id="n5">⏳ Cargando contador N5...</div>
-    <ul>
-      <li><a href="kana.html" class="button">Kana</a></li>
-      <li><a href="kanji.html" class="button">Kanji de grado 1</a></li>
-      <li><a href="kanji_todos.html" class="button">Los 2136 Jōyō Kanji</a></li>
-      <li><a href="Vocabulario_N5.html" class="button">Vocabulario N5</a></li>
-      <li><a href="vocabulario_series_y_anime.html" class="button">Vocabulario de canciones y series</a></li>
-      <li><a href="test.html" class="button">TEST</a></li>
-    </ul>
+  <div class="wrap">
+
+    <header>
+      <h1>Herramientas de Asallam Sensei</h1>
+      <p class="sub">Potenciado por GPT • práctica rápida, limpia y constante</p>
+    </header>
+
+    <div class="grid">
+      <!-- Perfil / Info -->
+      <div class="card">
+        <div class="profile">
+          <div class="avatar">
+            <img src="data/asallam.jpg" alt="Asallam Sensei">
+          </div>
+
+          <div>
+            <p class="name">Asallam Sensei</p>
+            <p class="phone">📲 +573217876009</p>
+            <p class="tagline">
+              Japonés paso a paso: kana, kanji, vocab y práctica estilo JLPT.
+              Entra a una herramienta y empieza ya.
+            </p>
+          </div>
+        </div>
+
+        <div class="sep"></div>
+
+        <div id="n5">⏳ Cargando contador JLPT N5…</div>
+
+        <div class="hint">
+          Tip: si estás en celular, agrega esta página a inicio para que quede como app.
+        </div>
+      </div>
+
+      <!-- Herramientas -->
+      <div class="card">
+        <p class="rightTitle">ELIGE UNA HERRAMIENTA</p>
+        <div class="sep"></div>
+
+        <div class="tools">
+          <a class="btn kana" href="kana.html">
+            <span>
+              Kana
+              <small>Hiragana / Katakana</small>
+            </span>
+            <span class="icon">あ</span>
+          </a>
+
+          <a class="btn kanji" href="kanji.html">
+            <span>
+              Kanji de grado 1
+              <small>base sólida</small>
+            </span>
+            <span class="icon">一</span>
+          </a>
+
+          <a class="btn joyo" href="kanji_todos.html">
+            <span>
+              2136 Jōyō Kanji
+              <small>modo full power</small>
+            </span>
+            <span class="icon">漢</span>
+          </a>
+
+          <a class="btn n5" href="Vocabulario_N5.html">
+            <span>
+              Vocabulario N5
+              <small>lo esencial</small>
+            </span>
+            <span class="icon">N5</span>
+          </a>
+
+          <a class="btn media" href="vocabulario_series_y_anime.html">
+            <span>
+              Canciones y series
+              <small>vocab en contexto</small>
+            </span>
+            <span class="icon">🎧</span>
+          </a>
+
+          <a class="btn test" href="test.html">
+            <span>
+              TEST
+              <small>ponte a prueba</small>
+            </span>
+            <span class="icon">✓</span>
+          </a>
+        </div>
+
+        <footer>
+          © Asallam Sensei
+        </footer>
+      </div>
+    </div>
+
   </div>
+
   <script>
+    // ===== Contador JLPT N5 =====
     const dates = [
       new Date("2026-07-05T08:00:00-05:00"),
       new Date("2026-12-06T08:00:00-05:00")
     ];
-  
+
     function left(ms){
       if(ms <= 0) return "¡Es hoy! 🔥";
       const s = Math.floor(ms/1000);
@@ -89,19 +347,29 @@
       const ss = s%60;
       return `${d}d ${h}h ${m}m ${ss}s`;
     }
-  
+
     function tick(){
       const now = Date.now();
       const next = dates.find(d => d.getTime() > now);
-      document.getElementById("n5").textContent =
-        next ? `⏳ JLPT N5: ${left(next.getTime() - now)}` : "Configura nuevas fechas del N5.";
+      const el = document.getElementById("n5");
+      if(!el) return;
+
+      if(next){
+        const diff = next.getTime() - now;
+        el.textContent = `⏳ JLPT N5: ${left(diff)}`;
+
+        // estilos “urgencia”
+        el.classList.remove("good","warn");
+        if(diff < 1000 * 60 * 60 * 24 * 30) el.classList.add("warn"); // < 30 días
+        else el.classList.add("good");
+      }else{
+        el.textContent = "Configura nuevas fechas del N5.";
+        el.classList.remove("good","warn");
+      }
     }
-  
+
     tick();
     setInterval(tick, 1000);
   </script>
 </body>
 </html>
-
-
-
