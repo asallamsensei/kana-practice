@@ -59,13 +59,14 @@
     letter-spacing: .3px;
     text-align: center;
   }
-
-  .sub{
-    margin-top: 6px;
-    color: var(--text);
-    font-size: 14px;
-    text-align: center;
+  
+  h1 .sup{
+    font-size: 12px;
+    font-weight: 700;
+    vertical-align: super;
+    margin-left: 4px;
     letter-spacing: .2px;
+    opacity: .85;
   }
 
   .grid{
@@ -244,10 +245,10 @@
 <body>
   <div class="wrap">
 
-<header>
-  <h1>Asallam Sensei</h1>
-  <p class="sub">Potenciado por GPT</p>
-</header>
+<h1>
+  Asallam Sensei
+  <sup class="sup">Potenciado por GPT</sup>
+</h1>
 
 <!-- Bloque de perfil (debajo del título, antes del grid principal) -->
 <div class="card">
@@ -434,6 +435,7 @@
   </script>
 </body>
 </html>
+
 
 
 
