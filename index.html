@@ -86,6 +86,18 @@
     padding: 16px;
   }
 
+  .mainGrid{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+  
+  @media (max-width: 900px){
+    .mainGrid{
+      grid-template-columns: 1fr;
+    }
+  }
+
   .sep{
     height: 1px;
     background: rgba(255,255,255,.10);
@@ -303,128 +315,109 @@
   </div>
 </div>
 
-    
-<!-- Libros y Cursos (lado a lado) -->
-<div class="card">
+<!-- GRID PRINCIPAL: Izquierda / Derecha -->
+<div class="mainGrid">
 
-  <div class="gridLC">
-    <!-- LIBROS -->
-    <div>
-      <p class="rightTitle">📚 LIBROS</p>
-      <div class="sep"></div>
+  <!-- IZQUIERDA: LIBROS + CURSOS -->
+  <div class="card">
 
-      <div class="tools">
-        <div class="btn">
-          <span>
-            Kit de iniciación al japonés
-            <small>ideal para empezar desde cero</small>
-          </span>
+    <div class="gridLC">
+      <!-- LIBROS -->
+      <div>
+        <p class="rightTitle">📚 LIBROS</p>
+        <div class="sep"></div>
+
+        <div class="tools">
+          <div class="btn">
+            <span>
+              Kit de iniciación al japonés
+              <small>ideal para empezar desde cero</small>
+            </span>
+          </div>
+
+          <div class="btn">
+            <span>
+              Los 2136 Jōyō Kanji
+              <small>guía completa + estructura</small>
+            </span>
+          </div>
         </div>
+      </div>
 
-        <div class="btn">
-          <span>
-            Los 2136 Jōyō Kanji
-            <small>guía completa + estructura</small>
-          </span>
+      <!-- CURSOS -->
+      <div>
+        <p class="rightTitle">🎓 CURSOS</p>
+        <div class="sep"></div>
+
+        <div class="tools">
+          <div class="btn">
+            <span>
+              Japonés desde 0
+              <small>fundamentos claros y prácticos</small>
+            </span>
+          </div>
+
+          <div class="btn">
+            <span>
+              Anime sin subtítulos
+              <small>escucha + vocab en contexto</small>
+            </span>
+          </div>
+
+          <div class="btn">
+            <span>
+              Lee Manga Hoy
+              <small>lectura guiada y kanji útil</small>
+            </span>
+          </div>
         </div>
       </div>
     </div>
 
-    <!-- CURSOS -->
-    <div>
-      <p class="rightTitle">🎓 CURSOS</p>
-      <div class="sep"></div>
+  </div>
 
-      <div class="tools">
-        <div class="btn">
-          <span>
-            Japonés desde 0
-            <small>fundamentos claros y prácticos</small>
-          </span>
-        </div>
+  <!-- DERECHA: HERRAMIENTAS -->
+  <div class="card">
+    <p class="rightTitle">🛠️ ELIGE UNA HERRAMIENTA</p>
+    <div class="sep"></div>
 
-        <div class="btn">
-          <span>
-            Anime sin subtítulos
-            <small>escucha + vocab en contexto</small>
-          </span>
-        </div>
+    <div class="tools">
+      <a class="btn kana" href="kana.html">
+        <span>Kana<small>Hiragana / Katakana</small></span>
+        <span class="icon">あ</span>
+      </a>
 
-        <div class="btn">
-          <span>
-            Lee Manga Hoy
-            <small>lectura guiada y kanji útil</small>
-          </span>
-        </div>
-      </div>
+      <a class="btn kanji" href="kanji.html">
+        <span>Kanji de grado 1<small>base sólida</small></span>
+        <span class="icon">一</span>
+      </a>
+
+      <a class="btn joyo" href="kanji_todos.html">
+        <span>2136 Jōyō Kanji<small>modo full power</small></span>
+        <span class="icon">漢</span>
+      </a>
+
+      <a class="btn n5" href="Vocabulario_N5.html">
+        <span>Vocabulario N5<small>lo esencial</small></span>
+        <span class="icon">N5</span>
+      </a>
+
+      <a class="btn media" href="vocabulario_series_y_anime.html">
+        <span>Canciones y series<small>vocab en contexto</small></span>
+        <span class="icon">🎧</span>
+      </a>
+
+      <a class="btn test" href="test.html">
+        <span>TEST<small>ponte a prueba</small></span>
+        <span class="icon">✓</span>
+      </a>
     </div>
+
+    <footer>© Asallam Sensei</footer>
   </div>
 
 </div>
 
-
-      <!-- Herramientas -->
-      <div class="card">
-        <p class="rightTitle">🛠️ ELIGE UNA HERRAMIENTA</p>
-        <div class="sep"></div>
-
-        <div class="tools">
-          <a class="btn kana" href="kana.html">
-            <span>
-              Kana
-              <small>Hiragana / Katakana</small>
-            </span>
-            <span class="icon">あ</span>
-          </a>
-
-          <a class="btn kanji" href="kanji.html">
-            <span>
-              Kanji de grado 1
-              <small>base sólida</small>
-            </span>
-            <span class="icon">一</span>
-          </a>
-
-          <a class="btn joyo" href="kanji_todos.html">
-            <span>
-              2136 Jōyō Kanji
-              <small>modo full power</small>
-            </span>
-            <span class="icon">漢</span>
-          </a>
-
-          <a class="btn n5" href="Vocabulario_N5.html">
-            <span>
-              Vocabulario N5
-              <small>lo esencial</small>
-            </span>
-            <span class="icon">N5</span>
-          </a>
-
-          <a class="btn media" href="vocabulario_series_y_anime.html">
-            <span>
-              Canciones y series
-              <small>vocab en contexto</small>
-            </span>
-            <span class="icon">🎧</span>
-          </a>
-
-          <a class="btn test" href="test.html">
-            <span>
-              TEST
-              <small>ponte a prueba</small>
-            </span>
-            <span class="icon">✓</span>
-          </a>
-        </div>
-
-        <footer>
-          © Asallam Sensei
-        </footer>
-      </div>
-    </div>
-
-  </div>
 
   <script>
     // ===== Contador JLPT N5 =====
@@ -468,6 +461,7 @@
   </script>
 </body>
 </html>
+
 
 
 
