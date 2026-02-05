@@ -327,6 +327,80 @@
     .btn.media .icon{ background: rgba(125,92,255,.18); border-color: rgba(125,92,255,.35); }
     .btn.test .icon{ background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.18); }
 
+.topProfile{
+  margin-top: 14px;
+  width: 100%;
+  max-width: 860px;
+  display:flex;
+  gap: 14px;
+  align-items:center;
+  justify-content:center;
+  padding: 12px 14px;
+  border-radius: 18px;
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,.06);
+}
+
+.topAvatar{
+  width: 86px;
+  height: 86px;
+  border-radius: 18px;
+  overflow:hidden;
+  border: 1px solid rgba(255,255,255,.18);
+  background: rgba(255,255,255,.06);
+  flex: 0 0 auto;
+}
+
+.topAvatar img{
+  width:100%;
+  height:100%;
+  object-fit: cover;
+  display:block;
+}
+
+.topInfo{
+  text-align:left;
+  max-width: 62ch;
+}
+
+.topName{
+  font-weight: 900;
+  font-size: 16px;
+  letter-spacing: .2px;
+}
+
+.topLinks{
+  margin-top: 6px;
+  display:flex;
+  gap: 10px;
+  flex-wrap:wrap;
+}
+
+.topLink{
+  color: var(--muted);
+  text-decoration: none;
+  font-weight: 900;
+  font-size: 13px;
+  border-bottom: 1px dashed rgba(238,242,255,.35);
+  padding-bottom: 1px;
+}
+.topLink:hover{
+  border-bottom-color: rgba(238,242,255,.75);
+}
+
+.topTagline{
+  margin-top: 8px;
+  color: rgba(238,242,255,.72);
+  font-size: 13px;
+  line-height: 1.35;
+}
+
+@media (max-width: 680px){
+  .topProfile{ flex-direction:column; text-align:center; }
+  .topInfo{ text-align:center; }
+  .topLinks{ justify-content:center; }
+}
+
     footer{
       margin-top: 14px;
       color: rgba(238,242,255,.55);
@@ -339,71 +413,76 @@
 <body>
   <div class="wrap">
 
-    <header>
-      <h1>Asallam Sensei</h1>
-      <p class="sub">Japonés con método práctico • Libros, cursos y herramientas para estudiar en serio</p>
-    </header>
+<header>
+  <h1>Asallam Sensei</h1>
+  <p class="sub">Japonés con método práctico • Libros, cursos y herramientas para estudiar en serio</p>
+
+  <!-- PERFIL ARRIBA (foto + contacto) -->
+  <div class="topProfile">
+    <div class="topAvatar">
+      <img src="data/asallam.jpg" alt="Asallam Sensei">
+    </div>
+
+    <div class="topInfo">
+      <div class="topName">Asallam Sensei</div>
+
+      <div class="topLinks">
+        <a class="topLink" href="https://wa.me/573217876009">📲 WhatsApp: +573217876009</a>
+        <a class="topLink" href="https://paypal.me/asallamsensei" target="_blank">💳 PayPal.me/asallamsensei</a>
+      </div>
+
+      <div class="topTagline">
+        Japonés paso a paso: kana, kanji, vocab y práctica estilo JLPT. Entra a una herramienta y empieza ya.
+      </div>
+    </div>
+  </div>
+</header>
+
 
     <div class="grid">
       <!-- Columna izquierda: Perfil + ventas + contador -->
       <div class="card">
-        <div class="profileCenter">
-          <div class="avatar">
-            <img src="data/asallam.jpg" alt="Asallam Sensei">
-          </div>
+  <div class="salesGrid">
+    <div class="miniCard">
+      <p class="miniTitle">📚 LIBROS</p>
+      <ul class="list">
+        <li class="item">
+          Kit de iniciación al japonés
+          <small>ideal para empezar desde cero</small>
+        </li>
+        <li class="item">
+          Los 2136 Jōyō Kanji
+          <small>guía completa + estructura</small>
+        </li>
+      </ul>
+    </div>
 
-          <p class="name">Asallam Sensei</p>
+    <div class="miniCard">
+      <p class="miniTitle">🎓 CURSOS</p>
+      <ul class="list">
+        <li class="item">
+          Japonés desde 0
+          <small>fundamentos claros y prácticos</small>
+        </li>
+        <li class="item">
+          Anime sin subtítulos
+          <small>escucha + vocab en contexto</small>
+        </li>
+        <li class="item">
+          Lee Manga Hoy
+          <small>lectura guiada y kanji útil</small>
+        </li>
+      </ul>
+    </div>
+  </div>
 
-          <p class="linkline">
-            📲 <a href="https://wa.me/573217876009">WhatsApp: +573217876009</a>
-          </p>
+  <div id="n5">⏳ Cargando contador JLPT N5…</div>
 
-          <p class="linkline">
-            💳 <a href="https://paypal.me/asallamsensei" target="_blank">PayPal.me/asallamsensei</a>
-          </p>
+  <div class="hint">
+    Tip: si estás en celular, agrega esta página a inicio para que quede como app.
+  </div>
+</div>
 
-          <p class="tagline">
-            Japonés paso a paso: kana, kanji, vocab y práctica estilo JLPT.
-            Entra a una herramienta y empieza ya.
-          </p>
-        </div>
-
-        <div class="sep"></div>
-
-        <!-- Lo más vendido -->
-        <div class="salesGrid">
-          <div class="miniCard">
-            <p class="miniTitle">📚 LIBROS</p>
-            <ul class="list">
-              <li class="item">
-                Kit de iniciación al japonés
-                <small>ideal para empezar desde cero</small>
-              </li>
-              <li class="item">
-                Los 2136 Jōyō Kanji
-                <small>guía completa + estructura</small>
-              </li>
-            </ul>
-          </div>
-
-          <div class="miniCard">
-            <p class="miniTitle">🎓 CURSOS</p>
-            <ul class="list">
-              <li class="item">
-                Japonés desde 0
-                <small>fundamentos claros y prácticos</small>
-              </li>
-              <li class="item">
-                Anime sin subtítulos
-                <small>escucha + vocab en contexto</small>
-              </li>
-              <li class="item">
-                Lee Manga Hoy
-                <small>lectura guiada y kanji útil</small>
-              </li>
-            </ul>
-          </div>
-        </div>
 
         <div class="ctaRow">
           <a class="ctaBtn" href="https://wa.me/573217876009">📲 Escríbeme por WhatsApp</a>
@@ -419,7 +498,7 @@
 
       <!-- Columna derecha: herramientas -->
       <div class="card">
-        <p class="rightTitle">HERRAMIENTAS GRATIS</p>
+        <p class="rightTitle">HERRAMIENTAS</p>
         <div class="sep"></div>
 
         <div class="tools">
@@ -519,3 +598,4 @@
   </script>
 </body>
 </html>
+
