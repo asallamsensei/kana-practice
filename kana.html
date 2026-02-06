@@ -311,6 +311,9 @@ function reproducirAudioKana(kanaChar){
     
 function siguienteKana() {
     actual = Math.floor(Math.random() * kanaLista.length);
+
+    const k = kanaLista[actual][0];   // ✅ aquí defines k (el kana actual)
+    
     document.getElementById("kana").innerText = kanaLista[actual][0];
     document.getElementById("respuesta").innerText = "";
     document.getElementById("respuestaUsuario").value = "";
@@ -446,6 +449,7 @@ function mostrarRespuesta(){
 
 </body>
 </html>
+
 
 
 
