@@ -283,31 +283,40 @@ function setModo(modo) {
 }
 
 // ===============================
+// 🔁 MAPEO Katakana -> Hiragana (para audio)
+// ===============================
+function kataToHira(str){
+  // Convierte katakana a hiragana para un solo caracter o texto corto
+  // Rango Unicode: Katakana 0x30A1-0x30F6 -> Hiragana 0x3041-0x3096
+  return (str || "").replace(/[\u30A1-\u30F6]/g, ch =>
+    String.fromCharCode(ch.charCodeAt(0) - 0x60)
+  );
+}
+
+    
+// ===============================
 // 🔊 AUDIO POR KANA
 // ===============================
 let audioKana = new Audio();
 audioKana.preload = "auto";
 
 function reproducirAudioKana(kanaChar){
-  // evita problemas si viene con saltos/espacios raros
-  const nombre = (kanaChar || "").trim();
-  if(!nombre) return;
+  const raw = (kanaChar || "").trim();
+  if(!raw) return;
 
-  // ruta: data/audios/あ.mp3 (etc.)
+  // ✅ Si es katakana, lo convierte a hiragana para buscar el audio
+  const nombre = kataToHira(raw);
+
   const src = "data/audios/" + encodeURIComponent(nombre) + ".mp3";
 
   try{
     audioKana.pause();
     audioKana.currentTime = 0;
     audioKana.src = src;
-    audioKana.play().catch(() => {
-      // si el navegador bloquea autoplay hasta que el usuario interactúe,
-      // no hacemos nada (ya con tu primer click/tecla empezará a sonar)
-    });
-  }catch(e){
-    // silencioso
-  }
+    audioKana.play().catch(() => {});
+  }catch(e){}
 }
+
     
 function siguienteKana() {
     actual = Math.floor(Math.random() * kanaLista.length);
@@ -449,6 +458,7 @@ function mostrarRespuesta(){
 
 </body>
 </html>
+
 
 
 
