@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Repaso — Saludos y Despedidas — Asallam Sensei</title>
+<style>
+  :root{
+    --bg: #f6f6ff;
+    --card: #ffffff;
+    --text: #111;
+    --muted: #555;
+    --accent: #7d5cff;
+    --accent2:#5d46d4;
+    --danger:#d93025;
+    --ok:#28a745;
+    --border:#d9d9e7;
+  }
+
+  body{
+    background: var(--bg);
+    font-family: Arial, sans-serif;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    padding: 26px 14px 60px;
+    color: var(--text);
+  }
+
+  h1{
+    font-size: 24px;
+    margin: 10px 0 14px;
+    text-align:center;
+  }
+
+  /* Barra superior: bloques + modos */
+  .bar{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    justify-content:center;
+    max-width: 920px;
+    margin-bottom: 10px;
+  }
+
+  .btn{
+    padding: 10px 14px;
+    font-size: 16px;
+    border-radius: 999px;
+    border: 2px solid var(--accent);
+    background: transparent;
+    color: #2b214b;
+    cursor:pointer;
+    user-select:none;
+    transition: 0.15s;
+  }
+  .btn:hover{ transform: translateY(-1px); }
+  .btn.activo{
+    background: var(--accent);
+    color: white;
+  }
+
+  .panel{
+    width: min(920px, 100%);
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 18px 16px 16px;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.06);
+    text-align:center;
+  }
+
+  #prompt{
+    font-size: 64px;
+    font-weight: 800;
+    margin: 6px 0 10px;
+    line-height: 1.05;
+    word-break: break-word;
+  }
+
+  #sub{
+    font-size: 14px;
+    color: var(--muted);
+    margin-bottom: 10px;
+    min-height: 18px;
+  }
+
+  #opciones{
+    font-size: 22px;
+    text-align:left;
+    line-height: 1.7;
+    width: fit-content;
+    margin: 0 auto 10px;
+  }
+
+  #respuestaUsuario{
+    margin-top: 8px;
+    font-size: 22px;
+    padding: 8px 12px;
+    border-radius: 10px;
+    border: 2px solid #aaa;
+    text-align:center;
+    width: 110px;
+  }
+
+  .acciones{
+    margin-top: 14px;
+    display:flex;
+    flex-wrap:wrap;
+    gap: 10px;
+    justify-content:center;
+  }
+
+  .accion-btn{
+    padding: 12px 18px;
+    border-radius: 12px;
+    border:none;
+    background: var(--accent);
+    color: white;
+    cursor:pointer;
+    font-size: 18px;
+  }
+  .accion-btn:hover{ background: var(--accent2); }
+
+  #resultado{
+    margin-top: 12px;
+    font-size: 22px;
+    min-height: 30px;
+    text-align:center;
+    white-space: pre-line;
+  }
+
+  .correcto{ color: var(--ok); font-weight: 800; }
+  .incorrecto{ color: var(--danger); font-weight: 800; }
+
+  #estadisticas{
+    margin-top: 14px;
+    font-size: 18px;
+    text-align:center;
+    color: #222;
+  }
+
+  .mini{
+    margin-top: 6px;
+    font-size: 13px;
+    color: var(--muted);
+    text-align:center;
+  }
+
+  .sep{
+    height:1px;
+    background: var(--border);
+    margin: 12px 0;
+  }
+</style>
+</head>
+<body>
+
+<h1>Repaso — Saludos y Despedidas — Asallam Sensei</h1>
+
+<!-- Bloques (dinámicos) -->
+<div class="bar" id="bloquesBar"></div>
+
+<!-- Modos -->
+<div class="bar" id="modosBar">
+  <button class="btn" id="btn-jp_es" onclick="setModo('jp_es')">Japonés → Español</button>
+  <button class="btn" id="btn-es_jp" onclick="setModo('es_jp')">Español → Japonés</button>
+</div>
+
+<div class="panel">
+  <div id="prompt">…</div>
+  <div id="sub"></div>
+
+  <div id="opciones"></div>
+
+  <input id="respuestaUsuario"
+         type="text"
+         placeholder="a / b / c"
+         maxlength="1"
+         onkeydown="manejarEnter(event)"/>
+
+  <div class="acciones">
+    <button class="accion-btn" onclick="mostrarRespuesta()">Mostrar respuesta</button>
+    <button class="accion-btn" onclick="siguienteDesdeBoton()">Siguiente</button>
+  </div>
+
+  <div id="resultado"></div>
+
+  <div class="sep"></div>
+
+  <div id="estadisticas">
+    Aciertos: <span id="aciertos">0</span> — Errores: <span id="errores">0</span>
+  </div>
+
+  <div class="mini">
+    Enter: 1) validar · 2) siguiente — “Mostrar respuesta” y “Siguiente” sin responder cuentan como error
+  </div>
+
+  <div class="acciones" style="margin-top:12px;">
+    <button class="btn" onclick="resetStatsTodo()">Reset stats</button>
+  </div>
+</div>
+
+<script>
+/* ===============================
+   CONFIG
+=============================== */
+const DATA_PATH  = "data/saludos_y_despedidas.json";   // <-- cambia el nombre si tu archivo se llama distinto
+const AUDIO_DIR  = "data/audios/saludos/";             // <-- carpeta de audios
+
+/* ===============================
+   STATE
+=============================== */
+let dataRaw = {};
+let bloques = [];              // keys del JSON
+let bloqueActual = "";         // key actual
+let lista = [];                // items normalizados del bloque actual
+
+let modoActual = "jp_es";      // "jp_es" | "es_jp"
+let pool = [];                 // lista activa para el quiz
+
+let actualIdx = 0;
+let actualItem = null;
+
+let correcta = "";             // 'a'|'b'|'c'
+let opcionCorrectaTexto = "";  // texto correcto mostrado en opciones
+let yaValidado = false;
+
+let aciertos = 0;
+let errores  = 0;
+
+/* ===============================
+   AUDIO (busca con y sin "！")
+=============================== */
+let audio = new Audio();
+audio.preload = "auto";
+
+function unique(arr){
+  return [...new Set(arr.filter(Boolean))];
+}
+
+function limpiarExclamJP(s){
+  return (s || "").replace(/！+$/g, "").trim();
+}
+
+function candidatosAudioJP(jp){
+  const raw = (jp || "").trim();
+  const sin = limpiarExclamJP(raw);
+  const con = sin ? (sin + "！") : "";
+
+  // Preferimos exacto, luego sin '！', luego con '！'
+  return unique([raw, sin, con]).filter(x => x.length > 0);
+}
+
+function playAudioForJP(jp){
+  const candidates = candidatosAudioJP(jp);
+  if(candidates.length === 0) return;
+
+  let i = 0;
+
+  const tryNext = () => {
+    if(i >= candidates.length) return;
+    const name = candidates[i++];
+    const src = AUDIO_DIR + encodeURIComponent(name) + ".mp3";
+
+    audio.onended = null;
+    audio.onerror = () => { tryNext(); };
+    try{
+      audio.pause();
+      audio.currentTime = 0;
+      audio.src = src;
+      audio.play().catch(() => { tryNext(); });
+    }catch(e){
+      tryNext();
+    }
+  };
+
+  tryNext();
+}
+
+/* ===============================
+   STATS (localStorage) - por modo + bloque
+=============================== */
+const STATS_KEY = "saludosQuizStats_v1";
+
+function cargarStatsObj(){
+  try{ return JSON.parse(localStorage.getItem(STATS_KEY)) || {}; }
+  catch{ return {}; }
+}
+function guardarStatsObj(o){
+  localStorage.setItem(STATS_KEY, JSON.stringify(o));
+}
+function statsKey(modo, bloque){
+  return `${bloque}__${modo}`;
+}
+function cargarStatsActual(){
+  const stats = cargarStatsObj();
+  const k = statsKey(modoActual, bloqueActual);
+  const s = stats[k] || { aciertos: 0, errores: 0 };
+  aciertos = s.aciertos || 0;
+  errores  = s.errores  || 0;
+  actualizarEstadisticas();
+}
+function guardarStatsActual(){
+  const stats = cargarStatsObj();
+  const k = statsKey(modoActual, bloqueActual);
+  stats[k] = { aciertos, errores };
+  guardarStatsObj(stats);
+}
+function resetStatsTodo(){
+  localStorage.removeItem(STATS_KEY);
+  aciertos = 0; errores = 0;
+  actualizarEstadisticas();
+}
+
+/* ===============================
+   UI HELPERS
+=============================== */
+function $(id){ return document.getElementById(id); }
+
+function pintarBotonesActivos(){
+  // modos
+  ["jp_es","es_jp"].forEach(m => {
+    const b = $("btn-" + m);
+    if(!b) return;
+    b.classList.toggle("activo", modoActual === m);
+  });
+
+  // bloques
+  document.querySelectorAll(".btn-bloque").forEach(btn => {
+    btn.classList.toggle("activo", btn.dataset.bloque === bloqueActual);
+  });
+}
+
+function actualizarEstadisticas(){
+  $("aciertos").innerText = aciertos;
+  $("errores").innerText  = errores;
+}
+
+/* ===============================
+   CARGA Y NORMALIZACIÓN
+=============================== */
+function normalizarItem(x){
+  return {
+    japones: String(x.japones || "").trim(),
+    romaji:  String(x.romaji  || "").trim(),
+    espanol: String(x.espanol || "").trim()
+  };
+}
+
+fetch(DATA_PATH)
+  .then(r => r.json())
+  .then(data => {
+    dataRaw = data || {};
+    bloques = Object.keys(dataRaw).filter(k => Array.isArray(dataRaw[k]));
+
+    if(bloques.length === 0){
+      $("prompt").innerText = "No hay bloques";
+      $("resultado").innerText = "El JSON no contiene listas de vocabulario.";
+      return;
+    }
+
+    construirBarraBloques(bloques);
+    bloqueActual = bloques[0];
+
+    // modo por defecto
+    modoActual = "jp_es";
+    pintarBotonesActivos();
+
+    cargarBloque(bloqueActual);
+    setModo(modoActual); // esto llama a cargar stats + siguiente
+  })
+  .catch(err => {
+    console.error(err);
+    $("resultado").innerText = "No se pudo cargar el JSON. Revisa ruta y servidor.";
+    $("resultado").className = "incorrecto";
+  });
+
+function construirBarraBloques(keys){
+  const bar = $("bloquesBar");
+  bar.innerHTML = "";
+
+  keys.forEach(k => {
+    const btn = document.createElement("button");
+    btn.className = "btn btn-bloque";
+    btn.dataset.bloque = k;
+    btn.textContent = k.replaceAll("_"," ");
+    btn.onclick = () => {
+      bloqueActual = k;
+      cargarBloque(k);
+      cargarStatsActual();
+      pintarBotonesActivos();
+      siguiente();
+    };
+    bar.appendChild(btn);
+  });
+}
+
+function cargarBloque(k){
+  lista = (dataRaw[k] || []).map(normalizarItem)
+    .filter(it => it.japones && it.espanol && it.romaji);
+
+  pool = lista.slice();
+  $("sub").innerText = `Bloque: ${k.replaceAll("_"," ")} · Total: ${pool.length}`;
+
+  if(pool.length < 3){
+    $("resultado").innerText = "Pool muy pequeño: necesitas al menos 3 entradas en el bloque.";
+    $("resultado").className = "incorrecto";
+  }else{
+    $("resultado").innerText = "";
+    $("resultado").className = "";
+  }
+}
+
+/* ===============================
+   MODO
+=============================== */
+function setModo(modo){
+  modoActual = modo;
+  pintarBotonesActivos();
+  cargarStatsActual();
+  siguiente();
+}
+
+/* ===============================
+   QUIZ (3 opciones)
+=============================== */
+function mezclar(arr){
+  return arr.slice().sort(() => Math.random() - 0.5);
+}
+
+function siguiente(){
+  if(pool.length < 3) return;
+
+  yaValidado = false;
+  $("resultado").innerText = "";
+  $("resultado").className = "";
+  $("respuestaUsuario").value = "";
+  $("respuestaUsuario").focus();
+
+  actualIdx = Math.floor(Math.random() * pool.length);
+  actualItem = pool[actualIdx];
+
+  // pregunta según modo
+  const pregunta = (modoActual === "jp_es") ? actualItem.japones : actualItem.espanol;
+
+  // correcto y distractores según modo (si pregunta jp -> opciones español, si pregunta es -> opciones japonés)
+  const campoOpciones = (modoActual === "jp_es") ? "espanol" : "japones";
+  const campoCorrecto = campoOpciones;
+
+  const correctoTexto = actualItem[campoCorrecto];
+
+  let opciones = [correctoTexto];
+  while(opciones.length < 3){
+    const r = pool[Math.floor(Math.random() * pool.length)][campoOpciones];
+    if(r && !opciones.includes(r)) opciones.push(r);
+  }
+  opciones = mezclar(opciones);
+
+  const letras = ["a","b","c"];
+  correcta = letras[opciones.indexOf(correctoTexto)];
+  opcionCorrectaTexto = correctoTexto;
+
+  $("prompt").innerText = pregunta;
+
+  $("opciones").innerHTML =
+    `a) ${escapeHTML(opciones[0])}<br>
+     b) ${escapeHTML(opciones[1])}<br>
+     c) ${escapeHTML(opciones[2])}`;
+
+  // subinfo: mostramos el romaji SOLO después (al corregir / mostrar / saltar)
+  $("sub").innerText = `Bloque: ${bloqueActual.replaceAll("_"," ")} · Modo: ${modoActual === "jp_es" ? "JP→ES" : "ES→JP"} · Total: ${pool.length}`;
+}
+
+function escapeHTML(str){
+  return String(str)
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
+}
+
+function verificar(){
+  const r = $("respuestaUsuario").value.toLowerCase().trim();
+  const res = $("resultado");
+
+  // sonido al validar (si hay)
+  playAudioForJP(actualItem.japones);
+
+  if(r === correcta){
+    res.innerText = `Correcto ✔\nRomaji: ${actualItem.romaji}`;
+    res.className = "correcto";
+    aciertos++;
+  }else{
+    res.innerText =
+      `Incorrecto ✘ (era ${correcta})\n` +
+      `Respuesta: ${opcionCorrectaTexto}\n` +
+      `Romaji: ${actualItem.romaji}`;
+    res.className = "incorrecto";
+    errores++;
+  }
+
+  actualizarEstadisticas();
+  guardarStatsActual();
+  yaValidado = true;
+}
+
+function mostrarRespuesta(){
+  if(yaValidado) return;
+
+  const res = $("resultado");
+
+  playAudioForJP(actualItem.japones);
+
+  // penaliza
+  errores++;
+  actualizarEstadisticas();
+  guardarStatsActual();
+
+  // muestra solución + romaji
+  res.innerText =
+    `Mostrada ✘ (era ${correcta})\n` +
+    `Respuesta: ${opcionCorrectaTexto}\n` +
+    `Romaji: ${actualItem.romaji}`;
+  res.className = "incorrecto";
+
+  yaValidado = true;
+}
+
+function siguienteDesdeBoton(){
+  const res = $("resultado");
+
+  // si no ha respondido -> cuenta como error (saltado)
+  if(!yaValidado){
+    playAudioForJP(actualItem.japones);
+
+    errores++;
+    actualizarEstadisticas();
+    guardarStatsActual();
+
+    res.innerText =
+      `Saltado ✘ (era ${correcta})\n` +
+      `Respuesta: ${opcionCorrectaTexto}\n` +
+      `Romaji: ${actualItem.romaji}`;
+    res.className = "incorrecto";
+
+    yaValidado = true;
+    return;
+  }
+
+  // si ya estaba validado -> pasar a siguiente
+  siguiente();
+}
+
+function manejarEnter(ev){
+  if(ev.key !== "Enter") return;
+
+  if(!yaValidado){
+    // Enter sin letra -> lo tratamos como "mostrar respuesta" y penaliza (como tu estilo)
+    const v = $("respuestaUsuario").value.trim();
+    if(v === ""){
+      mostrarRespuesta();
+      return;
+    }
+    verificar();
+  }else{
+    siguiente();
+  }
+}
+</script>
+
+</body>
+</html>
