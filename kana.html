@@ -311,7 +311,7 @@ function reproducirAudioKana(kanaChar){
   const nombre = kataToHira(raw).normalize("NFC"); // ✅ extra seguridad
 
   const src = "data/audios/" + encodeURIComponent(nombre) + ".mp3";
-
+  console.log("KANA RAW:", raw, "=> NOMBRE:", nombre, "=> SRC:", src);
   try{
     audioKana.pause();
     audioKana.currentTime = 0;
@@ -462,6 +462,7 @@ function mostrarRespuesta(){
 
 </body>
 </html>
+
 
 
 
