@@ -419,6 +419,7 @@ function resetStatsModo() {
 }
 
 function siguienteDesdeBoton(){
+    
   // Si NO se ha respondido aún → cuenta como error (saltado)
   if (!yaValidado) {
     const correcto = kanaLista[actual][1];
@@ -427,6 +428,8 @@ function siguienteDesdeBoton(){
       "Saltado ✘ (era: " + correcto + ")";
     document.getElementById("respuesta").className = "incorrecto";
 
+    reproducirAudioKana(kanaLista[actual][0]); // 🔊 suena SOLO si fue saltado
+      
     errores++;
     actualizarEstadisticas();
     guardarStatsActual();
@@ -464,6 +467,7 @@ function mostrarRespuesta(){
 
 </body>
 </html>
+
 
 
 
