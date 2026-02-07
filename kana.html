@@ -286,12 +286,16 @@ function setModo(modo) {
 // 🔁 MAPEO Katakana -> Hiragana (para audio)
 // ===============================
 function kataToHira(str){
-  // Convierte katakana a hiragana para un solo caracter o texto corto
-  // Rango Unicode: Katakana 0x30A1-0x30F6 -> Hiragana 0x3041-0x3096
-  return (str || "").replace(/[\u30A1-\u30F6]/g, ch =>
+  // 1) NFKC: convierte halfwidth katakana → katakana normal
+  // 2) NFC: une dakuten combinante (カ + ゙ → ガ)
+  const s = (str || "").normalize("NFKC").normalize("NFC");
+
+  // Katakana fullwidth → Hiragana (mismo offset -0x60)
+  return s.replace(/[\u30A1-\u30F6]/g, ch =>
     String.fromCharCode(ch.charCodeAt(0) - 0x60)
   );
 }
+
 
     
 // ===============================
@@ -304,8 +308,7 @@ function reproducirAudioKana(kanaChar){
   const raw = (kanaChar || "").trim();
   if(!raw) return;
 
-  // ✅ Si es katakana, lo convierte a hiragana para buscar el audio
-  const nombre = kataToHira(raw);
+  const nombre = kataToHira(raw).normalize("NFC"); // ✅ extra seguridad
 
   const src = "data/audios/" + encodeURIComponent(nombre) + ".mp3";
 
@@ -317,21 +320,22 @@ function reproducirAudioKana(kanaChar){
   }catch(e){}
 }
 
+
     
 function siguienteKana() {
-    actual = Math.floor(Math.random() * kanaLista.length);
+  actual = Math.floor(Math.random() * kanaLista.length);
+  const k = kanaLista[actual][0];
 
-    const k = kanaLista[actual][0];   // ✅ aquí defines k (el kana actual)
-    
-    document.getElementById("kana").innerText = kanaLista[actual][0];
-    document.getElementById("respuesta").innerText = "";
-    document.getElementById("respuestaUsuario").value = "";
-    yaValidado = false;  
-    document.getElementById("respuestaUsuario").focus();
-    document.getElementById("respuesta").className = "";
+  document.getElementById("kana").innerText = k;
+  document.getElementById("respuesta").innerText = "";
+  document.getElementById("respuestaUsuario").value = "";
+  yaValidado = false;
+  document.getElementById("respuestaUsuario").focus();
+  document.getElementById("respuesta").className = "";
 
-    reproducirAudioKana(k); // ✅ AQUI
+  reproducirAudioKana(k);
 }
+
 
 function mostrarRomaji() {
     document.getElementById("respuesta").innerText = kanaLista[actual][1];
@@ -458,6 +462,7 @@ function mostrarRespuesta(){
 
 </body>
 </html>
+
 
 
 
