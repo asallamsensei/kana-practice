@@ -477,6 +477,11 @@ function escapeHTML(str){
     .replaceAll("'","&#039;");
 }
 
+function mostrarRomajiEnSub(){
+  if (!actualItem) return;
+  $("sub").innerText = "Romaji: " + actualItem.romaji;
+}
+  
 function verificar(){
   const r = $("respuestaUsuario").value.toLowerCase().trim();
   const res = $("resultado");
@@ -499,6 +504,7 @@ function verificar(){
 
   actualizarEstadisticas();
   guardarStatsActual();
+  mostrarRomajiEnSub();
   yaValidado = true;
 }
 
@@ -520,7 +526,7 @@ function mostrarRespuesta(){
     `Respuesta: ${opcionCorrectaTexto}\n` +
     `Romaji: ${actualItem.romaji}`;
   res.className = "incorrecto";
-
+  mostrarRomajiEnSub();
   yaValidado = true;
 }
 
@@ -540,6 +546,8 @@ function siguienteDesdeBoton(){
       `Respuesta: ${opcionCorrectaTexto}\n` +
       `Romaji: ${actualItem.romaji}`;
     res.className = "incorrecto";
+
+    mostrarRomajiEnSub();
 
     yaValidado = true;
     return;
