@@ -5,7 +5,7 @@
     { "japones": "こんばんは", "romaji": "konbanwa", "espanol": "buenas noches (saludo)" },
     
     { "japones": "ようこそ", "romaji": "yōkoso", "espanol": "bienvenido (matiz de 'por primera vez')" },
-    { "japones": "いらっしゃいませ", "romaji": "irasshaimase", "espanol": "bienvenido (en tiendas y restaurantes)" },
+    { "japones": "いらっしゃいませ", "romaji": "irasshaimase", "espanol": "¡Bienvenido! (en tiendas y restaurantes)" },
     
     { "japones": "おはよう", "romaji": "ohayō", "espanol": "buenos días (informal)" },
     { "japones": "おはようございます", "romaji": "ohayō gozaimasu", "espanol": "buenos días (formal)" },
@@ -13,8 +13,8 @@
     { "japones": "もしもし", "romaji": "moshi moshi", "espanol": "hola (en el teléfono)" },
     { "japones": "どうも", "romaji": "dōmo", "espanol": "gracias, hola o adiós (según el contexto)" },
     
-    { "japones": "久しぶり！", "romaji": "hisashiburi!", "espanol": "¡Cuánto tiempo! (al reencontrarse)" },
-    { "japones": "よう！", "romaji": "yō!", "espanol": "¡Hey! (muy informal, entre amigos)" },
+    { "japones": "久しぶり", "romaji": "hisashiburi", "espanol": "¡Cuánto tiempo! (al reencontrarse)" },
+    { "japones": "よう", "romaji": "yō", "espanol": "¡Hey! (muy informal, entre amigos)" },
     
     { "japones": "元気？", "romaji": "genki?", "espanol": "¿Cómo estás? (informal)" },
     { "japones": "お元気ですか？", "romaji": "ogenki desu ka?", "espanol": "¿Cómo estás? (formal)" },
@@ -31,7 +31,7 @@
     { "japones": "いってらっしゃい", "romaji": "itterasshai", "espanol": "que te vaya bien (respuesta a いってきます)" },
     
     { "japones": "お気をつけて", "romaji": "oki o tsukete", "espanol": "cuídate (al despedirse)" },
-    { "japones": "ただいま！", "romaji": "tadaima", "espanol": "¡Ya volví! / ¡Ya llegué!" },
+    { "japones": "ただいま", "romaji": "tadaima", "espanol": "¡Ya volví! / ¡Ya llegué!" },
     
     { "japones": "おかえり", "romaji": "okaeri", "espanol": "bienvenido de vuelta (respuesta a ただいま, informal)" },
     { "japones": "おかえりなさい", "romaji": "okaerinasai", "espanol": "bienvenido de vuelta (respuesta a ただいま, formal)" },
