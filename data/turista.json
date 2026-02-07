@@ -1,0 +1,60 @@
+{
+  "saludos_y_despedidas": [
+    
+    { "japones": "こんにちは", "romaji": "konnichiwa", "espanol": "hola (desde media mañana hasta antes del anochecer)" },
+    { "japones": "こんばんは", "romaji": "konbanwa", "espanol": "buenas noches (saludo)" },
+    
+    { "japones": "ようこそ", "romaji": "yōkoso", "espanol": "bienvenido (matiz de 'por primera vez')" },
+    { "japones": "いらっしゃいませ", "romaji": "irasshaimase", "espanol": "bienvenido (en tiendas y restaurantes)" },
+    
+    { "japones": "おはよう", "romaji": "ohayō", "espanol": "buenos días (informal)" },
+    { "japones": "おはようございます", "romaji": "ohayō gozaimasu", "espanol": "buenos días (formal)" },
+    
+    { "japones": "もしもし", "romaji": "moshi moshi", "espanol": "hola (en el teléfono)" },
+    { "japones": "どうも", "romaji": "dōmo", "espanol": "gracias, hola o adiós (según el contexto)" },
+    
+    { "japones": "久しぶり！", "romaji": "hisashiburi!", "espanol": "¡Cuánto tiempo! (al reencontrarse)" },
+    { "japones": "よう！", "romaji": "yō!", "espanol": "¡Hey! (muy informal, entre amigos)" },
+    
+    { "japones": "元気？", "romaji": "genki?", "espanol": "¿Cómo estás? (informal)" },
+    { "japones": "お元気ですか？", "romaji": "ogenki desu ka?", "espanol": "¿Cómo estás? (formal)" },
+    
+    { "japones": "元気だよ", "romaji": "genki da yo", "espanol": "estoy bien (informal)" },
+    { "japones": "元気です", "romaji": "genki desu", "espanol": "estoy bien (formal)" },
+    
+    { "japones": "さようなら", "romaji": "sayōnara", "espanol": "adiós (matiz de 'definitivo')" },
+       
+    { "japones": "おやすみ", "romaji": "oyasumi", "espanol": "buenas noches (antes de dormir, informal)" },
+    { "japones": "おやすみなさい", "romaji": "oyasuminasai", "espanol": "buenas noches (antes de dormir, formal)" },
+    
+    { "japones": "いってきます", "romaji": "ittekimasu", "espanol": "me voy (y volveré)" },
+    { "japones": "いってらっしゃい", "romaji": "itterasshai", "espanol": "que te vaya bien (respuesta a いってきます)" },
+    
+    { "japones": "お気をつけて", "romaji": "oki o tsukete", "espanol": "cuídate (al despedirse)" },
+    { "japones": "ただいま！", "romaji": "tadaima", "espanol": "¡Ya volví! / ¡Ya llegué!" },
+    
+    { "japones": "おかえり", "romaji": "okaeri", "espanol": "bienvenido de vuelta (respuesta a ただいま, informal)" },
+    { "japones": "おかえりなさい", "romaji": "okaerinasai", "espanol": "bienvenido de vuelta (respuesta a ただいま, formal)" },
+    
+    { "japones": "また会いましょう", "romaji": "mata aimashō", "espanol": "hasta la próxima" },
+    { "japones": "ありがとうございました", "romaji": "arigatō gozaimashita", "espanol": "muchas gracias (por lo que ya pasó)" },
+
+    { "japones": "お疲れさま", "romaji": "otsukaresama", "espanol": "buen trabajo (despedida)" },
+        
+    { "japones": "ただいま戻りました", "romaji": "tadaima modorimashita", "espanol": "ya regresé (formal)" },
+
+    { "japones": "行ってまいります", "romaji": "itte mairimasu", "espanol": "me voy (y volveré) (humilde)" },
+    { "japones": "お先に失礼します", "romaji": "osaki ni shitsurei shimasu", "espanol": "me retiro antes, disculpen" },
+    { "japones": "お世話になりました", "romaji": "osewa ni narimashita", "espanol": "gracias por todo (despedida formal)" },
+    
+    { "japones": "またね", "romaji": "mata ne", "espanol": "nos vemos" },
+    { "japones": "またあとで", "romaji": "mata ato de", "espanol": "nos vemos más tarde" },
+    { "japones": "じゃあね", "romaji": "jā ne", "espanol": "hasta luego" },
+    { "japones": "じゃあまたね", "romaji": "jā mata ne", "espanol": "bueno, nos vemos" },
+    { "japones": "ではまた", "romaji": "dewa mata", "espanol": "hasta luego" },
+    
+    { "japones": "バイバイ", "romaji": "baibai", "espanol": "bay, bay" },
+    { "japones": "お大事に", "romaji": "odaiji ni", "espanol": "que te mejores (despedida)" }
+    
+  ]
+}
