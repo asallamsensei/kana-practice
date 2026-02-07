@@ -254,6 +254,7 @@ let yaValidado = false;
 
 let aciertos = 0;
 let errores  = 0;
+let focoAutomatico = false; // por defecto: NO abrir teclado en móvil
 
 /* ===============================
    AUDIO (busca con y sin "！")
@@ -344,6 +345,17 @@ function resetStatsTodo(){
 =============================== */
 function $(id){ return document.getElementById(id); }
 
+// Si el usuario toca/clickea el input, permitimos foco automático después
+document.addEventListener("pointerdown", (e) => {
+  focoAutomatico = (e.target && e.target.id === "respuestaUsuario");
+});
+
+// Si el usuario presiona teclas, asumimos que quiere modo teclado
+document.addEventListener("keydown", (e) => {
+  if(["a","b","c","Enter"].includes(e.key)) focoAutomatico = true;
+});
+
+  
 function pintarBotonesActivos(){
   // modos
   ["jp_es","es_jp"].forEach(m => {
@@ -461,7 +473,10 @@ function siguiente(){
   $("resultado").innerText = "";
   $("resultado").className = "";
   $("respuestaUsuario").value = "";
-  $("respuestaUsuario").focus();
+  if(focoAutomatico){
+    $("respuestaUsuario").focus();
+  }
+
 
   actualIdx = Math.floor(Math.random() * pool.length);
   actualItem = pool[actualIdx];
@@ -513,6 +528,7 @@ function escapeHTML(str){
 }
 
 function responder(letra){
+  focoAutomatico = false;  // si usa botones, no queremos teclado automático
   if(yaValidado) return;               // evita doble respuesta
   $("respuestaUsuario").value = letra; // rellena el input
   verificar();                         // valida igual que Enter
