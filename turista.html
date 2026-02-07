@@ -152,6 +152,31 @@
     background: var(--border);
     margin: 12px 0;
   }
+
+  /* Botones a/b/c */
+  #opbtns{
+    display:flex;
+    gap:10px;
+    justify-content:center;
+    margin: 6px 0 2px;
+  }
+
+  .btnABC{
+    padding:10px 16px;
+    font-size:18px;
+    border-radius:10px;
+    border:none;
+    background:#b94a48;        /* rojo apagado */
+    color:#fff;
+    cursor:pointer;
+    min-width:64px;
+    font-weight:800;
+  }
+  .btnABC:hover{
+    background:#a94442;
+  }
+
+  
 </style>
 </head>
 <body>
@@ -172,6 +197,12 @@
 
   <div id="opciones"></div>
 
+  <div id="opbtns">
+    <button class="btnABC" type="button" onclick="responder('a')">a</button>
+    <button class="btnABC" type="button" onclick="responder('b')">b</button>
+    <button class="btnABC" type="button" onclick="responder('c')">c</button>
+  </div>
+  
   <input id="respuestaUsuario"
          type="text"
          placeholder="a / b / c"
@@ -479,6 +510,12 @@ function escapeHTML(str){
     .replaceAll(">","&gt;")
     .replaceAll('"',"&quot;")
     .replaceAll("'","&#039;");
+}
+
+function responder(letra){
+  if(yaValidado) return;               // evita doble respuesta
+  $("respuestaUsuario").value = letra; // rellena el input
+  verificar();                         // valida igual que Enter
 }
 
 function verificar(){
