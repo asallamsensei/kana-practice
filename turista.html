@@ -78,6 +78,14 @@
     word-break: break-word;
   }
 
+  /* Cuando la pregunta es español → japonés */
+  .prompt-es-jp{
+    font-size: 38px;   /* ajusta a tu gusto: 36–42 suele ir bien */
+    font-weight: 700;
+    line-height: 1.2;
+  }
+
+  
   #sub{
     font-size: 14px;
     color: var(--muted);
@@ -457,7 +465,14 @@ function siguiente(){
   correcta = letras[opciones.indexOf(correctoTexto)];
   opcionCorrectaTexto = correctoTexto;
 
-  $("prompt").innerText = pregunta;
+  const promptEl = $("prompt");
+  promptEl.innerText = pregunta;
+  
+  // tamaño según modo
+  promptEl.classList.remove("prompt-es-jp");
+  if(modoActual === "es_jp"){
+    promptEl.classList.add("prompt-es-jp");
+  }
 
   $("opciones").innerHTML =
     `a) ${escapeHTML(opciones[0])}<br>
