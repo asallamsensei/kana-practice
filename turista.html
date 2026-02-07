@@ -79,10 +79,11 @@
   }
 
   #sub{
-    font-size: 14px;
-    color: var(--muted);
-    margin-bottom: 10px;
-    min-height: 18px;
+    font-size: 26px;          /* ⬅️ tamaño del romaji */
+    color: #444;              /* un gris elegante */
+    margin: 10px 0 14px;
+    min-height: 32px;         /* reserva espacio aunque esté vacío */
+    font-weight: 500;
   }
 
   #opciones{
@@ -479,7 +480,7 @@ function escapeHTML(str){
 
 function mostrarRomajiEnSub(){
   if (!actualItem) return;
-  $("sub").innerText = "Romaji: " + actualItem.romaji;
+  $("sub").innerText = actualItem.romaji;
 }
   
 function verificar(){
@@ -497,7 +498,6 @@ function verificar(){
     res.innerText =
       `Incorrecto ✘ (era ${correcta})\n` +
       `Respuesta: ${opcionCorrectaTexto}\n` +
-      `Romaji: ${actualItem.romaji}`;
     res.className = "incorrecto";
     errores++;
   }
@@ -524,7 +524,6 @@ function mostrarRespuesta(){
   res.innerText =
     `Mostrada ✘ (era ${correcta})\n` +
     `Respuesta: ${opcionCorrectaTexto}\n` +
-    `Romaji: ${actualItem.romaji}`;
   res.className = "incorrecto";
   mostrarRomajiEnSub();
   yaValidado = true;
@@ -544,7 +543,6 @@ function siguienteDesdeBoton(){
     res.innerText =
       `Saltado ✘ (era ${correcta})\n` +
       `Respuesta: ${opcionCorrectaTexto}\n` +
-      `Romaji: ${actualItem.romaji}`;
     res.className = "incorrecto";
 
     mostrarRomajiEnSub();
