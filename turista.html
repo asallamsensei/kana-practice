@@ -28,7 +28,7 @@
   }
 
   h1{
-    font-size: 24px;
+    font-size: 40px;
     margin: 10px 0 14px;
     text-align:center;
   }
@@ -80,16 +80,9 @@
   
   /* Cuando la pregunta es español → japonés */
   #prompt.prompt-es-jp{
-    font-size: 20px;   /* aquí sí, bien pequeño */
+    font-size: 35px;   /* aquí sí, bien pequeño */
     font-weight: 700;
     line-height: 1.2;
-  }
-
-  #sub{
-    font-size: 14px;
-    color: var(--muted);
-    margin-bottom: 10px;
-    min-height: 18px;
   }
 
   #opciones{
@@ -176,7 +169,6 @@
 
 <div class="panel">
   <div id="prompt">…</div>
-  <div id="sub"></div>
 
   <div id="opciones"></div>
 
@@ -404,8 +396,7 @@ function cargarBloque(k){
     .filter(it => it.japones && it.espanol && it.romaji);
 
   pool = lista.slice();
-  $("sub").innerText = `Bloque: ${k.replaceAll("_"," ")} · Total: ${pool.length}`;
-
+  
   if(pool.length < 3){
     $("resultado").innerText = "Pool muy pequeño: necesitas al menos 3 entradas en el bloque.";
     $("resultado").className = "incorrecto";
@@ -479,7 +470,6 @@ function siguiente(){
      c) ${escapeHTML(opciones[2])}`;
 
   // subinfo: mostramos el romaji SOLO después (al corregir / mostrar / saltar)
-  $("sub").innerText = "";
 }
 
 function escapeHTML(str){
