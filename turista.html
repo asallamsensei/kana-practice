@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Repaso — Saludos y Despedidas — Asallam Sensei</title>
+<title>Turista en Japón — Asallam Sensei</title>
 <style>
   :root{
     --bg: #f6f6ff;
@@ -156,7 +156,7 @@
 </head>
 <body>
 
-<h1>Repaso — Saludos y Despedidas — Asallam Sensei</h1>
+<h1>Turista en Japón — Asallam Sensei</h1>
 
 <!-- Bloques (dinámicos) -->
 <div class="bar" id="bloquesBar"></div>
@@ -190,10 +190,6 @@
 
   <div id="estadisticas">
     Aciertos: <span id="aciertos">0</span> — Errores: <span id="errores">0</span>
-  </div>
-
-  <div class="mini">
-    Enter: 1) validar · 2) siguiente — “Mostrar respuesta” y “Siguiente” sin responder cuentan como error
   </div>
 
   <div class="acciones" style="margin-top:12px;">
@@ -469,7 +465,7 @@ function siguiente(){
      c) ${escapeHTML(opciones[2])}`;
 
   // subinfo: mostramos el romaji SOLO después (al corregir / mostrar / saltar)
-  $("sub").innerText = `Bloque: ${bloqueActual.replaceAll("_"," ")} · Modo: ${modoActual === "jp_es" ? "JP→ES" : "ES→JP"} · Total: ${pool.length}`;
+  $("sub").innerText = "";
 }
 
 function escapeHTML(str){
