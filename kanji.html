@@ -75,7 +75,6 @@
     font-weight:700;         /* antes 800 */
     text-align:center;
     line-height:1.1;
-    width:min(900px, 94vw);
     word-break:break-word;
     letter-spacing: .02em;
   }
@@ -125,6 +124,7 @@
     border:1px solid var(--border);
     text-align:center;
     width:14ch;
+    margin:0;
   
     background: rgba(255,255,255,.06);
     color: var(--text);
@@ -140,12 +140,13 @@
 
   /* Nav debajo del input */
   #navBtns{
-    margin-top:12px;
+    margin-top:0;          /* ✅ quita el extra */
     display:flex;
     gap:10px;
     justify-content:center;
     flex-wrap:wrap;
   }
+
   .btnNav{
     padding:12px 20px;
     font-size:18px;
@@ -246,7 +247,7 @@
     border: 1px solid var(--border);
     border-radius: 18px;
     box-shadow: var(--shadow);
-    padding: 18px 14px 14px;
+    padding: 10px 14px 14px;
   }
 
 
@@ -570,6 +571,7 @@ function aplicarEstiloOpciones(){
   </div>
 </body>
 </html>
+
 
 
 
