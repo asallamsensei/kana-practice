@@ -118,7 +118,8 @@
 
   /* Input */
   #respuestaUsuario{
-    margin-top:14px;
+    display:block;          /* ✅ asegura que sea bloque */
+    margin:14px auto 0;     /* ✅ auto = centrado horizontal */
     font-size:22px;
     padding:10px 12px;
     border-radius:12px;
@@ -130,6 +131,7 @@
     color: var(--text);
     outline:none;
   }
+
   #respuestaUsuario::placeholder{ color: rgba(255,255,255,.70); }
   #respuestaUsuario:focus{
     border-color: rgba(255,255,255,.22);
@@ -541,3 +543,4 @@ function aplicarEstiloOpciones(){
   </div>
 </body>
 </html>
+
