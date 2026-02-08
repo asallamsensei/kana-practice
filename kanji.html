@@ -45,7 +45,7 @@
     min-height:100vh;
     display:flex;
     flex-direction:column;
-    align-items:center;
+    align-items:stretch;
     padding: 26px 14px 70px;
   }
 
@@ -261,11 +261,17 @@
     font-family: var(--jp);
     font-weight: 600;
   }
- 
+
+  .wrap{
+    width: min(980px, 100%);
+    margin: 0 auto;
+  }
+  
 </style>
 </head>
 
 <body>
+  <div class="wrap">
   <h1>Kanji de Grado 1 — Asallam Sensei</h1>
 
   <div id="controles">
@@ -532,10 +538,6 @@ function aplicarEstiloOpciones(){
 }
 
 </script>
+  </div>
 </body>
 </html>
-
-
-
-
-
