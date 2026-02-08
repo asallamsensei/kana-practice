@@ -99,6 +99,29 @@
     { "japones": "焼きそばパン", "romaji": "yakisoba pan", "espanol": "pan relleno de fideos yakisoba" },
 
     { "japones": "スポーツドリンク", "romaji": "supōtsu dorinku", "espanol": "bebida deportiva" },
-    { "japones": "エナジードリンク", "romaji": "enajī dorinku", "espanol": "bebida energética" }
+    { "japones": "エナジードリンク", "romaji": "enajī dorinku", "espanol": "bebida energética" },
+
+    { "japones": "コンビニ", "romaji": "konbini", "espanol": "tienda de conveniencia" },
+    { "japones": "店", "romaji": "mise", "espanol": "tienda" },
+    { "japones": "入口", "romaji": "iriguchi", "espanol": "entrada" },
+    { "japones": "出口", "romaji": "deguchi", "espanol": "salida" },
+
+    { "japones": "レジ", "romaji": "reji", "espanol": "caja registradora" },
+    { "japones": "会計", "romaji": "kaikei", "espanol": "cuenta, pago" },
+    { "japones": "現金", "romaji": "genkin", "espanol": "efectivo" },
+    { "japones": "カード", "romaji": "kādo", "espanol": "tarjeta" },
+
+    { "japones": "袋", "romaji": "fukuro", "espanol": "bolsa" },
+    { "japones": "レジ袋", "romaji": "rejibukuro", "espanol": "bolsa de la tienda" },
+    { "japones": "容器", "romaji": "yōki", "espanol": "envase, recipiente" },
+
+    { "japones": "おにぎり", "romaji": "onigiri", "espanol": "bola de arroz" },
+    { "japones": "弁当", "romaji": "bentō", "espanol": "caja de comida preparada" },
+    { "japones": "サンドイッチ", "romaji": "sandoicchi", "espanol": "sándwich" },
+    { "japones": "デザート", "romaji": "dezāto", "espanol": "postre" },
+
+    { "japones": "電子レンジ", "romaji": "denshi renji", "espanol": "microondas" },
+    { "japones": "コピー機", "romaji": "kopīki", "espanol": "fotocopiadora" },
+    { "japones": "ATM", "romaji": "ē tī emu", "espanol": "cajero automático" }
   ]
 }
