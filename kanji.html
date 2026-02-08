@@ -292,7 +292,11 @@
   .wrap{
     width: min(980px, 100%);
     margin: 0 auto;
+    display:flex;
+    flex-direction:column;
+    align-items:center; /* ✅ esto centra hijos como qaGrid */
   }
+
   
 </style>
 </head>
@@ -571,6 +575,7 @@ function aplicarEstiloOpciones(){
   </div>
 </body>
 </html>
+
 
 
 
