@@ -56,5 +56,49 @@
     { "japones": "バイバイ", "romaji": "baibai", "espanol": "bay, bay" },
     { "japones": "お大事に", "romaji": "odaiji ni", "espanol": "que te mejores (despedida)" }
     
+  ],
+  "¡Corre al konbini!": [
+    { "japones": "歯ブラシ", "romaji": "haburashi", "espanol": "cepillo de dientes" },
+    { "japones": "歯磨き", "romaji": "hamigaki", "espanol": "pasta de dientes" },
+    { "japones": "シャンプー", "romaji": "shanpū", "espanol": "champú" },
+    { "japones": "ボディソープ", "romaji": "bodi sōpu", "espanol": "jabón líquido para el cuerpo" },
+    { "japones": "ハンドソープ", "romaji": "hando sōpu", "espanol": "jabón líquido para las manos" },
+    { "japones": "石鹸", "romaji": "sekken", "espanol": "jabón en barra" },
+    { "japones": "アルコール消毒", "romaji": "arukōru shōdoku", "espanol": "alcohol desinfectante (para manos)" },
+    { "japones": "ウェットティッシュ", "romaji": "uetto tisshu", "espanol": "toallitas húmedas" },
+
+    { "japones": "コンドーム", "romaji": "kondōmu", "espanol": "condón" },
+    { "japones": "タンポン", "romaji": "tanpon", "espanol": "tampones" },
+    { "japones": "おりものシート", "romaji": "orimono shīto", "espanol": "protectores diarios" },
+    { "japones": "生理用ナプキン", "romaji": "seiriyō napukin", "espanol": "toallas higiénicas" },
+    { "japones": "ナプキン", "romaji": "napukin", "espanol": "toalla higiénica / servilleta (según contexto)" },
+
+    { "japones": "傘", "romaji": "kasa", "espanol": "paraguas, sombrilla" },
+    { "japones": "ガム", "romaji": "gamu", "espanol": "chicle, goma de mascar" },
+    { "japones": "おでん", "romaji": "oden", "espanol": "estofado japonés (de invierno)" },
+    { "japones": "ポケットティッシュ", "romaji": "poketto tisshu", "espanol": "pañuelos desechables" },
+    { "japones": "日焼け止め", "romaji": "hiyakedome", "espanol": "protector solar" },
+    { "japones": "虫除けスプレー", "romaji": "mushiyoke supurē", "espanol": "repelente de insectos" },
+    { "japones": "レインコート", "romaji": "reinkōto", "espanol": "impermeable" },
+
+    { "japones": "チューハイ", "romaji": "chūhai", "espanol": "cóctel de shōchū con soda y saborizantes" },
+    { "japones": "缶コーヒー", "romaji": "kan kōhī", "espanol": "café enlatado" },
+    { "japones": "緑茶", "romaji": "ryokucha", "espanol": "té verde japonés" },
+
+    { "japones": "デオドラント", "romaji": "deodoranto", "espanol": "desodorante" },
+    { "japones": "髭剃り", "romaji": "higesori", "espanol": "afeitadora (manual)" },
+    { "japones": "絆創膏", "romaji": "bansōkō", "espanol": "curitas" },
+    { "japones": "マスク", "romaji": "masuku", "espanol": "mascarilla" },
+    { "japones": "消毒液", "romaji": "shōdokueki", "espanol": "desinfectante líquido" },
+    { "japones": "ハンカチ", "romaji": "hankachi", "espanol": "pañuelo de tela" },
+
+    { "japones": "イヤホン", "romaji": "iyahon", "espanol": "auriculares" },
+    { "japones": "充電器", "romaji": "jūdenki", "espanol": "cargador de celular" },
+    { "japones": "カレーパン", "romaji": "karēpan", "espanol": "pan relleno de curry" },
+    { "japones": "モバイルバッテリー", "romaji": "mobairu batterī", "espanol": "batería portátil" },
+    { "japones": "焼きそばパン", "romaji": "yakisoba pan", "espanol": "pan relleno de fideos yakisoba" },
+
+    { "japones": "スポーツドリンク", "romaji": "supōtsu dorinku", "espanol": "bebida deportiva" },
+    { "japones": "エナジードリンク", "romaji": "enajī dorinku", "espanol": "bebida energética" }
   ]
 }
