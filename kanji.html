@@ -191,8 +191,6 @@
         <option value="sig-kanji">Significado → Kanji</option>
       </select>
     </span>
-
-    <button class="btnReset" type="button" onclick="resetStats()">Reset stats</button>
   </div>
 
   <div id="kanji">日</div>
@@ -221,6 +219,9 @@
   <div id="estadisticas">
     Aciertos: <span id="aciertos">0</span> —
     Errores: <span id="errores">0</span>
+    <div style="margin-top:8px;">
+      <button class="btnReset" type="button" onclick="resetStats()">Reset stats</button>
+    </div>
   </div>
 
 <script>
@@ -233,7 +234,6 @@ let errores = 0;
 let correcta = "";             // 'a'/'b'/'c'
 let respuestaCorrecta = "";    // texto correcto (depende del modo)
 let yaValidado = false;        // ya se verificó la respuesta actual
-let mostrada = false;          // ya se pulsó "Mostrar respuesta" en esta pregunta
 
 // Anti-teclado automático (como en tu otro proyecto)
 let focoAutomatico = false; // por defecto: NO forzar focus (no abre teclado)
@@ -293,12 +293,13 @@ function limpiarUIParaNueva(){
 function siguiente(){
   if (lista.length < 3) return;
 
+  limpiarUIParaNueva(); // primero limpia
+
   actual = Math.floor(Math.random() * lista.length);
   const itemCorrecto = lista[actual];
 
   respuestaCorrecta = textoRespuesta(itemCorrecto);
 
-  // opciones (3)
   let opciones = [respuestaCorrecta];
   while (opciones.length < 3) {
     const rItem = lista[Math.floor(Math.random() * lista.length)];
@@ -306,19 +307,15 @@ function siguiente(){
     if (!opciones.includes(r)) opciones.push(r);
   }
 
-  // mezclar
   opciones.sort(() => Math.random() - 0.5);
   correcta = letras[opciones.indexOf(respuestaCorrecta)];
 
-  // mostrar
   aplicarEstiloPregunta();
   document.getElementById("kanji").innerText = textoPregunta(itemCorrecto);
   document.getElementById("opciones").innerHTML =
     `a) ${opciones[0]}<br>
      b) ${opciones[1]}<br>
      c) ${opciones[2]}`;
-
-  limpiarUIParaNueva();
 }
 
 /* ✅ Verificar la letra actual del input */
@@ -419,3 +416,4 @@ function resetStats(){
 </script>
 </body>
 </html>
+
