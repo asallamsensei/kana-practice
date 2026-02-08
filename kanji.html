@@ -49,33 +49,17 @@
     margin-top:10px;
     margin-bottom:6px;
   }
-  .chip{
-    display:inline-flex;
-    align-items:center;
-    gap:8px;
-    padding:8px 12px;
-    border:1px solid #e5e7eb;
-    border-radius:999px;
-    background:white;
-    font-size:16px;
-  }
-  select{
-    font-size:16px;
-    padding:6px 10px;
-    border-radius:8px;
-    border:1px solid #ccc;
-    background:white;
-  }
+
 
   /* Pregunta */
   #kanji{
     font-size:120px;
-    margin: 26px 0 10px 0;
+    margin: 18px 0 0 0;
     font-weight:800;
     text-align:center;
     line-height:1.1;
     width:min(900px, 94vw);
-    word-break:break-word;
+    word-break:break-word; 
   }
 
   /* ✅ Cuando la pregunta sea español (modo significado→kanji), achicar */
@@ -83,15 +67,6 @@
     font-size:46px;
     font-weight:800;
     line-height:1.25;
-  }
-
-  /* Opciones */
-  #opciones{
-    font-size:22px;
-    margin-top:14px;
-    text-align:left;
-    line-height:1.7;
-    width:min(520px, 92vw);
   }
 
   /* Botones ABC */
@@ -177,6 +152,53 @@
 
   /* Botón general (por si luego lo usas) */
   button{ -webkit-tap-highlight-color: transparent; }
+
+  /* --- Modos (3 botoncitos) --- */
+  .modes{
+    display:flex;
+    gap:8px;
+    justify-content:center;
+    flex-wrap:wrap;
+  }
+  
+  .btnMode{
+    padding:10px 14px;
+    font-size:16px;
+    border-radius:999px;
+    border:1px solid #e5e7eb;
+    background:white;
+    color:#111;
+    cursor:pointer;
+    font-weight:800;
+  }
+  .btnMode:hover{ background:#f3f4f6; }
+  .btnMode.active{
+    background:#111;
+    color:white;
+    border-color:#111;
+  }
+  
+  /* --- Grid pregunta + opciones --- */
+  .qaGrid{
+    width:min(920px, 96vw);
+    display:grid;
+    grid-template-columns: 1fr;
+    justify-items:center; /* centra los items del grid */
+    gap:10px;
+    margin-top:8px;
+  }
+  
+
+  
+  /* Opciones como bloque centrado */
+  #opciones{
+    width:auto;                 /* en vez de width fijo */
+    max-width:min(520px, 92vw); /* límite elegante */
+    text-align:left;            /* texto alineado a la izquierda */
+    margin-top:0;
+    justify-self:center;        /* bloque centrado dentro del grid */
+  }
+ 
 </style>
 </head>
 
@@ -184,18 +206,23 @@
   <h1>Kanji de Grado 1 — Asallam Sensei</h1>
 
   <div id="controles">
-    <span class="chip">
-      Modo:
-      <select id="modo" onchange="cambiarModo()">
-        <option value="sig-kanji">Significado → Kanji</option>
-        <option value="kanji-sig" selected>Kanji → Significado</option>
-      </select>
-    </span>
+    <div class="modes">
+      <button id="btnKS" class="btnMode active" type="button" onclick="setModo('kanji-sig')">
+        Kanji → Significado
+      </button>
+      <button id="btnSK" class="btnMode" type="button" onclick="setModo('sig-kanji')">
+        Significado → Kanji
+      </button>
+      <button id="btnMix" class="btnMode" type="button" onclick="setModo('mix')">
+        Mezcla
+      </button>
+    </div>
   </div>
 
-  <div id="kanji">日</div>
-
-  <div id="opciones"></div>
+  <div class="qaGrid">
+    <div id="kanji">日</div>
+    <div id="opciones"></div>
+  </div>
 
   <div id="opbtns">
     <button class="btnABC" type="button" onclick="responder('a')">a</button>
@@ -234,7 +261,10 @@ let errores = 0;
 let correcta = "";             // 'a'/'b'/'c'
 let respuestaCorrecta = "";    // texto correcto (depende del modo)
 let yaValidado = false;        // ya se verificó la respuesta actual
-
+  
+let modoActual = "kanji-sig"; // 'kanji-sig' | 'sig-kanji' | 'mix'
+let dirActual = "kanji-sig"; // dirección REAL de la pregunta actual (en mix puede cambiar)
+  
 // Anti-teclado automático (como en tu otro proyecto)
 let focoAutomatico = false; // por defecto: NO forzar focus (no abre teclado)
 document.addEventListener("pointerdown", (e) => {
@@ -260,22 +290,43 @@ fetch("data/kanji_1.json")
   });
 
 function getModo(){
-  return document.getElementById("modo").value; // 'kanji-sig' o 'sig-kanji'
+  return modoActual;
+}
+
+function setModo(m){
+  modoActual = m;
+
+  dirActual = (m === "mix") ? "kanji-sig" : m; // valor inicial; en mix se redefine en siguiente()
+  
+  // activar/desactivar estilos de botones
+  document.getElementById("btnKS").classList.toggle("active", m==="kanji-sig");
+  document.getElementById("btnSK").classList.toggle("active", m==="sig-kanji");
+  document.getElementById("btnMix").classList.toggle("active", m==="mix");
+
+  // limpiar y siguiente (sin tocar stats)
+  yaValidado = false;
+  document.getElementById("resultado").innerText = "";
+  document.getElementById("resultado").className = "";
+  document.getElementById("respuestaUsuario").value = "";
+  siguiente();
 }
 
 function textoPregunta(item){
-  return (getModo()==="kanji-sig") ? item.kanji : item.significado;
+  return (dirActual === "kanji-sig") ? item.kanji : item.significado;
 }
 
 function textoRespuesta(item){
-  return (getModo()==="kanji-sig") ? item.significado : item.kanji;
+  return (dirActual === "kanji-sig") ? item.significado : item.kanji;
 }
+
 
 function aplicarEstiloPregunta(){
   const el = document.getElementById("kanji");
-  if (getModo()==="sig-kanji") el.classList.add("esPregunta");
+  if (dirActual === "sig-kanji") el.classList.add("esPregunta");
   else el.classList.remove("esPregunta");
 }
+
+
 
 function limpiarUIParaNueva(){
   const res = document.getElementById("resultado");
@@ -283,7 +334,6 @@ function limpiarUIParaNueva(){
   res.className = "";
   document.getElementById("respuestaUsuario").value = "";
   yaValidado = false;
-  mostrada = false;
 
   if (focoAutomatico) {
     document.getElementById("respuestaUsuario").focus();
@@ -297,6 +347,14 @@ function siguiente(){
 
   actual = Math.floor(Math.random() * lista.length);
   const itemCorrecto = lista[actual];
+
+  // decidir dirección real para ESTA pregunta (sin mutar el objeto)
+  if (getModo() === "mix") {
+    dirActual = (Math.random() < 0.5) ? "kanji-sig" : "sig-kanji";
+  } else {
+    dirActual = getModo();
+  }
+
 
   respuestaCorrecta = textoRespuesta(itemCorrecto);
 
@@ -387,21 +445,10 @@ function accionMostrar(){
     res.className = "";
 
     yaValidado = true;
-    mostrada = true;
     return;
   }
 
   // Si ya estaba validado o ya se mostró → segundo toque avanza
-  siguiente();
-}
-
-/* Cambiar modo: reinicia la pregunta, sin tocar stats */
-function cambiarModo(){
-  yaValidado = false;
-  mostrada = false;
-  document.getElementById("resultado").innerText = "";
-  document.getElementById("resultado").className = "";
-  document.getElementById("respuestaUsuario").value = "";
   siguiente();
 }
 
@@ -416,5 +463,6 @@ function resetStats(){
 </script>
 </body>
 </html>
+
 
 
