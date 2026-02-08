@@ -3,39 +3,52 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
+  
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
+
 <title>Kanji de Grado 1 - Asallam Sensei</title>
 <style>
   :root{
-    --bg:#fffaf3;
-    --text:#111;
-    --muted:#555;
-    --border:#d9d9e7;
-
-    --btn:#d97706;
-    --btnHover:#b45309;
-
-    --abc:#b94a48;         /* rojo apagado */
-    --abcHover:#a94442;
-
-    --nav:#3b82b6;         /* azul mate */
-    --navHover:#2563eb;
-
-    --ok:#28a745;
-    --bad:#d93025;
-    --jp: "Hiragino Kaku Gothic ProN","Yu Gothic","Meiryo","Noto Sans JP","Segoe UI",Arial,sans-serif;
-    --shadow: 0 8px 24px rgba(0,0,0,.06);
-
+    --bg: #0b1020;
+    --card: rgba(255,255,255,.08);
+    --card2: rgba(255,255,255,.10);
+    --border: rgba(255,255,255,.14);
+  
+    --text:#ffffff;
+    --muted:#ffffff;
+  
+    --abc: rgba(239,68,68,.85);      /* rojo */
+    --abcHover: rgba(239,68,68,.70);
+  
+    --nav: rgba(125,92,255,.85);     /* morado */
+    --navHover: rgba(125,92,255,.70);
+  
+    --ok:#22c55e;
+    --bad:#ef4444;
+  
+    --jp: "Noto Sans JP","Hiragino Kaku Gothic ProN","Yu Gothic","Meiryo","MS PGothic",system-ui,sans-serif;
+    --shadow: 0 18px 45px rgba(0,0,0,.35);
   }
 
+
   body{
-    background:var(--bg);
-    font-family:Arial, sans-serif;
+    margin:0;
+    font-family: Arial, system-ui, sans-serif;
+    background:
+      radial-gradient(1200px 700px at 20% 10%, rgba(125,92,255,.35), transparent 60%),
+      radial-gradient(900px 600px at 90% 20%, rgba(34,197,94,.22), transparent 60%),
+      radial-gradient(900px 600px at 30% 90%, rgba(239,68,68,.18), transparent 55%),
+      var(--bg);
+    color: var(--text);
+    min-height:100vh;
     display:flex;
     flex-direction:column;
     align-items:center;
-    padding: 20px 14px 60px;
-    color:var(--text);
+    padding: 26px 14px 70px;
   }
+
 
   h1{
     font-size:clamp(22px, 5vw, 34px);
@@ -88,27 +101,41 @@
   .btnABC{
     padding:10px 16px;
     font-size:18px;
-    border-radius:10px;
-    border:none;
-    background:var(--abc);
+    border-radius:12px;
+    border:1px solid rgba(255,255,255,.14);
+    background: rgba(239,68,68,.18);
     color:#fff;
     cursor:pointer;
     min-width:64px;
-    font-weight:800;
+    font-weight:900;
+    transition:.14s;
   }
-  .btnABC:hover{ background:var(--abcHover); }
+  .btnABC:hover{
+    background: rgba(239,68,68,.28);
+    transform: translateY(-1px);
+  }
+
 
   /* Input */
   #respuestaUsuario{
     margin-top:14px;
     font-size:22px;
     padding:10px 12px;
-    border-radius:10px;
-    border:2px solid #aaa;
+    border-radius:12px;
+    border:1px solid var(--border);
     text-align:center;
     width:14ch;
-    background:white;
+  
+    background: rgba(255,255,255,.06);
+    color: var(--text);
+    outline:none;
   }
+  #respuestaUsuario::placeholder{ color: rgba(255,255,255,.70); }
+  #respuestaUsuario:focus{
+    border-color: rgba(255,255,255,.22);
+    box-shadow: 0 0 0 4px rgba(125,92,255,.18);
+  }
+
 
   /* Nav debajo del input */
   #navBtns{
@@ -121,27 +148,37 @@
   .btnNav{
     padding:12px 20px;
     font-size:18px;
-    border-radius:10px;
-    border:none;
-    background:var(--nav);
+    border-radius:12px;
+    border:1px solid rgba(255,255,255,.14);
+    background: rgba(125,92,255,.18);
     color:white;
     cursor:pointer;
-    font-weight:800;
+    font-weight:900;
+    transition:.14s;
   }
-  .btnNav:hover{ background:var(--navHover); }
+  .btnNav:hover{
+    background: rgba(125,92,255,.28);
+    transform: translateY(-1px);
+  }
+
 
   /* Reset */
   .btnReset{
     padding:10px 16px;
     font-size:16px;
     border-radius:999px;
-    border:none;
-    background:#111;
+    border:1px solid rgba(255,255,255,.16);
+    background: rgba(0,0,0,.25);
     color:#fff;
     cursor:pointer;
-    font-weight:800;
+    font-weight:900;
+    transition:.14s;
   }
-  .btnReset:hover{ opacity:.88; }
+  .btnReset:hover{
+    background: rgba(0,0,0,.35);
+    transform: translateY(-1px);
+  }
+
 
   /* Resultado + stats */
   #resultado{
@@ -174,18 +211,23 @@
     padding:10px 14px;
     font-size:16px;
     border-radius:999px;
-    border:1px solid #e5e7eb;
-    background:white;
-    color:#111;
+    border:1px solid var(--border);
+    background: rgba(255,255,255,.06);
+    color: var(--text);
     cursor:pointer;
-    font-weight:800;
+    font-weight:900;
+    transition:.14s;
   }
-  .btnMode:hover{ background:#f3f4f6; }
+  .btnMode:hover{
+    background: rgba(255,255,255,.09);
+    transform: translateY(-1px);
+  }
   .btnMode.active{
     background:#111;
     color:white;
-    border-color:#111;
+    border-color: rgba(255,255,255,.22);
   }
+
   
   /* --- Grid pregunta + opciones --- */
   .qaGrid{
@@ -196,15 +238,12 @@
     gap:10px;
     margin-top:12px;
   
-    background: rgba(255,255,255,.65);
-    border: 1px solid rgba(0,0,0,.08);
+    background: linear-gradient(180deg, var(--card2), var(--card));
+    border: 1px solid var(--border);
     border-radius: 18px;
-    padding: 16px 14px 14px;
     box-shadow: var(--shadow);
+    padding: 18px 14px 14px;
   }
-
-  
-
   
   /* Opciones como bloque centrado */
   #opciones{
@@ -495,6 +534,7 @@ function aplicarEstiloOpciones(){
 </script>
 </body>
 </html>
+
 
 
 
