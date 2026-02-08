@@ -119,7 +119,6 @@
   /* Input */
   #respuestaUsuario{
     display:block;          /* ✅ asegura que sea bloque */
-    margin:14px auto 0;     /* ✅ auto = centrado horizontal */
     font-size:22px;
     padding:10px 12px;
     border-radius:12px;
@@ -233,12 +232,16 @@
   
   /* --- Grid pregunta + opciones --- */
   .qaGrid{
-    width:min(920px, 96vw);
-    display:grid;
+    display:inline-grid;            /* ✅ clave */
     grid-template-columns: 1fr;
     justify-items:center;
     gap:10px;
     margin-top:12px;
+  
+    width: fit-content;             /* ✅ autofit */
+    max-width: min(920px, 96vw);    /* ✅ límite en móvil */
+    margin-left:auto;               /* ✅ centrado */
+    margin-right:auto;
   
     background: linear-gradient(180deg, var(--card2), var(--card));
     border: 1px solid var(--border);
@@ -246,6 +249,28 @@
     box-shadow: var(--shadow);
     padding: 18px 14px 14px;
   }
+
+
+  .answerGrid{
+    display:grid;
+    justify-items:center;
+    gap:14px;
+    margin-top:14px;
+  
+    /* 🔥 autofit real + centrado */
+    width: fit-content;
+    max-width: min(920px, 96vw);
+    margin-left:auto;
+    margin-right:auto;
+  
+    /* opcional: que también sea tipo “card” */
+    padding: 12px 14px 14px;
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    background: linear-gradient(180deg, var(--card2), var(--card));
+    box-shadow: var(--shadow);
+  }
+
   
   /* Opciones como bloque centrado */
   #opciones{
@@ -295,22 +320,25 @@
     <div id="opciones"></div>
   </div>
 
-  <div id="opbtns">
-    <button class="btnABC" type="button" onclick="responder('a')">a</button>
-    <button class="btnABC" type="button" onclick="responder('b')">b</button>
-    <button class="btnABC" type="button" onclick="responder('c')">c</button>
+  <div class="answerGrid">
+    <div id="opbtns">
+      <button class="btnABC" type="button" onclick="responder('a')">a</button>
+      <button class="btnABC" type="button" onclick="responder('b')">b</button>
+      <button class="btnABC" type="button" onclick="responder('c')">c</button>
+    </div>
+  
+    <input id="respuestaUsuario"
+           type="text"
+           placeholder="a / b / c + Enter"
+           maxlength="1"
+           onkeydown="manejarEnter(event)" />
+  
+    <div id="navBtns">
+      <button class="btnNav" type="button" onclick="accionSiguiente()">Siguiente</button>
+      <button class="btnNav" type="button" onclick="accionMostrar()">Mostrar respuesta</button>
+    </div>
   </div>
 
-  <input id="respuestaUsuario"
-         type="text"
-         placeholder="a / b / c + Enter"
-         maxlength="1"
-         onkeydown="manejarEnter(event)" />
-
-  <div id="navBtns">
-    <button class="btnNav" type="button" onclick="accionSiguiente()">Siguiente</button>
-    <button class="btnNav" type="button" onclick="accionMostrar()">Mostrar respuesta</button>
-  </div>
 
   <div id="resultado"></div>
 
@@ -543,4 +571,5 @@ function aplicarEstiloOpciones(){
   </div>
 </body>
 </html>
+
 
