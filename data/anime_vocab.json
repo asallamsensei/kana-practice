@@ -425,6 +425,167 @@
         { "kanji": "無", "significado": "nada; inexistente; sin (kanji negador)" },
         { "kanji": "敵", "significado": "enemigo; rival" }
       ]
-    }   
+    },
+    {
+      "cancion": "プラスティック・ラブ (Plastic Love)",
+      "artista": "竹内まりや (Mariya Takeuchi)",
+      "nota": "Material elaborado por Asallam Sensei",
+      "vocabulario": [
+        { "jp": "冷たい女", "romaji": "tsumetai onna", "es": "mujer fría" },
+        { "jp": "出逢い", "romaji": "deai", "es": "encuentro (con matiz de destino o casualidad significativa)" },
+        { "jp": "氷のように", "romaji": "kōri no yō ni", "es": "como el hielo" },
+        { "jp": "上手に", "romaji": "jōzu ni", "es": "con destreza; hábilmente; con soltura" },
+        { "jp": "あの日", "romaji": "ano hi", "es": "aquel día" },
+    
+        { "jp": "閉ざした心", "romaji": "tozashita kokoro", "es": "corazón cerrado" },
+        { "jp": "ハロゲンライト", "romaji": "harogen raito", "es": "luz halógena (del inglés “halogen light”)" },
+        { "jp": "恋", "romaji": "koi", "es": "amor romántico; enamoramiento" },
+        { "jp": "ささやく声", "romaji": "sasayaku koe", "es": "voz susurrante" },
+        { "jp": "グラス", "romaji": "gurasu", "es": "copa; vaso (del inglés “glass”)" },
+    
+        { "jp": "踊り明かす", "romaji": "odori akasu", "es": "bailar toda la noche; bailar hasta el amanecer" },
+        { "jp": "突然のキス", "romaji": "totsuzen no kisu", "es": "beso repentino (inesperado, súbito)" },
+        { "jp": "昼と夜", "romaji": "hiru to yoru", "es": "el día y la noche" },
+        { "jp": "皮肉な", "romaji": "hiniku na", "es": "irónico; sarcástico" },
+        { "jp": "派手な", "romaji": "hade na", "es": "llamativo; vistoso; extravagante" }
+      ],
+      "kanji": [
+        { "kanji": "冷", "significado": "frío; distante" },
+        { "kanji": "女", "significado": "mujer" },
+        { "kanji": "出", "significado": "salir; aparecer" },
+        { "kanji": "逢", "significado": "encontrarse (encuentro significativo)" },
+        { "kanji": "氷", "significado": "hielo" },
+    
+        { "kanji": "心", "significado": "corazón; mente; sentimientos" },
+        { "kanji": "上", "significado": "arriba; superior" },
+        { "kanji": "手", "significado": "mano; habilidad" },
+        { "kanji": "日", "significado": "día; sol" },
+        { "kanji": "恋", "significado": "amor romántico" },
+    
+        { "kanji": "声", "significado": "voz" },
+        { "kanji": "踊", "significado": "bailar" },
+        { "kanji": "明", "significado": "claro; amanecer" },
+        { "kanji": "突", "significado": "repentino; irrumpir" },
+        { "kanji": "然", "significado": "así; estado natural" },
+    
+        { "kanji": "昼", "significado": "día (opuesto a noche)" },
+        { "kanji": "夜", "significado": "noche" },
+        { "kanji": "皮", "significado": "piel; superficie" },
+        { "kanji": "肉", "significado": "carne" },
+        { "kanji": "派", "significado": "grupo; estilo; llamativo" },
+        { "kanji": "手", "significado": "mano; estilo; manera de hacer algo" }
+      ]
+    },
+    {
+      "cancion": "Para Bellum",
+      "artista": "Sizuk junto a AYAME (de AliA)",
+      "nota": "Material elaborado por Asallam Sensei",
+      "vocabulario": [
+        { "jp": "孤独な爪痕", "romaji": "kodoku na tsumeato", "es": "solitarias cicatrices (lit. marcas de garras solitarias)" },
+        { "jp": "解りあえば？", "romaji": "wakariaeba?", "es": "¿y si nos comprendemos?" },
+        { "jp": "壊れていく前に", "romaji": "kowarete iku mae ni", "es": "antes de que se rompa; antes de ir rompiéndose" },
+        { "jp": "始まる世界へ", "romaji": "hajimaru sekai e", "es": "hacia el mundo que comienza" },
+    
+        { "jp": "切なさ", "romaji": "setsunasa", "es": "tristeza profunda; melancolía" },
+        { "jp": "微笑んだ時", "romaji": "hohoenda toki", "es": "cuando sonreíste; el momento en que sonreíste" },
+        { "jp": "さよなら", "romaji": "sayonara", "es": "adiós (puede sonar definitivo)" },
+        { "jp": "側に感じる", "romaji": "soba ni kanjiru", "es": "te siento a mi lado; sentir cerca" },
+        { "jp": "まけたくない", "romaji": "maketakunai", "es": "no quiero perder" },
+        { "jp": "唇", "romaji": "kuchibiru", "es": "labios" },
+    
+        { "jp": "許しあえば？", "romaji": "yurushiaeba?", "es": "¿y si nos perdonamos?" },
+        { "jp": "強いままの決意", "romaji": "tsuyoi mama no ketsui", "es": "determinación intacta (lit. resolución que se mantiene fuerte)" },
+        { "jp": "曖昧な終わり", "romaji": "aimai na owari", "es": "final ambiguo; poco claro, indefinido" },
+        { "jp": "同じもの", "romaji": "onaji mono", "es": "lo mismo; la misma cosa" },
+        { "jp": "欠片", "romaji": "kakera", "es": "fragmento; pieza rota" }
+      ],
+      "kanji": [
+        { "kanji": "孤", "significado": "solo; aislado" },
+        { "kanji": "独", "significado": "soledad; único" },
+        { "kanji": "爪", "significado": "uña; garra" },
+        { "kanji": "痕", "significado": "marca; cicatriz; rastro" },
+    
+        { "kanji": "解", "significado": "entender; desatar; resolver" },
+        { "kanji": "壊", "significado": "romper; destruir" },
+        { "kanji": "前", "significado": "antes; frente" },
+        { "kanji": "始", "significado": "comenzar" },
+        { "kanji": "世", "significado": "mundo; generación" },
+        { "kanji": "界", "significado": "límite; mundo" },
+    
+        { "kanji": "切", "significado": "cortar; intenso (emoción)" },
+        { "kanji": "微", "significado": "leve; sutil" },
+        { "kanji": "笑", "significado": "sonreír; reír" },
+        { "kanji": "時", "significado": "tiempo; momento" },
+        { "kanji": "側", "significado": "lado; cercanía" },
+        { "kanji": "感", "significado": "sentir; sensación" },
+    
+        { "kanji": "許", "significado": "permitir; perdonar" },
+        { "kanji": "強", "significado": "fuerte" },
+        { "kanji": "決", "significado": "decidir; resolución" },
+        { "kanji": "意", "significado": "intención; voluntad" },
+        { "kanji": "曖", "significado": "ambiguo; oscuro" },
+        { "kanji": "昧", "significado": "vago; poco claro" },
+        { "kanji": "終", "significado": "finalizar; terminar" },
+    
+        { "kanji": "同", "significado": "mismo; igual" },
+        { "kanji": "欠", "significado": "faltar; carecer" },
+        { "kanji": "片", "significado": "fragmento; pedazo" }
+      ]
+    },
+    {
+      "cancion": "Midnight Pretenders",
+      "artista": "亜蘭知子 (Tomoko Aran)",
+      "nota": "Material elaborado por Asallam Sensei",
+      "vocabulario": [
+        { "jp": "ぬくもり", "romaji": "nukumori", "es": "calor humano; calidez (afectivo)" },
+        { "jp": "窓に", "romaji": "mado ni", "es": "en la ventana" },
+        { "jp": "束の間", "romaji": "tsuka no ma", "es": "breve momento; instante fugaz" },
+        { "jp": "ホクロ", "romaji": "hokuro", "es": "lunar; marca en la piel" },
+        { "jp": "分け合う", "romaji": "wakeau", "es": "compartir (mutuamente)" },
+        { "jp": "旅人", "romaji": "tabibito", "es": "viajero" },
+    
+        { "jp": "海の底に", "romaji": "umi no soko ni", "es": "en el fondo del mar" },
+        { "jp": "背中", "romaji": "senaka", "es": "espalda" },
+        { "jp": "恋人", "romaji": "koibito", "es": "amante; pareja; persona amada" },
+        { "jp": "軽い", "romaji": "karui", "es": "ligero; suave; liviano" },
+        { "jp": "寝息", "romaji": "neiki", "es": "respiración al dormir" },
+        { "jp": "いつも", "romaji": "itsumo", "es": "siempre" },
+    
+        { "jp": "胸に", "romaji": "mune ni", "es": "en el pecho" },
+        { "jp": "魚", "romaji": "sakana", "es": "pez; pescado" },
+        { "jp": "孤独に", "romaji": "kodoku ni", "es": "en la soledad; solitariamente" },
+        { "jp": "夜の海", "romaji": "yoru no umi", "es": "mar de la noche" },
+        { "jp": "深い", "romaji": "fukai", "es": "profundo; hondo" },
+        { "jp": "言葉", "romaji": "kotoba", "es": "palabras" },
+        { "jp": "別れ", "romaji": "wakare", "es": "despedida; separación; ruptura (amorosa)" }
+      ],
+      "kanji": [
+        { "kanji": "窓", "significado": "ventana" },
+        { "kanji": "束", "significado": "atado; breve (en expresiones de tiempo)" },
+        { "kanji": "間", "significado": "intervalo; espacio; momento" },
+        { "kanji": "分", "significado": "dividir; compartir" },
+        { "kanji": "旅", "significado": "viaje" },
+        { "kanji": "人", "significado": "persona" },
+    
+        { "kanji": "海", "significado": "mar" },
+        { "kanji": "底", "significado": "fondo" },
+        { "kanji": "背", "significado": "espalda; estatura" },
+        { "kanji": "中", "significado": "dentro; centro" },
+        { "kanji": "恋", "significado": "amor romántico" },
+        { "kanji": "軽", "significado": "ligero" },
+        { "kanji": "寝", "significado": "dormir" },
+        { "kanji": "息", "significado": "respiración" },
+    
+        { "kanji": "胸", "significado": "pecho" },
+        { "kanji": "魚", "significado": "pez; pescado" },
+        { "kanji": "孤", "significado": "solo; aislado" },
+        { "kanji": "独", "significado": "soledad; único" },
+        { "kanji": "夜", "significado": "noche" },
+        { "kanji": "深", "significado": "profundo" },
+        { "kanji": "言", "significado": "decir; palabras" },
+        { "kanji": "葉", "significado": "hoja; palabra" },
+        { "kanji": "別", "significado": "separar; distinto" }
+      ]
+    }    
   ]
 }
