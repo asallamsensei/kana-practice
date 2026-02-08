@@ -375,6 +375,56 @@
         { "kanji": "直", "significado": "recto, directo; franqueza; reparar" },
         { "kanji": "主", "significado": "señor, dueño" }
       ]
-    }
+    },
+    {
+      "cancion": "参上!!ギニュー特戦隊!! (Sanjō!! Ginyū Tokusentai!!)",
+      "artista": "山崎燿 (Yō Yamazaki)",
+      "nota": "Material elaborado por Asallam Sensei",
+      "vocabulario": [
+        { "jp": "特戦隊", "romaji": "tokusentai", "es": "fuerzas especiales" },
+        { "jp": "只今参上!!", "romaji": "tadaima sanjō!!", "es": "¡¡Nos presentamos ahora mismo!!" },
+        { "jp": "エリート戦士", "romaji": "erīto senshi", "es": "guerreros de élite" },
+        { "jp": "ひざまずく", "romaji": "hizamazuku", "es": "arrodillarse; doblar la rodilla (por respeto o sumisión)" },
+        { "jp": "順番決め", "romaji": "junban-gime", "es": "decidir el orden (los turnos)" },
+    
+        { "jp": "泣く子も黙る", "romaji": "naku ko mo damaru", "es": "(tan imponentes que) hasta los niños que lloran se callan" },
+        { "jp": "赤いマグマ", "romaji": "akai maguma", "es": "magma rojo" },
+        { "jp": "無敵", "romaji": "muteki", "es": "invencible (lit. sin rival)" },
+        { "jp": "喜び", "romaji": "yorokobi", "es": "alegría; regocijo" },
+        { "jp": "青い", "romaji": "aoi", "es": "azul (adjetivo)" },
+        { "jp": "隊長", "romaji": "taichō", "es": "líder del escuadrón; capitán (en el doblaje latino)" },
+    
+        { "jp": "チョコレートパフェ", "romaji": "chokorēto pafe", "es": "parfait de chocolate (postre en capas)" },
+        { "jp": "エスパー", "romaji": "esupā", "es": "psíquico; “esper” (del inglés, relacionado con ESP: percepción extra-sensorial)" },
+        { "jp": "ジャンケン", "romaji": "janken", "es": "el juego de “piedra, papel o tijera”" },
+        { "jp": "ハリケーン", "romaji": "harikēn", "es": "huracán (del inglés “hurricane”)" },
+        { "jp": "カエル", "romaji": "kaeru", "es": "rana; sapo (según contexto)" }
+      ],
+      "kanji": [
+        { "kanji": "特", "significado": "especial, particular" },
+        { "kanji": "戦", "significado": "guerra, combate" },
+        { "kanji": "隊", "significado": "escuadrón, fuerzas; unidad, tropa" },
+        { "kanji": "只", "significado": "solo, simplemente; nada más que" },
+        { "kanji": "今", "significado": "ahora; este momento" },
+    
+        { "kanji": "参", "significado": "acudir, presentarse (de forma humilde)" },
+        { "kanji": "上", "significado": "arriba; subir" },
+        { "kanji": "青", "significado": "azul (verde en casos excepcionales)" },
+        { "kanji": "喜", "significado": "alegría, regocijo; satisfacción" },
+        { "kanji": "泣", "significado": "llorar" },
+    
+        { "kanji": "子", "significado": "niño; niña" },
+        { "kanji": "黙", "significado": "silencio; callarse" },
+        { "kanji": "順", "significado": "orden; secuencia; obediencia" },
+        { "kanji": "番", "significado": "turno; número (asignado)" },
+        { "kanji": "決", "significado": "decidir; determinar" },
+    
+        { "kanji": "赤", "significado": "rojo" },
+        { "kanji": "士", "significado": "guerrero; samurái" },
+        { "kanji": "長", "significado": "largo; jefe, líder" },
+        { "kanji": "無", "significado": "nada; inexistente; sin (kanji negador)" },
+        { "kanji": "敵", "significado": "enemigo; rival" }
+      ]
+    }   
   ]
 }
