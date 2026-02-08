@@ -22,6 +22,9 @@
 
     --ok:#28a745;
     --bad:#d93025;
+    --jp: "Hiragino Kaku Gothic ProN","Yu Gothic","Meiryo","Noto Sans JP","Segoe UI",Arial,sans-serif;
+    --shadow: 0 8px 24px rgba(0,0,0,.06);
+
   }
 
   body{
@@ -53,21 +56,27 @@
 
   /* Pregunta */
   #kanji{
-    font-size:120px;
+    font-family: var(--jp);
+    font-size:96px;          /* antes 120 */
     margin: 18px 0 0 0;
-    font-weight:800;
+    font-weight:700;         /* antes 800 */
     text-align:center;
     line-height:1.1;
     width:min(900px, 94vw);
-    word-break:break-word; 
+    word-break:break-word;
+    letter-spacing: .02em;
   }
+
 
   /* ✅ Cuando la pregunta sea español (modo significado→kanji), achicar */
   #kanji.esPregunta{
-    font-size:46px;
-    font-weight:800;
+    font-family: Arial, sans-serif; /* español normal */
+    font-size:38px;                 /* antes 46 */
+    font-weight:700;                /* antes 800 */
     line-height:1.25;
+    letter-spacing: 0;
   }
+
 
   /* Botones ABC */
   #opbtns{
@@ -183,20 +192,35 @@
     width:min(920px, 96vw);
     display:grid;
     grid-template-columns: 1fr;
-    justify-items:center; /* centra los items del grid */
+    justify-items:center;
     gap:10px;
-    margin-top:8px;
+    margin-top:12px;
+  
+    background: rgba(255,255,255,.65);
+    border: 1px solid rgba(0,0,0,.08);
+    border-radius: 18px;
+    padding: 16px 14px 14px;
+    box-shadow: var(--shadow);
   }
+
   
 
   
   /* Opciones como bloque centrado */
   #opciones{
-    width:auto;                 /* en vez de width fijo */
-    max-width:min(520px, 92vw); /* límite elegante */
-    text-align:left;            /* texto alineado a la izquierda */
+    font-size:24px;                 /* antes 22 */
+    font-family: Arial, sans-serif;
+    width:auto;
+    max-width:min(560px, 92vw);     /* un poquito más */
+    text-align:left;
     margin-top:0;
-    justify-self:center;        /* bloque centrado dentro del grid */
+    justify-self:center;
+    line-height:1.75;
+  }
+  
+  #opciones.jp{
+    font-family: var(--jp);
+    font-weight: 600;
   }
  
 </style>
@@ -369,6 +393,7 @@ function siguiente(){
   correcta = letras[opciones.indexOf(respuestaCorrecta)];
 
   aplicarEstiloPregunta();
+  aplicarEstiloOpciones();
   document.getElementById("kanji").innerText = textoPregunta(itemCorrecto);
   document.getElementById("opciones").innerHTML =
     `a) ${opciones[0]}<br>
@@ -460,9 +485,17 @@ function resetStats(){
   document.getElementById("errores").innerText = "0";
   siguiente();
 }
+  
+function aplicarEstiloOpciones(){
+  const op = document.getElementById("opciones");
+  const opcionesSonJapones = (dirActual === "sig-kanji"); // en este modo la respuesta/opciones son kanji
+  op.classList.toggle("jp", opcionesSonJapones);
+}
+
 </script>
 </body>
 </html>
+
 
 
 
