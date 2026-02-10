@@ -296,6 +296,32 @@
     align-items:center; /* ✅ esto centra hijos como qaGrid */
   }
 
+  /* 📱 CELULAR: achicar botones de modo para que no se partan en 2 filas */
+  @media (max-width: 420px){
+    .modes{
+      flex-wrap: nowrap;      /* intenta 1 sola fila */
+      gap:6px;
+      width: 100%;
+    }
+    .btnMode{
+      flex: 1 1 0;            /* cada botón ocupa 1/3 y puede encogerse */
+      padding:8px 10px;
+      font-size:13px;
+      border-radius:999px;
+      white-space: nowrap;     /* no partir texto */
+      min-width: 0;            /* clave para que sí se encoja */
+    }
+  }
+  
+  /* por si tu celu es más pequeño todavía */
+  @media (max-width: 360px){
+    .btnMode{
+      padding:7px 8px;
+      font-size:12px;
+    }
+  }
+
+  
   
 </style>
 </head>
@@ -574,6 +600,7 @@ function aplicarEstiloOpciones(){
   </div>
 </body>
 </html>
+
 
 
 
