@@ -639,6 +639,60 @@
         { "kanji": "顔", "significado": "cara; rostro" },
         { "kanji": "速", "significado": "rápido; veloz" }
       ]
+    },
+    {
+      "cancion": "燃えるハートで～レッドリボン軍をやっつけろ～",
+      "artista": "Anime: ドラゴンボール",
+      "nota": "Material elaborado por Asallam Sensei",
+      "vocabulario": [
+        { "jp": "さあ来い！！", "romaji": "sā koi!!", "es": "¡¡vamos, ven ya!! (grito de desafío)" },
+        { "jp": "ハートを燃やせ", "romaji": "hāto o moyase", "es": "¡enciende tu corazón!" },
+        { "jp": "仲間", "romaji": "nakama", "es": "compañeros; camaradas" },
+        { "jp": "豪快！", "romaji": "gōkai!", "es": "¡grandioso!; ¡con fuerza!; ¡con energía!" },
+        { "jp": "倒せよ！", "romaji": "taose yo!", "es": "¡derríbenlos!; ¡derrótenlos!; ¡vénzanlos!" },
+        { "jp": "奇跡", "romaji": "kiseki", "es": "milagro" },
+    
+        { "jp": "恐れず", "romaji": "osorezu", "es": "sin temer; sin miedo" },
+        { "jp": "赤いリボン", "romaji": "akai ribon", "es": "cinta roja; listón rojo (Patrulla Roja)" },
+        { "jp": "地獄の", "romaji": "jigoku no", "es": "del infierno; infernal" },
+        { "jp": "ファイター", "romaji": "faitā", "es": "luchador; combatiente (del inglés “fighter”)" },
+        { "jp": "危険なわな", "romaji": "kiken na wana", "es": "trampa peligrosa" },
+        { "jp": "翼に", "romaji": "tsubasa ni", "es": "en las alas" },
+    
+        { "jp": "素敵な", "romaji": "suteki na", "es": "maravilloso; espléndido; genial" },
+        { "jp": "ソルジャー", "romaji": "sorujā", "es": "soldado (del inglés “soldier”)" },
+        { "jp": "熱いきずな", "romaji": "atsui kizuna", "es": "lazo ardiente; vínculo apasionado" },
+        { "jp": "パワー", "romaji": "pawā", "es": "poder (del inglés “power”)" },
+        { "jp": "そうさ", "romaji": "sō sa", "es": "¡así es!; ¡exacto!" },
+        { "jp": "不気味な", "romaji": "bukimina", "es": "siniestro; inquietante; tenebroso" }
+      ],
+      "kanji": [
+        { "kanji": "来", "significado": "venir" },
+        { "kanji": "燃", "significado": "arder; quemar" },
+        { "kanji": "仲", "significado": "compañero; relación" },
+        { "kanji": "間", "significado": "entre; espacio; relación" },
+        { "kanji": "豪", "significado": "poderoso; grandioso" },
+        { "kanji": "快", "significado": "placentero; enérgico" },
+    
+        { "kanji": "倒", "significado": "derrotar; tumbar" },
+        { "kanji": "奇", "significado": "extraño; extraordinario" },
+        { "kanji": "跡", "significado": "huella; rastro; vestigio" },
+    
+        { "kanji": "恐", "significado": "temer; miedo" },
+        { "kanji": "赤", "significado": "rojo" },
+        { "kanji": "地", "significado": "tierra; suelo" },
+        { "kanji": "獄", "significado": "infierno; prisión" },
+        { "kanji": "危", "significado": "peligro" },
+        { "kanji": "険", "significado": "riesgoso; peligroso" },
+        { "kanji": "翼", "significado": "ala" },
+    
+        { "kanji": "素", "significado": "esencial; puro" },
+        { "kanji": "敵", "significado": "enemigo" },
+        { "kanji": "熱", "significado": "calor; ardiente" },
+        { "kanji": "不", "significado": "no; negación" },
+        { "kanji": "気", "significado": "ánimo; energía; sensación" },
+        { "kanji": "味", "significado": "sensación; matiz; sabor" }
+      ]
     }
   ]
 }
