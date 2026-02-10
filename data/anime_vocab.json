@@ -586,6 +586,59 @@
         { "kanji": "葉", "significado": "hoja; palabra" },
         { "kanji": "別", "significado": "separar; distinto" }
       ]
-    }    
+    },
+    {
+      "cancion": "チェンソーマン (Chainsaw Man)",
+      "artista": "Anime: チェンソーマン",
+      "nota": "Material elaborado por Asallam Sensei",
+      "vocabulario": [
+        { "jp": "蛇", "romaji": "hebi", "es": "serpiente; culebra" },
+        { "jp": "右目", "romaji": "migime", "es": "ojo derecho" },
+        { "jp": "武器", "romaji": "buki", "es": "arma" },
+        { "jp": "最高", "romaji": "saikō", "es": "lo mejor; genial" },
+        { "jp": "やった！", "romaji": "yatta!", "es": "¡yei!; ¡yupi!; ¡lo logré!" },
+        { "jp": "最悪な", "romaji": "saiaku na", "es": "lo peor; horrible" },
+        { "jp": "欲しい", "romaji": "hoshī", "es": "querer; desear (adjetivo)" },
+        { "jp": "週一", "romaji": "shūichi", "es": "una vez por semana (coloquial)" },
+        { "jp": "俺と", "romaji": "ore to", "es": "conmigo; contra mí (según contexto)" },
+    
+        { "jp": "契約", "romaji": "keiyaku", "es": "contrato; acuerdo" },
+        { "jp": "速く", "romaji": "hayaku", "es": "rápido; rápidamente" },
+        { "jp": "未来", "romaji": "mirai", "es": "futuro" },
+        { "jp": "マジ", "romaji": "maji", "es": "en serio (coloquial)" },
+        { "jp": "もっと", "romaji": "motto", "es": "más (de algo)" },
+        { "jp": "お前たち", "romaji": "omaetachi", "es": "ustedes (rudo; informal)" },
+        { "jp": "終わり", "romaji": "owari", "es": "fin; final" },
+        { "jp": "死に方", "romaji": "shinikata", "es": "forma o manera de morir" },
+        { "jp": "顔", "romaji": "kao", "es": "cara; rostro" }
+      ],
+      "kanji": [
+        { "kanji": "蛇", "significado": "serpiente" },
+        { "kanji": "右", "significado": "derecha" },
+        { "kanji": "目", "significado": "ojo" },
+        { "kanji": "一", "significado": "uno" },
+        { "kanji": "高", "significado": "alto; caro" },
+        { "kanji": "週", "significado": "semana" },
+        { "kanji": "悪", "significado": "malo; maldad" },
+    
+        { "kanji": "欲", "significado": "desear; querer; codicia" },
+        { "kanji": "俺", "significado": "yo (masculino; rudo)" },
+        { "kanji": "武", "significado": "marcial; guerrero" },
+        { "kanji": "器", "significado": "utensilio; instrumento; recipiente" },
+        { "kanji": "最", "significado": "lo más (kanji superlativo)" },
+    
+        { "kanji": "契", "significado": "pacto; compromiso; promesa" },
+        { "kanji": "約", "significado": "promesa; acuerdo; aproximadamente" },
+        { "kanji": "未", "significado": "aún no; todavía no" },
+        { "kanji": "来", "significado": "venir; llegar" },
+        { "kanji": "前", "significado": "al frente (espacio); antes (tiempo)" },
+    
+        { "kanji": "終", "significado": "fin; finalizar; acabar" },
+        { "kanji": "死", "significado": "muerte; morir" },
+        { "kanji": "方", "significado": "dirección; lado; manera; forma" },
+        { "kanji": "顔", "significado": "cara; rostro" },
+        { "kanji": "速", "significado": "rápido; veloz" }
+      ]
+    }
   ]
 }
