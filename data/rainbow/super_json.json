@@ -111,6 +111,1288 @@
           ]
         }
       ]
+    },
+    {
+      "page_id": 2,
+      "meta_title": {
+        "jp": "彼女の髪は、虹色",
+        "es": "Su cabello era de muchos colores"
+      },
+      "line_count": 4,
+      "audio_page": "p02.mp3",
+      "image_count": 1,
+      "images": [
+        {
+          "id": "img_p02_01",
+          "keywords": []
+        }
+      ],
+      "lines": [
+        {
+          "line_id": "p02_l01",
+          "jp": "彼女の髪は、",
+          "romaji": "kanojo no kami wa,",
+          "es": "Su cabello,",
+          "audio_line": "p02_l01.mp3",
+          "words": [
+            { "jp": "彼女", "romaji": "kanojo", "es": "ella; su novia (según contexto)" },
+            { "jp": "の", "romaji": "no", "es": "de (posesivo)" },
+            { "jp": "髪", "romaji": "kami", "es": "cabello" },
+            { "jp": "は", "romaji": "wa", "es": "marca tema (partícula)" }
+          ],
+          "kanji": [
+            { "k": "彼", "gloss": ["él/esa persona", "aquel"] },
+            { "k": "女", "gloss": ["mujer", "femenino"] },
+            { "k": "髪", "gloss": ["cabello", "pelo"] }
+          ]
+        },
+        {
+          "line_id": "p02_l02",
+          "jp": "赤やオレンジ、黄色、緑、",
+          "romaji": "aka ya orenji, kiiro, midori,",
+          "es": "rojo, naranja, amarillo, verde,",
+          "audio_line": "p02_l02.mp3",
+          "words": [
+            { "jp": "赤", "romaji": "aka", "es": "rojo" },
+            { "jp": "や", "romaji": "ya", "es": "y / cosas como… (lista no exhaustiva)" },
+            { "jp": "オレンジ", "romaji": "orenji", "es": "naranja" },
+            { "jp": "黄色", "romaji": "kiiro", "es": "amarillo" },
+            { "jp": "緑", "romaji": "midori", "es": "verde" }
+          ],
+          "kanji": [
+            { "k": "赤", "gloss": ["rojo"] },
+            { "k": "黄", "gloss": ["amarillo"] },
+            { "k": "色", "gloss": ["color"] },
+            { "k": "緑", "gloss": ["verde"] }
+          ]
+        },
+        {
+          "line_id": "p02_l03",
+          "jp": "青、藍、そして紫、",
+          "romaji": "ao, ai, soshite murasaki,",
+          "es": "azul, índigo y violeta,",
+          "audio_line": "p02_l03.mp3",
+          "words": [
+            { "jp": "青", "romaji": "ao", "es": "azul" },
+            { "jp": "藍", "romaji": "ai", "es": "índigo" },
+            { "jp": "そして", "romaji": "soshite", "es": "y; y luego; además" },
+            { "jp": "紫", "romaji": "murasaki", "es": "violeta; púrpura" }
+          ],
+          "kanji": [
+            { "k": "青", "gloss": ["azul", "verde-azulado"] },
+            { "k": "藍", "gloss": ["índigo"] },
+            { "k": "紫", "gloss": ["violeta", "púrpura"] }
+          ]
+        },
+        {
+          "line_id": "p02_l04",
+          "jp": "それらの色をしていました。",
+          "romaji": "sorera no iro o shite imashita.",
+          "es": "todos esos colores tenía.",
+          "audio_line": "p02_l04.mp3",
+          "words": [
+            { "jp": "それら", "romaji": "sorera", "es": "esos; esos (plural)" },
+            { "jp": "の", "romaji": "no", "es": "de (conector)" },
+            { "jp": "色", "romaji": "iro", "es": "color" },
+            { "jp": "を", "romaji": "o", "es": "marca objeto directo (partícula)" },
+            { "jp": "していました", "romaji": "shite imashita", "es": "tenía; estaba (siendo) (pasado, formal)" }
+          ],
+          "kanji": [
+            { "k": "色", "gloss": ["color"] },
+            { "k": "彼", "gloss": ["esa persona", "aquel"] }
+          ]
+        }
+      ]
+    },
+    {
+      "page_id": 3,
+      "meta_title": {
+        "jp": "世界から色が消える",
+        "es": "Los colores desaparecen del mundo"
+      },
+      "line_count": 4,
+      "audio_page": "p03.mp3",
+      "image_count": 1,
+      "images": [
+        {
+          "id": "img_p03_01",
+          "keywords": []
+        }
+      ],
+      "lines": [
+        {
+          "line_id": "p03_l01",
+          "jp": "さらに、夢の中にしかない色もありました。",
+          "romaji": "sarani, yume no naka ni shika nai iro mo arimashita.",
+          "es": "Además, había colores que solo existían en los sueños.",
+          "audio_line": "p03_l01.mp3",
+          "words": [
+            { "jp": "さらに", "romaji": "sarani", "es": "además; aún más" },
+            { "jp": "夢", "romaji": "yume", "es": "sueño" },
+            { "jp": "の", "romaji": "no", "es": "de (posesivo)" },
+            { "jp": "中", "romaji": "naka", "es": "dentro; interior" },
+            { "jp": "に", "romaji": "ni", "es": "en (partícula de lugar)" },
+            { "jp": "しか", "romaji": "shika", "es": "solo; nada más que (con negación)" },
+            { "jp": "ない", "romaji": "nai", "es": "no hay; no existe (negación)" },
+            { "jp": "色", "romaji": "iro", "es": "color" },
+            { "jp": "も", "romaji": "mo", "es": "también; incluso" },
+            { "jp": "ありました", "romaji": "arimashita", "es": "había; existían (pasado, formal)" }
+          ],
+          "kanji": [
+            { "k": "夢", "gloss": ["sueño"] },
+            { "k": "中", "gloss": ["dentro", "interior", "medio"] },
+            { "k": "色", "gloss": ["color"] }
+          ]
+        },
+        {
+          "line_id": "p03_l02",
+          "jp": "ある日、理由もなく、",
+          "romaji": "aru hi, riyū mo naku,",
+          "es": "Un día, sin razón alguna,",
+          "audio_line": "p03_l02.mp3",
+          "words": [
+            { "jp": "ある日", "romaji": "aru hi", "es": "un día; cierto día" },
+            { "jp": "理由", "romaji": "riyū", "es": "razón; motivo" },
+            { "jp": "も", "romaji": "mo", "es": "ni siquiera; tampoco (énfasis con negación implícita)" },
+            { "jp": "なく", "romaji": "naku", "es": "sin; sin tener (forma -ku de ない)" }
+          ],
+          "kanji": [
+            { "k": "日", "gloss": ["día", "sol"] },
+            { "k": "理", "gloss": ["razón", "lógica"] },
+            { "k": "由", "gloss": ["motivo", "origen"] }
+          ]
+        },
+        {
+          "line_id": "p03_l03",
+          "jp": "世界からすべての色が消えてしまいました。",
+          "romaji": "sekai kara subete no iro ga kiete shimaimashita.",
+          "es": "Todos los colores desaparecieron del mundo.",
+          "audio_line": "p03_l03.mp3",
+          "words": [
+            { "jp": "世界", "romaji": "sekai", "es": "mundo" },
+            { "jp": "から", "romaji": "kara", "es": "desde; de (origen)" },
+            { "jp": "すべて", "romaji": "subete", "es": "todo; todos" },
+            { "jp": "の", "romaji": "no", "es": "de (conector)" },
+            { "jp": "色", "romaji": "iro", "es": "color" },
+            { "jp": "が", "romaji": "ga", "es": "marca sujeto (partícula)" },
+            { "jp": "消えて", "romaji": "kiete", "es": "desaparecer (forma te)" },
+            { "jp": "しまいました", "romaji": "shimaimashita", "es": "terminó por; lamentablemente (pasado, formal; matiz de ‘se fue/ocurrió’)" }
+          ],
+          "kanji": [
+            { "k": "世", "gloss": ["mundo", "generación"] },
+            { "k": "界", "gloss": ["límite", "mundo"] },
+            { "k": "色", "gloss": ["color"] },
+            { "k": "消", "gloss": ["borrar", "apagar", "desaparecer"] }
+          ]
+        },
+        {
+          "line_id": "p03_l04",
+          "jp": "バラはもう赤くありませんでした。",
+          "romaji": "bara wa mō akaku arimasen deshita.",
+          "es": "Las rosas ya no eran rojas.",
+          "audio_line": "p03_l04.mp3",
+          "words": [
+            { "jp": "バラ", "romaji": "bara", "es": "rosa (flor)" },
+            { "jp": "は", "romaji": "wa", "es": "marca tema (partícula)" },
+            { "jp": "もう", "romaji": "mō", "es": "ya; ya no (según negación)" },
+            { "jp": "赤く", "romaji": "akaku", "es": "rojo (forma -ku de 赤い)" },
+            { "jp": "ありませんでした", "romaji": "arimasen deshita", "es": "no era; no había (pasado, formal negativo)" }
+          ],
+          "kanji": [
+            { "k": "赤", "gloss": ["rojo"] }
+          ]
+        }
+      ]
+    },
+    {
+      "page_id": 4,
+      "meta_title": {
+        "jp": "色を失った世界",
+        "es": "Un mundo sin colores"
+      },
+      "line_count": 4,
+      "audio_page": "p04.mp3",
+      "image_count": 1,
+      "images": [
+        {
+          "id": "img_p04_01",
+          "keywords": []
+        }
+      ],
+      "lines": [
+        {
+          "line_id": "p04_l01",
+          "jp": "オレンジはもうオレンジ色ではありませんでした。",
+          "romaji": "orenji wa mō orenji-iro de wa arimasen deshita.",
+          "es": "Las naranjas ya no eran naranjas.",
+          "audio_line": "p04_l01.mp3",
+          "words": [
+            { "jp": "オレンジ", "romaji": "orenji", "es": "naranja" },
+            { "jp": "は", "romaji": "wa", "es": "marca tema (partícula)" },
+            { "jp": "もう", "romaji": "mō", "es": "ya; ya no (según negación)" },
+            { "jp": "オレンジ色", "romaji": "orenji-iro", "es": "color naranja" },
+            { "jp": "ではありませんでした", "romaji": "de wa arimasen deshita", "es": "no era (pasado, formal negativo)" }
+          ],
+          "kanji": [
+            { "k": "色", "gloss": ["color"] }
+          ]
+        },
+        {
+          "line_id": "p04_l02",
+          "jp": "ひよこはもう黄色くありませんでした。",
+          "romaji": "hiyoko wa mō kiiroku arimasen deshita.",
+          "es": "Los pollitos ya no eran amarillos.",
+          "audio_line": "p04_l02.mp3",
+          "words": [
+            { "jp": "ひよこ", "romaji": "hiyoko", "es": "pollito" },
+            { "jp": "は", "romaji": "wa", "es": "marca tema (partícula)" },
+            { "jp": "もう", "romaji": "mō", "es": "ya; ya no" },
+            { "jp": "黄色く", "romaji": "kiiroku", "es": "amarillo (forma -ku de 黄色い)" },
+            { "jp": "ありませんでした", "romaji": "arimasen deshita", "es": "no era (pasado, formal negativo)" }
+          ],
+          "kanji": [
+            { "k": "黄", "gloss": ["amarillo"] },
+            { "k": "色", "gloss": ["color"] }
+          ]
+        },
+        {
+          "line_id": "p04_l03",
+          "jp": "草はもう緑ではありませんでした。",
+          "romaji": "kusa wa mō midori de wa arimasen deshita.",
+          "es": "El pasto ya no era verde.",
+          "audio_line": "p04_l03.mp3",
+          "words": [
+            { "jp": "草", "romaji": "kusa", "es": "hierba; pasto" },
+            { "jp": "は", "romaji": "wa", "es": "marca tema (partícula)" },
+            { "jp": "もう", "romaji": "mō", "es": "ya; ya no" },
+            { "jp": "緑", "romaji": "midori", "es": "verde" },
+            { "jp": "ではありませんでした", "romaji": "de wa arimasen deshita", "es": "no era (pasado, formal negativo)" }
+          ],
+          "kanji": [
+            { "k": "草", "gloss": ["hierba", "pasto"] },
+            { "k": "緑", "gloss": ["verde"] }
+          ]
+        },
+        {
+          "line_id": "p04_l04",
+          "jp": "空はもう青くありませんでした。",
+          "romaji": "sora wa mō aoku arimasen deshita.",
+          "es": "El cielo ya no era azul.",
+          "audio_line": "p04_l04.mp3",
+          "words": [
+            { "jp": "空", "romaji": "sora", "es": "cielo" },
+            { "jp": "は", "romaji": "wa", "es": "marca tema (partícula)" },
+            { "jp": "もう", "romaji": "mō", "es": "ya; ya no" },
+            { "jp": "青く", "romaji": "aoku", "es": "azul (forma -ku de 青い)" },
+            { "jp": "ありませんでした", "romaji": "arimasen deshita", "es": "no era (pasado, formal negativo)" }
+          ],
+          "kanji": [
+            { "k": "空", "gloss": ["cielo", "vacío"] },
+            { "k": "青", "gloss": ["azul"] }
+          ]
+        }
+      ]
+    },
+    {
+      "page_id": 5,
+      "meta_title": {
+        "jp": "灰色の世界と雨",
+        "es": "Un mundo gris y la lluvia diaria"
+      },
+      "line_count": 4,
+      "audio_page": "p05.mp3",
+      "image_count": 1,
+      "images": [
+        {
+          "id": "img_p05_01",
+          "keywords": []
+        }
+      ],
+      "lines": [
+        {
+          "line_id": "p05_l01",
+          "jp": "藍色の花はもう藍色ではありませんでした。",
+          "romaji": "ai-iro no hana wa mō ai-iro de wa arimasen deshita.",
+          "es": "Las flores de índigo ya no eran de color índigo.",
+          "audio_line": "p05_l01.mp3",
+          "words": [
+            { "jp": "藍色", "romaji": "ai-iro", "es": "índigo; color índigo" },
+            { "jp": "の", "romaji": "no", "es": "de (conector)" },
+            { "jp": "花", "romaji": "hana", "es": "flor; flores" },
+            { "jp": "は", "romaji": "wa", "es": "marca tema (partícula)" },
+            { "jp": "もう", "romaji": "mō", "es": "ya; ya no (según negación)" },
+            { "jp": "ではありませんでした", "romaji": "de wa arimasen deshita", "es": "no era (pasado, formal negativo)" }
+          ],
+          "kanji": [
+            { "k": "藍", "gloss": ["índigo"] },
+            { "k": "色", "gloss": ["color"] },
+            { "k": "花", "gloss": ["flor"] }
+          ]
+        },
+        {
+          "line_id": "p05_l02",
+          "jp": "そして、菫はもう紫ではありませんでした。",
+          "romaji": "soshite, sumire wa mō murasaki de wa arimasen deshita.",
+          "es": "Y las violetas ya no eran violetas.",
+          "audio_line": "p05_l02.mp3",
+          "words": [
+            { "jp": "そして", "romaji": "soshite", "es": "y; y luego; además" },
+            { "jp": "菫", "romaji": "sumire", "es": "violeta (flor)" },
+            { "jp": "は", "romaji": "wa", "es": "marca tema (partícula)" },
+            { "jp": "もう", "romaji": "mō", "es": "ya; ya no" },
+            { "jp": "紫", "romaji": "murasaki", "es": "violeta; púrpura" },
+            { "jp": "ではありませんでした", "romaji": "de wa arimasen deshita", "es": "no era (pasado, formal negativo)" }
+          ],
+          "kanji": [
+            { "k": "菫", "gloss": ["violeta (flor)"] },
+            { "k": "紫", "gloss": ["violeta", "púrpura"] }
+          ]
+        },
+        {
+          "line_id": "p05_l03",
+          "jp": "すべてのものが灰色になって、",
+          "romaji": "subete no mono ga hai-iro ni natte,",
+          "es": "Todas las cosas se tornaron grises,",
+          "audio_line": "p05_l03.mp3",
+          "words": [
+            { "jp": "すべて", "romaji": "subete", "es": "todo; todos" },
+            { "jp": "の", "romaji": "no", "es": "de (conector)" },
+            { "jp": "もの", "romaji": "mono", "es": "cosa; objeto" },
+            { "jp": "が", "romaji": "ga", "es": "marca sujeto (partícula)" },
+            { "jp": "灰色", "romaji": "hai-iro", "es": "gris" },
+            { "jp": "に", "romaji": "ni", "es": "a; en (resultado / dirección)" },
+            { "jp": "なって", "romaji": "natte", "es": "volverse; convertirse (forma te de なる)" }
+          ],
+          "kanji": [
+            { "k": "灰", "gloss": ["ceniza", "gris"] },
+            { "k": "色", "gloss": ["color"] }
+          ]
+        },
+        {
+          "line_id": "p05_l04",
+          "jp": "毎日雨が降るようになりました。",
+          "romaji": "mainichi ame ga furu yō ni narimashita.",
+          "es": "y comenzó a llover todos los días.",
+          "audio_line": "p05_l04.mp3",
+          "words": [
+            { "jp": "毎日", "romaji": "mainichi", "es": "todos los días; cada día" },
+            { "jp": "雨", "romaji": "ame", "es": "lluvia" },
+            { "jp": "が", "romaji": "ga", "es": "marca sujeto (partícula)" },
+            { "jp": "降る", "romaji": "furu", "es": "caer (lluvia/nieve); llover" },
+            { "jp": "ように", "romaji": "yō ni", "es": "de tal manera que; llegar a (hacer algo)" },
+            { "jp": "なりました", "romaji": "narimashita", "es": "llegó a ser; se volvió (pasado, formal)" }
+          ],
+          "kanji": [
+            { "k": "毎", "gloss": ["cada", "todos los…"] },
+            { "k": "日", "gloss": ["día", "sol"] },
+            { "k": "雨", "gloss": ["lluvia"] },
+            { "k": "降", "gloss": ["caer", "bajar", "llover"] }
+          ]
+        }
+      ]
+    },
+    {
+      "page_id": 6,
+      "meta_title": {
+        "jp": "悲しみと決意",
+        "es": "Tristeza… y la chica decide actuar"
+      },
+      "line_count": 4,
+      "audio_page": "p06.mp3",
+      "image_count": 1,
+      "images": [
+        {
+          "id": "img_p06_01",
+          "keywords": []
+        }
+      ],
+      "lines": [
+        {
+          "line_id": "p06_l01",
+          "jp": "人々はとても悲しくなりました。",
+          "romaji": "hitobito wa totemo kanashiku narimashita.",
+          "es": "La gente se puso muy triste.",
+          "audio_line": "p06_l01.mp3",
+          "words": [
+            { "jp": "人々", "romaji": "hitobito", "es": "la gente; las personas" },
+            { "jp": "は", "romaji": "wa", "es": "marca tema (partícula)" },
+            { "jp": "とても", "romaji": "totemo", "es": "muy" },
+            { "jp": "悲しく", "romaji": "kanashiku", "es": "triste (forma -ku de 悲しい)" },
+            { "jp": "なりました", "romaji": "narimashita", "es": "se volvió; se puso (pasado, formal)" }
+          ],
+          "kanji": [
+            { "k": "人", "gloss": ["persona", "gente"] },
+            { "k": "悲", "gloss": ["triste", "pena"] }
+          ]
+        },
+        {
+          "line_id": "p06_l02",
+          "jp": "誰ももう微笑みませんでした。",
+          "romaji": "dare mo mō hohoemimasen deshita.",
+          "es": "Nadie volvió a sonreír.",
+          "audio_line": "p06_l02.mp3",
+          "words": [
+            { "jp": "誰も", "romaji": "dare mo", "es": "nadie (con negación)" },
+            { "jp": "もう", "romaji": "mō", "es": "ya; ya no; volvió a (según contexto)" },
+            { "jp": "微笑みませんでした", "romaji": "hohoemimasen deshita", "es": "no sonrió (pasado, formal negativo)" }
+          ],
+          "kanji": [
+            { "k": "誰", "gloss": ["quién", "alguien"] },
+            { "k": "微", "gloss": ["leve", "pequeño"] },
+            { "k": "笑", "gloss": ["reír", "sonreír"] }
+          ]
+        },
+        {
+          "line_id": "p06_l03",
+          "jp": "女の子は、もう我慢できませんでした。",
+          "romaji": "onnanoko wa, mō gaman dekimasen deshita.",
+          "es": "La chica ya no podía soportarlo más.",
+          "audio_line": "p06_l03.mp3",
+          "words": [
+            { "jp": "女の子", "romaji": "onnanoko", "es": "niña; chica" },
+            { "jp": "は", "romaji": "wa", "es": "marca tema (partícula)" },
+            { "jp": "もう", "romaji": "mō", "es": "ya; ya no (según negación)" },
+            { "jp": "我慢", "romaji": "gaman", "es": "aguante; paciencia; soportar" },
+            { "jp": "できませんでした", "romaji": "dekimasen deshita", "es": "no podía (pasado, formal negativo)" }
+          ],
+          "kanji": [
+            { "k": "女", "gloss": ["mujer", "femenino"] },
+            { "k": "子", "gloss": ["niño/a", "hijo/a"] },
+            { "k": "我", "gloss": ["yo", "uno mismo"] },
+            { "k": "慢", "gloss": ["aguantar", "resistir"] }
+          ]
+        },
+        {
+          "line_id": "p06_l04",
+          "jp": "だから、彼女はずっと考えました。",
+          "romaji": "dakara, kanojo wa zutto kangaemashita.",
+          "es": "Así que pensó y pensó.",
+          "audio_line": "p06_l04.mp3",
+          "words": [
+            { "jp": "だから", "romaji": "dakara", "es": "por eso; así que" },
+            { "jp": "彼女", "romaji": "kanojo", "es": "ella" },
+            { "jp": "は", "romaji": "wa", "es": "marca tema (partícula)" },
+            { "jp": "ずっと", "romaji": "zutto", "es": "todo el tiempo; por mucho rato" },
+            { "jp": "考えました", "romaji": "kangaemashita", "es": "pensó (pasado, formal)" }
+          ],
+          "kanji": [
+            { "k": "彼", "gloss": ["esa persona", "aquel"] },
+            { "k": "女", "gloss": ["mujer", "femenino"] },
+            { "k": "考", "gloss": ["pensar", "considerar"] }
+          ]
+        }
+      ]
+    },
+    {
+      "page_id": 7,
+      "meta_title": {
+        "jp": "希望の木と、空へのはしご",
+        "es": "El árbol de la esperanza y la escalera al cielo"
+      },
+      "line_count": 4,
+      "audio_page": "p07.mp3",
+      "image_count": 1,
+      "images": [
+        {
+          "id": "img_p07_01",
+          "keywords": []
+        }
+      ],
+      "lines": [
+        {
+          "line_id": "p07_l01",
+          "jp": "ついにすばらしいアイデアを思いつきました。",
+          "romaji": "tsuini subarashii aidea o omoitsukimashita.",
+          "es": "Finalmente, se le ocurrió una idea maravillosa.",
+          "audio_line": "p07_l01.mp3",
+          "words": [
+            { "jp": "ついに", "romaji": "tsuini", "es": "finalmente; al fin" },
+            { "jp": "すばらしい", "romaji": "subarashii", "es": "maravilloso/a" },
+            { "jp": "アイデア", "romaji": "aidea", "es": "idea" },
+            { "jp": "を", "romaji": "o", "es": "marca objeto directo (partícula)" },
+            { "jp": "思いつきました", "romaji": "omoitsukimashita", "es": "se le ocurrió; pensó en (pasado, formal)" }
+          ],
+          "kanji": [
+            { "k": "思", "gloss": ["pensar", "ocurrírsele", "idea"] }
+          ]
+        },
+        {
+          "line_id": "p07_l02",
+          "jp": "希望の木から枝を一本借りました。",
+          "romaji": "kibō no ki kara eda o ippon karimashita.",
+          "es": "Tomó prestada una rama del árbol de la esperanza.",
+          "audio_line": "p07_l02.mp3",
+          "words": [
+            { "jp": "希望", "romaji": "kibō", "es": "esperanza" },
+            { "jp": "の", "romaji": "no", "es": "de (conector)" },
+            { "jp": "木", "romaji": "ki", "es": "árbol" },
+            { "jp": "から", "romaji": "kara", "es": "de; desde (origen)" },
+            { "jp": "枝", "romaji": "eda", "es": "rama" },
+            { "jp": "を", "romaji": "o", "es": "marca objeto directo (partícula)" },
+            { "jp": "一本", "romaji": "ippon", "es": "una (pieza larga: rama, botella, etc.)" },
+            { "jp": "借りました", "romaji": "karimashita", "es": "tomó prestado (pasado, formal)" }
+          ],
+          "kanji": [
+            { "k": "希", "gloss": ["esperanza", "raro"] },
+            { "k": "望", "gloss": ["deseo", "esperanza"] },
+            { "k": "木", "gloss": ["árbol"] },
+            { "k": "枝", "gloss": ["rama"] },
+            { "k": "一", "gloss": ["uno"] },
+            { "k": "本", "gloss": ["libro/origen", "contador de cosas largas"] },
+            { "k": "借", "gloss": ["pedir prestado", "tomar prestado"] }
+          ]
+        },
+        {
+          "line_id": "p07_l03",
+          "jp": "ありえない金属のくぎを取って、",
+          "romaji": "arienai kinzoku no kugi o totte,",
+          "es": "Tomó clavos de un metal imposible,",
+          "audio_line": "p07_l03.mp3",
+          "words": [
+            { "jp": "ありえない", "romaji": "arienai", "es": "imposible; no puede ser" },
+            { "jp": "金属", "romaji": "kinzoku", "es": "metal" },
+            { "jp": "の", "romaji": "no", "es": "de (conector)" },
+            { "jp": "くぎ", "romaji": "kugi", "es": "clavo" },
+            { "jp": "を", "romaji": "o", "es": "marca objeto directo (partícula)" },
+            { "jp": "取って", "romaji": "totte", "es": "tomando; agarrando (forma te de 取る)" }
+          ],
+          "kanji": [
+            { "k": "金", "gloss": ["metal", "oro", "dinero"] },
+            { "k": "属", "gloss": ["pertenecer", "categoría"] },
+            { "k": "取", "gloss": ["tomar", "agarrar"] }
+          ]
+        },
+        {
+          "line_id": "p07_l04",
+          "jp": "空へつながるはしごを作りました。",
+          "romaji": "sora e tsunagaru hashigo o tsukurimashita.",
+          "es": "y construyó una escalera al cielo.",
+          "audio_line": "p07_l04.mp3",
+          "words": [
+            { "jp": "空", "romaji": "sora", "es": "cielo" },
+            { "jp": "へ", "romaji": "e", "es": "hacia (dirección)" },
+            { "jp": "つながる", "romaji": "tsunagaru", "es": "conectar(se); estar unido/a" },
+            { "jp": "はしご", "romaji": "hashigo", "es": "escalera (de mano)" },
+            { "jp": "を", "romaji": "o", "es": "marca objeto directo (partícula)" },
+            { "jp": "作りました", "romaji": "tsukurimashita", "es": "hizo; construyó (pasado, formal)" }
+          ],
+          "kanji": [
+            { "k": "空", "gloss": ["cielo", "vacío"] },
+            { "k": "作", "gloss": ["hacer", "crear", "construir"] }
+          ]
+        }
+      ]
+    },
+    {
+      "page_id": 8,
+      "meta_title": {
+        "jp": "髪を切って、空へ登る",
+        "es": "Corta su cabello y empieza a subir"
+      },
+      "line_count": 4,
+      "audio_page": "p08.mp3",
+      "image_count": 1,
+      "images": [
+        {
+          "id": "img_p08_01",
+          "keywords": []
+        }
+      ],
+      "lines": [
+        {
+          "line_id": "p08_l01",
+          "jp": "女の子はハサミで美しい髪を切りました。",
+          "romaji": "onnanoko wa hasami de utsukushii kami o kirimashita.",
+          "es": "La chica cortó su hermoso cabello con unas tijeras.",
+          "audio_line": "p08_l01.mp3",
+          "words": [
+            { "jp": "女の子", "romaji": "onnanoko", "es": "niña; chica" },
+            { "jp": "は", "romaji": "wa", "es": "marca tema (partícula)" },
+            { "jp": "ハサミ", "romaji": "hasami", "es": "tijeras" },
+            { "jp": "で", "romaji": "de", "es": "con (medio/herramienta)" },
+            { "jp": "美しい", "romaji": "utsukushii", "es": "hermoso/a; bello/a" },
+            { "jp": "髪", "romaji": "kami", "es": "cabello" },
+            { "jp": "を", "romaji": "o", "es": "marca objeto directo (partícula)" },
+            { "jp": "切りました", "romaji": "kirimashita", "es": "cortó (pasado, formal)" }
+          ],
+          "kanji": [
+            { "k": "女", "gloss": ["mujer", "femenino"] },
+            { "k": "子", "gloss": ["niño/a", "hijo/a"] },
+            { "k": "美", "gloss": ["bello", "hermoso"] },
+            { "k": "髪", "gloss": ["cabello", "pelo"] },
+            { "k": "切", "gloss": ["cortar"] }
+          ]
+        },
+        {
+          "line_id": "p08_l02",
+          "jp": "それを手に取り、階段を登り始めました。",
+          "romaji": "sore o te ni tori, kaidan o nobori-hajimemashita.",
+          "es": "Lo tomó en sus manos y empezó a subir la escalera.",
+          "audio_line": "p08_l02.mp3",
+          "words": [
+            { "jp": "それ", "romaji": "sore", "es": "eso" },
+            { "jp": "を", "romaji": "o", "es": "marca objeto directo (partícula)" },
+            { "jp": "手", "romaji": "te", "es": "mano" },
+            { "jp": "に", "romaji": "ni", "es": "en; a (partícula)" },
+            { "jp": "取り", "romaji": "tori", "es": "tomar; agarrar (forma -masu base de 取る)" },
+            { "jp": "階段", "romaji": "kaidan", "es": "escalera; escaleras" },
+            { "jp": "を", "romaji": "o", "es": "marca objeto directo (partícula)" },
+            { "jp": "登り始めました", "romaji": "nobori-hajimemashita", "es": "empezó a subir (pasado, formal)" }
+          ],
+          "kanji": [
+            { "k": "手", "gloss": ["mano"] },
+            { "k": "取", "gloss": ["tomar", "agarrar"] },
+            { "k": "階", "gloss": ["piso", "nivel", "escalón"] },
+            { "k": "段", "gloss": ["escalón", "grado"] },
+            { "k": "登", "gloss": ["subir", "ascender"] },
+            { "k": "始", "gloss": ["empezar"] }
+          ]
+        },
+        {
+          "line_id": "p08_l03",
+          "jp": "たとえ嵐が激しく吹こうとも、",
+          "romaji": "tatoe arashi ga hageshiku fukō tomo,",
+          "es": "Aunque la tormenta soplara con violencia,",
+          "audio_line": "p08_l03.mp3",
+          "words": [
+            { "jp": "たとえ", "romaji": "tatoe", "es": "aunque; incluso si" },
+            { "jp": "嵐", "romaji": "arashi", "es": "tormenta" },
+            { "jp": "が", "romaji": "ga", "es": "marca sujeto (partícula)" },
+            { "jp": "激しく", "romaji": "hageshiku", "es": "violentamente; intensamente" },
+            { "jp": "吹こう", "romaji": "fukō", "es": "soplara (volitivo de 吹く, usado en ‘aunque…’)" },
+            { "jp": "とも", "romaji": "tomo", "es": "aunque; incluso si (estructura 〜ようとも)" }
+          ],
+          "kanji": [
+            { "k": "嵐", "gloss": ["tormenta"] },
+            { "k": "激", "gloss": ["intenso", "violento"] },
+            { "k": "吹", "gloss": ["soplar"] }
+          ]
+        },
+        {
+          "line_id": "p08_l04",
+          "jp": "不可能だとしても、登り続けました。",
+          "romaji": "fukanō da toshite mo, nobori tsuzukemashita.",
+          "es": "aunque fuera imposible, siguió subiendo.",
+          "audio_line": "p08_l04.mp3",
+          "words": [
+            { "jp": "不可能", "romaji": "fukanō", "es": "imposible" },
+            { "jp": "だ", "romaji": "da", "es": "ser (copula informal)" },
+            { "jp": "としても", "romaji": "toshite mo", "es": "aunque sea; incluso si fuera (como si)" },
+            { "jp": "登り", "romaji": "nobori", "es": "subir (forma -masu base de 登る)" },
+            { "jp": "続けました", "romaji": "tsuzukemashita", "es": "continuó; siguió (pasado, formal)" }
+          ],
+          "kanji": [
+            { "k": "不", "gloss": ["no", "negación"] },
+            { "k": "可", "gloss": ["posible", "permitido"] },
+            { "k": "能", "gloss": ["capacidad", "poder"] },
+            { "k": "登", "gloss": ["subir", "ascender"] },
+            { "k": "続", "gloss": ["continuar", "seguir"] }
+          ]
+        }
+      ]
+    },
+    {
+      "page_id": 9,
+      "meta_title": {
+        "jp": "雲の上で休む",
+        "es": "Descansa sobre una nube"
+      },
+      "line_count": 2,
+      "audio_page": "p09.mp3",
+      "image_count": 2,
+      "images": [
+        {
+          "id": "img_p09_01",
+          "keywords": []
+        },
+        {
+          "id": "img_p09_02",
+          "keywords": []
+        }
+      ],
+      "lines": [
+        {
+          "line_id": "p09_l01",
+          "jp": "途中で疲れて、",
+          "romaji": "tochū de tsukarete,",
+          "es": "A mitad de camino se cansó",
+          "audio_line": "p09_l01.mp3",
+          "words": [
+            { "jp": "途中", "romaji": "tochū", "es": "a mitad de camino; en medio" },
+            { "jp": "で", "romaji": "de", "es": "en; durante (partícula de contexto)" },
+            { "jp": "疲れて", "romaji": "tsukarete", "es": "cansarse (forma te de 疲れる)" }
+          ],
+          "kanji": [
+            { "k": "途", "gloss": ["camino", "ruta"] },
+            { "k": "中", "gloss": ["medio", "dentro"] },
+            { "k": "疲", "gloss": ["cansarse", "fatiga"] }
+          ]
+        },
+        {
+          "line_id": "p09_l02",
+          "jp": "雲の上で休みました。",
+          "romaji": "kumo no ue de yasumimashita.",
+          "es": "y descansó sobre una nube.",
+          "audio_line": "p09_l02.mp3",
+          "words": [
+            { "jp": "雲", "romaji": "kumo", "es": "nube" },
+            { "jp": "の", "romaji": "no", "es": "de (posesivo / relación)" },
+            { "jp": "上", "romaji": "ue", "es": "arriba; encima" },
+            { "jp": "で", "romaji": "de", "es": "en (lugar de acción)" },
+            { "jp": "休みました", "romaji": "yasumimashita", "es": "descansó (pasado, formal)" }
+          ],
+          "kanji": [
+            { "k": "雲", "gloss": ["nube"] },
+            { "k": "上", "gloss": ["arriba", "encima"] },
+            { "k": "休", "gloss": ["descansar", "reposar"] }
+          ]
+        }
+      ]
+    },
+    {
+      "page_id": 10,
+      "meta_title": {
+        "jp": "流れ星の友達",
+        "es": "La amiga estrella fugaz"
+      },
+      "line_count": 4,
+      "audio_page": "p10.mp3",
+      "image_count": 1,
+      "images": [
+        {
+          "id": "img_p10_01",
+          "keywords": []
+        }
+      ],
+      "lines": [
+        {
+          "line_id": "p10_l01",
+          "jp": "休んでいると、流れ星が通りました。",
+          "romaji": "yasunde iru to, nagareboshi ga tōrimashita.",
+          "es": "Mientras descansaba, una estrella fugaz pasó.",
+          "audio_line": "p10_l01.mp3",
+          "words": [
+            { "jp": "休んでいると", "romaji": "yasunde iru to", "es": "mientras descansaba; al estar descansando (cuando…)" },
+            { "jp": "流れ星", "romaji": "nagareboshi", "es": "estrella fugaz" },
+            { "jp": "が", "romaji": "ga", "es": "marca sujeto (partícula)" },
+            { "jp": "通りました", "romaji": "tōrimashita", "es": "pasó (pasado, formal)" }
+          ],
+          "kanji": [
+            { "k": "休", "gloss": ["descansar", "reposar"] },
+            { "k": "流", "gloss": ["fluir", "correr"] },
+            { "k": "星", "gloss": ["estrella"] },
+            { "k": "通", "gloss": ["pasar", "atravesar"] }
+          ]
+        },
+        {
+          "line_id": "p10_l02",
+          "jp": "星が近づいてきて、友達になりました。",
+          "romaji": "hoshi ga chikadzuite kite, tomodachi ni narimashita.",
+          "es": "La estrella se acercó y se volvieron amigos.",
+          "audio_line": "p10_l02.mp3",
+          "words": [
+            { "jp": "星", "romaji": "hoshi", "es": "estrella" },
+            { "jp": "が", "romaji": "ga", "es": "marca sujeto (partícula)" },
+            { "jp": "近づいてきて", "romaji": "chikadzuite kite", "es": "acercándose (hacia aquí); se acercó (〜てくる)" },
+            { "jp": "友達", "romaji": "tomodachi", "es": "amigo/a; amigos" },
+            { "jp": "に", "romaji": "ni", "es": "a; en (resultado)" },
+            { "jp": "なりました", "romaji": "narimashita", "es": "se volvió; llegó a ser (pasado, formal)" }
+          ],
+          "kanji": [
+            { "k": "星", "gloss": ["estrella"] },
+            { "k": "近", "gloss": ["cerca", "aproximarse"] },
+            { "k": "友", "gloss": ["amigo"] },
+            { "k": "達", "gloss": ["lograr", "alcanzar (pluralizador en 友達)"] }
+          ]
+        },
+        {
+          "line_id": "p10_l03",
+          "jp": "虹色の少女は自分の悩みを話しました。",
+          "romaji": "niji-iro no shōjo wa jibun no nayami o hanashimashita.",
+          "es": "La chica arcoíris le contó su problema.",
+          "audio_line": "p10_l03.mp3",
+          "words": [
+            { "jp": "虹色", "romaji": "niji-iro", "es": "color arcoíris" },
+            { "jp": "の", "romaji": "no", "es": "de (conector)" },
+            { "jp": "少女", "romaji": "shōjo", "es": "chica; jovencita (más narrativo/literario)" },
+            { "jp": "は", "romaji": "wa", "es": "marca tema (partícula)" },
+            { "jp": "自分", "romaji": "jibun", "es": "uno mismo; ella misma" },
+            { "jp": "の", "romaji": "no", "es": "de (posesivo)" },
+            { "jp": "悩み", "romaji": "nayami", "es": "preocupación; problema" },
+            { "jp": "を", "romaji": "o", "es": "marca objeto directo (partícula)" },
+            { "jp": "話しました", "romaji": "hanashimashita", "es": "contó; habló (pasado, formal)" }
+          ],
+          "kanji": [
+            { "k": "虹", "gloss": ["arcoíris"] },
+            { "k": "色", "gloss": ["color"] },
+            { "k": "少", "gloss": ["poco", "joven"] },
+            { "k": "女", "gloss": ["mujer", "femenino"] },
+            { "k": "自", "gloss": ["uno mismo", "propio"] },
+            { "k": "分", "gloss": ["parte", "dividir"] },
+            { "k": "悩", "gloss": ["preocuparse", "angustia"] },
+            { "k": "話", "gloss": ["hablar", "contar"] }
+          ]
+        },
+        {
+          "line_id": "p10_l04",
+          "jp": "「助けてあげるよ。」と星は言いました。",
+          "romaji": "“tasukete ageru yo.” to hoshi wa iimashita.",
+          "es": "“Te ayudaré”, dijo la estrella.",
+          "audio_line": "p10_l04.mp3",
+          "words": [
+            { "jp": "助けて", "romaji": "tasukete", "es": "ayudar (forma te de 助ける)" },
+            { "jp": "あげる", "romaji": "ageru", "es": "dar (a alguien); hacer por ti (matiz de ‘te lo hago’) " },
+            { "jp": "よ", "romaji": "yo", "es": "énfasis / afirmación (partícula final)" },
+            { "jp": "と", "romaji": "to", "es": "cita (partícula)" },
+            { "jp": "星", "romaji": "hoshi", "es": "estrella" },
+            { "jp": "は", "romaji": "wa", "es": "marca tema (partícula)" },
+            { "jp": "言いました", "romaji": "iimashita", "es": "dijo (pasado, formal)" }
+          ],
+          "kanji": [
+            { "k": "助", "gloss": ["ayudar", "asistir"] },
+            { "k": "星", "gloss": ["estrella"] },
+            { "k": "言", "gloss": ["decir", "hablar"] }
+          ]
+        }
+      ]
+    },
+    {
+      "page_id": 11,
+      "meta_title": {
+        "jp": "魔法ののりで虹を作る",
+        "es": "Con pegamento mágico, crea un arcoíris"
+      },
+      "line_count": 4,
+      "audio_page": "p11.mp3",
+      "image_count": 1,
+      "images": [
+        {
+          "id": "img_p11_01",
+          "keywords": []
+        }
+      ],
+      "lines": [
+        {
+          "line_id": "p11_l01",
+          "jp": "少女は魔法ののりを手に取り、",
+          "romaji": "shōjo wa mahō no nori o te ni tori,",
+          "es": "La chica tomó pegamento mágico,",
+          "audio_line": "p11_l01.mp3",
+          "words": [
+            { "jp": "少女", "romaji": "shōjo", "es": "chica; jovencita (narrativo/literario)" },
+            { "jp": "は", "romaji": "wa", "es": "marca tema (partícula)" },
+            { "jp": "魔法", "romaji": "mahō", "es": "magia" },
+            { "jp": "の", "romaji": "no", "es": "de (conector)" },
+            { "jp": "のり", "romaji": "nori", "es": "pegamento; cola" },
+            { "jp": "を", "romaji": "o", "es": "marca objeto directo (partícula)" },
+            { "jp": "手", "romaji": "te", "es": "mano" },
+            { "jp": "に", "romaji": "ni", "es": "en; a (partícula)" },
+            { "jp": "取り", "romaji": "tori", "es": "tomar; agarrar (forma -masu base de 取る)" }
+          ],
+          "kanji": [
+            { "k": "少", "gloss": ["poco", "joven"] },
+            { "k": "女", "gloss": ["mujer", "femenino"] },
+            { "k": "魔", "gloss": ["mágico", "demoníaco"] },
+            { "k": "法", "gloss": ["método", "ley", "técnica"] },
+            { "k": "手", "gloss": ["mano"] },
+            { "k": "取", "gloss": ["tomar", "agarrar"] }
+          ]
+        },
+        {
+          "line_id": "p11_l02",
+          "jp": "髪の毛を空に貼って、",
+          "romaji": "kami no ke o sora ni hatte,",
+          "es": "pegó su cabello al cielo,",
+          "audio_line": "p11_l02.mp3",
+          "words": [
+            { "jp": "髪", "romaji": "kami", "es": "cabello" },
+            { "jp": "の", "romaji": "no", "es": "de (posesivo)" },
+            { "jp": "毛", "romaji": "ke", "es": "pelo; vello" },
+            { "jp": "を", "romaji": "o", "es": "marca objeto directo (partícula)" },
+            { "jp": "空", "romaji": "sora", "es": "cielo" },
+            { "jp": "に", "romaji": "ni", "es": "a; en (destino / lugar)" },
+            { "jp": "貼って", "romaji": "hatte", "es": "pegando; adhiriendo (forma te de 貼る)" }
+          ],
+          "kanji": [
+            { "k": "髪", "gloss": ["cabello", "pelo"] },
+            { "k": "毛", "gloss": ["pelo", "vello"] },
+            { "k": "空", "gloss": ["cielo", "vacío"] },
+            { "k": "貼", "gloss": ["pegar", "adherir"] }
+          ]
+        },
+        {
+          "line_id": "p11_l03",
+          "jp": "虹の形を作りました。",
+          "romaji": "niji no katachi o tsukurimashita.",
+          "es": "y le dio forma de arcoíris.",
+          "audio_line": "p11_l03.mp3",
+          "words": [
+            { "jp": "虹", "romaji": "niji", "es": "arcoíris" },
+            { "jp": "の", "romaji": "no", "es": "de (conector)" },
+            { "jp": "形", "romaji": "katachi", "es": "forma; figura" },
+            { "jp": "を", "romaji": "o", "es": "marca objeto directo (partícula)" },
+            { "jp": "作りました", "romaji": "tsukurimashita", "es": "hizo; creó (pasado, formal)" }
+          ],
+          "kanji": [
+            { "k": "虹", "gloss": ["arcoíris"] },
+            { "k": "形", "gloss": ["forma", "figura"] },
+            { "k": "作", "gloss": ["hacer", "crear"] }
+          ]
+        },
+        {
+          "line_id": "p11_l04",
+          "jp": "星は嬉しくなりました。",
+          "romaji": "hoshi wa ureshiku narimashita.",
+          "es": "La estrella se puso feliz.",
+          "audio_line": "p11_l04.mp3",
+          "words": [
+            { "jp": "星", "romaji": "hoshi", "es": "estrella" },
+            { "jp": "は", "romaji": "wa", "es": "marca tema (partícula)" },
+            { "jp": "嬉しく", "romaji": "ureshiku", "es": "feliz; contento (forma -ku de 嬉しい)" },
+            { "jp": "なりました", "romaji": "narimashita", "es": "se volvió; se puso (pasado, formal)" }
+          ],
+          "kanji": [
+            { "k": "星", "gloss": ["estrella"] },
+            { "k": "嬉", "gloss": ["feliz", "contento"] }
+          ]
+        }
+      ]
+    },
+    {
+      "page_id": 12,
+      "meta_title": {
+        "jp": "願いごと",
+        "es": "El deseo"
+      },
+      "line_count": 4,
+      "audio_page": "p12.mp3",
+      "image_count": 1,
+      "images": [
+        {
+          "id": "img_p12_01",
+          "keywords": []
+        }
+      ],
+      "lines": [
+        {
+          "line_id": "p12_l01",
+          "jp": "「私は流れ星だよ、",
+          "romaji": "“watashi wa nagareboshi da yo,”",
+          "es": "“Soy una estrella fugaz,",
+          "audio_line": "p12_l01.mp3",
+          "words": [
+            { "jp": "私", "romaji": "watashi", "es": "yo" },
+            { "jp": "は", "romaji": "wa", "es": "marca tema (partícula)" },
+            { "jp": "流れ星", "romaji": "nagareboshi", "es": "estrella fugaz" },
+            { "jp": "だ", "romaji": "da", "es": "ser (copula informal)" },
+            { "jp": "よ", "romaji": "yo", "es": "énfasis / afirmación (partícula final)" }
+          ],
+          "kanji": [
+            { "k": "私", "gloss": ["yo", "privado"] },
+            { "k": "流", "gloss": ["fluir", "correr"] },
+            { "k": "星", "gloss": ["estrella"] }
+          ]
+        },
+        {
+          "line_id": "p12_l02",
+          "jp": "願いごとを言ってごらん、",
+          "romaji": "negaigoto o itte goran,",
+          "es": "anda, dime un deseo,",
+          "audio_line": "p12_l02.mp3",
+          "words": [
+            { "jp": "願いごと", "romaji": "negaigoto", "es": "deseo; petición" },
+            { "jp": "を", "romaji": "o", "es": "marca objeto directo (partícula)" },
+            { "jp": "言って", "romaji": "itte", "es": "di / diciendo (forma te de 言う)" },
+            { "jp": "ごらん", "romaji": "goran", "es": "anda; inténtalo (〜てごらん: prueba a…)" }
+          ],
+          "kanji": [
+            { "k": "願", "gloss": ["deseo", "pedir"] },
+            { "k": "言", "gloss": ["decir", "hablar"] }
+          ]
+        },
+        {
+          "line_id": "p12_l03",
+          "jp": "なんでも叶えてあげる。」",
+          "romaji": "nandemo kanaete ageru.”",
+          "es": "te concederé cualquier cosa.”",
+          "audio_line": "p12_l03.mp3",
+          "words": [
+            { "jp": "なんでも", "romaji": "nandemo", "es": "cualquier cosa; lo que sea" },
+            { "jp": "叶えて", "romaji": "kanaete", "es": "cumplir / conceder (forma te de 叶える)" },
+            { "jp": "あげる", "romaji": "ageru", "es": "dar; hacer por alguien (matiz de beneficio)" }
+          ],
+          "kanji": [
+            { "k": "叶", "gloss": ["cumplir", "conceder (deseos)"] }
+          ]
+        },
+        {
+          "line_id": "p12_l04",
+          "jp": "あたしの髪を虹に変えて！",
+          "romaji": "atashi no kami o niji ni kaete!",
+          "es": "¡Transforma mi cabello en arcoíris!",
+          "audio_line": "p12_l04.mp3",
+          "words": [
+            { "jp": "あたし", "romaji": "atashi", "es": "yo (femenino/coloquial)" },
+            { "jp": "の", "romaji": "no", "es": "de (posesivo)" },
+            { "jp": "髪", "romaji": "kami", "es": "cabello" },
+            { "jp": "を", "romaji": "o", "es": "marca objeto directo (partícula)" },
+            { "jp": "虹", "romaji": "niji", "es": "arcoíris" },
+            { "jp": "に", "romaji": "ni", "es": "a; en (resultado)" },
+            { "jp": "変えて", "romaji": "kaete", "es": "cambia / transforma (forma te de 変える)" }
+          ],
+          "kanji": [
+            { "k": "髪", "gloss": ["cabello", "pelo"] },
+            { "k": "虹", "gloss": ["arcoíris"] },
+            { "k": "変", "gloss": ["cambiar", "transformar"] }
+          ]
+        }
+      ]
+    },
+    {
+      "page_id": 13,
+      "meta_title": {
+        "jp": "夢が現実になる",
+        "es": "El sueño se vuelve realidad"
+      },
+      "line_count": 4,
+      "audio_page": "p13.mp3",
+      "image_count": 1,
+      "images": [
+        {
+          "id": "img_p13_01",
+          "keywords": []
+        }
+      ],
+      "lines": [
+        {
+          "line_id": "p13_l01",
+          "jp": "流れ星は願いを叶えてくれました。",
+          "romaji": "nagareboshi wa negai o kanaete kuremashita.",
+          "es": "La estrella fugaz concedió el deseo.",
+          "audio_line": "p13_l01.mp3",
+          "words": [
+            { "jp": "流れ星", "romaji": "nagareboshi", "es": "estrella fugaz" },
+            { "jp": "は", "romaji": "wa", "es": "marca tema (partícula)" },
+            { "jp": "願い", "romaji": "negai", "es": "deseo; petición" },
+            { "jp": "を", "romaji": "o", "es": "marca objeto directo (partícula)" },
+            { "jp": "叶えて", "romaji": "kanaete", "es": "cumplir / conceder (forma te de 叶える)" },
+            { "jp": "くれました", "romaji": "kuremashita", "es": "me/te lo hizo; me/te lo dio (pasado, formal; beneficio hacia el hablante)" }
+          ],
+          "kanji": [
+            { "k": "流", "gloss": ["fluir", "correr"] },
+            { "k": "星", "gloss": ["estrella"] },
+            { "k": "願", "gloss": ["deseo", "pedir"] },
+            { "k": "叶", "gloss": ["cumplir", "conceder (deseos)"] }
+          ]
+        },
+        {
+          "line_id": "p13_l02",
+          "jp": "決意とともに、夢は現実になりました。",
+          "romaji": "ketsui to tomo ni, yume wa genjitsu ni narimashita.",
+          "es": "Con determinación, el sueño se hizo realidad.",
+          "audio_line": "p13_l02.mp3",
+          "words": [
+            { "jp": "決意", "romaji": "ketsui", "es": "determinación; decisión firme" },
+            { "jp": "とともに", "romaji": "to tomo ni", "es": "junto con; con" },
+            { "jp": "夢", "romaji": "yume", "es": "sueño" },
+            { "jp": "は", "romaji": "wa", "es": "marca tema (partícula)" },
+            { "jp": "現実", "romaji": "genjitsu", "es": "realidad" },
+            { "jp": "に", "romaji": "ni", "es": "en; a (resultado)" },
+            { "jp": "なりました", "romaji": "narimashita", "es": "se volvió; llegó a ser (pasado, formal)" }
+          ],
+          "kanji": [
+            { "k": "決", "gloss": ["decidir", "fijar"] },
+            { "k": "意", "gloss": ["intención", "mente"] },
+            { "k": "夢", "gloss": ["sueño"] },
+            { "k": "現", "gloss": ["aparecer", "actual"] },
+            { "k": "実", "gloss": ["real", "verdad", "fruto"] }
+          ]
+        },
+        {
+          "line_id": "p13_l03",
+          "jp": "この虹は世界を色で満たしました。",
+          "romaji": "kono niji wa sekai o iro de mitashimashita.",
+          "es": "Este arcoíris llenó al mundo de colores.",
+          "audio_line": "p13_l03.mp3",
+          "words": [
+            { "jp": "この", "romaji": "kono", "es": "este/a" },
+            { "jp": "虹", "romaji": "niji", "es": "arcoíris" },
+            { "jp": "は", "romaji": "wa", "es": "marca tema (partícula)" },
+            { "jp": "世界", "romaji": "sekai", "es": "mundo" },
+            { "jp": "を", "romaji": "o", "es": "marca objeto directo (partícula)" },
+            { "jp": "色", "romaji": "iro", "es": "color; colores" },
+            { "jp": "で", "romaji": "de", "es": "con; usando (medio)" },
+            { "jp": "満たしました", "romaji": "mitashimashita", "es": "llenó (pasado, formal)" }
+          ],
+          "kanji": [
+            { "k": "虹", "gloss": ["arcoíris"] },
+            { "k": "世", "gloss": ["mundo", "generación"] },
+            { "k": "界", "gloss": ["límite", "mundo"] },
+            { "k": "色", "gloss": ["color"] },
+            { "k": "満", "gloss": ["llenar", "estar lleno"] }
+          ]
+        },
+        {
+          "line_id": "p13_l04",
+          "jp": "以前より多くの色さえありました。",
+          "romaji": "izen yori ōku no iro sae arimashita.",
+          "es": "Incluso había más colores que antes.",
+          "audio_line": "p13_l04.mp3",
+          "words": [
+            { "jp": "以前", "romaji": "izen", "es": "antes; previamente" },
+            { "jp": "より", "romaji": "yori", "es": "que; comparativo ‘más que…’" },
+            { "jp": "多く", "romaji": "ōku", "es": "muchos; más (forma adverbial de 多い)" },
+            { "jp": "の", "romaji": "no", "es": "de (conector)" },
+            { "jp": "色", "romaji": "iro", "es": "color; colores" },
+            { "jp": "さえ", "romaji": "sae", "es": "incluso; hasta" },
+            { "jp": "ありました", "romaji": "arimashita", "es": "había; existían (pasado, formal)" }
+          ],
+          "kanji": [
+            { "k": "以", "gloss": ["a partir de", "con"] },
+            { "k": "前", "gloss": ["antes", "frente"] },
+            { "k": "多", "gloss": ["mucho", "numeroso"] },
+            { "k": "色", "gloss": ["color"] }
+          ]
+        }
+      ]
+    },
+    {
+      "page_id": 14,
+      "meta_title": {
+        "jp": "宇宙の少女",
+        "es": "La chica cósmica"
+      },
+      "line_count": 4,
+      "audio_page": "p14.mp3",
+      "image_count": 1,
+      "images": [
+        {
+          "id": "img_p14_01",
+          "keywords": []
+        }
+      ],
+      "lines": [
+        {
+          "line_id": "p14_l01",
+          "jp": "それ以来、虹の少女は、",
+          "romaji": "sore irai, niji no shōjo wa,",
+          "es": "Desde entonces, la chica arcoíris",
+          "audio_line": "p14_l01.mp3",
+          "words": [
+            { "jp": "それ以来", "romaji": "sore irai", "es": "desde entonces" },
+            { "jp": "虹", "romaji": "niji", "es": "arcoíris" },
+            { "jp": "の", "romaji": "no", "es": "de (conector)" },
+            { "jp": "少女", "romaji": "shōjo", "es": "chica; jovencita (narrativo/literario)" },
+            { "jp": "は", "romaji": "wa", "es": "marca tema (partícula)" }
+          ],
+          "kanji": [
+            { "k": "以", "gloss": ["a partir de", "con"] },
+            { "k": "来", "gloss": ["venir", "desde"] },
+            { "k": "虹", "gloss": ["arcoíris"] },
+            { "k": "少", "gloss": ["poco", "joven"] },
+            { "k": "女", "gloss": ["mujer", "femenino"] }
+          ]
+        },
+        {
+          "line_id": "p14_l02",
+          "jp": "「宇宙の少女」と呼ばれるようになりました。",
+          "romaji": "“uchū no shōjo” to yobareru yō ni narimashita.",
+          "es": "llegó a ser llamada “la chica cósmica”.",
+          "audio_line": "p14_l02.mp3",
+          "words": [
+            { "jp": "宇宙", "romaji": "uchū", "es": "universo; espacio" },
+            { "jp": "の", "romaji": "no", "es": "de (conector)" },
+            { "jp": "少女", "romaji": "shōjo", "es": "chica; jovencita" },
+            { "jp": "と", "romaji": "to", "es": "cita (partícula)" },
+            { "jp": "呼ばれる", "romaji": "yobareru", "es": "ser llamado/a (pasiva)" },
+            { "jp": "ように", "romaji": "yō ni", "es": "llegar a; de manera que (cambio de estado)" },
+            { "jp": "なりました", "romaji": "narimashita", "es": "llegó a ser (pasado, formal)" }
+          ],
+          "kanji": [
+            { "k": "宇", "gloss": ["universo", "cielo/techo"] },
+            { "k": "宙", "gloss": ["espacio", "medio del aire"] },
+            { "k": "少", "gloss": ["poco", "joven"] },
+            { "k": "女", "gloss": ["mujer", "femenino"] },
+            { "k": "呼", "gloss": ["llamar", "nombrar"] }
+          ]
+        },
+        {
+          "line_id": "p14_l03",
+          "jp": "時が経つにつれて、",
+          "romaji": "toki ga tatsu ni tsurete,",
+          "es": "Con el tiempo,",
+          "audio_line": "p14_l03.mp3",
+          "words": [
+            { "jp": "時", "romaji": "toki", "es": "tiempo; momento" },
+            { "jp": "が", "romaji": "ga", "es": "marca sujeto (partícula)" },
+            { "jp": "経つ", "romaji": "tatsu", "es": "pasar (tiempo)" },
+            { "jp": "につれて", "romaji": "ni tsurete", "es": "a medida que; conforme" }
+          ],
+          "kanji": [
+            { "k": "時", "gloss": ["tiempo", "hora"] },
+            { "k": "経", "gloss": ["pasar", "transcurrir"] }
+          ]
+        },
+        {
+          "line_id": "p14_l04",
+          "jp": "彼女の髪はまた伸びてきました。",
+          "romaji": "kanojo no kami wa mata nobite kimashita.",
+          "es": "su cabello volvió a crecer.",
+          "audio_line": "p14_l04.mp3",
+          "words": [
+            { "jp": "彼女", "romaji": "kanojo", "es": "ella" },
+            { "jp": "の", "romaji": "no", "es": "de (posesivo)" },
+            { "jp": "髪", "romaji": "kami", "es": "cabello" },
+            { "jp": "は", "romaji": "wa", "es": "marca tema (partícula)" },
+            { "jp": "また", "romaji": "mata", "es": "otra vez; de nuevo" },
+            { "jp": "伸びてきました", "romaji": "nobite kimashita", "es": "creció (y volvió) / empezó a crecer (〜てくる; pasado, formal)" }
+          ],
+          "kanji": [
+            { "k": "彼", "gloss": ["esa persona", "aquel"] },
+            { "k": "女", "gloss": ["mujer", "femenino"] },
+            { "k": "髪", "gloss": ["cabello", "pelo"] },
+            { "k": "伸", "gloss": ["estirarse", "crecer"] },
+            { "k": "来", "gloss": ["venir"] }
+          ]
+        }
+      ]
+    },
+    {
+      "page_id": 15,
+      "meta_title": {
+        "jp": "いつまでも幸せに",
+        "es": "Felices para siempre"
+      },
+      "line_count": 1,
+      "audio_page": "p15.mp3",
+      "image_count": 1,
+      "images": [
+        {
+          "id": "img_p15_01",
+          "keywords": []
+        }
+      ],
+      "lines": [
+        {
+          "line_id": "p15_l01",
+          "jp": "そしてみんな、いつまでも幸せに暮らしました。",
+          "romaji": "soshite minna, itsumademo shiawase ni kurashimashita.",
+          "es": "Y todos vivieron felices para siempre.",
+          "audio_line": "p15_l01.mp3",
+          "words": [
+            { "jp": "そして", "romaji": "soshite", "es": "y; entonces; y así" },
+            { "jp": "みんな", "romaji": "minna", "es": "todos; toda la gente" },
+            { "jp": "いつまでも", "romaji": "itsumademo", "es": "para siempre; eternamente" },
+            { "jp": "幸せ", "romaji": "shiawase", "es": "feliz; felicidad" },
+            { "jp": "に", "romaji": "ni", "es": "de manera; en (estado)" },
+            { "jp": "暮らしました", "romaji": "kurashimashita", "es": "vivieron; llevaron su vida (pasado, formal)" }
+          ],
+          "kanji": [
+            { "k": "幸", "gloss": ["felicidad", "fortuna"] },
+            { "k": "暮", "gloss": ["vivir", "pasar la vida"] }
+          ]
+        }
+      ]
     }
   ]
 }
