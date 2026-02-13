@@ -1,0 +1,1617 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Cuento Arcoíris — Super App (Asallam Sensei)</title>
+  <style>
+    :root{
+      --bg:#fffaf3;
+      --card:#ffffff;
+      --text:#111;
+      --muted:#555;
+      --border:#e2e2ee;
+      --accent:#7d5cff;
+      --accent2:#5d46d4;
+      --ok:#28a745;
+      --bad:#d93025;
+      --warn:#d97706;
+      --shadow: 0 10px 26px rgba(0,0,0,.08);
+      --radius:16px;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+    }
+
+    body{
+      margin:0;
+      font-family: Arial, sans-serif;
+      background: radial-gradient(1200px 700px at 20% -10%, rgba(125,92,255,.14), transparent 55%),
+                  radial-gradient(900px 600px at 110% 20%, rgba(217,119,6,.12), transparent 55%),
+                  var(--bg);
+      color:var(--text);
+      display:flex;
+      justify-content:center;
+      padding:18px 12px 80px;
+    }
+
+    .app{ width:min(1050px, 100%); display:flex; flex-direction:column; gap:14px; }
+
+    header{
+      display:flex; flex-wrap:wrap; align-items:flex-end; justify-content:space-between;
+      gap:10px;
+      padding:12px 14px;
+      background:rgba(255,255,255,.72);
+      border:1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(6px);
+    }
+    header .title{
+      display:flex; flex-direction:column; gap:4px;
+      min-width: 260px;
+    }
+    header h1{
+      margin:0;
+      font-size: clamp(20px, 3.6vw, 30px);
+      letter-spacing:.2px;
+    }
+    header .sub{
+      color:var(--muted);
+      font-size: 13px;
+      display:flex; gap:10px; flex-wrap:wrap;
+    }
+    .pill{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      background:#fff;
+      font-size:12px;
+      color:var(--muted);
+      user-select:none;
+    }
+    .dot{ width:8px; height:8px; border-radius:50%; background: var(--warn); display:inline-block; }
+
+    .row{
+      display:grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap:14px;
+    }
+    @media (max-width: 920px){
+      .row{ grid-template-columns: 1fr; }
+    }
+
+    .card{
+      background: var(--card);
+      border:1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .card .hd{
+      padding:12px 14px;
+      border-bottom:1px solid var(--border);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      background: linear-gradient(180deg, rgba(125,92,255,.08), rgba(125,92,255,0));
+    }
+    .card .hd h2{
+      margin:0;
+      font-size: 15px;
+    }
+    .card .bd{ padding:12px 14px; }
+
+    .grid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:10px;
+    }
+    @media (max-width: 560px){
+      .grid{ grid-template-columns: 1fr; }
+    }
+
+    label{
+      display:flex;
+      flex-direction:column;
+      gap:6px;
+      font-size:12px;
+      color:var(--muted);
+    }
+    select, input[type="number"], input[type="text"]{
+      padding:10px 10px;
+      border:1px solid var(--border);
+      border-radius: 12px;
+      background:#fff;
+      outline:none;
+      font-size:14px;
+      color:var(--text);
+    }
+    input[type="checkbox"]{ transform: scale(1.05); }
+
+    .btns{ display:flex; flex-wrap:wrap; gap:8px; align-items:center; }
+    .btn{
+      border:none;
+      border-radius: 999px;
+      padding:10px 12px;
+      font-weight:700;
+      cursor:pointer;
+      background: var(--accent);
+      color:#fff;
+      transition: transform .04s ease, filter .2s ease;
+      user-select:none;
+    }
+    .btn:hover{ filter: brightness(.96); }
+    .btn:active{ transform: translateY(1px); }
+    .btn.secondary{
+      background:#fff;
+      color:var(--accent2);
+      border:1px solid var(--border);
+    }
+    .btn.danger{
+      background: var(--bad);
+    }
+
+    .quizArea{
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+    }
+
+    .qTop{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+
+    .qMeta{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      align-items:center;
+    }
+
+    .qBox{
+      border:1px solid var(--border);
+      border-radius: 14px;
+      padding:14px 14px;
+      background: #fff;
+    }
+
+    .prompt{
+      font-size: clamp(20px, 4.2vw, 34px);
+      font-weight: 800;
+      line-height: 1.15;
+      margin:0;
+      word-break: break-word;
+    }
+    .prompt.small{ font-size: clamp(18px, 3.5vw, 26px); }
+
+    .hintLine{
+      margin-top:10px;
+      color: var(--muted);
+      font-size: 13px;
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+    .mono{ font-family: var(--mono); }
+
+    .answerRow{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+    .answerRow input[type="text"]{
+      flex: 1 1 260px;
+      min-width: 190px;
+    }
+
+    .feedback{
+      padding:10px 12px;
+      border-radius: 12px;
+      border:1px solid var(--border);
+      background: #fff;
+      color: var(--muted);
+      font-size: 13px;
+      line-height:1.35;
+      white-space: pre-wrap;
+    }
+    .feedback.ok{ border-color: rgba(40,167,69,.4); background: rgba(40,167,69,.08); color:#155724; }
+    .feedback.bad{ border-color: rgba(217,48,37,.35); background: rgba(217,48,37,.08); color:#7a1b16; }
+
+    .media{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap:10px;
+    }
+    .imgWrap{
+      border:1px dashed var(--border);
+      border-radius: 14px;
+      overflow:hidden;
+      background: #fff;
+      position:relative;
+      min-height: 120px;
+    }
+    .imgWrap img{
+      width:100%;
+      height:auto;
+      display:block;
+    }
+    .imgNote{
+      position:absolute;
+      bottom:10px; left:10px;
+      background: rgba(0,0,0,.55);
+      color:#fff;
+      padding:6px 9px;
+      border-radius: 999px;
+      font-size:12px;
+    }
+    .audioRow{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+    }
+    audio{ width: min(540px, 100%); }
+
+    .stats{
+      display:grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap:10px;
+    }
+    @media (max-width: 760px){
+      .stats{ grid-template-columns: repeat(2, 1fr); }
+    }
+    .stat{
+      border:1px solid var(--border);
+      border-radius: 14px;
+      padding:10px 12px;
+      background:#fff;
+      display:flex;
+      flex-direction:column;
+      gap:4px;
+    }
+    .stat .k{ color:var(--muted); font-size:12px; }
+    .stat .v{ font-weight:900; font-size:18px; }
+
+    .tiny{
+      color:var(--muted);
+      font-size:12px;
+      line-height:1.35;
+    }
+
+    .chipRow{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      margin-top:10px;
+    }
+    .chip{
+      padding:7px 10px;
+      border-radius:999px;
+      border:1px solid var(--border);
+      background:#fff;
+      font-size:12px;
+      cursor:pointer;
+      user-select:none;
+    }
+    .chip:hover{ border-color: rgba(125,92,255,.35); }
+
+    .sep{ height:1px; background: var(--border); margin: 10px 0; }
+  </style>
+</head>
+
+<body>
+  <div class="app">
+    <header>
+      <div class="title">
+        <h1>虹色の髪の少女 — Super App</h1>
+        <div class="sub">
+          <span class="pill"><span class="dot" id="statusDot"></span><span id="statusText">Cargando JSON…</span></span>
+          <span class="pill">Asallam Sensei</span>
+          <span class="pill">Modo: <b id="modeLabel">Quiz</b></span>
+        </div>
+      </div>
+
+      <div class="btns">
+        <button class="btn secondary" id="btnModeRead">Lectura</button>
+        <button class="btn secondary" id="btnModeQuiz">Quiz</button>
+        <button class="btn secondary" id="btnModeSearch">Búsqueda</button>
+        <button class="btn danger" id="btnReset">Reset progreso</button>
+      </div>
+    </header>
+
+    <div class="row">
+      <!-- LEFT: CONTROLS -->
+      <section class="card" id="controlsCard">
+        <div class="hd">
+          <h2>Controles</h2>
+          <div class="qMeta">
+            <span class="pill">JSON: <span class="mono">data/arcoiris/super_json.json</span></span>
+          </div>
+        </div>
+        <div class="bd">
+          <div class="grid">
+            <label>
+              Tipo de pregunta
+              <select id="qType">
+                <option value="jp_to_es">JP → ES (línea)</option>
+                <option value="es_to_jp">ES → JP (línea)</option>
+                <option value="romaji_to_jp">Romaji → JP (línea)</option>
+                <option value="kanji_to_gloss">Kanji → significado</option>
+                <option value="word_to_es">Palabra JP → ES</option>
+                <option value="es_to_word">ES → palabra JP</option>
+                <option value="cloze_jp">Cloze (JP con hueco)</option>
+                <option value="cloze_es">Cloze (ES con hueco)</option>
+                <option value="order_lines">Ordena líneas (página)</option>
+                <option value="image_context">Imagen → contenido (página)</option>
+              </select>
+            </label>
+
+            <label>
+              Fuente de contenido
+              <select id="sourceScope">
+                <option value="all">Todo el cuento</option>
+                <option value="range">Rango de páginas</option>
+                <option value="single">Una página</option>
+              </select>
+            </label>
+
+            <label>
+              Página (si aplica)
+              <select id="singlePage"></select>
+            </label>
+
+            <label>
+              Páginas: desde
+              <input type="number" id="pageFrom" min="1" value="1" />
+            </label>
+
+            <label>
+              Páginas: hasta
+              <input type="number" id="pageTo" min="1" value="15" />
+            </label>
+
+            <label>
+              Incluir audio
+              <div class="pill" style="gap:12px;">
+                <span><input type="checkbox" id="optAudio" checked /> Sí</span>
+                <span class="tiny">Si falta, se oculta y NO rompe.</span>
+              </div>
+            </label>
+
+            <label>
+              Incluir imagen
+              <div class="pill" style="gap:12px;">
+                <span><input type="checkbox" id="optImage" checked /> Sí</span>
+                <span class="tiny">Si falta, se oculta y NO rompe.</span>
+              </div>
+            </label>
+
+            <label>
+              Dificultad (huecos / distractores)
+              <select id="difficulty">
+                <option value="easy">Fácil</option>
+                <option value="med" selected>Medio</option>
+                <option value="hard">Difícil</option>
+              </select>
+            </label>
+
+            <label>
+              Respuestas tipo “selección”
+              <select id="answerStyle">
+                <option value="typed" selected>Escribir</option>
+                <option value="mcq">Opción múltiple</option>
+                <option value="hybrid">Híbrido</option>
+              </select>
+            </label>
+          </div>
+
+          <div class="sep"></div>
+
+          <div class="btns">
+            <button class="btn" id="btnNew">Generar pregunta</button>
+            <button class="btn secondary" id="btnReveal">Ver respuesta</button>
+            <button class="btn secondary" id="btnSkip">Saltar</button>
+          </div>
+
+          <div class="sep"></div>
+
+          <div class="stats">
+            <div class="stat">
+              <div class="k">Aciertos</div>
+              <div class="v" id="stOk">0</div>
+            </div>
+            <div class="stat">
+              <div class="k">Errores</div>
+              <div class="v" id="stBad">0</div>
+            </div>
+            <div class="stat">
+              <div class="k">Saltos</div>
+              <div class="v" id="stSkip">0</div>
+            </div>
+            <div class="stat">
+              <div class="k">Racha</div>
+              <div class="v" id="stStreak">0</div>
+            </div>
+          </div>
+
+          <div class="sep"></div>
+          <div class="tiny">
+            Tips: Puedes usar esto para preguntas súper creativas (cloze de estructuras, kanji por página, imagen-contexto, orden de líneas…). El app no se rompe si falta audio/imagen.
+          </div>
+        </div>
+      </section>
+
+      <!-- RIGHT: MAIN -->
+      <section class="card" id="mainCard">
+        <div class="hd">
+          <h2 id="mainTitle">Quiz</h2>
+          <div class="qMeta" id="metaBadges"></div>
+        </div>
+
+        <div class="bd">
+          <!-- QUIZ -->
+          <div class="quizArea" id="quizView">
+            <div class="qTop">
+              <div class="qMeta" id="qInfo"></div>
+              <div class="btns">
+                <button class="btn secondary" id="btnPrevRead" title="Solo en Lectura">◀</button>
+                <button class="btn secondary" id="btnNextRead" title="Solo en Lectura">▶</button>
+              </div>
+            </div>
+
+            <div class="qBox">
+              <p class="prompt" id="prompt">(Genera una pregunta)</p>
+              <div class="hintLine" id="hintLine"></div>
+
+              <div class="sep"></div>
+
+              <div class="answerRow" id="answerRow">
+                <input id="answerInput" type="text" placeholder="Escribe tu respuesta aquí…" autocomplete="off" />
+                <button class="btn" id="btnCheck">Revisar</button>
+              </div>
+
+              <div class="chipRow" id="mcqRow" style="display:none;"></div>
+
+              <div class="sep"></div>
+              <div class="feedback" id="feedback">Aquí verás la retroalimentación.</div>
+            </div>
+
+            <div class="media" id="mediaArea">
+              <div class="imgWrap" id="imgWrap" style="display:none;">
+                <img id="qImg" alt="Imagen de página" />
+                <div class="imgNote" id="imgNote">img</div>
+              </div>
+
+              <div class="audioRow" id="audioRow" style="display:none;">
+                <button class="btn secondary" id="btnPlayLine">🔊 Línea</button>
+                <button class="btn secondary" id="btnPlayPage">📄 Página</button>
+                <audio id="audio" controls preload="none"></audio>
+              </div>
+            </div>
+          </div>
+
+          <!-- SEARCH -->
+          <div id="searchView" style="display:none;">
+            <div class="qBox">
+              <p class="prompt small">Búsqueda</p>
+              <div class="hintLine">Busca una palabra o un kanji y salta a su página/línea.</div>
+              <div class="sep"></div>
+              <div class="answerRow">
+                <input id="searchInput" type="text" placeholder="Ej: 虹 / 女の子 / 叶 / shōjo / arcoíris" />
+                <button class="btn" id="btnSearch">Buscar</button>
+              </div>
+              <div class="sep"></div>
+              <div id="searchResults" class="feedback">Resultados aquí…</div>
+            </div>
+          </div>
+
+          <!-- READ -->
+          <div id="readView" style="display:none;">
+            <div class="qBox">
+              <p class="prompt small" id="readTitle">Lectura</p>
+              <div class="hintLine" id="readMeta"></div>
+              <div class="sep"></div>
+              <div id="readLines" class="feedback"></div>
+              <div class="sep"></div>
+              <div class="btns">
+                <button class="btn secondary" id="btnPlayReadPage">📄 Audio página</button>
+                <button class="btn secondary" id="btnPlayReadAllLines">🔊 Reproducir líneas</button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+    </div>
+  </div>
+
+<script>
+/* ===========================
+   CONFIG (paths)
+=========================== */
+const PATH_JSON   = "data/arcoiris/super_json.json";
+const PATH_AUDIOS = "data/arcoiris/audios/";
+const PATH_IMGS   = "data/arcoiris/imagenes/";
+
+/* ===========================
+   STATE
+=========================== */
+let DATA = null;
+
+let currentMode = "quiz"; // quiz | read | search
+let currentQuestion = null;
+let currentReadPageId = 1;
+
+const LS_KEY = "ARCOIRIS_SUPERAPP_PROGRESS_V1";
+let progress = {
+  ok: 0, bad: 0, skip: 0, streak: 0,
+  seen: {}, // key -> count
+  mastered: {}, // key -> true
+};
+
+/* ===========================
+   DOM
+=========================== */
+const statusDot = document.getElementById("statusDot");
+const statusText = document.getElementById("statusText");
+const modeLabel = document.getElementById("modeLabel");
+
+const btnModeRead = document.getElementById("btnModeRead");
+const btnModeQuiz = document.getElementById("btnModeQuiz");
+const btnModeSearch = document.getElementById("btnModeSearch");
+const btnReset = document.getElementById("btnReset");
+
+const mainTitle = document.getElementById("mainTitle");
+const quizView = document.getElementById("quizView");
+const readView = document.getElementById("readView");
+const searchView = document.getElementById("searchView");
+
+const qType = document.getElementById("qType");
+const sourceScope = document.getElementById("sourceScope");
+const singlePage = document.getElementById("singlePage");
+const pageFrom = document.getElementById("pageFrom");
+const pageTo = document.getElementById("pageTo");
+const optAudio = document.getElementById("optAudio");
+const optImage = document.getElementById("optImage");
+const difficulty = document.getElementById("difficulty");
+const answerStyle = document.getElementById("answerStyle");
+
+const btnNew = document.getElementById("btnNew");
+const btnReveal = document.getElementById("btnReveal");
+const btnSkip = document.getElementById("btnSkip");
+
+const stOk = document.getElementById("stOk");
+const stBad = document.getElementById("stBad");
+const stSkip = document.getElementById("stSkip");
+const stStreak = document.getElementById("stStreak");
+
+const promptEl = document.getElementById("prompt");
+const hintLine = document.getElementById("hintLine");
+const qInfo = document.getElementById("qInfo");
+const metaBadges = document.getElementById("metaBadges");
+
+const answerRow = document.getElementById("answerRow");
+const answerInput = document.getElementById("answerInput");
+const btnCheck = document.getElementById("btnCheck");
+
+const mcqRow = document.getElementById("mcqRow");
+
+const feedback = document.getElementById("feedback");
+
+const imgWrap = document.getElementById("imgWrap");
+const qImg = document.getElementById("qImg");
+const imgNote = document.getElementById("imgNote");
+
+const audioRow = document.getElementById("audioRow");
+const audioEl = document.getElementById("audio");
+const btnPlayLine = document.getElementById("btnPlayLine");
+const btnPlayPage = document.getElementById("btnPlayPage");
+
+const btnPrevRead = document.getElementById("btnPrevRead");
+const btnNextRead = document.getElementById("btnNextRead");
+
+const readTitle = document.getElementById("readTitle");
+const readMeta = document.getElementById("readMeta");
+const readLines = document.getElementById("readLines");
+const btnPlayReadPage = document.getElementById("btnPlayReadPage");
+const btnPlayReadAllLines = document.getElementById("btnPlayReadAllLines");
+
+const searchInput = document.getElementById("searchInput");
+const btnSearch = document.getElementById("btnSearch");
+const searchResults = document.getElementById("searchResults");
+
+/* ===========================
+   UTIL
+=========================== */
+function clamp(n, a, b){ return Math.max(a, Math.min(b, n)); }
+function randInt(min, max){ return Math.floor(Math.random()*(max-min+1))+min; }
+function pick(arr){ return arr[Math.floor(Math.random()*arr.length)]; }
+function shuffle(arr){
+  const a = [...arr];
+  for(let i=a.length-1;i>0;i--){
+    const j = Math.floor(Math.random()*(i+1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+function esc(s){
+  return String(s).replace(/[&<>"']/g, m => ({
+    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"
+  }[m]));
+}
+function pill(text){
+  const span = document.createElement("span");
+  span.className = "pill";
+  span.textContent = text;
+  return span;
+}
+function setStatus(ok, msg){
+  statusDot.style.background = ok ? "var(--ok)" : "var(--warn)";
+  statusText.textContent = msg;
+}
+function safeLower(s){ return String(s||"").toLowerCase(); }
+
+/* ===========================
+   PROGRESS
+=========================== */
+function loadProgress(){
+  try{
+    const raw = localStorage.getItem(LS_KEY);
+    if(raw){
+      const parsed = JSON.parse(raw);
+      progress = { ...progress, ...parsed };
+    }
+  }catch(e){}
+  renderStats();
+}
+function saveProgress(){
+  try{ localStorage.setItem(LS_KEY, JSON.stringify(progress)); }catch(e){}
+}
+function renderStats(){
+  stOk.textContent = progress.ok || 0;
+  stBad.textContent = progress.bad || 0;
+  stSkip.textContent = progress.skip || 0;
+  stStreak.textContent = progress.streak || 0;
+}
+function bumpSeen(key){
+  if(!key) return;
+  progress.seen[key] = (progress.seen[key] || 0) + 1;
+}
+function markMastered(key){
+  if(!key) return;
+  progress.mastered[key] = true;
+}
+
+/* ===========================
+   DATA FLATTENING
+=========================== */
+function getPagesInScope(){
+  if(!DATA?.pages) return [];
+  const scope = sourceScope.value;
+  if(scope === "all") return DATA.pages;
+
+  if(scope === "single"){
+    const pid = Number(singlePage.value || 1);
+    return DATA.pages.filter(p => p.page_id === pid);
+  }
+
+  // range
+  const a = clamp(Number(pageFrom.value||1), 1, DATA.pages.length);
+  const b = clamp(Number(pageTo.value||DATA.pages.length), 1, DATA.pages.length);
+  const lo = Math.min(a,b), hi = Math.max(a,b);
+  return DATA.pages.filter(p => p.page_id >= lo && p.page_id <= hi);
+}
+
+function buildPool(){
+  const pages = getPagesInScope();
+  const lines = [];
+  const words = [];
+  const kanji = [];
+  const pagesWithImages = [];
+
+  for(const p of pages){
+    if(p.images && p.images.length) pagesWithImages.push(p);
+
+    for(const ln of (p.lines || [])){
+      lines.push({ page:p, line: ln });
+
+      for(const w of (ln.words || [])){
+        words.push({ page:p, line: ln, word: w });
+      }
+
+      for(const k of (ln.kanji || [])){
+        kanji.push({ page:p, line: ln, kanji: k });
+      }
+    }
+  }
+
+  return { pages, lines, words, kanji, pagesWithImages };
+}
+
+/* ===========================
+   ASSET HELPERS (never break)
+=========================== */
+function buildAudioSrc(file){
+  if(!file) return null;
+  return PATH_AUDIOS + file;
+}
+function buildImgSrc(id){
+  if(!id) return null;
+  // you can change extension strategy here. We'll try common ones gracefully.
+  // We'll attempt .png first, then .jpg, then .webp; whichever loads.
+  return [
+    PATH_IMGS + id + ".png",
+    PATH_IMGS + id + ".jpg",
+    PATH_IMGS + id + ".jpeg",
+    PATH_IMGS + id + ".webp"
+  ];
+}
+
+async function tryLoadImage(imgEl, candidates){
+  return new Promise((resolve) => {
+    if(!candidates || candidates.length===0){ resolve(false); return; }
+
+    let idx = 0;
+    const test = new Image();
+    test.onload = () => {
+      imgEl.src = candidates[idx];
+      resolve(true);
+    };
+    test.onerror = () => {
+      idx++;
+      if(idx >= candidates.length){
+        resolve(false);
+      }else{
+        test.src = candidates[idx];
+      }
+    };
+    test.src = candidates[idx];
+  });
+}
+
+function setAudioIfExists(file){
+  if(!optAudio.checked){
+    audioRow.style.display = "none";
+    audioEl.removeAttribute("src");
+    return;
+  }
+  const src = buildAudioSrc(file);
+  if(!src){
+    audioRow.style.display = "none";
+    audioEl.removeAttribute("src");
+    return;
+  }
+  audioRow.style.display = "";
+  audioEl.src = src;
+
+  // If file missing, audio element will error: hide on error to avoid ugly UI
+  audioEl.onerror = () => {
+    audioRow.style.display = "none";
+    audioEl.removeAttribute("src");
+  };
+}
+
+async function setImageIfExists(imageId){
+  if(!optImage.checked){
+    imgWrap.style.display = "none";
+    qImg.removeAttribute("src");
+    return;
+  }
+  if(!imageId){
+    imgWrap.style.display = "none";
+    qImg.removeAttribute("src");
+    return;
+  }
+
+  imgNote.textContent = imageId;
+  const candidates = buildImgSrc(imageId);
+  const ok = await tryLoadImage(qImg, candidates);
+  imgWrap.style.display = ok ? "" : "none";
+}
+
+/* ===========================
+   QUESTION GENERATORS
+=========================== */
+function normalizeAnswer(s){
+  return String(s||"")
+    .trim()
+    .replace(/\s+/g," ")
+    .replace(/[“”]/g,'"')
+    .replace(/[’]/g,"'")
+    .toLowerCase();
+}
+
+function makeMCQ(correct, distractors, howMany=4){
+  const uniq = new Set();
+  const picks = [];
+  uniq.add(normalizeAnswer(correct));
+  picks.push(correct);
+
+  const shuffled = shuffle(distractors);
+  for(const d of shuffled){
+    if(picks.length >= howMany) break;
+    const key = normalizeAnswer(d);
+    if(!key || uniq.has(key)) continue;
+    uniq.add(key);
+    picks.push(d);
+  }
+  return shuffle(picks);
+}
+
+function chooseLineForCloze(pool){
+  // prefer lines with more words
+  const candidates = pool.lines
+    .filter(x => (x.line.words||[]).length >= 3);
+  return candidates.length ? pick(candidates) : pick(pool.lines);
+}
+
+function chooseWordFromLine(lnObj){
+  const ws = lnObj.line.words || [];
+  if(!ws.length) return null;
+
+  // difficulty affects which word chosen: hard prefers shorter/particles, easy prefers content words
+  const diff = difficulty.value;
+  if(diff === "easy"){
+    // pick longer JP (likely content) and not tiny particles
+    const c = ws.filter(w => (w.jp||"").length >= 2 && !["は","が","を","に","で","の","と","も","へ"].includes(w.jp));
+    return c.length ? pick(c) : pick(ws);
+  }
+  if(diff === "hard"){
+    // allow small tokens (particles, auxiliaries)
+    return pick(ws);
+  }
+  // med
+  const c = ws.filter(w => (w.jp||"").length >= 1);
+  return pick(c);
+}
+
+function buildCloze(text, target){
+  // Replace first occurrence of target in text with blank
+  const blank = "＿＿＿";
+  const idx = text.indexOf(target);
+  if(idx === -1) return { cloze: text, found:false };
+  return { cloze: text.slice(0,idx) + blank + text.slice(idx + target.length), found:true };
+}
+
+function genQuestion(){
+  if(!DATA) return;
+
+  const pool = buildPool();
+
+  if(!pool.pages.length){
+    feedback.className = "feedback bad";
+    feedback.textContent = "No hay páginas en el filtro seleccionado.";
+    return;
+  }
+
+  // Some types need specific pools
+  const type = qType.value;
+
+  if(type.includes("word") && pool.words.length === 0){
+    feedback.className = "feedback bad";
+    feedback.textContent = "En este rango no hay 'words[]' para generar preguntas de palabras.";
+    return;
+  }
+  if(type.includes("kanji") && pool.kanji.length === 0){
+    feedback.className = "feedback bad";
+    feedback.textContent = "En este rango no hay 'kanji[]' para generar preguntas de kanji.";
+    return;
+  }
+  if(type === "image_context" && pool.pagesWithImages.length === 0){
+    feedback.className = "feedback bad";
+    feedback.textContent = "En este rango no hay páginas con imágenes registradas.";
+    return;
+  }
+
+  // Reset UI
+  feedback.className = "feedback";
+  feedback.textContent = "Responde y dale “Revisar”.";
+  answerInput.value = "";
+  mcqRow.style.display = "none";
+  mcqRow.innerHTML = "";
+  answerRow.style.display = "";
+  answerInput.style.display = "";
+  btnCheck.style.display = "";
+
+  // Question object structure
+  const Q = {
+    type,
+    key: null, // for progress tracking
+    page_id: null,
+    line_id: null,
+    prompt: "",
+    hint: "",
+    answer: "",
+    accepted: [], // accepted alt answers
+    reveal: "",
+    imageId: null,
+    audioLine: null,
+    audioPage: null,
+    mcq: null, // array if MCQ mode
+    meta: {},
+  };
+
+  function attachMediaFromLine(page, line){
+    Q.page_id = page.page_id;
+    Q.line_id = line.line_id;
+    Q.audioPage = page.audio_page || ("p" + String(page.page_id).padStart(2,"0") + ".mp3");
+    Q.audioLine = line.audio_line || (line.line_id + ".mp3");
+    // pick a page image if any
+    if(page.images && page.images.length){
+      Q.imageId = pick(page.images).id || null;
+    }else{
+      Q.imageId = null;
+    }
+  }
+
+  // Build distractor pools (for MCQ)
+  const allES = pool.lines.map(x => x.line.es).filter(Boolean);
+  const allJP = pool.lines.map(x => x.line.jp).filter(Boolean);
+  const allRomaji = pool.lines.map(x => x.line.romaji).filter(Boolean);
+
+  // Generator per type
+  if(type === "jp_to_es"){
+    const x = pick(pool.lines);
+    attachMediaFromLine(x.page, x.line);
+    Q.key = `L:${x.line.line_id}:jp_to_es`;
+    Q.prompt = x.line.jp;
+    Q.hint = `Romaji: ${x.line.romaji || "—"}`;
+    Q.answer = x.line.es || "";
+    Q.reveal = `✅ ${x.line.es}\n\n(JP) ${x.line.jp}\n(Romaji) ${x.line.romaji || "—"}`;
+    Q.accepted = [x.line.es || ""];
+  }
+
+  else if(type === "es_to_jp"){
+    const x = pick(pool.lines);
+    attachMediaFromLine(x.page, x.line);
+    Q.key = `L:${x.line.line_id}:es_to_jp`;
+    Q.prompt = x.line.es;
+    Q.hint = `Pista: página ${x.page.page_id} · línea ${x.line.line_id.split("_")[1]}`;
+    Q.answer = x.line.jp || "";
+    Q.reveal = `✅ ${x.line.jp}\n\n(ES) ${x.line.es}\n(Romaji) ${x.line.romaji || "—"}`;
+    Q.accepted = [x.line.jp || ""];
+  }
+
+  else if(type === "romaji_to_jp"){
+    const x = pick(pool.lines);
+    attachMediaFromLine(x.page, x.line);
+    Q.key = `L:${x.line.line_id}:romaji_to_jp`;
+    Q.prompt = x.line.romaji;
+    Q.hint = `Pista ES: ${x.line.es || "—"}`;
+    Q.answer = x.line.jp || "";
+    Q.reveal = `✅ ${x.line.jp}\n\n(Romaji) ${x.line.romaji}\n(ES) ${x.line.es || "—"}`;
+    Q.accepted = [x.line.jp || ""];
+  }
+
+  else if(type === "kanji_to_gloss"){
+    const x = pick(pool.kanji);
+    attachMediaFromLine(x.page, x.line);
+    const k = x.kanji?.k || "";
+    const gloss = (x.kanji?.gloss || []).join(", ");
+    Q.key = `K:${k}:kanji_to_gloss`;
+    Q.prompt = k || "(kanji)";
+    Q.hint = `Ubicación: p${String(x.page.page_id).padStart(2,"0")} · ${x.line.line_id}`;
+    Q.answer = gloss;
+    Q.reveal = `✅ ${k} → ${gloss}\n\nLínea: ${x.line.jp}\nES: ${x.line.es}`;
+    Q.accepted = (x.kanji?.gloss || []);
+  }
+
+  else if(type === "word_to_es"){
+    const x = pick(pool.words);
+    attachMediaFromLine(x.page, x.line);
+    const w = x.word?.jp || "";
+    Q.key = `W:${w}:word_to_es`;
+    Q.prompt = w || "(palabra)";
+    Q.hint = `Contexto: ${x.line.jp}`;
+    Q.answer = x.word?.es || "";
+    Q.reveal = `✅ ${w} → ${x.word?.es || "—"}\n(Romaji) ${x.word?.romaji || "—"}\n\nLínea: ${x.line.jp}\nES: ${x.line.es}`;
+    Q.accepted = [x.word?.es || ""];
+  }
+
+  else if(type === "es_to_word"){
+    const x = pick(pool.words);
+    attachMediaFromLine(x.page, x.line);
+    Q.key = `W:${x.word?.jp || ""}:es_to_word`;
+    Q.prompt = x.word?.es || "(traducción)";
+    Q.hint = `Pista Romaji: ${x.word?.romaji || "—"} · Contexto: p${String(x.page.page_id).padStart(2,"0")}`;
+    Q.answer = x.word?.jp || "";
+    Q.reveal = `✅ ${x.word?.jp || "—"}\n(Romaji) ${x.word?.romaji || "—"}\n(ES) ${x.word?.es || "—"}\n\nLínea: ${x.line.jp}`;
+    Q.accepted = [x.word?.jp || ""];
+  }
+
+  else if(type === "cloze_jp"){
+    const x = chooseLineForCloze(pool);
+    attachMediaFromLine(x.page, x.line);
+
+    const targetWord = chooseWordFromLine(x);
+    if(!targetWord){
+      Q.prompt = "No hay words[] suficientes para cloze en este rango.";
+      Q.answer = "";
+    }else{
+      const t = targetWord.jp;
+      const { cloze } = buildCloze(x.line.jp, t);
+      Q.key = `C:${x.line.line_id}:cloze_jp:${t}`;
+      Q.prompt = cloze;
+      Q.hint = `Pista ES: ${x.line.es || "—"} · (Respuesta = una palabra exacta del JP)`;
+      Q.answer = t;
+      Q.reveal = `✅ ${t}\n\nJP completo: ${x.line.jp}\nRomaji: ${x.line.romaji || "—"}\nES: ${x.line.es || "—"}`;
+      Q.accepted = [t];
+    }
+  }
+
+  else if(type === "cloze_es"){
+    const x = chooseLineForCloze(pool);
+    attachMediaFromLine(x.page, x.line);
+
+    const targetWord = chooseWordFromLine(x);
+    if(!targetWord){
+      Q.prompt = "No hay words[] suficientes para cloze en este rango.";
+      Q.answer = "";
+    }else{
+      const tES = (targetWord.es || "").split(";")[0].trim() || (targetWord.es || "").trim(); // take first segment if user used "literal; natural"
+      const { cloze } = buildCloze(x.line.es, tES);
+      Q.key = `C:${x.line.line_id}:cloze_es:${tES}`;
+      Q.prompt = cloze;
+      Q.hint = `Pista JP: ${x.line.jp || "—"} · (Respuesta = palabra en ES)`;
+      Q.answer = tES;
+      Q.reveal = `✅ ${tES}\n\nES completo: ${x.line.es}\nJP: ${x.line.jp}\nRomaji: ${x.line.romaji || "—"}`;
+      Q.accepted = [tES, (targetWord.es || "").trim()];
+    }
+  }
+
+  else if(type === "order_lines"){
+    // pick a page with at least 3 lines (prefer 4)
+    const candidates = pool.pages.filter(p => (p.lines||[]).length >= 3);
+    const p = candidates.length ? pick(candidates) : pick(pool.pages);
+    Q.page_id = p.page_id;
+    Q.key = `P:${p.page_id}:order_lines`;
+    Q.audioPage = p.audio_page || ("p" + String(p.page_id).padStart(2,"0") + ".mp3");
+    Q.imageId = (p.images && p.images.length) ? pick(p.images).id : null;
+
+    const correct = (p.lines||[]).map(l => l.jp);
+    const shuffledLines = shuffle(correct);
+    Q.prompt = `Ordena estas líneas de la página ${p.page_id} (escribe el orden, ej: 2-1-3-4):\n\n` +
+      shuffledLines.map((t,i)=>`${i+1}) ${t}`).join("\n");
+    Q.hint = `Tip: puedes usar el audio de página.`;
+    // answer is the mapping from displayed order to correct order
+    // We'll accept user input as sequence of indices that reconstruct correct order.
+    // Store mapping
+    Q.meta.order = { displayed: shuffledLines, correct };
+    Q.answer = correct.join(" | "); // for reveal
+    Q.reveal = `✅ Orden correcto (JP):\n` + correct.map((t,i)=>`${i+1}) ${t}`).join("\n");
+    Q.accepted = []; // handled specially in check
+    // typed only (simpler)
+    answerStyle.value = "typed";
+  }
+
+  else if(type === "image_context"){
+    const p = pick(pool.pagesWithImages);
+    const img = pick(p.images);
+    Q.page_id = p.page_id;
+    Q.key = `IMG:${img.id}:image_context`;
+    Q.imageId = img.id;
+    Q.audioPage = p.audio_page || ("p" + String(p.page_id).padStart(2,"0") + ".mp3");
+
+    // choose a target from the page: kanji, word, or line meaning depending on difficulty
+    const lines = p.lines || [];
+    const linePick = lines.length ? pick(lines) : null;
+
+    // build choices
+    const diff = difficulty.value;
+    if(diff === "easy"){
+      Q.prompt = `¿Qué idea corresponde mejor a esta imagen (página ${p.page_id})?`;
+      Q.hint = `Selecciona la frase en ES que encaja con esta página.`;
+      Q.answer = linePick?.es || "";
+      Q.reveal = `✅ Página ${p.page_id}\n` + lines.map(l => `• ${l.es}`).join("\n");
+      const distractors = allES.filter(x => x && x !== Q.answer);
+      Q.mcq = makeMCQ(Q.answer, distractors, 4);
+    }else if(diff === "hard"){
+      // ask kanji meaning from that page
+      const allK = [];
+      for(const ln of lines){
+        for(const k of (ln.kanji||[])) allK.push(k);
+      }
+      const kPick = allK.length ? pick(allK) : null;
+      if(kPick){
+        Q.prompt = `Imagen de la página ${p.page_id}.\n¿Qué significa este kanji que aparece en esta página? → ${kPick.k}`;
+        Q.hint = `Tip: está en la misma página que la imagen.`;
+        Q.answer = (kPick.gloss || []).join(", ");
+        Q.accepted = (kPick.gloss || []);
+        Q.reveal = `✅ ${kPick.k} → ${(kPick.gloss || []).join(", ")}\n\n(ES de la página)\n` + lines.map(l => `• ${l.es}`).join("\n");
+      }else{
+        Q.prompt = `Imagen de la página ${p.page_id}.\nEscribe una frase JP de esta página (cualquiera).`;
+        Q.hint = `Puedes reproducir el audio de página.`;
+        Q.answer = linePick?.jp || "";
+        Q.accepted = lines.map(l => l.jp);
+        Q.reveal = `✅ Frases JP posibles:\n` + lines.map(l => `• ${l.jp}`).join("\n");
+      }
+    }else{
+      // medium: JP line choice
+      Q.prompt = `¿Qué línea en JP corresponde a esta imagen (página ${p.page_id})?`;
+      Q.hint = `Selecciona la línea JP correcta.`;
+      Q.answer = linePick?.jp || "";
+      Q.reveal = `✅ Página ${p.page_id}\n` + lines.map(l => `• ${l.jp}`).join("\n");
+      const distractors = allJP.filter(x => x && x !== Q.answer);
+      Q.mcq = makeMCQ(Q.answer, distractors, 4);
+    }
+  }
+
+  // Answer style handling
+  const style = answerStyle.value;
+  const prefersMCQ = (style === "mcq") || (style === "hybrid" && Math.random() < 0.55);
+
+  // If generator already produced MCQ, honor it; else we may create MCQ for some types
+  if(!Q.mcq && prefersMCQ){
+    // MCQ for line translation types and word types
+    if(Q.type === "jp_to_es" && Q.answer){
+      Q.mcq = makeMCQ(Q.answer, allES.filter(x => x && x !== Q.answer), 4);
+    }
+    if(Q.type === "es_to_jp" && Q.answer){
+      Q.mcq = makeMCQ(Q.answer, allJP.filter(x => x && x !== Q.answer), 4);
+    }
+    if(Q.type === "romaji_to_jp" && Q.answer){
+      Q.mcq = makeMCQ(Q.answer, allJP.filter(x => x && x !== Q.answer), 4);
+    }
+    if(Q.type === "word_to_es" && Q.answer){
+      const d = pool.words.map(x => x.word?.es).filter(Boolean);
+      Q.mcq = makeMCQ(Q.answer, d.filter(x => x && x !== Q.answer), 4);
+    }
+    if(Q.type === "es_to_word" && Q.answer){
+      const d = pool.words.map(x => x.word?.jp).filter(Boolean);
+      Q.mcq = makeMCQ(Q.answer, d.filter(x => x && x !== Q.answer), 4);
+    }
+    if(Q.type === "kanji_to_gloss" && Q.answer){
+      const d = pool.kanji.map(x => (x.kanji?.gloss||[]).join(", ")).filter(Boolean);
+      Q.mcq = makeMCQ(Q.answer, d.filter(x => x && x !== Q.answer), 4);
+    }
+  }
+
+  currentQuestion = Q;
+  bumpSeen(Q.key);
+
+  renderQuestion(Q);
+  saveProgress();
+}
+
+async function renderQuestion(Q){
+  // badges/meta
+  metaBadges.innerHTML = "";
+  qInfo.innerHTML = "";
+
+  metaBadges.appendChild(pill(`Tipo: ${Q.type}`));
+  if(Q.page_id) metaBadges.appendChild(pill(`Página: ${Q.page_id}`));
+  if(Q.line_id) metaBadges.appendChild(pill(`Línea: ${Q.line_id}`));
+
+  qInfo.appendChild(pill(`Scope: ${sourceScope.value}`));
+  qInfo.appendChild(pill(`Dificultad: ${difficulty.value}`));
+  qInfo.appendChild(pill(`Resp: ${answerStyle.value}`));
+
+  promptEl.textContent = Q.prompt || "(sin prompt)";
+  hintLine.textContent = Q.hint || "";
+
+  // media
+  await setImageIfExists(Q.imageId);
+  setAudioIfExists(Q.audioLine || null);
+
+  // If optAudio enabled, we still also want "page" ability:
+  btnPlayLine.onclick = () => playAudioFile(Q.audioLine);
+  btnPlayPage.onclick = () => playAudioFile(Q.audioPage);
+
+  // MCQ vs typed
+  if(Q.mcq && Q.mcq.length){
+    answerRow.style.display = "none";
+    mcqRow.style.display = "";
+    mcqRow.innerHTML = "";
+    Q.mcq.forEach(choice => {
+      const c = document.createElement("div");
+      c.className = "chip";
+      c.textContent = choice;
+      c.onclick = () => checkAnswer(choice, true);
+      mcqRow.appendChild(c);
+    });
+  }else{
+    answerRow.style.display = "";
+    mcqRow.style.display = "none";
+    answerInput.focus();
+  }
+}
+
+function playAudioFile(file){
+  if(!optAudio.checked) return;
+  const src = buildAudioSrc(file);
+  if(!src) return;
+
+  audioRow.style.display = "";
+  audioEl.src = src;
+  audioEl.play().catch(()=>{});
+  audioEl.onerror = () => {
+    audioRow.style.display = "none";
+    audioEl.removeAttribute("src");
+  };
+}
+
+function checkAnswer(inputValue, fromMCQ=false){
+  const Q = currentQuestion;
+  if(!Q){
+    feedback.className = "feedback bad";
+    feedback.textContent = "No hay pregunta activa. Dale “Generar pregunta”.";
+    return;
+  }
+
+  // Special: order_lines
+  if(Q.type === "order_lines"){
+    const user = normalizeAnswer(inputValue || answerInput.value);
+    const seq = user.replace(/[^0-9\-\,\s]/g,"").trim();
+    const parts = seq.split(/[\-\,\s]+/).filter(Boolean).map(n => Number(n));
+    const disp = Q.meta?.order?.displayed || [];
+    const corr = Q.meta?.order?.correct || [];
+
+    let ok = false;
+    if(parts.length === corr.length && parts.every(n => n>=1 && n<=disp.length)){
+      const reconstructed = parts.map(i => disp[i-1]);
+      ok = reconstructed.join("||") === corr.join("||");
+    }
+
+    if(ok){
+      progress.ok++; progress.streak++;
+      markMastered(Q.key);
+      feedback.className = "feedback ok";
+      feedback.textContent = "✅ Correcto.\n\n" + Q.reveal;
+    }else{
+      progress.bad++; progress.streak = 0;
+      feedback.className = "feedback bad";
+      feedback.textContent = "✘ No.\n\n" + Q.reveal + "\n\nTu orden: " + (parts.length ? parts.join("-") : "(vacío)");
+    }
+    renderStats(); saveProgress();
+    return;
+  }
+
+  const user = normalizeAnswer(inputValue || answerInput.value);
+  const correctMain = normalizeAnswer(Q.answer);
+
+  const accepted = (Q.accepted || []).map(normalizeAnswer).filter(Boolean);
+  let ok = false;
+
+  if(Q.type === "kanji_to_gloss"){
+    // allow user to type one of the gloss terms OR the joined string
+    ok = accepted.includes(user) || user === correctMain || accepted.some(g => user.includes(g) && g.length>=2);
+  }else{
+    ok = (user === correctMain) || accepted.includes(user);
+  }
+
+  if(ok){
+    progress.ok++;
+    progress.streak++;
+    // mastery: after seen >= 2 and correct
+    if((progress.seen[Q.key]||0) >= 2) markMastered(Q.key);
+
+    feedback.className = "feedback ok";
+    feedback.textContent = "✅ Correcto.\n\n" + Q.reveal;
+  }else{
+    progress.bad++;
+    progress.streak = 0;
+    feedback.className = "feedback bad";
+    feedback.textContent = "✘ Incorrecto.\n\nRespuesta:\n" + Q.reveal + "\n\nTu respuesta:\n" + (inputValue || answerInput.value || "(vacío)");
+  }
+
+  renderStats();
+  saveProgress();
+}
+
+function revealAnswer(){
+  const Q = currentQuestion;
+  if(!Q){
+    feedback.className = "feedback bad";
+    feedback.textContent = "No hay pregunta activa.";
+    return;
+  }
+  feedback.className = "feedback";
+  feedback.textContent = "Respuesta:\n" + (Q.reveal || Q.answer || "—");
+}
+
+function skipQuestion(){
+  if(!currentQuestion){
+    feedback.className = "feedback bad";
+    feedback.textContent = "No hay pregunta activa.";
+    return;
+  }
+  progress.skip++;
+  progress.streak = 0;
+  renderStats();
+  saveProgress();
+  feedback.className = "feedback";
+  feedback.textContent = "Saltado. Genera otra cuando quieras.";
+  genQuestion();
+}
+
+/* ===========================
+   MODES
+=========================== */
+function setMode(mode){
+  currentMode = mode;
+  modeLabel.textContent = mode === "quiz" ? "Quiz" : (mode === "read" ? "Lectura" : "Búsqueda");
+
+  quizView.style.display = mode === "quiz" ? "" : "none";
+  readView.style.display = mode === "read" ? "" : "none";
+  searchView.style.display = mode === "search" ? "" : "none";
+
+  mainTitle.textContent = mode === "quiz" ? "Quiz" : (mode === "read" ? "Lectura" : "Búsqueda");
+
+  if(mode === "read"){
+    renderReadPage(currentReadPageId);
+  }
+}
+
+async function renderReadPage(pageId){
+  if(!DATA?.pages) return;
+  const p = DATA.pages.find(x => x.page_id === pageId) || DATA.pages[0];
+  currentReadPageId = p.page_id;
+
+  readTitle.textContent = `Lectura — Página ${p.page_id}`;
+  readMeta.textContent = `${p.meta_title?.jp || ""} · ${p.meta_title?.es || ""} · líneas: ${p.line_count || (p.lines||[]).length}`;
+
+  const blocks = [];
+  for(const ln of (p.lines || [])){
+    blocks.push(
+      `【${ln.line_id}】\nJP: ${ln.jp}\nRomaji: ${ln.romaji || "—"}\nES: ${ln.es}\n`
+    );
+  }
+  readLines.textContent = blocks.join("\n");
+
+  // media in read: show a page image if exists
+  const imgId = (p.images && p.images.length) ? p.images[0].id : null;
+  // reuse same media area (quiz media) to avoid duplicating HTML
+  // We'll show it in quiz media area only; but read has separate controls for audio.
+  btnPlayReadPage.onclick = () => playAudioFile(p.audio_page || ("p" + String(p.page_id).padStart(2,"0") + ".mp3"));
+
+  btnPlayReadAllLines.onclick = async () => {
+    // sequential play line audios if present; if missing, skip silently
+    for(const ln of (p.lines || [])){
+      if(!optAudio.checked) return;
+      const f = ln.audio_line || (ln.line_id + ".mp3");
+      const src = buildAudioSrc(f);
+      if(!src) continue;
+
+      const ok = await new Promise(resolve => {
+        const a = new Audio();
+        a.src = src;
+        a.onended = () => resolve(true);
+        a.onerror = () => resolve(false);
+        a.play().then(()=>{}).catch(()=>resolve(false));
+        // fail-safe timeout
+        setTimeout(()=>resolve(false), 12000);
+      });
+      // continue regardless
+    }
+  };
+
+  // Navigation buttons on header of quiz card (works in read too)
+  btnPrevRead.disabled = (p.page_id <= 1);
+  btnNextRead.disabled = (p.page_id >= DATA.pages.length);
+
+  // show a preview image + audio page in the quiz media area (nice UX)
+  if(optImage.checked && imgId){
+    imgNote.textContent = imgId;
+    await setImageIfExists(imgId);
+  }else{
+    imgWrap.style.display = "none";
+  }
+  if(optAudio.checked){
+    setAudioIfExists(p.audio_page || ("p"+String(p.page_id).padStart(2,"0")+".mp3"));
+  }else{
+    audioRow.style.display = "none";
+  }
+
+  // update meta badges to reflect read context
+  metaBadges.innerHTML = "";
+  metaBadges.appendChild(pill(`Página: ${p.page_id}`));
+  metaBadges.appendChild(pill(`Líneas: ${p.line_count || (p.lines||[]).length}`));
+}
+
+/* ===========================
+   SEARCH
+=========================== */
+function doSearch(){
+  if(!DATA?.pages){
+    searchResults.textContent = "JSON no cargado.";
+    return;
+  }
+  const q = (searchInput.value || "").trim();
+  if(!q){
+    searchResults.textContent = "Escribe algo para buscar.";
+    return;
+  }
+  const qL = safeLower(q);
+
+  const hits = [];
+  for(const p of DATA.pages){
+    for(const ln of (p.lines||[])){
+      const hay = [
+        ln.jp, ln.romaji, ln.es,
+        ...(ln.words||[]).flatMap(w => [w.jp, w.romaji, w.es]),
+        ...(ln.kanji||[]).flatMap(k => [k.k, ...(k.gloss||[])])
+      ].filter(Boolean).map(String);
+
+      const ok = hay.some(s => safeLower(s).includes(qL));
+      if(ok){
+        hits.push({p, ln});
+      }
+    }
+  }
+
+  if(!hits.length){
+    searchResults.textContent = "Sin resultados.";
+    return;
+  }
+
+  // Render compact results (click to jump)
+  const lines = [];
+  lines.push(`Resultados: ${hits.length}\n`);
+  hits.slice(0, 40).forEach((h,i)=>{
+    lines.push(
+      `${i+1}) Página ${h.p.page_id} · ${h.ln.line_id}\n` +
+      `   JP: ${h.ln.jp}\n` +
+      `   ES: ${h.ln.es}\n`
+    );
+  });
+  lines.push("\nTip: En la siguiente iteración podemos convertir esto a lista clicable real (con botones).");
+
+  searchResults.textContent = lines.join("\n");
+
+  // Quick jump: if only 1 hit, go to read page
+  if(hits.length === 1){
+    currentReadPageId = hits[0].p.page_id;
+    setMode("read");
+  }
+}
+
+/* ===========================
+   INIT
+=========================== */
+function populatePagesSelect(){
+  singlePage.innerHTML = "";
+  const pages = DATA?.pages || [];
+  pages.forEach(p=>{
+    const opt = document.createElement("option");
+    opt.value = String(p.page_id);
+    const jp = p.meta_title?.jp ? ` — ${p.meta_title.jp}` : "";
+    opt.textContent = `Página ${p.page_id}${jp}`;
+    singlePage.appendChild(opt);
+  });
+
+  pageFrom.max = String(pages.length || 15);
+  pageTo.max = String(pages.length || 15);
+  pageTo.value = String(pages.length || 15);
+}
+
+function wireUI(){
+  btnModeRead.onclick = () => setMode("read");
+  btnModeQuiz.onclick = () => setMode("quiz");
+  btnModeSearch.onclick = () => setMode("search");
+
+  btnNew.onclick = () => genQuestion();
+  btnReveal.onclick = () => revealAnswer();
+  btnSkip.onclick = () => skipQuestion();
+
+  btnCheck.onclick = () => checkAnswer();
+  answerInput.addEventListener("keydown", (e)=>{
+    if(e.key === "Enter") checkAnswer();
+  });
+
+  btnPrevRead.onclick = () => {
+    if(!DATA?.pages) return;
+    currentReadPageId = Math.max(1, currentReadPageId - 1);
+    setMode("read");
+  };
+  btnNextRead.onclick = () => {
+    if(!DATA?.pages) return;
+    currentReadPageId = Math.min(DATA.pages.length, currentReadPageId + 1);
+    setMode("read");
+  };
+
+  btnSearch.onclick = () => doSearch();
+  searchInput.addEventListener("keydown", (e)=>{
+    if(e.key === "Enter") doSearch();
+  });
+
+  btnReset.onclick = () => {
+    if(!confirm("¿Seguro? Se borrarán estadísticas/progreso local.")) return;
+    localStorage.removeItem(LS_KEY);
+    progress = { ok:0, bad:0, skip:0, streak:0, seen:{}, mastered:{} };
+    renderStats();
+    feedback.className = "feedback";
+    feedback.textContent = "Progreso reiniciado.";
+  };
+
+  // scope behavior
+  function syncScopeUI(){
+    const scope = sourceScope.value;
+    singlePage.parentElement.style.opacity = (scope==="single") ? "1" : ".55";
+    singlePage.disabled = (scope!=="single");
+
+    pageFrom.parentElement.style.opacity = (scope==="range") ? "1" : ".55";
+    pageTo.parentElement.style.opacity   = (scope==="range") ? "1" : ".55";
+    pageFrom.disabled = (scope!=="range");
+    pageTo.disabled   = (scope!=="range");
+  }
+  sourceScope.onchange = syncScopeUI;
+  syncScopeUI();
+
+  // keep range sane
+  pageFrom.onchange = () => {
+    const a = Number(pageFrom.value||1);
+    const b = Number(pageTo.value||a);
+    if(a>b) pageTo.value = String(a);
+  };
+  pageTo.onchange = () => {
+    const a = Number(pageFrom.value||1);
+    const b = Number(pageTo.value||a);
+    if(b<a) pageFrom.value = String(b);
+  };
+
+  // If toggles off audio/image, hide instantly
+  optAudio.onchange = () => {
+    if(!optAudio.checked){
+      audioRow.style.display = "none";
+      audioEl.removeAttribute("src");
+    }else if(currentQuestion){
+      setAudioIfExists(currentQuestion.audioLine);
+    }
+  };
+  optImage.onchange = async () => {
+    if(!optImage.checked){
+      imgWrap.style.display = "none";
+      qImg.removeAttribute("src");
+    }else if(currentQuestion){
+      await setImageIfExists(currentQuestion.imageId);
+    }
+  };
+}
+
+async function loadJSON(){
+  setStatus(false, "Cargando JSON…");
+  try{
+    const res = await fetch(PATH_JSON, { cache: "no-cache" });
+    if(!res.ok) throw new Error("HTTP " + res.status);
+    DATA = await res.json();
+
+    // Defensive: allow either {pages:[...]} or {story:{}, pages:[...]}
+    if(!DATA.pages && Array.isArray(DATA)){
+      DATA = { story:{}, pages: DATA };
+    }
+
+    populatePagesSelect();
+    setStatus(true, "JSON listo");
+    // Auto: set read to page 1
+    currentReadPageId = 1;
+
+    // small sanity: if some pages missing, still ok.
+    // Create first question automatically:
+    setMode("quiz");
+    genQuestion();
+  }catch(err){
+    console.error(err);
+    setStatus(false, "No se pudo cargar el JSON (revisa ruta)");
+    feedback.className = "feedback bad";
+    feedback.textContent =
+      "No pude cargar: " + PATH_JSON + "\n" +
+      "Verifica que exista y que el servidor permita fetch (si abres el HTML como file:// algunos navegadores bloquean).\n\n" +
+      "Solución típica: abrirlo con un servidor local (por ejemplo Live Server en VSCode).";
+  }
+}
+
+/* ===========================
+   START
+=========================== */
+loadProgress();
+wireUI();
+loadJSON();
+</script>
+</body>
+</html>
