@@ -1,0 +1,116 @@
+{
+  "story": {
+    "story_id": "cuento_01",
+    "title_jp": "虹色の髪の少女",
+    "title_es": "La chica del cabello arcoíris",
+    "author": "Asallam Sensei",
+    "romaji_style": "macron",
+    "notes": "Estructura por páginas > líneas > palabras/kanji. Audios por página y por línea. Imágenes por página + extras."
+  },
+  "extras": {
+    "images": []
+  },
+  "pages": [
+    {
+      "page_id": 1,
+      "meta_title": {
+        "jp": "昔々、遠い国で",
+        "es": "Hace mucho tiempo, en un país lejano"
+      },
+      "line_count": 4,
+      "audio_page": "p01.mp3",
+      "image_count": 1,
+      "images": [
+        {
+          "id": "img_p01_01",
+          "keywords": []
+        }
+      ],
+      "lines": [
+        {
+          "line_id": "p01_l01",
+          "jp": "昔々、遠い国で、",
+          "romaji": "mukashi mukashi, tōi kuni de,",
+          "es": "Hace mucho tiempo, en un país lejano,",
+          "audio_line": "p01_l01.mp3",
+          "words": [
+            { "jp": "昔々", "romaji": "mukashi mukashi", "es": "hace mucho tiempo; érase una vez" },
+            { "jp": "遠い", "romaji": "tōi", "es": "lejano/a" },
+            { "jp": "国", "romaji": "kuni", "es": "país" },
+            { "jp": "で", "romaji": "de", "es": "en (partícula de lugar)" }
+          ],
+          "kanji": [
+            { "k": "昔", "gloss": ["antiguamente", "pasado"] },
+            { "k": "遠", "gloss": ["lejano", "distante"] },
+            { "k": "国", "gloss": ["país", "nación"] }
+          ]
+        },
+        {
+          "line_id": "p01_l02",
+          "jp": "ひとりの女の子が生まれました。",
+          "romaji": "hitori no onnanoko ga umaremashita.",
+          "es": "Nació una niña.",
+          "audio_line": "p01_l02.mp3",
+          "words": [
+            { "jp": "ひとり", "romaji": "hitori", "es": "una persona; una (sola)" },
+            { "jp": "の", "romaji": "no", "es": "de (posesivo / conector)" },
+            { "jp": "女の子", "romaji": "onnanoko", "es": "niña; chica" },
+            { "jp": "が", "romaji": "ga", "es": "marca sujeto (partícula)" },
+            { "jp": "生まれました", "romaji": "umaremashita", "es": "nació (pasado, formal)" }
+          ],
+          "kanji": [
+            { "k": "女", "gloss": ["mujer", "femenino"] },
+            { "k": "子", "gloss": ["niño/a", "hijo/a"] },
+            { "k": "生", "gloss": ["nacer", "vida"] }
+          ]
+        },
+        {
+          "line_id": "p01_l03",
+          "jp": "女の子の髪は、虹色でした。",
+          "romaji": "onnanoko no kami wa, niji-iro deshita.",
+          "es": "El cabello de la niña era de color arcoíris.",
+          "audio_line": "p01_l03.mp3",
+          "words": [
+            { "jp": "女の子", "romaji": "onnanoko", "es": "niña; chica" },
+            { "jp": "の", "romaji": "no", "es": "de (posesivo)" },
+            { "jp": "髪", "romaji": "kami", "es": "cabello" },
+            { "jp": "は", "romaji": "wa", "es": "marca tema (partícula)" },
+            { "jp": "虹色", "romaji": "niji-iro", "es": "color arcoíris" },
+            { "jp": "でした", "romaji": "deshita", "es": "era / fue (pasado, formal)" }
+          ],
+          "kanji": [
+            { "k": "女", "gloss": ["mujer", "femenino"] },
+            { "k": "子", "gloss": ["niño/a", "hijo/a"] },
+            { "k": "髪", "gloss": ["cabello", "pelo"] },
+            { "k": "虹", "gloss": ["arcoíris"] },
+            { "k": "色", "gloss": ["color"] }
+          ]
+        },
+        {
+          "line_id": "p01_l04",
+          "jp": "だから、みんなは「虹色の女の子」と呼びました。",
+          "romaji": "dakara, minna wa “niji-iro no onnanoko” to yobimashita.",
+          "es": "Por eso, todos la llamaron “la niña del cabello arcoíris”.",
+          "audio_line": "p01_l04.mp3",
+          "words": [
+            { "jp": "だから", "romaji": "dakara", "es": "por eso; así que" },
+            { "jp": "みんな", "romaji": "minna", "es": "todos; toda la gente" },
+            { "jp": "は", "romaji": "wa", "es": "marca tema (partícula)" },
+            { "jp": "虹色", "romaji": "niji-iro", "es": "color arcoíris" },
+            { "jp": "の", "romaji": "no", "es": "de (conector)" },
+            { "jp": "女の子", "romaji": "onnanoko", "es": "niña; chica" },
+            { "jp": "と", "romaji": "to", "es": "cita/llamado como (partícula de cita)" },
+            { "jp": "呼びました", "romaji": "yobimashita", "es": "llamaron; nombraron (pasado, formal)" }
+          ],
+          "kanji": [
+            { "k": "虹", "gloss": ["arcoíris"] },
+            { "k": "色", "gloss": ["color"] },
+            { "k": "女", "gloss": ["mujer", "femenino"] },
+            { "k": "子", "gloss": ["niño/a", "hijo/a"] },
+            { "k": "呼", "gloss": ["llamar", "invocar", "nombrar"] }
+          ]
+        }
+      ]
+    }
+  ]
+}
