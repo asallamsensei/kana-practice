@@ -184,15 +184,24 @@ img{
 
 /* 🧭 Topbar (Volver + Quiz en una sola fila) */
 .topbar{
+  position: relative;
   display:flex;
   align-items:center;
-  justify-content:space-between;
-  gap:10px;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
 }
+
+/* Volver siempre a la izquierda */
+.topbar button{
+  z-index:2;
+}
+  
+/* Quiz centrado absoluto */
 .topbarTitle{
+  position:absolute;
+  left:50%;
+  transform:translateX(-50%);
   font-weight:900;
-  font-size:18px;
+  font-size:20px;
 }
 
 /* 🎯 Centrado en quiz */
@@ -550,11 +559,25 @@ function showQuestion(){
   if(q.type === "ear"){
     h.innerText = "¿Qué escuchaste?";
     div.appendChild(h);
-
-    // reproducir audio de esa línea (con page + index ya guardados)
+  
     const pnum = q.question.page.page_id;
     const li = q.question.lineIndex + 1;
-    new Audio(AUDIO_PATH + "p" + String(pnum).padStart(2,"0") + "_l0" + li + ".mp3").play();
+    const audioFile = AUDIO_PATH + "p" + String(pnum).padStart(2,"0") + "_l0" + li + ".mp3";
+  
+    // 🔊 Reproducir automáticamente
+    const audio = new Audio(audioFile);
+    audio.play();
+  
+    // 🔘 Botón repetir
+    const repeatBtn = document.createElement("button");
+    repeatBtn.textContent = "🔊 Repetir audio";
+    repeatBtn.style.marginTop = "10px";
+    repeatBtn.onclick = () => {
+      const a = new Audio(audioFile);
+      a.play();
+    };
+  
+    div.appendChild(repeatBtn);
   }else{
     h.innerText = q.question;
     div.appendChild(h);
