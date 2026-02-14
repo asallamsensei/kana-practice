@@ -74,16 +74,20 @@ img{
 }
 
 .menu-romaji{
-  font-size: 16px;
-  color:#333;
-  margin: 6px 0 6px 0;
+  font-size: 20px;      /* más grande */
+  font-weight: 500;
+  color:#222;
+  margin: 8px 0 10px 0; /* más espacio abajo */
+  letter-spacing: 0.5px;
 }
 
 .menu-sub{
-  font-size: 14px;
-  color:#555;
-  margin-bottom: 12px;
+  font-size: 18px;      /* más grande */
+  font-weight: 400;
+  color:#444;
+  margin-bottom: 20px;  /* más separación antes del botón */
 }
+
 
 .menu-audio{
   margin: 10px 0 16px 0;
@@ -143,11 +147,14 @@ img{
   <h2 id="menuTitleJp">虹色の髪の少女</h2>
 
   <div id="menuTitleRomaji" class="menu-romaji"></div>
-  <div class="menu-sub">cuento educativo japonés escrito por Asallam Sensei</div>
+  <div class="menu-sub">
+    <div>cuento educativo japonés</div>
+    <div>escrito por Asallam Sensei</div>
+  </div>
 
   <div class="menu-audio">
     <button onclick="playCoverAudio()">🔊 Audio portada</button>
-    <audio id="coverAudio" controls preload="none"></audio>
+    <audio id="coverAudio" preload="none"></audio>
   </div>
 
   <button onclick="startReading()">📖 Lectura</button>
