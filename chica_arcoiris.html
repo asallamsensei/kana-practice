@@ -144,6 +144,43 @@ img{
   box-shadow: 0 6px 18px rgba(0,0,0,0.12);
 }
 
+/* 🖼️ Imagen en quiz (mismo estilo que lectura) */
+#quizImageWrap{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:16px;
+  align-items:flex-start;
+  margin: 10px 0 14px 0;
+}
+
+#quizImageWrap img{
+  width: 180px;
+  max-width: 100%;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+}
+
+/* ✅ Retroalimentación */
+.quizFeedback{
+  margin-top: 12px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  background: #fff;
+  font-weight: bold;
+}
+.quizFeedback.ok{
+  border-color: rgba(40,167,69,.35);
+  background: rgba(40,167,69,.10);
+  color: #155724;
+}
+.quizFeedback.bad{
+  border-color: rgba(217,48,37,.35);
+  background: rgba(217,48,37,.08);
+  color: #7a1b16;
+}
 
 </style>
 </head>
@@ -202,6 +239,8 @@ img{
   <div class="progress" id="progress"></div>
 
   <div id="quizArea"></div>
+  <div id="quizFeedback"></div>
+  <div class="progress" id="quizStats"></div>
 </div>
 
 </div>
@@ -213,6 +252,16 @@ const IMG_PATH = "data/arcoiris/imagenes/";
 
 let DATA;
 let currentPage = 1;
+
+const EXTRA_IMAGES = [
+  "img_extra_01",
+  "img_extra_02",
+  "img_extra_03",
+  "img_extra_04",
+  "img_extra_05",
+  "img_extra_06",
+  "img_extra_07"
+];
 
 let quizData = [];
 let currentQuestionIndex = 0;
@@ -331,14 +380,15 @@ function loadImgWithFallback(imgEl, id){
 }
   
 function generateQuiz(){
-  const words=[];
-  const kanji=[];
-  const lines=[];
+  const words = [];
+  const kanji = [];
+  const lines = [];
+
   DATA.pages.forEach(p=>{
-    p.lines.forEach(l=>{
-      l.words.forEach(w=>words.push(w));
-      l.kanji.forEach(k=>kanji.push(k));
-      lines.push(l);
+    p.lines.forEach((l, li)=>{
+      (l.words || []).forEach(w => words.push({ w, page: p }));     // 👈 guardo página
+      (l.kanji || []).forEach(k => kanji.push({ k, page: p }));     // 👈 guardo página
+      lines.push({ line: l, page: p, lineIndex: li });              // 👈 guardo página + índice
     });
   });
 
@@ -346,26 +396,76 @@ function generateQuiz(){
   shuffle(kanji);
   shuffle(lines);
 
-  quizData=[];
+  quizData = [];
 
-  words.slice(0,25).forEach(w=>{
-    quizData.push({type:"jp_es",correct:w.es,question:w.jp});
+  // 25 JP -> ES (vocab)
+  words.slice(0,25).forEach(x=>{
+    quizData.push({
+      type:"jp_es",
+      correct: x.w.es,
+      question: x.w.jp,
+      page: x.page
+    });
   });
 
-  words.slice(25,50).forEach(w=>{
-    quizData.push({type:"es_jp",correct:w.jp,question:w.es});
+  // 25 ES -> JP (vocab)
+  words.slice(25,50).forEach(x=>{
+    quizData.push({
+      type:"es_jp",
+      correct: x.w.jp,
+      question: x.w.es,
+      page: x.page
+    });
   });
 
-  kanji.slice(0,25).forEach(k=>{
-    quizData.push({type:"kanji",correct:k.gloss[0],question:k.k});
+  // 25 Kanji
+  kanji.slice(0,25).forEach(x=>{
+    quizData.push({
+      type:"kanji",
+      correct: (x.k.gloss && x.k.gloss.length) ? x.k.gloss[0] : "",
+      question: x.k.k,
+      page: x.page
+    });
   });
 
-  lines.slice(0,25).forEach(l=>{
-    quizData.push({type:"ear",correct:l.jp,question:l});
+  // 25 Oído (línea completa)
+  lines.slice(0,25).forEach(x=>{
+    quizData.push({
+      type:"ear",
+      correct: x.line.jp,
+      question: x,     // {line,page,lineIndex}
+      page: x.page
+    });
   });
 
   shuffle(quizData);
-  currentQuestionIndex=0;
+  currentQuestionIndex = 0;
+
+  // reset marcador
+  score = { jp_es:0, es_jp:0, kanji:0, ear:0, wrong:0 };
+  document.getElementById("quizFeedback").innerHTML = "";
+  renderQuizStats();
+}
+
+function renderQuizStats(){
+  const totalOk = score.jp_es + score.es_jp + score.kanji + score.ear;
+  document.getElementById("quizStats").innerText =
+    `Aciertos: ${totalOk} · Errores: ${score.wrong}`;
+}
+
+function pick(arr){
+  return arr[Math.floor(Math.random()*arr.length)];
+}
+
+function getQuizImageId(q){
+  // 1) intentar imagen de la página
+  const imgs = q.page?.images || [];
+  if(imgs.length){
+    const one = pick(imgs);
+    if(one?.id) return one.id;   // id sin extensión, perfecto para loadImgWithFallback
+  }
+  // 2) si no hay, usar extra al azar
+  return pick(EXTRA_IMAGES);
 }
 
 function playCoverAudio(){
@@ -374,35 +474,54 @@ function playCoverAudio(){
 }
   
 function showQuestion(){
-  if(currentQuestionIndex>=quizData.length){
+  if(currentQuestionIndex >= quizData.length){
     showResults();
     return;
   }
 
-  const q=quizData[currentQuestionIndex];
-  const div=document.getElementById("quizArea");
-  div.innerHTML="";
+  const q = quizData[currentQuestionIndex];
+  const div = document.getElementById("quizArea");
+  const fb = document.getElementById("quizFeedback");
 
-  document.getElementById("progress").innerText=
-  `Pregunta ${currentQuestionIndex+1}/100`;
+  div.innerHTML = "";
+  fb.innerHTML = ""; // limpio feedback
 
-  const h=document.createElement("h3");
+  document.getElementById("progress").innerText = `Pregunta ${currentQuestionIndex+1}/100`;
+  renderQuizStats();
 
-  if(q.type==="ear"){
-    h.innerText="¿Qué escuchaste?";
+  // 🖼️ Imagen
+  const imgWrap = document.createElement("div");
+  imgWrap.id = "quizImageWrap";
+  const img = document.createElement("img");
+  loadImgWithFallback(img, getQuizImageId(q));
+  imgWrap.appendChild(img);
+  div.appendChild(imgWrap);
+
+  // 🧾 Enunciado
+  const h = document.createElement("h3");
+
+  if(q.type === "ear"){
+    h.innerText = "¿Qué escuchaste?";
     div.appendChild(h);
-    new Audio(AUDIO_PATH+findLineAudio(q.question)).play();
+
+    // reproducir audio de esa línea (con page + index ya guardados)
+    const pnum = q.question.page.page_id;
+    const li = q.question.lineIndex + 1;
+    new Audio(AUDIO_PATH + "p" + String(pnum).padStart(2,"0") + "_l0" + li + ".mp3").play();
   }else{
-    h.innerText=q.question;
+    h.innerText = q.question;
     div.appendChild(h);
   }
 
-  const options=generateOptions(q);
+  // 🅰️🅱️🅾️ Opciones
+  const options = generateOptions(q);
   options.forEach((opt,i)=>{
-    const b=document.createElement("button");
-    b.className="option";
-    b.innerText=String.fromCharCode(65+i)+") "+opt;
-    b.onclick=()=>answer(q,opt);
+    const b = document.createElement("button");
+    b.className = "option";
+    b.innerText = String.fromCharCode(65+i)+") "+opt;
+
+    b.onclick = () => answerWithFeedback(q, opt);
+
     div.appendChild(b);
   });
 }
@@ -437,6 +556,38 @@ function findLineAudio(line){
   }
 }
 
+function answerWithFeedback(q, opt){
+  const fb = document.getElementById("quizFeedback");
+
+  const ok = (opt === q.correct);
+
+  if(ok){
+    score[q.type]++;
+    fb.className = "quizFeedback ok";
+    fb.innerHTML = `✅ Correcto`;
+  }else{
+    score.wrong++;
+    fb.className = "quizFeedback bad";
+    fb.innerHTML = `✘ Incorrecto<br>✅ Respuesta: <b>${q.correct}</b>`;
+  }
+
+  renderQuizStats();
+
+  // desactivar botones para que no respondan 2 veces
+  document.querySelectorAll("#quizArea button.option").forEach(b => b.disabled = true);
+
+  // botón siguiente
+  const nextBtn = document.createElement("button");
+  nextBtn.textContent = "Siguiente ▶";
+  nextBtn.style.marginTop = "12px";
+  nextBtn.onclick = () => {
+    currentQuestionIndex++;
+    showQuestion();
+  };
+  fb.appendChild(document.createElement("br"));
+  fb.appendChild(nextBtn);
+}
+ 
 function answer(q,opt){
   if(opt===q.correct){
     score[q.type]++;
