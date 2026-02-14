@@ -127,16 +127,23 @@ img{
 }
 
 /* 📖 Modo lectura: imágenes del cuento más pequeñas y uniformes */
+/* Contenedor de imágenes en lectura */
+#pageImages{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:16px;
+}
+
+/* Imágenes del cuento en lectura */
 #pageImages img{
-  width: 280px;      /* <-- ajusta aquí (240, 260, 300...) */
-  max-width: 90%;
+  flex: 0 1 240px;     /* base = 240px (tu tamaño actual) */
+  max-width: 45%;      /* si hay 2, cada una ocupa ~45% */
   height: auto;
-  display:block;
-  margin: 10px auto 14px auto;
   border-radius: 12px;
   box-shadow: 0 6px 18px rgba(0,0,0,0.12);
 }
-  
+
 </style>
 </head>
 
