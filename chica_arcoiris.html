@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>虹色の髪の少女 — Asallam Sensei</title>
+
+<style>
+body{
+  margin:0;
+  font-family: Arial, sans-serif;
+  background:#fafafa;
+  color:#111;
+  display:flex;
+  justify-content:center;
+}
+
+.app{
+  width:100%;
+  max-width:900px;
+  padding:20px;
+}
+
+.center{
+  text-align:center;
+}
+
+button{
+  padding:12px 18px;
+  margin:6px;
+  border:none;
+  border-radius:8px;
+  background:#7d5cff;
+  color:white;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+button.secondary{
+  background:#eee;
+  color:#333;
+}
+
+button.option{
+  display:block;
+  width:100%;
+  margin:8px 0;
+  background:#fff;
+  border:1px solid #ddd;
+  color:#111;
+}
+
+.hidden{ display:none; }
+
+img{
+  max-width:100%;
+  border-radius:10px;
+}
+
+.jp{
+  font-size:22px;
+  font-weight:bold;
+  margin-top:10px;
+}
+
+.romaji{
+  color:#666;
+  font-size:14px;
+}
+
+.es{
+  margin-bottom:12px;
+}
+
+.progress{
+  margin:10px 0;
+  font-weight:bold;
+}
+
+.resultBox{
+  background:#fff;
+  padding:20px;
+  border-radius:10px;
+  border:1px solid #ddd;
+}
+</style>
+</head>
+
+<body>
+<div class="app">
+
+<!-- 🔐 GATE -->
+<div id="gate" class="center">
+  <img src="data/arcoiris/imagenes/img_extra_06.jpg">
+  <h2>Introduce la clave</h2>
+  <input type="text" id="password">
+  <br><br>
+  <button onclick="checkPassword()">Entrar</button>
+  <p id="gateMsg" style="color:red;"></p>
+</div>
+
+<!-- 🏠 MENU -->
+<div id="menu" class="hidden center">
+  <h2>虹色の髪の少女</h2>
+  <button onclick="startReading()">📖 Lectura</button>
+  <button onclick="startQuiz()">🎮 Quiz</button>
+</div>
+
+<!-- 📖 LECTURA -->
+<div id="reading" class="hidden">
+  <button class="secondary" onclick="backMenu()">← Volver</button>
+  <h2 id="pageTitle"></h2>
+  <div id="pageImages"></div>
+  <button onclick="playPageAudio()">🔊 Audio página</button>
+  <div id="lines"></div>
+  <div class="center">
+    <button onclick="prevPage()">◀</button>
+    <button onclick="nextPage()">▶</button>
+  </div>
+</div>
+
+<!-- 🎮 QUIZ -->
+<div id="quiz" class="hidden">
+  <button class="secondary" onclick="backMenu()">← Volver</button>
+
+  <div class="progress" id="progress"></div>
+
+  <div id="quizArea"></div>
+</div>
+
+</div>
+
+<script>
+const JSON_PATH = "data/arcoiris/super_json.json";
+const AUDIO_PATH = "data/arcoiris/audios/";
+const IMG_PATH = "data/arcoiris/imagenes/";
+
+let DATA;
+let currentPage = 1;
+
+let quizData = [];
+let currentQuestionIndex = 0;
+let score = {
+  jp_es:0,
+  es_jp:0,
+  kanji:0,
+  ear:0,
+  wrong:0
+};
+
+function checkPassword(){
+  if(document.getElementById("password").value === "rainbow"){
+    document.getElementById("gate").classList.add("hidden");
+    document.getElementById("menu").classList.remove("hidden");
+  }else{
+    document.getElementById("gateMsg").innerText="Clave incorrecta";
+  }
+}
+
+async function loadJSON(){
+  const res = await fetch(JSON_PATH);
+  DATA = await res.json();
+}
+loadJSON();
+
+function backMenu(){
+  document.getElementById("reading").classList.add("hidden");
+  document.getElementById("quiz").classList.add("hidden");
+  document.getElementById("menu").classList.remove("hidden");
+}
+
+function startReading(){
+  document.getElementById("menu").classList.add("hidden");
+  document.getElementById("reading").classList.remove("hidden");
+  renderPage();
+}
+
+function renderPage(){
+  const p = DATA.pages.find(x=>x.page_id===currentPage);
+  document.getElementById("pageTitle").innerText="Página "+currentPage;
+
+  const imgDiv = document.getElementById("pageImages");
+  imgDiv.innerHTML="";
+  if(p.images){
+    p.images.forEach(img=>{
+      const i=document.createElement("img");
+      i.src=IMG_PATH+img.id;
+      imgDiv.appendChild(i);
+    });
+  }
+
+  const linesDiv=document.getElementById("lines");
+  linesDiv.innerHTML="";
+  p.lines.forEach((line,i)=>{
+    const div=document.createElement("div");
+    div.innerHTML=
+      `<div class="jp">${line.jp}</div>
+       <div class="romaji">${line.romaji}</div>
+       <div class="es">${line.es}</div>
+       <button onclick="playLine(${currentPage},${i+1})">🔊 Línea</button>`;
+    linesDiv.appendChild(div);
+  });
+}
+
+function prevPage(){ if(currentPage>1){currentPage--;renderPage();}}
+function nextPage(){ if(currentPage<DATA.pages.length){currentPage++;renderPage();}}
+
+function playPageAudio(){
+  new Audio(AUDIO_PATH+"p"+String(currentPage).padStart(2,"0")+".mp3").play();
+}
+function playLine(p,l){
+  new Audio(AUDIO_PATH+"p"+String(p).padStart(2,"0")+"_l0"+l+".mp3").play();
+}
+
+function startQuiz(){
+  document.getElementById("menu").classList.add("hidden");
+  document.getElementById("quiz").classList.remove("hidden");
+  generateQuiz();
+  showQuestion();
+}
+
+function shuffle(arr){
+  return arr.sort(()=>Math.random()-0.5);
+}
+
+function generateQuiz(){
+  const words=[];
+  const kanji=[];
+  const lines=[];
+  DATA.pages.forEach(p=>{
+    p.lines.forEach(l=>{
+      l.words.forEach(w=>words.push(w));
+      l.kanji.forEach(k=>kanji.push(k));
+      lines.push(l);
+    });
+  });
+
+  shuffle(words);
+  shuffle(kanji);
+  shuffle(lines);
+
+  quizData=[];
+
+  words.slice(0,25).forEach(w=>{
+    quizData.push({type:"jp_es",correct:w.es,question:w.jp});
+  });
+
+  words.slice(25,50).forEach(w=>{
+    quizData.push({type:"es_jp",correct:w.jp,question:w.es});
+  });
+
+  kanji.slice(0,25).forEach(k=>{
+    quizData.push({type:"kanji",correct:k.gloss[0],question:k.k});
+  });
+
+  lines.slice(0,25).forEach(l=>{
+    quizData.push({type:"ear",correct:l.jp,question:l});
+  });
+
+  shuffle(quizData);
+  currentQuestionIndex=0;
+}
+
+function showQuestion(){
+  if(currentQuestionIndex>=quizData.length){
+    showResults();
+    return;
+  }
+
+  const q=quizData[currentQuestionIndex];
+  const div=document.getElementById("quizArea");
+  div.innerHTML="";
+
+  document.getElementById("progress").innerText=
+  `Pregunta ${currentQuestionIndex+1}/100`;
+
+  const h=document.createElement("h3");
+
+  if(q.type==="ear"){
+    h.innerText="¿Qué escuchaste?";
+    div.appendChild(h);
+    new Audio(AUDIO_PATH+findLineAudio(q.question)).play();
+  }else{
+    h.innerText=q.question;
+    div.appendChild(h);
+  }
+
+  const options=generateOptions(q);
+  options.forEach((opt,i)=>{
+    const b=document.createElement("button");
+    b.className="option";
+    b.innerText=String.fromCharCode(65+i)+") "+opt;
+    b.onclick=()=>answer(q,opt);
+    div.appendChild(b);
+  });
+}
+
+function generateOptions(q){
+  let pool=[];
+  if(q.type==="jp_es"){
+    pool=quizData.filter(x=>x.type==="jp_es").map(x=>x.correct);
+  }
+  if(q.type==="es_jp"){
+    pool=quizData.filter(x=>x.type==="es_jp").map(x=>x.correct);
+  }
+  if(q.type==="kanji"){
+    pool=quizData.filter(x=>x.type==="kanji").map(x=>x.correct);
+  }
+  if(q.type==="ear"){
+    pool=DATA.pages.flatMap(p=>p.lines.map(l=>l.jp));
+  }
+
+  pool=shuffle(pool).slice(0,3);
+  pool.push(q.correct);
+  return shuffle(pool);
+}
+
+function findLineAudio(line){
+  for(const p of DATA.pages){
+    for(let i=0;i<p.lines.length;i++){
+      if(p.lines[i].jp===line.jp){
+        return "p"+String(p.page_id).padStart(2,"0")+"_l0"+(i+1)+".mp3";
+      }
+    }
+  }
+}
+
+function answer(q,opt){
+  if(opt===q.correct){
+    score[q.type]++;
+  }else{
+    score.wrong++;
+  }
+  currentQuestionIndex++;
+  showQuestion();
+}
+
+function showResults(){
+  const div=document.getElementById("quizArea");
+  div.innerHTML=`
+  <div class="resultBox">
+  <h2>RESULTADOS</h2>
+  JP→ES: ${score.jp_es}/25<br>
+  ES→JP: ${score.es_jp}/25<br>
+  Kanji: ${score.kanji}/25<br>
+  Oído: ${score.ear}/25<br>
+  <br>
+  Total correcto: ${score.jp_es+score.es_jp+score.kanji+score.ear}/100
+  </div>
+  `;
+}
+</script>
+
+</body>
+</html>
