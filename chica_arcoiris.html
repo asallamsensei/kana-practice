@@ -190,8 +190,8 @@ function renderPage(){
   imgDiv.innerHTML="";
   if(p.images){
     p.images.forEach(img=>{
-      const i=document.createElement("img");
-      i.src=IMG_PATH+img.id;
+      const i = document.createElement("img");
+      loadImgWithFallback(i, img.id);
       imgDiv.appendChild(i);
     });
   }
@@ -230,6 +230,33 @@ function shuffle(arr){
   return arr.sort(()=>Math.random()-0.5);
 }
 
+function imgCandidates(id){
+  return [
+    IMG_PATH + id + ".jpg",
+    IMG_PATH + id + ".webp",
+    IMG_PATH + id + ".png",
+    IMG_PATH + id + ".jpeg"
+  ];
+}
+
+function loadImgWithFallback(imgEl, id){
+  const cands = imgCandidates(id);
+  let idx = 0;
+
+  function tryNext(){
+    if(idx >= cands.length){
+      imgEl.style.display = "none";
+      return;
+    }
+    imgEl.src = cands[idx++];
+  }
+
+  imgEl.onload = () => { imgEl.style.display = "block"; };
+  imgEl.onerror = () => { tryNext(); };
+
+  tryNext();
+}
+  
 function generateQuiz(){
   const words=[];
   const kanji=[];
