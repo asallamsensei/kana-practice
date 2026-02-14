@@ -133,16 +133,17 @@ img{
   flex-wrap:wrap;
   justify-content:center;
   gap:16px;
+  align-items:flex-start;   /* 👈 CLAVE: no iguala alturas */
 }
 
-/* Imágenes del cuento en lectura */
 #pageImages img{
-  flex: 0 1 240px;     /* base = 240px (tu tamaño actual) */
-  max-width: 45%;      /* si hay 2, cada una ocupa ~45% */
-  height: auto;
+  width: 180px;        /* más pequeño */
+  max-width: 100%;
+  height: auto;        /* mantiene proporción */
   border-radius: 12px;
   box-shadow: 0 6px 18px rgba(0,0,0,0.12);
 }
+
 
 </style>
 </head>
