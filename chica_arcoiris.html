@@ -383,6 +383,13 @@ function showResults(){
   </div>
   `;
 }
+
+document.getElementById("password").addEventListener("keydown", function(e){
+  if(e.key === "Enter"){
+    checkPassword();
+  }
+});
+
 </script>
 
 </body>
