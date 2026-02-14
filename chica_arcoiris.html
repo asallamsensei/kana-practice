@@ -596,25 +596,67 @@ function showQuestion(){
   });
 }
 
+function normalizeOpt(s){
+  return String(s ?? "")
+    .trim()
+    .replace(/\s+/g, " ")
+    .toLowerCase();
+}
+
 function generateOptions(q){
-  let pool=[];
+  let pool = [];
+
   if(q.type==="jp_es"){
-    pool=quizData.filter(x=>x.type==="jp_es").map(x=>x.correct);
+    pool = DATA.pages.flatMap(p => p.lines.flatMap(l => (l.words||[]).map(w => w.es)));
   }
   if(q.type==="es_jp"){
-    pool=quizData.filter(x=>x.type==="es_jp").map(x=>x.correct);
+    pool = DATA.pages.flatMap(p => p.lines.flatMap(l => (l.words||[]).map(w => w.jp)));
   }
   if(q.type==="kanji"){
-    pool=quizData.filter(x=>x.type==="kanji").map(x=>x.correct);
+    pool = DATA.pages.flatMap(p => p.lines.flatMap(l => (l.kanji||[]).map(k => (k.gloss||[])[0])));
   }
   if(q.type==="ear"){
-    pool=DATA.pages.flatMap(p=>p.lines.map(l=>l.jp));
+    pool = DATA.pages.flatMap(p => (p.lines||[]).map(l => l.jp));
   }
 
-  pool=shuffle(pool).slice(0,3);
-  pool.push(q.correct);
-  return shuffle(pool);
+  // limpiar pool: strings válidos
+  pool = pool.filter(x => typeof x === "string" && x.trim().length);
+
+  // Construir opciones únicas: 3 distractores + correcta = 4
+  const correct = String(q.correct ?? "").trim();
+  const correctKey = normalizeOpt(correct);
+
+  const seen = new Set();
+  const opts = [];
+
+  // meter correcta primero (única)
+  if(correctKey){
+    seen.add(correctKey);
+    opts.push(correct);
+  }
+
+  // barajar pool y sacar distractores únicos
+  const shuffled = shuffle([...pool]);
+
+  for(const cand of shuffled){
+    if(opts.length >= 4) break;
+    const c = String(cand).trim();
+    const key = normalizeOpt(c);
+    if(!key) continue;
+    if(seen.has(key)) continue;          // evita repetidas
+    if(key === correctKey) continue;     // evita que se cuele la correcta duplicada
+    seen.add(key);
+    opts.push(c);
+  }
+
+  // si por alguna razón no alcanzó 4 (pool pequeño), rellena con extras genéricos
+  while(opts.length < 4){
+    opts.push("—");
+  }
+
+  return shuffle(opts);
 }
+
 
 function findLineAudio(line){
   for(const p of DATA.pages){
