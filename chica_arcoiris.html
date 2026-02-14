@@ -182,6 +182,40 @@ img{
   color: #7a1b16;
 }
 
+/* 🧭 Topbar (Volver + Quiz en una sola fila) */
+.topbar{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  margin-bottom: 8px;
+}
+.topbarTitle{
+  font-weight:900;
+  font-size:18px;
+}
+
+/* 🎯 Centrado en quiz */
+#progress,
+#quizStats{
+  text-align:center;
+}
+
+/* Centrar todo el contenido generado en quizArea */
+#quizArea{
+  text-align:center;
+}
+
+/* Centrar la retroalimentación y el botón siguiente */
+#quizFeedback{
+  text-align:center;
+}
+
+/* El cuadro de feedback centrado (si usas .quizFeedback) */
+.quizFeedback{
+  text-align:center;
+}
+
 </style>
 </head>
 
@@ -234,7 +268,10 @@ img{
 
 <!-- 🎮 QUIZ -->
 <div id="quiz" class="hidden">
-  <button class="secondary" onclick="backMenu()">← Volver</button>
+  <div class="topbar">
+    <button class="secondary" onclick="backMenu()">← Volver</button>
+    <div class="topbarTitle">Quiz</div>
+  </div>
 
   <div class="progress" id="progress"></div>
 
@@ -242,6 +279,7 @@ img{
   <div id="quizFeedback"></div>
   <div class="progress" id="quizStats"></div>
 </div>
+
 
 </div>
 
