@@ -63,6 +63,36 @@ img{
   border-radius:16px;
   box-shadow:0 8px 25px rgba(0,0,0,0.15);
 }
+
+.cover-img{
+  width: 260px;
+  max-width: 85%;
+  display:block;
+  margin: 0 auto 12px auto;
+  border-radius: 14px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.14);
+}
+
+.menu-romaji{
+  font-size: 16px;
+  color:#333;
+  margin: 6px 0 6px 0;
+}
+
+.menu-sub{
+  font-size: 14px;
+  color:#555;
+  margin-bottom: 12px;
+}
+
+.menu-audio{
+  margin: 10px 0 16px 0;
+}
+
+.menu-audio audio{
+  width: min(520px, 100%);
+  margin-top: 8px;
+}
   
 .jp{
   font-size:22px;
@@ -108,7 +138,18 @@ img{
 
 <!-- 🏠 MENU -->
 <div id="menu" class="hidden center">
-  <h2>虹色の髪の少女</h2>
+  <img id="menuCover" class="cover-img" alt="Portada">
+
+  <h2 id="menuTitleJp">虹色の髪の少女</h2>
+
+  <div id="menuTitleRomaji" class="menu-romaji"></div>
+  <div class="menu-sub">cuento educativo japonés escrito por Asallam Sensei</div>
+
+  <div class="menu-audio">
+    <button onclick="playCoverAudio()">🔊 Audio portada</button>
+    <audio id="coverAudio" controls preload="none"></audio>
+  </div>
+
   <button onclick="startReading()">📖 Lectura</button>
   <button onclick="startQuiz()">🎮 Quiz</button>
 </div>
@@ -159,10 +200,14 @@ function checkPassword(){
   if(document.getElementById("password").value === "rainbow"){
     document.getElementById("gate").classList.add("hidden");
     document.getElementById("menu").classList.remove("hidden");
+
+    renderMenuFromJSON();   // 👈 ESTA ES LA CLAVE
+
   }else{
     document.getElementById("gateMsg").innerText="Clave incorrecta";
   }
 }
+
 
 async function loadJSON(){
   const res = await fetch(JSON_PATH);
@@ -295,6 +340,11 @@ function generateQuiz(){
   currentQuestionIndex=0;
 }
 
+function playCoverAudio(){
+  const a = document.getElementById("coverAudio");
+  a.play().catch(()=>{});
+}
+  
 function showQuestion(){
   if(currentQuestionIndex>=quizData.length){
     showResults();
@@ -390,6 +440,29 @@ document.getElementById("password").addEventListener("keydown", function(e){
   }
 });
 
+function renderMenuFromJSON(){
+  if(!DATA?.story) return;
+
+  // 1️⃣ Título JP desde JSON
+  document.getElementById("menuTitleJp").textContent =
+    DATA.story.title_jp || "—";
+
+  // 2️⃣ Romaji (agregamos paréntesis aquí)
+  const r = (DATA.story.title_romaji || "").trim();
+  document.getElementById("menuTitleRomaji").textContent =
+    r ? `(${r})` : "";
+
+  // 3️⃣ Portada (detecta extensión automáticamente)
+  const coverEl = document.getElementById("menuCover");
+  loadImgWithFallback(coverEl, "portada");
+
+  // 4️⃣ Audio portada preparado
+  const a = document.getElementById("coverAudio");
+  a.src = AUDIO_PATH + "portada.mp3";
+  a.onerror = () => { a.removeAttribute("src"); };
+}
+
+  
 </script>
 
 </body>
