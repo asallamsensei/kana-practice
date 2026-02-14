@@ -458,15 +458,24 @@ function pick(arr){
 }
 
 function getQuizImageId(q){
-  // 1) intentar imagen de la página
-  const imgs = q.page?.images || [];
-  if(imgs.length){
-    const one = pick(imgs);
-    if(one?.id) return one.id;   // id sin extensión, perfecto para loadImgWithFallback
+  const pageImgs = (q.page?.images || []).map(img => img.id).filter(Boolean);
+
+  const P_PAGE = 0.60; // <-- cambia esto (0.6, 0.8, etc.)
+
+  // Si hay imágenes de página y cae en probabilidad
+  if(pageImgs.length && Math.random() < P_PAGE){
+    return pick(pageImgs); // si hay varias (p9), elige 1 al azar
   }
-  // 2) si no hay, usar extra al azar
-  return pick(EXTRA_IMAGES);
+
+  // Si no, usa extra (y si por alguna razón no hay extras, cae a página)
+  if(EXTRA_IMAGES.length){
+    return pick(EXTRA_IMAGES);
+  }
+
+  // fallback final
+  return pageImgs.length ? pick(pageImgs) : null;
 }
+
 
 function playCoverAudio(){
   const a = document.getElementById("coverAudio");
