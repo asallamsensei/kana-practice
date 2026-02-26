@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+  
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
+
+<title>Kanji de Grado 1 - Asallam Sensei</title>
+<style>
+  :root{
+    --bg: #0b1020;
+    --card: rgba(255,255,255,.08);
+    --card2: rgba(255,255,255,.10);
+    --border: rgba(255,255,255,.14);
+  
+    --text:#ffffff;
+    --muted:#ffffff;
+  
+    --abc: rgba(239,68,68,.85);      /* rojo */
+    --abcHover: rgba(239,68,68,.70);
+  
+    --nav: rgba(125,92,255,.85);     /* morado */
+    --navHover: rgba(125,92,255,.70);
+  
+    --ok:#22c55e;
+    --bad:#ef4444;
+  
+    --jp: "Noto Sans JP","Hiragino Kaku Gothic ProN","Yu Gothic","Meiryo","MS PGothic",system-ui,sans-serif;
+    --shadow: 0 18px 45px rgba(0,0,0,.35);
+  }
+
+
+  body{
+    margin:0;
+    font-family: Arial, system-ui, sans-serif;
+    background:
+      radial-gradient(1200px 700px at 20% 10%, rgba(125,92,255,.35), transparent 60%),
+      radial-gradient(900px 600px at 90% 20%, rgba(34,197,94,.22), transparent 60%),
+      radial-gradient(900px 600px at 30% 90%, rgba(239,68,68,.18), transparent 55%),
+      var(--bg);
+    color: var(--text);
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    align-items:stretch;
+    padding: 26px 14px 70px;
+  }
+
+  h1{
+    font-size:clamp(20px, 5vw, 30px);
+    margin: 6px 0 6px;
+    text-align:center;
+    font-weight: 600;    /* baja la negrita */
+  }
+
+  /* Controles (modo + reset) */
+  #controles{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    justify-content:center;
+    margin-top:10px;
+    margin-bottom:6px;
+  }
+
+
+  /* Pregunta */
+  #kanji{
+    font-family: var(--jp);
+    font-size:70px;
+    margin: 5px 0 0 0;
+    font-weight:500;         /* antes 800 */
+    text-align:center;
+    line-height:1.1;
+    word-break:break-word;
+    letter-spacing: .02em;
+  }
+
+  /* ✅ Cuando la pregunta sea español (modo significado→kanji), achicar */
+  #kanji.esPregunta{
+    font-family: Arial, sans-serif; /* español normal */
+    font-size:38px;                 /* antes 46 */
+    font-weight:700;                /* antes 800 */
+    line-height:1.25;
+    letter-spacing: 0;
+  }
+
+
+  /* Botones ABC */
+  #opbtns{
+    display:flex;
+    gap:10px;
+    justify-content:center;
+    margin-top:0px;
+  }
+  .btnABC{
+    padding:10px 16px;
+    font-size:18px;
+    border-radius:12px;
+    border:1px solid rgba(255,255,255,.14);
+    background: rgba(239,68,68,.18);
+    color:#fff;
+    cursor:pointer;
+    min-width:64px;
+    font-weight:900;
+    transition:.14s;
+  }
+  .btnABC:hover{
+    background: rgba(239,68,68,.28);
+    transform: translateY(-1px);
+  }
+
+
+  /* Input */
+  #respuestaUsuario{
+    display:block;          /* ✅ asegura que sea bloque */
+    font-size:22px;
+    padding:10px 12px;
+    border-radius:12px;
+    border:1px solid var(--border);
+    text-align:center;
+    width:14ch;
+    margin:0;
+  
+    background: rgba(255,255,255,.06);
+    color: var(--text);
+    outline:none;
+  }
+
+  #respuestaUsuario::placeholder{ color: rgba(255,255,255,.70); }
+  #respuestaUsuario:focus{
+    border-color: rgba(255,255,255,.22);
+    box-shadow: 0 0 0 4px rgba(125,92,255,.18);
+  }
+
+
+  /* Nav debajo del input */
+  #navBtns{
+    margin-top:0;          /* ✅ quita el extra */
+    display:flex;
+    gap:10px;
+    justify-content:center;
+    flex-wrap:wrap;
+  }
+
+  .btnNav{
+    padding:12px 20px;
+    font-size:16px;
+    border-radius:12px;
+    border:1px solid rgba(255,255,255,.14);
+    background: rgba(125,92,255,.18);
+    color:white;
+    cursor:pointer;
+    font-weight:500;
+    transition:.14s;
+  }
+  .btnNav:hover{
+    background: rgba(125,92,255,.28);
+    transform: translateY(-1px);
+  }
+
+
+  /* Reset */
+  .btnReset{
+    padding:10px 16px;
+    font-size:16px;
+    border-radius:999px;
+    border:1px solid rgba(255,255,255,.16);
+    background: rgba(0,0,0,.25);
+    color:#fff;
+    cursor:pointer;
+    font-weight:900;
+    transition:.14s;
+  }
+  .btnReset:hover{
+    background: rgba(0,0,0,.35);
+    transform: translateY(-1px);
+  }
+
+
+  /* Resultado + stats */
+  #resultado{
+    margin-top:14px;
+    font-size:22px;
+    text-align:center;
+    min-height: 28px;
+  }
+  .correcto{ color:var(--ok); font-weight:900; }
+  .incorrecto{ color:var(--bad); font-weight:900; }
+
+  #estadisticas{
+    margin-top:8px;
+    font-size:20px;
+    text-align:center;
+  }
+
+  /* Botón general (por si luego lo usas) */
+  button{ -webkit-tap-highlight-color: transparent; }
+
+  /* --- Modos (3 botoncitos) --- */
+  .modes{
+    display:flex;
+    gap:8px;
+    justify-content:center;
+    flex-wrap:wrap;
+  }
+  
+  .btnMode{
+    padding:10px 14px;
+    font-size:16px;
+    border-radius:999px;
+    border:1px solid var(--border);
+    background: rgba(255,255,255,.06);
+    color: var(--text);
+    cursor:pointer;
+    font-weight:500;
+    transition:.14s;
+  }
+  .btnMode:hover{
+    background: rgba(255,255,255,.09);
+    transform: translateY(-1px);
+  }
+  .btnMode.active{
+    background:#111;
+    color:white;
+    border-color: rgba(255,255,255,.22);
+  }
+
+  
+  /* --- Grid pregunta + opciones --- */
+  .qaGrid{
+    display:inline-grid;            /* ✅ clave */
+    grid-template-columns: 1fr;
+    justify-items:center;
+    gap:10px;
+    margin-top:12px;
+  
+    width: fit-content;             /* ✅ autofit */
+    margin-left:auto;               /* ✅ centrado */
+    margin-right:auto;
+  
+    background: linear-gradient(180deg, var(--card2), var(--card));
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    box-shadow: var(--shadow);
+    padding: 10px 14px 14px;
+  }
+
+
+  .answerGrid{
+    display:grid;
+    justify-items:center;
+    gap:14px;
+    margin-top:14px;
+  
+    /* 🔥 autofit real + centrado */
+    width: fit-content;
+    max-width: min(920px, 96vw);
+    margin-left:auto;
+    margin-right:auto;
+  
+    /* opcional: que también sea tipo “card” */
+    padding: 12px 14px 14px;
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    background: linear-gradient(180deg, var(--card2), var(--card));
+    box-shadow: var(--shadow);
+  }
+
+  
+  /* Opciones como bloque centrado */
+  #opciones{
+    font-size:24px;                 /* antes 22 */
+    font-family: Arial, sans-serif;
+    width:auto;
+    max-width:min(560px, 92vw);     /* un poquito más */
+    text-align:left;
+    margin-top:0;
+    justify-self:center;
+    line-height:1.75;
+  }
+  
+  #opciones.jp{
+    font-family: var(--jp);
+    font-weight: 600;
+  }
+
+  .wrap{
+    width: min(980px, 100%);
+    margin: 0 auto;
+    display:flex;
+    flex-direction:column;
+    align-items:center; /* ✅ esto centra hijos como qaGrid */
+  }
+
+  /* 📱 CELULAR: reducir tamaño del texto de los botones de modo */
+  @media (max-width: 520px){
+    .btnMode{
+      font-size: 12px;
+    }
+  }
+  
+</style>
+</head>
+
+<body>
+  <div class="wrap">
+  <h1>Kanji de Grado 1 — Asallam Sensei</h1>
+
+  <div id="controles">
+    <div class="modes">
+      <button id="btnKS" class="btnMode active" type="button" onclick="setModo('kanji-sig')">
+        Kanji → Significado
+      </button>
+      <button id="btnSK" class="btnMode" type="button" onclick="setModo('sig-kanji')">
+        Significado → Kanji
+      </button>
+      <button id="btnMix" class="btnMode" type="button" onclick="setModo('mix')">
+        Mezcla
+      </button>
+    </div>
+  </div>
+
+  <div class="qaGrid">
+    <div id="kanji">日</div>
+    <div id="opciones"></div>
+  </div>
+
+  <div class="answerGrid">
+    <div id="opbtns">
+      <button class="btnABC" type="button" onclick="responder('a')">a</button>
+      <button class="btnABC" type="button" onclick="responder('b')">b</button>
+      <button class="btnABC" type="button" onclick="responder('c')">c</button>
+    </div>
+  
+    <input id="respuestaUsuario"
+           type="text"
+           placeholder="a / b / c + Enter"
+           maxlength="1"
+           onkeydown="manejarEnter(event)" />
+  
+    <div id="navBtns">
+      <button class="btnNav" type="button" onclick="accionMostrar()">Mostrar respuesta</button>
+      <button class="btnNav" type="button" onclick="accionSiguiente()">Siguiente</button>
+    </div>
+  </div>
+
+
+  <div id="resultado"></div>
+
+  <div id="estadisticas">
+    Aciertos: <span id="aciertos">0</span> —
+    Errores: <span id="errores">0</span>
+    <div style="margin-top:8px;">
+      <button class="btnReset" type="button" onclick="resetStats()">Reset stats</button>
+    </div>
+  </div>
+
+<script>
+let lista = [];
+let actual = 0;
+
+let aciertos = 0;
+let errores = 0;
+
+let correcta = "";             // 'a'/'b'/'c'
+let respuestaCorrecta = "";    // texto correcto (depende del modo)
+let yaValidado = false;        // ya se verificó la respuesta actual
+  
+let modoActual = "kanji-sig"; // 'kanji-sig' | 'sig-kanji' | 'mix'
+let dirActual = "kanji-sig"; // dirección REAL de la pregunta actual (en mix puede cambiar)
+  
+// Anti-teclado automático (como en tu otro proyecto)
+let focoAutomatico = false; // por defecto: NO forzar focus (no abre teclado)
+document.addEventListener("pointerdown", (e) => {
+  focoAutomatico = (e.target && e.target.id === "respuestaUsuario");
+});
+document.addEventListener("keydown", (e) => {
+  if(["a","b","c","Enter"].includes(e.key)) focoAutomatico = true;
+});
+
+const letras = ["a","b","c"];
+
+// ✅ Cargar kanji desde JSON (obj: {kanji, significado})
+fetch("data/kanji_1.json")
+  .then(res => res.json())
+  .then(data => {
+    lista = (data || []).filter(x => x && x.kanji && x.significado);
+    siguiente();
+  })
+  .catch(() => {
+    document.getElementById("resultado").innerText =
+      "No se pudo cargar data/kanji_1.json";
+    document.getElementById("resultado").className = "incorrecto";
+  });
+
+function getModo(){
+  return modoActual;
+}
+
+function setModo(m){
+  modoActual = m;
+
+  dirActual = (m === "mix") ? "kanji-sig" : m; // valor inicial; en mix se redefine en siguiente()
+  
+  // activar/desactivar estilos de botones
+  document.getElementById("btnKS").classList.toggle("active", m==="kanji-sig");
+  document.getElementById("btnSK").classList.toggle("active", m==="sig-kanji");
+  document.getElementById("btnMix").classList.toggle("active", m==="mix");
+
+  // limpiar y siguiente (sin tocar stats)
+  yaValidado = false;
+  document.getElementById("resultado").innerText = "";
+  document.getElementById("resultado").className = "";
+  document.getElementById("respuestaUsuario").value = "";
+  siguiente();
+}
+
+function textoPregunta(item){
+  return (dirActual === "kanji-sig") ? item.kanji : item.significado;
+}
+
+function textoRespuesta(item){
+  return (dirActual === "kanji-sig") ? item.significado : item.kanji;
+}
+
+
+function aplicarEstiloPregunta(){
+  const el = document.getElementById("kanji");
+  if (dirActual === "sig-kanji") el.classList.add("esPregunta");
+  else el.classList.remove("esPregunta");
+}
+
+
+
+function limpiarUIParaNueva(){
+  const res = document.getElementById("resultado");
+  res.innerText = "";
+  res.className = "";
+  document.getElementById("respuestaUsuario").value = "";
+  yaValidado = false;
+
+  if (focoAutomatico) {
+    document.getElementById("respuestaUsuario").focus();
+  }
+}
+
+function siguiente(){
+  if (lista.length < 3) return;
+
+  limpiarUIParaNueva(); // primero limpia
+
+  actual = Math.floor(Math.random() * lista.length);
+  const itemCorrecto = lista[actual];
+
+  // decidir dirección real para ESTA pregunta (sin mutar el objeto)
+  if (getModo() === "mix") {
+    dirActual = (Math.random() < 0.5) ? "kanji-sig" : "sig-kanji";
+  } else {
+    dirActual = getModo();
+  }
+
+
+  respuestaCorrecta = textoRespuesta(itemCorrecto);
+
+  let opciones = [respuestaCorrecta];
+  while (opciones.length < 3) {
+    const rItem = lista[Math.floor(Math.random() * lista.length)];
+    const r = textoRespuesta(rItem);
+    if (!opciones.includes(r)) opciones.push(r);
+  }
+
+  opciones.sort(() => Math.random() - 0.5);
+  correcta = letras[opciones.indexOf(respuestaCorrecta)];
+
+  aplicarEstiloPregunta();
+  aplicarEstiloOpciones();
+  document.getElementById("kanji").innerText = textoPregunta(itemCorrecto);
+  document.getElementById("opciones").innerHTML =
+    `a) ${opciones[0]}<br>
+     b) ${opciones[1]}<br>
+     c) ${opciones[2]}`;
+}
+
+/* ✅ Verificar la letra actual del input */
+function verificar(){
+  if (yaValidado) return; // evitar doble conteo
+
+  const r = document.getElementById("respuestaUsuario").value.toLowerCase().trim();
+  const res = document.getElementById("resultado");
+
+  if (r === correcta) {
+    res.innerText = "Correcto ✔";
+    res.className = "correcto";
+    aciertos++;
+    document.getElementById("aciertos").innerText = aciertos;
+  } else {
+    res.innerText = `Incorrecto ✘ (era ${correcta})`;
+    res.className = "incorrecto";
+    errores++;
+    document.getElementById("errores").innerText = errores;
+  }
+
+  yaValidado = true;
+}
+
+/* ✅ Botones a/b/c: llenan input y verifican */
+function responder(letra){
+  focoAutomatico = false;
+  if (yaValidado) return;
+  document.getElementById("respuestaUsuario").value = letra;
+  verificar();
+}
+
+/* ✅ Enter: primero verifica; si ya estaba verificado → siguiente */
+function manejarEnter(event){
+  if (event.key !== "Enter") return;
+
+  if (!yaValidado) verificar();
+  else siguiente();
+}
+
+/* ✅ Siguiente: debe requerir 2 toques (primero verifica, segundo avanza) */
+function accionSiguiente(){
+  focoAutomatico = false;
+
+  if (!yaValidado) {
+    // primero: verifica
+    verificar();
+    return;
+  }
+  // segundo: avanza
+  siguiente();
+}
+
+/*
+  ✅ Mostrar respuesta:
+  - la primera vez: muestra "Respuesta: ... (era b)" y CUENTA ERROR
+  - la segunda vez: avanza (para que también sea de 2 toques como "Siguiente")
+*/
+function accionMostrar(){
+  focoAutomatico = false;
+
+  if (!yaValidado) {
+    // Si aún no ha respondido, al mostrar respuesta: marcar error.
+    errores++;
+    document.getElementById("errores").innerText = errores;
+
+    const res = document.getElementById("resultado");
+    res.innerText = `Respuesta: ${respuestaCorrecta} (era ${correcta})`;
+    res.className = "";
+
+    yaValidado = true;
+    return;
+  }
+
+  // Si ya estaba validado o ya se mostró → segundo toque avanza
+  siguiente();
+}
+
+/* Reset stats: resetea todo (stats + UI) */
+function resetStats(){
+  aciertos = 0;
+  errores = 0;
+  document.getElementById("aciertos").innerText = "0";
+  document.getElementById("errores").innerText = "0";
+  siguiente();
+}
+  
+function aplicarEstiloOpciones(){
+  const op = document.getElementById("opciones");
+  const opcionesSonJapones = (dirActual === "sig-kanji"); // en este modo la respuesta/opciones son kanji
+  op.classList.toggle("jp", opcionesSonJapones);
+}
+
+</script>
+  </div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+

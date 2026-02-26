@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Vocabulario N5 — Asallam Sensei</title>
+
+<style>
+  :root{
+    --bg: #0b1020;
+    --card: rgba(255,255,255,.08);
+    --card2: rgba(255,255,255,.10);
+    --text: #eef2ff;
+    --muted: rgba(238,242,255,.75);
+    --accent: #7d5cff;
+    --accent2:#22c55e;
+    --danger:#ef4444;
+    --border: rgba(255,255,255,.14);
+
+    /* Dictado rojos */
+    --dictadoRed: #ff3b30;     /* más intenso (dictado) */
+    --dictadoRedSoft:#d94a45;  /* menos intenso (base activo en dictado) */
+  }
+
+  body{
+    margin:0;
+    font-family: Arial, sans-serif;
+    background: radial-gradient(1200px 700px at 20% 10%, rgba(125,92,255,.35), transparent 60%),
+                radial-gradient(900px 600px at 90% 20%, rgba(34,197,94,.22), transparent 60%),
+                radial-gradient(900px 600px at 30% 90%, rgba(239,68,68,.18), transparent 55%),
+                var(--bg);
+    color: var(--text);
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    padding:28px 14px 70px;
+  }
+
+  .wrap{ width:min(980px, 100%); }
+
+  header{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    margin-bottom:16px;
+    align-items:center;          /* ✅ centrado */
+    text-align:center;           /* ✅ centrado */
+  }
+
+  h1{
+    margin:0;
+    font-size: 26px;
+    letter-spacing:.2px;
+  }
+
+  /* Layout: un solo panel centrado */
+  .solo{
+    display:flex;
+    justify-content:center;
+  }
+  .solo .card{ width: min(980px, 100%); }
+
+  .card{
+    background: linear-gradient(180deg, var(--card2), var(--card));
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    box-shadow: 0 18px 45px rgba(0,0,0,.35);
+    padding: 16px;
+  }
+
+  /* ✅ grid principal autofit (speaker/pregunta/opciones/input/botones) */
+  .panelGrid{
+    display:grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+    justify-items: center;
+  }
+
+  .row{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    align-items:center;
+  }
+
+  input{
+    background: rgba(255,255,255,.08);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 10px 12px;
+    border-radius: 12px;
+    outline:none;
+    font-size: 15px;
+    width: min(420px, 100%);
+  }
+
+  .btn{
+    border: none;
+    border-radius: 12px;
+    padding: 11px 14px;
+    cursor: pointer;
+    color: white;
+    background: var(--accent);
+    font-weight: bold;
+    transition: .15s;
+  }
+  .btn:hover{ transform: translateY(-1px); filter: brightness(1.06); }
+  .btn:disabled{ opacity:.45; cursor:not-allowed; transform:none; filter:none; }
+
+  .btn-ghost{
+    background: rgba(255,255,255,.08);
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-weight: 700;
+  }
+
+  .btn-mode{
+    background: rgba(255,255,255,.08);
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-weight: 800;
+  }
+  .btn-mode.activo{
+    background: var(--accent);
+    border-color: transparent;
+  }
+
+  /* ✅ estado dictado (rojo) */
+  .btn-mode.dictado-on{
+    background: var(--dictadoRed);
+    border-color: transparent;
+  }
+  /* ✅ botón base activo cuando dictado está on (rojo suave) */
+  .btn-mode.base-dictado{
+    background: var(--dictadoRedSoft);
+    border-color: transparent;
+  }
+
+  .big{
+    text-align:center;
+    padding: 20px 10px 10px;
+  }
+
+  /* Pregunta grande (JP por defecto) */
+  #promptMain{
+    font-size: 64px;
+    font-weight: 900;
+    letter-spacing: .5px;
+    margin: 6px 0 8px;
+    word-break: break-word;
+    width: min(920px, 100%);
+  }
+  /* Cuando la pregunta sea ES, achicamos */
+  #promptMain.esPregunta{
+    font-size: 40px;
+    font-weight: 800;
+    letter-spacing: .2px;
+    line-height: 1.25;
+  }
+
+  #promptSub{
+    color: var(--muted);
+    font-size: 16px;
+    margin: 0 0 2px;
+    min-height: 20px;
+    width: min(920px, 100%);
+  }
+
+  #resultado{
+    margin-top: 4px;
+    font-size: 20px;
+    min-height: 28px;
+    text-align:center;
+    font-weight: 900;
+    width: min(920px, 100%);
+  }
+
+  .correcto{ color: var(--accent2); }
+  .incorrecto{ color: var(--danger); }
+
+  .stats{
+    margin-top: 4px;
+    text-align:center;
+    color: var(--muted);
+    font-size: 15px;
+    width: min(920px, 100%);
+  }
+
+  /* Switch de modos (grid autofit) */
+  .switch{
+    display:grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap:8px;
+    width:min(560px, 100%);
+  }
+  .switch .btn-mode{
+    padding: 9px 12px;
+    border-radius: 999px;
+    font-size: 13px;
+    width:100%;
+  }
+
+  /* Botón parlantico grande */
+  .btnAudioBig{
+    border:none;
+    cursor:pointer;
+    background: rgba(255,255,255,.08);
+    border: 1px solid var(--border);
+    color: var(--text);
+    border-radius: 16px;
+    padding: 12px 14px;
+    font-size: 20px;
+    line-height: 1;
+    user-select:none;
+  }
+  .btnAudioBig:hover{ filter: brightness(1.1); transform: translateY(-1px); }
+  .btnAudioBig:active{ transform: translateY(0px); }
+  .btnAudioBig[disabled]{ opacity:.35; cursor:not-allowed; transform:none; }
+
+  /* Opciones (grid autofit) */
+#opcionesBtns{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  width:min(560px, 100%);
+  margin-left:auto;
+  margin-right:auto;
+}
+
+  .optBtn{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+    text-align:left;
+    border-radius: 14px;
+    border: 1px solid var(--border);
+    background: rgba(0,0,0,.18);
+    color: var(--text);
+    padding: 12px 14px;
+    cursor:pointer;
+    font-weight: 800;
+    transition: .12s;
+  }
+  .optBtn:hover{ transform: translateY(-1px); filter: brightness(1.05); }
+  .optBtn:disabled{
+    cursor:not-allowed;
+    transform:none;
+    filter:none;
+    opacity:.95;
+  }
+
+  .optLeft{
+    display:flex;
+    align-items:flex-start;
+    gap:10px;
+    flex:1;
+  }
+  .optLetter{
+    width:26px;
+    height:26px;
+    border-radius:9px;
+    display:grid;
+    place-items:center;
+    background: rgba(255,255,255,.08);
+    border:1px solid rgba(255,255,255,.12);
+    font-weight:900;
+    flex:0 0 auto;
+  }
+  .optText{
+    flex:1;
+    line-height:1.25;
+    word-break: break-word;
+  }
+
+  /* ✅ pintado correcto/incorrecto */
+  .optBtn.correcta{
+    border-color: rgba(34,197,94,.55);
+    background: rgba(34,197,94,.12);
+  }
+  .optBtn.incorrecta{
+    border-color: rgba(239,68,68,.60);
+    background: rgba(239,68,68,.12);
+  }
+  .optBtn.neutra-disabled{
+    opacity:.55;
+  }
+
+  /* Input respuesta solo en no-dictado */
+  #inputRow{
+    justify-content:center;
+    margin-top: 2px;
+    width:min(560px, 100%);
+  }
+  #respuestaUsuario{
+    text-align:center;
+    width:min(220px, 100%);
+  }
+
+  /* fila de botones de acción (autofit) */
+  .actions{
+    display:grid;
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    gap:10px;
+    width:min(760px, 100%);
+    margin-top: 6px;
+  }
+  .actions .btn, .actions .btn-ghost{
+    width:100%;
+    justify-self:stretch;
+  }
+</style>
+</head>
+
+<body>
+<div class="wrap">
+
+  <header>
+    <h1>Vocabulario N5 — Asallam Sensei</h1>
+
+    <div class="switch">
+      <button class="btn btn-mode" id="m-jp-es" type="button" onclick="setModoBase('jp-es')">JP → ES</button>
+      <button class="btn btn-mode" id="m-es-jp" type="button" onclick="setModoBase('es-jp')">ES → JP</button>
+      <button class="btn btn-mode" id="m-mixto" type="button" onclick="setModoBase('mixto')">Mixto</button>
+      <button class="btn btn-mode" id="m-dictado" type="button" onclick="toggleDictado()">Dictado</button>
+    </div>
+  </header>
+
+  <div class="solo">
+    <div class="card big">
+      <div class="panelGrid">
+
+        <div id="promptMain">—</div>
+        <div id="promptSub"></div>
+
+        <div id="opcionesBtns"></div>
+
+        <div class="row" id="inputRow">
+          <input id="respuestaUsuario"
+                 type="text"
+                 placeholder="a / b / c + Enter"
+                 maxlength="1"
+                 onkeydown="manejarEnter(event)">
+        </div>
+
+        <div id="resultado"></div>
+
+        <div class="stats">
+          Aciertos: <span id="aciertos">0</span> — Errores: <span id="errores">0</span>
+        </div>
+
+        <div class="actions">
+          <button class="btn" type="button" onclick="accionSiguiente()">Siguiente</button>
+          <button class="btn btn-ghost" type="button" onclick="mostrarRespuesta()">Mostrar respuesta</button>         
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+let lista = [];
+let actual = 0;
+
+let aciertos = 0;
+let errores = 0;
+
+let correctaLetra = "";        // "a"/"b"/"c"
+let respuestaCorrecta = "";    // texto correcto (según dirección de la ronda)
+let yaValidado = false;
+
+const letras = ["a","b","c"];
+
+// ====== MODOS ======
+// modoBase: "jp-es" | "es-jp" | "mixto"
+let modoBase = "jp-es";
+
+// dictado: on/off
+let dictadoOn = false;
+
+// dirección actual de la RONDA (en mixto cambia cada pregunta)
+let rondaDir = "jp-es"; // "jp-es" | "es-jp"
+
+// ====== AUDIO ======
+const AUDIO_BASE = "data/audios/n5/";   // <-- tu carpeta
+const audioCache = new Map();
+let ultimoAudioKey = "";                // JP actual
+let audioActual = null;
+
+// ✅ Anti-teclado automático (igual que tu otro código)
+let focoAutomatico = false; // por defecto: NO forzar focus (no abre teclado)
+
+// Si tocas/clickeas el input, entonces sí permitimos foco automático
+document.addEventListener("pointerdown", (e) => {
+  focoAutomatico = (e.target && e.target.id === "respuestaUsuario");
+});
+
+// Si respondes con teclado (a/b/c/Enter), permitimos foco automático
+document.addEventListener("keydown", (e) => {
+  if (["a","b","c","Enter"].includes(e.key)) focoAutomatico = true;
+});
+  
+function audioUrlFromText(jp){
+  return AUDIO_BASE + encodeURIComponent(String(jp || "").trim()) + ".mp3";
+}
+
+function getAudio(jp){
+  const key = String(jp || "").trim();
+  if(!key) return null;
+  if(audioCache.has(key)) return audioCache.get(key);
+
+  const a = new Audio(audioUrlFromText(key));
+  a.preload = "auto";
+  a.__ok = true;
+  a.addEventListener("error", () => { a.__ok = false; });
+
+  audioCache.set(key, a);
+  return a;
+}
+
+function detenerAudio(){
+  try{
+    if(audioActual){
+      audioActual.pause();
+      audioActual.currentTime = 0;
+    }
+  }catch{}
+}
+
+function playAudio(jp){
+  const a = getAudio(jp);
+  ultimoAudioKey = String(jp || "").trim();
+
+  const speaker = document.getElementById("promptSpeaker");
+  if(speaker){
+    speaker.disabled = (!a || a.__ok === false);
+  }
+
+  if(!a) return;
+  if(a.__ok === false) return;
+
+  detenerAudio();
+  audioActual = a;
+  a.currentTime = 0;
+  a.play().catch(() => {});
+}
+
+function reproducirAudioActual(){
+  if(ultimoAudioKey) playAudio(ultimoAudioKey);
+}
+
+// ====== DATA ======
+fetch("data/Vocabulario_N5.json")
+  .then(res => res.json())
+  .then(data => {
+    lista = (data || []).filter(x => x && x.kanji && x.significado);
+    setModoBase("jp-es");
+    siguiente(true);
+  })
+  .catch(err=>{
+    console.error(err);
+    document.getElementById("promptMain").innerText = "No se pudo cargar data/Vocabulario_N5.json";
+    document.getElementById("promptSub").innerText = "Revisa la ruta y usa servidor (GitHub Pages / Live Server).";
+  });
+
+// ====== UI MODO ======
+function limpiarActivos(){
+  ["m-jp-es","m-es-jp","m-mixto","m-dictado"].forEach(id=>{
+    const el = document.getElementById(id);
+    if(!el) return;
+    el.classList.remove("activo","dictado-on","base-dictado");
+  });
+}
+
+function aplicarUI(){
+  limpiarActivos();
+
+  // base activo normal
+  const baseId = (modoBase === "jp-es") ? "m-jp-es" : (modoBase === "es-jp") ? "m-es-jp" : "m-mixto";
+  const baseBtn = document.getElementById(baseId);
+  const dictBtn = document.getElementById("m-dictado");
+
+  if(dictadoOn){
+    // dictado rojo intenso
+    dictBtn.classList.add("dictado-on");
+    // base activo rojo suave
+    baseBtn.classList.add("base-dictado");
+  }else{
+    // base normal morado
+    baseBtn.classList.add("activo");
+  }
+
+  // input visible solo si NO dictado
+  document.getElementById("inputRow").style.display = dictadoOn ? "none" : "flex";
+}
+
+function setModoBase(nuevoBase){
+  modoBase = nuevoBase;
+  aplicarUI();
+
+  yaValidado = false;
+  limpiarResultado();
+  if(lista.length) siguiente(true);
+}
+
+function toggleDictado(){
+  dictadoOn = !dictadoOn;
+  aplicarUI();
+
+  yaValidado = false;
+  limpiarResultado();
+  if(lista.length) siguiente(true);
+}
+
+// ====== TEXTO SEGÚN DIRECCIÓN DE LA RONDA ======
+// rondaDir: "jp-es": pregunta JP, respuesta ES
+//           "es-jp": pregunta ES, respuesta JP
+function textoPregunta(item){
+  return (rondaDir === "jp-es") ? item.kanji : item.significado;
+}
+function textoRespuesta(item){
+  return (rondaDir === "jp-es") ? item.significado : item.kanji;
+}
+
+function aplicarEstiloPregunta(){
+  const el = document.getElementById("promptMain");
+  // si la pregunta es ES → achicar
+  if(rondaDir === "es-jp") el.classList.add("esPregunta");
+  else el.classList.remove("esPregunta");
+}
+
+function renderPrompt(itemCorrecto){
+  const promptEl = document.getElementById("promptMain");
+  const subEl = document.getElementById("promptSub");
+
+  aplicarEstiloPregunta();
+
+  // audio siempre corresponde al JP del item
+  ultimoAudioKey = String(itemCorrecto.kanji || "").trim();
+
+  if(dictadoOn){
+    // dictado: solo speaker
+    let label = "";
+    if(modoBase === "mixto"){
+      label = (rondaDir === "jp-es") ? "🎧 Dictado mixto: elige el significado" : "🎧 Dictado mixto: elige el japonés";
+    }else if(modoBase === "jp-es"){
+      label = "🎧 Dictado: elige el significado";
+    }else{
+      label = "🎧 Dictado: elige el japonés";
+    }
+    subEl.innerText = label;
+
+    promptEl.innerHTML = `
+      <button id="promptSpeaker" class="btnAudioBig" type="button" title="Escuchar" onclick="reproducirAudioActual()">🔊</button>
+    `;
+  }else{
+    // normal: texto + speaker
+    promptEl.textContent = textoPregunta(itemCorrecto);
+    subEl.innerHTML = `
+      <button id="promptSpeaker" class="btnAudioBig" type="button" title="Escuchar" onclick="reproducirAudioActual()">🔊</button>
+    `;
+  }
+
+  // habilitar/deshabilitar speaker según audio exista
+  const a = getAudio(ultimoAudioKey);
+  const speaker = document.getElementById("promptSpeaker");
+  if(speaker) speaker.disabled = (!a || a.__ok === false);
+}
+
+function limpiarResultado(){
+  const res = document.getElementById("resultado");
+  res.innerText = "";
+  res.className = "";
+}
+
+function pintarStats(){
+  document.getElementById("aciertos").innerText = aciertos;
+  document.getElementById("errores").innerText = errores;
+}
+
+// ====== CONTROL DE OPCIONES ======
+function bloquearOpciones(){
+  const box = document.getElementById("opcionesBtns");
+  const btns = box.querySelectorAll("button.optBtn");
+  btns.forEach(b => { b.disabled = true; });
+}
+
+function pintarOpciones(letraElegida){
+  const box = document.getElementById("opcionesBtns");
+  const btns = Array.from(box.querySelectorAll("button.optBtn"));
+  btns.forEach(btn=>{
+    const letraBtn = btn.getAttribute("data-letter");
+    btn.classList.remove("correcta","incorrecta","neutra-disabled");
+    if(letraBtn === correctaLetra){
+      btn.classList.add("correcta");
+    }else if(letraBtn === letraElegida){
+      btn.classList.add("incorrecta");
+    }else{
+      btn.classList.add("neutra-disabled");
+    }
+  });
+}
+
+// ====== SIGUIENTE (DOBLE CLICK SI ESTABA SIN CALIFICAR) ======
+function accionSiguiente(){
+  focoAutomatico = false;
+  // Si NO se ha respondido aún → cuenta como error y SOLO muestra respuesta (no pasa)
+  if(!yaValidado){
+    errores++;
+    pintarStats();
+    yaValidado = true;
+
+    const res = document.getElementById("resultado");
+    res.className = "incorrecto";
+    res.innerText = `Saltado ✘ (era ${correctaLetra}) — ${respuestaCorrecta}`;
+
+    // pintar opciones: correcta marcada, resto apagadas
+    pintarOpciones(null);
+    bloquearOpciones();
+
+    // SIEMPRE suena al revisar
+    playAudio(ultimoAudioKey);
+    return;
+  }
+
+  // ya calificado → ahora sí pasa
+  siguiente(false);
+}
+
+// ====== GENERAR RONDA ======
+function elegirRondaDir(){
+  if(modoBase === "jp-es") return "jp-es";
+  if(modoBase === "es-jp") return "es-jp";
+  // mixto
+  return (Math.random() < 0.5) ? "jp-es" : "es-jp";
+}
+
+function siguiente(forzarAutoPlay){
+  if(lista.length < 3) return;
+
+  rondaDir = elegirRondaDir();
+
+  actual = Math.floor(Math.random() * lista.length);
+  const itemCorrecto = lista[actual];
+
+  respuestaCorrecta = textoRespuesta(itemCorrecto);
+
+  // Armar opciones MC (siempre 3)
+  let opciones = [respuestaCorrecta];
+  while(opciones.length < 3){
+    const rItem = lista[Math.floor(Math.random()*lista.length)];
+    const r = textoRespuesta(rItem);
+    if(!opciones.includes(r)) opciones.push(r);
+  }
+  opciones.sort(()=>Math.random()-0.5);
+  correctaLetra = letras[opciones.indexOf(respuestaCorrecta)];
+
+  renderPrompt(itemCorrecto);
+  renderOpciones(opciones);
+
+  limpiarResultado();
+  yaValidado = false;
+
+  const input = document.getElementById("respuestaUsuario");
+  if(!dictadoOn){
+    input.value = "";
+    input.placeholder = "a / b / c + Enter";
+    input.maxLength = 1;
+    if (focoAutomatico) input.focus({preventScroll:true});
+  }
+
+  // SIEMPRE suena al pasar (forzar o no da igual, lo dejamos siempre)
+  playAudio(ultimoAudioKey);
+}
+
+function renderOpciones(opciones){
+  const box = document.getElementById("opcionesBtns");
+  box.innerHTML = "";
+
+  opciones.forEach((txt, idx)=>{
+    const letra = letras[idx];
+    const btn = document.createElement("button");
+    btn.className = "optBtn";
+    btn.type = "button";
+    btn.setAttribute("data-letter", letra);
+
+    btn.addEventListener("click", ()=>{
+      responder(letra);
+    });
+
+    const left = document.createElement("div");
+    left.className = "optLeft";
+
+    const badge = document.createElement("div");
+    badge.className = "optLetter";
+    badge.textContent = letra;
+
+    const text = document.createElement("div");
+    text.className = "optText";
+    text.textContent = txt;
+
+    left.appendChild(badge);
+    left.appendChild(text);
+
+    btn.appendChild(left);
+    box.appendChild(btn);
+  });
+}
+
+function responder(letra){
+  focoAutomatico = false;
+  if(yaValidado) return;
+
+  if(!dictadoOn){
+    document.getElementById("respuestaUsuario").value = letra;
+  }
+  verificar(letra);
+}
+
+function verificar(letraForzada){
+  const res = document.getElementById("resultado");
+  const r = (letraForzada || (!dictadoOn ? document.getElementById("respuestaUsuario").value : ""))
+              .toString().toLowerCase().trim();
+
+  // en no-dictado, si mete algo raro
+  if(!dictadoOn && !["a","b","c"].includes(r)){
+    res.className = "incorrecto";
+    res.innerText = `Incorrecto ✘ (era ${correctaLetra}) — ${respuestaCorrecta}`;
+    errores++;
+    pintarStats();
+    yaValidado = true;
+
+    pintarOpciones(r);  // pinta correcta y (si aplica) la elegida
+    bloquearOpciones();
+
+    playAudio(ultimoAudioKey);
+    return;
+  }
+
+  const letra = dictadoOn ? letraForzada : r;
+
+  if(letra === correctaLetra){
+    res.className = "correcto";
+    res.innerText = "Correcto ✔";
+    aciertos++;
+  }else{
+    res.className = "incorrecto";
+    res.innerText = `Incorrecto ✘ (era ${correctaLetra}) — ${respuestaCorrecta}`;
+    errores++;
+  }
+
+  pintarStats();
+  yaValidado = true;
+
+  pintarOpciones(letra);
+  bloquearOpciones();
+
+  // SIEMPRE suena al revisar
+  playAudio(ultimoAudioKey);
+}
+
+function mostrarRespuesta(){
+  focoAutomatico = false;
+  // Mostrar respuesta cuenta como mala SOLO si no estaba validado
+  if(!yaValidado){
+    errores++;
+    pintarStats();
+  }
+
+  const res = document.getElementById("resultado");
+  res.className = "incorrecto";
+  res.innerText = `Respuesta: ${respuestaCorrecta}`;
+
+  yaValidado = true;
+
+  // pintar opciones: correcta marcada, resto apagadas
+  pintarOpciones(null);
+  bloquearOpciones();
+
+  playAudio(ultimoAudioKey);
+}
+
+function manejarEnter(event){
+  if(event.key !== "Enter") return;
+  if(dictadoOn) return;
+
+  if(!yaValidado){
+    verificar();
+  }else{
+    // si ya estaba calificado, Enter pasa directo
+    siguiente(false);
+  }
+}
+</script>
+
+</body>
+</html>

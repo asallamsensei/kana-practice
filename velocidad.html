@@ -1,0 +1,1038 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Math Command — Asallam Sensei</title>
+<style>
+  :root{
+    --bg:#0b1020;
+    --card:rgba(255,255,255,.08);
+    --card2:rgba(255,255,255,.10);
+    --border:rgba(255,255,255,.14);
+    --text:#eef2ff;
+    --muted:rgba(238,242,255,.75);
+    --accent:#7d5cff;
+    --good:#22c55e;
+    --bad:#ef4444;
+    --warn:#fbbf24;
+  }
+  *{box-sizing:border-box}
+  body{
+    margin:0;
+    font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Apple Color Emoji","Segoe UI Emoji";
+    color:var(--text);
+    background:
+      radial-gradient(1200px 700px at 20% 10%, rgba(125,92,255,.35), transparent 60%),
+      radial-gradient(900px 600px at 80% 20%, rgba(34,197,94,.20), transparent 55%),
+      radial-gradient(1000px 700px at 50% 110%, rgba(239,68,68,.12), transparent 60%),
+      var(--bg);
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:18px;
+  }
+  .wrap{
+    width:min(1100px, 98vw);
+    display:grid;
+    grid-template-columns: 360px 1fr;
+    gap:14px;
+  }
+  @media (max-width: 900px){
+    body{padding:12px}
+    .wrap{grid-template-columns:1fr}
+  }
+
+  .panel{
+    background:linear-gradient(180deg, var(--card), rgba(0,0,0,.08));
+    border:1px solid var(--border);
+    border-radius:18px;
+    padding:14px;
+    box-shadow: 0 18px 60px rgba(0,0,0,.35);
+    backdrop-filter: blur(8px);
+  }
+  .brand{
+    display:flex; align-items:center; justify-content:space-between; gap:10px;
+    padding:6px 6px 10px 6px;
+  }
+  .brand h1{
+    font-size:16px; margin:0; font-weight:800; letter-spacing:.2px;
+  }
+  .chip{
+    font-size:12px;
+    padding:6px 10px;
+    border-radius:999px;
+    background:rgba(125,92,255,.18);
+    border:1px solid rgba(125,92,255,.35);
+    color:var(--text);
+    user-select:none;
+  }
+  .grid2{display:grid; grid-template-columns:1fr 1fr; gap:10px}
+  .stat{
+    background:var(--card2);
+    border:1px solid var(--border);
+    border-radius:14px;
+    padding:10px;
+  }
+  .stat .k{font-size:12px; color:var(--muted)}
+  .stat .v{font-size:22px; font-weight:900; margin-top:2px}
+
+  .btnRow{display:flex; gap:10px; margin-top:12px}
+  button{
+    border:1px solid var(--border);
+    background:rgba(125,92,255,.20);
+    color:var(--text);
+    padding:10px 12px;
+    border-radius:14px;
+    font-weight:800;
+    cursor:pointer;
+    transition:.15s transform, .15s background;
+    user-select:none;
+    flex:1;
+  }
+  button:hover{transform: translateY(-1px); background: rgba(125,92,255,.28)}
+  button.secondary{background: rgba(255,255,255,.08)}
+  button.secondary:hover{background: rgba(255,255,255,.12)}
+  button.danger{background: rgba(239,68,68,.18); border-color: rgba(239,68,68,.35)}
+  button.danger:hover{background: rgba(239,68,68,.26)}
+  button:disabled{opacity:.55; cursor:not-allowed; transform:none}
+
+  .configHidden{display:none !important;}
+
+  /* --- GAME (canvas) --- */
+  .game{
+    position:relative;
+    overflow:hidden;
+    height: 680px; /* reducido */
+    border-radius:18px;
+    border:1px solid var(--border);
+    background:
+      radial-gradient(900px 500px at 30% 20%, rgba(255,255,255,.06), transparent 60%),
+      radial-gradient(700px 500px at 80% 10%, rgba(125,92,255,.10), transparent 55%),
+      linear-gradient(180deg, rgba(255,255,255,.06), rgba(0,0,0,.22));
+    box-shadow: 0 18px 60px rgba(0,0,0,.35);
+  }
+  @media (max-width: 900px){
+    .game{height: 520px;}
+  }
+  @media (max-width: 420px){
+    .game{height: 450px;} /* más pequeño en celular */
+  }
+
+  .topBar{
+    position:absolute; left:0; top:0; right:0;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:10px 12px;
+    background: rgba(0,0,0,.18);
+    border-bottom:1px solid rgba(255,255,255,.10);
+    backdrop-filter: blur(8px);
+    z-index:5;
+  }
+  .topBar .left, .topBar .right{display:flex; gap:10px; align-items:center}
+  .pill{
+    font-size:12px;
+    padding:6px 10px;
+    border-radius:999px;
+    border:1px solid rgba(255,255,255,.14);
+    background: rgba(0,0,0,.18);
+    color: var(--text);
+  }
+  .pill.good{border-color:rgba(34,197,94,.35); background:rgba(34,197,94,.12)}
+
+  .city{
+    position:absolute;
+    left:0; right:0; bottom:0;
+    height:95px; /* un poquito menos */
+    background:
+      linear-gradient(180deg, rgba(0,0,0,0), rgba(0,0,0,.30)),
+      repeating-linear-gradient(90deg, rgba(255,255,255,.08) 0 10px, rgba(255,255,255,.02) 10px 20px);
+    opacity:.9;
+    z-index:1;
+  }
+  .groundLine{
+    position:absolute; left:0; right:0; bottom:95px;
+    height:2px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,.22), transparent);
+    z-index:2;
+  }
+
+.meteor{
+  position:absolute;
+  top:-60px;
+
+  min-width:110px;
+  max-width:240px;           /* límite para que no se vuelva gigante */
+  width:auto;
+
+  padding:10px 14px;
+  border-radius:16px;
+  border:1px solid rgba(255,255,255,.16);
+  background: rgba(0,0,0,.22);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 16px 40px rgba(0,0,0,.35);
+
+  text-align:center;
+  white-space:nowrap;        /* 🔥 evita salto de línea */
+  z-index:3;
+}
+  .meteor .expr{font-size:20px; font-weight:900; letter-spacing:.2px}
+  .meteor.hit{border-color: rgba(34,197,94,.45); background: rgba(34,197,94,.12)}
+  .meteor.miss{border-color: rgba(239,68,68,.45); background: rgba(239,68,68,.12)}
+  .meteor.bonus{border-color: rgba(251,191,36,.40); background: rgba(251,191,36,.10)}
+
+  /* --- Answer UI (sin input) --- */
+.answerBox{
+  width:100%;
+  max-width:700px;
+  margin:14px auto 0 auto;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+/* ===== Layout PC: izquierda (panel+teclado), derecha (juego alto) ===== */
+@media (min-width: 901px){
+  .wrap{
+    grid-template-rows: auto 1fr; /* crea fila 2 para el teclado */
+    align-items: start;
+  }
+
+  .panel{
+    grid-column: 1;
+    grid-row: 1;
+  }
+
+  .answerBox{
+    grid-column: 1;   /* 👈 columna izquierda */
+    grid-row: 2;      /* 👈 debajo del panel */
+    margin: 14px 0 0 0;  /* quita el auto-centro en PC */
+    max-width: none;     /* usa el ancho de la col 1 (360px) */
+    justify-self: stretch;
+  }
+
+  .game{
+    grid-column: 2;
+    grid-row: 1 / span 2; /* 👈 el juego ocupa fila 1 y 2 */
+  }
+}
+
+/* ===== EN MÓVIL vuelve a flujo normal ===== */
+@media (max-width: 900px){
+  .answerBox{
+    grid-column: 1;
+    grid-row: auto;
+  }
+}
+  
+  .displayRow{
+    display:flex;
+    gap:10px;
+    align-items:center;
+  }
+  .display{
+    flex:1;
+    min-height:48px;
+    display:flex;
+    align-items:center;
+    justify-content:flex-end;
+    padding:10px 12px;
+    border-radius:14px;
+    border:1px solid rgba(255,255,255,.14);
+    background: rgba(0,0,0,.18);
+    font-size:22px;
+    font-weight:900;
+    letter-spacing:.6px;
+    color:var(--text);
+    user-select:none;
+    overflow:hidden;
+  }
+  .display.placeholder{
+    color:rgba(238,242,255,.35);
+    font-weight:800;
+    letter-spacing:.2px;
+    justify-content:flex-start;
+  }
+
+  .keypad{
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap:10px;
+  }
+  .kbtn{
+    padding:14px 10px;
+    border-radius:14px;
+    border:1px solid rgba(255,255,255,.14);
+    background: rgba(255,255,255,.08);
+    color: var(--text);
+    font-weight:900;
+    font-size:18px;
+    cursor:pointer;
+    user-select:none;
+    transition:.12s transform, .12s background;
+  }
+  .kbtn:hover{transform: translateY(-1px); background: rgba(255,255,255,.12)}
+  .kbtn:active{transform: translateY(0px);}
+
+  .kbtn.ok{
+    background: rgba(34,197,94,.12);
+    border-color: rgba(34,197,94,.28);
+  }
+  .kbtn.ok:hover{background: rgba(34,197,94,.18)}
+  .kbtn.bad{
+    background: rgba(239,68,68,.12);
+    border-color: rgba(239,68,68,.28);
+  }
+  .kbtn.bad:hover{background: rgba(239,68,68,.18)}
+  .kbtn.secondary{
+    background: rgba(125,92,255,.16);
+    border-color: rgba(125,92,255,.28);
+  }
+  .kbtn.secondary:hover{background: rgba(125,92,255,.22)}
+
+  .overlay{
+    position:absolute; inset:0;
+    display:flex; align-items:center; justify-content:center;
+    z-index:10;
+    background: rgba(0,0,0,.55);
+    backdrop-filter: blur(6px);
+    padding:16px;
+  }
+  .modal{
+    width:min(520px, 96%);
+    border-radius:18px;
+    border:1px solid rgba(255,255,255,.16);
+    background: rgba(15,18,35,.85);
+    box-shadow: 0 30px 90px rgba(0,0,0,.6);
+    padding:16px;
+  }
+  .modal h2{margin:0 0 6px 0; font-size:18px}
+  .modal p{margin:0; color:var(--muted); line-height:1.45; font-size:13px}
+  .modal .actions{display:flex; gap:10px; margin-top:12px}
+
+  .toast{
+    position:absolute;
+    left:50%; transform:translateX(-50%);
+    top:56px;
+    z-index:9;
+    padding:8px 12px;
+    border-radius:999px;
+    border:1px solid rgba(255,255,255,.14);
+    background: rgba(0,0,0,.22);
+    color:var(--text);
+    font-size:12px;
+    opacity:0;
+    transition: .18s opacity, .18s transform;
+    pointer-events:none;
+  }
+  .toast.show{opacity:1; transform:translateX(-50%) translateY(2px)}
+
+  @media (max-width: 420px){
+    .answerBox{gap:8px; padding:8px; bottom:10px;}
+    .kbtn{padding:13px 10px; font-size:17px;}
+    .display{min-height:44px; font-size:20px;}
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <!-- PANEL -->
+  <div class="panel">
+    <div class="brand">
+      <h1>Math Command</h1>
+      <div class="chip">Asallam Sensei</div>
+    </div>
+
+    <div class="grid2">
+      <div class="stat"><div class="k">Puntaje</div><div class="v" id="score">0</div></div>
+      <div class="stat"><div class="k">Racha</div><div class="v" id="streak">0</div></div>
+      <div class="stat"><div class="k">Nivel</div><div class="v" id="level">1</div></div>
+      <div class="stat"><div class="k">Vidas</div><div class="v" id="lives">5</div></div>
+    </div>
+
+    <!-- Config oculta -->
+    <div class="configHidden">
+      <select id="op"><option value="mix" selected>Mixto</option></select>
+      <select id="diff"><option value="easy" selected>Fácil</option></select>
+      <input id="target" type="number" value="20" />
+      <input id="speed" type="number" value="0.3" />
+    </div>
+
+    <div class="btnRow">
+      <button id="btnStart">Iniciar</button>
+      <button id="btnPause" class="secondary" disabled>Pausar</button>
+      <button id="btnReset" class="danger">Reiniciar</button>
+    </div>
+  </div>
+
+  <!-- JUEGO -->
+  <div class="game" id="game">
+    <div class="topBar">
+      <div class="left">
+        <div class="pill" id="pillLevel">Nivel: 1</div>
+        <div class="pill good" id="pillGoal">Objetivo: 0 / 20</div>
+      </div>
+      <div class="right">
+        <div class="pill" id="pillBest">Mejor racha: 0</div>
+      </div>
+    </div>
+
+    <div class="toast" id="toast">✔</div>
+
+    <div class="groundLine"></div>
+    <div class="city"></div>
+
+    <div class="overlay" id="overlay">
+      <div class="modal">
+        <h2>Math Command</h2>
+        <p>Resuelve las operaciones antes de que lleguen a la línea. Presiona <b>Iniciar</b>.</p>
+        <div class="actions">
+          <button id="btnQuickStart">Iniciar ahora</button>
+          <button id="btnCloseOverlay" class="secondary">Cerrar</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+<!-- Answer UI (sin input) -->
+    <div class="answerBox" aria-label="Teclado numérico">
+      <div class="displayRow">
+        <div class="display placeholder" id="display">Respuesta…</div>
+      </div>
+
+      <div class="keypad">
+        <button class="kbtn" data-key="7">7</button>
+        <button class="kbtn" data-key="8">8</button>
+        <button class="kbtn" data-key="9">9</button>
+
+        <button class="kbtn" data-key="4">4</button>
+        <button class="kbtn" data-key="5">5</button>
+        <button class="kbtn" data-key="6">6</button>
+
+        <button class="kbtn" data-key="1">1</button>
+        <button class="kbtn" data-key="2">2</button>
+        <button class="kbtn" data-key="3">3</button>
+
+        <button class="kbtn secondary" data-act="neg">+/−</button>
+        <button class="kbtn" data-key="0">0</button>
+        <button class="kbtn secondary" data-act="clear">C</button>
+
+        <button class="kbtn ok" style="grid-column: 1 / span 3;" data-act="enter">OK</button>
+      </div>
+    </div>
+  
+</div>
+
+<script>
+(() => {
+  // ---------- Helpers ----------
+  const $ = (id) => document.getElementById(id);
+  const clamp = (n, a, b) => Math.max(a, Math.min(b, n));
+  const randInt = (a, b) => Math.floor(Math.random() * (b - a + 1)) + a;
+  const now = () => performance.now();
+  const fmt = (n) => (n < 0 ? `(${n})` : String(n));
+  // ---------- UI ----------
+  const scoreEl = $("score");
+  const streakEl = $("streak");
+  const levelEl = $("level");
+  const livesEl = $("lives");
+
+  const pillLevel = $("pillLevel");
+  const pillGoal  = $("pillGoal");
+  const pillBest  = $("pillBest");
+  const toast     = $("toast");
+
+  const btnStart = $("btnStart");
+  const btnPause = $("btnPause");
+  const btnReset = $("btnReset");
+
+  const overlay = $("overlay");
+  const btnQuickStart = $("btnQuickStart");
+  const btnCloseOverlay = $("btnCloseOverlay");
+
+  const game = $("game");
+
+  // --- keypad / display ---
+  const displayEl = $("display");
+  const keypadEl = document.querySelector(".keypad");
+
+  // ---------- Fixed curriculum defaults ----------
+  const FIXED = {
+    baseSpeed: 0.3,
+    targetStart: 20,
+    targetStep: 5,
+
+    spawnStartMs: 1500,
+    spawnMinMs: 950,
+    spawnStepMs: 20,
+
+    maxMeteors: 4,
+    maxMeteorsCap: 7,
+
+    bonusBase: 0.06,
+    bonusPerLevel: 0.01,
+    bonusCap: 0.18,
+
+    // input constraints
+    maxDigits: 4
+  };
+
+  // ---------- State ----------
+  const state = {
+    running: false,
+    paused: false,
+    score: 0,
+    streak: 0,
+    bestStreak: 0,
+    level: 1,
+    lives: 5,
+    solvedThisLevel: 0,
+    target: FIXED.targetStart,
+    baseSpeed: FIXED.baseSpeed,
+    spawnEveryMs: FIXED.spawnStartMs,
+    lastSpawn: 0,
+    meteors: new Map(),
+    nextId: 1,
+    lastTick: 0,
+
+    typed: "" // lo que va formando el teclado
+  };
+
+  function setDisplay(){
+    if(state.typed.length === 0){
+      displayEl.textContent = "Respuesta…";
+      displayEl.classList.add("placeholder");
+    }else{
+      displayEl.textContent = state.typed;
+      displayEl.classList.remove("placeholder");
+    }
+  }
+
+  function pushDigit(d){
+    if(!state.running || state.paused) return;
+    if(state.typed.length >= FIXED.maxDigits) return;
+    // evita "000"
+    if(state.typed === "0") state.typed = "";
+    state.typed += String(d);
+    setDisplay();
+  }
+
+  function clearAll(){
+    if(!state.running || state.paused) return;
+    state.typed = "";
+    setDisplay();
+  }
+
+  function toggleSign(){
+    if(!state.running || state.paused) return;
+  
+    if(state.typed.startsWith("-")){
+      state.typed = state.typed.slice(1);
+    }else{
+      state.typed = "-" + state.typed;
+    }
+    setDisplay();
+  }
+  
+  function targetForLevel(level){
+    return FIXED.targetStart + (level - 1) * FIXED.targetStep;
+  }
+
+  function bonusProbForLevel(level){
+    const p = FIXED.bonusBase + (level - 1) * FIXED.bonusPerLevel;
+    return Math.min(FIXED.bonusCap, Math.max(0, p));
+  }
+
+  function maxMeteorsForLevel(level){
+    return Math.min(FIXED.maxMeteorsCap, FIXED.maxMeteors + Math.floor((level - 1) / 3));
+  }
+
+  function loadBest(){
+    const v = Number(localStorage.getItem("mc_bestStreak") || "0");
+    state.bestStreak = isFinite(v) ? v : 0;
+    pillBest.textContent = `Mejor racha: ${state.bestStreak}`;
+  }
+  function saveBest(){
+    localStorage.setItem("mc_bestStreak", String(state.bestStreak));
+  }
+
+  function showToast(text, kind="neutral"){
+    toast.textContent = text;
+    toast.style.borderColor =
+      kind==="good" ? "rgba(34,197,94,.45)" :
+      kind==="bad" ? "rgba(239,68,68,.45)" :
+      kind==="warn" ? "rgba(251,191,36,.45)" :
+      "rgba(255,255,255,.16)";
+    toast.style.background =
+      kind==="good" ? "rgba(34,197,94,.12)" :
+      kind==="bad" ? "rgba(239,68,68,.12)" :
+      kind==="warn" ? "rgba(251,191,36,.12)" :
+      "rgba(0,0,0,.22)";
+    toast.classList.add("show");
+    setTimeout(()=> toast.classList.remove("show"), 550);
+  }
+
+  function updateHUD(){
+    scoreEl.textContent = state.score;
+    streakEl.textContent = state.streak;
+    levelEl.textContent = state.level;
+    livesEl.textContent = state.lives;
+
+    pillLevel.textContent = `Nivel: ${state.level}`;
+    pillGoal.textContent = `Objetivo: ${state.solvedThisLevel} / ${state.target}`;
+    pillBest.textContent = `Mejor racha: ${state.bestStreak}`;
+  }
+
+  // ---------- Curriculum ----------
+  function getRangesForLevel(level){
+    const addSubMax = clamp(10 + (level - 1) * 2, 10, 80);
+    const mulMax = clamp(5 + Math.floor((level - 1) / 2), 5, 20);
+  
+    const negAddSub = level >= 2;  // negativos desde nivel 2
+    const negMul    = level >= 3;  // negativos en multiplicación desde nivel 3
+  
+    return {
+      add: [negAddSub ? -addSubMax : 0, addSubMax],
+      sub: [negAddSub ? -addSubMax : 0, addSubMax],
+      mul: [negMul ? -mulMax : 0, mulMax]
+    };
+  }
+
+  function pickOp(){
+    const ops = ["add","sub","mul","div"];
+    return ops[randInt(0, ops.length-1)];
+  }
+
+  function makeEquationProblem(){
+    // Devuelve ecuaciones tipo: 2×___ + 1 = 5  (respuesta: 2)
+    // Restringimos para que el hueco sea entero y los números no se disparen.
+    const level = state.level;
+    const xMax = clamp(8 + Math.floor((level-1)*1.5), 8, 25); // hueco máximo
+    const x = randInt(0, xMax);
+
+    // Elegimos una plantilla
+    const templates = ["a*x+b=c", "a*x-b=c", "(x+a)*b=c", "(x-a)*b=c", "(x*b)+a=c", "(x*b)-a=c", "x/a+b=c", "x/a-b=c"];
+    const tpl = templates[randInt(0, templates.length-1)];
+
+    // helpers para evitar división fea
+    const pickA = (min, max) => randInt(min, max);
+    const pickB = (min, max) => randInt(min, max);
+
+    let a, b, c, text, ans = x;
+
+    if(tpl === "a*x+b=c"){
+      a = pickA(1, clamp(3 + Math.floor(level/3), 3, 9));
+      b = pickB(0, clamp(6 + level, 6, 25));
+      c = a*x + b;
+      text = `${a} × ___ + ${b} = ${c}`;
+
+    }else if(tpl === "a*x-b=c"){
+      a = pickA(1, clamp(3 + Math.floor(level/3), 3, 9));
+      b = pickB(0, clamp(6 + level, 6, 25));
+      c = a*x - b;
+      // evita c muy negativo (se siente raro para peques)
+      if(c < 0){ b = Math.max(0, a*x); c = a*x - b; }
+      text = `${a} × ___ − ${b} = ${c}`;
+
+    }else if(tpl === "(x+a)*b=c"){
+      a = pickB(0, clamp(6 + level, 6, 25));
+      b = pickA(1, clamp(3 + Math.floor(level/4), 3, 8));
+      c = (x + a) * b;
+      text = `(___ + ${a}) × ${b} = ${c}`;
+
+    }else if(tpl === "(x-a)*b=c"){
+      a = pickB(0, Math.min(x, clamp(6 + level, 6, 25))); // para que x-a no sea negativo
+      b = pickA(1, clamp(3 + Math.floor(level/4), 3, 8));
+      c = (x - a) * b;
+      text = `(___ − ${a}) × ${b} = ${c}`;
+
+    }else if(tpl === "(x*b)+a=c"){
+      b = pickA(1, clamp(4 + Math.floor(level/3), 4, 10));
+      a = pickB(0, clamp(6 + level, 6, 25));
+      c = x*b + a;
+      text = `___ × ${b} + ${a} = ${c}`;
+
+    }else if(tpl === "(x*b)-a=c"){
+      b = pickA(1, clamp(4 + Math.floor(level/3), 4, 10));
+      a = pickB(0, clamp(6 + level, 6, 25));
+      c = x*b - a;
+      if(c < 0){ a = Math.max(0, x*b); c = x*b - a; }
+      text = `___ × ${b} − ${a} = ${c}`;
+
+    }else if(tpl === "x/a+b=c"){
+      // aquí ___ es x (el hueco), pero queremos división exacta:
+      a = pickA(1, clamp(3 + Math.floor(level/4), 3, 10));
+      b = pickB(0, clamp(6 + level, 6, 25));
+      c = (x / a) + b;
+      // forzamos x múltiplo de a: reconstruimos x para que sea exacto
+      const k = randInt(0, xMax);
+      const x2 = a * k;
+      ans = x2;
+      c = (x2 / a) + b;
+      text = `___ ÷ ${a} + ${b} = ${c}`;
+
+    }else{ // "x/a-b=c"
+      a = pickA(1, clamp(3 + Math.floor(level/4), 3, 10));
+      b = pickB(0, clamp(6 + level, 6, 25));
+      const k = randInt(0, xMax);
+      const x2 = a * k;
+      ans = x2;
+      c = (x2 / a) - b;
+      if(c < 0){ b = Math.max(0, (x2 / a)); c = (x2 / a) - b; }
+      text = `___ ÷ ${a} − ${b} = ${c}`;
+    }
+
+    return { text, ans };
+  }
+  
+  function makeProblem(){
+    // % de ecuaciones con hueco (sube levemente con el nivel)
+    const eqProb = clamp(0.12 + (state.level-1)*0.01, 0.12, 0.22);
+    if(Math.random() < eqProb){
+      return makeEquationProblem();
+    }
+
+    // ---- lo tuyo normal, sin cambios ----
+    const ranges = getRangesForLevel(state.level);
+    const op = pickOp();
+    let a, b, text, ans;
+
+    if(op === "add"){
+      [a,b] = [randInt(...ranges.add), randInt(...ranges.add)];
+      text = `${fmt(a)} + ${fmt(b)}`;
+      ans = a + b;
+
+    }else if(op === "sub"){
+      a = randInt(...ranges.sub);
+      b = randInt(...ranges.sub);
+      text = `${fmt(a)} − ${fmt(b)}`;
+      ans = a - b;
+
+    }else if(op === "mul"){
+      a = randInt(...ranges.mul);
+      b = randInt(...ranges.mul);
+      text = `${fmt(a)} × ${fmt(b)}`;
+      ans = a * b;
+
+    }else{
+      const max = ranges.mul[1];
+      const divisor = randInt(1, max);
+    
+      // resultado entero
+      let result = randInt(1, max);
+    
+      // ✅ desde nivel 3, a veces lo hacemos negativo
+      if(state.level >= 3 && Math.random() < 0.5){
+        result = -result;
+      }
+    
+      const dividend = divisor * result;
+    
+      text = `${fmt(dividend)} ÷ ${fmt(divisor)}`;
+      ans = result;
+    }
+
+    return { text, ans };
+  }
+
+  // ---------- Meteors ----------
+  function spawnMeteor(isBonus=false){
+    const { text, ans } = makeProblem();
+    const id = state.nextId++;
+    const el = document.createElement("div");
+    el.className = "meteor";
+    if(isBonus) el.classList.add("bonus");
+    el.dataset.id = String(id);
+    el.innerHTML = `<div class="expr">${text}</div>`;
+    game.appendChild(el);
+
+    const rect = game.getBoundingClientRect();
+    const padding = 12;
+    const w = 140;
+    const x = randInt(padding, Math.max(padding, Math.floor(rect.width - w - padding)));
+    el.style.left = `${x}px`;
+
+    const levelBoost = 1 + (state.level - 1) * 0.03;
+    const speed = state.baseSpeed * levelBoost;
+
+    state.meteors.set(id, {
+      id, el, ans,
+      y: -60,
+      speedPxPerSec: (70 + state.level * 2) * speed,
+      alive: true,
+      isBonus
+    });
+  }
+
+  function killMeteor(m, cls){
+    if(!m.alive) return;
+    m.alive = false;
+    m.el.classList.add(cls);
+    setTimeout(() => {
+      try { m.el.remove(); } catch {}
+    }, 260);
+    state.meteors.delete(m.id);
+  }
+
+  function missMeteor(m){
+    killMeteor(m, "miss");
+    state.lives = Math.max(0, state.lives - 1);
+    state.streak = 0;
+    showToast("💥 Falló", "bad");
+    if(state.lives === 0) gameOver();
+  }
+
+  // ---------- Loop ----------
+  function tick(t){
+    if(!state.running) return;
+    if(state.paused){
+      state.lastTick = t;
+      requestAnimationFrame(tick);
+      return;
+    }
+
+    const dt = (t - state.lastTick) / 1000;
+    state.lastTick = t;
+
+    if(t - state.lastSpawn >= state.spawnEveryMs){
+      state.lastSpawn = t;
+
+      const maxActive = maxMeteorsForLevel(state.level);
+      if(state.meteors.size < maxActive){
+        spawnMeteor(false);
+
+        const p = bonusProbForLevel(state.level);
+        if(state.meteors.size < maxActive && Math.random() < p){
+          spawnMeteor(true);
+        }
+      }
+    }
+
+    const groundY = game.clientHeight - 95 - 2;
+    for(const m of [...state.meteors.values()]){
+      m.y += m.speedPxPerSec * dt;
+      m.el.style.top = `${m.y}px`;
+
+      if(m.y + m.el.offsetHeight >= groundY){
+        missMeteor(m);
+      }
+    }
+
+    updateHUD();
+    requestAnimationFrame(tick);
+  }
+
+  // ---------- Answer ----------
+  function findMeteorByAnswer(n){
+    // Devuelve el meteorito con respuesta n más urgente (más abajo)
+    let best = null;
+    for(const m of state.meteors.values()){
+      if(m.ans !== n) continue;
+      if(!best || m.y > best.y) best = m;
+    }
+    return best;
+  }
+
+function submitAnswer(){
+  if(!state.running || state.paused) return;
+
+  if(state.typed.trim() === ""){
+    showToast("Escribe un número", "warn");
+    return;
+  }
+
+  if(state.typed === "-"){
+    showToast("Completa el número", "warn");
+    return;
+  }
+  
+  const n = Number(state.typed);
+  if(!Number.isFinite(n)){
+    showToast("Número inválido", "bad");
+    state.typed = "";
+    setDisplay();
+    return;
+  }
+
+  const m = findMeteorByAnswer(n);
+
+  // ❌ Si no existe ningún meteorito con esa respuesta
+  if(!m){
+    showToast("✖", "bad");
+
+    // borrar siempre al oprimir OK
+    state.typed = "";
+    setDisplay();
+
+    // penalización por error
+    state.score = Math.max(0, state.score - 4);
+    state.streak = 0;
+
+    updateHUD();
+    return;
+  }
+
+  // ✅ Sí existe: destruimos el meteorito correspondiente
+  killMeteor(m, "hit");
+
+  state.score += m.isBonus ? 8 : 10;
+  state.streak += 1;
+  state.bestStreak = Math.max(state.bestStreak, state.streak);
+
+  if(!m.isBonus){
+    state.solvedThisLevel += 1;
+    if(state.solvedThisLevel >= state.target){
+      nextLevel();
+    }
+  }else{
+    showToast("⭐ Bonus", "warn");
+  }
+
+  state.typed = "";
+  setDisplay();
+  saveBest();
+  updateHUD();
+}
+  
+  function nextLevel(){
+    state.level += 1;
+    state.solvedThisLevel = 0;
+    state.target = targetForLevel(state.level);
+
+    state.spawnEveryMs = clamp(state.spawnEveryMs - FIXED.spawnStepMs, FIXED.spawnMinMs, FIXED.spawnStartMs);
+
+    if(state.level % 3 === 0) state.lives = Math.min(9, state.lives + 1);
+
+    showToast(`Nivel ${state.level}`, "good");
+    updateHUD();
+  }
+
+  // ---------- Controls ----------
+  function start(){
+    state.target = targetForLevel(state.level);
+    state.baseSpeed = FIXED.baseSpeed;
+    state.spawnEveryMs = FIXED.spawnStartMs;
+
+    state.running = true;
+    state.paused = false;
+
+    btnStart.disabled = true;
+    btnPause.disabled = false;
+
+    overlay.style.display = "none";
+
+    state.lastSpawn = now();
+    state.lastTick = now();
+    requestAnimationFrame(tick);
+    updateHUD();
+
+    state.typed = "";
+    setDisplay();
+  }
+
+  function pauseToggle(){
+    if(!state.running) return;
+    state.paused = !state.paused;
+    btnPause.textContent = state.paused ? "Reanudar" : "Pausar";
+    showToast(state.paused ? "Pausado" : "Reanudado");
+  }
+
+  function resetAll(){
+    for(const m of state.meteors.values()){
+      try { m.el.remove(); } catch {}
+    }
+    state.meteors.clear();
+
+    state.running = false;
+    state.paused = false;
+    state.score = 0;
+    state.streak = 0;
+    state.level = 1;
+    state.lives = 5;
+    state.solvedThisLevel = 0;
+
+    state.target = targetForLevel(state.level);
+    state.baseSpeed = FIXED.baseSpeed;
+    state.spawnEveryMs = FIXED.spawnStartMs;
+
+    btnStart.disabled = false;
+    btnPause.disabled = true;
+    btnPause.textContent = "Pausar";
+
+    overlay.style.display = "flex";
+
+    state.typed = "";
+    setDisplay();
+    updateHUD();
+  }
+
+  function gameOver(){
+    state.running = false;
+    btnStart.disabled = false;
+    btnPause.disabled = true;
+
+    overlay.style.display = "flex";
+    overlay.querySelector(".modal h2").textContent = "Game Over";
+    overlay.querySelector(".modal p").innerHTML =
+      `Puntaje: <b>${state.score}</b><br/>Mejor racha: <b>${state.bestStreak}</b><br/><span style="color:rgba(238,242,255,.75)">Presiona Iniciar para volver.</span>`;
+  }
+
+  // ---------- Events ----------
+  btnStart.addEventListener("click", start);
+  btnQuickStart.addEventListener("click", start);
+  btnCloseOverlay.addEventListener("click", () => overlay.style.display = "none");
+  btnPause.addEventListener("click", pauseToggle);
+  btnReset.addEventListener("click", resetAll);
+
+  // keypad clicks
+  keypadEl.addEventListener("click", (e) => {
+    const btn = e.target.closest("button");
+    if(!btn) return;
+
+    const key = btn.dataset.key;
+    const act = btn.dataset.act;
+
+    if(key != null) pushDigit(key);
+    else if(act === "neg") toggleSign();
+    else if(act === "clear") clearAll();
+    else if(act === "enter") submitAnswer();
+  });
+
+  // teclado físico (PC)
+  window.addEventListener("keydown", (e) => {
+    if(!state.running) return;
+
+    if(e.key >= "0" && e.key <= "9"){
+      pushDigit(e.key);
+      return;
+    }
+
+    if(e.key === "Enter"){
+      submitAnswer();
+      return;
+    }
+    if(e.key === "Escape"){
+      pauseToggle();
+      return;
+    }
+    if(e.key.toLowerCase() === "c"){
+      clearAll();
+      return;
+    }
+
+    if(e.key === "-" || e.key === "Subtract"){
+      toggleSign();
+      return;
+    }
+  });
+
+  // init
+  loadBest();
+  updateHUD();
+  setDisplay();
+})();
+</script>
+</body>
+</html>

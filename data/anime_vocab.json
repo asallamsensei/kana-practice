@@ -1,0 +1,698 @@
+{
+  "bloques": [
+        {
+      "cancion": "MIND POWER… 気",
+      "artista": "影山ヒロノブ・佐藤有香",
+      "nota": "Material elaborado por Asallam Sensei",
+      "vocabulario": [
+        { "jp": "突き進む", "romaji": "tsukisusumu", "es": "lanzarse hacia adelante, avanzar a la fuerza, abrirse paso" },
+        { "jp": "明日は無い", "romaji": "asu wa nai", "es": "no hay un mañana" },
+        { "jp": "わからない", "romaji": "wakaranai", "es": "no lo sé" },
+        { "jp": "どうするかさ！", "romaji": "dō suru ka sa!", "es": "¡lo importante es lo que vas a hacer!" },
+        { "jp": "ジャングル", "romaji": "janguru", "es": "jungla" },
+    
+        { "jp": "未来から", "romaji": "mirai kara", "es": "desde el futuro" },
+        { "jp": "毒ヤリ", "romaji": "doku yari", "es": "lanza venenosa" },
+        { "jp": "拳", "romaji": "kobushi", "es": "puño" },
+        { "jp": "恐怖", "romaji": "kyōfu", "es": "miedo, terror" },
+        { "jp": "砂漠に", "romaji": "sabaku ni", "es": "en el desierto" },
+        { "jp": "勝てるのかなんて", "romaji": "kateru no ka nante", "es": "eso de “si se puede ganar o no”" },
+        { "jp": "力を集め", "romaji": "chikara o atsume", "es": "reúne la fuerza" },
+    
+        { "jp": "鋭い刃に", "romaji": "surudoi yaiba ni", "es": "hacia la hoja afilada" },
+        { "jp": "眼に", "romaji": "manako ni", "es": "a los ojos (registro literario)" },
+        { "jp": "どうなるかなんて", "romaji": "dō naru ka nante", "es": "eso de “qué va a pasar”" },
+        { "jp": "前を見据え", "romaji": "mae o misue", "es": "fija la mirada al frente" },
+        { "jp": "どうなるかよりも", "romaji": "dō naru ka yori mo", "es": "más que pensar en qué pasará…" }
+      ],
+      "kanji": [
+        { "kanji": "進", "significado": "avanzar, progresar" },
+        { "kanji": "明", "significado": "claro, brillante" },
+        { "kanji": "見", "significado": "ver, mirar" },
+        { "kanji": "力", "significado": "fuerza, poder" },
+        { "kanji": "集", "significado": "reunir, juntar" },
+    
+        { "kanji": "来", "significado": "venir" },
+        { "kanji": "毒", "significado": "veneno" },
+        { "kanji": "拳", "significado": "puño" },
+        { "kanji": "砂", "significado": "arena" },
+        { "kanji": "日", "significado": "sol, día" },
+        { "kanji": "前", "significado": "frente, delante" },
+    
+        { "kanji": "恐", "significado": "temor, miedo (sensación)" },
+        { "kanji": "怖", "significado": "terror, pavor (lo que causa miedo)" },
+        { "kanji": "突", "significado": "empujar, embestir, irrumpir" },
+        { "kanji": "据", "significado": "fijar, colocar firmemente" },
+        { "kanji": "刃", "significado": "hoja, filo (de espada o cuchillo)" },
+    
+        { "kanji": "鋭", "significado": "afilado, agudo" },
+        { "kanji": "眼", "significado": "ojo (registro literario o poético)" },
+        { "kanji": "勝", "significado": "ganar, vencer" },
+        { "kanji": "漠", "significado": "vasto, desolado, difuso" },
+        { "kanji": "無", "significado": "no existir, nada (kanji negador)" }
+      ]
+    },
+    {
+      "cancion": "予感… (Yokan…)",
+      "artista": "よーみ (吉田友美)",
+      "nota": "Material elaborado por Asallam Sensei",
+      "vocabulario": [
+        { "jp": "瞳", "romaji": "hitomi", "es": "ojos, pupilas (registro poético)" },
+        { "jp": "思い", "romaji": "omoi", "es": "sentimiento, emoción" },
+        { "jp": "まっすぐ", "romaji": "massugu", "es": "recto; fijo; honesto (mirada o intención)" },
+        { "jp": "強い", "romaji": "tsuyoi", "es": "fuerte" },
+        { "jp": "届いたの", "romaji": "todoita no", "es": "llegó, me alcanzó (tono explicativo/emocional)" },
+        { "jp": "守ったよ", "romaji": "mamotta yo", "es": "cumpliste, mantuviste, protegiste (una promesa)" },
+    
+        { "jp": "風のように", "romaji": "kaze no yō ni", "es": "como el viento" },
+        { "jp": "誰なの", "romaji": "dare na no", "es": "¿quién será…? (suave, emocional)" },
+        { "jp": "予感", "romaji": "yokan", "es": "presentimiento, corazonada" },
+        { "jp": "約束", "romaji": "yakusoku", "es": "promesa" },
+        { "jp": "なんだか", "romaji": "nandaka", "es": "de algún modo; no sé por qué (intuición vaga)" },
+        { "jp": "光", "romaji": "hikari", "es": "luz" },
+    
+        { "jp": "たどってる", "romaji": "tadotteru", "es": "estoy siguiendo, persiguiendo (un camino, huellas, un sueño)" },
+        { "jp": "不思議な", "romaji": "fushigi na", "es": "misterioso, inexplicable, maravilloso" },
+        { "jp": "もうすぐ", "romaji": "mōsugu", "es": "pronto, en poco tiempo" },
+        { "jp": "時間", "romaji": "jikan", "es": "tiempo, hora" },
+        { "jp": "明日へ", "romaji": "ashita e", "es": "hacia el mañana" }
+      ],
+      "kanji": [
+        { "kanji": "瞳", "significado": "ojo, pupila (literario)" },
+        { "kanji": "思", "significado": "pensar, sentir" },
+        { "kanji": "強", "significado": "fuerte" },
+        { "kanji": "届", "significado": "llegar, alcanzar" },
+        { "kanji": "守", "significado": "proteger, cumplir" },
+    
+        { "kanji": "風", "significado": "viento" },
+        { "kanji": "誰", "significado": "quién" },
+        { "kanji": "予", "significado": "anticipar" },
+        { "kanji": "感", "significado": "sentir, sensación" },
+        { "kanji": "約", "significado": "promesa, compromiso" },
+        { "kanji": "束", "significado": "atar, compromiso" },
+        { "kanji": "光", "significado": "luz" },
+    
+        { "kanji": "不", "significado": "no, negación" },
+        { "kanji": "思", "significado": "pensar" },
+        { "kanji": "議", "significado": "deliberar, pensar" },
+        { "kanji": "時", "significado": "tiempo, momento" },
+        { "kanji": "間", "significado": "intervalo, espacio" },
+        { "kanji": "明", "significado": "claro, brillante" },
+        { "kanji": "日", "significado": "día, sol" }
+      ]
+    },
+    {
+      "cancion": "8のチャヴォ (Hachi no Chavo)",
+      "artista": "Anime: El Chavo del 8",
+      "nota": "Material elaborado por Asallam Sensei",
+      "vocabulario": [
+        { "jp": "墓場", "romaji": "hakaba", "es": "cementerio" },
+        { "jp": "不合格", "romaji": "fugōkaku", "es": "reprobado, no aprobado" },
+        { "jp": "危険", "romaji": "kiken", "es": "peligro" },
+        { "jp": "鉄道列車", "romaji": "tetsudō ressha", "es": "tren ferroviario" },
+        { "jp": "しっかりしろ！", "romaji": "shikkari shiro!", "es": "¡contrólate!, ¡ponte firme!" },
+        { "jp": "葬儀", "romaji": "sōgi", "es": "funeral" },
+        { "jp": "触ったら", "romaji": "sawattara", "es": "si lo tocas; una vez que lo toques" },
+        { "jp": "外", "romaji": "soto", "es": "afuera, exterior" },
+    
+        { "jp": "最期の願い", "romaji": "saigo no negai", "es": "último deseo (antes de morir)" },
+        { "jp": "失礼します", "romaji": "shitsurei shimasu", "es": "disculpe, con permiso" },
+        { "jp": "コート", "romaji": "kōto", "es": "cancha (del inglés “court”)" },
+        { "jp": "飲めば", "romaji": "nomeba", "es": "si lo bebes" },
+        { "jp": "知らない", "romaji": "shiranai", "es": "no sé" },
+        { "jp": "できますか？", "romaji": "dekimasu ka?", "es": "¿puede hacerlo?, ¿es capaz?" },
+    
+        { "jp": "座って", "romaji": "suwatte", "es": "siéntate (imperativo suave)" },
+        { "jp": "素晴らしかった", "romaji": "subarashikatta", "es": "fue maravilloso, estuvo genial" },
+        { "jp": "別に", "romaji": "betsu ni", "es": "nada en particular; no realmente" },
+        { "jp": "ラモン先生だよ！", "romaji": "Ramon-sensei da yo!", "es": "¡es el profesor don Ramón!" },
+        { "jp": "時間があれば", "romaji": "jikan ga areba", "es": "si hay tiempo; cuando tenga un momento" }
+      ],
+      "kanji": [
+        { "kanji": "墓", "significado": "tumba" },
+        { "kanji": "場", "significado": "lugar" },
+        { "kanji": "不", "significado": "no, negación" },
+        { "kanji": "合", "significado": "encajar, unir" },
+        { "kanji": "格", "significado": "estatus, norma" },
+        { "kanji": "危", "significado": "peligro" },
+        { "kanji": "険", "significado": "arriesgado, peligroso" },
+        { "kanji": "鉄", "significado": "hierro" },
+    
+        { "kanji": "道", "significado": "camino" },
+        { "kanji": "列", "significado": "fila" },
+        { "kanji": "車", "significado": "carro, vehículo" },
+        { "kanji": "葬", "significado": "enterrar" },
+        { "kanji": "儀", "significado": "ceremonia, ritual" },
+        { "kanji": "触", "significado": "tocar" },
+        { "kanji": "外", "significado": "fuera, exterior" },
+        { "kanji": "最", "significado": "el más, extremo" },
+    
+        { "kanji": "期", "significado": "periodo, momento" },
+        { "kanji": "願", "significado": "deseo, pedir" },
+        { "kanji": "失", "significado": "perder" },
+        { "kanji": "礼", "significado": "cortesía, respeto" },
+        { "kanji": "飲", "significado": "beber" },
+        { "kanji": "知", "significado": "saber, conocer" },
+        { "kanji": "出", "significado": "salir" },
+        { "kanji": "来", "significado": "venir" },
+    
+        { "kanji": "座", "significado": "sentarse" },
+        { "kanji": "素", "significado": "elemental, simple" },
+        { "kanji": "晴", "significado": "despejar, claro" },
+        { "kanji": "別", "significado": "separar, distinto" },
+        { "kanji": "先", "significado": "anterior, antes" },
+        { "kanji": "生", "significado": "vida, nacer" },
+        { "kanji": "時", "significado": "tiempo, momento" },
+        { "kanji": "間", "significado": "intervalo, espacio" }
+      ]
+    },
+    {
+      "cancion": "HEART OF MADNESS",
+      "artista": "子供ばんど (Kodomo Band)",
+      "nota": "Material elaborado por Asallam Sensei",
+      "vocabulario": [
+        { "jp": "見つからなくても", "romaji": "mitsukaranakute mo", "es": "aunque no encuentre" },
+        { "jp": "やすらぎの言葉", "romaji": "yasuragi no kotoba", "es": "palabras de consuelo, de paz interior" },
+        { "jp": "旅立つ", "romaji": "tabidatsu", "es": "partir (de viaje)" },
+        { "jp": "かなわぬ夢", "romaji": "kanawanu yume", "es": "sueño imposible (forma poética negativa)" },
+        { "jp": "悲しみ", "romaji": "kanashimi", "es": "tristeza" },
+    
+        { "jp": "とり戻す", "romaji": "torimodosu", "es": "recuperar" },
+        { "jp": "瞳閉じれば", "romaji": "hitomi tojireba", "es": "si cierro los ojos (poético)" },
+        { "jp": "もう二度と", "romaji": "mō nido to", "es": "ya nunca más" },
+        { "jp": "忘れはしない", "romaji": "wasure wa shinai", "es": "de ninguna manera lo olvidaré" },
+        { "jp": "しまい込んで", "romaji": "shimaikonde", "es": "guardar dentro, atesorar (poético)" },
+    
+        { "jp": "たとえ引き裂かれても", "romaji": "tatoe hikisakarete mo", "es": "aunque me desgarren; incluso si nos separan a la fuerza" },
+        { "jp": "自由へ", "romaji": "jiyū e", "es": "hacia la libertad" },
+        { "jp": "もう一度", "romaji": "mō ichido", "es": "otra vez" },
+        { "jp": "ふり返れない", "romaji": "furikaerenai", "es": "no puedo volver la mirada" },
+        { "jp": "限りなき", "romaji": "kagirinaki", "es": "sin límites, infinita" }
+      ],
+      "kanji": [
+        { "kanji": "見", "significado": "ver, mirar" },
+        { "kanji": "戻", "significado": "volver, regresar" },
+        { "kanji": "返", "significado": "devolver, regresar" },
+        { "kanji": "葉", "significado": "hoja (planta)" },
+    
+        { "kanji": "悲", "significado": "tristeza, lamentar" },
+        { "kanji": "立", "significado": "levantarse, ponerse de pie" },
+        { "kanji": "由", "significado": "razón, causa; libertad (en compuestos)" },
+        { "kanji": "裂", "significado": "rasgar, desgarrar; separar a la fuerza" },
+        { "kanji": "言", "significado": "decir, palabras" },
+    
+        { "kanji": "一", "significado": "uno" },
+        { "kanji": "二", "significado": "dos" },
+        { "kanji": "旅", "significado": "viaje" },
+        { "kanji": "度", "significado": "vez, grado" },
+        { "kanji": "夢", "significado": "sueño" },
+        { "kanji": "忘", "significado": "olvidar" },
+        { "kanji": "閉", "significado": "cerrar" },
+    
+        { "kanji": "限", "significado": "límite, restricción" },
+        { "kanji": "込", "significado": "meter, insertar; atestar" },
+        { "kanji": "瞳", "significado": "pupila (del ojo, literario)" },
+        { "kanji": "引", "significado": "tirar, jalar, arrastrar" },
+        { "kanji": "自", "significado": "uno mismo, sí mismo" }
+      ]
+    },
+    {
+      "cancion": "HUNTER×HUNTER – Capítulo de las serpientes",
+      "artista": "Anime: HUNTER×HUNTER",
+      "nota": "Material elaborado por Asallam Sensei",
+      "vocabulario": [
+        { "jp": "無駄よ", "romaji": "muda yo", "es": "es inútil, no sirve" },
+        { "jp": "どういうことだ", "romaji": "dō iu koto da", "es": "¿qué quieres decir?, ¿qué significa eso?" },
+        { "jp": "遅いね", "romaji": "osoi ne", "es": "se tarda, ¿no?; es lento, ¿no?" },
+        { "jp": "多すぎる", "romaji": "ōsugiru", "es": "hay demasiadas / es demasiado" },
+        { "jp": "大切な", "romaji": "taisetsu na", "es": "importante, valioso" },
+        { "jp": "大丈夫かな", "romaji": "daijōbu kana", "es": "me pregunto si estará bien" },
+    
+        { "jp": "出られない", "romaji": "derarenai", "es": "no puede(s) salir (forma potencial negativa)" },
+        { "jp": "ばかやろう", "romaji": "baka yarō", "es": "¡idiota!, ¡imbécil!" },
+        { "jp": "やめたほうがいいわよ", "romaji": "yameta hō ga ii wa yo", "es": "es mejor que se detengan (tono femenino enfático)" },
+        { "jp": "死んでいるから", "romaji": "shindeiru kara", "es": "porque está muerto (estado resultante)" },
+    
+        { "jp": "蛇使い", "romaji": "hebi-tsukai", "es": "domador / usuario de serpientes" },
+        { "jp": "来るな", "romaji": "kuru na", "es": "¡no vengas!, ¡no vengan!" },
+        { "jp": "ターゲット", "romaji": "tāgetto", "es": "objetivo, blanco" },
+        { "jp": "面接", "romaji": "mensetsu", "es": "entrevista" },
+        { "jp": "ゴンたち", "romaji": "Gon-tachi", "es": "Gon y los demás; el grupo de Gon" },
+        { "jp": "こちらこそだ", "romaji": "kochira koso da", "es": "igualmente; no, gracias a ti" },
+        { "jp": "罠", "romaji": "wana", "es": "trampa" }
+      ],
+      "kanji": [
+        { "kanji": "無", "significado": "no existir, nada" },
+        { "kanji": "駄", "significado": "inútil, en vano" },
+        { "kanji": "遅", "significado": "tarde, lento" },
+        { "kanji": "多", "significado": "mucho, muchos" },
+        { "kanji": "大", "significado": "grande" },
+        { "kanji": "切", "significado": "importante; cortar" },
+        { "kanji": "丈", "significado": "robusto; medida" },
+        { "kanji": "夫", "significado": "hombre; esposo" },
+    
+        { "kanji": "出", "significado": "salir" },
+        { "kanji": "死", "significado": "morir" },
+    
+        { "kanji": "蛇", "significado": "serpiente" },
+        { "kanji": "使", "significado": "usar" },
+        { "kanji": "来", "significado": "venir" },
+        { "kanji": "面", "significado": "cara; superficie" },
+        { "kanji": "接", "significado": "contactar; acercarse" },
+        { "kanji": "罠", "significado": "trampa" }
+      ]
+    },
+    {
+      "cancion": "HUNTER×HUNTER – Entrenamiento de Netero",
+      "artista": "Anime: HUNTER×HUNTER",
+      "nota": "Material elaborado por Asallam Sensei",
+      "vocabulario": [
+        { "jp": "怪物", "romaji": "kaibutsu", "es": "monstruo" },
+        { "jp": "拳", "romaji": "kobushi", "es": "puño" },
+        { "jp": "大きな恩", "romaji": "ōkina on", "es": "gran deuda de gratitud" },
+        { "jp": "さて…", "romaji": "sate…", "es": "bien…, ahora…, entonces…" },
+        { "jp": "４６歳", "romaji": "yonjū-roku-sai", "es": "46 años de edad" },
+        { "jp": "看板", "romaji": "kanban", "es": "letrero, placa (del dojo, aquí)" },
+        { "jp": "弟子", "romaji": "deshi", "es": "discípulo, aprendiz" },
+        { "jp": "冬", "romaji": "fuyu", "es": "invierno" },
+    
+        { "jp": "祈る", "romaji": "inoru", "es": "orar, rezar, hacer una plegaria" },
+        { "jp": "観音様", "romaji": "Kannon-sama", "es": "la bodhisattva Kannon (deidad de la compasión)" },
+        { "jp": "気のせいだよな", "romaji": "ki no sei da yo na", "es": "debe ser mi imaginación, ¿no?" },
+        { "jp": "誕生した", "romaji": "tanjō shita", "es": "nació, surgió, fue engendrado" },
+        { "jp": "２年", "romaji": "ni-nen", "es": "dos años" },
+    
+        { "jp": "感謝", "romaji": "kansha", "es": "gratitud, agradecimiento" },
+        { "jp": "館長", "romaji": "kanchō", "es": "director, encargado (del dojo)" },
+        { "jp": "いいよ", "romaji": "ii yo", "es": "está bien, vale (informal)" },
+        { "jp": "限界", "romaji": "genkai", "es": "límite, frontera (tope máximo)" },
+        { "jp": "置き去りにした", "romaji": "okizari ni shita", "es": "dejó atrás (algo que quedó rezagado)" }
+      ],
+      "kanji": [
+        { "kanji": "怪", "significado": "extraño, misterioso" },
+        { "kanji": "物", "significado": "cosa, ser" },
+        { "kanji": "拳", "significado": "puño" },
+        { "kanji": "大", "significado": "grande" },
+        { "kanji": "恩", "significado": "favor, deuda de gratitud" },
+    
+        { "kanji": "看", "significado": "vigilar, observar" },
+        { "kanji": "板", "significado": "tabla, placa" },
+        { "kanji": "弟", "significado": "hermano menor; discípulo" },
+        { "kanji": "子", "significado": "niño; aprendiz" },
+        { "kanji": "冬", "significado": "invierno" },
+    
+        { "kanji": "祈", "significado": "orar" },
+        { "kanji": "観", "significado": "observar, contemplar" },
+        { "kanji": "音", "significado": "sonido" },
+        { "kanji": "様", "significado": "honorífico" },
+        { "kanji": "気", "significado": "energía, ánimo, mente" },
+    
+        { "kanji": "誕", "significado": "nacer" },
+        { "kanji": "生", "significado": "vida, nacer" },
+        { "kanji": "感", "significado": "sentir" },
+        { "kanji": "謝", "significado": "agradecer, disculparse" },
+        { "kanji": "館", "significado": "edificio, salón" },
+        { "kanji": "長", "significado": "jefe, líder" },
+    
+        { "kanji": "限", "significado": "límite" },
+        { "kanji": "界", "significado": "frontera, mundo" },
+        { "kanji": "置", "significado": "colocar, dejar" },
+        { "kanji": "去", "significado": "irse, abandonar" }
+      ]
+    },
+    {
+      "cancion": "七人の侍 (Shichinin no Samurai)",
+      "artista": "Serie: 七人の侍",
+      "nota": "Material elaborado por Asallam Sensei",
+      "vocabulario": [
+        { "jp": "貴様", "romaji": "kisama", "es": "tú (arcaico; hoy suena insultante por ironía)" },
+        { "jp": "おぬし", "romaji": "onushi", "es": "tú (arcaico; usado entre iguales o inferiores)" },
+        { "jp": "もう合戦は嫌か", "romaji": "mō kassen wa iya ka", "es": "¿ya estás harto de las batallas?" },
+        { "jp": "もうよい 出て来い", "romaji": "mō yoi, dete koi", "es": "ya está, puedes salir" },
+        { "jp": "そう 別に", "romaji": "sō, betsuni", "es": "no, nada en particular" },
+        { "jp": "こんどこそ", "romaji": "kondo koso", "es": "esta vez sí (énfasis con こそ)" },
+    
+        { "jp": "三十人ほど", "romaji": "sanjū-nin hodo", "es": "como unos treinta" },
+        { "jp": "ありがたい", "romaji": "arigatai", "es": "es de agradecer" },
+        { "jp": "ところで", "romaji": "tokoro de", "es": "por cierto; a propósito" },
+        { "jp": "いやいや", "romaji": "iya iya", "es": "no no, esto no es nada (modestia)" },
+        { "jp": "助けて！", "romaji": "tasukete!", "es": "¡ayúdenme!" },
+        { "jp": "野武士", "romaji": "nobushi", "es": "bandidos armados; guerreros de campo" },
+        { "jp": "水草", "romaji": "mizukusa", "es": "hierbas acuáticas" },
+    
+        { "jp": "素直なとこ", "romaji": "sunao na toko", "es": "su franqueza; su lado franco" },
+        { "jp": "気はないかな", "romaji": "ki wa nai kana", "es": "¿no te animas?" },
+        { "jp": "せがれの敵 討たせるだ", "romaji": "segare no kataki, utaseru da", "es": "déjenla vengar a su hijo" },
+        { "jp": "侍だ", "romaji": "samurai da", "es": "lo que necesito son samuráis" },
+        { "jp": "戦", "romaji": "ikusa", "es": "batalla; campaña" }
+      ],
+      "kanji": [
+        { "kanji": "士", "significado": "guerrero, caballero, samurái" },
+        { "kanji": "合", "significado": "unir, encajar, coincidir" },
+        { "kanji": "武", "significado": "marcial, militar" },
+        { "kanji": "素", "significado": "elemental, al natural, sin adornos" },
+        { "kanji": "討", "significado": "atacar, acabar con, ajustar cuentas" },
+        { "kanji": "嫌", "significado": "no gustar, desagradar, detestar" },
+    
+        { "kanji": "三", "significado": "tres" },
+        { "kanji": "十", "significado": "diez" },
+        { "kanji": "人", "significado": "persona" },
+        { "kanji": "助", "significado": "ayudar" },
+        { "kanji": "水", "significado": "agua" },
+        { "kanji": "出", "significado": "salir, sacar" },
+        { "kanji": "来", "significado": "venir, llegar" },
+    
+        { "kanji": "草", "significado": "hierba, pasto" },
+        { "kanji": "別", "significado": "separar, distinto" },
+        { "kanji": "戦", "significado": "guerra, batalla" },
+        { "kanji": "野", "significado": "campo, silvestre" },
+        { "kanji": "侍", "significado": "samurái; servir" },
+        { "kanji": "貴", "significado": "precioso, valioso" },
+    
+        { "kanji": "敵", "significado": "enemigo, adversario" },
+        { "kanji": "様", "significado": "honorífico de alto respeto" },
+        { "kanji": "気", "significado": "ánimo, espíritu, energía" },
+        { "kanji": "直", "significado": "recto, directo; franqueza; reparar" },
+        { "kanji": "主", "significado": "señor, dueño" }
+      ]
+    },
+    {
+      "cancion": "参上!!ギニュー特戦隊!! (Sanjō!! Ginyū Tokusentai!!)",
+      "artista": "山崎燿 (Yō Yamazaki)",
+      "nota": "Material elaborado por Asallam Sensei",
+      "vocabulario": [
+        { "jp": "特戦隊", "romaji": "tokusentai", "es": "fuerzas especiales" },
+        { "jp": "只今参上!!", "romaji": "tadaima sanjō!!", "es": "¡¡Nos presentamos ahora mismo!!" },
+        { "jp": "エリート戦士", "romaji": "erīto senshi", "es": "guerreros de élite" },
+        { "jp": "ひざまずく", "romaji": "hizamazuku", "es": "arrodillarse; doblar la rodilla (por respeto o sumisión)" },
+        { "jp": "順番決め", "romaji": "junban-gime", "es": "decidir el orden (los turnos)" },
+    
+        { "jp": "泣く子も黙る", "romaji": "naku ko mo damaru", "es": "(tan imponentes que) hasta los niños que lloran se callan" },
+        { "jp": "赤いマグマ", "romaji": "akai maguma", "es": "magma rojo" },
+        { "jp": "無敵", "romaji": "muteki", "es": "invencible (lit. sin rival)" },
+        { "jp": "喜び", "romaji": "yorokobi", "es": "alegría; regocijo" },
+        { "jp": "青い", "romaji": "aoi", "es": "azul (adjetivo)" },
+        { "jp": "隊長", "romaji": "taichō", "es": "líder del escuadrón; capitán (en el doblaje latino)" },
+    
+        { "jp": "チョコレートパフェ", "romaji": "chokorēto pafe", "es": "parfait de chocolate (postre en capas)" },
+        { "jp": "エスパー", "romaji": "esupā", "es": "psíquico; “esper” (del inglés, relacionado con ESP: percepción extra-sensorial)" },
+        { "jp": "ジャンケン", "romaji": "janken", "es": "el juego de “piedra, papel o tijera”" },
+        { "jp": "ハリケーン", "romaji": "harikēn", "es": "huracán (del inglés “hurricane”)" },
+        { "jp": "カエル", "romaji": "kaeru", "es": "rana; sapo (según contexto)" }
+      ],
+      "kanji": [
+        { "kanji": "特", "significado": "especial, particular" },
+        { "kanji": "戦", "significado": "guerra, combate" },
+        { "kanji": "隊", "significado": "escuadrón, fuerzas; unidad, tropa" },
+        { "kanji": "只", "significado": "solo, simplemente; nada más que" },
+        { "kanji": "今", "significado": "ahora; este momento" },
+    
+        { "kanji": "参", "significado": "acudir, presentarse (de forma humilde)" },
+        { "kanji": "上", "significado": "arriba; subir" },
+        { "kanji": "青", "significado": "azul (verde en casos excepcionales)" },
+        { "kanji": "喜", "significado": "alegría, regocijo; satisfacción" },
+        { "kanji": "泣", "significado": "llorar" },
+    
+        { "kanji": "子", "significado": "niño; niña" },
+        { "kanji": "黙", "significado": "silencio; callarse" },
+        { "kanji": "順", "significado": "orden; secuencia; obediencia" },
+        { "kanji": "番", "significado": "turno; número (asignado)" },
+        { "kanji": "決", "significado": "decidir; determinar" },
+    
+        { "kanji": "赤", "significado": "rojo" },
+        { "kanji": "士", "significado": "guerrero; samurái" },
+        { "kanji": "長", "significado": "largo; jefe, líder" },
+        { "kanji": "無", "significado": "nada; inexistente; sin (kanji negador)" },
+        { "kanji": "敵", "significado": "enemigo; rival" }
+      ]
+    },
+    {
+      "cancion": "プラスティック・ラブ (Plastic Love)",
+      "artista": "竹内まりや (Mariya Takeuchi)",
+      "nota": "Material elaborado por Asallam Sensei",
+      "vocabulario": [
+        { "jp": "冷たい女", "romaji": "tsumetai onna", "es": "mujer fría" },
+        { "jp": "出逢い", "romaji": "deai", "es": "encuentro (con matiz de destino o casualidad significativa)" },
+        { "jp": "氷のように", "romaji": "kōri no yō ni", "es": "como el hielo" },
+        { "jp": "上手に", "romaji": "jōzu ni", "es": "con destreza; hábilmente; con soltura" },
+        { "jp": "あの日", "romaji": "ano hi", "es": "aquel día" },
+    
+        { "jp": "閉ざした心", "romaji": "tozashita kokoro", "es": "corazón cerrado" },
+        { "jp": "ハロゲンライト", "romaji": "harogen raito", "es": "luz halógena (del inglés “halogen light”)" },
+        { "jp": "恋", "romaji": "koi", "es": "amor romántico; enamoramiento" },
+        { "jp": "ささやく声", "romaji": "sasayaku koe", "es": "voz susurrante" },
+        { "jp": "グラス", "romaji": "gurasu", "es": "copa; vaso (del inglés “glass”)" },
+    
+        { "jp": "踊り明かす", "romaji": "odori akasu", "es": "bailar toda la noche; bailar hasta el amanecer" },
+        { "jp": "突然のキス", "romaji": "totsuzen no kisu", "es": "beso repentino (inesperado, súbito)" },
+        { "jp": "昼と夜", "romaji": "hiru to yoru", "es": "el día y la noche" },
+        { "jp": "皮肉な", "romaji": "hiniku na", "es": "irónico; sarcástico" },
+        { "jp": "派手な", "romaji": "hade na", "es": "llamativo; vistoso; extravagante" }
+      ],
+      "kanji": [
+        { "kanji": "冷", "significado": "frío; distante" },
+        { "kanji": "女", "significado": "mujer" },
+        { "kanji": "出", "significado": "salir; aparecer" },
+        { "kanji": "逢", "significado": "encontrarse (encuentro significativo)" },
+        { "kanji": "氷", "significado": "hielo" },
+    
+        { "kanji": "心", "significado": "corazón; mente; sentimientos" },
+        { "kanji": "上", "significado": "arriba; superior" },
+        { "kanji": "手", "significado": "mano; habilidad" },
+        { "kanji": "日", "significado": "día; sol" },
+        { "kanji": "恋", "significado": "amor romántico" },
+    
+        { "kanji": "声", "significado": "voz" },
+        { "kanji": "踊", "significado": "bailar" },
+        { "kanji": "明", "significado": "claro; amanecer" },
+        { "kanji": "突", "significado": "repentino; irrumpir" },
+        { "kanji": "然", "significado": "así; estado natural" },
+    
+        { "kanji": "昼", "significado": "día (opuesto a noche)" },
+        { "kanji": "夜", "significado": "noche" },
+        { "kanji": "皮", "significado": "piel; superficie" },
+        { "kanji": "肉", "significado": "carne" },
+        { "kanji": "派", "significado": "grupo; estilo; llamativo" },
+        { "kanji": "手", "significado": "mano; estilo; manera de hacer algo" }
+      ]
+    },
+    {
+      "cancion": "Para Bellum",
+      "artista": "Sizuk junto a AYAME (de AliA)",
+      "nota": "Material elaborado por Asallam Sensei",
+      "vocabulario": [
+        { "jp": "孤独な爪痕", "romaji": "kodoku na tsumeato", "es": "solitarias cicatrices (lit. marcas de garras solitarias)" },
+        { "jp": "解りあえば？", "romaji": "wakariaeba?", "es": "¿y si nos comprendemos?" },
+        { "jp": "壊れていく前に", "romaji": "kowarete iku mae ni", "es": "antes de que se rompa; antes de ir rompiéndose" },
+        { "jp": "始まる世界へ", "romaji": "hajimaru sekai e", "es": "hacia el mundo que comienza" },
+    
+        { "jp": "切なさ", "romaji": "setsunasa", "es": "tristeza profunda; melancolía" },
+        { "jp": "微笑んだ時", "romaji": "hohoenda toki", "es": "cuando sonreíste; el momento en que sonreíste" },
+        { "jp": "さよなら", "romaji": "sayonara", "es": "adiós (puede sonar definitivo)" },
+        { "jp": "側に感じる", "romaji": "soba ni kanjiru", "es": "te siento a mi lado; sentir cerca" },
+        { "jp": "まけたくない", "romaji": "maketakunai", "es": "no quiero perder" },
+        { "jp": "唇", "romaji": "kuchibiru", "es": "labios" },
+    
+        { "jp": "許しあえば？", "romaji": "yurushiaeba?", "es": "¿y si nos perdonamos?" },
+        { "jp": "強いままの決意", "romaji": "tsuyoi mama no ketsui", "es": "determinación intacta (lit. resolución que se mantiene fuerte)" },
+        { "jp": "曖昧な終わり", "romaji": "aimai na owari", "es": "final ambiguo; poco claro, indefinido" },
+        { "jp": "同じもの", "romaji": "onaji mono", "es": "lo mismo; la misma cosa" },
+        { "jp": "欠片", "romaji": "kakera", "es": "fragmento; pieza rota" }
+      ],
+      "kanji": [
+        { "kanji": "孤", "significado": "solo; aislado" },
+        { "kanji": "独", "significado": "soledad; único" },
+        { "kanji": "爪", "significado": "uña; garra" },
+        { "kanji": "痕", "significado": "marca; cicatriz; rastro" },
+    
+        { "kanji": "解", "significado": "entender; desatar; resolver" },
+        { "kanji": "壊", "significado": "romper; destruir" },
+        { "kanji": "前", "significado": "antes; frente" },
+        { "kanji": "始", "significado": "comenzar" },
+        { "kanji": "世", "significado": "mundo; generación" },
+        { "kanji": "界", "significado": "límite; mundo" },
+    
+        { "kanji": "切", "significado": "cortar; intenso (emoción)" },
+        { "kanji": "微", "significado": "leve; sutil" },
+        { "kanji": "笑", "significado": "sonreír; reír" },
+        { "kanji": "時", "significado": "tiempo; momento" },
+        { "kanji": "側", "significado": "lado; cercanía" },
+        { "kanji": "感", "significado": "sentir; sensación" },
+    
+        { "kanji": "許", "significado": "permitir; perdonar" },
+        { "kanji": "強", "significado": "fuerte" },
+        { "kanji": "決", "significado": "decidir; resolución" },
+        { "kanji": "意", "significado": "intención; voluntad" },
+        { "kanji": "曖", "significado": "ambiguo; oscuro" },
+        { "kanji": "昧", "significado": "vago; poco claro" },
+        { "kanji": "終", "significado": "finalizar; terminar" },
+    
+        { "kanji": "同", "significado": "mismo; igual" },
+        { "kanji": "欠", "significado": "faltar; carecer" },
+        { "kanji": "片", "significado": "fragmento; pedazo" }
+      ]
+    },
+    {
+      "cancion": "Midnight Pretenders",
+      "artista": "亜蘭知子 (Tomoko Aran)",
+      "nota": "Material elaborado por Asallam Sensei",
+      "vocabulario": [
+        { "jp": "ぬくもり", "romaji": "nukumori", "es": "calor humano; calidez (afectivo)" },
+        { "jp": "窓に", "romaji": "mado ni", "es": "en la ventana" },
+        { "jp": "束の間", "romaji": "tsuka no ma", "es": "breve momento; instante fugaz" },
+        { "jp": "ホクロ", "romaji": "hokuro", "es": "lunar; marca en la piel" },
+        { "jp": "分け合う", "romaji": "wakeau", "es": "compartir (mutuamente)" },
+        { "jp": "旅人", "romaji": "tabibito", "es": "viajero" },
+    
+        { "jp": "海の底に", "romaji": "umi no soko ni", "es": "en el fondo del mar" },
+        { "jp": "背中", "romaji": "senaka", "es": "espalda" },
+        { "jp": "恋人", "romaji": "koibito", "es": "amante; pareja; persona amada" },
+        { "jp": "軽い", "romaji": "karui", "es": "ligero; suave; liviano" },
+        { "jp": "寝息", "romaji": "neiki", "es": "respiración al dormir" },
+        { "jp": "いつも", "romaji": "itsumo", "es": "siempre" },
+    
+        { "jp": "胸に", "romaji": "mune ni", "es": "en el pecho" },
+        { "jp": "魚", "romaji": "sakana", "es": "pez; pescado" },
+        { "jp": "孤独に", "romaji": "kodoku ni", "es": "en la soledad; solitariamente" },
+        { "jp": "夜の海", "romaji": "yoru no umi", "es": "mar de la noche" },
+        { "jp": "深い", "romaji": "fukai", "es": "profundo; hondo" },
+        { "jp": "言葉", "romaji": "kotoba", "es": "palabras" },
+        { "jp": "別れ", "romaji": "wakare", "es": "despedida; separación; ruptura (amorosa)" }
+      ],
+      "kanji": [
+        { "kanji": "窓", "significado": "ventana" },
+        { "kanji": "束", "significado": "atado; breve (en expresiones de tiempo)" },
+        { "kanji": "間", "significado": "intervalo; espacio; momento" },
+        { "kanji": "分", "significado": "dividir; compartir" },
+        { "kanji": "旅", "significado": "viaje" },
+        { "kanji": "人", "significado": "persona" },
+    
+        { "kanji": "海", "significado": "mar" },
+        { "kanji": "底", "significado": "fondo" },
+        { "kanji": "背", "significado": "espalda; estatura" },
+        { "kanji": "中", "significado": "dentro; centro" },
+        { "kanji": "恋", "significado": "amor romántico" },
+        { "kanji": "軽", "significado": "ligero" },
+        { "kanji": "寝", "significado": "dormir" },
+        { "kanji": "息", "significado": "respiración" },
+    
+        { "kanji": "胸", "significado": "pecho" },
+        { "kanji": "魚", "significado": "pez; pescado" },
+        { "kanji": "孤", "significado": "solo; aislado" },
+        { "kanji": "独", "significado": "soledad; único" },
+        { "kanji": "夜", "significado": "noche" },
+        { "kanji": "深", "significado": "profundo" },
+        { "kanji": "言", "significado": "decir; palabras" },
+        { "kanji": "葉", "significado": "hoja; palabra" },
+        { "kanji": "別", "significado": "separar; distinto" }
+      ]
+    },
+    {
+      "cancion": "チェンソーマン (Chainsaw Man)",
+      "artista": "Anime: チェンソーマン",
+      "nota": "Material elaborado por Asallam Sensei",
+      "vocabulario": [
+        { "jp": "蛇", "romaji": "hebi", "es": "serpiente; culebra" },
+        { "jp": "右目", "romaji": "migime", "es": "ojo derecho" },
+        { "jp": "武器", "romaji": "buki", "es": "arma" },
+        { "jp": "最高", "romaji": "saikō", "es": "lo mejor; genial" },
+        { "jp": "やった！", "romaji": "yatta!", "es": "¡yei!; ¡yupi!; ¡lo logré!" },
+        { "jp": "最悪な", "romaji": "saiaku na", "es": "lo peor; horrible" },
+        { "jp": "欲しい", "romaji": "hoshī", "es": "querer; desear (adjetivo)" },
+        { "jp": "週一", "romaji": "shūichi", "es": "una vez por semana (coloquial)" },
+        { "jp": "俺と", "romaji": "ore to", "es": "conmigo; contra mí (según contexto)" },
+    
+        { "jp": "契約", "romaji": "keiyaku", "es": "contrato; acuerdo" },
+        { "jp": "速く", "romaji": "hayaku", "es": "rápido; rápidamente" },
+        { "jp": "未来", "romaji": "mirai", "es": "futuro" },
+        { "jp": "マジ", "romaji": "maji", "es": "en serio (coloquial)" },
+        { "jp": "もっと", "romaji": "motto", "es": "más (de algo)" },
+        { "jp": "お前たち", "romaji": "omaetachi", "es": "ustedes (rudo; informal)" },
+        { "jp": "終わり", "romaji": "owari", "es": "fin; final" },
+        { "jp": "死に方", "romaji": "shinikata", "es": "forma o manera de morir" },
+        { "jp": "顔", "romaji": "kao", "es": "cara; rostro" }
+      ],
+      "kanji": [
+        { "kanji": "蛇", "significado": "serpiente" },
+        { "kanji": "右", "significado": "derecha" },
+        { "kanji": "目", "significado": "ojo" },
+        { "kanji": "一", "significado": "uno" },
+        { "kanji": "高", "significado": "alto; caro" },
+        { "kanji": "週", "significado": "semana" },
+        { "kanji": "悪", "significado": "malo; maldad" },
+    
+        { "kanji": "欲", "significado": "desear; querer; codicia" },
+        { "kanji": "俺", "significado": "yo (masculino; rudo)" },
+        { "kanji": "武", "significado": "marcial; guerrero" },
+        { "kanji": "器", "significado": "utensilio; instrumento; recipiente" },
+        { "kanji": "最", "significado": "lo más (kanji superlativo)" },
+    
+        { "kanji": "契", "significado": "pacto; compromiso; promesa" },
+        { "kanji": "約", "significado": "promesa; acuerdo; aproximadamente" },
+        { "kanji": "未", "significado": "aún no; todavía no" },
+        { "kanji": "来", "significado": "venir; llegar" },
+        { "kanji": "前", "significado": "al frente (espacio); antes (tiempo)" },
+    
+        { "kanji": "終", "significado": "fin; finalizar; acabar" },
+        { "kanji": "死", "significado": "muerte; morir" },
+        { "kanji": "方", "significado": "dirección; lado; manera; forma" },
+        { "kanji": "顔", "significado": "cara; rostro" },
+        { "kanji": "速", "significado": "rápido; veloz" }
+      ]
+    },
+    {
+      "cancion": "燃えるハートで～レッドリボン軍をやっつけろ～",
+      "artista": "Anime: ドラゴンボール",
+      "nota": "Material elaborado por Asallam Sensei",
+      "vocabulario": [
+        { "jp": "さあ来い！！", "romaji": "sā koi!!", "es": "¡¡vamos, ven ya!! (grito de desafío)" },
+        { "jp": "ハートを燃やせ", "romaji": "hāto o moyase", "es": "¡enciende tu corazón!" },
+        { "jp": "仲間", "romaji": "nakama", "es": "compañeros; camaradas" },
+        { "jp": "豪快！", "romaji": "gōkai!", "es": "¡grandioso!; ¡con fuerza!; ¡con energía!" },
+        { "jp": "倒せよ！", "romaji": "taose yo!", "es": "¡derríbenlos!; ¡derrótenlos!; ¡vénzanlos!" },
+        { "jp": "奇跡", "romaji": "kiseki", "es": "milagro" },
+    
+        { "jp": "恐れず", "romaji": "osorezu", "es": "sin temer; sin miedo" },
+        { "jp": "赤いリボン", "romaji": "akai ribon", "es": "cinta roja; listón rojo (Patrulla Roja)" },
+        { "jp": "地獄の", "romaji": "jigoku no", "es": "del infierno; infernal" },
+        { "jp": "ファイター", "romaji": "faitā", "es": "luchador; combatiente (del inglés “fighter”)" },
+        { "jp": "危険なわな", "romaji": "kiken na wana", "es": "trampa peligrosa" },
+        { "jp": "翼に", "romaji": "tsubasa ni", "es": "en las alas" },
+    
+        { "jp": "素敵な", "romaji": "suteki na", "es": "maravilloso; espléndido; genial" },
+        { "jp": "ソルジャー", "romaji": "sorujā", "es": "soldado (del inglés “soldier”)" },
+        { "jp": "熱いきずな", "romaji": "atsui kizuna", "es": "lazo ardiente; vínculo apasionado" },
+        { "jp": "パワー", "romaji": "pawā", "es": "poder (del inglés “power”)" },
+        { "jp": "そうさ", "romaji": "sō sa", "es": "¡así es!; ¡exacto!" },
+        { "jp": "不気味な", "romaji": "bukimina", "es": "siniestro; inquietante; tenebroso" }
+      ],
+      "kanji": [
+        { "kanji": "来", "significado": "venir" },
+        { "kanji": "燃", "significado": "arder; quemar" },
+        { "kanji": "仲", "significado": "compañero; relación" },
+        { "kanji": "間", "significado": "entre; espacio; relación" },
+        { "kanji": "豪", "significado": "poderoso; grandioso" },
+        { "kanji": "快", "significado": "placentero; enérgico" },
+    
+        { "kanji": "倒", "significado": "derrotar; tumbar" },
+        { "kanji": "奇", "significado": "extraño; extraordinario" },
+        { "kanji": "跡", "significado": "huella; rastro; vestigio" },
+    
+        { "kanji": "恐", "significado": "temer; miedo" },
+        { "kanji": "赤", "significado": "rojo" },
+        { "kanji": "地", "significado": "tierra; suelo" },
+        { "kanji": "獄", "significado": "infierno; prisión" },
+        { "kanji": "危", "significado": "peligro" },
+        { "kanji": "険", "significado": "riesgoso; peligroso" },
+        { "kanji": "翼", "significado": "ala" },
+    
+        { "kanji": "素", "significado": "esencial; puro" },
+        { "kanji": "敵", "significado": "enemigo" },
+        { "kanji": "熱", "significado": "calor; ardiente" },
+        { "kanji": "不", "significado": "no; negación" },
+        { "kanji": "気", "significado": "ánimo; energía; sensación" },
+        { "kanji": "味", "significado": "sensación; matiz; sabor" }
+      ]
+    }
+  ]
+}

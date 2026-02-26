@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Canciones & Series — Asallam Sensei</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --bg: #0b1020;
+    --card: rgba(255,255,255,.08);
+    --card2: rgba(255,255,255,.10);
+    --text: #eef2ff;
+    --muted: rgba(238,242,255,.75);
+    --accent: #7d5cff;
+    --accent2:#22c55e;
+    --danger:#ef4444;
+    --border: rgba(255,255,255,.14);
+    --font-jp: "Noto Sans JP", "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", "MS PGothic", system-ui, sans-serif;
+  }
+
+  body{
+    margin:0;
+    font-family: Arial, sans-serif;
+    background: radial-gradient(1200px 700px at 20% 10%, rgba(125,92,255,.35), transparent 60%),
+                radial-gradient(900px 600px at 90% 20%, rgba(34,197,94,.22), transparent 60%),
+                radial-gradient(900px 600px at 30% 90%, rgba(239,68,68,.18), transparent 55%),
+                var(--bg);
+    color: var(--text);
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    padding:28px 14px 70px;
+  }
+
+  .wrap{ width:min(980px, 100%); }
+
+  header{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    margin-bottom:16px;
+  }
+
+  h1{
+    margin:0;
+    font-size:clamp(22px, 5vw, 32px);
+    margin-top:16px;
+    margin-bottom:10px;
+    text-align:center;
+    letter-spacing:.2px;
+  }
+
+  .grid{
+    display:grid;
+    grid-template-columns: 1.1fr .9fr;
+    gap:14px;
+  }
+
+  @media (max-width: 860px){
+    .grid{ grid-template-columns: 1fr; }
+  
+    h1{
+      font-size: 22px;
+      line-height: 1.2;
+      margin-top: 8px;
+      margin-bottom: 6px;
+    }
+  }
+
+  .card{
+    background: linear-gradient(180deg, var(--card2), var(--card));
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    box-shadow: 0 18px 45px rgba(0,0,0,.35);
+    padding: 16px;
+  }
+
+  .row{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    align-items:center;
+    justify-content:center;
+  }
+
+  .pill{
+    padding: 8px 12px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: rgba(255,255,255,.06);
+    color: var(--muted);
+    font-size: 13px;
+  }
+
+  .chips{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-top:8px;
+  }
+
+  .chip{
+    padding: 9px 12px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: rgba(255,255,255,.06);
+    color: var(--muted);
+    cursor:pointer;
+    user-select:none;
+    font-size: 13px;
+    font-weight: 800;
+    transition:.12s;
+  }
+
+  .chip:hover{ transform: translateY(-1px); }
+
+  .chip.activo{
+    background: var(--accent);
+    color: white;
+    border-color: transparent;
+  }
+
+  input{
+    background: rgba(255,255,255,.08);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 10px 12px;
+    border-radius: 12px;
+    outline:none;
+    font-size: 15px;
+  }
+
+  .btn{
+    border: none;
+    border-radius: 12px;
+    padding: 11px 14px;
+    cursor: pointer;
+    color: white;
+    background: var(--accent);
+    font-weight: bold;
+    transition: .15s;
+  }
+  .btn:hover{ transform: translateY(-1px); filter: brightness(1.06); }
+
+  .btn-ghost{
+    background: rgba(255,255,255,.08);
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-weight: 700;
+  }
+
+  .btn-danger{
+    background: rgba(239,68,68,.15);
+    border: 1px solid rgba(239,68,68,.5);
+    color: #fecaca;
+  }
+
+  .btn-danger.activo{
+    background: var(--danger);
+    border-color: transparent;
+    color: white;
+  }
+
+  .btn-mode{
+    background: rgba(255,255,255,.08);
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-weight: 700;
+  }
+  .btn-mode.activo{
+    background: var(--accent);
+    border-color: transparent;
+  }
+
+  .big{
+    text-align:center;
+    padding: 20px 10px 10px;
+  }
+
+  #promptJP{
+    font-size: 52px;
+    font-weight: 900;
+    letter-spacing: .5px;
+    margin: 6px 0 8px;
+  }
+
+/* JP → ES: baja un poquito el japonés del prompt */
+body.modo-jp-es #promptJP{
+  font-size: 46px;
+  font-family: var(--font-jp);
+  letter-spacing: .35px;
+}
+
+body.modo-es-jp #promptJP{
+  font-size: 34px;
+  letter-spacing: .2px;
+  font-family: var(--font-jp);
+}
+
+body.modo-es-jp #opciones{
+  font-size: 22px;
+  font-family: var(--font-jp);
+}
+
+#opciones{
+  margin-top: 10px;
+  font-size: 20px;
+  line-height: 1.7;
+  text-align:left;
+  width: fit-content;
+  margin-left:auto;
+  margin-right:auto;
+  padding: 10px 14px;
+  border-radius: 14px;
+  border: 1px dashed rgba(255,255,255,.22);
+  background: rgba(0,0,0,.18);
+}
+  .opbtns{
+    display:flex;
+    justify-content:center;
+    gap:10px;
+    margin-top: 12px;
+    flex-wrap:wrap;
+  }
+
+  .opbtns button{ min-width: 90px; }
+
+  #resultado{
+    margin-top: 12px;
+    font-size: 20px;
+    min-height: 32px;
+    text-align:center;
+    font-weight: 800;
+    white-space: pre-line;
+  }
+
+  .correcto{ color: var(--accent2); }
+  .incorrecto{ color: var(--danger); }
+
+  .stats{
+    margin-top: 12px;
+    text-align:center;
+    color: var(--muted);
+    font-size: 15px;
+  }
+
+  .sep{
+    height: 1px;
+    background: rgba(255,255,255,.10);
+    margin: 12px 0;
+  }
+
+  .hint{
+    color: rgba(238,242,255,.7);
+    font-size: 13px;
+    line-height: 1.35;
+    text-align:center;
+  }
+
+  code.kbd{
+    background: rgba(255,255,255,.08);
+    border: 1px solid rgba(255,255,255,.14);
+    padding: 2px 7px;
+    border-radius: 8px;
+    font-weight: 700;
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <h1>Canciones & Series — Asallam Sensei</h1>
+  </header>
+
+  <div class="grid">
+    <!-- Panel izquierdo: juego -->
+    <div class="card big">
+      <div id="promptJP">—</div>
+
+      <div class="row" style="margin-top:6px;">
+        <button class="btn btn-ghost" type="button" onclick="replayAudio()">🔊</button>
+      </div>
+
+      <div id="opciones"></div>
+
+      <div class="opbtns">
+        <button class="btn btn-ghost" onclick="responder('a')">a</button>
+        <button class="btn btn-ghost" onclick="responder('b')">b</button>
+        <button class="btn btn-ghost" onclick="responder('c')">c</button>
+      </div>
+
+      <div class="row" style="margin-top: 12px;">
+        <input id="respuestaUsuario" type="text"
+               placeholder="a / b / c + Enter"
+               maxlength="1"
+               onkeydown="manejarEnter(event)">
+      </div>
+
+      <div id="resultado"></div>
+
+      <div class="stats">
+        Aciertos: <span id="aciertos">0</span> — Errores: <span id="errores">0</span>
+      </div>
+
+      <div class="row" style="margin-top: 14px;">
+        <button class="btn" onclick="siguiente()">Siguiente</button>
+        <button class="btn btn-ghost" onclick="resetStats()">Reset stats</button>
+      </div>
+
+      <!-- <div class="sep"></div> -->
+      <div class="hint" id="ayuda" style="display:none;">
+        <b>Atajos:</b> <code class="kbd">a</code>/<code class="kbd">b</code>/<code class="kbd">c</code> + <code class="kbd">Enter</code> valida.
+        <code class="kbd">Enter</code> de nuevo pasa.
+      </div>
+    </div>
+
+    <!-- Panel derecho: controles -->
+    <div class="card">
+      <div class="row" style="justify-content:flex-start;">
+        <span class="pill">Canción / Serie</span>
+      </div>
+
+      <div class="row" style="justify-content:flex-start; margin-top: 8px;">
+        <div id="chipsBloques" class="chips"></div>
+      </div>
+
+      <div class="row" style="justify-content:flex-start; margin-top:10px; gap:10px;">
+        <button id="btnTodo" class="btn btn-ghost btn-danger" onclick="seleccionarTodo()">Todo</button>
+        <button id="btnNinguna" class="btn btn-ghost" onclick="seleccionarNinguna()">Ninguna</button>
+      </div>
+
+      <div class="sep"></div>
+
+      <div class="row" style="justify-content:flex-start;">
+        <span class="pill">Modo</span>
+      </div>
+
+      <div class="row" style="justify-content:flex-start; margin-top: 8px;">
+        <button class="btn btn-mode" id="m-jp-es"   onclick="setModo('jp_es')">JP → ES</button>
+        <button class="btn btn-mode" id="m-es-jp"   onclick="setModo('es_jp')">ES → JP</button>
+        <button class="btn btn-mode" id="m-dict-es" onclick="setModo('dict_es')">Dictado → ES</button>
+        <button class="btn btn-mode" id="m-dict-jp" onclick="setModo('dict_jp')">Dictado → JP</button>
+        <button class="btn btn-mode" id="m-kanji"   onclick="setModo('kanji_mc')">Kanji</button>
+        <button class="btn btn-mode" id="m-mix"     onclick="setModo('mix')">Mix</button>
+      </div>
+
+      <div class="sep"></div>
+
+      <div class="row" style="justify-content:flex-start;">
+        <span class="pill">Pool de opciones</span>
+      </div>
+
+      <div class="row" style="justify-content:flex-start; margin-top: 8px;">
+        <button class="btn btn-mode" id="pool-sel"  onclick="setPoolScope('seleccion')">Solo selección</button>
+        <button class="btn btn-mode" id="pool-glob" onclick="setPoolScope('global')">Global</button>
+      </div>
+
+      <div class="sep"></div>
+
+      <div class="hint">
+        Enter = validar / siguiente.
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+let DATA = { bloques: [] };
+
+let bloqueIdx = 0;
+let modoActual = "jp_es";
+let yaValidado = false;
+let focoAutomatico = false; // por defecto: NO enfocar (evita teclado móvil)
+let actual = null;
+
+let aciertos = 0;
+let errores = 0;
+
+let bloquesActivos = new Set([0]); // por defecto, el primero activo
+
+// Pool de distractores: por defecto "seleccion"
+let poolScope = "seleccion"; // "seleccion" | "global"
+
+/* ===============================
+   AUDIO (protección ! / !! / ? / ？ / ！ etc.)
+=============================== */
+const AUDIO_DIR = "data/audios/series/"; // <- tu carpeta real
+
+let audio = new Audio();
+audio.preload = "auto";
+
+function unique(arr){
+  return [...new Set(arr.filter(Boolean))];
+}
+
+function limpiarPuntuacionFinalJP(s){
+  return (s || "")
+    .replace(/[！？?!]+$/g, "")
+    .trim();
+}
+
+function candidatosAudioJP(jp){
+  const raw = (jp || "").trim();
+  const base = limpiarPuntuacionFinalJP(raw);
+
+  const variantes = [
+    raw,
+    base,
+    base ? (base + "！") : "",
+    base ? (base + "？") : "",
+    base ? (base + "!") : "",
+    base ? (base + "?") : ""
+  ];
+
+  return unique(variantes).filter(x => x.length > 0);
+}
+
+function playAudioForJP(jp){
+  const candidates = candidatosAudioJP(jp);
+  if(candidates.length === 0) return;
+
+  let i = 0;
+  const tryNext = () => {
+    if(i >= candidates.length) return;
+
+    const name = candidates[i++];
+    const src = AUDIO_DIR + encodeURIComponent(name) + ".mp3";
+
+    audio.onended = null;
+    audio.onerror = () => { tryNext(); };
+
+    try{
+      audio.pause();
+      audio.currentTime = 0;
+      audio.src = src;
+      audio.play().catch(() => { tryNext(); });
+    }catch(e){
+      tryNext();
+    }
+  };
+
+  tryNext();
+}
+
+/* ===============================
+   STATS localStorage
+=============================== */
+const STATS_KEY = "animeVocabStats_mc_v1";
+
+function cargarStats() {
+  try { return JSON.parse(localStorage.getItem(STATS_KEY)) || {}; }
+  catch { return {}; }
+}
+function guardarStats(stats) {
+  localStorage.setItem(STATS_KEY, JSON.stringify(stats));
+}
+
+function statsKeyActual() {
+  const b = DATA.bloques[bloqueIdx];
+  const id = (b?.cancion || "bloque").toLowerCase().slice(0,60);
+  return `${id}__${modoActual}`;
+}
+
+function cargarStatsActual() {
+  const all = cargarStats();
+  const k = statsKeyActual();
+  const s = all[k] || { aciertos: 0, errores: 0 };
+  aciertos = s.aciertos || 0;
+  errores  = s.errores  || 0;
+  pintarStats();
+}
+function guardarStatsActual() {
+  const all = cargarStats();
+  const k = statsKeyActual();
+  all[k] = { aciertos, errores };
+  guardarStats(all);
+}
+
+/* ===============================
+   POOLS (selección vs global)
+=============================== */
+function getVocabPool(scope){
+  const idxs = (scope === "global")
+    ? DATA.bloques.map((_, i) => i)
+    : [...bloquesActivos];
+
+  let pool = [];
+  idxs.forEach(i => {
+    const b = DATA.bloques[i];
+    if(b?.vocabulario?.length) pool = pool.concat(b.vocabulario);
+  });
+  return pool;
+}
+
+function getKanjiPool(scope){
+  const idxs = (scope === "global")
+    ? DATA.bloques.map((_, i) => i)
+    : [...bloquesActivos];
+
+  let pool = [];
+  idxs.forEach(i => {
+    const b = DATA.bloques[i];
+    if(b?.kanji?.length) pool = pool.concat(b.kanji);
+  });
+  return pool;
+}
+
+function setPoolScope(scope){
+  poolScope = scope;
+  $("pool-sel")?.classList.toggle("activo", poolScope === "seleccion");
+  $("pool-glob")?.classList.toggle("activo", poolScope === "global");
+  yaValidado = false;
+  limpiarResultado();
+  siguiente();
+}
+
+/* ===============================
+   Selección de bloques (chips)
+=============================== */
+function seleccionarTodo(){
+  bloquesActivos = new Set(DATA.bloques.map((_, i) => i));
+
+  const cont = $("chipsBloques");
+  if(cont){
+    [...cont.children].forEach(el => el.classList.add("activo"));
+  }
+
+  $("btnTodo")?.classList.add("activo");
+
+  yaValidado = false;
+  limpiarResultado();
+  siguiente();
+}
+
+function seleccionarNinguna(){
+  bloquesActivos.clear();
+
+  const cont = $("chipsBloques");
+  if(cont){
+    [...cont.children].forEach(el => el.classList.remove("activo"));
+  }
+
+  $("btnTodo")?.classList.remove("activo");
+
+  limpiarResultado();
+}
+
+/* ===============================
+   UI helpers
+=============================== */
+function $(id){ return document.getElementById(id); }
+
+// Evita teclado móvil por defecto; se activa si el usuario interactúa con input / teclado
+document.addEventListener("pointerdown", (e) => {
+  focoAutomatico = (e.target && e.target.id === "respuestaUsuario");
+});
+document.addEventListener("keydown", (e) => {
+  const k = (e.key || "").toLowerCase();
+  if (k === "enter" || k === "a" || k === "b" || k === "c") {
+    focoAutomatico = true;
+  }
+});
+
+function limpiarResultado(){
+  $("resultado").innerText = "";
+  $("resultado").className = "";
+}
+
+function pintarStats(){
+  $("aciertos").innerText = aciertos;
+  $("errores").innerText = errores;
+}
+
+function refrescarPills(){
+  const b = DATA.bloques[bloqueIdx];
+  document.title = `Repaso Anime Vocab — ${b?.cancion || "Asallam Sensei"}`;
+}
+
+function replayAudio(){
+  if(!actual) return;
+
+  let jpAudio = "";
+  if(actual.tipo === "vocab_jp_es") jpAudio = actual.prompt;
+  else if(actual.tipo === "vocab_es_jp") jpAudio = actual.respuesta;
+  else if(actual.tipo === "dict_es" || actual.tipo === "dict_jp") jpAudio = actual.audioJP;
+
+  if(jpAudio) playAudioForJP(jpAudio);
+}
+
+/* ===============================
+   Modo
+=============================== */
+function setModo(modo){
+  modoActual = modo;
+
+  // estilos por modo (solo afecta ES→JP)
+  document.body.classList.toggle("modo-es-jp", modo === "es_jp" || modo === "dict_jp");
+
+  // botones activos
+  ["jp-es","es-jp","dict-es","dict-jp","kanji","mix"].forEach(x=>{
+    const el = $("m-" + x);
+    if(el) el.classList.remove("activo");
+  });
+
+  const map = {
+    jp_es: "m-jp-es",
+    es_jp: "m-es-jp",
+    dict_es: "m-dict-es",
+    dict_jp: "m-dict-jp",
+    kanji_mc: "m-kanji",
+    mix: "m-mix"
+  };
+  $(map[modo])?.classList.add("activo");
+
+  yaValidado = false;
+  limpiarResultado();
+  cargarStatsActual();
+  siguiente();
+}
+
+/* ===============================
+   Random helpers
+=============================== */
+function pick(arr){
+  return arr[Math.floor(Math.random()*arr.length)];
+}
+
+function shuffle(arr){
+  return arr.slice().sort(()=>Math.random()-0.5);
+}
+
+// arma 3 opciones únicas con un "correct"
+function build3Options(pool, correctValue, mapFn){
+  const opciones = [correctValue];
+
+  let tries = 0;
+  while(opciones.length < 3 && tries < 200){
+    tries++;
+    const v = mapFn(pick(pool));
+    if(v != null && v !== "" && !opciones.includes(v)) opciones.push(v);
+  }
+
+  while(opciones.length < 3){
+    opciones.push("—");
+  }
+
+  return shuffle(opciones);
+}
+
+/* ===============================
+   Generadores de preguntas
+=============================== */
+function preguntaVocabJP_ES(b){
+  const poolLocal = b.vocabulario || [];
+  if(poolLocal.length < 3) return null;
+
+  const v = pick(poolLocal);
+  const correct = v.es;
+
+  const poolOpciones = getVocabPool(poolScope);
+  const basePool = (poolOpciones.length >= 3) ? poolOpciones : poolLocal;
+
+  const opciones = build3Options(basePool, correct, x => x.es);
+  const letras = ["a","b","c"];
+  const correcta = letras[opciones.indexOf(correct)];
+
+  return {
+    tipo: "vocab_jp_es",
+    prompt: v.jp,
+    opciones,
+    correcta,
+    respuesta: correct,
+    extra: v
+  };
+}
+
+function preguntaVocabES_JP(b){
+  const poolLocal = b.vocabulario || [];
+  if(poolLocal.length < 3) return null;
+
+  const v = pick(poolLocal);
+  const correct = v.jp;
+
+  const poolOpciones = getVocabPool(poolScope);
+  const basePool = (poolOpciones.length >= 3) ? poolOpciones : poolLocal;
+
+  const opciones = build3Options(basePool, correct, x => x.jp);
+  const letras = ["a","b","c"];
+  const correcta = letras[opciones.indexOf(correct)];
+
+  return {
+    tipo: "vocab_es_jp",
+    prompt: v.es,
+    opciones,
+    correcta,
+    respuesta: correct,
+    extra: v
+  };
+}
+
+function preguntaDictado_ES(b){
+  const poolLocal = b.vocabulario || [];
+  if(poolLocal.length < 3) return null;
+
+  const v = pick(poolLocal);
+  const correct = v.es;
+
+  const poolOpciones = getVocabPool(poolScope);
+  const basePool = (poolOpciones.length >= 3) ? poolOpciones : poolLocal;
+
+  const opciones = build3Options(basePool, correct, x => x.es);
+  const letras = ["a","b","c"];
+  const correcta = letras[opciones.indexOf(correct)];
+
+  return {
+    tipo: "dict_es",
+    prompt: "🔊",
+    opciones,
+    correcta,
+    respuesta: correct,
+    extra: v,
+    audioJP: v.jp
+  };
+}
+
+function preguntaDictado_JP(b){
+  const poolLocal = b.vocabulario || [];
+  if(poolLocal.length < 3) return null;
+
+  const v = pick(poolLocal);
+  const correct = v.jp;
+
+  const poolOpciones = getVocabPool(poolScope);
+  const basePool = (poolOpciones.length >= 3) ? poolOpciones : poolLocal;
+
+  const opciones = build3Options(basePool, correct, x => x.jp);
+  const letras = ["a","b","c"];
+  const correcta = letras[opciones.indexOf(correct)];
+
+  return {
+    tipo: "dict_jp",
+    prompt: "🔊",
+    opciones,
+    correcta,
+    respuesta: correct,
+    extra: v,
+    audioJP: v.jp
+  };
+}
+
+function preguntaKanjiMC(b){
+  const poolLocal = b.kanji || [];
+  if(poolLocal.length < 3) return null;
+
+  const k = pick(poolLocal);
+  const correct = k.significado;
+
+  const poolOpciones = getKanjiPool(poolScope);
+  const basePool = (poolOpciones.length >= 3) ? poolOpciones : poolLocal;
+
+  const opciones = build3Options(basePool, correct, x => x.significado);
+  const letras = ["a","b","c"];
+  const correcta = letras[opciones.indexOf(correct)];
+
+  return {
+    tipo: "kanji_mc",
+    prompt: k.kanji,
+    opciones,
+    correcta,
+    respuesta: correct,
+    extra: k
+  };
+}
+
+/* ===============================
+   Flujo
+=============================== */
+function siguiente(){
+  const activos = [...bloquesActivos].filter(i => DATA.bloques[i]);
+  if(activos.length === 0){
+    $("promptJP").innerText = "Selecciona una canción/serie";
+    $("opciones").innerHTML = "";
+    return;
+  }
+
+  // elegimos al azar entre los bloques seleccionados (default: solo selección)
+  bloqueIdx = pick(activos);
+  const b = DATA.bloques[bloqueIdx];
+  if(!b) return;
+
+  let q = null;
+
+  if(modoActual === "jp_es") q = preguntaVocabJP_ES(b);
+  else if(modoActual === "es_jp") q = preguntaVocabES_JP(b);
+  else if(modoActual === "dict_es") q = preguntaDictado_ES(b);
+  else if(modoActual === "dict_jp") q = preguntaDictado_JP(b);
+  else if(modoActual === "kanji_mc") q = preguntaKanjiMC(b);
+  else {
+    // mix
+    const r = Math.random();
+    if(r < 0.35) q = preguntaVocabJP_ES(b);
+    else if(r < 0.60) q = preguntaVocabES_JP(b);
+    else if(r < 0.78) q = preguntaDictado_ES(b);
+    else if(r < 0.90) q = preguntaDictado_JP(b);
+    else q = preguntaKanjiMC(b);
+  }
+
+  if(!q){
+    $("promptJP").innerText = "Faltan datos en el JSON";
+    $("opciones").innerHTML = "";
+    return;
+  }
+
+  actual = q;
+
+  $("promptJP").innerText = actual.prompt;
+
+  $("opciones").innerHTML =
+    `a) ${actual.opciones[0]}<br>b) ${actual.opciones[1]}<br>c) ${actual.opciones[2]}`;
+
+  $("respuestaUsuario").value = "";
+  $("respuestaUsuario").placeholder = (actual.tipo === "dict_es" || actual.tipo === "dict_jp")
+    ? "Dictado: a / b / c + Enter"
+    : "a / b / c + Enter";
+  $("respuestaUsuario").maxLength = 1;
+
+  limpiarResultado();
+  yaValidado = false;
+  if (focoAutomatico) $("respuestaUsuario").focus();
+
+  // dictado: reproduce apenas sale
+  if(actual.tipo === "dict_es" || actual.tipo === "dict_jp"){
+    if(actual.audioJP) playAudioForJP(actual.audioJP);
+  }
+
+  // stats por (bloque + modo) ya queda bien
+  cargarStatsActual();
+}
+
+function responder(letra){
+  focoAutomatico = false;
+  if(yaValidado) return;
+  $("respuestaUsuario").value = letra;
+  verificar();
+}
+
+function verificar(){
+  const input = ($("respuestaUsuario").value || "").trim().toLowerCase();
+  const res = $("resultado");
+
+  // AUDIO al validar
+  if(actual){
+    let jpAudio = "";
+    if(actual.tipo === "vocab_jp_es") jpAudio = actual.prompt;
+    else if(actual.tipo === "vocab_es_jp") jpAudio = actual.respuesta;
+    else if(actual.tipo === "dict_es" || actual.tipo === "dict_jp") jpAudio = actual.audioJP;
+    else jpAudio = "";
+
+    if(jpAudio) playAudioForJP(jpAudio);
+  }
+
+  // ENTER vacío = revelar + error
+  if(input === ""){
+    const extra = (actual.extra?.romaji && ["vocab_jp_es","vocab_es_jp","dict_es","dict_jp"].includes(actual.tipo))
+      ? `\nRomaji: ${actual.extra.romaji}`
+      : "";
+
+    res.className = "incorrecto";
+    res.innerText = `Respuesta: ${actual.correcta}) ${actual.respuesta}${extra}`;
+    errores++;
+    pintarStats();
+    guardarStatsActual();
+    yaValidado = true;
+    return;
+  }
+
+  if(!["a","b","c"].includes(input)){
+    res.className = "incorrecto";
+    res.innerText = "Usa solo: a / b / c";
+    return;
+  }
+
+  if(input === actual.correcta){
+    res.className = "correcto";
+    res.innerText = "Correcto ✔";
+    aciertos++;
+  }else{
+    const extra = (actual.extra?.romaji && ["vocab_jp_es","vocab_es_jp","dict_es","dict_jp"].includes(actual.tipo))
+      ? `\nRomaji: ${actual.extra.romaji}`
+      : "";
+
+    res.className = "incorrecto";
+    res.innerText = `Incorrecto ✘ (era ${actual.correcta})\nRespuesta: ${actual.correcta}) ${actual.respuesta}${extra}`;
+    errores++;
+  }
+
+  pintarStats();
+  guardarStatsActual();
+  yaValidado = true;
+}
+
+function manejarEnter(event){
+  if(event.key !== "Enter") return;
+
+  if(!yaValidado){
+    verificar();
+  } else {
+    siguiente();
+  }
+}
+
+function resetStats(){
+  aciertos = 0;
+  errores = 0;
+  pintarStats();
+  guardarStatsActual();
+}
+
+/* ===============================
+   CARGA JSON
+=============================== */
+fetch("data/anime_vocab.json")
+  .then(r => r.json())
+  .then(json => {
+    DATA = (json && json.bloques) ? json : { bloques: [] };
+
+    const cont = $("chipsBloques");
+    cont.innerHTML = "";
+
+    // default: primer bloque activo (no todo)
+    bloquesActivos = new Set(DATA.bloques.length ? [0] : []);
+    $("btnTodo")?.classList.remove("activo");
+
+    DATA.bloques.forEach((b, i) => {
+      const chip = document.createElement("div");
+      chip.className = "chip" + (bloquesActivos.has(i) ? " activo" : "");
+      chip.textContent = b.cancion || `Bloque ${i+1}`;
+
+      chip.onclick = () => {
+        $("btnTodo")?.classList.remove("activo");
+
+        if(bloquesActivos.has(i)) bloquesActivos.delete(i);
+        else bloquesActivos.add(i);
+
+        // nunca dejar vacío: si apaga el último, lo volvemos a prender
+        if(bloquesActivos.size === 0) bloquesActivos.add(i);
+
+        [...cont.children].forEach((el, idx) => {
+          el.classList.toggle("activo", bloquesActivos.has(idx));
+        });
+
+        yaValidado = false;
+        limpiarResultado();
+        siguiente();
+      };
+
+      cont.appendChild(chip);
+    });
+
+    bloqueIdx = 0;
+    refrescarPills();
+
+    // default: pool por selección
+    setPoolScope("seleccion");
+
+    // default: modo jp_es
+    setModo("jp_es");
+  })
+  .catch(err => {
+    $("promptJP").innerText = "No se pudo cargar data/anime_vocab.json";
+    $("resultado").innerText = "Revisa la ruta y que estés en servidor (GitHub Pages / Live Server).";
+    console.error(err);
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Preguntas estilo JLPT N5 — Asallam Sensei</title>
+<style>
+  body{
+    background:#fffaf3;
+    font-family: Arial, sans-serif;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    padding:40px 16px;
+  }
+  h1{ margin: 0 0 8px; text-align:center; }
+  #sub{ margin:0 0 18px; text-align:center; opacity:.85; }
+
+  .card{
+    width:min(900px, 100%);
+    background:#ffffff;
+    border-radius:14px;
+    box-shadow: 0 6px 18px rgba(0,0,0,.08);
+    padding:20px;
+    margin-bottom:18px;
+  }
+
+  /* ===== CLAVE ===== */
+  #bloqueClave{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+    align-items:center;
+  }
+  #claveInput{
+    font-size:20px;
+    padding:10px 12px;
+    border-radius:10px;
+    border:2px solid #aaa;
+    width:min(320px, 90%);
+    text-align:center;
+  }
+  #errorClave{
+    color:#d93025;
+    font-weight:bold;
+    min-height: 24px;
+    text-align:center;
+  }
+
+  /* ===== BOTONES ===== */
+  button{
+    padding:12px 20px;
+    margin: 4px;
+    font-size:18px;
+    border-radius:10px;
+    border:none;
+    background:#d97706;
+    color:white;
+    cursor:pointer;
+  }
+  button:hover{ background:#b45309; }
+  button.sec{
+    background:#374151;
+  }
+  button.sec:hover{
+    background:#111827;
+  }
+  button:disabled{
+    opacity:.45;
+    cursor:not-allowed;
+  }
+
+  /* ===== QUIZ ===== */
+  #quiz{ display:none; }
+
+  #progreso{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-bottom:10px;
+  }
+  #contador{
+    font-size:18px;
+    opacity:.9;
+  }
+
+  #enunciado{
+    font-size:22px;
+    line-height:1.55;
+    white-space:pre-wrap;
+    margin: 10px 0 14px;
+  }
+
+  #opciones{
+    font-size:20px;
+    line-height:1.6;
+    margin-top:10px;
+    white-space:pre-wrap;
+  }
+
+  #respuestaUsuario{
+    margin-top: 12px;
+    font-size:22px;
+    padding:8px 12px;
+    border-radius:10px;
+    border:2px solid #aaa;
+    text-align:center;
+    width:140px;
+  }
+
+  #resultado{
+    margin-top:12px;
+    font-size:22px;
+    min-height: 28px;
+    white-space:pre-wrap;
+  }
+  .correcto{ color:#28a745; font-weight:bold; }
+  .incorrecto{ color:#d93025; font-weight:bold; }
+
+  #estadisticas{
+    margin-top:12px;
+    font-size:20px;
+  }
+</style>
+</head>
+<body>
+
+<h1>Preguntas estilo JLPT N5 — Asallam Sensei</h1>
+<p id="sub">
+  猿も木から落ちる<br>
+  Saru mo ki kara ochiru<br>
+  Incluso los monos caen de los árboles
+</p>
+
+<!-- ===== BLOQUE CLAVE ===== -->
+<div class="card" id="bloqueClave">
+  <div style="font-size:18px; opacity:.9; text-align:center;">
+    Ingresa la clave para iniciar el test:
+  </div>
+
+  <input id="claveInput" type="password" placeholder="Clave..." onkeydown="enterClave(event)" />
+
+  <div>
+    <button onclick="validarClave()">Entrar</button>
+  </div>
+
+  <div id="errorClave"></div>
+</div>
+
+<!-- ===== QUIZ ===== -->
+<div class="card" id="quiz">
+  <div id="progreso">
+    <div id="contador">Pregunta 1 / 20</div>
+    <div>
+      <button class="sec" onclick="reiniciar()">Reiniciar</button>
+    </div>
+  </div>
+
+  <div id="enunciado"></div>
+  <div id="opciones"></div>
+
+  <div>
+    <input id="respuestaUsuario"
+           type="text"
+           placeholder="a / b / c / d"
+           maxlength="1"
+           onkeydown="manejarEnter(event)" />
+  </div>
+
+  <div id="resultado"></div>
+
+  <div id="estadisticas">
+    Aciertos: <span id="aciertos">0</span> —
+    Errores: <span id="errores">0</span>
+  </div>
+</div>
+
+<script>
+/* =========================================================
+   CONFIG
+   ========================================================= */
+const CLAVES = {
+  esperanza: 0, // Sección 0 => Preguntas 1 (1-20)
+  chorrazo: 1,   // Sección 1 => Preguntas 2 (21-40)
+  aguecuca: 2   // Sección 2 => Preguntas 3 (41-60)  
+};
+
+const MODO_ALEATORIO = false;
+// false = modo examen (orden del JSON)
+// true  = modo práctica (mezclado)
+
+const JSON_URL = "data/preguntas_n5_vocab.json";
+
+/* =========================================================
+   ESTADO
+   ========================================================= */
+let preguntas = [];
+let orden = [];
+let idx = 0;
+
+let aciertos = 0;
+let errores = 0;
+let yaValidado = false;
+
+let correcta = "";
+let opcionesActuales = null; // {a: "...", b:"...", c:"...", d:"..."} según el shuffle
+let explicacion = "";
+
+let seccionElegida = 0;
+
+/* =========================================================
+   CLAVE
+   ========================================================= */
+function validarClave(){
+  const v = document.getElementById("claveInput").value.trim().toLowerCase();
+  const err = document.getElementById("errorClave");
+
+  if(v in CLAVES){
+    seccionElegida = CLAVES[v];
+    err.textContent = "";
+    document.getElementById("bloqueClave").style.display = "none";
+    document.getElementById("quiz").style.display = "block";
+    document.getElementById("sub").textContent =
+      (seccionElegida === 0) ? "Parte 1: Vocabulario"
+      : (seccionElegida === 1) ? "Parte 2: Vocabulario"
+      : "Parte 3: Vocabulario";
+    iniciar();
+  }else{
+    err.textContent = "Clave incorrecta.";
+  }
+}
+
+function enterClave(e){
+  if(e.key === "Enter") validarClave();
+}
+
+/* =========================================================
+   INICIO / CARGA JSON
+   ========================================================= */
+async function iniciar(){
+  try{
+    const res = await fetch(JSON_URL, { cache: "no-store" });
+    if(!res.ok) throw new Error("No se pudo cargar el JSON. Verifica la ruta: " + JSON_URL);
+
+    const data = await res.json();
+
+    // validar estructura
+    if(!data || !Array.isArray(data.secciones)){
+      throw new Error("El JSON no tiene 'secciones' (array).");
+    }
+    if(!data.secciones[seccionElegida] || !Array.isArray(data.secciones[seccionElegida].preguntas)){
+      throw new Error("La sección elegida no existe o no tiene 'preguntas' (array).");
+    }
+    
+    // aquí ya queda como antes: un arreglo plano de preguntas
+    preguntas = data.secciones[seccionElegida].preguntas;
+    
+    if(preguntas.length === 0){
+      throw new Error("La sección elegida está vacía.");
+    }
+
+    // Crear orden base
+    orden = [...Array(preguntas.length).keys()];
+
+    // Mezclar solo si está activado el modo práctica
+    if (MODO_ALEATORIO) {
+      ordenarAleatorio(orden);
+    }
+
+    idx = 0;
+    aciertos = 0;
+    errores = 0;
+    actualizarStats();
+    cargarPregunta();
+  }catch(e){
+    document.getElementById("enunciado").textContent =
+      "Error cargando preguntas:\n" + e.message;
+    document.getElementById("opciones").textContent = "";
+  }
+}
+
+function ordenarAleatorio(arr){
+  for(let i = arr.length - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+}
+
+function escapeHtml(str){
+  return String(str)
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
+}
+
+/* =========================================================
+   RENDER
+   ========================================================= */
+function cargarPregunta(){
+  yaValidado = false;
+
+  const p = preguntas[orden[idx]];
+
+  document.getElementById("enunciado").textContent = `${idx+1}. ${p.titulo}`;
+
+  // 1️⃣ Convertir opciones a array
+  let opcionesArray = [
+    { letra: "a", texto: p.opciones.a },
+    { letra: "b", texto: p.opciones.b },
+    { letra: "c", texto: p.opciones.c },
+    { letra: "d", texto: p.opciones.d }
+  ];
+
+  // 2️⃣ Mezclar opciones
+  ordenarAleatorio(opcionesArray);
+
+  // 3️⃣ Reasignar letras A/B/C/D
+  const letras = ["a","b","c","d"];
+  let opcionesRender = {};
+  let nuevaCorrecta = "";
+
+  opcionesArray.forEach((opt, i) => {
+    const letraNueva = letras[i];
+    opcionesRender[letraNueva] = opt.texto;
+
+    if(opt.letra === p.correcta){
+      nuevaCorrecta = letraNueva;
+    }
+  });
+
+  // ✅ Guardar opciones actuales (ya mezcladas) para verificar/mostrar respuesta
+  opcionesActuales = opcionesRender;
+
+  // 4️⃣ Mostrar opciones
+  document.getElementById("opciones").innerHTML =
+    `A) ${escapeHtml(opcionesRender.a)}<br>` +
+    `B) ${escapeHtml(opcionesRender.b)}<br>` +
+    `C) ${escapeHtml(opcionesRender.c)}<br>` +
+    `D) ${escapeHtml(opcionesRender.d)}`;
+
+  // 5️⃣ Guardar correcta real
+  correcta = nuevaCorrecta;
+  explicacion = p.explicacion || "";
+
+  document.getElementById("resultado").textContent = "";
+  document.getElementById("resultado").className = "";
+  document.getElementById("respuestaUsuario").value = "";
+  document.getElementById("respuestaUsuario").focus();
+
+  document.getElementById("contador").textContent =
+    `Pregunta ${idx+1} / ${preguntas.length}`;
+}
+
+/* =========================================================
+   LÓGICA (Enter: verificar -> siguiente)
+   - Si NO escribió nada: cuenta como ERROR y muestra respuesta
+   ========================================================= */
+function verificar(){
+  if(preguntas.length === 0) return;
+
+  const r = document.getElementById("respuestaUsuario").value.toLowerCase().trim();
+  const res = document.getElementById("resultado");
+
+  // VACÍO = ERROR + mostrar respuesta
+  if(!r){
+    errores++;
+    document.getElementById("errores").textContent = errores;
+
+    const textoCorrecto =
+      (opcionesActuales && opcionesActuales[correcta]) ? opcionesActuales[correcta] : "";
+
+    let extra = "";
+    if(explicacion && explicacion.trim().length > 0){
+      extra = `\n${explicacion}`;
+    }
+
+    res.textContent =
+      `Sin respuesta ✘ (era ${correcta.toUpperCase()})\n` +
+      `Respuesta: ${correcta.toUpperCase()}) ${textoCorrecto}${extra}`;
+    res.className = "incorrecto";
+    yaValidado = true;
+    return;
+  }
+
+  if(r === correcta){
+    res.textContent = "Correcto ✔";
+    res.className = "correcto";
+    aciertos++;
+  }else{
+    const textoCorrecto =
+      (opcionesActuales && opcionesActuales[correcta]) ? opcionesActuales[correcta] : "";
+
+    let extra = "";
+    if(explicacion && explicacion.trim().length > 0){
+      extra = `\n${explicacion}`;
+    }
+
+    res.textContent =
+      `Incorrecto ✘ (era ${correcta.toUpperCase()})\n` +
+      `Respuesta: ${correcta.toUpperCase()}) ${textoCorrecto}${extra}`;
+    res.className = "incorrecto";
+    errores++;
+  }
+
+  actualizarStats();
+  yaValidado = true;
+}
+
+function siguiente(){
+  if(preguntas.length === 0) return;
+
+  idx++;
+  if(idx >= preguntas.length){
+    const res = document.getElementById("resultado");
+    res.className = "";
+    res.textContent = `Fin del test. Aciertos: ${aciertos} — Errores: ${errores}`;
+    idx = preguntas.length - 1;
+    return;
+  }
+  cargarPregunta();
+}
+
+function manejarEnter(event){
+  if(event.key !== "Enter") return;
+
+  event.preventDefault(); // <- clave para que Enter no haga nada raro
+
+  if(!yaValidado){
+    verificar();
+  }else{
+    siguiente();
+  }
+}
+
+function actualizarStats(){
+  document.getElementById("aciertos").textContent = aciertos;
+  document.getElementById("errores").textContent = errores;
+}
+
+function reiniciar(){
+  if(preguntas.length === 0) return;
+
+  orden = [...Array(preguntas.length).keys()];
+  if (MODO_ALEATORIO) {
+    ordenarAleatorio(orden);
+  }
+
+  idx = 0;
+  aciertos = 0;
+  errores = 0;
+  actualizarStats();
+  cargarPregunta();
+}
+</script>
+
+</body>
+</html>

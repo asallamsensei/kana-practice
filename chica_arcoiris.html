@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>虹色の髪の少女 — Asallam Sensei</title>
+
+<style>
+body{
+  margin:0;
+  font-family: Arial, sans-serif;
+  background:#fafafa;
+  color:#111;
+  display:flex;
+  justify-content:center;
+}
+
+.app{
+  width:100%;
+  max-width:900px;
+  padding:20px;
+}
+
+.center{
+  text-align:center;
+}
+
+button{
+  padding:12px 18px;
+  margin:6px;
+  border:none;
+  border-radius:8px;
+  background:#7d5cff;
+  color:white;
+  font-weight:bold;
+  cursor:pointer;
+}
+
+button.secondary{
+  background:#eee;
+  color:#333;
+}
+
+button.option{
+  display:block;
+  width:100%;
+  margin:8px 0;
+  background:#fff;
+  border:1px solid #ddd;
+  color:#111;
+}
+
+.hidden{ display:none; }
+
+img{
+  max-width:100%;
+  border-radius:10px;
+}
+
+.gate-img{
+  width:260px;
+  max-width:75%;
+  border-radius:16px;
+  box-shadow:0 8px 25px rgba(0,0,0,0.15);
+}
+
+.cover-img{
+  width: 260px;
+  max-width: 85%;
+  display:block;
+  margin: 0 auto 12px auto;
+  border-radius: 14px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.14);
+}
+
+.menu-romaji{
+  font-size: 20px;      /* más grande */
+  font-weight: 500;
+  color:#222;
+  margin: 8px 0 10px 0; /* más espacio abajo */
+  letter-spacing: 0.5px;
+}
+
+.menu-sub{
+  font-size: 18px;      /* más grande */
+  font-weight: 400;
+  color:#444;
+  margin-bottom: 20px;  /* más separación antes del botón */
+}
+
+
+.menu-audio{
+  margin: 10px 0 16px 0;
+}
+
+.menu-audio audio{
+  width: min(520px, 100%);
+  margin-top: 8px;
+}
+  
+.jp{
+  font-size:22px;
+  font-weight:bold;
+  margin-top:10px;
+}
+
+.romaji{
+  color:#555;
+  font-size:16px;  /* antes 14 */
+}
+
+
+.es{
+  margin-bottom:12px;
+}
+
+.progress{
+  margin:10px 0;
+  font-weight:bold;
+}
+
+.resultBox{
+  background:#fff;
+  padding:20px;
+  border-radius:10px;
+  border:1px solid #ddd;
+}
+
+/* 📖 Modo lectura: imágenes del cuento más pequeñas y uniformes */
+/* Contenedor de imágenes en lectura */
+#pageImages{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:16px;
+  align-items:flex-start;   /* 👈 CLAVE: no iguala alturas */
+}
+
+#pageImages img{
+  width: 180px;        /* más pequeño */
+  max-width: 100%;
+  height: auto;        /* mantiene proporción */
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+}
+
+/* 🖼️ Imagen en quiz (mismo estilo que lectura) */
+#quizImageWrap{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:16px;
+  align-items:flex-start;
+  margin: 10px 0 14px 0;
+}
+
+#quizImageWrap img{
+  width: 160px;
+  max-width: 100%;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+}
+
+/* ✅ Retroalimentación */
+.quizFeedback{
+  margin-top: 12px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  background: #fff;
+  font-weight: bold;
+}
+.quizFeedback.ok{
+  border-color: rgba(40,167,69,.35);
+  background: rgba(40,167,69,.10);
+  color: #155724;
+}
+.quizFeedback.bad{
+  border-color: rgba(217,48,37,.35);
+  background: rgba(217,48,37,.08);
+  color: #7a1b16;
+}
+
+/* 🧭 Topbar (Volver + Quiz en una sola fila) */
+.topbar{
+  position: relative;
+  display:flex;
+  align-items:center;
+  margin-bottom: 10px;
+}
+
+/* Volver siempre a la izquierda */
+.topbar button{
+  z-index:2;
+}
+  
+/* Quiz centrado absoluto */
+.topbarTitle{
+  position:absolute;
+  left:50%;
+  transform:translateX(-50%);
+  font-weight:900;
+  font-size:20px;
+}
+
+/* 🎯 Centrado en quiz */
+#progress,
+#quizStats{
+  text-align:center;
+}
+
+/* Centrar todo el contenido generado en quizArea */
+#quizArea{
+  text-align:center;
+}
+
+/* Centrar la retroalimentación y el botón siguiente */
+#quizFeedback{
+  text-align:center;
+}
+
+/* El cuadro de feedback centrado (si usas .quizFeedback) */
+.quizFeedback{
+  text-align:center;
+}
+
+#quizArea h3{
+  margin: 8px 0 6px 0;   /* arriba 8px, abajo 6px */
+}
+
+#quizArea button{
+  margin-top: 4px;
+}
+</style>
+</head>
+
+<body>
+<div class="app">
+
+<!-- 🔐 GATE -->
+<div id="gate" class="center">
+  <img src="data/arcoiris/imagenes/img_extra_06.jpg" class="gate-img">
+  <h2>Introduce la clave</h2>
+  <input type="text" id="password">
+  <br><br>
+  <button onclick="checkPassword()">Entrar</button>
+  <p id="gateMsg" style="color:red;"></p>
+</div>
+
+<!-- 🏠 MENU -->
+<div id="menu" class="hidden center">
+  <img id="menuCover" class="cover-img" alt="Portada">
+
+  <h2 id="menuTitleJp">虹色の髪の少女</h2>
+
+  <div id="menuTitleRomaji" class="menu-romaji"></div>
+  <div class="menu-sub">
+    <div>cuento educativo japonés</div>
+    <div>escrito por Asallam Sensei</div>
+  </div>
+
+  <div class="menu-audio">
+    <button onclick="playCoverAudio()">🔊 Audio portada</button>
+    <audio id="coverAudio" preload="none"></audio>
+  </div>
+
+  <button onclick="startReading()">📖 Lectura</button>
+  <button onclick="startQuiz()">🎮 Quiz</button>
+</div>
+
+<!-- 📖 LECTURA -->
+<div id="reading" class="hidden">
+  <button class="secondary" onclick="backMenu()">← Volver</button>
+  <h2 id="pageTitle"></h2>
+  <div id="pageImages"></div>
+  <button onclick="playPageAudio()">🔊 Audio página</button>
+  <div id="lines"></div>
+  <div class="center">
+    <button onclick="prevPage()">◀</button>
+    <button onclick="nextPage()">▶</button>
+  </div>
+</div>
+
+<!-- 🎮 QUIZ -->
+<div id="quiz" class="hidden">
+  <div class="topbar">
+    <button class="secondary" onclick="backMenu()">← Volver</button>
+    <div class="topbarTitle">Quiz</div>
+  </div>
+
+  <div class="progress" id="progress"></div>
+
+  <div id="quizArea"></div>
+  <div id="quizFeedback"></div>
+  <div class="progress" id="quizStats"></div>
+</div>
+
+
+</div>
+
+<script>
+const JSON_PATH = "data/arcoiris/super_json.json";
+const AUDIO_PATH = "data/arcoiris/audios/";
+const IMG_PATH = "data/arcoiris/imagenes/";
+
+let DATA;
+let currentPage = 1;
+
+const EXTRA_IMAGES = [
+  "img_extra_01",
+  "img_extra_02",
+  "img_extra_03",
+  "img_extra_04",
+  "img_extra_05",
+  "img_extra_06",
+  "img_extra_07"
+];
+
+let quizData = [];
+let currentQuestionIndex = 0;
+let score = {
+  jp_es:0,
+  es_jp:0,
+  kanji:0,
+  ear:0,
+  wrong:0
+};
+
+function checkPassword(){
+  if(document.getElementById("password").value === "rainbow"){
+    document.getElementById("gate").classList.add("hidden");
+    document.getElementById("menu").classList.remove("hidden");
+
+    renderMenuFromJSON();   // 👈 ESTA ES LA CLAVE
+
+  }else{
+    document.getElementById("gateMsg").innerText="Clave incorrecta";
+  }
+}
+
+
+async function loadJSON(){
+  const res = await fetch(JSON_PATH);
+  DATA = await res.json();
+}
+loadJSON();
+
+function backMenu(){
+  document.getElementById("reading").classList.add("hidden");
+  document.getElementById("quiz").classList.add("hidden");
+  document.getElementById("menu").classList.remove("hidden");
+}
+
+function startReading(){
+  document.getElementById("menu").classList.add("hidden");
+  document.getElementById("reading").classList.remove("hidden");
+  renderPage();
+}
+
+function renderPage(){
+  const p = DATA.pages.find(x=>x.page_id===currentPage);
+  document.getElementById("pageTitle").innerText="Página "+currentPage;
+
+  const imgDiv = document.getElementById("pageImages");
+  imgDiv.innerHTML="";
+  if(p.images){
+    p.images.forEach(img=>{
+      const i = document.createElement("img");
+      loadImgWithFallback(i, img.id);
+      imgDiv.appendChild(i);
+    });
+  }
+
+  const linesDiv=document.getElementById("lines");
+  linesDiv.innerHTML="";
+  p.lines.forEach((line,i)=>{
+    const div=document.createElement("div");
+    div.innerHTML=
+      `<div class="jp">${line.jp}</div>
+       <div class="romaji">(${line.romaji || ""})</div>
+       <div class="es">${line.es}</div>
+       <button onclick="playLine(${currentPage},${i+1})">🔊 Línea</button>`;
+    linesDiv.appendChild(div);
+  });
+}
+
+function prevPage(){ if(currentPage>1){currentPage--;renderPage();}}
+function nextPage(){ if(currentPage<DATA.pages.length){currentPage++;renderPage();}}
+
+function playPageAudio(){
+  new Audio(AUDIO_PATH+"p"+String(currentPage).padStart(2,"0")+".mp3").play();
+}
+function playLine(p,l){
+  new Audio(AUDIO_PATH+"p"+String(p).padStart(2,"0")+"_l0"+l+".mp3").play();
+}
+
+function startQuiz(){
+  document.getElementById("menu").classList.add("hidden");
+  document.getElementById("quiz").classList.remove("hidden");
+  generateQuiz();
+  showQuestion();
+}
+
+function shuffle(arr){
+  return arr.sort(()=>Math.random()-0.5);
+}
+
+function imgCandidates(id){
+  return [
+    IMG_PATH + id + ".jpg",
+    IMG_PATH + id + ".webp",
+    IMG_PATH + id + ".png",
+    IMG_PATH + id + ".jpeg"
+  ];
+}
+
+function loadImgWithFallback(imgEl, id){
+  const cands = imgCandidates(id);
+  let idx = 0;
+
+  function tryNext(){
+    if(idx >= cands.length){
+      imgEl.style.display = "none";
+      return;
+    }
+    imgEl.src = cands[idx++];
+  }
+
+  imgEl.onload = () => { imgEl.style.display = "block"; };
+  imgEl.onerror = () => { tryNext(); };
+
+  tryNext();
+}
+  
+function generateQuiz(){
+  const words = [];
+  const kanji = [];
+  const lines = [];
+
+  DATA.pages.forEach(p=>{
+    p.lines.forEach((l, li)=>{
+      (l.words || []).forEach(w => words.push({ w, page: p }));     // 👈 guardo página
+      (l.kanji || []).forEach(k => kanji.push({ k, page: p }));     // 👈 guardo página
+      lines.push({ line: l, page: p, lineIndex: li });              // 👈 guardo página + índice
+    });
+  });
+
+  shuffle(words);
+  shuffle(kanji);
+  shuffle(lines);
+
+  quizData = [];
+
+  // 25 JP -> ES (vocab)
+  words.slice(0,25).forEach(x=>{
+    quizData.push({
+      type:"jp_es",
+      correct: x.w.es,
+      question: x.w.jp,
+      page: x.page
+    });
+  });
+
+  // 25 ES -> JP (vocab)
+  words.slice(25,50).forEach(x=>{
+    quizData.push({
+      type:"es_jp",
+      correct: x.w.jp,
+      question: x.w.es,
+      page: x.page
+    });
+  });
+
+  // 25 Kanji
+  kanji.slice(0,25).forEach(x=>{
+    quizData.push({
+      type:"kanji",
+      correct: (x.k.gloss && x.k.gloss.length) ? x.k.gloss[0] : "",
+      question: x.k.k,
+      page: x.page
+    });
+  });
+
+  // 25 Oído (línea completa)
+  lines.slice(0,25).forEach(x=>{
+    quizData.push({
+      type:"ear",
+      correct: x.line.jp,
+      question: x,     // {line,page,lineIndex}
+      page: x.page
+    });
+  });
+
+  shuffle(quizData);
+  currentQuestionIndex = 0;
+
+  // reset marcador
+  score = { jp_es:0, es_jp:0, kanji:0, ear:0, wrong:0 };
+  document.getElementById("quizFeedback").innerHTML = "";
+  renderQuizStats();
+}
+
+function renderQuizStats(){
+  const totalOk = score.jp_es + score.es_jp + score.kanji + score.ear;
+  document.getElementById("quizStats").innerText =
+    `Aciertos: ${totalOk} · Errores: ${score.wrong}`;
+}
+
+function pick(arr){
+  return arr[Math.floor(Math.random()*arr.length)];
+}
+
+function getQuizImageId(q){
+  const pageImgs = (q.page?.images || []).map(img => img.id).filter(Boolean);
+
+  const P_PAGE = 0.60; // <-- cambia esto (0.6, 0.8, etc.)
+
+  // Si hay imágenes de página y cae en probabilidad
+  if(pageImgs.length && Math.random() < P_PAGE){
+    return pick(pageImgs); // si hay varias (p9), elige 1 al azar
+  }
+
+  // Si no, usa extra (y si por alguna razón no hay extras, cae a página)
+  if(EXTRA_IMAGES.length){
+    return pick(EXTRA_IMAGES);
+  }
+
+  // fallback final
+  return pageImgs.length ? pick(pageImgs) : null;
+}
+
+
+function playCoverAudio(){
+  const a = document.getElementById("coverAudio");
+  a.play().catch(()=>{});
+}
+  
+function showQuestion(){
+  if(currentQuestionIndex >= quizData.length){
+    showResults();
+    return;
+  }
+
+  const q = quizData[currentQuestionIndex];
+  const div = document.getElementById("quizArea");
+  const fb = document.getElementById("quizFeedback");
+
+  div.innerHTML = "";
+  fb.innerHTML = ""; // limpio feedback
+
+  document.getElementById("progress").innerText = `Pregunta ${currentQuestionIndex+1}/100`;
+  renderQuizStats();
+
+  // 🖼️ Imagen
+  const imgWrap = document.createElement("div");
+  imgWrap.id = "quizImageWrap";
+  const img = document.createElement("img");
+  loadImgWithFallback(img, getQuizImageId(q));
+  imgWrap.appendChild(img);
+  div.appendChild(imgWrap);
+
+  // 🧾 Enunciado
+  const h = document.createElement("h3");
+
+  if(q.type === "ear"){
+    h.innerText = "¿Qué escuchaste?";
+    div.appendChild(h);
+  
+    const pnum = q.question.page.page_id;
+    const li = q.question.lineIndex + 1;
+    const audioFile = AUDIO_PATH + "p" + String(pnum).padStart(2,"0") + "_l0" + li + ".mp3";
+  
+    // 🔊 Reproducir automáticamente
+    const audio = new Audio(audioFile);
+    audio.play();
+  
+    // 🔘 Botón repetir
+    const repeatBtn = document.createElement("button");
+    repeatBtn.textContent = "🔊 Repetir audio";
+    repeatBtn.style.marginTop = "10px";
+    repeatBtn.onclick = () => {
+      const a = new Audio(audioFile);
+      a.play();
+    };
+  
+    div.appendChild(repeatBtn);
+  }else{
+    h.innerText = q.question;
+    div.appendChild(h);
+  }
+
+  // 🅰️🅱️🅾️ Opciones
+  const options = generateOptions(q);
+  options.forEach((opt,i)=>{
+    const b = document.createElement("button");
+    b.className = "option";
+    b.innerText = String.fromCharCode(65+i)+") "+opt;
+
+    b.onclick = () => answerWithFeedback(q, opt);
+
+    div.appendChild(b);
+  });
+}
+
+function normalizeOpt(s){
+  return String(s ?? "")
+    .trim()
+    .replace(/\s+/g, " ")
+    .toLowerCase();
+}
+
+function generateOptions(q){
+  let pool = [];
+
+  if(q.type==="jp_es"){
+    pool = DATA.pages.flatMap(p => p.lines.flatMap(l => (l.words||[]).map(w => w.es)));
+  }
+  if(q.type==="es_jp"){
+    pool = DATA.pages.flatMap(p => p.lines.flatMap(l => (l.words||[]).map(w => w.jp)));
+  }
+  if(q.type==="kanji"){
+    pool = DATA.pages.flatMap(p => p.lines.flatMap(l => (l.kanji||[]).map(k => (k.gloss||[])[0])));
+  }
+  if(q.type==="ear"){
+    pool = DATA.pages.flatMap(p => (p.lines||[]).map(l => l.jp));
+  }
+
+  // limpiar pool: strings válidos
+  pool = pool.filter(x => typeof x === "string" && x.trim().length);
+
+  // Construir opciones únicas: 3 distractores + correcta = 4
+  const correct = String(q.correct ?? "").trim();
+  const correctKey = normalizeOpt(correct);
+
+  const seen = new Set();
+  const opts = [];
+
+  // meter correcta primero (única)
+  if(correctKey){
+    seen.add(correctKey);
+    opts.push(correct);
+  }
+
+  // barajar pool y sacar distractores únicos
+  const shuffled = shuffle([...pool]);
+
+  for(const cand of shuffled){
+    if(opts.length >= 4) break;
+    const c = String(cand).trim();
+    const key = normalizeOpt(c);
+    if(!key) continue;
+    if(seen.has(key)) continue;          // evita repetidas
+    if(key === correctKey) continue;     // evita que se cuele la correcta duplicada
+    seen.add(key);
+    opts.push(c);
+  }
+
+  // si por alguna razón no alcanzó 4 (pool pequeño), rellena con extras genéricos
+  while(opts.length < 4){
+    opts.push("—");
+  }
+
+  return shuffle(opts);
+}
+
+
+function findLineAudio(line){
+  for(const p of DATA.pages){
+    for(let i=0;i<p.lines.length;i++){
+      if(p.lines[i].jp===line.jp){
+        return "p"+String(p.page_id).padStart(2,"0")+"_l0"+(i+1)+".mp3";
+      }
+    }
+  }
+}
+
+function answerWithFeedback(q, opt){
+  const fb = document.getElementById("quizFeedback");
+
+  const ok = (opt === q.correct);
+
+  if(ok){
+    score[q.type]++;
+    fb.className = "quizFeedback ok";
+    fb.innerHTML = `✅ Correcto`;
+  }else{
+    score.wrong++;
+    fb.className = "quizFeedback bad";
+    fb.innerHTML = `✘ Incorrecto<br>✅ Respuesta: <b>${q.correct}</b>`;
+  }
+
+  renderQuizStats();
+
+  // desactivar botones para que no respondan 2 veces
+  document.querySelectorAll("#quizArea button.option").forEach(b => b.disabled = true);
+
+  // botón siguiente
+  const nextBtn = document.createElement("button");
+  nextBtn.textContent = "Siguiente ▶";
+  nextBtn.style.marginTop = "12px";
+  nextBtn.onclick = () => {
+    currentQuestionIndex++;
+    showQuestion();
+  };
+  fb.appendChild(document.createElement("br"));
+  fb.appendChild(nextBtn);
+}
+ 
+function answer(q,opt){
+  if(opt===q.correct){
+    score[q.type]++;
+  }else{
+    score.wrong++;
+  }
+  currentQuestionIndex++;
+  showQuestion();
+}
+
+function showResults(){
+  const div=document.getElementById("quizArea");
+  div.innerHTML=`
+  <div class="resultBox">
+  <h2>RESULTADOS</h2>
+  JP→ES: ${score.jp_es}/25<br>
+  ES→JP: ${score.es_jp}/25<br>
+  Kanji: ${score.kanji}/25<br>
+  Oído: ${score.ear}/25<br>
+  <br>
+  Total correcto: ${score.jp_es+score.es_jp+score.kanji+score.ear}/100
+  </div>
+  `;
+}
+
+document.getElementById("password").addEventListener("keydown", function(e){
+  if(e.key === "Enter"){
+    checkPassword();
+  }
+});
+
+function renderMenuFromJSON(){
+  if(!DATA?.story) return;
+
+  // 1️⃣ Título JP desde JSON
+  document.getElementById("menuTitleJp").textContent =
+    DATA.story.title_jp || "—";
+
+  // 2️⃣ Romaji (agregamos paréntesis aquí)
+  const r = (DATA.story.title_romaji || "").trim();
+  document.getElementById("menuTitleRomaji").textContent =
+    r ? `(${r})` : "";
+
+  // 3️⃣ Portada (detecta extensión automáticamente)
+  const coverEl = document.getElementById("menuCover");
+  loadImgWithFallback(coverEl, "portada");
+
+  // 4️⃣ Audio portada preparado
+  const a = document.getElementById("coverAudio");
+  a.src = AUDIO_PATH + "portada.mp3";
+  a.onerror = () => { a.removeAttribute("src"); };
+}
+
+  
+</script>
+
+</body>
+</html>

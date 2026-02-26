@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Repaso de Kana - Asallam Sensei</title>
+<style>
+  body {
+    background: #f6f6ff;
+    font-family: Arial;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 40px;
+  }
+
+  h1 { margin-bottom: 10px; }
+
+  #kana {
+    font-size: 120px;
+    margin: 20px 0;
+    font-weight: bold;
+    user-select: none;
+  }
+
+  button {
+    padding: 12px 20px;
+    margin: 5px;
+    font-size: 18px;
+    border-radius: 10px;
+    border: none;
+    background: #7d5cff;
+    color: white;
+    cursor: pointer;
+  }
+  button:hover { background: #5d46d4; }
+
+  #respuesta {
+    font-size: 30px;
+    margin-top: 10px;
+  }
+  .correcto { color: #28a745; font-weight: bold; }
+  .incorrecto { color: #d93025; font-weight: bold; }
+
+  #acciones { margin-top: 18px; }
+
+  #respuestaUsuario {
+    margin-top: 15px;
+    font-size: 22px;
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: 2px solid #aaa;
+    text-align: center;
+  }
+
+  #modo-container {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+  }
+
+  .modo-btn {
+    font-size: 16px;
+    padding: 8px 14px;
+    background: #ddddff;
+    color: #333;
+  }
+  .modo-btn.activo { background: #7d5cff; color: white; }
+
+  #estadisticas {
+    margin-top: 20px;
+    font-size: 22px;
+  }
+
+  #btn-principiante { opacity: 0.45; }
+  #btn-principiante.activo {
+    opacity: 1;
+    background: #e03131;
+    color: white;
+  }
+
+  .accion-btn{
+    padding:12px 18px;
+    border-radius:10px;
+    border:none;
+    background:#7d5cff;
+    color:white;
+    cursor:pointer;
+    font-size:18px;
+  }
+  .accion-btn:hover{ background:#5d46d4; }
+
+  @media (max-width: 360px){
+    .modo-btn{ font-size: 12px; }
+  }
+
+  #orden-container {
+    margin-top: 10px;
+    display: flex;
+    gap: 8px;
+  }
+
+  .orden-btn {
+    font-size: 14px;
+    padding: 6px 12px;
+    border-radius: 8px;
+    border: none;
+    background: #ddddff;
+    color: #333;
+    opacity: 0.55;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .orden-btn.activo {
+    opacity: 1;
+    background: #ffb3b3;
+    color: #7a1c1c;
+  }
+
+  .reset-btn{
+    font-size: 16px;
+    padding: 8px 14px;
+    border-radius: 10px;
+    border: none;
+    background: #ddddff;
+    color: #333;
+    cursor: pointer;
+  }
+  .reset-btn:hover{ background: #cfcfff; }
+</style>
+</head>
+<body>
+
+<h1>Repaso de Kana — Asallam Sensei</h1>
+
+<div id="modo-container">
+  <button id="btn-hiragana" class="modo-btn" onclick="setModo('hiragana')">Hiragana</button>
+  <button id="btn-katakana" class="modo-btn" onclick="setModo('katakana')">Katakana</button>
+  <button id="btn-mezcla"   class="modo-btn" onclick="setModo('mezcla')">Mezcla</button>
+  <button id="btn-extra"    class="modo-btn" onclick="setModo('extra')">Extra</button>
+</div>
+
+<div id="orden-container">
+  <button id="btn-principiante" class="modo-btn" onclick="togglePrincipiante()">Principiante</button>
+  <button id="btn-jp-es" class="orden-btn" onclick="setQuizModo('jp_es')">Kana → Romaji</button>
+  <button id="btn-es-jp" class="orden-btn" onclick="setQuizModo('es_jp')">Romaji → Kana</button>
+  <button id="btn-dictado" class="orden-btn" onclick="toggleDictado()">Dictado 🔊</button>
+</div>
+
+<div id="kana" onclick="if(quizModo==='dictado') reproducirAudioKana(kanaLista[actual][0])">あ</div>
+
+<div id="respuesta"></div>
+
+<input id="respuestaUsuario"
+       type="text"
+       placeholder="Escribe el romaji aquí"
+       onkeydown="manejarEnter(event)">
+
+<div id="nota-teclado" style="display:none; font-size:14px; color:#666; margin-top:6px;">
+  💡 Te recomiendo usar un teclado japonés diferente al QWERTY en este ejercicio.
+</div>
+  
+<div id="acciones">
+  <button class="accion-btn" onclick="mostrarRespuesta()">Mostrar respuesta</button>
+  <button class="accion-btn" onclick="siguienteDesdeBoton()">Siguiente</button>
+</div>
+
+<div id="estadisticas">
+  Aciertos: <span id="aciertos">0</span> —
+  Errores: <span id="errores">0</span>
+</div>
+
+<button class="reset-btn" onclick="resetStatsModo()">Reset stats</button>
+
+<script>
+/* ===============================
+   DATA
+=============================== */
+let hiragana = [];
+let katakana = [];
+let extra = [];
+let hiraganaBase = [];
+let katakanaBase = [];
+
+let filtroPrincipiante = false;
+
+const GOJUON = [
+  "a","i","u","e","o",
+  "ka","ki","ku","ke","ko",
+  "sa","shi","su","se","so",
+  "ta","chi","tsu","te","to",
+  "na","ni","nu","ne","no",
+  "ha","hi","fu","he","ho",
+  "ma","mi","mu","me","mo",
+  "ya","yu","yo",
+  "ra","ri","ru","re","ro",
+  "wa","wo","n"
+];
+
+// Cargar JSON
+fetch("data/kana.json")
+  .then(res => res.json())
+  .then(data => {
+    hiraganaBase = data.hiragana;
+    katakanaBase = data.katakana;
+    extra = data.Extra;
+
+    hiragana = hiraganaBase;
+    katakana = katakanaBase;
+
+    aplicarFiltroPrincipiante();
+
+    // init
+    setModo("hiragana");
+    setQuizModo("jp_es");
+  });
+
+/* ===============================
+   ESTADO
+=============================== */
+let modoActual = "hiragana"; // hiragana|katakana|mezcla|extra
+let kanaLista = hiragana;
+let actual = 0;
+
+let yaValidado = false;
+let aciertos = 0;
+let errores = 0;
+
+let quizModo = "jp_es";        // jp_es | es_jp | dictado
+let quizModoPrevio = "jp_es";  // recuerda el último no-dictado
+
+/* ===============================
+   STATS (localStorage)
+=============================== */
+const STATS_KEY = "kanaStats_v1";
+
+function cargarStats(){
+  try { return JSON.parse(localStorage.getItem(STATS_KEY)) || {}; }
+  catch { return {}; }
+}
+function guardarStats(stats){
+  localStorage.setItem(STATS_KEY, JSON.stringify(stats));
+}
+
+function statsKeyActual(){
+  return modoActual + "__" + quizModo;
+}
+
+function cargarStatsActual(){
+  const key = statsKeyActual();
+  const stats = cargarStats();
+  if (!stats[key]) {
+    stats[key] = { aciertos: 0, errores: 0 };
+    guardarStats(stats);
+  }
+  aciertos = stats[key].aciertos || 0;
+  errores  = stats[key].errores  || 0;
+  actualizarEstadisticas();
+}
+
+function guardarStatsActual(){
+  const key = statsKeyActual();
+  const stats = cargarStats();
+  if (!stats[key]) stats[key] = { aciertos: 0, errores: 0 };
+  stats[key].aciertos = aciertos;
+  stats[key].errores  = errores;
+  guardarStats(stats);
+}
+
+/* ===============================
+   UI HELPERS
+=============================== */
+function aplicarVisualQuizModo(){
+  document.querySelectorAll(".orden-btn").forEach(b => b.classList.remove("activo"));
+  const btnId =
+    (quizModo === "jp_es") ? "btn-jp-es" :
+    (quizModo === "es_jp") ? "btn-es-jp" :
+    "btn-dictado";
+  const btn = document.getElementById(btnId);
+  if (btn) btn.classList.add("activo");
+}
+
+function aplicarPlaceholderQuizModo(){
+  const inp = document.getElementById("respuestaUsuario");
+  if (!inp) return;
+  inp.type = "text";
+  if (quizModo === "jp_es") inp.placeholder = "Escribe el romaji aquí";
+  else if (quizModo === "es_jp") inp.placeholder = "Escribe el kana aquí";
+  else inp.placeholder = "Escribe kana o romaji";
+}
+
+function limpiarUI(){
+  document.getElementById("respuesta").innerText = "";
+  document.getElementById("respuesta").className = "";
+  document.getElementById("respuestaUsuario").value = "";
+  yaValidado = false;
+}
+
+/* ===============================
+   MODOS
+=============================== */
+function setModo(modo){
+  modoActual = modo;
+
+  if (modo === "hiragana") kanaLista = hiragana;
+  else if (modo === "katakana") kanaLista = katakana;
+  else if (modo === "extra") kanaLista = extra;
+  else kanaLista = [...hiragana, ...katakana]; // mezcla
+
+  // botones superiores
+  const botonesModo = document.querySelectorAll(".modo-btn");
+  botonesModo.forEach(b => { if (b.id !== "btn-principiante") b.classList.remove("activo"); });
+  const btnModo = document.getElementById("btn-" + modo);
+  if (btnModo) btnModo.classList.add("activo");
+
+  // botones inferiores según quizModo actual (NO pelea con dictado)
+  aplicarVisualQuizModo();
+  aplicarPlaceholderQuizModo();
+  aplicarNotaTeclado();
+  // stats del combo actual
+  cargarStatsActual();
+
+  limpiarUI();
+  siguienteKana();
+}
+
+function setQuizModo(modo){
+  // al elegir jp_es o es_jp, eso “sale” de dictado y actualiza previo
+  if (modo === "jp_es" || modo === "es_jp") quizModoPrevio = modo;
+  quizModo = modo;
+
+  aplicarVisualQuizModo();
+  aplicarPlaceholderQuizModo();
+  aplicarNotaTeclado();
+  cargarStatsActual();
+  limpiarUI();
+  siguienteKana();
+}
+
+function toggleDictado(){
+  if (quizModo !== "dictado") {
+    quizModoPrevio = quizModo; // guarda jp_es/es_jp
+    quizModo = "dictado";
+  } else {
+    quizModo = quizModoPrevio || "jp_es";
+  }
+
+  aplicarVisualQuizModo();
+  aplicarPlaceholderQuizModo();
+  aplicarNotaTeclado();
+  
+  cargarStatsActual();
+  limpiarUI();
+  siguienteKana();
+  if (quizModo === "dictado") {
+    reproducirAudioKana(kanaLista[actual][0]);
+  }
+}
+
+/* ===============================
+   FILTRO PRINCIPIANTE
+=============================== */
+function aplicarFiltroPrincipiante(){
+  if (!filtroPrincipiante) {
+    hiragana = hiraganaBase;
+    katakana = katakanaBase;
+    return;
+  }
+  hiragana = hiraganaBase.filter(k => GOJUON.includes(k[1]));
+  katakana = katakanaBase.filter(k => GOJUON.includes(k[1]));
+}
+
+function togglePrincipiante(){
+  filtroPrincipiante = !filtroPrincipiante;
+  const btn = document.getElementById("btn-principiante");
+  if (filtroPrincipiante) btn.classList.add("activo");
+  else btn.classList.remove("activo");
+
+  aplicarFiltroPrincipiante();
+
+  if (modoActual === "extra") return;
+  setModo(modoActual);
+}
+
+/* ===============================
+   AUDIO
+=============================== */
+function kataToHira(str){
+  const s = (str || "").normalize("NFKC").normalize("NFC");
+  return s.replace(/[\u30A1-\u30F6]/g, ch =>
+    String.fromCharCode(ch.charCodeAt(0) - 0x60)
+  );
+}
+
+let audioKana = new Audio();
+audioKana.preload = "auto";
+
+function reproducirAudioKana(kanaChar){
+  const raw = (kanaChar || "").trim();
+  if(!raw) return;
+
+  const nombre = kataToHira(raw).normalize("NFC");
+  const src = "data/audios/" + encodeURIComponent(nombre) + ".mp3";
+
+  try{
+    audioKana.pause();
+    audioKana.currentTime = 0;
+    audioKana.src = src;
+    audioKana.play().catch(() => {});
+  }catch(e){}
+}
+
+/* ===============================
+   JUEGO
+=============================== */
+function siguienteKana(){
+  actual = Math.floor(Math.random() * kanaLista.length);
+
+  const k = kanaLista[actual][0];
+  const r = kanaLista[actual][1];
+
+  if (quizModo === "dictado") {
+    document.getElementById("kana").innerText = "🔊";
+  } else {
+    document.getElementById("kana").innerText = (quizModo === "jp_es") ? k : r;
+  }
+
+  document.getElementById("respuesta").innerText = "";
+  document.getElementById("respuesta").className = "";
+  document.getElementById("respuestaUsuario").value = "";
+  yaValidado = false;
+  document.getElementById("respuestaUsuario").focus();
+  if (quizModo === "dictado") {
+  reproducirAudioKana(k);
+  }
+}
+
+function verificarRespuesta(){
+  const kRaw = kanaLista[actual][0];
+  const rRaw = kanaLista[actual][1];
+
+  const k = (kRaw || "").normalize("NFKC").normalize("NFC");
+  const r = (rRaw || "").trim().toLowerCase();
+
+  const raw = document.getElementById("respuestaUsuario").value.trim();
+
+  // Dictado: aceptar kana o romaji
+  if (quizModo === "dictado") {
+    // reproduce audio al validar (opcional)
+    reproducirAudioKana(k);
+
+    const rawNorm  = (raw || "").normalize("NFKC").normalize("NFC");
+    const rawLower = raw.toLowerCase();
+
+    const pareceRomaji = /^[a-z\- ]+$/i.test(rawLower);
+
+    let esCorrecto = false;
+
+    if (pareceRomaji) {
+      const user = rawLower.replace(/\s+/g,"");
+      const opciones = romajiAlternativas(r);
+      esCorrecto = opciones.includes(user);
+    } else {
+      const ok1 = k;
+      const ok2 = kataToHira(ok1);
+      const u1  = rawNorm;
+      const u2  = kataToHira(u1);
+      esCorrecto = (u1 === ok1) || (u2 === ok2);
+    }
+
+    if (esCorrecto) {
+      document.getElementById("respuesta").innerText = "Correcto ✔ (" + k + " / " + r + ")";
+      document.getElementById("respuesta").className = "correcto";
+      aciertos++;
+    } else {
+      document.getElementById("respuesta").innerText = "Incorrecto ✘ (era: " + k + " / " + r + ")";
+      document.getElementById("respuesta").className = "incorrecto";
+      errores++;
+    }
+
+    actualizarEstadisticas();
+    guardarStatsActual();
+    yaValidado = true;
+    return;
+  }
+
+  // NO dictado: reproduce audio al validar
+  reproducirAudioKana(k);
+
+  if (quizModo === "jp_es") {
+    // Kana→Romaji: usuario escribe romaji
+    const user = raw.toLowerCase();
+    if (user === r) {
+      document.getElementById("respuesta").innerText = "Correcto ✔ (" + r + ")";
+      document.getElementById("respuesta").className = "correcto";
+      aciertos++;
+    } else {
+      document.getElementById("respuesta").innerText = "Incorrecto ✘ (era: " + r + ")";
+      document.getElementById("respuesta").className = "incorrecto";
+      errores++;
+    }
+  } else {
+    // Romaji→Kana: usuario escribe kana (acepta hira o kata)
+    const u = (raw || "").normalize("NFKC").normalize("NFC");
+    const ok1 = k;
+    const ok2 = kataToHira(ok1);
+    const esCorrecto = (u === ok1) || (kataToHira(u) === ok2);
+
+    if (esCorrecto) {
+      document.getElementById("respuesta").innerText = "Correcto ✔ (" + ok1 + ")";
+      document.getElementById("respuesta").className = "correcto";
+      aciertos++;
+    } else {
+      document.getElementById("respuesta").innerText = "Incorrecto ✘ (era: " + ok1 + ")";
+      document.getElementById("respuesta").className = "incorrecto";
+      errores++;
+    }
+  }
+
+  actualizarEstadisticas();
+  guardarStatsActual();
+  yaValidado = true;
+}
+
+function aplicarNotaTeclado(){
+  const nota = document.getElementById("nota-teclado");
+  if (!nota) return;
+  nota.style.display = (quizModo === "es_jp") ? "block" : "none";
+}
+
+  
+function manejarEnter(event){
+  if (event.key !== "Enter") return;
+
+  if (!yaValidado) {
+    verificarRespuesta();
+  } else {
+    yaValidado = false;
+    document.getElementById("respuesta").innerText = "";
+    siguienteKana();
+  }
+}
+
+function romajiAlternativas(r){
+  const base = (r || "").trim().toLowerCase().replace(/\s+/g,"");
+
+  // Alternativas permitidas SOLO para dictado
+  if (base === "wo") return ["wo","o"];  // を suena "o"
+  // (Opcional) si algún día quieres: じ / ぢ, ず / づ etc.
+  // if (base === "ji") return ["ji","zi"];
+  // if (base === "zu") return ["zu","du"];
+
+  return [base];
+}
+
+  
+function actualizarEstadisticas(){
+  document.getElementById("aciertos").innerText = aciertos;
+  document.getElementById("errores").innerText  = errores;
+}
+
+/* ===============================
+   BOTONES ACCIONES
+=============================== */
+function siguienteDesdeBoton(){
+  if (!yaValidado) {
+    let correcto;
+    if (quizModo === "dictado") {
+      correcto = kanaLista[actual][0] + " / " + kanaLista[actual][1];
+    } else if (quizModo === "jp_es") {
+      correcto = kanaLista[actual][1];
+    } else {
+      correcto = kanaLista[actual][0];
+    }
+
+    document.getElementById("respuesta").innerText = "Saltado ✘ (era: " + correcto + ")";
+    document.getElementById("respuesta").className = "incorrecto";
+
+    reproducirAudioKana(kanaLista[actual][0]);
+
+    errores++;
+    actualizarEstadisticas();
+    guardarStatsActual();
+
+    yaValidado = true;
+    return;
+  }
+
+  document.getElementById("respuesta").innerText = "";
+  siguienteKana();
+}
+
+function mostrarRespuesta(){
+  if (yaValidado) return;
+
+  let correcto;
+  if (quizModo === "dictado") {
+    correcto = kanaLista[actual][0] + " / " + kanaLista[actual][1];
+  } else if (quizModo === "jp_es") {
+    correcto = kanaLista[actual][1];
+  } else {
+    correcto = kanaLista[actual][0];
+  }
+
+  reproducirAudioKana(kanaLista[actual][0]);
+
+  document.getElementById("respuesta").innerText = "Mostrada ✘ (era: " + correcto + ")";
+  document.getElementById("respuesta").className = "incorrecto";
+
+  errores++;
+  actualizarEstadisticas();
+  guardarStatsActual();
+
+  yaValidado = true;
+}
+
+function resetStatsModo(){
+  const key = statsKeyActual();
+  const stats = cargarStats();
+  stats[key] = { aciertos: 0, errores: 0 };
+  guardarStats(stats);
+
+  aciertos = 0;
+  errores = 0;
+  actualizarEstadisticas();
+}
+</script>
+
+</body>
+</html>
+
+
+
+

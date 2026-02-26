@@ -1,0 +1,61 @@
+[
+  {
+    "verbo": "読む",
+    "romaji": "yomu",
+    "significado": "leer",
+    "tipo": "godan",
+    "grupo": "mu",
+    "conjugaciones": [
+      {
+        "forma": "no pasado",
+        "afirmativo": "読む",
+        "negativo": "読まない"
+      },
+      {
+        "forma": "no pasado (formal)",
+        "afirmativo": "読みます",
+        "negativo": "読みません"
+      },
+      {
+        "forma": "pasado",
+        "afirmativo": "読んだ",
+        "negativo": "読まなかった"
+      },
+      {
+        "forma": "pasado (formal)",
+        "afirmativo": "読みました",
+        "negativo": "読みませんでした"
+      },
+      {
+        "forma": "forma -te",
+        "afirmativo": "読んで",
+        "negativo": "読まなくて"
+      },
+      {
+        "forma": "forma potencial",
+        "afirmativo": "読める",
+        "negativo": "読めない"
+      },
+      {
+        "forma": "forma pasiva",
+        "afirmativo": "読まれる",
+        "negativo": "読まれない"
+      },
+      {
+        "forma": "forma causativa",
+        "afirmativo": "読ませる",
+        "negativo": "読ませない"
+      },
+      {
+        "forma": "forma causativa-pasiva",
+        "afirmativo": "読ませられる",
+        "negativo": "読ませられない"
+      },
+      {
+        "forma": "imperativo",
+        "afirmativo": "読め",
+        "negativo": "読むな"
+      }
+    ]
+  }
+]
