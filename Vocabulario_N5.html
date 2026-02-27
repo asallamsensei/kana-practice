@@ -18,8 +18,8 @@
     --border: rgba(255,255,255,.14);
 
     /* Dictado rojos */
-    --dictadoRed: #ff3b30;     /* más intenso (dictado) */
-    --dictadoRedSoft:#d94a45;  /* menos intenso (base activo en dictado) */
+    --dictadoRed: #ff3b30;
+    --dictadoRedSoft:#d94a45;
   }
 
   body{
@@ -43,8 +43,8 @@
     flex-direction:column;
     gap:10px;
     margin-bottom:16px;
-    align-items:center;          /* ✅ centrado */
-    text-align:center;           /* ✅ centrado */
+    align-items:center;
+    text-align:center;
   }
 
   h1{
@@ -53,7 +53,6 @@
     letter-spacing:.2px;
   }
 
-  /* Layout: un solo panel centrado */
   .solo{
     display:flex;
     justify-content:center;
@@ -68,7 +67,6 @@
     padding: 16px;
   }
 
-  /* ✅ grid principal autofit (speaker/pregunta/opciones/input/botones) */
   .panelGrid{
     display:grid;
     grid-template-columns: 1fr;
@@ -125,12 +123,10 @@
     border-color: transparent;
   }
 
-  /* ✅ estado dictado (rojo) */
   .btn-mode.dictado-on{
     background: var(--dictadoRed);
     border-color: transparent;
   }
-  /* ✅ botón base activo cuando dictado está on (rojo suave) */
   .btn-mode.base-dictado{
     background: var(--dictadoRedSoft);
     border-color: transparent;
@@ -141,7 +137,6 @@
     padding: 20px 10px 10px;
   }
 
-  /* Pregunta grande (JP por defecto) */
   #promptMain{
     font-size: 64px;
     font-weight: 900;
@@ -150,7 +145,6 @@
     word-break: break-word;
     width: min(920px, 100%);
   }
-  /* Cuando la pregunta sea ES, achicamos */
   #promptMain.esPregunta{
     font-size: 40px;
     font-weight: 800;
@@ -186,7 +180,6 @@
     width: min(920px, 100%);
   }
 
-  /* Switch de modos (grid autofit) */
   .switch{
     display:grid;
     grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
@@ -200,7 +193,6 @@
     width:100%;
   }
 
-  /* Botón parlantico grande */
   .btnAudioBig{
     border:none;
     cursor:pointer;
@@ -217,15 +209,14 @@
   .btnAudioBig:active{ transform: translateY(0px); }
   .btnAudioBig[disabled]{ opacity:.35; cursor:not-allowed; transform:none; }
 
-  /* Opciones (grid autofit) */
-#opcionesBtns{
-  display:flex;
-  flex-direction:column;
-  gap:10px;
-  width:min(560px, 100%);
-  margin-left:auto;
-  margin-right:auto;
-}
+  #opcionesBtns{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    width:min(560px, 100%);
+    margin-left:auto;
+    margin-right:auto;
+  }
 
   .optBtn{
     display:flex;
@@ -273,7 +264,6 @@
     word-break: break-word;
   }
 
-  /* ✅ pintado correcto/incorrecto */
   .optBtn.correcta{
     border-color: rgba(34,197,94,.55);
     background: rgba(34,197,94,.12);
@@ -286,7 +276,6 @@
     opacity:.55;
   }
 
-  /* Input respuesta solo en no-dictado */
   #inputRow{
     justify-content:center;
     margin-top: 2px;
@@ -297,7 +286,6 @@
     width:min(220px, 100%);
   }
 
-  /* fila de botones de acción (autofit) */
   .actions{
     display:grid;
     grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
@@ -351,7 +339,7 @@
 
         <div class="actions">
           <button class="btn" type="button" onclick="accionSiguiente()">Siguiente</button>
-          <button class="btn btn-ghost" type="button" onclick="mostrarRespuesta()">Mostrar respuesta</button>         
+          <button class="btn btn-ghost" type="button" onclick="mostrarRespuesta()">Mostrar respuesta</button>
         </div>
 
       </div>
@@ -374,162 +362,49 @@ let yaValidado = false;
 const letras = ["a","b","c"];
 
 // ====== MODOS ======
-// modoBase: "jp-es" | "es-jp" | "mixto"
-let modoBase = "jp-es";
+let modoBase = "jp-es";   // "jp-es" | "es-jp" | "mixto"
+let dictadoOn = false;    // on/off
+let rondaDir = "jp-es";   // dirección actual de la ronda
 
-// dictado: on/off
-let dictadoOn = false;
-
-// dirección actual de la RONDA (en mixto cambia cada pregunta)
-let rondaDir = "jp-es"; // "jp-es" | "es-jp"
-
-// ====== AUDIO ======
+// ====== AUDIO (EXACTO AL JSON) ======
 const AUDIO_BASE = "data/audios/n5/";   // carpeta mp3
-const audioCache = new Map();           // url -> Audio
-const resolvedUrlCache = new Map();     // romajiOriginal -> urlResuelta (o "" si no existe)
-let ultimoAudioKey = "";                // romaji actual (tal cual del JSON)
-let audioActual = null;
+const audio = new Audio();
+audio.preload = "auto";
+let ultimoAudioKey = "";                // romaji actual tal cual del JSON
 
-function normalizeRomajiBasic(s){
-  return String(s || "")
-    .trim()
-    .toLowerCase()
-    .replace(/[’‘]/g, "'")
-    .replace(/\s+/g, " ");
-}
-
-// genera candidatos de filename (sin .mp3)
-function buildRomajiCandidates(romaji){
-  const base = normalizeRomajiBasic(romaji);
-  if(!base) return [];
-
-  // helpers
-  const macronTo = (str, map) => str.replace(/[āīūēō]/g, ch => map[ch] ?? ch);
-
-  // ō: ou/oo/o ; ē: ee/ei/e ; demás: aa/ii/uu + sin macrón
-  const v1 = macronTo(base, { "ā":"aa","ī":"ii","ū":"uu","ē":"ee","ō":"ou" });
-  const v2 = macronTo(base, { "ā":"aa","ī":"ii","ū":"uu","ē":"ee","ō":"oo" });
-  const v3 = macronTo(base, { "ā":"a","ī":"i","ū":"u","ē":"e","ō":"o" });   // quitar macrón
-
-  // también probar ē como "ei" (a veces se guarda así)
-  const v4 = macronTo(base, { "ā":"aa","ī":"ii","ū":"uu","ē":"ei","ō":"ou" });
-  const v5 = macronTo(base, { "ā":"aa","ī":"ii","ū":"uu","ē":"ei","ō":"oo" });
-
-  // espacios: tal cual / con _ / sin espacios (por si renombraste)
-  const spaceVariants = (str) => {
-    const a = str;
-    const b = str.replace(/ /g, "_");
-    const c = str.replace(/ /g, "");
-    return [a,b,c];
-  };
-
-  const raw = [
-    ...spaceVariants(base),
-    ...spaceVariants(v1),
-    ...spaceVariants(v2),
-    ...spaceVariants(v3),
-    ...spaceVariants(v4),
-    ...spaceVariants(v5),
-  ];
-
-  // únicos, sin vacíos, límite razonable
-  const out = [];
-  const seen = new Set();
-  for(const x of raw){
-    const k = String(x || "").trim();
-    if(!k) continue;
-    if(seen.has(k)) continue;
-    seen.add(k);
-    out.push(k);
-    if(out.length >= 18) break;
-  }
-  return out;
-}
-
-function audioUrlFromFilename(filenameNoExt){
-  return AUDIO_BASE + encodeURIComponent(filenameNoExt) + ".mp3";
-}
-
-async function urlExists(url){
-  // GitHub Pages normalmente responde bien a HEAD; si falla, probamos GET.
-  try{
-    const r = await fetch(url, { method:"HEAD", cache:"force-cache" });
-    if(r.ok) return true;
-  }catch{}
-  try{
-    const r2 = await fetch(url, { method:"GET", cache:"force-cache" });
-    return r2.ok;
-  }catch{
-    return false;
-  }
-}
-
-async function resolveAudioUrlFromRomaji(romaji){
+function buildExactAudioSrc(romaji){
   const key = String(romaji || "").trim();
   if(!key) return "";
-
-  if(resolvedUrlCache.has(key)) return resolvedUrlCache.get(key);
-
-  const candidates = buildRomajiCandidates(key);
-  for(const name of candidates){
-    const url = audioUrlFromFilename(name);
-    if(await urlExists(url)){
-      resolvedUrlCache.set(key, url);
-      return url;
-    }
-  }
-
-  resolvedUrlCache.set(key, "");
-  return "";
-}
-
-function getAudioByUrl(url){
-  if(!url) return null;
-  if(audioCache.has(url)) return audioCache.get(url);
-
-  const a = new Audio(url);
-  a.preload = "auto";
-  audioCache.set(url, a);
-  return a;
+  // nombre EXACTO al romaji del JSON (solo encode para espacios/acentos)
+  return AUDIO_BASE + encodeURIComponent(key) + ".mp3";
 }
 
 function detenerAudio(){
   try{
-    if(audioActual){
-      audioActual.pause();
-      audioActual.currentTime = 0;
-    }
+    audio.pause();
+    audio.currentTime = 0;
   }catch{}
 }
 
-// play por romaji (async). No revienta si no existe.
 async function playAudio(romaji){
   const key = String(romaji || "").trim();
   ultimoAudioKey = key;
 
+  const src = buildExactAudioSrc(key);
+  if(!src) return;
+
+  // ya no comprobamos existencia: si falla, falla y ya
   const speaker = document.getElementById("promptSpeaker");
-  if(speaker) speaker.disabled = true;
-
-  const url = await resolveAudioUrlFromRomaji(key);
-  if(!url){
-    if(speaker) speaker.disabled = true;
-    return;
-  }
-
-  const a = getAudioByUrl(url);
-  if(!a){
-    if(speaker) speaker.disabled = true;
-    return;
-  }
-
   if(speaker) speaker.disabled = false;
 
-  detenerAudio();
-  audioActual = a;
   try{
-    a.currentTime = 0;
-    await a.play();
-  }catch{}
+    detenerAudio();
+    audio.src = src;
+    audio.load();
+    await audio.play();
+  }catch{
+    // silencioso
+  }
 }
 
 function reproducirAudioActual(){
@@ -561,22 +436,17 @@ function limpiarActivos(){
 function aplicarUI(){
   limpiarActivos();
 
-  // base activo normal
   const baseId = (modoBase === "jp-es") ? "m-jp-es" : (modoBase === "es-jp") ? "m-es-jp" : "m-mixto";
   const baseBtn = document.getElementById(baseId);
   const dictBtn = document.getElementById("m-dictado");
 
   if(dictadoOn){
-    // dictado rojo intenso
     dictBtn.classList.add("dictado-on");
-    // base activo rojo suave
     baseBtn.classList.add("base-dictado");
   }else{
-    // base normal morado
     baseBtn.classList.add("activo");
   }
 
-  // input visible solo si NO dictado
   document.getElementById("inputRow").style.display = dictadoOn ? "none" : "flex";
 }
 
@@ -586,7 +456,7 @@ function setModoBase(nuevoBase){
 
   yaValidado = false;
   limpiarResultado();
-  if(lista.length) siguiente(true);
+  if(lista.length) siguiente();
 }
 
 function toggleDictado(){
@@ -595,12 +465,10 @@ function toggleDictado(){
 
   yaValidado = false;
   limpiarResultado();
-  if(lista.length) siguiente(true);
+  if(lista.length) siguiente();
 }
 
 // ====== TEXTO SEGÚN DIRECCIÓN DE LA RONDA ======
-// rondaDir: "jp-es": pregunta JP, respuesta ES
-//           "es-jp": pregunta ES, respuesta JP
 function textoPregunta(item){
   return (rondaDir === "jp-es") ? item.kanji : item.significado;
 }
@@ -610,7 +478,6 @@ function textoRespuesta(item){
 
 function aplicarEstiloPregunta(){
   const el = document.getElementById("promptMain");
-  // si la pregunta es ES → achicar
   if(rondaDir === "es-jp") el.classList.add("esPregunta");
   else el.classList.remove("esPregunta");
 }
@@ -621,11 +488,9 @@ function renderPrompt(itemCorrecto){
 
   aplicarEstiloPregunta();
 
-  // audio siempre corresponde al ROMAJI del item
   ultimoAudioKey = String(itemCorrecto.romaji || "").trim();
 
   if(dictadoOn){
-    // dictado: solo speaker
     let label = "";
     if(modoBase === "mixto"){
       label = (rondaDir === "jp-es") ? "🎧 Dictado mixto: elige el significado" : "🎧 Dictado mixto: elige el japonés";
@@ -640,16 +505,14 @@ function renderPrompt(itemCorrecto){
       <button id="promptSpeaker" class="btnAudioBig" type="button" title="Escuchar" onclick="reproducirAudioActual()">🔊</button>
     `;
   }else{
-    // normal: texto + speaker
     promptEl.textContent = textoPregunta(itemCorrecto);
     subEl.innerHTML = `
       <button id="promptSpeaker" class="btnAudioBig" type="button" title="Escuchar" onclick="reproducirAudioActual()">🔊</button>
     `;
   }
 
-  // habilitar/deshabilitar speaker según audio exista
   const speaker = document.getElementById("promptSpeaker");
-  if(speaker) speaker.disabled = true; // se habilita cuando exista audio (al reproducir)
+  if(speaker) speaker.disabled = false; // ya no verificamos existencia
 }
 
 function limpiarResultado(){
@@ -689,7 +552,7 @@ function pintarOpciones(letraElegida){
 // ====== SIGUIENTE (DOBLE CLICK SI ESTABA SIN CALIFICAR) ======
 function accionSiguiente(){
   focoAutomatico = false;
-  // Si NO se ha respondido aún → cuenta como error y SOLO muestra respuesta (no pasa)
+
   if(!yaValidado){
     errores++;
     pintarStats();
@@ -699,28 +562,24 @@ function accionSiguiente(){
     res.className = "incorrecto";
     res.innerText = `Saltado ✘ (era ${correctaLetra}) — ${respuestaCorrecta}`;
 
-    // pintar opciones: correcta marcada, resto apagadas
     pintarOpciones(null);
     bloquearOpciones();
 
-    // SIEMPRE suena al revisar
     playAudio(ultimoAudioKey);
     return;
   }
 
-  // ya calificado → ahora sí pasa
-  siguiente(false);
+  siguiente();
 }
 
 // ====== GENERAR RONDA ======
 function elegirRondaDir(){
   if(modoBase === "jp-es") return "jp-es";
   if(modoBase === "es-jp") return "es-jp";
-  // mixto
   return (Math.random() < 0.5) ? "jp-es" : "es-jp";
 }
 
-function siguiente(forzarAutoPlay){
+function siguiente(){
   if(lista.length < 3) return;
 
   rondaDir = elegirRondaDir();
@@ -730,7 +589,6 @@ function siguiente(forzarAutoPlay){
 
   respuestaCorrecta = textoRespuesta(itemCorrecto);
 
-  // Armar opciones MC (siempre 3)
   let opciones = [respuestaCorrecta];
   while(opciones.length < 3){
     const rItem = lista[Math.floor(Math.random()*lista.length)];
@@ -754,7 +612,7 @@ function siguiente(forzarAutoPlay){
     if (focoAutomatico) input.focus({preventScroll:true});
   }
 
-  // SIEMPRE suena al pasar (forzar o no da igual, lo dejamos siempre)
+  // (como lo tenías) suena al pasar:
   playAudio(ultimoAudioKey);
 }
 
@@ -807,7 +665,6 @@ function verificar(letraForzada){
   const r = (letraForzada || (!dictadoOn ? document.getElementById("respuestaUsuario").value : ""))
               .toString().toLowerCase().trim();
 
-  // en no-dictado, si mete algo raro
   if(!dictadoOn && !["a","b","c"].includes(r)){
     res.className = "incorrecto";
     res.innerText = `Incorrecto ✘ (era ${correctaLetra}) — ${respuestaCorrecta}`;
@@ -815,7 +672,7 @@ function verificar(letraForzada){
     pintarStats();
     yaValidado = true;
 
-    pintarOpciones(r);  // pinta correcta y (si aplica) la elegida
+    pintarOpciones(r);
     bloquearOpciones();
 
     playAudio(ultimoAudioKey);
@@ -840,13 +697,12 @@ function verificar(letraForzada){
   pintarOpciones(letra);
   bloquearOpciones();
 
-  // SIEMPRE suena al revisar
   playAudio(ultimoAudioKey);
 }
 
 function mostrarRespuesta(){
   focoAutomatico = false;
-  // Mostrar respuesta cuenta como mala SOLO si no estaba validado
+
   if(!yaValidado){
     errores++;
     pintarStats();
@@ -858,7 +714,6 @@ function mostrarRespuesta(){
 
   yaValidado = true;
 
-  // pintar opciones: correcta marcada, resto apagadas
   pintarOpciones(null);
   bloquearOpciones();
 
@@ -872,8 +727,7 @@ function manejarEnter(event){
   if(!yaValidado){
     verificar();
   }else{
-    // si ya estaba calificado, Enter pasa directo
-    siguiente(false);
+    siguiente();
   }
 }
 </script>
