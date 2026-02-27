@@ -383,7 +383,7 @@
       "vocabulario": [
         { "jp": "特戦隊", "romaji": "tokusentai", "es": "fuerzas especiales" },
         { "jp": "只今参上!!", "romaji": "tadaima sanjou!!", "es": "¡¡Nos presentamos ahora mismo!!" },
-        { "jp": "エリート戦士", "romaji": "erīto senshi", "es": "guerreros de élite" },
+        { "jp": "エリート戦士", "romaji": "eriito senshi", "es": "guerreros de élite" },
         { "jp": "ひざまずく", "romaji": "hizamazuku", "es": "arrodillarse; doblar la rodilla (por respeto o sumisión)" },
         { "jp": "順番決め", "romaji": "junban-gime", "es": "decidir el orden (los turnos)" },
     
@@ -394,10 +394,10 @@
         { "jp": "青い", "romaji": "aoi", "es": "azul (adjetivo)" },
         { "jp": "隊長", "romaji": "taichou", "es": "líder del escuadrón; capitán (en el doblaje latino)" },
     
-        { "jp": "チョコレートパフェ", "romaji": "chokorēto pafe", "es": "parfait de chocolate (postre en capas)" },
-        { "jp": "エスパー", "romaji": "esupā", "es": "psíquico; “esper” (del inglés, relacionado con ESP: percepción extra-sensorial)" },
+        { "jp": "チョコレートパフェ", "romaji": "chokoreeto pafe", "es": "parfait de chocolate (postre en capas)" },
+        { "jp": "エスパー", "romaji": "esupaa", "es": "psíquico; “esper” (del inglés, relacionado con ESP: percepción extra-sensorial)" },
         { "jp": "ジャンケン", "romaji": "janken", "es": "el juego de “piedra, papel o tijera”" },
-        { "jp": "ハリケーン", "romaji": "harikēn", "es": "huracán (del inglés “hurricane”)" },
+        { "jp": "ハリケーン", "romaji": "harikeen", "es": "huracán (del inglés “hurricane”)" },
         { "jp": "カエル", "romaji": "kaeru", "es": "rana; sapo (según contexto)" }
       ],
       "kanji": [
@@ -648,7 +648,7 @@
         { "jp": "さあ来い！！", "romaji": "sā koi!!", "es": "¡¡vamos, ven ya!! (grito de desafío)" },
         { "jp": "ハートを燃やせ", "romaji": "hāto o moyase", "es": "¡enciende tu corazón!" },
         { "jp": "仲間", "romaji": "nakama", "es": "compañeros; camaradas" },
-        { "jp": "豪快！", "romaji": "goukai!", "es": "¡grandioso!; ¡con fuerza!; ¡con energía!" },
+        { "jp": "豪快！", "romaji": "goukai", "es": "¡grandioso!; ¡con fuerza!; ¡con energía!" },
         { "jp": "倒せよ！", "romaji": "taose yo!", "es": "¡derríbenlos!; ¡derrótenlos!; ¡vénzanlos!" },
         { "jp": "奇跡", "romaji": "kiseki", "es": "milagro" },
     
