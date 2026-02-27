@@ -432,6 +432,10 @@
 <audio id="sfxExplosion" preload="auto">
   <source src="data/velocidad/bum_suelo.mp3" type="audio/mpeg">
 </audio>
+
+<audio id="sfxHit" preload="auto">
+  <source src="data/velocidad/bum_asteroide.mp3" type="audio/mpeg">
+</audio>
   
 <script>
 (() => {
@@ -463,6 +467,8 @@
   const game = $("game");
   const bgMusic = $("bgMusic");
   const sfxExplosion = $("sfxExplosion");
+  const sfxHit = $("sfxHit");
+  
   // --- keypad / display ---
   const displayEl = $("display");
   const keypadEl = document.querySelector(".keypad");
@@ -802,6 +808,17 @@
     snd.volume = 0.5;
     snd.play().catch(()=>{});
   }
+
+  function playHit(){
+    const snd = sfxHit.cloneNode(true);
+  
+    snd.volume = 0.45;
+  
+    // 🎮 variación ligera de sonido (más arcade)
+    snd.playbackRate = 1 + Math.random() * 0.1;
+  
+    snd.play().catch(()=>{});
+  }
   
   // ---------- Loop ----------
   function tick(t){
@@ -895,7 +912,8 @@ function submitAnswer(){
 
   // ✅ Sí existe: destruimos el meteorito correspondiente
   killMeteor(m, "hit");
-
+  playHit(); // 💥 BOOM CORRECTO
+  
   state.score += m.isBonus ? 8 : 10;
   state.streak += 1;
   state.bestStreak = Math.max(state.bestStreak, state.streak);
