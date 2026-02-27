@@ -388,67 +388,49 @@ let bloquesActivos = new Set([0]); // por defecto, el primero activo
 // Pool de distractores: por defecto "seleccion"
 let poolScope = "seleccion"; // "seleccion" | "global"
 
+<script>
 /* ===============================
-   AUDIO (protección ! / !! / ? / ？ / ！ etc.)
+   AUDIO (ROMAJI EXACTO)
+   Regla: archivo = romaji EXACTO + ".mp3"
+   Ej: "mirai kara" -> data/audios/series/mirai%20kara.mp3
 =============================== */
-const AUDIO_DIR = "data/audios/series/"; // <- tu carpeta real
-
+const AUDIO_DIR = "/kana-practice/data/audios/series/";
 let audio = new Audio();
 audio.preload = "auto";
 
-function unique(arr){
-  return [...new Set(arr.filter(Boolean))];
+// autoplay policy: habilitar audio tras primer click/tecla
+let audioHabilitado = false;
+document.addEventListener("pointerdown", () => (audioHabilitado = true), { once:true });
+document.addEventListener("keydown",     () => (audioHabilitado = true), { once:true });
+
+function audioUrlDesdeRomaji(romaji){
+  return AUDIO_DIR + encodeURIComponent(String(romaji || "").trim()) + ".mp3";
 }
 
-function limpiarPuntuacionFinalJP(s){
-  return (s || "")
-    .replace(/[！？?!]+$/g, "")
-    .trim();
-}
+function playAudioForRomaji(romaji){
+  if(!romaji) return;
 
-function candidatosAudioJP(jp){
-  const raw = (jp || "").trim();
-  const base = limpiarPuntuacionFinalJP(raw);
+  // si aún no hay interacción del usuario, no forzamos
+  if(!audioHabilitado) return;
 
-  const variantes = [
-    raw,
-    base,
-    base ? (base + "！") : "",
-    base ? (base + "？") : "",
-    base ? (base + "!") : "",
-    base ? (base + "?") : ""
-  ];
+  const src = audioUrlDesdeRomaji(romaji);
 
-  return unique(variantes).filter(x => x.length > 0);
-}
+  try{
+    audio.pause();
+    audio.currentTime = 0;
+  }catch(e){}
 
-function playAudioForJP(jp){
-  const candidates = candidatosAudioJP(jp);
-  if(candidates.length === 0) return;
-
-  let i = 0;
-  const tryNext = () => {
-    if(i >= candidates.length) return;
-
-    const name = candidates[i++];
-    const src = AUDIO_DIR + encodeURIComponent(name) + ".mp3";
-
-    audio.onended = null;
-    audio.onerror = () => { tryNext(); };
-
-    try{
-      audio.pause();
-      audio.currentTime = 0;
-      audio.src = src;
-      audio.play().catch(() => { tryNext(); });
-    }catch(e){
-      tryNext();
-    }
+  audio.onerror = () => {
+    console.warn("[audio] No cargó:", src, "romaji=", romaji);
   };
 
-  tryNext();
+  audio.src = src;
+  audio.play().catch(err => {
+    console.warn("[audio] play() falló/bloqueado:", err);
+  });
 }
-
+</script>
+  
 /* ===============================
    STATS localStorage
 =============================== */
@@ -586,12 +568,8 @@ function refrescarPills(){
 function replayAudio(){
   if(!actual) return;
 
-  let jpAudio = "";
-  if(actual.tipo === "vocab_jp_es") jpAudio = actual.prompt;
-  else if(actual.tipo === "vocab_es_jp") jpAudio = actual.respuesta;
-  else if(actual.tipo === "dict_es" || actual.tipo === "dict_jp") jpAudio = actual.audioJP;
-
-  if(jpAudio) playAudioForJP(jpAudio);
+  const r = actual?.extra?.romaji;
+  if(r) playAudioForRomaji(r);
 }
 
 /* ===============================
@@ -837,7 +815,7 @@ function siguiente(){
 
   // dictado: reproduce apenas sale
   if(actual.tipo === "dict_es" || actual.tipo === "dict_jp"){
-    if(actual.audioJP) playAudioForJP(actual.audioJP);
+    if(actual.extra?.romaji) playAudioForRomaji(actual.extra.romaji);
   }
 
   // stats por (bloque + modo) ya queda bien
@@ -856,14 +834,9 @@ function verificar(){
   const res = $("resultado");
 
   // AUDIO al validar
-  if(actual){
-    let jpAudio = "";
-    if(actual.tipo === "vocab_jp_es") jpAudio = actual.prompt;
-    else if(actual.tipo === "vocab_es_jp") jpAudio = actual.respuesta;
-    else if(actual.tipo === "dict_es" || actual.tipo === "dict_jp") jpAudio = actual.audioJP;
-    else jpAudio = "";
-
-    if(jpAudio) playAudioForJP(jpAudio);
+  // AUDIO al validar (romaji)
+  if(actual?.extra?.romaji){
+    playAudioForRomaji(actual.extra.romaji);
   }
 
   // ENTER vacío = revelar + error
