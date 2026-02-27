@@ -383,39 +383,112 @@ let dictadoOn = false;
 let rondaDir = "jp-es"; // "jp-es" | "es-jp"
 
 // ====== AUDIO ======
-const AUDIO_BASE = "data/audios/n5/";   // <-- tu carpeta
-const audioCache = new Map();
-let ultimoAudioKey = "";                // JP actual
+const AUDIO_BASE = "data/audios/n5/";   // carpeta mp3
+const audioCache = new Map();           // url -> Audio
+const resolvedUrlCache = new Map();     // romajiOriginal -> urlResuelta (o "" si no existe)
+let ultimoAudioKey = "";                // romaji actual (tal cual del JSON)
 let audioActual = null;
 
-// ✅ Anti-teclado automático (igual que tu otro código)
-let focoAutomatico = false; // por defecto: NO forzar focus (no abre teclado)
-
-// Si tocas/clickeas el input, entonces sí permitimos foco automático
-document.addEventListener("pointerdown", (e) => {
-  focoAutomatico = (e.target && e.target.id === "respuestaUsuario");
-});
-
-// Si respondes con teclado (a/b/c/Enter), permitimos foco automático
-document.addEventListener("keydown", (e) => {
-  if (["a","b","c","Enter"].includes(e.key)) focoAutomatico = true;
-});
-  
-function audioUrlFromText(jp){
-  return AUDIO_BASE + encodeURIComponent(String(jp || "").trim()) + ".mp3";
+function normalizeRomajiBasic(s){
+  return String(s || "")
+    .trim()
+    .toLowerCase()
+    .replace(/[’‘]/g, "'")
+    .replace(/\s+/g, " ");
 }
 
-function getAudio(jp){
-  const key = String(jp || "").trim();
-  if(!key) return null;
-  if(audioCache.has(key)) return audioCache.get(key);
+// genera candidatos de filename (sin .mp3)
+function buildRomajiCandidates(romaji){
+  const base = normalizeRomajiBasic(romaji);
+  if(!base) return [];
 
-  const a = new Audio(audioUrlFromText(key));
+  // helpers
+  const macronTo = (str, map) => str.replace(/[āīūēō]/g, ch => map[ch] ?? ch);
+
+  // ō: ou/oo/o ; ē: ee/ei/e ; demás: aa/ii/uu + sin macrón
+  const v1 = macronTo(base, { "ā":"aa","ī":"ii","ū":"uu","ē":"ee","ō":"ou" });
+  const v2 = macronTo(base, { "ā":"aa","ī":"ii","ū":"uu","ē":"ee","ō":"oo" });
+  const v3 = macronTo(base, { "ā":"a","ī":"i","ū":"u","ē":"e","ō":"o" });   // quitar macrón
+
+  // también probar ē como "ei" (a veces se guarda así)
+  const v4 = macronTo(base, { "ā":"aa","ī":"ii","ū":"uu","ē":"ei","ō":"ou" });
+  const v5 = macronTo(base, { "ā":"aa","ī":"ii","ū":"uu","ē":"ei","ō":"oo" });
+
+  // espacios: tal cual / con _ / sin espacios (por si renombraste)
+  const spaceVariants = (str) => {
+    const a = str;
+    const b = str.replace(/ /g, "_");
+    const c = str.replace(/ /g, "");
+    return [a,b,c];
+  };
+
+  const raw = [
+    ...spaceVariants(base),
+    ...spaceVariants(v1),
+    ...spaceVariants(v2),
+    ...spaceVariants(v3),
+    ...spaceVariants(v4),
+    ...spaceVariants(v5),
+  ];
+
+  // únicos, sin vacíos, límite razonable
+  const out = [];
+  const seen = new Set();
+  for(const x of raw){
+    const k = String(x || "").trim();
+    if(!k) continue;
+    if(seen.has(k)) continue;
+    seen.add(k);
+    out.push(k);
+    if(out.length >= 18) break;
+  }
+  return out;
+}
+
+function audioUrlFromFilename(filenameNoExt){
+  return AUDIO_BASE + encodeURIComponent(filenameNoExt) + ".mp3";
+}
+
+async function urlExists(url){
+  // GitHub Pages normalmente responde bien a HEAD; si falla, probamos GET.
+  try{
+    const r = await fetch(url, { method:"HEAD", cache:"force-cache" });
+    if(r.ok) return true;
+  }catch{}
+  try{
+    const r2 = await fetch(url, { method:"GET", cache:"force-cache" });
+    return r2.ok;
+  }catch{
+    return false;
+  }
+}
+
+async function resolveAudioUrlFromRomaji(romaji){
+  const key = String(romaji || "").trim();
+  if(!key) return "";
+
+  if(resolvedUrlCache.has(key)) return resolvedUrlCache.get(key);
+
+  const candidates = buildRomajiCandidates(key);
+  for(const name of candidates){
+    const url = audioUrlFromFilename(name);
+    if(await urlExists(url)){
+      resolvedUrlCache.set(key, url);
+      return url;
+    }
+  }
+
+  resolvedUrlCache.set(key, "");
+  return "";
+}
+
+function getAudioByUrl(url){
+  if(!url) return null;
+  if(audioCache.has(url)) return audioCache.get(url);
+
+  const a = new Audio(url);
   a.preload = "auto";
-  a.__ok = true;
-  a.addEventListener("error", () => { a.__ok = false; });
-
-  audioCache.set(key, a);
+  audioCache.set(url, a);
   return a;
 }
 
@@ -428,22 +501,34 @@ function detenerAudio(){
   }catch{}
 }
 
-function playAudio(jp){
-  const a = getAudio(jp);
-  ultimoAudioKey = String(jp || "").trim();
+// play por romaji (async). No revienta si no existe.
+async function playAudio(romaji){
+  const key = String(romaji || "").trim();
+  ultimoAudioKey = key;
 
   const speaker = document.getElementById("promptSpeaker");
-  if(speaker){
-    speaker.disabled = (!a || a.__ok === false);
+  if(speaker) speaker.disabled = true;
+
+  const url = await resolveAudioUrlFromRomaji(key);
+  if(!url){
+    if(speaker) speaker.disabled = true;
+    return;
   }
 
-  if(!a) return;
-  if(a.__ok === false) return;
+  const a = getAudioByUrl(url);
+  if(!a){
+    if(speaker) speaker.disabled = true;
+    return;
+  }
+
+  if(speaker) speaker.disabled = false;
 
   detenerAudio();
   audioActual = a;
-  a.currentTime = 0;
-  a.play().catch(() => {});
+  try{
+    a.currentTime = 0;
+    await a.play();
+  }catch{}
 }
 
 function reproducirAudioActual(){
@@ -454,7 +539,7 @@ function reproducirAudioActual(){
 fetch("data/Vocabulario_N5.json")
   .then(res => res.json())
   .then(data => {
-    lista = (data || []).filter(x => x && x.kanji && x.significado);
+    lista = (data || []).filter(x => x && x.kanji && x.significado && x.romaji);
     setModoBase("jp-es");
     siguiente(true);
   })
@@ -536,8 +621,8 @@ function renderPrompt(itemCorrecto){
 
   aplicarEstiloPregunta();
 
-  // audio siempre corresponde al JP del item
-  ultimoAudioKey = String(itemCorrecto.kanji || "").trim();
+  // audio siempre corresponde al ROMAJI del item
+  ultimoAudioKey = String(itemCorrecto.romaji || "").trim();
 
   if(dictadoOn){
     // dictado: solo speaker
@@ -563,9 +648,8 @@ function renderPrompt(itemCorrecto){
   }
 
   // habilitar/deshabilitar speaker según audio exista
-  const a = getAudio(ultimoAudioKey);
   const speaker = document.getElementById("promptSpeaker");
-  if(speaker) speaker.disabled = (!a || a.__ok === false);
+  if(speaker) speaker.disabled = true; // se habilita cuando exista audio (al reproducir)
 }
 
 function limpiarResultado(){
