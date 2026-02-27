@@ -345,65 +345,37 @@ function longVowelVariants(s){
 }
 
 function separatorVariants(s){
-  const baseRaw = String(s || "").trim();          // 👈 NO lower aquí
-  const baseLow = baseRaw.toLowerCase();
+  const base = String(s || "").trim();
 
-  // normaliza espacios
-  const spacedRaw = baseRaw.replace(/\s+/g, " ").trim();
-  const spacedLow = baseLow.replace(/\s+/g, " ").trim();
+  // separadores equivalentes
+  const forms = new Set();
 
-  // separadores típicos (raw + lower)
-  const undersRaw = spacedRaw.replace(/\s+/g, "_");
-  const dashedRaw = spacedRaw.replace(/\s+/g, "-");
-  const dottedRaw = spacedRaw.replace(/\s+/g, ".");
-  const joinedRaw = spacedRaw.replace(/\s+/g, "");
+  const normalized = base
+    .replace(/[_\-.]+/g, " ")   // _ - . → espacio
+    .replace(/\s+/g, " ")
+    .trim();
 
-  const undersLow = spacedLow.replace(/\s+/g, "_");
-  const dashedLow = spacedLow.replace(/\s+/g, "-");
-  const dottedLow = spacedLow.replace(/\s+/g, ".");
-  const joinedLow = spacedLow.replace(/\s+/g, "");
+  // todas las variantes principales
+  forms.add(normalized);                         // odaiji ni
+  forms.add(normalized.replace(/ /g, "_"));      // odaiji_ni
+  forms.add(normalized.replace(/ /g, "-"));      // odaiji-ni
+  forms.add(normalized.replace(/ /g, "."));      // odaiji.ni
+  forms.add(normalized.replace(/ /g, ""));       // odaijini
 
-  // cambiar separadores existentes
-  const swap1Raw = spacedRaw.replace(/[_-]+/g, " ");
-  const swap2Raw = spacedRaw.replace(/[_]+/g, "-");
-  const swap3Raw = spacedRaw.replace(/[-]+/g, "_");
+  // si ya venía con _
+  forms.add(base.replace(/_/g," "));
+  forms.add(base.replace(/_/g,"-"));
+  forms.add(base.replace(/_/g,""));
 
-  const unders2Raw = swap1Raw.replace(/\s+/g, "_");
-  const dashed2Raw = swap1Raw.replace(/\s+/g, "-");
+  // si ya venía con -
+  forms.add(base.replace(/-/g," "));
+  forms.add(base.replace(/-/g,"_"));
+  forms.add(base.replace(/-/g,""));
 
-  const safe = (x) => x.replace(/[^a-z0-9 _.-]/gi, ""); // 👈 gi para no matar mayúsculas
-  const safe_spacedRaw = safe(spacedRaw);
-  const safe_undersRaw = safe(undersRaw);
-  const safe_dashedRaw = safe(dashedRaw);
-  const safe_dottedRaw = safe(dottedRaw);
-  const safe_joinedRaw = safe(joinedRaw);
-
-  const safe_spacedLow = safe(spacedLow);
-  const safe_undersLow = safe(undersLow);
-  const safe_dashedLow = safe(dashedLow);
-  const safe_dottedLow = safe(dottedLow);
-  const safe_joinedLow = safe(joinedLow);
-
-  // super-pegado (máxima tolerancia)
-  const alnumOnlyRaw = baseRaw.replace(/[^a-z0-9]/gi, "");
-  const alnumOnlyLow = baseLow.replace(/[^a-z0-9]/g, "");
-
-  const squeezeUnders = (x) => x.replace(/_+/g, "_");
-  const squeezeDash   = (x) => x.replace(/-+/g, "-");
-
-  return unique([
-    baseRaw, spacedRaw, undersRaw, dashedRaw, dottedRaw, joinedRaw,
-    swap1Raw, swap2Raw, swap3Raw, unders2Raw, dashed2Raw,
-    safe_spacedRaw, safe_undersRaw, safe_dashedRaw, safe_dottedRaw, safe_joinedRaw,
-    squeezeUnders(undersRaw), squeezeDash(dashedRaw),
-    alnumOnlyRaw,
-
-    // 👇 también prueba la versión lower (por si el archivo sí está todo en minúscula)
-    baseLow, spacedLow, undersLow, dashedLow, dottedLow, joinedLow,
-    safe_spacedLow, safe_undersLow, safe_dashedLow, safe_dottedLow, safe_joinedLow,
-    squeezeUnders(undersLow), squeezeDash(dashedLow),
-    alnumOnlyLow
-  ].map(x => String(x).trim()).filter(Boolean));
+  // limpieza final
+  return [...forms]
+    .map(x => x.toLowerCase().trim())
+    .filter(Boolean);
 }
 
 function romajiCandidatesFromJson(romaji){
