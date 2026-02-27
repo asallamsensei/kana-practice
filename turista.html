@@ -805,9 +805,14 @@ function mostrarRespuesta(){
 function siguienteDesdeBoton(){
   const res = $("resultado");
 
-  // si no ha respondido -> cuenta como error (saltado)
+  // si NO ha respondido aún
   if(!yaValidado){
-    playAudioForRomaji(actualItem.romaji);
+    const v = $("respuestaUsuario").value.trim();
+
+    // ✅ SOLO suena si está en blanco
+    if(v === ""){
+      playAudioForRomaji(actualItem.romaji);
+    }
 
     errores++;
     actualizarEstadisticas();
@@ -823,7 +828,7 @@ function siguienteDesdeBoton(){
     return;
   }
 
-  // si ya estaba validado -> pasar a siguiente
+  // ✅ si YA estaba revisado, NO suena, solo pasa
   siguiente();
 }
 
