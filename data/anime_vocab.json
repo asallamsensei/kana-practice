@@ -8,22 +8,22 @@
         { "jp": "突き進む", "romaji": "tsukisusumu", "es": "lanzarse hacia adelante, avanzar a la fuerza, abrirse paso" },
         { "jp": "明日は無い", "romaji": "asu wa nai", "es": "no hay un mañana" },
         { "jp": "わからない", "romaji": "wakaranai", "es": "no lo sé" },
-        { "jp": "どうするかさ！", "romaji": "dō suru ka sa!", "es": "¡lo importante es lo que vas a hacer!" },
+        { "jp": "どうするかさ！", "romaji": "dou suru ka sa!", "es": "¡lo importante es lo que vas a hacer!" },
         { "jp": "ジャングル", "romaji": "janguru", "es": "jungla" },
     
         { "jp": "未来から", "romaji": "mirai kara", "es": "desde el futuro" },
         { "jp": "毒ヤリ", "romaji": "doku yari", "es": "lanza venenosa" },
         { "jp": "拳", "romaji": "kobushi", "es": "puño" },
-        { "jp": "恐怖", "romaji": "kyōfu", "es": "miedo, terror" },
+        { "jp": "恐怖", "romaji": "kyoufu", "es": "miedo, terror" },
         { "jp": "砂漠に", "romaji": "sabaku ni", "es": "en el desierto" },
         { "jp": "勝てるのかなんて", "romaji": "kateru no ka nante", "es": "eso de “si se puede ganar o no”" },
         { "jp": "力を集め", "romaji": "chikara o atsume", "es": "reúne la fuerza" },
     
         { "jp": "鋭い刃に", "romaji": "surudoi yaiba ni", "es": "hacia la hoja afilada" },
         { "jp": "眼に", "romaji": "manako ni", "es": "a los ojos (registro literario)" },
-        { "jp": "どうなるかなんて", "romaji": "dō naru ka nante", "es": "eso de “qué va a pasar”" },
+        { "jp": "どうなるかなんて", "romaji": "dou naru ka nante", "es": "eso de “qué va a pasar”" },
         { "jp": "前を見据え", "romaji": "mae o misue", "es": "fija la mirada al frente" },
-        { "jp": "どうなるかよりも", "romaji": "dō naru ka yori mo", "es": "más que pensar en qué pasará…" }
+        { "jp": "どうなるかよりも", "romaji": "dou naru ka yori mo", "es": "más que pensar en qué pasará…" }
       ],
       "kanji": [
         { "kanji": "進", "significado": "avanzar, progresar" },
@@ -64,7 +64,7 @@
         { "jp": "届いたの", "romaji": "todoita no", "es": "llegó, me alcanzó (tono explicativo/emocional)" },
         { "jp": "守ったよ", "romaji": "mamotta yo", "es": "cumpliste, mantuviste, protegiste (una promesa)" },
     
-        { "jp": "風のように", "romaji": "kaze no yō ni", "es": "como el viento" },
+        { "jp": "風のように", "romaji": "kaze no you ni", "es": "como el viento" },
         { "jp": "誰なの", "romaji": "dare na no", "es": "¿quién será…? (suave, emocional)" },
         { "jp": "予感", "romaji": "yokan", "es": "presentimiento, corazonada" },
         { "jp": "約束", "romaji": "yakusoku", "es": "promesa" },
@@ -73,7 +73,7 @@
     
         { "jp": "たどってる", "romaji": "tadotteru", "es": "estoy siguiendo, persiguiendo (un camino, huellas, un sueño)" },
         { "jp": "不思議な", "romaji": "fushigi na", "es": "misterioso, inexplicable, maravilloso" },
-        { "jp": "もうすぐ", "romaji": "mōsugu", "es": "pronto, en poco tiempo" },
+        { "jp": "もうすぐ", "romaji": "mousugu", "es": "pronto, en poco tiempo" },
         { "jp": "時間", "romaji": "jikan", "es": "tiempo, hora" },
         { "jp": "明日へ", "romaji": "ashita e", "es": "hacia el mañana" }
       ],
@@ -107,17 +107,17 @@
       "nota": "Material elaborado por Asallam Sensei",
       "vocabulario": [
         { "jp": "墓場", "romaji": "hakaba", "es": "cementerio" },
-        { "jp": "不合格", "romaji": "fugōkaku", "es": "reprobado, no aprobado" },
+        { "jp": "不合格", "romaji": "fugoukaku", "es": "reprobado, no aprobado" },
         { "jp": "危険", "romaji": "kiken", "es": "peligro" },
-        { "jp": "鉄道列車", "romaji": "tetsudō ressha", "es": "tren ferroviario" },
+        { "jp": "鉄道列車", "romaji": "tetsudou ressha", "es": "tren ferroviario" },
         { "jp": "しっかりしろ！", "romaji": "shikkari shiro!", "es": "¡contrólate!, ¡ponte firme!" },
-        { "jp": "葬儀", "romaji": "sōgi", "es": "funeral" },
+        { "jp": "葬儀", "romaji": "sougi", "es": "funeral" },
         { "jp": "触ったら", "romaji": "sawattara", "es": "si lo tocas; una vez que lo toques" },
         { "jp": "外", "romaji": "soto", "es": "afuera, exterior" },
     
         { "jp": "最期の願い", "romaji": "saigo no negai", "es": "último deseo (antes de morir)" },
         { "jp": "失礼します", "romaji": "shitsurei shimasu", "es": "disculpe, con permiso" },
-        { "jp": "コート", "romaji": "kōto", "es": "cancha (del inglés “court”)" },
+        { "jp": "コート", "romaji": "kouto", "es": "cancha (del inglés “court”)" },
         { "jp": "飲めば", "romaji": "nomeba", "es": "si lo bebes" },
         { "jp": "知らない", "romaji": "shiranai", "es": "no sé" },
         { "jp": "できますか？", "romaji": "dekimasu ka?", "es": "¿puede hacerlo?, ¿es capaz?" },
@@ -179,13 +179,13 @@
     
         { "jp": "とり戻す", "romaji": "torimodosu", "es": "recuperar" },
         { "jp": "瞳閉じれば", "romaji": "hitomi tojireba", "es": "si cierro los ojos (poético)" },
-        { "jp": "もう二度と", "romaji": "mō nido to", "es": "ya nunca más" },
+        { "jp": "もう二度と", "romaji": "mou nido to", "es": "ya nunca más" },
         { "jp": "忘れはしない", "romaji": "wasure wa shinai", "es": "de ninguna manera lo olvidaré" },
         { "jp": "しまい込んで", "romaji": "shimaikonde", "es": "guardar dentro, atesorar (poético)" },
     
         { "jp": "たとえ引き裂かれても", "romaji": "tatoe hikisakarete mo", "es": "aunque me desgarren; incluso si nos separan a la fuerza" },
-        { "jp": "自由へ", "romaji": "jiyū e", "es": "hacia la libertad" },
-        { "jp": "もう一度", "romaji": "mō ichido", "es": "otra vez" },
+        { "jp": "自由へ", "romaji": "jiyuu e", "es": "hacia la libertad" },
+        { "jp": "もう一度", "romaji": "mou ichido", "es": "otra vez" },
         { "jp": "ふり返れない", "romaji": "furikaerenai", "es": "no puedo volver la mirada" },
         { "jp": "限りなき", "romaji": "kagirinaki", "es": "sin límites, infinita" }
       ],
@@ -222,15 +222,15 @@
       "nota": "Material elaborado por Asallam Sensei",
       "vocabulario": [
         { "jp": "無駄よ", "romaji": "muda yo", "es": "es inútil, no sirve" },
-        { "jp": "どういうことだ", "romaji": "dō iu koto da", "es": "¿qué quieres decir?, ¿qué significa eso?" },
+        { "jp": "どういうことだ", "romaji": "dou iu koto da", "es": "¿qué quieres decir?, ¿qué significa eso?" },
         { "jp": "遅いね", "romaji": "osoi ne", "es": "se tarda, ¿no?; es lento, ¿no?" },
-        { "jp": "多すぎる", "romaji": "ōsugiru", "es": "hay demasiadas / es demasiado" },
+        { "jp": "多すぎる", "romaji": "ousugiru", "es": "hay demasiadas / es demasiado" },
         { "jp": "大切な", "romaji": "taisetsu na", "es": "importante, valioso" },
-        { "jp": "大丈夫かな", "romaji": "daijōbu kana", "es": "me pregunto si estará bien" },
+        { "jp": "大丈夫かな", "romaji": "daijoubu kana", "es": "me pregunto si estará bien" },
     
         { "jp": "出られない", "romaji": "derarenai", "es": "no puede(s) salir (forma potencial negativa)" },
-        { "jp": "ばかやろう", "romaji": "baka yarō", "es": "¡idiota!, ¡imbécil!" },
-        { "jp": "やめたほうがいいわよ", "romaji": "yameta hō ga ii wa yo", "es": "es mejor que se detengan (tono femenino enfático)" },
+        { "jp": "ばかやろう", "romaji": "baka yarou", "es": "¡idiota!, ¡imbécil!" },
+        { "jp": "やめたほうがいいわよ", "romaji": "yameta hou ga ii wa yo", "es": "es mejor que se detengan (tono femenino enfático)" },
         { "jp": "死んでいるから", "romaji": "shindeiru kara", "es": "porque está muerto (estado resultante)" },
     
         { "jp": "蛇使い", "romaji": "hebi-tsukai", "es": "domador / usuario de serpientes" },
@@ -269,9 +269,9 @@
       "vocabulario": [
         { "jp": "怪物", "romaji": "kaibutsu", "es": "monstruo" },
         { "jp": "拳", "romaji": "kobushi", "es": "puño" },
-        { "jp": "大きな恩", "romaji": "ōkina on", "es": "gran deuda de gratitud" },
+        { "jp": "大きな恩", "romaji": "oukina on", "es": "gran deuda de gratitud" },
         { "jp": "さて…", "romaji": "sate…", "es": "bien…, ahora…, entonces…" },
-        { "jp": "４６歳", "romaji": "yonjū-roku-sai", "es": "46 años de edad" },
+        { "jp": "４６歳", "romaji": "yonjuu-roku-sai", "es": "46 años de edad" },
         { "jp": "看板", "romaji": "kanban", "es": "letrero, placa (del dojo, aquí)" },
         { "jp": "弟子", "romaji": "deshi", "es": "discípulo, aprendiz" },
         { "jp": "冬", "romaji": "fuyu", "es": "invierno" },
@@ -279,11 +279,11 @@
         { "jp": "祈る", "romaji": "inoru", "es": "orar, rezar, hacer una plegaria" },
         { "jp": "観音様", "romaji": "Kannon-sama", "es": "la bodhisattva Kannon (deidad de la compasión)" },
         { "jp": "気のせいだよな", "romaji": "ki no sei da yo na", "es": "debe ser mi imaginación, ¿no?" },
-        { "jp": "誕生した", "romaji": "tanjō shita", "es": "nació, surgió, fue engendrado" },
+        { "jp": "誕生した", "romaji": "tanjou shita", "es": "nació, surgió, fue engendrado" },
         { "jp": "２年", "romaji": "ni-nen", "es": "dos años" },
     
         { "jp": "感謝", "romaji": "kansha", "es": "gratitud, agradecimiento" },
-        { "jp": "館長", "romaji": "kanchō", "es": "director, encargado (del dojo)" },
+        { "jp": "館長", "romaji": "kanchou", "es": "director, encargado (del dojo)" },
         { "jp": "いいよ", "romaji": "ii yo", "es": "está bien, vale (informal)" },
         { "jp": "限界", "romaji": "genkai", "es": "límite, frontera (tope máximo)" },
         { "jp": "置き去りにした", "romaji": "okizari ni shita", "es": "dejó atrás (algo que quedó rezagado)" }
@@ -327,12 +327,12 @@
       "vocabulario": [
         { "jp": "貴様", "romaji": "kisama", "es": "tú (arcaico; hoy suena insultante por ironía)" },
         { "jp": "おぬし", "romaji": "onushi", "es": "tú (arcaico; usado entre iguales o inferiores)" },
-        { "jp": "もう合戦は嫌か", "romaji": "mō kassen wa iya ka", "es": "¿ya estás harto de las batallas?" },
-        { "jp": "もうよい 出て来い", "romaji": "mō yoi, dete koi", "es": "ya está, puedes salir" },
-        { "jp": "そう 別に", "romaji": "sō, betsuni", "es": "no, nada en particular" },
+        { "jp": "もう合戦は嫌か", "romaji": "mou kassen wa iya ka", "es": "¿ya estás harto de las batallas?" },
+        { "jp": "もうよい 出て来い", "romaji": "mou yoi, dete koi", "es": "ya está, puedes salir" },
+        { "jp": "そう 別に", "romaji": "sou, betsuni", "es": "no, nada en particular" },
         { "jp": "こんどこそ", "romaji": "kondo koso", "es": "esta vez sí (énfasis con こそ)" },
     
-        { "jp": "三十人ほど", "romaji": "sanjū-nin hodo", "es": "como unos treinta" },
+        { "jp": "三十人ほど", "romaji": "sanjuu-nin hodo", "es": "como unos treinta" },
         { "jp": "ありがたい", "romaji": "arigatai", "es": "es de agradecer" },
         { "jp": "ところで", "romaji": "tokoro de", "es": "por cierto; a propósito" },
         { "jp": "いやいや", "romaji": "iya iya", "es": "no no, esto no es nada (modestia)" },
@@ -377,12 +377,12 @@
       ]
     },
     {
-      "cancion": "参上!!ギニュー特戦隊!! (Sanjō!! Ginyū Tokusentai!!)",
-      "artista": "山崎燿 (Yō Yamazaki)",
+      "cancion": "参上!!ギニュー特戦隊!! (Sanjou!! Ginyuu Tokusentai!!)",
+      "artista": "山崎燿 (You Yamazaki)",
       "nota": "Material elaborado por Asallam Sensei",
       "vocabulario": [
         { "jp": "特戦隊", "romaji": "tokusentai", "es": "fuerzas especiales" },
-        { "jp": "只今参上!!", "romaji": "tadaima sanjō!!", "es": "¡¡Nos presentamos ahora mismo!!" },
+        { "jp": "只今参上!!", "romaji": "tadaima sanjou!!", "es": "¡¡Nos presentamos ahora mismo!!" },
         { "jp": "エリート戦士", "romaji": "erīto senshi", "es": "guerreros de élite" },
         { "jp": "ひざまずく", "romaji": "hizamazuku", "es": "arrodillarse; doblar la rodilla (por respeto o sumisión)" },
         { "jp": "順番決め", "romaji": "junban-gime", "es": "decidir el orden (los turnos)" },
@@ -392,7 +392,7 @@
         { "jp": "無敵", "romaji": "muteki", "es": "invencible (lit. sin rival)" },
         { "jp": "喜び", "romaji": "yorokobi", "es": "alegría; regocijo" },
         { "jp": "青い", "romaji": "aoi", "es": "azul (adjetivo)" },
-        { "jp": "隊長", "romaji": "taichō", "es": "líder del escuadrón; capitán (en el doblaje latino)" },
+        { "jp": "隊長", "romaji": "taichou", "es": "líder del escuadrón; capitán (en el doblaje latino)" },
     
         { "jp": "チョコレートパフェ", "romaji": "chokorēto pafe", "es": "parfait de chocolate (postre en capas)" },
         { "jp": "エスパー", "romaji": "esupā", "es": "psíquico; “esper” (del inglés, relacionado con ESP: percepción extra-sensorial)" },
@@ -433,8 +433,8 @@
       "vocabulario": [
         { "jp": "冷たい女", "romaji": "tsumetai onna", "es": "mujer fría" },
         { "jp": "出逢い", "romaji": "deai", "es": "encuentro (con matiz de destino o casualidad significativa)" },
-        { "jp": "氷のように", "romaji": "kōri no yō ni", "es": "como el hielo" },
-        { "jp": "上手に", "romaji": "jōzu ni", "es": "con destreza; hábilmente; con soltura" },
+        { "jp": "氷のように", "romaji": "kouri no you ni", "es": "como el hielo" },
+        { "jp": "上手に", "romaji": "jouzu ni", "es": "con destreza; hábilmente; con soltura" },
         { "jp": "あの日", "romaji": "ano hi", "es": "aquel día" },
     
         { "jp": "閉ざした心", "romaji": "tozashita kokoro", "es": "corazón cerrado" },
@@ -595,11 +595,11 @@
         { "jp": "蛇", "romaji": "hebi", "es": "serpiente; culebra" },
         { "jp": "右目", "romaji": "migime", "es": "ojo derecho" },
         { "jp": "武器", "romaji": "buki", "es": "arma" },
-        { "jp": "最高", "romaji": "saikō", "es": "lo mejor; genial" },
+        { "jp": "最高", "romaji": "saikou", "es": "lo mejor; genial" },
         { "jp": "やった！", "romaji": "yatta!", "es": "¡yei!; ¡yupi!; ¡lo logré!" },
         { "jp": "最悪な", "romaji": "saiaku na", "es": "lo peor; horrible" },
         { "jp": "欲しい", "romaji": "hoshī", "es": "querer; desear (adjetivo)" },
-        { "jp": "週一", "romaji": "shūichi", "es": "una vez por semana (coloquial)" },
+        { "jp": "週一", "romaji": "shuuichi", "es": "una vez por semana (coloquial)" },
         { "jp": "俺と", "romaji": "ore to", "es": "conmigo; contra mí (según contexto)" },
     
         { "jp": "契約", "romaji": "keiyaku", "es": "contrato; acuerdo" },
@@ -648,7 +648,7 @@
         { "jp": "さあ来い！！", "romaji": "sā koi!!", "es": "¡¡vamos, ven ya!! (grito de desafío)" },
         { "jp": "ハートを燃やせ", "romaji": "hāto o moyase", "es": "¡enciende tu corazón!" },
         { "jp": "仲間", "romaji": "nakama", "es": "compañeros; camaradas" },
-        { "jp": "豪快！", "romaji": "gōkai!", "es": "¡grandioso!; ¡con fuerza!; ¡con energía!" },
+        { "jp": "豪快！", "romaji": "goukai!", "es": "¡grandioso!; ¡con fuerza!; ¡con energía!" },
         { "jp": "倒せよ！", "romaji": "taose yo!", "es": "¡derríbenlos!; ¡derrótenlos!; ¡vénzanlos!" },
         { "jp": "奇跡", "romaji": "kiseki", "es": "milagro" },
     
@@ -663,7 +663,7 @@
         { "jp": "ソルジャー", "romaji": "sorujā", "es": "soldado (del inglés “soldier”)" },
         { "jp": "熱いきずな", "romaji": "atsui kizuna", "es": "lazo ardiente; vínculo apasionado" },
         { "jp": "パワー", "romaji": "pawā", "es": "poder (del inglés “power”)" },
-        { "jp": "そうさ", "romaji": "sō sa", "es": "¡así es!; ¡exacto!" },
+        { "jp": "そうさ", "romaji": "sou sa", "es": "¡así es!; ¡exacto!" },
         { "jp": "不気味な", "romaji": "bukimina", "es": "siniestro; inquietante; tenebroso" }
       ],
       "kanji": [
