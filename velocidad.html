@@ -110,6 +110,15 @@
     box-shadow: 0 18px 60px rgba(0,0,0,.35);
   }
 
+@media (max-width:900px){
+  body{padding:2px;align-items:flex-start}
+  .wrap{grid-template-columns:1fr;gap:0}
+  .answerBox{margin:0}
+  .game{height:58vh}
+  .city{height:45px}
+  .groundLine{bottom:45px}
+}
+
   .topBar{
     position:absolute; left:0; top:0; right:0;
     display:flex; align-items:center; justify-content:space-between;
@@ -175,7 +184,7 @@
 .answerBox{
   width:100%;
   max-width:700px;
-  margin:0 auto 0 auto;
+  margin:14px auto 0 auto;
   display:flex;
   flex-direction:column;
   gap:10px;
@@ -193,13 +202,6 @@
     grid-row: 1;
   }
 
-@media (max-width:900px){
-  body{padding:2px;align-items:flex-start;justify-content:flex-start;overflow-x:hidden}
-  .wrap{grid-template-columns:1fr;gap:8px}
-  .game{height:58vh}
-  .answerBox{margin:4px 0 0 0;max-width:none}
-}
-  
   .answerBox{
     grid-column: 1;   /* 👈 columna izquierda */
     grid-row: 2;      /* 👈 debajo del panel */
