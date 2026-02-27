@@ -96,8 +96,7 @@
   { "kanji": "橋", "significado": "puente", "romaji": "hashi" },
   { "kanji": "春", "significado": "primavera", "romaji": "haru" },
   { "kanji": "病院", "significado": "hospital", "romaji": "byōin" },
-
-[
+  
   { "kanji": "図書館", "significado": "biblioteca (no confundir con librería)", "romaji": "toshokan" },
   { "kanji": "買い物", "significado": "compras, shopping", "romaji": "kaimono" },
   { "kanji": "椅子", "significado": "silla", "romaji": "isu" },
@@ -198,7 +197,6 @@
   { "kanji": "月曜日", "significado": "lunes (día de la luna)", "romaji": "getsuyōbi" },
   { "kanji": "金曜日", "significado": "viernes (día del metal)", "romaji": "kinyōbi" },
 
-[
   { "kanji": "花瓶", "significado": "florero, jarrón", "romaji": "kabin" },
   { "kanji": "木曜日", "significado": "jueves (día de la madera)", "romaji": "mokuyōbi" },
   { "kanji": "本棚", "significado": "estantería para libros", "romaji": "hondana" },
