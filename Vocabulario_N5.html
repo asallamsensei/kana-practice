@@ -364,6 +364,7 @@ let lista = [];
 let actual = 0;
 
 let aciertos = 0;
+let focoAutomatico = true; // o false, como prefieras por defecto
 let errores = 0;
 
 let correctaLetra = "";        // "a"/"b"/"c"
@@ -541,7 +542,6 @@ fetch("data/Vocabulario_N5.json")
   .then(data => {
     lista = (data || []).filter(x => x && x.kanji && x.significado && x.romaji);
     setModoBase("jp-es");
-    siguiente(true);
   })
   .catch(err=>{
     console.error(err);
