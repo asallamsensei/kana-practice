@@ -344,31 +344,48 @@ function longVowelVariants(s){
 }
 
 function separatorVariants(s){
-  const base = String(s || "").trim();
+  const base = String(s || "").trim().toLowerCase();
 
+  // normaliza espacios
   const spaced = base.replace(/\s+/g, " ").trim();
-  const unders = base.replace(/\s+/g, "_");
-  const dashed = base.replace(/\s+/g, "-");
-  const dotted = base.replace(/\s+/g, ".");
-  const joined = base.replace(/\s+/g, "");
 
-  const safe1 = spaced.replace(/[^a-z0-9 _.-]/g, "");
-  const safe2 = unders.replace(/[^a-z0-9 _.-]/g, "");
-  const safe3 = dashed.replace(/[^a-z0-9 _.-]/g, "");
-  const safe4 = dotted.replace(/[^a-z0-9 _.-]/g, "");
-  const safe5 = joined.replace(/[^a-z0-9 _.-]/g, "");
+  // separadores típicos
+  const unders = spaced.replace(/\s+/g, "_");
+  const dashed = spaced.replace(/\s+/g, "-");
+  const dotted = spaced.replace(/\s+/g, ".");
+  const joined = spaced.replace(/\s+/g, "");
 
+  // si el romaji ya trae _ o -, también probamos “cambiar” separadores
+  const swap1 = spaced.replace(/[_-]+/g, " ");
+  const swap2 = spaced.replace(/[_]+/g, "-");
+  const swap3 = spaced.replace(/[-]+/g, "_");
+
+  const unders2 = swap1.replace(/\s+/g, "_");
+  const dashed2 = swap1.replace(/\s+/g, "-");
+
+  // “safe” (por si hay comas, paréntesis, etc.)
+  const safe = (x) => x.replace(/[^a-z0-9 _.-]/g, "");
+
+  const safe_spaced = safe(spaced);
+  const safe_unders = safe(unders);
+  const safe_dashed = safe(dashed);
+  const safe_dotted = safe(dotted);
+  const safe_joined = safe(joined);
+
+  // super-pegado (máxima tolerancia)
   const alnumOnly = base.replace(/[^a-z0-9]/g, "");
 
-  const noDash = base.replace(/-/g, "");
-  const noUnd  = base.replace(/_/g, "");
-  const noDot  = base.replace(/\./g, "");
+  // evita cosas como "__"
+  const squeezeUnders = (x) => x.replace(/_+/g, "_");
+  const squeezeDash   = (x) => x.replace(/-+/g, "-");
 
   return unique([
     base,
     spaced, unders, dashed, dotted, joined,
-    safe1, safe2, safe3, safe4, safe5,
-    noDash, noUnd, noDot,
+    swap1, swap2, swap3, unders2, dashed2,
+    safe_spaced, safe_unders, safe_dashed, safe_dotted, safe_joined,
+    squeezeUnders(unders),
+    squeezeDash(dashed),
     alnumOnly
   ].map(x => x.trim()).filter(Boolean));
 }
