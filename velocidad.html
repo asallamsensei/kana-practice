@@ -193,6 +193,13 @@
     grid-row: 1;
   }
 
+@media (max-width:900px){
+  body{padding:2px;align-items:flex-start;justify-content:flex-start;overflow-x:hidden}
+  .wrap{grid-template-columns:1fr;gap:8px}
+  .game{height:58vh}
+  .answerBox{margin:4px 0 0 0;max-width:none}
+}
+  
   .answerBox{
     grid-column: 1;   /* 👈 columna izquierda */
     grid-row: 2;      /* 👈 debajo del panel */
