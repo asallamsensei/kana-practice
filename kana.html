@@ -490,6 +490,13 @@ function siguienteKana(){
   }
 }
 
+// Convierte Katakana -> Hiragana (para comparar respuestas en es_jp)
+function kataToHira(str){
+  return (str || "").replace(/[\u30A1-\u30F6]/g, ch => {
+    return String.fromCharCode(ch.charCodeAt(0) - 0x60);
+  });
+}
+  
 function verificarRespuesta(){
   const kRaw = kanaLista[actual][0];
   const rRaw = kanaLista[actual][1];
