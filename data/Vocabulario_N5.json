@@ -1,9 +1,9 @@
 [
-  { "kanji": "学校", "significado": "escuela", "romaji": "gakkō" },
+  { "kanji": "学校", "significado": "escuela", "romaji": "gakkou" },
   { "kanji": "川", "significado": "río", "romaji": "kawa" },
   { "kanji": "手", "significado": "mano", "romaji": "te" },
   { "kanji": "戸", "significado": "puerta tradicional japonesa", "romaji": "to" },
-  { "kanji": "障子", "significado": "puerta corrediza de papel (tradicional japonesa)", "romaji": "shōji" },
+  { "kanji": "障子", "significado": "puerta corrediza de papel (tradicional japonesa)", "romaji": "shouji" },
   { "kanji": "襖", "significado": "puerta corrediza opaca (tradicional japonesa)", "romaji": "fusuma" },
   { "kanji": "雨戸", "significado": "puerta exterior corrediza contra la lluvia (tradicional japonesa)", "romaji": "amado" },
   { "kanji": "ドア", "significado": "puerta de estilo occidental con bisagra", "romaji": "doa" },
@@ -28,7 +28,7 @@
 
   { "kanji": "電話", "significado": "teléfono", "romaji": "denwa" },
   { "kanji": "水", "significado": "agua", "romaji": "mizu" },
-  { "kanji": "病気", "significado": "enfermedad", "romaji": "byōki" },
+  { "kanji": "病気", "significado": "enfermedad", "romaji": "byouki" },
   { "kanji": "会社", "significado": "compañía, empresa", "romaji": "kaisha" },
   { "kanji": "目", "significado": "ojo", "romaji": "me" },
 
@@ -42,10 +42,10 @@
   { "kanji": "言葉", "significado": "palabra", "romaji": "kotoba" },
   { "kanji": "走る", "significado": "correr", "romaji": "hashiru" },
   { "kanji": "名前", "significado": "nombre", "romaji": "namae" },
-  { "kanji": "旅行", "significado": "viaje", "romaji": "ryokō" },
+  { "kanji": "旅行", "significado": "viaje", "romaji": "ryokou" },
 
   { "kanji": "道", "significado": "camino, calle, ruta", "romaji": "michi" },
-  { "kanji": "飛行機", "significado": "avión", "romaji": "hikōki" },
+  { "kanji": "飛行機", "significado": "avión", "romaji": "hikouki" },
   { "kanji": "映画", "significado": "película", "romaji": "eiga" },
   { "kanji": "音楽", "significado": "música", "romaji": "ongaku" },
 
@@ -62,13 +62,13 @@
   { "kanji": "山", "significado": "montaña", "romaji": "yama" },
 
   { "kanji": "窓", "significado": "ventana", "romaji": "mado" },
-  { "kanji": "動物", "significado": "animal", "romaji": "dōbutsu" },
+  { "kanji": "動物", "significado": "animal", "romaji": "doubutsu" },
   { "kanji": "夜", "significado": "noche", "romaji": "yoru" },
-  { "kanji": "料理", "significado": "cocina (no es el cuarto), comida", "romaji": "ryōri" },
+  { "kanji": "料理", "significado": "cocina (no es el cuarto), comida", "romaji": "ryouri" },
   { "kanji": "夏", "significado": "verano", "romaji": "natsu" },
 
   { "kanji": "新聞", "significado": "periódico (medio de comunicación impreso)", "romaji": "shinbun" },
-  { "kanji": "公園", "significado": "parque (público)", "romaji": "kōen" },
+  { "kanji": "公園", "significado": "parque (público)", "romaji": "kouen" },
   { "kanji": "意味", "significado": "significado, sentido", "romaji": "imi" },
   { "kanji": "足", "significado": "pierna, pie", "romaji": "ashi" },
 
@@ -84,9 +84,9 @@
   { "kanji": "机", "significado": "escritorio", "romaji": "tsukue" },
   { "kanji": "海", "significado": "mar", "romaji": "umi" },
 
-  { "kanji": "帽子", "significado": "sombrero, gorra", "romaji": "bōshi" },
-  { "kanji": "授業", "significado": "clase, lección", "romaji": "jugyō" },
-  { "kanji": "銀行", "significado": "banco (institución financiera)", "romaji": "ginkō" },
+  { "kanji": "帽子", "significado": "sombrero, gorra", "romaji": "boushi" },
+  { "kanji": "授業", "significado": "clase, lección", "romaji": "jugyou" },
+  { "kanji": "銀行", "significado": "banco (institución financiera)", "romaji": "ginkou" },
   { "kanji": "写真", "significado": "foto, fotografía", "romaji": "shashin" },
 
   { "kanji": "冬", "significado": "invierno", "romaji": "fuyu" },
@@ -95,19 +95,19 @@
   { "kanji": "口", "significado": "boca", "romaji": "kuchi" },
   { "kanji": "橋", "significado": "puente", "romaji": "hashi" },
   { "kanji": "春", "significado": "primavera", "romaji": "haru" },
-  { "kanji": "病院", "significado": "hospital", "romaji": "byōin" },
+  { "kanji": "病院", "significado": "hospital", "romaji": "byouin" },
   
   { "kanji": "図書館", "significado": "biblioteca (no confundir con librería)", "romaji": "toshokan" },
   { "kanji": "買い物", "significado": "compras, shopping", "romaji": "kaimono" },
   { "kanji": "椅子", "significado": "silla", "romaji": "isu" },
 
-  { "kanji": "自動車", "significado": "automóvil (término formal/técnico)", "romaji": "jidōsha" },
+  { "kanji": "自動車", "significado": "automóvil (término formal/técnico)", "romaji": "jidousha" },
   { "kanji": "色", "significado": "color", "romaji": "iro" },
   { "kanji": "卵", "significado": "huevo", "romaji": "tamago" },
   { "kanji": "肉", "significado": "carne", "romaji": "niku" },
   { "kanji": "風邪", "significado": "resfriado, catarro", "romaji": "kaze" },
 
-  { "kanji": "掃除", "significado": "limpieza, aseo", "romaji": "sōji" },
+  { "kanji": "掃除", "significado": "limpieza, aseo", "romaji": "souji" },
   { "kanji": "紙", "significado": "papel", "romaji": "kami" },
   { "kanji": "鍵", "significado": "llave", "romaji": "kagi" },
   { "kanji": "雑誌", "significado": "revista", "romaji": "zasshi" },
@@ -122,21 +122,21 @@
   { "kanji": "鉛筆", "significado": "lápiz", "romaji": "enpitsu" },
   { "kanji": "大人", "significado": "adulto", "romaji": "otona" },
   { "kanji": "地図", "significado": "mapa", "romaji": "chizu" },
-  { "kanji": "砂糖", "significado": "azúcar", "romaji": "satō" },
+  { "kanji": "砂糖", "significado": "azúcar", "romaji": "satou" },
 
   { "kanji": "夏休み", "significado": "vacaciones de verano", "romaji": "natsuyasumi" },
-  { "kanji": "郵便局", "significado": "oficina de correos", "romaji": "yūbinkyoku" },
+  { "kanji": "郵便局", "significado": "oficina de correos", "romaji": "yuubinkyoku" },
   { "kanji": "黒", "significado": "negro", "romaji": "kuro" },
   { "kanji": "台所", "significado": "cocina (lugar)", "romaji": "daidokoro" },
 
-  { "kanji": "教室", "significado": "aula, salón de clase", "romaji": "kyōshitsu" },
+  { "kanji": "教室", "significado": "aula, salón de clase", "romaji": "kyoushitsu" },
   { "kanji": "切手", "significado": "estampilla, sello postal", "romaji": "kitte" },
   { "kanji": "電気", "significado": "electricidad, luz eléctrica", "romaji": "denki" },
   { "kanji": "歯", "significado": "diente", "romaji": "ha" },
   { "kanji": "鼻", "significado": "nariz", "romaji": "hana" },
 
   { "kanji": "作文", "significado": "redacción, composición escrita", "romaji": "sakubun" },
-  { "kanji": "紅茶", "significado": "té negro (紅 = rojo carmesí)", "romaji": "kōcha" },
+  { "kanji": "紅茶", "significado": "té negro (紅 = rojo carmesí)", "romaji": "koucha" },
   { "kanji": "家庭", "significado": "hogar, familia (ámbito familiar)", "romaji": "katei" },
   { "kanji": "玄関", "significado": "entrada (recibidor donde se dejan los zapatos)", "romaji": "genkan" },
 
@@ -149,13 +149,13 @@
   { "kanji": "南", "significado": "sur", "romaji": "minami" },
   { "kanji": "北", "significado": "norte", "romaji": "kita" },
   { "kanji": "野菜", "significado": "verduras, vegetales", "romaji": "yasai" },
-  { "kanji": "冷蔵庫", "significado": "refrigerador, nevera", "romaji": "reizōko" },
+  { "kanji": "冷蔵庫", "significado": "refrigerador, nevera", "romaji": "reizouko" },
   { "kanji": "茶色", "significado": "café (color), marrón", "romaji": "chairo" },
 
   { "kanji": "青", "significado": "azul (a veces verde)", "romaji": "ao" },
   { "kanji": "地下鉄", "significado": "metro (ferrocarril subterráneo)", "romaji": "chikatetsu" },
   { "kanji": "西", "significado": "oeste", "romaji": "nishi" },
-  { "kanji": "火曜日", "significado": "martes (día del fuego)", "romaji": "kayōbi" },
+  { "kanji": "火曜日", "significado": "martes (día del fuego)", "romaji": "kayoubi" },
 
   { "kanji": "喫茶店", "significado": "kissaten (cafetería tradicional japonesa)", "romaji": "kissaten" },
   { "kanji": "昼", "significado": "mediodía, parte diurna del día", "romaji": "hiru" },
@@ -164,15 +164,15 @@
 
   { "kanji": "靴下", "significado": "calcetines, medias", "romaji": "kutsushita" },
   { "kanji": "辺", "significado": "alrededores, zona, cerca de", "romaji": "hen" },
-  { "kanji": "封筒", "significado": "sobre (de carta)", "romaji": "fūtō" },
+  { "kanji": "封筒", "significado": "sobre (de carta)", "romaji": "fuutou" },
   { "kanji": "話す", "significado": "hablar", "romaji": "hanasu" },
 
   { "kanji": "映画館", "significado": "cine (lugar), sala de cine", "romaji": "eigakan" },
   { "kanji": "箸", "significado": "palillos (para comer)", "romaji": "hashi" },
-  { "kanji": "食堂", "significado": "comedor, cafetería, restaurante sencillo", "romaji": "shokudō" },
-  { "kanji": "牛肉", "significado": "carne de res", "romaji": "gyūniku" },
+  { "kanji": "食堂", "significado": "comedor, cafetería, restaurante sencillo", "romaji": "shokudou" },
+  { "kanji": "牛肉", "significado": "carne de res", "romaji": "gyuuniku" },
 
-  { "kanji": "交差点", "significado": "cruce, intersección (de calles)", "romaji": "kōsaten" },
+  { "kanji": "交差点", "significado": "cruce, intersección (de calles)", "romaji": "kousaten" },
   { "kanji": "頭", "significado": "cabeza", "romaji": "atama" },
   { "kanji": "曇り", "significado": "nublado (clima)", "romaji": "kumori" },
   { "kanji": "漢字", "significado": "kanji (caracteres chinos)", "romaji": "kanji" },
@@ -188,25 +188,25 @@
   { "kanji": "百", "significado": "100", "romaji": "hyaku" },
   { "kanji": "豚肉", "significado": "carne de cerdo", "romaji": "butaniku" },
 
-  { "kanji": "交番", "significado": "caseta de policía", "romaji": "kōban" },
+  { "kanji": "交番", "significado": "caseta de policía", "romaji": "kouban" },
   { "kanji": "飲む", "significado": "beber, tomar (líquidos)", "romaji": "nomu" },
-  { "kanji": "日曜日", "significado": "domingo (día del sol)", "romaji": "nichiyōbi" },
+  { "kanji": "日曜日", "significado": "domingo (día del sol)", "romaji": "nichiyoubi" },
   { "kanji": "飴", "significado": "caramelo (duro)", "romaji": "ame" },
 
-  { "kanji": "土曜日", "significado": "sábado (día de la tierra)", "romaji": "doyōbi" },
-  { "kanji": "月曜日", "significado": "lunes (día de la luna)", "romaji": "getsuyōbi" },
-  { "kanji": "金曜日", "significado": "viernes (día del metal)", "romaji": "kinyōbi" },
+  { "kanji": "土曜日", "significado": "sábado (día de la tierra)", "romaji": "doyoubi" },
+  { "kanji": "月曜日", "significado": "lunes (día de la luna)", "romaji": "getsuyoubi" },
+  { "kanji": "金曜日", "significado": "viernes (día del metal)", "romaji": "kinyoubi" },
 
   { "kanji": "花瓶", "significado": "florero, jarrón", "romaji": "kabin" },
-  { "kanji": "木曜日", "significado": "jueves (día de la madera)", "romaji": "mokuyōbi" },
+  { "kanji": "木曜日", "significado": "jueves (día de la madera)", "romaji": "mokuyoubi" },
   { "kanji": "本棚", "significado": "estantería para libros", "romaji": "hondana" },
   { "kanji": "石鹸", "significado": "jabón", "romaji": "sekken" },
 
-  { "kanji": "誕生日", "significado": "cumpleaños", "romaji": "tanjōbi" },
+  { "kanji": "誕生日", "significado": "cumpleaños", "romaji": "tanjoubi" },
   { "kanji": "かわいい", "significado": "lindo, adorable, encantador", "romaji": "kawaii" },
   { "kanji": "鞄", "significado": "bolso, maletín, mochila", "romaji": "kaban" },
 
-  { "kanji": "水曜日", "significado": "miércoles (día del agua)", "romaji": "suiyōbi" },
+  { "kanji": "水曜日", "significado": "miércoles (día del agua)", "romaji": "suiyoubi" },
   { "kanji": "八百屋", "significado": "tienda de frutas y verduras (800 representa muchísimas cosas)", "romaji": "yaoya" },
   { "kanji": "成る", "significado": "convertirse en, llegar a ser", "romaji": "naru" },
 
@@ -228,10 +228,10 @@
   { "kanji": "自分", "significado": "uno mismo, sí mismo", "romaji": "jibun" },
   { "kanji": "知る", "significado": "saber, conocer", "romaji": "shiru" },
   { "kanji": "言う", "significado": "decir", "romaji": "iu" },
-  { "kanji": "今日", "significado": "hoy", "romaji": "kyō" },
+  { "kanji": "今日", "significado": "hoy", "romaji": "kyou" },
   { "kanji": "誰", "significado": "¿quién?", "romaji": "dare" },
   
-  { "kanji": "勉強", "significado": "estudio, estudiar (verbo suru)", "romaji": "benkyō" },
+  { "kanji": "勉強", "significado": "estudio, estudiar (verbo suru)", "romaji": "benkyou" },
   { "kanji": "話", "significado": "charla, conversación, historia, relato", "romaji": "hanashi" },
   { "kanji": "明日", "significado": "mañana (el día siguiente)", "romaji": "ashita" },
   { "kanji": "姉", "significado": "hermana mayor (propia o de la familia)", "romaji": "ane" },
@@ -242,7 +242,7 @@
   { "kanji": "新しい", "significado": "nuevo", "romaji": "atarashii" },
   { "kanji": "取る", "significado": "tomar, agarrar, obtener", "romaji": "toru" },
   
-  { "kanji": "昨日", "significado": "ayer (el día anterior)", "romaji": "kinō" },
+  { "kanji": "昨日", "significado": "ayer (el día anterior)", "romaji": "kinou" },
   { "kanji": "出る", "significado": "salir, aparecer", "romaji": "deru" },
   { "kanji": "買う", "significado": "comprar", "romaji": "kau" },
   { "kanji": "読む", "significado": "leer", "romaji": "yomu" },
@@ -277,21 +277,21 @@
   { "kanji": "長い", "significado": "largo (distancia o tiempo)", "romaji": "nagai" },
   { "kanji": "どの", "significado": "cuál (de entre varios, va antes de sustantivo)", "romaji": "dono" },
   { "kanji": "また", "significado": "otra vez, de nuevo", "romaji": "mata" },
-  { "kanji": "大きな", "significado": "grande (va antes de sustantivo)", "romaji": "ōkina" },
+  { "kanji": "大きな", "significado": "grande (va antes de sustantivo)", "romaji": "oukina" },
   
   { "kanji": "あまり", "significado": "no mucho, no tanto (en oraciones negativas)", "romaji": "amari" },
   { "kanji": "難しい", "significado": "difícil, complicado", "romaji": "muzukashii" },
   { "kanji": "友達", "significado": "amigo", "romaji": "tomodachi" },
   { "kanji": "立つ", "significado": "levantarse, ponerse o estar de pie", "romaji": "tatsu" },
   
-  { "kanji": "本当", "significado": "verdad, realidad", "romaji": "hontō" },
+  { "kanji": "本当", "significado": "verdad, realidad", "romaji": "hontou" },
   { "kanji": "寝る", "significado": "acostarse, irse a dormir", "romaji": "neru" },
   { "kanji": "生徒", "significado": "alumno, estudiante (de escuela)", "romaji": "seito" },
   { "kanji": "出す", "significado": "sacar (algo); enviar (una carta)", "romaji": "dasu" },
   { "kanji": "古い", "significado": "viejo, antiguo (cosas, no personas)", "romaji": "furui" },
   
   { "kanji": "忙しい", "significado": "ocupado, atareado", "romaji": "isogashii" },
-  { "kanji": "両親", "significado": "padres (ambos)", "romaji": "ryōshin" },
+  { "kanji": "両親", "significado": "padres (ambos)", "romaji": "ryoushin" },
   { "kanji": "泳ぐ", "significado": "nadar", "romaji": "oyogu" },
   { "kanji": "一つ", "significado": "una (cosa)", "romaji": "hitotsu" },
   { "kanji": "体", "significado": "cuerpo", "romaji": "karada" },
@@ -305,11 +305,11 @@
   { "kanji": "楽しい", "significado": "divertido, agradable", "romaji": "tanoshii" },
   { "kanji": "面白い", "significado": "interesante, entretenido, gracioso", "romaji": "omoshiroi" },
   { "kanji": "女の子", "significado": "niña, chica", "romaji": "onnanoko" },
-  { "kanji": "妹", "significado": "hermana menor", "romaji": "imōto" },
+  { "kanji": "妹", "significado": "hermana menor", "romaji": "imouto" },
   
   { "kanji": "着る", "significado": "ponerse, vestirse (parte superior del cuerpo)", "romaji": "kiru" },
   { "kanji": "服", "significado": "ropa", "romaji": "fuku" },
-  { "kanji": "上手", "significado": "hábil, bueno (en algo)", "romaji": "jōzu" },
+  { "kanji": "上手", "significado": "hábil, bueno (en algo)", "romaji": "jouzu" },
   { "kanji": "下手", "significado": "malo, torpe (en algo)", "romaji": "heta" },
   { "kanji": "今朝", "significado": "esta mañana", "romaji": "kesa" },
   
@@ -323,24 +323,24 @@
   { "kanji": "兄", "significado": "hermano mayor (el propio)", "romaji": "ani" },
   { "kanji": "飲み物", "significado": "bebida (lit. “cosa para beber”)", "romaji": "nomimono" },
   { "kanji": "二", "significado": "2", "romaji": "ni" },
-  { "kanji": "有名", "significado": "famoso (lit. que tiene nombre)", "romaji": "yūmei" },
+  { "kanji": "有名", "significado": "famoso (lit. que tiene nombre)", "romaji": "yuumei" },
   
-  { "kanji": "大きい", "significado": "grande", "romaji": "ōkii" },
-  { "kanji": "昨夜", "significado": "anoche (lectura formal/literaria: sakuya; en conversación: yūbe)", "romaji": "sakuya" },
+  { "kanji": "大きい", "significado": "grande", "romaji": "oukii" },
+  { "kanji": "昨夜", "significado": "anoche (lectura formal/literaria: sakuya; en conversación: yuube)", "romaji": "sakuya" },
   { "kanji": "質問", "significado": "pregunta", "romaji": "shitsumon" },
   { "kanji": "魚", "significado": "pez, pescado", "romaji": "sakana" },
-  { "kanji": "牛乳", "significado": "leche (de vaca)", "romaji": "gyūnyū" },
+  { "kanji": "牛乳", "significado": "leche (de vaca)", "romaji": "gyuunyuu" },
   
   { "kanji": "時々", "significado": "a veces (lit. tiempo tiempo)", "romaji": "tokidoki" },
   { "kanji": "頼む", "significado": "pedir, solicitar, encargar (algo a alguien)", "romaji": "tanomu" },
   { "kanji": "遅い", "significado": "tarde, lento", "romaji": "osoi" },
   { "kanji": "弱い", "significado": "débil", "romaji": "yowai" },
-  { "kanji": "十", "significado": "10", "romaji": "jū" },
+  { "kanji": "十", "significado": "10", "romaji": "juu" },
   { "kanji": "女", "significado": "mujer", "romaji": "onna" },
   
-  { "kanji": "お父さん", "significado": "papá, padre (para dirigirse al tuyo o al hablar del de otra persona)", "romaji": "otōsan" },
+  { "kanji": "お父さん", "significado": "papá, padre (para dirigirse al tuyo o al hablar del de otra persona)", "romaji": "otousan" },
   { "kanji": "建物", "significado": "edificio, construcción", "romaji": "tatemono" },
   { "kanji": "降りる", "significado": "bajar, descender", "romaji": "oriru" },
-  { "kanji": "弟", "significado": "hermano menor (el propio)", "romaji": "otōto" }
+  { "kanji": "弟", "significado": "hermano menor (el propio)", "romaji": "otouto" }
 
 ]
