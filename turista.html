@@ -345,50 +345,65 @@ function longVowelVariants(s){
 }
 
 function separatorVariants(s){
-  const base = String(s || "").trim().toLowerCase();
+  const baseRaw = String(s || "").trim();          // 👈 NO lower aquí
+  const baseLow = baseRaw.toLowerCase();
 
   // normaliza espacios
-  const spaced = base.replace(/\s+/g, " ").trim();
+  const spacedRaw = baseRaw.replace(/\s+/g, " ").trim();
+  const spacedLow = baseLow.replace(/\s+/g, " ").trim();
 
-  // separadores típicos
-  const unders = spaced.replace(/\s+/g, "_");
-  const dashed = spaced.replace(/\s+/g, "-");
-  const dotted = spaced.replace(/\s+/g, ".");
-  const joined = spaced.replace(/\s+/g, "");
+  // separadores típicos (raw + lower)
+  const undersRaw = spacedRaw.replace(/\s+/g, "_");
+  const dashedRaw = spacedRaw.replace(/\s+/g, "-");
+  const dottedRaw = spacedRaw.replace(/\s+/g, ".");
+  const joinedRaw = spacedRaw.replace(/\s+/g, "");
 
-  // si el romaji ya trae _ o -, también probamos “cambiar” separadores
-  const swap1 = spaced.replace(/[_-]+/g, " ");
-  const swap2 = spaced.replace(/[_]+/g, "-");
-  const swap3 = spaced.replace(/[-]+/g, "_");
+  const undersLow = spacedLow.replace(/\s+/g, "_");
+  const dashedLow = spacedLow.replace(/\s+/g, "-");
+  const dottedLow = spacedLow.replace(/\s+/g, ".");
+  const joinedLow = spacedLow.replace(/\s+/g, "");
 
-  const unders2 = swap1.replace(/\s+/g, "_");
-  const dashed2 = swap1.replace(/\s+/g, "-");
+  // cambiar separadores existentes
+  const swap1Raw = spacedRaw.replace(/[_-]+/g, " ");
+  const swap2Raw = spacedRaw.replace(/[_]+/g, "-");
+  const swap3Raw = spacedRaw.replace(/[-]+/g, "_");
 
-  // “safe” (por si hay comas, paréntesis, etc.)
-  const safe = (x) => x.replace(/[^a-z0-9 _.-]/g, "");
+  const unders2Raw = swap1Raw.replace(/\s+/g, "_");
+  const dashed2Raw = swap1Raw.replace(/\s+/g, "-");
 
-  const safe_spaced = safe(spaced);
-  const safe_unders = safe(unders);
-  const safe_dashed = safe(dashed);
-  const safe_dotted = safe(dotted);
-  const safe_joined = safe(joined);
+  const safe = (x) => x.replace(/[^a-z0-9 _.-]/gi, ""); // 👈 gi para no matar mayúsculas
+  const safe_spacedRaw = safe(spacedRaw);
+  const safe_undersRaw = safe(undersRaw);
+  const safe_dashedRaw = safe(dashedRaw);
+  const safe_dottedRaw = safe(dottedRaw);
+  const safe_joinedRaw = safe(joinedRaw);
+
+  const safe_spacedLow = safe(spacedLow);
+  const safe_undersLow = safe(undersLow);
+  const safe_dashedLow = safe(dashedLow);
+  const safe_dottedLow = safe(dottedLow);
+  const safe_joinedLow = safe(joinedLow);
 
   // super-pegado (máxima tolerancia)
-  const alnumOnly = base.replace(/[^a-z0-9]/g, "");
+  const alnumOnlyRaw = baseRaw.replace(/[^a-z0-9]/gi, "");
+  const alnumOnlyLow = baseLow.replace(/[^a-z0-9]/g, "");
 
-  // evita cosas como "__"
   const squeezeUnders = (x) => x.replace(/_+/g, "_");
   const squeezeDash   = (x) => x.replace(/-+/g, "-");
 
   return unique([
-    base,
-    spaced, unders, dashed, dotted, joined,
-    swap1, swap2, swap3, unders2, dashed2,
-    safe_spaced, safe_unders, safe_dashed, safe_dotted, safe_joined,
-    squeezeUnders(unders),
-    squeezeDash(dashed),
-    alnumOnly
-  ].map(x => x.trim()).filter(Boolean));
+    baseRaw, spacedRaw, undersRaw, dashedRaw, dottedRaw, joinedRaw,
+    swap1Raw, swap2Raw, swap3Raw, unders2Raw, dashed2Raw,
+    safe_spacedRaw, safe_undersRaw, safe_dashedRaw, safe_dottedRaw, safe_joinedRaw,
+    squeezeUnders(undersRaw), squeezeDash(dashedRaw),
+    alnumOnlyRaw,
+
+    // 👇 también prueba la versión lower (por si el archivo sí está todo en minúscula)
+    baseLow, spacedLow, undersLow, dashedLow, dottedLow, joinedLow,
+    safe_spacedLow, safe_undersLow, safe_dashedLow, safe_dottedLow, safe_joinedLow,
+    squeezeUnders(undersLow), squeezeDash(dashedLow),
+    alnumOnlyLow
+  ].map(x => String(x).trim()).filter(Boolean));
 }
 
 function romajiCandidatesFromJson(romaji){
