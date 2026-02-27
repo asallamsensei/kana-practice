@@ -353,15 +353,38 @@ function longVowelVariants(s){
 }
 
 function separatorVariants(s){
-  // por si tus mp3 usan _ o - o sin espacios
+  const base = String(s || "").trim();
+
+  // 1) variantes simples de separador
+  const spaced = base.replace(/\s+/g, " ").trim();
+  const unders = base.replace(/\s+/g, "_");
+  const dashed = base.replace(/\s+/g, "-");
+  const dotted = base.replace(/\s+/g, ".");
+  const joined = base.replace(/\s+/g, "");
+
+  // 2) “filename safe”: solo a-z 0-9 y separadores _ - .
+  //    (sirve si tus mp3 tienen cosas raras, comas, paréntesis, etc.)
+  const safe1 = spaced.replace(/[^a-z0-9 _.-]/g, "");
+  const safe2 = unders.replace(/[^a-z0-9 _.-]/g, "");
+  const safe3 = dashed.replace(/[^a-z0-9 _.-]/g, "");
+  const safe4 = dotted.replace(/[^a-z0-9 _.-]/g, "");
+  const safe5 = joined.replace(/[^a-z0-9 _.-]/g, "");
+
+  // 3) super-pegado: solo letras y números (máxima tolerancia)
+  const alnumOnly = base.replace(/[^a-z0-9]/g, "");
+
+  // 4) también prueba versiones sin separadores existentes
+  const noDash = base.replace(/-/g, "");
+  const noUnd  = base.replace(/_/g, "");
+  const noDot  = base.replace(/\./g, "");
+
   return unique([
-    s,
-    s.replace(/\s+/g, "_"),
-    s.replace(/\s+/g, "-"),
-    s.replace(/\s+/g, ""),
-    s.replace(/-/g, ""),
-    s.replace(/_/g, "")
-  ]);
+    base,
+    spaced, unders, dashed, dotted, joined,
+    safe1, safe2, safe3, safe4, safe5,
+    noDash, noUnd, noDot,
+    alnumOnly
+  ].map(x => x.trim()).filter(Boolean));
 }
 
 function romajiCandidatesFromJson(romaji){
