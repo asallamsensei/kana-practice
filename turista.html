@@ -294,7 +294,7 @@ function stripDiacritics(s){
 }
 
 function cleanRomajiToken(s){
-  let x = String(s || "").trim().toLowerCase();
+    let x = String(s || "").trim().toLowerCase().normalize("NFC"); // ✅ NFC aquí
 
   // quita puntuación final típica
   x = x.replace(/[！？?!。．…]+$/g, "").trim();
@@ -322,6 +322,7 @@ function splitRomajiOptions(romaji){
 }
 
 function longVowelVariants(s){
+  s = String(s || "").normalize("NFC"); // ✅ NFC aquí también
   const v = new Set([s]);
 
   // macrones -> variantes
