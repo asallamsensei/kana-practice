@@ -445,15 +445,21 @@ function reproducirAudioKana(romaji){
   audioKana.pause();
   audioKana.currentTime = 0;
 
+  // ✅ carpeta según modo
+  const baseDir =
+    (modoActual === "extra")
+      ? "data/audios/kana/extra/"
+      : "data/audios/";   // <- ajusta si tus hiragana/katakana están en otra carpeta
+
   let i = 0;
   const intentar = () => {
     if (i >= opciones.length) return;
     const nombre = opciones[i++];
-    audioKana.src = "data/audios/" + encodeURIComponent(nombre) + ".mp3";
-    audioKana.play().catch(() => {
-      // si falla (404 u otro), probamos la siguiente variante
-      intentar();
-    });
+
+    // NO uses encodeURIComponent para toda la ruta, solo para el nombre
+    audioKana.src = baseDir + encodeURIComponent(nombre) + ".mp3";
+
+    audioKana.play().catch(() => intentar());
   };
 
   intentar();
