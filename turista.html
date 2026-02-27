@@ -415,10 +415,7 @@ function buildSrc(nameBase){
 // --- helper: prueba existencia real del mp3
 async function fileExists(url){
   try{
-    let r = await fetch(url, { method:"HEAD", cache:"no-store" });
-    if(r.ok) return true;
-
-    r = await fetch(url, {
+    const r = await fetch(url, {
       method:"GET",
       headers:{ "Range":"bytes=0-0" },
       cache:"no-store"
