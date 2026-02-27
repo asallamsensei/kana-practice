@@ -154,7 +154,7 @@
 <input id="respuestaUsuario"
        type="text"
        placeholder="Escribe el romaji aquí"
-       onkeyup="manejarEnter(event)">
+       onkeydown="manejarEnter(event)">
 
 <div id="nota-teclado" style="display:none; font-size:14px; color:#666; margin-top:6px;">
   💡 Te recomiendo usar un teclado japonés diferente al QWERTY en este ejercicio.
@@ -583,32 +583,6 @@ function aplicarNotaTeclado(){
   nota.style.display = (quizModo === "es_jp") ? "block" : "none";
 }
 
-  
-function manejarEnter(event){
-  // Si el IME está en composición, NO validar todavía
-  if (event.isComposing) return;
-
-  const esEnter =
-    (event.key === "Enter") ||
-    (event.code === "Enter") ||
-    (event.keyCode === 13);
-
-  if (!esEnter) return;
-
-  event.preventDefault();
-
-  // En modo es_jp, a veces el Enter “real” llega justo después de confirmar el IME.
-  // Este pequeño defer asegura que ya quedó el kana en el input.
-  setTimeout(() => {
-    if (!yaValidado) {
-      verificarRespuesta();
-    } else {
-      yaValidado = false;
-      document.getElementById("respuesta").innerText = "";
-      siguienteKana();
-    }
-  }, 0);
-}
 
 function romajiAlternativas(r){
   const base = (r || "").trim().toLowerCase().replace(/\s+/g,"");
@@ -693,6 +667,55 @@ function resetStatsModo(){
   errores = 0;
   actualizarEstadisticas();
 }
+
+// ===== ENTER robusto (incluye IME) =====
+let enterPendienteIME = false;
+
+window.addEventListener("DOMContentLoaded", () => {
+  const inp = document.getElementById("respuestaUsuario");
+  if (!inp) return;
+
+  // Si el usuario presionó Enter mientras IME componía, validamos al terminar.
+  inp.addEventListener("compositionend", () => {
+    if (!enterPendienteIME) return;
+    enterPendienteIME = false;
+
+    if (!yaValidado) verificarRespuesta();
+    else {
+      yaValidado = false;
+      document.getElementById("respuesta").innerText = "";
+      siguienteKana();
+    }
+  });
+});
+
+function manejarEnter(event){
+  const esEnter =
+    event.key === "Enter" ||
+    event.code === "Enter" ||
+    event.keyCode === 13;
+
+  if (!esEnter) return;
+
+  // Si el IME está componiendo, el Enter suele ser "confirmar conversión", no validar.
+  // Entonces lo dejamos pendiente y esperamos compositionend.
+  if (event.isComposing || event.key === "Process") {
+    enterPendienteIME = true;
+    event.preventDefault();
+    return;
+  }
+
+  event.preventDefault();
+
+  // ✅ 1er Enter: revisar / ✅ 2do Enter: siguiente
+  if (!yaValidado) verificarRespuesta();
+  else {
+    yaValidado = false;
+    document.getElementById("respuesta").innerText = "";
+    siguienteKana();
+  }
+}
+  
 </script>
 
 </body>
