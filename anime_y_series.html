@@ -202,7 +202,6 @@
     font-weight: 700;
   }
 
-  /* pequeño “switch” */
   .switch{
     display:flex;
     gap:8px;
@@ -346,8 +345,58 @@ const cfg = {
   mostrarRomaji: false
 };
 
+// ====== AUDIO (EXACTO, sin tolerancias) ======
+// Regla: el archivo debe llamarse EXACTO como el romaji del JSON + ".mp3"
+// Ej: romaji: "mirai kara"  =>  data/audios/series/mirai%20kara.mp3
+const AUDIO_DIR = "data/audios/series/";
+const AUDIO_EXT = ".mp3";
+
+// cacheamos el Audio para no crear uno nuevo cada vez
+let audioVocab = new Audio();
+audioVocab.preload = "auto";
+
+let audioHabilitado = false; // se activa tras la primera interacción del usuario (autoplay policy)
+document.addEventListener("pointerdown", () => audioHabilitado = true, { once:true });
+document.addEventListener("keydown", () => audioHabilitado = true, { once:true });
+
+function audioUrlDesdeRomaji(romaji){
+  // NO cambia el texto: exacto. Solo encodea para espacios/unicode.
+  // (encodeURIComponent convierte " " a %20 y soporta caracteres raros)
+  return AUDIO_DIR + encodeURIComponent(String(romaji || "").trim()) + AUDIO_EXT;
+}
+
+function reproducirAudioRomajiExacto(romaji){
+  if(!romaji) return;
+
+  // Si el navegador bloquea autoplay, no lo forzamos: solo sonará luego del primer click/tecla.
+  if(!audioHabilitado) return;
+
+  const url = audioUrlDesdeRomaji(romaji);
+
+  // reset rápido para permitir repetir mismo audio seguido
+  try{
+    audioVocab.pause();
+    audioVocab.currentTime = 0;
+  }catch(e){}
+
+  audioVocab.src = url;
+
+  // Debug útil por si algo no carga (ver consola)
+  audioVocab.onloadeddata = () => {
+    // ok
+  };
+  audioVocab.onerror = () => {
+    console.warn("[audio] No cargó:", url, "romaji=", romaji);
+  };
+
+  // intentar play
+  audioVocab.play().catch(err => {
+    console.warn("[audio] play() bloqueado o falló:", err);
+  });
+}
+
 // ====== localStorage ======
-const STATS_KEY = "animeVocabStats_v2";      // subimos versión para no mezclar con las viejas keys
+const STATS_KEY = "animeVocabStats_v2";
 const PREFS_KEY = "animeVocabPrefs_v1";
 
 // scope de stats: "song" | "global"
@@ -379,8 +428,7 @@ function slug(s){
     .slice(0,80);
 }
 
-// ID robusto por bloque (evita colisiones: canción repetida, etc.)
-// Incluye índice + canción + artista.
+// ID robusto por bloque
 function bloqueId(b, idx){
   const cancion = slug(b?.cancion || "bloque");
   const artista = slug(b?.artista || "");
@@ -388,7 +436,6 @@ function bloqueId(b, idx){
 }
 
 function statsKeyActual() {
-  // stats por scope + modo (+ bloque si aplica)
   if(statsScope === "global"){
     return `global__${modoActual}`;
   }
@@ -426,18 +473,15 @@ function $(id){ return document.getElementById(id); }
 function setStatsScope(scope){
   statsScope = scope;
 
-  // UI
   ["song","global"].forEach(x=>{
     $("scope-"+x).classList.remove("activo");
   });
   $("scope-"+scope).classList.add("activo");
 
-  // persistir pref
   const p = cargarPrefs();
   p.statsScope = statsScope;
   guardarPrefs(p);
 
-  // recargar stats del nuevo scope
   yaValidado = false;
   limpiarResultado();
   cargarStatsActual();
@@ -447,7 +491,6 @@ function setStatsScope(scope){
 function setModo(modo){
   modoActual = modo;
 
-  // pintar botones modo
   ["jp-es","romaji","es-jp","kanji","mix"].forEach(x=>{
     const el = $("m-" + x);
     if(el) el.classList.remove("activo");
@@ -483,7 +526,6 @@ function cambiarBloque(){
   limpiarResultado();
   refrescarPills();
 
-  // Importante: NO resetea. Solo carga stats correctas del bloque actual + scope.
   cargarStatsActual();
   actualizarPillScope();
   siguiente();
@@ -564,13 +606,11 @@ function preguntaKanjiMC(b){
   const k = pick(pool);
   const correct = k.significado;
 
-  // armar opciones
   const opciones = [correct];
   while(opciones.length < 3){
     const r = pick(pool).significado;
     if(!opciones.includes(r)) opciones.push(r);
   }
-  // shuffle
   opciones.sort(()=>Math.random()-0.5);
 
   const letras = ["a","b","c"];
@@ -592,7 +632,6 @@ function siguiente(){
   const b = DATA.bloques[bloqueIdx];
   if(!b) return;
 
-  // elegir pregunta según modo
   let q = null;
 
   if(modoActual === "jp_es") q = preguntaVocabJP_ES(b);
@@ -600,7 +639,6 @@ function siguiente(){
   else if(modoActual === "es_jp") q = preguntaVocabES_JP(b);
   else if(modoActual === "kanji_mc") q = preguntaKanjiMC(b);
   else {
-    // mix
     const r = Math.random();
     if(r < 0.60) q = preguntaVocabJP_ES(b);
     else q = preguntaKanjiMC(b) || preguntaVocabJP_ES(b);
@@ -608,11 +646,14 @@ function siguiente(){
 
   actual = q;
 
-  // pintar
   $("promptJP").innerText = actual.prompt;
   $("promptSub").innerText = actual.sub || "";
 
-  // opciones (si aplica)
+  // === AUDIO: SOLO vocabulario (cuando exista romaji en el item)
+  if(actual && actual.extra && actual.extra.romaji){
+    reproducirAudioRomajiExacto(actual.extra.romaji);
+  }
+
   if(actual.tipo === "kanji_mc"){
     $("opciones").style.display = "block";
     $("opciones").innerHTML =
@@ -637,7 +678,6 @@ function verificar(){
   const input = $("respuestaUsuario").value.trim();
   const res = $("resultado");
 
-  // ENTER vacío → mostrar respuesta (y cuenta como error)
   if(input === ""){
     res.className = "incorrecto";
     res.innerText = "Respuesta: " + (actual.tipo==="kanji_mc" ? actual.respuesta : actual.respuesta);
@@ -665,7 +705,6 @@ function verificar(){
     return;
   }
 
-  // modos texto
   const user = (modoActual==="romaji") ? input.toLowerCase() : input;
   const target = (modoActual==="romaji") ? actual.respuesta.toLowerCase() : actual.respuesta;
 
@@ -735,11 +774,9 @@ fetch("data/anime_vocab.json")
       sel.appendChild(opt);
     });
 
-    // cargar prefs
     const p = cargarPrefs();
     if(p.statsScope === "global" || p.statsScope === "song") statsScope = p.statsScope;
 
-    // UI scope
     ["song","global"].forEach(x=>{
       $("scope-"+x).classList.remove("activo");
     });
@@ -748,7 +785,6 @@ fetch("data/anime_vocab.json")
     bloqueIdx = 0;
     refrescarPills();
 
-    // setModo carga stats + siguiente
     setModo("jp_es");
     actualizarPillScope();
   })
