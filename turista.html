@@ -72,20 +72,20 @@
 
   /* Prompt base (JP→ES y ES→JP) responsive */
   #prompt{
-    font-size: clamp(36px, 8vw, 64px);  /* móvil → mediano → pc */
+    font-size: clamp(36px, 8vw, 64px);
     font-weight: 800;
     margin: 6px 0 10px;
     line-height: 1.05;
     word-break: break-word;
   }
-  
+
   /* Cuando la pregunta es español → japonés (más pequeñoo) */
   #prompt.prompt-es-jp{
     font-size: clamp(22px, 4.5vw, 35px);
     font-weight: 700;
     line-height: 1.2;
   }
-  
+
   /* Opciones también responsive */
   #opciones{
     font-size: clamp(16px, 4.2vw, 22px);
@@ -142,13 +142,6 @@
     color: #222;
   }
 
-  .mini{
-    margin-top: 6px;
-    font-size: 13px;
-    color: var(--muted);
-    text-align:center;
-  }
-
   .sep{
     height:1px;
     background: var(--border);
@@ -168,34 +161,31 @@
     font-size:18px;
     border-radius:10px;
     border:none;
-    background:#b94a48;        /* rojo apagado */
+    background:#b94a48;
     color:#fff;
     cursor:pointer;
     min-width:64px;
     font-weight:800;
   }
-  .btnABC:hover{
-    background:#a94442;
-  }
+  .btnABC:hover{ background:#a94442; }
 
   .jp{
-  font-family: "Yu Gothic", "Hiragino Sans", "Meiryo", "Noto Sans JP", sans-serif;
-  font-feature-settings: "palt" 0;
+    font-family: "Yu Gothic", "Hiragino Sans", "Meiryo", "Noto Sans JP", sans-serif;
+    font-feature-settings: "palt" 0;
   }
 
   /* Botón TODOS */
   .btn-todos{
     border-color:#e03131;
     color:#a11b1b;
-    opacity:0.45;            /* fantasma cuando NO activo */
+    opacity:0.45;
   }
   .btn-todos.activo{
-    background:#ffb3b3;      /* rojo pastel cuando activo */
+    background:#ffb3b3;
     border-color:#ffb3b3;
     color:#7a1c1c;
     opacity:1;
   }
-  
 </style>
 </head>
 <body>
@@ -221,7 +211,7 @@
     <button class="btnABC" type="button" onclick="responder('b')">b</button>
     <button class="btnABC" type="button" onclick="responder('c')">c</button>
   </div>
-  
+
   <input id="respuestaUsuario"
          type="text"
          placeholder="a / b / c"
@@ -250,210 +240,50 @@
 /* ===============================
    CONFIG
 =============================== */
-const DATA_PATH  = "data/turista.json";   // <-- cambia el nombre si tu archivo se llama distinto
-const AUDIO_DIR  = "data/audios/turista/";             // <-- carpeta de audios
+const DATA_PATH  = "data/turista.json";
+const AUDIO_DIR  = "data/audios/turista/";
 
 /* ===============================
    STATE
 =============================== */
 let dataRaw = {};
-let bloques = [];              // keys del JSON
-let bloqueActual = "";         // key actual
-let lista = [];                // items normalizados del bloque actual
+let bloques = [];
+let bloqueActual = "";
+let lista = [];
 
-let modoActual = "jp_es";      // "jp_es" | "es_jp"
-let pool = [];                 // lista activa para el quiz
+let modoActual = "jp_es";
+let pool = [];
 
 let actualIdx = 0;
 let actualItem = null;
 
-let correcta = "";             // 'a'|'b'|'c'
-let opcionCorrectaTexto = "";  // texto correcto mostrado en opciones
+let correcta = "";
+let opcionCorrectaTexto = "";
 let yaValidado = false;
 
 let aciertos = 0;
 let errores  = 0;
-let focoAutomatico = false; // por defecto: NO abrir teclado en móvil
 
+let focoAutomatico = false;
 let todosActivo = false;
-let bloquesSeleccionados = new Set();  // temas marcados
-  
+let bloquesSeleccionados = new Set();
+
 /* ===============================
-   AUDIO — ULTRA TOLERANTE + CACHE
+   AUDIO — EXACTO AL JSON
+   archivo = AUDIO_DIR + romaji + ".mp3"
 =============================== */
-let audio = new Audio();
+const audio = new Audio();
 audio.preload = "auto";
 
-// cache: romaji_original -> filename_base_encontrado
-const audioCache = new Map();
-
-function unique(arr){
-  return [...new Set(arr.filter(Boolean))];
-}
-
-function stripDiacritics(s){
-  // ō ū ā ē ī -> o u a e i
-  return (s || "").normalize("NFKD").replace(/[\u0300-\u036f]/g, "");
-}
-
-function cleanRomajiToken(s){
-  let x = String(s || "")
-    .trim()
-    .toLowerCase()
-    .normalize("NFKC"); // 👈 mejor que NFC para limpiar raritos
-
-  // quita comillas y basura común
-  x = x.replace(/^["'“”‘’`]+|["'“”‘’`]+$/g, "");
-
-  // quita puntuación final típica
-  x = x.replace(/[！？?!。．…]+$/g, "").trim();
-
-  // normaliza separadores internos
-  x = x.replace(/[、，,]/g, " ");
-  x = x.replace(/[.]/g, " ");
-
-  // quita apóstrofo de n: shin'ya -> shinya
-  x = x.replace(/n'/g, "n");
-
-  // tabs / múltiples espacios
-  x = x.replace(/\s+/g, " ").trim();
-
-  return x;
-}
-
-function splitRomajiOptions(romaji){
-  // "hairu / nyū" -> ["hairu","nyū"]
-  return String(romaji || "")
-    .split("/")
-    .map(s => cleanRomajiToken(s))
-    .filter(Boolean);
-}
-
-function longVowelVariants(s){
-  s = String(s || "").normalize("NFKC");
-  const v = new Set([s]);
-
-  // macrones -> variantes
-  v.add(s.replace(/ō/g, "ou"));
-  v.add(s.replace(/ō/g, "oo"));
-  v.add(s.replace(/ū/g, "uu"));
-  v.add(s.replace(/ā/g, "aa"));
-  v.add(s.replace(/ē/g, "ee"));
-  v.add(s.replace(/ī/g, "ii"));
-
-  // versión sin macrón
-  v.add(s.replace(/ō/g, "o"));
-  v.add(s.replace(/ū/g, "u"));
-  v.add(s.replace(/ā/g, "a"));
-  v.add(s.replace(/ē/g, "e"));
-  v.add(s.replace(/ī/g, "i"));
-
-  return [...v];
-}
-
-function separatorVariants(s){
-  const base = cleanRomajiToken(s);
-
-  // normaliza: cualquier _ - . o espacios múltiples -> 1 espacio
-  const normalized = base
-    .replace(/[_\-.]+/g, " ")
-    .replace(/\s+/g, " ")
-    .trim();
-
-  const forms = new Set();
-
-  // formas canónicas
-  forms.add(normalized);                    // "odaiji ni"
-  forms.add(normalized.replace(/ /g, "_")); // "odaiji_ni"
-  forms.add(normalized.replace(/ /g, "-")); // "odaiji-ni"
-  forms.add(normalized.replace(/ /g, ".")); // "odaiji.ni"
-  forms.add(normalized.replace(/ /g, ""));  // "odaijini"
-
-  // extra: por si el archivo ya venía con separadores mezclados
-  forms.add(base);
-  forms.add(base.replace(/ /g, "_"));
-  forms.add(base.replace(/ /g, "-"));
-  forms.add(base.replace(/ /g, ""));
-  forms.add(base.replace(/_/g, " "));
-  forms.add(base.replace(/-/g, " "));
-  forms.add(base.replace(/[ _-]/g, ""));
-
-  return [...forms]
-    .map(x => x.toLowerCase().trim())
-    .filter(Boolean);
-}
-
-function romajiCandidatesFromJson(romaji){
-  const opts = splitRomajiOptions(romaji);
-  if(opts.length === 0) return [];
-
-  let all = [];
-
-  opts.forEach(opt => {
-    const plain = stripDiacritics(opt);
-
-    [opt, plain].forEach(base => {
-      longVowelVariants(base).forEach(v => {
-        separatorVariants(v).forEach(s => all.push(s));
-      });
-    });
-  });
-
-  return unique(all);
-}
-
-function buildSrc(nameBase){
-  return AUDIO_DIR + encodeURIComponent(nameBase) + ".mp3";
-}
-
-/* ===============================
-   🔊 NUEVO SISTEMA AUDIO TOLERANTE
-=============================== */
-
-// 👇 PEGA TODO AQUÍ ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
-
-// --- helper: prueba existencia real del mp3
-async function fileExists(url){
-  try{
-    const r = await fetch(url, {
-      method:"GET",
-      headers:{ "Range":"bytes=0-0" },
-      cache:"no-store"
-    });
-    return r.ok;
-  }catch{
-    return false;
-  }
-}
-
-async function resolveAudioBase(romaji){
+function buildExactSrcFromRomaji(romaji){
   const key = String(romaji || "").trim();
   if(!key) return null;
-
-  if(audioCache.has(key)) return audioCache.get(key);
-
-  const candidates = romajiCandidatesFromJson(key);
-  if(candidates.length === 0) return null;
-
-  for(const name of candidates){
-    const url = buildSrc(name);
-    const ok = await fileExists(url);
-    if(ok){
-      audioCache.set(key, name);
-      return name;
-    }
-  }
-  return null;
+  return AUDIO_DIR + encodeURIComponent(key) + ".mp3";
 }
 
 async function playAudioForRomaji(romaji){
-  const key = String(romaji || "").trim();
-  if(!key) return;
-
-  const name = await resolveAudioBase(key);
-  if(!name) return;
-
-  const src = buildSrc(name);
+  const src = buildExactSrcFromRomaji(romaji);
+  if(!src) return;
 
   try{
     audio.pause();
@@ -461,9 +291,11 @@ async function playAudioForRomaji(romaji){
     audio.src = src;
     audio.load();
     await audio.play();
-  }catch{}
+  }catch{
+    // si falla, no hacemos nada (silencioso)
+  }
 }
-  
+
 /* ===============================
    STATS (localStorage) - por modo + bloque
 =============================== */
@@ -504,35 +336,27 @@ function resetStatsTodo(){
 =============================== */
 function $(id){ return document.getElementById(id); }
 
-// Si el usuario toca/clickea el input, permitimos foco automático después
 document.addEventListener("pointerdown", (e) => {
   focoAutomatico = (e.target && e.target.id === "respuestaUsuario");
 });
-
-// Si el usuario presiona teclas, asumimos que quiere modo teclado
 document.addEventListener("keydown", (e) => {
   if(["a","b","c","Enter"].includes(e.key)) focoAutomatico = true;
 });
 
-  
 function pintarBotonesActivos(){
-  // modos
   ["jp_es","es_jp"].forEach(m => {
     const b = $("btn-" + m);
     if(!b) return;
     b.classList.toggle("activo", modoActual === m);
   });
 
-  // bloques
   document.querySelectorAll(".btn-bloque").forEach(btn => {
     const k = btn.dataset.bloque;
     btn.classList.toggle("activo", bloquesSeleccionados.has(k));
   });
-  
-  // botón TODOS
+
   const bt = $("btn-todos");
   if(bt) bt.classList.toggle("activo", todosActivo);
-  
 }
 
 function actualizarEstadisticas(){
@@ -566,12 +390,11 @@ fetch(DATA_PATH)
     construirBarraBloques(bloques);
     bloqueActual = bloques[0];
 
-    // modo por defecto
     modoActual = "jp_es";
     pintarBotonesActivos();
 
     cargarBloque(bloqueActual);
-    setModo(modoActual); // esto llama a cargar stats + siguiente
+    setModo(modoActual);
   })
   .catch(err => {
     console.error(err);
@@ -583,16 +406,14 @@ function construirBarraBloques(keys){
   const bar = $("bloquesBar");
   bar.innerHTML = "";
 
-  // por defecto: solo "saludos_y_despedidas"
   const defaultBloque = "saludos_y_despedidas";
-  
+
   if(keys.includes(defaultBloque)){
     bloquesSeleccionados = new Set([defaultBloque]);
   }else{
-    // si no existe, usa el primero
     bloquesSeleccionados = new Set([keys[0]]);
   }
-  
+
   todosActivo = false;
 
   keys.forEach(k => {
@@ -604,7 +425,6 @@ function construirBarraBloques(keys){
     bar.appendChild(btn);
   });
 
-  // Botón TODOS al final
   const btnAll = document.createElement("button");
   btnAll.className = "btn btn-todos";
   btnAll.id = "btn-todos";
@@ -631,35 +451,29 @@ function toggleTodos(){
   if(!bloques.length) return;
 
   if(todosActivo){
-    // si apaga TODOS, deja solo el primero para no quedar vacío
     todosActivo = false;
     bloquesSeleccionados = new Set([bloques[0]]);
   }else{
-    // activa TODOS
     todosActivo = true;
     bloquesSeleccionados = new Set(bloques);
   }
 
   actualizarPoolDesdeSeleccion();
-  cargarStatsActual();      // stats siguen por modo+bloqueActual (lo dejas igual)
+  cargarStatsActual();
   pintarBotonesActivos();
   siguiente();
 }
 
 function toggleTema(k){
-  // si estaba "Todos", al tocar un tema pasamos a modo selección manual
   if(todosActivo){
     todosActivo = false;
     bloquesSeleccionados = new Set([k]);
   }else{
     if(bloquesSeleccionados.has(k)) bloquesSeleccionados.delete(k);
     else bloquesSeleccionados.add(k);
-
-    // evita quedar vacío
     if(bloquesSeleccionados.size === 0) bloquesSeleccionados.add(k);
   }
 
-  // si ya quedaron todos marcados -> vuelve a TODOS
   if(bloquesSeleccionados.size === bloques.length) todosActivo = true;
 
   actualizarPoolDesdeSeleccion();
@@ -667,13 +481,12 @@ function toggleTema(k){
   siguiente();
 }
 
-
 function cargarBloque(k){
   lista = (dataRaw[k] || []).map(normalizarItem)
     .filter(it => it.japones && it.espanol && it.romaji);
 
   pool = lista.slice();
-  
+
   if(pool.length < 3){
     $("resultado").innerText = "Pool muy pequeño: necesitas al menos 3 entradas en el bloque.";
     $("resultado").className = "incorrecto";
@@ -707,22 +520,15 @@ function siguiente(){
   $("resultado").innerText = "";
   $("resultado").className = "";
   $("respuestaUsuario").value = "";
-  if(focoAutomatico){
-    $("respuestaUsuario").focus();
-  }
-
+  if(focoAutomatico) $("respuestaUsuario").focus();
 
   actualIdx = Math.floor(Math.random() * pool.length);
   actualItem = pool[actualIdx];
 
-  // pregunta según modo
   const pregunta = (modoActual === "jp_es") ? actualItem.japones : actualItem.espanol;
 
-  // correcto y distractores según modo (si pregunta jp -> opciones español, si pregunta es -> opciones japonés)
   const campoOpciones = (modoActual === "jp_es") ? "espanol" : "japones";
-  const campoCorrecto = campoOpciones;
-
-  const correctoTexto = actualItem[campoCorrecto];
+  const correctoTexto = actualItem[campoOpciones];
 
   let opciones = [correctoTexto];
   while(opciones.length < 3){
@@ -739,16 +545,10 @@ function siguiente(){
   promptEl.innerText = pregunta;
 
   promptEl.classList.remove("jp");
-  if(modoActual === "jp_es"){
-    promptEl.classList.add("jp");
-  }
+  if(modoActual === "jp_es") promptEl.classList.add("jp");
 
-  
-  // tamaño según modo
   promptEl.classList.remove("prompt-es-jp");
-  if(modoActual === "es_jp"){
-    promptEl.classList.add("prompt-es-jp");
-  }
+  if(modoActual === "es_jp") promptEl.classList.add("prompt-es-jp");
 
   $("opciones").innerHTML =
     `a) ${escapeHTML(opciones[0])}<br>
@@ -756,12 +556,7 @@ function siguiente(){
      c) ${escapeHTML(opciones[2])}`;
 
   $("opciones").classList.remove("jp");
-  if(modoActual === "es_jp"){
-    $("opciones").classList.add("jp");
-  }
- 
-  // subinfo: mostramos el romaji SOLO después (al corregir / mostrar / saltar)
-
+  if(modoActual === "es_jp") $("opciones").classList.add("jp");
 }
 
 function escapeHTML(str){
@@ -774,10 +569,10 @@ function escapeHTML(str){
 }
 
 function responder(letra){
-  focoAutomatico = false;  // si usa botones, no queremos teclado automático
-  if(yaValidado) return;               // evita doble respuesta
-  $("respuestaUsuario").value = letra; // rellena el input
-  verificar();                         // valida igual que Enter
+  focoAutomatico = false;
+  if(yaValidado) return;
+  $("respuestaUsuario").value = letra;
+  verificar();
 }
 
 async function verificar(){
@@ -829,7 +624,6 @@ async function siguienteDesdeBoton(){
 
   if(!yaValidado){
     const v = $("respuestaUsuario").value.trim();
-
     if(v === ""){
       await playAudioForRomaji(actualItem.romaji);
     }
@@ -855,7 +649,6 @@ function manejarEnter(ev){
   if(ev.key !== "Enter") return;
 
   if(!yaValidado){
-    // Enter sin letra -> lo tratamos como "mostrar respuesta" y penaliza (como tu estilo)
     const v = $("respuestaUsuario").value.trim();
     if(v === ""){
       mostrarRespuesta();
