@@ -783,12 +783,11 @@ function responder(letra){
   verificar();                         // valida igual que Enter
 }
 
-function verificar(){
+async function verificar(){
   const r = $("respuestaUsuario").value.toLowerCase().trim();
   const res = $("resultado");
 
-  // 🔊 sonido al validar
-  playAudioForRomaji(actualItem.romaji);
+  await playAudioForRomaji(actualItem.romaji);
 
   if(r === correcta){
     res.innerText = `Correcto ✔\nRomaji: ${actualItem.romaji}`;
@@ -808,19 +807,17 @@ function verificar(){
   yaValidado = true;
 }
 
-function mostrarRespuesta(){
+async function mostrarRespuesta(){
   if(yaValidado) return;
 
   const res = $("resultado");
 
-  playAudioForRomaji(actualItem.romaji);
+  await playAudioForRomaji(actualItem.romaji);
 
-  // penaliza
   errores++;
   actualizarEstadisticas();
   guardarStatsActual();
 
-  // muestra solución + romaji
   res.innerText =
     `Mostrada ✘ (era ${correcta})\n` +
     `Respuesta: ${opcionCorrectaTexto}\n` +
@@ -830,16 +827,14 @@ function mostrarRespuesta(){
   yaValidado = true;
 }
 
-function siguienteDesdeBoton(){
+async function siguienteDesdeBoton(){
   const res = $("resultado");
 
-  // si NO ha respondido aún
   if(!yaValidado){
     const v = $("respuestaUsuario").value.trim();
 
-    // ✅ SOLO suena si está en blanco
     if(v === ""){
-      playAudioForRomaji(actualItem.romaji);
+      await playAudioForRomaji(actualItem.romaji);
     }
 
     errores++;
@@ -856,7 +851,6 @@ function siguienteDesdeBoton(){
     return;
   }
 
-  // ✅ si YA estaba revisado, NO suena, solo pasa
   siguiente();
 }
 
