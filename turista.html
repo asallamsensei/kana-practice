@@ -329,25 +329,21 @@ function splitRomajiOptions(romaji){
 function longVowelVariants(s){
   const v = new Set([s]);
 
-  // pruebas para o larga (depende cómo nombraste mp3)
-  v.add(s.replace(/o/g, "ou"));
-  v.add(s.replace(/o/g, "oo"));
+  // SOLO convertir macrones reales
+  v.add(s.replace(/ō/g, "ou"));
+  v.add(s.replace(/ō/g, "oo"));
 
-  // u larga
-  v.add(s.replace(/u/g, "uu"));
+  v.add(s.replace(/ū/g, "uu"));
+  v.add(s.replace(/ā/g, "aa"));
+  v.add(s.replace(/ē/g, "ee"));
+  v.add(s.replace(/ī/g, "ii"));
 
-  // a/e/i largas duplicadas
-  v.add(s.replace(/a/g, "aa"));
-  v.add(s.replace(/e/g, "ee"));
-  v.add(s.replace(/i/g, "ii"));
-
-  // también colapsos (por si tu mp3 está "genki" y romaji viene "ge n kii" etc)
-  v.add(s.replace(/ou/g, "o"));
-  v.add(s.replace(/oo/g, "o"));
-  v.add(s.replace(/uu/g, "u"));
-  v.add(s.replace(/aa/g, "a"));
-  v.add(s.replace(/ee/g, "e"));
-  v.add(s.replace(/ii/g, "i"));
+  // también versión sin macrón (ō → o)
+  v.add(s.replace(/ō/g, "o"));
+  v.add(s.replace(/ū/g, "u"));
+  v.add(s.replace(/ā/g, "a"));
+  v.add(s.replace(/ē/g, "e"));
+  v.add(s.replace(/ī/g, "i"));
 
   return [...v];
 }
