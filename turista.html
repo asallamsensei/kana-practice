@@ -403,58 +403,69 @@ function romajiCandidatesFromJson(romaji){
 }
 
 function buildSrc(nameBase){
-  // OJO: nameBase NO trae ".mp3"
   return AUDIO_DIR + encodeURIComponent(nameBase) + ".mp3";
 }
 
-function playAudioForRomaji(romaji){
-  const key = String(romaji || "").trim();
+/* ===============================
+   🔊 NUEVO SISTEMA AUDIO TOLERANTE
+=============================== */
 
-  // ✅ si ya lo resolvimos antes, dispara directo
-  if(audioCache.has(key)){
-    const hit = audioCache.get(key);
-    const src = buildSrc(hit);
-    try{
-      audio.pause();
-      audio.currentTime = 0;
-      audio.src = src;
-      audio.play();
-    }catch{}
-    return;
+// 👇 PEGA TODO AQUÍ ↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓↓
+
+// --- helper: prueba existencia real del mp3
+async function fileExists(url){
+  try{
+    let r = await fetch(url, { method:"HEAD", cache:"no-store" });
+    if(r.ok) return true;
+
+    r = await fetch(url, {
+      method:"GET",
+      headers:{ "Range":"bytes=0-0" },
+      cache:"no-store"
+    });
+    return r.ok;
+  }catch{
+    return false;
   }
-
-  const candidates = romajiCandidatesFromJson(key);
-  if(candidates.length === 0) return;
-
-  let i = 0;
-
-  const tryNext = () => {
-    if(i >= candidates.length) return;
-
-    const name = candidates[i++];
-    const src = buildSrc(name);
-
-    audio.onended = null;
-    audio.onerror = () => { tryNext(); };
-
-    try{
-      audio.pause();
-      audio.currentTime = 0;
-      audio.src = src;
-      audio.play()
-        .then(() => {
-          // ✅ si sonó, guardamos el match
-          audioCache.set(key, name);
-        })
-        .catch(() => tryNext());
-    }catch(e){
-      tryNext();
-    }
-  };
-
-  tryNext();
 }
 
+async function resolveAudioBase(romaji){
+  const key = String(romaji || "").trim();
+  if(!key) return null;
+
+  if(audioCache.has(key)) return audioCache.get(key);
+
+  const candidates = romajiCandidatesFromJson(key);
+  if(candidates.length === 0) return null;
+
+  for(const name of candidates){
+    const url = buildSrc(name);
+    const ok = await fileExists(url);
+    if(ok){
+      audioCache.set(key, name);
+      return name;
+    }
+  }
+  return null;
+}
+
+async function playAudioForRomaji(romaji){
+  const key = String(romaji || "").trim();
+  if(!key) return;
+
+  const name = await resolveAudioBase(key);
+  if(!name) return;
+
+  const src = buildSrc(name);
+
+  try{
+    audio.pause();
+    audio.currentTime = 0;
+    audio.src = src;
+    audio.load();
+    await audio.play();
+  }catch{}
+}
   
 /* ===============================
    STATS (localStorage) - por modo + bloque
