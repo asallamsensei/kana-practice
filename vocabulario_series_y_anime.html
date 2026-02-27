@@ -388,7 +388,6 @@ let bloquesActivos = new Set([0]); // por defecto, el primero activo
 // Pool de distractores: por defecto "seleccion"
 let poolScope = "seleccion"; // "seleccion" | "global"
 
-<script>
 /* ===============================
    AUDIO (ROMAJI EXACTO)
    Regla: archivo = romaji EXACTO + ".mp3"
@@ -429,7 +428,6 @@ function playAudioForRomaji(romaji){
     console.warn("[audio] play() falló/bloqueado:", err);
   });
 }
-</script>
   
 /* ===============================
    STATS localStorage
