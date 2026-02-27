@@ -428,6 +428,10 @@
 <audio id="bgMusic" preload="auto" loop>
   <source src="data/velocidad/retro_math_grid.mp3" type="audio/mpeg">
 </audio>
+
+<audio id="sfxExplosion" preload="auto">
+  <source src="data/velocidad/bum_suelo.mp3" type="audio/mpeg">
+</audio>
   
 <script>
 (() => {
@@ -458,7 +462,7 @@
 
   const game = $("game");
   const bgMusic = $("bgMusic");
-  
+  const sfxExplosion = $("sfxExplosion");
   // --- keypad / display ---
   const displayEl = $("display");
   const keypadEl = document.querySelector(".keypad");
@@ -783,12 +787,22 @@
 
   function missMeteor(m){
     killMeteor(m, "miss");
+  
+    playExplosion(); // 💥 SONIDO AQUÍ
+  
     state.lives = Math.max(0, state.lives - 1);
     state.streak = 0;
     showToast("💥 Falló", "bad");
+  
     if(state.lives === 0) gameOver();
   }
 
+  function playExplosion(){
+    const snd = sfxExplosion.cloneNode(true); // permite múltiples sonidos simultáneos
+    snd.volume = 0.5;
+    snd.play().catch(()=>{});
+  }
+  
   // ---------- Loop ----------
   function tick(t){
     if(!state.running) return;
