@@ -115,6 +115,9 @@
   }
   @media (max-width: 900px){
     .game{height: 520px;}
+  
+    .city{ height: 70px; }
+    .groundLine{ bottom: 70px; }
   }
   @media (max-width: 420px){
     .game{height: 450px;} /* más pequeño en celular */
@@ -465,6 +468,8 @@
   const btnCloseOverlay = $("btnCloseOverlay");
 
   const game = $("game");
+  const city = game.querySelector(".city");
+  
   const bgMusic = $("bgMusic");
   const sfxExplosion = $("sfxExplosion");
   const sfxHit = $("sfxHit");
@@ -823,39 +828,42 @@
   // ---------- Loop ----------
   function tick(t){
     if(!state.running) return;
+  
     if(state.paused){
       state.lastTick = t;
       requestAnimationFrame(tick);
       return;
     }
-
+  
     const dt = (t - state.lastTick) / 1000;
     state.lastTick = t;
-
+  
     if(t - state.lastSpawn >= state.spawnEveryMs){
       state.lastSpawn = t;
-
+  
       const maxActive = maxMeteorsForLevel(state.level);
       if(state.meteors.size < maxActive){
         spawnMeteor(false);
-
+  
         const p = bonusProbForLevel(state.level);
         if(state.meteors.size < maxActive && Math.random() < p){
           spawnMeteor(true);
         }
       }
     }
-
-    const groundY = game.clientHeight - 95 - 2;
+  
+    // ✅ suelo calculado con la altura REAL de .city (móvil/pc)
+    const groundY = game.clientHeight - city.offsetHeight - 2;
+  
     for(const m of [...state.meteors.values()]){
       m.y += m.speedPxPerSec * dt;
       m.el.style.top = `${m.y}px`;
-
+  
       if(m.y + m.el.offsetHeight >= groundY){
         missMeteor(m);
       }
     }
-
+  
     updateHUD();
     requestAnimationFrame(tick);
   }
