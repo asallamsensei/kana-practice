@@ -279,12 +279,9 @@ let todosActivo = false;
 let bloquesSeleccionados = new Set();  // temas marcados
   
 /* ===============================
-   AUDIO (usa romaji del JSON)
-   - Soporta macrones: ō ū ā ē ī
-   - Prueba variantes largas: o→ou/oo, u→uu, a→aa, e→ee, i→ii
-   - Soporta opciones tipo "hairu / nyū" (usa cada alternativa)
-   - Soporta frases con espacios y puntuación
+   AUDIO (usa romaji del JSON) - estilo Turista
 =============================== */
+const AUDIO_DIR = "data/audios/anime/"; // <-- AJUSTA esta ruta
 let audio = new Audio();
 audio.preload = "auto";
 
@@ -303,7 +300,7 @@ function cleanRomajiToken(s){
   // quita puntuación final típica
   x = x.replace(/[！？?!。．…]+$/g, "").trim();
 
-  // normaliza comas/puntos dentro: "sumimasen, kore..." -> "sumimasen kore..."
+  // normaliza comas/puntos dentro
   x = x.replace(/[、，,]/g, " ");
   x = x.replace(/[.]/g, "");
 
@@ -317,7 +314,6 @@ function cleanRomajiToken(s){
 }
 
 function splitRomajiOptions(romaji){
-  // separa por "/" (y variantes con espacios)
   // "hairu / nyū" -> ["hairu","nyū"]
   const raw = String(romaji || "");
   return raw
@@ -329,7 +325,7 @@ function splitRomajiOptions(romaji){
 function longVowelVariants(s){
   const v = new Set([s]);
 
-  // SOLO convertir macrones reales
+  // macrones -> variantes
   v.add(s.replace(/ō/g, "ou"));
   v.add(s.replace(/ō/g, "oo"));
 
@@ -338,7 +334,7 @@ function longVowelVariants(s){
   v.add(s.replace(/ē/g, "ee"));
   v.add(s.replace(/ī/g, "ii"));
 
-  // también versión sin macrón (ō → o)
+  // versión sin macrón
   v.add(s.replace(/ō/g, "o"));
   v.add(s.replace(/ū/g, "u"));
   v.add(s.replace(/ā/g, "a"));
@@ -351,25 +347,20 @@ function longVowelVariants(s){
 function separatorVariants(s){
   const base = String(s || "").trim();
 
-  // 1) variantes simples de separador
   const spaced = base.replace(/\s+/g, " ").trim();
   const unders = base.replace(/\s+/g, "_");
   const dashed = base.replace(/\s+/g, "-");
   const dotted = base.replace(/\s+/g, ".");
   const joined = base.replace(/\s+/g, "");
 
-  // 2) “filename safe”: solo a-z 0-9 y separadores _ - .
-  //    (sirve si tus mp3 tienen cosas raras, comas, paréntesis, etc.)
   const safe1 = spaced.replace(/[^a-z0-9 _.-]/g, "");
   const safe2 = unders.replace(/[^a-z0-9 _.-]/g, "");
   const safe3 = dashed.replace(/[^a-z0-9 _.-]/g, "");
   const safe4 = dotted.replace(/[^a-z0-9 _.-]/g, "");
   const safe5 = joined.replace(/[^a-z0-9 _.-]/g, "");
 
-  // 3) super-pegado: solo letras y números (máxima tolerancia)
   const alnumOnly = base.replace(/[^a-z0-9]/g, "");
 
-  // 4) también prueba versiones sin separadores existentes
   const noDash = base.replace(/-/g, "");
   const noUnd  = base.replace(/_/g, "");
   const noDot  = base.replace(/\./g, "");
@@ -392,7 +383,6 @@ function romajiCandidatesFromJson(romaji){
   opts.forEach(opt => {
     const plain = stripDiacritics(opt);
 
-    // base: con macrón + sin macrón
     [opt, plain].forEach(base => {
       longVowelVariants(base).forEach(v => {
         separatorVariants(v).forEach(s => all.push(s));
@@ -411,6 +401,7 @@ function playAudioForRomaji(romaji){
 
   const tryNext = () => {
     if(i >= candidates.length) return;
+
     const name = candidates[i++];
     const src = AUDIO_DIR + encodeURIComponent(name) + ".mp3";
 
@@ -429,6 +420,8 @@ function playAudioForRomaji(romaji){
 
   tryNext();
 }
+
+  
 /* ===============================
    STATS (localStorage) - por modo + bloque
 =============================== */
@@ -726,6 +719,8 @@ function siguiente(){
   }
  
   // subinfo: mostramos el romaji SOLO después (al corregir / mostrar / saltar)
+  // 🔊 auto audio al mostrar pregunta
+  playAudioForRomaji(actualItem.romaji);
 }
 
 function escapeHTML(str){
@@ -748,7 +743,7 @@ function verificar(){
   const r = $("respuestaUsuario").value.toLowerCase().trim();
   const res = $("resultado");
 
-  // sonido al validar (si hay)
+  // 🔊 sonido al validar
   playAudioForRomaji(actualItem.romaji);
 
   if(r === correcta){
