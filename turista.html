@@ -279,10 +279,13 @@ let todosActivo = false;
 let bloquesSeleccionados = new Set();  // temas marcados
   
 /* ===============================
-   AUDIO (usa romaji del JSON) - estilo Turista
+   AUDIO — ULTRA TOLERANTE + CACHE
 =============================== */
 let audio = new Audio();
 audio.preload = "auto";
+
+// cache: romaji_original -> filename_base_encontrado
+const audioCache = new Map();
 
 function unique(arr){
   return [...new Set(arr.filter(Boolean))];
@@ -294,19 +297,25 @@ function stripDiacritics(s){
 }
 
 function cleanRomajiToken(s){
-    let x = String(s || "").trim().toLowerCase().normalize("NFC"); // ✅ NFC aquí
+  let x = String(s || "")
+    .trim()
+    .toLowerCase()
+    .normalize("NFKC"); // 👈 mejor que NFC para limpiar raritos
+
+  // quita comillas y basura común
+  x = x.replace(/^["'“”‘’`]+|["'“”‘’`]+$/g, "");
 
   // quita puntuación final típica
   x = x.replace(/[！？?!。．…]+$/g, "").trim();
 
-  // normaliza comas/puntos dentro
+  // normaliza separadores internos
   x = x.replace(/[、，,]/g, " ");
-  x = x.replace(/[.]/g, "");
+  x = x.replace(/[.]/g, " ");
 
   // quita apóstrofo de n: shin'ya -> shinya
   x = x.replace(/n'/g, "n");
 
-  // colapsa espacios
+  // tabs / múltiples espacios
   x = x.replace(/\s+/g, " ").trim();
 
   return x;
@@ -314,21 +323,19 @@ function cleanRomajiToken(s){
 
 function splitRomajiOptions(romaji){
   // "hairu / nyū" -> ["hairu","nyū"]
-  const raw = String(romaji || "");
-  return raw
+  return String(romaji || "")
     .split("/")
     .map(s => cleanRomajiToken(s))
     .filter(Boolean);
 }
 
 function longVowelVariants(s){
-  s = String(s || "").normalize("NFC"); // ✅ NFC aquí también
+  s = String(s || "").normalize("NFKC");
   const v = new Set([s]);
 
   // macrones -> variantes
   v.add(s.replace(/ō/g, "ou"));
   v.add(s.replace(/ō/g, "oo"));
-
   v.add(s.replace(/ū/g, "uu"));
   v.add(s.replace(/ā/g, "aa"));
   v.add(s.replace(/ē/g, "ee"));
@@ -345,34 +352,32 @@ function longVowelVariants(s){
 }
 
 function separatorVariants(s){
-  const base = String(s || "").trim();
+  const base = cleanRomajiToken(s);
 
-  // separadores equivalentes
-  const forms = new Set();
-
+  // normaliza: cualquier _ - . o espacios múltiples -> 1 espacio
   const normalized = base
-    .replace(/[_\-.]+/g, " ")   // _ - . → espacio
+    .replace(/[_\-.]+/g, " ")
     .replace(/\s+/g, " ")
     .trim();
 
-  // todas las variantes principales
-  forms.add(normalized);                         // odaiji ni
-  forms.add(normalized.replace(/ /g, "_"));      // odaiji_ni
-  forms.add(normalized.replace(/ /g, "-"));      // odaiji-ni
-  forms.add(normalized.replace(/ /g, "."));      // odaiji.ni
-  forms.add(normalized.replace(/ /g, ""));       // odaijini
+  const forms = new Set();
 
-  // si ya venía con _
-  forms.add(base.replace(/_/g," "));
-  forms.add(base.replace(/_/g,"-"));
-  forms.add(base.replace(/_/g,""));
+  // formas canónicas
+  forms.add(normalized);                    // "odaiji ni"
+  forms.add(normalized.replace(/ /g, "_")); // "odaiji_ni"
+  forms.add(normalized.replace(/ /g, "-")); // "odaiji-ni"
+  forms.add(normalized.replace(/ /g, ".")); // "odaiji.ni"
+  forms.add(normalized.replace(/ /g, ""));  // "odaijini"
 
-  // si ya venía con -
-  forms.add(base.replace(/-/g," "));
-  forms.add(base.replace(/-/g,"_"));
-  forms.add(base.replace(/-/g,""));
+  // extra: por si el archivo ya venía con separadores mezclados
+  forms.add(base);
+  forms.add(base.replace(/ /g, "_"));
+  forms.add(base.replace(/ /g, "-"));
+  forms.add(base.replace(/ /g, ""));
+  forms.add(base.replace(/_/g, " "));
+  forms.add(base.replace(/-/g, " "));
+  forms.add(base.replace(/[ _-]/g, ""));
 
-  // limpieza final
   return [...forms]
     .map(x => x.toLowerCase().trim())
     .filter(Boolean);
@@ -397,8 +402,28 @@ function romajiCandidatesFromJson(romaji){
   return unique(all);
 }
 
+function buildSrc(nameBase){
+  // OJO: nameBase NO trae ".mp3"
+  return AUDIO_DIR + encodeURIComponent(nameBase) + ".mp3";
+}
+
 function playAudioForRomaji(romaji){
-  const candidates = romajiCandidatesFromJson(romaji);
+  const key = String(romaji || "").trim();
+
+  // ✅ si ya lo resolvimos antes, dispara directo
+  if(audioCache.has(key)){
+    const hit = audioCache.get(key);
+    const src = buildSrc(hit);
+    try{
+      audio.pause();
+      audio.currentTime = 0;
+      audio.src = src;
+      audio.play();
+    }catch{}
+    return;
+  }
+
+  const candidates = romajiCandidatesFromJson(key);
   if(candidates.length === 0) return;
 
   let i = 0;
@@ -407,7 +432,7 @@ function playAudioForRomaji(romaji){
     if(i >= candidates.length) return;
 
     const name = candidates[i++];
-    const src = AUDIO_DIR + encodeURIComponent(name) + ".mp3";
+    const src = buildSrc(name);
 
     audio.onended = null;
     audio.onerror = () => { tryNext(); };
@@ -416,7 +441,12 @@ function playAudioForRomaji(romaji){
       audio.pause();
       audio.currentTime = 0;
       audio.src = src;
-      audio.play().catch(() => tryNext());
+      audio.play()
+        .then(() => {
+          // ✅ si sonó, guardamos el match
+          audioCache.set(key, name);
+        })
+        .catch(() => tryNext());
     }catch(e){
       tryNext();
     }
