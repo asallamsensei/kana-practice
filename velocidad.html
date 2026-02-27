@@ -425,6 +425,10 @@
   
 </div>
 
+<audio id="bgMusic" preload="auto" loop>
+  <source src="data/velocidad/retro_math_grid.mp3" type="audio/mpeg">
+</audio>
+  
 <script>
 (() => {
   // ---------- Helpers ----------
@@ -453,7 +457,8 @@
   const btnCloseOverlay = $("btnCloseOverlay");
 
   const game = $("game");
-
+  const bgMusic = $("bgMusic");
+  
   // --- keypad / display ---
   const displayEl = $("display");
   const keypadEl = document.querySelector(".keypad");
@@ -930,6 +935,12 @@ function submitAnswer(){
 
     state.typed = "";
     setDisplay();
+
+    // reproducir música
+    bgMusic.currentTime = 0;
+    bgMusic.play().catch(() => {
+      // por si el navegador bloquea autoplay
+    });
   }
 
   function pauseToggle(){
@@ -937,6 +948,11 @@ function submitAnswer(){
     state.paused = !state.paused;
     btnPause.textContent = state.paused ? "Reanudar" : "Pausar";
     showToast(state.paused ? "Pausado" : "Reanudado");
+    if(state.paused){
+      bgMusic.pause();
+    }else{
+      bgMusic.play().catch(()=>{});
+    }
   }
 
   function resetAll(){
@@ -966,6 +982,9 @@ function submitAnswer(){
     state.typed = "";
     setDisplay();
     updateHUD();
+
+    bgMusic.pause();
+    bgMusic.currentTime = 0;
   }
 
   function gameOver(){
@@ -977,6 +996,7 @@ function submitAnswer(){
     overlay.querySelector(".modal h2").textContent = "Game Over";
     overlay.querySelector(".modal p").innerHTML =
       `Puntaje: <b>${state.score}</b><br/>Mejor racha: <b>${state.bestStreak}</b><br/><span style="color:rgba(238,242,255,.75)">Presiona Iniciar para volver.</span>`;
+    bgMusic.pause();
   }
 
   // ---------- Events ----------
