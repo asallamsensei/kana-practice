@@ -154,7 +154,7 @@
 <input id="respuestaUsuario"
        type="text"
        placeholder="Escribe el romaji aquí"
-       onkeydown="manejarEnter(event)">
+       onkeyup="manejarEnter(event)">
 
 <div id="nota-teclado" style="display:none; font-size:14px; color:#666; margin-top:6px;">
   💡 Te recomiendo usar un teclado japonés diferente al QWERTY en este ejercicio.
@@ -585,15 +585,29 @@ function aplicarNotaTeclado(){
 
   
 function manejarEnter(event){
-  if (event.key !== "Enter") return;
+  // Si el IME está en composición, NO validar todavía
+  if (event.isComposing) return;
 
-  if (!yaValidado) {
-    verificarRespuesta();
-  } else {
-    yaValidado = false;
-    document.getElementById("respuesta").innerText = "";
-    siguienteKana();
-  }
+  const esEnter =
+    (event.key === "Enter") ||
+    (event.code === "Enter") ||
+    (event.keyCode === 13);
+
+  if (!esEnter) return;
+
+  event.preventDefault();
+
+  // En modo es_jp, a veces el Enter “real” llega justo después de confirmar el IME.
+  // Este pequeño defer asegura que ya quedó el kana en el input.
+  setTimeout(() => {
+    if (!yaValidado) {
+      verificarRespuesta();
+    } else {
+      yaValidado = false;
+      document.getElementById("respuesta").innerText = "";
+      siguienteKana();
+    }
+  }, 0);
 }
 
 function romajiAlternativas(r){
