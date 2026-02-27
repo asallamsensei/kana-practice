@@ -279,7 +279,11 @@ let todosActivo = false;
 let bloquesSeleccionados = new Set();  // temas marcados
   
 /* ===============================
-   AUDIO (busca con y sin "！")
+   AUDIO (usa romaji del JSON)
+   - Soporta macrones: ō ū ā ē ī
+   - Prueba variantes largas: o→ou/oo, u→uu, a→aa, e→ee, i→ii
+   - Soporta opciones tipo "hairu / nyū" (usa cada alternativa)
+   - Soporta frases con espacios y puntuación
 =============================== */
 let audio = new Audio();
 audio.preload = "auto";
@@ -288,28 +292,100 @@ function unique(arr){
   return [...new Set(arr.filter(Boolean))];
 }
 
-function limpiarPuntuacionFinalJP(s){
-  return (s || "").replace(/[！？?!]+$/g, "").trim();
+function stripDiacritics(s){
+  // ō ū ā ē ī -> o u a e i
+  return (s || "").normalize("NFKD").replace(/[\u0300-\u036f]/g, "");
 }
 
-function candidatosAudioJP(jp){
-  const raw = (jp || "").trim();
-  const base = limpiarPuntuacionFinalJP(raw);
+function cleanRomajiToken(s){
+  let x = String(s || "").trim().toLowerCase();
 
-  const variantes = [
-    raw,
-    base,
-    base ? (base + "！") : "",
-    base ? (base + "？") : "",
-    base ? (base + "?") : "",
-    base ? (base + "!") : ""
-  ];
+  // quita puntuación final típica
+  x = x.replace(/[！？?!。．…]+$/g, "").trim();
 
-  return unique(variantes).filter(x => x.length > 0);
+  // normaliza comas/puntos dentro: "sumimasen, kore..." -> "sumimasen kore..."
+  x = x.replace(/[、，,]/g, " ");
+  x = x.replace(/[.]/g, "");
+
+  // quita apóstrofo de n: shin'ya -> shinya
+  x = x.replace(/n'/g, "n");
+
+  // colapsa espacios
+  x = x.replace(/\s+/g, " ").trim();
+
+  return x;
 }
 
-function playAudioForJP(jp){
-  const candidates = candidatosAudioJP(jp);
+function splitRomajiOptions(romaji){
+  // separa por "/" (y variantes con espacios)
+  // "hairu / nyū" -> ["hairu","nyū"]
+  const raw = String(romaji || "");
+  return raw
+    .split("/")
+    .map(s => cleanRomajiToken(s))
+    .filter(Boolean);
+}
+
+function longVowelVariants(s){
+  const v = new Set([s]);
+
+  // pruebas para o larga (depende cómo nombraste mp3)
+  v.add(s.replace(/o/g, "ou"));
+  v.add(s.replace(/o/g, "oo"));
+
+  // u larga
+  v.add(s.replace(/u/g, "uu"));
+
+  // a/e/i largas duplicadas
+  v.add(s.replace(/a/g, "aa"));
+  v.add(s.replace(/e/g, "ee"));
+  v.add(s.replace(/i/g, "ii"));
+
+  // también colapsos (por si tu mp3 está "genki" y romaji viene "ge n kii" etc)
+  v.add(s.replace(/ou/g, "o"));
+  v.add(s.replace(/oo/g, "o"));
+  v.add(s.replace(/uu/g, "u"));
+  v.add(s.replace(/aa/g, "a"));
+  v.add(s.replace(/ee/g, "e"));
+  v.add(s.replace(/ii/g, "i"));
+
+  return [...v];
+}
+
+function separatorVariants(s){
+  // por si tus mp3 usan _ o - o sin espacios
+  return unique([
+    s,
+    s.replace(/\s+/g, "_"),
+    s.replace(/\s+/g, "-"),
+    s.replace(/\s+/g, ""),
+    s.replace(/-/g, ""),
+    s.replace(/_/g, "")
+  ]);
+}
+
+function romajiCandidatesFromJson(romaji){
+  const opts = splitRomajiOptions(romaji);
+  if(opts.length === 0) return [];
+
+  let all = [];
+
+  opts.forEach(opt => {
+    const plain = stripDiacritics(opt);
+
+    // base: con macrón + sin macrón
+    [opt, plain].forEach(base => {
+      longVowelVariants(base).forEach(v => {
+        separatorVariants(v).forEach(s => all.push(s));
+      });
+    });
+  });
+
+  return unique(all);
+}
+
+function playAudioForRomaji(romaji){
+  const candidates = romajiCandidatesFromJson(romaji);
   if(candidates.length === 0) return;
 
   let i = 0;
@@ -321,11 +397,12 @@ function playAudioForJP(jp){
 
     audio.onended = null;
     audio.onerror = () => { tryNext(); };
+
     try{
       audio.pause();
       audio.currentTime = 0;
       audio.src = src;
-      audio.play().catch(() => { tryNext(); });
+      audio.play().catch(() => tryNext());
     }catch(e){
       tryNext();
     }
@@ -333,7 +410,6 @@ function playAudioForJP(jp){
 
   tryNext();
 }
-
 /* ===============================
    STATS (localStorage) - por modo + bloque
 =============================== */
@@ -654,7 +730,7 @@ function verificar(){
   const res = $("resultado");
 
   // sonido al validar (si hay)
-  playAudioForJP(actualItem.japones);
+  playAudioForRomaji(actualItem.romaji);
 
   if(r === correcta){
     res.innerText = `Correcto ✔\nRomaji: ${actualItem.romaji}`;
@@ -679,7 +755,7 @@ function mostrarRespuesta(){
 
   const res = $("resultado");
 
-  playAudioForJP(actualItem.japones);
+  playAudioForRomaji(actualItem.romaji);
 
   // penaliza
   errores++;
@@ -701,7 +777,7 @@ function siguienteDesdeBoton(){
 
   // si no ha respondido -> cuenta como error (saltado)
   if(!yaValidado){
-    playAudioForJP(actualItem.japones);
+    playAudioForRomaji(actualItem.romaji);
 
     errores++;
     actualizarEstadisticas();
