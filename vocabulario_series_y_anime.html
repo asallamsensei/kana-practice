@@ -227,6 +227,13 @@ body.modo-es-jp #opciones{
   font-family: var(--font-jp);
 }
 
+/* Bafle grande solo en dictado */
+#btnReplay.big-sound{
+  font-size: 28px;
+  padding: 16px 20px;
+  border-radius: 16px;
+}
+  
 #opciones{
   margin-top: 10px;
   font-size: 20px;
@@ -304,7 +311,7 @@ body.modo-es-jp #opciones{
       <div id="promptJP">—</div>
 
       <div class="row" style="margin-top:6px;">
-        <button class="btn btn-ghost" type="button" onclick="replayAudio()">🔊</button>
+        <button id="btnReplay" class="btn btn-ghost" type="button" onclick="replayAudio()">🔊</button>
       </div>
 
       <div id="opciones"></div>
@@ -813,14 +820,27 @@ function siguiente(){
     $("promptJP").classList.add("prompt-es");
   }
   
-  if(actual.tipo === "kanji_mc"){
-    $("promptJP").innerHTML = `
-      <div class="tag-kanji">(KANJI)</div>
-      <div class="kanji-prompt">${actual.prompt}</div>
-    `;
-  } else {
-    $("promptJP").textContent = actual.prompt;
-  }
+const btnReplay = $("btnReplay");
+
+// reset: tamaño normal del bafle
+btnReplay?.classList.remove("big-sound");
+
+// dictado: NO mostrar 🔊 arriba, solo el botón grande
+if(actual.tipo === "dict_es" || actual.tipo === "dict_jp"){
+  $("promptJP").textContent = "";          // o "DICTADO" si quieres
+  btnReplay?.classList.add("big-sound");
+}
+// kanji: badge + kanji
+else if(actual.tipo === "kanji_mc"){
+  $("promptJP").innerHTML = `
+    <div class="tag-kanji">(KANJI)</div>
+    <div class="kanji-prompt">${actual.prompt}</div>
+  `;
+}
+// resto: prompt normal
+else{
+  $("promptJP").textContent = actual.prompt;
+}
 
   $("opciones").innerHTML =
     `a) ${actual.opciones[0]}<br>b) ${actual.opciones[1]}<br>c) ${actual.opciones[2]}`;
