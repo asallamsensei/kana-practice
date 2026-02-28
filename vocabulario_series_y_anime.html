@@ -97,6 +97,19 @@
     font-size: 13px;
   }
 
+  .tag-kanji{
+    display:inline-block;
+    margin-bottom:6px;
+    padding:4px 10px;
+    border-radius:999px;
+    font-size:12px;
+    font-weight:800;
+    background: rgba(34,197,94,.18);
+    border: 1px solid rgba(34,197,94,.5);
+    color:#86efac;
+    letter-spacing:.5px;
+  }
+  
   .chips{
     display:flex;
     flex-wrap:wrap;
@@ -785,7 +798,14 @@ function siguiente(){
 
   actual = q;
 
-  $("promptJP").innerText = actual.prompt;
+  if(actual.tipo === "kanji_mc"){
+    $("promptJP").innerHTML = `
+      <div class="tag-kanji">(KANJI)</div>
+      ${actual.prompt}
+    `;
+  } else {
+    $("promptJP").innerText = actual.prompt;
+  }
 
   $("opciones").innerHTML =
     `a) ${actual.opciones[0]}<br>b) ${actual.opciones[1]}<br>c) ${actual.opciones[2]}`;
