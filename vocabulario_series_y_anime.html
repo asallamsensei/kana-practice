@@ -822,6 +822,13 @@ function siguiente(){
   
 const btnReplay = $("btnReplay");
 
+// 🔊 ocultar solo en modo Kanji
+if(actual.tipo === "kanji_mc"){
+  btnReplay.style.display = "none";
+} else {
+  btnReplay.style.display = "";
+}
+  
 // reset: tamaño normal del bafle
 btnReplay?.classList.remove("big-sound");
 
