@@ -320,6 +320,28 @@
   }
   .toast.show{opacity:1; transform:translateX(-50%) translateY(2px)}
 
+/* === Pixel fire particles (se desprenden arriba) === */
+.px{
+  position:absolute;
+  width:8px;
+  height:8px;
+  border-radius:2px;         /* cuadradito suave; pon 0 si lo quieres 100% pixel */
+  pointer-events:none;
+  z-index:4;                 /* encima del city */
+  opacity:1;
+  transform: translate(-50%, -50%) scale(1);
+  will-change: transform, opacity, filter;
+  filter: drop-shadow(0 0 8px rgba(0,0,0,.25));
+  animation: pxBurn var(--life, 520ms) steps(2,end) forwards;
+}
+
+/* animación: “quema” y desaparece */
+@keyframes pxBurn{
+  0%   { opacity: 1; transform: translate(-50%, -50%) scale(1); filter: blur(0px); }
+  65%  { opacity: .75; transform: translate(-50%, -50%) scale(.95); filter: blur(.2px); }
+  100% { opacity: 0; transform: translate(-50%, -50%) scale(.35); filter: blur(1px); }
+}
+  
 </style>
 </head>
 <body>
@@ -579,6 +601,72 @@
     setTimeout(()=> toast.classList.remove("show"), 550);
   }
 
+// ===== Pixel fire (particles) =====
+const FIRE_COLORS = ["#fbbf24","#fb7185","#60a5fa","#22c55e","#a78bfa","#ffffff"];
+
+function emitPixelFire(m, count=1){
+  const rectG = game.getBoundingClientRect();
+  const rectM = m.el.getBoundingClientRect();
+
+  for(let i=0;i<count;i++){
+    const p = document.createElement("div");
+    p.className = "px";
+
+    // color aleatorio (o puedes usar uno fijo)
+    const col = FIRE_COLORS[randInt(0, FIRE_COLORS.length-1)];
+    p.style.background = col;
+
+    // vida (ms)
+    const life = randInt(320, 650);
+    p.style.setProperty("--life", `${life}ms`);
+
+    // tamaño aleatorio (px)
+    const s = randInt(5, 10);
+    p.style.width = `${s}px`;
+    p.style.height = `${s}px`;
+
+    // posición: por encima del meteoro, a lo ancho (desorden)
+    const x = (rectM.left - rectG.left) + randInt(10, Math.max(10, Math.floor(rectM.width - 10)));
+    const y = (rectM.top - rectG.top) + randInt(0, 10); // pegado arriba
+
+    p.style.left = `${x}px`;
+    p.style.top  = `${y}px`;
+
+    // “salida” en desorden: drift + subir un poquito + caer sutil
+    const dx = randInt(-22, 22);
+    const dy = randInt(-28, -10);
+
+    // aplicamos un empujón con transition (simple y efectivo)
+    // (arranca en su posición, luego se mueve y se quema)
+    requestAnimationFrame(() => {
+      p.style.transition = `transform ${life}ms linear`;
+      p.style.transform = `translate(calc(-50% + ${dx}px), calc(-50% + ${dy}px)) scale(.9)`;
+    });
+
+    // se elimina solo
+    p.addEventListener("animationend", () => p.remove(), { once:true });
+
+    game.appendChild(p);
+  }
+}
+
+// emite según tiempo (para que no dependa de FPS)
+function pixelFireTick(m, dt){
+  // intensidad base: 0.9–2.0 partículas por segundo por meteoro (ajusta)
+  const rate = 1.4;
+
+  m.fireAcc = (m.fireAcc || 0) + dt * rate;
+
+  // cuando acumula 1, suelta partículas
+  while(m.fireAcc >= 1){
+    m.fireAcc -= 1;
+
+    // 1 o 2 pixeles, a veces 3
+    const n = (Math.random() < 0.12) ? 3 : (Math.random() < 0.45 ? 2 : 1);
+    emitPixelFire(m, n);
+  }
+}
+  
   function updateHUD(){
     scoreEl.textContent = state.score;
     streakEl.textContent = state.streak;
@@ -846,7 +934,10 @@
     for(const m of [...state.meteors.values()]){
       m.y += m.speedPxPerSec * dt;
       m.el.style.top = `${m.y}px`;
-  
+    
+      // 🔥
+      pixelFireTick(m, dt);
+      
       if(m.y + m.el.offsetHeight >= groundY){
         missMeteor(m);
       }
