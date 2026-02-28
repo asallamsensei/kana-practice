@@ -613,29 +613,14 @@ function actualizarEstadisticas(){
    BOTONES ACCIONES
 =============================== */
 function siguienteDesdeBoton(){
+  // ✅ 1er click: revisar (validar)
   if (!yaValidado) {
-    let correcto;
-    if (quizModo === "dictado") {
-      correcto = kanaLista[actual][0] + " / " + kanaLista[actual][1];
-    } else if (quizModo === "jp_es") {
-      correcto = kanaLista[actual][1];
-    } else {
-      correcto = kanaLista[actual][0];
-    }
-
-    document.getElementById("respuesta").innerText = "Saltado ✘ (era: " + correcto + ")";
-    document.getElementById("respuesta").className = "incorrecto";
-
-    reproducirAudioKana(kanaLista[actual][1]);
-
-    errores++;
-    actualizarEstadisticas();
-    guardarStatsActual();
-
-    yaValidado = true;
+    verificarRespuesta();   // esto ya pone yaValidado=true, actualiza stats y reproduce audio
     return;
   }
 
+  // ✅ 2do click: siguiente pregunta
+  yaValidado = false;
   document.getElementById("respuesta").innerText = "";
   siguienteKana();
 }
