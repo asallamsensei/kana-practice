@@ -693,6 +693,54 @@
         { "kanji": "気", "significado": "ánimo; energía; sensación" },
         { "kanji": "味", "significado": "sensación; matiz; sabor" }
       ]
+    },
+    {
+      "cancion": "KILL THE FIGHT (MATO LA PELEA)",
+      "artista": "子門真人 (Shimon Masato)",
+      "nota": "Material elaborado por Asallam Sensei",
+      "vocabulario": [
+        { "jp": "いつまでも", "romaji": "itsu made mo", "es": "por siempre, eternamente" },
+        { "jp": "俺の内側で", "romaji": "ore no uchigawa de", "es": "dentro de mí; en mi interior" },
+        { "jp": "悲しみ", "romaji": "kanashimi", "es": "tristeza, pesar" },
+        { "jp": "たおす", "romaji": "taosu", "es": "derribar, vencer, derrotar" },
+        { "jp": "砂漠", "romaji": "sabaku", "es": "desierto" },
+
+        { "jp": "面白い", "romaji": "omoshiroi", "es": "interesante; divertido; curioso" },
+        { "jp": "この世", "romaji": "kono yo", "es": "este mundo; esta vida" },
+        { "jp": "北斗", "romaji": "hokuto", "es": "Hokuto; (en la serie) “estrella del norte” / constelación del norte" },
+        { "jp": "心なき心", "romaji": "kokoro naki kokoro", "es": "corazón sin corazón; alma vacía (expresión poética)" },
+        { "jp": "生きること", "romaji": "ikiru koto", "es": "vivir (como concepto); el hecho de vivir" },
+
+        { "jp": "これなら", "romaji": "korenara", "es": "si se trata de esto…; en ese caso…" },
+        { "jp": "何かが命じる", "romaji": "nanika ga meijiru", "es": "algo (me) lo ordena; algo manda (dentro de mí)" },
+        { "jp": "俺は今たたく", "romaji": "ore wa ima tataku", "es": "yo la enfrento ahora; ahora golpeo/ataco" },
+        { "jp": "奥義", "romaji": "ōgi", "es": "técnica secreta; arte/técnica definitiva (de escuela)" }
+      ],
+      "kanji": [
+        { "kanji": "俺", "significado": "yo (masculino, rudo/informal)" },
+        { "kanji": "内", "significado": "interior; dentro" },
+        { "kanji": "側", "significado": "lado; interior/exterior (según contexto)" },
+        { "kanji": "悲", "significado": "tristeza; lamentar" },
+        { "kanji": "倒", "significado": "derribar; vencer; tumbar" },
+        { "kanji": "砂", "significado": "arena" },
+        { "kanji": "漠", "significado": "vasto; desolado; (en compuestos) “desierto”" },
+
+        { "kanji": "面", "significado": "cara; superficie; aspecto" },
+        { "kanji": "白", "significado": "blanco; (en compuestos) matiz de “interesante/curioso”" },
+        { "kanji": "世", "significado": "mundo; sociedad; vida (este mundo)" },
+        { "kanji": "北", "significado": "norte" },
+        { "kanji": "斗", "significado": "dipper; cazo/medida (en nombres como 北斗)" },
+        { "kanji": "心", "significado": "corazón; mente; sentimientos" },
+        { "kanji": "無", "significado": "no existir; sin (base de 〜なき = “sin…”) " },
+
+        { "kanji": "生", "significado": "vida; vivir; nacer" },
+        { "kanji": "何", "significado": "qué; algo (en 何か)" },
+        { "kanji": "命", "significado": "vida; ordenar/mandar (en 命じる)" },
+        { "kanji": "今", "significado": "ahora" },
+        { "kanji": "叩", "significado": "golpear; atacar" },
+        { "kanji": "奥", "significado": "profundo; interior; secreto" },
+        { "kanji": "義", "significado": "principio; significado; justicia (en compuestos)" }
+      ]
     }
   ]
 }
