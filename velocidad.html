@@ -917,6 +917,15 @@ function burstPixelRain(m, power=14){
       text = `___ ÷ ${a} − ${b} = ${c}`;
     }
 
+    // --- random: invertir lados (___ queda a la derecha) ---
+    const flipProb = 0.5; // 0.5 = 50% (ajusta a gusto)
+    if(Math.random() < flipProb){
+      const parts = text.split(" = ");
+      if(parts.length === 2){
+        text = `${parts[1]} = ${parts[0]}`;
+      }
+    }
+    
     return { text, ans };
   }
   
