@@ -430,37 +430,26 @@ function playAudioForRomaji(romaji){
 }
   
 /* ===============================
-   STATS localStorage
+   STATS globales (1 solo contador)
 =============================== */
-const STATS_KEY = "animeVocabStats_mc_v1";
+const STATS_KEY = "animeVocabStats_global_v1";
 
-function cargarStats() {
-  try { return JSON.parse(localStorage.getItem(STATS_KEY)) || {}; }
-  catch { return {}; }
+function cargarStatsGlobal() {
+  try { return JSON.parse(localStorage.getItem(STATS_KEY)) || { aciertos: 0, errores: 0 }; }
+  catch { return { aciertos: 0, errores: 0 }; }
 }
-function guardarStats(stats) {
-  localStorage.setItem(STATS_KEY, JSON.stringify(stats));
-}
-
-function statsKeyActual() {
-  const b = DATA.bloques[bloqueIdx];
-  const id = (b?.cancion || "bloque").toLowerCase().slice(0,60);
-  return `${id}__${modoActual}`;
+function guardarStatsGlobal() {
+  localStorage.setItem(STATS_KEY, JSON.stringify({ aciertos, errores }));
 }
 
 function cargarStatsActual() {
-  const all = cargarStats();
-  const k = statsKeyActual();
-  const s = all[k] || { aciertos: 0, errores: 0 };
+  const s = cargarStatsGlobal();
   aciertos = s.aciertos || 0;
   errores  = s.errores  || 0;
   pintarStats();
 }
 function guardarStatsActual() {
-  const all = cargarStats();
-  const k = statsKeyActual();
-  all[k] = { aciertos, errores };
-  guardarStats(all);
+  guardarStatsGlobal();
 }
 
 /* ===============================
@@ -894,14 +883,36 @@ function resetStats(){
   guardarStatsActual();
 }
 
+
+  
 /* ===============================
    CARGA JSON
 =============================== */
+
+/* ===============================
+   LISTA de canciones que SÍ tienen audio
+   (exactamente igual a como viene en el JSON)
+=============================== */
+const CANCIONES_CON_AUDIO = new Set([
+  "MIND POWER… 気",
+  "参上!!ギニュー特戦隊!! (Sanjou!! Ginyuu Tokusentai!!)",
+  // "AQUI VA LA TERCERA CUANDO LA TENGAS"
+]);
+  
 fetch("data/anime_vocab.json")
   .then(r => r.json())
   .then(json => {
     DATA = (json && json.bloques) ? json : { bloques: [] };
 
+    // Filtrar: dejar solo las canciones que están en la lista con audio
+    DATA.bloques = (DATA.bloques || []).filter(b => CANCIONES_CON_AUDIO.has(b.cancion));
+
+    if(DATA.bloques.length === 0){
+      $("promptJP").innerText = "No hay canciones habilitadas (revisa CANCIONES_CON_AUDIO)";
+      $("opciones").innerHTML = "";
+      return;
+    }
+    
     const cont = $("chipsBloques");
     cont.innerHTML = "";
 
