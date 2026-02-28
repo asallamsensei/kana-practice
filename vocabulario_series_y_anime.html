@@ -98,16 +98,17 @@
   }
 
   .tag-kanji{
-    display:inline-block;
-    margin-bottom:6px;
-    padding:4px 10px;
-    border-radius:999px;
-    font-size:12px;
-    font-weight:800;
+    display:block;          /* <- clave: que sea una línea sola */
+    width: fit-content;
+    margin: 0 auto 10px;    /* centrado + espacio abajo */
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 800;
     background: rgba(34,197,94,.18);
     border: 1px solid rgba(34,197,94,.5);
-    color:#86efac;
-    letter-spacing:.5px;
+    color: #86efac;
+    letter-spacing: .5px;
   }
   
   .chips{
@@ -801,10 +802,10 @@ function siguiente(){
   if(actual.tipo === "kanji_mc"){
     $("promptJP").innerHTML = `
       <div class="tag-kanji">(KANJI)</div>
-      ${actual.prompt}
+      <div class="kanji-prompt">${actual.prompt}</div>
     `;
   } else {
-    $("promptJP").innerText = actual.prompt;
+    $("promptJP").textContent = actual.prompt;
   }
 
   $("opciones").innerHTML =
