@@ -936,10 +936,10 @@ fetch("data/anime_vocab.json")
     
     const cont = $("chipsBloques");
     cont.innerHTML = "";
-
-    // default: primer bloque activo (no todo)
-    bloquesActivos = new Set(DATA.bloques.length ? [0] : []);
-    $("btnTodo")?.classList.remove("activo");
+    
+    // default: TODO lo visible activo
+    bloquesActivos = new Set(DATA.bloques.map((_, i) => i));
+    $("btnTodo")?.classList.add("activo");
 
     DATA.bloques.forEach((b, i) => {
       const chip = document.createElement("div");
