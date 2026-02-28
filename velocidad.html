@@ -335,6 +335,13 @@
   animation: pxBurn var(--life, 520ms) steps(2,end) forwards;
 }
 
+  .px.gold{
+    box-shadow:
+      0 0 10px rgba(251,191,36,.55),
+      0 0 18px rgba(251,191,36,.35);
+    filter: drop-shadow(0 0 10px rgba(251,191,36,.45));
+  }
+  
 /* animación: “quema” y desaparece */
 @keyframes pxBurn{
   0%   { opacity: 1; transform: translate(-50%, -50%) scale(1); filter: blur(0px); }
@@ -603,7 +610,8 @@
 
 // ===== Pixel fire (particles) =====
 const FIRE_COLORS = ["#fbbf24","#fb7185","#60a5fa","#22c55e","#a78bfa","#ffffff"];
-
+const BONUS_COLORS = ["#fbbf24","#fde68a","#fff7cc","#ffffff"]; // dorado + brillo
+  
 function emitPixelFire(m, count=1){
   const rectG = game.getBoundingClientRect();
   const rectM = m.el.getBoundingClientRect();
@@ -612,9 +620,13 @@ function emitPixelFire(m, count=1){
     const p = document.createElement("div");
     p.className = "px";
 
-    // color aleatorio (o puedes usar uno fijo)
-    const col = FIRE_COLORS[randInt(0, FIRE_COLORS.length-1)];
+    const palette = m.isBonus ? BONUS_COLORS : FIRE_COLORS;
+    const col = palette[randInt(0, palette.length-1)];
     p.style.background = col;
+    
+    if(m.isBonus){
+      p.classList.add("gold");
+    }
 
     // vida (ms)
     const life = randInt(320, 650);
@@ -653,7 +665,7 @@ function emitPixelFire(m, count=1){
 // emite según tiempo (para que no dependa de FPS)
 function pixelFireTick(m, dt){
   // intensidad base: 0.9–2.0 partículas por segundo por meteoro (ajusta)
-  const rate = 1.4;
+  const rate = m.isBonus ? 2.6 : 1.4;
 
   m.fireAcc = (m.fireAcc || 0) + dt * rate;
 
@@ -662,7 +674,9 @@ function pixelFireTick(m, dt){
     m.fireAcc -= 1;
 
     // 1 o 2 pixeles, a veces 3
-    const n = (Math.random() < 0.12) ? 3 : (Math.random() < 0.45 ? 2 : 1);
+    const n = m.isBonus
+      ? (Math.random() < 0.35 ? 3 : 2)
+      : (Math.random() < 0.12 ? 3 : (Math.random() < 0.45 ? 2 : 1));
     emitPixelFire(m, n);
   }
 }
