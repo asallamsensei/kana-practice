@@ -714,7 +714,7 @@
         { "jp": "これなら", "romaji": "korenara", "es": "si se trata de esto…; en ese caso…" },
         { "jp": "何かが命じる", "romaji": "nanika ga meijiru", "es": "algo (me) lo ordena; algo manda (dentro de mí)" },
         { "jp": "俺は今たたく", "romaji": "ore wa ima tataku", "es": "yo la enfrento ahora; ahora golpeo/ataco" },
-        { "jp": "奥義", "romaji": "ōgi", "es": "técnica secreta; arte/técnica definitiva (de escuela)" }
+        { "jp": "奥義", "romaji": "ougi", "es": "técnica secreta; arte/técnica definitiva (de escuela)" }
       ],
       "kanji": [
         { "kanji": "俺", "significado": "yo (masculino, rudo/informal)" },
