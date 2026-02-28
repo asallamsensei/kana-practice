@@ -359,6 +359,74 @@
   65%  { opacity: .75; transform: translate(-50%, -50%) scale(.95); filter: blur(.2px); }
   100% { opacity: 0; transform: translate(-50%, -50%) scale(.35); filter: blur(1px); }
 }
+
+/* === Explosión radial (sale para todos lados) === */
+.px.explode{
+  animation-name: pxExplode;
+  animation-timing-function: linear;
+}
+
+@keyframes pxExplode{
+  0%{
+    opacity:1;
+    transform: translate(-50%, -50%) scale(1);
+    filter: blur(0px);
+  }
+  70%{
+    opacity:.85;
+    transform: translate(
+      calc(-50% + var(--dx,0px)),
+      calc(-50% + var(--dy,0px))
+    ) scale(.9);
+  }
+  100%{
+    opacity:0;
+    transform: translate(
+      calc(-50% + var(--dx,0px)),
+      calc(-50% + var(--dy,0px))
+    ) scale(.35);
+    filter: blur(1px);
+  }
+}
+
+/* === Lluvia que rebota 1 vez (arcade) === */
+.px.bounce{
+  animation-name: pxBounce;
+  animation-timing-function: linear;
+}
+
+@keyframes pxBounce{
+  /* cae */
+  0%{
+    opacity:1;
+    transform: translate(-50%, -50%) scale(1);
+    filter: blur(0px);
+  }
+  55%{
+    opacity:.9;
+    transform: translate(
+      calc(-50% + var(--dx,0px)),
+      calc(-50% + var(--fall, 140px))
+    ) scale(.95);
+  }
+  /* rebote (sube un poquito) */
+  75%{
+    opacity:.8;
+    transform: translate(
+      calc(-50% + (var(--dx,0px) * .65)),
+      calc(-50% + (var(--fall, 140px) - var(--bounce, 60px)))
+    ) scale(.85);
+  }
+  /* vuelve a caer y muere */
+  100%{
+    opacity:0;
+    transform: translate(
+      calc(-50% + (var(--dx,0px) * .85)),
+      calc(-50% + (var(--fall, 140px) + 24px))
+    ) scale(.35);
+    filter: blur(1px);
+  }
+}
   
 </style>
 </head>
@@ -950,6 +1018,7 @@ function burstPixelRain(m, power=14){
     playExplosion(); // 💥 SONIDO AQUÍ
 
     burstPixelRain(m, m.isBonus ? 24 : 16);
+    burstPixelFX(m);
     
     state.lives = Math.max(0, state.lives - 1);
     state.streak = 0;
@@ -964,6 +1033,93 @@ function burstPixelRain(m, power=14){
     snd.play().catch(()=>{});
   }
 
+function burstPixelFX(m, opts = {}){
+  const rectG = game.getBoundingClientRect();
+  const rectM = m.el.getBoundingClientRect();
+
+  const cx = (rectM.left - rectG.left) + rectM.width / 2;
+  const cy = (rectM.top  - rectG.top)  + rectM.height / 2;
+
+  // para saber si “está cerca del suelo” (y ahí rebota)
+  const groundY = game.clientHeight - city.offsetHeight - 2;
+  const nearGround = (cy >= groundY - 90);
+
+  const palette = m.isBonus ? BONUS_COLORS : FIRE_COLORS;
+
+  const explodeN = opts.explode ?? (m.isBonus ? 18 : 12); // radial (aire)
+  const rainN    = opts.rain    ?? (m.isBonus ? 22 : 16); // lluvia
+  const bounceN  = opts.bounce  ?? (nearGround ? (m.isBonus ? 14 : 10) : 0); // rebote 1 vez
+
+  // helper creador
+  const makeP = (cls, x, y, life) => {
+    const p = document.createElement("div");
+    p.className = `px ${cls}`;
+    if(m.isBonus) p.classList.add("gold");
+
+    const col = palette[randInt(0, palette.length-1)];
+    p.style.background = col;
+
+    const s = randInt(4, 10) + (m.isBonus ? 2 : 0);
+    p.style.width = `${s}px`;
+    p.style.height = `${s}px`;
+
+    p.style.left = `${x}px`;
+    p.style.top  = `${y}px`;
+
+    p.style.setProperty("--life", `${life}ms`);
+    p.style.animationDuration = `${life}ms`;
+    p.addEventListener("animationend", () => p.remove(), { once:true });
+    game.appendChild(p);
+    return p;
+  };
+
+  // 1) Explosión radial (sale a todos lados) — ideal “en el aire”
+  for(let i=0;i<explodeN;i++){
+    const life = randInt(360, 720);
+    const x = cx + randInt(-Math.floor(rectM.width/3),  Math.floor(rectM.width/3));
+    const y = cy + randInt(-Math.floor(rectM.height/3), Math.floor(rectM.height/3));
+
+    const p = makeP("explode", x, y, life);
+
+    // vector radial
+    const dx = randInt(-120, 120);
+    const dy = randInt(-120, 120);
+    p.style.setProperty("--dx", `${dx}px`);
+    p.style.setProperty("--dy", `${dy}px`);
+  }
+
+  // 2) Lluvia (como ya te gusta)
+  for(let i=0;i<rainN;i++){
+    const life = randInt(420, 900);
+    const x = cx + randInt(-Math.floor(rectM.width/2),  Math.floor(rectM.width/2));
+    const y = cy + randInt(-Math.floor(rectM.height/2), Math.floor(rectM.height/2));
+
+    const p = makeP("rain", x, y, life);
+
+    const dx = randInt(-80, 80);
+    const dy = randInt(90, 190) + (m.isBonus ? 30 : 0);
+    p.style.setProperty("--dx", `${dx}px`);
+    p.style.setProperty("--dy", `${dy}px`);
+  }
+
+  // 3) Rebote 1 vez (solo si está cerca del suelo)
+  for(let i=0;i<bounceN;i++){
+    const life = randInt(520, 980);
+    const x = cx + randInt(-Math.floor(rectM.width/2),  Math.floor(rectM.width/2));
+    const y = cy + randInt(-Math.floor(rectM.height/4), Math.floor(rectM.height/4));
+
+    const p = makeP("bounce", x, y, life);
+
+    const dx = randInt(-120, 120);
+    const fall = randInt(120, 220) + (m.isBonus ? 30 : 0);
+    const bounce = randInt(40, 95);
+
+    p.style.setProperty("--dx", `${dx}px`);
+    p.style.setProperty("--fall", `${fall}px`);
+    p.style.setProperty("--bounce", `${bounce}px`);
+  }
+}
+  
   function playHit(){
     const snd = sfxHit.cloneNode(true);
   
@@ -1075,6 +1231,7 @@ function submitAnswer(){
   killMeteor(m, "hit");
   playHit(); // 💥 BOOM CORRECTO
   burstPixelRain(m, m.isBonus ? 18 : 10);
+  burstPixelFX(m, { explode: m.isBonus ? 14 : 8, rain: 0, bounce: 0 });
   
   state.score += m.isBonus ? 8 : 10;
   state.streak += 1;
