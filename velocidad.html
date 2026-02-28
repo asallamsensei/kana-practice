@@ -341,6 +341,17 @@
       0 0 18px rgba(251,191,36,.35);
     filter: drop-shadow(0 0 10px rgba(251,191,36,.45));
   }
+
+  .px.rain{
+    animation-name: pxRain;
+    animation-timing-function: linear;
+  }
+  
+  @keyframes pxRain{
+    0%   { opacity: 1; transform: translate(-50%, -50%) scale(1); filter: blur(0px); }
+    60%  { opacity: .8; transform: translate(calc(-50% + var(--dx,0px)), calc(-50% + var(--dy, 40px))) scale(.9); }
+    100% { opacity: 0; transform: translate(calc(-50% + var(--dx,0px)), calc(-50% + var(--dy, 90px))) scale(.35); filter: blur(1px); }
+  }
   
 /* animación: “quema” y desaparece */
 @keyframes pxBurn{
@@ -680,6 +691,53 @@ function pixelFireTick(m, dt){
     emitPixelFire(m, n);
   }
 }
+
+function burstPixelRain(m, power=14){
+  const rectG = game.getBoundingClientRect();
+  const rectM = m.el.getBoundingClientRect();
+
+  // centro del meteoro
+  const cx = (rectM.left - rectG.left) + rectM.width / 2;
+  const cy = (rectM.top  - rectG.top)  + rectM.height / 2;
+
+  const palette = m.isBonus ? BONUS_COLORS : FIRE_COLORS;
+
+  for(let i=0;i<power;i++){
+    const p = document.createElement("div");
+    p.className = "px rain";
+    if(m.isBonus) p.classList.add("gold");
+
+    // color
+    const col = palette[randInt(0, palette.length-1)];
+    p.style.background = col;
+
+    // tamaño
+    const s = randInt(4, 10) + (m.isBonus ? 2 : 0);
+    p.style.width = `${s}px`;
+    p.style.height = `${s}px`;
+
+    // punto de salida (desorden alrededor del meteoro)
+    const x = cx + randInt(-Math.floor(rectM.width/2), Math.floor(rectM.width/2));
+    const y = cy + randInt(-Math.floor(rectM.height/2), Math.floor(rectM.height/2));
+    p.style.left = `${x}px`;
+    p.style.top  = `${y}px`;
+
+    // “lluvia”: cae hacia abajo con dispersión lateral
+    const dx = randInt(-70, 70);
+    const dy = randInt(70, 160) + (m.isBonus ? 30 : 0);
+    p.style.setProperty("--dx", `${dx}px`);
+    p.style.setProperty("--dy", `${dy}px`);
+
+    // vida
+    const life = randInt(420, 900);
+    p.style.setProperty("--life", `${life}ms`);
+    p.style.animationDuration = `${life}ms`;
+
+    // borrar solo
+    p.addEventListener("animationend", () => p.remove(), { once:true });
+    game.appendChild(p);
+  }
+}
   
   function updateHUD(){
     scoreEl.textContent = state.score;
@@ -890,7 +948,9 @@ function pixelFireTick(m, dt){
     killMeteor(m, "miss");
   
     playExplosion(); // 💥 SONIDO AQUÍ
-  
+
+    burstPixelRain(m, m.isBonus ? 24 : 16);
+    
     state.lives = Math.max(0, state.lives - 1);
     state.streak = 0;
     showToast("💥 Falló", "bad");
@@ -1014,6 +1074,7 @@ function submitAnswer(){
   // ✅ Sí existe: destruimos el meteorito correspondiente
   killMeteor(m, "hit");
   playHit(); // 💥 BOOM CORRECTO
+  burstPixelRain(m, m.isBonus ? 18 : 10);
   
   state.score += m.isBonus ? 8 : 10;
   state.streak += 1;
