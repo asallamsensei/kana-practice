@@ -761,11 +761,14 @@
 
     const levelBoost = 1 + (state.level - 1) * 0.03;
     const speed = state.baseSpeed * levelBoost;
-
+    
+    // 🎲 variación: 0.88 a 1.18 (ajústalo a gusto)
+    const jitter = 0.88 + Math.random() * 0.30;
+    
     state.meteors.set(id, {
       id, el, ans,
       y: -60,
-      speedPxPerSec: (70 + state.level * 2) * speed,
+      speedPxPerSec: (70 + state.level * 2) * speed * jitter,
       alive: true,
       isBonus
     });
