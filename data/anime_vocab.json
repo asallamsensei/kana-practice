@@ -110,7 +110,7 @@
         { "jp": "不合格", "romaji": "fugoukaku", "es": "reprobado, no aprobado" },
         { "jp": "危険", "romaji": "kiken", "es": "peligro" },
         { "jp": "鉄道列車", "romaji": "tetsudou ressha", "es": "tren ferroviario" },
-        { "jp": "しっかりしろ！", "romaji": "shikkari shiro!", "es": "¡contrólate!, ¡ponte firme!" },
+        { "jp": "しっかりしろ！", "romaji": "shikkari shiro", "es": "¡contrólate!, ¡ponte firme!" },
         { "jp": "葬儀", "romaji": "sougi", "es": "funeral" },
         { "jp": "触ったら", "romaji": "sawattara", "es": "si lo tocas; una vez que lo toques" },
         { "jp": "外", "romaji": "soto", "es": "afuera, exterior" },
@@ -120,12 +120,12 @@
         { "jp": "コート", "romaji": "kouto", "es": "cancha (del inglés “court”)" },
         { "jp": "飲めば", "romaji": "nomeba", "es": "si lo bebes" },
         { "jp": "知らない", "romaji": "shiranai", "es": "no sé" },
-        { "jp": "できますか？", "romaji": "dekimasu ka?", "es": "¿puede hacerlo?, ¿es capaz?" },
+        { "jp": "できますか？", "romaji": "dekimasu ka", "es": "¿puede hacerlo?, ¿es capaz?" },
     
         { "jp": "座って", "romaji": "suwatte", "es": "siéntate (imperativo suave)" },
         { "jp": "素晴らしかった", "romaji": "subarashikatta", "es": "fue maravilloso, estuvo genial" },
         { "jp": "別に", "romaji": "betsu ni", "es": "nada en particular; no realmente" },
-        { "jp": "ラモン先生だよ！", "romaji": "Ramon-sensei da yo!", "es": "¡es el profesor don Ramón!" },
+        { "jp": "ラモン先生だよ！", "romaji": "Ramon-sensei da yo", "es": "¡es el profesor don Ramón!" },
         { "jp": "時間があれば", "romaji": "jikan ga areba", "es": "si hay tiempo; cuando tenga un momento" }
       ],
       "kanji": [
