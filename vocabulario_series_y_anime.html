@@ -203,6 +203,12 @@
     margin: 6px 0 8px;
   }
 
+.prompt-es{
+  font-size: 22px !important;
+  line-height: 1.25;
+  letter-spacing: .2px;
+}
+  
 /* JP → ES: baja un poquito el japonés del prompt */
 body.modo-jp-es #promptJP{
   font-size: 46px;
@@ -799,6 +805,14 @@ function siguiente(){
 
   actual = q;
 
+  // Reset clases del prompt
+  $("promptJP").classList.remove("prompt-es");
+  
+  // Si la pregunta muestra español como prompt
+  if(actual.tipo === "vocab_es_jp"){
+    $("promptJP").classList.add("prompt-es");
+  }
+  
   if(actual.tipo === "kanji_mc"){
     $("promptJP").innerHTML = `
       <div class="tag-kanji">(KANJI)</div>
