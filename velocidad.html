@@ -464,8 +464,6 @@
 
     <div class="grid2">
       <div class="stat"><div class="k">Puntaje</div><div class="v" id="score">0</div></div>
-      <div class="stat"><div class="k">Racha</div><div class="v" id="streak">0</div></div>
-      <div class="stat"><div class="k">Nivel</div><div class="v" id="level">1</div></div>
       <div class="stat"><div class="k">Vidas</div><div class="v" id="lives">5</div></div>
     </div>
 
@@ -557,8 +555,6 @@
   const fmt = (n) => (n < 0 ? `(${n})` : String(n));
   // ---------- UI ----------
   const scoreEl = $("score");
-  const streakEl = $("streak");
-  const levelEl = $("level");
   const livesEl = $("lives");
 
   const pillLevel = $("pillLevel");
@@ -722,7 +718,7 @@
   function loadBest(){
     const v = Number(localStorage.getItem("mc_bestStreak") || "0");
     state.bestStreak = isFinite(v) ? v : 0;
-    pillBest.textContent = `Mejor racha: ${state.bestStreak}`;
+    pillBest.textContent = `Mejor racha: ${state.streak} / ${state.bestStreak}`;
   }
   function saveBest(){
     localStorage.setItem("mc_bestStreak", String(state.bestStreak));
@@ -866,13 +862,11 @@ function burstPixelRain(m, power=14){
   
   function updateHUD(){
     scoreEl.textContent = state.score;
-    streakEl.textContent = state.streak;
-    levelEl.textContent = state.level;
     livesEl.textContent = state.lives;
 
     pillLevel.textContent = `Nivel: ${state.level}`;
     pillGoal.textContent = `Objetivo: ${state.solvedThisLevel} / ${state.target}`;
-    pillBest.textContent = `Mejor racha: ${state.bestStreak}`;
+    pillBest.textContent = `Mejor racha: ${state.streak} / ${state.bestStreak}`;
   }
 
   // ---------- Curriculum ----------
