@@ -233,11 +233,11 @@
         { "jp": "やめたほうがいいわよ", "romaji": "yameta hou ga ii wa yo", "es": "es mejor que se detengan (tono femenino enfático)" },
         { "jp": "死んでいるから", "romaji": "shindeiru kara", "es": "porque está muerto (estado resultante)" },
     
-        { "jp": "蛇使い", "romaji": "hebi-tsukai", "es": "domador / usuario de serpientes" },
+        { "jp": "蛇使い", "romaji": "hebi tsukai", "es": "domador / usuario de serpientes" },
         { "jp": "来るな", "romaji": "kuru na", "es": "¡no vengas!, ¡no vengan!" },
-        { "jp": "ターゲット", "romaji": "tāgetto", "es": "objetivo, blanco" },
+        { "jp": "ターゲット", "romaji": "taagetto", "es": "objetivo, blanco" },
         { "jp": "面接", "romaji": "mensetsu", "es": "entrevista" },
-        { "jp": "ゴンたち", "romaji": "Gon-tachi", "es": "Gon y los demás; el grupo de Gon" },
+        { "jp": "ゴンたち", "romaji": "Gon tachi", "es": "Gon y los demás; el grupo de Gon" },
         { "jp": "こちらこそだ", "romaji": "kochira koso da", "es": "igualmente; no, gracias a ti" },
         { "jp": "罠", "romaji": "wana", "es": "trampa" }
       ],
