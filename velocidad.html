@@ -595,7 +595,6 @@
     </div>
 
     <div class="grid2">
-      <div class="stat"><div class="k">Puntaje</div><div class="v" id="score">0</div></div>
       <div class="stat"><div class="k">Vidas</div><div class="v" id="lives">5</div></div>
     </div>
 
@@ -613,9 +612,12 @@
   
   <div class="game" id="game">
     <div class="topBar">
-      <div class="left">
-        <div class="pill progress" id="pillProg"><span id="pillProgText">Nivel 1 • 0/20</span></div>
-      </div>
+        <div class="left">
+          <div class="pill progress" id="pillProg">
+            <span id="pillProgText">Nivel 1 • 0/20</span>
+          </div>
+          <div class="pill" id="pillScore">0 pts</div>
+        </div>
       <div class="right">
         <div class="pill" id="pillBest">Mejor racha: 0</div>
       </div>
@@ -684,7 +686,6 @@
   const now = () => performance.now();
   const fmt = (n) => (n < 0 ? `(${n})` : String(n));
   // ---------- UI ----------
-  const scoreEl = $("score");
   const livesEl = $("lives");
   
   const pillProg = $("pillProg");
@@ -693,6 +694,8 @@
   const pillBest  = $("pillBest");
   const toast     = $("toast");
 
+  const pillScore = $("pillScore");
+  
   const overlay = $("overlay");
   const btnQuickStart = $("btnQuickStart");
   
@@ -996,9 +999,9 @@ function burstPixelRain(m, power=14){
 }
   
   function updateHUD(){
-    scoreEl.textContent = state.score;
     livesEl.textContent = state.lives;
-
+    pillScore.textContent = `${state.score} pts`;
+    
     // Progreso del nivel
     const pct = Math.max(0, Math.min(100, (state.solvedThisLevel / state.target) * 100));
     pillProg.style.setProperty("--p", `${pct}%`);
