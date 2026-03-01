@@ -240,29 +240,37 @@
   gap:10px;
 }
 
-/* ===== Layout PC: izquierda (panel+teclado), derecha (juego alto) ===== */
+/* ===== Layout PC: topBar arriba a lo ancho, teclado izquierda, juego derecha ===== */
 @media (min-width: 901px){
   .wrap{
-    grid-template-rows: auto 1fr; /* crea fila 2 para el teclado */
-    align-items: start;
+    grid-template-columns: 360px 1fr;
+    grid-template-rows: auto 1fr;   /* fila 1: topBar, fila 2: contenido */
+    gap:14px;
+    align-items:start;
   }
 
-  .panel{
-    grid-column: 1;
+  /* topBar ocupa las 2 columnas */
+  .topBar{
+    grid-column: 1 / -1;
     grid-row: 1;
+    margin: 0;              /* por si tenías margin auto */
   }
 
+  /* teclado a la izquierda (col 1) */
   .answerBox{
-    grid-column: 1;   /* 👈 columna izquierda */
-    grid-row: 2;      /* 👈 debajo del panel */
-    margin: 14px 0 0 0;  /* quita el auto-centro en PC */
-    max-width: none;     /* usa el ancho de la col 1 (360px) */
+    grid-column: 1;
+    grid-row: 2;
+    margin: 0;              /* quita el auto-center en PC */
+    max-width: none;        /* usa el ancho de 360px */
     justify-self: stretch;
+    align-self: start;
   }
 
+  /* juego a la derecha (col 2) */
   .game{
     grid-column: 2;
-    grid-row: 1 / span 2; /* 👈 el juego ocupa fila 1 y 2 */
+    grid-row: 2;
+    height: 680px;          /* tu alto PC */
   }
 }
   
@@ -579,27 +587,7 @@
 <body>
 
 <div class="wrap">
-  <!-- PANEL -->
-  <div class="panel">
-    <div class="brand">
-      <h1>Math Command</h1>
-      <div class="chip">Asallam Sensei</div>
-    </div>
-
-    <div class="grid2">
-      <div class="stat"><div class="k">Vidas</div><div class="v" id="lives">5</div></div>
-    </div>
-
-    <!-- Config oculta -->
-    <div class="configHidden">
-      <select id="op"><option value="mix" selected>Mixto</option></select>
-      <select id="diff"><option value="easy" selected>Fácil</option></select>
-      <input id="target" type="number" value="20" />
-      <input id="speed" type="number" value="0.3" />
-    </div>
-
-  </div>
-
+  
   <!-- JUEGO -->
 
   <div class="topBar">
@@ -678,8 +666,7 @@
   const now = () => performance.now();
   const fmt = (n) => (n < 0 ? `(${n})` : String(n));
   // ---------- UI ----------
-  const livesEl = $("lives");
-  
+    
   const pillProg = $("pillProg");
   const pillProgText = $("pillProgText");
   
@@ -990,7 +977,6 @@ function burstPixelRain(m, power=14){
 }
   
   function updateHUD(){
-    livesEl.textContent = state.lives;
     pillScore.textContent = `${state.score} pts`;
     
     // Progreso del nivel
