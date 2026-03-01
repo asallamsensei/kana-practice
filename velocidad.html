@@ -479,7 +479,6 @@
 
     <div class="btnRow">
       <button id="btnStart">Iniciar</button>
-      <button id="btnPause" class="secondary" disabled>Pausar</button>
       <button id="btnReset" class="danger">Reiniciar</button>
     </div>
   </div>
@@ -573,7 +572,6 @@
   const toast     = $("toast");
 
   const btnStart = $("btnStart");
-  const btnPause = $("btnPause");
   const btnReset = $("btnReset");
 
   const overlay = $("overlay");
@@ -655,7 +653,6 @@
   // ---------- State ----------
   const state = {
     running: false,
-    paused: false,
     score: 0,
     streak: 0,
     bestStreak: 0,
@@ -687,7 +684,7 @@
   }
 
   function pushDigit(d){
-    if(!state.running || state.paused) return;
+    if(!state.running) return;
     if(state.typed.length >= FIXED.maxDigits) return;
     // evita "000"
     if(state.typed === "0") state.typed = "";
@@ -696,13 +693,13 @@
   }
 
   function clearAll(){
-    if(!state.running || state.paused) return;
+    if(!state.running) return;
     state.typed = "";
     setDisplay();
   }
 
   function toggleSign(){
-    if(!state.running || state.paused) return;
+    if(!state.running) return;
   
     if(state.typed.startsWith("-")){
       state.typed = state.typed.slice(1);
@@ -1266,12 +1263,6 @@ function burstPixelFX(m, opts = {}){
   function tick(t){
     if(!state.running) return;
   
-    if(state.paused){
-      state.lastTick = t;
-      requestAnimationFrame(tick);
-      return;
-    }
-  
     const dt = (t - state.lastTick) / 1000;
     state.lastTick = t;
   
@@ -1449,7 +1440,7 @@ function spawnFlybyBonus(){
   }
 
 function submitAnswer(){
-  if(!state.running || state.paused) return;
+  if(!state.running) return;
 
   if(state.typed.trim() === ""){
     showToast("Escribe un número", "warn");
@@ -1550,8 +1541,7 @@ function submitAnswer(){
     state.spawnEveryMs = FIXED.spawnStartMs;
 
     state.running = true;
-    state.paused = false;
-
+    
     btnStart.disabled = true;
     btnPause.disabled = false;
 
@@ -1572,18 +1562,6 @@ function submitAnswer(){
     state.nextFlybyAt = state.lastFlyby + FIXED.flybyBaseMs + randInt(0, FIXED.flybyJitterMs);
   }
 
-  function pauseToggle(){
-    if(!state.running) return;
-    state.paused = !state.paused;
-    btnPause.textContent = state.paused ? "Reanudar" : "Pausar";
-    showToast(state.paused ? "Pausado" : "Reanudado");
-    if(state.paused){
-      bgMusic.pause();
-    }else{
-      bgMusic.play().catch(()=>{});
-    }
-  }
-
   function resetAll(){
     for(const m of state.meteors.values()){
       try { m.el.remove(); } catch {}
@@ -1591,7 +1569,6 @@ function submitAnswer(){
     state.meteors.clear();
 
     state.running = false;
-    state.paused = false;
     state.score = 0;
     state.streak = 0;
     state.level = 1;
@@ -1668,10 +1645,7 @@ function submitAnswer(){
       submitAnswer();
       return;
     }
-    if(e.key === "Escape"){
-      pauseToggle();
-      return;
-    }
+
     if(e.key.toLowerCase() === "c"){
       clearAll();
       return;
