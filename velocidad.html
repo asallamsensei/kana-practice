@@ -1543,8 +1543,7 @@ function submitAnswer(){
     state.running = true;
     
     btnStart.disabled = true;
-    btnPause.disabled = false;
-
+    
     overlay.style.display = "none";
 
     state.lastSpawn = now();
@@ -1580,9 +1579,7 @@ function submitAnswer(){
     state.spawnEveryMs = FIXED.spawnStartMs;
 
     btnStart.disabled = false;
-    btnPause.disabled = true;
-    btnPause.textContent = "Pausar";
-
+    
     overlay.style.display = "flex";
 
     state.typed = "";
@@ -1596,8 +1593,7 @@ function submitAnswer(){
   function gameOver(){
     state.running = false;
     btnStart.disabled = false;
-    btnPause.disabled = true;
-
+    
     overlay.style.display = "flex";
     overlay.querySelector(".modal h2").textContent = "Game Over";
     overlay.querySelector(".modal p").innerHTML =
@@ -1609,7 +1605,6 @@ function submitAnswer(){
   btnStart.addEventListener("click", start);
   btnQuickStart.addEventListener("click", start);
   btnCloseOverlay.addEventListener("click", () => overlay.style.display = "none");
-  btnPause.addEventListener("click", pauseToggle);
   btnReset.addEventListener("click", resetAll);
   
   bgMusic.addEventListener("ended", () => {
