@@ -853,7 +853,7 @@ function setDisplay(){
   function loadBest(){
     const v = Number(localStorage.getItem("mc_bestStreak") || "0");
     state.bestStreak = isFinite(v) ? v : 0;
-    pillBest.textContent = `Mejor racha: ${state.streak} / ${state.bestStreak}`;
+    pillBest.textContent = `Racha • ${state.streak} / ${state.bestStreak}`;
   }
   function saveBest(){
     localStorage.setItem("mc_bestStreak", String(state.bestStreak));
@@ -1004,7 +1004,7 @@ function burstPixelRain(m, power=14){
     pillProg.style.setProperty("--p", `${pct}%`);
     pillProgText.textContent = `Nivel ${state.level} • ${state.solvedThisLevel}/${state.target}`;
     
-    pillBest.textContent = `Mejor racha: ${state.streak} / ${state.bestStreak}`;
+    pillBest.textContent = `Racha • ${state.streak} / ${state.bestStreak}`;
   }
 
   // ---------- Curriculum ----------
