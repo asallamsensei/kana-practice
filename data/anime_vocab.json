@@ -73,7 +73,7 @@
     
         { "jp": "たどってる", "romaji": "tadotteru", "es": "estoy siguiendo, persiguiendo (un camino, huellas, un sueño)" },
         { "jp": "不思議な", "romaji": "fushigi na", "es": "misterioso, inexplicable, maravilloso" },
-        { "jp": "もうすぐ", "romaji": "mousugu", "es": "pronto, en poco tiempo" },
+        { "jp": "もうすぐ", "romaji": "mou sugu", "es": "pronto, en poco tiempo" },
         { "jp": "時間", "romaji": "jikan", "es": "tiempo, hora" },
         { "jp": "明日へ", "romaji": "ashita e", "es": "hacia el mañana" }
       ],
