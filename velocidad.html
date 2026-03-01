@@ -554,6 +554,33 @@
     filter: blur(.8px);
   }
 }
+
+/* 👻 estela del disparo */
+.shotGhost{
+  position:absolute;
+  left:0; top:0;
+  transform: translate(-50%, -50%);
+  font-size:42px;
+  font-weight:900;
+  letter-spacing:2px;
+  color:#fff;
+  pointer-events:none;
+  z-index:7;
+
+  opacity:.45;
+  filter: blur(.2px);
+
+  text-shadow:
+    0 0 8px rgba(255,255,255,.35),
+    0 0 18px rgba(125,92,255,.25);
+
+  animation: ghostFade var(--gt, 160ms) linear forwards;
+}
+
+@keyframes ghostFade{
+  from{ opacity: var(--go, .45); transform: translate(-50%, -50%) scale(1); }
+  to  { opacity: 0;              transform: translate(-50%, -50%) scale(.85); }
+}
   
 </style>
 </head>
@@ -1537,20 +1564,58 @@ function spawnFlybyBonus(){
 
 function shootNumberToMeteor(m, text){
   const rectG = game.getBoundingClientRect();
-  const rectD = displayEl.getBoundingClientRect(); // tu número abajo en el canvas
+  const rectD = displayEl.getBoundingClientRect(); // número abajo (en canvas)
   const rectM = m.el.getBoundingClientRect();      // meteoro objetivo
 
-  // punto de salida (centro del display)
+  // salida (centro del display)
   const sx = (rectD.left - rectG.left) + rectD.width/2;
   const sy = (rectD.top  - rectG.top)  + rectD.height/2;
 
-  // punto objetivo (centro del meteoro)
+  // target (centro del meteoro)
   const tx = (rectM.left - rectG.left) + rectM.width/2;
   const ty = (rectM.top  - rectG.top)  + rectM.height/2;
 
   const dx = tx - sx;
   const dy = ty - sy;
 
+  // duración según distancia
+  const dist = Math.hypot(dx, dy);
+  const t = Math.max(190, Math.min(380, dist * 0.55)); // ms
+
+  // helper: crear ghost en un punto intermedio del trayecto
+  function spawnGhost(f, delayMs){
+    setTimeout(() => {
+      const g = document.createElement("div");
+      g.className = "shotGhost";
+      g.textContent = text;
+
+      // punto a lo largo del vector (f = 0..1)
+      const gx = sx + dx * f;
+      const gy = sy + dy * f;
+
+      g.style.left = `${gx}px`;
+      g.style.top  = `${gy}px`;
+
+      // fade rápido
+      const gt = 140 + Math.random() * 80; // 140–220ms
+      g.style.setProperty("--gt", `${gt}ms`);
+
+      // opacidad ligeramente distinta
+      const go = 0.28 + Math.random() * 0.22; // 0.28–0.50
+      g.style.setProperty("--go", go);
+
+      g.addEventListener("animationend", () => g.remove(), { once:true });
+      game.appendChild(g);
+    }, delayMs);
+  }
+
+  // 👻 2–3 ghosts: aparecen detrás del disparo (en tiempos distintos)
+  // aparecen al 25%, 45%, 65% del recorrido aprox
+  spawnGhost(0.25, 30);
+  spawnGhost(0.45, 70);
+  if(Math.random() < 0.55) spawnGhost(0.65, 110); // a veces 3
+
+  // disparo principal
   const shot = document.createElement("div");
   shot.className = "shotNum";
   shot.textContent = text;
@@ -1559,10 +1624,6 @@ function shootNumberToMeteor(m, text){
   shot.style.top  = `${sy}px`;
   shot.style.setProperty("--dx", `${dx}px`);
   shot.style.setProperty("--dy", `${dy}px`);
-
-  // duración según distancia (se siente “justo”)
-  const dist = Math.hypot(dx, dy);
-  const t = Math.max(180, Math.min(360, dist * 0.55)); // 180–360ms
   shot.style.setProperty("--t", `${t}ms`);
 
   shot.addEventListener("animationend", () => shot.remove(), { once:true });
