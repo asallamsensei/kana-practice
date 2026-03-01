@@ -1043,26 +1043,43 @@ function burstPixelRain(m, power=14){
     el.innerHTML = `<div class="expr">${text}</div>`;
     game.appendChild(el);
 
-    const rect = game.getBoundingClientRect();
-    const padding = 12;
+const rect = game.getBoundingClientRect();
+const padding = 12;
 
-    // primero lo ponemos temporalmente para medirlo
-    el.style.left = "0px";
-    el.style.top = "-60px";
-    
-    // ⚠️ forzamos al navegador a calcular tamaño real
-    const meteorWidth = el.offsetWidth;
-    
-    const rect = game.getBoundingClientRect();
-    const padding = 12;
-    
-    // ahora sí calculamos posición segura
-    const minX = padding;
-    const maxX = rect.width - meteorWidth - padding;
-    
-    const x = randInt(minX, Math.max(minX, Math.floor(maxX)));
-    
-    el.style.left = `${x}px`;
+// medir ancho REAL del meteoro
+el.style.left = "0px";
+el.style.top  = "-60px";
+const meteorWidth = el.offsetWidth;
+
+// rango seguro dentro del canvas
+const minX = padding;
+const maxX = rect.width - meteorWidth - padding;
+
+// aleatorio con “fairness” suave (evita pegados extremos)
+const gap = 18;   // prueba 12–18 en móvil; 18 en PC va bien
+const tries = 6;
+
+let x = randInt(minX, Math.max(minX, Math.floor(maxX)));
+
+for(let i=0;i<tries;i++){
+  let ok = true;
+
+  for(const other of state.meteors.values()){
+    const ox = parseFloat(other.el.style.left || "0");
+    const ow = other.el.offsetWidth || 140;
+
+    // solape horizontal con margen gap
+    if(x < ox + ow + gap && x + meteorWidth + gap > ox){
+      ok = false;
+      break;
+    }
+  }
+
+  if(ok) break;
+  x = randInt(minX, Math.max(minX, Math.floor(maxX)));
+}
+
+el.style.left = `${x}px`;
 
     const levelBoost = 1 + (state.level - 1) * 0.03;
     const speed = state.baseSpeed * levelBoost;
