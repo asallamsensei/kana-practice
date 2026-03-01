@@ -246,34 +246,32 @@
 /* ===== Layout PC: topBar arriba a lo ancho, teclado izquierda, juego derecha ===== */
 @media (min-width: 901px){
   .wrap{
-    grid-template-columns: 360px 1fr;
-    grid-template-rows: auto 1fr;   /* fila 1: topBar, fila 2: contenido */
+    grid-template-columns: 1fr 360px; /* 🔥 invertimos proporción */
+    grid-template-rows: auto 1fr;
     gap:14px;
     align-items:start;
   }
 
-  /* topBar ocupa las 2 columnas */
   .topBar{
     grid-column: 1 / -1;
     grid-row: 1;
-    margin: 0;              /* por si tenías margin auto */
   }
 
-  /* teclado a la izquierda (col 1) */
-  .answerBox{
-    grid-column: 2;
-    grid-row: 2;
-    margin: 0;              /* quita el auto-center en PC */
-    max-width: none;        /* usa el ancho de 360px */
-    justify-self: stretch;
-    align-self: start;
-  }
-
-  /* juego a la derecha (col 2) */
+  /* 🎮 Juego ahora a la izquierda */
   .game{
     grid-column: 1;
     grid-row: 2;
-    height: 680px;          /* tu alto PC */
+    height: 680px;
+  }
+
+  /* 🔢 Teclado a la derecha */
+  .answerBox{
+    grid-column: 2;
+    grid-row: 2;
+    margin: 0;
+    max-width: none;
+    justify-self: stretch;
+    align-self: start;
   }
 }
   
@@ -326,10 +324,22 @@
   .kbtn:hover{transform: translateY(-1px); background: rgba(255,255,255,.12)}
   .kbtn:active{transform: translateY(0px);}
 
-  .kbtn.ok{
-    background: rgba(34,197,94,.12);
-    border-color: rgba(34,197,94,.28);
-  }
+.kbtn.ok{
+  background: linear-gradient(135deg, #22c55e, #16a34a);
+  border-color: rgba(34,197,94,.55);
+  color:#ffffff;
+  box-shadow:
+    0 0 14px rgba(34,197,94,.55),
+    0 0 28px rgba(34,197,94,.35);
+}
+
+.kbtn.ok:hover{
+  background: linear-gradient(135deg, #16a34a, #15803d);
+  box-shadow:
+    0 0 18px rgba(34,197,94,.7),
+    0 0 34px rgba(34,197,94,.45);
+}
+  
   .kbtn.ok:hover{background: rgba(34,197,94,.18)}
   .kbtn.bad{
     background: rgba(239,68,68,.12);
