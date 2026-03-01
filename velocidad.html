@@ -148,6 +148,55 @@
   }
   .pill.good{border-color:rgba(34,197,94,.35); background:rgba(34,197,94,.12)}
 
+  .pill.progress{
+    position:relative;
+    overflow:hidden;
+    border-color: rgba(255,255,255,.14);
+    background: rgba(0,0,0,.18);
+  }
+  
+  /* la barra de progreso */
+  .pill.progress::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    width: var(--p, 0%);
+    background: rgba(34,197,94,.18);
+    border-right: 1px solid rgba(34,197,94,.28);
+  }
+  
+  /* el texto por encima */
+  .pill.progress > span{
+    position:relative;
+    z-index:1;
+  }
+
+  /* 🔥 flash dorado al completar nivel */
+  .pill.progress.levelUp{
+    animation: levelUpFlash 300ms ease-out;
+  }
+  
+  @keyframes levelUpFlash{
+    0%{
+      filter: brightness(1);
+      box-shadow: 0 0 0 rgba(0,0,0,0);
+    }
+    45%{
+      filter: brightness(1.9);
+      box-shadow: 0 0 22px rgba(251,191,36,.85);
+    }
+    100%{
+      filter: brightness(1);
+      box-shadow: 0 0 0 rgba(0,0,0,0);
+    }
+  }
+  
+  /* durante el flash, la barra se vuelve dorada */
+  .pill.progress.levelUp::before{
+    background: rgba(251,191,36,.22);
+    border-right-color: rgba(251,191,36,.35);
+  }
+  
   .city{
     position:absolute;
     left:0; right:0; bottom:0;
@@ -481,8 +530,7 @@
   <div class="game" id="game">
     <div class="topBar">
       <div class="left">
-        <div class="pill" id="pillLevel">Nivel: 1</div>
-        <div class="pill good" id="pillGoal">Objetivo: 0 / 20</div>
+        <div class="pill progress" id="pillProg"><span id="pillProgText">Nivel 1 • 0/20</span></div>
       </div>
       <div class="right">
         <div class="pill" id="pillBest">Mejor racha: 0</div>
@@ -556,9 +604,10 @@
   // ---------- UI ----------
   const scoreEl = $("score");
   const livesEl = $("lives");
-
-  const pillLevel = $("pillLevel");
-  const pillGoal  = $("pillGoal");
+  
+  const pillProg = $("pillProg");
+  const pillProgText = $("pillProgText");
+  
   const pillBest  = $("pillBest");
   const toast     = $("toast");
 
@@ -864,8 +913,11 @@ function burstPixelRain(m, power=14){
     scoreEl.textContent = state.score;
     livesEl.textContent = state.lives;
 
-    pillLevel.textContent = `Nivel: ${state.level}`;
-    pillGoal.textContent = `Objetivo: ${state.solvedThisLevel} / ${state.target}`;
+    // Progreso del nivel
+    const pct = Math.max(0, Math.min(100, (state.solvedThisLevel / state.target) * 100));
+    pillProg.style.setProperty("--p", `${pct}%`);
+    pillProgText.textContent = `Nivel ${state.level} • ${state.solvedThisLevel}/${state.target}`;
+    
     pillBest.textContent = `Mejor racha: ${state.streak} / ${state.bestStreak}`;
   }
 
@@ -1523,6 +1575,13 @@ function submitAnswer(){
 
     showToast(`Nivel ${state.level}`, "good");
     updateHUD();
+
+    // ✨ flash dorado en el progreso
+    pillProg.classList.remove("levelUp"); // por si se repite rápido
+    void pillProg.offsetWidth;            // reflow para reiniciar animación
+    pillProg.classList.add("levelUp");
+    
+    setTimeout(()=> pillProg.classList.remove("levelUp"), 320);
   }
 
   // ---------- Controles ----------
