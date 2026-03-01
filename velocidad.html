@@ -1290,11 +1290,14 @@ function burstPixelFX(m, opts = {}){
     }
 
     // --- bonus flyby ---
+    
     if(t >= state.nextFlybyAt){
     
       const maxActive = maxMeteorsForLevel(state.level);
     
-      if(state.meteors.size < maxActive){
+      const flybyChance = 0.25; // 25%
+    
+      if(state.meteors.size < maxActive && Math.random() < flybyChance){
         spawnFlybyBonus();
       }
     
