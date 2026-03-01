@@ -112,6 +112,13 @@
     box-shadow: 0 18px 60px rgba(0,0,0,.35);
   }
 
+  .game::before{
+    content:"";
+    position:absolute; inset:0;
+    background: rgba(0,0,0,.10); /* 10% oscurecido */
+    z-index:0;
+  }
+  
   @media (max-width:900px){
     body{padding:2px;align-items:flex-start}
     .wrap{grid-template-columns:1fr;gap:0}
@@ -178,8 +185,8 @@
   z-index:3;
 }
   .meteor .expr{font-size:20px; font-weight:900; letter-spacing:.2px}
-  .meteor.hit{border-color: rgba(34,197,94,.45); background: rgba(34,197,94,.12)}
-  .meteor.miss{border-color: rgba(239,68,68,.45); background: rgba(239,68,68,.12)}
+  .meteor.hit{border-color: rgba(34,197,94,.45); background: rgba(34,197,94,.12); animation: hitFlash 120ms ease-out;}
+  .meteor.miss{border-color: rgba(239,68,68,.45); background: rgba(239,68,68,.12); animation: hitFlash 120ms ease-out;}
   .meteor.bonus{border-color: rgba(251,191,36,.40); background: rgba(251,191,36,.10)}
   
   /* --- Answer UI (sin input) --- */
@@ -352,14 +359,29 @@
     60%  { opacity: .8; transform: translate(calc(-50% + var(--dx,0px)), calc(-50% + var(--dy, 40px))) scale(.9); }
     100% { opacity: 0; transform: translate(calc(-50% + var(--dx,0px)), calc(-50% + var(--dy, 90px))) scale(.35); filter: blur(1px); }
   }
+    
+  /* animación: “quema” y desaparece */
+  @keyframes pxBurn{
+    0%   { opacity: 1; transform: translate(-50%, -50%) scale(1); filter: blur(0px); }
+    65%  { opacity: .75; transform: translate(-50%, -50%) scale(.95); filter: blur(.2px); }
+    100% { opacity: 0; transform: translate(-50%, -50%) scale(.35); filter: blur(1px); }
+  }
   
-/* animación: “quema” y desaparece */
-@keyframes pxBurn{
-  0%   { opacity: 1; transform: translate(-50%, -50%) scale(1); filter: blur(0px); }
-  65%  { opacity: .75; transform: translate(-50%, -50%) scale(.95); filter: blur(.2px); }
-  100% { opacity: 0; transform: translate(-50%, -50%) scale(.35); filter: blur(1px); }
-}
-
+  @keyframes hitFlash {
+    0%{
+      filter: brightness(1);
+      box-shadow: 0 0 0 rgba(255,255,255,0);
+    }
+    40%{
+      filter: brightness(3);
+      box-shadow: 0 0 18px rgba(255,255,255,.9);
+    }
+    100%{
+      filter: brightness(1);
+      box-shadow: 0 0 0 rgba(255,255,255,0);
+    }
+  }
+  
 /* === Explosión radial (sale para todos lados) === */
 .px.explode{
   animation-name: pxExplode;
@@ -521,9 +543,7 @@
   
 </div>
 
-<audio id="bgMusic" preload="auto" loop>
-  <source src="data/velocidad/retro_math_grid.mp3" type="audio/mpeg">
-</audio>
+<audio id="bgMusic" preload="auto"></audio>
 
 <audio id="sfxExplosion" preload="auto">
   <source src="data/velocidad/bum_suelo.mp3" type="audio/mpeg">
@@ -564,6 +584,38 @@
   const city = game.querySelector(".city");
   
   const bgMusic = $("bgMusic");
+
+  // ===== Playlist aleatoria =====
+  const TRACKS = [
+    "data/velocidad/Arcade Divide.mp3",
+    "data/velocidad/Hex Grid Calculus.mp3",
+    "data/velocidad/Hex Grid Calculus 2.mp3",
+    "data/velocidad/Pixel Abyss Countdown.mp3",
+    "data/velocidad/Pixel Abyss Countdown 2.mp3",
+    "data/velocidad/Pixel Pressure Loop.mp3",
+    "data/velocidad/Retro Math Grid.mp3",
+    "data/velocidad/Retro Math Grid 2.mp3"
+  ];
+  
+  let lastTrackIndex = -1;
+  
+  function pickNextTrackIndex(){
+    if(TRACKS.length <= 1) return 0;
+  
+    let idx = Math.floor(Math.random() * TRACKS.length);
+    while(idx === lastTrackIndex){
+      idx = Math.floor(Math.random() * TRACKS.length);
+    }
+    lastTrackIndex = idx;
+    return idx;
+  }
+  
+  function playRandomTrack(){
+    const idx = pickNextTrackIndex();
+    bgMusic.src = TRACKS[idx];
+    playRandomTrack();
+  }
+  
   const sfxExplosion = $("sfxExplosion");
   const sfxHit = $("sfxHit");
   
@@ -1017,7 +1069,7 @@ function burstPixelRain(m, power=14){
     m.el.classList.add(cls);
     setTimeout(() => {
       try { m.el.remove(); } catch {}
-    }, 260);
+    }, 110);
     state.meteors.delete(m.id);
   }
 
@@ -1365,7 +1417,13 @@ function submitAnswer(){
   btnCloseOverlay.addEventListener("click", () => overlay.style.display = "none");
   btnPause.addEventListener("click", pauseToggle);
   btnReset.addEventListener("click", resetAll);
-
+  
+  bgMusic.addEventListener("ended", () => {
+    if(state.running && !state.paused){
+      playRandomTrack();
+    }
+  });
+  
   // keypad clicks
   keypadEl.addEventListener("click", (e) => {
     const btn = e.target.closest("button");
