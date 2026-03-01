@@ -643,6 +643,13 @@
 
     // input constraints
     maxDigits: 4
+
+    // --- BONUS FLYBY ---
+    flybyBaseMs: 6500,      // cada cuánto intentamos uno (aprox)
+    flybyJitterMs: 2200,    // variación aleatoria
+    flybySpeedMin: 160,     // px/s
+    flybySpeedMax: 260,     // px/s
+    flybyYPad: 90,          // evita topBar y evita suelo
   };
 
   // ---------- State ----------
@@ -664,6 +671,9 @@
     lastTick: 0,
 
     typed: "" // lo que va formando el teclado
+    lastFlyby: 0,
+    nextFlybyAt: 0,
+    
   };
 
   function setDisplay(){
@@ -1096,15 +1106,19 @@ el.style.left = `${x}px`;
     });
   }
 
-  function killMeteor(m, cls){
-    if(!m.alive) return;
-    m.alive = false;
-    m.el.classList.add(cls);
-    setTimeout(() => {
-      try { m.el.remove(); } catch {}
-    }, 110);
-    state.meteors.delete(m.id);
-  }
+function killMeteor(m, cls){
+  if(!m.alive) return;
+  m.alive = false;
+
+  // ✅ solo agrega clase si existe
+  if(cls) m.el.classList.add(cls);
+
+  setTimeout(() => {
+    try { m.el.remove(); } catch {}
+  }, 110);
+
+  state.meteors.delete(m.id);
+}
 
   function missMeteor(m){
     killMeteor(m, "miss");
@@ -1251,26 +1265,152 @@ function burstPixelFX(m, opts = {}){
         }
       }
     }
-  
+
+    // --- bonus flyby ---
+    if(t >= state.nextFlybyAt){
+    
+      const maxActive = maxMeteorsForLevel(state.level);
+    
+      if(state.meteors.size < maxActive){
+        spawnFlybyBonus();
+      }
+    
+      state.lastFlyby = t;
+      state.nextFlybyAt =
+        t + FIXED.flybyBaseMs + randInt(0, FIXED.flybyJitterMs);
+    }
+    
     // ✅ suelo calculado con la altura REAL de .city (móvil/pc)
     const groundY = game.clientHeight - city.offsetHeight - 2;
   
-    for(const m of [...state.meteors.values()]){
-      m.y += m.speedPxPerSec * dt;
-      m.el.style.top = `${m.y}px`;
-    
-      // 🔥
-      pixelFireTick(m, dt);
-      
-      if(m.y + m.el.offsetHeight >= groundY){
-        missMeteor(m);
-      }
+for(const m of [...state.meteors.values()]){
+  // 1) movimiento
+  if(m.kind === "flyby"){
+    m.x += m.vx * dt;
+    m.el.style.left = `${m.x}px`;
+    // top fijo
+    // (m.y ya está)
+  }else{
+    m.y += m.speedPxPerSec * dt;
+    m.el.style.top = `${m.y}px`;
+  }
+
+  // 2) partículas (sirve igual)
+  pixelFireTick(m, dt);
+
+  // 3) reglas de salida / fallo
+  if(m.kind === "flyby"){
+    // si sale totalmente del canvas, se elimina sin penalizar
+    const w = m.el.offsetWidth || 140;
+    if(m.x < -w - 30 || m.x > game.clientWidth + 30){
+      killMeteor(m, ""); // o simplemente remove sin clase
     }
+  }else{
+    // meteoro normal: choca contra suelo
+    const groundY = game.clientHeight - city.offsetHeight - 2;
+    if(m.y + m.el.offsetHeight >= groundY){
+      missMeteor(m);
+    }
+  }
+}
   
     updateHUD();
     requestAnimationFrame(tick);
   }
 
+function makeBonusProblem(){
+  // Pesados pero controlados (sin locuras): multiplicación grande, combos, y algunas ecuaciones con hueco
+  const L = state.level;
+
+  const pick = (arr) => arr[randInt(0, arr.length-1)];
+  const heavy = pick(["mulBig","mix","eqHard"]);
+
+  // 1) Multiplicación grande (2 dígitos × 1-2 dígitos)
+  if(heavy === "mulBig"){
+    const a = randInt(12, clamp(22 + L*2, 22, 60));
+    const b = randInt(6,  clamp(9 + Math.floor(L/2), 9, 18));
+    return { text: `${a} × ${b}`, ans: a*b };
+  }
+
+  // 2) Combo (a×b ± c)
+  if(heavy === "mix"){
+    const a = randInt(8,  clamp(12 + L, 12, 30));
+    const b = randInt(4,  clamp(6 + Math.floor(L/2), 6, 14));
+    const c = randInt(6,  clamp(12 + L, 12, 35));
+    const sign = Math.random() < 0.5 ? "+" : "−";
+    const ans = sign === "+" ? (a*b + c) : (a*b - c);
+    return { text: `(${a} × ${b}) ${sign} ${c}`, ans };
+  }
+
+  // 3) Ecuación con hueco un poco más dura
+  // ___ × a − b = c   (ans entero)
+  {
+    const a = randInt(3, clamp(4 + Math.floor(L/3), 4, 10));
+    const ans = randInt(4, clamp(8 + L, 8, 25));
+    const b = randInt(5, clamp(12 + L, 12, 40));
+    const c = ans*a - b;
+    // si queda muy negativo, ajusta b
+    const b2 = c < -50 ? Math.max(0, ans*a) : b;
+    const c2 = ans*a - b2;
+    return { text: `___ × ${a} − ${b2} = ${c2}`, ans };
+  }
+}
+
+function spawnFlybyBonus(){
+  const { text, ans } = makeBonusProblem();
+  const id = state.nextId++;
+
+  const el = document.createElement("div");
+  el.className = "meteor bonus";
+  el.dataset.id = String(id);
+  el.innerHTML = `<div class="expr">${text}</div>`;
+  game.appendChild(el);
+
+  // Medimos tamaño real
+  el.style.left = "0px";
+  el.style.top  = "0px";
+  const w = el.offsetWidth;
+  const h = el.offsetHeight;
+
+  // Sale por izquierda o derecha
+  const fromLeft = Math.random() < 0.5;
+
+  const rect = game.getBoundingClientRect();
+  const padding = 12;
+
+  // rango vertical seguro (no topbar, no suelo)
+  const topSafe = 58 + padding; // topBar ~56px
+  const groundY = game.clientHeight - city.offsetHeight - 2;
+  const bottomSafe = groundY - h - FIXED.flybyYPad;
+
+  const minY = clamp(topSafe, topSafe, bottomSafe);
+  const maxY = clamp(bottomSafe, minY, bottomSafe);
+  const y = randInt(minY, Math.floor(maxY));
+
+  // posición inicial fuera de pantalla
+  const x = fromLeft ? -w - 10 : (rect.width + 10);
+
+  // velocidad horizontal
+  const sp = randInt(FIXED.flybySpeedMin, FIXED.flybySpeedMax);
+  const vx = fromLeft ? sp : -sp;
+
+  el.style.left = `${x}px`;
+  el.style.top  = `${y}px`;
+
+  state.meteors.set(id, {
+    id, el, ans,
+    x, y,
+    vx,                          // 👈 horizontal
+    speedPxPerSec: 0,            // no cae
+    alive: true,
+    isBonus: true,
+    kind: "flyby"                // 👈 etiqueta
+  });
+
+  // un pequeño “spark trail” más intenso (opcional)
+  // m.fireAcc se maneja igual en pixelFireTick(m,dt)
+}
+  
   // ---------- Answer ----------
   function findMeteorByAnswer(n){
     // Devuelve el meteorito con respuesta n más urgente (más abajo)
@@ -1383,6 +1523,9 @@ function submitAnswer(){
 
     // reproducir música (aleatoria)
     playRandomTrack();
+
+    state.lastFlyby = now();
+    state.nextFlybyAt = state.lastFlyby + FIXED.flybyBaseMs + randInt(0, FIXED.flybyJitterMs);
   }
 
   function pauseToggle(){
