@@ -518,6 +518,42 @@
     0 0 8px rgba(255,255,255,.6),
     0 0 18px rgba(125,92,255,.4);
 }
+
+/* 🎯 número-disparo que viaja hacia el meteoro */
+.shotNum{
+  position:absolute;
+  left:0; top:0;
+  transform: translate(-50%, -50%);
+  font-size:42px;
+  font-weight:900;
+  letter-spacing:2px;
+  color:#fff;
+  text-shadow:
+    0 0 8px rgba(255,255,255,.6),
+    0 0 18px rgba(125,92,255,.4);
+  pointer-events:none;
+  z-index:8;
+
+  /* animación controlada por variables */
+  animation: shotFly var(--t, 240ms) cubic-bezier(.2,.9,.2,1) forwards;
+}
+
+@keyframes shotFly{
+  0%{
+    opacity:1;
+    transform: translate(-50%, -50%) translate(0px, 0px) scale(1);
+    filter: blur(0px);
+  }
+  70%{
+    opacity:.95;
+    transform: translate(-50%, -50%) translate(var(--dx), var(--dy)) scale(.92);
+  }
+  100%{
+    opacity:0;
+    transform: translate(-50%, -50%) translate(var(--dx), var(--dy)) scale(.55);
+    filter: blur(.8px);
+  }
+}
   
 </style>
 </head>
@@ -1499,6 +1535,40 @@ function spawnFlybyBonus(){
     return best;
   }
 
+function shootNumberToMeteor(m, text){
+  const rectG = game.getBoundingClientRect();
+  const rectD = displayEl.getBoundingClientRect(); // tu número abajo en el canvas
+  const rectM = m.el.getBoundingClientRect();      // meteoro objetivo
+
+  // punto de salida (centro del display)
+  const sx = (rectD.left - rectG.left) + rectD.width/2;
+  const sy = (rectD.top  - rectG.top)  + rectD.height/2;
+
+  // punto objetivo (centro del meteoro)
+  const tx = (rectM.left - rectG.left) + rectM.width/2;
+  const ty = (rectM.top  - rectG.top)  + rectM.height/2;
+
+  const dx = tx - sx;
+  const dy = ty - sy;
+
+  const shot = document.createElement("div");
+  shot.className = "shotNum";
+  shot.textContent = text;
+
+  shot.style.left = `${sx}px`;
+  shot.style.top  = `${sy}px`;
+  shot.style.setProperty("--dx", `${dx}px`);
+  shot.style.setProperty("--dy", `${dy}px`);
+
+  // duración según distancia (se siente “justo”)
+  const dist = Math.hypot(dx, dy);
+  const t = Math.max(180, Math.min(360, dist * 0.55)); // 180–360ms
+  shot.style.setProperty("--t", `${t}ms`);
+
+  shot.addEventListener("animationend", () => shot.remove(), { once:true });
+  game.appendChild(shot);
+}
+  
 function submitAnswer(){
   if(!state.running) return;
 
@@ -1538,6 +1608,9 @@ function submitAnswer(){
     return;
   }
 
+  // 🎯 Disparo visual: el número vuela hacia el meteoro
+  shootNumberToMeteor(m, state.typed);
+  
   // ✅ Sí existe: destruimos el meteorito correspondiente
   // destruimos el meteoro que respondiste
   killMeteor(m, "hit");
