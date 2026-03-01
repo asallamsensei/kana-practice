@@ -127,16 +127,26 @@
     .groundLine{bottom:28px!important}
   }
 
-  .topBar{
-    position:absolute; left:0; top:0; right:0;
-    display:flex; align-items:center; justify-content:space-between;
-    padding:10px 12px;
-    background: rgba(0,0,0,.18);
-    border-bottom:1px solid rgba(255,255,255,.10);
-    backdrop-filter: blur(8px);
-    z-index:5;
-  }
-  .topBar .left, .topBar .right{display:flex; gap:10px; align-items:center}
+.topBar{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:10px 12px;
+
+  background: rgba(0,0,0,.18);
+  border-bottom:1px solid rgba(255,255,255,.10);
+  backdrop-filter: blur(8px);
+
+  border-radius:18px 18px 0 0; /* opcional bonito */
+}
+
+.topBar .left,
+.topBar .right{
+  display:flex;
+  gap:10px;
+  align-items:center;
+}
+  
   .pill{
     font-size:12px;
     padding:6px 10px;
@@ -591,19 +601,21 @@
   </div>
 
   <!-- JUEGO -->
+
+  <div class="topBar">
+      <div class="left">
+        <div class="pill progress" id="pillProg">
+          <span id="pillProgText">Nivel 1 • 0/20</span>
+        </div>
+        <div class="pill" id="pillScore">0 pts</div>
+      </div>
+    <div class="right">
+      <div class="pill" id="pillBest">Mejor racha: 0</div>
+    </div>
+  </div>
   
   <div class="game" id="game">
-    <div class="topBar">
-        <div class="left">
-          <div class="pill progress" id="pillProg">
-            <span id="pillProgText">Nivel 1 • 0/20</span>
-          </div>
-          <div class="pill" id="pillScore">0 pts</div>
-        </div>
-      <div class="right">
-        <div class="pill" id="pillBest">Mejor racha: 0</div>
-      </div>
-    </div>
+
 
     <div class="toast" id="toast">✔</div>
 
