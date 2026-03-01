@@ -816,6 +816,12 @@ function setDisplay(){
 
   function clearAll(){
     if(!state.running) return;
+  
+    // 💥 si había algo, explota antes de borrar
+    if(state.typed.length > 0){
+      explodeTypedAtDisplay("soft");
+    }
+  
     state.typed = "";
     setDisplay();
   }
@@ -1370,6 +1376,25 @@ function burstPixelFX(m, opts = {}){
     p.style.setProperty("--bounce", `${bounce}px`);
   }
 }
+
+function explodeTypedAtDisplay(strength="soft"){
+  // si no hay nada escrito, no hacemos nada
+  if(!state.typed || state.typed.trim() === "" || state.typed === "-") return;
+
+  // “meteoro falso” apuntando al display
+  const fake = { el: displayEl, isBonus: false };
+
+  if(strength === "hard"){
+    // error: explosión más notoria
+    burstPixelFX(fake, { explode: 14, rain: 10, bounce: 10 });
+  }else{
+    // borrado: algo más sutil
+    burstPixelFX(fake, { explode: 8, rain: 4, bounce: 6 });
+  }
+
+  // opcional: sonido (yo lo pondría SOLO en hard)
+  // playExplosion();
+}
   
   function playHit(){
     const snd = sfxHit.cloneNode(true);
@@ -1657,6 +1682,9 @@ function submitAnswer(){
   if(!m){
     showToast("✖", "bad");
 
+    // 💥 explotamos el número en el display (fallo)
+    explodeTypedAtDisplay("hard");
+    
     // borrar siempre al oprimir OK
     state.typed = "";
     setDisplay();
