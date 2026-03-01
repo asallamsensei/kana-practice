@@ -595,16 +595,22 @@
     "data/velocidad/Retro Math Grid 2.mp3"
   ];
   
-  let lastTrackIndex = -1;
-  
-  function pickNextTrackIndex(){
-    if(TRACKS.length <= 1) return 0;
-  
-    let idx = Math.floor(Math.random() * TRACKS.length);
-    while(idx === lastTrackIndex){
+  let lastTrackIndex = -1; // El índice anterior empieza en -1
+
+  function pickNextTrackIndex() {
+    let idx;
+    
+    // Si lastTrackIndex es -1, significa que es la primera vez que se selecciona
+    // y no queremos comparar con nada, así que simplemente seleccionamos aleatoriamente
+    if (lastTrackIndex === -1) {
       idx = Math.floor(Math.random() * TRACKS.length);
+    } else {
+      do {
+        idx = Math.floor(Math.random() * TRACKS.length); // Selección aleatoria
+      } while (idx === lastTrackIndex); // Aseguramos que no repita la canción anterior
     }
-    lastTrackIndex = idx;
+  
+    lastTrackIndex = idx; // Guardamos el índice para la siguiente vez
     return idx;
   }
   
