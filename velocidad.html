@@ -124,7 +124,6 @@
     .wrap{grid-template-columns:1fr;gap:0}
     .answerBox{margin:0}
     .game{height:50vh}
-    .city{height:28px!important}
     .groundLine{bottom:28px!important}
   }
 
@@ -197,17 +196,6 @@
     border-right-color: rgba(251,191,36,.35);
   }
   
-  .city{
-    position:absolute;
-    left:0; right:0; bottom:0;
-    height:95px; /* un poquito menos */
-    background:
-      linear-gradient(180deg, rgba(0,0,0,0), rgba(0,0,0,.30)),
-      repeating-linear-gradient(90deg, rgba(255,255,255,.08) 0 10px, rgba(255,255,255,.02) 10px 20px);
-    opacity:.9;
-    z-index:1;
-  }
-
 .meteor{
   position:absolute;
   top:-60px;
@@ -619,7 +607,6 @@
 
     <div class="toast" id="toast">✔</div>
 
-    <div class="city"></div>
     <div class="canvasDisplay" id="display"></div>
     
     <div class="overlay" id="overlay">
@@ -693,8 +680,7 @@
   const btnQuickStart = $("btnQuickStart");
   
   const game = $("game");
-  const city = game.querySelector(".city");
-  
+    
   const bgMusic = $("bgMusic");
 
   // ===== Playlist aleatoria =====
@@ -1294,7 +1280,7 @@ function burstPixelFX(m, opts = {}){
   const cy = (rectM.top  - rectG.top)  + rectM.height / 2;
 
   // para saber si “está cerca del suelo” (y ahí rebota)
-  const groundY = game.clientHeight - city.offsetHeight - 2;
+  const groundY = game.clientHeight - 2;
   const nearGround = (cy >= groundY - 90);
 
   const palette = m.isBonus ? BONUS_COLORS : FIRE_COLORS;
@@ -1441,8 +1427,8 @@ function explodeTypedAtDisplay(strength="soft"){
         t + FIXED.flybyBaseMs + randInt(0, FIXED.flybyJitterMs);
     }
     
-    // ✅ suelo calculado con la altura REAL de .city (móvil/pc)
-    const groundY = game.clientHeight - city.offsetHeight - 2;
+    // ✅ suelo calculado (móvil/pc)
+    const groundY = game.clientHeight - 2;
   
 for(const m of [...state.meteors.values()]){
   // 1) movimiento
@@ -1468,7 +1454,7 @@ for(const m of [...state.meteors.values()]){
     }
   }else{
     // meteoro normal: choca contra suelo
-    const groundY = game.clientHeight - city.offsetHeight - 2;
+    const groundY = game.clientHeight - 2;
     if(m.y + m.el.offsetHeight >= groundY){
       missMeteor(m);
     }
@@ -1541,7 +1527,7 @@ function spawnFlybyBonus(){
 
   // rango vertical seguro (no topbar, no suelo)
   const topSafe = 58 + padding; // topBar ~56px
-  const groundY = game.clientHeight - city.offsetHeight - 2;
+  const groundY = game.clientHeight - 2;
   const bottomSafe = groundY - h - FIXED.flybyYPad;
 
   const minY = clamp(topSafe, topSafe, bottomSafe);
