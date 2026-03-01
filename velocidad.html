@@ -498,6 +498,34 @@
     filter: blur(1px);
   }
 }
+
+.canvasDisplay{
+  position:absolute;
+  left:50%;
+  transform:translateX(-50%);
+  bottom:110px; /* un poco arriba de la ciudad */
+  
+  min-width:120px;
+  padding:12px 18px;
+  border-radius:16px;
+  border:1px solid rgba(255,255,255,.18);
+  background: rgba(0,0,0,.35);
+  backdrop-filter: blur(6px);
+
+  font-size:28px;
+  font-weight:900;
+  letter-spacing:1px;
+  color:var(--text);
+  text-align:center;
+
+  z-index:6;
+  user-select:none;
+}
+
+.canvasDisplay.placeholder{
+  color:rgba(238,242,255,.35);
+  font-weight:800;
+}
   
 </style>
 </head>
@@ -527,6 +555,7 @@
   </div>
 
   <!-- JUEGO -->
+  
   <div class="game" id="game">
     <div class="topBar">
       <div class="left">
@@ -541,7 +570,8 @@
 
     <div class="groundLine"></div>
     <div class="city"></div>
-
+    <div class="canvasDisplay placeholder" id="display">Respuesta…</div>
+    
     <div class="overlay" id="overlay">
       <div class="modal">
         <h2>Math Command</h2>
@@ -556,9 +586,6 @@
 
 <!-- Answer UI (sin input) -->
     <div class="answerBox" aria-label="Teclado numérico">
-      <div class="displayRow">
-        <div class="display placeholder" id="display">Respuesta…</div>
-      </div>
 
       <div class="keypad">
         <button class="kbtn" data-key="7">7</button>
