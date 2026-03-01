@@ -362,23 +362,6 @@
   .modal p{margin:0; color:var(--muted); line-height:1.45; font-size:13px}
   .modal .actions{display:flex; gap:10px; margin-top:12px}
 
-  .toast{
-    position:absolute;
-    left:50%; transform:translateX(-50%);
-    top:56px;
-    z-index:9;
-    padding:8px 12px;
-    border-radius:999px;
-    border:1px solid rgba(255,255,255,.14);
-    background: rgba(0,0,0,.22);
-    color:var(--text);
-    font-size:12px;
-    opacity:0;
-    transition: .18s opacity, .18s transform;
-    pointer-events:none;
-  }
-  .toast.show{opacity:1; transform:translateX(-50%) translateY(2px)}
-
 /* === Pixel fire particles (se desprenden arriba) === */
 .px{
   position:absolute;
@@ -608,8 +591,6 @@
       </div>
     </div>
     
-    <div class="toast" id="toast">✔</div>
-
     <div class="canvasDisplay" id="display"></div>
     
     <div class="overlay" id="overlay">
@@ -674,8 +655,7 @@
   const pillProgText = $("pillProgText");
   
   const pillBest  = $("pillBest");
-  const toast     = $("toast");
-
+  
   const pillScore = $("pillScore");
   
   const overlay = $("overlay");
@@ -841,22 +821,6 @@ function setDisplay(){
   }
   function saveBest(){
     localStorage.setItem("mc_bestStreak", String(state.bestStreak));
-  }
-
-  function showToast(text, kind="neutral"){
-    toast.textContent = text;
-    toast.style.borderColor =
-      kind==="good" ? "rgba(34,197,94,.45)" :
-      kind==="bad" ? "rgba(239,68,68,.45)" :
-      kind==="warn" ? "rgba(251,191,36,.45)" :
-      "rgba(255,255,255,.16)";
-    toast.style.background =
-      kind==="good" ? "rgba(34,197,94,.12)" :
-      kind==="bad" ? "rgba(239,68,68,.12)" :
-      kind==="warn" ? "rgba(251,191,36,.12)" :
-      "rgba(0,0,0,.22)";
-    toast.classList.add("show");
-    setTimeout(()=> toast.classList.remove("show"), 550);
   }
 
 // ===== Pixel fire (particles) =====
@@ -1239,7 +1203,6 @@ function killMeteor(m, cls){
     
     state.lives = Math.max(0, state.lives - 1);
     state.streak = 0;
-    showToast("💥 Falló", "bad");
   
     if(state.lives === 0) gameOver();
   }
@@ -1262,9 +1225,8 @@ function killMeteor(m, cls){
     }
   
     // recompensa opcional por limpieza (ajusta a gusto)
-    state.score += cleared * 3;  // +3 por cada meteoro borrado
-         
-    showToast(`💣 BOMBA! x${cleared}`, "warn");
+    state.score += cleared * 3;  // +3 por cada meteoro borrado       
+
   }
   
   function playExplosion(){
@@ -1642,18 +1604,15 @@ function submitAnswer(){
   if(!state.running) return;
 
   if(state.typed.trim() === ""){
-    showToast("Escribe un número", "warn");
     return;
   }
 
   if(state.typed === "-"){
-    showToast("Completa el número", "warn");
     return;
   }
   
   const n = Number(state.typed);
   if(!Number.isFinite(n)){
-    showToast("Número inválido", "bad");
     state.typed = "";
     setDisplay();
     return;
@@ -1663,7 +1622,6 @@ function submitAnswer(){
 
   // ❌ Si no existe ningún meteorito con esa respuesta
   if(!m){
-    showToast("✖", "bad");
 
     // 💥 explotamos el número en el display (fallo)
     explodeTypedAtDisplay("hard");
@@ -1694,7 +1652,6 @@ function submitAnswer(){
   if(m.isBonus && m.kind === "flyby"){
     state.lives = Math.min(9, state.lives + 1);
     state.score += 6; // opcional
-    showToast("❤️ +1 Vida", "good");
 
     state.streak += 1;
     state.bestStreak = Math.max(state.bestStreak, state.streak);
@@ -1735,7 +1692,6 @@ function submitAnswer(){
 
     if(state.level % 3 === 0) state.lives = Math.min(9, state.lives + 1);
 
-    showToast(`Nivel ${state.level}`, "good");
     updateHUD();
 
     // ✨ flash dorado en el progreso
