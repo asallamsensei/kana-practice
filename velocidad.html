@@ -613,7 +613,8 @@
   function playRandomTrack(){
     const idx = pickNextTrackIndex();
     bgMusic.src = TRACKS[idx];
-    playRandomTrack();
+    bgMusic.currentTime = 0;
+    bgMusic.play().catch(()=>{});
   }
   
   const sfxExplosion = $("sfxExplosion");
@@ -1044,8 +1045,23 @@ function burstPixelRain(m, power=14){
 
     const rect = game.getBoundingClientRect();
     const padding = 12;
-    const w = 140;
-    const x = randInt(padding, Math.max(padding, Math.floor(rect.width - w - padding)));
+
+    // primero lo ponemos temporalmente para medirlo
+    el.style.left = "0px";
+    el.style.top = "-60px";
+    
+    // ⚠️ forzamos al navegador a calcular tamaño real
+    const meteorWidth = el.offsetWidth;
+    
+    const rect = game.getBoundingClientRect();
+    const padding = 12;
+    
+    // ahora sí calculamos posición segura
+    const minX = padding;
+    const maxX = rect.width - meteorWidth - padding;
+    
+    const x = randInt(minX, Math.max(minX, Math.floor(maxX)));
+    
     el.style.left = `${x}px`;
 
     const levelBoost = 1 + (state.level - 1) * 0.03;
@@ -1348,11 +1364,8 @@ function submitAnswer(){
     state.typed = "";
     setDisplay();
 
-    // reproducir música
-    bgMusic.currentTime = 0;
-    bgMusic.play().catch(() => {
-      // por si el navegador bloquea autoplay
-    });
+    // reproducir música (aleatoria)
+    playRandomTrack();
   }
 
   function pauseToggle(){
