@@ -1135,6 +1135,29 @@ function killMeteor(m, cls){
     if(state.lives === 0) gameOver();
   }
 
+  function screenBomb(){
+    // Borra TODOS los meteoros actuales (sin penalizar vidas)
+    const arr = [...state.meteors.values()];
+  
+    let cleared = 0;
+  
+    for(const mm of arr){
+      if(!mm.alive) continue;
+  
+      // efecto visual (ligero)
+      burstPixelFX(mm, { explode: 10, rain: 6, bounce: 0 });
+  
+      // lo removemos como "hit" (sin missMeteor)
+      killMeteor(mm, "hit");
+      cleared++;
+    }
+  
+    // recompensa opcional por limpieza (ajusta a gusto)
+    state.score += cleared * 3;  // +2 por cada meteoro borrado
+         
+    showToast(`💣 Limpieza x${cleared}`, "warn");
+  }
+  
   function playExplosion(){
     const snd = sfxExplosion.cloneNode(true); // permite múltiples sonidos simultáneos
     snd.volume = 0.5;
@@ -1462,22 +1485,40 @@ function submitAnswer(){
   }
 
   // ✅ Sí existe: destruimos el meteorito correspondiente
+  // destruimos el meteoro que respondiste
   killMeteor(m, "hit");
-  playHit(); // 💥 BOOM CORRECTO
+  playHit();
   burstPixelRain(m, m.isBonus ? 18 : 10);
   burstPixelFX(m, { explode: m.isBonus ? 14 : 8, rain: 0, bounce: 0 });
-  
-  state.score += m.isBonus ? 8 : 10;
-  state.streak += 1;
-  state.bestStreak = Math.max(state.bestStreak, state.streak);
 
-  if(!m.isBonus){
+  // ✅ BONUS FLYBY = +1 vida
+  if(m.isBonus && m.kind === "flyby"){
+    state.lives = Math.min(9, state.lives + 1);
+    state.score += 6; // opcional
+    showToast("❤️ +1 Vida", "good");
+
+    state.streak += 1;
+    state.bestStreak = Math.max(state.bestStreak, state.streak);
+
+  // ✅ BONUS que cae = BOMBA (limpia pantalla)
+  }else if(m.isBonus){
+    state.score += 8; // opcional (puntos base por activar bomba)
+    state.streak += 1;  // 👈 SOLO 1 por resolverlo
+    state.bestStreak = Math.max(state.bestStreak, state.streak);
+    
+    screenBomb();     // 👈 limpia todos los meteoros
+    // nota: NO cuenta para objetivo del nivel
+
+  // ✅ Meteoro normal
+  }else{
+    state.score += 10;
+    state.streak += 1;
+    state.bestStreak = Math.max(state.bestStreak, state.streak);
+
     state.solvedThisLevel += 1;
     if(state.solvedThisLevel >= state.target){
       nextLevel();
     }
-  }else{
-    showToast("⭐ Bonus", "warn");
   }
 
   state.typed = "";
