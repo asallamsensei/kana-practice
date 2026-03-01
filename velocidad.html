@@ -502,7 +502,6 @@
         <p>Resuelve las operaciones antes de que lleguen a la línea. Presiona <b>Iniciar</b>.</p>
         <div class="actions">
           <button id="btnQuickStart">Iniciar ahora</button>
-          <button id="btnCloseOverlay" class="secondary">Cerrar</button>
         </div>
       </div>
     </div>
@@ -569,8 +568,7 @@
 
   const overlay = $("overlay");
   const btnQuickStart = $("btnQuickStart");
-  const btnCloseOverlay = $("btnCloseOverlay");
-
+  
   const game = $("game");
   const city = game.querySelector(".city");
   
@@ -1597,8 +1595,7 @@ function submitAnswer(){
 
   // ---------- Events ----------
   btnQuickStart.addEventListener("click", start);
-  btnCloseOverlay.addEventListener("click", () => overlay.style.display = "none");
-    
+      
   bgMusic.addEventListener("ended", () => {
     if(state.running && !state.paused){
       playRandomTrack();
@@ -1621,6 +1618,13 @@ function submitAnswer(){
 
   // teclado físico (PC)
   window.addEventListener("keydown", (e) => {
+    // 🔥 Si el overlay está visible → ENTER o SPACE inician
+    const overlayVisible = overlay.style.display !== "none";
+    if(overlayVisible && (e.key === "Enter" || e.key === " ")){
+      e.preventDefault();
+      start();
+      return;
+    }
     if(!state.running) return;
 
     if(e.key >= "0" && e.key <= "9"){
