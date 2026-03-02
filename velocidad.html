@@ -1137,6 +1137,17 @@ function pixelFireTick(m, dt){
 }
   
 function updateHUD() {
+
+  // Debugging: Imprimir valores de las variables en la consola
+  console.log("Actualizando HUD:", {
+    score: state.score,
+    streak: state.streak,
+    lives: state.lives,
+    solvedThisLevel: state.solvedThisLevel,
+    target: state.target,
+    level: state.level
+  });
+  
   // Actualiza el puntaje
   pillScore.textContent = `${state.score} pts`;
 
