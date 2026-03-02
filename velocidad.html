@@ -698,9 +698,61 @@
 }
 
 @media (max-width:900px){
-  .missionTitle{ font-size:22px; }
-  .missionText{ font-size:16px; }
-  .btnPlay{ font-size:18px !important; }
+  .missionTitle{ font-size:24px; }
+  .missionText{ font-size:18px; }
+  .missionText .dangerLine{ font-size:20px; }
+  .btnPlay{ font-size:20px !important; }
+  .alertLine{ font-size:16px; }
+}
+
+.alertLine{
+  margin:0 0 10px 0;
+  font-size:20px;
+  font-weight:900;
+  text-align:center;
+  letter-spacing:1.5px;
+  text-transform:uppercase;
+  color:#ef4444;
+  text-shadow:
+    0 0 8px rgba(239,68,68,.7),
+    0 0 16px rgba(239,68,68,.4);
+  animation: alertPulse 1.4s ease-in-out infinite;
+}
+
+@keyframes alertPulse{
+  0%{ opacity:1; }
+  50%{ opacity:.65; }
+  100%{ opacity:1; }
+}
+
+.dangerWord{
+  display:inline-block;
+  font-weight:900;
+  color:#ff3b3b;
+  letter-spacing:1px;
+  animation: dangerSiren 1.2s ease-in-out infinite;
+}
+
+@keyframes dangerSiren{
+  0%{
+    text-shadow:
+      0 0 4px rgba(255,0,0,.6),
+      0 0 10px rgba(255,0,0,.5);
+    transform: scale(1);
+  }
+  50%{
+    text-shadow:
+      0 0 10px rgba(255,0,0,.9),
+      0 0 22px rgba(255,0,0,.8),
+      0 0 40px rgba(255,0,0,.6);
+    transform: scale(1.06);
+  }
+  100%{
+    text-shadow:
+      0 0 4px rgba(255,0,0,.6),
+      0 0 10px rgba(255,0,0,.5);
+    transform: scale(1);
+  }
 }
   
 </style>
@@ -739,13 +791,11 @@
 
         <h2 class="missionTitle">RANGER MATEMÁTICO: ¡PRESENTARSE!</h2>
         
-        <p class="missionText">
-          <span class="dangerLine">🌍 La Tierra está en <b>PELIGRO</b>.</span><br/>
-          Resuelve las operaciones antes de que impacten.
-        </p>
+        <p class="alertLine">🚨 ALERTA • IMPACTO INMINENTE 🚨</p>
         
-        <p class="missionHint">
-          Dispara con <b>OK</b> • Borra con <b>C</b> • Negativos con <b>+/−</b>
+        <p class="missionText">
+          <span class="dangerLine">🌍 LA TIERRA ESTÁ EN <b>PELIGRO</b></span><br/>
+          Resuelve las operaciones antes de que impacten.
         </p>
         
         <div class="actions">
