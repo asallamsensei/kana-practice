@@ -1598,7 +1598,7 @@ function adjustTopBarPills() {
   const pills = document.querySelectorAll('.topBar .pill');
   const totalWidth = topBar.clientWidth; // Obtén el ancho disponible de .topBar
   
-  const pillWidth = totalWidth / 4; // Divide el ancho total entre los 4 elementos
+  const pillWidth = totalWidth / 4 * 0.88; // Divide el ancho total entre los 4 elementos
   
   pills.forEach(pill => {
     pill.style.width = `${pillWidth}px`; // Asigna el ancho calculado a cada pill
