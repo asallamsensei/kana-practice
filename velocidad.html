@@ -339,8 +339,7 @@
     0 0 18px rgba(34,197,94,.7),
     0 0 34px rgba(34,197,94,.45);
 }
-  
-  .kbtn.ok:hover{background: rgba(34,197,94,.18)}
+
   .kbtn.bad{
     background: rgba(239,68,68,.12);
     border-color: rgba(239,68,68,.28);
@@ -983,53 +982,6 @@ function pixelFireTick(m, dt){
     emitPixelFire(m, n);
   }
 }
-
-function burstPixelRain(m, power=14){
-  const rectG = game.getBoundingClientRect();
-  const rectM = m.el.getBoundingClientRect();
-
-  // centro del meteoro
-  const cx = (rectM.left - rectG.left) + rectM.width / 2;
-  const cy = (rectM.top  - rectG.top)  + rectM.height / 2;
-
-  const palette = m.isBonus ? BONUS_COLORS : FIRE_COLORS;
-
-  for(let i=0;i<power;i++){
-    const p = document.createElement("div");
-    p.className = "px rain";
-    if(m.isBonus) p.classList.add("gold");
-
-    // color
-    const col = palette[randInt(0, palette.length-1)];
-    p.style.background = col;
-
-    // tamaño
-    const s = randInt(4, 10) + (m.isBonus ? 2 : 0);
-    p.style.width = `${s}px`;
-    p.style.height = `${s}px`;
-
-    // punto de salida (desorden alrededor del meteoro)
-    const x = cx + randInt(-Math.floor(rectM.width/2), Math.floor(rectM.width/2));
-    const y = cy + randInt(-Math.floor(rectM.height/2), Math.floor(rectM.height/2));
-    p.style.left = `${x}px`;
-    p.style.top  = `${y}px`;
-
-    // “lluvia”: cae hacia abajo con dispersión lateral
-    const dx = randInt(-70, 70);
-    const dy = randInt(70, 160) + (m.isBonus ? 30 : 0);
-    p.style.setProperty("--dx", `${dx}px`);
-    p.style.setProperty("--dy", `${dy}px`);
-
-    // vida
-    const life = randInt(420, 900);
-    p.style.setProperty("--life", `${life}ms`);
-    p.style.animationDuration = `${life}ms`;
-
-    // borrar solo
-    p.addEventListener("animationend", () => p.remove(), { once:true });
-    game.appendChild(p);
-  }
-}
   
   function updateHUD(){
     pillScore.textContent = `${state.score} pts`;
@@ -1286,8 +1238,11 @@ function killMeteor(m, cls){
   
     playExplosion(); // 💥 SONIDO AQUÍ
 
-    burstPixelRain(m, m.isBonus ? 24 : 16);
-    burstPixelFX(m);
+    burstPixelFX(m, {
+      explode: m.isBonus ? 18 : 12,
+      rain:    m.isBonus ? 24 : 16,
+      bounce:  undefined // que decida nearGround automáticamente
+    });
     
     state.lives = Math.max(0, state.lives - 1);
     state.streak = 0;
@@ -1505,7 +1460,6 @@ for(const m of [...state.meteors.values()]){
     }
   }else{
     // meteoro normal: choca contra suelo
-    const groundY = game.clientHeight - 2;
     if(m.y + m.el.offsetHeight >= groundY){
       missMeteor(m);
     }
@@ -1873,7 +1827,7 @@ function submitAnswer(){
   });
       
   bgMusic.addEventListener("ended", () => {
-    if(state.running && !state.paused){
+    if(state.running){
       playRandomTrack();
     }
   });
