@@ -1832,6 +1832,12 @@ function submitAnswer(){
     state.baseSpeed = FIXED.baseSpeed;
     state.spawnEveryMs = FIXED.spawnStartMs;
 
+    state.nextId = 1;
+    state.lastSpawn = 0;
+    state.lastTick = 0;
+    state.lastFlyby = 0;
+    state.nextFlybyAt = 0;
+    
     overlay.style.display = "flex";
 
     state.typed = "";
@@ -1853,7 +1859,10 @@ function submitAnswer(){
   }
 
   // ---------- Events ----------
-  btnQuickStart.addEventListener("click", start);
+  btnQuickStart.addEventListener("click", () => {
+    resetAll();  // ✅ reinicia todo (meteoros/score/level/vidas)
+    start();     // ✅ arranca limpio
+  });
       
   bgMusic.addEventListener("ended", () => {
     if(state.running && !state.paused){
