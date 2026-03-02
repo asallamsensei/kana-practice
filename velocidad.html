@@ -127,87 +127,95 @@
     .groundLine{bottom:28px!important}
   }
 
-.topBar{
-  position:absolute;
-  left:0; right:0; top:0;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  padding:10px 12px;
-
-  background: rgba(0,0,0,.18);
-  border-bottom:1px solid rgba(255,255,255,.10);
+.topBar {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  display: flex; /* Usamos Flexbox para distribuir los elementos */
+  justify-content: space-between; /* Distribuye los elementos en los extremos */
+  align-items: center; /* Alinea los elementos verticalmente */
+  padding: 10px 12px;
+  background: rgba(0, 0, 0, 0.18);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.10);
   backdrop-filter: blur(8px);
-
-  border-radius:18px 18px 0 0; /* coincide con .game */
-  z-index:6;
+  border-radius: 18px 18px 0 0; /* Coincide con .game */
+  z-index: 6;
 }
 
 .topBar .left,
-.topBar .right{
-  display:flex;
-  gap:10px;
-  align-items:center;
+.topBar .right {
+  display: flex;
+  gap: 10px; /* Espacio entre los elementos dentro de left y right */
+  align-items: center;
 }
-  
-  .pill{
-    font-size:12px;
-    padding:6px 10px;
-    border-radius:999px;
-    border:1px solid rgba(255,255,255,.14);
-    background: rgba(0,0,0,.18);
-    color: var(--text);
-  }
-  .pill.good{border-color:rgba(34,197,94,.35); background:rgba(34,197,94,.12)}
 
-  .pill.progress{
-    position:relative;
-    overflow:hidden;
-    border-color: rgba(255,255,255,.14);
-    background: rgba(0,0,0,.18);
-  }
-  
-  /* la barra de progreso */
-  .pill.progress::before{
-    content:"";
-    position:absolute;
-    inset:0;
-    width: var(--p, 0%);
-    background: rgba(34,197,94,.18);
-    border-right: 1px solid rgba(34,197,94,.28);
-  }
-  
-  /* el texto por encima */
-  .pill.progress > span{
-    position:relative;
-    z-index:1;
-  }
+.pill {
+  font-size: 12px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(0, 0, 0, 0.18);
+  color: var(--text);
+  user-select: none;
+}
 
-  /* 🔥 flash dorado al completar nivel */
-  .pill.progress.levelUp{
-    animation: levelUpFlash 300ms ease-out;
+.pill.good {
+  border-color: rgba(34, 197, 94, 0.35);
+  background: rgba(34, 197, 94, 0.12);
+}
+
+.pill.progress {
+  position: relative;
+  overflow: hidden;
+  border-color: rgba(255, 255, 255, 0.14);
+  background: rgba(0, 0, 0, 0.18);
+  flex-grow: 1; /* Esto hace que solo la barra de vida ocupe el espacio disponible entre puntaje y racha */
+  margin: 0 10px; /* Margen entre la barra de vida y los otros elementos */
+}
+
+/* Barra de progreso (la que se llena con el color verde) */
+.pill.progress::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  width: var(--p, 0%); /* Ajustamos el ancho según el porcentaje de vida */
+  background: rgba(34, 197, 94, 0.18); /* Color verde */
+  border-right: 1px solid rgba(34, 197, 94, 0.28);
+}
+
+/* El texto sobre la barra de vida */
+.pill.progress > span {
+  position: relative;
+  z-index: 1;
+}
+
+/* Efecto de flash dorado al completar nivel */
+.pill.progress.levelUp {
+  animation: levelUpFlash 300ms ease-out;
+}
+
+/* Animación para el flash dorado */
+@keyframes levelUpFlash {
+  0% {
+    filter: brightness(1);
+    box-shadow: 0 0 0 rgba(0, 0, 0, 0);
   }
-  
-  @keyframes levelUpFlash{
-    0%{
-      filter: brightness(1);
-      box-shadow: 0 0 0 rgba(0,0,0,0);
-    }
-    45%{
-      filter: brightness(1.9);
-      box-shadow: 0 0 22px rgba(251,191,36,.85);
-    }
-    100%{
-      filter: brightness(1);
-      box-shadow: 0 0 0 rgba(0,0,0,0);
-    }
+  45% {
+    filter: brightness(1.9);
+    box-shadow: 0 0 22px rgba(251, 191, 36, 0.85);
   }
-  
-  /* durante el flash, la barra se vuelve dorada */
-  .pill.progress.levelUp::before{
-    background: rgba(251,191,36,.22);
-    border-right-color: rgba(251,191,36,.35);
+  100% {
+    filter: brightness(1);
+    box-shadow: 0 0 0 rgba(0, 0, 0, 0);
   }
+}
+
+/* Durante el flash, la barra se vuelve dorada */
+.pill.progress.levelUp::before {
+  background: rgba(251, 191, 36, 0.22);
+  border-right-color: rgba(251, 191, 36, 0.35);
+}
   
 .meteor{
   position:absolute;
@@ -773,17 +781,23 @@
   <!-- JUEGO -->
   <div class="game" id="game">
 
-    <div class="topBar">
-        <div class="left">
-          <div class="pill progress" id="pillProg">
-            <span id="pillProgText">Nivel 1 • 0/20</span>
-          </div>
-          <div class="pill" id="pillScore">0 pts</div>
-        </div>
-      <div class="right">
-        <div class="pill" id="pillBest">Mejor racha: 0</div>
+  <div class="topBar">
+    <div class="left">
+      <div class="pill progress" id="pillProg">
+        <span id="pillProgText">Nivel 1 • 0/20</span>
       </div>
+      <div class="pill" id="pillScore">0 pts</div>
     </div>
+  
+    <!-- Barra de vida entre puntaje y racha -->
+    <div class="pill progress" id="pillLives">
+      <span id="pillLivesText">Vidas: 5/5</span>
+    </div>
+  
+    <div class="right">
+      <div class="pill" id="pillBest">Mejor racha: 0</div>
+    </div>
+  </div>
     
     <div class="canvasDisplay" id="display"></div>
     
