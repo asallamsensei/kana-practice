@@ -127,14 +127,47 @@
     .groundLine{bottom:28px!important}
   }
 
+
+  
+.meteor{
+  position:absolute;
+  top:-60px;
+
+  min-width:110px;
+  max-width:240px;           /* límite para que no se vuelva gigante */
+  width:auto;
+
+  padding:10px 14px;
+  border-radius:16px;
+  border:1px solid rgba(255,255,255,.16);
+  background: rgba(0,0,0,.22);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 16px 40px rgba(0,0,0,.35);
+
+  text-align:center;
+  white-space:nowrap;        /* 🔥 evita salto de línea */
+  z-index:3;
+}
+  .meteor .expr{font-size:20px; font-weight:900; letter-spacing:.2px}
+  .meteor.hit{border-color: rgba(34,197,94,.45); background: rgba(34,197,94,.12); animation: hitFlash 120ms ease-out;}
+  .meteor.miss{border-color: rgba(239,68,68,.45); background: rgba(239,68,68,.12); animation: hitFlash 120ms ease-out;}
+  .meteor.bonus{border-color: rgba(251,191,36,.40); background: rgba(251,191,36,.10)}
+  
+  /* --- Answer UI (sin input) --- */
+.answerBox{
+  width:100%;
+  max-width:700px;
+  margin:14px auto 0 auto;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
 .topBar {
   position: absolute;
   left: 0;
   right: 0;
   top: 0;
-  display: flex; /* Usamos Flexbox para distribuir los elementos */
-  justify-content: space-between; /* Distribuye los elementos en los extremos */
-  align-items: center; /* Alinea los elementos verticalmente */
   padding: 10px 12px;
   background: rgba(0, 0, 0, 0.18);
   border-bottom: 1px solid rgba(255, 255, 255, 0.10);
@@ -145,9 +178,12 @@
 
 .topBar .left,
 .topBar .right {
-  display: flex;
-  gap: 10px; /* Espacio entre los elementos dentro de left y right */
-  align-items: center;
+  display: block;  /* Cambiado de flex a block para evitar el uso de Flexbox */
+  margin-bottom: 10px; /* Espacio entre las filas */
+}
+
+.topBar .left {
+  margin-right: 20px; /* Espacio entre izquierda y derecha */
 }
 
 .pill {
@@ -158,6 +194,7 @@
   background: rgba(0, 0, 0, 0.18);
   color: var(--text);
   user-select: none;
+  margin-right: 10px;  /* Espacio entre las pastillas */
 }
 
 .pill.good {
@@ -170,7 +207,7 @@
   overflow: hidden;
   border-color: rgba(255, 255, 255, 0.14);
   background: rgba(0, 0, 0, 0.18);
-  flex-grow: 1; /* Esto hace que solo la barra de vida ocupe el espacio disponible entre puntaje y racha */
+  width: 100%; /* Hace que la barra de progreso ocupe todo el ancho disponible */
   margin: 0 10px; /* Margen entre la barra de vida y los otros elementos */
 }
 
@@ -217,40 +254,6 @@
   border-right-color: rgba(251, 191, 36, 0.35);
 }
   
-.meteor{
-  position:absolute;
-  top:-60px;
-
-  min-width:110px;
-  max-width:240px;           /* límite para que no se vuelva gigante */
-  width:auto;
-
-  padding:10px 14px;
-  border-radius:16px;
-  border:1px solid rgba(255,255,255,.16);
-  background: rgba(0,0,0,.22);
-  backdrop-filter: blur(6px);
-  box-shadow: 0 16px 40px rgba(0,0,0,.35);
-
-  text-align:center;
-  white-space:nowrap;        /* 🔥 evita salto de línea */
-  z-index:3;
-}
-  .meteor .expr{font-size:20px; font-weight:900; letter-spacing:.2px}
-  .meteor.hit{border-color: rgba(34,197,94,.45); background: rgba(34,197,94,.12); animation: hitFlash 120ms ease-out;}
-  .meteor.miss{border-color: rgba(239,68,68,.45); background: rgba(239,68,68,.12); animation: hitFlash 120ms ease-out;}
-  .meteor.bonus{border-color: rgba(251,191,36,.40); background: rgba(251,191,36,.10)}
-  
-  /* --- Answer UI (sin input) --- */
-.answerBox{
-  width:100%;
-  max-width:700px;
-  margin:14px auto 0 auto;
-  display:flex;
-  flex-direction:column;
-  gap:10px;
-}
-
 /* ===== Layout PC: topBar arriba a lo ancho, teclado izquierda, juego derecha ===== */
 @media (min-width: 901px){
   .wrap{
@@ -793,23 +796,23 @@
   <!-- JUEGO -->
   <div class="game" id="game">
 
-  <div class="topBar">
-    <div class="left">
-      <div class="pill progress" id="pillProg">
-        <span id="pillProgText"></span>
+    <div class="topBar">
+      <div class="left">
+        <div class="pill progress" id="pillProg">
+          <span id="pillProgText"></span>
+        </div>
+        <div class="pill" id="pillScore"></div>
       </div>
-      <div class="pill" id="pillScore"></div>
+    
+      <!-- Barra de vida entre puntaje y racha -->
+      <div class="pill progress" id="pillLives">
+        <span id="pillLivesText"></span>
+      </div>
+    
+      <div class="right">
+        <div class="pill" id="pillBest"></div>
+      </div>
     </div>
-  
-    <!-- Barra de vida entre puntaje y racha -->
-    <div class="pill progress" id="pillLives">
-      <span id="pillLivesText"></span>
-    </div>
-  
-    <div class="right">
-      <div class="pill" id="pillBest"></div>
-    </div>
-  </div>
     
     <div class="canvasDisplay" id="display"></div>
     
