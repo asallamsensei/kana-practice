@@ -164,7 +164,6 @@
 }
 
 /* Ajustamos .topBar para que use Flexbox y distribuya los elementos */
-/* Ajustamos .topBar para que use Flexbox y distribuya los elementos */
 .topBar {
   display: flex;                /* Usamos flexbox para distribuir en fila */
   justify-content: space-between; /* Distribuye el espacio entre los elementos */
@@ -179,17 +178,16 @@
 
 /* Aseguramos que los 4 elementos dentro de .topBar tengan el mismo tamaño */
 .topBar > div {
-  flex: 1;                        /* Hace que cada div ocupe el mismo ancho */
+  flex-basis: 25%;               /* Hace que cada div ocupe el 25% del ancho */
   display: flex;
-  justify-content: center;         /* Centra el contenido dentro de cada div */
-  align-items: center;             /* Centra verticalmente los elementos dentro */
-  /* El margen aquí ayuda a que no se amontonen */
-  margin: 0 5px;   
+  justify-content: center;       /* Centra el contenido dentro de cada div */
+  align-items: center;           /* Centra verticalmente los elementos dentro */
+  margin: 0 5px;                 /* Espacio entre los elementos */
 }
 
 /* Los elementos .pill deben tener un tamaño igual */
 .pill {
-  flex: 1;                         /* Hace que cada .pill ocupe el mismo tamaño */
+  flex-grow: 1;                         /* Hace que cada .pill ocupe el mismo tamaño */
   margin: 0 5px;                   /* Espacio entre los elementos */
   font-size: 12px;
   padding: 6px 10px;
