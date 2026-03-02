@@ -163,30 +163,31 @@
   gap:10px;
 }
 
+/* Ajustamos .topBar para que use Flexbox y distribuya los elementos */
 .topBar {
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
+  display: flex;                /* Cambiamos a flexbox para distribuir en fila */
+  justify-content: space-between; /* Distribuye el espacio entre los elementos */
+  align-items: center;           /* Centra los elementos verticalmente */
   padding: 10px 12px;
   background: rgba(0, 0, 0, 0.18);
   border-bottom: 1px solid rgba(255, 255, 255, 0.10);
   backdrop-filter: blur(8px);
-  border-radius: 18px 18px 0 0; /* Coincide con .game */
+  border-radius: 18px 18px 0 0;  /* Coincide con .game */
   z-index: 6;
 }
 
+/* Aseguramos que los contenedores de los elementos ocupen el mismo ancho */
 .topBar .left,
 .topBar .right {
-  display: block;  /* Cambiado de flex a block para evitar el uso de Flexbox */
-  margin-bottom: 10px; /* Espacio entre las filas */
+  display: flex;
+  justify-content: space-between;  /* Asegura que los elementos dentro de left y right estén distribuidos */
+  flex: 1;                         /* Toman el mismo espacio */
 }
 
-.topBar .left {
-  margin-right: 20px; /* Espacio entre izquierda y derecha */
-}
-
+/* Los elementos .pill deben tener un tamaño igual */
 .pill {
+  flex: 1;                          /* Hace que cada .pill ocupe el mismo tamaño */
+  margin: 0 5px;                    /* Espacio entre los elementos */
   font-size: 12px;
   padding: 6px 10px;
   border-radius: 999px;
@@ -194,14 +195,12 @@
   background: rgba(0, 0, 0, 0.18);
   color: var(--text);
   user-select: none;
-  margin-right: 10px;  /* Espacio entre las pastillas */
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.pill.good {
-  border-color: rgba(34, 197, 94, 0.35);
-  background: rgba(34, 197, 94, 0.12);
-}
-
+/* Aseguramos que la barra de progreso esté bien configurada */
 .pill.progress {
   position: relative;
   overflow: hidden;
@@ -253,20 +252,21 @@
   background: rgba(251, 191, 36, 0.22);
   border-right-color: rgba(251, 191, 36, 0.35);
 }
-  
-/* ===== Layout PC: topBar arriba a lo ancho, teclado izquierda, juego derecha ===== */
-@media (min-width: 901px){
-  .wrap{
-    grid-template-columns: 1fr 360px; /* 🔥 invertimos proporción */
+
+/* Ajustes para el layout en pantallas grandes */
+@media (min-width: 901px) {
+  .wrap {
+    grid-template-columns: 1fr 360px; /* Invertimos la proporción */
     grid-template-rows: auto 1fr;
-    gap:14px;
-    align-items:start;
+    gap: 14px;
+    align-items: start;
   }
 
-  .topBar{
-    grid-column: 1 / -1;
+  .topBar {
+    grid-column: 1 / -1; /* Se asegura que la barra ocupe toda la fila */
     grid-row: 1;
   }
+}
 
   /* 🎮 Juego ahora a la izquierda */
   .game{
@@ -838,12 +838,6 @@
     </div>
 
   </div>
-
-<div id="debug">
-  <p id="debugScore">Puntaje: 0</p>
-  <p id="debugStreak">Racha: 0</p>
-  <p id="debugProgress">Progreso: 0/20</p>
-</div>
   
 <!-- Answer UI (sin input) -->
     <div class="answerBox" aria-label="Teclado numérico">
