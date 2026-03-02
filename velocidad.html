@@ -1851,15 +1851,16 @@ function submitAnswer() {
 
     state.streak += 1;
     state.bestStreak = Math.max(state.bestStreak, state.streak);
+    updateHUD();
 
   // ✅ BONUS que cae = BOMBA
   } else if (m.isBonus) {
     state.score += 8;
     state.streak += 1;
     state.bestStreak = Math.max(state.bestStreak, state.streak);
-
+    updateHUD(); 
     screenBomb();
-
+    
   // ✅ Meteoro normal
   } else {
     state.score += 10;
