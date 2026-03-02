@@ -796,18 +796,18 @@
   <div class="topBar">
     <div class="left">
       <div class="pill progress" id="pillProg">
-        <span id="pillProgText">Nivel 1 • 0/20</span>
+        <span id="pillProgText"></span>
       </div>
-      <div class="pill" id="pillScore">0 pts</div>
+      <div class="pill" id="pillScore"></div>
     </div>
   
     <!-- Barra de vida entre puntaje y racha -->
     <div class="pill progress" id="pillLives">
-      <span id="pillLivesText">Vidas: 5/5</span>
+      <span id="pillLivesText"></span>
     </div>
   
     <div class="right">
-      <div class="pill" id="pillBest">Mejor racha: 0</div>
+      <div class="pill" id="pillBest"></div>
     </div>
   </div>
     
@@ -1865,6 +1865,7 @@ function submitAnswer() {
     state.score += 10;
     state.streak += 1;
     state.bestStreak = Math.max(state.bestStreak, state.streak);
+    updateHUD();  // Actualiza la interfaz con el nuevo puntaje
 
     state.solvedThisLevel += 1; // Se suma el meteoro resuelto para el progreso del nivel
     if (state.solvedThisLevel >= state.target) {
