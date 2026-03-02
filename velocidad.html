@@ -1816,7 +1816,7 @@ function submitAnswer(){
 
   // ✅ BONUS FLYBY = +1 vida
   if(m.isBonus && m.kind === "flyby"){
-    state.lives = Math.min(9, state.lives + 1);
+    state.lives = Math.min(9, state.lives + 1); // Añadir vida por bonus flyby
     state.score += 6;
 
     state.streak += 1;
@@ -1836,14 +1836,20 @@ function submitAnswer(){
     state.streak += 1;
     state.bestStreak = Math.max(state.bestStreak, state.streak);
 
-    state.solvedThisLevel += 1;
+    state.solvedThisLevel += 1; // Se suma el meteoro resuelto para el progreso del nivel
     if(state.solvedThisLevel >= state.target){
       nextLevel();
     }
   }
 
+  // Si el meteoro fue acertado, contar el avance
+  state.solvedThisLevel += 1;
+  if(state.solvedThisLevel >= state.target){
+    nextLevel(); // Si se completan los meteoros requeridos, pasar al siguiente nivel
+  }
+
   saveBest();
-  updateHUD();
+  updateHUD(); // Actualiza la interfaz con el puntaje, vidas, y progreso del nivel
 }
   
   function nextLevel(){
