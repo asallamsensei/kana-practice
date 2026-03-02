@@ -651,7 +651,7 @@
 
 .missionTitle{
   margin:0 0 10px 0;
-  font-size:28px;
+  font-size:42px;
   font-weight:900;
   letter-spacing:.6px;
   text-transform:uppercase;
@@ -661,7 +661,7 @@
 
 .missionText{
   margin:0;
-  font-size:17px;
+  font-size:35px;
   line-height:1.45;
   text-align:center;
   color: rgba(238,242,255,.92);
@@ -669,7 +669,7 @@
 
 .missionText .dangerLine{
   display:inline-block;
-  font-size:18px;
+  font-size:35px;
   letter-spacing:.2px;
 }
 
@@ -702,59 +702,58 @@
   .missionText{ font-size:18px; }
   .missionText .dangerLine{ font-size:20px; }
   .btnPlay{ font-size:20px !important; }
-  .alertLine{ font-size:16px; }
+  .alertLine{ font-size:16px;}
 }
 
 .alertLine{
-  margin:0 0 10px 0;
-  font-size:20px;
+  margin:0 0 12px 0;
+  font-size:35px;
   font-weight:900;
   text-align:center;
-  letter-spacing:1.5px;
+  letter-spacing:2px;
   text-transform:uppercase;
-  color:#ef4444;
-  text-shadow:
-    0 0 8px rgba(239,68,68,.7),
-    0 0 16px rgba(239,68,68,.4);
-  animation: alertPulse 1.4s ease-in-out infinite;
+  color:#ff2d2d;
+
+  animation: alertSiren 1.2s linear infinite;
 }
 
-@keyframes alertPulse{
-  0%{ opacity:1; }
-  50%{ opacity:.65; }
-  100%{ opacity:1; }
-}
-
-.dangerWord{
-  display:inline-block;
-  font-weight:900;
-  color:#ff3b3b;
-  letter-spacing:1px;
-  animation: dangerSiren 1.2s ease-in-out infinite;
-}
-
-@keyframes dangerSiren{
+@keyframes alertSiren{
   0%{
+    opacity:1;
     text-shadow:
-      0 0 4px rgba(255,0,0,.6),
-      0 0 10px rgba(255,0,0,.5);
-    transform: scale(1);
+      0 0 6px rgba(255,0,0,.7),
+      0 0 14px rgba(255,0,0,.6);
   }
+
+  45%{
+    opacity:1;
+    text-shadow:
+      0 0 14px rgba(255,0,0,1),
+      0 0 28px rgba(255,0,0,.9),
+      0 0 55px rgba(255,0,0,.7);
+  }
+
   50%{
-    text-shadow:
-      0 0 10px rgba(255,0,0,.9),
-      0 0 22px rgba(255,0,0,.8),
-      0 0 40px rgba(255,0,0,.6);
-    transform: scale(1.06);
+    opacity:.4;
+    text-shadow:none;
   }
-  100%{
+
+  55%{
+    opacity:1;
     text-shadow:
-      0 0 4px rgba(255,0,0,.6),
-      0 0 10px rgba(255,0,0,.5);
-    transform: scale(1);
+      0 0 18px rgba(255,0,0,1),
+      0 0 35px rgba(255,0,0,.9),
+      0 0 70px rgba(255,0,0,.8);
+  }
+
+  100%{
+    opacity:1;
+    text-shadow:
+      0 0 6px rgba(255,0,0,.7),
+      0 0 14px rgba(255,0,0,.6);
   }
 }
-  
+
 </style>
 </head>
 <body>
