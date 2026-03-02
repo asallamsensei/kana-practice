@@ -1850,11 +1850,19 @@ function submitAnswer(){
 
   function gameOver(){
     state.running = false;
-    
+  
+    // 🧹 BORRAR METEOROS INMEDIATAMENTE
+    for(const m of state.meteors.values()){
+      try { m.el.remove(); } catch {}
+    }
+    state.meteors.clear();
+  
     overlay.style.display = "flex";
     overlay.querySelector(".modal h2").textContent = "Game Over";
     overlay.querySelector(".modal p").innerHTML =
-      `Puntaje: <b>${state.score}</b><br/>Mejor racha: <b>${state.bestStreak}</b><br/><span style="color:rgba(238,242,255,.75)">Presiona Iniciar para volver.</span>`;
+      `Puntaje: <b>${state.score}</b><br/>Mejor racha: <b>${state.bestStreak}</b><br/>
+       <span style="color:rgba(238,242,255,.75)">Presiona Iniciar para volver.</span>`;
+  
     bgMusic.pause();
   }
 
