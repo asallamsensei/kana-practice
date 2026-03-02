@@ -1763,6 +1763,9 @@ function shootNumberToMeteor(m, text){
 function submitAnswer(){
   if(!state.running) return;
 
+  // Limpiar cualquier disparo o fantasma que haya quedado
+  game.querySelectorAll(".shotNum,.shotGhost").forEach(el => el.remove());
+  
   const typedText = state.typed; // 👈 capturamos lo que había
   if(typedText.trim() === "" || typedText === "-") return;
 
