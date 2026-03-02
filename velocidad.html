@@ -1763,46 +1763,35 @@ function shootNumberToMeteor(m, text){
 function submitAnswer(){
   if(!state.running) return;
 
-  if(state.typed.trim() === ""){
-    return;
-  }
+  const typedText = state.typed; // 👈 capturamos lo que había
+  if(typedText.trim() === "" || typedText === "-") return;
 
-  if(state.typed === "-"){
-    return;
-  }
-  
-  const n = Number(state.typed);
+  const n = Number(typedText);
   if(!Number.isFinite(n)){
     state.typed = "";
     setDisplay();
     return;
   }
 
+  // ✅ borra INMEDIATO el número del centro para que quede “libre”
+  state.typed = "";
+  setDisplay();
+
   const m = findMeteorByAnswer(n);
 
-  // ❌ Si no existe ningún meteorito con esa respuesta
+  // ❌ no hay meteoro con esa respuesta
   if(!m){
-
-    // 💥 explotamos el número en el display (fallo)
-    explodeTypedAtDisplay("hard");
-    
-    // borrar siempre al oprimir OK
-    state.typed = "";
-    setDisplay();
-
-    // penalización por error
+    explodeTypedAtDisplay("hard"); // usa fake/display (ya está vacío, pero el FX sale igual)
     state.score = Math.max(0, state.score - 4);
     state.streak = 0;
-
     updateHUD();
     return;
   }
 
-  // 🎯 Disparo visual: el número vuela hacia el meteoro
-  shootNumberToMeteor(m, state.typed);
-  
-  // ✅ Sí existe: destruimos el meteorito correspondiente
-  // destruimos el meteoro que respondiste
+  // 🎯 Disparo visual (usa typedText, no state.typed)
+  shootNumberToMeteor(m, typedText);
+
+  // ✅ destruimos el meteorito correspondiente
   killMeteor(m, "hit");
   playHit();
   burstPixelRain(m, m.isBonus ? 18 : 10);
@@ -1811,19 +1800,18 @@ function submitAnswer(){
   // ✅ BONUS FLYBY = +1 vida
   if(m.isBonus && m.kind === "flyby"){
     state.lives = Math.min(9, state.lives + 1);
-    state.score += 6; // opcional
+    state.score += 6;
 
     state.streak += 1;
     state.bestStreak = Math.max(state.bestStreak, state.streak);
 
-  // ✅ BONUS que cae = BOMBA (limpia pantalla)
+  // ✅ BONUS que cae = BOMBA
   }else if(m.isBonus){
-    state.score += 8; // opcional (puntos base por activar bomba)
-    state.streak += 1;  // 👈 SOLO 1 por resolverlo
+    state.score += 8;
+    state.streak += 1;
     state.bestStreak = Math.max(state.bestStreak, state.streak);
-    
-    screenBomb();     // 👈 limpia todos los meteoros
-    // nota: NO cuenta para objetivo del nivel
+
+    screenBomb();
 
   // ✅ Meteoro normal
   }else{
@@ -1837,8 +1825,6 @@ function submitAnswer(){
     }
   }
 
-  state.typed = "";
-  setDisplay();
   saveBest();
   updateHUD();
 }
