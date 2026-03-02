@@ -1632,27 +1632,6 @@ for(const m of [...state.meteors.values()]){
     updateHUD();
     requestAnimationFrame(tick);
   }
-
-// Función para calcular el tamaño de cada "pill" en base al tamaño de la pantalla
-function adjustTopBarPills() {
-  const topBar = document.querySelector('.topBar');
-  const pills = document.querySelectorAll('.topBar .pill');
-  const totalWidth = topBar.clientWidth; // Obtén el ancho disponible de .topBar
-  
-  const pillWidth = totalWidth / 4 * 0.88; // Divide el ancho total entre los 4 elementos
-  
-  pills.forEach(pill => {
-    pill.style.width = `${pillWidth}px`; // Asigna el ancho calculado a cada pill
-  });
-}
-
-// Llama a la función cuando la página cargue o cuando el tamaño de la ventana cambie
-window.addEventListener('resize', adjustTopBarPills); // Ajusta el ancho cuando la ventana cambie
-window.addEventListener('load', adjustTopBarPills);   // Ajusta el ancho cuando la página cargue
-
-// Llama a la función cuando la página cargue o cuando el tamaño de la ventana cambie
-window.addEventListener('resize', adjustTopBarPills); // Ajusta el ancho cuando la ventana cambie
-window.addEventListener('load', adjustTopBarPills);   // Ajusta el ancho cuando la página cargue
   
 function makeBonusProblem(){
   // Pesados pero controlados (sin locuras): multiplicación grande, combos, y algunas ecuaciones con hueco
