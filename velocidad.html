@@ -648,6 +648,60 @@
   .gameHeader .inner{ padding:10px 14px; }
   .gameHeader .title{ font-size:16px;}
 }
+
+.missionTitle{
+  margin:0 0 10px 0;
+  font-size:28px;
+  font-weight:900;
+  letter-spacing:.6px;
+  text-transform:uppercase;
+  text-align:center;
+  text-shadow: 0 0 14px rgba(125,92,255,.55);
+}
+
+.missionText{
+  margin:0;
+  font-size:17px;
+  line-height:1.45;
+  text-align:center;
+  color: rgba(238,242,255,.92);
+}
+
+.missionText .dangerLine{
+  display:inline-block;
+  font-size:18px;
+  letter-spacing:.2px;
+}
+
+.missionHint{
+  margin:10px 0 0 0;
+  font-size:13px;
+  text-align:center;
+  color: rgba(238,242,255,.72);
+}
+
+.btnPlay{
+  font-size:20px !important;
+  padding:14px 16px !important;
+  border-radius:16px !important;
+  font-weight:900 !important;
+  letter-spacing:.6px;
+  text-transform:uppercase;
+  background: linear-gradient(135deg, rgba(125,92,255,.95), rgba(34,197,94,.70)) !important;
+  border-color: rgba(255,255,255,.18) !important;
+  box-shadow: 0 0 22px rgba(125,92,255,.35), 0 0 30px rgba(34,197,94,.18);
+}
+
+.btnPlay:hover{
+  transform: translateY(-1px);
+  filter: brightness(1.05);
+}
+
+@media (max-width:900px){
+  .missionTitle{ font-size:22px; }
+  .missionText{ font-size:16px; }
+  .btnPlay{ font-size:18px !important; }
+}
   
 </style>
 </head>
@@ -682,11 +736,22 @@
     
     <div class="overlay" id="overlay">
       <div class="modal">
-        <h2>Math Command</h2>
-        <p>Resuelve las operaciones antes de que lleguen a la línea. Presiona <b>Iniciar</b>.</p>
+
+        <h2 class="missionTitle">RANGER MATEMÁTICO: ¡PRESENTARSE!</h2>
+        
+        <p class="missionText">
+          <span class="dangerLine">🌍 La Tierra está en <b>PELIGRO</b>.</span><br/>
+          Resuelve las operaciones antes de que impacten.
+        </p>
+        
+        <p class="missionHint">
+          Dispara con <b>OK</b> • Borra con <b>C</b> • Negativos con <b>+/−</b>
+        </p>
+        
         <div class="actions">
-          <button id="btnQuickStart">Iniciar ahora</button>
+          <button id="btnQuickStart" class="btnPlay">¡JUGAR!</button>
         </div>
+        
       </div>
     </div>
 
