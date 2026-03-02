@@ -176,19 +176,17 @@
   z-index: 6;
 }
 
-/* Aseguramos que los 4 elementos dentro de .topBar tengan el mismo tamaño */
+/* Los elementos .pill deben tener un tamaño igual, con el ancho calculado dinámicamente */
 .topBar > div {
-  flex-basis: 25%;               /* Hace que cada div ocupe el 25% del ancho */
   display: flex;
   justify-content: center;       /* Centra el contenido dentro de cada div */
   align-items: center;           /* Centra verticalmente los elementos dentro */
   margin: 0 5px;                 /* Espacio entre los elementos */
+  width: auto;                   /* Garantiza que el ancho se ajuste dinámicamente */
 }
 
-/* Los elementos .pill deben tener un tamaño igual */
+/* Los elementos pill deben tener un tamaño igual */
 .pill {
-  flex-grow: 1;                         /* Hace que cada .pill ocupe el mismo tamaño */
-  margin: 0 5px;                   /* Espacio entre los elementos */
   font-size: 12px;
   padding: 6px 10px;
   border-radius: 999px;
@@ -199,6 +197,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  width: auto; /* Esto asegura que el ancho se calcule dinámicamente */
 }
 
 /* Aseguramos que la barra de progreso esté bien configurada */
@@ -1595,6 +1594,27 @@ for(const m of [...state.meteors.values()]){
     requestAnimationFrame(tick);
   }
 
+// Función para calcular el tamaño de cada "pill" en base al tamaño de la pantalla
+function adjustTopBarPills() {
+  const topBar = document.querySelector('.topBar');
+  const pills = document.querySelectorAll('.topBar .pill');
+  const totalWidth = topBar.clientWidth; // Obtén el ancho disponible de .topBar
+  
+  const pillWidth = totalWidth / 4; // Divide el ancho total entre los 4 elementos
+  
+  pills.forEach(pill => {
+    pill.style.width = `${pillWidth}px`; // Asigna el ancho calculado a cada pill
+  });
+}
+
+// Llama a la función cuando la página cargue o cuando el tamaño de la ventana cambie
+window.addEventListener('resize', adjustTopBarPills); // Ajusta el ancho cuando la ventana cambie
+window.addEventListener('load', adjustTopBarPills);   // Ajusta el ancho cuando la página cargue
+
+// Llama a la función cuando la página cargue o cuando el tamaño de la ventana cambie
+window.addEventListener('resize', adjustTopBarPills); // Ajusta el ancho cuando la ventana cambie
+window.addEventListener('load', adjustTopBarPills);   // Ajusta el ancho cuando la página cargue
+  
 function makeBonusProblem(){
   // Pesados pero controlados (sin locuras): multiplicación grande, combos, y algunas ecuaciones con hueco
   const L = state.level;
