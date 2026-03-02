@@ -164,30 +164,38 @@
 }
 
 /* Ajustamos .topBar para que use Flexbox y distribuya los elementos */
+/* Ajustamos .topBar para que use Flexbox y distribuya los elementos */
 .topBar {
-  display: flex;                /* Cambiamos a flexbox para distribuir en fila */
+  display: flex;                /* Usamos flexbox para distribuir en fila */
   justify-content: space-between; /* Distribuye el espacio entre los elementos */
   align-items: center;           /* Centra los elementos verticalmente */
   padding: 10px 12px;
   background: rgba(0, 0, 0, 0.18);
   border-bottom: 1px solid rgba(255, 255, 255, 0.10);
   backdrop-filter: blur(8px);
-  border-radius: 18px 18px 0 0;  /* Coincide con .game */
+  border-radius: 18px 18px 0 0;
   z-index: 6;
 }
 
-/* Aseguramos que los contenedores de los elementos ocupen el mismo ancho */
+/* Aseguramos que los 4 elementos dentro de .topBar tengan el mismo tamaño */
+.topBar > div {
+  flex: 1;                        /* Hace que cada div ocupe el mismo ancho */
+  display: flex;
+  justify-content: center;         /* Centra el contenido dentro de cada div */
+  align-items: center;             /* Centra verticalmente los elementos dentro */
+}
+
 .topBar .left,
 .topBar .right {
   display: flex;
-  justify-content: space-between;  /* Asegura que los elementos dentro de left y right estén distribuidos */
+  justify-content: space-between;  /* Distribuye los elementos dentro de left y right */
   flex: 1;                         /* Toman el mismo espacio */
 }
 
 /* Los elementos .pill deben tener un tamaño igual */
 .pill {
-  flex: 1;                          /* Hace que cada .pill ocupe el mismo tamaño */
-  margin: 0 5px;                    /* Espacio entre los elementos */
+  flex: 1;                         /* Hace que cada .pill ocupe el mismo tamaño */
+  margin: 0 5px;                   /* Espacio entre los elementos */
   font-size: 12px;
   padding: 6px 10px;
   border-radius: 999px;
@@ -206,8 +214,8 @@
   overflow: hidden;
   border-color: rgba(255, 255, 255, 0.14);
   background: rgba(0, 0, 0, 0.18);
-  width: 100%; /* Hace que la barra de progreso ocupe todo el ancho disponible */
-  margin: 0 10px; /* Margen entre la barra de vida y los otros elementos */
+  width: 100%;
+  margin: 0 10px; 
 }
 
 /* Barra de progreso (la que se llena con el color verde) */
@@ -215,8 +223,8 @@
   content: "";
   position: absolute;
   inset: 0;
-  width: var(--p, 0%); /* Ajustamos el ancho según el porcentaje de vida */
-  background: rgba(34, 197, 94, 0.18); /* Color verde */
+  width: var(--p, 0%);
+  background: rgba(34, 197, 94, 0.18); 
   border-right: 1px solid rgba(34, 197, 94, 0.28);
 }
 
