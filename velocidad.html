@@ -766,18 +766,6 @@
   .gameHeader .title{ font-size:16px; }
 
 }
-
-#debug {
-  position: fixed;
-  top: 10px;
-  left: 10px;
-  background-color: rgba(0, 0, 0, 0.7);
-  color: white;
-  padding: 10px;
-  border-radius: 8px;
-  font-size: 16px;
-  z-index: 1000; /* Asegura que sea visible sobre otros elementos */
-}
   
 </style>
 </head>
@@ -1131,16 +1119,6 @@ function pixelFireTick(m, dt){
 }
   
 function updateHUD() {
-
-  // Debugging: Imprimir valores de las variables en la consola
-  console.log("Actualizando HUD:", {
-    score: state.score,
-    streak: state.streak,
-    lives: state.lives,
-    solvedThisLevel: state.solvedThisLevel,
-    target: state.target,
-    level: state.level
-  });
   
   // Actualiza el puntaje
   pillScore.textContent = `${state.score} pts`;
@@ -1158,10 +1136,6 @@ function updateHUD() {
   pillLives.style.setProperty("--p", `${lifePct}%`);
   pillLivesText.textContent = `Vidas: ${state.lives}/5`;
 
-  // --- Debug: Actualizar los valores en el div temporal ---
-  document.getElementById("debugScore").textContent = `Puntaje: ${state.score}`;
-  document.getElementById("debugStreak").textContent = `Racha: ${state.streak}`;
-  document.getElementById("debugProgress").textContent = `Progreso: ${state.solvedThisLevel}/${state.target}`;
 }
 
   // ---------- Curriculum ----------
