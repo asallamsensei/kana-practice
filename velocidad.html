@@ -1116,14 +1116,21 @@ function pixelFireTick(m, dt){
 }
   
   function updateHUD(){
+    // Actualiza el puntaje
     pillScore.textContent = `${state.score} pts`;
-    
+  
     // Progreso del nivel
     const pct = Math.max(0, Math.min(100, (state.solvedThisLevel / state.target) * 100));
     pillProg.style.setProperty("--p", `${pct}%`);
     pillProgText.textContent = `Nivel ${state.level} • ${state.solvedThisLevel}/${state.target}`;
-    
+  
+    // Racha de puntaje
     pillBest.textContent = `Racha • ${state.streak} / ${state.bestStreak}`;
+  
+    // Actualiza la barra de vida
+    const lifePct = (state.lives / 5) * 100; // Considerando que el máximo de vidas es 5
+    pillLives.style.setProperty("--p", `${lifePct}%`);
+    pillLivesText.textContent = `Vidas: ${state.lives}/5`;
   }
 
   // ---------- Curriculum ----------
