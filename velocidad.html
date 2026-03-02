@@ -1383,8 +1383,11 @@ function missMeteor(m) {
     bounce:  undefined // que decida nearGround automáticamente
   });
 
+  // Penaliza el puntaje cuando fallamos un meteoro
+  state.score = Math.max(0, state.score - 4); // Restar puntos si el meteoro es fallado
+
   state.lives = Math.max(0, state.lives - 1); // Si no hay vidas, game over
-  state.streak = 0;
+  state.streak = 0; // Racha se reinicia
 
   if (state.lives === 0) gameOver();
 }
