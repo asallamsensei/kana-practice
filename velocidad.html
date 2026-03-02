@@ -367,7 +367,7 @@
     box-shadow: 0 30px 90px rgba(0,0,0,.6);
     padding:16px;
   }
-  .modal h2{margin:0 0 6px 0; font-size:40px}
+  .modal h2{margin:0 0 6px 0;}
   .modal .actions{display:flex; gap:10px; margin-top:12px}
 
 /* === Pixel fire particles (se desprenden arriba) === */
@@ -735,7 +735,6 @@
 }
 
 @media (max-width:900px){
-  .missionTitle{ font-size:18px; }
   .missionText{ font-size:18px; }
   .missionText .dangerLine{ font-size:20px; }
   .btnPlay{ font-size:20px !important; }
@@ -751,6 +750,12 @@
   }
   .gameHeader .inner{ padding:10px 14px; }
   .gameHeader .title{ font-size:16px;}
+}
+
+@media (max-width:900px){
+  .modal .missionTitle{
+    font-size:18px !important;
+  }
 }
   
 </style>
