@@ -1115,23 +1115,23 @@ function pixelFireTick(m, dt){
   }
 }
   
-  function updateHUD(){
-    // Actualiza el puntaje
-    pillScore.textContent = `${state.score} pts`;
-  
-    // Progreso del nivel
-    const pct = Math.max(0, Math.min(100, (state.solvedThisLevel / state.target) * 100));
-    pillProg.style.setProperty("--p", `${pct}%`);
-    pillProgText.textContent = `Nivel ${state.level} • ${state.solvedThisLevel}/${state.target}`;
-  
-    // Racha de puntaje
-    pillBest.textContent = `Racha • ${state.streak} / ${state.bestStreak}`;
-  
-    // Actualiza la barra de vida
-    const lifePct = (state.lives / 5) * 100; // Considerando que el máximo de vidas es 5
-    pillLives.style.setProperty("--p", `${lifePct}%`);
-    pillLivesText.textContent = `Vidas: ${state.lives}/5`;
-  }
+function updateHUD() {
+  // Actualiza el puntaje
+  pillScore.textContent = `${state.score} pts`;
+
+  // Progreso del nivel
+  const pct = Math.max(0, Math.min(100, (state.solvedThisLevel / state.target) * 100));
+  pillProg.style.setProperty("--p", `${pct}%`);
+  pillProgText.textContent = `Nivel ${state.level} • ${state.solvedThisLevel}/${state.target}`;
+
+  // Racha de puntaje
+  pillBest.textContent = `Racha • ${state.streak} / ${state.bestStreak}`;
+
+  // Actualiza la barra de vida
+  const lifePct = (state.lives / 5) * 100; // Considerando que el máximo de vidas es 5
+  pillLives.style.setProperty("--p", `${lifePct}%`);
+  pillLivesText.textContent = `Vidas: ${state.lives}/5`;
+}
 
   // ---------- Curriculum ----------
   function getRangesForLevel(level){
@@ -1372,22 +1372,22 @@ function killMeteor(m, cls){
   state.meteors.delete(m.id);
 }
 
-  function missMeteor(m){
-    killMeteor(m, "miss");
-  
-    playExplosion(); // 💥 SONIDO AQUÍ
+function missMeteor(m) {
+  killMeteor(m, "miss");
 
-    burstPixelFX(m, {
-      explode: m.isBonus ? 18 : 12,
-      rain:    m.isBonus ? 24 : 16,
-      bounce:  undefined // que decida nearGround automáticamente
-    });
-    
-    state.lives = Math.max(0, state.lives - 1);
-    state.streak = 0;
-  
-    if(state.lives === 0) gameOver();
-  }
+  playExplosion(); // 💥 SONIDO AQUÍ
+
+  burstPixelFX(m, {
+    explode: m.isBonus ? 18 : 12,
+    rain:    m.isBonus ? 24 : 16,
+    bounce:  undefined // que decida nearGround automáticamente
+  });
+
+  state.lives = Math.max(0, state.lives - 1); // Si no hay vidas, game over
+  state.streak = 0;
+
+  if (state.lives === 0) gameOver();
+}
 
   function screenBomb(){
     // Borra TODOS los meteoros actuales (sin penalizar vidas)
@@ -1780,18 +1780,18 @@ function shootNumberToMeteor(m, text){
   shot.addEventListener("animationend", () => shot.remove(), { once:true });
   game.appendChild(shot);
 }
-  
-function submitAnswer(){
-  if(!state.running) return;
+
+function submitAnswer() {
+  if (!state.running) return;
 
   // Limpiar cualquier disparo o fantasma que haya quedado
   game.querySelectorAll(".shotNum,.shotGhost").forEach(el => el.remove());
-  
+
   const typedText = state.typed; // 👈 capturamos lo que había
-  if(typedText.trim() === "" || typedText === "-") return;
+  if (typedText.trim() === "" || typedText === "-") return;
 
   const n = Number(typedText);
-  if(!Number.isFinite(n)){
+  if (!Number.isFinite(n)) {
     state.typed = "";
     setDisplay();
     return;
@@ -1804,7 +1804,7 @@ function submitAnswer(){
   const m = findMeteorByAnswer(n);
 
   // ❌ no hay meteoro con esa respuesta
-  if(!m){
+  if (!m) {
     explodeTypedAtDisplay("hard"); // usa fake/display (ya está vacío, pero el FX sale igual)
     state.score = Math.max(0, state.score - 4);
     state.streak = 0;
@@ -1822,7 +1822,7 @@ function submitAnswer(){
   burstPixelFX(m, { explode: m.isBonus ? 14 : 8, rain: 0, bounce: 0 });
 
   // ✅ BONUS FLYBY = +1 vida
-  if(m.isBonus && m.kind === "flyby"){
+  if (m.isBonus && m.kind === "flyby") {
     state.lives = Math.min(9, state.lives + 1); // Añadir vida por bonus flyby
     state.score += 6;
 
@@ -1830,7 +1830,7 @@ function submitAnswer(){
     state.bestStreak = Math.max(state.bestStreak, state.streak);
 
   // ✅ BONUS que cae = BOMBA
-  }else if(m.isBonus){
+  } else if (m.isBonus) {
     state.score += 8;
     state.streak += 1;
     state.bestStreak = Math.max(state.bestStreak, state.streak);
@@ -1838,20 +1838,20 @@ function submitAnswer(){
     screenBomb();
 
   // ✅ Meteoro normal
-  }else{
+  } else {
     state.score += 10;
     state.streak += 1;
     state.bestStreak = Math.max(state.bestStreak, state.streak);
 
     state.solvedThisLevel += 1; // Se suma el meteoro resuelto para el progreso del nivel
-    if(state.solvedThisLevel >= state.target){
+    if (state.solvedThisLevel >= state.target) {
       nextLevel();
     }
   }
 
   // Si el meteoro fue acertado, contar el avance
   state.solvedThisLevel += 1;
-  if(state.solvedThisLevel >= state.target){
+  if (state.solvedThisLevel >= state.target) {
     nextLevel(); // Si se completan los meteoros requeridos, pasar al siguiente nivel
   }
 
@@ -1859,24 +1859,24 @@ function submitAnswer(){
   updateHUD(); // Actualiza la interfaz con el puntaje, vidas, y progreso del nivel
 }
   
-  function nextLevel(){
-    state.level += 1;
-    state.solvedThisLevel = 0;
-    state.target = targetForLevel(state.level);
+function nextLevel() {
+  state.level += 1;
+  state.solvedThisLevel = 0;
+  state.target = targetForLevel(state.level);
 
-    state.spawnEveryMs = clamp(state.spawnEveryMs - FIXED.spawnStepMs, FIXED.spawnMinMs, FIXED.spawnStartMs);
+  state.spawnEveryMs = clamp(state.spawnEveryMs - FIXED.spawnStepMs, FIXED.spawnMinMs, FIXED.spawnStartMs);
 
-    if(state.level % 3 === 0) state.lives = Math.min(9, state.lives + 1);
+  if (state.level % 3 === 0) state.lives = Math.min(9, state.lives + 1);
 
-    updateHUD();
+  updateHUD();
 
-    // ✨ flash dorado en el progreso
-    pillProg.classList.remove("levelUp"); // por si se repite rápido
-    void pillProg.offsetWidth;            // reflow para reiniciar animación
-    pillProg.classList.add("levelUp");
-    
-    setTimeout(()=> pillProg.classList.remove("levelUp"), 320);
-  }
+  // ✨ flash dorado en el progreso
+  pillProg.classList.remove("levelUp"); // por si se repite rápido
+  void pillProg.offsetWidth;            // reflow para reiniciar animación
+  pillProg.classList.add("levelUp");
+
+  setTimeout(() => pillProg.classList.remove("levelUp"), 320);
+}
 
   // ---------- Controles ----------
   function start(){
