@@ -1763,6 +1763,7 @@ function spawnFlybyBonus(){
   }
 
 function shootNumberToMeteor(m, text){
+  if(!state.running) return; // 🔒 protección temprana
   const rectG = game.getBoundingClientRect();
   const rectD = displayEl.getBoundingClientRect(); // número abajo (en canvas)
   const rectM = m.el.getBoundingClientRect();      // meteoro objetivo
@@ -1784,6 +1785,7 @@ function shootNumberToMeteor(m, text){
 
   // helper: crear ghost en un punto intermedio del trayecto
   function spawnGhost(f, delayMs){
+    if(!state.running) return; // 🔒 no crear si el juego ya murió
     setTimeout(() => {
       const g = document.createElement("div");
       g.className = "shotGhost";
@@ -1948,6 +1950,9 @@ function nextLevel() {
     }
     state.meteors.clear();
 
+    // 🧹 Limpia todo lo visual temporal (disparos + partículas)
+    game.querySelectorAll(".px,.shotNum,.shotGhost").forEach(el => el.remove());
+
     state.running = false;
     state.score = 0;
     state.streak = 0;
@@ -1983,7 +1988,10 @@ function nextLevel() {
       try { m.el.remove(); } catch {}
     }
     state.meteors.clear();
-  
+
+    // 🧹 Limpieza total visual
+    game.querySelectorAll(".px,.shotNum,.shotGhost").forEach(el => el.remove());
+    
     overlay.style.display = "flex";
     overlay.querySelector(".modal h2").textContent = "Game Over";
     overlay.querySelector(".modal p").innerHTML =
