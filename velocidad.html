@@ -1552,7 +1552,7 @@ function spawnBoss(){
   const boss = {
     id, el,
     x, y,
-    vy: 28 + state.level * 2,   // baja lento
+    vy: 12,   // baja lento, no depende del nivel
     orbiters: new Set(),
     t0: performance.now()
   };
