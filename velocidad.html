@@ -100,26 +100,28 @@
   .game{
     position:relative;
     overflow:hidden;
-    height: 680px;
+  
     border-radius:18px;
     border:1px solid var(--border);
+    box-shadow: 0 18px 60px rgba(0,0,0,.35);
   
-    background-image: url("data/velocidad/fondo.png"); /* 👈 tu imagen */
+    background-image: url("data/velocidad/fondo.png");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    
+  
     image-rendering: pixelated;
-    
-    box-shadow: 0 18px 60px rgba(0,0,0,.35);
-    z-index: 1; /* Asegura que el juego esté detrás de la barra superior pero no del overlay */
+  
+    isolation:isolate;
+    z-index:0;
   }
-
+  
   .game::before{
     content:"";
-    position:absolute; inset:0;
+    position:absolute;
+    inset:0;
     background: rgba(0,0,0,.10); /* 10% oscurecido */
-    z-index:0;
+    z-index:1;
   }
   
 
@@ -138,9 +140,10 @@
   backdrop-filter: blur(6px);
   box-shadow: 0 16px 40px rgba(0,0,0,.35);
 
+  isolation:isolate;
   text-align:center;
   white-space:nowrap;        /* 🔥 evita salto de línea */
-  z-index: 5; /* Aseguramos que los meteoros estén por detrás de otros elementos */
+  z-index: 30; /* Aseguramos que los meteoros estén por detrás de otros elementos */
 }
   .meteor .expr{font-size:20px; font-weight:900; letter-spacing:.2px}
   .meteor.hit{border-color: rgba(34,197,94,.45); background: rgba(34,197,94,.12); animation: hitFlash 120ms ease-out;}
@@ -167,7 +170,7 @@
 .topBar{
   position:absolute;
   left:0; right:0; top:0;
-  z-index:10;
+  z-index:80;
 
   display:grid;
   align-items:center;
@@ -353,7 +356,7 @@
   .overlay{
     position:absolute; inset:0;
     display:flex; align-items:center; justify-content:center;
-    z-index:8;
+    z-index:100;
     background: rgba(0,0,0,.55);
     backdrop-filter: blur(6px);
     padding:16px;
@@ -376,7 +379,7 @@
   height:8px;
   border-radius:2px;         /* cuadradito suave; pon 0 si lo quieres 100% pixel */
   pointer-events:none;
-  z-index:6;                 /* encima del city */
+  z-index:40;                 /* encima del city */
   opacity:1;
   transform: translate(-50%, -50%) scale(1);
   will-change: transform, opacity, filter;
@@ -504,7 +507,7 @@
   color:#ffffff;
 
   text-align:center;
-  z-index:6;
+  z-index:20;
   user-select:none;
 
   text-shadow:
@@ -525,7 +528,7 @@
     0 0 8px rgba(255,255,255,.6),
     0 0 18px rgba(125,92,255,.4);
   pointer-events:none;
-  z-index:8;
+  z-index:60;
 
   /* animación controlada por variables */
   animation: shotFly var(--t, 240ms) cubic-bezier(.2,.9,.2,1) forwards;
@@ -558,7 +561,7 @@
   letter-spacing:2px;
   color:#fff;
   pointer-events:none;
-  z-index:7;
+  z-index:50;
 
   opacity:.45;
   filter: blur(.2px);
@@ -765,13 +768,6 @@
     font-size:16px;
   }
 
-  .game{
-    grid-column:1;
-    grid-row:2;
-    width:100%;
-    height:50vh;
-  }
-
   .answerBox{
     grid-column:1;
     grid-row:3;
@@ -819,12 +815,6 @@
     grid-column:1;
     grid-row:1;
     margin:0 0 10px 0;
-  }
-
-  .game{
-    grid-column:1;
-    grid-row:2;
-    height:680px;
   }
 
   .answerBox{
