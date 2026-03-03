@@ -1553,22 +1553,22 @@ function burstPixelFX(m, opts = {}) {
   }
 }
 
-function explodeTypedAtDisplay(strength="soft"){
+function explodeTypedAtDisplay(strength="soft", text=null){
+  const t = (text ?? state.typed ?? "").trim();
+
   // si no hay nada escrito, no hacemos nada
-  if(!state.typed || state.typed.trim() === "" || state.typed === "-") return;
+  if(t === "" || t === "-") return;
 
   // “meteoro falso” apuntando al display
   const fake = { el: displayEl, isBonus: false };
 
   if(strength === "hard"){
-    // error: explosión más notoria
     burstPixelFX(fake, { explode: 14, rain: 10, bounce: 10 });
   }else{
-    // borrado: algo más sutil
     burstPixelFX(fake, { explode: 8, rain: 4, bounce: 6 });
   }
 
-  // opcional: sonido (yo lo pondría SOLO en hard)
+  // opcional: sonido SOLO en hard (si quieres)
   // playExplosion();
 }
   
@@ -1851,7 +1851,7 @@ function submitAnswer() {
 
   // Si no hay meteoro con esa respuesta, penalizamos
   if (!m) {
-    explodeTypedAtDisplay("hard"); // Efecto visual de error
+    explodeTypedAtDisplay("hard", typedText); // 💥 ahora sí explota siempre
     state.score = Math.max(0, state.score - 4);
     state.streak = 0;
     updateHUD();
