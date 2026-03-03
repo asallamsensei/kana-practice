@@ -2166,14 +2166,27 @@ function submitAnswer() {
     updateHUD(); 
     screenBomb(); // Efecto de bomba para meteoros de bonus
   } else {
-    state.score += 10; // Puntaje por meteoro normal
+
+    // 🔥 ORBITER (no cuenta para progreso normal)
+    if (m.kind === "orbiter") {
+      state.score += 10;
+      state.streak += 1;
+      state.bestStreak = Math.max(state.bestStreak, state.streak);
+      updateHUD();
+      return; // 🚫 importantísimo: salir aquí
+    }
+
+    // 🔥 METEORO NORMAL (sí cuenta para progreso)
+    state.score += 10;
     state.streak += 1;
     state.bestStreak = Math.max(state.bestStreak, state.streak);
-    updateHUD(); 
 
-    state.solvedThisLevel += 1; // Actualiza el progreso del nivel
+    state.solvedThisLevel += 1;
+
+    updateHUD();
+
     if (state.solvedThisLevel >= state.target) {
-      startBossPhase(); // 👈 boss al final del nivel
+      startBossPhase();
     }
   }
 
