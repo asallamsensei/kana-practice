@@ -1534,7 +1534,7 @@ function spawnBoss(){
   el.dataset.id = String(id);
 
   // carita ASCII
-  el.innerHTML = `<div class="expr">&lt;^s^&gt; BOSS</div>`;
+  el.innerHTML = `<div class="expr">&lt;^s^&gt;</div>`;
   game.appendChild(el);
 
   // tamaño real
@@ -1635,16 +1635,23 @@ function updateBoss(dt){
   const boss = state.boss;
   if(!boss) return;
 
-  // boss baja despacio hasta un “techo” seguro
-  const topSafe = 62; // ~topBar + padding
-  const targetY = topSafe + 35;
-  boss.y = Math.min(targetY, boss.y + boss.vy * dt);
+  // boss cae lento (presión real)
+  boss.y += boss.vy * dt;
 
   // actualiza posición del boss element
   const bossM = state.meteors.get(boss.id);
   if(bossM && bossM.alive){
     bossM.y = boss.y;
     bossM.el.style.top = `${boss.y}px`;
+    // 💀 si el boss toca el suelo => pierdes
+    const groundY = game.clientHeight - 2;
+    if(bossM && bossM.alive){
+      const h = bossM.el.offsetHeight || 60;
+      if(boss.y + h >= groundY){
+        gameOver();
+        return;
+      }
+    }
   }
 
   // centro del boss (para orbiters)
