@@ -1,0 +1,941 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Katakana Vocab — Asallam Sensei</title>
+
+<style>
+  :root{
+    --bg: #0b1020;
+    --card: rgba(255,255,255,.08);
+    --card2: rgba(255,255,255,.10);
+    --text: #eef2ff;
+    --muted: rgba(238,242,255,.75);
+    --accent: #7d5cff;
+    --accent2:#22c55e;
+    --danger:#ef4444;
+    --border: rgba(255,255,255,.14);
+
+    --dictadoRed: #ff3b30;
+    --dictadoRedSoft:#d94a45;
+  }
+
+  body{
+    margin:0;
+    font-family: Arial, sans-serif;
+    background: radial-gradient(1200px 700px at 20% 10%, rgba(125,92,255,.35), transparent 60%),
+                radial-gradient(900px 600px at 90% 20%, rgba(34,197,94,.22), transparent 60%),
+                radial-gradient(900px 600px at 30% 90%, rgba(239,68,68,.18), transparent 55%),
+                var(--bg);
+    color: var(--text);
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    padding:28px 14px 70px;
+  }
+
+  .wrap{ width:min(1100px, 100%); }
+
+  header{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    margin-bottom:14px;
+    align-items:center;
+    text-align:center;
+  }
+
+  h1{
+    margin:0;
+    font-size: 26px;
+    letter-spacing:.2px;
+  }
+
+  .grid{
+    display:grid;
+    grid-template-columns: 1.15fr .85fr;
+    gap:14px;
+  }
+  @media (max-width: 900px){
+    .grid{ grid-template-columns: 1fr; }
+  }
+
+  .card{
+    background: linear-gradient(180deg, var(--card2), var(--card));
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    box-shadow: 0 18px 45px rgba(0,0,0,.35);
+    padding: 16px;
+  }
+
+  .pill{
+    padding: 8px 12px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: rgba(255,255,255,.06);
+    color: var(--muted);
+    font-size: 13px;
+    font-weight: 800;
+  }
+
+  .row{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    align-items:center;
+    justify-content:center;
+  }
+
+  .chips{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-top:8px;
+  }
+
+  .chip{
+    padding: 9px 12px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: rgba(255,255,255,.06);
+    color: var(--muted);
+    cursor:pointer;
+    user-select:none;
+    font-size: 13px;
+    font-weight: 900;
+    transition:.12s;
+  }
+  .chip:hover{ transform: translateY(-1px); }
+  .chip.activo{
+    background: var(--accent);
+    color: white;
+    border-color: transparent;
+  }
+
+  input{
+    background: rgba(255,255,255,.08);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 10px 12px;
+    border-radius: 12px;
+    outline:none;
+    font-size: 15px;
+    width: min(420px, 100%);
+  }
+
+  .btn{
+    border: none;
+    border-radius: 12px;
+    padding: 11px 14px;
+    cursor: pointer;
+    color: white;
+    background: var(--accent);
+    font-weight: 900;
+    transition: .15s;
+  }
+  .btn:hover{ transform: translateY(-1px); filter: brightness(1.06); }
+  .btn:disabled{ opacity:.45; cursor:not-allowed; transform:none; filter:none; }
+
+  .btn-ghost{
+    background: rgba(255,255,255,.08);
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-weight: 800;
+  }
+
+  .btn-danger{
+    background: rgba(239,68,68,.15);
+    border: 1px solid rgba(239,68,68,.5);
+    color: #fecaca;
+  }
+  .btn-danger.activo{
+    background: var(--danger);
+    border-color: transparent;
+    color: white;
+  }
+
+  .btn-mode{
+    background: rgba(255,255,255,.08);
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-weight: 900;
+  }
+  .btn-mode.activo{
+    background: var(--accent);
+    border-color: transparent;
+  }
+  .btn-mode.dictado-on{
+    background: var(--dictadoRed);
+    border-color: transparent;
+  }
+  .btn-mode.base-dictado{
+    background: var(--dictadoRedSoft);
+    border-color: transparent;
+  }
+
+  .big{
+    text-align:center;
+    padding: 20px 10px 10px;
+  }
+
+  #promptMain{
+    font-size: 64px;
+    font-weight: 900;
+    letter-spacing: .5px;
+    margin: 6px 0 8px;
+    word-break: break-word;
+  }
+  #promptMain.esPregunta{
+    font-size: 40px;
+    font-weight: 900;
+    letter-spacing: .2px;
+    line-height: 1.25;
+  }
+
+  #promptSub{
+    color: var(--muted);
+    font-size: 16px;
+    margin: 0 0 2px;
+    min-height: 20px;
+  }
+
+  #resultado{
+    margin-top: 4px;
+    font-size: 20px;
+    min-height: 28px;
+    text-align:center;
+    font-weight: 900;
+    white-space: pre-line;
+  }
+  .correcto{ color: var(--accent2); }
+  .incorrecto{ color: var(--danger); }
+
+  .stats{
+    margin-top: 6px;
+    text-align:center;
+    color: var(--muted);
+    font-size: 15px;
+  }
+
+  .switch{
+    display:grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap:8px;
+    width:min(560px, 100%);
+  }
+  .switch .btn-mode{
+    padding: 9px 12px;
+    border-radius: 999px;
+    font-size: 13px;
+    width:100%;
+  }
+
+  .btnAudioBig{
+    border:none;
+    cursor:pointer;
+    background: rgba(255,255,255,.08);
+    border: 1px solid var(--border);
+    color: var(--text);
+    border-radius: 16px;
+    padding: 12px 14px;
+    font-size: 20px;
+    line-height: 1;
+    user-select:none;
+  }
+  .btnAudioBig:hover{ filter: brightness(1.1); transform: translateY(-1px); }
+  .btnAudioBig:active{ transform: translateY(0px); }
+  .btnAudioBig[disabled]{ opacity:.35; cursor:not-allowed; transform:none; }
+
+  #opcionesBtns{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    width:min(560px, 100%);
+    margin-left:auto;
+    margin-right:auto;
+  }
+
+  .optBtn{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+    text-align:left;
+    border-radius: 14px;
+    border: 1px solid var(--border);
+    background: rgba(0,0,0,.18);
+    color: var(--text);
+    padding: 12px 14px;
+    cursor:pointer;
+    font-weight: 900;
+    transition: .12s;
+  }
+  .optBtn:hover{ transform: translateY(-1px); filter: brightness(1.05); }
+  .optBtn:disabled{
+    cursor:not-allowed;
+    transform:none;
+    filter:none;
+    opacity:.95;
+  }
+
+  .optLeft{
+    display:flex;
+    align-items:flex-start;
+    gap:10px;
+    flex:1;
+  }
+  .optLetter{
+    width:26px;
+    height:26px;
+    border-radius:9px;
+    display:grid;
+    place-items:center;
+    background: rgba(255,255,255,.08);
+    border:1px solid rgba(255,255,255,.12);
+    font-weight:900;
+    flex:0 0 auto;
+  }
+  .optText{
+    flex:1;
+    line-height:1.25;
+    word-break: break-word;
+  }
+
+  .optBtn.correcta{
+    border-color: rgba(34,197,94,.55);
+    background: rgba(34,197,94,.12);
+  }
+  .optBtn.incorrecta{
+    border-color: rgba(239,68,68,.60);
+    background: rgba(239,68,68,.12);
+  }
+  .optBtn.neutra-disabled{
+    opacity:.55;
+  }
+
+  #inputRow{
+    justify-content:center;
+    margin-top: 2px;
+    width:min(560px, 100%);
+  }
+  #respuestaUsuario{
+    text-align:center;
+    width:min(220px, 100%);
+  }
+
+  .actions{
+    display:grid;
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    gap:10px;
+    width:min(760px, 100%);
+    margin-top: 6px;
+  }
+  .actions .btn, .actions .btn-ghost{ width:100%; }
+</style>
+</head>
+
+<body>
+<div class="wrap">
+
+  <header>
+    <h1>Katakana Vocab — Asallam Sensei</h1>
+
+    <div class="switch">
+      <button class="btn btn-mode" id="m-jp-es" type="button" onclick="setModoBase('jp-es')">JP → ES</button>
+      <button class="btn btn-mode" id="m-es-jp" type="button" onclick="setModoBase('es-jp')">ES → JP</button>
+      <button class="btn btn-mode" id="m-mixto" type="button" onclick="setModoBase('mixto')">Mixto</button>
+      <button class="btn btn-mode" id="m-dictado" type="button" onclick="toggleDictado()">Dictado</button>
+    </div>
+  </header>
+
+  <div class="grid">
+
+    <!-- Panel juego -->
+    <div class="card big">
+      <div id="promptMain">—</div>
+      <div id="promptSub"></div>
+
+      <div id="opcionesBtns"></div>
+
+      <div class="row" id="inputRow">
+        <input id="respuestaUsuario"
+               type="text"
+               placeholder="a / b / c + Enter"
+               maxlength="1"
+               onkeydown="manejarEnter(event)">
+      </div>
+
+      <div id="resultado"></div>
+
+      <div class="stats">
+        Aciertos: <span id="aciertos">0</span> — Errores: <span id="errores">0</span>
+      </div>
+
+      <div class="actions">
+        <button class="btn" type="button" onclick="accionSiguiente()">Siguiente</button>
+        <button class="btn btn-ghost" type="button" onclick="mostrarRespuesta()">Mostrar respuesta</button>
+      </div>
+    </div>
+
+    <!-- Panel controles -->
+    <div class="card">
+      <div class="row" style="justify-content:flex-start;">
+        <span class="pill">Bloques (Katakana)</span>
+      </div>
+
+      <div class="row" style="justify-content:flex-start; margin-top:8px;">
+        <div id="chipsBloques" class="chips"></div>
+      </div>
+
+      <div class="row" style="justify-content:flex-start; margin-top:10px;">
+        <button id="btnTodo" class="btn btn-ghost btn-danger" type="button" onclick="seleccionarTodo()">Todo</button>
+        <button id="btnNinguna" class="btn btn-ghost" type="button" onclick="seleccionarNinguna()">Ninguna</button>
+      </div>
+
+      <div class="row" style="justify-content:flex-start; margin-top:14px;">
+        <span class="pill">Pool de distractores</span>
+      </div>
+
+      <div class="row" style="justify-content:flex-start; margin-top:8px;">
+        <button class="btn btn-mode" id="pool-sel" type="button" onclick="setPoolScope('seleccion')">Solo selección</button>
+        <button class="btn btn-mode" id="pool-glob" type="button" onclick="setPoolScope('global')">Global</button>
+      </div>
+
+      <div class="row" style="justify-content:flex-start; margin-top:14px;">
+        <span class="pill">Tip</span>
+      </div>
+      <div class="row" style="justify-content:flex-start;">
+        <div style="color:rgba(238,242,255,.7); font-size:13px; line-height:1.35;">
+          Enter valida / Enter de nuevo pasa. En móvil, toca el input si quieres teclado.
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+/* ===============================
+   CONFIG
+=============================== */
+const JSON_PATH  = "data/katakana_vocab.json";
+const AUDIO_BASE = "data/audios/katakana/"; // <- carpeta mp3
+
+/* ===============================
+   HELPERS
+=============================== */
+function $(id){ return document.getElementById(id); }
+function pick(arr){ return arr[Math.floor(Math.random()*arr.length)]; }
+function shuffle(arr){ return arr.slice().sort(()=>Math.random()-0.5); }
+
+/* ===============================
+   DATA (bloques)
+=============================== */
+let DATA = { bloques: [] };
+let bloquesActivos = new Set(); // índices de bloques activos
+let poolScope = "seleccion";    // "seleccion" | "global"
+
+/* ===============================
+   STATS
+=============================== */
+let aciertos = 0;
+let errores  = 0;
+function pintarStats(){
+  $("aciertos").innerText = aciertos;
+  $("errores").innerText  = errores;
+}
+
+/* ===============================
+   MODOS (como tu base)
+=============================== */
+let modoBase  = "jp-es"; // "jp-es" | "es-jp" | "mixto"
+let dictadoOn = false;
+let rondaDir  = "jp-es";
+
+let correctaLetra = "";
+let respuestaCorrecta = "";
+let yaValidado = false;
+let focoAutomatico = false;
+
+const letras = ["a","b","c"];
+
+/* ===============================
+   AUDIO (romaji exacto)
+=============================== */
+const audio = new Audio();
+audio.preload = "auto";
+let ultimoAudioKey = "";
+
+// autoplay policy: solo tras interacción
+let audioHabilitado = false;
+document.addEventListener("pointerdown", () => (audioHabilitado = true), { once:true });
+document.addEventListener("keydown",     () => (audioHabilitado = true), { once:true });
+
+function buildExactAudioSrc(romaji){
+  const key = String(romaji || "").trim();
+  if(!key) return "";
+  return AUDIO_BASE + encodeURIComponent(key) + ".mp3";
+}
+function detenerAudio(){
+  try{ audio.pause(); audio.currentTime = 0; }catch{}
+}
+async function playAudio(romaji){
+  const key = String(romaji || "").trim();
+  ultimoAudioKey = key;
+
+  if(!audioHabilitado) return; // no forzamos antes del primer gesto
+  const src = buildExactAudioSrc(key);
+  if(!src) return;
+
+  try{
+    detenerAudio();
+    audio.src = src;
+    audio.load();
+    await audio.play();
+  }catch{
+    // silencioso
+  }
+}
+function reproducirAudioActual(){
+  if(ultimoAudioKey) playAudio(ultimoAudioKey);
+}
+
+/* ===============================
+   POOLS
+=============================== */
+function getPool(scope){
+  const idxs = (scope === "global")
+    ? DATA.bloques.map((_, i) => i)
+    : [...bloquesActivos];
+
+  let pool = [];
+  idxs.forEach(i=>{
+    const b = DATA.bloques[i];
+    if(b?.vocabulario?.length) pool = pool.concat(b.vocabulario);
+  });
+  return pool;
+}
+
+/* ===============================
+   UI MODO (botones)
+=============================== */
+function limpiarActivos(){
+  ["m-jp-es","m-es-jp","m-mixto","m-dictado"].forEach(id=>{
+    const el = $(id);
+    if(!el) return;
+    el.classList.remove("activo","dictado-on","base-dictado");
+  });
+}
+
+function aplicarUI(){
+  limpiarActivos();
+
+  const baseId = (modoBase === "jp-es") ? "m-jp-es" : (modoBase === "es-jp") ? "m-es-jp" : "m-mixto";
+  const baseBtn = $(baseId);
+  const dictBtn = $("m-dictado");
+
+  if(dictadoOn){
+    dictBtn.classList.add("dictado-on");
+    baseBtn.classList.add("base-dictado");
+  }else{
+    baseBtn.classList.add("activo");
+  }
+
+  $("inputRow").style.display = dictadoOn ? "none" : "flex";
+}
+
+function setModoBase(nuevoBase){
+  modoBase = nuevoBase;
+  aplicarUI();
+  yaValidado = false;
+  limpiarResultado();
+  siguiente();
+}
+
+function toggleDictado(){
+  dictadoOn = !dictadoOn;
+  aplicarUI();
+  yaValidado = false;
+  limpiarResultado();
+  siguiente();
+}
+
+/* ===============================
+   POOL scope UI
+=============================== */
+function setPoolScope(scope){
+  poolScope = scope;
+  $("pool-sel")?.classList.toggle("activo", poolScope === "seleccion");
+  $("pool-glob")?.classList.toggle("activo", poolScope === "global");
+  yaValidado = false;
+  limpiarResultado();
+  siguiente();
+}
+
+/* ===============================
+   Selección de bloques (chips)
+=============================== */
+function seleccionarTodo(){
+  bloquesActivos = new Set(DATA.bloques.map((_, i)=>i));
+  [...$("chipsBloques").children].forEach(ch=>ch.classList.add("activo"));
+  $("btnTodo")?.classList.add("activo");
+  yaValidado = false;
+  limpiarResultado();
+  siguiente();
+}
+
+function seleccionarNinguna(){
+  bloquesActivos.clear();
+  [...$("chipsBloques").children].forEach(ch=>ch.classList.remove("activo"));
+  $("btnTodo")?.classList.remove("activo");
+  limpiarResultado();
+  $("promptMain").innerText = "Selecciona un bloque";
+  $("promptSub").innerText = "";
+  $("opcionesBtns").innerHTML = "";
+}
+
+/* ===============================
+   Render helpers
+=============================== */
+function limpiarResultado(){
+  const res = $("resultado");
+  res.innerText = "";
+  res.className = "";
+}
+
+function bloquearOpciones(){
+  $("opcionesBtns").querySelectorAll("button.optBtn").forEach(b => b.disabled = true);
+}
+
+function pintarOpciones(letraElegida){
+  const btns = Array.from($("opcionesBtns").querySelectorAll("button.optBtn"));
+  btns.forEach(btn=>{
+    const letraBtn = btn.getAttribute("data-letter");
+    btn.classList.remove("correcta","incorrecta","neutra-disabled");
+    if(letraBtn === correctaLetra) btn.classList.add("correcta");
+    else if(letraBtn === letraElegida) btn.classList.add("incorrecta");
+    else btn.classList.add("neutra-disabled");
+  });
+}
+
+function aplicarEstiloPregunta(){
+  const el = $("promptMain");
+  if(rondaDir === "es-jp") el.classList.add("esPregunta");
+  else el.classList.remove("esPregunta");
+}
+
+function textoPregunta(item){
+  // item.jp = KATAKANA (prompt japonés)
+  return (rondaDir === "jp-es") ? item.jp : item.es;
+}
+function textoRespuesta(item){
+  return (rondaDir === "jp-es") ? item.es : item.jp;
+}
+
+function renderPrompt(itemCorrecto){
+  const promptEl = $("promptMain");
+  const subEl = $("promptSub");
+
+  aplicarEstiloPregunta();
+
+  ultimoAudioKey = String(itemCorrecto.romaji || "").trim();
+
+  if(dictadoOn){
+    let label = "";
+    if(modoBase === "mixto"){
+      label = (rondaDir === "jp-es") ? "🎧 Dictado mixto: elige el significado" : "🎧 Dictado mixto: elige el katakana";
+    }else if(modoBase === "jp-es"){
+      label = "🎧 Dictado: elige el significado";
+    }else{
+      label = "🎧 Dictado: elige el katakana";
+    }
+    subEl.innerText = label;
+
+    promptEl.innerHTML = `
+      <button id="promptSpeaker" class="btnAudioBig" type="button" title="Escuchar" onclick="reproducirAudioActual()">🔊</button>
+    `;
+  }else{
+    promptEl.textContent = textoPregunta(itemCorrecto);
+    subEl.innerHTML = `
+      <button id="promptSpeaker" class="btnAudioBig" type="button" title="Escuchar" onclick="reproducirAudioActual()">🔊</button>
+    `;
+  }
+}
+
+/* ===============================
+   Opciones (3)
+=============================== */
+function renderOpciones(opciones){
+  const box = $("opcionesBtns");
+  box.innerHTML = "";
+
+  opciones.forEach((txt, idx)=>{
+    const letra = letras[idx];
+    const btn = document.createElement("button");
+    btn.className = "optBtn";
+    btn.type = "button";
+    btn.setAttribute("data-letter", letra);
+
+    btn.addEventListener("click", ()=> responder(letra));
+
+    const left = document.createElement("div");
+    left.className = "optLeft";
+
+    const badge = document.createElement("div");
+    badge.className = "optLetter";
+    badge.textContent = letra;
+
+    const text = document.createElement("div");
+    text.className = "optText";
+    text.textContent = txt;
+
+    left.appendChild(badge);
+    left.appendChild(text);
+
+    btn.appendChild(left);
+    box.appendChild(btn);
+  });
+}
+
+/* ===============================
+   Flujo ronda
+=============================== */
+function elegirRondaDir(){
+  if(modoBase === "jp-es") return "jp-es";
+  if(modoBase === "es-jp") return "es-jp";
+  return (Math.random() < 0.5) ? "jp-es" : "es-jp";
+}
+
+function build3Options(pool, correctValue, mapFn){
+  const opciones = [correctValue];
+  let tries = 0;
+
+  while(opciones.length < 3 && tries < 200){
+    tries++;
+    const v = mapFn(pick(pool));
+    if(v != null && v !== "" && !opciones.includes(v)) opciones.push(v);
+  }
+  while(opciones.length < 3) opciones.push("—");
+  return shuffle(opciones);
+}
+
+function getActivosValidos(){
+  return [...bloquesActivos].filter(i => DATA.bloques[i]?.vocabulario?.length >= 3);
+}
+
+function siguiente(){
+  const activos = getActivosValidos();
+  if(activos.length === 0){
+    $("promptMain").innerText = (DATA.bloques.length ? "Selecciona un bloque con ≥ 3 palabras" : "No hay data");
+    $("promptSub").innerText = "";
+    $("opcionesBtns").innerHTML = "";
+    return;
+  }
+
+  rondaDir = elegirRondaDir();
+
+  const bloqueIdx = pick(activos);
+  const b = DATA.bloques[bloqueIdx];
+  const poolLocal = b.vocabulario;
+
+  const itemCorrecto = pick(poolLocal);
+  respuestaCorrecta = textoRespuesta(itemCorrecto);
+
+  const poolOpciones = getPool(poolScope);
+  const basePool = (poolOpciones.length >= 3) ? poolOpciones : poolLocal;
+
+  const opciones = build3Options(basePool, respuestaCorrecta, x => textoRespuesta(x));
+  correctaLetra = letras[opciones.indexOf(respuestaCorrecta)];
+
+  renderPrompt(itemCorrecto);
+  renderOpciones(opciones);
+
+  limpiarResultado();
+  yaValidado = false;
+
+  const input = $("respuestaUsuario");
+  if(!dictadoOn){
+    input.value = "";
+    input.placeholder = "a / b / c + Enter";
+    input.maxLength = 1;
+    if(focoAutomatico) input.focus({preventScroll:true});
+  }
+
+  // tu comportamiento: suena al pasar
+  playAudio(ultimoAudioKey);
+}
+
+/* ===============================
+   Responder / Verificar (igual espíritu)
+=============================== */
+function responder(letra){
+  focoAutomatico = false;
+  if(yaValidado) return;
+  if(!dictadoOn) $("respuestaUsuario").value = letra;
+  verificar(letra);
+}
+
+function verificar(letraForzada){
+  const res = $("resultado");
+  const r = (letraForzada || (!dictadoOn ? $("respuestaUsuario").value : ""))
+              .toString().toLowerCase().trim();
+
+  if(!dictadoOn && !["a","b","c"].includes(r)){
+    res.className = "incorrecto";
+    res.innerText = `Incorrecto ✘ (era ${correctaLetra}) — ${respuestaCorrecta}`;
+    errores++; pintarStats();
+    yaValidado = true;
+
+    pintarOpciones(r);
+    bloquearOpciones();
+    playAudio(ultimoAudioKey);
+    return;
+  }
+
+  const letra = dictadoOn ? letraForzada : r;
+
+  if(letra === correctaLetra){
+    res.className = "correcto";
+    res.innerText = "Correcto ✔";
+    aciertos++;
+  }else{
+    res.className = "incorrecto";
+    res.innerText = `Incorrecto ✘ (era ${correctaLetra}) — ${respuestaCorrecta}`;
+    errores++;
+  }
+
+  pintarStats();
+  yaValidado = true;
+
+  pintarOpciones(letra);
+  bloquearOpciones();
+
+  playAudio(ultimoAudioKey);
+}
+
+function accionSiguiente(){
+  focoAutomatico = false;
+
+  if(!yaValidado){
+    errores++;
+    pintarStats();
+    yaValidado = true;
+
+    const res = $("resultado");
+    res.className = "incorrecto";
+    res.innerText = `Saltado ✘ (era ${correctaLetra}) — ${respuestaCorrecta}`;
+
+    pintarOpciones(null);
+    bloquearOpciones();
+
+    playAudio(ultimoAudioKey);
+    return;
+  }
+
+  siguiente();
+}
+
+function mostrarRespuesta(){
+  focoAutomatico = false;
+
+  if(!yaValidado){
+    errores++;
+    pintarStats();
+  }
+
+  const res = $("resultado");
+  res.className = "incorrecto";
+  res.innerText = `Respuesta: ${respuestaCorrecta}`;
+
+  yaValidado = true;
+
+  pintarOpciones(null);
+  bloquearOpciones();
+
+  playAudio(ultimoAudioKey);
+}
+
+function manejarEnter(event){
+  if(event.key !== "Enter") return;
+  if(dictadoOn) return;
+
+  if(!yaValidado) verificar();
+  else siguiente();
+}
+
+/* ===============================
+   UX: evitar teclado móvil por defecto
+=============================== */
+document.addEventListener("pointerdown", (e)=>{
+  focoAutomatico = (e.target && e.target.id === "respuestaUsuario");
+});
+document.addEventListener("keydown", (e)=>{
+  const k = (e.key || "").toLowerCase();
+  if(k === "enter" || k === "a" || k === "b" || k === "c") focoAutomatico = true;
+});
+
+/* ===============================
+   CARGA JSON + chips bloques
+=============================== */
+function renderChips(){
+  const cont = $("chipsBloques");
+  cont.innerHTML = "";
+
+  DATA.bloques.forEach((b, i)=>{
+    const chip = document.createElement("div");
+    chip.className = "chip" + (bloquesActivos.has(i) ? " activo" : "");
+    chip.textContent = b.nombre || `Bloque ${i+1}`;
+
+    chip.onclick = ()=>{
+      $("btnTodo")?.classList.remove("activo");
+
+      if(bloquesActivos.has(i)) bloquesActivos.delete(i);
+      else bloquesActivos.add(i);
+
+      // nunca dejar vacío
+      if(bloquesActivos.size === 0) bloquesActivos.add(i);
+
+      [...cont.children].forEach((el, idx)=>{
+        el.classList.toggle("activo", bloquesActivos.has(idx));
+      });
+
+      yaValidado = false;
+      limpiarResultado();
+      siguiente();
+    };
+
+    cont.appendChild(chip);
+  });
+}
+
+fetch(JSON_PATH)
+  .then(r=>r.json())
+  .then(json=>{
+    DATA = (json && json.bloques) ? json : { bloques: [] };
+
+    if(DATA.bloques.length === 0){
+      $("promptMain").innerText = "No hay bloques en el JSON";
+      $("promptSub").innerText = "";
+      return;
+    }
+
+    // default: todo activo
+    bloquesActivos = new Set(DATA.bloques.map((_, i)=>i));
+    $("btnTodo")?.classList.add("activo");
+
+    renderChips();
+
+    // defaults
+    setPoolScope("seleccion");
+    setModoBase("mixto"); // también llama siguiente()
+  })
+  .catch(err=>{
+    console.error(err);
+    $("promptMain").innerText = "No se pudo cargar " + JSON_PATH;
+    $("promptSub").innerText = "Revisa ruta y usa servidor (GitHub Pages / Live Server).";
+  });
+</script>
+
+</body>
+</html>
