@@ -124,7 +124,6 @@
     z-index:1;
   }
   
-
 .meteor{
   position:absolute;
   top:-60px;
@@ -149,6 +148,20 @@
   .meteor.hit{border-color: rgba(34,197,94,.45); background: rgba(34,197,94,.12); animation: hitFlash 120ms ease-out;}
   .meteor.miss{border-color: rgba(239,68,68,.45); background: rgba(239,68,68,.12); animation: hitFlash 120ms ease-out;}
   .meteor.bonus{border-color: rgba(251,191,36,.40); background: rgba(251,191,36,.10)}
+
+/* === BOSS === */
+.meteor.boss{
+  padding:12px 16px;
+  border-radius:18px;
+  background: rgba(0,0,0,.28);
+  border:1px solid rgba(125,92,255,.45);
+  box-shadow: 0 22px 60px rgba(0,0,0,.55);
+  z-index:35; /* boss arriba de topbar, debajo de px/shot si quieres */
+}
+.meteor.boss .expr{
+  font-size:22px;
+  letter-spacing:.6px;
+}
   
   /* --- Answer UI (sin input) --- */
 .answerBox{
@@ -1054,6 +1067,8 @@
     lastFlyby: 0,
     nextFlybyAt: 0,
     
+    phase: "normal",   // "normal" | "boss"
+    boss: null,        // { id, el, x, y, vy, orbiters:Set<number>, t0, ... }
   };
 
 function setDisplay(){
@@ -1447,6 +1462,10 @@ function killMeteor(m, cls){
     try { m.el.remove(); } catch {}
   }, 110);
 
+  if(m.kind === "orbiter" && state.boss){
+    state.boss.orbiters.delete(m.id);
+  }
+  
   state.meteors.delete(m.id);
 }
 
@@ -1491,6 +1510,219 @@ function missMeteor(m) {
     state.score += cleared * 3;  // +3 por cada meteoro borrado       
 
   }
+
+// BOSS
+
+function startBossPhase(){
+  // congela progreso normal
+  state.phase = "boss";
+
+  // limpia meteoros normales/bonus actuales (opcional pero recomendado)
+  for(const m of [...state.meteors.values()]){
+    if(m.kind === "flyby") killMeteor(m, "");
+    else killMeteor(m, "");
+  }
+
+  spawnBoss();
+  updateHUD();
+}
+
+function spawnBoss(){
+  const id = state.nextId++;
+  const el = document.createElement("div");
+  el.className = "meteor boss";
+  el.dataset.id = String(id);
+
+  // carita ASCII
+  el.innerHTML = `<div class="expr">&lt;^s^&gt; BOSS</div>`;
+  game.appendChild(el);
+
+  // tamaño real
+  el.style.left = "0px";
+  el.style.top  = "0px";
+  const w = el.offsetWidth;
+  const h = el.offsetHeight;
+
+  const x = (game.clientWidth - w) * 0.5;
+  const y = -h - 20;
+
+  el.style.left = `${x}px`;
+  el.style.top  = `${y}px`;
+
+  const boss = {
+    id, el,
+    x, y,
+    vy: 28 + state.level * 2,   // baja lento
+    orbiters: new Set(),
+    t0: performance.now()
+  };
+
+  state.boss = boss;
+
+  // cuántos orbiters: basado en dificultad del nivel
+  const n = clamp(4 + Math.floor(state.level/2), 4, 10);
+  for(let i=0;i<n;i++){
+    spawnBossOrbiter(boss, i, n);
+  }
+
+  // registra el boss como entidad en el mapa (sin ans)
+  state.meteors.set(id, {
+    id, el,
+    ans: null,
+    x, y,
+    alive: true,
+    isBonus: false,
+    kind: "boss",
+    // guardamos dimensiones para update
+    w, h,
+    bossRef: boss
+  });
+}
+
+function spawnBossOrbiter(boss, i, n){
+  const { text, ans } = makeProblem(); // MISMA dificultad del nivel ✅
+
+  const id = state.nextId++;
+  const el = document.createElement("div");
+  el.className = "meteor";
+  el.dataset.id = String(id);
+  el.innerHTML = `<div class="expr">${text}</div>`;
+  game.appendChild(el);
+
+  // ring 0/1 (2 anillos)
+  const ring = (i % 2);
+
+  // velocidad distinta por minion
+  const baseOmega = 1.0 + 0.10 * state.level;              // rad/s
+  const omega = (ring ? 1 : -1) * (baseOmega * (0.75 + Math.random()*0.55));
+
+  // fases distintas
+  const phase = (i / n) * Math.PI * 2;
+
+  // params por minion
+  const orb = {
+    id, el, ans,
+    alive: true,
+    isBonus:false,
+    kind:"orbiter",
+    bossId: boss.id,
+
+    ring,
+    phase,
+    omega,
+
+    // respiración
+    breathAmp: ring ? 10 : 14,
+    breathSpeed: ring ? 0.9 : 0.75,
+
+    // elipse base (A/B) + ring offset
+    baseR: (ring ? 74 : 108),
+
+    // pequeño wobble (suave)
+    wobbleAmp: ring ? 0.07 : 0.05,
+    wobbleSpeed: ring ? 1.6 : 1.3
+  };
+
+  // inicio “pegado” al boss (lo posiciona updateBoss)
+  el.style.left = `${boss.x}px`;
+  el.style.top  = `${boss.y}px`;
+
+  state.meteors.set(id, orb);
+  boss.orbiters.add(id);
+}
+
+function updateBoss(dt){
+  const boss = state.boss;
+  if(!boss) return;
+
+  // boss baja despacio hasta un “techo” seguro
+  const topSafe = 62; // ~topBar + padding
+  const targetY = topSafe + 35;
+  boss.y = Math.min(targetY, boss.y + boss.vy * dt);
+
+  // actualiza posición del boss element
+  const bossM = state.meteors.get(boss.id);
+  if(bossM && bossM.alive){
+    bossM.y = boss.y;
+    bossM.el.style.top = `${boss.y}px`;
+  }
+
+  // centro del boss (para orbiters)
+  const rectG = game.getBoundingClientRect();
+  const rectB = boss.el.getBoundingClientRect();
+
+  const cx = (rectB.left - rectG.left) + rectB.width/2;
+  const cy = (rectB.top  - rectG.top)  + rectB.height/2;
+
+  const t = (performance.now() - boss.t0) / 1000;
+
+  // elipse rotando (wow, still fair)
+  const ellipseRot = t * (0.25 + state.level*0.006); // rad/s (lento)
+  const cosR = Math.cos(ellipseRot);
+  const sinR = Math.sin(ellipseRot);
+
+  for(const id of [...boss.orbiters]){
+    const m = state.meteors.get(id);
+    if(!m || !m.alive){
+      boss.orbiters.delete(id);
+      continue;
+    }
+
+    const theta = m.phase + t * m.omega;
+
+    // respiración (radio pulso)
+    const breath = Math.sin(t * m.breathSpeed + m.phase) * m.breathAmp;
+    const r = m.baseR + breath;
+
+    // elipse base (A/B)
+    const A = 1.18;     // estira X
+    const B = 0.82;     // comprime Y
+
+    // wobble suave (micro caos)
+    const wob = Math.sin(t * m.wobbleSpeed + m.phase*2) * m.wobbleAmp;
+
+    // coords elípticas
+    let ox = Math.cos(theta + wob) * r * A;
+    let oy = Math.sin(theta - wob) * r * B;
+
+    // rota elipse (wow)
+    const rx = ox * cosR - oy * sinR;
+    const ry = ox * sinR + oy * cosR;
+
+    // aplica posición (centrado por CSS ya)
+    const x = cx + rx;
+    const y = cy + ry;
+
+    m.x = x;
+    m.y = y;
+    m.el.style.left = `${x}px`;
+    m.el.style.top  = `${y}px`;
+
+    // partículas normales funcionan
+  }
+
+  // si ya no quedan orbiters -> boss muerto -> siguiente nivel
+  if(boss.orbiters.size === 0){
+    // limpia boss
+    const bossMeteor = state.meteors.get(boss.id);
+    if(bossMeteor) killMeteor(bossMeteor, "hit");
+
+    state.boss = null;
+    state.phase = "normal";
+
+    // recompensa (tú ajustas)
+    state.score += 25;
+    state.streak += 1;
+    state.bestStreak = Math.max(state.bestStreak, state.streak);
+    saveBest();
+
+    state.lastFlyby = now();
+    state.nextFlybyAt = state.lastFlyby + FIXED.flybyBaseMs + randInt(0, FIXED.flybyJitterMs);
+    nextLevel(); // vuelve al flow normal
+  }
+}
+  
+// BOSS
   
   function playExplosion(){
     const snd = sfxExplosion.cloneNode(true); // permite múltiples sonidos simultáneos
@@ -1611,67 +1843,88 @@ function explodeTypedAtDisplay(strength="soft", text=null){
     const dt = (t - state.lastTick) / 1000;
     state.lastTick = t;
   
-    if(t - state.lastSpawn >= state.spawnEveryMs){
-      state.lastSpawn = t;
-  
-      const maxActive = maxMeteorsForLevel(state.level);
-      if(state.meteors.size < maxActive){
-        spawnMeteor(false);
-  
-        const p = bonusProbForLevel(state.level);
-        if(state.meteors.size < maxActive && Math.random() < p){
-          spawnMeteor(true);
+    if(state.phase === "normal"){
+      if(t - state.lastSpawn >= state.spawnEveryMs){
+        state.lastSpawn = t;
+    
+        const maxActive = maxMeteorsForLevel(state.level);
+        if(state.meteors.size < maxActive){
+          spawnMeteor(false);
+    
+          const p = bonusProbForLevel(state.level);
+          if(state.meteors.size < maxActive && Math.random() < p){
+            spawnMeteor(true);
+          }
         }
       }
     }
 
     // --- bonus flyby ---
-    
-    if(t >= state.nextFlybyAt){
-    
-      const maxActive = maxMeteorsForLevel(state.level);
-    
-      const flybyChance = 0.25; // 25%
-    
-      if(state.meteors.size < maxActive && Math.random() < flybyChance){
-        spawnFlybyBonus();
+    if(state.phase === "normal"){
+      if(t >= state.nextFlybyAt){
+      
+        const maxActive = maxMeteorsForLevel(state.level);
+      
+        const flybyChance = 0.25; // 25%
+      
+        if(state.meteors.size < maxActive && Math.random() < flybyChance){
+          spawnFlybyBonus();
+        }
+      
+        state.lastFlyby = t;
+        state.nextFlybyAt =
+          t + FIXED.flybyBaseMs + randInt(0, FIXED.flybyJitterMs);
       }
-    
-      state.lastFlyby = t;
-      state.nextFlybyAt =
-        t + FIXED.flybyBaseMs + randInt(0, FIXED.flybyJitterMs);
     }
-    
     // ✅ suelo calculado (móvil/pc)
     const groundY = game.clientHeight - 2;
-  
+
+if(state.phase === "boss") updateBoss(dt);
+
 for(const m of [...state.meteors.values()]){
-  // 1) movimiento
+
+  // ========= MOVIMIENTO =========
   if(m.kind === "flyby"){
+
     m.x += m.vx * dt;
     m.el.style.left = `${m.x}px`;
-    // top fijo
-    // (m.y ya está)
+
+  }else if(m.kind === "boss" || m.kind === "orbiter"){
+
+    // 🔥 NO caen.
+    // Se posicionan en updateBoss()
+    // Aquí no hacemos nada.
+
   }else{
+
+    // meteoro normal cae
     m.y += m.speedPxPerSec * dt;
     m.el.style.top = `${m.y}px`;
   }
 
-  // 2) partículas (sirve igual)
+  // ========= PARTICULAS =========
   pixelFireTick(m, dt);
 
-  // 3) reglas de salida / fallo
+
+  // ========= SALIDA / FALLO =========
   if(m.kind === "flyby"){
-    // si sale totalmente del canvas, se elimina sin penalizar
+
     const w = m.el.offsetWidth || 140;
     if(m.x < -w - 30 || m.x > game.clientWidth + 30){
-      killMeteor(m, ""); // o simplemente remove sin clase
+      killMeteor(m, "");
     }
+
+  }else if(m.kind === "boss" || m.kind === "orbiter"){
+
+    // 🔥 NUNCA hacen miss por tocar suelo
+    // Nada aquí
+
   }else{
-    // meteoro normal: choca contra suelo
+
     if(m.y + m.el.offsetHeight >= groundY){
       missMeteor(m);
     }
+
   }
 }
   
@@ -1913,7 +2166,7 @@ function submitAnswer() {
 
     state.solvedThisLevel += 1; // Actualiza el progreso del nivel
     if (state.solvedThisLevel >= state.target) {
-      nextLevel(); // Avanza al siguiente nivel
+      startBossPhase(); // 👈 boss al final del nivel
     }
   }
 
