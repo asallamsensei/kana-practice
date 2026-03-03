@@ -1496,61 +1496,73 @@ function burstPixelFX(m, opts = {}) {
   const cx = (rectM.left - rectG.left) + rectM.width / 2;
   const cy = (rectM.top  - rectG.top)  + rectM.height / 2;
 
-  const explodeN = opts.explode ?? (m.isBonus ? 18 : 12); // Explosión radial
-  const rainN    = opts.rain    ?? (m.isBonus ? 22 : 16); // Lluvia de partículas
-  const bounceN  = opts.bounce  ?? 0; // Rebote si es necesario
+  const explodeN = opts.explode ?? (m.isBonus ? 18 : 12);
+  const rainN    = opts.rain    ?? (m.isBonus ? 22 : 16);
+  const bounceN  = opts.bounce  ?? 0;
 
-  // 1) Explosión radial (sale a todos lados)
-  for (let i = 0; i < explodeN; i++) {
+  const palette = m.isBonus ? BONUS_COLORS : FIRE_COLORS;
+
+  const spawn = (kind) => {
     const p = document.createElement("div");
     p.className = "px";
-    p.style.background = "rgba(255, 255, 255, 0.6)"; // Partículas blancas
 
-    const size = Math.random() * 6 + 4;
+    // color
+    p.style.background = palette[randInt(0, palette.length - 1)];
+    if (m.isBonus) p.classList.add("gold");
+
+    // tamaño
+    const size = randInt(5, 10);
     p.style.width = `${size}px`;
     p.style.height = `${size}px`;
 
-    const x = cx + (Math.random() - 0.5) * rectM.width;
-    const y = cy + Math.random() * 30; // Lluvia cayendo desde el meteoro
-
+    // posición base cerca del centro
+    const x = cx + randInt(-Math.floor(rectM.width * 0.35), Math.floor(rectM.width * 0.35));
+    const y = cy + randInt(-Math.floor(rectM.height * 0.25), Math.floor(rectM.height * 0.25));
     p.style.left = `${x}px`;
-    p.style.top = `${y}px`;
+    p.style.top  = `${y}px`;
 
-    p.style.animation = "pxRain 0.5s ease-out forwards";
-    game.appendChild(p);
+    // vida
+    const life = randInt(320, 650);
+    p.style.setProperty("--life", `${life}ms`);
 
-    p.addEventListener("animationend", () => p.remove(), { once: true });
-  }
-
-  // 2) Lluvia de partículas (cae desde el meteoro)
-  for (let i = 0; i < rainN; i++) {
-    const p = document.createElement("div");
-    p.className = "px";
-    p.style.background = "rgba(255, 255, 255, 0.5)"; // Partículas blancas
-
-    const size = Math.random() * 6 + 4;
-    p.style.width = `${size}px`;
-    p.style.height = `${size}px`;
-
-    const x = cx + (Math.random() - 0.5) * rectM.width;
-    const y = cy + Math.random() * 30;
-
-    p.style.left = `${x}px`;
-    p.style.top = `${y}px`;
-
-    p.style.animation = "pxRain 0.5s ease-out forwards";
-    game.appendChild(p);
-
-    p.addEventListener("animationend", () => p.remove(), { once: true });
-  }
-
-  // 3) Rebote de partículas (si está cerca del suelo)
-  if (bounceN > 0) {
-    // Implementa el rebote si es necesario
-    for (let i = 0; i < bounceN; i++) {
-      // Añade lógica de rebote si es necesario
+    if (kind === "explode") {
+      p.classList.add("explode");
+      const dx = randInt(-140, 140);
+      const dy = randInt(-120, 120);
+      p.style.setProperty("--dx", `${dx}px`);
+      p.style.setProperty("--dy", `${dy}px`);
     }
-  }
+
+    if (kind === "rain") {
+      p.classList.add("rain");
+      const dx = randInt(-40, 40);
+      const dy = randInt(70, 140);
+      p.style.setProperty("--dx", `${dx}px`);
+      p.style.setProperty("--dy", `${dy}px`);
+    }
+
+    if (kind === "bounce") {
+      p.classList.add("bounce");
+      const dx = randInt(-90, 90);
+      const fall = randInt(120, 190);
+      const bounce = randInt(45, 75);
+      p.style.setProperty("--dx", `${dx}px`);
+      p.style.setProperty("--fall", `${fall}px`);
+      p.style.setProperty("--bounce", `${bounce}px`);
+    }
+
+    p.addEventListener("animationend", () => p.remove(), { once: true });
+    game.appendChild(p);
+  };
+
+  // 1) Explosión radial real
+  for (let i = 0; i < explodeN; i++) spawn("explode");
+
+  // 2) Lluvia real
+  for (let i = 0; i < rainN; i++) spawn("rain");
+
+  // 3) Rebote (si lo pides)
+  for (let i = 0; i < bounceN; i++) spawn("bounce");
 }
 
 function explodeTypedAtDisplay(strength="soft", text=null){
