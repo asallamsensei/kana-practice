@@ -249,23 +249,26 @@
 }
 
 /* =========================
-   MÓVIL: autofit + centrado
-   (topBar hace wrap y se centra)
+   MÓVIL: 1 sola fila
+   auto-fit al texto + centrado
 ========================= */
 @media (max-width:900px){
   .topBar{
-    /* en móvil dejamos de usar la rejilla “matemática” */
     display:flex;
-    flex-wrap:wrap;
-    justify-content:center;
-    gap:8px;                 /* separación visual */
-    padding:10px 10px;
+    justify-content:center;  /* centra todo el grupo */
+    align-items:center;
+    gap:8px;
+    padding:10px 8px;
+
+    /* opcional (solo si se te corta en pantallas muy pequeñas) */
+    /* overflow-x:auto; */
+    /* -webkit-overflow-scrolling: touch; */
   }
 
   .topBar .pill{
-    /* autofit: que se acomoden y queden centradas */
-    flex: 1 1 160px;         /* crece, encoge, base 160px */
-    max-width: 260px;        /* para que no se vean gigantes */
+    flex:0 0 auto;           /* tamaño según contenido */
+    width:auto;
+    white-space:nowrap;      /* no salta línea */
   }
 }
   
