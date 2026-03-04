@@ -808,6 +808,11 @@ function renderPrompt(itemCorrecto){
     subEl.innerHTML = `
       <button id="promptSpeaker" class="btnAudioBig" type="button" title="Escuchar" onclick="reproducirAudioActual()">🔊</button>
     `;
+    
+    // deshabilitar audio si la pregunta es español → inglés
+    if(rondaDir === "es-en" && !rondaDictado){
+      document.getElementById("promptSpeaker").disabled = true;
+    }
     $("inputRow").style.display = "flex";
   }
 }
@@ -970,6 +975,15 @@ function verificar(letraForzada){
   playAudio(ultimoAudioKey);
 }
 
+function setSpeakerEnabled(on){
+  const btn = document.getElementById("promptSpeaker");
+  if(!btn) return;
+  btn.disabled = !on;
+  btn.style.opacity = on ? "1" : ".35";
+  btn.style.cursor  = on ? "pointer" : "not-allowed";
+  btn.title = on ? "Escuchar" : "Disponible después de responder";
+}
+  
 function accionSiguiente(){
   focoAutomatico = false;
 
@@ -985,7 +999,7 @@ function accionSiguiente(){
     pintarOpciones(null);
     bloquearOpciones();
 
-    playAudio(ultimoAudioKey);
+    if(!(rondaDir === "es-en" && !rondaDictado)) playAudio(ultimoAudioKey);
     return;
   }
 
