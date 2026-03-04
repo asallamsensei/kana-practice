@@ -796,7 +796,7 @@ function renderPrompt(itemCorrecto){
       ? "🎧 Dictado: elige el significado (ES)"
       : "🎧 Dictado: elige la palabra (EN)";
 
-    subEl.innerText = label + pronLine;
+    subEl.innerText = label;
 
     promptEl.innerHTML = `
       <button id="promptSpeaker" class="btnAudioBig" type="button" title="Escuchar" onclick="reproducirAudioActual()">🔊</button>
