@@ -549,7 +549,11 @@ function validarClave(){
   $("claveBack").setAttribute("aria-hidden", "true");
 
   audioHabilitado = true;
-  playAudio(ultimoAudioKey);
+  
+  // solo suena al entrar si NO es ES→EN (y no dictado)
+  if(!(rondaDir === "es-en" && !rondaDictado)){
+    playAudio(ultimoAudioKey);
+  }
   
   // (opcional) enfoque al input cuando NO esté en dictado
   // $("respuestaUsuario")?.focus({preventScroll:true});
