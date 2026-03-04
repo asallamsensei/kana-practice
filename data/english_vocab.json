@@ -2,7 +2,7 @@
   "bloques": [
     {
       "id": "eng_01",
-      "nombre": "Bloque 1 — Saludos y despedidas (1/30)",
+      "nombre": "Bloque 1 — Saludos y despedidas",
       "vocabulario": [
         { "en": "hello", "es": "hola", "pron": "jelou" },
         { "en": "hi", "es": "hola (informal)", "pron": "jai" },
