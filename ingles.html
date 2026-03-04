@@ -993,15 +993,21 @@ function accionSiguiente(){
     errores++;
     pintarStats();
     yaValidado = true;
-
+  
     const res = $("resultado");
     res.className = "incorrecto";
     res.innerText = `Saltado ✘ (era ${correctaLetra}) — ${respuestaCorrecta}`;
-
+  
     pintarOpciones(null);
     bloquearOpciones();
-
-    if(!(rondaDir === "es-en" && !rondaDictado)) playAudio(ultimoAudioKey);
+  
+    // ✅ Si es ES→EN (no dictado), habilita el botón y suena al saltar
+    if(rondaDir === "es-en" && !rondaDictado){
+      const sp = document.getElementById("promptSpeaker");
+      if(sp) sp.disabled = false;
+    }
+  
+    playAudio(ultimoAudioKey);
     return;
   }
 
