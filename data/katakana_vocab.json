@@ -164,7 +164,8 @@
         { "jp": "パーキング", "es": "parqueadero", "romaji": "paakingu" },
         { "jp": "ガレージ", "es": "garaje", "romaji": "gareeji" },
         { "jp": "スタジオ", "es": "estudio", "romaji": "sutajio" },
-        { "jp": "イベント", "es": "evento", "romaji": "ibento" }
+        { "jp": "イベント", "es": "evento", "romaji": "ibento" },
+        { "jp": "ラウンジ", "es": "lounge / sala lounge", "romaji": "raunji" }
       ]
     }
   ]
