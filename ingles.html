@@ -548,6 +548,9 @@ function validarClave(){
   $("claveBack").style.display = "none";
   $("claveBack").setAttribute("aria-hidden", "true");
 
+  audioHabilitado = true;
+  playAudio(ultimoAudioKey);
+  
   // (opcional) enfoque al input cuando NO esté en dictado
   // $("respuestaUsuario")?.focus({preventScroll:true});
 }
