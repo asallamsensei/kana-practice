@@ -924,7 +924,9 @@ function siguiente(){
     if(focoAutomatico) input.focus({preventScroll:true});
   }
 
-  playAudio(ultimoAudioKey);
+  if(!(rondaDir === "es-en" && !rondaDictado)){
+    playAudio(ultimoAudioKey);
+  }
 }
 
 /* ===============================
