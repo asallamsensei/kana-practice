@@ -184,7 +184,8 @@
 const CLAVES = {
   esperanza: 0, // Sección 0 => Preguntas 1 (1-20)
   chorrazo: 1,   // Sección 1 => Preguntas 2 (21-40)
-  aguecuca: 2   // Sección 2 => Preguntas 3 (41-60)  
+  aguecuca: 2,   // Sección 2 => Preguntas 3 (41-60)  
+  la bestia: 3   // Sección 3 => Preguntas 4 (61-80)  
 };
 
 const MODO_ALEATORIO = false;
@@ -225,7 +226,8 @@ function validarClave(){
     document.getElementById("sub").textContent =
       (seccionElegida === 0) ? "Parte 1: Vocabulario"
       : (seccionElegida === 1) ? "Parte 2: Vocabulario"
-      : "Parte 3: Vocabulario";
+      : (seccionElegida === 2) ? "Parte 3: Vocabulario"
+      : "Parte 4: Vocabulario";
     iniciar();
   }else{
     err.textContent = "Clave incorrecta.";
