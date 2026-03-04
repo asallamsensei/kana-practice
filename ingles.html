@@ -807,9 +807,6 @@ function renderPrompt(itemCorrecto){
     promptEl.textContent = textoPregunta(itemCorrecto);
     subEl.innerHTML = `
       <button id="promptSpeaker" class="btnAudioBig" type="button" title="Escuchar" onclick="reproducirAudioActual()">🔊</button>
-      //<span style="display:block; margin-top:10px; color: rgba(238,242,255,.75); font-weight:900; font-size:14px;">
-      //  ${pron ? ("Pron: " + pron) : ""}
-      //</span>
     `;
     $("inputRow").style.display = "flex";
   }
