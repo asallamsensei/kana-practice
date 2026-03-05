@@ -167,6 +167,42 @@
         { "jp": "イベント", "es": "evento", "romaji": "ibento" },
         { "jp": "ラウンジ", "es": "lounge / sala lounge", "romaji": "raunji" }
       ]
+    },
+    {
+      "id": "kata_04",
+      "nombre": "Bloque 4 — Transporte y viaje",
+      "vocabulario": [
+        { "jp": "バス", "es": "bus", "romaji": "basu" },
+        { "jp": "タクシー", "es": "taxi", "romaji": "takushii" },
+        { "jp": "レンタカー", "es": "carro de alquiler", "romaji": "rentakaa" },
+        { "jp": "ドライブ", "es": "conducir / paseo en carro", "romaji": "doraibu" },
+        { "jp": "ドライバー", "es": "conductor", "romaji": "doraibaa" },
+        { "jp": "トラック", "es": "camión", "romaji": "torakku" },
+        { "jp": "バイク", "es": "moto", "romaji": "baiku" },
+        { "jp": "サイクル", "es": "bicicleta (cycle)", "romaji": "saikuru" },
+        { "jp": "エンジン", "es": "motor", "romaji": "enjin" },
+        { "jp": "ブレーキ", "es": "freno", "romaji": "bureeki" },
+        { "jp": "ガソリン", "es": "gasolina", "romaji": "gasorin" },
+        { "jp": "ガソリンスタンド", "es": "gasolinera", "romaji": "gasorinsutando" },
+        { "jp": "パーキング", "es": "parqueadero", "romaji": "paakingu" },
+        { "jp": "ナビ", "es": "GPS / navegador", "romaji": "nabi" },
+        { "jp": "ルート", "es": "ruta", "romaji": "ruuto" },
+        { "jp": "マップ", "es": "mapa", "romaji": "mappu" },
+        { "jp": "チケット", "es": "boleto", "romaji": "chiketto" },
+        { "jp": "パスポート", "es": "pasaporte", "romaji": "pasupooto" },
+        { "jp": "ビザ", "es": "visa", "romaji": "biza" },
+        { "jp": "チェックイン", "es": "check-in", "romaji": "chekkuin" },
+        { "jp": "ゲート", "es": "puerta de embarque", "romaji": "geeto" },
+        { "jp": "フライト", "es": "vuelo", "romaji": "furaito" },
+        { "jp": "ターミナル", "es": "terminal", "romaji": "taaminaru" },
+        { "jp": "プラットフォーム", "es": "andén / plataforma", "romaji": "purattofoomu" },
+        { "jp": "トンネル", "es": "túnel", "romaji": "tonneru" },
+        { "jp": "ホテル", "es": "hotel", "romaji": "hoteru" },
+        { "jp": "リザーブ", "es": "reservación / reservar", "romaji": "rizaabu" },
+        { "jp": "キャンセル", "es": "cancelación / cancelar", "romaji": "kyanseru" },
+        { "jp": "スーツケース", "es": "maleta", "romaji": "suutsukeesu" },
+        { "jp": "トラブル", "es": "problema / inconveniente", "romaji": "toraburu" }
+      ]
     }
   ]
 }
