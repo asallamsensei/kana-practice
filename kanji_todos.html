@@ -193,7 +193,7 @@
   }
 
   #kanji{
-    font-size: 92px;
+    font-size: clamp(44px, 6vw, 92px);
     font-weight: 900;
     margin: 8px 0 6px;
     letter-spacing: .5px;
@@ -222,6 +222,13 @@
     background: rgba(0,0,0,.18);
   }
 
+  /* ES → Kanji: las opciones son kanji, hazlas más grandes y con fuente JP */
+  body.modo-es-kanji #opciones{
+    font-family: var(--font-jp);
+    font-size: 28px;
+    letter-spacing: .2px;
+  }
+  
   .opbtns{
     display:flex;
     justify-content:center;
@@ -347,7 +354,6 @@
 
       <div class="hint" id="ayuda">
         <b>Atajos:</b>
-        <code class="kbd">a</code>/<code class="kbd">b</code>/<code class="kbd">c</code> selecciona.
         <code class="kbd">Enter</code> valida.
         <code class="kbd">Enter</code> de nuevo pasa.
       </div>
@@ -390,12 +396,6 @@
       <div class="row" style="justify-content:flex-start; margin-top: 8px; gap:10px;">
         <button class="btn btn-mode" id="pool-sel" type="button" onclick="setPoolScope('seleccion')">Solo selección</button>
         <button class="btn btn-mode" id="pool-glob" type="button" onclick="setPoolScope('global')">Global</button>
-      </div>
-
-      <div class="sep"></div>
-
-      <div class="hint">
-        <b>Tip:</b> En móvil, el teclado no se abre solo; toca el input o usa <code class="kbd">a</code>/<code class="kbd">b</code>/<code class="kbd">c</code>.
       </div>
 
       <div class="sep"></div>
@@ -597,6 +597,8 @@ function seleccionarNinguna(){
 function setModo(modo){
   modoActual = modo;
 
+  document.body.classList.toggle("modo-es-kanji", modo === "es_kanji");
+  
   ["m-kanji-es","m-es-kanji","m-mix"].forEach(id => $(id)?.classList.remove("activo"));
   if(modo === "kanji_es") $("m-kanji-es")?.classList.add("activo");
   else if(modo === "es_kanji") $("m-es-kanji")?.classList.add("activo");
@@ -762,11 +764,13 @@ function siguiente(){
   // si es ES→Kanji, mostramos el significado como "kanji" grande (pero en fuente normal)
   if(actual.tipo === "es_kanji"){
     $("kanji").style.fontFamily = "Arial, sans-serif";
-    $("kanji").style.fontSize = "44px";
+    $("kanji").style.fontSize = "clamp(22px, 3.2vw, 34px)";
+    $("kanji").style.letterSpacing = ".2px";
     $("kanji").innerText = actual.prompt;
   }else{
     $("kanji").style.fontFamily = "var(--font-jp)";
-    $("kanji").style.fontSize = "92px";
+    $("kanji").style.fontSize = "clamp(44px, 6vw, 92px)";
+    $("kanji").style.letterSpacing = ".5px";
     $("kanji").innerText = actual.prompt;
   }
 
