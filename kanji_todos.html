@@ -110,6 +110,24 @@
     text-align:center;
   }
 
+  .miniStatus{
+    margin-top: 6px;
+    color: rgba(238,242,255,.78);
+    font-size: 13px;
+    line-height: 1.45;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  
+  .miniStatus > div{
+    padding: 0;            /* sin “pill” */
+    border: 0;
+    background: transparent;
+    border-radius: 0;
+    color: inherit;
+  }
+  
   code.kbd{
     background: rgba(255,255,255,.08);
     border: 1px solid rgba(255,255,255,.14);
@@ -351,7 +369,6 @@
       <div class="sep"></div>
 
       <div class="hint" id="ayuda">
-        <b>Atajos:</b>
         <code class="kbd">Enter</code> valida.
         <code class="kbd">Enter</code> de nuevo pasa.
       </div>
@@ -398,11 +415,11 @@
 
       <div class="sep"></div>
       
-      <div class="hint" style="text-align:left;">
-        <div><span class="pill" id="pillGrados">Grados activos: —</span></div>
-        <div style="margin-top:8px;"><span class="pill" id="pillPool">Pool: —</span></div>
-        <div style="margin-top:8px;"><span class="pill" id="pillModo">Modo: —</span></div>
-        <div style="margin-top:8px;"><span class="pill" id="pillScope">Distractores: —</span></div>
+      <div class="miniStatus" id="miniStatus">
+        <div id="pillGrados">Grados activos: —</div>
+        <div id="pillPool">Pool: —</div>
+        <div id="pillModo">Modo: —</div>
+        <div id="pillScope">Distractores: —</div>
       </div>
 
     </div>
