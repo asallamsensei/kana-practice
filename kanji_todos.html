@@ -760,7 +760,8 @@ function siguiente(){
   }
 
   actual = q;
-
+  document.body.classList.toggle("modo-es-kanji", actual.tipo === "es_kanji");
+  
   // prompt principal (arriba grande)
   // si es ES→Kanji, mostramos el significado como "kanji" grande (pero en fuente normal)
   if(actual.tipo === "es_kanji"){
