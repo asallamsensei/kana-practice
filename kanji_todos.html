@@ -312,12 +312,6 @@
 
     <!-- Panel izquierdo: juego -->
     <div class="card big">
-      <div id="promptTop" class="row" style="justify-content:center;">
-        <span class="pill" id="pillGrados">Grados activos: —</span>
-        <span class="pill" id="pillPool">Pool: —</span>
-        <span class="pill" id="pillModo">Modo: —</span>
-        <span class="pill" id="pillScope">Distractores: —</span>
-      </div>
 
       <div id="kanji">—</div>
 
@@ -339,11 +333,15 @@
       <div id="resultado"></div>
 
       <div class="stats">
-        Aciertos: <span id="aciertos">0</span> —
-        Errores: <span id="errores">0</span> —
-        Racha: <span id="racha">0</span> —
-        Mejor racha: <span id="mejorRacha">0</span> —
-        Precisión: <span id="precision">0%</span>
+        <div>
+          Aciertos: <span id="aciertos">0</span> —
+          Errores: <span id="errores">0</span>
+        </div>
+        <div style="margin-top:6px;">
+          Racha: <span id="racha">0</span> —
+          Mejor racha: <span id="mejorRacha">0</span> —
+          Precisión: <span id="precision">0%</span>
+        </div>
       </div>
 
       <div class="row" style="margin-top: 14px;">
@@ -400,10 +398,14 @@
       </div>
 
       <div class="sep"></div>
-
+      
       <div class="hint" style="text-align:left;">
-        <b>Requisito:</b> Abre esto desde servidor (GitHub Pages / Live Server) para que funcione el <code class="kbd">fetch</code> a <code class="kbd">data/2136.json</code>.
+        <div><span class="pill" id="pillGrados">Grados activos: —</span></div>
+        <div style="margin-top:8px;"><span class="pill" id="pillPool">Pool: —</span></div>
+        <div style="margin-top:8px;"><span class="pill" id="pillModo">Modo: —</span></div>
+        <div style="margin-top:8px;"><span class="pill" id="pillScope">Distractores: —</span></div>
       </div>
+
     </div>
 
   </div>
