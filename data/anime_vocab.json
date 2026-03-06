@@ -741,6 +741,48 @@
         { "kanji": "奥", "significado": "profundo; interior; secreto" },
         { "kanji": "義", "significado": "principio; significado; justicia (en compuestos)" }
       ]
+    },
+    {
+      "cancion": "FUTURE (parte 2)",
+      "artista": "Little Viking",
+      "nota": "Material elaborado por Asallam Sensei",
+      "vocabulario": [
+        { "jp": "ほどいたら", "romaji": "hodoitara", "es": "si desenredas; si desatas (hilo, nudo, trenza, etc.)" },
+        { "jp": "にかけた", "romaji": "ni kaketa", "es": "puse en; confié en; deposité en; colgué en" },
+        { "jp": "続いてゆく", "romaji": "tsuzuite yuku", "es": "seguir avanzando; continuar hacia adelante" },
+        { "jp": "気持ち", "romaji": "kimochi", "es": "sentimiento; emoción" },
+        { "jp": "このみち", "romaji": "kono michi", "es": "este camino" },
+    
+        { "jp": "行かない", "romaji": "ikanai", "es": "no ir; no llegaré (según el contexto)" },
+        { "jp": "ハゲシク", "romaji": "hageshiku", "es": "intensamente; apasionadamente" },
+        { "jp": "始まる", "romaji": "hajimaru", "es": "comenzar; empezar" },
+        { "jp": "さぁ行こう", "romaji": "saa yukou", "es": "¡anda, vamos!; ¡vamos, adelante!" },
+        { "jp": "からみ合う", "romaji": "karamiau", "es": "entrelazarse; enredarse mutuamente" },
+    
+        { "jp": "願い", "romaji": "negai", "es": "deseo; plegaria" },
+        { "jp": "また探せば", "romaji": "mata sagaseba", "es": "si vuelves a buscar; si buscas otra vez" },
+        { "jp": "枯れる事のない", "romaji": "kareru koto no nai", "es": "que no se marchita; que nunca se seca" },
+        { "jp": "夢みる", "romaji": "yume miru", "es": "soñar (lit. ver un sueño)" },
+        { "jp": "ひとつ", "romaji": "hitotsu", "es": "uno; uno solo (contador general)" }
+      ],
+      "kanji": [
+        { "kanji": "続", "significado": "continuar, seguir" },
+        { "kanji": "気", "significado": "espíritu, energía, ánimo" },
+        { "kanji": "持", "significado": "tener, sostener" },
+        { "kanji": "道", "significado": "camino, vía" },
+        { "kanji": "行", "significado": "ir" },
+    
+        { "kanji": "始", "significado": "comenzar" },
+        { "kanji": "願", "significado": "deseo, pedir" },
+        { "kanji": "探", "significado": "buscar, explorar" },
+        { "kanji": "枯", "significado": "marchitarse, secarse" },
+        { "kanji": "事", "significado": "cosa, hecho" },
+    
+        { "kanji": "夢", "significado": "sueño" },
+        { "kanji": "見", "significado": "ver, mirar" },
+        { "kanji": "絡", "significado": "enredar, entrelazar" },
+        { "kanji": "合", "significado": "unir, encajar" }
+      ]
     }
   ]
 }
