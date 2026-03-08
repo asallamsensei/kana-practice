@@ -838,7 +838,7 @@
         { "jp": "全然", "romaji": "zenzen", "es": "para nada; en absoluto" },
         { "jp": "興味ない", "romaji": "kyoumi nai", "es": "no me interesa (lit. no hay interés)" },
         { "jp": "視線", "romaji": "shisen", "es": "mirada" },
-        { "jp": "あんたなんて", "romaji": "anta nante", "es": "alguien como tú" },
+        { "jp": "あんたなんて", "romaji": "anta nante", "es": "alguien como tú; tú de todas las personas (expresión emocional, a veces con reproche o desprecio)" },
         { "jp": "ムカつく", "romaji": "muka tsuku", "es": "me saca de quicio; me fastidia; me irrita (coloquial)" },
     
         { "jp": "言葉", "romaji": "kotoba", "es": "palabras" },
@@ -898,8 +898,7 @@
         { "jp": "ほっといて", "romaji": "hottoite", "es": "¡déjame en paz!; déjame tranquilo" },
         { "jp": "好きだよ", "romaji": "suki da yo", "es": "te quiero; me gustas" },
         { "jp": "惑わせる", "romaji": "madowaseru", "es": "confundir; hacer dudar; desconcertar" },
-        { "jp": "前言撤回", "romaji": "zengen tekkai", "es": "retractarse; retirar lo dicho; retirar mis palabras" },
-        { "jp": "あんたなんて", "romaji": "anta nante", "es": "alguien como tú; tú de todas las personas (expresión emocional, a veces con reproche o desprecio)" }
+        { "jp": "前言撤回", "romaji": "zengen tekkai", "es": "retractarse; retirar lo dicho; retirar mis palabras" }
       ],
       "kanji": [
         { "kanji": "茜", "significado": "rojo carmesí; rojo profundo" },
