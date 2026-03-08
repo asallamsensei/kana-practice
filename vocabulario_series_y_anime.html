@@ -629,13 +629,19 @@ function shuffle(arr){
 }
 
 // arma 3 opciones únicas con un "correct"
-function build3Options(pool, correctValue, mapFn){
+function build3Options(pool, correctValue, mapFn, allowFn = null){
   const opciones = [correctValue];
 
   let tries = 0;
-  while(opciones.length < 3 && tries < 200){
+  while(opciones.length < 3 && tries < 300){
     tries++;
-    const v = mapFn(pick(pool));
+
+    const item = pick(pool);
+    if(!item) continue;
+
+    if(allowFn && !allowFn(item)) continue;
+
+    const v = mapFn(item);
     if(v != null && v !== "" && !opciones.includes(v)) opciones.push(v);
   }
 
@@ -659,7 +665,13 @@ function preguntaVocabJP_ES(b){
   const poolOpciones = getVocabPool(poolScope);
   const basePool = (poolOpciones.length >= 3) ? poolOpciones : poolLocal;
 
-  const opciones = build3Options(basePool, correct, x => x.es);
+  const opciones = build3Options(
+    basePool,
+    correct,
+    x => x.es,
+    x => x.jp !== v.jp
+  );
+  
   const letras = ["a","b","c"];
   const correcta = letras[opciones.indexOf(correct)];
 
@@ -707,7 +719,13 @@ function preguntaDictado_ES(b){
   const poolOpciones = getVocabPool(poolScope);
   const basePool = (poolOpciones.length >= 3) ? poolOpciones : poolLocal;
 
-  const opciones = build3Options(basePool, correct, x => x.es);
+  const opciones = build3Options(
+    basePool,
+    correct,
+    x => x.es,
+    x => x.jp !== v.jp
+  );
+  
   const letras = ["a","b","c"];
   const correcta = letras[opciones.indexOf(correct)];
 
