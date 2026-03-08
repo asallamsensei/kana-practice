@@ -336,7 +336,7 @@
         { "jp": "ありがたい", "romaji": "arigatai", "es": "es de agradecer" },
         { "jp": "ところで", "romaji": "tokoro de", "es": "por cierto; a propósito" },
         { "jp": "いやいや", "romaji": "iya iya", "es": "no no, esto no es nada (modestia)" },
-        { "jp": "助けて！", "romaji": "tasukete!", "es": "¡ayúdenme!" },
+        { "jp": "助けて！", "romaji": "tasukete", "es": "¡ayúdenme!" },
         { "jp": "野武士", "romaji": "nobushi", "es": "bandidos armados; guerreros de campo" },
         { "jp": "水草", "romaji": "mizukusa", "es": "hierbas acuáticas" },
     
