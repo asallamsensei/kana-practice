@@ -69,9 +69,10 @@
 
   .panelGrid{
     display:grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     gap: 12px;
     justify-items: center;
+    width: 100%;
   }
 
   .row{
@@ -123,6 +124,18 @@
     border-color: transparent;
   }
 
+  .btn-mode.mix-activo{
+    background: var(--dictadoRed);
+    border-color: transparent;
+    color: white;
+  }
+  
+  .btn-mode.mix-sombra{
+    background: var(--dictadoRedSoft);
+    border-color: transparent;
+    color: white;
+  }
+  
   .big{
     text-align:center;
     padding: 20px 10px 10px;
@@ -173,14 +186,15 @@
 
   .switch{
     display:grid;
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-    gap:8px;
-    width:min(560px, 100%);
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap:10px;
+    width:min(760px, 100%);
   }
+  
   .switch .btn-mode{
-    padding: 9px 12px;
+    padding: 10px 14px;
     border-radius: 999px;
-    font-size: 13px;
+    font-size: 15px;
     width:100%;
   }
 
@@ -228,9 +242,10 @@
   
   .actions{
     display:grid;
-    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(150px, 210px));
+    justify-content:center;
     gap:10px;
-    width:min(760px, 100%);
+    width:min(460px, 100%);
     margin-top: 6px;
   }
   .actions .btn, .actions .btn-ghost{
@@ -247,8 +262,8 @@
     <h1>Vocabulario N5 — Asallam Sensei</h1>
 
     <div class="switch">
-      <button class="btn btn-mode" id="m-jp-es" type="button" onclick="setModo('jp-es')">JP → ES</button>
-      <button class="btn btn-mode" id="m-es-jp" type="button" onclick="setModo('es-jp')">ES → JP</button>
+      <button class="btn btn-mode" id="m-jp-es" type="button" onclick="clickJpEs()">JP → ES</button>
+      <button class="btn btn-mode" id="m-es-jp" type="button" onclick="clickEsJp()">ES → JP</button>
       <button class="btn btn-mode" id="m-dictado" type="button" onclick="setModo('dictado')">Dictado</button>
       <button class="btn btn-mode" id="m-mixto" type="button" onclick="setModo('mixto')">Mix</button>
     </div>
@@ -355,6 +370,7 @@ function precisionPct(){
 let modoActual = "mixto";   // "jp-es" | "es-jp" | "dictado" | "mixto"
 let rondaDir = "jp-es";     // "jp-es" | "es-jp"
 let rondaEsDictado = false; // true/false
+let dictadoDirs = new Set(["jp-es", "es-jp"]);
 
 // ====== AUDIO (EXACTO AL JSON) ======
 const AUDIO_BASE = "data/audios/n5/";   // carpeta mp3
@@ -421,21 +437,37 @@ function limpiarActivos(){
   ["m-jp-es","m-es-jp","m-dictado","m-mixto"].forEach(id=>{
     const el = document.getElementById(id);
     if(!el) return;
-    el.classList.remove("activo");
+    el.classList.remove("activo","mix-activo","mix-sombra");
   });
 }
 
 function aplicarUI(){
   limpiarActivos();
 
-  const map = {
-    "jp-es": "m-jp-es",
-    "es-jp": "m-es-jp",
-    "dictado": "m-dictado",
-    "mixto": "m-mixto"
-  };
+  const btnJpEs = document.getElementById("m-jp-es");
+  const btnEsJp = document.getElementById("m-es-jp");
+  const btnDict = document.getElementById("m-dictado");
+  const btnMix  = document.getElementById("m-mixto");
 
-  document.getElementById(map[modoActual])?.classList.add("activo");
+  if(modoActual === "mixto"){
+    btnMix?.classList.add("mix-activo");
+    btnJpEs?.classList.add("mix-sombra");
+    btnEsJp?.classList.add("mix-sombra");
+    btnDict?.classList.add("mix-sombra");
+  }
+  else if(modoActual === "dictado"){
+    btnDict?.classList.add("activo");
+
+    btnJpEs?.classList.toggle("activo", dictadoDirs.has("jp-es"));
+    btnEsJp?.classList.toggle("activo", dictadoDirs.has("es-jp"));
+  }
+  else if(modoActual === "jp-es"){
+    btnJpEs?.classList.add("activo");
+  }
+  else if(modoActual === "es-jp"){
+    btnEsJp?.classList.add("activo");
+  }
+
   document.getElementById("inputRow").style.display = rondaEsDictado ? "none" : "flex";
 }
 
@@ -448,14 +480,37 @@ function setModo(nuevoModo){
   if(lista.length) siguiente();
 }
 
-function toggleDictado(){
-  dictadoOn = !dictadoOn;
+function clickJpEs(){
+  if(modoActual === "dictado"){
+    toggleDictadoDir("jp-es");
+  }else{
+    setModo("jp-es");
+  }
+}
+
+function clickEsJp(){
+  if(modoActual === "dictado"){
+    toggleDictadoDir("es-jp");
+  }else{
+    setModo("es-jp");
+  }
+}
+
+function toggleDictadoDir(dir){
+  if(dictadoDirs.has(dir)){
+    if(dictadoDirs.size === 1) return; // nunca dejar 0
+    dictadoDirs.delete(dir);
+  }else{
+    dictadoDirs.add(dir);
+  }
+
   aplicarUI();
 
   yaValidado = false;
   limpiarResultado();
-  if(lista.length) siguiente();
+  if(lista.length && modoActual === "dictado") siguiente();
 }
+
 
 // ====== TEXTO SEGÚN DIRECCIÓN DE LA RONDA ======
 function textoPregunta(item){
@@ -575,9 +630,9 @@ function elegirRonda(){
   }
 
   if(modoActual === "dictado"){
-    return (Math.random() < 0.5)
-      ? { dir: "jp-es", dictado: true }
-      : { dir: "es-jp", dictado: true };
+    const dirs = [...dictadoDirs];
+    const dir = dirs[Math.floor(Math.random() * dirs.length)];
+    return { dir, dictado: true };
   }
 
   // Mix = super mixto
