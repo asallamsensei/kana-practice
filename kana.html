@@ -252,6 +252,10 @@
     color: rgba(238,242,255,.55);
   }
 
+  #kana:empty{
+    display: none;
+  }
+  
   #respuestaUsuario:focus{
     border-color: rgba(125,92,255,.7);
     box-shadow: 0 0 0 3px rgba(125,92,255,.18);
@@ -639,15 +643,18 @@ function limpiarUI(){
 function actualizarBotonAudio(){
   const btn = document.getElementById("btnReplay");
   const kanaEl = document.getElementById("kana");
+  const box = document.getElementById("kanaBox");
 
-  if (!btn || !kanaEl) return;
+  if (!btn || !kanaEl || !box) return;
 
   btn.classList.remove("visible", "big-sound");
   kanaEl.classList.remove("dictado");
+  box.classList.remove("dictado-only");
 
   if (quizModo === "dictado") {
     btn.classList.add("visible", "big-sound");
     kanaEl.classList.add("dictado");
+    box.classList.add("dictado-only");
   }
 }
 
@@ -816,7 +823,7 @@ function siguienteKana(){
   const kanaEl = document.getElementById("kana");
 
   if (quizModo === "dictado") {
-    kanaEl.innerText = "🔊";
+    kanaEl.innerText = "";
   } else {
     kanaEl.innerText = (quizModo === "jp_es") ? k : r;
   }
