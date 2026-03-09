@@ -139,16 +139,6 @@
     border-color: transparent;
   }
 
-  input{
-    background: rgba(255,255,255,.08);
-    border: 1px solid var(--border);
-    color: var(--text);
-    padding: 10px 12px;
-    border-radius: 12px;
-    outline:none;
-    font-size: 15px;
-  }
-
   .btn{
     border: none;
     border-radius: 12px;
@@ -322,13 +312,6 @@ body.modo-es-jp #opciones{
         <button class="btn btn-ghost" onclick="responder('c')">c</button>
       </div>
 
-      <div class="row" style="margin-top: 12px;">
-        <input id="respuestaUsuario" type="text"
-               placeholder="a / b / c + Enter"
-               maxlength="1"
-               onkeydown="manejarEnter(event)">
-      </div>
-
       <div id="resultado"></div>
 
       <div class="stats">
@@ -350,8 +333,8 @@ body.modo-es-jp #opciones{
 
       <!-- <div class="sep"></div> -->
       <div class="hint" id="ayuda" style="display:none;">
-        <b>Atajos:</b> <code class="kbd">a</code>/<code class="kbd">b</code>/<code class="kbd">c</code> + <code class="kbd">Enter</code> valida.
-        <code class="kbd">Enter</code> de nuevo pasa.
+        <b>Atajos:</b> <code class="kbd">a</code>, <code class="kbd">b</code>, <code class="kbd">c</code> responden.
+        <code class="kbd">Enter</code> pasa a la siguiente.
       </div>
     </div>
 
@@ -399,7 +382,7 @@ body.modo-es-jp #opciones{
       <div class="sep"></div>
 
       <div class="hint">
-        Enter = validar / siguiente.
+        A / B / C = responder · Enter = siguiente
       </div>
     </div>
   </div>
@@ -412,7 +395,6 @@ let DATA = { bloques: [] };
 let bloqueIdx = 0;
 let modoActual = "jp_es";
 let yaValidado = false;
-let focoAutomatico = false; // por defecto: NO enfocar (evita teclado móvil)
 let actual = null;
 
 let aciertos = 0;
@@ -590,17 +572,6 @@ function seleccionarNinguna(){
    UI helpers
 =============================== */
 function $(id){ return document.getElementById(id); }
-
-// Evita teclado móvil por defecto; se activa si el usuario interactúa con input / teclado
-document.addEventListener("pointerdown", (e) => {
-  focoAutomatico = (e.target && e.target.id === "respuestaUsuario");
-});
-document.addEventListener("keydown", (e) => {
-  const k = (e.key || "").toLowerCase();
-  if (k === "enter" || k === "a" || k === "b" || k === "c") {
-    focoAutomatico = true;
-  }
-});
 
 function limpiarResultado(){
   $("resultado").innerText = "";
@@ -911,15 +882,8 @@ else{
   $("opciones").innerHTML =
     `a) ${actual.opciones[0]}<br>b) ${actual.opciones[1]}<br>c) ${actual.opciones[2]}`;
 
-  $("respuestaUsuario").value = "";
-  $("respuestaUsuario").placeholder = (actual.tipo === "dict_es" || actual.tipo === "dict_jp")
-    ? "Dictado: a / b / c + Enter"
-    : "a / b / c + Enter";
-  $("respuestaUsuario").maxLength = 1;
-
   limpiarResultado();
   yaValidado = false;
-  if (focoAutomatico) $("respuestaUsuario").focus();
 
   // dictado: reproduce apenas sale
   if(actual.tipo === "dict_es" || actual.tipo === "dict_jp"){
@@ -931,41 +895,21 @@ else{
 }
 
 function responder(letra){
-  focoAutomatico = false;
   if(yaValidado) return;
-  $("respuestaUsuario").value = letra;
-  verificar();
+  verificar(letra);
 }
 
-function verificar(){
-  const input = ($("respuestaUsuario").value || "").trim().toLowerCase();
+function verificar(letra = ""){
+  const input = String(letra || "").trim().toLowerCase();
   const res = $("resultado");
 
-  // AUDIO al validar
-  // AUDIO al validar (romaji)
   if(actual?.extra?.romaji){
     playAudioForRomaji(actual.extra.romaji);
   }
 
-  // ENTER vacío = revelar + error
-  if(input === ""){
-    const extra = (actual.extra?.romaji && ["vocab_jp_es","vocab_es_jp","dict_es","dict_jp"].includes(actual.tipo))
-      ? `\nRomaji: ${actual.extra.romaji}`
-      : "";
-
-    res.className = "incorrecto";
-    res.innerText = `Respuesta: ${actual.correcta}) ${actual.respuesta}${extra}`;
-    errores++;
-    racha = 0;
-    pintarStats();
-    guardarStatsActual();
-    yaValidado = true;
-    return;
-  }
-
   if(!["a","b","c"].includes(input)){
     res.className = "incorrecto";
-    res.innerText = "Usa solo: a / b / c";
+    res.innerText = "Usa solo los botones: a / b / c";
     return;
   }
 
@@ -989,16 +933,6 @@ function verificar(){
   pintarStats();
   guardarStatsActual();
   yaValidado = true;
-}
-
-function manejarEnter(event){
-  if(event.key !== "Enter") return;
-
-  if(!yaValidado){
-    verificar();
-  } else {
-    siguiente();
-  }
 }
 
 function resetStats(){
@@ -1101,6 +1035,22 @@ fetch("data/anime_vocab.json")
     $("resultado").innerText = "Revisa la ruta y que estés en servidor (GitHub Pages / Live Server).";
     console.error(err);
   });
+
+document.addEventListener("keydown", (event) => {
+  const k = (event.key || "").toLowerCase();
+
+  if(k === "a" || k === "b" || k === "c"){
+    event.preventDefault();
+    if(!yaValidado) responder(k);
+    return;
+  }
+
+  if(k === "enter"){
+    event.preventDefault();
+    if(yaValidado) siguiente();
+  }
+});
+  
 </script>
 </body>
 </html>
