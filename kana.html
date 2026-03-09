@@ -235,29 +235,8 @@
     justify-content:center;
   }
 
-  #respuestaUsuario{
-    width:min(100%, 360px);
-    background: rgba(255,255,255,.08);
-    border: 1px solid var(--border);
-    color: var(--text);
-    padding: 14px 14px;
-    border-radius: 14px;
-    outline:none;
-    font-size: clamp(18px, 4.2vw, 24px);
-    text-align:center;
-  }
-
-  #respuestaUsuario::placeholder{
-    color: rgba(238,242,255,.55);
-  }
-
   #kana:empty{
     display: none;
-  }
-  
-  #respuestaUsuario:focus{
-    border-color: rgba(125,92,255,.7);
-    box-shadow: 0 0 0 3px rgba(125,92,255,.18);
   }
 
   #nota-teclado{
@@ -281,6 +260,16 @@
     min-width: 150px;
   }
 
+  .opcion-btn:disabled{
+    opacity: 1;
+    cursor: default;
+  }
+  
+  .opcion-btn:disabled:hover{
+    transform: none;
+    filter: none;
+  }
+  
   #estadisticas{
     margin-top: 14px;
     text-align:center;
@@ -369,11 +358,6 @@
       font-size: 46px;
     }
 
-    #respuestaUsuario{
-      width:100%;
-      font-size: 20px;
-    }
-
     .chips{
       gap:8px;
     }
@@ -392,6 +376,74 @@
       padding: 7px 10px;
     }
   }
+
+.opciones-wrap{
+  margin-top: 16px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+}
+
+.opcion-btn{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  justify-content: flex-start;
+  text-align: left;
+  padding: 14px 16px;
+  border-radius: 16px;
+  background: rgba(255,255,255,.08);
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.opcion-btn:hover{
+  background: rgba(255,255,255,.12);
+}
+
+.opcion-letra{
+  min-width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(125,92,255,.18);
+  border: 1px solid rgba(125,92,255,.45);
+  color: #efe9ff;
+  font-weight: 900;
+}
+
+.opcion-texto{
+  flex: 1;
+  word-break: break-word;
+}
+
+.opcion-btn.correcta{
+  background: rgba(34,197,94,.18);
+  border-color: rgba(34,197,94,.45);
+}
+
+.opcion-btn.incorrecta{
+  background: rgba(239,68,68,.18);
+  border-color: rgba(239,68,68,.45);
+}
+
+@media (max-width: 420px){
+  .opcion-btn{
+    font-size: 16px;
+    padding: 12px 13px;
+  }
+
+  .opcion-letra{
+    min-width: 34px;
+    height: 34px;
+  }
+}
+  
 </style>
 </head>
 <body>
@@ -440,25 +492,21 @@
 
         <div id="respuesta"></div>
 
-        <div class="input-wrap">
-          <form autocomplete="off">
-            <input
-              id="respuestaUsuario"
-              type="search"
-              placeholder="Escribe aquí"
-              autocomplete="off"
-              autocorrect="off"
-              autocapitalize="off"
-              spellcheck="false"
-              inputmode="text"
-              name="kana-input"
-              onkeydown="manejarEnter(event)"
-            >
-          </form>  
-        </div>
-
-        <div id="nota-teclado">
-          💡 Te recomiendo usar un teclado japonés diferente al QWERTY en este ejercicio.
+        <div id="opciones" class="opciones-wrap">
+          <button id="btn-opcion-a" class="opcion-btn" onclick="responderOpcion(0)">
+            <span class="opcion-letra">A</span>
+            <span id="texto-opcion-a" class="opcion-texto">...</span>
+          </button>
+        
+          <button id="btn-opcion-b" class="opcion-btn" onclick="responderOpcion(1)">
+            <span class="opcion-letra">B</span>
+            <span id="texto-opcion-b" class="opcion-texto">...</span>
+          </button>
+        
+          <button id="btn-opcion-c" class="opcion-btn" onclick="responderOpcion(2)">
+            <span class="opcion-letra">C</span>
+            <span id="texto-opcion-c" class="opcion-texto">...</span>
+          </button>
         </div>
 
         <div id="acciones">
@@ -483,11 +531,6 @@
         </div>
 
         <div class="sep"></div>
-
-        <div class="hint">
-          <b>Atajos:</b>
-          <code class="kbd">Enter</code> valida y luego pasa a la siguiente.<code class="kbd">🔊</code>.
-        </div>
       </div>
 
     </div>
@@ -533,7 +576,6 @@ fetch("data/kana.json")
     aplicarFiltroPrincipiante();
 
     setModo("hiragana");
-    setQuizModo("jp_es");
   });
 
 /* ===============================
@@ -551,7 +593,8 @@ let mejorRacha = 0;
 
 let quizModo = "jp_es";        // jp_es | es_jp | dictado
 let quizModoPrevio = "jp_es";  // recuerda el último no-dictado
-
+let opcionesActuales = [];
+let indiceCorrecto = 0;
 /* ===============================
    STATS (localStorage)
 =============================== */
@@ -592,6 +635,71 @@ function cargarStatsActual(){
   actualizarEstadisticas();
 }
 
+function setBotonesOpcionesHabilitados(estado){
+  document.querySelectorAll(".opcion-btn").forEach(btn => {
+    btn.disabled = !estado;
+  });
+}
+  
+function limpiarEstadoBotones(){
+  document.querySelectorAll(".opcion-btn").forEach(btn => {
+    btn.classList.remove("correcta", "incorrecta");
+  });
+}
+  
+function generarOpciones(){
+  if (!kanaLista.length) return;
+
+  const correcta = kanaLista[actual];
+  const correctaValor = valorOpcion(correcta);
+
+  const pool = kanaLista.filter(item => {
+    const v = valorOpcion(item);
+    return v !== correctaValor;
+  });
+
+  const distractores = mezclarArray(pool).slice(0, 2);
+
+  opcionesActuales = mezclarArray([correcta, ...distractores]);
+  indiceCorrecto = opcionesActuales.findIndex(item => item === correcta);
+
+  const textos = opcionesActuales.map(item => valorOpcion(item));
+
+  document.getElementById("texto-opcion-a").innerText = textos[0] || "";
+  document.getElementById("texto-opcion-b").innerText = textos[1] || "";
+  document.getElementById("texto-opcion-c").innerText = textos[2] || "";
+
+  limpiarEstadoBotones();
+}
+  
+function valorOpcion(item){
+  const kana = item[0];
+  const romaji = item[1];
+
+  if (quizModo === "jp_es") {
+    return romaji;
+  }
+
+  if (quizModo === "es_jp") {
+    return kana;
+  }
+
+  if (quizModo === "dictado") {
+    return kana + " / " + romaji;
+  }
+
+  return romaji;
+}
+  
+function mezclarArray(arr){
+  const copia = [...arr];
+  for (let i = copia.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [copia[i], copia[j]] = [copia[j], copia[i]];
+  }
+  return copia;
+}
+  
 function guardarStatsActual(){
   const key = statsKeyActual();
   const stats = cargarStats();
@@ -633,19 +741,15 @@ function aplicarVisualQuizModo(){
 }
 
 function aplicarPlaceholderQuizModo(){
-  const inp = document.getElementById("respuestaUsuario");
-  if (!inp) return;
-  inp.type = "text";
-  if (quizModo === "jp_es") inp.placeholder = "Escribe el romaji aquí";
-  else if (quizModo === "es_jp") inp.placeholder = "Escribe el kana aquí";
-  else inp.placeholder = "Escribe kana o romaji";
+  return;
 }
 
 function limpiarUI(){
   document.getElementById("respuesta").innerText = "";
   document.getElementById("respuesta").className = "";
-  document.getElementById("respuestaUsuario").value = "";
   yaValidado = false;
+  limpiarEstadoBotones();
+  setBotonesOpcionesHabilitados(true);
 }
 
 function actualizarBotonAudio(){
@@ -723,10 +827,6 @@ function toggleDictado(){
   cargarStatsActual();
   limpiarUI();
   siguienteKana();
-
-  if (quizModo === "dictado") {
-    reproducirAudioKana(kanaLista[actual][1]);
-  }
 }
 
 /* ===============================
@@ -838,124 +938,57 @@ function siguienteKana(){
 
   document.getElementById("respuesta").innerText = "";
   document.getElementById("respuesta").className = "";
-  document.getElementById("respuestaUsuario").value = "";
   yaValidado = false;
-  document.getElementById("respuestaUsuario").focus();
+
+  generarOpciones();
+  setBotonesOpcionesHabilitados(true);
 
   if (quizModo === "dictado") {
     reproducirAudioKana(r);
   }
 }
 
-// Convierte Katakana -> Hiragana
-function kataToHira(str){
-  return (str || "").replace(/[\u30A1-\u30F6]/g, ch => {
-    return String.fromCharCode(ch.charCodeAt(0) - 0x60);
-  });
-}
+function responderOpcion(indice){
+  if (yaValidado) return;
 
-function verificarRespuesta(){
-  const kRaw = kanaLista[actual][0];
-  const rRaw = kanaLista[actual][1];
+  const correcta = kanaLista[actual];
+  const correctaTexto = valorOpcion(correcta);
 
-  const k = (kRaw || "").normalize("NFKC").normalize("NFC");
-  const r = (rRaw || "").trim().toLowerCase();
+  const btns = document.querySelectorAll(".opcion-btn");
+  const btnElegido = btns[indice];
+  const btnCorrecto = btns[indiceCorrecto];
 
-  const raw = document.getElementById("respuestaUsuario").value.trim();
+  reproducirAudioKana(correcta[1]);
 
-  if (quizModo === "dictado") {
-    reproducirAudioKana(r);
+  if (indice === indiceCorrecto) {
+    document.getElementById("respuesta").innerText = "Correcto ✔ (" + correctaTexto + ")";
+    document.getElementById("respuesta").className = "correcto";
 
-    const rawNorm  = (raw || "").normalize("NFKC").normalize("NFC");
-    const rawLower = raw.toLowerCase();
-    const pareceRomaji = /^[a-z\- ]+$/i.test(rawLower);
+    btnElegido.classList.add("correcta");
 
-    let esCorrecto = false;
-
-    if (pareceRomaji) {
-      const user = rawLower.replace(/\s+/g,"");
-      const opciones = romajiAlternativas(r);
-      esCorrecto = opciones.includes(user);
-    } else {
-      const ok1 = k;
-      const ok2 = kataToHira(ok1);
-      const u1  = rawNorm;
-      const u2  = kataToHira(u1);
-      esCorrecto = (u1 === ok1) || (u2 === ok2);
-    }
-
-    if (esCorrecto) {
-      document.getElementById("respuesta").innerText = "Correcto ✔ (" + k + " / " + r + ")";
-      document.getElementById("respuesta").className = "correcto";
-      aciertos++;
-      racha++;
-      if (racha > mejorRacha) mejorRacha = racha;
-    } else {
-      document.getElementById("respuesta").innerText = "Incorrecto ✘ (era: " + k + " / " + r + ")";
-      document.getElementById("respuesta").className = "incorrecto";
-      errores++;
-      racha = 0;
-    }
-
-    actualizarEstadisticas();
-    guardarStatsActual();
-    yaValidado = true;
-    return;
-  }
-
-  reproducirAudioKana(r);
-
-  if (quizModo === "jp_es") {
-    const user = raw.toLowerCase();
-
-    if (user === r) {
-      document.getElementById("respuesta").innerText = "Correcto ✔ (" + r + ")";
-      document.getElementById("respuesta").className = "correcto";
-      aciertos++;
-      racha++;
-      if (racha > mejorRacha) mejorRacha = racha;
-    } else {
-      document.getElementById("respuesta").innerText = "Incorrecto ✘ (era: " + r + ")";
-      document.getElementById("respuesta").className = "incorrecto";
-      errores++;
-      racha = 0;
-    }
+    aciertos++;
+    racha++;
+    if (racha > mejorRacha) mejorRacha = racha;
   } else {
-    const u = (raw || "").normalize("NFKC").normalize("NFC");
-    const ok1 = k;
-    const ok2 = kataToHira(ok1);
-    const esCorrecto = (u === ok1) || (kataToHira(u) === ok2);
+    document.getElementById("respuesta").innerText = "Incorrecto ✘ (era: " + correctaTexto + ")";
+    document.getElementById("respuesta").className = "incorrecto";
 
-    if (esCorrecto) {
-      document.getElementById("respuesta").innerText = "Correcto ✔ (" + ok1 + ")";
-      document.getElementById("respuesta").className = "correcto";
-      aciertos++;
-      racha++;
-      if (racha > mejorRacha) mejorRacha = racha;
-    } else {
-      document.getElementById("respuesta").innerText = "Incorrecto ✘ (era: " + ok1 + ")";
-      document.getElementById("respuesta").className = "incorrecto";
-      errores++;
-      racha = 0;
-    }
+    btnElegido.classList.add("incorrecta");
+    btnCorrecto.classList.add("correcta");
+
+    errores++;
+    racha = 0;
   }
 
   actualizarEstadisticas();
   guardarStatsActual();
+
   yaValidado = true;
+  setBotonesOpcionesHabilitados(false);
 }
 
 function aplicarNotaTeclado(){
-  const nota = document.getElementById("nota-teclado");
-  if (!nota) return;
-  nota.style.display = (quizModo === "es_jp") ? "block" : "none";
-}
-
-function romajiAlternativas(r){
-  const base = (r || "").trim().toLowerCase().replace(/\s+/g,"");
-
-  if (base === "wo") return ["wo","o"];
-  return [base];
+  return;
 }
 
 function actualizarEstadisticas(){
@@ -970,32 +1003,25 @@ function actualizarEstadisticas(){
    BOTONES ACCIONES
 =============================== */
 function siguienteDesdeBoton(){
-  if (!yaValidado) {
-    verificarRespuesta();
-    return;
-  }
-
-  yaValidado = false;
-  document.getElementById("respuesta").innerText = "";
+  if (!yaValidado) return;
   siguienteKana();
 }
 
 function mostrarRespuesta(){
   if (yaValidado) return;
 
-  let correcto;
-  if (quizModo === "dictado") {
-    correcto = kanaLista[actual][0] + " / " + kanaLista[actual][1];
-  } else if (quizModo === "jp_es") {
-    correcto = kanaLista[actual][1];
-  } else {
-    correcto = kanaLista[actual][0];
-  }
+  const correcta = kanaLista[actual];
+  const correcto = valorOpcion(correcta);
 
-  reproducirAudioKana(kanaLista[actual][1]);
+  reproducirAudioKana(correcta[1]);
 
   document.getElementById("respuesta").innerText = "Mostrada ✘ (era: " + correcto + ")";
   document.getElementById("respuesta").className = "incorrecto";
+
+  const btns = document.querySelectorAll(".opcion-btn");
+  if (btns[indiceCorrecto]) {
+    btns[indiceCorrecto].classList.add("correcta");
+  }
 
   errores++;
   racha = 0;
@@ -1003,6 +1029,7 @@ function mostrarRespuesta(){
   guardarStatsActual();
 
   yaValidado = true;
+  setBotonesOpcionesHabilitados(false);
 }
 
 function resetStatsModo(){
@@ -1027,50 +1054,43 @@ function resetStatsModo(){
 }
 
 /* ===============================
-   ENTER robusto (incluye IME)
+   ATAJOS DE TECLADO
 =============================== */
-let enterPendienteIME = false;
+document.addEventListener("keydown", (event) => {
+  const tag = (document.activeElement?.tagName || "").toLowerCase();
+  const enCampo = tag === "input" || tag === "textarea";
 
-window.addEventListener("DOMContentLoaded", () => {
-  const inp = document.getElementById("respuestaUsuario");
-  if (!inp) return;
+  if (enCampo) return;
 
-  inp.addEventListener("compositionend", () => {
-    if (!enterPendienteIME) return;
-    enterPendienteIME = false;
+  const key = event.key.toLowerCase();
 
-    if (!yaValidado) verificarRespuesta();
-    else {
-      yaValidado = false;
-      document.getElementById("respuesta").innerText = "";
-      siguienteKana();
-    }
-  });
-});
-
-function manejarEnter(event){
-  const esEnter =
-    event.key === "Enter" ||
-    event.code === "Enter" ||
-    event.keyCode === 13;
-
-  if (!esEnter) return;
-
-  if (event.isComposing || event.key === "Process") {
-    enterPendienteIME = true;
+  if (key === "a") {
     event.preventDefault();
+    if (!yaValidado) responderOpcion(0);
+    else siguienteKana();
     return;
   }
 
-  event.preventDefault();
-
-  if (!yaValidado) verificarRespuesta();
-  else {
-    yaValidado = false;
-    document.getElementById("respuesta").innerText = "";
-    siguienteKana();
+  if (key === "b") {
+    event.preventDefault();
+    if (!yaValidado) responderOpcion(1);
+    else siguienteKana();
+    return;
   }
-}
+
+  if (key === "c") {
+    event.preventDefault();
+    if (!yaValidado) responderOpcion(2);
+    else siguienteKana();
+    return;
+  }
+
+  if (key === "enter") {
+    event.preventDefault();
+    if (yaValidado) siguienteKana();
+  }
+});
+  
 </script>
 
 </body>
