@@ -385,41 +385,19 @@
 }
 
 .opcion-btn{
-  width: 100%;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  justify-content: flex-start;
-  text-align: left;
-  padding: 14px 16px;
-  border-radius: 16px;
-  background: rgba(255,255,255,.08);
-  border: 1px solid var(--border);
-  color: var(--text);
-  font-size: 18px;
-  font-weight: 700;
+  width:100%;
+  padding:14px 16px;
+  border-radius:16px;
+  background:rgba(255,255,255,.08);
+  border:1px solid var(--border);
+  color:var(--text);
+  font-size:18px;
+  font-weight:700;
+  text-align:center;
 }
 
 .opcion-btn:hover{
   background: rgba(255,255,255,.12);
-}
-
-.opcion-letra{
-  min-width: 38px;
-  height: 38px;
-  border-radius: 10px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(125,92,255,.18);
-  border: 1px solid rgba(125,92,255,.45);
-  color: #efe9ff;
-  font-weight: 900;
-}
-
-.opcion-texto{
-  flex: 1;
-  word-break: break-word;
 }
 
 .opcion-btn.correcta{
@@ -493,20 +471,19 @@
         <div id="respuesta"></div>
 
         <div id="opciones" class="opciones-wrap">
-          <button id="btn-opcion-a" class="opcion-btn" onclick="responderOpcion(0)">
-            <span class="opcion-letra">A</span>
-            <span id="texto-opcion-a" class="opcion-texto">...</span>
-          </button>
         
-          <button id="btn-opcion-b" class="opcion-btn" onclick="responderOpcion(1)">
-            <span class="opcion-letra">B</span>
-            <span id="texto-opcion-b" class="opcion-texto">...</span>
-          </button>
+        <button id="btn-opcion-a" class="opcion-btn" onclick="responderOpcion(0)">
+          <span id="texto-opcion-a">...</span>
+        </button>
         
-          <button id="btn-opcion-c" class="opcion-btn" onclick="responderOpcion(2)">
-            <span class="opcion-letra">C</span>
-            <span id="texto-opcion-c" class="opcion-texto">...</span>
-          </button>
+        <button id="btn-opcion-b" class="opcion-btn" onclick="responderOpcion(1)">
+          <span id="texto-opcion-b">...</span>
+        </button>
+        
+        <button id="btn-opcion-c" class="opcion-btn" onclick="responderOpcion(2)">
+          <span id="texto-opcion-c">...</span>
+        </button>
+        
         </div>
 
         <div id="acciones">
