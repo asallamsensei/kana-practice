@@ -257,18 +257,6 @@
   }
   .opbtns button{ min-width: 90px; }
 
-  input{
-    background: rgba(255,255,255,.08);
-    border: 1px solid var(--border);
-    color: var(--text);
-    padding: 10px 12px;
-    border-radius: 12px;
-    outline:none;
-    font-size: 15px;
-    text-align:center;
-    width: 140px;
-  }
-
   #resultado{
     margin-top: 12px;
     font-size: 20px;
@@ -341,12 +329,6 @@
         <button class="btn btn-ghost" type="button" onclick="responder('c')">c</button>
       </div>
 
-      <div class="row" style="margin-top: 12px;">
-        <input id="respuestaUsuario" type="text"
-               placeholder="a / b / c + Enter"
-               maxlength="1">
-      </div>
-
       <div id="resultado"></div>
 
       <div class="stats">
@@ -369,8 +351,8 @@
       <div class="sep"></div>
 
       <div class="hint" id="ayuda">
-        <code class="kbd">Enter</code> valida.
-        <code class="kbd">Enter</code> de nuevo pasa.
+        Usa <code class="kbd">A</code>, <code class="kbd">B</code> o <code class="kbd">C</code>.
+        <code class="kbd">Enter</code> pasa a la siguiente.
       </div>
     </div>
 
@@ -436,7 +418,6 @@ let listaFiltrada = [];     // filtrado por grados seleccionados
 
 let actual = null;          // { tipo, prompt, opciones, correcta, respuesta, extra }
 let yaValidado = false;
-let focoAutomatico = false; // evita teclado móvil por defecto
 
 const gradosDisponibles = [1,2,3,4,5,6,8];
 let gradosSeleccionados = new Set(gradosDisponibles); // default: todos activos
@@ -519,37 +500,24 @@ function refrescarPills(){
 }
 
 /* Evita teclado móvil por defecto; se activa si el usuario interactúa con input o teclado */
-document.addEventListener("pointerdown", (e) => {
-  focoAutomatico = (e.target && e.target.id === "respuestaUsuario");
-});
+
 document.addEventListener("keydown", (e) => {
   const k = (e.key || "").toLowerCase();
-  if (k === "enter" || k === "a" || k === "b" || k === "c") {
-    focoAutomatico = true;
-  }
 
-  // Atajos: presionar a/b/c responde directo
   if(!yaValidado && ["a","b","c"].includes(k)){
+    e.preventDefault();
     responder(k);
   }
 });
 
-  document.addEventListener("keydown", (e) => {
-  // Enter global: funciona aunque NO estés en el input
+document.addEventListener("keydown", (e) => {
   if (e.key !== "Enter") return;
-
-  // Evita que haga cosas raras (como enviar forms)
   e.preventDefault();
 
-  // Si no hay pregunta cargada aún, no hagas nada
   if (!actual) return;
 
   if (yaValidado) {
-    // Enter después de validar => siguiente pregunta
     siguiente();
-  } else {
-    // Primer Enter => valida (si está vacío, marcará mal y revelará)
-    verificar();
   }
 });
 /* =========================================================
@@ -666,7 +634,12 @@ function pick(arr){
   return arr[Math.floor(Math.random() * arr.length)];
 }
 function shuffle(arr){
-  return arr.slice().sort(()=>Math.random() - 0.5);
+  const copia = arr.slice();
+  for(let i = copia.length - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * (i + 1));
+    [copia[i], copia[j]] = [copia[j], copia[i]];
+  }
+  return copia;
 }
 
 /* arma 3 opciones únicas con un "correct" */
@@ -817,41 +790,22 @@ function siguiente(){
      b) ${actual.opciones[1]}<br>
      c) ${actual.opciones[2]}`;
 
-  $("respuestaUsuario").value = "";
-  $("respuestaUsuario").placeholder = "a / b / c + Enter";
-  $("respuestaUsuario").maxLength = 1;
-
   limpiarResultado();
   yaValidado = false;
 
   refrescarPills();
-
-  if(focoAutomatico) $("respuestaUsuario").focus();
 }
 
 function responder(letra){
-  // no abrir teclado por click en botón
-  focoAutomatico = false;
   if(yaValidado) return;
-  $("respuestaUsuario").value = letra;
-  verificar();
+  verificar(letra);
 }
 
-function verificar(){
-  const input = ($("respuestaUsuario").value || "").trim().toLowerCase();
+function verificar(input){
+  input = (input || "").trim().toLowerCase();
   const res = $("resultado");
 
   // ENTER vacío = revelar + error
-  if(input === ""){
-    res.className = "incorrecto";
-    res.innerText = `Respuesta: ${actual.correcta}) ${actual.respuesta}`;
-    errores++;
-    racha = 0;
-    pintarStats();
-    guardarStats();
-    yaValidado = true;
-    return;
-  }
 
   if(!["a","b","c"].includes(input)){
     res.className = "incorrecto";
