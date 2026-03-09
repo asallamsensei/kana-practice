@@ -468,7 +468,7 @@ function aplicarUI(){
     btnEsJp?.classList.add("activo");
   }
 
-  document.getElementById("inputRow").style.display = rondaEsDictado ? "none" : "flex";
+  document.getElementById("inputRow").style.display = "flex";
 }
 
 function setModo(nuevoModo){
@@ -675,14 +675,10 @@ function siguiente(){
   yaValidado = false;
 
   const input = document.getElementById("respuestaUsuario");
-  if(!rondaEsDictado){
-    input.value = "";
-    input.placeholder = "a / b / c + Enter";
-    input.maxLength = 1;
-    if (focoAutomatico) input.focus({preventScroll:true});
-  }else{
-    input.value = "";
-  }
+  input.value = "";
+  input.placeholder = "a / b / c + Enter";
+  input.maxLength = 1;
+  if (focoAutomatico) input.focus({preventScroll:true});
 
   // (como lo tenías) suena al pasar:
   playAudio(ultimoAudioKey);
@@ -701,34 +697,23 @@ function responder(letra){
   focoAutomatico = false;
   if(yaValidado) return;
 
-  if(!rondaEsDictado){
-    document.getElementById("respuestaUsuario").value = letra;
-  }
+  document.getElementById("respuestaUsuario").value = letra;
   verificar(letra);
 }
 
 function verificar(letraForzada){
   const res = document.getElementById("resultado");
-  const r = (letraForzada || (!rondaEsDictado ? document.getElementById("respuestaUsuario").value : ""))
+
+  const r = (letraForzada || document.getElementById("respuestaUsuario").value || "")
               .toString().toLowerCase().trim();
   
-  if(!rondaEsDictado && !["a","b","c"].includes(r)){
+  if(!["a","b","c"].includes(r)){
     res.className = "incorrecto";
-    res.innerText = `Incorrecto ✘ (era ${correctaLetra}) — ${respuestaCorrecta}`;
-    errores++;
-    racha = 0;
-    pintarStats();
-    guardarStats();
-    yaValidado = true;
-
-    pintarOpciones(r);
-    bloquearOpciones();
-
-    playAudio(ultimoAudioKey);
+    res.innerText = `Usa solo: a / b / c`;
     return;
   }
-
-  const letra = rondaEsDictado ? letraForzada : r;
+  
+  const letra = r;
 
   if(letra === correctaLetra){
     res.className = "correcto";
@@ -786,7 +771,6 @@ function resetStats(){
   
 function manejarEnter(event){
   if(event.key !== "Enter") return;
-  if(rondaEsDictado) return;
 
   if(!yaValidado){
     verificar();
