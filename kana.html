@@ -441,17 +441,20 @@
         <div id="respuesta"></div>
 
         <div class="input-wrap">
-          <input
-            id="respuestaUsuario"
-            type="text"
-            placeholder="Escribe el romaji aquí"
-            autocomplete="off"
-            autocorrect="off"
-            autocapitalize="off"
-            spellcheck="false"
-            inputmode="text"
-            onkeydown="manejarEnter(event)"
-          >
+          <form autocomplete="off">
+            <input
+              id="respuestaUsuario"
+              type="search"
+              placeholder="Escribe aquí"
+              autocomplete="off"
+              autocorrect="off"
+              autocapitalize="off"
+              spellcheck="false"
+              inputmode="text"
+              name="kana-input"
+              onkeydown="manejarEnter(event)"
+            >
+          </form>  
         </div>
 
         <div id="nota-teclado">
