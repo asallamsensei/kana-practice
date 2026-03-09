@@ -341,6 +341,73 @@
   { "kanji": "お父さん", "significado": "papá, padre (para dirigirse al tuyo o al hablar del de otra persona)", "romaji": "otousan" },
   { "kanji": "建物", "significado": "edificio, construcción", "romaji": "tatemono" },
   { "kanji": "降りる", "significado": "bajar, descender", "romaji": "oriru" },
-  { "kanji": "弟", "significado": "hermano menor (el propio)", "romaji": "otouto" }
+  { "kanji": "弟", "significado": "hermano menor (el propio)", "romaji": "otouto" },
+
+  { "kanji": "来週", "significado": "la próxima semana", "romaji": "raishuu" },
+  { "kanji": "庭", "significado": "jardín, patio", "romaji": "niwa" },
+  { "kanji": "外国", "significado": "país extranjero, el extranjero", "romaji": "gaikoku" },
+  { "kanji": "小さい", "significado": "pequeño (adjetivo -i)", "romaji": "chiisai" },
+  { "kanji": "兄弟", "significado": "hermanos (hermanos y hermanas)", "romaji": "kyoudai" },
+  
+  { "kanji": "元気", "significado": "energía, vitalidad, salud, ánimo", "romaji": "genki" },
+  { "kanji": "今年", "significado": "este año", "romaji": "kotoshi" },
+  { "kanji": "食べ物", "significado": "comida, alimentos (lit. cosa para comer)", "romaji": "tabemono" },
+  { "kanji": "赤い", "significado": "rojo (adjetivo -i)", "romaji": "akai" },
+  { "kanji": "五", "significado": "5", "romaji": "go" },
+  
+  { "kanji": "お母さん", "significado": "madre (para referirte a tu mamá o hablar de la mamá de alguien)", "romaji": "okaasan" },
+  { "kanji": "男の子", "significado": "niño, chico", "romaji": "otokonoko" },
+  { "kanji": "飛ぶ", "significado": "volar", "romaji": "tobu" },
+  { "kanji": "三", "significado": "3", "romaji": "san" },
+  
+  { "kanji": "売る", "significado": "vender", "romaji": "uru" },
+  { "kanji": "静か", "significado": "tranquilo, silencioso", "romaji": "shizuka" },
+  { "kanji": "休む", "significado": "descansar; faltar (al trabajo, la escuela)", "romaji": "yasumu" },
+  { "kanji": "大切", "significado": "importante, valioso", "romaji": "taisetsu" },
+  { "kanji": "暇", "significado": "tiempo libre, estar desocupado", "romaji": "hima" },
+  
+  { "kanji": "警官", "significado": "oficial de policía", "romaji": "keikan" },
+  { "kanji": "借りる", "significado": "pedir prestado; alquilar (lado que recibe)", "romaji": "kariru" },
+  { "kanji": "休み", "significado": "descanso, día libre, vacaciones", "romaji": "yasumi" },
+  { "kanji": "練習", "significado": "práctica, entrenamiento", "romaji": "renshuu" },
+  { "kanji": "秋", "significado": "otoño", "romaji": "aki" },
+  
+  { "kanji": "暖かい", "significado": "cálido, templado (adjetivo -i)", "romaji": "atatakai" },
+  { "kanji": "二つ", "significado": "dos (cosas)", "romaji": "futatsu" },
+  { "kanji": "洗う", "significado": "lavar", "romaji": "arau" },
+  { "kanji": "来月", "significado": "el mes que viene", "romaji": "raigetsu" },
+  { "kanji": "隣", "significado": "al lado, vecino", "romaji": "tonari" },
+  
+  { "kanji": "止まる", "significado": "pararse, detenerse (intransitivo)", "romaji": "tomaru" },
+  { "kanji": "一緒に", "significado": "juntos, en compañía", "romaji": "issho ni" },
+  { "kanji": "先週", "significado": "la semana pasada", "romaji": "senshuu" },
+  { "kanji": "痛い", "significado": "me duele, doloroso", "romaji": "itai" },
+  
+  { "kanji": "白い", "significado": "blanco (adjetivo -i)", "romaji": "shiroi" },
+  { "kanji": "少ない", "significado": "poco, escaso (adjetivo -i)", "romaji": "sukunai" },
+  { "kanji": "嫌い", "significado": "no me gusta, me desagrada", "romaji": "kirai" },
+  { "kanji": "立派な", "significado": "magnífico, estupendo, espléndido (adjetivo -na)", "romaji": "rippana" },
+  
+  { "kanji": "お茶", "significado": "té (suele ser té verde)", "romaji": "ocha" },
+  { "kanji": "広い", "significado": "amplio, espacioso (adjetivo -i)", "romaji": "hiroi" },
+  { "kanji": "去年", "significado": "el año pasado", "romaji": "kyonen" },
+  { "kanji": "右", "significado": "derecha", "romaji": "migi" },
+  { "kanji": "上着", "significado": "chaqueta, abrigo (encima de la ropa)", "romaji": "uwagi" },
+  
+  { "kanji": "切る", "significado": "cortar", "romaji": "kiru" },
+  { "kanji": "多分", "significado": "tal vez, probablemente", "romaji": "tabun" },
+  { "kanji": "荷物", "significado": "equipaje, maletas; paquetes", "romaji": "nimotsu" },
+  { "kanji": "返す", "significado": "devolver", "romaji": "kaesu" },
+  { "kanji": "毎年", "significado": "cada año, todos los años", "romaji": "maitoshi / mainen" },
+  
+  { "kanji": "先月", "significado": "el mes pasado", "romaji": "sengetsu" },
+  { "kanji": "大好き", "significado": "me encanta, me gusta muchísimo", "romaji": "daisuki" },
+  { "kanji": "黒い", "significado": "negro (adjetivo -i)", "romaji": "kuroi" },
+  { "kanji": "向こう", "significado": "allá, al otro lado", "romaji": "mukou" },
+  
+  { "kanji": "来年", "significado": "el próximo año", "romaji": "rainen" },
+  { "kanji": "近い", "significado": "cerca, próximo", "romaji": "chikai" },
+  { "kanji": "明るい", "significado": "claro, luminoso; alegre (persona)", "romaji": "akarui" },
+  { "kanji": "皆さん", "significado": "todos (forma respetuosa)", "romaji": "minasan" }
 
 ]
