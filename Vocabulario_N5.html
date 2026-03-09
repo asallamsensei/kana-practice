@@ -334,7 +334,12 @@
         <div id="resultado"></div>
 
         <div class="stats">
-          Aciertos: <span id="aciertos">0</span> — Errores: <span id="errores">0</span>
+          <div>
+            Aciertos: <span id="aciertos">0</span> — Errores: <span id="errores">0</span>
+          </div>
+          <div style="margin-top:6px;">
+            Racha: <span id="racha">0</span> — Mejor racha: <span id="mejorRacha">0</span> — Precisión: <span id="precision">0%</span>
+          </div>
         </div>
 
         <div class="actions">
@@ -354,6 +359,8 @@ let actual = 0;
 let aciertos = 0;
 let focoAutomatico = true; // o false, como prefieras por defecto
 let errores = 0;
+let racha = 0;
+let mejorRacha = 0;
 
 let correctaLetra = "";        // "a"/"b"/"c"
 let respuestaCorrecta = "";    // texto correcto (según dirección de la ronda)
@@ -361,6 +368,38 @@ let yaValidado = false;
 
 const letras = ["a","b","c"];
 
+const STATS_KEY = "n5_vocab_stats_v1";
+
+function cargarStats(){
+  try{
+    const s = JSON.parse(localStorage.getItem(STATS_KEY)) || {};
+    aciertos = s.aciertos || 0;
+    errores = s.errores || 0;
+    racha = s.racha || 0;
+    mejorRacha = s.mejorRacha || 0;
+  }catch{
+    aciertos = 0;
+    errores = 0;
+    racha = 0;
+    mejorRacha = 0;
+  }
+}
+
+function guardarStats(){
+  localStorage.setItem(STATS_KEY, JSON.stringify({
+    aciertos,
+    errores,
+    racha,
+    mejorRacha
+  }));
+}
+
+function precisionPct(){
+  const total = aciertos + errores;
+  if(total <= 0) return "0%";
+  return Math.round((aciertos / total) * 100) + "%";
+}
+  
 // ====== MODOS ======
 let modoBase = "jp-es";   // "jp-es" | "es-jp" | "mixto"
 let dictadoOn = false;    // on/off
@@ -521,9 +560,18 @@ function limpiarResultado(){
   res.className = "";
 }
 
+function precisionPct(){
+  const total = aciertos + errores;
+  if(total <= 0) return "0%";
+  return Math.round((aciertos / total) * 100) + "%";
+}
+  
 function pintarStats(){
   document.getElementById("aciertos").innerText = aciertos;
   document.getElementById("errores").innerText = errores;
+  document.getElementById("racha").innerText = racha;
+  document.getElementById("mejorRacha").innerText = mejorRacha;
+  document.getElementById("precision").innerText = precisionPct();
 }
 
 // ====== CONTROL DE OPCIONES ======
@@ -555,7 +603,9 @@ function accionSiguiente(){
 
   if(!yaValidado){
     errores++;
+    racha = 0;
     pintarStats();
+    guardarStats();
     yaValidado = true;
 
     const res = document.getElementById("resultado");
@@ -669,7 +719,9 @@ function verificar(letraForzada){
     res.className = "incorrecto";
     res.innerText = `Incorrecto ✘ (era ${correctaLetra}) — ${respuestaCorrecta}`;
     errores++;
+    racha = 0;
     pintarStats();
+    guardarStats();
     yaValidado = true;
 
     pintarOpciones(r);
@@ -685,13 +737,20 @@ function verificar(letraForzada){
     res.className = "correcto";
     res.innerText = "Correcto ✔";
     aciertos++;
+    racha++;
+    if(racha > mejorRacha) mejorRacha = racha;
   }else{
     res.className = "incorrecto";
     res.innerText = `Incorrecto ✘ (era ${correctaLetra}) — ${respuestaCorrecta}`;
     errores++;
+    racha = 0;
+    pintarStats();
+    guardarStats();
+    yaValidado = true;
   }
 
   pintarStats();
+  guardarStats();
   yaValidado = true;
 
   pintarOpciones(letra);
@@ -705,7 +764,9 @@ function mostrarRespuesta(){
 
   if(!yaValidado){
     errores++;
+    racha = 0;
     pintarStats();
+    guardarStats();
   }
 
   const res = document.getElementById("resultado");
@@ -720,6 +781,15 @@ function mostrarRespuesta(){
   playAudio(ultimoAudioKey);
 }
 
+function resetStats(){
+  aciertos = 0;
+  errores = 0;
+  racha = 0;
+  mejorRacha = 0;
+  pintarStats();
+  guardarStats();
+}
+  
 function manejarEnter(event){
   if(event.key !== "Enter") return;
   if(dictadoOn) return;
@@ -730,6 +800,10 @@ function manejarEnter(event){
     siguiente();
   }
 }
+
+cargarStats();
+pintarStats();
+  
 </script>
 
 </body>
