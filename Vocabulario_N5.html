@@ -352,7 +352,7 @@ function precisionPct(){
 }
   
 // ====== MODOS ======
-let modoActual = "jp-es";   // "jp-es" | "es-jp" | "dictado" | "mixto"
+let modoActual = "mixto";   // "jp-es" | "es-jp" | "dictado" | "mixto"
 let rondaDir = "jp-es";     // "jp-es" | "es-jp"
 let rondaEsDictado = false; // true/false
 
@@ -406,7 +406,7 @@ fetch("data/Vocabulario_N5.json")
   .then(res => res.json())
   .then(data => {
     lista = (data || []).filter(x => x && x.kanji && x.significado && x.romaji);
-    setModo("jp-es");
+    setModo("mixto");
   })
   .catch(err=>{
     console.error(err);
