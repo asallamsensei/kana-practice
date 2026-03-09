@@ -487,8 +487,8 @@
         </div>
 
         <div id="acciones">
-          <button class="accion-btn" onclick="mostrarRespuesta()">Mostrar respuesta</button>
           <button class="accion-btn" onclick="siguienteDesdeBoton()">Siguiente</button>
+          <button class="accion-btn" onclick="mostrarRespuesta()">Mostrar respuesta</button>
         </div>
 
         <div id="estadisticas">
@@ -980,7 +980,10 @@ function actualizarEstadisticas(){
    BOTONES ACCIONES
 =============================== */
 function siguienteDesdeBoton(){
-  if (!yaValidado) return;
+  if (!yaValidado) {
+    mostrarRespuesta();
+    return;
+  }
   siguienteKana();
 }
 
