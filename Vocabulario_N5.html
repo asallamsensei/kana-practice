@@ -123,15 +123,6 @@
     border-color: transparent;
   }
 
-  .btn-mode.dictado-on{
-    background: var(--dictadoRed);
-    border-color: transparent;
-  }
-  .btn-mode.base-dictado{
-    background: var(--dictadoRedSoft);
-    border-color: transparent;
-  }
-
   .big{
     text-align:center;
     padding: 20px 10px 10px;
@@ -307,10 +298,10 @@
     <h1>Vocabulario N5 — Asallam Sensei</h1>
 
     <div class="switch">
-      <button class="btn btn-mode" id="m-jp-es" type="button" onclick="setModoBase('jp-es')">JP → ES</button>
-      <button class="btn btn-mode" id="m-es-jp" type="button" onclick="setModoBase('es-jp')">ES → JP</button>
-      <button class="btn btn-mode" id="m-mixto" type="button" onclick="setModoBase('mixto')">Mixto</button>
-      <button class="btn btn-mode" id="m-dictado" type="button" onclick="toggleDictado()">Dictado</button>
+      <button class="btn btn-mode" id="m-jp-es" type="button" onclick="setModo('jp-es')">JP → ES</button>
+      <button class="btn btn-mode" id="m-es-jp" type="button" onclick="setModo('es-jp')">ES → JP</button>
+      <button class="btn btn-mode" id="m-dictado" type="button" onclick="setModo('dictado')">Dictado</button>
+      <button class="btn btn-mode" id="m-mixto" type="button" onclick="setModo('mixto')">Mix</button>
     </div>
   </header>
 
@@ -405,9 +396,9 @@ function precisionPct(){
 }
   
 // ====== MODOS ======
-let modoBase = "jp-es";   // "jp-es" | "es-jp" | "mixto"
-let dictadoOn = false;    // on/off
-let rondaDir = "jp-es";   // dirección actual de la ronda
+let modoActual = "jp-es";   // "jp-es" | "es-jp" | "dictado" | "mixto"
+let rondaDir = "jp-es";     // "jp-es" | "es-jp"
+let rondaEsDictado = false; // true/false
 
 // ====== AUDIO (EXACTO AL JSON) ======
 const AUDIO_BASE = "data/audios/n5/";   // carpeta mp3
@@ -459,7 +450,7 @@ fetch("data/Vocabulario_N5.json")
   .then(res => res.json())
   .then(data => {
     lista = (data || []).filter(x => x && x.kanji && x.significado && x.romaji);
-    setModoBase("jp-es");
+    setModo("jp-es");
   })
   .catch(err=>{
     console.error(err);
@@ -468,33 +459,31 @@ fetch("data/Vocabulario_N5.json")
   });
 
 // ====== UI MODO ======
+
 function limpiarActivos(){
-  ["m-jp-es","m-es-jp","m-mixto","m-dictado"].forEach(id=>{
+  ["m-jp-es","m-es-jp","m-dictado","m-mixto"].forEach(id=>{
     const el = document.getElementById(id);
     if(!el) return;
-    el.classList.remove("activo","dictado-on","base-dictado");
+    el.classList.remove("activo");
   });
 }
 
 function aplicarUI(){
   limpiarActivos();
 
-  const baseId = (modoBase === "jp-es") ? "m-jp-es" : (modoBase === "es-jp") ? "m-es-jp" : "m-mixto";
-  const baseBtn = document.getElementById(baseId);
-  const dictBtn = document.getElementById("m-dictado");
+  const map = {
+    "jp-es": "m-jp-es",
+    "es-jp": "m-es-jp",
+    "dictado": "m-dictado",
+    "mixto": "m-mixto"
+  };
 
-  if(dictadoOn){
-    dictBtn.classList.add("dictado-on");
-    baseBtn.classList.add("base-dictado");
-  }else{
-    baseBtn.classList.add("activo");
-  }
-
-  document.getElementById("inputRow").style.display = dictadoOn ? "none" : "flex";
+  document.getElementById(map[modoActual])?.classList.add("activo");
+  document.getElementById("inputRow").style.display = rondaEsDictado ? "none" : "flex";
 }
 
-function setModoBase(nuevoBase){
-  modoBase = nuevoBase;
+function setModo(nuevoModo){
+  modoActual = nuevoModo;
   aplicarUI();
 
   yaValidado = false;
@@ -533,17 +522,13 @@ function renderPrompt(itemCorrecto){
 
   ultimoAudioKey = String(itemCorrecto.romaji || "").trim();
 
-  if(dictadoOn){
-    let label = "";
-    if(modoBase === "mixto"){
-      label = (rondaDir === "jp-es") ? "🎧 Dictado mixto: elige el significado" : "🎧 Dictado mixto: elige el japonés";
-    }else if(modoBase === "jp-es"){
-      label = "🎧 Dictado: elige el significado";
-    }else{
-      label = "🎧 Dictado: elige el japonés";
-    }
+  if(rondaEsDictado){
+    const label = (rondaDir === "jp-es")
+      ? "🎧 Dictado: elige el significado"
+      : "🎧 Dictado: elige el japonés";
+  
     subEl.innerText = label;
-
+  
     promptEl.innerHTML = `
       <button id="promptSpeaker" class="btnAudioBig" type="button" title="Escuchar" onclick="reproducirAudioActual()">🔊</button>
     `;
@@ -621,16 +606,36 @@ function accionSiguiente(){
 }
 
 // ====== GENERAR RONDA ======
-function elegirRondaDir(){
-  if(modoBase === "jp-es") return "jp-es";
-  if(modoBase === "es-jp") return "es-jp";
-  return (Math.random() < 0.5) ? "jp-es" : "es-jp";
+function elegirRonda(){
+  if(modoActual === "jp-es"){
+    return { dir: "jp-es", dictado: false };
+  }
+
+  if(modoActual === "es-jp"){
+    return { dir: "es-jp", dictado: false };
+  }
+
+  if(modoActual === "dictado"){
+    return (Math.random() < 0.5)
+      ? { dir: "jp-es", dictado: true }
+      : { dir: "es-jp", dictado: true };
+  }
+
+  // Mix = super mixto
+  const r = Math.random();
+
+  if(r < 0.25) return { dir: "jp-es", dictado: false };
+  if(r < 0.50) return { dir: "es-jp", dictado: false };
+  if(r < 0.75) return { dir: "jp-es", dictado: true };
+  return { dir: "es-jp", dictado: true };
 }
 
 function siguiente(){
   if(lista.length < 3) return;
 
-  rondaDir = elegirRondaDir();
+  const ronda = elegirRonda();
+  rondaDir = ronda.dir;
+  rondaEsDictado = ronda.dictado;
 
   actual = Math.floor(Math.random() * lista.length);
   const itemCorrecto = lista[actual];
@@ -650,14 +655,17 @@ function siguiente(){
   renderOpciones(opciones);
 
   limpiarResultado();
+  aplicarUI();
   yaValidado = false;
 
   const input = document.getElementById("respuestaUsuario");
-  if(!dictadoOn){
+  if(!rondaEsDictado){
     input.value = "";
     input.placeholder = "a / b / c + Enter";
     input.maxLength = 1;
     if (focoAutomatico) input.focus({preventScroll:true});
+  }else{
+    input.value = "";
   }
 
   // (como lo tenías) suena al pasar:
@@ -702,7 +710,7 @@ function responder(letra){
   focoAutomatico = false;
   if(yaValidado) return;
 
-  if(!dictadoOn){
+  if(!rondaEsDictado){
     document.getElementById("respuestaUsuario").value = letra;
   }
   verificar(letra);
@@ -710,10 +718,10 @@ function responder(letra){
 
 function verificar(letraForzada){
   const res = document.getElementById("resultado");
-  const r = (letraForzada || (!dictadoOn ? document.getElementById("respuestaUsuario").value : ""))
+  const r = (letraForzada || (!rondaEsDictado ? document.getElementById("respuestaUsuario").value : ""))
               .toString().toLowerCase().trim();
-
-  if(!dictadoOn && !["a","b","c"].includes(r)){
+  
+  if(!rondaEsDictado && !["a","b","c"].includes(r)){
     res.className = "incorrecto";
     res.innerText = `Incorrecto ✘ (era ${correctaLetra}) — ${respuestaCorrecta}`;
     errores++;
@@ -729,7 +737,7 @@ function verificar(letraForzada){
     return;
   }
 
-  const letra = dictadoOn ? letraForzada : r;
+  const letra = rondaEsDictado ? letraForzada : r;
 
   if(letra === correctaLetra){
     res.className = "correcto";
@@ -787,7 +795,7 @@ function resetStats(){
   
 function manejarEnter(event){
   if(event.key !== "Enter") return;
-  if(dictadoOn) return;
+  if(rondaEsDictado) return;
 
   if(!yaValidado){
     verificar();
