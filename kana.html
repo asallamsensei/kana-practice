@@ -410,6 +410,16 @@
   border-color: rgba(239,68,68,.45);
 }
 
+.btn-mostrar{
+  background: rgba(239,68,68,.15);
+  border: 1px solid rgba(239,68,68,.4);
+  color: var(--danger);
+}
+
+.btn-mostrar:hover{
+  background: rgba(239,68,68,.26);
+}
+  
 @media (max-width: 420px){
   .opcion-btn{
     font-size: 16px;
@@ -488,7 +498,7 @@
 
         <div id="acciones">
           <button class="accion-btn" onclick="siguienteDesdeBoton()">Siguiente</button>
-          <button class="accion-btn" onclick="mostrarRespuesta()">Mostrar respuesta</button>
+          <button class="accion-btn btn-mostrar" onclick="mostrarRespuesta()">Mostrar respuesta</button>
         </div>
 
         <div id="estadisticas">
