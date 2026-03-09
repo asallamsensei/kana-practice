@@ -332,7 +332,15 @@ body.modo-es-jp #opciones{
       <div id="resultado"></div>
 
       <div class="stats">
-        Aciertos: <span id="aciertos">0</span> — Errores: <span id="errores">0</span>
+        <div>
+          Aciertos: <span id="aciertos">0</span> —
+          Errores: <span id="errores">0</span>
+        </div>
+        <div style="margin-top:6px;">
+          Racha: <span id="racha">0</span> —
+          Mejor racha: <span id="mejorRacha">0</span> —
+          Precisión: <span id="precision">0%</span>
+        </div>
       </div>
 
       <div class="row" style="margin-top: 14px;">
@@ -409,6 +417,8 @@ let actual = null;
 
 let aciertos = 0;
 let errores = 0;
+let racha = 0;
+let mejorRacha = 0;
 
 let bloquesActivos = new Set([0]); // por defecto, el primero activo
 
@@ -459,22 +469,50 @@ function playAudioForRomaji(romaji){
 /* ===============================
    STATS globales (1 solo contador)
 =============================== */
-const STATS_KEY = "animeVocabStats_global_v1";
+const STATS_KEY = "animeVocabStats_global_v2";
 
 function cargarStatsGlobal() {
-  try { return JSON.parse(localStorage.getItem(STATS_KEY)) || { aciertos: 0, errores: 0 }; }
-  catch { return { aciertos: 0, errores: 0 }; }
+  try {
+    return JSON.parse(localStorage.getItem(STATS_KEY)) || {
+      aciertos: 0,
+      errores: 0,
+      racha: 0,
+      mejorRacha: 0
+    };
+  } catch {
+    return {
+      aciertos: 0,
+      errores: 0,
+      racha: 0,
+      mejorRacha: 0
+    };
+  }
 }
+
 function guardarStatsGlobal() {
-  localStorage.setItem(STATS_KEY, JSON.stringify({ aciertos, errores }));
+  localStorage.setItem(STATS_KEY, JSON.stringify({
+    aciertos,
+    errores,
+    racha,
+    mejorRacha
+  }));
 }
 
 function cargarStatsActual() {
   const s = cargarStatsGlobal();
   aciertos = s.aciertos || 0;
-  errores  = s.errores  || 0;
+  errores = s.errores || 0;
+  racha = s.racha || 0;
+  mejorRacha = s.mejorRacha || 0;
   pintarStats();
 }
+
+function precisionPct(){
+  const total = aciertos + errores;
+  if(total <= 0) return "0%";
+  return Math.round((aciertos / total) * 100) + "%";
+}
+  
 function guardarStatsActual() {
   guardarStatsGlobal();
 }
@@ -572,6 +610,9 @@ function limpiarResultado(){
 function pintarStats(){
   $("aciertos").innerText = aciertos;
   $("errores").innerText = errores;
+  $("racha").innerText = racha;
+  $("mejorRacha").innerText = mejorRacha;
+  $("precision").innerText = precisionPct();
 }
 
 function refrescarPills(){
@@ -915,6 +956,7 @@ function verificar(){
     res.className = "incorrecto";
     res.innerText = `Respuesta: ${actual.correcta}) ${actual.respuesta}${extra}`;
     errores++;
+    racha = 0;
     pintarStats();
     guardarStatsActual();
     yaValidado = true;
@@ -931,6 +973,8 @@ function verificar(){
     res.className = "correcto";
     res.innerText = "Correcto ✔";
     aciertos++;
+    racha++;
+    if(racha > mejorRacha) mejorRacha = racha;
   }else{
     const extra = (actual.extra?.romaji && ["vocab_jp_es","vocab_es_jp","dict_es","dict_jp"].includes(actual.tipo))
       ? `\nRomaji: ${actual.extra.romaji}`
@@ -939,6 +983,7 @@ function verificar(){
     res.className = "incorrecto";
     res.innerText = `Incorrecto ✘ (era ${actual.correcta})\nRespuesta: ${actual.correcta}) ${actual.respuesta}${extra}`;
     errores++;
+    racha = 0;
   }
 
   pintarStats();
@@ -959,12 +1004,12 @@ function manejarEnter(event){
 function resetStats(){
   aciertos = 0;
   errores = 0;
+  racha = 0;
+  mejorRacha = 0;
   pintarStats();
   guardarStatsActual();
 }
 
-
-  
 /* ===============================
    CARGA JSON
 =============================== */
