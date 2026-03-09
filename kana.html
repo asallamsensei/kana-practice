@@ -441,10 +441,17 @@
         <div id="respuesta"></div>
 
         <div class="input-wrap">
-          <input id="respuestaUsuario"
-                 type="text"
-                 placeholder="Escribe el romaji aquí"
-                 onkeydown="manejarEnter(event)">
+          <input
+            id="respuestaUsuario"
+            type="text"
+            placeholder="Escribe el romaji aquí"
+            autocomplete="off"
+            autocorrect="off"
+            autocapitalize="off"
+            spellcheck="false"
+            inputmode="text"
+            onkeydown="manejarEnter(event)"
+          >
         </div>
 
         <div id="nota-teclado">
