@@ -200,73 +200,6 @@
   .btnAudioBig:active{ transform: translateY(0px); }
   .btnAudioBig[disabled]{ opacity:.35; cursor:not-allowed; transform:none; }
 
-  #opcionesBtns{
-    display:flex;
-    flex-direction:column;
-    gap:10px;
-    width:min(560px, 100%);
-    margin-left:auto;
-    margin-right:auto;
-  }
-
-  .optBtn{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:10px;
-    text-align:left;
-    border-radius: 14px;
-    border: 1px solid var(--border);
-    background: rgba(0,0,0,.18);
-    color: var(--text);
-    padding: 12px 14px;
-    cursor:pointer;
-    font-weight: 800;
-    transition: .12s;
-  }
-  .optBtn:hover{ transform: translateY(-1px); filter: brightness(1.05); }
-  .optBtn:disabled{
-    cursor:not-allowed;
-    transform:none;
-    filter:none;
-    opacity:.95;
-  }
-
-  .optLeft{
-    display:flex;
-    align-items:flex-start;
-    gap:10px;
-    flex:1;
-  }
-  .optLetter{
-    width:26px;
-    height:26px;
-    border-radius:9px;
-    display:grid;
-    place-items:center;
-    background: rgba(255,255,255,.08);
-    border:1px solid rgba(255,255,255,.12);
-    font-weight:900;
-    flex:0 0 auto;
-  }
-  .optText{
-    flex:1;
-    line-height:1.25;
-    word-break: break-word;
-  }
-
-  .optBtn.correcta{
-    border-color: rgba(34,197,94,.55);
-    background: rgba(34,197,94,.12);
-  }
-  .optBtn.incorrecta{
-    border-color: rgba(239,68,68,.60);
-    background: rgba(239,68,68,.12);
-  }
-  .optBtn.neutra-disabled{
-    opacity:.55;
-  }
-
   #inputRow{
     justify-content:center;
     margin-top: 2px;
@@ -277,6 +210,22 @@
     width:min(220px, 100%);
   }
 
+  #opcionesTexto{
+    margin-top: 10px;
+    font-size: 20px;
+    line-height: 1.7;
+    text-align: left;
+    width: fit-content;
+    max-width: min(720px, 100%);
+    margin-left: auto;
+    margin-right: auto;
+    padding: 10px 14px;
+    border-radius: 14px;
+    border: 1px dashed rgba(255,255,255,.22);
+    background: rgba(0,0,0,.18);
+    word-break: break-word;
+  }
+  
   .actions{
     display:grid;
     grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
@@ -312,8 +261,14 @@
         <div id="promptMain">—</div>
         <div id="promptSub"></div>
 
-        <div id="opcionesBtns"></div>
-
+        <div id="opcionesTexto"></div>
+        
+        <div class="row" style="justify-content:center; margin-top: 2px;">
+          <button class="btn btn-ghost" type="button" onclick="responder('a')">a</button>
+          <button class="btn btn-ghost" type="button" onclick="responder('b')">b</button>
+          <button class="btn btn-ghost" type="button" onclick="responder('c')">c</button>
+        </div>
+        
         <div class="row" id="inputRow">
           <input id="respuestaUsuario"
                  type="text"
@@ -360,6 +315,7 @@ let mejorRacha = 0;
 let correctaLetra = "";        // "a"/"b"/"c"
 let respuestaCorrecta = "";    // texto correcto (según dirección de la ronda)
 let yaValidado = false;
+let actualOpcionesTexto = [];
 
 const letras = ["a","b","c"];
 
@@ -456,6 +412,7 @@ fetch("data/Vocabulario_N5.json")
     console.error(err);
     document.getElementById("promptMain").innerText = "No se pudo cargar data/Vocabulario_N5.json";
     document.getElementById("promptSub").innerText = "Revisa la ruta y usa servidor (GitHub Pages / Live Server).";
+    document.getElementById("opcionesTexto").innerHTML = "";
   });
 
 // ====== UI MODO ======
@@ -559,25 +516,27 @@ function pintarStats(){
 
 // ====== CONTROL DE OPCIONES ======
 function bloquearOpciones(){
-  const box = document.getElementById("opcionesBtns");
-  const btns = box.querySelectorAll("button.optBtn");
-  btns.forEach(b => { b.disabled = true; });
+  // ya no hay botones de opciones que bloquear
 }
 
 function pintarOpciones(letraElegida){
-  const box = document.getElementById("opcionesBtns");
-  const btns = Array.from(box.querySelectorAll("button.optBtn"));
-  btns.forEach(btn=>{
-    const letraBtn = btn.getAttribute("data-letter");
-    btn.classList.remove("correcta","incorrecta","neutra-disabled");
-    if(letraBtn === correctaLetra){
-      btn.classList.add("correcta");
-    }else if(letraBtn === letraElegida){
-      btn.classList.add("incorrecta");
-    }else{
-      btn.classList.add("neutra-disabled");
+  const box = document.getElementById("opcionesTexto");
+
+  const opcionesActuales = actualOpcionesTexto;
+  if(!opcionesActuales || opcionesActuales.length < 3) return;
+
+  box.innerHTML = opcionesActuales.map((txt, idx) => {
+    const letra = letras[idx];
+
+    let color = "";
+    if(letra === correctaLetra){
+      color = ' style="color:#86efac; font-weight:900;"';
+    }else if(letra === letraElegida){
+      color = ' style="color:#fecaca; font-weight:900;"';
     }
-  });
+
+    return `<div${color}>${letra}) ${txt}</div>`;
+  }).join("");
 }
 
 // ====== SIGUIENTE (DOBLE CLICK SI ESTABA SIN CALIFICAR) ======
@@ -648,8 +607,10 @@ function siguiente(){
     const r = textoRespuesta(rItem);
     if(!opciones.includes(r)) opciones.push(r);
   }
+  
   opciones.sort(()=>Math.random()-0.5);
   correctaLetra = letras[opciones.indexOf(respuestaCorrecta)];
+  actualOpcionesTexto = opciones.slice();
 
   renderPrompt(itemCorrecto);
   renderOpciones(opciones);
@@ -673,37 +634,12 @@ function siguiente(){
 }
 
 function renderOpciones(opciones){
-  const box = document.getElementById("opcionesBtns");
-  box.innerHTML = "";
-
-  opciones.forEach((txt, idx)=>{
-    const letra = letras[idx];
-    const btn = document.createElement("button");
-    btn.className = "optBtn";
-    btn.type = "button";
-    btn.setAttribute("data-letter", letra);
-
-    btn.addEventListener("click", ()=>{
-      responder(letra);
-    });
-
-    const left = document.createElement("div");
-    left.className = "optLeft";
-
-    const badge = document.createElement("div");
-    badge.className = "optLetter";
-    badge.textContent = letra;
-
-    const text = document.createElement("div");
-    text.className = "optText";
-    text.textContent = txt;
-
-    left.appendChild(badge);
-    left.appendChild(text);
-
-    btn.appendChild(left);
-    box.appendChild(btn);
-  });
+  const box = document.getElementById("opcionesTexto");
+  box.innerHTML = `
+    a) ${opciones[0]}<br>
+    b) ${opciones[1]}<br>
+    c) ${opciones[2]}
+  `;
 }
 
 function responder(letra){
@@ -804,6 +740,14 @@ function manejarEnter(event){
   }
 }
 
+document.addEventListener("keydown", (e) => {
+  const k = (e.key || "").toLowerCase();
+
+  if(["a","b","c"].includes(k) && !yaValidado){
+    responder(k);
+  }
+});
+  
 cargarStats();
 pintarStats();
   
