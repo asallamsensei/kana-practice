@@ -2,175 +2,485 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Repaso de Kana - Asallam Sensei</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Repaso de Kana — Asallam Sensei</title>
+
 <style>
-  body {
-    background: #f6f6ff;
-    font-family: Arial;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-top: 40px;
+  :root{
+    --bg: #0b1020;
+    --card: rgba(255,255,255,.08);
+    --card2: rgba(255,255,255,.10);
+    --text: #eef2ff;
+    --muted: rgba(238,242,255,.75);
+    --accent: #7d5cff;
+    --accent2:#22c55e;
+    --danger:#ef4444;
+    --border: rgba(255,255,255,.14);
+    --soft: rgba(255,255,255,.06);
   }
 
-  h1 { margin-bottom: 10px; }
+  *{ box-sizing: border-box; }
 
-  #kana {
-    font-size: 120px;
-    margin: 20px 0;
-    font-weight: bold;
-    user-select: none;
+  body{
+    margin:0;
+    font-family: Arial, sans-serif;
+    background:
+      radial-gradient(1200px 700px at 20% 10%, rgba(125,92,255,.35), transparent 60%),
+      radial-gradient(900px 600px at 90% 20%, rgba(34,197,94,.18), transparent 60%),
+      radial-gradient(900px 600px at 30% 90%, rgba(239,68,68,.14), transparent 55%),
+      var(--bg);
+    color: var(--text);
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    padding: 16px 12px 42px;
   }
 
-  button {
-    padding: 12px 20px;
-    margin: 5px;
-    font-size: 18px;
-    border-radius: 10px;
-    border: none;
-    background: #7d5cff;
+  .wrap{
+    width:min(920px, 100%);
+  }
+
+  h1{
+    margin: 8px 0 14px;
+    text-align:center;
+    font-size: clamp(24px, 4.8vw, 34px);
+    line-height: 1.15;
+    letter-spacing: .2px;
+  }
+
+  .card{
+    background: linear-gradient(180deg, var(--card2), var(--card));
+    border: 1px solid var(--border);
+    border-radius: 22px;
+    box-shadow: 0 20px 50px rgba(0,0,0,.35);
+    padding: 16px;
+  }
+
+  .top-grid{
+    display:grid;
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .panel{
+    background: rgba(255,255,255,.04);
+    border: 1px solid rgba(255,255,255,.08);
+    border-radius: 18px;
+    padding: 14px;
+  }
+
+  .row{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    align-items:center;
+    justify-content:center;
+  }
+
+  .row-left{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    align-items:center;
+    justify-content:flex-start;
+  }
+
+  .pill{
+    padding: 8px 12px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: rgba(255,255,255,.06);
+    color: var(--muted);
+    font-size: 13px;
+    font-weight: 700;
+  }
+
+  .chips{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+  }
+
+  button{
+    border:none;
+    border-radius: 12px;
+    padding: 11px 14px;
+    cursor:pointer;
+    color:white;
+    background: var(--accent);
+    font-weight: 700;
+    font-size: 15px;
+    transition: .15s;
+  }
+
+  button:hover{
+    transform: translateY(-1px);
+    filter: brightness(1.06);
+  }
+
+  .modo-btn,
+  .orden-btn,
+  .reset-btn,
+  .ghost-btn{
+    background: rgba(255,255,255,.08);
+    border: 1px solid var(--border);
+    color: var(--text);
+  }
+
+  .modo-btn.activo{
+    background: var(--accent);
+    border-color: transparent;
     color: white;
+  }
+
+  .orden-btn{
+    opacity: .62;
+  }
+
+  .orden-btn.activo{
+    opacity: 1;
+    background: rgba(125,92,255,.22);
+    border-color: rgba(125,92,255,.55);
+    color: #efe9ff;
+  }
+
+  #btn-principiante{
+    opacity: .55;
+  }
+
+  #btn-principiante.activo{
+    opacity: 1;
+    background: rgba(239,68,68,.18);
+    border-color: rgba(239,68,68,.5);
+    color: #fecaca;
+  }
+
+  .reset-btn:hover,
+  .ghost-btn:hover,
+  .modo-btn:hover,
+  .orden-btn:hover{
+    background: rgba(255,255,255,.12);
+  }
+
+  .main-play{
+    text-align:center;
+    padding: 14px 10px 10px;
+  }
+
+  #kanaBox{
+    min-height: 210px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,.10);
+    background: rgba(0,0,0,.16);
+    padding: 18px 12px;
+  }
+
+  #kana{
+    font-size: clamp(92px, 20vw, 150px);
+    line-height: 1;
+    font-weight: 900;
+    user-select: none;
+    margin: 0;
+    text-align:center;
+    letter-spacing: .5px;
     cursor: pointer;
   }
-  button:hover { background: #5d46d4; }
 
-  #respuesta {
-    font-size: 30px;
-    margin-top: 10px;
-  }
-  .correcto { color: #28a745; font-weight: bold; }
-  .incorrecto { color: #d93025; font-weight: bold; }
-
-  #acciones { margin-top: 18px; }
-
-  #respuestaUsuario {
-    margin-top: 15px;
-    font-size: 22px;
-    padding: 8px 12px;
-    border-radius: 8px;
-    border: 2px solid #aaa;
-    text-align: center;
+  #kana.dictado{
+    font-size: clamp(48px, 12vw, 68px);
   }
 
-  #modo-container {
-    display: flex;
-    gap: 10px;
-    margin-top: 10px;
+  .audio-row{
+    margin-top: 12px;
   }
 
-  .modo-btn {
-    font-size: 16px;
-    padding: 8px 14px;
-    background: #ddddff;
-    color: #333;
-  }
-  .modo-btn.activo { background: #7d5cff; color: white; }
-
-  #estadisticas {
-    margin-top: 20px;
-    font-size: 22px;
+  #btnReplay{
+    display:none;
   }
 
-  #btn-principiante { opacity: 0.45; }
-  #btn-principiante.activo {
-    opacity: 1;
-    background: #e03131;
-    color: white;
+  #btnReplay.visible{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+  }
+
+  #btnReplay.big-sound{
+    font-size: 28px;
+    padding: 16px 20px;
+    border-radius: 16px;
+    background: rgba(255,255,255,.08);
+    border: 1px solid var(--border);
+    color: var(--text);
+  }
+
+  #respuesta{
+    margin-top: 14px;
+    font-size: clamp(20px, 4.2vw, 30px);
+    min-height: 40px;
+    text-align:center;
+    font-weight: 800;
+    white-space: pre-line;
+    line-height: 1.28;
+  }
+
+  .correcto{ color: var(--accent2); }
+  .incorrecto{ color: var(--danger); }
+
+  .input-wrap{
+    margin-top: 14px;
+    display:flex;
+    justify-content:center;
+  }
+
+  #respuestaUsuario{
+    width:min(100%, 360px);
+    background: rgba(255,255,255,.08);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 14px 14px;
+    border-radius: 14px;
+    outline:none;
+    font-size: clamp(18px, 4.2vw, 24px);
+    text-align:center;
+  }
+
+  #respuestaUsuario::placeholder{
+    color: rgba(238,242,255,.55);
+  }
+
+  #respuestaUsuario:focus{
+    border-color: rgba(125,92,255,.7);
+    box-shadow: 0 0 0 3px rgba(125,92,255,.18);
+  }
+
+  #nota-teclado{
+    display:none;
+    font-size: 13px;
+    color: var(--muted);
+    margin-top: 8px;
+    text-align:center;
+    line-height: 1.35;
+  }
+
+  #acciones{
+    margin-top: 14px;
+    display:flex;
+    gap:10px;
+    justify-content:center;
+    flex-wrap:wrap;
   }
 
   .accion-btn{
-    padding:12px 18px;
-    border-radius:10px;
-    border:none;
-    background:#7d5cff;
-    color:white;
-    cursor:pointer;
-    font-size:18px;
-  }
-  .accion-btn:hover{ background:#5d46d4; }
-
-  @media (max-width: 360px){
-    .modo-btn{ font-size: 12px; }
+    min-width: 150px;
   }
 
-  #orden-container {
-    margin-top: 10px;
-    display: flex;
-    gap: 8px;
+  #estadisticas{
+    margin-top: 14px;
+    text-align:center;
+    color: var(--muted);
+    font-size: 15px;
+    line-height: 1.5;
   }
 
-  .orden-btn {
-    font-size: 14px;
-    padding: 6px 12px;
+  .sep{
+    height:1px;
+    background: rgba(255,255,255,.10);
+    margin: 14px 0;
+  }
+
+  .hint{
+    color: rgba(238,242,255,.72);
+    font-size: 13px;
+    line-height: 1.35;
+    text-align:center;
+  }
+
+  code.kbd{
+    background: rgba(255,255,255,.08);
+    border: 1px solid rgba(255,255,255,.14);
+    padding: 2px 7px;
     border-radius: 8px;
-    border: none;
-    background: #ddddff;
-    color: #333;
-    opacity: 0.55;
-    cursor: pointer;
-    transition: all 0.2s ease;
+    font-weight: 700;
+    color: var(--text);
   }
 
-  .orden-btn.activo {
-    opacity: 1;
-    background: #ffb3b3;
-    color: #7a1c1c;
+  @media (max-width: 700px){
+    body{
+      padding: 10px 10px 28px;
+    }
+
+    .card{
+      padding: 12px;
+      border-radius: 18px;
+    }
+
+    .panel{
+      padding: 12px;
+      border-radius: 16px;
+    }
+
+    h1{
+      margin-top: 4px;
+      margin-bottom: 10px;
+      font-size: 24px;
+    }
+
+    #kanaBox{
+      min-height: 180px;
+      padding: 16px 10px;
+    }
+
+    #respuesta{
+      font-size: 22px;
+      min-height: 34px;
+    }
+
+    #estadisticas{
+      font-size: 14px;
+    }
+
+    .accion-btn{
+      min-width: 132px;
+      flex: 1 1 140px;
+    }
+
+    .modo-btn,
+    .orden-btn,
+    .reset-btn,
+    button{
+      font-size: 14px;
+      padding: 10px 12px;
+    }
   }
 
-  .reset-btn{
-    font-size: 16px;
-    padding: 8px 14px;
-    border-radius: 10px;
-    border: none;
-    background: #ddddff;
-    color: #333;
-    cursor: pointer;
+  @media (max-width: 420px){
+    #kana{
+      font-size: clamp(88px, 24vw, 128px);
+    }
+
+    #kana.dictado{
+      font-size: 46px;
+    }
+
+    #respuestaUsuario{
+      width:100%;
+      font-size: 20px;
+    }
+
+    .chips{
+      gap:8px;
+    }
+
+    .modo-btn,
+    .orden-btn,
+    .reset-btn,
+    button{
+      font-size: 13px;
+      padding: 10px 11px;
+      border-radius: 11px;
+    }
+
+    .pill{
+      font-size: 12px;
+      padding: 7px 10px;
+    }
   }
-  .reset-btn:hover{ background: #cfcfff; }
 </style>
 </head>
 <body>
 
-<h1>Repaso de Kana — Asallam Sensei</h1>
+<div class="wrap">
+  <h1>Repaso de Kana — Asallam Sensei</h1>
 
-<div id="modo-container">
-  <button id="btn-hiragana" class="modo-btn" onclick="setModo('hiragana')">Hiragana</button>
-  <button id="btn-katakana" class="modo-btn" onclick="setModo('katakana')">Katakana</button>
-  <button id="btn-mezcla"   class="modo-btn" onclick="setModo('mezcla')">Mezcla</button>
-  <button id="btn-extra"    class="modo-btn" onclick="setModo('extra')">Extra</button>
+  <div class="card">
+
+    <div class="top-grid">
+
+      <div class="panel">
+        <div class="row-left" style="margin-bottom:10px;">
+          <span class="pill">Modo de escritura</span>
+        </div>
+
+        <div id="modo-container" class="chips">
+          <button id="btn-hiragana" class="modo-btn" onclick="setModo('hiragana')">Hiragana</button>
+          <button id="btn-katakana" class="modo-btn" onclick="setModo('katakana')">Katakana</button>
+          <button id="btn-mezcla" class="modo-btn" onclick="setModo('mezcla')">Mezcla</button>
+          <button id="btn-extra" class="modo-btn" onclick="setModo('extra')">Extra</button>
+        </div>
+
+        <div class="sep"></div>
+
+        <div class="row-left" style="margin-bottom:10px;">
+          <span class="pill">Tipo de ejercicio</span>
+        </div>
+
+        <div id="orden-container" class="chips">
+          <button id="btn-principiante" class="modo-btn" onclick="togglePrincipiante()">Principiante</button>
+          <button id="btn-jp-es" class="orden-btn" onclick="setQuizModo('jp_es')">Kana → Romaji</button>
+          <button id="btn-es-jp" class="orden-btn" onclick="setQuizModo('es_jp')">Romaji → Kana</button>
+          <button id="btn-dictado" class="orden-btn" onclick="toggleDictado()">Dictado 🔊</button>
+        </div>
+      </div>
+
+      <div class="panel main-play">
+        <div id="kanaBox">
+          <div id="kana" onclick="if(quizModo==='dictado') reproducirAudioKana(kanaLista[actual][1])">あ</div>
+
+          <div class="audio-row">
+            <button id="btnReplay" class="ghost-btn" type="button" onclick="replayAudio()">🔊</button>
+          </div>
+        </div>
+
+        <div id="respuesta"></div>
+
+        <div class="input-wrap">
+          <input id="respuestaUsuario"
+                 type="text"
+                 placeholder="Escribe el romaji aquí"
+                 onkeydown="manejarEnter(event)">
+        </div>
+
+        <div id="nota-teclado">
+          💡 Te recomiendo usar un teclado japonés diferente al QWERTY en este ejercicio.
+        </div>
+
+        <div id="acciones">
+          <button class="accion-btn" onclick="mostrarRespuesta()">Mostrar respuesta</button>
+          <button class="accion-btn" onclick="siguienteDesdeBoton()">Siguiente</button>
+        </div>
+
+        <div id="estadisticas">
+          <div>
+            Aciertos: <span id="aciertos">0</span> —
+            Errores: <span id="errores">0</span>
+          </div>
+          <div>
+            Racha: <span id="racha">0</span> —
+            Mejor racha: <span id="mejorRacha">0</span> —
+            Precisión: <span id="precision">0%</span>
+          </div>
+        </div>
+
+        <div style="margin-top:14px;" class="row">
+          <button class="reset-btn" onclick="resetStatsModo()">Reset stats</button>
+        </div>
+
+        <div class="sep"></div>
+
+        <div class="hint">
+          <b>Atajos:</b>
+          <code class="kbd">Enter</code> valida y luego pasa a la siguiente.
+          En dictado puedes tocar el símbolo o el botón <code class="kbd">🔊</code>.
+        </div>
+      </div>
+
+    </div>
+  </div>
 </div>
-
-<div id="orden-container">
-  <button id="btn-principiante" class="modo-btn" onclick="togglePrincipiante()">Principiante</button>
-  <button id="btn-jp-es" class="orden-btn" onclick="setQuizModo('jp_es')">Kana → Romaji</button>
-  <button id="btn-es-jp" class="orden-btn" onclick="setQuizModo('es_jp')">Romaji → Kana</button>
-  <button id="btn-dictado" class="orden-btn" onclick="toggleDictado()">Dictado 🔊</button>
-</div>
-
-<div id="kana" onclick="if(quizModo==='dictado') reproducirAudioKana(kanaLista[actual][1])">あ</div>
-
-<div id="respuesta"></div>
-
-<input id="respuestaUsuario"
-       type="text"
-       placeholder="Escribe el romaji aquí"
-       onkeydown="manejarEnter(event)">
-
-<div id="nota-teclado" style="display:none; font-size:14px; color:#666; margin-top:6px;">
-  💡 Te recomiendo usar un teclado japonés diferente al QWERTY en este ejercicio.
-</div>
-  
-<div id="acciones">
-  <button class="accion-btn" onclick="mostrarRespuesta()">Mostrar respuesta</button>
-  <button class="accion-btn" onclick="siguienteDesdeBoton()">Siguiente</button>
-</div>
-
-<div id="estadisticas">
-  Aciertos: <span id="aciertos">0</span> —
-  Errores: <span id="errores">0</span>
-</div>
-
-<button class="reset-btn" onclick="resetStatsModo()">Reset stats</button>
 
 <script>
 /* ===============================
@@ -210,7 +520,6 @@ fetch("data/kana.json")
 
     aplicarFiltroPrincipiante();
 
-    // init
     setModo("hiragana");
     setQuizModo("jp_es");
   });
@@ -225,6 +534,8 @@ let actual = 0;
 let yaValidado = false;
 let aciertos = 0;
 let errores = 0;
+let racha = 0;
+let mejorRacha = 0;
 
 let quizModo = "jp_es";        // jp_es | es_jp | dictado
 let quizModoPrevio = "jp_es";  // recuerda el último no-dictado
@@ -232,12 +543,13 @@ let quizModoPrevio = "jp_es";  // recuerda el último no-dictado
 /* ===============================
    STATS (localStorage)
 =============================== */
-const STATS_KEY = "kanaStats_v1";
+const STATS_KEY = "kanaStats_v2";
 
 function cargarStats(){
   try { return JSON.parse(localStorage.getItem(STATS_KEY)) || {}; }
   catch { return {}; }
 }
+
 function guardarStats(stats){
   localStorage.setItem(STATS_KEY, JSON.stringify(stats));
 }
@@ -249,22 +561,50 @@ function statsKeyActual(){
 function cargarStatsActual(){
   const key = statsKeyActual();
   const stats = cargarStats();
+
   if (!stats[key]) {
-    stats[key] = { aciertos: 0, errores: 0 };
+    stats[key] = {
+      aciertos: 0,
+      errores: 0,
+      racha: 0,
+      mejorRacha: 0
+    };
     guardarStats(stats);
   }
+
   aciertos = stats[key].aciertos || 0;
-  errores  = stats[key].errores  || 0;
+  errores = stats[key].errores || 0;
+  racha = stats[key].racha || 0;
+  mejorRacha = stats[key].mejorRacha || 0;
+
   actualizarEstadisticas();
 }
 
 function guardarStatsActual(){
   const key = statsKeyActual();
   const stats = cargarStats();
-  if (!stats[key]) stats[key] = { aciertos: 0, errores: 0 };
+
+  if (!stats[key]) {
+    stats[key] = {
+      aciertos: 0,
+      errores: 0,
+      racha: 0,
+      mejorRacha: 0
+    };
+  }
+
   stats[key].aciertos = aciertos;
-  stats[key].errores  = errores;
+  stats[key].errores = errores;
+  stats[key].racha = racha;
+  stats[key].mejorRacha = mejorRacha;
+
   guardarStats(stats);
+}
+
+function precisionPct(){
+  const total = aciertos + errores;
+  if (total <= 0) return "0%";
+  return Math.round((aciertos / total) * 100) + "%";
 }
 
 /* ===============================
@@ -296,6 +636,21 @@ function limpiarUI(){
   yaValidado = false;
 }
 
+function actualizarBotonAudio(){
+  const btn = document.getElementById("btnReplay");
+  const kanaEl = document.getElementById("kana");
+
+  if (!btn || !kanaEl) return;
+
+  btn.classList.remove("visible", "big-sound");
+  kanaEl.classList.remove("dictado");
+
+  if (quizModo === "dictado") {
+    btn.classList.add("visible", "big-sound");
+    kanaEl.classList.add("dictado");
+  }
+}
+
 /* ===============================
    MODOS
 =============================== */
@@ -305,19 +660,20 @@ function setModo(modo){
   if (modo === "hiragana") kanaLista = hiragana;
   else if (modo === "katakana") kanaLista = katakana;
   else if (modo === "extra") kanaLista = extra;
-  else kanaLista = [...hiragana, ...katakana]; // mezcla
+  else kanaLista = [...hiragana, ...katakana];
 
-  // botones superiores
   const botonesModo = document.querySelectorAll(".modo-btn");
-  botonesModo.forEach(b => { if (b.id !== "btn-principiante") b.classList.remove("activo"); });
+  botonesModo.forEach(b => {
+    if (b.id !== "btn-principiante") b.classList.remove("activo");
+  });
+
   const btnModo = document.getElementById("btn-" + modo);
   if (btnModo) btnModo.classList.add("activo");
 
-  // botones inferiores según quizModo actual (NO pelea con dictado)
   aplicarVisualQuizModo();
   aplicarPlaceholderQuizModo();
   aplicarNotaTeclado();
-  // stats del combo actual
+  actualizarBotonAudio();
   cargarStatsActual();
 
   limpiarUI();
@@ -325,13 +681,13 @@ function setModo(modo){
 }
 
 function setQuizModo(modo){
-  // al elegir jp_es o es_jp, eso “sale” de dictado y actualiza previo
   if (modo === "jp_es" || modo === "es_jp") quizModoPrevio = modo;
   quizModo = modo;
 
   aplicarVisualQuizModo();
   aplicarPlaceholderQuizModo();
   aplicarNotaTeclado();
+  actualizarBotonAudio();
   cargarStatsActual();
   limpiarUI();
   siguienteKana();
@@ -339,7 +695,7 @@ function setQuizModo(modo){
 
 function toggleDictado(){
   if (quizModo !== "dictado") {
-    quizModoPrevio = quizModo; // guarda jp_es/es_jp
+    quizModoPrevio = quizModo;
     quizModo = "dictado";
   } else {
     quizModo = quizModoPrevio || "jp_es";
@@ -348,12 +704,13 @@ function toggleDictado(){
   aplicarVisualQuizModo();
   aplicarPlaceholderQuizModo();
   aplicarNotaTeclado();
-  
+  actualizarBotonAudio();
   cargarStatsActual();
   limpiarUI();
   siguienteKana();
+
   if (quizModo === "dictado") {
-    reproducirAudioKana(kanaLista[actual][1]); // romaji del item actual
+    reproducirAudioKana(kanaLista[actual][1]);
   }
 }
 
@@ -366,6 +723,7 @@ function aplicarFiltroPrincipiante(){
     katakana = katakanaBase;
     return;
   }
+
   hiragana = hiraganaBase.filter(k => GOJUON.includes(k[1]));
   katakana = katakanaBase.filter(k => GOJUON.includes(k[1]));
 }
@@ -373,6 +731,7 @@ function aplicarFiltroPrincipiante(){
 function togglePrincipiante(){
   filtroPrincipiante = !filtroPrincipiante;
   const btn = document.getElementById("btn-principiante");
+
   if (filtroPrincipiante) btn.classList.add("activo");
   else btn.classList.remove("activo");
 
@@ -383,52 +742,31 @@ function togglePrincipiante(){
 }
 
 /* ===============================
-   AUDIO
-=============================== */
-/* ===============================
    AUDIO (por ROMAJI)
 =============================== */
-
-// Convierte romaji a nombre de archivo "seguro" y prueba variantes (ou/oo, etc.)
 function romajiParaArchivo(romaji){
   let r = (romaji || "").trim().toLowerCase();
 
-  // normaliza macrones si algún día aparecen (ā ī ū ē ō)
   r = r
     .replace(/ā/g,"aa")
     .replace(/ī/g,"ii")
     .replace(/ū/g,"uu")
     .replace(/ē/g,"ee")
-    .replace(/ō/g,"ou"); // opción base: ō -> ou
+    .replace(/ō/g,"ou");
 
-  // limpia espacios y símbolos típicos
   r = r.replace(/\s+/g,"").replace(/[’']/g,"").replace(/-/g,"");
-
-  // Algunas personas guardan "n" como "n" (bien). Si guardas "nn", ajusta aquí.
   return r;
 }
 
-// genera alternativas para encontrar el archivo si hay varias convenciones
 function romajiAlternativasAudio(romaji){
   const base = romajiParaArchivo(romaji);
   const set = new Set([base]);
 
-  // ō puede ser ou u oo (según cómo hayas guardado)
-  // Si el base trae "ou", probamos "oo"
   if (base.includes("ou")) set.add(base.replace(/ou/g,"oo"));
-
-  // también, por si alguien guardó ō como "o" largo con "oo" pero tú pusiste "ou" (o viceversa)
-  // ya cubierto arriba.
-
-  // ふ: a veces "hu" vs "fu" (tú usas "fu" en GOJUON)
   if (base.includes("fu")) set.add(base.replace(/fu/g,"hu"));
-
-  // し/ち/つ (por si alguien guardó con si/ti/tu en vez de shi/chi/tsu)
   if (base.includes("shi")) set.add(base.replace(/shi/g,"si"));
   if (base.includes("chi")) set.add(base.replace(/chi/g,"ti"));
   if (base.includes("tsu")) set.add(base.replace(/tsu/g,"tu"));
-
-  // を: a veces "wo" o "o"
   if (base === "wo") set.add("o");
 
   return Array.from(set);
@@ -437,7 +775,6 @@ function romajiAlternativasAudio(romaji){
 let audioKana = new Audio();
 audioKana.preload = "auto";
 
-// IMPORTANTE: ahora recibimos ROMAJI (no kana)
 function reproducirAudioKana(romaji){
   const opciones = romajiAlternativasAudio(romaji);
   if (!opciones.length) return;
@@ -445,24 +782,27 @@ function reproducirAudioKana(romaji){
   audioKana.pause();
   audioKana.currentTime = 0;
 
-  // ✅ carpeta según modo
   const baseDir =
     (modoActual === "extra")
       ? "data/audios/kana/extra/"
-      : "data/audios/";   // <- ajusta si tus hiragana/katakana están en otra carpeta
+      : "data/audios/";
 
   let i = 0;
   const intentar = () => {
     if (i >= opciones.length) return;
     const nombre = opciones[i++];
 
-    // NO uses encodeURIComponent para toda la ruta, solo para el nombre
     audioKana.src = baseDir + encodeURIComponent(nombre) + ".mp3";
-
     audioKana.play().catch(() => intentar());
   };
 
   intentar();
+}
+
+function replayAudio(){
+  if (!kanaLista.length) return;
+  const r = kanaLista[actual]?.[1];
+  if (r) reproducirAudioKana(r);
 }
 
 /* ===============================
@@ -473,11 +813,12 @@ function siguienteKana(){
 
   const k = kanaLista[actual][0];
   const r = kanaLista[actual][1];
+  const kanaEl = document.getElementById("kana");
 
   if (quizModo === "dictado") {
-    document.getElementById("kana").innerText = "🔊";
+    kanaEl.innerText = "🔊";
   } else {
-    document.getElementById("kana").innerText = (quizModo === "jp_es") ? k : r;
+    kanaEl.innerText = (quizModo === "jp_es") ? k : r;
   }
 
   document.getElementById("respuesta").innerText = "";
@@ -485,18 +826,19 @@ function siguienteKana(){
   document.getElementById("respuestaUsuario").value = "";
   yaValidado = false;
   document.getElementById("respuestaUsuario").focus();
+
   if (quizModo === "dictado") {
-  reproducirAudioKana(r);
+    reproducirAudioKana(r);
   }
 }
 
-// Convierte Katakana -> Hiragana (para comparar respuestas en es_jp)
+// Convierte Katakana -> Hiragana
 function kataToHira(str){
   return (str || "").replace(/[\u30A1-\u30F6]/g, ch => {
     return String.fromCharCode(ch.charCodeAt(0) - 0x60);
   });
 }
-  
+
 function verificarRespuesta(){
   const kRaw = kanaLista[actual][0];
   const rRaw = kanaLista[actual][1];
@@ -506,14 +848,11 @@ function verificarRespuesta(){
 
   const raw = document.getElementById("respuestaUsuario").value.trim();
 
-  // Dictado: aceptar kana o romaji
   if (quizModo === "dictado") {
-    // reproduce audio al validar (opcional)
     reproducirAudioKana(r);
 
     const rawNorm  = (raw || "").normalize("NFKC").normalize("NFC");
     const rawLower = raw.toLowerCase();
-
     const pareceRomaji = /^[a-z\- ]+$/i.test(rawLower);
 
     let esCorrecto = false;
@@ -534,10 +873,13 @@ function verificarRespuesta(){
       document.getElementById("respuesta").innerText = "Correcto ✔ (" + k + " / " + r + ")";
       document.getElementById("respuesta").className = "correcto";
       aciertos++;
+      racha++;
+      if (racha > mejorRacha) mejorRacha = racha;
     } else {
       document.getElementById("respuesta").innerText = "Incorrecto ✘ (era: " + k + " / " + r + ")";
       document.getElementById("respuesta").className = "incorrecto";
       errores++;
+      racha = 0;
     }
 
     actualizarEstadisticas();
@@ -546,23 +888,24 @@ function verificarRespuesta(){
     return;
   }
 
-  // NO dictado: reproduce audio al validar
   reproducirAudioKana(r);
 
   if (quizModo === "jp_es") {
-    // Kana→Romaji: usuario escribe romaji
     const user = raw.toLowerCase();
+
     if (user === r) {
       document.getElementById("respuesta").innerText = "Correcto ✔ (" + r + ")";
       document.getElementById("respuesta").className = "correcto";
       aciertos++;
+      racha++;
+      if (racha > mejorRacha) mejorRacha = racha;
     } else {
       document.getElementById("respuesta").innerText = "Incorrecto ✘ (era: " + r + ")";
       document.getElementById("respuesta").className = "incorrecto";
       errores++;
+      racha = 0;
     }
   } else {
-    // Romaji→Kana: usuario escribe kana (acepta hira o kata)
     const u = (raw || "").normalize("NFKC").normalize("NFC");
     const ok1 = k;
     const ok2 = kataToHira(ok1);
@@ -572,10 +915,13 @@ function verificarRespuesta(){
       document.getElementById("respuesta").innerText = "Correcto ✔ (" + ok1 + ")";
       document.getElementById("respuesta").className = "correcto";
       aciertos++;
+      racha++;
+      if (racha > mejorRacha) mejorRacha = racha;
     } else {
       document.getElementById("respuesta").innerText = "Incorrecto ✘ (era: " + ok1 + ")";
       document.getElementById("respuesta").className = "incorrecto";
       errores++;
+      racha = 0;
     }
   }
 
@@ -590,36 +936,30 @@ function aplicarNotaTeclado(){
   nota.style.display = (quizModo === "es_jp") ? "block" : "none";
 }
 
-
 function romajiAlternativas(r){
   const base = (r || "").trim().toLowerCase().replace(/\s+/g,"");
 
-  // Alternativas permitidas SOLO para dictado
-  if (base === "wo") return ["wo","o"];  // を suena "o"
-  // (Opcional) si algún día quieres: じ / ぢ, ず / づ etc.
-  // if (base === "ji") return ["ji","zi"];
-  // if (base === "zu") return ["zu","du"];
-
+  if (base === "wo") return ["wo","o"];
   return [base];
 }
 
-  
 function actualizarEstadisticas(){
   document.getElementById("aciertos").innerText = aciertos;
-  document.getElementById("errores").innerText  = errores;
+  document.getElementById("errores").innerText = errores;
+  document.getElementById("racha").innerText = racha;
+  document.getElementById("mejorRacha").innerText = mejorRacha;
+  document.getElementById("precision").innerText = precisionPct();
 }
 
 /* ===============================
    BOTONES ACCIONES
 =============================== */
 function siguienteDesdeBoton(){
-  // ✅ 1er click: revisar (validar)
   if (!yaValidado) {
-    verificarRespuesta();   // esto ya pone yaValidado=true, actualiza stats y reproduce audio
+    verificarRespuesta();
     return;
   }
 
-  // ✅ 2do click: siguiente pregunta
   yaValidado = false;
   document.getElementById("respuesta").innerText = "";
   siguienteKana();
@@ -643,6 +983,7 @@ function mostrarRespuesta(){
   document.getElementById("respuesta").className = "incorrecto";
 
   errores++;
+  racha = 0;
   actualizarEstadisticas();
   guardarStatsActual();
 
@@ -652,22 +993,33 @@ function mostrarRespuesta(){
 function resetStatsModo(){
   const key = statsKeyActual();
   const stats = cargarStats();
-  stats[key] = { aciertos: 0, errores: 0 };
+
+  stats[key] = {
+    aciertos: 0,
+    errores: 0,
+    racha: 0,
+    mejorRacha: 0
+  };
+
   guardarStats(stats);
 
   aciertos = 0;
   errores = 0;
+  racha = 0;
+  mejorRacha = 0;
+
   actualizarEstadisticas();
 }
 
-// ===== ENTER robusto (incluye IME) =====
+/* ===============================
+   ENTER robusto (incluye IME)
+=============================== */
 let enterPendienteIME = false;
 
 window.addEventListener("DOMContentLoaded", () => {
   const inp = document.getElementById("respuestaUsuario");
   if (!inp) return;
 
-  // Si el usuario presionó Enter mientras IME componía, validamos al terminar.
   inp.addEventListener("compositionend", () => {
     if (!enterPendienteIME) return;
     enterPendienteIME = false;
@@ -689,8 +1041,6 @@ function manejarEnter(event){
 
   if (!esEnter) return;
 
-  // Si el IME está componiendo, el Enter suele ser "confirmar conversión", no validar.
-  // Entonces lo dejamos pendiente y esperamos compositionend.
   if (event.isComposing || event.key === "Process") {
     enterPendienteIME = true;
     event.preventDefault();
@@ -699,7 +1049,6 @@ function manejarEnter(event){
 
   event.preventDefault();
 
-  // ✅ 1er Enter: revisar / ✅ 2do Enter: siguiente
   if (!yaValidado) verificarRespuesta();
   else {
     yaValidado = false;
@@ -707,12 +1056,7 @@ function manejarEnter(event){
     siguienteKana();
   }
 }
-  
 </script>
 
 </body>
 </html>
-
-
-
-
