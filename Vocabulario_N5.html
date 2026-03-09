@@ -333,6 +333,11 @@
 
         <div id="resultado"></div>
 
+        <div class="actions">
+          <button class="btn" type="button" onclick="accionSiguiente()">Siguiente</button>
+          <button class="btn btn-ghost" type="button" onclick="mostrarRespuesta()">Mostrar respuesta</button>
+        </div>
+        
         <div class="stats">
           <div>
             Aciertos: <span id="aciertos">0</span> — Errores: <span id="errores">0</span>
@@ -341,10 +346,9 @@
             Racha: <span id="racha">0</span> — Mejor racha: <span id="mejorRacha">0</span> — Precisión: <span id="precision">0%</span>
           </div>
         </div>
-
-        <div class="actions">
-          <button class="btn" type="button" onclick="accionSiguiente()">Siguiente</button>
-          <button class="btn btn-ghost" type="button" onclick="mostrarRespuesta()">Mostrar respuesta</button>
+        
+        <div class="row" style="justify-content:center; margin-top: 8px; width:min(760px, 100%);">
+          <button class="btn btn-ghost" type="button" onclick="resetStats()">Reset stats</button>
         </div>
 
       </div>
@@ -559,12 +563,6 @@ function limpiarResultado(){
   res.innerText = "";
   res.className = "";
 }
-
-function precisionPct(){
-  const total = aciertos + errores;
-  if(total <= 0) return "0%";
-  return Math.round((aciertos / total) * 100) + "%";
-}
   
 function pintarStats(){
   document.getElementById("aciertos").innerText = aciertos;
@@ -744,9 +742,6 @@ function verificar(letraForzada){
     res.innerText = `Incorrecto ✘ (era ${correctaLetra}) — ${respuestaCorrecta}`;
     errores++;
     racha = 0;
-    pintarStats();
-    guardarStats();
-    yaValidado = true;
   }
 
   pintarStats();
