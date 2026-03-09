@@ -658,12 +658,12 @@ function siguiente(){
 
   let opciones = [respuestaCorrecta];
   while(opciones.length < 3){
-    const rItem = lista[Math.floor(Math.random()*lista.length)];
+    const rItem = lista[Math.floor(Math.random() * lista.length)];
     const r = textoRespuesta(rItem);
     if(!opciones.includes(r)) opciones.push(r);
   }
   
-  opciones.sort(()=>Math.random()-0.5);
+  opciones = mezclarArray(opciones);
   correctaLetra = letras[opciones.indexOf(respuestaCorrecta)];
   actualOpcionesTexto = opciones.slice();
 
@@ -693,6 +693,15 @@ function renderOpciones(opciones){
   `;
 }
 
+function mezclarArray(arr){
+  const copia = [...arr];
+  for(let i = copia.length - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * (i + 1));
+    [copia[i], copia[j]] = [copia[j], copia[i]];
+  }
+  return copia;
+}
+  
 function responder(letra){
   focoAutomatico = false;
   if(yaValidado) return;
