@@ -85,16 +85,6 @@
     justify-content:flex-start;
   }
 
-  .pill{
-    padding: 8px 12px;
-    border-radius: 999px;
-    border: 1px solid var(--border);
-    background: rgba(255,255,255,.06);
-    color: var(--muted);
-    font-size: 13px;
-    font-weight: 700;
-  }
-
   .chips{
     display:flex;
     gap:10px;
@@ -444,9 +434,6 @@
     <div class="top-grid">
 
       <div class="panel">
-        <div class="row-left" style="margin-bottom:10px;">
-          <span class="pill">Modo de escritura</span>
-        </div>
 
         <div id="modo-container" class="chips">
           <button id="btn-hiragana" class="modo-btn" onclick="setModo('hiragana')">Hiragana</button>
@@ -456,10 +443,6 @@
         </div>
 
         <div class="sep"></div>
-
-        <div class="row-left" style="margin-bottom:10px;">
-          <span class="pill">Tipo de ejercicio</span>
-        </div>
 
         <div id="orden-container" class="chips">
           <button id="btn-principiante" class="modo-btn" onclick="togglePrincipiante()">Principiante</button>
