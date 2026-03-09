@@ -709,7 +709,7 @@ function verificar(letraForzada){
   
   if(!["a","b","c"].includes(r)){
     res.className = "incorrecto";
-    res.innerText = `Usa solo: a / b / c`;
+    res.innerText = "Usa solo: a / b / c";
     return;
   }
   
@@ -781,8 +781,15 @@ function manejarEnter(event){
 
 document.addEventListener("keydown", (e) => {
   const k = (e.key || "").toLowerCase();
+  const input = document.getElementById("respuestaUsuario");
+  const focoEnInput = (document.activeElement === input);
 
   if(["a","b","c"].includes(k) && !yaValidado){
+    // Si el foco está en la caja, dejamos que escriba normal
+    if(focoEnInput) return;
+
+    // Si el foco NO está en la caja, responder directo
+    e.preventDefault();
     responder(k);
   }
 });
