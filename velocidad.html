@@ -1474,11 +1474,19 @@ function missMeteor(m) {
 
   playExplosion(); // 💥 SONIDO AQUÍ
 
-  burstPixelFX(m, {
-    explode: m.isBonus ? 18 : 12,
-    rain:    m.isBonus ? 24 : 16,
-    bounce:  undefined // que decida nearGround automáticamente
-  });
+  if (m.isBonus) {
+    burstPixelFX(m, {
+      explode: 18,
+      rain: 24,
+      bounce: 0
+    });
+  } else {
+    burstPixelFX(m, {
+      explode: 12,
+      rain: 16,
+      bounce: 0
+    });
+  }
 
   // Penaliza el puntaje cuando fallamos un meteoro
   state.score = Math.max(0, state.score - 4); // Restar puntos si el meteoro es fallado
@@ -1823,9 +1831,9 @@ function explodeTypedAtDisplay(strength="soft", text=null){
   const fake = { el: displayEl, isBonus: false };
 
   if(strength === "hard"){
-    burstPixelFX(fake, { explode: 14, rain: 10, bounce: 10 });
+    burstPixelFX(fake, { explode: 8, rain: 5, bounce: 5 });
   }else{
-    burstPixelFX(fake, { explode: 8, rain: 4, bounce: 6 });
+    burstPixelFX(fake, { explode: 7, rain: 4, bounce: 4 });
   }
 
   // opcional: sonido SOLO en hard (si quieres)
@@ -2149,7 +2157,11 @@ function submitAnswer() {
   playHit();
   
   // Aquí utilizamos `burstPixelFX` para las partículas (lluvia de pixels)
-  burstPixelFX(m, { explode: m.isBonus ? 14 : 8, rain: 0, bounce: 0 });
+  if (m.isBonus) {
+    burstPixelFX(m, { explode: 8, rain: 0, bounce: 0 });
+  } else {
+    burstPixelFX(m, { explode: 8, rain: 0, bounce: 0 });
+  }
 
   // Actualiza el puntaje y la racha
   if (m.isBonus && m.kind === "flyby") {
