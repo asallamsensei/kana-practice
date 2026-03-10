@@ -58,6 +58,44 @@ h1{
     box-shadow:0 10px 25px rgba(0,0,0,0.35);
 }
 
+/* VARIACIÓN AUTOMÁTICA DE TARJETAS */
+
+.card:nth-child(4n+1){
+    border-color:#ffd700;
+    background:linear-gradient(
+        145deg,
+        rgba(255,215,0,0.15),
+        rgba(255,255,255,0.05)
+    );
+}
+
+.card:nth-child(4n+2){
+    border-color:#c0c0c0;
+    background:linear-gradient(
+        145deg,
+        rgba(192,192,192,0.15),
+        rgba(255,255,255,0.05)
+    );
+}
+
+.card:nth-child(4n+3){
+    border-color:#cd7f32;
+    background:linear-gradient(
+        145deg,
+        rgba(205,127,50,0.15),
+        rgba(255,255,255,0.05)
+    );
+}
+
+.card:nth-child(4n){
+    border-color:#7d5cff;
+    background:linear-gradient(
+        145deg,
+        rgba(125,92,255,0.18),
+        rgba(255,255,255,0.05)
+    );
+}
+    
 .card:hover{
     transform:translateY(-5px);
     border-color:#7d5cff;
