@@ -48,35 +48,77 @@ h1{
 }
 
 .card{
+    position:relative;
+    overflow:hidden;
     background:rgba(255,255,255,0.05);
     border:1px solid rgba(255,255,255,0.15);
     border-radius:14px;
     padding:20px;
     transition:0.3s;
+    box-shadow:0 10px 25px rgba(0,0,0,0.35);
 }
 
 .card:hover{
     transform:translateY(-5px);
     border-color:#7d5cff;
 }
+    
+.card::before{
+    content:"";
+    position:absolute;
+    top:0;
+    left:-100%;
+    width:60%;
+    height:100%;
+    background:linear-gradient(
+        120deg,
+        transparent,
+        rgba(255,255,255,0.35),
+        transparent
+    );
+    transform:skewX(-25deg);
+}
 
+.card:hover::before{
+    animation:shine 1s ease;
+}
+
+@keyframes shine{
+    100%{
+        left:150%;
+    }
+}
+
+.country{
+  font-size:14px;
+  color:#aab3ff;
+  margin-top:4px;
+}
+    
 .name{
-    font-size:18px;
+    font-size:20px;
     font-weight:bold;
 }
 
-.role{
-    font-size:14px;
-    color:#aab3ff;
+.alias{
+  font-size:14px;
+  color:#ffd166;
+  margin-top:4px;
 }
 
+.jp{
+    font-size:26px;
+    color:#aab3ff;
+    font-weight:normal;
+}
+    
 footer{
     margin-top:40px;
     padding:30px;
     font-size:14px;
     color:#889;
 }
-
+    
 </style>
 </head>
 
@@ -84,86 +126,35 @@ footer{
 
 <header>
 
-<h1>Salón de Honor</h1>
-
+<h1>
+Salón de Honor
+<br>
+<span class="jp">名誉の殿堂</span>
+</h1>
+    
 <div class="subtitle">
 Personas que han apoyado el proyecto educativo de Asallam Sensei
 </div>
 
 </header>
 
-
 <div class="section">
 
-<h2>Fundadores del Proyecto</h2>
+<h2>Estudiantes de todo el mundo 🌍</h2>
 
 <div class="grid">
 
 <!-- AGREGA NOMBRES AQUÍ -->
 
 <div class="card">
-<div class="name">Nombre del estudiante</div>
-<div class="role">Fundador</div>
-</div>
-
-<div class="card">
-<div class="name">Nombre del estudiante</div>
-<div class="role">Fundador</div>
+  <div class="name">Freddy</div>
+  <div class="country">🇻🇪 🇪🇸</div>
+  <div class="alias">Tarea fija</div>
 </div>
 
 </div>
-
 </div>
-
-
-
-<div class="section">
-
-<h2>Apoyo al Canal</h2>
-
-<div class="grid">
-
-<!-- AGREGA MÁS NOMBRES AQUÍ -->
-
-<div class="card">
-<div class="name">Nombre del estudiante</div>
-<div class="role">Apoyo al canal</div>
-</div>
-
-<div class="card">
-<div class="name">Nombre del estudiante</div>
-<div class="role">Apoyo al canal</div>
-</div>
-
-</div>
-
-</div>
-
-
-
-<div class="section">
-
-<h2>Estudiantes Destacados</h2>
-
-<div class="grid">
-
-<!-- AGREGA MÁS NOMBRES AQUÍ -->
-
-<div class="card">
-<div class="name">Nombre del estudiante</div>
-<div class="role">Estudiante destacado</div>
-</div>
-
-<div class="card">
-<div class="name">Nombre del estudiante</div>
-<div class="role">Estudiante destacado</div>
-</div>
-
-</div>
-
-</div>
-
-
+    
 <footer>
 
 Proyecto educativo — Asallam Sensei  
