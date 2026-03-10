@@ -1469,6 +1469,9 @@ function killMeteor(m, cls){
   state.meteors.delete(m.id);
 }
 
+// 💥 METEORO FALLADO (golpea el suelo)
+// Maneja la explosión cuando el jugador NO responde a tiempo.
+// Los meteoros bonus tienen una explosión un poco mayor.
 function missMeteor(m) {
   killMeteor(m, "miss");
 
@@ -1476,15 +1479,15 @@ function missMeteor(m) {
 
   if (m.isBonus) {
     burstPixelFX(m, {
-      explode: 18,
-      rain: 24,
-      bounce: 0
+      explode: 8,
+      rain: 6,
+      bounce: 5
     });
   } else {
     burstPixelFX(m, {
-      explode: 12,
-      rain: 16,
-      bounce: 0
+      explode: 7,
+      rain: 5,
+      bounce: 4
     });
   }
 
@@ -1497,6 +1500,10 @@ function missMeteor(m) {
   if (state.lives === 0) gameOver();
 }
 
+  // 💣 SCREEN BOMB (bomba de pantalla)
+  // Destruye TODOS los meteoros activos sin penalizar vidas.
+  // Se usa como habilidad especial para limpiar la pantalla.
+  // Cada meteoro eliminado da una pequeña recompensa de puntos.
   function screenBomb(){
     // Borra TODOS los meteoros actuales (sin penalizar vidas)
     const arr = [...state.meteors.values()];
@@ -1507,7 +1514,7 @@ function missMeteor(m) {
       if(!mm.alive) continue;
   
       // efecto visual (ligero)
-      burstPixelFX(mm, { explode: 10, rain: 6, bounce: 0 });
+      burstPixelFX(mm, { explode: 6, rain: 3, bounce: 2 });
   
       // lo removemos como "hit" (sin missMeteor)
       killMeteor(mm, "hit");
@@ -1752,9 +1759,9 @@ function burstPixelFX(m, opts = {}) {
   const cx = (rectM.left - rectG.left) + rectM.width / 2;
   const cy = (rectM.top  - rectG.top)  + rectM.height / 2;
 
-  const explodeN = opts.explode ?? (m.isBonus ? 18 : 12);
-  const rainN    = opts.rain    ?? (m.isBonus ? 22 : 16);
-  const bounceN  = opts.bounce  ?? 0;
+  const explodeN = opts.explode;
+  const rainN = opts.rain;
+  const bounceN = opts.bounce;
 
   const palette = m.isBonus ? BONUS_COLORS : FIRE_COLORS;
 
@@ -1821,6 +1828,9 @@ function burstPixelFX(m, opts = {}) {
   for (let i = 0; i < bounceN; i++) spawn("bounce");
 }
 
+// 💥 EXPLOSIÓN DEL NÚMERO EN EL DISPLAY
+// Efecto visual cuando el jugador escribe o confirma una respuesta.
+// Usa un "meteoro falso" apuntando al display para reutilizar burstPixelFX.
 function explodeTypedAtDisplay(strength="soft", text=null){
   const t = (text ?? state.typed ?? "").trim();
 
@@ -1831,9 +1841,9 @@ function explodeTypedAtDisplay(strength="soft", text=null){
   const fake = { el: displayEl, isBonus: false };
 
   if(strength === "hard"){
-    burstPixelFX(fake, { explode: 8, rain: 5, bounce: 5 });
+    burstPixelFX(fake, { explode: 5, rain: 3, bounce: 2 });
   }else{
-    burstPixelFX(fake, { explode: 7, rain: 4, bounce: 4 });
+    burstPixelFX(fake, { explode: 4, rain: 2, bounce: 1 });
   }
 
   // opcional: sonido SOLO en hard (si quieres)
@@ -2158,9 +2168,9 @@ function submitAnswer() {
   
   // Aquí utilizamos `burstPixelFX` para las partículas (lluvia de pixels)
   if (m.isBonus) {
-    burstPixelFX(m, { explode: 8, rain: 0, bounce: 0 });
+    burstPixelFX(m, { explode: 8, rain: 6, bounce: 5 });
   } else {
-    burstPixelFX(m, { explode: 8, rain: 0, bounce: 0 });
+    burstPixelFX(m, { explode: 7, rain: 5, bounce: 4 });
   }
 
   // Actualiza el puntaje y la racha
