@@ -57,10 +57,8 @@
   }
 
 .panel{
-  width: fit-content;
-  max-width: 100%;
+  width: 100%;
   min-width: 0;
-  justify-self: start;
   background: var(--card);
   border: 1px solid var(--border);
   border-radius: 16px;
@@ -68,7 +66,7 @@
   box-shadow: 0 6px 16px rgba(0,0,0,0.06);
   text-align: center;
 }
-
+  
   /* Prompt base (JP→ES y ES→JP) responsive */
 #prompt{
   font-size: clamp(30px, 3.6vw, 48px);
@@ -190,9 +188,10 @@
 .layout{
   width: min(1180px, 100%);
   display: grid;
-  grid-template-columns: minmax(0, 1fr) fit-content(320px);
-  gap: 18px;
+  grid-template-columns: minmax(0, 1fr) fit-content(380px);
+  gap: 20px;
   align-items: start;
+  justify-content: center;
 }
 
 .sidebar{
@@ -203,7 +202,7 @@
 
 .panel-side{
   width: fit-content;
-  max-width: 320px;
+  max-width: 380px;
   background: var(--card);
   border: 1px solid var(--border);
   border-radius: 16px;
