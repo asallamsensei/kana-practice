@@ -34,14 +34,10 @@
   }
 
   /* Sidebar: bloques y modos */
-  .bar{
-    display:flex;
-    flex-wrap:wrap;
-    gap:10px;
-    justify-content:center;
-    max-width: 920px;
-    margin-bottom: 0px;
-  }
+.bar{
+  width: 100%;
+  margin-bottom: 0;
+}
 
   .btn{
     padding: 10px 14px;
@@ -192,7 +188,7 @@
 .layout{
   width: min(1180px, 100%);
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1.35fr) minmax(260px, 0.85fr);
   gap: 18px;
   align-items: start;
 }
@@ -233,15 +229,17 @@
 }
 
 .side-bar{
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
   gap: 10px;
+  width: 100%;
   max-width: 100%;
   margin: 0;
 }
 
 .side-bar .btn{
   width: 100%;
+  min-width: 0;
   text-align: center;
 }
 
@@ -264,13 +262,14 @@
   }
 
   .side-bar{
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 10px;
+    width: 100%;
   }
 
   .side-bar .btn{
-    width: auto;
+    width: 100%;
   }
 
   #prompt{
@@ -298,9 +297,7 @@
     font-size: 16px;
     padding: 11px 15px;
   }
-}
 
-@media (max-width: 900px){
   h1{
     font-size: 28px;
     line-height: 1.15;
