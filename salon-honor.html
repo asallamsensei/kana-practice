@@ -364,6 +364,18 @@ Personas que han apoyado el proyecto educativo de Asallam Sensei
   <div class="country">México</div>
   <div class="alias">Ya lee mejor que yo!</div>
 </div>
+
+<div class="card">
+  <div class="name">Rosina</div>
+  <div class="country">México</div>
+  <div class="alias">Elemental mi querido Watson! 🧐</div>
+</div>
+
+<div class="card">
+  <div class="name">Dory</div>
+  <div class="country">Vascolandia</div>
+  <div class="alias">¿Ane? ¿Qué es eso viejona?</div>
+</div>
     
 </div>
 </div>
@@ -376,5 +388,19 @@ Cada nombre aquí representa esfuerzo, dedicación y amor por el aprendizaje.
 
 </footer>
 
+<script>
+const grid = document.querySelector(".grid");
+const cards = Array.from(grid.children);
+
+// Fisher–Yates shuffle
+for (let i = cards.length - 1; i > 0; i--) {
+  const j = Math.floor(Math.random() * (i + 1));
+  [cards[i], cards[j]] = [cards[j], cards[i]];
+}
+
+// volver a insertarlas en el grid
+cards.forEach(card => grid.appendChild(card));
+</script>
+    
 </body>
 </html>
