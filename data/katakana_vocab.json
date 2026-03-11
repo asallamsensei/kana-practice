@@ -406,7 +406,7 @@
     },
     {
       "id": "kata_extra",
-      "nombre": "Extra — Cultura pop",
+      "nombre": "Cultura pop",
       "vocabulario": [
         { "jp": "ギャル", "es": "gyaru", "romaji": "gyaru" },
         { "jp": "コスプレ", "es": "cosplay", "romaji": "kosupure" },
@@ -427,6 +427,46 @@
         { "jp": "バズる", "es": "volverse viral", "romaji": "bazuru" },
         { "jp": "ミーム", "es": "meme", "romaji": "miimu" },
         { "jp": "ネタ", "es": "broma / material", "romaji": "neta" }
+      ]
+    },
+    {
+      "id": "kata_secret",
+      "nombre": "Vida adulta y cuidado íntimo",
+      "vocabulario": [
+        { "jp": "キス", "es": "beso", "romaji": "kisu" },
+        { "jp": "セックス", "es": "sexo", "romaji": "sekkusu" },
+        { "jp": "デート", "es": "cita romántica", "romaji": "deeto" },
+        { "jp": "ロマンス", "es": "romance", "romaji": "romansu" },
+        { "jp": "カップル", "es": "pareja", "romaji": "kappuru" },
+        { "jp": "ラブ", "es": "amor", "romaji": "rabu" },
+        { "jp": "ムード", "es": "ambiente / mood", "romaji": "muudo" },
+        { "jp": "スキンシップ", "es": "contacto físico afectivo", "romaji": "sukinshippu" },
+    
+        { "jp": "コンドーム", "es": "condón", "romaji": "kondoomu" },
+        { "jp": "ピル", "es": "píldora", "romaji": "piru" },
+        { "jp": "ナプキン", "es": "toalla sanitaria", "romaji": "napukin" },
+        { "jp": "タンポン", "es": "tampón", "romaji": "tanpon" },
+        { "jp": "パッド", "es": "protector / pad", "romaji": "paddo" },
+        { "jp": "シート", "es": "toallita / sheet", "romaji": "shiito" },
+        { "jp": "ソープ", "es": "jabón", "romaji": "soopu" },
+        { "jp": "ローション", "es": "loción", "romaji": "rooshon" },
+        { "jp": "クリーム", "es": "crema", "romaji": "kuriimu" },
+        { "jp": "ジェル", "es": "gel", "romaji": "jeru" },
+    
+        { "jp": "ドラッグストア", "es": "farmacia", "romaji": "doraggusutaa" },
+        { "jp": "ホテル", "es": "hotel", "romaji": "hoteru" },
+        { "jp": "ラブホテル", "es": "love hotel", "romaji": "rabu hoteru" },
+        { "jp": "ナイトクラブ", "es": "club nocturno", "romaji": "naitokurabu" },
+        { "jp": "バー", "es": "bar", "romaji": "baa" },
+        { "jp": "チェックイン", "es": "check-in", "romaji": "chekkuin" },
+    
+        { "jp": "トラブル", "es": "problema / inconveniente", "romaji": "toraburu" },
+        { "jp": "マッサージ", "es": "masaje", "romaji": "massaaji" },
+        { "jp": "リラックス", "es": "relajarse", "romaji": "rirakkusu" },
+        { "jp": "トイレットペーパー", "es": "papel higiénico", "romaji": "toiretto peepaa" },
+        { "jp": "ティッシュ", "es": "pañuelos desechables", "romaji": "tisshu" },
+        { "jp": "ウェットティッシュ", "es": "toallitas húmedas", "romaji": "wetto tisshu" },
+        { "jp": "ハンドソープ", "es": "jabón de manos", "romaji": "hando soopu" }
       ]
     }
   ]
