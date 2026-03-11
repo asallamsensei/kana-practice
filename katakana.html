@@ -113,17 +113,6 @@
     border-color: transparent;
   }
 
-  input{
-    background: rgba(255,255,255,.08);
-    border: 1px solid var(--border);
-    color: var(--text);
-    padding: 12px 14px;    /* + padding */
-    border-radius: 12px;
-    outline:none;
-    font-size: 16px;       /* + fuente */
-    width: min(420px, 100%);
-  }
-
   .btn{
     border: none;
     border-radius: 12px;
@@ -314,16 +303,6 @@
   }
   .optBtn.neutra-disabled{ opacity:.55; }
 
-  #inputRow{
-    justify-content:center;
-    margin-top: 18px;       /* + espacio entre opciones y cuadro de texto */
-    width:min(600px, 100%);
-  }
-  #respuestaUsuario{
-    text-align:center;
-    width:min(240px, 100%);
-  }
-
   .actions{
     display:grid;
     grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
@@ -362,14 +341,6 @@
       <div id="promptSub"></div>
 
       <div id="opcionesBtns"></div>
-
-      <div class="row" id="inputRow">
-        <input id="respuestaUsuario"
-               type="text"
-               placeholder="a / b / c + Enter"
-               maxlength="1"
-               onkeydown="manejarEnter(event)">
-      </div>
 
       <div id="resultado"></div>
 
@@ -412,7 +383,7 @@
       </div>
       <div class="row" style="justify-content:flex-start;">
         <div style="color:rgba(238,242,255,.7); font-size:14px; line-height:1.45;">
-          Enter valida / Enter de nuevo pasa. En móvil, toca el input si quieres teclado.
+          Responde tocando a, b o c. Luego pulsa “Siguiente”.
         </div>
       </div>
     </div>
@@ -470,7 +441,6 @@ let rondaDictado = false;
 let correctaLetra = "";
 let respuestaCorrecta = "";
 let yaValidado = false;
-let focoAutomatico = false;
 
 const letras = ["a","b","c"];
 
@@ -561,7 +531,6 @@ function aplicarUI(){
 
   // input se muestra/oculta según dictado EFECTIVO (ronda)
   // (aquí ponemos una base visual; se ajusta en renderPrompt)
-  $("inputRow").style.display = "flex";
 }
 
 function setModoBase(nuevoBase){
@@ -676,14 +645,12 @@ function renderPrompt(itemCorrecto){
       <button id="promptSpeaker" class="btnAudioBig" type="button" title="Escuchar" onclick="reproducirAudioActual()">🔊</button>
     `;
 
-    $("inputRow").style.display = "none";
   }else{
     promptEl.textContent = textoPregunta(itemCorrecto);
     subEl.innerHTML = `
       <button id="promptSpeaker" class="btnAudioBig" type="button" title="Escuchar" onclick="reproducirAudioActual()">🔊</button>
     `;
 
-    $("inputRow").style.display = "flex";
   }
 }
 
@@ -790,14 +757,6 @@ function siguiente(){
   limpiarResultado();
   yaValidado = false;
 
-  const input = $("respuestaUsuario");
-  if(!rondaDictado){
-    input.value = "";
-    input.placeholder = "a / b / c + Enter";
-    input.maxLength = 1;
-    if(focoAutomatico) input.focus({preventScroll:true});
-  }
-
   // sonido al pasar
   playAudio(ultimoAudioKey);
 }
@@ -808,28 +767,16 @@ function siguiente(){
 function responder(letra){
   focoAutomatico = false;
   if(yaValidado) return;
-  if(!rondaDictado) $("respuestaUsuario").value = letra;
   verificar(letra);
 }
 
 function verificar(letraForzada){
   const res = $("resultado");
-  const r = (letraForzada || (!rondaDictado ? $("respuestaUsuario").value : ""))
-              .toString().toLowerCase().trim();
+  const letra = (letraForzada || "").toString().toLowerCase().trim();
 
-  if(!rondaDictado && !["a","b","c"].includes(r)){
-    res.className = "incorrecto";
-    res.innerText = `Incorrecto ✘ (era ${correctaLetra}) — ${respuestaCorrecta}`;
-    errores++; pintarStats();
-    yaValidado = true;
-
-    pintarOpciones(r);
-    bloquearOpciones();
-    playAudio(ultimoAudioKey);
+  if(!["a","b","c"].includes(letra)){
     return;
   }
-
-  const letra = rondaDictado ? letraForzada : r;
 
   if(letra === correctaLetra){
     res.className = "correcto";
@@ -892,24 +839,9 @@ function mostrarRespuesta(){
   playAudio(ultimoAudioKey);
 }
 
-function manejarEnter(event){
-  if(event.key !== "Enter") return;
-  if(rondaDictado) return;
-
-  if(!yaValidado) verificar();
-  else siguiente();
-}
-
 /* ===============================
    UX: evitar teclado móvil por defecto
 =============================== */
-document.addEventListener("pointerdown", (e)=>{
-  focoAutomatico = (e.target && e.target.id === "respuestaUsuario");
-});
-document.addEventListener("keydown", (e)=>{
-  const k = (e.key || "").toLowerCase();
-  if(k === "enter" || k === "a" || k === "b" || k === "c") focoAutomatico = true;
-});
 
 /* ===============================
    CARGA JSON + chips bloques
