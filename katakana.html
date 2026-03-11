@@ -208,18 +208,24 @@
     font-size: 16px;        /* + fuente */
   }
 
-  .switch{
-    display:grid;
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-    gap:12px;               /* + espacio entre botones modo */
-    width:min(640px, 100%);
-  }
-  .switch .btn-mode{
-    padding: 11px 14px;     /* + padding */
-    border-radius: 999px;
-    font-size: 14px;        /* + fuente */
-    width:100%;
-  }
+.switch{
+  display:grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap:12px;
+  width:100%;
+  margin-top:12px;
+}
+
+.switch .btn-mode{
+  padding: 11px 14px;
+  border-radius: 999px;
+  font-size: 14px;
+  width:100%;
+}
+
+.switch-panel{
+  max-width: 100%;
+}
 
   .btnAudioBig{
     border:none;
@@ -289,6 +295,13 @@
     margin-top: 14px;
   }
   .actions .btn, .actions .btn-ghost{ width:100%; }
+
+@media (max-width: 900px){
+  .switch{
+    grid-template-columns: 1fr;
+  }
+}
+  
 </style>
 </head>
 
@@ -303,12 +316,6 @@
          - Dictado: on/off (se aplica a la base)
          - Mix: super mix (mezcla JP/ES + dictado on/off al azar)
     -->
-    <div class="switch">
-      <button class="btn btn-mode" id="m-jp-es" type="button" onclick="setModoBase('jp-es')">JP → ES</button>
-      <button class="btn btn-mode" id="m-es-jp" type="button" onclick="setModoBase('es-jp')">ES → JP</button>
-      <button class="btn btn-mode" id="m-dictado" type="button" onclick="toggleDictado()">Dictado</button>
-      <button class="btn btn-mode" id="m-mix" type="button" onclick="setModoBase('mix')">Mix</button>
-    </div>
   </header>
 
   <div class="grid">
@@ -340,6 +347,18 @@
 
     <!-- Panel controles -->
     <div class="card">
+
+      <div class="row" style="justify-content:flex-start;">
+        <span class="pill">Modo</span>
+      </div>
+      
+      <div class="switch switch-panel">
+        <button class="btn btn-mode" id="m-jp-es" type="button" onclick="setModoBase('jp-es')">JP → ES</button>
+        <button class="btn btn-mode" id="m-es-jp" type="button" onclick="setModoBase('es-jp')">ES → JP</button>
+        <button class="btn btn-mode" id="m-dictado" type="button" onclick="toggleDictado()">Dictado</button>
+        <button class="btn btn-mode" id="m-mix" type="button" onclick="setModoBase('mix')">Mix</button>
+      </div>
+      
       <div class="row" style="justify-content:flex-start;">
         <span class="pill">Bloques (Katakana)</span>
       </div>
