@@ -44,7 +44,9 @@
         { "jp": "ゲーム", "es": "juego", "romaji": "geemu" },
         { "jp": "チケット", "es": "boleto", "romaji": "chiketto" },
         { "jp": "パスポート", "es": "pasaporte", "romaji": "pasupooto" },
-        { "jp": "スーツケース", "es": "maleta", "romaji": "suutsukeesu" }
+        { "jp": "スーツケース", "es": "maleta", "romaji": "suutsukeesu" },
+        { "jp": "コピー", "es": "copia", "romaji": "kopii" },
+        { "jp": "メモ", "es": "nota", "romaji": "memo" }
       ]
     },
     {
@@ -247,7 +249,12 @@
         { "jp": "オンライン", "es": "en línea", "romaji": "onrain" },
         { "jp": "オフライン", "es": "fuera de línea", "romaji": "ofurain" },
         { "jp": "コンテンツ", "es": "contenido", "romaji": "kontentsu" },
-        { "jp": "アドレス", "es": "dirección (web / email)", "romaji": "adoresu" }
+        { "jp": "アドレス", "es": "dirección (web / email)", "romaji": "adoresu" },
+        { "jp": "コメント", "es": "comentario", "romaji": "komento" },
+        { "jp": "シェア", "es": "compartir", "romaji": "shea" },
+        { "jp": "スクリーン", "es": "pantalla", "romaji": "sukuriin" },
+        { "jp": "タイプ", "es": "tipo / teclear", "romaji": "taipu" },
+        { "jp": "ミス", "es": "error / fallo", "romaji": "misu" }
       ]
     },
     {
@@ -282,7 +289,8 @@
         { "jp": "イベント", "es": "evento", "romaji": "ibento" },
         { "jp": "ショー", "es": "show / espectáculo", "romaji": "shoo" },
         { "jp": "オープニング", "es": "opening", "romaji": "oopuningu" },
-        { "jp": "エンディング", "es": "ending", "romaji": "endingu" }
+        { "jp": "エンディング", "es": "ending", "romaji": "endingu" },
+        { "jp": "エンタメ", "es": "entretenimiento", "romaji": "entame" }
       ]
     },
     {
@@ -317,7 +325,9 @@
         { "jp": "ギフト", "es": "regalo", "romaji": "gifuto" },
         { "jp": "ラッピング", "es": "envoltura de regalo", "romaji": "rappingu" },
         { "jp": "クレジットカード", "es": "tarjeta de crédito", "romaji": "kurejitto kaado" },
-        { "jp": "レシート", "es": "recibo", "romaji": "reshiito" }
+        { "jp": "レシート", "es": "recibo", "romaji": "reshiito" },
+        { "jp": "バーゲン", "es": "liquidación / ganga", "romaji": "baagen" },
+        { "jp": "アウトレット", "es": "outlet", "romaji": "autoretto" }
       ]
     },
     {
@@ -352,7 +362,8 @@
         { "jp": "スキンケア", "es": "cuidado de la piel", "romaji": "sukin kea" },
         { "jp": "ヘアケア", "es": "cuidado del cabello", "romaji": "hea kea" },
         { "jp": "メイク", "es": "maquillaje", "romaji": "meiku" },
-        { "jp": "チェック", "es": "chequeo / revisión", "romaji": "chekku" }
+        { "jp": "チェック", "es": "chequeo / revisión", "romaji": "chekku" },
+        { "jp": "テスト", "es": "test / examen", "romaji": "tesuto" }
       ]
     },
     {
@@ -387,7 +398,10 @@
         { "jp": "フリータイム", "es": "tiempo libre", "romaji": "furiitaimu" },
         { "jp": "リラックス", "es": "relajarse", "romaji": "rirakkusu" },
         { "jp": "チャレンジ", "es": "reto / desafío", "romaji": "charenji" },
-        { "jp": "スポット", "es": "lugar turístico / spot", "romaji": "supotto" }
+        { "jp": "スポット", "es": "lugar turístico / spot", "romaji": "supotto" },
+        { "jp": "チャンス", "es": "oportunidad", "romaji": "chansu" },
+        { "jp": "ペース", "es": "ritmo", "romaji": "peesu" },
+        { "jp": "タイミング", "es": "momento / timing", "romaji": "taimingu" }
       ]
     },
     {
