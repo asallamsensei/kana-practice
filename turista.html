@@ -333,12 +333,6 @@
       <button class="btnABC" type="button" onclick="responder('c')">c</button>
     </div>
 
-    <input id="respuestaUsuario"
-           type="text"
-           placeholder="a / b / c"
-           maxlength="1"
-           onkeydown="manejarEnter(event)"/>
-
     <div class="acciones">
       <button class="accion-btn" onclick="mostrarRespuesta()">Mostrar respuesta</button>
       <button class="accion-btn" onclick="siguienteDesdeBoton()">Siguiente</button>
@@ -401,7 +395,6 @@ let yaValidado = false;
 let aciertos = 0;
 let errores  = 0;
 
-let focoAutomatico = false;
 let todosActivo = false;
 let bloquesSeleccionados = new Set();
 
@@ -473,11 +466,18 @@ function resetStatsTodo(){
 =============================== */
 function $(id){ return document.getElementById(id); }
 
-document.addEventListener("pointerdown", (e) => {
-  focoAutomatico = (e.target && e.target.id === "respuestaUsuario");
-});
 document.addEventListener("keydown", (e) => {
-  if(["a","b","c","Enter"].includes(e.key)) focoAutomatico = true;
+  const k = e.key.toLowerCase();
+
+  if(k === "a" || k === "b" || k === "c"){
+    responder(k);
+    return;
+  }
+
+  if(k === "enter"){
+    if(yaValidado) siguiente();
+    else mostrarRespuesta();
+  }
 });
 
 function pintarBotonesActivos(){
@@ -656,8 +656,6 @@ function siguiente(){
   yaValidado = false;
   $("resultado").innerText = "";
   $("resultado").className = "";
-  $("respuestaUsuario").value = "";
-  if(focoAutomatico) $("respuestaUsuario").focus();
 
   actualIdx = Math.floor(Math.random() * pool.length);
   actualItem = pool[actualIdx];
@@ -706,14 +704,12 @@ function escapeHTML(str){
 }
 
 function responder(letra){
-  focoAutomatico = false;
   if(yaValidado) return;
-  $("respuestaUsuario").value = letra;
-  verificar();
+  verificar(letra);
 }
 
-async function verificar(){
-  const r = $("respuestaUsuario").value.toLowerCase().trim();
+async function verificar(letra){
+  const r = String(letra).toLowerCase().trim();
   const res = $("resultado");
 
   await playAudioForRomaji(actualItem.romaji);
@@ -758,13 +754,10 @@ async function mostrarRespuesta(){
 
 async function siguienteDesdeBoton(){
   const res = $("resultado");
-
+  
   if(!yaValidado){
-    const v = $("respuestaUsuario").value.trim();
-    if(v === ""){
-      await playAudioForRomaji(actualItem.romaji);
-    }
-
+    await playAudioForRomaji(actualItem.romaji);
+  
     errores++;
     actualizarEstadisticas();
     guardarStatsActual();
@@ -782,20 +775,6 @@ async function siguienteDesdeBoton(){
   siguiente();
 }
 
-function manejarEnter(ev){
-  if(ev.key !== "Enter") return;
-
-  if(!yaValidado){
-    const v = $("respuestaUsuario").value.trim();
-    if(v === ""){
-      mostrarRespuesta();
-      return;
-    }
-    verificar();
-  }else{
-    siguiente();
-  }
-}
 </script>
 
 </body>
