@@ -57,24 +57,26 @@
   }
 
 .panel{
-  width: 100%;
+  width: auto;
   min-width: 0;
+  max-width: 100%;
   background: var(--card);
   border: 1px solid var(--border);
   border-radius: 16px;
   padding: 18px 16px 16px;
   box-shadow: 0 6px 16px rgba(0,0,0,0.06);
   text-align:center;
+  justify-self: stretch;
 }
 
   /* Prompt base (JP→ES y ES→JP) responsive */
-  #prompt{
-    font-size: clamp(36px, 8vw, 64px);
-    font-weight: 800;
-    margin: 6px 0 10px;
-    line-height: 1.05;
-    word-break: break-word;
-  }
+#prompt{
+  font-size: clamp(34px, 4.8vw, 56px);
+  font-weight: 800;
+  margin: 6px 0 10px;
+  line-height: 1.05;
+  word-break: break-word;
+}
 
   /* Cuando la pregunta es español → japonés (más pequeñoo) */
   #prompt.prompt-es-jp{
@@ -188,7 +190,7 @@
 .layout{
   width: min(1180px, 100%);
   display: grid;
-  grid-template-columns: minmax(0, 1.35fr) minmax(260px, 0.85fr);
+  grid-template-columns: minmax(0, 1fr) fit-content(320px);
   gap: 18px;
   align-items: start;
 }
@@ -200,6 +202,8 @@
 }
 
 .panel-side{
+  width: fit-content;
+  max-width: 320px;
   background: var(--card);
   border: 1px solid var(--border);
   border-radius: 16px;
@@ -230,27 +234,31 @@
 
 .side-bar{
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  grid-template-columns: repeat(auto-fit, max-content);
   gap: 10px;
-  width: 100%;
+  justify-content: start;
+  width: auto;
   max-width: 100%;
   margin: 0;
 }
 
 .side-bar .btn{
-  width: 100%;
-  min-width: 0;
-  text-align: center;
+  width: auto;
 }
 
 @media (max-width: 900px){
   .layout{
+    width: 100%;
     grid-template-columns: 1fr;
+    gap: 14px;
   }
 
   .panel,
   .panel-side{
-    width: 100%;
+    width: calc(100vw - 28px);
+    max-width: 100%;
+    box-sizing: border-box;
+    justify-self: center;
   }
 
   .sidebar{
@@ -259,17 +267,19 @@
 
   .panel-side{
     padding: 14px;
+    max-width: none;
   }
 
   .side-bar{
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    display: flex;
+    flex-wrap: wrap;
     gap: 10px;
     width: 100%;
   }
 
   .side-bar .btn{
-    width: 100%;
+    width: auto;
+    max-width: 100%;
   }
 
   #prompt{
