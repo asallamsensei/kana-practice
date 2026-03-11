@@ -4,6 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Turista en Japón — Asallam Sensei</title>
+
 <style>
   :root{
     --bg: #f6f6ff;
@@ -17,305 +18,319 @@
     --border:#d9d9e7;
   }
 
+  *,
+  *::before,
+  *::after{
+    box-sizing: border-box;
+  }
+
+  html, body{
+    margin: 0;
+    padding: 0;
+  }
+
   body{
     background: var(--bg);
     font-family: Arial, sans-serif;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     padding: 26px 14px 60px;
     color: var(--text);
   }
 
   h1{
     font-size: 40px;
-    margin: 10px 0 14px;
-    text-align:center;
+    margin: 10px 0 18px;
+    text-align: center;
+    line-height: 1.15;
   }
 
-  /* Sidebar: bloques y modos */
-.bar{
-  width: 100%;
-  margin-bottom: 0;
-}
+  .layout{
+    width: 100%;
+    max-width: 1120px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 360px;
+    gap: 20px;
+    align-items: start;
+  }
+
+  .panel{
+    width: 100%;
+    min-width: 0;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 22px 20px 18px;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.06);
+    text-align: center;
+    overflow: hidden;
+  }
+
+  .sidebar{
+    width: 100%;
+    min-width: 0;
+  }
+
+  .panel-side{
+    width: 100%;
+    min-width: 0;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 16px;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.06);
+  }
+
+  .side-section{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .side-section + .side-section{
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px solid var(--border);
+  }
+
+  .side-title{
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: .04em;
+    text-align: left;
+  }
+
+  .bar{
+    width: 100%;
+    margin-bottom: 0;
+  }
+
+  .side-bar{
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+    margin: 0;
+  }
 
   .btn{
+    width: 100%;
     padding: 10px 14px;
     font-size: 16px;
     border-radius: 999px;
     border: 2px solid var(--accent);
     background: transparent;
     color: #2b214b;
-    cursor:pointer;
-    user-select:none;
+    cursor: pointer;
+    user-select: none;
     transition: 0.15s;
+    text-align: center;
   }
-  .btn:hover{ transform: translateY(-1px); }
+
+  .btn:hover{
+    transform: translateY(-1px);
+  }
+
   .btn.activo{
     background: var(--accent);
     color: white;
   }
 
-.panel{
-  width: 100%;
-  min-width: 0;
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  padding: 18px 16px 16px;
-  box-shadow: 0 6px 16px rgba(0,0,0,0.06);
-  text-align: center;
-}
-  
-  /* Prompt base (JP→ES y ES→JP) responsive */
-#prompt{
-  font-size: clamp(30px, 3.6vw, 48px);
-  font-weight: 800;
-  margin: 6px 0 10px;
-  line-height: 1.05;
-  word-break: break-word;
-}
-
-  /* Cuando la pregunta es español → japonés (más pequeñoo) */
-  #prompt.prompt-es-jp{
-    font-size: clamp(22px, 4.5vw, 35px);
-    font-weight: 700;
-    line-height: 1.2;
+  .btn-todos{
+    border-color: #e03131;
+    color: #a11b1b;
+    opacity: 0.45;
   }
 
-  /* Opciones también responsive */
+  .btn-todos.activo{
+    background: #ffb3b3;
+    border-color: #ffb3b3;
+    color: #7a1c1c;
+    opacity: 1;
+  }
+
+  #prompt{
+    font-size: clamp(30px, 3.2vw, 48px);
+    font-weight: 800;
+    margin: 4px 0 12px;
+    line-height: 1.08;
+    word-break: break-word;
+  }
+
+  #prompt.prompt-es-jp{
+    font-size: clamp(22px, 2.5vw, 34px);
+    font-weight: 700;
+    line-height: 1.22;
+  }
+
   #opciones{
-    font-size: clamp(16px, 4.2vw, 22px);
-    text-align:left;
+    font-size: clamp(18px, 1.9vw, 22px);
+    text-align: left;
     line-height: 1.7;
     width: fit-content;
-    margin: 0 auto 10px;
+    max-width: 100%;
+    margin: 0 auto 14px;
   }
-
-  #respuestaUsuario{
-    margin-top: 8px;
-    font-size: 22px;
-    padding: 8px 12px;
-    border-radius: 10px;
-    border: 2px solid #aaa;
-    text-align:center;
-    width: 110px;
-  }
-
-  .acciones{
-    margin-top: 14px;
-    display:flex;
-    flex-wrap:wrap;
-    gap: 10px;
-    justify-content:center;
-  }
-
-  .accion-btn{
-    padding: 12px 18px;
-    border-radius: 12px;
-    border:none;
-    background: var(--accent);
-    color: white;
-    cursor:pointer;
-    font-size: 18px;
-  }
-  .accion-btn:hover{ background: var(--accent2); }
-
-  #resultado{
-    margin-top: 12px;
-    font-size: 22px;
-    min-height: 30px;
-    text-align:center;
-    white-space: pre-line;
-  }
-
-  .correcto{ color: var(--ok); font-weight: 800; }
-  .incorrecto{ color: var(--danger); font-weight: 800; }
-
-  #estadisticas{
-    margin-top: 14px;
-    font-size: 18px;
-    text-align:center;
-    color: #222;
-  }
-
-  .sep{
-    height:1px;
-    background: var(--border);
-    margin: 12px 0;
-  }
-
-  
-  /* Botones a/b/c */
-  #opbtns{
-    display:flex;
-    gap:10px;
-    justify-content:center;
-    margin: 6px 0 2px;
-  }
-
-  .btnABC{
-    padding:10px 16px;
-    font-size:18px;
-    border-radius:10px;
-    border:none;
-    background:#b94a48;
-    color:#fff;
-    cursor:pointer;
-    min-width:64px;
-    font-weight:800;
-  }
-  .btnABC:hover{ background:#a94442; }
 
   .jp{
     font-family: "Yu Gothic", "Hiragino Sans", "Meiryo", "Noto Sans JP", sans-serif;
     font-feature-settings: "palt" 0;
   }
 
-  /* Botón TODOS */
-  .btn-todos{
-    border-color:#e03131;
-    color:#a11b1b;
-    opacity:0.45;
-  }
-  .btn-todos.activo{
-    background:#ffb3b3;
-    border-color:#ffb3b3;
-    color:#7a1c1c;
-    opacity:1;
+  #opbtns{
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin: 8px 0 8px;
+    flex-wrap: wrap;
   }
 
-.layout{
-  width: min(1180px, 100%);
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) 360px;
-  gap: 20px;
-  align-items: start;
-  justify-content: center;
-}
-
-.sidebar{
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-  width: 100%;
-  min-width: 0;
-}
-
-.panel-side{
-  width: 100%;
-  min-width: 0;
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  padding: 16px;
-  box-shadow: 0 6px 16px rgba(0,0,0,0.06);
-}
-
-.side-section{
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.side-section + .side-section{
-  margin-top: 14px;
-  padding-top: 14px;
-  border-top: 1px solid var(--border);
-}
-
-.side-title{
-  font-size: 14px;
-  font-weight: 700;
-  color: var(--muted);
-  text-transform: uppercase;
-  letter-spacing: .04em;
-  text-align: left;
-}
-
-.side-bar{
-  display: grid;
-  grid-template-columns: repeat(auto-fit, max-content);
-  gap: 10px;
-  justify-content: start;
-  width: auto;
-  max-width: 100%;
-  margin: 0;
-}
-
-.side-bar .btn{
-  width: auto;
-}
-
-@media (max-width: 900px){
-  .layout{
-    width: 100%;
-    grid-template-columns: 1fr;
-    gap: 14px;
+  .btnABC{
+    padding: 10px 16px;
+    font-size: 18px;
+    border-radius: 10px;
+    border: none;
+    background: #b94a48;
+    color: #fff;
+    cursor: pointer;
+    min-width: 64px;
+    font-weight: 800;
   }
 
-  .panel,
-  .panel-side{
-    width: calc(100vw - 28px);
-    max-width: 100%;
-    box-sizing: border-box;
-    justify-self: center;
+  .btnABC:hover{
+    background: #a94442;
   }
 
-  .sidebar{
-    gap: 14px;
-  }
-
-  .panel-side{
-    padding: 14px;
-    max-width: none;
-  }
-
-  .side-bar{
+  .acciones{
+    margin-top: 14px;
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
-    width: 100%;
-  }
-
-  .side-bar .btn{
-    width: auto;
-    max-width: 100%;
-  }
-
-  #prompt{
-    font-size: clamp(28px, 9vw, 42px);
-    line-height: 1.1;
-  }
-
-  #prompt.prompt-es-jp{
-    font-size: clamp(20px, 5.8vw, 28px);
-    line-height: 1.25;
-  }
-
-  #opciones{
-    font-size: clamp(15px, 4.3vw, 20px);
-    width: 100%;
-    max-width: 100%;
-  }
-
-  #respuestaUsuario{
-    width: 100px;
-    font-size: 20px;
+    justify-content: center;
   }
 
   .accion-btn{
-    font-size: 16px;
-    padding: 11px 15px;
+    padding: 12px 18px;
+    border-radius: 12px;
+    border: none;
+    background: var(--accent);
+    color: white;
+    cursor: pointer;
+    font-size: 18px;
   }
 
-  h1{
-    font-size: clamp(18px, 5.5vw, 24px);
-    line-height: 1.2;
+  .accion-btn:hover{
+    background: var(--accent2);
   }
-}
-  
+
+  #resultado{
+    margin-top: 12px;
+    font-size: 22px;
+    min-height: 30px;
+    text-align: center;
+    white-space: pre-line;
+  }
+
+  .correcto{
+    color: var(--ok);
+    font-weight: 800;
+  }
+
+  .incorrecto{
+    color: var(--danger);
+    font-weight: 800;
+  }
+
+  .sep{
+    height: 1px;
+    background: var(--border);
+    margin: 16px 0 12px;
+  }
+
+  #estadisticas{
+    margin-top: 14px;
+    font-size: 18px;
+    text-align: center;
+    color: #222;
+  }
+
+  @media (max-width: 1020px){
+    .layout{
+      max-width: 760px;
+      grid-template-columns: 1fr;
+      gap: 14px;
+    }
+
+    .panel,
+    .panel-side{
+      width: 100%;
+      max-width: 100%;
+    }
+
+    .side-bar{
+      display: flex;
+      flex-wrap: wrap;
+      flex-direction: row;
+      gap: 10px;
+    }
+
+    .side-bar .btn{
+      width: auto;
+      max-width: 100%;
+    }
+  }
+
+  @media (max-width: 900px){
+    h1{
+      font-size: clamp(18px, 5.5vw, 24px);
+      line-height: 1.2;
+      margin: 8px 0 14px;
+    }
+
+    .layout{
+      width: 100%;
+      max-width: 100%;
+      gap: 14px;
+    }
+
+    .panel,
+    .panel-side{
+      width: 100%;
+      padding-left: 14px;
+      padding-right: 14px;
+    }
+
+    .panel-side{
+      padding-top: 14px;
+      padding-bottom: 14px;
+    }
+
+    #prompt{
+      font-size: clamp(28px, 9vw, 42px);
+      line-height: 1.1;
+    }
+
+    #prompt.prompt-es-jp{
+      font-size: clamp(20px, 5.8vw, 28px);
+      line-height: 1.25;
+    }
+
+    #opciones{
+      font-size: clamp(15px, 4.3vw, 20px);
+      width: 100%;
+      max-width: 100%;
+    }
+
+    .accion-btn{
+      font-size: 16px;
+      padding: 11px 15px;
+    }
+  }
 </style>
+  
 </head>
 <body>
 
