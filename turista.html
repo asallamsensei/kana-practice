@@ -188,7 +188,7 @@
 .layout{
   width: min(1180px, 100%);
   display: grid;
-  grid-template-columns: minmax(0, 1fr) fit-content(380px);
+  grid-template-columns: minmax(0, 1fr) 360px;
   gap: 20px;
   align-items: start;
   justify-content: center;
@@ -198,11 +198,12 @@
   display: flex;
   flex-direction: column;
   gap: 18px;
+  width: 100%;
 }
 
 .panel-side{
-  width: fit-content;
-  max-width: 380px;
+  width: 100%;
+  max-width: 360px;
   background: var(--card);
   border: 1px solid var(--border);
   border-radius: 16px;
