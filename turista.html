@@ -148,6 +148,45 @@
     margin: 12px 0;
   }
 
+.layout{
+  width: min(1120px, 100%);
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 18px;
+  align-items: start;
+}
+
+.sidebar{
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.bloques-lateral,
+.modos-lateral{
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 10px;
+  max-width: 100%;
+  margin-bottom: 0;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 14px;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.06);
+}
+
+.bloques-lateral .btn,
+.modos-lateral .btn{
+  width: 100%;
+  text-align: center;
+}
+
+.panel{
+  width: 100%;
+}
+  
   /* Botones a/b/c */
   #opbtns{
     display:flex;
@@ -186,56 +225,87 @@
     color:#7a1c1c;
     opacity:1;
   }
+
+@media (max-width: 900px){
+  .layout{
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar{
+    order: 1;
+  }
+
+  .panel{
+    order: 2;
+  }
+
+  .bloques-lateral,
+  .modos-lateral{
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .bloques-lateral .btn,
+  .modos-lateral .btn{
+    width: auto;
+  }
+}
+  
 </style>
 </head>
 <body>
 
 <h1>Turista en Japón — Asallam Sensei</h1>
 
-<!-- Bloques (dinámicos) -->
-<div class="bar" id="bloquesBar"></div>
+<div class="layout">
+  <div class="sidebar">
+    <!-- Bloques (dinámicos) -->
+    <div class="bar" id="bloquesBar"></div>
 
-<!-- Modos -->
-<div class="bar" id="modosBar">
-  <button class="btn" id="btn-jp_es" onclick="setModo('jp_es')">Japonés → Español</button>
-  <button class="btn" id="btn-es_jp" onclick="setModo('es_jp')">Español → Japonés</button>
+    <!-- Modos -->
+    <div class="bar" id="modosBar">
+      <button class="btn" id="btn-jp_es" onclick="setModo('jp_es')">Japonés → Español</button>
+      <button class="btn" id="btn-es_jp" onclick="setModo('es_jp')">Español → Japonés</button>
+    </div>
+
+    <div class="panel">
+      <div id="prompt">…</div>
+    
+      <div id="opciones"></div>
+    
+      <div id="opbtns">
+        <button class="btnABC" type="button" onclick="responder('a')">a</button>
+        <button class="btnABC" type="button" onclick="responder('b')">b</button>
+        <button class="btnABC" type="button" onclick="responder('c')">c</button>
+      </div>
+    
+      <input id="respuestaUsuario"
+             type="text"
+             placeholder="a / b / c"
+             maxlength="1"
+             onkeydown="manejarEnter(event)"/>
+    
+      <div class="acciones">
+        <button class="accion-btn" onclick="mostrarRespuesta()">Mostrar respuesta</button>
+        <button class="accion-btn" onclick="siguienteDesdeBoton()">Siguiente</button>
+      </div>
+    
+      <div id="resultado"></div>
+    
+      <div class="sep"></div>
+    
+      <div id="estadisticas">
+        Aciertos: <span id="aciertos">0</span> — Errores: <span id="errores">0</span>
+      </div>
+    
+      <div class="acciones" style="margin-top:12px;">
+        <button class="btn" onclick="resetStatsTodo()">Reset stats</button>
+      </div>
+    </div>
+  </div>
 </div>
-
-<div class="panel">
-  <div id="prompt">…</div>
-
-  <div id="opciones"></div>
-
-  <div id="opbtns">
-    <button class="btnABC" type="button" onclick="responder('a')">a</button>
-    <button class="btnABC" type="button" onclick="responder('b')">b</button>
-    <button class="btnABC" type="button" onclick="responder('c')">c</button>
-  </div>
-
-  <input id="respuestaUsuario"
-         type="text"
-         placeholder="a / b / c"
-         maxlength="1"
-         onkeydown="manejarEnter(event)"/>
-
-  <div class="acciones">
-    <button class="accion-btn" onclick="mostrarRespuesta()">Mostrar respuesta</button>
-    <button class="accion-btn" onclick="siguienteDesdeBoton()">Siguiente</button>
-  </div>
-
-  <div id="resultado"></div>
-
-  <div class="sep"></div>
-
-  <div id="estadisticas">
-    Aciertos: <span id="aciertos">0</span> — Errores: <span id="errores">0</span>
-  </div>
-
-  <div class="acciones" style="margin-top:12px;">
-    <button class="btn" onclick="resetStatsTodo()">Reset stats</button>
-  </div>
-</div>
-
+  
 <script>
 /* ===============================
    CONFIG
