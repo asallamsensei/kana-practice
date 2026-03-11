@@ -46,7 +46,7 @@
         { "jp": "パスポート", "es": "pasaporte", "romaji": "pasupooto" },
         { "jp": "スーツケース", "es": "maleta", "romaji": "suutsukeesu" }
       ]
-    }
+    },
     {
       "id": "kata_02",
       "nombre": "Comidas & Bebidas",
@@ -96,7 +96,7 @@
         { "jp": "ドーナツ", "es": "dona", "romaji": "doonatsu" },
         { "jp": "ポップコーン", "es": "palomitas", "romaji": "poppukoon" }
       ]
-    }
+    },
     {
       "id": "kata_03",
       "nombre": "Lugares clave",
@@ -145,9 +145,7 @@
         { "jp": "イベント", "es": "evento", "romaji": "ibento" },
         { "jp": "ラウンジ", "es": "lounge", "romaji": "raunji" }
       ]
-    }
-    
-        
+    },      
     {
       "id": "kata_04",
       "nombre": "Viaje",
@@ -181,7 +179,7 @@
         { "jp": "スーツケース", "es": "maleta", "romaji": "suutsukeesu" },
         { "jp": "トラブル", "es": "problema / inconveniente", "romaji": "toraburu" }
       ]
-    }
+    },
     {
       "id": "kata_05",
       "nombre": "Personas",
@@ -215,7 +213,7 @@
         { "jp": "プログラマー", "es": "programador", "romaji": "puroguramaa" },
         { "jp": "キャラクター", "es": "personaje", "romaji": "kyarakutaa" }
       ]
-    }
+    },
     {
       "id": "kata_06",
       "nombre": "Internet",
@@ -251,7 +249,7 @@
         { "jp": "コンテンツ", "es": "contenido", "romaji": "kontentsu" },
         { "jp": "アドレス", "es": "dirección (web / email)", "romaji": "adoresu" }
       ]
-    }
+    },
     {
       "id": "kata_07",
       "nombre": "Entretenimiento",
@@ -286,7 +284,7 @@
         { "jp": "オープニング", "es": "opening", "romaji": "oopuningu" },
         { "jp": "エンディング", "es": "ending", "romaji": "endingu" }
       ]
-    }
+    },
     {
       "id": "kata_08",
       "nombre": "Compras",
@@ -321,7 +319,7 @@
         { "jp": "クレジットカード", "es": "tarjeta de crédito", "romaji": "kurejitto kaado" },
         { "jp": "レシート", "es": "recibo", "romaji": "reshiito" }
       ]
-    }
+    },
     {
       "id": "kata_09",
       "nombre": "Salud",
@@ -356,7 +354,7 @@
         { "jp": "メイク", "es": "maquillaje", "romaji": "meiku" },
         { "jp": "チェック", "es": "chequeo / revisión", "romaji": "chekku" }
       ]
-    }
+    },
     {
       "id": "kata_10",
       "nombre": "Ocio",
@@ -391,7 +389,7 @@
         { "jp": "チャレンジ", "es": "reto / desafío", "romaji": "charenji" },
         { "jp": "スポット", "es": "lugar turístico / spot", "romaji": "supotto" }
       ]
-    }
+    },
     {
       "id": "kata_extra",
       "nombre": "Extra — Cultura pop",
