@@ -87,31 +87,36 @@
     justify-content:center;
   }
 
-  .chips{
-    display:flex;
-    flex-wrap:wrap;
-    gap:12px;
-    margin-top:10px;
-  }
+.chips{
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+  margin-top:0;
+}
 
-  .chip{
-    padding: 10px 14px;    /* + padding */
-    border-radius: 999px;
-    border: 1px solid var(--border);
-    background: rgba(255,255,255,.06);
-    color: var(--muted);
-    cursor:pointer;
-    user-select:none;
-    font-size: 14px;       /* + fuente */
-    font-weight: 900;
-    transition:.12s;
-  }
-  .chip:hover{ transform: translateY(-1px); }
-  .chip.activo{
-    background: var(--accent);
-    color: white;
-    border-color: transparent;
-  }
+.chip{
+  padding: 11px 16px;
+  border-radius: 999px;
+  border: 1px solid rgba(125,92,255,.18);
+  background: rgba(125,92,255,.14);
+  color: #dfe3ff;
+  cursor:pointer;
+  user-select:none;
+  font-size: 14px;
+  font-weight: 900;
+  transition:.12s;
+}
+
+.chip:hover{
+  transform: translateY(-1px);
+  background: rgba(125,92,255,.20);
+}
+
+.chip.activo{
+  background: linear-gradient(180deg, #8b6dff, #6f52f5);
+  color: white;
+  border-color: transparent;
+}
 
   .btn{
     border: none;
@@ -145,24 +150,49 @@
     color: white;
   }
 
-  .btn-mode{
-    background: rgba(255,255,255,.08);
-    border: 1px solid var(--border);
-    color: var(--text);
-    font-weight: 900;
-  }
-  .btn-mode.activo{
-    background: var(--accent);
-    border-color: transparent;
-  }
-  .btn-mode.dictado-on{
-    background: var(--dictadoRed);
-    border-color: transparent;
-  }
-  .btn-mode.base-dictado{
-    background: var(--dictadoRedSoft);
-    border-color: transparent;
-  }
+.btn-mode{
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.14);
+  color: #eef2ff;
+  font-weight: 900;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.04);
+}
+
+.btn-mode.activo{
+  background: linear-gradient(180deg, #8b6dff, #6f52f5);
+  border-color: transparent;
+  color: white;
+}
+
+.btn-mode.dictado-on{
+  background: linear-gradient(180deg, #ff5a52, #e24139);
+  border-color: transparent;
+  color: white;
+}
+
+.btn-mode.base-dictado{
+  box-shadow: 0 0 0 1px rgba(255,90,82,.35) inset;
+}
+
+.pool-row{
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+  justify-content:flex-start;
+}
+
+.btn-pool{
+  background: rgba(125,92,255,.10);
+  border: 1px solid rgba(125,92,255,.25);
+  color: #ddd6fe;
+  font-weight: 900;
+}
+
+.btn-pool.activo{
+  background: rgba(125,92,255,.95);
+  border-color: transparent;
+  color: white;
+}
 
   .big{
     text-align:center;
@@ -226,9 +256,14 @@
 }
 
 .switch-panel{
-  max-width: 100%;
+  max-width:100%;
+  margin-bottom:2px;
 }
 
+.control-section:first-child{
+  padding-bottom:2px;
+}
+  
   .btnAudioBig{
     border:none;
     cursor:pointer;
@@ -289,14 +324,59 @@
   opacity:.55;
 }
   
-  .actions{
-    display:grid;
-    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
-    gap:12px;
-    width:min(820px, 100%);
-    margin-top: 14px;
-  }
-  .actions .btn, .actions .btn-ghost{ width:100%; }
+.actions{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:12px;
+  width:100%;
+  margin-top:14px;
+}
+
+.actions .btn,
+.actions .btn-ghost{
+  width:auto;
+  flex:0 0 auto;
+  white-space:nowrap;
+  padding:12px 18px;
+}
+
+.controls-card{
+  display:flex;
+  flex-direction:column;
+  gap:22px;
+}
+
+.control-section{
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+  padding-top:2px;
+}
+
+.control-section + .control-section{
+  border-top: 1px solid rgba(255,255,255,.10);
+  padding-top:20px;
+}
+
+.section-head{
+  display:flex;
+  align-items:center;
+  justify-content:flex-start;
+}
+
+.section-label{
+  display:inline-flex;
+  align-items:center;
+  padding:8px 14px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.12);
+  background:rgba(255,255,255,.05);
+  color:#cbd5ff;
+  font-size:13px;
+  font-weight:900;
+  letter-spacing:.2px;
+}
   
 </style>
 </head>
@@ -342,40 +422,45 @@
     </div>
 
     <!-- Panel controles -->
-    <div class="card">
-
-      <div class="row" style="justify-content:flex-start;">
-        <span class="pill">Modo</span>
-      </div>
-      
-      <div class="switch switch-panel">
-        <button class="btn btn-mode" id="m-jp-es" type="button" onclick="setModoBase('jp-es')">JP → ES</button>
-        <button class="btn btn-mode" id="m-es-jp" type="button" onclick="setModoBase('es-jp')">ES → JP</button>
-        <button class="btn btn-mode" id="m-dictado" type="button" onclick="toggleDictado()">Dictado</button>
-        <button class="btn btn-mode" id="m-mix" type="button" onclick="setModoBase('mix')">Mix</button>
-      </div>
-      
-      <div class="row" style="justify-content:flex-start;">
-        <span class="pill">Bloques</span>
-      </div>
-
-      <div class="row" style="justify-content:flex-start; margin-top:12px;">
+    <div class="card controls-card">
+    
+      <section class="control-section">
+        <div class="section-head">
+          <span class="section-label">Modo</span>
+        </div>
+    
+        <div class="switch switch-panel">
+          <button class="btn btn-mode" id="m-jp-es" type="button" onclick="setModoBase('jp-es')">JP → ES</button>
+          <button class="btn btn-mode" id="m-es-jp" type="button" onclick="setModoBase('es-jp')">ES → JP</button>
+          <button class="btn btn-mode" id="m-dictado" type="button" onclick="toggleDictado()">Dictado</button>
+          <button class="btn btn-mode" id="m-mix" type="button" onclick="setModoBase('mix')">Mix</button>
+        </div>
+      </section>
+    
+      <section class="control-section">
+        <div class="section-head">
+          <span class="section-label">Bloques</span>
+        </div>
+    
         <div id="chipsBloques" class="chips"></div>
-      </div>
-
-      <div class="row" style="justify-content:flex-start; margin-top:14px;">
-        <button id="btnTodo" class="btn btn-ghost btn-danger" type="button" onclick="seleccionarTodo()">Todo</button>
-        <button id="btnNinguna" class="btn btn-ghost" type="button" onclick="seleccionarNinguna()">Ninguna</button>
-      </div>
-
-      <div class="row" style="justify-content:flex-start; margin-top:18px;">
-        <span class="pill">Pool de distractores</span>
-      </div>
-
-      <div class="row" style="justify-content:flex-start; margin-top:12px;">
-        <button class="btn btn-mode" id="pool-sel" type="button" onclick="setPoolScope('seleccion')">Solo selección</button>
-        <button class="btn btn-mode" id="pool-glob" type="button" onclick="setPoolScope('global')">Global</button>
-      </div>
+    
+        <div class="row section-actions" style="justify-content:flex-start;">
+          <button id="btnTodo" class="btn btn-ghost btn-danger" type="button" onclick="seleccionarTodo()">Todo</button>
+          <button id="btnNinguna" class="btn btn-ghost" type="button" onclick="seleccionarNinguna()">Ninguna</button>
+        </div>
+      </section>
+    
+      <section class="control-section">
+        <div class="section-head">
+          <span class="section-label">Pool de distractores</span>
+        </div>
+    
+        <div class="pool-row">
+          <button class="btn btn-pool" id="pool-sel" type="button" onclick="setPoolScope('seleccion')">Solo selección</button>
+          <button class="btn btn-pool" id="pool-glob" type="button" onclick="setPoolScope('global')">Global</button>
+        </div>
+      </section>
+    
     </div>
 
   </div>
