@@ -241,6 +241,16 @@
     background: var(--accent2);
   }
 
+  .accion-btn.mostrar{
+    background: rgba(125,92,255,0.45);
+    color: rgba(255,255,255,0.85);
+    opacity: 0.75;
+  }
+  
+  .accion-btn.mostrar:hover{
+    background: rgba(125,92,255,0.6);
+  }
+  
   #resultado{
     margin-top: 12px;
     font-size: 22px;
@@ -376,7 +386,7 @@
     </div>
 
     <div class="acciones">
-      <button class="accion-btn" onclick="mostrarRespuesta()">Mostrar respuesta</button>
+      <button class="accion-btn mostrar" onclick="mostrarRespuesta()">Mostrar respuesta</button>
       <button class="accion-btn" onclick="siguienteDesdeBoton()">Siguiente</button>
     </div>
 
