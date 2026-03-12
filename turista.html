@@ -715,11 +715,11 @@ function siguiente(){
 
   const badge = $("badgeKanji");
   
-  if(actualItem && dataRaw["Kanjis vitales para el turista"].includes(actualItem)){
-    badge.style.display = "inline-block";
-  }else{
-    badge.style.display = "none";
-  }
+  const hayKanji = [...bloquesSeleccionados].some(
+    b => b.toLowerCase().includes("kanji")
+  );
+  
+  badge.style.display = hayKanji ? "inline-block" : "none";
   
   const promptEl = $("prompt");
   promptEl.innerText = pregunta;
