@@ -82,17 +82,6 @@
     align-items:center;
   }
 
-  input{
-    background: rgba(255,255,255,.08);
-    border: 1px solid var(--border);
-    color: var(--text);
-    padding: 10px 12px;
-    border-radius: 12px;
-    outline:none;
-    font-size: 15px;
-    width: min(420px, 100%);
-  }
-
   .btn{
     border: none;
     border-radius: 12px;
@@ -214,16 +203,6 @@
   .btnAudioBig:active{ transform: translateY(0px); }
   .btnAudioBig[disabled]{ opacity:.35; cursor:not-allowed; transform:none; }
 
-  #inputRow{
-    justify-content:center;
-    margin-top: 2px;
-    width:min(560px, 100%);
-  }
-  #respuestaUsuario{
-    text-align:center;
-    width:min(220px, 100%);
-  }
-
   #opcionesTexto{
     margin-top: 10px;
     font-size: 20px;
@@ -279,17 +258,9 @@
         <div id="opcionesTexto"></div>
         
         <div class="row" style="justify-content:center; margin-top: 2px;">
-          <button class="btn btn-ghost" type="button" onclick="responder('a')">a</button>
-          <button class="btn btn-ghost" type="button" onclick="responder('b')">b</button>
-          <button class="btn btn-ghost" type="button" onclick="responder('c')">c</button>
-        </div>
-        
-        <div class="row" id="inputRow">
-          <input id="respuestaUsuario"
-                 type="text"
-                 placeholder="a / b / c + Enter"
-                 maxlength="1"
-                 onkeydown="manejarEnter(event)">
+          <button class="btn btn-ghost" type="button" onclick="responder('a')">A</button>
+          <button class="btn btn-ghost" type="button" onclick="responder('b')">B</button>
+          <button class="btn btn-ghost" type="button" onclick="responder('c')">C</button>
         </div>
 
         <div id="resultado"></div>
@@ -322,7 +293,6 @@ let lista = [];
 let actual = 0;
 
 let aciertos = 0;
-let focoAutomatico = true; // o false, como prefieras por defecto
 let errores = 0;
 let racha = 0;
 let mejorRacha = 0;
@@ -468,7 +438,6 @@ function aplicarUI(){
     btnEsJp?.classList.add("activo");
   }
 
-  document.getElementById("inputRow").style.display = "flex";
 }
 
 function setModo(nuevoModo){
@@ -596,7 +565,6 @@ function pintarOpciones(letraElegida){
 
 // ====== SIGUIENTE (DOBLE CLICK SI ESTABA SIN CALIFICAR) ======
 function accionSiguiente(){
-  focoAutomatico = false;
 
   if(!yaValidado){
     errores++;
@@ -674,12 +642,6 @@ function siguiente(){
   aplicarUI();
   yaValidado = false;
 
-  const input = document.getElementById("respuestaUsuario");
-  input.value = "";
-  input.placeholder = "a / b / c + Enter";
-  input.maxLength = 1;
-  if (focoAutomatico) input.focus({preventScroll:true});
-
   // (como lo tenías) suena al pasar:
   playAudio(ultimoAudioKey);
 }
@@ -703,18 +665,14 @@ function mezclarArray(arr){
 }
   
 function responder(letra){
-  focoAutomatico = false;
   if(yaValidado) return;
-
-  document.getElementById("respuestaUsuario").value = letra;
   verificar(letra);
 }
 
 function verificar(letraForzada){
   const res = document.getElementById("resultado");
 
-  const r = (letraForzada || document.getElementById("respuestaUsuario").value || "")
-              .toString().toLowerCase().trim();
+  const r = (letraForzada || "").toString().toLowerCase().trim();
   
   if(!["a","b","c"].includes(r)){
     res.className = "incorrecto";
@@ -748,7 +706,6 @@ function verificar(letraForzada){
 }
 
 function mostrarRespuesta(){
-  focoAutomatico = false;
 
   if(!yaValidado){
     errores++;
@@ -777,29 +734,22 @@ function resetStats(){
   pintarStats();
   guardarStats();
 }
-  
-function manejarEnter(event){
-  if(event.key !== "Enter") return;
-
-  if(!yaValidado){
-    verificar();
-  }else{
-    siguiente();
-  }
-}
 
 document.addEventListener("keydown", (e) => {
   const k = (e.key || "").toLowerCase();
-  const input = document.getElementById("respuestaUsuario");
-  const focoEnInput = (document.activeElement === input);
 
   if(["a","b","c"].includes(k) && !yaValidado){
-    // Si el foco está en la caja, dejamos que escriba normal
-    if(focoEnInput) return;
-
-    // Si el foco NO está en la caja, responder directo
     e.preventDefault();
     responder(k);
+    return;
+  }
+
+  if(k === "enter"){
+    e.preventDefault();
+
+    if(yaValidado){
+      siguiente();
+    }
   }
 });
   
