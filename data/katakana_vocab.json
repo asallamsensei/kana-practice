@@ -213,7 +213,8 @@
         { "jp": "エンジニア", "es": "ingeniero", "romaji": "enjinia" },
         { "jp": "デザイナー", "es": "diseñador", "romaji": "dezainaa" },
         { "jp": "プログラマー", "es": "programador", "romaji": "puroguramaa" },
-        { "jp": "キャラクター", "es": "personaje", "romaji": "kyarakutaa" }
+        { "jp": "キャラクター", "es": "personaje", "romaji": "kyarakutaa" },
+        { "jp": "バディ", "es": "compañero / buddy", "romaji": "badi" }
       ]
     },
     {
