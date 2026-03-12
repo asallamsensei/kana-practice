@@ -292,6 +292,18 @@
 }
   }
 
+.badge-kanji{
+  display:inline-block;
+  background:#ef4444;
+  color:white;
+  font-weight:800;
+  font-size:12px;
+  letter-spacing:.08em;
+  padding:4px 10px;
+  border-radius:999px;
+  margin-bottom:8px;
+}
+  
   @media (max-width: 900px){
     h1{
       font-size: clamp(18px, 5.5vw, 24px);
@@ -347,6 +359,7 @@
 
 <div class="layout">
   <div class="panel">
+    <div id="badgeKanji" class="badge-kanji" style="display:none;">KANJI</div>
     <div id="prompt">…</div>
 
     <div id="opciones"></div>
@@ -700,6 +713,14 @@ function siguiente(){
   correcta = letras[opciones.indexOf(correctoTexto)];
   opcionCorrectaTexto = correctoTexto;
 
+const badge = $("badgeKanji");
+
+if([...bloquesSeleccionados].includes("kanji_vitales")){
+  badge.style.display = "inline-block";
+}else{
+  badge.style.display = "none";
+}
+  
   const promptEl = $("prompt");
   promptEl.innerText = pregunta;
 
