@@ -129,7 +129,7 @@
   border-radius: 999px;
   border: 2px solid var(--accent);
   background: transparent;
-  color: #2b214b;
+  color: var(--text);
   cursor: pointer;
   user-select: none;
   transition: 0.15s;
@@ -146,9 +146,9 @@
   }
 
   .btn-todos{
-    border-color: #e03131;
-    color: #a11b1b;
-    opacity: 0.45;
+    border-color: #ef4444;
+    color: #ffd6d6;
+    opacity: 0.75;
   }
 
   .btn-todos.activo{
@@ -264,7 +264,7 @@
     margin-top: 14px;
     font-size: 18px;
     text-align: center;
-    color: #222;
+    color: var(--text);
   }
 
   @media (max-width: 1020px){
@@ -715,7 +715,7 @@ function siguiente(){
 
 const badge = $("badgeKanji");
 
-if([...bloquesSeleccionados].includes("kanji_vitales")){
+if([...bloquesSeleccionados].includes("Kanjis vitales para el turista")){
   badge.style.display = "inline-block";
 }else{
   badge.style.display = "none";
