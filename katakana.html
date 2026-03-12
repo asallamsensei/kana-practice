@@ -209,18 +209,20 @@
   }
 
 .switch{
-  display:grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  display:flex;
+  flex-wrap:wrap;
   gap:12px;
   width:100%;
   margin-top:12px;
 }
 
 .switch .btn-mode{
-  padding: 11px 14px;
+  width:auto;
+  flex:0 0 auto;
+  padding: 11px 16px;
   border-radius: 999px;
   font-size: 14px;
-  width:100%;
+  white-space: nowrap;
 }
 
 .switch-panel{
@@ -295,12 +297,6 @@
     margin-top: 14px;
   }
   .actions .btn, .actions .btn-ghost{ width:100%; }
-
-@media (max-width: 900px){
-  .switch{
-    grid-template-columns: 1fr;
-  }
-}
   
 </style>
 </head>
@@ -360,7 +356,7 @@
       </div>
       
       <div class="row" style="justify-content:flex-start;">
-        <span class="pill">Bloques (Katakana)</span>
+        <span class="pill">Bloques</span>
       </div>
 
       <div class="row" style="justify-content:flex-start; margin-top:12px;">
@@ -379,15 +375,6 @@
       <div class="row" style="justify-content:flex-start; margin-top:12px;">
         <button class="btn btn-mode" id="pool-sel" type="button" onclick="setPoolScope('seleccion')">Solo selección</button>
         <button class="btn btn-mode" id="pool-glob" type="button" onclick="setPoolScope('global')">Global</button>
-      </div>
-
-      <div class="row" style="justify-content:flex-start; margin-top:18px;">
-        <span class="pill">Tip</span>
-      </div>
-      <div class="row" style="justify-content:flex-start;">
-        <div style="color:rgba(238,242,255,.7); font-size:14px; line-height:1.45;">
-          Responde tocando a, b o c. Luego pulsa “Siguiente”.
-        </div>
       </div>
     </div>
 
