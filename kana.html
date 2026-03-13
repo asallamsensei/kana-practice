@@ -671,21 +671,16 @@ let usarHiragana = true;
 let usarKatakana = true;
 let usarExtra = false;
 
-let usarJPES = true;   // Kana -> Romaji
-let usarESJP = true;   // Romaji -> Kana
+let usarJPES = true;
+let usarESJP = true;
 let usarDictado = false;
 let usarMix = false;
 
 let opcionesActuales = [];
 let indiceCorrecto = 0;
 
-let tipoPreguntaActual = "jp_es"; // jp_es | es_jp | dictado_jp_es | dictado_es_jp
+let tipoPreguntaActual = "jp_es";
 
-
-let quizModo = "jp_es";        // jp_es | es_jp | dictado
-let quizModoPrevio = "jp_es";  // recuerda el último no-dictado
-let opcionesActuales = [];
-let indiceCorrecto = 0;
 /* ===============================
    STATS (localStorage)
 =============================== */
@@ -819,20 +814,6 @@ function precisionPct(){
 /* ===============================
    UI HELPERS
 =============================== */
-function aplicarVisualQuizModo(){
-  document.querySelectorAll(".orden-btn").forEach(b => b.classList.remove("activo"));
-  const btnId =
-    (quizModo === "jp_es") ? "btn-jp-es" :
-    (quizModo === "es_jp") ? "btn-es-jp" :
-    "btn-dictado";
-  const btn = document.getElementById(btnId);
-  if (btn) btn.classList.add("activo");
-}
-
-function aplicarPlaceholderQuizModo(){
-  return;
-}
-
 function limpiarUI(){
   document.getElementById("respuesta").innerText = "";
   document.getElementById("respuesta").className = "";
@@ -1093,10 +1074,7 @@ function reproducirAudioKana(romaji){
   audioKana.pause();
   audioKana.currentTime = 0;
 
-  const baseDir =
-    (modoActual === "extra")
-      ? "data/audios/kana/extra/"
-      : "data/audios/";
+  const baseDir = "data/audios/";
 
   let i = 0;
   const intentar = () => {
