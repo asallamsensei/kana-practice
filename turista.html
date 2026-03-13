@@ -596,15 +596,8 @@ function construirBarraBloques(keys){
   const bar = $("bloquesBar");
   bar.innerHTML = "";
 
-  const defaultBloque = "saludos_y_despedidas";
-
-  if(keys.includes(defaultBloque)){
-    bloquesSeleccionados = new Set([defaultBloque]);
-  }else{
-    bloquesSeleccionados = new Set([keys[0]]);
-  }
-
-  todosActivo = false;
+  bloquesSeleccionados = new Set(keys);
+  todosActivo = true;
 
   keys.forEach(k => {
     const btn = document.createElement("button");
