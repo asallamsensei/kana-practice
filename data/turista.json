@@ -221,7 +221,7 @@
   
     { "japones": "ジャパンレールパス", "romaji": "Japan reeru pasu", "espanol": "Japan Rail Pass (JR Pass)" },
   
-    { "japones": "荷物を預けたいです。", "romaji": "nimotsu o azuketai desu.", "espanol": "Quiero dejar mi equipaje." },
+    { "japones": "荷物を預けたいです。", "romaji": "nimotsu o azuketai desu", "espanol": "Quiero dejar mi equipaje." },
     { "japones": "特急券が必要ですか？", "romaji": "tokkyuuken ga hitsuyou desu ka", "espanol": "¿Necesito boleto de tren exprés?" },
     { "japones": "JRパスはここで使えますか？", "romaji": "jee aaru pasu wa koko de tsukaemasu ka", "espanol": "¿Se puede usar el JR Pass aquí?" },
 
@@ -430,9 +430,9 @@
 
     { "japones": "すみません、これはいくらですか？", "romaji": "sumimasen, kore wa ikura desu ka?", "espanol": "Disculpe, ¿cuánto cuesta esto?" },
     { "japones": "ラーメンはありますか？", "romaji": "raamen wa arimasu ka", "espanol": "¿Tienen ramen?" },
-    { "japones": "オムライスをお願いします。", "romaji": "omuraisu o onegaishimasu.", "espanol": "Omuraisu, por favor." },
-    { "japones": "お好み焼きをひとつください。", "romaji": "okonomiyaki o hitotsu kudasai.", "espanol": "Un okonomiyaki, por favor." },
+    { "japones": "オムライスをお願いします。", "romaji": "omuraisu o onegaishimasu", "espanol": "Omuraisu, por favor." },
+    { "japones": "お好み焼きをひとつください。", "romaji": "okonomiyaki o hitotsu kudasai", "espanol": "Un okonomiyaki, por favor." },
     { "japones": "駅弁はどこで買えますか？", "romaji": "ekiben wa doko de kaemasu ka", "espanol": "¿Dónde puedo comprar un ekiben?" },
-    { "japones": "たい焼きをください。", "romaji": "taiyaki o kudasai.", "espanol": "Deme un taiyaki, por favor." }
+    { "japones": "たい焼きをください。", "romaji": "taiyaki o kudasai", "espanol": "Deme un taiyaki, por favor." }
   ]
 }
