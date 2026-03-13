@@ -49,8 +49,8 @@
     
     { "japones": "またね", "romaji": "mata ne", "espanol": "nos vemos" },
     { "japones": "またあとで", "romaji": "mata ato de", "espanol": "nos vemos más tarde" },
-    { "japones": "じゃあね", "romaji": "jā ne", "espanol": "hasta luego" },
-    { "japones": "じゃあまたね", "romaji": "jā mata ne", "espanol": "bueno, nos vemos" },
+    { "japones": "じゃあね", "romaji": "jaa ne", "espanol": "hasta luego" },
+    { "japones": "じゃあまたね", "romaji": "jaa mata ne", "espanol": "bueno, nos vemos" },
     { "japones": "ではまた", "romaji": "dewa mata", "espanol": "hasta luego" },
     
     { "japones": "バイバイ", "romaji": "baibai", "espanol": "bay, bay" },
@@ -69,7 +69,7 @@
 
     { "japones": "コンドーム", "romaji": "kondoumu", "espanol": "condón" },
     { "japones": "タンポン", "romaji": "tanpon", "espanol": "tampones" },
-    { "japones": "おりものシート", "romaji": "orimono shīto", "espanol": "protectores diarios" },
+    { "japones": "おりものシート", "romaji": "orimono shiito", "espanol": "protectores diarios" },
     { "japones": "生理用ナプキン", "romaji": "seiriyou napukin", "espanol": "toallas higiénicas" },
     { "japones": "ナプキン", "romaji": "napukin", "espanol": "toalla higiénica / servilleta (según contexto)" },
 
@@ -78,11 +78,11 @@
     { "japones": "おでん", "romaji": "oden", "espanol": "estofado japonés (de invierno)" },
     { "japones": "ポケットティッシュ", "romaji": "poketto tisshu", "espanol": "pañuelos desechables" },
     { "japones": "日焼け止め", "romaji": "hiyakedome", "espanol": "protector solar" },
-    { "japones": "虫除けスプレー", "romaji": "mushiyoke supurē", "espanol": "repelente de insectos" },
+    { "japones": "虫除けスプレー", "romaji": "mushiyoke supuree", "espanol": "repelente de insectos" },
     { "japones": "レインコート", "romaji": "reinkouto", "espanol": "impermeable" },
 
     { "japones": "チューハイ", "romaji": "chuuhai", "espanol": "cóctel de shouchuu con soda y saborizantes" },
-    { "japones": "缶コーヒー", "romaji": "kan kouhī", "espanol": "café enlatado" },
+    { "japones": "缶コーヒー", "romaji": "kan kouhii", "espanol": "café enlatado" },
     { "japones": "緑茶", "romaji": "ryokucha", "espanol": "té verde japonés" },
 
     { "japones": "デオドラント", "romaji": "deodoranto", "espanol": "desodorante" },
@@ -94,12 +94,12 @@
 
     { "japones": "イヤホン", "romaji": "iyahon", "espanol": "auriculares" },
     { "japones": "充電器", "romaji": "juudenki", "espanol": "cargador de celular" },
-    { "japones": "カレーパン", "romaji": "karēpan", "espanol": "pan relleno de curry" },
-    { "japones": "モバイルバッテリー", "romaji": "mobairu batterī", "espanol": "batería portátil" },
+    { "japones": "カレーパン", "romaji": "kareepan", "espanol": "pan relleno de curry" },
+    { "japones": "モバイルバッテリー", "romaji": "mobairu batterii", "espanol": "batería portátil" },
     { "japones": "焼きそばパン", "romaji": "yakisoba pan", "espanol": "pan relleno de fideos yakisoba" },
 
     { "japones": "スポーツドリンク", "romaji": "supoutsu dorinku", "espanol": "bebida deportiva" },
-    { "japones": "エナジードリンク", "romaji": "enajī dorinku", "espanol": "bebida energética" },
+    { "japones": "エナジードリンク", "romaji": "enajii dorinku", "espanol": "bebida energética" },
 
     { "japones": "コンビニ", "romaji": "konbini", "espanol": "tienda de conveniencia" },
     { "japones": "店", "romaji": "mise", "espanol": "tienda" },
@@ -109,7 +109,7 @@
     { "japones": "レジ", "romaji": "reji", "espanol": "caja registradora" },
     { "japones": "会計", "romaji": "kaikei", "espanol": "cuenta, pago" },
     { "japones": "現金", "romaji": "genkin", "espanol": "efectivo" },
-    { "japones": "カード", "romaji": "kādo", "espanol": "tarjeta" },
+    { "japones": "カード", "romaji": "kaado", "espanol": "tarjeta" },
 
     { "japones": "袋", "romaji": "fukuro", "espanol": "bolsa" },
     { "japones": "レジ袋", "romaji": "rejibukuro", "espanol": "bolsa de la tienda" },
@@ -117,12 +117,12 @@
 
     { "japones": "おにぎり", "romaji": "onigiri", "espanol": "bola de arroz" },
     { "japones": "弁当", "romaji": "bentou", "espanol": "caja de comida preparada" },
-    { "japones": "サンドイッチ", "romaji": "sandoicchi", "espanol": "sándwich" },
-    { "japones": "デザート", "romaji": "dezāto", "espanol": "postre" },
+    { "japones": "サンドイッチ", "romaji": "sandoitchi", "espanol": "sándwich" },
+    { "japones": "デザート", "romaji": "dezaato", "espanol": "postre" },
 
     { "japones": "電子レンジ", "romaji": "denshi renji", "espanol": "microondas" },
-    { "japones": "コピー機", "romaji": "kopīki", "espanol": "fotocopiadora" },
-    { "japones": "ATM", "romaji": "ē tī emu", "espanol": "cajero automático" }
+    { "japones": "コピー機", "romaji": "kopiiki", "espanol": "fotocopiadora" },
+    { "japones": "ATM", "romaji": "ee tii emu", "espanol": "cajero automático" }
   ],
   "Lugares clave": [
     { "japones": "駅", "romaji": "eki", "espanol": "estación (tren/metro)" },
@@ -131,7 +131,7 @@
   
     { "japones": "レストラン", "romaji": "resutoran", "espanol": "restaurante" },
     { "japones": "コンビニ", "romaji": "konbini", "espanol": "tienda de conveniencia" },
-    { "japones": "スーパー", "romaji": "suupā", "espanol": "supermercado" },
+    { "japones": "スーパー", "romaji": "suupaa", "espanol": "supermercado" },
   
     { "japones": "モール", "romaji": "mouru", "espanol": "centro comercial (del inglés mall)" },
     { "japones": "病院", "romaji": "byouin", "espanol": "hospital" },
@@ -165,13 +165,13 @@
     { "japones": "ビル", "romaji": "biru", "espanol": "edificio (moderno)" },
     { "japones": "海", "romaji": "umi", "espanol": "mar" },
 
-    { "japones": "空港ターミナル", "romaji": "kuukou tāminaru", "espanol": "terminal del aeropuerto" },
+    { "japones": "空港ターミナル", "romaji": "kuukou taaminaru", "espanol": "terminal del aeropuerto" },
     { "japones": "新幹線", "romaji": "shinkansen", "espanol": "tren bala" },
     { "japones": "改札", "romaji": "kaisatsu", "espanol": "torniquete de acceso (estación)" },
     
     { "japones": "地下鉄", "romaji": "chikatetsu", "espanol": "metro (subterráneo)" },
     { "japones": "バス停", "romaji": "basutei", "espanol": "parada de autobús" },
-    { "japones": "タクシー乗り場", "romaji": "takushī noriba", "espanol": "parada de taxis" },
+    { "japones": "タクシー乗り場", "romaji": "takushii noriba", "espanol": "parada de taxis" },
     
     { "japones": "観覧車", "romaji": "kanransha", "espanol": "rueda de la fortuna" },
     { "japones": "展望台", "romaji": "tenboudai", "espanol": "mirador" },
@@ -194,9 +194,9 @@
   ],
   "Vocabulario clave para el viaje": [
     { "japones": "トイレ", "romaji": "toire", "espanol": "baño" },
-    { "japones": "トイレットペーパー", "romaji": "toiretto pēpā", "espanol": "papel higiénico" },
+    { "japones": "トイレットペーパー", "romaji": "toiretto peepaa", "espanol": "papel higiénico" },
     { "japones": "トイレはどこですか？", "romaji": "toire wa doko desu ka?", "espanol": "¿Dónde está el baño?" },
-    { "japones": "トイレットペーパーはどこですか？", "romaji": "toiretto pēpā wa doko desu ka?", "espanol": "¿Dónde está el papel higiénico?" },
+    { "japones": "トイレットペーパーはどこですか？", "romaji": "toiretto peepaa wa doko desu ka?", "espanol": "¿Dónde está el papel higiénico?" },
   
     { "japones": "パスポート", "romaji": "pasupouto", "espanol": "pasaporte" },
     { "japones": "ビザ", "romaji": "biza", "espanol": "visa" },
@@ -205,8 +205,8 @@
     { "japones": "手荷物", "romaji": "tenimotsu", "espanol": "equipaje de mano" },
     { "japones": "荷物預かり", "romaji": "nimotsu azukari", "espanol": "consigna de equipaje" },
   
-    { "japones": "スーツケース", "romaji": "suutsukēsu", "espanol": "maleta (grande)" },
-    { "japones": "キャリーケース", "romaji": "kyarī kēsu", "espanol": "maleta con ruedas" },
+    { "japones": "スーツケース", "romaji": "suutsukeesu", "espanol": "maleta (grande)" },
+    { "japones": "キャリーケース", "romaji": "kyarii keesu", "espanol": "maleta con ruedas" },
   
     { "japones": "切符", "romaji": "kippu", "espanol": "boleto (transporte)" },
     { "japones": "チケット", "romaji": "chiketto", "espanol": "entrada, tiquete (evento)" },
@@ -219,11 +219,11 @@
     { "japones": "特急券", "romaji": "tokkyuuken", "espanol": "boleto adicional (tren exprés)" },
     { "japones": "乗車券", "romaji": "joushaken", "espanol": "boleto regular de tren" },
   
-    { "japones": "ジャパンレールパス", "romaji": "Japan rēru pasu", "espanol": "Japan Rail Pass (JR Pass)" },
+    { "japones": "ジャパンレールパス", "romaji": "Japan reeru pasu", "espanol": "Japan Rail Pass (JR Pass)" },
   
     { "japones": "荷物を預けたいです。", "romaji": "nimotsu o azuketai desu.", "espanol": "Quiero dejar mi equipaje." },
     { "japones": "特急券が必要ですか？", "romaji": "tokkyuuken ga hitsuyou desu ka?", "espanol": "¿Necesito boleto de tren exprés?" },
-    { "japones": "JRパスはここで使えますか？", "romaji": "jē āru pasu wa koko de tsukaemasu ka?", "espanol": "¿Se puede usar el JR Pass aquí?" },
+    { "japones": "JRパスはここで使えますか？", "romaji": "jee aaru pasu wa koko de tsukaemasu ka?", "espanol": "¿Se puede usar el JR Pass aquí?" },
 
     { "japones": "出口", "romaji": "deguchi", "espanol": "salida" },
     { "japones": "入口", "romaji": "iriguchi", "espanol": "entrada" },
@@ -334,8 +334,8 @@
     { "japones": "豚肉", "romaji": "butaniku", "espanol": "cerdo" },
     { "japones": "牛肉", "romaji": "gyuuniku", "espanol": "res" },
 
-    { "japones": "クッキー", "romaji": "kukkī", "espanol": "galleta" },
-    { "japones": "チーズ", "romaji": "chīzu", "espanol": "queso" },
+    { "japones": "クッキー", "romaji": "kukkii", "espanol": "galleta" },
+    { "japones": "チーズ", "romaji": "chiizu", "espanol": "queso" },
     { "japones": "サラダ", "romaji": "sarada", "espanol": "ensalada" },
 
     { "japones": "ご飯", "romaji": "gohan", "espanol": "arroz (cocido)" },
@@ -354,7 +354,7 @@
     { "japones": "サンド", "romaji": "sando", "espanol": "sándwich (abreviación)" },
     { "japones": "ニンジン", "romaji": "ninjin", "espanol": "zanahoria" },
 
-    { "japones": "アイスクリーム", "romaji": "aisukurīmu", "espanol": "helado" },
+    { "japones": "アイスクリーム", "romaji": "aisukuriimu", "espanol": "helado" },
     { "japones": "アイス", "romaji": "aisu", "espanol": "helado (abreviación)" },
     { "japones": "トマト", "romaji": "tomato", "espanol": "tomate" },
 
@@ -362,7 +362,7 @@
     { "japones": "水", "romaji": "mizu", "espanol": "agua" },
     { "japones": "炭酸水", "romaji": "tansansui", "espanol": "agua con gas" },
 
-    { "japones": "コーヒー", "romaji": "kouhī", "espanol": "café" },
+    { "japones": "コーヒー", "romaji": "kouhii", "espanol": "café" },
     { "japones": "ジュース", "romaji": "juusu", "espanol": "jugo" },
     { "japones": "メロン", "romaji": "meron", "espanol": "melón" },
 
@@ -370,8 +370,8 @@
     { "japones": "ワイン", "romaji": "wain", "espanol": "vino" },
     { "japones": "コーラ", "romaji": "koura", "espanol": "cola" },
 
-    { "japones": "ビール", "romaji": "bīru", "espanol": "cerveza" },
-    { "japones": "生ビール", "romaji": "nama bīru", "espanol": "cerveza de barril" },
+    { "japones": "ビール", "romaji": "biiru", "espanol": "cerveza" },
+    { "japones": "生ビール", "romaji": "nama biiru", "espanol": "cerveza de barril" },
     { "japones": "乾杯！", "romaji": "kanpai!", "espanol": "¡salud!" },
 
     { "japones": "ミルク", "romaji": "miruku", "espanol": "leche" },
@@ -385,7 +385,7 @@
     { "japones": "刺身", "romaji": "sashimi", "espanol": "pescado crudo" },
 
     { "japones": "天ぷら", "romaji": "tempura", "espanol": "fritura japonesa" },
-    { "japones": "ラーメン", "romaji": "rāmen", "espanol": "ramen" },
+    { "japones": "ラーメン", "romaji": "raamen", "espanol": "ramen" },
     { "japones": "うどん", "romaji": "udon", "espanol": "fideos gruesos de trigo" },
 
     { "japones": "そば", "romaji": "soba", "espanol": "fideos de trigo sarraceno" },
@@ -402,7 +402,7 @@
 
     { "japones": "とんかつ", "romaji": "tonkatsu", "espanol": "chuleta de cerdo empanizada" },
     { "japones": "卵焼き", "romaji": "tamagoyaki", "espanol": "rollo de huevo japonés" },
-    { "japones": "ハンバーグ", "romaji": "hanbāgu", "espanol": "hamburguesa estilo japonés" },
+    { "japones": "ハンバーグ", "romaji": "hanbaagu", "espanol": "hamburguesa estilo japonés" },
 
     { "japones": "焼き肉", "romaji": "yakiniku", "espanol": "carne asada" },
     { "japones": "親子丼", "romaji": "oyakodon", "espanol": "arroz con pollo y huevo" },
@@ -429,7 +429,7 @@
     { "japones": "ラムネ", "romaji": "ramune", "espanol": "refresco ramune" },
 
     { "japones": "すみません、これはいくらですか？", "romaji": "sumimasen, kore wa ikura desu ka?", "espanol": "Disculpe, ¿cuánto cuesta esto?" },
-    { "japones": "ラーメンはありますか？", "romaji": "rāmen wa arimasu ka?", "espanol": "¿Tienen ramen?" },
+    { "japones": "ラーメンはありますか？", "romaji": "raamen wa arimasu ka?", "espanol": "¿Tienen ramen?" },
     { "japones": "オムライスをお願いします。", "romaji": "omuraisu o onegaishimasu.", "espanol": "Omuraisu, por favor." },
     { "japones": "お好み焼きをひとつください。", "romaji": "okonomiyaki o hitotsu kudasai.", "espanol": "Un okonomiyaki, por favor." },
     { "japones": "駅弁はどこで買えますか？", "romaji": "ekiben wa doko de kaemasu ka?", "espanol": "¿Dónde puedo comprar un ekiben?" },

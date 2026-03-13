@@ -97,6 +97,20 @@
     font-size: 13px;
   }
 
+  .tag-kanji{
+    display:block;          /* <- clave: que sea una línea sola */
+    width: fit-content;
+    margin: 0 auto 10px;    /* centrado + espacio abajo */
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 800;
+    background: rgba(34,197,94,.18);
+    border: 1px solid rgba(34,197,94,.5);
+    color: #86efac;
+    letter-spacing: .5px;
+  }
+  
   .chips{
     display:flex;
     flex-wrap:wrap;
@@ -123,16 +137,6 @@
     background: var(--accent);
     color: white;
     border-color: transparent;
-  }
-
-  input{
-    background: rgba(255,255,255,.08);
-    border: 1px solid var(--border);
-    color: var(--text);
-    padding: 10px 12px;
-    border-radius: 12px;
-    outline:none;
-    font-size: 15px;
   }
 
   .btn{
@@ -189,6 +193,12 @@
     margin: 6px 0 8px;
   }
 
+.prompt-es{
+  font-size: 25px !important;
+  line-height: 1.25;
+  letter-spacing: .2px;
+}
+  
 /* JP → ES: baja un poquito el japonés del prompt */
 body.modo-jp-es #promptJP{
   font-size: 46px;
@@ -207,6 +217,13 @@ body.modo-es-jp #opciones{
   font-family: var(--font-jp);
 }
 
+/* Bafle grande solo en dictado */
+#btnReplay.big-sound{
+  font-size: 28px;
+  padding: 16px 20px;
+  border-radius: 16px;
+}
+  
 #opciones{
   margin-top: 10px;
   font-size: 20px;
@@ -284,7 +301,7 @@ body.modo-es-jp #opciones{
       <div id="promptJP">—</div>
 
       <div class="row" style="margin-top:6px;">
-        <button class="btn btn-ghost" type="button" onclick="replayAudio()">🔊</button>
+        <button id="btnReplay" class="btn btn-ghost" type="button" onclick="replayAudio()">🔊</button>
       </div>
 
       <div id="opciones"></div>
@@ -295,17 +312,18 @@ body.modo-es-jp #opciones{
         <button class="btn btn-ghost" onclick="responder('c')">c</button>
       </div>
 
-      <div class="row" style="margin-top: 12px;">
-        <input id="respuestaUsuario" type="text"
-               placeholder="a / b / c + Enter"
-               maxlength="1"
-               onkeydown="manejarEnter(event)">
-      </div>
-
       <div id="resultado"></div>
 
       <div class="stats">
-        Aciertos: <span id="aciertos">0</span> — Errores: <span id="errores">0</span>
+        <div>
+          Aciertos: <span id="aciertos">0</span> —
+          Errores: <span id="errores">0</span>
+        </div>
+        <div style="margin-top:6px;">
+          Racha: <span id="racha">0</span> —
+          Mejor racha: <span id="mejorRacha">0</span> —
+          Precisión: <span id="precision">0%</span>
+        </div>
       </div>
 
       <div class="row" style="margin-top: 14px;">
@@ -315,8 +333,8 @@ body.modo-es-jp #opciones{
 
       <!-- <div class="sep"></div> -->
       <div class="hint" id="ayuda" style="display:none;">
-        <b>Atajos:</b> <code class="kbd">a</code>/<code class="kbd">b</code>/<code class="kbd">c</code> + <code class="kbd">Enter</code> valida.
-        <code class="kbd">Enter</code> de nuevo pasa.
+        <b>Atajos:</b> <code class="kbd">a</code>, <code class="kbd">b</code>, <code class="kbd">c</code> responden.
+        <code class="kbd">Enter</code> pasa a la siguiente.
       </div>
     </div>
 
@@ -364,7 +382,7 @@ body.modo-es-jp #opciones{
       <div class="sep"></div>
 
       <div class="hint">
-        Enter = validar / siguiente.
+        A / B / C = responder · Enter = siguiente
       </div>
     </div>
   </div>
@@ -377,11 +395,12 @@ let DATA = { bloques: [] };
 let bloqueIdx = 0;
 let modoActual = "jp_es";
 let yaValidado = false;
-let focoAutomatico = false; // por defecto: NO enfocar (evita teclado móvil)
 let actual = null;
 
 let aciertos = 0;
 let errores = 0;
+let racha = 0;
+let mejorRacha = 0;
 
 let bloquesActivos = new Set([0]); // por defecto, el primero activo
 
@@ -430,37 +449,54 @@ function playAudioForRomaji(romaji){
 }
   
 /* ===============================
-   STATS localStorage
+   STATS globales (1 solo contador)
 =============================== */
-const STATS_KEY = "animeVocabStats_mc_v1";
+const STATS_KEY = "animeVocabStats_global_v1";
 
-function cargarStats() {
-  try { return JSON.parse(localStorage.getItem(STATS_KEY)) || {}; }
-  catch { return {}; }
-}
-function guardarStats(stats) {
-  localStorage.setItem(STATS_KEY, JSON.stringify(stats));
+function cargarStatsGlobal() {
+  try {
+    return JSON.parse(localStorage.getItem(STATS_KEY)) || {
+      aciertos: 0,
+      errores: 0,
+      racha: 0,
+      mejorRacha: 0
+    };
+  } catch {
+    return {
+      aciertos: 0,
+      errores: 0,
+      racha: 0,
+      mejorRacha: 0
+    };
+  }
 }
 
-function statsKeyActual() {
-  const b = DATA.bloques[bloqueIdx];
-  const id = (b?.cancion || "bloque").toLowerCase().slice(0,60);
-  return `${id}__${modoActual}`;
+function guardarStatsGlobal() {
+  localStorage.setItem(STATS_KEY, JSON.stringify({
+    aciertos,
+    errores,
+    racha,
+    mejorRacha
+  }));
 }
 
 function cargarStatsActual() {
-  const all = cargarStats();
-  const k = statsKeyActual();
-  const s = all[k] || { aciertos: 0, errores: 0 };
+  const s = cargarStatsGlobal();
   aciertos = s.aciertos || 0;
-  errores  = s.errores  || 0;
+  errores = s.errores || 0;
+  racha = s.racha || 0;
+  mejorRacha = s.mejorRacha || 0;
   pintarStats();
 }
+
+function precisionPct(){
+  const total = aciertos + errores;
+  if(total <= 0) return "0%";
+  return Math.round((aciertos / total) * 100) + "%";
+}
+  
 function guardarStatsActual() {
-  const all = cargarStats();
-  const k = statsKeyActual();
-  all[k] = { aciertos, errores };
-  guardarStats(all);
+  guardarStatsGlobal();
 }
 
 /* ===============================
@@ -537,17 +573,6 @@ function seleccionarNinguna(){
 =============================== */
 function $(id){ return document.getElementById(id); }
 
-// Evita teclado móvil por defecto; se activa si el usuario interactúa con input / teclado
-document.addEventListener("pointerdown", (e) => {
-  focoAutomatico = (e.target && e.target.id === "respuestaUsuario");
-});
-document.addEventListener("keydown", (e) => {
-  const k = (e.key || "").toLowerCase();
-  if (k === "enter" || k === "a" || k === "b" || k === "c") {
-    focoAutomatico = true;
-  }
-});
-
 function limpiarResultado(){
   $("resultado").innerText = "";
   $("resultado").className = "";
@@ -556,6 +581,9 @@ function limpiarResultado(){
 function pintarStats(){
   $("aciertos").innerText = aciertos;
   $("errores").innerText = errores;
+  $("racha").innerText = racha;
+  $("mejorRacha").innerText = mejorRacha;
+  $("precision").innerText = precisionPct();
 }
 
 function refrescarPills(){
@@ -609,17 +637,28 @@ function pick(arr){
 }
 
 function shuffle(arr){
-  return arr.slice().sort(()=>Math.random()-0.5);
+  const a = arr.slice();
+  for(let i = a.length - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
 }
 
 // arma 3 opciones únicas con un "correct"
-function build3Options(pool, correctValue, mapFn){
+function build3Options(pool, correctValue, mapFn, allowFn = null){
   const opciones = [correctValue];
 
   let tries = 0;
-  while(opciones.length < 3 && tries < 200){
+  while(opciones.length < 3 && tries < 300){
     tries++;
-    const v = mapFn(pick(pool));
+
+    const item = pick(pool);
+    if(!item) continue;
+
+    if(allowFn && !allowFn(item)) continue;
+
+    const v = mapFn(item);
     if(v != null && v !== "" && !opciones.includes(v)) opciones.push(v);
   }
 
@@ -643,7 +682,13 @@ function preguntaVocabJP_ES(b){
   const poolOpciones = getVocabPool(poolScope);
   const basePool = (poolOpciones.length >= 3) ? poolOpciones : poolLocal;
 
-  const opciones = build3Options(basePool, correct, x => x.es);
+  const opciones = build3Options(
+    basePool,
+    correct,
+    x => x.es,
+    x => x.jp !== v.jp
+  );
+  
   const letras = ["a","b","c"];
   const correcta = letras[opciones.indexOf(correct)];
 
@@ -691,7 +736,13 @@ function preguntaDictado_ES(b){
   const poolOpciones = getVocabPool(poolScope);
   const basePool = (poolOpciones.length >= 3) ? poolOpciones : poolLocal;
 
-  const opciones = build3Options(basePool, correct, x => x.es);
+  const opciones = build3Options(
+    basePool,
+    correct,
+    x => x.es,
+    x => x.jp !== v.jp
+  );
+  
   const letras = ["a","b","c"];
   const correcta = letras[opciones.indexOf(correct)];
 
@@ -796,20 +847,48 @@ function siguiente(){
 
   actual = q;
 
-  $("promptJP").innerText = actual.prompt;
+  // Reset clases del prompt
+  $("promptJP").classList.remove("prompt-es");
+  
+  // Si la pregunta muestra español como prompt
+  if(actual.tipo === "vocab_es_jp"){
+    $("promptJP").classList.add("prompt-es");
+  }
+  
+const btnReplay = $("btnReplay");
+
+// 🔊 ocultar solo en modo Kanji
+if(actual.tipo === "kanji_mc"){
+  btnReplay.style.display = "none";
+} else {
+  btnReplay.style.display = "";
+}
+  
+// reset: tamaño normal del bafle
+btnReplay?.classList.remove("big-sound");
+
+// dictado: NO mostrar 🔊 arriba, solo el botón grande
+if(actual.tipo === "dict_es" || actual.tipo === "dict_jp"){
+  $("promptJP").textContent = "";          // o "DICTADO" si quieres
+  btnReplay?.classList.add("big-sound");
+}
+// kanji: badge + kanji
+else if(actual.tipo === "kanji_mc"){
+  $("promptJP").innerHTML = `
+    <div class="tag-kanji">(KANJI)</div>
+    <div class="kanji-prompt">${actual.prompt}</div>
+  `;
+}
+// resto: prompt normal
+else{
+  $("promptJP").textContent = actual.prompt;
+}
 
   $("opciones").innerHTML =
     `a) ${actual.opciones[0]}<br>b) ${actual.opciones[1]}<br>c) ${actual.opciones[2]}`;
 
-  $("respuestaUsuario").value = "";
-  $("respuestaUsuario").placeholder = (actual.tipo === "dict_es" || actual.tipo === "dict_jp")
-    ? "Dictado: a / b / c + Enter"
-    : "a / b / c + Enter";
-  $("respuestaUsuario").maxLength = 1;
-
   limpiarResultado();
   yaValidado = false;
-  if (focoAutomatico) $("respuestaUsuario").focus();
 
   // dictado: reproduce apenas sale
   if(actual.tipo === "dict_es" || actual.tipo === "dict_jp"){
@@ -821,40 +900,21 @@ function siguiente(){
 }
 
 function responder(letra){
-  focoAutomatico = false;
   if(yaValidado) return;
-  $("respuestaUsuario").value = letra;
-  verificar();
+  verificar(letra);
 }
 
-function verificar(){
-  const input = ($("respuestaUsuario").value || "").trim().toLowerCase();
+function verificar(letra = ""){
+  const input = String(letra || "").trim().toLowerCase();
   const res = $("resultado");
 
-  // AUDIO al validar
-  // AUDIO al validar (romaji)
   if(actual?.extra?.romaji){
     playAudioForRomaji(actual.extra.romaji);
   }
 
-  // ENTER vacío = revelar + error
-  if(input === ""){
-    const extra = (actual.extra?.romaji && ["vocab_jp_es","vocab_es_jp","dict_es","dict_jp"].includes(actual.tipo))
-      ? `\nRomaji: ${actual.extra.romaji}`
-      : "";
-
-    res.className = "incorrecto";
-    res.innerText = `Respuesta: ${actual.correcta}) ${actual.respuesta}${extra}`;
-    errores++;
-    pintarStats();
-    guardarStatsActual();
-    yaValidado = true;
-    return;
-  }
-
   if(!["a","b","c"].includes(input)){
     res.className = "incorrecto";
-    res.innerText = "Usa solo: a / b / c";
+    res.innerText = "Usa solo los botones: a / b / c";
     return;
   }
 
@@ -862,6 +922,8 @@ function verificar(){
     res.className = "correcto";
     res.innerText = "Correcto ✔";
     aciertos++;
+    racha++;
+    if(racha > mejorRacha) mejorRacha = racha;
   }else{
     const extra = (actual.extra?.romaji && ["vocab_jp_es","vocab_es_jp","dict_es","dict_jp"].includes(actual.tipo))
       ? `\nRomaji: ${actual.extra.romaji}`
@@ -870,6 +932,7 @@ function verificar(){
     res.className = "incorrecto";
     res.innerText = `Incorrecto ✘ (era ${actual.correcta})\nRespuesta: ${actual.correcta}) ${actual.respuesta}${extra}`;
     errores++;
+    racha = 0;
   }
 
   pintarStats();
@@ -877,19 +940,11 @@ function verificar(){
   yaValidado = true;
 }
 
-function manejarEnter(event){
-  if(event.key !== "Enter") return;
-
-  if(!yaValidado){
-    verificar();
-  } else {
-    siguiente();
-  }
-}
-
 function resetStats(){
   aciertos = 0;
   errores = 0;
+  racha = 0;
+  mejorRacha = 0;
   pintarStats();
   guardarStatsActual();
 }
@@ -897,17 +952,53 @@ function resetStats(){
 /* ===============================
    CARGA JSON
 =============================== */
+
+/* ===============================
+   LISTA de canciones que SÍ tienen audio
+   (exactamente igual a como viene en el JSON)
+=============================== */
+const CANCIONES_CON_AUDIO = new Set([
+  "MIND POWER… 気",
+  "参上!!ギニュー特戦隊!! (Sanjou!! Ginyuu Tokusentai!!)",
+  "8のチャヴォ (Hachi no Chavo)",
+  "KILL THE FIGHT (MATO LA PELEA)",
+  "予感… (Yokan…)",
+  "HUNTER×HUNTER – Capítulo de las serpientes",
+  "HUNTER×HUNTER – Entrenamiento de Netero",
+  "HEART OF MADNESS",
+  "七人の侍 (Shichinin no Samurai)",
+  "FUTURE (parte 1)",
+  "FUTURE (parte 2)",
+  "あんたなんて。 (parte 1)",
+  "あんたなんて。 (parte 2)",
+  "ぬきたし",
+  "めざせ天下一",
+  "黄昏のBAY CITY",
+  "仮面ライダーBLACK RX",
+  "歌え！！レクイエム",
+  "Hensuki"// "AQUI VA LA TERCERA CUANDO LA TENGAS"
+]);
+  
 fetch("data/anime_vocab.json")
   .then(r => r.json())
   .then(json => {
     DATA = (json && json.bloques) ? json : { bloques: [] };
 
+    // Filtrar: dejar solo las canciones que están en la lista con audio
+    DATA.bloques = (DATA.bloques || []).filter(b => CANCIONES_CON_AUDIO.has(b.cancion));
+
+    if(DATA.bloques.length === 0){
+      $("promptJP").innerText = "No hay canciones habilitadas (revisa CANCIONES_CON_AUDIO)";
+      $("opciones").innerHTML = "";
+      return;
+    }
+    
     const cont = $("chipsBloques");
     cont.innerHTML = "";
-
-    // default: primer bloque activo (no todo)
-    bloquesActivos = new Set(DATA.bloques.length ? [0] : []);
-    $("btnTodo")?.classList.remove("activo");
+    
+    // default: TODO lo visible activo
+    bloquesActivos = new Set(DATA.bloques.map((_, i) => i));
+    $("btnTodo")?.classList.add("activo");
 
     DATA.bloques.forEach((b, i) => {
       const chip = document.createElement("div");
@@ -942,13 +1033,29 @@ fetch("data/anime_vocab.json")
     setPoolScope("seleccion");
 
     // default: modo jp_es
-    setModo("jp_es");
+    setModo("mix");
   })
   .catch(err => {
     $("promptJP").innerText = "No se pudo cargar data/anime_vocab.json";
     $("resultado").innerText = "Revisa la ruta y que estés en servidor (GitHub Pages / Live Server).";
     console.error(err);
   });
+
+document.addEventListener("keydown", (event) => {
+  const k = (event.key || "").toLowerCase();
+
+  if(k === "a" || k === "b" || k === "c"){
+    event.preventDefault();
+    if(!yaValidado) responder(k);
+    return;
+  }
+
+  if(k === "enter"){
+    event.preventDefault();
+    if(yaValidado) siguiente();
+  }
+});
+  
 </script>
 </body>
 </html>

@@ -69,9 +69,10 @@
 
   .panelGrid{
     display:grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     gap: 12px;
     justify-items: center;
+    width: 100%;
   }
 
   .row{
@@ -79,17 +80,6 @@
     gap:10px;
     flex-wrap:wrap;
     align-items:center;
-  }
-
-  input{
-    background: rgba(255,255,255,.08);
-    border: 1px solid var(--border);
-    color: var(--text);
-    padding: 10px 12px;
-    border-radius: 12px;
-    outline:none;
-    font-size: 15px;
-    width: min(420px, 100%);
   }
 
   .btn{
@@ -123,15 +113,18 @@
     border-color: transparent;
   }
 
-  .btn-mode.dictado-on{
+  .btn-mode.mix-activo{
     background: var(--dictadoRed);
     border-color: transparent;
+    color: white;
   }
-  .btn-mode.base-dictado{
+  
+  .btn-mode.mix-sombra{
     background: var(--dictadoRedSoft);
     border-color: transparent;
+    color: white;
   }
-
+  
   .big{
     text-align:center;
     padding: 20px 10px 10px;
@@ -182,14 +175,15 @@
 
   .switch{
     display:grid;
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-    gap:8px;
-    width:min(560px, 100%);
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap:10px;
+    width:min(760px, 100%);
   }
+  
   .switch .btn-mode{
-    padding: 9px 12px;
+    padding: 10px 14px;
     border-radius: 999px;
-    font-size: 13px;
+    font-size: 15px;
     width:100%;
   }
 
@@ -209,94 +203,49 @@
   .btnAudioBig:active{ transform: translateY(0px); }
   .btnAudioBig[disabled]{ opacity:.35; cursor:not-allowed; transform:none; }
 
-  #opcionesBtns{
-    display:flex;
-    flex-direction:column;
-    gap:10px;
-    width:min(560px, 100%);
-    margin-left:auto;
-    margin-right:auto;
-  }
-
-  .optBtn{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:10px;
-    text-align:left;
+  #opcionesTexto{
+    margin-top: 10px;
+    font-size: 20px;
+    line-height: 1.7;
+    text-align: left;
+    width: fit-content;
+    max-width: min(720px, 100%);
+    margin-left: auto;
+    margin-right: auto;
+    padding: 10px 14px;
     border-radius: 14px;
-    border: 1px solid var(--border);
+    border: 1px dashed rgba(255,255,255,.22);
     background: rgba(0,0,0,.18);
-    color: var(--text);
-    padding: 12px 14px;
-    cursor:pointer;
-    font-weight: 800;
-    transition: .12s;
-  }
-  .optBtn:hover{ transform: translateY(-1px); filter: brightness(1.05); }
-  .optBtn:disabled{
-    cursor:not-allowed;
-    transform:none;
-    filter:none;
-    opacity:.95;
-  }
-
-  .optLeft{
-    display:flex;
-    align-items:flex-start;
-    gap:10px;
-    flex:1;
-  }
-  .optLetter{
-    width:26px;
-    height:26px;
-    border-radius:9px;
-    display:grid;
-    place-items:center;
-    background: rgba(255,255,255,.08);
-    border:1px solid rgba(255,255,255,.12);
-    font-weight:900;
-    flex:0 0 auto;
-  }
-  .optText{
-    flex:1;
-    line-height:1.25;
     word-break: break-word;
   }
-
-  .optBtn.correcta{
-    border-color: rgba(34,197,94,.55);
-    background: rgba(34,197,94,.12);
-  }
-  .optBtn.incorrecta{
-    border-color: rgba(239,68,68,.60);
-    background: rgba(239,68,68,.12);
-  }
-  .optBtn.neutra-disabled{
-    opacity:.55;
-  }
-
-  #inputRow{
-    justify-content:center;
-    margin-top: 2px;
-    width:min(560px, 100%);
-  }
-  #respuestaUsuario{
-    text-align:center;
-    width:min(220px, 100%);
-  }
-
+  
   .actions{
     display:grid;
-    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(150px, 210px));
+    justify-content:center;
     gap:10px;
-    width:min(760px, 100%);
+    width:min(460px, 100%);
     margin-top: 6px;
   }
   .actions .btn, .actions .btn-ghost{
     width:100%;
     justify-self:stretch;
   }
+  
+@media (max-width: 600px){
+  h1{
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 600px){
+
+  #promptMain.esPregunta{
+    font-size: 30px;
+  }
+
+}
+  
 </style>
 </head>
 
@@ -307,10 +256,10 @@
     <h1>Vocabulario N5 — Asallam Sensei</h1>
 
     <div class="switch">
-      <button class="btn btn-mode" id="m-jp-es" type="button" onclick="setModoBase('jp-es')">JP → ES</button>
-      <button class="btn btn-mode" id="m-es-jp" type="button" onclick="setModoBase('es-jp')">ES → JP</button>
-      <button class="btn btn-mode" id="m-mixto" type="button" onclick="setModoBase('mixto')">Mixto</button>
-      <button class="btn btn-mode" id="m-dictado" type="button" onclick="toggleDictado()">Dictado</button>
+      <button class="btn btn-mode" id="m-jp-es" type="button" onclick="clickJpEs()">JP → ES</button>
+      <button class="btn btn-mode" id="m-es-jp" type="button" onclick="clickEsJp()">ES → JP</button>
+      <button class="btn btn-mode" id="m-dictado" type="button" onclick="setModo('dictado')">Dictado</button>
+      <button class="btn btn-mode" id="m-mixto" type="button" onclick="setModo('mixto')">Mix</button>
     </div>
   </header>
 
@@ -321,25 +270,32 @@
         <div id="promptMain">—</div>
         <div id="promptSub"></div>
 
-        <div id="opcionesBtns"></div>
-
-        <div class="row" id="inputRow">
-          <input id="respuestaUsuario"
-                 type="text"
-                 placeholder="a / b / c + Enter"
-                 maxlength="1"
-                 onkeydown="manejarEnter(event)">
+        <div id="opcionesTexto"></div>
+        
+        <div class="row" style="justify-content:center; margin-top: 2px;">
+          <button class="btn btn-ghost" type="button" onclick="responder('a')">A</button>
+          <button class="btn btn-ghost" type="button" onclick="responder('b')">B</button>
+          <button class="btn btn-ghost" type="button" onclick="responder('c')">C</button>
         </div>
 
         <div id="resultado"></div>
 
-        <div class="stats">
-          Aciertos: <span id="aciertos">0</span> — Errores: <span id="errores">0</span>
-        </div>
-
         <div class="actions">
           <button class="btn" type="button" onclick="accionSiguiente()">Siguiente</button>
           <button class="btn btn-ghost" type="button" onclick="mostrarRespuesta()">Mostrar respuesta</button>
+        </div>
+        
+        <div class="stats">
+          <div>
+            Aciertos: <span id="aciertos">0</span> — Errores: <span id="errores">0</span>
+          </div>
+          <div style="margin-top:6px;">
+            Racha: <span id="racha">0</span> — Mejor racha: <span id="mejorRacha">0</span> — Precisión: <span id="precision">0%</span>
+          </div>
+        </div>
+        
+        <div class="row" style="justify-content:center; margin-top: 8px; width:min(760px, 100%);">
+          <button class="btn btn-ghost" type="button" onclick="resetStats()">Reset stats</button>
         </div>
 
       </div>
@@ -352,19 +308,54 @@ let lista = [];
 let actual = 0;
 
 let aciertos = 0;
-let focoAutomatico = true; // o false, como prefieras por defecto
 let errores = 0;
+let racha = 0;
+let mejorRacha = 0;
 
 let correctaLetra = "";        // "a"/"b"/"c"
 let respuestaCorrecta = "";    // texto correcto (según dirección de la ronda)
 let yaValidado = false;
+let actualOpcionesTexto = [];
 
 const letras = ["a","b","c"];
 
+const STATS_KEY = "n5_vocab_stats_v1";
+
+function cargarStats(){
+  try{
+    const s = JSON.parse(localStorage.getItem(STATS_KEY)) || {};
+    aciertos = s.aciertos || 0;
+    errores = s.errores || 0;
+    racha = s.racha || 0;
+    mejorRacha = s.mejorRacha || 0;
+  }catch{
+    aciertos = 0;
+    errores = 0;
+    racha = 0;
+    mejorRacha = 0;
+  }
+}
+
+function guardarStats(){
+  localStorage.setItem(STATS_KEY, JSON.stringify({
+    aciertos,
+    errores,
+    racha,
+    mejorRacha
+  }));
+}
+
+function precisionPct(){
+  const total = aciertos + errores;
+  if(total <= 0) return "0%";
+  return Math.round((aciertos / total) * 100) + "%";
+}
+  
 // ====== MODOS ======
-let modoBase = "jp-es";   // "jp-es" | "es-jp" | "mixto"
-let dictadoOn = false;    // on/off
-let rondaDir = "jp-es";   // dirección actual de la ronda
+let modoActual = "mixto";   // "jp-es" | "es-jp" | "dictado" | "mixto"
+let rondaDir = "jp-es";     // "jp-es" | "es-jp"
+let rondaEsDictado = false; // true/false
+let dictadoDirs = new Set(["jp-es", "es-jp"]);
 
 // ====== AUDIO (EXACTO AL JSON) ======
 const AUDIO_BASE = "data/audios/n5/";   // carpeta mp3
@@ -416,42 +407,56 @@ fetch("data/Vocabulario_N5.json")
   .then(res => res.json())
   .then(data => {
     lista = (data || []).filter(x => x && x.kanji && x.significado && x.romaji);
-    setModoBase("jp-es");
+    setModo("mixto");
   })
   .catch(err=>{
     console.error(err);
     document.getElementById("promptMain").innerText = "No se pudo cargar data/Vocabulario_N5.json";
     document.getElementById("promptSub").innerText = "Revisa la ruta y usa servidor (GitHub Pages / Live Server).";
+    document.getElementById("opcionesTexto").innerHTML = "";
   });
 
 // ====== UI MODO ======
+
 function limpiarActivos(){
-  ["m-jp-es","m-es-jp","m-mixto","m-dictado"].forEach(id=>{
+  ["m-jp-es","m-es-jp","m-dictado","m-mixto"].forEach(id=>{
     const el = document.getElementById(id);
     if(!el) return;
-    el.classList.remove("activo","dictado-on","base-dictado");
+    el.classList.remove("activo","mix-activo","mix-sombra");
   });
 }
 
 function aplicarUI(){
   limpiarActivos();
 
-  const baseId = (modoBase === "jp-es") ? "m-jp-es" : (modoBase === "es-jp") ? "m-es-jp" : "m-mixto";
-  const baseBtn = document.getElementById(baseId);
-  const dictBtn = document.getElementById("m-dictado");
+  const btnJpEs = document.getElementById("m-jp-es");
+  const btnEsJp = document.getElementById("m-es-jp");
+  const btnDict = document.getElementById("m-dictado");
+  const btnMix  = document.getElementById("m-mixto");
 
-  if(dictadoOn){
-    dictBtn.classList.add("dictado-on");
-    baseBtn.classList.add("base-dictado");
-  }else{
-    baseBtn.classList.add("activo");
+  if(modoActual === "mixto"){
+    btnMix?.classList.add("mix-activo");
+    btnJpEs?.classList.add("mix-sombra");
+    btnEsJp?.classList.add("mix-sombra");
+    btnDict?.classList.add("mix-sombra");
+  }
+  else if(modoActual === "dictado"){
+    btnDict?.classList.add("activo");
+
+    btnJpEs?.classList.toggle("activo", dictadoDirs.has("jp-es"));
+    btnEsJp?.classList.toggle("activo", dictadoDirs.has("es-jp"));
+  }
+  else if(modoActual === "jp-es"){
+    btnJpEs?.classList.add("activo");
+  }
+  else if(modoActual === "es-jp"){
+    btnEsJp?.classList.add("activo");
   }
 
-  document.getElementById("inputRow").style.display = dictadoOn ? "none" : "flex";
 }
 
-function setModoBase(nuevoBase){
-  modoBase = nuevoBase;
+function setModo(nuevoModo){
+  modoActual = nuevoModo;
   aplicarUI();
 
   yaValidado = false;
@@ -459,14 +464,37 @@ function setModoBase(nuevoBase){
   if(lista.length) siguiente();
 }
 
-function toggleDictado(){
-  dictadoOn = !dictadoOn;
+function clickJpEs(){
+  if(modoActual === "dictado"){
+    toggleDictadoDir("jp-es");
+  }else{
+    setModo("jp-es");
+  }
+}
+
+function clickEsJp(){
+  if(modoActual === "dictado"){
+    toggleDictadoDir("es-jp");
+  }else{
+    setModo("es-jp");
+  }
+}
+
+function toggleDictadoDir(dir){
+  if(dictadoDirs.has(dir)){
+    if(dictadoDirs.size === 1) return; // nunca dejar 0
+    dictadoDirs.delete(dir);
+  }else{
+    dictadoDirs.add(dir);
+  }
+
   aplicarUI();
 
   yaValidado = false;
   limpiarResultado();
-  if(lista.length) siguiente();
+  if(lista.length && modoActual === "dictado") siguiente();
 }
+
 
 // ====== TEXTO SEGÚN DIRECCIÓN DE LA RONDA ======
 function textoPregunta(item){
@@ -490,17 +518,13 @@ function renderPrompt(itemCorrecto){
 
   ultimoAudioKey = String(itemCorrecto.romaji || "").trim();
 
-  if(dictadoOn){
-    let label = "";
-    if(modoBase === "mixto"){
-      label = (rondaDir === "jp-es") ? "🎧 Dictado mixto: elige el significado" : "🎧 Dictado mixto: elige el japonés";
-    }else if(modoBase === "jp-es"){
-      label = "🎧 Dictado: elige el significado";
-    }else{
-      label = "🎧 Dictado: elige el japonés";
-    }
+  if(rondaEsDictado){
+    const label = (rondaDir === "jp-es")
+      ? "🎧 Dictado: elige el significado"
+      : "🎧 Dictado: elige el japonés";
+  
     subEl.innerText = label;
-
+  
     promptEl.innerHTML = `
       <button id="promptSpeaker" class="btnAudioBig" type="button" title="Escuchar" onclick="reproducirAudioActual()">🔊</button>
     `;
@@ -520,42 +544,48 @@ function limpiarResultado(){
   res.innerText = "";
   res.className = "";
 }
-
+  
 function pintarStats(){
   document.getElementById("aciertos").innerText = aciertos;
   document.getElementById("errores").innerText = errores;
+  document.getElementById("racha").innerText = racha;
+  document.getElementById("mejorRacha").innerText = mejorRacha;
+  document.getElementById("precision").innerText = precisionPct();
 }
 
 // ====== CONTROL DE OPCIONES ======
 function bloquearOpciones(){
-  const box = document.getElementById("opcionesBtns");
-  const btns = box.querySelectorAll("button.optBtn");
-  btns.forEach(b => { b.disabled = true; });
+  // ya no hay botones de opciones que bloquear
 }
 
 function pintarOpciones(letraElegida){
-  const box = document.getElementById("opcionesBtns");
-  const btns = Array.from(box.querySelectorAll("button.optBtn"));
-  btns.forEach(btn=>{
-    const letraBtn = btn.getAttribute("data-letter");
-    btn.classList.remove("correcta","incorrecta","neutra-disabled");
-    if(letraBtn === correctaLetra){
-      btn.classList.add("correcta");
-    }else if(letraBtn === letraElegida){
-      btn.classList.add("incorrecta");
-    }else{
-      btn.classList.add("neutra-disabled");
+  const box = document.getElementById("opcionesTexto");
+
+  const opcionesActuales = actualOpcionesTexto;
+  if(!opcionesActuales || opcionesActuales.length < 3) return;
+
+  box.innerHTML = opcionesActuales.map((txt, idx) => {
+    const letra = letras[idx];
+
+    let color = "";
+    if(letra === correctaLetra){
+      color = ' style="color:#86efac; font-weight:900;"';
+    }else if(letra === letraElegida){
+      color = ' style="color:#fecaca; font-weight:900;"';
     }
-  });
+
+    return `<div${color}>${letra}) ${txt}</div>`;
+  }).join("");
 }
 
 // ====== SIGUIENTE (DOBLE CLICK SI ESTABA SIN CALIFICAR) ======
 function accionSiguiente(){
-  focoAutomatico = false;
 
   if(!yaValidado){
     errores++;
+    racha = 0;
     pintarStats();
+    guardarStats();
     yaValidado = true;
 
     const res = document.getElementById("resultado");
@@ -573,16 +603,36 @@ function accionSiguiente(){
 }
 
 // ====== GENERAR RONDA ======
-function elegirRondaDir(){
-  if(modoBase === "jp-es") return "jp-es";
-  if(modoBase === "es-jp") return "es-jp";
-  return (Math.random() < 0.5) ? "jp-es" : "es-jp";
+function elegirRonda(){
+  if(modoActual === "jp-es"){
+    return { dir: "jp-es", dictado: false };
+  }
+
+  if(modoActual === "es-jp"){
+    return { dir: "es-jp", dictado: false };
+  }
+
+  if(modoActual === "dictado"){
+    const dirs = [...dictadoDirs];
+    const dir = dirs[Math.floor(Math.random() * dirs.length)];
+    return { dir, dictado: true };
+  }
+
+  // Mix = super mixto
+  const r = Math.random();
+
+  if(r < 0.25) return { dir: "jp-es", dictado: false };
+  if(r < 0.50) return { dir: "es-jp", dictado: false };
+  if(r < 0.75) return { dir: "jp-es", dictado: true };
+  return { dir: "es-jp", dictado: true };
 }
 
 function siguiente(){
   if(lista.length < 3) return;
 
-  rondaDir = elegirRondaDir();
+  const ronda = elegirRonda();
+  rondaDir = ronda.dir;
+  rondaEsDictado = ronda.dictado;
 
   actual = Math.floor(Math.random() * lista.length);
   const itemCorrecto = lista[actual];
@@ -591,107 +641,77 @@ function siguiente(){
 
   let opciones = [respuestaCorrecta];
   while(opciones.length < 3){
-    const rItem = lista[Math.floor(Math.random()*lista.length)];
+    const rItem = lista[Math.floor(Math.random() * lista.length)];
     const r = textoRespuesta(rItem);
     if(!opciones.includes(r)) opciones.push(r);
   }
-  opciones.sort(()=>Math.random()-0.5);
+  
+  opciones = mezclarArray(opciones);
   correctaLetra = letras[opciones.indexOf(respuestaCorrecta)];
+  actualOpcionesTexto = opciones.slice();
 
   renderPrompt(itemCorrecto);
   renderOpciones(opciones);
 
   limpiarResultado();
+  aplicarUI();
   yaValidado = false;
-
-  const input = document.getElementById("respuestaUsuario");
-  if(!dictadoOn){
-    input.value = "";
-    input.placeholder = "a / b / c + Enter";
-    input.maxLength = 1;
-    if (focoAutomatico) input.focus({preventScroll:true});
-  }
 
   // (como lo tenías) suena al pasar:
   playAudio(ultimoAudioKey);
 }
 
 function renderOpciones(opciones){
-  const box = document.getElementById("opcionesBtns");
-  box.innerHTML = "";
-
-  opciones.forEach((txt, idx)=>{
-    const letra = letras[idx];
-    const btn = document.createElement("button");
-    btn.className = "optBtn";
-    btn.type = "button";
-    btn.setAttribute("data-letter", letra);
-
-    btn.addEventListener("click", ()=>{
-      responder(letra);
-    });
-
-    const left = document.createElement("div");
-    left.className = "optLeft";
-
-    const badge = document.createElement("div");
-    badge.className = "optLetter";
-    badge.textContent = letra;
-
-    const text = document.createElement("div");
-    text.className = "optText";
-    text.textContent = txt;
-
-    left.appendChild(badge);
-    left.appendChild(text);
-
-    btn.appendChild(left);
-    box.appendChild(btn);
-  });
+  const box = document.getElementById("opcionesTexto");
+  box.innerHTML = `
+    a) ${opciones[0]}<br>
+    b) ${opciones[1]}<br>
+    c) ${opciones[2]}
+  `;
 }
 
-function responder(letra){
-  focoAutomatico = false;
-  if(yaValidado) return;
-
-  if(!dictadoOn){
-    document.getElementById("respuestaUsuario").value = letra;
+function mezclarArray(arr){
+  const copia = [...arr];
+  for(let i = copia.length - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * (i + 1));
+    [copia[i], copia[j]] = [copia[j], copia[i]];
   }
+  return copia;
+}
+  
+function responder(letra){
+  if(yaValidado) return;
   verificar(letra);
 }
 
 function verificar(letraForzada){
   const res = document.getElementById("resultado");
-  const r = (letraForzada || (!dictadoOn ? document.getElementById("respuestaUsuario").value : ""))
-              .toString().toLowerCase().trim();
 
-  if(!dictadoOn && !["a","b","c"].includes(r)){
+  const r = (letraForzada || "").toString().toLowerCase().trim();
+  
+  if(!["a","b","c"].includes(r)){
     res.className = "incorrecto";
-    res.innerText = `Incorrecto ✘ (era ${correctaLetra}) — ${respuestaCorrecta}`;
-    errores++;
-    pintarStats();
-    yaValidado = true;
-
-    pintarOpciones(r);
-    bloquearOpciones();
-
-    playAudio(ultimoAudioKey);
+    res.innerText = "Usa solo: a / b / c";
     return;
   }
-
-  const letra = dictadoOn ? letraForzada : r;
+  
+  const letra = r;
 
   if(letra === correctaLetra){
     res.className = "correcto";
     res.innerText = "Correcto ✔";
     aciertos++;
+    racha++;
+    if(racha > mejorRacha) mejorRacha = racha;
   }else{
     res.className = "incorrecto";
     res.innerText = `Incorrecto ✘ (era ${correctaLetra}) — ${respuestaCorrecta}`;
     errores++;
+    racha = 0;
   }
 
   pintarStats();
+  guardarStats();
   yaValidado = true;
 
   pintarOpciones(letra);
@@ -701,11 +721,12 @@ function verificar(letraForzada){
 }
 
 function mostrarRespuesta(){
-  focoAutomatico = false;
 
   if(!yaValidado){
     errores++;
+    racha = 0;
     pintarStats();
+    guardarStats();
   }
 
   const res = document.getElementById("resultado");
@@ -720,16 +741,36 @@ function mostrarRespuesta(){
   playAudio(ultimoAudioKey);
 }
 
-function manejarEnter(event){
-  if(event.key !== "Enter") return;
-  if(dictadoOn) return;
-
-  if(!yaValidado){
-    verificar();
-  }else{
-    siguiente();
-  }
+function resetStats(){
+  aciertos = 0;
+  errores = 0;
+  racha = 0;
+  mejorRacha = 0;
+  pintarStats();
+  guardarStats();
 }
+
+document.addEventListener("keydown", (e) => {
+  const k = (e.key || "").toLowerCase();
+
+  if(["a","b","c"].includes(k) && !yaValidado){
+    e.preventDefault();
+    responder(k);
+    return;
+  }
+
+  if(k === "enter"){
+    e.preventDefault();
+
+    if(yaValidado){
+      siguiente();
+    }
+  }
+});
+  
+cargarStats();
+pintarStats();
+  
 </script>
 
 </body>

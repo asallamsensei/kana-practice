@@ -10,8 +10,8 @@
     --card:rgba(255,255,255,.08);
     --card2:rgba(255,255,255,.10);
     --border:rgba(255,255,255,.14);
-    --text:#eef2ff;
-    --muted:rgba(238,242,255,.75);
+    --text:#ffffff;
+    --muted:#ffffff;
     --accent:#7d5cff;
     --good:#22c55e;
     --bad:#ef4444;
@@ -38,10 +38,6 @@
     display:grid;
     grid-template-columns: 360px 1fr;
     gap:14px;
-  }
-  @media (max-width: 900px){
-    body{padding:12px}
-    .wrap{grid-template-columns:1fr}
   }
 
   .panel{
@@ -104,59 +100,30 @@
   .game{
     position:relative;
     overflow:hidden;
-    height: 680px; /* reducido */
+  
     border-radius:18px;
     border:1px solid var(--border);
-    background:
-      radial-gradient(900px 500px at 30% 20%, rgba(255,255,255,.06), transparent 60%),
-      radial-gradient(700px 500px at 80% 10%, rgba(125,92,255,.10), transparent 55%),
-      linear-gradient(180deg, rgba(255,255,255,.06), rgba(0,0,0,.22));
     box-shadow: 0 18px 60px rgba(0,0,0,.35);
+  
+    background-image: url("data/velocidad/fondo.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  
+    image-rendering: pixelated;
+  
+    isolation:isolate;
+    z-index:0;
   }
-  @media (max-width: 900px){
-    .game{height: 520px;}
-  }
-  @media (max-width: 420px){
-    .game{height: 450px;} /* más pequeño en celular */
-  }
-
-  .topBar{
-    position:absolute; left:0; top:0; right:0;
-    display:flex; align-items:center; justify-content:space-between;
-    padding:10px 12px;
-    background: rgba(0,0,0,.18);
-    border-bottom:1px solid rgba(255,255,255,.10);
-    backdrop-filter: blur(8px);
-    z-index:5;
-  }
-  .topBar .left, .topBar .right{display:flex; gap:10px; align-items:center}
-  .pill{
-    font-size:12px;
-    padding:6px 10px;
-    border-radius:999px;
-    border:1px solid rgba(255,255,255,.14);
-    background: rgba(0,0,0,.18);
-    color: var(--text);
-  }
-  .pill.good{border-color:rgba(34,197,94,.35); background:rgba(34,197,94,.12)}
-
-  .city{
+  
+  .game::before{
+    content:"";
     position:absolute;
-    left:0; right:0; bottom:0;
-    height:95px; /* un poquito menos */
-    background:
-      linear-gradient(180deg, rgba(0,0,0,0), rgba(0,0,0,.30)),
-      repeating-linear-gradient(90deg, rgba(255,255,255,.08) 0 10px, rgba(255,255,255,.02) 10px 20px);
-    opacity:.9;
+    inset:0;
+    background: rgba(0,0,0,.10); /* 10% oscurecido */
     z-index:1;
   }
-  .groundLine{
-    position:absolute; left:0; right:0; bottom:95px;
-    height:2px;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,.22), transparent);
-    z-index:2;
-  }
-
+  
 .meteor{
   position:absolute;
   top:-60px;
@@ -172,15 +139,30 @@
   backdrop-filter: blur(6px);
   box-shadow: 0 16px 40px rgba(0,0,0,.35);
 
+  isolation:isolate;
   text-align:center;
   white-space:nowrap;        /* 🔥 evita salto de línea */
-  z-index:3;
+  z-index: 30; /* Aseguramos que los meteoros estén por detrás de otros elementos */
 }
   .meteor .expr{font-size:20px; font-weight:900; letter-spacing:.2px}
-  .meteor.hit{border-color: rgba(34,197,94,.45); background: rgba(34,197,94,.12)}
-  .meteor.miss{border-color: rgba(239,68,68,.45); background: rgba(239,68,68,.12)}
+  .meteor.hit{border-color: rgba(34,197,94,.45); background: rgba(34,197,94,.12); animation: hitFlash 120ms ease-out;}
+  .meteor.miss{border-color: rgba(239,68,68,.45); background: rgba(239,68,68,.12); animation: hitFlash 120ms ease-out;}
   .meteor.bonus{border-color: rgba(251,191,36,.40); background: rgba(251,191,36,.10)}
 
+/* === BOSS === */
+.meteor.boss{
+  padding:12px 16px;
+  border-radius:18px;
+  background: rgba(0,0,0,.28);
+  border:1px solid rgba(125,92,255,.45);
+  box-shadow: 0 22px 60px rgba(0,0,0,.55);
+  z-index:35; /* boss arriba de topbar, debajo de px/shot si quieres */
+}
+.meteor.boss .expr{
+  font-size:22px;
+  letter-spacing:.6px;
+}
+  
   /* --- Answer UI (sin input) --- */
 .answerBox{
   width:100%;
@@ -191,37 +173,120 @@
   gap:10px;
 }
 
-/* ===== Layout PC: izquierda (panel+teclado), derecha (juego alto) ===== */
-@media (min-width: 901px){
-  .wrap{
-    grid-template-rows: auto 1fr; /* crea fila 2 para el teclado */
-    align-items: start;
-  }
+/* =========================
+   TOP BAR (nuevo)
+   PC: 4 pills ~22% + espacios iguales
+   Móvil: autofit y centrado
+========================= */
 
-  .panel{
-    grid-column: 1;
-    grid-row: 1;
-  }
+/* Contenedor */
+.topBar{
+  position:absolute;
+  left:0; right:0; top:0;
+  z-index:15;
 
-  .answerBox{
-    grid-column: 1;   /* 👈 columna izquierda */
-    grid-row: 2;      /* 👈 debajo del panel */
-    margin: 14px 0 0 0;  /* quita el auto-centro en PC */
-    max-width: none;     /* usa el ancho de la col 1 (360px) */
-    justify-self: stretch;
-  }
+  display:grid;
+  align-items:center;
 
-  .game{
-    grid-column: 2;
-    grid-row: 1 / span 2; /* 👈 el juego ocupa fila 1 y 2 */
-  }
+  /* 4 columnas: cada pill ~22% (0.22fr) y 5 espacios iguales (0.024fr)
+     Espacios: izq + entre + entre + entre + der = 5 */
+  grid-template-columns:
+    0.024fr 0.22fr 0.024fr 0.22fr 0.024fr 0.22fr 0.024fr 0.22fr 0.024fr;
+
+  padding:10px 12px;
+  background: rgba(0,0,0,.18);
+  border-bottom: 1px solid rgba(255,255,255,.10);
+  backdrop-filter: blur(8px);
+  border-radius: 18px 18px 0 0;
 }
 
-/* ===== EN MÓVIL vuelve a flujo normal ===== */
-@media (max-width: 900px){
-  .answerBox{
-    grid-column: 1;
-    grid-row: auto;
+/* Colocamos cada pill en su columna */
+#pillProg  { grid-column:2; }
+#pillScore { grid-column:4; }
+#pillLives { grid-column:6; }
+#pillBest  { grid-column:8; }
+
+/* Base pill (sirve para todos) */
+.pill{
+  min-width:0;                 /* clave para que no rompa el grid */
+  height:28px;
+  padding:6px 10px;
+  border-radius:999px;
+
+  border:1px solid rgba(255,255,255,.14);
+  background: rgba(0,0,0,.18);
+  color: var(--text);
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  font-size:12px;
+  font-weight:800;
+  user-select:none;
+
+  white-space:nowrap;          /* HUD compacto */
+  overflow:hidden;             /* si el texto es largo, no explota */
+  text-overflow:ellipsis;
+}
+
+/* Progress pill (Nivel / Vidas) */
+.pill.progress{
+  position:relative;
+  overflow:hidden;             /* para que el fill no se salga */
+}
+
+/* Fill (se pinta con --p) */
+.pill.progress::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  width: var(--p, 0%);
+  background: rgba(34,197,94,.18);
+  border-right: 1px solid rgba(34,197,94,.28);
+}
+
+/* Texto por encima del fill */
+.pill.progress > span{
+  position:relative;
+  z-index:1;
+}
+
+/* Flash dorado al subir nivel (si lo sigues usando) */
+.pill.progress.levelUp{
+  animation: levelUpFlash 300ms ease-out;
+}
+@keyframes levelUpFlash{
+  0%   { filter: brightness(1);   box-shadow:0 0 0 rgba(0,0,0,0); }
+  45%  { filter: brightness(1.9); box-shadow:0 0 22px rgba(251,191,36,.85); }
+  100% { filter: brightness(1);   box-shadow:0 0 0 rgba(0,0,0,0); }
+}
+.pill.progress.levelUp::before{
+  background: rgba(251,191,36,.22);
+  border-right-color: rgba(251,191,36,.35);
+}
+
+/* =========================
+   MÓVIL: 1 sola fila
+   auto-fit al texto + centrado
+========================= */
+@media (max-width:900px){
+  .topBar{
+    display:flex;
+    justify-content:center;  /* centra todo el grupo */
+    align-items:center;
+    gap:8px;
+    padding:10px 8px;
+
+    /* opcional (solo si se te corta en pantallas muy pequeñas) */
+    /* overflow-x:auto; */
+    /* -webkit-overflow-scrolling: touch; */
+  }
+
+  .topBar .pill{
+    flex:0 0 auto;           /* tamaño según contenido */
+    width:auto;
+    white-space:nowrap;      /* no salta línea */
   }
 }
   
@@ -257,7 +322,7 @@
   .keypad{
     display:grid;
     grid-template-columns: repeat(3, 1fr);
-    gap:10px;
+    gap:2px;
   }
   .kbtn{
     padding:14px 10px;
@@ -274,11 +339,22 @@
   .kbtn:hover{transform: translateY(-1px); background: rgba(255,255,255,.12)}
   .kbtn:active{transform: translateY(0px);}
 
-  .kbtn.ok{
-    background: rgba(34,197,94,.12);
-    border-color: rgba(34,197,94,.28);
-  }
-  .kbtn.ok:hover{background: rgba(34,197,94,.18)}
+.kbtn.ok{
+  background: linear-gradient(135deg, #22c55e, #16a34a);
+  border-color: rgba(34,197,94,.55);
+  color:#ffffff;
+  box-shadow:
+    0 0 14px rgba(34,197,94,.55),
+    0 0 28px rgba(34,197,94,.35);
+}
+
+.kbtn.ok:hover{
+  background: linear-gradient(135deg, #16a34a, #15803d);
+  box-shadow:
+    0 0 18px rgba(34,197,94,.7),
+    0 0 34px rgba(34,197,94,.45);
+}
+
   .kbtn.bad{
     background: rgba(239,68,68,.12);
     border-color: rgba(239,68,68,.28);
@@ -293,7 +369,7 @@
   .overlay{
     position:absolute; inset:0;
     display:flex; align-items:center; justify-content:center;
-    z-index:10;
+    z-index:100;
     background: rgba(0,0,0,.55);
     backdrop-filter: blur(6px);
     padding:16px;
@@ -306,101 +382,539 @@
     box-shadow: 0 30px 90px rgba(0,0,0,.6);
     padding:16px;
   }
-  .modal h2{margin:0 0 6px 0; font-size:18px}
-  .modal p{margin:0; color:var(--muted); line-height:1.45; font-size:13px}
+  .modal h2{margin:0 0 6px 0;}
   .modal .actions{display:flex; gap:10px; margin-top:12px}
 
-  .toast{
-    position:absolute;
-    left:50%; transform:translateX(-50%);
-    top:56px;
-    z-index:9;
-    padding:8px 12px;
-    border-radius:999px;
-    border:1px solid rgba(255,255,255,.14);
-    background: rgba(0,0,0,.22);
-    color:var(--text);
-    font-size:12px;
-    opacity:0;
-    transition: .18s opacity, .18s transform;
-    pointer-events:none;
-  }
-  .toast.show{opacity:1; transform:translateX(-50%) translateY(2px)}
+/* === Pixel fire particles (se desprenden arriba) === */
+.px{
+  position:absolute;
+  width:8px;
+  height:8px;
+  border-radius:2px;         /* cuadradito suave; pon 0 si lo quieres 100% pixel */
+  pointer-events:none;
+  z-index:40;                 /* encima del city */
+  opacity:1;
+  transform: translate(-50%, -50%) scale(1);
+  will-change: transform, opacity, filter;
+  filter: drop-shadow(0 0 8px rgba(0,0,0,.25));
+  animation: pxBurn var(--life, 520ms) steps(2,end) forwards;
+}
 
-  @media (max-width: 420px){
-    .answerBox{gap:8px; padding:8px; bottom:10px;}
-    .kbtn{padding:13px 10px; font-size:17px;}
-    .display{min-height:44px; font-size:20px;}
+  .px.gold{
+    box-shadow:
+      0 0 10px rgba(251,191,36,.55),
+      0 0 18px rgba(251,191,36,.35);
+    filter: drop-shadow(0 0 10px rgba(251,191,36,.45));
   }
+
+  .px.rain{
+    animation-name: pxRain;
+    animation-timing-function: linear;
+  }
+  
+  @keyframes pxRain{
+    0%   { opacity: 1; transform: translate(-50%, -50%) scale(1); filter: blur(0px); }
+    60%  { opacity: .8; transform: translate(calc(-50% + var(--dx,0px)), calc(-50% + var(--dy, 40px))) scale(.9); }
+    100% { opacity: 0; transform: translate(calc(-50% + var(--dx,0px)), calc(-50% + var(--dy, 90px))) scale(.35); filter: blur(1px); }
+  }
+    
+  /* animación: “quema” y desaparece */
+  @keyframes pxBurn{
+    0%   { opacity: 1; transform: translate(-50%, -50%) scale(1); filter: blur(0px); }
+    65%  { opacity: .75; transform: translate(-50%, -50%) scale(.95); filter: blur(.2px); }
+    100% { opacity: 0; transform: translate(-50%, -50%) scale(.35); filter: blur(1px); }
+  }
+  
+  @keyframes hitFlash {
+    0%{
+      filter: brightness(1);
+      box-shadow: 0 0 0 rgba(255,255,255,0);
+    }
+    40%{
+      filter: brightness(3);
+      box-shadow: 0 0 18px rgba(255,255,255,.9);
+    }
+    100%{
+      filter: brightness(1);
+      box-shadow: 0 0 0 rgba(255,255,255,0);
+    }
+  }
+  
+/* === Explosión radial (sale para todos lados) === */
+.px.explode{
+  animation-name: pxExplode;
+  animation-timing-function: linear;
+}
+
+@keyframes pxExplode{
+  0%{
+    opacity:1;
+    transform: translate(-50%, -50%) scale(1);
+    filter: blur(0px);
+  }
+  70%{
+    opacity:.85;
+    transform: translate(
+      calc(-50% + var(--dx,0px)),
+      calc(-50% + var(--dy,0px))
+    ) scale(.9);
+  }
+  100%{
+    opacity:0;
+    transform: translate(
+      calc(-50% + var(--dx,0px)),
+      calc(-50% + var(--dy,0px))
+    ) scale(.35);
+    filter: blur(1px);
+  }
+}
+
+/* === Lluvia que rebota 1 vez (arcade) === */
+.px.bounce{
+  animation-name: pxBounce;
+  animation-timing-function: linear;
+}
+
+@keyframes pxBounce{
+  /* cae */
+  0%{
+    opacity:1;
+    transform: translate(-50%, -50%) scale(1);
+    filter: blur(0px);
+  }
+  55%{
+    opacity:.9;
+    transform: translate(
+      calc(-50% + var(--dx,0px)),
+      calc(-50% + var(--fall, 140px))
+    ) scale(.95);
+  }
+  /* rebote (sube un poquito) */
+  75%{
+    opacity:.8;
+    transform: translate(
+      calc(-50% + (var(--dx,0px) * .65)),
+      calc(-50% + (var(--fall, 140px) - var(--bounce, 60px)))
+    ) scale(.85);
+  }
+  /* vuelve a caer y muere */
+  100%{
+    opacity:0;
+    transform: translate(
+      calc(-50% + (var(--dx,0px) * .85)),
+      calc(-50% + (var(--fall, 140px) + 24px))
+    ) scale(.35);
+    filter: blur(1px);
+  }
+}
+
+.canvasDisplay{
+  position:absolute;
+  left:50%;
+  transform:translateX(-50%);
+  bottom:110px;
+
+  font-size:42px;
+  font-weight:900;
+  letter-spacing:2px;
+  color:#ffffff;
+
+  text-align:center;
+  z-index:20;
+  user-select:none;
+
+  text-shadow:
+    0 0 8px rgba(255,255,255,.6),
+    0 0 18px rgba(125,92,255,.4);
+}
+
+/* 🎯 número-disparo que viaja hacia el meteoro */
+.shotNum{
+  position:absolute;
+  left:0; top:0;
+  transform: translate(-50%, -50%);
+  font-size:42px;
+  font-weight:900;
+  letter-spacing:2px;
+  color:#fff;
+  text-shadow:
+    0 0 8px rgba(255,255,255,.6),
+    0 0 18px rgba(125,92,255,.4);
+  pointer-events:none;
+  z-index:60;
+
+  /* animación controlada por variables */
+  animation: shotFly var(--t, 240ms) cubic-bezier(.2,.9,.2,1) forwards;
+}
+
+@keyframes shotFly{
+  0%{
+    opacity:1;
+    transform: translate(-50%, -50%) translate(0px, 0px) scale(1);
+    filter: blur(0px);
+  }
+  70%{
+    opacity:.95;
+    transform: translate(-50%, -50%) translate(var(--dx), var(--dy)) scale(.92);
+  }
+  100%{
+    opacity:0;
+    transform: translate(-50%, -50%) translate(var(--dx), var(--dy)) scale(.55);
+    filter: blur(.8px);
+  }
+}
+
+/* 👻 estela del disparo */
+.shotGhost{
+  position:absolute;
+  left:0; top:0;
+  transform: translate(-50%, -50%);
+  font-size:42px;
+  font-weight:900;
+  letter-spacing:2px;
+  color:#fff;
+  pointer-events:none;
+  z-index:50;
+
+  opacity:.45;
+  filter: blur(.2px);
+
+  text-shadow:
+    0 0 8px rgba(255,255,255,.35),
+    0 0 18px rgba(125,92,255,.25);
+
+  animation: ghostFade var(--gt, 160ms) linear forwards;
+}
+
+@keyframes ghostFade{
+  from{ opacity: var(--go, .45); transform: translate(-50%, -50%) scale(1); }
+  to  { opacity: 0;              transform: translate(-50%, -50%) scale(.85); }
+}
+
+/* === Placa afuera del juego (arriba del .game) === */
+.gameHeader{
+  grid-column: 1;              /* en PC: misma columna del juego */
+  grid-row: 1;                 /* arriba del juego */
+  align-self: start;
+  justify-self: stretch;
+  margin: 0 0 10px 0;
+}
+
+.gameHeader .inner{
+  position:relative;
+  padding:12px 16px;
+  border-radius:18px;
+  border:1px solid rgba(255,255,255,.14);
+  background: rgba(15,18,35,.75);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 18px 60px rgba(0,0,0,.35);
+  overflow:hidden;
+}
+
+/* grid retro elegante */
+.gameHeader .inner::before{
+  content:"";
+  position:absolute; inset:0;
+  background-image:
+    linear-gradient(rgba(125,92,255,.16) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(34,197,94,.12) 1px, transparent 1px);
+  background-size: 26px 26px;
+  opacity:.55;
+  mix-blend-mode: screen;
+}
+
+/* glow suave */
+.gameHeader .inner::after{
+  content:"";
+  position:absolute; inset:-40%;
+  background:
+    radial-gradient(circle at 30% 40%, rgba(125,92,255,.28), transparent 60%),
+    radial-gradient(circle at 70% 60%, rgba(34,197,94,.18), transparent 65%);
+  filter: blur(16px);
+  opacity:.85;
+}
+
+.gameHeader .title{
+  position:relative; z-index:1;
+  font-weight:900;
+  font-size:18px;
+  letter-spacing:.9px;
+  text-transform: uppercase;
+  text-shadow: 0 0 12px rgba(125,92,255,.45);
+  text-align: center;
+}
+
+.gameHeader .sub{
+  position:relative; z-index:1;
+  margin-top:2px;
+  font-size:12px;
+  color: rgba(238,242,255,.78);
+  letter-spacing:.35px;
+}
+
+.missionTitle{
+  margin:0 0 10px 0;
+  font-size:40px;
+  font-weight:900;
+  letter-spacing:.6px;
+  text-transform:uppercase;
+  text-align:center;
+  text-shadow: 0 0 14px rgba(125,92,255,.55);
+}
+
+.missionText{
+  margin:0;
+  font-size:35px;
+  line-height:1.45;
+  text-align:center;
+  color: rgba(238,242,255,.92);
+}
+
+.missionText .dangerLine{
+  display:inline-block;
+  font-size:35px;
+  letter-spacing:.2px;
+}
+
+.missionHint{
+  margin:10px 0 0 0;
+  font-size:13px;
+  text-align:center;
+  color: rgba(238,242,255,.72);
+}
+
+.btnPlay{
+  font-size:20px !important;
+  padding:14px 16px !important;
+  border-radius:16px !important;
+  font-weight:900 !important;
+  letter-spacing:.6px;
+  text-transform:uppercase;
+  background: linear-gradient(135deg, rgba(125,92,255,.95), rgba(34,197,94,.70)) !important;
+  border-color: rgba(255,255,255,.18) !important;
+  box-shadow: 0 0 22px rgba(125,92,255,.35), 0 0 30px rgba(34,197,94,.18);
+}
+
+.btnPlay:hover{
+  transform: translateY(-1px);
+  filter: brightness(1.05);
+}
+
+.alertLine{
+  margin:0 0 12px 0;
+  font-size:31px;
+  font-weight:900;
+  text-align:center;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  color:#ff2d2d;
+
+  animation: alertSiren 1.2s linear infinite;
+}
+
+@keyframes alertSiren{
+  0%{
+    opacity:1;
+    text-shadow:
+      0 0 6px rgba(255,0,0,.7),
+      0 0 14px rgba(255,0,0,.6);
+  }
+
+  45%{
+    opacity:1;
+    text-shadow:
+      0 0 14px rgba(255,0,0,1),
+      0 0 28px rgba(255,0,0,.9),
+      0 0 55px rgba(255,0,0,.7);
+  }
+
+  50%{
+    opacity:.4;
+    text-shadow:none;
+  }
+
+  55%{
+    opacity:1;
+    text-shadow:
+      0 0 18px rgba(255,0,0,1),
+      0 0 35px rgba(255,0,0,.9),
+      0 0 70px rgba(255,0,0,.8);
+  }
+
+  100%{
+    opacity:1;
+    text-shadow:
+      0 0 6px rgba(255,0,0,.7),
+      0 0 14px rgba(255,0,0,.6);
+  }
+}
+
+/* =========================
+   RESPONSIVE LIMPIO
+   MÓVIL: juego arriba, teclado abajo
+   PC: juego izquierda, teclado derecha
+========================= */
+
+@media (max-width:900px){
+  body{
+    padding:2px;
+    align-items:flex-start;
+  }
+
+  .wrap{
+    grid-template-columns:1fr;
+    grid-template-rows:auto auto auto;
+    gap:6px;
+  }
+
+  .gameHeader{
+    grid-column:1;
+    grid-row:1;
+    margin:8px 0 0px 0;
+  }
+
+  .gameHeader .inner{
+    padding:10px 14px;
+  }
+
+  .gameHeader .title{
+    font-size:15px;
+  }
+
+  .answerBox{
+    grid-column:1;
+    grid-row:3;
+    width:100%;
+    max-width:none;
+    margin:0 0 0 0;
+    justify-self:stretch;
+    align-self:start;
+  }
+
+  .missionText{
+    font-size:18px;
+  }
+
+  .missionText .dangerLine{
+    font-size:20px;
+  }
+
+  .btnPlay{
+    font-size:20px !important;
+  }
+
+  .alertLine{
+    font-size:18px;
+  }
+
+  .modal .missionTitle{
+    font-size:25px !important;
+  }
+
+  .groundLine{
+    bottom:28px !important;
+  }
+}
+
+@media (min-width:901px){
+  .wrap{
+    grid-template-columns:1fr 360px;
+    grid-template-rows:auto 1fr;
+    gap:14px;
+    align-items:start;
+  }
+
+  .gameHeader{
+    grid-column:1;
+    grid-row:1;
+    margin:0 0 10px 0;
+  }
+
+  .answerBox{
+    grid-column:2;
+    grid-row:2;
+    margin:0;
+    max-width:none;
+    justify-self:stretch;
+    align-self:start;
+  }
+}
+
+@media (min-width:901px){
+  .game{
+    grid-column:1;
+    grid-row:2;
+    height:680px;
+  }
+}
+
+@media (max-width:900px){
+  .game{
+    grid-column:1;
+    grid-row:2;
+    width:100%;
+    height:50vh;
+  }
+}
+  
 </style>
 </head>
 <body>
 
 <div class="wrap">
-  <!-- PANEL -->
-  <div class="panel">
-    <div class="brand">
-      <h1>Math Command</h1>
-      <div class="chip">Asallam Sensei</div>
-    </div>
 
-    <div class="grid2">
-      <div class="stat"><div class="k">Puntaje</div><div class="v" id="score">0</div></div>
-      <div class="stat"><div class="k">Racha</div><div class="v" id="streak">0</div></div>
-      <div class="stat"><div class="k">Nivel</div><div class="v" id="level">1</div></div>
-      <div class="stat"><div class="k">Vidas</div><div class="v" id="lives">5</div></div>
-    </div>
-
-    <!-- Config oculta -->
-    <div class="configHidden">
-      <select id="op"><option value="mix" selected>Mixto</option></select>
-      <select id="diff"><option value="easy" selected>Fácil</option></select>
-      <input id="target" type="number" value="20" />
-      <input id="speed" type="number" value="0.3" />
-    </div>
-
-    <div class="btnRow">
-      <button id="btnStart">Iniciar</button>
-      <button id="btnPause" class="secondary" disabled>Pausar</button>
-      <button id="btnReset" class="danger">Reiniciar</button>
+<div class="gameHeader" aria-hidden="true">
+  <div class="inner">
+    <div class="title">
+      Math Command <span class="by">por Asallam Sensei</span>
     </div>
   </div>
-
+</div>
+  
   <!-- JUEGO -->
   <div class="game" id="game">
-    <div class="topBar">
-      <div class="left">
-        <div class="pill" id="pillLevel">Nivel: 1</div>
-        <div class="pill good" id="pillGoal">Objetivo: 0 / 20</div>
-      </div>
-      <div class="right">
-        <div class="pill" id="pillBest">Mejor racha: 0</div>
-      </div>
-    </div>
 
-    <div class="toast" id="toast">✔</div>
+<div class="topBar">
+  <div class="pill progress" id="pillProg">
+    <span id="pillProgText"></span>
+  </div>
 
-    <div class="groundLine"></div>
-    <div class="city"></div>
+  <div class="pill" id="pillScore"></div>
 
+  <div class="pill progress" id="pillLives">
+    <span id="pillLivesText"></span>
+  </div>
+
+  <div class="pill" id="pillBest"></div>
+</div>
+    
+    <div class="canvasDisplay" id="display"></div>
+    
     <div class="overlay" id="overlay">
       <div class="modal">
-        <h2>Math Command</h2>
-        <p>Resuelve las operaciones antes de que lleguen a la línea. Presiona <b>Iniciar</b>.</p>
+
+        <p class="alertLine">🚨 ALERTA 🚨</p>
+        
+        <h2 class="missionTitle">¡PRESENTARSE!<br>RANGER MATEMÁTICO</h2>
+        
+        <p class="alertLine">🚨 IMPACTO INMINENTE 🚨</p>
+        
+        <p class="missionText">
+          <span class="dangerLine"> LA 🌍 ESTÁ EN PELIGRO</span><br/>
+          ¡RESUELVE LAS OPERACIONES!
+        </p>
+        
         <div class="actions">
-          <button id="btnQuickStart">Iniciar ahora</button>
-          <button id="btnCloseOverlay" class="secondary">Cerrar</button>
+          <button id="btnQuickStart" class="btnPlay">¡JUGAR!</button>
         </div>
+        
       </div>
     </div>
 
   </div>
-
+  
 <!-- Answer UI (sin input) -->
     <div class="answerBox" aria-label="Teclado numérico">
-      <div class="displayRow">
-        <div class="display placeholder" id="display">Respuesta…</div>
-      </div>
 
       <div class="keypad">
         <button class="kbtn" data-key="7">7</button>
@@ -425,9 +939,7 @@
   
 </div>
 
-<audio id="bgMusic" preload="auto" loop>
-  <source src="data/velocidad/retro_math_grid.mp3" type="audio/mpeg">
-</audio>
+<audio id="bgMusic" preload="auto"></audio>
 
 <audio id="sfxExplosion" preload="auto">
   <source src="data/velocidad/bum_suelo.mp3" type="audio/mpeg">
@@ -446,26 +958,59 @@
   const now = () => performance.now();
   const fmt = (n) => (n < 0 ? `(${n})` : String(n));
   // ---------- UI ----------
-  const scoreEl = $("score");
-  const streakEl = $("streak");
-  const levelEl = $("level");
-  const livesEl = $("lives");
-
-  const pillLevel = $("pillLevel");
-  const pillGoal  = $("pillGoal");
+    
+  const pillProg = $("pillProg");
+  const pillProgText = $("pillProgText");
+  
   const pillBest  = $("pillBest");
-  const toast     = $("toast");
-
-  const btnStart = $("btnStart");
-  const btnPause = $("btnPause");
-  const btnReset = $("btnReset");
-
+  
+  const pillScore = $("pillScore");
+  
   const overlay = $("overlay");
   const btnQuickStart = $("btnQuickStart");
-  const btnCloseOverlay = $("btnCloseOverlay");
-
+  
   const game = $("game");
+    
   const bgMusic = $("bgMusic");
+
+  // ===== Playlist aleatoria =====
+  const TRACKS = [
+    "data/velocidad/Arcade Divide.mp3",
+    "data/velocidad/Hex Grid Calculus.mp3",
+    "data/velocidad/Hex Grid Calculus 2.mp3",
+    "data/velocidad/Pixel Abyss Countdown.mp3",
+    "data/velocidad/Pixel Abyss Countdown 2.mp3",
+    "data/velocidad/Pixel Pressure Loop.mp3",
+    "data/velocidad/Retro Math Grid.mp3",
+    "data/velocidad/Retro Math Grid 2.mp3"
+  ];
+  
+  let lastTrackIndex = -1; // El índice anterior empieza en -1
+
+  function pickNextTrackIndex() {
+    let idx;
+    
+    // Si lastTrackIndex es -1, significa que es la primera vez que se selecciona
+    // y no queremos comparar con nada, así que simplemente seleccionamos aleatoriamente
+    if (lastTrackIndex === -1) {
+      idx = Math.floor(Math.random() * TRACKS.length);
+    } else {
+      do {
+        idx = Math.floor(Math.random() * TRACKS.length); // Selección aleatoria
+      } while (idx === lastTrackIndex); // Aseguramos que no repita la canción anterior
+    }
+  
+    lastTrackIndex = idx; // Guardamos el índice para la siguiente vez
+    return idx;
+  }
+  
+  function playRandomTrack(){
+    const idx = pickNextTrackIndex();
+    bgMusic.src = TRACKS[idx];
+    bgMusic.currentTime = 0;
+    bgMusic.play().catch(()=>{});
+  }
+  
   const sfxExplosion = $("sfxExplosion");
   const sfxHit = $("sfxHit");
   
@@ -491,13 +1036,19 @@
     bonusCap: 0.18,
 
     // input constraints
-    maxDigits: 4
+    maxDigits: 4,
+
+    // --- BONUS FLYBY ---
+    flybyBaseMs: 10000,      // cada cuánto intentamos uno (aprox)
+    flybyJitterMs: 2200,    // variación aleatoria
+    flybySpeedMin: 160,     // px/s
+    flybySpeedMax: 200,     // px/s
+    flybyYPad: 90,          // evita topBar y evita suelo
   };
 
   // ---------- State ----------
   const state = {
     running: false,
-    paused: false,
     score: 0,
     streak: 0,
     bestStreak: 0,
@@ -512,21 +1063,24 @@
     nextId: 1,
     lastTick: 0,
 
-    typed: "" // lo que va formando el teclado
+    typed: "", // lo que va formando el teclado
+    lastFlyby: 0,
+    nextFlybyAt: 0,
+    
+    phase: "normal",   // "normal" | "boss"
+    boss: null,        // { id, el, x, y, vy, orbiters:Set<number>, t0, ... }
   };
 
-  function setDisplay(){
-    if(state.typed.length === 0){
-      displayEl.textContent = "Respuesta…";
-      displayEl.classList.add("placeholder");
-    }else{
-      displayEl.textContent = state.typed;
-      displayEl.classList.remove("placeholder");
-    }
+function setDisplay(){
+  if(state.typed.length === 0){
+    displayEl.textContent = "";
+  }else{
+    displayEl.textContent = state.typed;
   }
+}
 
   function pushDigit(d){
-    if(!state.running || state.paused) return;
+    if(!state.running) return;
     if(state.typed.length >= FIXED.maxDigits) return;
     // evita "000"
     if(state.typed === "0") state.typed = "";
@@ -535,13 +1089,19 @@
   }
 
   function clearAll(){
-    if(!state.running || state.paused) return;
+    if(!state.running) return;
+  
+    // 💥 si había algo, explota antes de borrar
+    if(state.typed.length > 0){
+      explodeTypedAtDisplay("soft");
+    }
+  
     state.typed = "";
     setDisplay();
   }
 
   function toggleSign(){
-    if(!state.running || state.paused) return;
+    if(!state.running) return;
   
     if(state.typed.startsWith("-")){
       state.typed = state.typed.slice(1);
@@ -567,38 +1127,104 @@
   function loadBest(){
     const v = Number(localStorage.getItem("mc_bestStreak") || "0");
     state.bestStreak = isFinite(v) ? v : 0;
-    pillBest.textContent = `Mejor racha: ${state.bestStreak}`;
+    pillBest.textContent = `Racha • ${state.streak} / ${state.bestStreak}`;
   }
   function saveBest(){
     localStorage.setItem("mc_bestStreak", String(state.bestStreak));
   }
 
-  function showToast(text, kind="neutral"){
-    toast.textContent = text;
-    toast.style.borderColor =
-      kind==="good" ? "rgba(34,197,94,.45)" :
-      kind==="bad" ? "rgba(239,68,68,.45)" :
-      kind==="warn" ? "rgba(251,191,36,.45)" :
-      "rgba(255,255,255,.16)";
-    toast.style.background =
-      kind==="good" ? "rgba(34,197,94,.12)" :
-      kind==="bad" ? "rgba(239,68,68,.12)" :
-      kind==="warn" ? "rgba(251,191,36,.12)" :
-      "rgba(0,0,0,.22)";
-    toast.classList.add("show");
-    setTimeout(()=> toast.classList.remove("show"), 550);
-  }
+// ===== Pixel fire (particles) =====
+const FIRE_COLORS = ["#fbbf24","#fb7185","#60a5fa","#22c55e","#a78bfa","#ffffff"];
+const BONUS_COLORS = ["#fbbf24","#fde68a","#fff7cc","#ffffff"]; // dorado + brillo
+  
+function emitPixelFire(m, count=1){
+  const rectG = game.getBoundingClientRect();
+  const rectM = m.el.getBoundingClientRect();
 
-  function updateHUD(){
-    scoreEl.textContent = state.score;
-    streakEl.textContent = state.streak;
-    levelEl.textContent = state.level;
-    livesEl.textContent = state.lives;
+  for(let i=0;i<count;i++){
+    const p = document.createElement("div");
+    p.className = "px";
 
-    pillLevel.textContent = `Nivel: ${state.level}`;
-    pillGoal.textContent = `Objetivo: ${state.solvedThisLevel} / ${state.target}`;
-    pillBest.textContent = `Mejor racha: ${state.bestStreak}`;
+    const palette = m.isBonus ? BONUS_COLORS : FIRE_COLORS;
+    const col = palette[randInt(0, palette.length-1)];
+    p.style.background = col;
+    
+    if(m.isBonus){
+      p.classList.add("gold");
+    }
+
+    // vida (ms)
+    const life = randInt(320, 650);
+    p.style.setProperty("--life", `${life}ms`);
+
+    // tamaño aleatorio (px)
+    const s = randInt(5, 10);
+    p.style.width = `${s}px`;
+    p.style.height = `${s}px`;
+
+    // posición: por encima del meteoro, a lo ancho (desorden)
+    const x = (rectM.left - rectG.left) + randInt(10, Math.max(10, Math.floor(rectM.width - 10)));
+    const y = (rectM.top - rectG.top) + randInt(0, 10); // pegado arriba
+
+    p.style.left = `${x}px`;
+    p.style.top  = `${y}px`;
+
+    // “salida” en desorden: drift + subir un poquito + caer sutil
+    const dx = randInt(-22, 22);
+    const dy = randInt(-28, -10);
+
+    // aplicamos un empujón con transition (simple y efectivo)
+    // (arranca en su posición, luego se mueve y se quema)
+    requestAnimationFrame(() => {
+      p.style.transition = `transform ${life}ms linear`;
+      p.style.transform = `translate(calc(-50% + ${dx}px), calc(-50% + ${dy}px)) scale(.9)`;
+    });
+
+    // se elimina solo
+    p.addEventListener("animationend", () => p.remove(), { once:true });
+
+    game.appendChild(p);
   }
+}
+
+// emite según tiempo (para que no dependa de FPS)
+function pixelFireTick(m, dt){
+  // intensidad base: 0.9–2.0 partículas por segundo por meteoro (ajusta)
+  const rate = m.isBonus ? 2.6 : 1.4;
+
+  m.fireAcc = (m.fireAcc || 0) + dt * rate;
+
+  // cuando acumula 1, suelta partículas
+  while(m.fireAcc >= 1){
+    m.fireAcc -= 1;
+
+    // 1 o 2 pixeles, a veces 3
+    const n = m.isBonus
+      ? (Math.random() < 0.35 ? 3 : 2)
+      : (Math.random() < 0.12 ? 3 : (Math.random() < 0.45 ? 2 : 1));
+    emitPixelFire(m, n);
+  }
+}
+  
+function updateHUD() {
+  
+  // Actualiza el puntaje
+  pillScore.textContent = `${state.score} pts`;
+
+  // Progreso del nivel
+  const pct = Math.max(0, Math.min(100, (state.solvedThisLevel / state.target) * 100));
+  pillProg.style.setProperty("--p", `${pct}%`);
+  pillProgText.textContent = `Nivel ${state.level} • ${state.solvedThisLevel}/${state.target}`;
+
+  // Racha de puntaje
+  pillBest.textContent = `Racha • ${state.streak} / ${state.bestStreak}`;
+
+  // Actualiza la barra de vida
+  const lifePct = (state.lives / 5) * 100; // Considerando que el máximo de vidas es 5
+  pillLives.style.setProperty("--p", `${lifePct}%`);
+  pillLivesText.textContent = `Vidas: ${state.lives}/5`;
+
+}
 
   // ---------- Curriculum ----------
   function getRangesForLevel(level){
@@ -699,6 +1325,15 @@
       text = `___ ÷ ${a} − ${b} = ${c}`;
     }
 
+    // --- random: invertir lados (___ queda a la derecha) ---
+    const flipProb = 0.5; // 0.5 = 50% (ajusta a gusto)
+    if(Math.random() < flipProb){
+      const parts = text.split(" = ");
+      if(parts.length === 2){
+        text = `${parts[1]} = ${parts[0]}`;
+      }
+    }
+    
     return { text, ans };
   }
   
@@ -763,52 +1398,458 @@
     el.innerHTML = `<div class="expr">${text}</div>`;
     game.appendChild(el);
 
-    const rect = game.getBoundingClientRect();
-    const padding = 12;
-    const w = 140;
-    const x = randInt(padding, Math.max(padding, Math.floor(rect.width - w - padding)));
-    el.style.left = `${x}px`;
+const rect = game.getBoundingClientRect();
+const padding = 12;
+
+// medir ancho REAL del meteoro
+el.style.left = "0px";
+el.style.top  = "-60px";
+const meteorWidth = el.offsetWidth;
+
+// rango seguro dentro del canvas
+const minX = padding;
+const maxX = rect.width - meteorWidth - padding;
+
+// aleatorio con “fairness” suave (evita pegados extremos)
+const gap = 18;   // prueba 12–18 en móvil; 18 en PC va bien
+const tries = 6;
+
+let x = randInt(minX, Math.max(minX, Math.floor(maxX)));
+
+for(let i=0;i<tries;i++){
+  let ok = true;
+
+  for(const other of state.meteors.values()){
+    const ox = parseFloat(other.el.style.left || "0");
+    const ow = other.el.offsetWidth || 140;
+
+    // solape horizontal con margen gap
+    if(x < ox + ow + gap && x + meteorWidth + gap > ox){
+      ok = false;
+      break;
+    }
+  }
+
+  if(ok) break;
+  x = randInt(minX, Math.max(minX, Math.floor(maxX)));
+}
+
+el.style.left = `${x}px`;
 
     const levelBoost = 1 + (state.level - 1) * 0.03;
     const speed = state.baseSpeed * levelBoost;
-
+    
+    // 🎲 variación: 0.88 a 1.18 (ajústalo a gusto)
+    const jitter = 0.88 + Math.random() * 0.30;
+    
     state.meteors.set(id, {
       id, el, ans,
       y: -60,
-      speedPxPerSec: (70 + state.level * 2) * speed,
+      speedPxPerSec: (70 + state.level * 2) * speed * jitter,
       alive: true,
       isBonus
     });
   }
 
-  function killMeteor(m, cls){
-    if(!m.alive) return;
-    m.alive = false;
-    m.el.classList.add(cls);
-    setTimeout(() => {
-      try { m.el.remove(); } catch {}
-    }, 260);
-    state.meteors.delete(m.id);
+function killMeteor(m, cls){
+  if(!m.alive) return;
+  m.alive = false;
+
+  // ✅ solo agrega clase si existe
+  if(cls) m.el.classList.add(cls);
+
+  setTimeout(() => {
+    try { m.el.remove(); } catch {}
+  }, 110);
+
+  if(m.kind === "orbiter" && state.boss){
+    state.boss.orbiters.delete(m.id);
+  }
+  
+  state.meteors.delete(m.id);
+}
+
+// 💥 METEORO FALLADO (golpea el suelo)
+// Maneja la explosión cuando el jugador NO responde a tiempo.
+// Los meteoros bonus tienen una explosión un poco mayor.
+function missMeteor(m) {
+  killMeteor(m, "miss");
+
+  playExplosion(); // 💥 SONIDO AQUÍ
+
+  if (m.isBonus) {
+    burstPixelFX(m, {
+      explode: 4,
+      rain: 3,
+      bounce: 2
+    });
+  } else {
+    burstPixelFX(m, {
+      explode: 3,
+      rain: 2,
+      bounce: 1
+    });
   }
 
-  function missMeteor(m){
-    killMeteor(m, "miss");
+  // Penaliza el puntaje cuando fallamos un meteoro
+  state.score = Math.max(0, state.score - 4); // Restar puntos si el meteoro es fallado
+
+  state.lives = Math.max(0, state.lives - 1); // Si no hay vidas, game over
+  state.streak = 0; // Racha se reinicia
+
+  if (state.lives === 0) gameOver();
+}
+
+  // 💣 SCREEN BOMB (bomba de pantalla)
+  // Destruye TODOS los meteoros activos sin penalizar vidas.
+  // Se usa como habilidad especial para limpiar la pantalla.
+  // Cada meteoro eliminado da una pequeña recompensa de puntos.
+  function screenBomb(){
+    // Borra TODOS los meteoros actuales (sin penalizar vidas)
+    const arr = [...state.meteors.values()];
   
-    playExplosion(); // 💥 SONIDO AQUÍ
+    let cleared = 0;
   
-    state.lives = Math.max(0, state.lives - 1);
-    state.streak = 0;
-    showToast("💥 Falló", "bad");
+    for(const mm of arr){
+      if(!mm.alive) continue;
   
-    if(state.lives === 0) gameOver();
+      // efecto visual (ligero)
+      burstPixelFX(mm, { explode: 3, rain: 2, bounce: 1 });
+  
+      // lo removemos como "hit" (sin missMeteor)
+      killMeteor(mm, "hit");
+      cleared++;
+    }
+  
+    // recompensa opcional por limpieza (ajusta a gusto)
+    state.score += cleared * 3;  // +3 por cada meteoro borrado       
+
   }
 
+// BOSS
+
+function startBossPhase(){
+  // congela progreso normal
+  state.phase = "boss";
+
+  // limpia meteoros normales/bonus actuales (opcional pero recomendado)
+  for(const m of [...state.meteors.values()]){
+    if(m.kind === "flyby") killMeteor(m, "");
+    else killMeteor(m, "");
+  }
+
+  spawnBoss();
+  updateHUD();
+}
+
+function spawnBoss(){
+  const id = state.nextId++;
+  const el = document.createElement("div");
+  el.className = "meteor boss";
+  el.dataset.id = String(id);
+
+  // carita ASCII
+  el.innerHTML = `<div class="expr">&lt;^s^&gt;</div>`;
+  game.appendChild(el);
+
+  // tamaño real
+  el.style.left = "0px";
+  el.style.top  = "0px";
+  const w = el.offsetWidth;
+  const h = el.offsetHeight;
+
+  const x = (game.clientWidth - w) * 0.5;
+  const y = -h - 20;
+
+  el.style.left = `${x}px`;
+  el.style.top  = `${y}px`;
+
+  const boss = {
+    id, el,
+    x, y,
+    vy: 12,   // baja lento, no depende del nivel
+    orbiters: new Set(),
+    t0: performance.now()
+  };
+
+  state.boss = boss;
+
+  // cuántos orbiters: basado en dificultad del nivel
+  const n = clamp(4 + Math.floor(state.level/2), 4, 10);
+  for(let i=0;i<n;i++){
+    spawnBossOrbiter(boss, i, n);
+  }
+
+  // registra el boss como entidad en el mapa (sin ans)
+  state.meteors.set(id, {
+    id, el,
+    ans: null,
+    x, y,
+    alive: true,
+    isBonus: false,
+    kind: "boss",
+    // guardamos dimensiones para update
+    w, h,
+    bossRef: boss
+  });
+}
+
+function spawnBossOrbiter(boss, i, n){
+  const { text, ans } = makeProblem(); // MISMA dificultad del nivel ✅
+
+  const id = state.nextId++;
+  const el = document.createElement("div");
+  el.className = "meteor";
+  el.dataset.id = String(id);
+  el.innerHTML = `<div class="expr">${text}</div>`;
+  game.appendChild(el);
+
+  // ring 0/1 (2 anillos)
+  const ring = (i % 2);
+
+  // velocidad distinta por minion
+  const baseOmega = 1.0 + 0.10 * state.level;              // rad/s
+  const omega = (ring ? 1 : -1) * (baseOmega * (0.75 + Math.random()*0.55));
+
+  // fases distintas
+  const phase = (i / n) * Math.PI * 2;
+
+  // params por minion
+  const orb = {
+    id, el, ans,
+    alive: true,
+    isBonus:false,
+    kind:"orbiter",
+    bossId: boss.id,
+
+    ring,
+    phase,
+    omega,
+
+    // respiración
+    breathAmp: ring ? 10 : 14,
+    breathSpeed: ring ? 0.9 : 0.75,
+
+    // elipse base (A/B) + ring offset
+    baseR: (ring ? 74 : 108),
+
+    // pequeño wobble (suave)
+    wobbleAmp: ring ? 0.07 : 0.05,
+    wobbleSpeed: ring ? 1.6 : 1.3
+  };
+
+  // inicio “pegado” al boss (lo posiciona updateBoss)
+  el.style.left = `${boss.x}px`;
+  el.style.top  = `${boss.y}px`;
+
+  state.meteors.set(id, orb);
+  boss.orbiters.add(id);
+}
+
+function updateBoss(dt){
+  const boss = state.boss;
+  if(!boss) return;
+
+  // boss cae lento (presión real)
+  boss.y += boss.vy * dt;
+
+  // actualiza posición del boss element
+  const bossM = state.meteors.get(boss.id);
+  if(bossM && bossM.alive){
+    bossM.y = boss.y;
+    bossM.el.style.top = `${boss.y}px`;
+    // 💀 si el boss toca el suelo => pierdes
+    const groundY = game.clientHeight - 2;
+    if(bossM && bossM.alive){
+      const h = bossM.el.offsetHeight || 60;
+      if(boss.y + h >= groundY){
+        gameOver();
+        return;
+      }
+    }
+  }
+
+  // centro del boss (para orbiters)
+  const rectG = game.getBoundingClientRect();
+  const rectB = boss.el.getBoundingClientRect();
+
+  const cx = (rectB.left - rectG.left) + rectB.width/2;
+  const cy = (rectB.top  - rectG.top)  + rectB.height/2;
+
+  const t = (performance.now() - boss.t0) / 1000;
+
+  // elipse rotando (wow, still fair)
+  const ellipseRot = t * (0.25 + state.level*0.006); // rad/s (lento)
+  const cosR = Math.cos(ellipseRot);
+  const sinR = Math.sin(ellipseRot);
+
+  for(const id of [...boss.orbiters]){
+    const m = state.meteors.get(id);
+    if(!m || !m.alive){
+      boss.orbiters.delete(id);
+      continue;
+    }
+
+    const theta = m.phase + t * m.omega;
+
+    // respiración (radio pulso)
+    const breath = Math.sin(t * m.breathSpeed + m.phase) * m.breathAmp;
+    const r = m.baseR + breath;
+
+    // elipse base (A/B)
+    const A = 1.18;     // estira X
+    const B = 0.82;     // comprime Y
+
+    // wobble suave (micro caos)
+    const wob = Math.sin(t * m.wobbleSpeed + m.phase*2) * m.wobbleAmp;
+
+    // coords elípticas
+    let ox = Math.cos(theta + wob) * r * A;
+    let oy = Math.sin(theta - wob) * r * B;
+
+    // rota elipse (wow)
+    const rx = ox * cosR - oy * sinR;
+    const ry = ox * sinR + oy * cosR;
+
+    // aplica posición (centrado por CSS ya)
+    const x = cx + rx;
+    const y = cy + ry;
+
+    m.x = x;
+    m.y = y;
+    m.el.style.left = `${x}px`;
+    m.el.style.top  = `${y}px`;
+
+    // partículas normales funcionan
+  }
+
+  // si ya no quedan orbiters -> boss muerto -> siguiente nivel
+  if(boss.orbiters.size === 0){
+    // limpia boss
+    const bossMeteor = state.meteors.get(boss.id);
+    if(bossMeteor) killMeteor(bossMeteor, "hit");
+
+    state.boss = null;
+    state.phase = "normal";
+
+    // recompensa (tú ajustas)
+    state.score += 25;
+    state.streak += 1;
+    state.bestStreak = Math.max(state.bestStreak, state.streak);
+    saveBest();
+
+    state.lastFlyby = now();
+    state.nextFlybyAt = state.lastFlyby + FIXED.flybyBaseMs + randInt(0, FIXED.flybyJitterMs);
+    nextLevel(); // vuelve al flow normal
+  }
+}
+  
+// BOSS
+  
   function playExplosion(){
     const snd = sfxExplosion.cloneNode(true); // permite múltiples sonidos simultáneos
     snd.volume = 0.5;
     snd.play().catch(()=>{});
   }
 
+function burstPixelFX(m, opts = {}) {
+  const rectG = game.getBoundingClientRect();
+  const rectM = m.el.getBoundingClientRect();
+
+  const cx = (rectM.left - rectG.left) + rectM.width / 2;
+  const cy = (rectM.top  - rectG.top)  + rectM.height / 2;
+
+  const explodeN = opts.explode;
+  const rainN = opts.rain;
+  const bounceN = opts.bounce;
+
+  const palette = m.isBonus ? BONUS_COLORS : FIRE_COLORS;
+
+  const spawn = (kind) => {
+    const p = document.createElement("div");
+    p.className = "px";
+
+    // color
+    p.style.background = palette[randInt(0, palette.length - 1)];
+    if (m.isBonus) p.classList.add("gold");
+
+    // tamaño
+    const size = randInt(5, 10);
+    p.style.width = `${size}px`;
+    p.style.height = `${size}px`;
+
+    // posición base cerca del centro
+    const x = cx + randInt(-Math.floor(rectM.width * 0.35), Math.floor(rectM.width * 0.35));
+    const y = cy + randInt(-Math.floor(rectM.height * 0.25), Math.floor(rectM.height * 0.25));
+    p.style.left = `${x}px`;
+    p.style.top  = `${y}px`;
+
+    // vida
+    const life = randInt(320, 650);
+    p.style.setProperty("--life", `${life}ms`);
+
+    if (kind === "explode") {
+      p.classList.add("explode");
+      const dx = randInt(-140, 140);
+      const dy = randInt(-120, 120);
+      p.style.setProperty("--dx", `${dx}px`);
+      p.style.setProperty("--dy", `${dy}px`);
+    }
+
+    if (kind === "rain") {
+      p.classList.add("rain");
+      const dx = randInt(-40, 40);
+      const dy = randInt(70, 140);
+      p.style.setProperty("--dx", `${dx}px`);
+      p.style.setProperty("--dy", `${dy}px`);
+    }
+
+    if (kind === "bounce") {
+      p.classList.add("bounce");
+      const dx = randInt(-90, 90);
+      const fall = randInt(120, 190);
+      const bounce = randInt(45, 75);
+      p.style.setProperty("--dx", `${dx}px`);
+      p.style.setProperty("--fall", `${fall}px`);
+      p.style.setProperty("--bounce", `${bounce}px`);
+    }
+
+    p.addEventListener("animationend", () => p.remove(), { once: true });
+    game.appendChild(p);
+  };
+
+  // 1) Explosión radial real
+  for (let i = 0; i < explodeN; i++) spawn("explode");
+
+  // 2) Lluvia real
+  for (let i = 0; i < rainN; i++) spawn("rain");
+
+  // 3) Rebote (si lo pides)
+  for (let i = 0; i < bounceN; i++) spawn("bounce");
+}
+
+// 💥 EXPLOSIÓN DEL NÚMERO EN EL DISPLAY
+// Efecto visual cuando el jugador escribe o confirma una respuesta.
+// Usa un "meteoro falso" apuntando al display para reutilizar burstPixelFX.
+function explodeTypedAtDisplay(strength="soft", text=null){
+  const t = (text ?? state.typed ?? "").trim();
+
+  // si no hay nada escrito, no hacemos nada
+  if(t === "" || t === "-") return;
+
+  // “meteoro falso” apuntando al display
+  const fake = { el: displayEl, isBonus: false };
+
+  if(strength === "hard"){
+    burstPixelFX(fake, { explode: 4, rain: 3, bounce: 1 });
+  }else{
+    burstPixelFX(fake, { explode: 3, rain: 2, bounce: 1 });
+  }
+
+  // opcional: sonido SOLO en hard (si quieres)
+  // playExplosion();
+}
+  
   function playHit(){
     const snd = sfxHit.cloneNode(true);
   
@@ -823,43 +1864,192 @@
   // ---------- Loop ----------
   function tick(t){
     if(!state.running) return;
-    if(state.paused){
-      state.lastTick = t;
-      requestAnimationFrame(tick);
-      return;
-    }
-
+  
     const dt = (t - state.lastTick) / 1000;
     state.lastTick = t;
-
-    if(t - state.lastSpawn >= state.spawnEveryMs){
-      state.lastSpawn = t;
-
-      const maxActive = maxMeteorsForLevel(state.level);
-      if(state.meteors.size < maxActive){
-        spawnMeteor(false);
-
-        const p = bonusProbForLevel(state.level);
-        if(state.meteors.size < maxActive && Math.random() < p){
-          spawnMeteor(true);
+  
+    if(state.phase === "normal"){
+      if(t - state.lastSpawn >= state.spawnEveryMs){
+        state.lastSpawn = t;
+    
+        const maxActive = maxMeteorsForLevel(state.level);
+        if(state.meteors.size < maxActive){
+          spawnMeteor(false);
+    
+          const p = bonusProbForLevel(state.level);
+          if(state.meteors.size < maxActive && Math.random() < p){
+            spawnMeteor(true);
+          }
         }
       }
     }
 
-    const groundY = game.clientHeight - 95 - 2;
-    for(const m of [...state.meteors.values()]){
-      m.y += m.speedPxPerSec * dt;
-      m.el.style.top = `${m.y}px`;
-
-      if(m.y + m.el.offsetHeight >= groundY){
-        missMeteor(m);
+    // --- bonus flyby ---
+    if(state.phase === "normal"){
+      if(t >= state.nextFlybyAt){
+      
+        const maxActive = maxMeteorsForLevel(state.level);
+      
+        const flybyChance = 0.25; // 25%
+      
+        if(state.meteors.size < maxActive && Math.random() < flybyChance){
+          spawnFlybyBonus();
+        }
+      
+        state.lastFlyby = t;
+        state.nextFlybyAt =
+          t + FIXED.flybyBaseMs + randInt(0, FIXED.flybyJitterMs);
       }
     }
+    // ✅ suelo calculado (móvil/pc)
+    const groundY = game.clientHeight - 2;
 
+if(state.phase === "boss") updateBoss(dt);
+
+for(const m of [...state.meteors.values()]){
+
+  // ========= MOVIMIENTO =========
+  if(m.kind === "flyby"){
+
+    m.x += m.vx * dt;
+    m.el.style.left = `${m.x}px`;
+
+  }else if(m.kind === "boss" || m.kind === "orbiter"){
+
+    // 🔥 NO caen.
+    // Se posicionan en updateBoss()
+    // Aquí no hacemos nada.
+
+  }else{
+
+    // meteoro normal cae
+    m.y += m.speedPxPerSec * dt;
+    m.el.style.top = `${m.y}px`;
+  }
+
+  // ========= PARTICULAS =========
+  pixelFireTick(m, dt);
+
+
+  // ========= SALIDA / FALLO =========
+  if(m.kind === "flyby"){
+
+    const w = m.el.offsetWidth || 140;
+    if(m.x < -w - 30 || m.x > game.clientWidth + 30){
+      killMeteor(m, "");
+    }
+
+  }else if(m.kind === "boss" || m.kind === "orbiter"){
+
+    // 🔥 NUNCA hacen miss por tocar suelo
+    // Nada aquí
+
+  }else{
+
+    if(m.y + m.el.offsetHeight >= groundY){
+      missMeteor(m);
+    }
+
+  }
+}
+  
     updateHUD();
     requestAnimationFrame(tick);
   }
+  
+function makeBonusProblem(){
+  // Pesados pero controlados (sin locuras): multiplicación grande, combos, y algunas ecuaciones con hueco
+  const L = state.level;
 
+  const pick = (arr) => arr[randInt(0, arr.length-1)];
+  const heavy = pick(["mulBig","mix","eqHard"]);
+
+  // 1) Multiplicación grande (2 dígitos × 1-2 dígitos)
+  if(heavy === "mulBig"){
+    const a = randInt(12, clamp(22 + L*2, 22, 60));
+    const b = randInt(6,  clamp(9 + Math.floor(L/2), 9, 18));
+    return { text: `${a} × ${b}`, ans: a*b };
+  }
+
+  // 2) Combo (a×b ± c)
+  if(heavy === "mix"){
+    const a = randInt(8,  clamp(12 + L, 12, 30));
+    const b = randInt(4,  clamp(6 + Math.floor(L/2), 6, 14));
+    const c = randInt(6,  clamp(12 + L, 12, 35));
+    const sign = Math.random() < 0.5 ? "+" : "−";
+    const ans = sign === "+" ? (a*b + c) : (a*b - c);
+    return { text: `(${a} × ${b}) ${sign} ${c}`, ans };
+  }
+
+  // 3) Ecuación con hueco un poco más dura
+  // ___ × a − b = c   (ans entero)
+  {
+    const a = randInt(3, clamp(4 + Math.floor(L/3), 4, 10));
+    const ans = randInt(4, clamp(8 + L, 8, 25));
+    const b = randInt(5, clamp(12 + L, 12, 40));
+    const c = ans*a - b;
+    // si queda muy negativo, ajusta b
+    const b2 = c < -50 ? Math.max(0, ans*a) : b;
+    const c2 = ans*a - b2;
+    return { text: `___ × ${a} − ${b2} = ${c2}`, ans };
+  }
+}
+
+function spawnFlybyBonus(){
+  const { text, ans } = makeBonusProblem();
+  const id = state.nextId++;
+
+  const el = document.createElement("div");
+  el.className = "meteor bonus";
+  el.dataset.id = String(id);
+  el.innerHTML = `<div class="expr">${text}</div>`;
+  game.appendChild(el);
+
+  // Medimos tamaño real
+  el.style.left = "0px";
+  el.style.top  = "0px";
+  const w = el.offsetWidth;
+  const h = el.offsetHeight;
+
+  // Sale por izquierda o derecha
+  const fromLeft = Math.random() < 0.5;
+
+  const rect = game.getBoundingClientRect();
+  const padding = 12;
+
+  // rango vertical seguro (no topbar, no suelo)
+  const topSafe = 58 + padding; // topBar ~56px
+  const groundY = game.clientHeight - 2;
+  const bottomSafe = groundY - h - FIXED.flybyYPad;
+
+  const minY = clamp(topSafe, topSafe, bottomSafe);
+  const maxY = clamp(bottomSafe, minY, bottomSafe);
+  const y = randInt(minY, Math.floor(maxY));
+
+  // posición inicial fuera de pantalla
+  const x = fromLeft ? -w - 10 : (rect.width + 10);
+
+  // velocidad horizontal
+  const sp = randInt(FIXED.flybySpeedMin, FIXED.flybySpeedMax);
+  const vx = fromLeft ? sp : -sp;
+
+  el.style.left = `${x}px`;
+  el.style.top  = `${y}px`;
+
+  state.meteors.set(id, {
+    id, el, ans,
+    x, y,
+    vx,                          // 👈 horizontal
+    speedPxPerSec: 0,            // no cae
+    alive: true,
+    isBonus: true,
+    kind: "flyby"                // 👈 etiqueta
+  });
+
+  // un pequeño “spark trail” más intenso (opcional)
+  // m.fireAcc se maneja igual en pixelFireTick(m,dt)
+}
+  
   // ---------- Answer ----------
   function findMeteorByAnswer(n){
     // Devuelve el meteorito con respuesta n más urgente (más abajo)
@@ -871,93 +2061,188 @@
     return best;
   }
 
-function submitAnswer(){
-  if(!state.running || state.paused) return;
+function shootNumberToMeteor(m, text){
+  if(!state.running) return; // 🔒 protección temprana
+  const rectG = game.getBoundingClientRect();
+  const rectD = displayEl.getBoundingClientRect(); // número abajo (en canvas)
+  const rectM = m.el.getBoundingClientRect();      // meteoro objetivo
 
-  if(state.typed.trim() === ""){
-    showToast("Escribe un número", "warn");
-    return;
+  // salida (centro del display)
+  const sx = (rectD.left - rectG.left) + rectD.width/2;
+  const sy = (rectD.top  - rectG.top)  + rectD.height/2;
+
+  // target (centro del meteoro)
+  const tx = (rectM.left - rectG.left) + rectM.width/2;
+  const ty = (rectM.top  - rectG.top)  + rectM.height/2;
+
+  const dx = tx - sx;
+  const dy = ty - sy;
+
+  // duración según distancia
+  const dist = Math.hypot(dx, dy);
+  const t = Math.max(190, Math.min(380, dist * 0.55)); // ms
+
+  // helper: crear ghost en un punto intermedio del trayecto
+  function spawnGhost(f, delayMs){
+    if(!state.running) return; // 🔒 no crear si el juego ya murió
+    setTimeout(() => {
+      const g = document.createElement("div");
+      g.className = "shotGhost";
+      g.textContent = text;
+
+      // punto a lo largo del vector (f = 0..1)
+      const gx = sx + dx * f;
+      const gy = sy + dy * f;
+
+      g.style.left = `${gx}px`;
+      g.style.top  = `${gy}px`;
+
+      // fade rápido
+      const gt = 140 + Math.random() * 80; // 140–220ms
+      g.style.setProperty("--gt", `${gt}ms`);
+
+      // opacidad ligeramente distinta
+      const go = 0.28 + Math.random() * 0.22; // 0.28–0.50
+      g.style.setProperty("--go", go);
+
+      g.addEventListener("animationend", () => g.remove(), { once:true });
+      game.appendChild(g);
+    }, delayMs);
   }
 
-  if(state.typed === "-"){
-    showToast("Completa el número", "warn");
-    return;
-  }
-  
-  const n = Number(state.typed);
-  if(!Number.isFinite(n)){
-    showToast("Número inválido", "bad");
+  // 👻 2–3 ghosts: aparecen detrás del disparo (en tiempos distintos)
+  // aparecen al 25%, 45%, 65% del recorrido aprox
+  spawnGhost(0.25, 30);
+  spawnGhost(0.45, 70);
+  if(Math.random() < 0.55) spawnGhost(0.65, 110); // a veces 3
+
+  // disparo principal
+  const shot = document.createElement("div");
+  shot.className = "shotNum";
+  shot.textContent = text;
+
+  shot.style.left = `${sx}px`;
+  shot.style.top  = `${sy}px`;
+  shot.style.setProperty("--dx", `${dx}px`);
+  shot.style.setProperty("--dy", `${dy}px`);
+  shot.style.setProperty("--t", `${t}ms`);
+
+  shot.addEventListener("animationend", () => shot.remove(), { once:true });
+  game.appendChild(shot);
+}
+
+function submitAnswer() {
+  if (!state.running) return;
+
+  const typedText = state.typed; // Capturamos lo que el jugador escribió
+  if (typedText.trim() === "" || typedText === "-") return;
+
+  const n = Number(typedText);
+  if (!Number.isFinite(n)) {
     state.typed = "";
     setDisplay();
     return;
   }
+
+  // Borra INMEDIATO el número del centro para que quede "libre"
+  state.typed = "";
+  setDisplay();
 
   const m = findMeteorByAnswer(n);
 
-  // ❌ Si no existe ningún meteorito con esa respuesta
-  if(!m){
-    showToast("✖", "bad");
-
-    // borrar siempre al oprimir OK
-    state.typed = "";
-    setDisplay();
-
-    // penalización por error
+  // Si no hay meteoro con esa respuesta, penalizamos
+  if (!m) {
+    explodeTypedAtDisplay("hard", typedText); // 💥 ahora sí explota siempre
     state.score = Math.max(0, state.score - 4);
     state.streak = 0;
-
     updateHUD();
     return;
   }
 
-  // ✅ Sí existe: destruimos el meteorito correspondiente
-  killMeteor(m, "hit");
-  playHit(); // 💥 BOOM CORRECTO
-  
-  state.score += m.isBonus ? 8 : 10;
-  state.streak += 1;
-  state.bestStreak = Math.max(state.bestStreak, state.streak);
+  // Disparo visual (usa typedText, no state.typed)
+  shootNumberToMeteor(m, typedText);
 
-  if(!m.isBonus){
-    state.solvedThisLevel += 1;
-    if(state.solvedThisLevel >= state.target){
-      nextLevel();
-    }
-  }else{
-    showToast("⭐ Bonus", "warn");
+  // Destruye el meteoro
+  killMeteor(m, "hit");
+  playHit();
+  
+  // Aquí utilizamos `burstPixelFX` para las partículas (lluvia de pixels)
+  if (m.isBonus) {
+    burstPixelFX(m, { explode: 4, rain: 3, bounce: 2 });
+  } else {
+    burstPixelFX(m, { explode: 3, rain: 2, bounce: 1 });
   }
 
-  state.typed = "";
-  setDisplay();
+  // Actualiza el puntaje y la racha
+  if (m.isBonus && m.kind === "flyby") {
+    state.lives = Math.min(9, state.lives + 1); // Añadir vida por bonus flyby
+    state.score += 6;
+    state.streak += 1;
+    state.bestStreak = Math.max(state.bestStreak, state.streak);
+    updateHUD();
+
+  } else if (m.isBonus) {
+    state.score += 8; // Puntaje extra por meteoro de bonus
+    state.streak += 1;
+    state.bestStreak = Math.max(state.bestStreak, state.streak);
+    updateHUD(); 
+    screenBomb(); // Efecto de bomba para meteoros de bonus
+  } else {
+
+    // 🔥 ORBITER (no cuenta para progreso normal)
+    if (m.kind === "orbiter") {
+      state.score += 10;
+      state.streak += 1;
+      state.bestStreak = Math.max(state.bestStreak, state.streak);
+      updateHUD();
+      return; // 🚫 importantísimo: salir aquí
+    }
+
+    // 🔥 METEORO NORMAL (sí cuenta para progreso)
+    state.score += 10;
+    state.streak += 1;
+    state.bestStreak = Math.max(state.bestStreak, state.streak);
+
+    state.solvedThisLevel += 1;
+
+    updateHUD();
+
+    if (state.solvedThisLevel >= state.target) {
+      startBossPhase();
+    }
+  }
+
   saveBest();
-  updateHUD();
+  updateHUD(); // Actualiza la interfaz con el puntaje, vidas, y progreso
 }
   
-  function nextLevel(){
-    state.level += 1;
-    state.solvedThisLevel = 0;
-    state.target = targetForLevel(state.level);
+function nextLevel() {
+  state.level += 1;
+  state.solvedThisLevel = 0;
+  state.target = targetForLevel(state.level);
 
-    state.spawnEveryMs = clamp(state.spawnEveryMs - FIXED.spawnStepMs, FIXED.spawnMinMs, FIXED.spawnStartMs);
+  state.spawnEveryMs = clamp(state.spawnEveryMs - FIXED.spawnStepMs, FIXED.spawnMinMs, FIXED.spawnStartMs);
 
-    if(state.level % 3 === 0) state.lives = Math.min(9, state.lives + 1);
+  if (state.level % 3 === 0) state.lives = Math.min(9, state.lives + 1);
 
-    showToast(`Nivel ${state.level}`, "good");
-    updateHUD();
-  }
+  updateHUD();
 
-  // ---------- Controls ----------
+  // ✨ flash dorado en el progreso
+  pillProg.classList.remove("levelUp"); // por si se repite rápido
+  void pillProg.offsetWidth;            // reflow para reiniciar animación
+  pillProg.classList.add("levelUp");
+
+  setTimeout(() => pillProg.classList.remove("levelUp"), 320);
+}
+
+  // ---------- Controles ----------
   function start(){
     state.target = targetForLevel(state.level);
     state.baseSpeed = FIXED.baseSpeed;
     state.spawnEveryMs = FIXED.spawnStartMs;
 
     state.running = true;
-    state.paused = false;
-
-    btnStart.disabled = true;
-    btnPause.disabled = false;
-
+    
     overlay.style.display = "none";
 
     state.lastSpawn = now();
@@ -968,23 +2253,11 @@ function submitAnswer(){
     state.typed = "";
     setDisplay();
 
-    // reproducir música
-    bgMusic.currentTime = 0;
-    bgMusic.play().catch(() => {
-      // por si el navegador bloquea autoplay
-    });
-  }
+    // reproducir música (aleatoria)
+    playRandomTrack();
 
-  function pauseToggle(){
-    if(!state.running) return;
-    state.paused = !state.paused;
-    btnPause.textContent = state.paused ? "Reanudar" : "Pausar";
-    showToast(state.paused ? "Pausado" : "Reanudado");
-    if(state.paused){
-      bgMusic.pause();
-    }else{
-      bgMusic.play().catch(()=>{});
-    }
+    state.lastFlyby = now();
+    state.nextFlybyAt = state.lastFlyby + FIXED.flybyBaseMs + randInt(0, FIXED.flybyJitterMs);
   }
 
   function resetAll(){
@@ -993,8 +2266,10 @@ function submitAnswer(){
     }
     state.meteors.clear();
 
+    // 🧹 Limpia todo lo visual temporal (disparos + partículas)
+    game.querySelectorAll(".px,.shotNum,.shotGhost").forEach(el => el.remove());
+
     state.running = false;
-    state.paused = false;
     state.score = 0;
     state.streak = 0;
     state.level = 1;
@@ -1005,10 +2280,12 @@ function submitAnswer(){
     state.baseSpeed = FIXED.baseSpeed;
     state.spawnEveryMs = FIXED.spawnStartMs;
 
-    btnStart.disabled = false;
-    btnPause.disabled = true;
-    btnPause.textContent = "Pausar";
-
+    state.nextId = 1;
+    state.lastSpawn = 0;
+    state.lastTick = 0;
+    state.lastFlyby = 0;
+    state.nextFlybyAt = 0;
+    
     overlay.style.display = "flex";
 
     state.typed = "";
@@ -1021,23 +2298,37 @@ function submitAnswer(){
 
   function gameOver(){
     state.running = false;
-    btnStart.disabled = false;
-    btnPause.disabled = true;
+  
+    // 🧹 BORRAR METEOROS INMEDIATAMENTE
+    for(const m of state.meteors.values()){
+      try { m.el.remove(); } catch {}
+    }
+    state.meteors.clear();
 
+    // 🧹 Limpieza total visual
+    game.querySelectorAll(".px,.shotNum,.shotGhost").forEach(el => el.remove());
+    
     overlay.style.display = "flex";
     overlay.querySelector(".modal h2").textContent = "Game Over";
     overlay.querySelector(".modal p").innerHTML =
-      `Puntaje: <b>${state.score}</b><br/>Mejor racha: <b>${state.bestStreak}</b><br/><span style="color:rgba(238,242,255,.75)">Presiona Iniciar para volver.</span>`;
+      `Puntaje: <b>${state.score}</b><br/>Mejor racha: <b>${state.bestStreak}</b><br/>
+       <span style="color:rgba(238,242,255,.75)">Presiona Iniciar para volver.</span>`;
+  
     bgMusic.pause();
   }
 
   // ---------- Events ----------
-  btnStart.addEventListener("click", start);
-  btnQuickStart.addEventListener("click", start);
-  btnCloseOverlay.addEventListener("click", () => overlay.style.display = "none");
-  btnPause.addEventListener("click", pauseToggle);
-  btnReset.addEventListener("click", resetAll);
-
+  btnQuickStart.addEventListener("click", () => {
+    resetAll();  // ✅ reinicia todo (meteoros/score/level/vidas)
+    start();     // ✅ arranca limpio
+  });
+      
+  bgMusic.addEventListener("ended", () => {
+    if(state.running){
+      playRandomTrack();
+    }
+  });
+  
   // keypad clicks
   keypadEl.addEventListener("click", (e) => {
     const btn = e.target.closest("button");
@@ -1054,6 +2345,13 @@ function submitAnswer(){
 
   // teclado físico (PC)
   window.addEventListener("keydown", (e) => {
+    // 🔥 Si el overlay está visible → ENTER o SPACE inician
+    const overlayVisible = overlay.style.display !== "none";
+    if(overlayVisible && (e.key === "Enter" || e.key === " ")){
+      e.preventDefault();
+      start();
+      return;
+    }
     if(!state.running) return;
 
     if(e.key >= "0" && e.key <= "9"){
@@ -1065,10 +2363,7 @@ function submitAnswer(){
       submitAnswer();
       return;
     }
-    if(e.key === "Escape"){
-      pauseToggle();
-      return;
-    }
+
     if(e.key.toLowerCase() === "c"){
       clearAll();
       return;

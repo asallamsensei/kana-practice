@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Salón de Honor — Asallam Sensei</title>
+
+<style>
+
+body{
+    margin:0;
+    font-family: "Segoe UI Emoji", "Apple Color Emoji", "Noto Color Emoji", Arial, sans-serif;
+    background: radial-gradient(circle at top,#10162a,#050814);
+    color:white;
+    text-align:center;
+}
+
+header{
+    padding:40px 20px 10px;
+}
+
+h1{
+    font-size:40px;
+    margin-bottom:10px;
+}
+
+.subtitle{
+    color:#aab3ff;
+    font-size:18px;
+}
+
+.section{
+    max-width:1000px;
+    margin:auto;
+    padding:20px 20px;
+}
+
+.section h2{
+    margin-bottom:25px;
+    font-size:28px;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:20px;
+}
+
+.card{
+    position:relative;
+    overflow:hidden;
+    background:rgba(255,255,255,0.05);
+    border:1px solid rgba(255,255,255,0.15);
+    border-radius:14px;
+    padding:20px;
+    transition:0.3s;
+    box-shadow:0 10px 25px rgba(0,0,0,0.35);
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+}
+
+/* VARIACIÓN AUTOMÁTICA DE TARJETAS */
+
+.card:nth-child(4n+1){
+    border-color:#ffd700;
+    background:linear-gradient(
+        145deg,
+        rgba(255,215,0,0.15),
+        rgba(255,255,255,0.05)
+    );
+}
+
+.card:nth-child(4n+2){
+    border-color:#c0c0c0;
+    background:linear-gradient(
+        145deg,
+        rgba(192,192,192,0.15),
+        rgba(255,255,255,0.05)
+    );
+}
+
+.card:nth-child(4n+3){
+    border-color:#cd7f32;
+    background:linear-gradient(
+        145deg,
+        rgba(205,127,50,0.15),
+        rgba(255,255,255,0.05)
+    );
+}
+
+.card:nth-child(4n){
+    border-color:#7d5cff;
+    background:linear-gradient(
+        145deg,
+        rgba(125,92,255,0.18),
+        rgba(255,255,255,0.05)
+    );
+}
+    
+.card:hover{
+    transform:translateY(-5px);
+    border-color:#7d5cff;
+}
+    
+.card::before{
+    content:"";
+    position:absolute;
+    top:0;
+    left:-100%;
+    width:60%;
+    height:100%;
+    background:linear-gradient(
+        120deg,
+        transparent,
+        rgba(255,255,255,0.35),
+        transparent
+    );
+    transform:skewX(-25deg);
+}
+
+.card:hover::before{
+    animation:shine 1s ease;
+}
+
+.card.small .name{
+    font-size:16px;
+}
+    
+@keyframes shine{
+    100%{
+        left:150%;
+    }
+}
+
+.country{
+  font-size:14px;
+  color:#aab3ff;
+  margin-top:4px;
+}
+    
+.name{
+    font-size:20px;
+    font-weight:bold;
+}
+
+.alias{
+  font-size:14px;
+  color:#ffd166;
+  margin-top:4px;
+}
+
+.jp{
+    font-size:26px;
+    color:#aab3ff;
+    font-weight:normal;
+}
+    
+footer{
+    margin-top:40px;
+    padding:30px;
+    font-size:14px;
+    color:#889;
+}
+    
+</style>
+</head>
+
+<body>
+
+<header>
+
+<h1>
+Salón de Honor
+<br>
+<span class="jp">名誉の殿堂</span>
+</h1>
+    
+<div class="subtitle">
+Personas que han apoyado el proyecto educativo de Asallam Sensei
+</div>
+
+</header>
+
+<div class="section">
+
+<h2>Estudiantes y Amigos de todo el mundo 🌍</h2>
+
+<div class="grid">
+
+<!-- AGREGA NOMBRES AQUÍ -->
+
+<div class="card">
+  <div class="name">Freddy</div>
+  <div class="country">Venezuela · España</div>
+  <div class="alias">Alias tarea fija</div>
+</div>
+
+<div class="card">
+  <div class="name">Tato</div>
+  <div class="country">Colombia</div>
+  <div class="alias">Te contrata si hay un 🐱 en tu perfil</div>
+</div>
+    
+<div class="card">
+  <div class="name">Jetillofix</div>
+  <div class="country">Costa Rica</div>
+  <div class="alias">A 1000 costapesos la 🍔!</div>
+</div>
+
+<div class="card">
+  <div class="name">Karen</div>
+  <div class="country">México</div>
+  <div class="alias">Su padre no le enseñó a rendirse ♡</div>
+</div>
+    
+<div class="card">
+  <div class="name">Susy🌻🌻</div>
+  <div class="country">Colombia</div>
+  <div class="alias">Siempre paga por adelantado 🤑</div>
+</div>
+    
+<div class="card">
+  <div class="name">Bogard</div>
+  <div class="country">México</div>
+  <div class="alias">El Amo del Katakana 😎</div>
+</div>
+
+<div class="card">
+  <div class="name">Yoko</div>
+  <div class="country">Perú</div>
+  <div class="alias">Allá nos vemos 😇</div>
+</div>
+    
+<div class="card">
+  <div class="name">Xime</div>
+  <div class="country">Chile</div>
+  <div class="alias">Guardiana de la salud 👩‍⚕️</div>
+</div>
+    
+<div class="card">
+  <div class="name">Renato</div>
+  <div class="country">Perú</div>
+  <div class="alias">Kanpai! 🥃</div>
+</div>
+
+<div class="card">
+  <div class="name">Tabimita</div>
+  <div class="country">Colombia</div>
+  <div class="alias">La ☆ canela de la canción ♪♫</div>
+</div>
+    
+<div class="card">
+  <div class="name">Marianita</div>
+  <div class="country">Colombia</div>
+  <div class="alias">Dijo que soy el mejor, pero la mejor es ella 🌠</div>
+</div>
+
+<div class="card">
+  <div class="name">Mani Manito</div>
+  <div class="country">México</div>
+  <div class="alias">EL TURBO ACTIVADO!!🚀</div>
+</div>
+
+<div class="card">
+  <div class="name">Callita</div>
+  <div class="country">Colombia</div>
+  <div class="alias">🐈❤️</div>
+</div>
+
+<div class="card">
+  <div class="name">Laloskini</div>
+  <div class="country">Chile</div>
+  <div class="alias">Escribió 1000+ oraciones en Japonés!! 🙌</div>
+</div>
+    
+<div class="card">
+  <div class="name">Adilene</div>
+  <div class="country">México</div>
+  <div class="alias">Hagamos otras 100 repeticiones! 🤓</div>
+</div>
+
+<div class="card">
+  <div class="name">Eduardo</div>
+  <div class="country">México</div>
+  <div class="alias">En el Bar del Caos 😵💫</div>
+</div>
+    
+<div class="card">
+  <div class="name">Gina</div>
+  <div class="country">Colombia</div>
+  <div class="alias">☆ Con determinación el sueño se hará realidad ☆</div>
+</div>
+
+<div class="card">
+  <div class="name">Marce</div>
+  <div class="country">Colombia</div>
+  <div class="alias">☆♪ Lari lari eh oh oh oh ♫☆</div>
+</div>
+
+<div class="card">
+  <div class="name">Grecia</div>
+  <div class="country">México</div>
+  <div class="alias">A veces hace onigiris 🍙</div>
+</div>
+    
+<div class="card">
+  <div class="name">Pao</div>
+  <div class="country">México</div>
+  <div class="alias">Hizo TODOS mis cursos!!!!!</div>
+</div>
+
+<div class="card">
+  <div class="name">⚡Dani⚡</div>
+  <div class="country">Colombia</div>
+  <div class="alias">Puede con todo! 💪</div>
+</div>
+
+<div class="card">
+  <div class="name">Sammy</div>
+  <div class="country">Canadá</div>
+  <div class="alias">♾️ Ranger Matemática ♾️</div>
+</div>
+
+<div class="card">
+  <div class="name">Valeu</div>
+  <div class="country">Colombia</div>
+  <div class="alias">🐱🐱🐱🐱🐱🐱</div>
+</div>
+
+<div class="card">
+  <div class="name">Aldo</div>
+  <div class="country">México</div>
+  <div class="alias">El Arqueólogo de los Kanji! 🗿</div>
+</div>
+    
+<div class="card">
+  <div class="name">Tomoe Sensei!</div>
+  <div class="country">Japón · México</div>
+  <div class="alias">Síganla en @nihongoenmexico</div>
+</div>
+    
+<div class="card">
+  <div class="name">Мигель アングロ</div>
+  <div class="country">México</div>
+  <div class="alias">Y te salen por el...</div>
+</div>
+
+<div class="card">
+  <div class="name">Gav🍀🌺</div>
+  <div class="country">Colombia</div>
+  <div class="alias">Potenciada por GPT!</div>
+</div>
+    
+<div class="card">
+  <div class="name">Sara 🤎</div>
+  <div class="country">Colombia · Argentina</div>
+  <div class="alias">Mi raza 🤗</div>
+</div>
+    
+<div class="card">
+  <div class="name">🐱 Eliana</div>
+  <div class="country">Colombia</div>
+  <div class="alias">Se escucha borroso xd</div>
+</div>
+
+
+<div class="card">
+  <div class="name">Edgarh</div>
+  <div class="country">México</div>
+  <div class="alias">Lista la tarea 🥳</div>
+</div>
+    
+<div class="card">
+  <div class="name">Adriana</div>
+  <div class="country">Costa Rica</div>
+  <div class="alias">La propia vagancia</div>
+</div>
+
+<div class="card">
+  <div class="name">Anderson</div>
+  <div class="country">Venezuela · Colombia</div>
+  <div class="alias">Apuéstale al 🐎 del japonés!</div>
+</div>
+
+<div class="card">
+  <div class="name">Rocío</div>
+  <div class="country">Colombia</div>
+  <div class="alias">El templo azul 💙</div>
+</div>
+    
+<div class="card">
+  <div class="name">Marimar</div>
+  <div class="country">Colombia</div>
+  <div class="alias">♪ Costeñita soy ♫</div>
+</div>
+    
+<div class="card">
+  <div class="name">Juango</div>
+  <div class="country">México</div>
+  <div class="alias">Fisicoculturista 💪</div>
+</div>
+    
+<div class="card">
+  <div class="name">Juanló</div>
+  <div class="country">Colombia</div>
+  <div class="alias">¿A qué hora es el vivo?</div>
+</div>
+    
+<div class="card small">
+  <div class="name">アルベト NUEVE アギラル</div>
+  <div class="country">México</div>
+  <div class="alias">La gramática es lo máximo 😎</div>
+</div>
+
+<div class="card">
+  <div class="name">Aurabb💞</div>
+  <div class="country">Chile</div>
+  <div class="alias">♪ Cántame una en japonés ♫</div>
+</div>
+    
+<div class="card">
+  <div class="name">Jonathan</div>
+  <div class="country">Colombia</div>
+  <div class="alias">Se inventa el inventario</div>
+</div>
+
+<div class="card">
+  <div class="name">Adrián</div>
+  <div class="country">Perú · España</div>
+  <div class="alias">¿Cuándo empieza el curso?</div>
+</div>
+
+<div class="card">
+  <div class="name">Lau🤘🏻</div>
+  <div class="country">México</div>
+  <div class="alias">Dogtora 🐶</div>
+</div>
+
+<div class="card">
+  <div class="name">Eduardoc</div>
+  <div class="country">México</div>
+  <div class="alias">Despacio pero seguro!</div>
+</div>
+    
+<div class="card">
+  <div class="name">Cox</div>
+  <div class="country">Colombia</div>
+  <div class="alias">Le gusta el matiz</div>
+</div>
+
+<div class="card">
+  <div class="name">Gaby</div>
+  <div class="country">Colombia</div>
+  <div class="alias">Ocupada con la U pero se logró!</div>
+</div>
+    
+<div class="card">
+  <div class="name">Borola</div>
+  <div class="country">México</div>
+  <div class="alias">Guarda secretos 😏</div>
+</div>
+
+<div class="card">
+  <div class="name">Leia</div>
+  <div class="country">Perú</div>
+  <div class="alias">Le diré a los BTS que no haces la tarea</div>
+</div>
+    
+<div class="card">
+  <div class="name">Esteban</div>
+  <div class="country">Uruguay </div>
+  <div class="alias">He-Man</div>
+</div>
+    
+<div class="card">
+  <div class="name">Lizarazo 🦊🍃</div>
+  <div class="country">Colombia</div>
+  <div class="alias">Esta semana estuvo floja</div>
+</div>
+
+<div class="card">
+  <div class="name">Guillermonster</div>
+  <div class="country">México</div>
+  <div class="alias">El motivado 🔥</div>
+</div>
+
+<div class="card">
+  <div class="name">Danny</div>
+  <div class="country">México</div>
+  <div class="alias">Sí entro... sí entro...</div>
+</div>
+
+<div class="card">
+  <div class="name">Bruce</div>
+  <div class="country">Colombia</div>
+  <div class="alias">Na-Na-Na-Na-Na-Na-Na-Na… Batman!</div>
+</div>
+
+<div class="card">
+  <div class="name">Belén</div>
+  <div class="country">Uruguay</div>
+  <div class="alias">Sigue de vacaciones jjjj</div>
+</div>
+    
+<div class="card">
+  <div class="name">Alonso</div>
+  <div class="country">USA</div>
+  <div class="alias">El Reconocedor de Kanjis!</div>
+</div>
+
+<div class="card">
+  <div class="name">JOSH | ジョシュ</div>
+  <div class="country">Venezuela</div>
+  <div class="alias">Música maistro!!</div>
+</div>
+
+<div class="card">
+  <div class="name">Karen</div>
+  <div class="country">Honduras</div>
+  <div class="alias">El Arte del Japonés 🎨</div>
+</div>
+    
+<div class="card">
+  <div class="name">Álvaro</div>
+  <div class="country">Chile</div>
+  <div class="alias">Rumbo al N1! Amonos viejo!</div>
+</div>
+
+<div class="card">
+  <div class="name">星月アドリア</div>
+  <div class="country">España</div>
+  <div class="alias">No duerme por estudiar japonés!</div>
+</div>
+
+<div class="card">
+  <div class="name">Papas 🥔 天使</div>
+  <div class="country">México</div>
+  <div class="alias">Ya lee mejor que yo!</div>
+</div>
+
+<div class="card">
+  <div class="name">Rosina</div>
+  <div class="country">México</div>
+  <div class="alias">Elemental mi querido Watson! 🧐</div>
+</div>
+
+<div class="card">
+  <div class="name">Dory</div>
+  <div class="country">Vascolandia</div>
+  <div class="alias">¿Ane? ¿Qué es eso viejona?</div>
+</div>
+    
+</div>
+</div>
+    
+<footer>
+
+Proyecto educativo — Asallam Sensei  
+<br>
+Cada nombre aquí representa esfuerzo, dedicación y amor por el aprendizaje.
+
+</footer>
+
+<script>
+const grid = document.querySelector(".grid");
+const cards = Array.from(grid.children);
+
+// Fisher–Yates shuffle
+for (let i = cards.length - 1; i > 0; i--) {
+  const j = Math.floor(Math.random() * (i + 1));
+  [cards[i], cards[j]] = [cards[j], cards[i]];
+}
+
+// volver a insertarlas en el grid
+cards.forEach(card => grid.appendChild(card));
+</script>
+    
+</body>
+</html>

@@ -4,238 +4,437 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Turista en Japón — Asallam Sensei</title>
+
 <style>
   :root{
-    --bg: #f6f6ff;
-    --card: #ffffff;
-    --text: #111;
-    --muted: #555;
+    --bg: #0b1020;
+    --card: rgba(255,255,255,.08);
+    --text: #eef2ff;
+    --muted: rgba(238,242,255,.75);
     --accent: #7d5cff;
-    --accent2:#5d46d4;
-    --danger:#d93025;
-    --ok:#28a745;
-    --border:#d9d9e7;
+    --accent2:#22c55e;
+    --danger:#ef4444;
+    --ok:#22c55e;
+    --border: rgba(255,255,255,.14);
+    --mix: #d84f7f;
+    --mix-soft: rgba(216,79,127,.22);
+    --mix-soft-border: rgba(216,79,127,.58);
+    --mix-soft-text: #ffd6e5;
+    --mix-hover: #c63f70;
+  }
+
+  *,
+  *::before,
+  *::after{
+    box-sizing: border-box;
+  }
+
+  html, body{
+    margin: 0;
+    padding: 0;
   }
 
   body{
-    background: var(--bg);
+    margin:0;
+    background:
+      radial-gradient(1200px 700px at 20% 10%, rgba(125,92,255,.35), transparent 60%),
+      radial-gradient(900px 600px at 90% 20%, rgba(34,197,94,.22), transparent 60%),
+      radial-gradient(900px 600px at 30% 90%, rgba(239,68,68,.18), transparent 55%),
+      var(--bg);
     font-family: Arial, sans-serif;
     display:flex;
     flex-direction:column;
     align-items:center;
-    padding: 26px 14px 60px;
+    padding:26px 14px 60px;
     color: var(--text);
+    min-height:100vh;
   }
 
   h1{
     font-size: 40px;
-    margin: 10px 0 14px;
-    text-align:center;
+    margin: 10px 0 18px;
+    text-align: center;
+    line-height: 1.15;
   }
 
-  /* Barra superior: bloques + modos */
+  .layout{
+    width: 100%;
+    max-width: 1120px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 360px;
+    gap: 20px;
+    align-items: start;
+  }
+
+  .panel{
+    width: 100%;
+    min-width: 0;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 22px 20px 18px;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.06);
+    text-align: center;
+    overflow: hidden;
+  }
+
+  .sidebar{
+    width: 100%;
+    min-width: 0;
+  }
+
+  .panel-side{
+    width: 100%;
+    min-width: 0;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 16px;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.06);
+  }
+
+  .side-section{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .side-section + .side-section{
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px solid var(--border);
+  }
+
+  .side-title{
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: .04em;
+    text-align: left;
+  }
+
   .bar{
-    display:flex;
-    flex-wrap:wrap;
-    gap:10px;
-    justify-content:center;
-    max-width: 920px;
-    margin-bottom: 10px;
+    width: 100%;
+    margin-bottom: 0;
   }
 
-  .btn{
-    padding: 10px 14px;
-    font-size: 16px;
-    border-radius: 999px;
-    border: 2px solid var(--accent);
-    background: transparent;
-    color: #2b214b;
-    cursor:pointer;
-    user-select:none;
-    transition: 0.15s;
+  .side-bar{
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+    margin: 0;
   }
-  .btn:hover{ transform: translateY(-1px); }
+
+.btn{
+  width: auto;
+  padding: 10px 14px;
+  font-size: 16px;
+  border-radius: 999px;
+  border: 2px solid var(--accent);
+  background: transparent;
+  color: var(--text);
+  cursor: pointer;
+  user-select: none;
+  transition: 0.15s;
+  text-align: center;
+}
+
+  .btn:hover{
+    transform: translateY(-1px);
+  }
+
   .btn.activo{
     background: var(--accent);
     color: white;
   }
 
-  .panel{
-    width: min(920px, 100%);
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 18px 16px 16px;
-    box-shadow: 0 6px 16px rgba(0,0,0,0.06);
-    text-align:center;
+.btn.mix-activo{
+  background: var(--mix);
+  border-color: var(--mix);
+  color: white;
+}
+
+.btn.mix-activo:hover{
+  background: var(--mix-hover);
+  border-color: var(--mix-hover);
+}
+
+.btn.mix-secundario{
+  background: var(--mix-soft);
+  border-color: var(--mix-soft-border);
+  color: var(--mix-soft-text);
+}
+  
+  .btn-todos{
+    border-color: #ef4444;
+    color: #ffd6d6;
+    opacity: 0.75;
   }
 
-  /* Prompt base (JP→ES y ES→JP) responsive */
+  .btn-todos.activo{
+    background: #ffb3b3;
+    border-color: #ffb3b3;
+    color: #7a1c1c;
+    opacity: 1;
+  }
+
   #prompt{
-    font-size: clamp(36px, 8vw, 64px);
+    font-size: clamp(30px, 3.2vw, 48px);
     font-weight: 800;
-    margin: 6px 0 10px;
-    line-height: 1.05;
+    margin: 4px 0 12px;
+    line-height: 1.08;
     word-break: break-word;
   }
 
-  /* Cuando la pregunta es español → japonés (más pequeñoo) */
   #prompt.prompt-es-jp{
-    font-size: clamp(22px, 4.5vw, 35px);
+    font-size: clamp(22px, 2.5vw, 34px);
     font-weight: 700;
-    line-height: 1.2;
+    line-height: 1.22;
   }
 
-  /* Opciones también responsive */
   #opciones{
-    font-size: clamp(16px, 4.2vw, 22px);
-    text-align:left;
-    line-height: 1.7;
+    font-size: clamp(22px, 2.4vw, 28px);
+    text-align: left;
+    line-height: 1.8;
     width: fit-content;
-    margin: 0 auto 10px;
+    max-width: 100%;
+    margin: 0 auto 14px;
+    padding: 10px 14px;
+    border-radius: 14px;
+    border: 1px dashed rgba(255,255,255,.22);
+    background: rgba(0,0,0,.18);
   }
-
-  #respuestaUsuario{
-    margin-top: 8px;
-    font-size: 22px;
-    padding: 8px 12px;
-    border-radius: 10px;
-    border: 2px solid #aaa;
-    text-align:center;
-    width: 110px;
-  }
-
-  .acciones{
-    margin-top: 14px;
-    display:flex;
-    flex-wrap:wrap;
-    gap: 10px;
-    justify-content:center;
-  }
-
-  .accion-btn{
-    padding: 12px 18px;
-    border-radius: 12px;
-    border:none;
-    background: var(--accent);
-    color: white;
-    cursor:pointer;
-    font-size: 18px;
-  }
-  .accion-btn:hover{ background: var(--accent2); }
-
-  #resultado{
-    margin-top: 12px;
-    font-size: 22px;
-    min-height: 30px;
-    text-align:center;
-    white-space: pre-line;
-  }
-
-  .correcto{ color: var(--ok); font-weight: 800; }
-  .incorrecto{ color: var(--danger); font-weight: 800; }
-
-  #estadisticas{
-    margin-top: 14px;
-    font-size: 18px;
-    text-align:center;
-    color: #222;
-  }
-
-  .sep{
-    height:1px;
-    background: var(--border);
-    margin: 12px 0;
-  }
-
-  /* Botones a/b/c */
-  #opbtns{
-    display:flex;
-    gap:10px;
-    justify-content:center;
-    margin: 6px 0 2px;
-  }
-
-  .btnABC{
-    padding:10px 16px;
-    font-size:18px;
-    border-radius:10px;
-    border:none;
-    background:#b94a48;
-    color:#fff;
-    cursor:pointer;
-    min-width:64px;
-    font-weight:800;
-  }
-  .btnABC:hover{ background:#a94442; }
 
   .jp{
     font-family: "Yu Gothic", "Hiragino Sans", "Meiryo", "Noto Sans JP", sans-serif;
     font-feature-settings: "palt" 0;
   }
 
-  /* Botón TODOS */
-  .btn-todos{
-    border-color:#e03131;
-    color:#a11b1b;
-    opacity:0.45;
+  #opciones.jp{
+    font-size: clamp(28px, 3vw, 36px);
+    line-height: 1.9;
   }
-  .btn-todos.activo{
-    background:#ffb3b3;
-    border-color:#ffb3b3;
-    color:#7a1c1c;
-    opacity:1;
+  
+  #opbtns{
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin: 8px 0 8px;
+    flex-wrap: wrap;
+  }
+
+  .btnABC{
+    padding: 10px 16px;
+    font-size: 18px;
+    border-radius: 10px;
+    border: none;
+    background: #b94a48;
+    color: #fff;
+    cursor: pointer;
+    min-width: 64px;
+    font-weight: 800;
+  }
+
+  .btnABC:hover{
+    background: #a94442;
+  }
+
+  .acciones{
+    margin-top: 14px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+  }
+
+  .accion-btn{
+    padding: 12px 18px;
+    border-radius: 12px;
+    border: none;
+    background: var(--accent);
+    color: white;
+    cursor: pointer;
+    font-size: 18px;
+  }
+
+  .accion-btn:hover{
+    background: var(--accent2);
+  }
+  
+  #resultado{
+    margin-top: 12px;
+    font-size: 22px;
+    min-height: 30px;
+    text-align: center;
+    white-space: pre-line;
+  }
+
+  .correcto{
+    color: var(--ok);
+    font-weight: 800;
+  }
+
+  .incorrecto{
+    color: var(--danger);
+    font-weight: 800;
+  }
+
+  .sep{
+    height: 1px;
+    background: var(--border);
+    margin: 16px 0 12px;
+  }
+
+  #estadisticas{
+    margin-top: 14px;
+    font-size: 18px;
+    text-align: center;
+    color: var(--text);
+  }
+
+  @media (max-width: 1020px){
+    .layout{
+      max-width: 760px;
+      grid-template-columns: 1fr;
+      gap: 14px;
+    }
+
+    .panel,
+    .panel-side{
+      width: 100%;
+      max-width: 100%;
+    }
+
+    .side-bar{
+      display: flex;
+      flex-wrap: wrap;
+      flex-direction: row;
+      gap: 10px;
+    }
+
+.side-bar .btn{
+  width: 100%;
+}
+  }
+
+.badge-kanji{
+  display:inline-block;
+  background:#ef4444;
+  color:white;
+  font-weight:800;
+  font-size:12px;
+  letter-spacing:.08em;
+  padding:4px 10px;
+  border-radius:999px;
+  margin-bottom:8px;
+}
+  
+  @media (max-width: 900px){
+    h1{
+      font-size: clamp(18px, 5.5vw, 24px);
+      line-height: 1.2;
+      margin: 8px 0 14px;
+    }
+
+    .layout{
+      width: 100%;
+      max-width: 100%;
+      gap: 14px;
+    }
+
+    .panel,
+    .panel-side{
+      width: 100%;
+      padding-left: 14px;
+      padding-right: 14px;
+    }
+
+    .panel-side{
+      padding-top: 14px;
+      padding-bottom: 14px;
+    }
+
+    #prompt{
+      font-size: clamp(28px, 9vw, 42px);
+      line-height: 1.1;
+    }
+
+    #prompt.prompt-es-jp{
+      font-size: clamp(20px, 5.8vw, 28px);
+      line-height: 1.25;
+    }
+
+    #opciones{
+      font-size: clamp(18px, 4.8vw, 24px);
+      width: 100%;
+      max-width: 100%;
+    }
+
+    .accion-btn{
+      font-size: 16px;
+      padding: 11px 15px;
+    }
   }
 </style>
+  
 </head>
 <body>
 
 <h1>Turista en Japón — Asallam Sensei</h1>
 
-<!-- Bloques (dinámicos) -->
-<div class="bar" id="bloquesBar"></div>
+<div class="layout">
+  <div class="panel">
+    <div id="badgeKanji" class="badge-kanji" style="display:none;">KANJI</div>
+    <div id="prompt">…</div>
 
-<!-- Modos -->
-<div class="bar" id="modosBar">
-  <button class="btn" id="btn-jp_es" onclick="setModo('jp_es')">Japonés → Español</button>
-  <button class="btn" id="btn-es_jp" onclick="setModo('es_jp')">Español → Japonés</button>
+    <div id="opciones"></div>
+
+    <div id="opbtns">
+      <button class="btnABC" type="button" onclick="responder('a')">a</button>
+      <button class="btnABC" type="button" onclick="responder('b')">b</button>
+      <button class="btnABC" type="button" onclick="responder('c')">c</button>
+    </div>
+
+    <div class="acciones">
+      <button class="accion-btn" onclick="siguienteDesdeBoton()">Siguiente</button>
+    </div>
+
+    <div id="resultado"></div>
+
+    <div class="sep"></div>
+
+    <div id="estadisticas">
+      Aciertos: <span id="aciertos">0</span> — Errores: <span id="errores">0</span>
+      <div style="margin-top:6px;">
+        Racha: <span id="racha">0</span> — Mejor racha: <span id="mejorRacha">0</span> — Precisión: <span id="precision">0%</span>
+      </div>
+    </div>
+
+    <div class="acciones" style="margin-top:12px;">
+      <button class="btn" onclick="resetStatsTodo()">Reset stats</button>
+    </div>
+  </div>
+
+  <div class="sidebar panel-side">
+
+    <div class="side-section">
+      <div class="side-title">Modo</div>
+      <div class="bar side-bar" id="modosBar">
+        <button class="btn" id="btn-jp_es" onclick="setModo('jp_es')">Japonés → Español</button>
+        <button class="btn" id="btn-es_jp" onclick="setModo('es_jp')">Español → Japonés</button>
+        <button class="btn" id="btn-mix" onclick="setModo('mix')">Mix</button>
+      </div>
+    </div>
+
+    <div class="side-section">
+      <div class="side-title">Bloques</div>
+      <div class="bar side-bar" id="bloquesBar"></div>
+    </div>
+  </div>
 </div>
-
-<div class="panel">
-  <div id="prompt">…</div>
-
-  <div id="opciones"></div>
-
-  <div id="opbtns">
-    <button class="btnABC" type="button" onclick="responder('a')">a</button>
-    <button class="btnABC" type="button" onclick="responder('b')">b</button>
-    <button class="btnABC" type="button" onclick="responder('c')">c</button>
-  </div>
-
-  <input id="respuestaUsuario"
-         type="text"
-         placeholder="a / b / c"
-         maxlength="1"
-         onkeydown="manejarEnter(event)"/>
-
-  <div class="acciones">
-    <button class="accion-btn" onclick="mostrarRespuesta()">Mostrar respuesta</button>
-    <button class="accion-btn" onclick="siguienteDesdeBoton()">Siguiente</button>
-  </div>
-
-  <div id="resultado"></div>
-
-  <div class="sep"></div>
-
-  <div id="estadisticas">
-    Aciertos: <span id="aciertos">0</span> — Errores: <span id="errores">0</span>
-  </div>
-
-  <div class="acciones" style="margin-top:12px;">
-    <button class="btn" onclick="resetStatsTodo()">Reset stats</button>
-  </div>
-</div>
-
+  
 <script>
 /* ===============================
    CONFIG
@@ -251,7 +450,8 @@ let bloques = [];
 let bloqueActual = "";
 let lista = [];
 
-let modoActual = "jp_es";
+let modoActual = "mix";
+let modoPreguntaActual = "jp_es";
 let pool = [];
 
 let actualIdx = 0;
@@ -263,8 +463,9 @@ let yaValidado = false;
 
 let aciertos = 0;
 let errores  = 0;
+let racha = 0;
+let mejorRacha = 0;
 
-let focoAutomatico = false;
 let todosActivo = false;
 let bloquesSeleccionados = new Set();
 
@@ -308,26 +509,37 @@ function cargarStatsObj(){
 function guardarStatsObj(o){
   localStorage.setItem(STATS_KEY, JSON.stringify(o));
 }
+  
 function statsKey(modo, bloque){
   return `${bloque}__${modo}`;
 }
+  
 function cargarStatsActual(){
   const stats = cargarStatsObj();
   const k = statsKey(modoActual, bloqueActual);
-  const s = stats[k] || { aciertos: 0, errores: 0 };
+  const s = stats[k] || { aciertos: 0, errores: 0, racha: 0, mejorRacha: 0 };
+
   aciertos = s.aciertos || 0;
-  errores  = s.errores  || 0;
+  errores = s.errores || 0;
+  racha = s.racha || 0;
+  mejorRacha = s.mejorRacha || 0;
+
   actualizarEstadisticas();
 }
+  
 function guardarStatsActual(){
   const stats = cargarStatsObj();
   const k = statsKey(modoActual, bloqueActual);
-  stats[k] = { aciertos, errores };
+  stats[k] = { aciertos, errores, racha, mejorRacha };
   guardarStatsObj(stats);
 }
+  
 function resetStatsTodo(){
   localStorage.removeItem(STATS_KEY);
-  aciertos = 0; errores = 0;
+  aciertos = 0;
+  errores = 0;
+  racha = 0;
+  mejorRacha = 0;
   actualizarEstadisticas();
 }
 
@@ -336,19 +548,39 @@ function resetStatsTodo(){
 =============================== */
 function $(id){ return document.getElementById(id); }
 
-document.addEventListener("pointerdown", (e) => {
-  focoAutomatico = (e.target && e.target.id === "respuestaUsuario");
-});
 document.addEventListener("keydown", (e) => {
-  if(["a","b","c","Enter"].includes(e.key)) focoAutomatico = true;
+  const k = e.key.toLowerCase();
+
+  if(k === "a" || k === "b" || k === "c"){
+    responder(k);
+    return;
+  }
+
+  if(k === "enter"){
+    if(yaValidado) siguiente();
+    else siguienteDesdeBoton();
+  }
 });
 
 function pintarBotonesActivos(){
-  ["jp_es","es_jp"].forEach(m => {
+  ["jp_es","es_jp","mix"].forEach(m => {
     const b = $("btn-" + m);
     if(!b) return;
-    b.classList.toggle("activo", modoActual === m);
+    b.classList.remove("activo", "mix-activo", "mix-secundario");
   });
+
+  if(modoActual === "mix"){
+    const btnMix = $("btn-mix");
+    const btnJpEs = $("btn-jp_es");
+    const btnEsJp = $("btn-es_jp");
+
+    if(btnMix) btnMix.classList.add("mix-activo");
+    if(btnJpEs) btnJpEs.classList.add("mix-secundario");
+    if(btnEsJp) btnEsJp.classList.add("mix-secundario");
+  }else{
+    const b = $("btn-" + modoActual);
+    if(b) b.classList.add("activo");
+  }
 
   document.querySelectorAll(".btn-bloque").forEach(btn => {
     const k = btn.dataset.bloque;
@@ -361,17 +593,24 @@ function pintarBotonesActivos(){
 
 function actualizarEstadisticas(){
   $("aciertos").innerText = aciertos;
-  $("errores").innerText  = errores;
+  $("errores").innerText = errores;
+  $("racha").innerText = racha;
+  $("mejorRacha").innerText = mejorRacha;
+
+  const total = aciertos + errores;
+  const precision = total > 0 ? Math.round((aciertos / total) * 100) : 0;
+  $("precision").innerText = precision + "%";
 }
 
 /* ===============================
    CARGA Y NORMALIZACIÓN
 =============================== */
-function normalizarItem(x){
+function normalizarItem(x, bloque = ""){
   return {
     japones: String(x.japones || "").trim(),
     romaji:  String(x.romaji  || "").trim(),
-    espanol: String(x.espanol || "").trim()
+    espanol: String(x.espanol || "").trim(),
+    bloque:  String(bloque || "").trim()
   };
 }
 
@@ -388,12 +627,10 @@ fetch(DATA_PATH)
     }
 
     construirBarraBloques(bloques);
-    bloqueActual = bloques[0];
 
-    modoActual = "jp_es";
+    modoActual = "mix";
     pintarBotonesActivos();
 
-    cargarBloque(bloqueActual);
     setModo(modoActual);
   })
   .catch(err => {
@@ -406,15 +643,8 @@ function construirBarraBloques(keys){
   const bar = $("bloquesBar");
   bar.innerHTML = "";
 
-  const defaultBloque = "saludos_y_despedidas";
-
-  if(keys.includes(defaultBloque)){
-    bloquesSeleccionados = new Set([defaultBloque]);
-  }else{
-    bloquesSeleccionados = new Set([keys[0]]);
-  }
-
-  todosActivo = false;
+  bloquesSeleccionados = new Set(keys);
+  todosActivo = true;
 
   keys.forEach(k => {
     const btn = document.createElement("button");
@@ -440,7 +670,8 @@ function actualizarPoolDesdeSeleccion(){
   const sel = [...bloquesSeleccionados];
   let combinado = [];
   sel.forEach(k => {
-    const arr = (dataRaw[k] || []).map(normalizarItem)
+    const arr = (dataRaw[k] || [])
+      .map(x => normalizarItem(x, k))
       .filter(it => it.japones && it.espanol && it.romaji);
     combinado = combinado.concat(arr);
   });
@@ -482,7 +713,8 @@ function toggleTema(k){
 }
 
 function cargarBloque(k){
-  lista = (dataRaw[k] || []).map(normalizarItem)
+  lista = (dataRaw[k] || [])
+    .map(x => normalizarItem(x, k))
     .filter(it => it.japones && it.espanol && it.romaji);
 
   pool = lista.slice();
@@ -513,21 +745,27 @@ function mezclar(arr){
   return arr.slice().sort(() => Math.random() - 0.5);
 }
 
+function itemEsDeKanji(item){
+  return String(item?.bloque || "").toLowerCase().includes("kanji");
+}  
+  
 function siguiente(){
   if(pool.length < 3) return;
 
   yaValidado = false;
   $("resultado").innerText = "";
   $("resultado").className = "";
-  $("respuestaUsuario").value = "";
-  if(focoAutomatico) $("respuestaUsuario").focus();
 
   actualIdx = Math.floor(Math.random() * pool.length);
   actualItem = pool[actualIdx];
 
-  const pregunta = (modoActual === "jp_es") ? actualItem.japones : actualItem.espanol;
+modoPreguntaActual = (modoActual === "mix")
+  ? (Math.random() < 0.5 ? "jp_es" : "es_jp")
+  : modoActual;
 
-  const campoOpciones = (modoActual === "jp_es") ? "espanol" : "japones";
+const pregunta = (modoPreguntaActual === "jp_es") ? actualItem.japones : actualItem.espanol;
+
+const campoOpciones = (modoPreguntaActual === "jp_es") ? "espanol" : "japones";
   const correctoTexto = actualItem[campoOpciones];
 
   let opciones = [correctoTexto];
@@ -541,14 +779,18 @@ function siguiente(){
   correcta = letras[opciones.indexOf(correctoTexto)];
   opcionCorrectaTexto = correctoTexto;
 
+const badge = $("badgeKanji");
+const hayKanji = itemEsDeKanji(actualItem);
+badge.style.display = hayKanji ? "inline-block" : "none";
+  
   const promptEl = $("prompt");
   promptEl.innerText = pregunta;
 
-  promptEl.classList.remove("jp");
-  if(modoActual === "jp_es") promptEl.classList.add("jp");
+promptEl.classList.remove("jp");
+if(modoPreguntaActual === "jp_es") promptEl.classList.add("jp");
 
-  promptEl.classList.remove("prompt-es-jp");
-  if(modoActual === "es_jp") promptEl.classList.add("prompt-es-jp");
+promptEl.classList.remove("prompt-es-jp");
+if(modoPreguntaActual === "es_jp") promptEl.classList.add("prompt-es-jp");
 
   $("opciones").innerHTML =
     `a) ${escapeHTML(opciones[0])}<br>
@@ -556,7 +798,7 @@ function siguiente(){
      c) ${escapeHTML(opciones[2])}`;
 
   $("opciones").classList.remove("jp");
-  if(modoActual === "es_jp") $("opciones").classList.add("jp");
+  if(modoPreguntaActual === "es_jp") $("opciones").classList.add("jp");
 }
 
 function escapeHTML(str){
@@ -569,22 +811,24 @@ function escapeHTML(str){
 }
 
 function responder(letra){
-  focoAutomatico = false;
   if(yaValidado) return;
-  $("respuestaUsuario").value = letra;
-  verificar();
+  verificar(letra);
 }
 
-async function verificar(){
-  const r = $("respuestaUsuario").value.toLowerCase().trim();
+async function verificar(letra){
+  const r = String(letra).toLowerCase().trim();
   const res = $("resultado");
 
-  await playAudioForRomaji(actualItem.romaji);
+  if(!itemEsDeKanji(actualItem)){
+    await playAudioForRomaji(actualItem.romaji);
+  }
 
   if(r === correcta){
     res.innerText = `Correcto ✔\nRomaji: ${actualItem.romaji}`;
     res.className = "correcto";
     aciertos++;
+    racha++;
+    if(racha > mejorRacha) mejorRacha = racha;
   }else{
     res.innerText =
       `Incorrecto ✘ (era ${correcta})\n` +
@@ -592,6 +836,7 @@ async function verificar(){
       `Romaji: ${actualItem.romaji}`;
     res.className = "incorrecto";
     errores++;
+    racha = 0;
   }
 
   actualizarEstadisticas();
@@ -599,36 +844,16 @@ async function verificar(){
   yaValidado = true;
 }
 
-async function mostrarRespuesta(){
-  if(yaValidado) return;
-
-  const res = $("resultado");
-
-  await playAudioForRomaji(actualItem.romaji);
-
-  errores++;
-  actualizarEstadisticas();
-  guardarStatsActual();
-
-  res.innerText =
-    `Mostrada ✘ (era ${correcta})\n` +
-    `Respuesta: ${opcionCorrectaTexto}\n` +
-    `Romaji: ${actualItem.romaji}`;
-  res.className = "incorrecto";
-
-  yaValidado = true;
-}
-
 async function siguienteDesdeBoton(){
   const res = $("resultado");
-
+  
   if(!yaValidado){
-    const v = $("respuestaUsuario").value.trim();
-    if(v === ""){
-      await playAudioForRomaji(actualItem.romaji);
-    }
+      if(!itemEsDeKanji(actualItem)){
+        await playAudioForRomaji(actualItem.romaji);
+      }
 
     errores++;
+    racha = 0;
     actualizarEstadisticas();
     guardarStatsActual();
 
@@ -645,20 +870,6 @@ async function siguienteDesdeBoton(){
   siguiente();
 }
 
-function manejarEnter(ev){
-  if(ev.key !== "Enter") return;
-
-  if(!yaValidado){
-    const v = $("respuestaUsuario").value.trim();
-    if(v === ""){
-      mostrarRespuesta();
-      return;
-    }
-    verificar();
-  }else{
-    siguiente();
-  }
-}
 </script>
 
 </body>

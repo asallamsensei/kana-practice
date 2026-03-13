@@ -1,0 +1,1135 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>English Vocab — Asallam Sensei</title>
+
+<style>
+  :root{
+    --bg: #0b1020;
+    --card: rgba(255,255,255,.08);
+    --card2: rgba(255,255,255,.10);
+    --text: #eef2ff;
+    --muted: rgba(238,242,255,.75);
+    --accent: #7d5cff;
+    --accent2:#22c55e;
+    --danger:#ef4444;
+    --border: rgba(255,255,255,.14);
+
+    --dictadoRed: #ff3b30;
+    --dictadoRedSoft:#d94a45;
+  }
+
+  body{
+    margin:0;
+    font-family: Arial, sans-serif;
+    background: radial-gradient(1200px 700px at 20% 10%, rgba(125,92,255,.35), transparent 60%),
+                radial-gradient(900px 600px at 90% 20%, rgba(34,197,94,.22), transparent 60%),
+                radial-gradient(900px 600px at 30% 90%, rgba(239,68,68,.18), transparent 55%),
+                var(--bg);
+    color: var(--text);
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    padding:30px 16px 76px;
+  }
+
+  .wrap{ width:min(1120px, 100%); }
+
+  header{
+    display:flex;
+    flex-direction:column;
+    gap:16px;
+    margin-bottom:16px;
+    align-items:center;
+    text-align:center;
+  }
+
+  h1{
+    margin:0;
+    font-size: 30px;
+    letter-spacing:.2px;
+  }
+
+  .studentLine{
+    margin-top:-6px;
+    color: var(--muted);
+    font-weight:900;
+    font-size:14px;
+  }
+  .studentBadge{
+    display:inline-flex;
+    gap:8px;
+    align-items:center;
+    padding:8px 12px;
+    border-radius:999px;
+    border: 1px solid var(--border);
+    background: rgba(255,255,255,.06);
+  }
+
+  .grid{
+    display:grid;
+    grid-template-columns: 1.15fr .85fr;
+    gap:16px;
+  }
+  @media (max-width: 900px){
+    .grid{ grid-template-columns: 1fr; }
+  }
+
+  .card{
+    background: linear-gradient(180deg, var(--card2), var(--card));
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    box-shadow: 0 18px 45px rgba(0,0,0,.35);
+    padding: 20px;
+  }
+
+  .pill{
+    padding: 10px 14px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: rgba(255,255,255,.06);
+    color: var(--muted);
+    font-size: 14px;
+    font-weight: 900;
+  }
+
+  .row{
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+    align-items:center;
+    justify-content:center;
+  }
+
+  .chips{
+    display:flex;
+    flex-wrap:wrap;
+    gap:12px;
+    margin-top:10px;
+  }
+
+  .chip{
+    padding: 10px 14px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: rgba(255,255,255,.06);
+    color: var(--muted);
+    cursor:pointer;
+    user-select:none;
+    font-size: 14px;
+    font-weight: 900;
+    transition:.12s;
+  }
+  .chip:hover{ transform: translateY(-1px); }
+  .chip.activo{
+    background: var(--accent);
+    color: white;
+    border-color: transparent;
+  }
+
+  input{
+    background: rgba(255,255,255,.08);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 12px 14px;
+    border-radius: 12px;
+    outline:none;
+    font-size: 16px;
+    width: min(420px, 100%);
+  }
+
+  .btn{
+    border: none;
+    border-radius: 12px;
+    padding: 12px 16px;
+    cursor: pointer;
+    color: white;
+    background: var(--accent);
+    font-weight: 900;
+    font-size: 15px;
+    transition: .15s;
+  }
+  .btn:hover{ transform: translateY(-1px); filter: brightness(1.06); }
+  .btn:disabled{ opacity:.45; cursor:not-allowed; transform:none; filter:none; }
+
+  .btn-ghost{
+    background: rgba(255,255,255,.08);
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-weight: 900;
+  }
+
+  .btn-danger{
+    background: rgba(239,68,68,.15);
+    border: 1px solid rgba(239,68,68,.5);
+    color: #fecaca;
+  }
+  .btn-danger.activo{
+    background: var(--danger);
+    border-color: transparent;
+    color: white;
+  }
+
+  .btn-mode{
+    background: rgba(255,255,255,.08);
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-weight: 900;
+  }
+  .btn-mode.activo{
+    background: var(--accent);
+    border-color: transparent;
+  }
+  .btn-mode.dictado-on{
+    background: var(--dictadoRed);
+    border-color: transparent;
+  }
+  .btn-mode.base-dictado{
+    background: var(--dictadoRedSoft);
+    border-color: transparent;
+  }
+
+  .big{
+    text-align:center;
+    padding: 24px 12px 14px;
+  }
+
+  #studentLabel{
+    color: #ffffff;
+    font-size:18px;
+    text-shadow:
+      0 0 4px #7d5cff,
+      0 0 8px #7d5cff,
+      0 0 14px #7d5cff,
+      0 0 24px rgba(125,92,255,.7);
+  }
+  
+  #promptMain{
+    font-size: 40px;
+    font-weight: 900;
+    letter-spacing: .5px;
+    margin: 6px 0 10px;
+    word-break: break-word;
+  }
+  #promptMain.esPregunta{
+    font-size: 40px;
+    font-weight: 900;
+    letter-spacing: .2px;
+    line-height: 1.25;
+  }
+
+  #promptSub{
+    color: var(--muted);
+    font-size: 17px;
+    margin: 0 0 10px;
+    min-height: 20px;
+  }
+
+  #resultado{
+    margin-top: 10px;
+    font-size: 22px;
+    min-height: 30px;
+    text-align:center;
+    font-weight: 900;
+    white-space: pre-line;
+  }
+  .correcto{ color: var(--accent2); }
+  .incorrecto{ color: var(--danger); }
+
+  .stats{
+    margin-top: 10px;
+    text-align:center;
+    color: var(--muted);
+    font-size: 16px;
+  }
+
+  .switch{
+    display:grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap:12px;
+    width:min(640px, 100%);
+  }
+  .switch .btn-mode{
+    padding: 11px 14px;
+    border-radius: 999px;
+    font-size: 14px;
+    width:100%;
+  }
+
+  .btnAudioBig{
+    border:none;
+    cursor:pointer;
+    background: rgba(255,255,255,.08);
+    border: 1px solid var(--border);
+    color: var(--text);
+    border-radius: 16px;
+    padding: 14px 16px;
+    font-size: 22px;
+    line-height: 1;
+    user-select:none;
+    margin-top: 6px;
+  }
+  .btnAudioBig:hover{ filter: brightness(1.1); transform: translateY(-1px); }
+  .btnAudioBig:active{ transform: translateY(0px); }
+  .btnAudioBig[disabled]{ opacity:.35; cursor:not-allowed; transform:none; }
+
+  #opcionesBtns{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+    width:min(600px, 100%);
+    margin: 18px auto 0;
+  }
+
+  .optBtn{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    text-align:left;
+    border-radius: 14px;
+    border: 1px solid var(--border);
+    background: rgba(0,0,0,.18);
+    color: var(--text);
+    padding: 14px 16px;
+    cursor:pointer;
+    font-weight: 900;
+    font-size: 16px;
+    transition: .12s;
+  }
+  .optBtn:hover{ transform: translateY(-1px); filter: brightness(1.05); }
+  .optBtn:disabled{
+    cursor:not-allowed;
+    transform:none;
+    filter:none;
+    opacity:.95;
+  }
+
+  .optLeft{
+    display:flex;
+    align-items:flex-start;
+    gap:12px;
+    flex:1;
+  }
+  .optLetter{
+    width:28px;
+    height:28px;
+    border-radius:10px;
+    display:grid;
+    place-items:center;
+    background: rgba(255,255,255,.08);
+    border:1px solid rgba(255,255,255,.12);
+    font-weight:900;
+    flex:0 0 auto;
+  }
+  .optText{
+    flex:1;
+    line-height:1.25;
+    word-break: break-word;
+  }
+
+  .optBtn.correcta{
+    border-color: rgba(34,197,94,.55);
+    background: rgba(34,197,94,.12);
+  }
+  .optBtn.incorrecta{
+    border-color: rgba(239,68,68,.60);
+    background: rgba(239,68,68,.12);
+  }
+  .optBtn.neutra-disabled{ opacity:.55; }
+
+  #inputRow{
+    justify-content:center;
+    margin-top: 18px;
+    width:min(600px, 100%);
+  }
+  #respuestaUsuario{
+    text-align:center;
+    width:min(240px, 100%);
+  }
+
+  .actions{
+    display:grid;
+    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+    gap:12px;
+    width:min(820px, 100%);
+    margin-top: 14px;
+  }
+  .actions .btn, .actions .btn-ghost{ width:100%; }
+
+  /* ========== MODAL CLAVE ========== */
+  .modalBack{
+    position:fixed;
+    inset:0;
+    background: rgba(0,0,0,.55);
+    backdrop-filter: blur(8px);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    z-index: 9999;
+    padding: 16px;
+  }
+  .modal{
+    width:min(560px, 100%);
+    background: linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.06));
+    border:1px solid var(--border);
+    border-radius: 18px;
+    box-shadow: 0 18px 55px rgba(0,0,0,.55);
+    padding: 18px;
+  }
+  .modal h2{
+    margin:0 0 8px;
+    font-size: 18px;
+  }
+  .modal p{
+    margin:0 0 14px;
+    color: var(--muted);
+    line-height: 1.45;
+    font-size: 14px;
+  }
+  .modalRow{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    align-items:center;
+    justify-content:flex-start;
+  }
+  .modalRow input{
+    flex:1;
+    min-width: 220px;
+  }
+  .modalErr{
+    margin-top:10px;
+    min-height: 18px;
+    color: #fecaca;
+    font-weight: 900;
+    font-size: 13px;
+  }
+</style>
+</head>
+
+<body>
+
+<!-- Modal de clave -->
+<div id="claveBack" class="modalBack" aria-hidden="false">
+  <div class="modal">
+    <h2>🔒 Código de estudiante</h2>
+    <p>Escribe tu clave para iniciar.</p>
+
+    <div class="modalRow">
+      <input id="claveInput" type="text" placeholder="Escribe tu clave..." autocomplete="off" />
+      <button class="btn" type="button" onclick="validarClave()">Entrar</button>
+    </div>
+
+    <div id="claveErr" class="modalErr"></div>
+  </div>
+</div>
+
+<div class="wrap">
+  <header>
+    <h1>English Vocab — Asallam Sensei</h1>
+
+    <div class="studentLine">
+      <span class="studentBadge">
+        👤 <span id="studentLabel">Estudiante: —</span>
+      </span>
+    </div>
+
+    <div class="switch">
+      <button class="btn btn-mode" id="m-en-es" type="button" onclick="setModoBase('en-es')">EN → ES</button>
+      <button class="btn btn-mode" id="m-es-en" type="button" onclick="setModoBase('es-en')">ES → EN</button>
+      <button class="btn btn-mode" id="m-dictado" type="button" onclick="toggleDictado()">Dictado</button>
+      <button class="btn btn-mode" id="m-mix" type="button" onclick="setModoBase('mix')">Mix</button>
+    </div>
+  </header>
+
+  <div class="grid">
+
+    <div class="card big">
+      <div id="promptMain">—</div>
+      <div id="promptSub"></div>
+
+      <div id="opcionesBtns"></div>
+
+      <div class="row" id="inputRow">
+        <input id="respuestaUsuario"
+               type="text"
+               placeholder="a / b / c + Enter"
+               maxlength="1"
+               onkeydown="manejarEnter(event)">
+      </div>
+
+      <div id="resultado"></div>
+
+      <div class="stats">
+        Aciertos: <span id="aciertos">0</span> — Errores: <span id="errores">0</span>
+      </div>
+
+      <div class="actions">
+        <button class="btn" type="button" onclick="accionSiguiente()">Siguiente</button>
+        <button class="btn btn-ghost" type="button" onclick="mostrarRespuesta()">Mostrar respuesta</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="row" style="justify-content:flex-start;">
+        <span class="pill">Bloques (English)</span>
+      </div>
+
+      <div class="row" style="justify-content:flex-start; margin-top:12px;">
+        <div id="chipsBloques" class="chips"></div>
+      </div>
+
+      <div class="row" style="justify-content:flex-start; margin-top:14px;">
+        <button id="btnTodo" class="btn btn-ghost btn-danger" type="button" onclick="seleccionarTodo()">Todo</button>
+        <button id="btnNinguna" class="btn btn-ghost" type="button" onclick="seleccionarNinguna()">Ninguna</button>
+      </div>
+
+      <div class="row" style="justify-content:flex-start; margin-top:18px;">
+        <span class="pill">Pool de distractores</span>
+      </div>
+
+      <div class="row" style="justify-content:flex-start; margin-top:12px;">
+        <button class="btn btn-mode" id="pool-sel" type="button" onclick="setPoolScope('seleccion')">Solo selección</button>
+        <button class="btn btn-mode" id="pool-glob" type="button" onclick="setPoolScope('global')">Global</button>
+      </div>
+
+      <div class="row" style="justify-content:flex-start; margin-top:18px;">
+        <span class="pill">Tip</span>
+      </div>
+      <div class="row" style="justify-content:flex-start;">
+        <div style="color:rgba(238,242,255,.7); font-size:14px; line-height:1.45;">
+          Enter valida / Enter de nuevo pasa. En móvil, toca el input si quieres teclado.
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+/* ===============================
+   CONFIG
+=============================== */
+const JSON_PATH  = "data/english_vocab.json";
+const AUDIO_BASE = "data/audios/english/";
+
+/* ===============================
+   CLAVES -> ESTUDIANTES
+   (agrega más aquí)
+=============================== */
+const CLAVES = [
+  { clave: "la bestia", estudiante: "Marlene" },
+];
+
+let estudianteActual = null;
+
+/* ===============================
+   HELPERS
+=============================== */
+function $(id){ return document.getElementById(id); }
+function pick(arr){ return arr[Math.floor(Math.random()*arr.length)]; }
+function shuffle(arr){ return arr.slice().sort(()=>Math.random()-0.5); }
+function norm(s){
+  return String(s || "")
+    .trim()
+    .toLowerCase()
+    .replace(/\s+/g," ");
+}
+
+/* ===============================
+   MODAL CLAVE
+=============================== */
+function validarClave(){
+  const raw = $("claveInput").value;
+  const key = norm(raw);
+
+  const found = CLAVES.find(x => norm(x.clave) === key);
+  if(!found){
+    $("claveErr").textContent = "Clave incorrecta. Intenta de nuevo.";
+    return;
+  }
+
+  estudianteActual = found.estudiante;
+  $("studentLabel").textContent = "Estudiante: " + estudianteActual;
+
+  $("claveBack").style.display = "none";
+  $("claveBack").setAttribute("aria-hidden", "true");
+
+  audioHabilitado = true;
+  
+  // solo suena al entrar si NO es ES→EN (y no dictado)
+  if(!(rondaDir === "es-en" && !rondaDictado)){
+    playAudio(ultimoAudioKey);
+  }
+  
+  // (opcional) enfoque al input cuando NO esté en dictado
+  // $("respuestaUsuario")?.focus({preventScroll:true});
+}
+document.addEventListener("DOMContentLoaded", ()=>{
+  $("claveInput").addEventListener("keydown", (e)=>{
+    if(e.key === "Enter") validarClave();
+  });
+});
+
+/* ===============================
+   DATA (bloques)
+=============================== */
+let DATA = { bloques: [] };
+let bloquesActivos = new Set();
+let poolScope = "seleccion";
+
+/* ===============================
+   STATS
+=============================== */
+let aciertos = 0;
+let errores  = 0;
+function pintarStats(){
+  $("aciertos").innerText = aciertos;
+  $("errores").innerText  = errores;
+}
+
+/* ===============================
+   MODOS
+   modoBase:
+     - "en-es" | "es-en" | "mix"
+   dictadoOn:
+     - solo se usa cuando modoBase != "mix"
+   En "mix":
+     - cada ronda decide dirección y decide dictado al azar
+=============================== */
+let modoBase  = "en-es";
+let dictadoOn = false;
+
+// efectivos por ronda
+let rondaDir = "en-es";
+let rondaDictado = false;
+
+let correctaLetra = "";
+let respuestaCorrecta = "";
+let yaValidado = false;
+let focoAutomatico = false;
+
+const letras = ["a","b","c"];
+
+/* ===============================
+   AUDIO
+   - usa item.en como "key" de mp3
+   - reproduce en dictado y también como apoyo
+=============================== */
+const audio = new Audio();
+audio.preload = "auto";
+let ultimoAudioKey = "";
+
+// autoplay policy: solo tras interacción
+let audioHabilitado = false;
+document.addEventListener("pointerdown", () => (audioHabilitado = true), { once:true });
+document.addEventListener("keydown",     () => (audioHabilitado = true), { once:true });
+
+function buildExactAudioSrc(key){
+  const k = String(key || "").trim();
+  if(!k) return "";
+  return AUDIO_BASE + encodeURIComponent(k) + ".mp3";
+}
+function detenerAudio(){
+  try{ audio.pause(); audio.currentTime = 0; }catch{}
+}
+async function playAudio(key){
+  ultimoAudioKey = String(key || "").trim();
+  if(!audioHabilitado) return;
+
+  const src = buildExactAudioSrc(ultimoAudioKey);
+  if(!src) return;
+
+  try{
+    detenerAudio();
+    audio.src = src;
+    audio.load();
+    await audio.play();
+  }catch{}
+}
+function reproducirAudioActual(){
+  if(ultimoAudioKey) playAudio(ultimoAudioKey);
+}
+
+/* ===============================
+   POOLS
+=============================== */
+function getPool(scope){
+  const idxs = (scope === "global")
+    ? DATA.bloques.map((_, i) => i)
+    : [...bloquesActivos];
+
+  let pool = [];
+  idxs.forEach(i=>{
+    const b = DATA.bloques[i];
+    if(b?.vocabulario?.length) pool = pool.concat(b.vocabulario);
+  });
+  return pool;
+}
+
+/* ===============================
+   UI MODO
+=============================== */
+function limpiarActivos(){
+  ["m-en-es","m-es-en","m-mix","m-dictado"].forEach(id=>{
+    const el = $(id);
+    if(!el) return;
+    el.classList.remove("activo","dictado-on","base-dictado");
+  });
+}
+
+function aplicarUI(){
+  limpiarActivos();
+
+  const enBtn   = $("m-en-es");
+  const esBtn   = $("m-es-en");
+  const mixBtn  = $("m-mix");
+  const dictBtn = $("m-dictado");
+
+  if(modoBase === "en-es") enBtn?.classList.add("activo");
+  if(modoBase === "es-en") esBtn?.classList.add("activo");
+  if(modoBase === "mix")   mixBtn?.classList.add("activo");
+
+  if(modoBase !== "mix" && dictadoOn){
+    dictBtn?.classList.add("dictado-on");
+    const baseBtn = (modoBase === "en-es") ? enBtn : esBtn;
+    baseBtn?.classList.add("base-dictado");
+  }
+
+  $("inputRow").style.display = "flex";
+}
+
+function setModoBase(nuevoBase){
+  modoBase = nuevoBase;
+  aplicarUI();
+  yaValidado = false;
+  limpiarResultado();
+  siguiente();
+}
+
+function toggleDictado(){
+  if(modoBase === "mix") return;
+  dictadoOn = !dictadoOn;
+  aplicarUI();
+  yaValidado = false;
+  limpiarResultado();
+  siguiente();
+}
+
+/* ===============================
+   POOL scope UI
+=============================== */
+function setPoolScope(scope){
+  poolScope = scope;
+  $("pool-sel")?.classList.toggle("activo", poolScope === "seleccion");
+  $("pool-glob")?.classList.toggle("activo", poolScope === "global");
+  yaValidado = false;
+  limpiarResultado();
+  siguiente();
+}
+
+/* ===============================
+   Selección de bloques
+=============================== */
+function seleccionarTodo(){
+  bloquesActivos = new Set(DATA.bloques.map((_, i)=>i));
+  [...$("chipsBloques").children].forEach(ch=>ch.classList.add("activo"));
+  $("btnTodo")?.classList.add("activo");
+  yaValidado = false;
+  limpiarResultado();
+  siguiente();
+}
+
+function seleccionarNinguna(){
+  bloquesActivos.clear();
+  [...$("chipsBloques").children].forEach(ch=>ch.classList.remove("activo"));
+  $("btnTodo")?.classList.remove("activo");
+  limpiarResultado();
+  $("promptMain").innerText = "Selecciona un bloque";
+  $("promptSub").innerText = "";
+  $("opcionesBtns").innerHTML = "";
+}
+
+/* ===============================
+   Render helpers
+=============================== */
+function limpiarResultado(){
+  const res = $("resultado");
+  res.innerText = "";
+  res.className = "";
+}
+
+function bloquearOpciones(){
+  $("opcionesBtns").querySelectorAll("button.optBtn").forEach(b => b.disabled = true);
+}
+
+function pintarOpciones(letraElegida){
+  const btns = Array.from($("opcionesBtns").querySelectorAll("button.optBtn"));
+  btns.forEach(btn=>{
+    const letraBtn = btn.getAttribute("data-letter");
+    btn.classList.remove("correcta","incorrecta","neutra-disabled");
+    if(letraBtn === correctaLetra) btn.classList.add("correcta");
+    else if(letraBtn === letraElegida) btn.classList.add("incorrecta");
+    else btn.classList.add("neutra-disabled");
+  });
+}
+
+function aplicarEstiloPregunta(){
+  const el = $("promptMain");
+  if(rondaDir === "es-en") el.classList.add("esPregunta");
+  else el.classList.remove("esPregunta");
+}
+
+/* ========== Mapeo EN/ES ========== */
+function textoPregunta(item){
+  return (rondaDir === "en-es") ? item.en : item.es;
+}
+function textoRespuesta(item){
+  return (rondaDir === "en-es") ? item.es : item.en;
+}
+
+/* pron: pronunciación aproximada */
+function getPron(item){
+  return String(item?.pron || "").trim();
+}
+
+function renderPrompt(itemCorrecto){
+  const promptEl = $("promptMain");
+  const subEl = $("promptSub");
+
+  aplicarEstiloPregunta();
+
+  // audio key: en
+  ultimoAudioKey = String(itemCorrecto.en || "").trim();
+
+  const pron = (rondaDir === "en-es") ? getPron(itemCorrecto) : "";
+  const pronLine = pron ? ` — Pron: ${pron}` : "";
+
+  if(rondaDictado){
+    const label = (rondaDir === "en-es")
+      ? "🎧 Dictado: elige el significado (ES)"
+      : "🎧 Dictado: elige la palabra (EN)";
+
+    subEl.innerText = label;
+
+    promptEl.innerHTML = `
+      <button id="promptSpeaker" class="btnAudioBig" type="button" title="Escuchar" onclick="reproducirAudioActual()">🔊</button>
+    `;
+
+    $("inputRow").style.display = "none";
+  }else{
+    promptEl.textContent = textoPregunta(itemCorrecto);
+    subEl.innerHTML = `
+      <button id="promptSpeaker" class="btnAudioBig" type="button" title="Escuchar" onclick="reproducirAudioActual()">🔊</button>
+    `;
+    
+    // deshabilitar audio si la pregunta es español → inglés
+    if(rondaDir === "es-en" && !rondaDictado){
+      document.getElementById("promptSpeaker").disabled = true;
+    }
+    $("inputRow").style.display = "flex";
+  }
+}
+
+/* ===============================
+   Opciones (3)
+=============================== */
+function renderOpciones(opciones){
+  const box = $("opcionesBtns");
+  box.innerHTML = "";
+
+  opciones.forEach((txt, idx)=>{
+    const letra = letras[idx];
+    const btn = document.createElement("button");
+    btn.className = "optBtn";
+    btn.type = "button";
+    btn.setAttribute("data-letter", letra);
+
+    btn.addEventListener("click", ()=> responder(letra));
+
+    const left = document.createElement("div");
+    left.className = "optLeft";
+
+    const badge = document.createElement("div");
+    badge.className = "optLetter";
+    badge.textContent = letra;
+
+    const text = document.createElement("div");
+    text.className = "optText";
+    text.textContent = txt;
+
+    left.appendChild(badge);
+    left.appendChild(text);
+
+    btn.appendChild(left);
+    box.appendChild(btn);
+  });
+}
+
+/* ===============================
+   Flujo ronda (SUPER MIX)
+=============================== */
+function elegirRondaDir(){
+  if(modoBase === "en-es") return "en-es";
+  if(modoBase === "es-en") return "es-en";
+  return (Math.random() < 0.5) ? "en-es" : "es-en";
+}
+
+function elegirRondaDictado(){
+  if(modoBase === "mix"){
+    return (Math.random() < 0.45);
+  }
+  return dictadoOn;
+}
+
+function build3Options(pool, correctValue, mapFn){
+  const opciones = [correctValue];
+  let tries = 0;
+
+  while(opciones.length < 3 && tries < 200){
+    tries++;
+    const v = mapFn(pick(pool));
+    if(v != null && v !== "" && !opciones.includes(v)) opciones.push(v);
+  }
+  while(opciones.length < 3) opciones.push("—");
+  return shuffle(opciones);
+}
+
+function getActivosValidos(){
+  return [...bloquesActivos].filter(i => DATA.bloques[i]?.vocabulario?.length >= 3);
+}
+
+function siguiente(){
+  const activos = getActivosValidos();
+  if(activos.length === 0){
+    $("promptMain").innerText = (DATA.bloques.length ? "Selecciona un bloque con ≥ 3 palabras" : "No hay data");
+    $("promptSub").innerText = "";
+    $("opcionesBtns").innerHTML = "";
+    return;
+  }
+
+  rondaDir = elegirRondaDir();
+  rondaDictado = elegirRondaDictado();
+
+  const bloqueIdx = pick(activos);
+  const b = DATA.bloques[bloqueIdx];
+  const poolLocal = b.vocabulario;
+
+  const itemCorrecto = pick(poolLocal);
+  respuestaCorrecta = textoRespuesta(itemCorrecto);
+
+  const poolOpciones = getPool(poolScope);
+  const basePool = (poolOpciones.length >= 3) ? poolOpciones : poolLocal;
+
+  const opciones = build3Options(basePool, respuestaCorrecta, x => textoRespuesta(x));
+  correctaLetra = letras[opciones.indexOf(respuestaCorrecta)];
+
+  renderPrompt(itemCorrecto);
+  renderOpciones(opciones);
+
+  limpiarResultado();
+  yaValidado = false;
+
+  const input = $("respuestaUsuario");
+  if(!rondaDictado){
+    input.value = "";
+    input.placeholder = "a / b / c + Enter";
+    input.maxLength = 1;
+    if(focoAutomatico) input.focus({preventScroll:true});
+  }
+
+  if(!(rondaDir === "es-en" && !rondaDictado)){
+    playAudio(ultimoAudioKey);
+  }
+}
+
+/* ===============================
+   Responder / Verificar
+=============================== */
+function responder(letra){
+  focoAutomatico = false;
+  if(yaValidado) return;
+  if(!rondaDictado) $("respuestaUsuario").value = letra;
+  verificar(letra);
+}
+
+function verificar(letraForzada){
+  const res = $("resultado");
+  const r = (letraForzada || (!rondaDictado ? $("respuestaUsuario").value : ""))
+              .toString().toLowerCase().trim();
+
+  if(!rondaDictado && !["a","b","c"].includes(r)){
+    res.className = "incorrecto";
+    res.innerText = `Incorrecto ✘ (era ${correctaLetra}) — ${respuestaCorrecta}`;
+    errores++; pintarStats();
+    yaValidado = true;
+
+    pintarOpciones(r);
+    bloquearOpciones();
+    playAudio(ultimoAudioKey);
+    return;
+  }
+
+  const letra = rondaDictado ? letraForzada : r;
+
+  if(letra === correctaLetra){
+    res.className = "correcto";
+    res.innerText = "Correcto ✔";
+    aciertos++;
+  }else{
+    res.className = "incorrecto";
+    res.innerText = `Incorrecto ✘ (era ${correctaLetra}) — ${respuestaCorrecta}`;
+    errores++;
+  }
+
+  pintarStats();
+  yaValidado = true;
+
+  pintarOpciones(letra);
+  bloquearOpciones();
+
+  playAudio(ultimoAudioKey);
+}
+
+function setSpeakerEnabled(on){
+  const btn = document.getElementById("promptSpeaker");
+  if(!btn) return;
+  btn.disabled = !on;
+  btn.style.opacity = on ? "1" : ".35";
+  btn.style.cursor  = on ? "pointer" : "not-allowed";
+  btn.title = on ? "Escuchar" : "Disponible después de responder";
+}
+  
+function accionSiguiente(){
+  focoAutomatico = false;
+
+  if(!yaValidado){
+    errores++;
+    pintarStats();
+    yaValidado = true;
+  
+    const res = $("resultado");
+    res.className = "incorrecto";
+    res.innerText = `Saltado ✘ (era ${correctaLetra}) — ${respuestaCorrecta}`;
+  
+    pintarOpciones(null);
+    bloquearOpciones();
+  
+    // ✅ Si es ES→EN (no dictado), habilita el botón y suena al saltar
+    if(rondaDir === "es-en" && !rondaDictado){
+      const sp = document.getElementById("promptSpeaker");
+      if(sp) sp.disabled = false;
+    }
+  
+    playAudio(ultimoAudioKey);
+    return;
+  }
+
+  siguiente();
+}
+
+function mostrarRespuesta(){
+  focoAutomatico = false;
+
+  if(!yaValidado){
+    errores++;
+    pintarStats();
+  }
+
+  const res = $("resultado");
+  res.className = "incorrecto";
+  res.innerText = `Respuesta: ${respuestaCorrecta}`;
+
+  yaValidado = true;
+
+  pintarOpciones(null);
+  bloquearOpciones();
+
+  playAudio(ultimoAudioKey);
+}
+
+function manejarEnter(event){
+  if(event.key !== "Enter") return;
+  if(rondaDictado) return;
+
+  if(!yaValidado) verificar();
+  else siguiente();
+}
+
+/* ===============================
+   UX: evitar teclado móvil por defecto
+=============================== */
+document.addEventListener("pointerdown", (e)=>{
+  focoAutomatico = (e.target && e.target.id === "respuestaUsuario");
+});
+document.addEventListener("keydown", (e)=>{
+  const k = (e.key || "").toLowerCase();
+  if(k === "enter" || k === "a" || k === "b" || k === "c") focoAutomatico = true;
+});
+
+/* ===============================
+   CARGA JSON + chips bloques
+=============================== */
+function renderChips(){
+  const cont = $("chipsBloques");
+  cont.innerHTML = "";
+
+  DATA.bloques.forEach((b, i)=>{
+    const chip = document.createElement("div");
+    chip.className = "chip" + (bloquesActivos.has(i) ? " activo" : "");
+    chip.textContent = b.nombre || `Bloque ${i+1}`;
+
+    chip.onclick = ()=>{
+      $("btnTodo")?.classList.remove("activo");
+
+      if(bloquesActivos.has(i)) bloquesActivos.delete(i);
+      else bloquesActivos.add(i);
+
+      if(bloquesActivos.size === 0) bloquesActivos.add(i);
+
+      [...cont.children].forEach((el, idx)=>{
+        el.classList.toggle("activo", bloquesActivos.has(idx));
+      });
+
+      yaValidado = false;
+      limpiarResultado();
+      siguiente();
+    };
+
+    cont.appendChild(chip);
+  });
+}
+
+fetch(JSON_PATH)
+  .then(r=>r.json())
+  .then(json=>{
+    DATA = (json && json.bloques) ? json : { bloques: [] };
+
+    if(DATA.bloques.length === 0){
+      $("promptMain").innerText = "No hay bloques en el JSON";
+      $("promptSub").innerText = "";
+      return;
+    }
+
+    // default: todo activo
+    bloquesActivos = new Set(DATA.bloques.map((_, i)=>i));
+    $("btnTodo")?.classList.add("activo");
+
+    renderChips();
+
+    // defaults
+    setPoolScope("seleccion");
+    setModoBase("mix"); // ✅ Mix default
+  })
+  .catch(err=>{
+    console.error(err);
+    $("promptMain").innerText = "No se pudo cargar " + JSON_PATH;
+    $("promptSub").innerText = "Revisa ruta y usa servidor (GitHub Pages / Live Server).";
+  });
+</script>
+
+</body>
+</html>

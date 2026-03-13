@@ -3,352 +3,870 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Repaso de Kanji (2136) - Asallam Sensei</title>
+<title>Repaso de los 2136 Jōyō Kanji — Asallam Sensei</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
+
 <style>
-    body {
-        background: #fffaf3;
-        font-family: Arial;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding: 30px 14px 60px;
+  :root{
+    --bg: #0b1020;
+    --card: rgba(255,255,255,.08);
+    --card2: rgba(255,255,255,.10);
+    --text: #eef2ff;
+    --muted: rgba(238,242,255,.75);
+    --accent: #7d5cff;
+    --accent2:#22c55e;
+    --danger:#ef4444;
+    --border: rgba(255,255,255,.14);
+    --font-jp: "Noto Sans JP", "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", "MS PGothic", system-ui, sans-serif;
+  }
+
+  body{
+    margin:0;
+    font-family: Arial, sans-serif;
+    background: radial-gradient(1200px 700px at 20% 10%, rgba(125,92,255,.35), transparent 60%),
+                radial-gradient(900px 600px at 90% 20%, rgba(34,197,94,.22), transparent 60%),
+                radial-gradient(900px 600px at 30% 90%, rgba(239,68,68,.18), transparent 55%),
+                var(--bg);
+    color: var(--text);
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    padding:28px 14px 70px;
+  }
+
+  .wrap{ width:min(980px, 100%); }
+
+  header{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    margin-bottom:16px;
+  }
+
+  h1{
+    margin:0;
+    font-size:clamp(22px, 5vw, 32px);
+    margin-top:16px;
+    margin-bottom:10px;
+    text-align:center;
+    letter-spacing:.2px;
+  }
+
+  .grid{
+    display:grid;
+    grid-template-columns: 1.1fr .9fr;
+    gap:14px;
+  }
+
+  @media (max-width: 860px){
+    .grid{ grid-template-columns: 1fr; }
+    h1{
+      font-size: 22px;
+      line-height: 1.2;
+      margin-top: 8px;
+      margin-bottom: 6px;
     }
+  }
 
-    h1 {
-    font-size: 24px;      /* 👈 más pequeño */
-    margin: 10px 0 16px;    /* 👈 menos aire arriba y abajo */
-    text-align: center;
-    }
+  .card{
+    background: linear-gradient(180deg, var(--card2), var(--card));
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    box-shadow: 0 18px 45px rgba(0,0,0,.35);
+    padding: 16px;
+  }
 
-    /* Barra de filtros */
-    #filtros {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 8px;
-        justify-content: center;
-        margin-bottom: 8px;
-        max-width: 780px;
-    }
+  .row{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    align-items:center;
+    justify-content:center;
+  }
 
-    .btn-grado {
-        padding: 10px 14px;
-        font-size: 16px;
-        border-radius: 999px;
-        border: 2px solid #d97706;
-        background: transparent;
-        color: #7c2d12;
-        cursor: pointer;
-        user-select: none;
-        transition: 0.15s;
-    }
+  .pill{
+    padding: 8px 12px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: rgba(255,255,255,.06);
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.35;
+  }
 
-    .btn-grado:hover { transform: translateY(-1px); }
+  .sep{
+    height: 1px;
+    background: rgba(255,255,255,.10);
+    margin: 12px 0;
+  }
 
-    .btn-grado.activo {
-        background: #d97706;
-        color: white;
-    }
+  .hint{
+    color: rgba(238,242,255,.7);
+    font-size: 13px;
+    line-height: 1.35;
+    text-align:center;
+  }
 
-    .pill {
-        margin-top: 6px;
-        font-size: 14px;
-        color: #444;
-        text-align: center;
-        max-width: 780px;
-        line-height: 1.4;
-    }
+  .miniStatus{
+    margin-top: 6px;
+    color: rgba(238,242,255,.78);
+    font-size: 13px;
+    line-height: 1.45;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  
+  .miniStatus > div{
+    padding: 0;            /* sin “pill” */
+    border: 0;
+    background: transparent;
+    border-radius: 0;
+    color: inherit;
+  }
+  
+  code.kbd{
+    background: rgba(255,255,255,.08);
+    border: 1px solid rgba(255,255,255,.14);
+    padding: 2px 7px;
+    border-radius: 8px;
+    font-weight: 700;
+  }
 
-    #kanji {
-        font-size: 120px;
-        margin: 10px 0 8px;
-        font-weight: bold;
-    }
+  .btn{
+    border: none;
+    border-radius: 12px;
+    padding: 11px 14px;
+    cursor: pointer;
+    color: white;
+    background: var(--accent);
+    font-weight: bold;
+    transition: .15s;
+  }
+  .btn:hover{ transform: translateY(-1px); filter: brightness(1.06); }
 
-    button {
-        padding: 12px 20px;
-        margin: 5px;
-        font-size: 18px;
-        border-radius: 10px;
-        border: none;
-        background: #d97706;
-        color: white;
-        cursor: pointer;
-    }
+  .btn-ghost{
+    background: rgba(255,255,255,.08);
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-weight: 700;
+  }
 
-    button:hover { background: #b45309; }
+  .btn-danger{
+    background: rgba(239,68,68,.15);
+    border: 1px solid rgba(239,68,68,.5);
+    color: #fecaca;
+  }
 
-    #opciones {
-        font-size: 24px;
-        margin-top: 6px;
-        text-align: left;
-        line-height: 1.6;
-        width: fit-content;
-        margin-left: auto;
-        margin-right: auto;
-    }
+  .btn-danger.activo{
+    background: var(--danger);
+    border-color: transparent;
+    color: white;
+  }
 
-    #respuestaUsuario {
-        margin-top: 6px;
-        font-size: 22px;
-        padding: 8px 12px;
-        border-radius: 8px;
-        border: 2px solid #aaa;
-        text-align: center;
-        width: 90px;
-    }
+  .btn-mode{
+    background: rgba(255,255,255,.08);
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-weight: 700;
+  }
+  .btn-mode.activo{
+    background: var(--accent);
+    border-color: transparent;
+  }
 
-    .correcto { color: #28a745; font-weight: bold; }
-    .incorrecto { color: #d93025; font-weight: bold; }
+  .chips{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-top:8px;
+  }
 
-    #resultado {
-        margin-top: 12px;
-        font-size: 24px;
-        min-height: 30px;
-        text-align: center;
-    }
+  .chip{
+    padding: 9px 12px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: rgba(255,255,255,.06);
+    color: var(--muted);
+    cursor:pointer;
+    user-select:none;
+    font-size: 13px;
+    font-weight: 800;
+    transition:.12s;
+  }
+  .chip:hover{ transform: translateY(-1px); }
+  .chip.activo{
+    background: var(--accent);
+    color: white;
+    border-color: transparent;
+  }
 
-    #estadisticas {
-        margin-top: 18px;
-        font-size: 20px;
-        text-align: center;
-    }
+  /* ======= Panel juego ======= */
+  .big{
+    text-align:center;
+    padding: 14px 10px 10px;
+  }
 
-    #miniinfo {
-        margin-top: 6px;
-        font-size: 14px;
-        color: #555;
-        text-align: center;
-    }
+  #kanji{
+    font-size: clamp(44px, 6vw, 92px);
+    font-weight: 200;
+    margin: 8px 0 6px;
+    letter-spacing: .5px;
+    font-family: var(--font-jp);
+  }
+
+  #promptTop{
+    margin-top: 2px;
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:8px;
+  }
+
+  #opciones{
+    margin-top: 10px;
+    font-size: 20px;
+    line-height: 1.7;
+    text-align:left;
+    width: fit-content;
+    margin-left:auto;
+    margin-right:auto;
+    padding: 10px 14px;
+    border-radius: 14px;
+    border: 1px dashed rgba(255,255,255,.22);
+    background: rgba(0,0,0,.18);
+  }
+
+  /* ES → Kanji: las opciones son kanji, hazlas más grandes y con fuente JP */
+  body.modo-es-kanji #opciones{
+    font-family: var(--font-jp);
+    font-size: 36px !important;
+    line-height: 1.6;
+    letter-spacing: .05em;
+  }
+  
+  .opbtns{
+    display:flex;
+    justify-content:center;
+    gap:10px;
+    margin-top: 12px;
+    flex-wrap:wrap;
+  }
+  .opbtns button{ min-width: 90px; }
+
+  #resultado{
+    margin-top: 12px;
+    font-size: 20px;
+    min-height: 32px;
+    text-align:center;
+    font-weight: 800;
+    white-space: pre-line;
+  }
+
+  .correcto{ color: var(--accent2); }
+  .incorrecto{ color: var(--danger); }
+
+  .stats{
+    margin-top: 12px;
+    text-align:center;
+    color: var(--muted);
+    font-size: 15px;
+  }
+
+  .tag{
+    padding: 6px 10px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: rgba(255,255,255,.06);
+    color: var(--muted);
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing:.3px;
+  }
+
+  .tag-acc{
+    background: rgba(34,197,94,.14);
+    border-color: rgba(34,197,94,.35);
+    color: #86efac;
+  }
+
+  .tag-warn{
+    background: rgba(239,68,68,.12);
+    border-color: rgba(239,68,68,.30);
+    color: #fecaca;
+  }
+
+  .tag-grade{
+    background: rgba(125,92,255,.18);
+    border-color: rgba(125,92,255,.45);
+    color: #ddd6fe;
+  }
 </style>
 </head>
+
 <body>
+<div class="wrap">
 
-<h1>Repaso de los 2136 Jōyō Kanji — Asallam Sensei</h1>
+  <header>
+    <h1>Los 2136 Jōyō Kanji — Asallam Sensei</h1>
+  </header>
 
-<div id="filtros">
-    <button class="btn-grado" data-grado="1">1</button>
-    <button class="btn-grado" data-grado="2">2</button>
-    <button class="btn-grado" data-grado="3">3</button>
-    <button class="btn-grado" data-grado="4">4</button>
-    <button class="btn-grado" data-grado="5">5</button>
-    <button class="btn-grado" data-grado="6">6</button>
-    <button class="btn-grado" data-grado="8">8</button>
-    <button class="btn-grado" data-grado="all">Todos</button>
-</div>
+  <div class="grid">
 
-<div id="kanji">日</div>
+    <!-- Panel izquierdo: juego -->
+    <div class="card big">
 
-<div id="opciones"></div>
+      <div id="kanji">—</div>
 
-<input id="respuestaUsuario"
-       type="text"
-       placeholder="a / b / c"
-       maxlength="1"
-       onkeydown="manejarEnter(event)">
+      <div id="opciones"></div>
 
-<div id="resultado"></div>
+      <div class="opbtns">
+        <button class="btn btn-ghost" type="button" onclick="responder('a')">a</button>
+        <button class="btn btn-ghost" type="button" onclick="responder('b')">b</button>
+        <button class="btn btn-ghost" type="button" onclick="responder('c')">c</button>
+      </div>
 
-<div id="estadisticas">
-    Aciertos: <span id="aciertos">0</span> —
-    Errores: <span id="errores">0</span>
+      <div id="resultado"></div>
+
+      <div class="stats">
+        <div>
+          Aciertos: <span id="aciertos">0</span> —
+          Errores: <span id="errores">0</span>
+        </div>
+        <div style="margin-top:6px;">
+          Racha: <span id="racha">0</span> —
+          Mejor racha: <span id="mejorRacha">0</span> —
+          Precisión: <span id="precision">0%</span>
+        </div>
+      </div>
+
+      <div class="row" style="margin-top: 14px;">
+        <button class="btn" type="button" onclick="siguiente()">Siguiente</button>
+        <button class="btn btn-ghost" type="button" onclick="resetStats()">Reset stats</button>
+      </div>
+
+      <div class="sep"></div>
+
+      <div class="hint" id="ayuda">
+        Usa <code class="kbd">A</code>, <code class="kbd">B</code> o <code class="kbd">C</code>.
+        <code class="kbd">Enter</code> pasa a la siguiente.
+      </div>
+    </div>
+
+    <!-- Panel derecho: controles -->
+    <div class="card">
+
+      <div class="row" style="justify-content:flex-start;">
+        <span class="pill">Grados</span>
+      </div>
+
+      <div class="row" style="justify-content:flex-start; margin-top: 8px;">
+        <div id="chipsGrados" class="chips"></div>
+      </div>
+
+      <div class="row" style="justify-content:flex-start; margin-top:10px; gap:10px;">
+        <button id="btnTodo" class="btn btn-ghost btn-danger" type="button" onclick="seleccionarTodo()">Todo</button>
+        <button id="btnNinguna" class="btn btn-ghost" type="button" onclick="seleccionarNinguna()">Ninguna</button>
+      </div>
+
+      <div class="sep"></div>
+
+      <div class="row" style="justify-content:flex-start;">
+        <span class="pill">Modo</span>
+      </div>
+
+      <div class="row" style="justify-content:flex-start; margin-top: 8px; gap:10px; flex-wrap:wrap;">
+        <button class="btn btn-mode" id="m-kanji-es" type="button" onclick="setModo('kanji_es')">Kanji → ES</button>
+        <button class="btn btn-mode" id="m-es-kanji" type="button" onclick="setModo('es_kanji')">ES → Kanji</button>
+        <button class="btn btn-mode" id="m-mix" type="button" onclick="setModo('mix')">Mix</button>
+      </div>
+
+      <div class="sep"></div>
+
+      <div class="row" style="justify-content:flex-start;">
+        <span class="pill">Pool de distractores</span>
+      </div>
+
+      <div class="row" style="justify-content:flex-start; margin-top: 8px; gap:10px;">
+        <button class="btn btn-mode" id="pool-sel" type="button" onclick="setPoolScope('seleccion')">Solo selección</button>
+        <button class="btn btn-mode" id="pool-glob" type="button" onclick="setPoolScope('global')">Global</button>
+      </div>
+
+      <div class="sep"></div>
+      
+      <div class="miniStatus" id="miniStatus">
+        <div id="pillGrados">Grados activos: —</div>
+        <div id="pillPool">Pool: —</div>
+        <div id="pillModo">Modo: —</div>
+        <div id="pillScope">Distractores: —</div>
+      </div>
+
+    </div>
+
+  </div>
 </div>
 
 <script>
-let listaCompleta = [];
-let listaFiltrada = [];
+/* =========================================================
+   DATA + ESTADO
+========================================================= */
+let listaCompleta = [];     // [{kanji, significado, grado}]
+let listaFiltrada = [];     // filtrado por grados seleccionados
 
-let actual = 0;
-let aciertos = 0;
-let errores = 0;
-
-let correcta = "";
-let significadoCorrecto = "";
+let actual = null;          // { tipo, prompt, opciones, correcta, respuesta, extra }
 let yaValidado = false;
 
 const gradosDisponibles = [1,2,3,4,5,6,8];
-let gradosSeleccionados = new Set(gradosDisponibles); // por defecto: todos
+let gradosSeleccionados = new Set(gradosDisponibles); // default: todos activos
 
-// Cargar kanji desde JSON (2136)
+let modoActual = "mix";     // "kanji_es" | "es_kanji" | "mix"
+let poolScope = "seleccion";// "seleccion" | "global"
+
+/* =========================================================
+   STATS (persistentes)
+========================================================= */
+const STATS_KEY = "joyo_2136_stats_v2";
+
+let aciertos = 0;
+let errores = 0;
+let racha = 0;
+let mejorRacha = 0;
+
+function cargarStats(){
+  try{
+    const s = JSON.parse(localStorage.getItem(STATS_KEY)) || {};
+    aciertos = s.aciertos || 0;
+    errores = s.errores || 0;
+    racha = s.racha || 0;
+    mejorRacha = s.mejorRacha || 0;
+  }catch{
+    aciertos = 0; errores = 0; racha = 0; mejorRacha = 0;
+  }
+  pintarStats();
+}
+
+function guardarStats(){
+  localStorage.setItem(STATS_KEY, JSON.stringify({ aciertos, errores, racha, mejorRacha }));
+}
+
+function resetStats(){
+  aciertos = 0;
+  errores = 0;
+  racha = 0;
+  mejorRacha = 0;
+  pintarStats();
+  guardarStats();
+}
+
+function precisionPct(){
+  const total = aciertos + errores;
+  if(total <= 0) return "0%";
+  return Math.round((aciertos / total) * 100) + "%";
+}
+
+function pintarStats(){
+  $("aciertos").innerText = aciertos;
+  $("errores").innerText = errores;
+  $("racha").innerText = racha;
+  $("mejorRacha").innerText = mejorRacha;
+  $("precision").innerText = precisionPct();
+}
+
+/* =========================================================
+   UI HELPERS
+========================================================= */
+function $(id){ return document.getElementById(id); }
+
+function limpiarResultado(){
+  const r = $("resultado");
+  r.innerText = "";
+  r.className = "";
+}
+
+function refrescarPills(){
+  // grados activos
+  const todosActivos = gradosDisponibles.every(g => gradosSeleccionados.has(g));
+  const gradosTxt = todosActivos
+    ? "Todos"
+    : [...gradosSeleccionados].sort((a,b)=>a-b).join(", ");
+
+  $("pillGrados").innerText = `Grados activos: ${gradosTxt}`;
+  $("pillPool").innerText = `Pool: ${listaFiltrada.length}`;
+  $("pillModo").innerText = `Modo: ${modoActual === "kanji_es" ? "Kanji → ES" : (modoActual === "es_kanji" ? "ES → Kanji" : "Mix")}`;
+  $("pillScope").innerText = `Distractores: ${poolScope === "global" ? "Global" : "Solo selección"}`;
+}
+
+/* Evita teclado móvil por defecto; se activa si el usuario interactúa con input o teclado */
+
+document.addEventListener("keydown", (e) => {
+  const k = (e.key || "").toLowerCase();
+
+  if(!yaValidado && ["a","b","c"].includes(k)){
+    e.preventDefault();
+    responder(k);
+  }
+});
+
+document.addEventListener("keydown", (e) => {
+  if (e.key !== "Enter") return;
+  e.preventDefault();
+
+  if (!actual) return;
+
+  if (yaValidado) {
+    siguiente();
+  }
+});
+/* =========================================================
+   CHIPS DE GRADOS (reemplaza botones)
+========================================================= */
+function construirChipsGrados(){
+  const cont = $("chipsGrados");
+  cont.innerHTML = "";
+
+  // chips 1..6,8
+  gradosDisponibles.forEach(g => {
+    const chip = document.createElement("div");
+    chip.className = "chip" + (gradosSeleccionados.has(g) ? " activo" : "");
+    chip.textContent = String(g);
+
+    chip.onclick = () => {
+      const todosActivos = gradosDisponibles.every(x => gradosSeleccionados.has(x));
+
+      // si estaban todos activos y tocas uno => dejar solo ese (igual que tu lógica anterior)
+      if(todosActivos){
+        gradosSeleccionados = new Set([g]);
+      }else{
+        if(gradosSeleccionados.has(g)) gradosSeleccionados.delete(g);
+        else gradosSeleccionados.add(g);
+
+        if(gradosSeleccionados.size === 0){
+          gradosSeleccionados = new Set(gradosDisponibles); // safety
+        }
+      }
+
+      syncChipsGrados();
+      aplicarFiltro();
+      yaValidado = false;
+      limpiarResultado();
+      siguiente();
+    };
+
+    cont.appendChild(chip);
+  });
+
+  // default: "Todo" activo cuando corresponde
+  syncChipsGrados();
+}
+
+function syncChipsGrados(){
+  const cont = $("chipsGrados");
+  const kids = [...cont.children];
+  kids.forEach((el, idx) => {
+    const g = gradosDisponibles[idx];
+    el.classList.toggle("activo", gradosSeleccionados.has(g));
+  });
+
+  const todosActivos = gradosDisponibles.every(g => gradosSeleccionados.has(g));
+  $("btnTodo")?.classList.toggle("activo", todosActivos);
+}
+
+/* Botones Todo / Ninguna */
+function seleccionarTodo(){
+  gradosSeleccionados = new Set(gradosDisponibles);
+  syncChipsGrados();
+  aplicarFiltro();
+  yaValidado = false;
+  limpiarResultado();
+  siguiente();
+}
+
+function seleccionarNinguna(){
+  gradosSeleccionados.clear();
+  syncChipsGrados();
+  aplicarFiltro();
+  // Si queda vacío, mostramos mensaje (no forzamos a todos aquí para que el usuario lo note)
+  $("kanji").innerText = "—";
+  $("opciones").innerHTML = "";
+  $("resultado").className = "incorrecto";
+  $("resultado").innerText = "Activa al menos un grado.";
+  refrescarPills();
+}
+
+/* =========================================================
+   MODO + POOL
+========================================================= */
+function setModo(modo){
+  modoActual = modo;
+
+  document.body.classList.toggle("modo-es-kanji", modo === "es_kanji");
+  
+  ["m-kanji-es","m-es-kanji","m-mix"].forEach(id => $(id)?.classList.remove("activo"));
+  if(modo === "kanji_es") $("m-kanji-es")?.classList.add("activo");
+  else if(modo === "es_kanji") $("m-es-kanji")?.classList.add("activo");
+  else $("m-mix")?.classList.add("activo");
+
+  yaValidado = false;
+  limpiarResultado();
+  refrescarPills();
+  siguiente();
+}
+
+function setPoolScope(scope){
+  poolScope = scope;
+
+  $("pool-sel")?.classList.toggle("activo", poolScope === "seleccion");
+  $("pool-glob")?.classList.toggle("activo", poolScope === "global");
+
+  yaValidado = false;
+  limpiarResultado();
+  refrescarPills();
+  siguiente();
+}
+
+/* =========================================================
+   RANDOM HELPERS
+========================================================= */
+function pick(arr){
+  return arr[Math.floor(Math.random() * arr.length)];
+}
+function shuffle(arr){
+  const copia = arr.slice();
+  for(let i = copia.length - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * (i + 1));
+    [copia[i], copia[j]] = [copia[j], copia[i]];
+  }
+  return copia;
+}
+
+/* arma 3 opciones únicas con un "correct" */
+function build3Options(pool, correctValue, mapFn){
+  const opciones = [correctValue];
+
+  let tries = 0;
+  while(opciones.length < 3 && tries < 300){
+    tries++;
+    const v = mapFn(pick(pool));
+    if(v != null && v !== "" && !opciones.includes(v)) opciones.push(v);
+  }
+
+  while(opciones.length < 3){
+    opciones.push("—");
+  }
+
+  return shuffle(opciones);
+}
+
+/* =========================================================
+   FILTRO + POOLS
+========================================================= */
+function aplicarFiltro(){
+  // si no hay grados seleccionados, no hay pool
+  if(gradosSeleccionados.size === 0){
+    listaFiltrada = [];
+    refrescarPills();
+    return;
+  }
+
+  listaFiltrada = listaCompleta.filter(item => gradosSeleccionados.has(item.grado));
+
+  refrescarPills();
+
+  if(listaFiltrada.length < 3){
+    $("resultado").className = "incorrecto";
+    $("resultado").innerText = "Pool muy pequeño: activa más grados (mínimo 3 kanji).";
+  }
+}
+
+function getPoolDistractores(){
+  // para distractores: o filtrada (solo selección), o completa (global)
+  const base = (poolScope === "global") ? listaCompleta : listaFiltrada;
+  return (Array.isArray(base) && base.length) ? base : listaFiltrada;
+}
+
+/* =========================================================
+   GENERADORES DE PREGUNTA
+========================================================= */
+function preguntaKanjiES(){
+  if(listaFiltrada.length < 3) return null;
+
+  const k = pick(listaFiltrada);
+  const correct = k.significado;
+
+  const pool = getPoolDistractores();
+  const basePool = (pool.length >= 3) ? pool : listaFiltrada;
+
+  const opciones = build3Options(basePool, correct, x => x.significado);
+  const letras = ["a","b","c"];
+  const correcta = letras[opciones.indexOf(correct)];
+
+  return {
+    tipo: "kanji_es",
+    prompt: k.kanji,
+    opciones,
+    correcta,
+    respuesta: correct,
+    extra: k
+  };
+}
+
+function preguntaESKanji(){
+  if(listaFiltrada.length < 3) return null;
+
+  const k = pick(listaFiltrada);
+  const correct = k.kanji;
+
+  const pool = getPoolDistractores();
+  const basePool = (pool.length >= 3) ? pool : listaFiltrada;
+
+  const opciones = build3Options(basePool, correct, x => x.kanji);
+  const letras = ["a","b","c"];
+  const correcta = letras[opciones.indexOf(correct)];
+
+  return {
+    tipo: "es_kanji",
+    prompt: k.significado,
+    opciones,
+    correcta,
+    respuesta: correct,
+    extra: k
+  };
+}
+
+/* =========================================================
+   FLUJO
+========================================================= */
+function siguiente(){
+  if(gradosSeleccionados.size === 0){
+    $("kanji").innerText = "—";
+    $("opciones").innerHTML = "";
+    return;
+  }
+
+  if(listaFiltrada.length < 3){
+    // ya se mostró mensaje en aplicarFiltro()
+    return;
+  }
+
+  let q = null;
+
+  if(modoActual === "kanji_es") q = preguntaKanjiES();
+  else if(modoActual === "es_kanji") q = preguntaESKanji();
+  else{
+    // mix
+    q = (Math.random() < 0.50) ? preguntaKanjiES() : preguntaESKanji();
+  }
+
+  if(!q){
+    $("kanji").innerText = "—";
+    $("opciones").innerHTML = "";
+    $("resultado").className = "incorrecto";
+    $("resultado").innerText = "No se pudo generar pregunta (revisa pool).";
+    return;
+  }
+
+  actual = q;
+  document.body.classList.toggle("modo-es-kanji", actual.tipo === "es_kanji");
+  
+  // prompt principal (arriba grande)
+  // si es ES→Kanji, mostramos el significado como "kanji" grande (pero en fuente normal)
+  if(actual.tipo === "es_kanji"){
+    $("kanji").style.fontFamily = "Arial, sans-serif";
+    $("kanji").style.fontSize = "clamp(22px, 3.2vw, 34px)";
+    $("kanji").style.letterSpacing = ".2px";
+    $("kanji").innerText = actual.prompt;
+  }else{
+    $("kanji").style.fontFamily = "var(--font-jp)";
+    $("kanji").style.fontSize = "clamp(44px, 6vw, 92px)";
+    $("kanji").style.letterSpacing = ".5px";
+    $("kanji").innerText = actual.prompt;
+  }
+
+  $("opciones").innerHTML =
+    `a) ${actual.opciones[0]}<br>
+     b) ${actual.opciones[1]}<br>
+     c) ${actual.opciones[2]}`;
+
+  limpiarResultado();
+  yaValidado = false;
+
+  refrescarPills();
+}
+
+function responder(letra){
+  if(yaValidado) return;
+  verificar(letra);
+}
+
+function verificar(input){
+  input = (input || "").trim().toLowerCase();
+  const res = $("resultado");
+
+  // ENTER vacío = revelar + error
+
+  if(!["a","b","c"].includes(input)){
+    res.className = "incorrecto";
+    res.innerText = "Usa solo: a / b / c";
+    return;
+  }
+
+  if(input === actual.correcta){
+    res.className = "correcto";
+    res.innerText = "Correcto ✔";
+    aciertos++;
+    racha++;
+    if(racha > mejorRacha) mejorRacha = racha;
+  }else{
+    res.className = "incorrecto";
+    res.innerText = `Incorrecto ✘ (era ${actual.correcta})\nRespuesta: ${actual.correcta}) ${actual.respuesta}`;
+    errores++;
+    racha = 0;
+  }
+
+  pintarStats();
+  guardarStats();
+  yaValidado = true;
+}
+
+/* =========================================================
+   CARGA JSON
+========================================================= */
+cargarStats();
+
 fetch("data/2136.json")
   .then(res => res.json())
   .then(data => {
-      // Normaliza y filtra entradas inválidas por si acaso
-      listaCompleta = (Array.isArray(data) ? data : []).filter(x =>
-          x && typeof x.kanji === "string" && x.kanji.trim() !== "" &&
-          typeof x.significado === "string" && x.significado.trim() !== "" &&
-          (typeof x.grado === "number" || typeof x.grado === "string")
-      ).map(x => ({
-          kanji: String(x.kanji).trim(),
-          significado: String(x.significado).trim(),
-          grado: Number(x.grado)
+    // Normaliza y filtra entradas inválidas
+    listaCompleta = (Array.isArray(data) ? data : [])
+      .filter(x =>
+        x && typeof x.kanji === "string" && x.kanji.trim() !== "" &&
+        typeof x.significado === "string" && x.significado.trim() !== "" &&
+        (typeof x.grado === "number" || typeof x.grado === "string")
+      )
+      .map(x => ({
+        kanji: String(x.kanji).trim(),
+        significado: String(x.significado).trim(),
+        grado: Number(x.grado)
       }));
 
-      prepararUIFiltros();
-      aplicarFiltro();
-      siguiente();
+    construirChipsGrados();
+    aplicarFiltro();
+
+    // defaults UI
+    setPoolScope("seleccion");
+    setModo("mix");
+
+    siguiente();
   })
   .catch(err => {
-      document.getElementById("resultado").innerText =
-        "No se pudo cargar data/2136.json (revisa ruta y servidor).";
-      console.error(err);
+    $("resultado").className = "incorrecto";
+    $("resultado").innerText =
+      "No se pudo cargar data/2136.json (revisa ruta y servidor).";
+    console.error(err);
   });
-
-function prepararUIFiltros() {
-    const botones = document.querySelectorAll(".btn-grado");
-
-    botones.forEach(btn => {
-        btn.addEventListener("click", () => {
-            const g = btn.dataset.grado;
-        
-            const todosActivos = gradosDisponibles.every(x => gradosSeleccionados.has(x));
-        
-            if (g === "all") {
-                // "Todos" siempre activa todos
-                gradosSeleccionados = new Set(gradosDisponibles);
-        
-            } else {
-                const n = Number(g);
-        
-                // ✅ Si estaban todos activos y tocas uno, resetea a SOLO ese
-                if (todosActivos) {
-                    gradosSeleccionados = new Set([n]);
-                } else {
-                    // comportamiento toggle normal
-                    if (gradosSeleccionados.has(n)) {
-                        gradosSeleccionados.delete(n);
-                    } else {
-                        gradosSeleccionados.add(n);
-                    }
-        
-                    // Si quedó vacío, por seguridad volvemos a todos
-                    if (gradosSeleccionados.size === 0) {
-                        gradosSeleccionados = new Set(gradosDisponibles);
-                    }
-                }
-            }
-        
-            pintarBotones();
-            aplicarFiltro();
-            siguiente();
-        });
-
-    });
-
-    pintarBotones();
-}
-
-function pintarBotones() {
-    const botones = document.querySelectorAll(".btn-grado");
-    const todosActivos = gradosDisponibles.every(g => gradosSeleccionados.has(g));
-
-    botones.forEach(btn => {
-        const g = btn.dataset.grado;
-        if (g === "all") {
-            btn.classList.toggle("activo", todosActivos);
-        } else {
-            btn.classList.toggle("activo", gradosSeleccionados.has(Number(g)));
-        }
-    });
-}
-
-function aplicarFiltro() {
-    listaFiltrada = listaCompleta.filter(item => gradosSeleccionados.has(item.grado));
-
-    const gradosTxt = [...gradosSeleccionados].sort((a,b)=>a-b).join(", ");
-
-    // Si el pool queda muy pequeño, no se puede hacer multiple-choice decente
-    if (listaFiltrada.length < 3) {
-        document.getElementById("resultado").innerText =
-          "Pool muy pequeño: activa más grados (mínimo 3 kanji).";
-    }
-}
-
-function siguiente() {
-    if (listaFiltrada.length < 3) return;
-
-    actual = Math.floor(Math.random() * listaFiltrada.length);
-    const correcto = listaFiltrada[actual];
-
-    significadoCorrecto = correcto.significado;
-
-    // Opciones
-    let opciones = [correcto.significado];
-    while (opciones.length < 3) {
-        const r = listaFiltrada[Math.floor(Math.random() * listaFiltrada.length)].significado;
-        if (!opciones.includes(r)) opciones.push(r);
-    }
-
-    // Mezclar opciones
-    opciones.sort(() => Math.random() - 0.5);
-
-    const letras = ["a","b","c"];
-    correcta = letras[opciones.indexOf(correcto.significado)];
-
-    // Mostrar
-    document.getElementById("kanji").innerText = correcto.kanji;
-    document.getElementById("opciones").innerHTML =
-        `a) ${opciones[0]}<br>
-         b) ${opciones[1]}<br>
-         c) ${opciones[2]}`;
-
-    document.getElementById("resultado").innerText = "";
-    document.getElementById("resultado").className = "";
-    document.getElementById("respuestaUsuario").value = "";
-    document.getElementById("respuestaUsuario").focus();
-
-    yaValidado = false;
-}
-
-function verificar() {
-    const input = document.getElementById("respuestaUsuario");
-    const r = input.value.toLowerCase().trim();
-    const res = document.getElementById("resultado");
-
-    // ENTER sin escribir nada → mostrar respuesta y contar como error
-    if (r === "") {
-        res.innerText = `Significado: ${significadoCorrecto}`;
-        res.className = "incorrecto";
-
-        errores++;
-        document.getElementById("errores").innerText = errores;
-
-        yaValidado = true;
-        return;
-    }
-
-    // Validación normal
-    if (r === correcta) {
-        res.innerText = "Correcto ✔";
-        res.className = "correcto";
-
-        aciertos++;
-        document.getElementById("aciertos").innerText = aciertos;
-    } else {
-        res.innerText = `Incorrecto ✘ (era ${correcta})`;
-        res.className = "incorrecto";
-
-        errores++;
-        document.getElementById("errores").innerText = errores;
-    }
-
-    yaValidado = true;
-}
-
-function mostrarRespuesta() {
-    const res = document.getElementById("resultado");
-    res.innerText = `Significado: ${significadoCorrecto}`;
-    res.className = "";
-}
-
-function manejarEnter(event) {
-    if (event.key !== "Enter") return;
-
-    if (!yaValidado) {
-        verificar();
-    } else {
-        siguiente();
-    }
-}
 </script>
 
 </body>

@@ -30,6 +30,10 @@
   
     --jp: "Noto Sans JP","Hiragino Kaku Gothic ProN","Yu Gothic","Meiryo","MS PGothic",system-ui,sans-serif;
     --shadow: 0 18px 45px rgba(0,0,0,.35);
+
+    --abcBg: rgba(168, 85, 247, .38);
+    --abcBorder: rgba(196, 120, 255, .55);
+    --abcHoverBg: rgba(168, 85, 247, .60);
   }
 
 
@@ -90,56 +94,35 @@
 
 
   /* Botones ABC */
-  #opbtns{
-    display:flex;
-    gap:10px;
-    justify-content:center;
-    margin-top:0px;
-  }
-  .btnABC{
-    padding:10px 16px;
-    font-size:18px;
-    border-radius:12px;
-    border:1px solid rgba(255,255,255,.14);
-    background: rgba(239,68,68,.18);
-    color:#fff;
-    cursor:pointer;
-    min-width:64px;
-    font-weight:900;
-    transition:.14s;
-  }
-  .btnABC:hover{
-    background: rgba(239,68,68,.28);
-    transform: translateY(-1px);
-  }
-
-
-  /* Input */
-  #respuestaUsuario{
-    display:block;          /* ✅ asegura que sea bloque */
-    font-size:22px;
-    padding:10px 12px;
-    border-radius:12px;
-    border:1px solid var(--border);
-    text-align:center;
-    width:14ch;
-    margin:0;
+#opbtns{
+  display:flex;
+  gap:12px;
+  justify-content:center;
+  margin-top:0;
+  flex-wrap:wrap;
+}
   
-    background: rgba(255,255,255,.06);
-    color: var(--text);
-    outline:none;
-  }
-
-  #respuestaUsuario::placeholder{ color: rgba(255,255,255,.70); }
-  #respuestaUsuario:focus{
-    border-color: rgba(255,255,255,.22);
-    box-shadow: 0 0 0 4px rgba(125,92,255,.18);
-  }
-
+.btnABC{
+  padding:10px 16px;
+  font-size:18px;
+  border-radius:12px;
+  border:1px solid var(--abcBorder);
+  background: var(--abcBg);
+  color:#fff;
+  cursor:pointer;
+  min-width:64px;
+  font-weight:900;
+  transition:.14s;
+  box-shadow: 0 0 10px rgba(168, 85, 247, .35);
+}
+.btnABC:hover{
+  background: var(--abcHoverBg);
+  transform: translateY(-1px);
+}
 
   /* Nav debajo del input */
   #navBtns{
-    margin-top:0;          /* ✅ quita el extra */
+    margin-top:4px;
     display:flex;
     gap:10px;
     justify-content:center;
@@ -250,25 +233,23 @@
   }
 
 
-  .answerGrid{
-    display:grid;
-    justify-items:center;
-    gap:14px;
-    margin-top:14px;
-  
-    /* 🔥 autofit real + centrado */
-    width: fit-content;
-    max-width: min(920px, 96vw);
-    margin-left:auto;
-    margin-right:auto;
-  
-    /* opcional: que también sea tipo “card” */
-    padding: 12px 14px 14px;
-    border: 1px solid var(--border);
-    border-radius: 18px;
-    background: linear-gradient(180deg, var(--card2), var(--card));
-    box-shadow: var(--shadow);
-  }
+.answerGrid{
+  display:grid;
+  justify-items:center;
+  gap:12px;
+  margin-top:14px;
+
+  width: fit-content;
+  max-width: min(920px, 96vw);
+  margin-left:auto;
+  margin-right:auto;
+
+  padding: 12px 14px 14px;
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  background: linear-gradient(180deg, var(--card2), var(--card));
+  box-shadow: var(--shadow);
+}
 
   
   /* Opciones como bloque centrado */
@@ -312,7 +293,7 @@
 
   <div id="controles">
     <div class="modes">
-      <button id="btnKS" class="btnMode active" type="button" onclick="setModo('kanji-sig')">
+      <button id="btnKS" class="btnMode" type="button" onclick="setModo('kanji-sig')">
         Kanji → Significado
       </button>
       <button id="btnSK" class="btnMode" type="button" onclick="setModo('sig-kanji')">
@@ -336,14 +317,7 @@
       <button class="btnABC" type="button" onclick="responder('c')">c</button>
     </div>
   
-    <input id="respuestaUsuario"
-           type="text"
-           placeholder="a / b / c + Enter"
-           maxlength="1"
-           onkeydown="manejarEnter(event)" />
-  
     <div id="navBtns">
-      <button class="btnNav" type="button" onclick="accionMostrar()">Mostrar respuesta</button>
       <button class="btnNav" type="button" onclick="accionSiguiente()">Siguiente</button>
     </div>
   </div>
@@ -354,6 +328,13 @@
   <div id="estadisticas">
     Aciertos: <span id="aciertos">0</span> —
     Errores: <span id="errores">0</span>
+  
+    <div style="margin-top:6px;">
+      Racha: <span id="racha">0</span> —
+      Mejor racha: <span id="mejorRacha">0</span> —
+      Precisión: <span id="precision">0%</span>
+    </div>
+  
     <div style="margin-top:8px;">
       <button class="btnReset" type="button" onclick="resetStats()">Reset stats</button>
     </div>
@@ -365,38 +346,45 @@ let actual = 0;
 
 let aciertos = 0;
 let errores = 0;
+let racha = 0;
+let mejorRacha = 0;
 
 let correcta = "";             // 'a'/'b'/'c'
 let respuestaCorrecta = "";    // texto correcto (depende del modo)
 let yaValidado = false;        // ya se verificó la respuesta actual
   
-let modoActual = "kanji-sig"; // 'kanji-sig' | 'sig-kanji' | 'mix'
-let dirActual = "kanji-sig"; // dirección REAL de la pregunta actual (en mix puede cambiar)
-  
-// Anti-teclado automático (como en tu otro proyecto)
-let focoAutomatico = false; // por defecto: NO forzar focus (no abre teclado)
-document.addEventListener("pointerdown", (e) => {
-  focoAutomatico = (e.target && e.target.id === "respuestaUsuario");
-});
-document.addEventListener("keydown", (e) => {
-  if(["a","b","c","Enter"].includes(e.key)) focoAutomatico = true;
-});
+let modoActual = "mix"; // por defecto mezcla
+let dirActual = "kanji-sig";
 
 const letras = ["a","b","c"];
 
+function actualizarStatsUI(){
+  document.getElementById("aciertos").innerText = aciertos;
+  document.getElementById("errores").innerText = errores;
+  document.getElementById("racha").innerText = racha;
+  document.getElementById("mejorRacha").innerText = mejorRacha;
+
+  const total = aciertos + errores;
+  const precision = total === 0 ? 0 : Math.round((aciertos / total) * 100);
+  document.getElementById("precision").innerText = `${precision}%`;
+}
+  
 // ✅ Cargar kanji desde JSON (obj: {kanji, significado})
 fetch("data/kanji_1.json")
   .then(res => res.json())
   .then(data => {
     lista = (data || []).filter(x => x && x.kanji && x.significado);
-    siguiente();
+    setModo("mix");
+    actualizarStatsUI();
   })
-  .catch(() => {
+  
+  .catch((err) => {
+    console.error(err);
     document.getElementById("resultado").innerText =
-      "No se pudo cargar data/kanji_1.json";
+      "No se pudo iniciar correctamente la app";
     document.getElementById("resultado").className = "incorrecto";
   });
-
+  
 function getModo(){
   return modoActual;
 }
@@ -415,7 +403,6 @@ function setModo(m){
   yaValidado = false;
   document.getElementById("resultado").innerText = "";
   document.getElementById("resultado").className = "";
-  document.getElementById("respuestaUsuario").value = "";
   siguiente();
 }
 
@@ -427,25 +414,25 @@ function textoRespuesta(item){
   return (dirActual === "kanji-sig") ? item.significado : item.kanji;
 }
 
-
+function shuffleArray(arr){
+  for(let i = arr.length - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+  
 function aplicarEstiloPregunta(){
   const el = document.getElementById("kanji");
   if (dirActual === "sig-kanji") el.classList.add("esPregunta");
   else el.classList.remove("esPregunta");
 }
 
-
-
 function limpiarUIParaNueva(){
   const res = document.getElementById("resultado");
   res.innerText = "";
   res.className = "";
-  document.getElementById("respuestaUsuario").value = "";
   yaValidado = false;
-
-  if (focoAutomatico) {
-    document.getElementById("respuestaUsuario").focus();
-  }
 }
 
 function siguiente(){
@@ -473,7 +460,7 @@ function siguiente(){
     if (!opciones.includes(r)) opciones.push(r);
   }
 
-  opciones.sort(() => Math.random() - 0.5);
+  shuffleArray(opciones);
   correcta = letras[opciones.indexOf(respuestaCorrecta)];
 
   aplicarEstiloPregunta();
@@ -485,54 +472,46 @@ function siguiente(){
      c) ${opciones[2]}`;
 }
 
-/* ✅ Verificar la letra actual del input */
-function verificar(){
-  if (yaValidado) return; // evitar doble conteo
+/* ✅ Verificar la letra elegida */
+function verificar(letraElegida = ""){
+  if (yaValidado) return;
 
-  const r = document.getElementById("respuestaUsuario").value.toLowerCase().trim();
+  const r = String(letraElegida).toLowerCase().trim();
   const res = document.getElementById("resultado");
 
   if (r === correcta) {
     res.innerText = "Correcto ✔";
     res.className = "correcto";
     aciertos++;
-    document.getElementById("aciertos").innerText = aciertos;
+    racha++;
+    if (racha > mejorRacha) mejorRacha = racha;
   } else {
-    res.innerText = `Incorrecto ✘ (era ${correcta})`;
+    res.innerText = `Incorrecto ✘ — correcta: ${correcta}) ${respuestaCorrecta}`;
     res.className = "incorrecto";
     errores++;
-    document.getElementById("errores").innerText = errores;
+    racha = 0;
   }
 
+  actualizarStatsUI();
   yaValidado = true;
 }
 
-/* ✅ Botones a/b/c: llenan input y verifican */
+/* ✅ Botones a/b/c: verifican; si ya estaba validado, avanzan */
 function responder(letra){
-  focoAutomatico = false;
-  if (yaValidado) return;
-  document.getElementById("respuestaUsuario").value = letra;
-  verificar();
-}
-
-/* ✅ Enter: primero verifica; si ya estaba verificado → siguiente */
-function manejarEnter(event){
-  if (event.key !== "Enter") return;
-
-  if (!yaValidado) verificar();
-  else siguiente();
-}
-
-/* ✅ Siguiente: debe requerir 2 toques (primero verifica, segundo avanza) */
-function accionSiguiente(){
-  focoAutomatico = false;
-
   if (!yaValidado) {
-    // primero: verifica
-    verificar();
+    verificar(letra);
     return;
   }
-  // segundo: avanza
+  siguiente();
+}
+
+/* ✅ Siguiente: si no respondió, cuenta como incorrecto; si ya está validado, avanza */
+function accionSiguiente(){
+  if (!yaValidado) {
+    verificar("");
+    return;
+  }
+
   siguiente();
 }
 
@@ -541,32 +520,14 @@ function accionSiguiente(){
   - la primera vez: muestra "Respuesta: ... (era b)" y CUENTA ERROR
   - la segunda vez: avanza (para que también sea de 2 toques como "Siguiente")
 */
-function accionMostrar(){
-  focoAutomatico = false;
-
-  if (!yaValidado) {
-    // Si aún no ha respondido, al mostrar respuesta: marcar error.
-    errores++;
-    document.getElementById("errores").innerText = errores;
-
-    const res = document.getElementById("resultado");
-    res.innerText = `Respuesta: ${respuestaCorrecta} (era ${correcta})`;
-    res.className = "";
-
-    yaValidado = true;
-    return;
-  }
-
-  // Si ya estaba validado o ya se mostró → segundo toque avanza
-  siguiente();
-}
 
 /* Reset stats: resetea todo (stats + UI) */
 function resetStats(){
   aciertos = 0;
   errores = 0;
-  document.getElementById("aciertos").innerText = "0";
-  document.getElementById("errores").innerText = "0";
+  racha = 0;
+  mejorRacha = 0;
+  actualizarStatsUI();
   siguiente();
 }
   

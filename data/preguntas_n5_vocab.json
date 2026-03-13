@@ -734,6 +734,251 @@
           "explicacion": "財布(さいふ) = billetera, cartera."
         }
       ]
+    },
+    {
+      "nombre": "Preguntas 4",
+      "preguntas": [
+        {
+          "id": 61,
+          "titulo": "「昨日、本を読みました。」\n¿Cuál es la lectura correcta de 昨日?",
+          "opciones": {
+            "a": "きのう",
+            "b": "きょう",
+            "c": "あした",
+            "d": "さくねん"
+          },
+          "correcta": "a",
+          "explicacion": "昨日(きのう) = ayer."
+        },
+        {
+          "id": 62,
+          "titulo": "「駅で友だちを＿＿＿。」\n¿Cuál verbo completa mejor la frase?",
+          "opciones": {
+            "a": "待ちます",
+            "b": "読みます",
+            "c": "作ります",
+            "d": "乗ります"
+          },
+          "correcta": "a",
+          "explicacion": "駅で友だちを待ちます = esperar a un amigo en la estación."
+        },
+        {
+          "id": 63,
+          "titulo": "「この町はとても静かです。」\n町 significa…",
+          "opciones": {
+            "a": "pueblo / ciudad / barrio",
+            "b": "estación",
+            "c": "país",
+            "d": "parque"
+          },
+          "correcta": "a",
+          "explicacion": "町(まち) = pueblo o ciudad."
+        },
+        {
+          "id": 64,
+          "titulo": "「電車に＿＿＿、会社へ行きます。」\n¿Cuál verbo encaja mejor?",
+          "opciones": {
+            "a": "乗って",
+            "b": "読んで",
+            "c": "出て",
+            "d": "作って"
+          },
+          "correcta": "a",
+          "explicacion": "電車に乗って会社へ行きます = voy al trabajo tomando el tren."
+        },
+        {
+          "id": 65,
+          "titulo": "「犬が公園で遊んでいます。」\n犬 se lee…",
+          "opciones": {
+            "a": "いぬ",
+            "b": "ねこ",
+            "c": "うま",
+            "d": "とり"
+          },
+          "correcta": "a",
+          "explicacion": "犬(いぬ) = perro."
+        },
+        {
+          "id": 66,
+          "titulo": "「はさみを＿＿＿。」\n(usar algo)\n¿Cuál verbo encaja mejor?",
+          "opciones": {
+            "a": "使います",
+            "b": "待ちます",
+            "c": "出ます",
+            "d": "乗ります"
+          },
+          "correcta": "a",
+          "explicacion": "はさみを使います = usar tijeras."
+        },
+        {
+          "id": 67,
+          "titulo": "「男の人が駅から出ました。」\n出る significa…",
+          "opciones": {
+            "a": "salir",
+            "b": "entrar",
+            "c": "comprar",
+            "d": "leer"
+          },
+          "correcta": "a",
+          "explicacion": "出る(でる) = salir."
+        },
+        {
+          "id": 68,
+          "titulo": "「＿＿＿、映画を見に行きます。」\n(El día siguiente)\n¿Cuál palabra encaja?",
+          "opciones": {
+            "a": "明日",
+            "b": "昨日",
+            "c": "今日",
+            "d": "今"
+          },
+          "correcta": "a",
+          "explicacion": "明日(あした) = mañana."
+        },
+        {
+          "id": 69,
+          "titulo": "「姉は東京に住んでいます。」\n姉 significa…",
+          "opciones": {
+            "a": "hermana mayor",
+            "b": "hermana menor",
+            "c": "madre",
+            "d": "prima"
+          },
+          "correcta": "a",
+          "explicacion": "姉(あね) = hermana mayor."
+        },
+        {
+          "id": 70,
+          "titulo": "Elige la frase más natural.",
+          "opciones": {
+            "a": "昨日、本を読みました。",
+            "b": "昨日、本を飲みました。",
+            "c": "昨日、本を乗りました。",
+            "d": "昨日、本を待ちました。"
+          },
+          "correcta": "a",
+          "explicacion": "本は読むものなので「読みました」が自然。"
+        },
+        {
+          "id": 71,
+          "titulo": "「料理を＿＿＿のが好きです。」\n¿Cuál verbo encaja mejor?",
+          "opciones": {
+            "a": "作る",
+            "b": "待つ",
+            "c": "出る",
+            "d": "読む"
+          },
+          "correcta": "a",
+          "explicacion": "料理を作るのが好きです = me gusta cocinar."
+        },
+        {
+          "id": 72,
+          "titulo": "「駅の＿＿＿にコンビニがあります。」\n¿Cuál palabra completa mejor?",
+          "opciones": {
+            "a": "後ろ",
+            "b": "犬",
+            "c": "国",
+            "d": "話"
+          },
+          "correcta": "a",
+          "explicacion": "後ろ(うしろ) = detrás."
+        },
+        {
+          "id": 73,
+          "titulo": "「私は毎日、日本語を＿＿＿。」\n¿Cuál verbo encaja mejor?",
+          "opciones": {
+            "a": "勉強します",
+            "b": "乗ります",
+            "c": "出ます",
+            "d": "待ちます"
+          },
+          "correcta": "a",
+          "explicacion": "日本語を勉強します = estudiar japonés."
+        },
+        {
+          "id": 74,
+          "titulo": "「お金」\n¿Cuál es la lectura correcta?",
+          "opciones": {
+            "a": "おかね",
+            "b": "おがね",
+            "c": "かね",
+            "d": "おかな"
+          },
+          "correcta": "a",
+          "explicacion": "お金(おかね) = dinero."
+        },
+        {
+          "id": 75,
+          "titulo": "「先生と＿＿＿をしました。」\n(una conversación)\n¿Cuál palabra encaja?",
+          "opciones": {
+            "a": "話",
+            "b": "犬",
+            "c": "駅",
+            "d": "町"
+          },
+          "correcta": "a",
+          "explicacion": "話(はなし) = conversación."
+        },
+        {
+          "id": 76,
+          "titulo": "「この仕事は＿＿＿です。」\n¿Cuál opción completa mejor?",
+          "opciones": {
+            "a": "大変",
+            "b": "昨日",
+            "c": "犬",
+            "d": "駅"
+          },
+          "correcta": "a",
+          "explicacion": "大変(たいへん) = difícil, duro, serio."
+        },
+        {
+          "id": 77,
+          "titulo": "「国」\n¿Cuál significado es correcto?",
+          "opciones": {
+            "a": "país",
+            "b": "ciudad",
+            "c": "estación",
+            "d": "montaña"
+          },
+          "correcta": "a",
+          "explicacion": "国(くに) = país, nación."
+        },
+        {
+          "id": 78,
+          "titulo": "「男が駅で待っています。」\n男 se lee…",
+          "opciones": {
+            "a": "おとこ",
+            "b": "おんな",
+            "c": "ひと",
+            "d": "とも"
+          },
+          "correcta": "a",
+          "explicacion": "男(おとこ) = hombre."
+        },
+        {
+          "id": 79,
+          "titulo": "「明日、電車に＿＿＿会社へ行きます。」\n¿Cuál verbo completa mejor?",
+          "opciones": {
+            "a": "乗ります",
+            "b": "作ります",
+            "c": "待ちます",
+            "d": "読みます"
+          },
+          "correcta": "a",
+          "explicacion": "電車に乗って会社へ行きます = ir al trabajo tomando el tren."
+        },
+        {
+          "id": 80,
+          "titulo": "¿Cuál oración significa “Ayer compré un libro”?",
+          "opciones": {
+            "a": "昨日、本を買いました。",
+            "b": "昨日、本を読みました。",
+            "c": "明日、本を買いました。",
+            "d": "昨日、本を作りました。"
+          },
+          "correcta": "a",
+          "explicacion": "買う = comprar."
+        }
+      ]
     }
   ]
 }

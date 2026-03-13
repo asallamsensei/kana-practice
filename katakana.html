@@ -1,0 +1,1021 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Katakana Vocab — Asallam Sensei</title>
+
+<style>
+  :root{
+    --bg: #0b1020;
+    --card: rgba(255,255,255,.08);
+    --card2: rgba(255,255,255,.10);
+    --text: #eef2ff;
+    --muted: rgba(238,242,255,.75);
+    --accent: #7d5cff;
+    --accent2:#22c55e;
+    --danger:#ef4444;
+    --border: rgba(255,255,255,.14);
+
+    --dictadoRed: #ff3b30;
+    --dictadoRedSoft:#d94a45;
+  }
+
+  body{
+    margin:0;
+    font-family: Arial, sans-serif;
+    background: radial-gradient(1200px 700px at 20% 10%, rgba(125,92,255,.35), transparent 60%),
+                radial-gradient(900px 600px at 90% 20%, rgba(34,197,94,.22), transparent 60%),
+                radial-gradient(900px 600px at 30% 90%, rgba(239,68,68,.18), transparent 55%),
+                var(--bg);
+    color: var(--text);
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    padding:30px 16px 76px;
+  }
+
+  .wrap{ width:min(1120px, 100%); }
+
+  header{
+    display:flex;
+    flex-direction:column;
+    gap:16px;              /* + padding entre título y modos */
+    margin-bottom:16px;
+    align-items:center;
+    text-align:center;
+  }
+
+  h1{
+    margin:0;
+    font-size: 30px;       /* fuentes un poco más grandes */
+    letter-spacing:.2px;
+  }
+
+  .grid{
+    display:grid;
+    grid-template-columns: 1.15fr .85fr;
+    gap:16px;
+  }
+  @media (max-width: 900px){
+    .grid{ grid-template-columns: 1fr; }
+  }
+
+  .card{
+    background: linear-gradient(180deg, var(--card2), var(--card));
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    box-shadow: 0 18px 45px rgba(0,0,0,.35);
+    padding: 20px;         /* + padding general */
+  }
+
+  .pill{
+    padding: 10px 14px;    /* + padding */
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: rgba(255,255,255,.06);
+    color: var(--muted);
+    font-size: 14px;       /* + fuente */
+    font-weight: 900;
+  }
+
+  .row{
+    display:flex;
+    gap:12px;              /* + espacio entre botones */
+    flex-wrap:wrap;
+    align-items:center;
+    justify-content:center;
+  }
+
+.chips{
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+  margin-top:0;
+}
+
+.chip{
+  padding: 11px 16px;
+  border-radius: 999px;
+  border: 1px solid rgba(125,92,255,.18);
+  background: rgba(125,92,255,.14);
+  color: #dfe3ff;
+  cursor:pointer;
+  user-select:none;
+  font-size: 14px;
+  font-weight: 900;
+  transition:.12s;
+}
+
+.chip:hover{
+  transform: translateY(-1px);
+  background: rgba(125,92,255,.20);
+}
+
+.chip.activo{
+  background: linear-gradient(180deg, #8b6dff, #6f52f5);
+  color: white;
+  border-color: transparent;
+}
+
+  .btn{
+    border: none;
+    border-radius: 12px;
+    padding: 12px 16px;    /* + padding */
+    cursor: pointer;
+    color: white;
+    background: var(--accent);
+    font-weight: 900;
+    font-size: 15px;       /* + fuente */
+    transition: .15s;
+  }
+  .btn:hover{ transform: translateY(-1px); filter: brightness(1.06); }
+  .btn:disabled{ opacity:.45; cursor:not-allowed; transform:none; filter:none; }
+
+  .btn-ghost{
+    background: rgba(255,255,255,.08);
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-weight: 900;
+  }
+
+  .btn-danger{
+    background: rgba(239,68,68,.15);
+    border: 1px solid rgba(239,68,68,.5);
+    color: #fecaca;
+  }
+  .btn-danger.activo{
+    background: var(--danger);
+    border-color: transparent;
+    color: white;
+  }
+
+.btn-mode{
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.14);
+  color: #eef2ff;
+  font-weight: 900;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.04);
+}
+
+.btn-mode.activo{
+  background: linear-gradient(180deg, #8b6dff, #6f52f5);
+  border-color: transparent;
+  color: white;
+}
+
+.btn-mode.dictado-on{
+  background: linear-gradient(180deg, #ff5a52, #e24139);
+  border-color: transparent;
+  color: white;
+}
+
+.btn-mode.base-dictado{
+  box-shadow: 0 0 0 1px rgba(255,90,82,.35) inset;
+}
+
+.pool-row{
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+  justify-content:flex-start;
+}
+
+.btn-pool{
+  background: rgba(125,92,255,.10);
+  border: 1px solid rgba(125,92,255,.25);
+  color: #ddd6fe;
+  font-weight: 900;
+}
+
+.btn-pool.activo{
+  background: rgba(125,92,255,.95);
+  border-color: transparent;
+  color: white;
+}
+
+  .big{
+    text-align:center;
+    padding: 24px 12px 14px;  /* + padding dentro del panel juego */
+  }
+
+  #promptMain{
+    font-size: 55px;        /* + fuente */
+    font-weight: 400;
+    letter-spacing: .5px;
+    margin: 6px 0 10px;
+    word-break: break-word;
+  }
+  #promptMain.esPregunta{
+    font-size: 44px;        /* + fuente */
+    font-weight: 400;
+    letter-spacing: .2px;
+    line-height: 1.25;
+  }
+
+  #promptSub{
+    color: var(--muted);
+    font-size: 17px;        /* + fuente */
+    margin: 0 0 10px;       /* + espacio */
+    min-height: 20px;
+  }
+  
+  #resultado{
+    margin-top: 10px;
+    font-size: 22px;        /* + fuente */
+    min-height: 30px;
+    text-align:center;
+    font-weight: 900;
+    white-space: pre-line;
+  }
+  .correcto{ color: var(--accent2); }
+  .incorrecto{ color: var(--danger); }
+
+  .stats{
+    margin-top: 10px;
+    text-align:center;
+    color: var(--muted);
+    font-size: 16px;        /* + fuente */
+  }
+
+.switch{
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+  width:100%;
+  margin-top:12px;
+}
+
+.switch .btn-mode{
+  width:auto;
+  flex:0 0 auto;
+  padding: 11px 16px;
+  border-radius: 999px;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+.switch-panel{
+  max-width:100%;
+  margin-bottom:2px;
+}
+
+.control-section:first-child{
+  padding-bottom:2px;
+}
+  
+  .btnAudioBig{
+    border:none;
+    cursor:pointer;
+    background: rgba(255,255,255,.08);
+    border: 1px solid var(--border);
+    color: var(--text);
+    border-radius: 16px;
+    padding: 14px 16px;     /* + padding */
+    font-size: 22px;        /* + fuente */
+    line-height: 1;
+    user-select:none;
+    margin-top: 6px;
+  }
+  .btnAudioBig:hover{ filter: brightness(1.1); transform: translateY(-1px); }
+  .btnAudioBig:active{ transform: translateY(0px); }
+  .btnAudioBig[disabled]{ opacity:.35; cursor:not-allowed; transform:none; }
+
+#opcionesTexto{
+  margin-top: 18px;
+  font-size: 20px;
+  line-height: 1.7;
+  text-align: left;
+  width: fit-content;
+  max-width: min(720px, 100%);
+  margin-left: auto;
+  margin-right: auto;
+  padding: 12px 16px;
+  border-radius: 14px;
+  border: 1px dashed rgba(255,255,255,.22);
+  background: rgba(0,0,0,.18);
+  word-break: break-word;
+}
+
+#respuestaBtns{
+  gap:12px;
+}
+
+.btnRespuesta{
+  min-width: 72px;
+  font-size: 18px;
+  font-weight: 900;
+  padding: 12px 18px;
+}
+
+.btnRespuesta.correcta{
+  background: rgba(34,197,94,.18);
+  border: 1px solid rgba(34,197,94,.55);
+  color: #dcfce7;
+}
+
+.btnRespuesta.incorrecta{
+  background: rgba(239,68,68,.18);
+  border: 1px solid rgba(239,68,68,.60);
+  color: #fecaca;
+}
+
+.btnRespuesta.neutra-disabled{
+  opacity:.55;
+}
+  
+.actions{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:12px;
+  width:100%;
+  margin-top:14px;
+}
+
+.actions .btn,
+.actions .btn-ghost{
+  width:auto;
+  flex:0 0 auto;
+  white-space:nowrap;
+  padding:12px 18px;
+}
+
+.controls-card{
+  display:flex;
+  flex-direction:column;
+  gap:22px;
+}
+
+.control-section{
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+  padding-top:2px;
+}
+
+.control-section + .control-section{
+  border-top: 1px solid rgba(255,255,255,.10);
+  padding-top:20px;
+}
+
+.section-head{
+  display:flex;
+  align-items:center;
+  justify-content:flex-start;
+}
+
+.section-label{
+  display:inline-flex;
+  align-items:center;
+  padding:8px 14px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.12);
+  background:rgba(255,255,255,.05);
+  color:#cbd5ff;
+  font-size:13px;
+  font-weight:900;
+  letter-spacing:.2px;
+}
+  
+</style>
+</head>
+
+<body>
+<div class="wrap">
+
+  <header>
+    <h1>Katakana Vocab — Asallam Sensei</h1>
+
+    <!-- NUEVOS MODOS:
+         - Base: JP→ES | ES→JP
+         - Dictado: on/off (se aplica a la base)
+         - Mix: super mix (mezcla JP/ES + dictado on/off al azar)
+    -->
+  </header>
+
+  <div class="grid">
+
+    <!-- Panel juego -->
+    <div class="card big">
+      <div id="promptMain">—</div>
+      <div id="promptSub"></div>
+
+      <div id="opcionesTexto"></div>
+      
+      <div class="row" id="respuestaBtns" style="justify-content:center; margin-top:10px;">
+        <button class="btn btn-ghost btnRespuesta" type="button" onclick="responder('a')">a</button>
+        <button class="btn btn-ghost btnRespuesta" type="button" onclick="responder('b')">b</button>
+        <button class="btn btn-ghost btnRespuesta" type="button" onclick="responder('c')">c</button>
+      </div>
+
+      <div id="resultado"></div>
+
+      <div class="stats">
+        Aciertos: <span id="aciertos">0</span> — Errores: <span id="errores">0</span>
+      
+        <div style="margin-top:6px;">
+          Racha: <span id="racha">0</span> — Mejor racha: <span id="mejorRacha">0</span> — Precisión: <span id="precision">0%</span>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button class="btn" type="button" onclick="accionSiguiente()">Siguiente</button>
+        <button class="btn btn-ghost" type="button" onclick="mostrarRespuesta()">Mostrar respuesta</button>
+      </div>
+    </div>
+
+    <!-- Panel controles -->
+    <div class="card controls-card">
+    
+      <section class="control-section">
+        <div class="section-head">
+          <span class="section-label">Modo</span>
+        </div>
+    
+        <div class="switch switch-panel">
+          <button class="btn btn-mode" id="m-jp-es" type="button" onclick="setModoBase('jp-es')">JP → ES</button>
+          <button class="btn btn-mode" id="m-es-jp" type="button" onclick="setModoBase('es-jp')">ES → JP</button>
+          <button class="btn btn-mode" id="m-dictado" type="button" onclick="toggleDictado()">Dictado</button>
+          <button class="btn btn-mode" id="m-mix" type="button" onclick="setModoBase('mix')">Mix</button>
+        </div>
+      </section>
+    
+      <section class="control-section">
+        <div class="section-head">
+          <span class="section-label">Bloques</span>
+        </div>
+    
+        <div id="chipsBloques" class="chips"></div>
+    
+        <div class="row section-actions" style="justify-content:flex-start;">
+          <button id="btnTodo" class="btn btn-ghost btn-danger" type="button" onclick="seleccionarTodo()">Todo</button>
+          <button id="btnNinguna" class="btn btn-ghost" type="button" onclick="seleccionarNinguna()">Ninguna</button>
+        </div>
+      </section>
+    
+      <section class="control-section">
+        <div class="section-head">
+          <span class="section-label">Pool de distractores</span>
+        </div>
+    
+        <div class="pool-row">
+          <button class="btn btn-pool" id="pool-sel" type="button" onclick="setPoolScope('seleccion')">Solo selección</button>
+          <button class="btn btn-pool" id="pool-glob" type="button" onclick="setPoolScope('global')">Global</button>
+        </div>
+      </section>
+    
+    </div>
+
+  </div>
+</div>
+
+<script>
+/* ===============================
+   CONFIG
+=============================== */
+const JSON_PATH  = "data/katakana_vocab.json";
+const AUDIO_BASE = "data/audios/katakana/";
+
+/* ===============================
+   HELPERS
+=============================== */
+function $(id){ return document.getElementById(id); }
+function pick(arr){ return arr[Math.floor(Math.random()*arr.length)]; }
+function shuffle(arr){
+  const copia = arr.slice();
+
+  for(let i = copia.length - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * (i + 1));
+    [copia[i], copia[j]] = [copia[j], copia[i]];
+  }
+
+  return copia;
+}
+
+/* ===============================
+   DATA (bloques)
+=============================== */
+let DATA = { bloques: [] };
+let bloquesActivos = new Set();
+let poolScope = "seleccion";
+
+/* ===============================
+   STATS
+=============================== */
+let aciertos = 0;
+let errores  = 0;
+
+let racha = 0;
+let mejorRacha = 0;
+function pintarStats(){
+  $("aciertos").innerText = aciertos;
+  $("errores").innerText  = errores;
+
+  $("racha").innerText = racha;
+  $("mejorRacha").innerText = mejorRacha;
+
+  const total = aciertos + errores;
+  const precision = total === 0 ? 0 : Math.round((aciertos / total) * 100);
+  $("precision").innerText = precision + "%";
+}
+
+/* ===============================
+   MODOS NUEVOS
+   modoBase:
+     - "jp-es" | "es-jp" | "mix"
+   dictadoOn:
+     - solo se usa cuando modoBase != "mix"
+   En "mix":
+     - cada ronda decide dirección (jp-es/es-jp) y decide dictado on/off al azar
+=============================== */
+let modoBase  = "jp-es";
+let dictadoOn = false;
+
+// dirección y dictado efectivos por ronda
+let rondaDir = "jp-es";
+let rondaDictado = false;
+
+let correctaLetra = "";
+let respuestaCorrecta = "";
+let yaValidado = false;
+
+const letras = ["a","b","c"];
+
+/* ===============================
+   AUDIO (romaji exacto)
+=============================== */
+const audio = new Audio();
+audio.preload = "auto";
+let ultimoAudioKey = "";
+
+// autoplay policy: solo tras interacción
+let audioHabilitado = false;
+document.addEventListener("pointerdown", () => (audioHabilitado = true), { once:true });
+document.addEventListener("keydown",     () => (audioHabilitado = true), { once:true });
+
+function buildExactAudioSrc(romaji){
+  const key = String(romaji || "").trim();
+  if(!key) return "";
+  return AUDIO_BASE + encodeURIComponent(key) + ".mp3";
+}
+function detenerAudio(){
+  try{ audio.pause(); audio.currentTime = 0; }catch{}
+}
+async function playAudio(romaji){
+  const key = String(romaji || "").trim();
+  ultimoAudioKey = key;
+
+  if(!audioHabilitado) return;
+  const src = buildExactAudioSrc(key);
+  if(!src) return;
+
+  try{
+    detenerAudio();
+    audio.src = src;
+    audio.load();
+    await audio.play();
+  }catch{}
+}
+function reproducirAudioActual(){
+  if(ultimoAudioKey) playAudio(ultimoAudioKey);
+}
+
+/* ===============================
+   POOLS
+=============================== */
+function getPool(scope){
+  const idxs = (scope === "global")
+    ? DATA.bloques.map((_, i) => i)
+    : [...bloquesActivos];
+
+  let pool = [];
+  idxs.forEach(i=>{
+    const b = DATA.bloques[i];
+    if(b?.vocabulario?.length) pool = pool.concat(b.vocabulario);
+  });
+  return pool;
+}
+
+/* ===============================
+   UI MODO (botones)
+=============================== */
+function limpiarActivos(){
+  ["m-jp-es","m-es-jp","m-mix","m-dictado"].forEach(id=>{
+    const el = $(id);
+    if(!el) return;
+    el.classList.remove("activo","dictado-on","base-dictado");
+  });
+}
+
+function aplicarUI(){
+  limpiarActivos();
+
+  const jpBtn   = $("m-jp-es");
+  const esBtn   = $("m-es-jp");
+  const mixBtn  = $("m-mix");
+  const dictBtn = $("m-dictado");
+
+  if(modoBase === "jp-es") jpBtn?.classList.add("activo");
+  if(modoBase === "es-jp") esBtn?.classList.add("activo");
+  if(modoBase === "mix")   mixBtn?.classList.add("activo");
+
+  // dictado: solo aplica fuera de mix
+  if(modoBase !== "mix" && dictadoOn){
+    dictBtn?.classList.add("dictado-on");
+    const baseBtn = (modoBase === "jp-es") ? jpBtn : esBtn;
+    baseBtn?.classList.add("base-dictado");
+  }
+
+  // input se muestra/oculta según dictado EFECTIVO (ronda)
+  // (aquí ponemos una base visual; se ajusta en renderPrompt)
+}
+
+function setModoBase(nuevoBase){
+  modoBase = nuevoBase;
+
+  // si entras a mix, no tocamos dictadoOn (queda guardado para cuando vuelvas)
+  aplicarUI();
+  yaValidado = false;
+  limpiarResultado();
+  siguiente();
+}
+
+function toggleDictado(){
+  // en mix, el dictado es random, así que el toggle no hace nada (lo ignoramos)
+  if(modoBase === "mix") return;
+
+  dictadoOn = !dictadoOn;
+  aplicarUI();
+  yaValidado = false;
+  limpiarResultado();
+  siguiente();
+}
+
+/* ===============================
+   POOL scope UI
+=============================== */
+function setPoolScope(scope){
+  poolScope = scope;
+  $("pool-sel")?.classList.toggle("activo", poolScope === "seleccion");
+  $("pool-glob")?.classList.toggle("activo", poolScope === "global");
+  yaValidado = false;
+  limpiarResultado();
+  siguiente();
+}
+
+/* ===============================
+   Selección de bloques (chips)
+=============================== */
+function seleccionarTodo(){
+  bloquesActivos = new Set(DATA.bloques.map((_, i)=>i));
+  [...$("chipsBloques").children].forEach(ch=>ch.classList.add("activo"));
+  $("btnTodo")?.classList.add("activo");
+  yaValidado = false;
+  limpiarResultado();
+  siguiente();
+}
+
+function seleccionarNinguna(){
+  bloquesActivos.clear();
+  [...$("chipsBloques").children].forEach(ch=>ch.classList.remove("activo"));
+  $("btnTodo")?.classList.remove("activo");
+  limpiarResultado();
+  $("promptMain").innerText = "Selecciona un bloque";
+  $("promptSub").innerText = "";
+  $("opcionesTexto").innerHTML = "";
+  limpiarBotonesRespuesta();
+}
+
+/* ===============================
+   Render helpers
+=============================== */
+function limpiarResultado(){
+  const res = $("resultado");
+  res.innerText = "";
+  res.className = "";
+}
+
+function bloquearOpciones(){
+  document.querySelectorAll(".btnRespuesta").forEach(b => b.disabled = true);
+}
+
+function limpiarBotonesRespuesta(){
+  document.querySelectorAll(".btnRespuesta").forEach(btn=>{
+    btn.disabled = false;
+    btn.classList.remove("correcta","incorrecta","neutra-disabled");
+  });
+}
+  
+function pintarOpciones(letraElegida){
+  const box = $("opcionesTexto");
+  if(!actualOpcionesTexto || actualOpcionesTexto.length < 3) return;
+
+  box.innerHTML = actualOpcionesTexto.map((txt, idx) => {
+    const letra = letras[idx];
+
+    let style = "";
+    if(letra === correctaLetra){
+      style = ' style="color:#86efac; font-weight:900;"';
+    }else if(letra === letraElegida){
+      style = ' style="color:#fecaca; font-weight:900;"';
+    }
+
+    return `<div${style}>${letra}) ${txt}</div>`;
+  }).join("");
+
+  document.querySelectorAll(".btnRespuesta").forEach(btn=>{
+    const letraBtn = btn.textContent.trim().toLowerCase();
+    btn.classList.remove("correcta","incorrecta","neutra-disabled");
+
+    if(letraBtn === correctaLetra){
+      btn.classList.add("correcta");
+    }else if(letraBtn === letraElegida){
+      btn.classList.add("incorrecta");
+    }else{
+      btn.classList.add("neutra-disabled");
+    }
+  });
+}
+
+function aplicarEstiloPregunta(){
+  const el = $("promptMain");
+  if(rondaDir === "es-jp") el.classList.add("esPregunta");
+  else el.classList.remove("esPregunta");
+}
+
+function textoPregunta(item){
+  return (rondaDir === "jp-es") ? item.jp : item.es;
+}
+function textoRespuesta(item){
+  return (rondaDir === "jp-es") ? item.es : item.jp;
+}
+
+function renderPrompt(itemCorrecto){
+  const promptEl = $("promptMain");
+  const subEl = $("promptSub");
+
+  aplicarEstiloPregunta();
+
+  ultimoAudioKey = String(itemCorrecto.romaji || "").trim();
+
+  // UI: dictado efectivo por ronda
+  if(rondaDictado){
+    const label = (rondaDir === "jp-es")
+      ? "🎧 Dictado: elige el significado"
+      : "🎧 Dictado: elige el katakana";
+
+    subEl.innerText = label;
+
+    promptEl.innerHTML = `
+      <button id="promptSpeaker" class="btnAudioBig" type="button" title="Escuchar" onclick="reproducirAudioActual()">🔊</button>
+    `;
+
+  }else{
+    promptEl.textContent = textoPregunta(itemCorrecto);
+    subEl.innerHTML = `
+      <button id="promptSpeaker" class="btnAudioBig" type="button" title="Escuchar" onclick="reproducirAudioActual()">🔊</button>
+    `;
+
+  }
+}
+
+/* ===============================
+   Opciones (3)
+=============================== */
+let actualOpcionesTexto = [];
+
+function renderOpciones(opciones){
+  actualOpcionesTexto = opciones.slice();
+
+  const box = $("opcionesTexto");
+  box.innerHTML = `
+    <div>a) ${opciones[0]}</div>
+    <div>b) ${opciones[1]}</div>
+    <div>c) ${opciones[2]}</div>
+  `;
+}
+
+/* ===============================
+   Flujo ronda (SUPER MIX)
+=============================== */
+function elegirRondaDir(){
+  if(modoBase === "jp-es") return "jp-es";
+  if(modoBase === "es-jp") return "es-jp";
+  // mix: random
+  return (Math.random() < 0.5) ? "jp-es" : "es-jp";
+}
+
+function elegirRondaDictado(){
+  if(modoBase === "mix"){
+    // super mix: a veces dictado, a veces no
+    return (Math.random() < 0.45); // ~45% dictado (ajústalo si quieres)
+  }
+  // fuera de mix: depende del toggle
+  return dictadoOn;
+}
+
+function build3Options(pool, correctValue, mapFn){
+  const opciones = [correctValue];
+  let tries = 0;
+
+  while(opciones.length < 3 && tries < 200){
+    tries++;
+    const v = mapFn(pick(pool));
+    if(v != null && v !== "" && !opciones.includes(v)) opciones.push(v);
+  }
+  while(opciones.length < 3) opciones.push("—");
+  return shuffle(opciones);
+}
+
+function getActivosValidos(){
+  return [...bloquesActivos].filter(i => DATA.bloques[i]?.vocabulario?.length >= 3);
+}
+
+function siguiente(){
+  const activos = getActivosValidos();
+  if(activos.length === 0){
+    $("promptMain").innerText = (DATA.bloques.length ? "Selecciona un bloque con ≥ 3 palabras" : "No hay data");
+    $("promptSub").innerText = "";
+    $("opcionesTexto").innerHTML = "";
+    limpiarBotonesRespuesta();
+    return;
+  }
+
+  // decide ronda
+  rondaDir = elegirRondaDir();
+  rondaDictado = elegirRondaDictado();
+
+  const bloqueIdx = pick(activos);
+  const b = DATA.bloques[bloqueIdx];
+  const poolLocal = b.vocabulario;
+
+  const itemCorrecto = pick(poolLocal);
+  respuestaCorrecta = textoRespuesta(itemCorrecto);
+
+  const poolOpciones = getPool(poolScope);
+  const basePool = (poolOpciones.length >= 3) ? poolOpciones : poolLocal;
+
+  const opciones = build3Options(basePool, respuestaCorrecta, x => textoRespuesta(x));
+  correctaLetra = letras[opciones.indexOf(respuestaCorrecta)];
+
+  renderPrompt(itemCorrecto);
+  renderOpciones(opciones);
+
+  limpiarResultado();
+  yaValidado = false;
+  limpiarBotonesRespuesta();
+  // sonido al pasar
+  playAudio(ultimoAudioKey);
+}
+
+/* ===============================
+   Responder / Verificar
+=============================== */
+function responder(letra){
+  if(yaValidado) return;
+  verificar(letra);
+}
+
+function verificar(letraForzada){
+  const res = $("resultado");
+  const letra = (letraForzada || "").toString().toLowerCase().trim();
+
+  if(!["a","b","c"].includes(letra)){
+    return;
+  }
+
+  if(letra === correctaLetra){
+    res.className = "correcto";
+    res.innerText = "Correcto ✔";
+  
+    aciertos++;
+    racha++;
+  
+    if(racha > mejorRacha) mejorRacha = racha;
+  
+  }else{
+    res.className = "incorrecto";
+    res.innerText = `Incorrecto ✘ (era ${correctaLetra}) — ${respuestaCorrecta}`;
+  
+    errores++;
+    racha = 0;
+  }
+
+  pintarStats();
+  yaValidado = true;
+
+  pintarOpciones(letra);
+  bloquearOpciones();
+
+  playAudio(ultimoAudioKey);
+}
+
+function accionSiguiente(){
+
+  if(!yaValidado){
+    errores++;
+    racha = 0;
+    pintarStats();
+    yaValidado = true;
+
+    const res = $("resultado");
+    res.className = "incorrecto";
+    res.innerText = `Saltado ✘ (era ${correctaLetra}) — ${respuestaCorrecta}`;
+
+    pintarOpciones(null);
+    bloquearOpciones();
+
+    playAudio(ultimoAudioKey);
+    return;
+  }
+
+  siguiente();
+}
+
+function mostrarRespuesta(){
+
+  if(!yaValidado){
+    errores++;
+    pintarStats();
+  }
+
+  const res = $("resultado");
+  res.className = "incorrecto";
+  res.innerText = `Respuesta: ${respuestaCorrecta}`;
+
+  yaValidado = true;
+
+  pintarOpciones(null);
+  bloquearOpciones();
+
+  playAudio(ultimoAudioKey);
+}
+
+/* ===============================
+   UX: evitar teclado móvil por defecto
+=============================== */
+
+/* ===============================
+   CARGA JSON + chips bloques
+=============================== */
+function renderChips(){
+  const cont = $("chipsBloques");
+  cont.innerHTML = "";
+
+  DATA.bloques.forEach((b, i)=>{
+    const chip = document.createElement("div");
+    chip.className = "chip" + (bloquesActivos.has(i) ? " activo" : "");
+    chip.textContent = b.nombre || `Bloque ${i+1}`;
+
+    chip.onclick = ()=>{
+      $("btnTodo")?.classList.remove("activo");
+
+      if(bloquesActivos.has(i)) bloquesActivos.delete(i);
+      else bloquesActivos.add(i);
+
+      if(bloquesActivos.size === 0) bloquesActivos.add(i);
+
+      [...cont.children].forEach((el, idx)=>{
+        el.classList.toggle("activo", bloquesActivos.has(idx));
+      });
+
+      yaValidado = false;
+      limpiarResultado();
+      siguiente();
+    };
+
+    cont.appendChild(chip);
+  });
+}
+
+fetch(JSON_PATH)
+  .then(r=>r.json())
+  .then(json=>{
+    DATA = (json && json.bloques) ? json : { bloques: [] };
+
+    if(DATA.bloques.length === 0){
+      $("promptMain").innerText = "No hay bloques en el JSON";
+      $("promptSub").innerText = "";
+      return;
+    }
+
+    // default: todo activo
+    bloquesActivos = new Set(DATA.bloques.map((_, i)=>i));
+    $("btnTodo")?.classList.add("activo");
+
+    renderChips();
+
+    // defaults
+    setPoolScope("seleccion");
+    setModoBase("mix");
+  })
+  .catch(err=>{
+    console.error(err);
+    $("promptMain").innerText = "No se pudo cargar " + JSON_PATH;
+    $("promptSub").innerText = "Revisa ruta y usa servidor (GitHub Pages / Live Server).";
+  });
+</script>
+
+</body>
+</html>
