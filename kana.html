@@ -160,17 +160,18 @@
     padding: 14px 10px 10px;
   }
 
-  #kanaBox{
-    min-height: 210px;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    border-radius: 20px;
-    border: 1px solid rgba(255,255,255,.10);
-    background: rgba(0,0,0,.16);
-    padding: 18px 12px;
-  }
+#kanaBox{
+  min-height: 140px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  border-radius: 18px;
+  border: 1px solid rgba(255,255,255,.10);
+  background: rgba(0,0,0,.16);
+  padding: 14px 10px;
+}
+
 
 #kana{
   font-size: clamp(40px, 8vw, 50px);
@@ -344,41 +345,14 @@
     }
   }
 
-  @media (max-width: 420px){
-    #kana{
-      font-size: clamp(88px, 24vw, 128px);
-    }
-
-    #kana.dictado{
-      font-size: 46px;
-    }
-
-    .chips{
-      gap:8px;
-    }
-
-    .modo-btn,
-    .orden-btn,
-    .reset-btn,
-    button{
-      font-size: 13px;
-      padding: 10px 11px;
-      border-radius: 11px;
-    }
-
-    .pill{
-      font-size: 12px;
-      padding: 7px 10px;
-    }
-  }
-
 .opciones-wrap{
   margin-top: 16px;
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 180px));
+  grid-template-columns: repeat(3, minmax(0, 145px));
   justify-content: center;
   gap: 10px;
 }
+
 
 
 .opcion-btn{
@@ -445,6 +419,15 @@
   width: 100%;
 }
 
+.panel-title{
+  font-size: 18px;
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 12px;
+  color: #efe9ff;
+  letter-spacing: .3px;
+}
+  
 @media (max-width: 900px){
   .top-grid{
     grid-template-columns: 1fr;
@@ -543,11 +526,11 @@
         <div style="margin-top:14px;" class="row">
           <button class="reset-btn" onclick="resetStatsModo()">Reset stats</button>
         </div>
-
-        <div class="sep"></div>
       </div>
       
-      <div class="panel">
+      <div class="panel side-panel">
+
+        <div class="panel-title">Modos</div>
 
         <div id="modo-container" class="chips">
           <button id="btn-hiragana" class="modo-btn" onclick="setModo('hiragana')">Hiragana</button>
