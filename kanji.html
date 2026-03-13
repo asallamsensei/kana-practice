@@ -341,7 +341,6 @@
     </div>
   
     <div id="navBtns">
-      <button class="btnNav" type="button" onclick="accionMostrar()">Mostrar respuesta</button>
       <button class="btnNav" type="button" onclick="accionSiguiente()">Siguiente</button>
     </div>
   </div>
@@ -531,16 +530,6 @@ function responder(letra){
 
 /* ✅ Siguiente: debe requerir 2 toques (primero verifica, segundo avanza) */
 function accionSiguiente(){
-  if (!yaValidado) return;
-  siguiente();
-}
-
-/*
-  ✅ Mostrar respuesta:
-  - la primera vez: muestra "Respuesta: ... (era b)" y CUENTA ERROR
-  - la segunda vez: avanza (para que también sea de 2 toques como "Siguiente")
-*/
-function accionMostrar(){
   if (!yaValidado) {
     errores++;
     racha = 0;
@@ -556,6 +545,12 @@ function accionMostrar(){
 
   siguiente();
 }
+
+/*
+  ✅ Mostrar respuesta:
+  - la primera vez: muestra "Respuesta: ... (era b)" y CUENTA ERROR
+  - la segunda vez: avanza (para que también sea de 2 toques como "Siguiente")
+*/
 
 /* Reset stats: resetea todo (stats + UI) */
 function resetStats(){
