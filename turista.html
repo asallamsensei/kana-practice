@@ -16,6 +16,11 @@
     --danger:#ef4444;
     --ok:#22c55e;
     --border: rgba(255,255,255,.14);
+    --mix: #d84f7f;
+    --mix-soft: rgba(216,79,127,.22);
+    --mix-soft-border: rgba(216,79,127,.58);
+    --mix-soft-text: #ffd6e5;
+    --mix-hover: #c63f70;
   }
 
   *,
@@ -145,6 +150,23 @@
     color: white;
   }
 
+.btn.mix-activo{
+  background: var(--mix);
+  border-color: var(--mix);
+  color: white;
+}
+
+.btn.mix-activo:hover{
+  background: var(--mix-hover);
+  border-color: var(--mix-hover);
+}
+
+.btn.mix-secundario{
+  background: var(--mix-soft);
+  border-color: var(--mix-soft-border);
+  color: var(--mix-soft-text);
+}
+  
   .btn-todos{
     border-color: #ef4444;
     color: #ffd6d6;
@@ -393,17 +415,19 @@
   </div>
 
   <div class="sidebar panel-side">
-    <div class="side-section">
-      <div class="side-title">Bloques</div>
-      <div class="bar side-bar" id="bloquesBar"></div>
-    </div>
 
     <div class="side-section">
       <div class="side-title">Modo</div>
       <div class="bar side-bar" id="modosBar">
         <button class="btn" id="btn-jp_es" onclick="setModo('jp_es')">Japonés → Español</button>
         <button class="btn" id="btn-es_jp" onclick="setModo('es_jp')">Español → Japonés</button>
+        <button class="btn" id="btn-mix" onclick="setModo('mix')">Mix</button>
       </div>
+    </div>
+
+    <div class="side-section">
+      <div class="side-title">Bloques</div>
+      <div class="bar side-bar" id="bloquesBar"></div>
     </div>
   </div>
 </div>
@@ -423,7 +447,8 @@ let bloques = [];
 let bloqueActual = "";
 let lista = [];
 
-let modoActual = "jp_es";
+let modoActual = "mix";
+let modoPreguntaActual = "jp_es";
 let pool = [];
 
 let actualIdx = 0;
@@ -522,11 +547,24 @@ document.addEventListener("keydown", (e) => {
 });
 
 function pintarBotonesActivos(){
-  ["jp_es","es_jp"].forEach(m => {
+  ["jp_es","es_jp","mix"].forEach(m => {
     const b = $("btn-" + m);
     if(!b) return;
-    b.classList.toggle("activo", modoActual === m);
+    b.classList.remove("activo", "mix-activo", "mix-secundario");
   });
+
+  if(modoActual === "mix"){
+    const btnMix = $("btn-mix");
+    const btnJpEs = $("btn-jp_es");
+    const btnEsJp = $("btn-es_jp");
+
+    if(btnMix) btnMix.classList.add("mix-activo");
+    if(btnJpEs) btnJpEs.classList.add("mix-secundario");
+    if(btnEsJp) btnEsJp.classList.add("mix-secundario");
+  }else{
+    const b = $("btn-" + modoActual);
+    if(b) b.classList.add("activo");
+  }
 
   document.querySelectorAll(".btn-bloque").forEach(btn => {
     const k = btn.dataset.bloque;
@@ -569,7 +607,7 @@ fetch(DATA_PATH)
     construirBarraBloques(bloques);
     bloqueActual = bloques[0];
 
-    modoActual = "jp_es";
+    modoActual = "mix";
     pintarBotonesActivos();
 
     cargarBloque(bloqueActual);
@@ -701,9 +739,13 @@ function siguiente(){
   actualIdx = Math.floor(Math.random() * pool.length);
   actualItem = pool[actualIdx];
 
-  const pregunta = (modoActual === "jp_es") ? actualItem.japones : actualItem.espanol;
+modoPreguntaActual = (modoActual === "mix")
+  ? (Math.random() < 0.5 ? "jp_es" : "es_jp")
+  : modoActual;
 
-  const campoOpciones = (modoActual === "jp_es") ? "espanol" : "japones";
+const pregunta = (modoPreguntaActual === "jp_es") ? actualItem.japones : actualItem.espanol;
+
+const campoOpciones = (modoPreguntaActual === "jp_es") ? "espanol" : "japones";
   const correctoTexto = actualItem[campoOpciones];
 
   let opciones = [correctoTexto];
@@ -724,11 +766,11 @@ badge.style.display = hayKanji ? "inline-block" : "none";
   const promptEl = $("prompt");
   promptEl.innerText = pregunta;
 
-  promptEl.classList.remove("jp");
-  if(modoActual === "jp_es") promptEl.classList.add("jp");
+promptEl.classList.remove("jp");
+if(modoPreguntaActual === "jp_es") promptEl.classList.add("jp");
 
-  promptEl.classList.remove("prompt-es-jp");
-  if(modoActual === "es_jp") promptEl.classList.add("prompt-es-jp");
+promptEl.classList.remove("prompt-es-jp");
+if(modoPreguntaActual === "es_jp") promptEl.classList.add("prompt-es-jp");
 
   $("opciones").innerHTML =
     `a) ${escapeHTML(opciones[0])}<br>
@@ -736,7 +778,7 @@ badge.style.display = hayKanji ? "inline-block" : "none";
      c) ${escapeHTML(opciones[2])}`;
 
   $("opciones").classList.remove("jp");
-  if(modoActual === "es_jp") $("opciones").classList.add("jp");
+  if(modoPreguntaActual === "es_jp") $("opciones").classList.add("jp");
 }
 
 function escapeHTML(str){
