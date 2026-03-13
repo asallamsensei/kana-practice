@@ -380,17 +380,29 @@
   width:100%;
   padding:14px 16px;
   border-radius:16px;
-  background:rgba(255,255,255,.08);
-  border:1px solid var(--border);
-  color:var(--text);
+
+  background: rgba(125,92,255,.12);
+  border:1px solid rgba(125,92,255,.55);
+
+  color:#efe9ff;
+
   font-size:30px;
   font-weight:700;
   text-align:center;
+
+  box-shadow:
+    0 0 6px rgba(125,92,255,.6),
+    0 0 14px rgba(125,92,255,.35),
+    inset 0 0 8px rgba(125,92,255,.15);
 }
 
 .opcion-btn:hover{
-  background: rgba(255,255,255,.12);
+  background: rgba(125,92,255,.22);
+  box-shadow:
+    0 0 10px rgba(125,92,255,.9),
+    0 0 24px rgba(125,92,255,.6);
 }
+
 
 .opcion-btn.correcta{
   background: rgba(34,197,94,.18);
@@ -483,7 +495,6 @@
 
         <div id="acciones">
           <button class="accion-btn" onclick="siguienteDesdeBoton()">Siguiente</button>
-          <button class="accion-btn btn-mostrar" onclick="mostrarRespuesta()">Mostrar respuesta</button>
         </div>
 
         <div id="estadisticas">
@@ -976,36 +987,31 @@ function actualizarEstadisticas(){
 =============================== */
 function siguienteDesdeBoton(){
   if (!yaValidado) {
-    mostrarRespuesta();
+    errores++;
+    racha = 0;
+
+    const correcta = kanaLista[actual];
+    const correcto = valorOpcion(correcta);
+
+    document.getElementById("respuesta").innerText = "Incorrecto ✘ (era: " + correcto + ")";
+    document.getElementById("respuesta").className = "incorrecto";
+
+    const btns = document.querySelectorAll(".opcion-btn");
+    if (btns[indiceCorrecto]) {
+      btns[indiceCorrecto].classList.add("correcta");
+    }
+
+    actualizarEstadisticas();
+    guardarStatsActual();
+
+    yaValidado = true;
+    setBotonesOpcionesHabilitados(false);
     return;
   }
+
   siguienteKana();
 }
 
-function mostrarRespuesta(){
-  if (yaValidado) return;
-
-  const correcta = kanaLista[actual];
-  const correcto = valorOpcion(correcta);
-
-  reproducirAudioKana(correcta[1]);
-
-  document.getElementById("respuesta").innerText = "Mostrada ✘ (era: " + correcto + ")";
-  document.getElementById("respuesta").className = "incorrecto";
-
-  const btns = document.querySelectorAll(".opcion-btn");
-  if (btns[indiceCorrecto]) {
-    btns[indiceCorrecto].classList.add("correcta");
-  }
-
-  errores++;
-  racha = 0;
-  actualizarEstadisticas();
-  guardarStatsActual();
-
-  yaValidado = true;
-  setBotonesOpcionesHabilitados(false);
-}
 
 function resetStatsModo(){
   const key = statsKeyActual();
