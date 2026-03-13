@@ -56,11 +56,13 @@
     padding: 16px;
   }
 
-  .top-grid{
-    display:grid;
-    grid-template-columns: 1fr;
-    gap: 14px;
-  }
+.top-grid{
+  display:grid;
+  grid-template-columns: minmax(0, 1fr) 280px;
+  gap: 14px;
+  align-items: start;
+}
+
 
   .panel{
     background: rgba(255,255,255,.04);
@@ -170,16 +172,17 @@
     padding: 18px 12px;
   }
 
-  #kana{
-    font-size: clamp(92px, 20vw, 150px);
-    line-height: 1;
-    font-weight: 600;
-    user-select: none;
-    margin: 0;
-    text-align:center;
-    letter-spacing: .5px;
-    cursor: pointer;
-  }
+#kana{
+  font-size: clamp(40px, 8vw, 50px);
+  line-height: 1.05;
+  font-weight: 300;
+  user-select: none;
+  margin: 0;
+  text-align:center;
+  letter-spacing: .5px;
+  cursor: pointer;
+}
+
 
   #kana.dictado{
     font-size: clamp(48px, 12vw, 68px);
@@ -372,21 +375,23 @@
 .opciones-wrap{
   margin-top: 16px;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 180px));
+  justify-content: center;
   gap: 10px;
 }
 
+
 .opcion-btn{
   width:100%;
-  padding:14px 16px;
+  min-height: 62px;
+  padding:12px 14px;
   border-radius:16px;
 
   background: rgba(125,92,255,.12);
   border:1px solid rgba(125,92,255,.55);
-
   color:#efe9ff;
 
-  font-size:30px;
+  font-size:22px;
   font-weight:700;
   text-align:center;
 
@@ -395,6 +400,7 @@
     0 0 14px rgba(125,92,255,.35),
     inset 0 0 8px rgba(125,92,255,.15);
 }
+
 
 .opcion-btn:hover{
   background: rgba(125,92,255,.22);
@@ -423,18 +429,62 @@
 .btn-mostrar:hover{
   background: rgba(239,68,68,.26);
 }
-  
-@media (max-width: 420px){
-  .opcion-btn{
-    font-size: 16px;
-    padding: 12px 13px;
+
+.side-panel{
+  position: sticky;
+  top: 16px;
+}
+
+.side-panel .chips{
+  justify-content: stretch;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.side-panel button{
+  width: 100%;
+}
+
+@media (max-width: 900px){
+  .top-grid{
+    grid-template-columns: 1fr;
   }
 
-  .opcion-letra{
-    min-width: 34px;
-    height: 34px;
+  .side-panel{
+    position: static;
+  }
+
+  .side-panel .chips{
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .side-panel button{
+    width: auto;
+  }
+
+  .opciones-wrap{
+    grid-template-columns: 1fr;
+  }
+
+  .opcion-btn{
+    font-size: 18px;
+    min-height: 56px;
+  }
+
+  #kana{
+    font-size: clamp(52px, 16vw, 74px);
+  }
+
+  #kana.dictado{
+    font-size: clamp(30px, 8vw, 42px);
   }
 }
+
+
+
+
   
 </style>
 </head>
@@ -446,25 +496,6 @@
   <div class="card">
 
     <div class="top-grid">
-
-      <div class="panel">
-
-        <div id="modo-container" class="chips">
-          <button id="btn-hiragana" class="modo-btn" onclick="setModo('hiragana')">Hiragana</button>
-          <button id="btn-katakana" class="modo-btn" onclick="setModo('katakana')">Katakana</button>
-          <button id="btn-mezcla" class="modo-btn" onclick="setModo('mezcla')">Mezcla</button>
-          <button id="btn-extra" class="modo-btn" onclick="setModo('extra')">Extra</button>
-        </div>
-
-        <div class="sep"></div>
-
-        <div id="orden-container" class="chips">
-          <button id="btn-principiante" class="modo-btn" onclick="togglePrincipiante()">Principiante</button>
-          <button id="btn-jp-es" class="orden-btn" onclick="setQuizModo('jp_es')">Kana → Romaji</button>
-          <button id="btn-es-jp" class="orden-btn" onclick="setQuizModo('es_jp')">Romaji → Kana</button>
-          <button id="btn-dictado" class="orden-btn" onclick="toggleDictado()">Dictado 🔊</button>
-        </div>
-      </div>
 
       <div class="panel main-play">
         <div id="kanaBox">
@@ -514,6 +545,25 @@
         </div>
 
         <div class="sep"></div>
+      </div>
+      
+      <div class="panel">
+
+        <div id="modo-container" class="chips">
+          <button id="btn-hiragana" class="modo-btn" onclick="setModo('hiragana')">Hiragana</button>
+          <button id="btn-katakana" class="modo-btn" onclick="setModo('katakana')">Katakana</button>
+          <button id="btn-mezcla" class="modo-btn" onclick="setModo('mezcla')">Mezcla</button>
+          <button id="btn-extra" class="modo-btn" onclick="setModo('extra')">Extra</button>
+        </div>
+
+        <div class="sep"></div>
+
+        <div id="orden-container" class="chips">
+          <button id="btn-principiante" class="modo-btn" onclick="togglePrincipiante()">Principiante</button>
+          <button id="btn-jp-es" class="orden-btn" onclick="setQuizModo('jp_es')">Kana → Romaji</button>
+          <button id="btn-es-jp" class="orden-btn" onclick="setQuizModo('es_jp')">Romaji → Kana</button>
+          <button id="btn-dictado" class="orden-btn" onclick="toggleDictado()">Dictado 🔊</button>
+        </div>
       </div>
 
     </div>
