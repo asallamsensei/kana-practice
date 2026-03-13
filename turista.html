@@ -407,6 +407,9 @@
 
     <div id="estadisticas">
       Aciertos: <span id="aciertos">0</span> — Errores: <span id="errores">0</span>
+      <div style="margin-top:6px;">
+        Racha: <span id="racha">0</span> — Mejor racha: <span id="mejorRacha">0</span> — Precisión: <span id="precision">0%</span>
+      </div>
     </div>
 
     <div class="acciones" style="margin-top:12px;">
@@ -460,6 +463,8 @@ let yaValidado = false;
 
 let aciertos = 0;
 let errores  = 0;
+let racha = 0;
+let mejorRacha = 0;
 
 let todosActivo = false;
 let bloquesSeleccionados = new Set();
@@ -504,26 +509,37 @@ function cargarStatsObj(){
 function guardarStatsObj(o){
   localStorage.setItem(STATS_KEY, JSON.stringify(o));
 }
+  
 function statsKey(modo, bloque){
   return `${bloque}__${modo}`;
 }
+  
 function cargarStatsActual(){
   const stats = cargarStatsObj();
   const k = statsKey(modoActual, bloqueActual);
-  const s = stats[k] || { aciertos: 0, errores: 0 };
+  const s = stats[k] || { aciertos: 0, errores: 0, racha: 0, mejorRacha: 0 };
+
   aciertos = s.aciertos || 0;
-  errores  = s.errores  || 0;
+  errores = s.errores || 0;
+  racha = s.racha || 0;
+  mejorRacha = s.mejorRacha || 0;
+
   actualizarEstadisticas();
 }
+  
 function guardarStatsActual(){
   const stats = cargarStatsObj();
   const k = statsKey(modoActual, bloqueActual);
-  stats[k] = { aciertos, errores };
+  stats[k] = { aciertos, errores, racha, mejorRacha };
   guardarStatsObj(stats);
 }
+  
 function resetStatsTodo(){
   localStorage.removeItem(STATS_KEY);
-  aciertos = 0; errores = 0;
+  aciertos = 0;
+  errores = 0;
+  racha = 0;
+  mejorRacha = 0;
   actualizarEstadisticas();
 }
 
@@ -577,7 +593,13 @@ function pintarBotonesActivos(){
 
 function actualizarEstadisticas(){
   $("aciertos").innerText = aciertos;
-  $("errores").innerText  = errores;
+  $("errores").innerText = errores;
+  $("racha").innerText = racha;
+  $("mejorRacha").innerText = mejorRacha;
+
+  const total = aciertos + errores;
+  const precision = total > 0 ? Math.round((aciertos / total) * 100) : 0;
+  $("precision").innerText = precision + "%";
 }
 
 /* ===============================
@@ -807,6 +829,8 @@ async function verificar(letra){
     res.innerText = `Correcto ✔\nRomaji: ${actualItem.romaji}`;
     res.className = "correcto";
     aciertos++;
+    racha++;
+    if(racha > mejorRacha) mejorRacha = racha;
   }else{
     res.innerText =
       `Incorrecto ✘ (era ${correcta})\n` +
@@ -814,6 +838,7 @@ async function verificar(letra){
       `Romaji: ${actualItem.romaji}`;
     res.className = "incorrecto";
     errores++;
+    racha = 0;
   }
 
   actualizarEstadisticas();
@@ -830,6 +855,7 @@ async function siguienteDesdeBoton(){
       }
 
     errores++;
+    racha = 0;
     actualizarEstadisticas();
     guardarStatsActual();
 
