@@ -402,12 +402,13 @@ fetch("data/kanji_1.json")
     actualizarStatsUI();
   })
   
-  .catch(() => {
+  .catch((err) => {
+    console.error(err);
     document.getElementById("resultado").innerText =
-      "No se pudo cargar data/kanji_1.json";
+      "No se pudo iniciar correctamente la app";
     document.getElementById("resultado").className = "incorrecto";
   });
-
+  
 function getModo(){
   return modoActual;
 }
@@ -426,7 +427,6 @@ function setModo(m){
   yaValidado = false;
   document.getElementById("resultado").innerText = "";
   document.getElementById("resultado").className = "";
-  document.getElementById("respuestaUsuario").value = "";
   siguiente();
 }
 
@@ -496,7 +496,7 @@ function siguiente(){
      c) ${opciones[2]}`;
 }
 
-/* ✅ Verificar la letra actual del input */
+/* ✅ Verificar la letra elegida */
 function verificar(letraElegida){
   if (yaValidado) return;
 
@@ -520,7 +520,7 @@ function verificar(letraElegida){
   yaValidado = true;
 }
 
-/* ✅ Botones a/b/c: llenan input y verifican */
+/* ✅ Botones a/b/c: verifican; si ya estaba validado, avanzan */
 function responder(letra){
   if (!yaValidado) {
     verificar(letra);
