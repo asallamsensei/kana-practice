@@ -18,7 +18,7 @@
   { "kanji": "問題", "significado": "problema (en general), pregunta (de examen)", "romaji": "mondai" },
   { "kanji": "部屋", "significado": "habitación", "romaji": "heya" },
   { "kanji": "子ども", "significado": "niño, niños (en general)", "romaji": "kodomo" },
-  { "kanji": "子供", "significado": "niño, niños (forma menos preferida; puede tener matiz indeseado)", "romaji": "kodomo_2" },
+  { "kanji": "子供", "significado": "niño, niños (forma menos preferida; puede tener matiz indeseado)", "romaji": "kodomo" },
 
   { "kanji": "時間", "significado": "tiempo, hora", "romaji": "jikan" },
   { "kanji": "雨", "significado": "lluvia", "romaji": "ame" },
