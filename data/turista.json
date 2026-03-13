@@ -372,7 +372,7 @@
 
     { "japones": "ビール", "romaji": "biiru", "espanol": "cerveza" },
     { "japones": "生ビール", "romaji": "nama biiru", "espanol": "cerveza de barril" },
-    { "japones": "乾杯！", "romaji": "kanpai!", "espanol": "¡salud!" },
+    { "japones": "乾杯！", "romaji": "kanpai", "espanol": "¡salud!" },
 
     { "japones": "ミルク", "romaji": "miruku", "espanol": "leche" },
     { "japones": "牛乳", "romaji": "gyuunyuu", "espanol": "leche (de vaca)" },
