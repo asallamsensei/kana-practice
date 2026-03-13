@@ -866,16 +866,21 @@ function togglePrincipiante(){
   filtroPrincipiante = !filtroPrincipiante;
   const btn = document.getElementById("btn-principiante");
 
-  if (filtroPrincipiante) btn.classList.add("activo");
-  else btn.classList.remove("activo");
+  if (filtroPrincipiante) {
+    usarExtra = false;
+    btn.classList.add("activo");
+  } else {
+    btn.classList.remove("activo");
+  }
 
   aplicarFiltroPrincipiante();
+  asegurarAlMenosUnScript();
   construirPoolActual();
+  aplicarVisualScripts();
   cargarStatsActual();
   limpiarUI();
   siguienteKana();
 }
-
 
 function construirPoolActual(){
   let pool = [];
@@ -927,17 +932,22 @@ function syncMixDesdeToggles(){
   usarMix = usarJPES && usarESJP && usarDictado;
 }
 
+function asegurarAlMenosUnScript(){
+  if (!usarHiragana && !usarKatakana && !usarExtra) {
+    usarHiragana = true;
+  }
+}
   
 function toggleScript(script){
   if (script === "hiragana") {
-    if (usarHiragana && !usarKatakana) return;
     usarHiragana = !usarHiragana;
   }
 
   if (script === "katakana") {
-    if (usarKatakana && !usarHiragana) return;
     usarKatakana = !usarKatakana;
   }
+
+  asegurarAlMenosUnScript();
 
   construirPoolActual();
   aplicarVisualScripts();
@@ -948,6 +958,15 @@ function toggleScript(script){
 
 function toggleExtra(){
   usarExtra = !usarExtra;
+
+  if (usarExtra) {
+    filtroPrincipiante = false;
+    document.getElementById("btn-principiante").classList.remove("activo");
+    aplicarFiltroPrincipiante();
+  }
+
+  asegurarAlMenosUnScript();
+
   construirPoolActual();
   aplicarVisualScripts();
   cargarStatsActual();
