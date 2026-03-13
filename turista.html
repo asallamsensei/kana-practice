@@ -608,9 +608,9 @@ function actualizarEstadisticas(){
 function normalizarItem(x, bloque = ""){
   return {
     japones: String(x.japones || "").trim(),
-    romaji:  String(x.romaji  || "").trim(),
+    romaji: String(x.romaji || x.lectura_kanji || x.lectura_kanjis || "").trim(),
     espanol: String(x.espanol || "").trim(),
-    bloque:  String(bloque || "").trim()
+    bloque: String(bloque || "").trim()
   };
 }
 
@@ -672,7 +672,7 @@ function actualizarPoolDesdeSeleccion(){
   sel.forEach(k => {
     const arr = (dataRaw[k] || [])
       .map(x => normalizarItem(x, k))
-      .filter(it => it.japones && it.espanol && it.romaji);
+      .filter(it => it.japones && it.espanol);
     combinado = combinado.concat(arr);
   });
   pool = combinado;
@@ -715,7 +715,7 @@ function toggleTema(k){
 function cargarBloque(k){
   lista = (dataRaw[k] || [])
     .map(x => normalizarItem(x, k))
-    .filter(it => it.japones && it.espanol && it.romaji);
+    .filter(it => it.japones && it.espanol);
 
   pool = lista.slice();
 
@@ -810,6 +810,10 @@ function escapeHTML(str){
     .replaceAll("'","&#039;");
 }
 
+function lineaRomaji(item){
+  return item?.romaji ? `\nRomaji: ${item.romaji}` : "";
+}
+  
 function responder(letra){
   if(yaValidado) return;
   verificar(letra);
@@ -819,12 +823,12 @@ async function verificar(letra){
   const r = String(letra).toLowerCase().trim();
   const res = $("resultado");
 
-  if(!itemEsDeKanji(actualItem)){
+  if(!itemEsDeKanji(actualItem) && actualItem.romaji){
     await playAudioForRomaji(actualItem.romaji);
   }
 
   if(r === correcta){
-    res.innerText = `Correcto ✔\nRomaji: ${actualItem.romaji}`;
+    res.innerText = `Correcto ✔${lineaRomaji(actualItem)}`;
     res.className = "correcto";
     aciertos++;
     racha++;
@@ -832,8 +836,8 @@ async function verificar(letra){
   }else{
     res.innerText =
       `Incorrecto ✘ (era ${correcta})\n` +
-      `Respuesta: ${opcionCorrectaTexto}\n` +
-      `Romaji: ${actualItem.romaji}`;
+      `Respuesta: ${opcionCorrectaTexto}` +
+      lineaRomaji(actualItem);
     res.className = "incorrecto";
     errores++;
     racha = 0;
@@ -848,7 +852,7 @@ async function siguienteDesdeBoton(){
   const res = $("resultado");
   
   if(!yaValidado){
-      if(!itemEsDeKanji(actualItem)){
+      if(!itemEsDeKanji(actualItem) && actualItem.romaji){
         await playAudioForRomaji(actualItem.romaji);
       }
 
@@ -859,8 +863,8 @@ async function siguienteDesdeBoton(){
 
     res.innerText =
       `Saltado ✘ (era ${correcta})\n` +
-      `Respuesta: ${opcionCorrectaTexto}\n` +
-      `Romaji: ${actualItem.romaji}`;
+      `Respuesta: ${opcionCorrectaTexto}` +
+      lineaRomaji(actualItem);
     res.className = "incorrecto";
 
     yaValidado = true;
