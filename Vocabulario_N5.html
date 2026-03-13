@@ -205,7 +205,7 @@
 
   #opcionesTexto{
     margin-top: 10px;
-    font-size: 20px;
+    font-size: 30px;
     line-height: 1.7;
     text-align: left;
     width: fit-content;
@@ -219,14 +219,14 @@
     word-break: break-word;
   }
   
-  .actions{
-    display:grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 210px));
-    justify-content:center;
-    gap:10px;
-    width:min(460px, 100%);
-    margin-top: 6px;
-  }
+.actions{
+  display:grid;
+  grid-template-columns: minmax(150px, 210px);
+  justify-content:center;
+  gap:10px;
+  width:min(220px, 100%);
+  margin-top: 6px;
+}
   .actions .btn, .actions .btn-ghost{
     width:100%;
     justify-self:stretch;
@@ -282,7 +282,6 @@
 
         <div class="actions">
           <button class="btn" type="button" onclick="accionSiguiente()">Siguiente</button>
-          <button class="btn btn-ghost" type="button" onclick="mostrarRespuesta()">Mostrar respuesta</button>
         </div>
         
         <div class="stats">
@@ -715,27 +714,6 @@ function verificar(letraForzada){
   yaValidado = true;
 
   pintarOpciones(letra);
-  bloquearOpciones();
-
-  playAudio(ultimoAudioKey);
-}
-
-function mostrarRespuesta(){
-
-  if(!yaValidado){
-    errores++;
-    racha = 0;
-    pintarStats();
-    guardarStats();
-  }
-
-  const res = document.getElementById("resultado");
-  res.className = "incorrecto";
-  res.innerText = `Respuesta: ${respuestaCorrecta}`;
-
-  yaValidado = true;
-
-  pintarOpciones(null);
   bloquearOpciones();
 
   playAudio(ultimoAudioKey);
