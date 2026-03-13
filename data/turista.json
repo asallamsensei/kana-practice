@@ -213,7 +213,7 @@
   
     { "japones": "航空券", "romaji": "koukuuken", "espanol": "boleto de avión" },
     { "japones": "窓側の席", "romaji": "mado gawa no seki", "espanol": "asiento del lado de la ventana" },
-    { "japones": "窓側の席をお願いします。", "romaji": "mado gawa no seki o onegaishimasu.", "espanol": "Un asiento del lado de la ventana, por favor." },
+    { "japones": "窓側の席をお願いします。", "romaji": "mado gawa no seki o onegaishimasu", "espanol": "Un asiento del lado de la ventana, por favor." },
   
     { "japones": "入場券", "romaji": "nyuujouken", "espanol": "entrada (a lugares turísticos)" },
     { "japones": "特急券", "romaji": "tokkyuuken", "espanol": "boleto adicional (tren exprés)" },
@@ -428,7 +428,7 @@
     { "japones": "カルピス", "romaji": "karupisu", "espanol": "bebida láctea dulce" },
     { "japones": "ラムネ", "romaji": "ramune", "espanol": "refresco ramune" },
 
-    { "japones": "すみません、これはいくらですか？", "romaji": "sumimasen, kore wa ikura desu ka", "espanol": "Disculpe, ¿cuánto cuesta esto?" },
+    { "japones": "すみません、これはいくらですか？", "romaji": "sumimasen kore wa ikura desu ka", "espanol": "Disculpe, ¿cuánto cuesta esto?" },
     { "japones": "ラーメンはありますか？", "romaji": "raamen wa arimasu ka", "espanol": "¿Tienen ramen?" },
     { "japones": "オムライスをお願いします。", "romaji": "omuraisu o onegaishimasu", "espanol": "Omuraisu, por favor." },
     { "japones": "お好み焼きをひとつください。", "romaji": "okonomiyaki o hitotsu kudasai", "espanol": "Un okonomiyaki, por favor." },
