@@ -119,30 +119,6 @@
   transform: translateY(-1px);
 }
 
-
-  /* Input */
-  #respuestaUsuario{
-    display:block;          /* ✅ asegura que sea bloque */
-    font-size:22px;
-    padding:10px 12px;
-    border-radius:12px;
-    border:1px solid var(--border);
-    text-align:center;
-    width:14ch;
-    margin:0;
-  
-    background: rgba(255,255,255,.06);
-    color: var(--text);
-    outline:none;
-  }
-
-  #respuestaUsuario::placeholder{ color: rgba(255,255,255,.70); }
-  #respuestaUsuario:focus{
-    border-color: rgba(255,255,255,.22);
-    box-shadow: 0 0 0 4px rgba(125,92,255,.18);
-  }
-
-
   /* Nav debajo del input */
   #navBtns{
     margin-top:4px;
@@ -496,10 +472,10 @@ function siguiente(){
 }
 
 /* ✅ Verificar la letra elegida */
-function verificar(letraElegida){
+function verificar(letraElegida = ""){
   if (yaValidado) return;
 
-  const r = letraElegida.toLowerCase().trim();
+  const r = String(letraElegida).toLowerCase().trim();
   const res = document.getElementById("resultado");
 
   if (r === correcta) {
@@ -509,7 +485,7 @@ function verificar(letraElegida){
     racha++;
     if (racha > mejorRacha) mejorRacha = racha;
   } else {
-    res.innerText = `Incorrecto ✘ (era ${correcta})`;
+    res.innerText = `Incorrecto ✘ — correcta: ${correcta}) ${respuestaCorrecta}`;
     res.className = "incorrecto";
     errores++;
     racha = 0;
@@ -528,18 +504,10 @@ function responder(letra){
   siguiente();
 }
 
-/* ✅ Siguiente: debe requerir 2 toques (primero verifica, segundo avanza) */
+/* ✅ Siguiente: si no respondió, cuenta como incorrecto; si ya está validado, avanza */
 function accionSiguiente(){
   if (!yaValidado) {
-    errores++;
-    racha = 0;
-
-    const res = document.getElementById("resultado");
-    res.innerText = `Respuesta: ${respuestaCorrecta} (era ${correcta})`;
-    res.className = "";
-
-    actualizarStatsUI();
-    yaValidado = true;
+    verificar("");
     return;
   }
 
