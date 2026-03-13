@@ -627,12 +627,10 @@ fetch(DATA_PATH)
     }
 
     construirBarraBloques(bloques);
-    bloqueActual = bloques[0];
 
     modoActual = "mix";
     pintarBotonesActivos();
 
-    cargarBloque(bloqueActual);
     setModo(modoActual);
   })
   .catch(err => {
