@@ -445,9 +445,12 @@
 }
 
 .modo-btn.dual-activo{
-  background: #D62828;
-  border-color: #D62828;
-  color: white;
+  background: rgba(214,40,40,.18);
+  border-color: rgba(214,40,40,.48);
+  color: #fecaca;
+  box-shadow:
+    0 0 8px rgba(214,40,40,.18),
+    inset 0 0 8px rgba(214,40,40,.08);
 }
 
 .orden-btn.activo,
@@ -465,11 +468,15 @@
 }
 
 #btn-mix.activo{
+  opacity: 1;
   background: rgba(214,40,40,.18);
   border-color: rgba(214,40,40,.55);
   color: #fecaca;
+  box-shadow:
+    0 0 8px rgba(214,40,40,.38),
+    0 0 18px rgba(214,40,40,.18),
+    inset 0 0 8px rgba(214,40,40,.08);
 }
-
   
 @media (max-width: 900px){
   .top-grid{
@@ -916,6 +923,11 @@ function aplicarVisualDirecciones(){
   if (usarMix) btnMix.classList.add("activo");
 }
 
+function syncMixDesdeToggles(){
+  usarMix = usarJPES && usarESJP && usarDictado;
+}
+
+  
 function toggleScript(script){
   if (script === "hiragana") {
     if (usarHiragana && !usarKatakana) return;
@@ -945,14 +957,16 @@ function toggleExtra(){
 
 function toggleDireccion(dir){
   if (dir === "jp_es") {
-    if (usarJPES && !usarESJP) return;
+    if (usarJPES && !usarESJP && !usarDictado) return;
     usarJPES = !usarJPES;
   }
 
   if (dir === "es_jp") {
-    if (usarESJP && !usarJPES) return;
+    if (usarESJP && !usarJPES && !usarDictado) return;
     usarESJP = !usarESJP;
   }
+
+  syncMixDesdeToggles();
 
   aplicarVisualDirecciones();
   cargarStatsActual();
@@ -961,15 +975,28 @@ function toggleDireccion(dir){
 }
 
 function toggleDictado(){
+  if (usarDictado && !usarJPES && !usarESJP) return;
+
   usarDictado = !usarDictado;
+
+  syncMixDesdeToggles();
+
   aplicarVisualDirecciones();
   cargarStatsActual();
   limpiarUI();
   siguienteKana();
 }
 
+  
 function toggleMix(){
   usarMix = !usarMix;
+
+  if (usarMix) {
+    usarJPES = true;
+    usarESJP = true;
+    usarDictado = true;
+  }
+
   aplicarVisualDirecciones();
   cargarStatsActual();
   limpiarUI();
@@ -977,26 +1004,15 @@ function toggleMix(){
 }
 
 function tiposDisponibles(){
-  const tiposVisuales = [];
-  const tiposDictado = [];
+  const tipos = [];
 
-  if (usarJPES) tiposVisuales.push("jp_es");
-  if (usarESJP) tiposVisuales.push("es_jp");
+  if (usarJPES) tipos.push("jp_es");
+  if (usarESJP) tipos.push("es_jp");
 
-  if (usarJPES) tiposDictado.push("dictado_jp_es");
-  if (usarESJP) tiposDictado.push("dictado_es_jp");
+  if (usarDictado && usarJPES) tipos.push("dictado_jp_es");
+  if (usarDictado && usarESJP) tipos.push("dictado_es_jp");
 
-  if (usarMix) {
-    let todos = [...tiposVisuales];
-    if (usarDictado) todos = todos.concat(tiposDictado);
-    return todos.length ? todos : ["jp_es"];
-  }
-
-  if (usarDictado) {
-    return tiposDictado.length ? tiposDictado : ["dictado_jp_es"];
-  }
-
-  return tiposVisuales.length ? tiposVisuales : ["jp_es"];
+  return tipos.length ? tipos : ["jp_es"];
 }
 
 function elegirTipoPregunta(){
