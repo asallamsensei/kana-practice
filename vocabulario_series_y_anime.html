@@ -412,7 +412,7 @@ let poolScope = "seleccion"; // "seleccion" | "global"
    Regla: archivo = romaji EXACTO + ".mp3"
    Ej: "mirai kara" -> data/audios/series/mirai%20kara.mp3
 =============================== */
-const AUDIO_DIR = "/kana-practice/data/audios/series/";
+const AUDIO_DIR = "data/audios/series/";
 let audio = new Audio();
 audio.preload = "auto";
 
@@ -428,9 +428,6 @@ function audioUrlDesdeRomaji(romaji){
 function playAudioForRomaji(romaji){
   if(!romaji) return;
 
-  // si aún no hay interacción del usuario, no forzamos
-  if(!audioHabilitado) return;
-
   const src = audioUrlDesdeRomaji(romaji);
 
   try{
@@ -444,7 +441,7 @@ function playAudioForRomaji(romaji){
 
   audio.src = src;
   audio.play().catch(err => {
-    console.warn("[audio] play() falló/bloqueado:", err);
+    console.warn("[audio] play() falló:", err);
   });
 }
   
@@ -592,6 +589,7 @@ function refrescarPills(){
 }
 
 function replayAudio(){
+  audioHabilitado = true;
   if(!actual) return;
 
   const r = actual?.extra?.romaji;
@@ -892,6 +890,7 @@ else{
 
   // dictado: reproduce apenas sale
   if(actual.tipo === "dict_es" || actual.tipo === "dict_jp"){
+    audioHabilitado = true;
     if(actual.extra?.romaji) playAudioForRomaji(actual.extra.romaji);
   }
 
