@@ -556,11 +556,12 @@ function actualizarEstadisticas(){
 /* ===============================
    CARGA Y NORMALIZACIÓN
 =============================== */
-function normalizarItem(x){
+function normalizarItem(x, bloque = ""){
   return {
     japones: String(x.japones || "").trim(),
     romaji:  String(x.romaji  || "").trim(),
-    espanol: String(x.espanol || "").trim()
+    espanol: String(x.espanol || "").trim(),
+    bloque:  String(bloque || "").trim()
   };
 }
 
@@ -629,7 +630,8 @@ function actualizarPoolDesdeSeleccion(){
   const sel = [...bloquesSeleccionados];
   let combinado = [];
   sel.forEach(k => {
-    const arr = (dataRaw[k] || []).map(normalizarItem)
+    const arr = (dataRaw[k] || [])
+      .map(x => normalizarItem(x, k))
       .filter(it => it.japones && it.espanol && it.romaji);
     combinado = combinado.concat(arr);
   });
@@ -671,7 +673,8 @@ function toggleTema(k){
 }
 
 function cargarBloque(k){
-  lista = (dataRaw[k] || []).map(normalizarItem)
+  lista = (dataRaw[k] || [])
+    .map(x => normalizarItem(x, k))
     .filter(it => it.japones && it.espanol && it.romaji);
 
   pool = lista.slice();
@@ -702,6 +705,10 @@ function mezclar(arr){
   return arr.slice().sort(() => Math.random() - 0.5);
 }
 
+function itemEsDeKanji(item){
+  return String(item?.bloque || "").toLowerCase().includes("kanji");
+}  
+  
 function siguiente(){
   if(pool.length < 3) return;
 
@@ -728,13 +735,9 @@ function siguiente(){
   correcta = letras[opciones.indexOf(correctoTexto)];
   opcionCorrectaTexto = correctoTexto;
 
-  const badge = $("badgeKanji");
-  
-  const hayKanji = [...bloquesSeleccionados].some(
-    b => b.toLowerCase().includes("kanji")
-  );
-  
-  badge.style.display = hayKanji ? "inline-block" : "none";
+const badge = $("badgeKanji");
+const hayKanji = itemEsDeKanji(actualItem);
+badge.style.display = hayKanji ? "inline-block" : "none";
   
   const promptEl = $("prompt");
   promptEl.innerText = pregunta;
@@ -772,7 +775,9 @@ async function verificar(letra){
   const r = String(letra).toLowerCase().trim();
   const res = $("resultado");
 
-  await playAudioForRomaji(actualItem.romaji);
+  if(!itemEsDeKanji(actualItem)){
+    await playAudioForRomaji(actualItem.romaji);
+  }
 
   if(r === correcta){
     res.innerText = `Correcto ✔\nRomaji: ${actualItem.romaji}`;
@@ -797,7 +802,9 @@ async function mostrarRespuesta(){
 
   const res = $("resultado");
 
-  await playAudioForRomaji(actualItem.romaji);
+  if(!itemEsDeKanji(actualItem)){
+    await playAudioForRomaji(actualItem.romaji);
+  }
 
   errores++;
   actualizarEstadisticas();
@@ -816,8 +823,10 @@ async function siguienteDesdeBoton(){
   const res = $("resultado");
   
   if(!yaValidado){
-    await playAudioForRomaji(actualItem.romaji);
-  
+      if(!itemEsDeKanji(actualItem)){
+        await playAudioForRomaji(actualItem.romaji);
+      }
+
     errores++;
     actualizarEstadisticas();
     guardarStatsActual();
