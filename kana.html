@@ -43,7 +43,7 @@
   h1{
     margin: 8px 0 14px;
     text-align:center;
-    font-size: clamp(24px, 4.8vw, 34px);
+    font-size: clamp(22px, 4.4vw, 30px);
     line-height: 1.15;
     letter-spacing: .2px;
   }
@@ -174,7 +174,7 @@
 
 
 #kana{
-  font-size: clamp(40px, 8vw, 50px);
+  font-size: clamp(50px, 10vw, 60px);
   line-height: 1.05;
   font-weight: 300;
   user-select: none;
@@ -427,6 +427,49 @@
   color: #efe9ff;
   letter-spacing: .3px;
 }
+
+.toggle-row{
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  gap:10px;
+}
+
+.sub-title{
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--muted);
+  margin-bottom: 8px;
+  text-align: center;
+  letter-spacing: .3px;
+  text-transform: uppercase;
+}
+
+.modo-btn.dual-activo{
+  background: #D62828;
+  border-color: #D62828;
+  color: white;
+}
+
+.orden-btn.activo,
+.modo-btn.activo{
+  opacity: 1;
+  background: rgba(125,92,255,.22);
+  border-color: rgba(125,92,255,.55);
+  color: #efe9ff;
+}
+
+#btn-extra.activo{
+  background: rgba(34,197,94,.18);
+  border-color: rgba(34,197,94,.45);
+  color: #dcfce7;
+}
+
+#btn-mix.activo{
+  background: rgba(214,40,40,.18);
+  border-color: rgba(214,40,40,.55);
+  color: #fecaca;
+}
+
   
 @media (max-width: 900px){
   .top-grid{
@@ -465,7 +508,11 @@
   }
 }
 
-
+@media (max-width: 900px){
+  .toggle-row{
+    grid-template-columns: 1fr 1fr;
+  }
+}
 
 
   
@@ -482,7 +529,7 @@
 
       <div class="panel main-play">
         <div id="kanaBox">
-          <div id="kana" onclick="if(quizModo==='dictado') reproducirAudioKana(kanaLista[actual][1])">あ</div>
+          <div id="kana" onclick="if(esDictadoTipo(tipoPreguntaActual)) reproducirAudioKana(kanaLista[actual][1])">あ</div>
 
           <div class="audio-row">
             <button id="btnReplay" class="ghost-btn" type="button" onclick="replayAudio()">🔊</button>
@@ -529,25 +576,35 @@
       </div>
       
       <div class="panel side-panel">
-
+      
         <div class="panel-title">Modos</div>
-
-        <div id="modo-container" class="chips">
-          <button id="btn-hiragana" class="modo-btn" onclick="setModo('hiragana')">Hiragana</button>
-          <button id="btn-katakana" class="modo-btn" onclick="setModo('katakana')">Katakana</button>
-          <button id="btn-mezcla" class="modo-btn" onclick="setModo('mezcla')">Mezcla</button>
-          <button id="btn-extra" class="modo-btn" onclick="setModo('extra')">Extra</button>
+      
+        <div class="sub-title">Escritura</div>
+        <div class="toggle-row">
+          <button id="btn-hiragana" class="modo-btn" onclick="toggleScript('hiragana')">Hiragana</button>
+          <button id="btn-katakana" class="modo-btn" onclick="toggleScript('katakana')">Katakana</button>
         </div>
-
-        <div class="sep"></div>
-
-        <div id="orden-container" class="chips">
+      
+        <div class="toggle-row" style="margin-top:10px;">
+          <button id="btn-extra" class="modo-btn" onclick="toggleExtra()">Extra</button>
           <button id="btn-principiante" class="modo-btn" onclick="togglePrincipiante()">Principiante</button>
-          <button id="btn-jp-es" class="orden-btn" onclick="setQuizModo('jp_es')">Kana → Romaji</button>
-          <button id="btn-es-jp" class="orden-btn" onclick="setQuizModo('es_jp')">Romaji → Kana</button>
-          <button id="btn-dictado" class="orden-btn" onclick="toggleDictado()">Dictado 🔊</button>
         </div>
+      
+        <div class="sep"></div>
+      
+        <div class="sub-title">Tipo de pregunta</div>
+        <div class="toggle-row">
+          <button id="btn-jp-es" class="orden-btn" onclick="toggleDireccion('jp_es')">Kana → Romaji</button>
+          <button id="btn-es-jp" class="orden-btn" onclick="toggleDireccion('es_jp')">Romaji → Kana</button>
+        </div>
+      
+        <div class="toggle-row" style="margin-top:10px;">
+          <button id="btn-dictado" class="orden-btn" onclick="toggleDictado()">Dictado 🔊</button>
+          <button id="btn-mix" class="orden-btn" onclick="toggleMix()">MIX</button>
+        </div>
+      
       </div>
+
 
     </div>
   </div>
@@ -590,22 +647,40 @@ fetch("data/kana.json")
     katakana = katakanaBase;
 
     aplicarFiltroPrincipiante();
+    construirPoolActual();
+    aplicarVisualScripts();
+    aplicarVisualDirecciones();
+    cargarStatsActual();
+    siguienteKana();
 
-    setModo("hiragana");
   });
 
 /* ===============================
    ESTADO
 =============================== */
-let modoActual = "hiragana"; // hiragana|katakana|mezcla|extra
-let kanaLista = hiragana;
 let actual = 0;
+let kanaLista = [];
 
 let yaValidado = false;
 let aciertos = 0;
 let errores = 0;
 let racha = 0;
 let mejorRacha = 0;
+
+let usarHiragana = true;
+let usarKatakana = true;
+let usarExtra = false;
+
+let usarJPES = true;   // Kana -> Romaji
+let usarESJP = true;   // Romaji -> Kana
+let usarDictado = false;
+let usarMix = false;
+
+let opcionesActuales = [];
+let indiceCorrecto = 0;
+
+let tipoPreguntaActual = "jp_es"; // jp_es | es_jp | dictado_jp_es | dictado_es_jp
+
 
 let quizModo = "jp_es";        // jp_es | es_jp | dictado
 let quizModoPrevio = "jp_es";  // recuerda el último no-dictado
@@ -626,8 +701,20 @@ function guardarStats(stats){
 }
 
 function statsKeyActual(){
-  return modoActual + "__" + quizModo;
+  const scripts =
+    (usarHiragana ? "H" : "") +
+    (usarKatakana ? "K" : "") +
+    (usarExtra ? "X" : "");
+
+  const tipos =
+    (usarJPES ? "J" : "") +
+    (usarESJP ? "R" : "") +
+    (usarDictado ? "D" : "") +
+    (usarMix ? "M" : "");
+
+  return scripts + "__" + tipos;
 }
+
 
 function cargarStatsActual(){
   const key = statsKeyActual();
@@ -667,11 +754,10 @@ function generarOpciones(){
   if (!kanaLista.length) return;
 
   const correcta = kanaLista[actual];
-  const correctaValor = valorOpcion(correcta);
+  const correctaValor = valorRespuesta(correcta, tipoPreguntaActual);
 
   const pool = kanaLista.filter(item => {
-    const v = valorOpcion(item);
-    return v !== correctaValor;
+    return valorRespuesta(item, tipoPreguntaActual) !== correctaValor;
   });
 
   const distractores = mezclarArray(pool).slice(0, 2);
@@ -679,7 +765,7 @@ function generarOpciones(){
   opcionesActuales = mezclarArray([correcta, ...distractores]);
   indiceCorrecto = opcionesActuales.findIndex(item => item === correcta);
 
-  const textos = opcionesActuales.map(item => valorOpcion(item));
+  const textos = opcionesActuales.map(item => valorRespuesta(item, tipoPreguntaActual));
 
   document.getElementById("texto-opcion-a").innerText = textos[0] || "";
   document.getElementById("texto-opcion-b").innerText = textos[1] || "";
@@ -687,25 +773,12 @@ function generarOpciones(){
 
   limpiarEstadoBotones();
 }
+
   
 function valorOpcion(item){
-  const kana = item[0];
-  const romaji = item[1];
-
-  if (quizModo === "jp_es") {
-    return romaji;
-  }
-
-  if (quizModo === "es_jp") {
-    return kana;
-  }
-
-  if (quizModo === "dictado") {
-    return kana + " / " + romaji;
-  }
-
-  return romaji;
+  return valorRespuesta(item, tipoPreguntaActual);
 }
+
   
 function mezclarArray(arr){
   const copia = [...arr];
@@ -779,71 +852,13 @@ function actualizarBotonAudio(){
   kanaEl.classList.remove("dictado");
   box.classList.remove("dictado-only");
 
-  if (quizModo === "dictado") {
+  if (esDictadoTipo(tipoPreguntaActual)) {
     btn.classList.add("visible", "big-sound");
     kanaEl.classList.add("dictado");
     box.classList.add("dictado-only");
   }
 }
 
-/* ===============================
-   MODOS
-=============================== */
-function setModo(modo){
-  modoActual = modo;
-
-  if (modo === "hiragana") kanaLista = hiragana;
-  else if (modo === "katakana") kanaLista = katakana;
-  else if (modo === "extra") kanaLista = extra;
-  else kanaLista = [...hiragana, ...katakana];
-
-  const botonesModo = document.querySelectorAll(".modo-btn");
-  botonesModo.forEach(b => {
-    if (b.id !== "btn-principiante") b.classList.remove("activo");
-  });
-
-  const btnModo = document.getElementById("btn-" + modo);
-  if (btnModo) btnModo.classList.add("activo");
-
-  aplicarVisualQuizModo();
-  aplicarPlaceholderQuizModo();
-  aplicarNotaTeclado();
-  actualizarBotonAudio();
-  cargarStatsActual();
-
-  limpiarUI();
-  siguienteKana();
-}
-
-function setQuizModo(modo){
-  if (modo === "jp_es" || modo === "es_jp") quizModoPrevio = modo;
-  quizModo = modo;
-
-  aplicarVisualQuizModo();
-  aplicarPlaceholderQuizModo();
-  aplicarNotaTeclado();
-  actualizarBotonAudio();
-  cargarStatsActual();
-  limpiarUI();
-  siguienteKana();
-}
-
-function toggleDictado(){
-  if (quizModo !== "dictado") {
-    quizModoPrevio = quizModo;
-    quizModo = "dictado";
-  } else {
-    quizModo = quizModoPrevio || "jp_es";
-  }
-
-  aplicarVisualQuizModo();
-  aplicarPlaceholderQuizModo();
-  aplicarNotaTeclado();
-  actualizarBotonAudio();
-  cargarStatsActual();
-  limpiarUI();
-  siguienteKana();
-}
 
 /* ===============================
    FILTRO PRINCIPIANTE
@@ -867,11 +882,176 @@ function togglePrincipiante(){
   else btn.classList.remove("activo");
 
   aplicarFiltroPrincipiante();
-
-  if (modoActual === "extra") return;
-  setModo(modoActual);
+  construirPoolActual();
+  cargarStatsActual();
+  limpiarUI();
+  siguienteKana();
 }
 
+
+function construirPoolActual(){
+  let pool = [];
+
+  if (usarHiragana) pool = pool.concat(hiragana);
+  if (usarKatakana) pool = pool.concat(katakana);
+  if (usarExtra) pool = pool.concat(extra);
+
+  kanaLista = pool;
+}
+
+function aplicarVisualScripts(){
+  const btnH = document.getElementById("btn-hiragana");
+  const btnK = document.getElementById("btn-katakana");
+  const btnE = document.getElementById("btn-extra");
+
+  [btnH, btnK, btnE].forEach(btn => {
+    btn.classList.remove("activo", "dual-activo");
+  });
+
+  if (usarHiragana && usarKatakana) {
+    btnH.classList.add("dual-activo");
+    btnK.classList.add("dual-activo");
+  } else {
+    if (usarHiragana) btnH.classList.add("activo");
+    if (usarKatakana) btnK.classList.add("activo");
+  }
+
+  if (usarExtra) btnE.classList.add("activo");
+}
+
+function aplicarVisualDirecciones(){
+  const btnJPES = document.getElementById("btn-jp-es");
+  const btnESJP = document.getElementById("btn-es-jp");
+  const btnDictado = document.getElementById("btn-dictado");
+  const btnMix = document.getElementById("btn-mix");
+
+  [btnJPES, btnESJP, btnDictado, btnMix].forEach(btn => {
+    btn.classList.remove("activo");
+  });
+
+  if (usarJPES) btnJPES.classList.add("activo");
+  if (usarESJP) btnESJP.classList.add("activo");
+  if (usarDictado) btnDictado.classList.add("activo");
+  if (usarMix) btnMix.classList.add("activo");
+}
+
+function toggleScript(script){
+  if (script === "hiragana") {
+    if (usarHiragana && !usarKatakana) return;
+    usarHiragana = !usarHiragana;
+  }
+
+  if (script === "katakana") {
+    if (usarKatakana && !usarHiragana) return;
+    usarKatakana = !usarKatakana;
+  }
+
+  construirPoolActual();
+  aplicarVisualScripts();
+  cargarStatsActual();
+  limpiarUI();
+  siguienteKana();
+}
+
+function toggleExtra(){
+  usarExtra = !usarExtra;
+  construirPoolActual();
+  aplicarVisualScripts();
+  cargarStatsActual();
+  limpiarUI();
+  siguienteKana();
+}
+
+function toggleDireccion(dir){
+  if (dir === "jp_es") {
+    if (usarJPES && !usarESJP) return;
+    usarJPES = !usarJPES;
+  }
+
+  if (dir === "es_jp") {
+    if (usarESJP && !usarJPES) return;
+    usarESJP = !usarESJP;
+  }
+
+  aplicarVisualDirecciones();
+  cargarStatsActual();
+  limpiarUI();
+  siguienteKana();
+}
+
+function toggleDictado(){
+  usarDictado = !usarDictado;
+  aplicarVisualDirecciones();
+  cargarStatsActual();
+  limpiarUI();
+  siguienteKana();
+}
+
+function toggleMix(){
+  usarMix = !usarMix;
+  aplicarVisualDirecciones();
+  cargarStatsActual();
+  limpiarUI();
+  siguienteKana();
+}
+
+function tiposDisponibles(){
+  const tiposVisuales = [];
+  const tiposDictado = [];
+
+  if (usarJPES) tiposVisuales.push("jp_es");
+  if (usarESJP) tiposVisuales.push("es_jp");
+
+  if (usarJPES) tiposDictado.push("dictado_jp_es");
+  if (usarESJP) tiposDictado.push("dictado_es_jp");
+
+  if (usarMix) {
+    let todos = [...tiposVisuales];
+    if (usarDictado) todos = todos.concat(tiposDictado);
+    return todos.length ? todos : ["jp_es"];
+  }
+
+  if (usarDictado) {
+    return tiposDictado.length ? tiposDictado : ["dictado_jp_es"];
+  }
+
+  return tiposVisuales.length ? tiposVisuales : ["jp_es"];
+}
+
+function elegirTipoPregunta(){
+  const tipos = tiposDisponibles();
+  return tipos[Math.floor(Math.random() * tipos.length)];
+}
+
+function esDictadoTipo(tipo){
+  return tipo === "dictado_jp_es" || tipo === "dictado_es_jp";
+}
+
+function valorPregunta(item, tipo){
+  const kana = item[0];
+  const romaji = item[1];
+
+  if (tipo === "jp_es") return kana;
+  if (tipo === "es_jp") return romaji;
+  if (tipo === "dictado_jp_es") return "";
+  if (tipo === "dictado_es_jp") return "";
+
+  return kana;
+}
+
+function valorRespuesta(item, tipo){
+  const kana = item[0];
+  const romaji = item[1];
+
+  if (tipo === "jp_es") return romaji;
+  if (tipo === "es_jp") return kana;
+  if (tipo === "dictado_jp_es") return romaji;
+  if (tipo === "dictado_es_jp") return kana;
+
+  return romaji;
+}
+
+  
 /* ===============================
    AUDIO (por ROMAJI)
 =============================== */
@@ -940,16 +1120,20 @@ function replayAudio(){
    JUEGO
 =============================== */
 function siguienteKana(){
-  actual = Math.floor(Math.random() * kanaLista.length);
+  if (!kanaLista.length) return;
 
-  const k = kanaLista[actual][0];
-  const r = kanaLista[actual][1];
+  actual = Math.floor(Math.random() * kanaLista.length);
+  tipoPreguntaActual = elegirTipoPregunta();
+
+  const item = kanaLista[actual];
   const kanaEl = document.getElementById("kana");
 
-  if (quizModo === "dictado") {
+  const textoPregunta = valorPregunta(item, tipoPreguntaActual);
+
+  if (esDictadoTipo(tipoPreguntaActual)) {
     kanaEl.innerText = "";
   } else {
-    kanaEl.innerText = (quizModo === "jp_es") ? k : r;
+    kanaEl.innerText = textoPregunta;
   }
 
   document.getElementById("respuesta").innerText = "";
@@ -958,17 +1142,19 @@ function siguienteKana(){
 
   generarOpciones();
   setBotonesOpcionesHabilitados(true);
+  actualizarBotonAudio();
 
-  if (quizModo === "dictado") {
-    reproducirAudioKana(r);
+  if (esDictadoTipo(tipoPreguntaActual)) {
+    reproducirAudioKana(item[1]);
   }
 }
+
 
 function responderOpcion(indice){
   if (yaValidado) return;
 
   const correcta = kanaLista[actual];
-  const correctaTexto = valorOpcion(correcta);
+  const correctaTexto = valorRespuesta(correcta, tipoPreguntaActual);
 
   const btns = document.querySelectorAll(".opcion-btn");
   const btnElegido = btns[indice];
@@ -1003,6 +1189,7 @@ function responderOpcion(indice){
   setBotonesOpcionesHabilitados(false);
 }
 
+
 function aplicarNotaTeclado(){
   return;
 }
@@ -1024,7 +1211,7 @@ function siguienteDesdeBoton(){
     racha = 0;
 
     const correcta = kanaLista[actual];
-    const correcto = valorOpcion(correcta);
+    const correcto = valorRespuesta(correcta, tipoPreguntaActual);
 
     document.getElementById("respuesta").innerText = "Incorrecto ✘ (era: " + correcto + ")";
     document.getElementById("respuesta").className = "incorrecto";
@@ -1044,6 +1231,7 @@ function siguienteDesdeBoton(){
 
   siguienteKana();
 }
+
 
 
 function resetStatsModo(){
