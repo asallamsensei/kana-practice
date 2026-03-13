@@ -240,16 +240,6 @@
   .accion-btn:hover{
     background: var(--accent2);
   }
-
-  .accion-btn.mostrar{
-    background: rgba(125,92,255,0.45);
-    color: rgba(255,255,255,0.85);
-    opacity: 0.75;
-  }
-  
-  .accion-btn.mostrar:hover{
-    background: rgba(125,92,255,0.6);
-  }
   
   #resultado{
     margin-top: 12px;
@@ -386,7 +376,6 @@
     </div>
 
     <div class="acciones">
-      <button class="accion-btn mostrar" onclick="mostrarRespuesta()">Mostrar respuesta</button>
       <button class="accion-btn" onclick="siguienteDesdeBoton()">Siguiente</button>
     </div>
 
@@ -528,7 +517,7 @@ document.addEventListener("keydown", (e) => {
 
   if(k === "enter"){
     if(yaValidado) siguiente();
-    else mostrarRespuesta();
+    else siguienteDesdeBoton();
   }
 });
 
@@ -787,28 +776,6 @@ async function verificar(letra){
 
   actualizarEstadisticas();
   guardarStatsActual();
-  yaValidado = true;
-}
-
-async function mostrarRespuesta(){
-  if(yaValidado) return;
-
-  const res = $("resultado");
-
-  if(!itemEsDeKanji(actualItem)){
-    await playAudioForRomaji(actualItem.romaji);
-  }
-
-  errores++;
-  actualizarEstadisticas();
-  guardarStatsActual();
-
-  res.innerText =
-    `Mostrada ✘ (era ${correcta})\n` +
-    `Respuesta: ${opcionCorrectaTexto}\n` +
-    `Romaji: ${actualItem.romaji}`;
-  res.className = "incorrecto";
-
   yaValidado = true;
 }
 
