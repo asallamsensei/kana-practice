@@ -610,11 +610,7 @@ function renderPrompt(itemCorrecto){
   
     promptEl.classList.add("dictado");
   
-    const label = (rondaDir === "jp-es")
-      ? "🎧 Dictado: elige el significado"
-      : "🎧 Dictado: elige el japonés";
-  
-    subEl.innerText = label;
+    subEl.innerText = "";
   
     promptEl.innerHTML = `
       <button id="promptSpeaker" class="btnAudioBig dictado" type="button" title="Escuchar" onclick="reproducirAudioActual()">🔊</button>
