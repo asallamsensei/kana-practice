@@ -482,7 +482,7 @@
       "nota": "Material elaborado por Asallam Sensei",
       "vocabulario": [
         { "jp": "孤独な爪痕", "romaji": "kodoku na tsumeato", "es": "solitarias cicatrices (lit. marcas de garras solitarias)" },
-        { "jp": "解りあえば？", "romaji": "wakariaeba?", "es": "¿y si nos comprendemos?" },
+        { "jp": "解りあえば？", "romaji": "wakariaeba", "es": "¿y si nos comprendemos?" },
         { "jp": "壊れていく前に", "romaji": "kowarete iku mae ni", "es": "antes de que se rompa; antes de ir rompiéndose" },
         { "jp": "始まる世界へ", "romaji": "hajimaru sekai e", "es": "hacia el mundo que comienza" },
     
@@ -596,9 +596,9 @@
         { "jp": "右目", "romaji": "migime", "es": "ojo derecho" },
         { "jp": "武器", "romaji": "buki", "es": "arma" },
         { "jp": "最高", "romaji": "saikou", "es": "lo mejor; genial" },
-        { "jp": "やった！", "romaji": "yatta!", "es": "¡yei!; ¡yupi!; ¡lo logré!" },
+        { "jp": "やった！", "romaji": "yatta", "es": "¡yei!; ¡yupi!; ¡lo logré!" },
         { "jp": "最悪な", "romaji": "saiaku na", "es": "lo peor; horrible" },
-        { "jp": "欲しい", "romaji": "hoshī", "es": "querer; desear (adjetivo)" },
+        { "jp": "欲しい", "romaji": "hoshii", "es": "querer; desear (adjetivo)" },
         { "jp": "週一", "romaji": "shuuichi", "es": "una vez por semana (coloquial)" },
         { "jp": "俺と", "romaji": "ore to", "es": "conmigo; contra mí (según contexto)" },
     
@@ -942,7 +942,7 @@
         { "jp": "任せろ", "romaji": "makasero", "es": "déjamelo a mí; yo me encargo" },
         { "jp": "煙幕", "romaji": "enmaku", "es": "cortina de humo" },
         { "jp": "何としても", "romaji": "nantoshitemo", "es": "cueste lo que cueste; a toda costa" },
-        { "jp": "戦闘配置につけ！", "romaji": "sentou haichi ni tsuke!", "es": "¡a los puestos de combate!" },
+        { "jp": "戦闘配置につけ！", "romaji": "sentou haichi ni tsuke", "es": "¡a los puestos de combate!" },
         { "jp": "だらけ", "romaji": "darake", "es": "lleno de; cubierto de" },
         { "jp": "飛んでる", "romaji": "tonderu", "es": "volando" },
     
@@ -993,7 +993,7 @@
       "nota": "Material elaborado por Asallam Sensei",
       "vocabulario": [
         { "jp": "熱い夢", "romaji": "atsui yume", "es": "sueño ardiente" },
-        { "jp": "それは誰！", "romaji": "sore wa dare!", "es": "¿quién será ese?" },
+        { "jp": "それは誰！", "romaji": "sore wa dare", "es": "¿quién será ese?" },
         { "jp": "武術", "romaji": "bujutsu", "es": "artes marciales (武 marcial + 術 artes)" },
         { "jp": "火花が散る", "romaji": "hibana ga chiru", "es": "vuelan chispas (lit. se dispersan las chispas)" },
         { "jp": "シッポ", "romaji": "shippo", "es": "cola (de un animal)" },
