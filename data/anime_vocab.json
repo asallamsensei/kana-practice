@@ -645,24 +645,24 @@
       "artista": "Anime: ドラゴンボール",
       "nota": "Material elaborado por Asallam Sensei",
       "vocabulario": [
-        { "jp": "さあ来い！！", "romaji": "sā koi!!", "es": "¡¡vamos, ven ya!! (grito de desafío)" },
-        { "jp": "ハートを燃やせ", "romaji": "hāto o moyase", "es": "¡enciende tu corazón!" },
+        { "jp": "さあ来い！！", "romaji": "saa koi", "es": "¡¡vamos, ven ya!! (grito de desafío)" },
+        { "jp": "ハートを燃やせ", "romaji": "haato o moyase", "es": "¡enciende tu corazón!" },
         { "jp": "仲間", "romaji": "nakama", "es": "compañeros; camaradas" },
         { "jp": "豪快！", "romaji": "goukai", "es": "¡grandioso!; ¡con fuerza!; ¡con energía!" },
-        { "jp": "倒せよ！", "romaji": "taose yo!", "es": "¡derríbenlos!; ¡derrótenlos!; ¡vénzanlos!" },
+        { "jp": "倒せよ！", "romaji": "taose yo", "es": "¡derríbenlos!; ¡derrótenlos!; ¡vénzanlos!" },
         { "jp": "奇跡", "romaji": "kiseki", "es": "milagro" },
     
         { "jp": "恐れず", "romaji": "osorezu", "es": "sin temer; sin miedo" },
         { "jp": "赤いリボン", "romaji": "akai ribon", "es": "cinta roja; listón rojo (Patrulla Roja)" },
         { "jp": "地獄の", "romaji": "jigoku no", "es": "del infierno; infernal" },
-        { "jp": "ファイター", "romaji": "faitā", "es": "luchador; combatiente (del inglés “fighter”)" },
+        { "jp": "ファイター", "romaji": "faitaa", "es": "luchador; combatiente (del inglés “fighter”)" },
         { "jp": "危険なわな", "romaji": "kiken na wana", "es": "trampa peligrosa" },
         { "jp": "翼に", "romaji": "tsubasa ni", "es": "en las alas" },
     
         { "jp": "素敵な", "romaji": "suteki na", "es": "maravilloso; espléndido; genial" },
-        { "jp": "ソルジャー", "romaji": "sorujā", "es": "soldado (del inglés “soldier”)" },
+        { "jp": "ソルジャー", "romaji": "sorujaa", "es": "soldado (del inglés “soldier”)" },
         { "jp": "熱いきずな", "romaji": "atsui kizuna", "es": "lazo ardiente; vínculo apasionado" },
-        { "jp": "パワー", "romaji": "pawā", "es": "poder (del inglés “power”)" },
+        { "jp": "パワー", "romaji": "pawaa", "es": "poder (del inglés “power”)" },
         { "jp": "そうさ", "romaji": "sou sa", "es": "¡así es!; ¡exacto!" },
         { "jp": "不気味な", "romaji": "bukimina", "es": "siniestro; inquietante; tenebroso" }
       ],
@@ -948,7 +948,7 @@
     
         { "jp": "戦場", "romaji": "senjou", "es": "campo de batalla" },
         { "jp": "無価値", "romaji": "mukachi", "es": "sin valor; que no vale nada" },
-        { "jp": "黙れ！", "romaji": "damare!", "es": "¡cállate! (imperativo brusco)" },
+        { "jp": "黙れ！", "romaji": "damare", "es": "¡cállate! (imperativo brusco)" },
         { "jp": "多すぎる", "romaji": "oosugiru", "es": "hay demasiados; demasiado" },
         { "jp": "起動", "romaji": "kidou", "es": "¡activar!; ¡iniciar!" },
         { "jp": "見つけた", "romaji": "mitsuketa", "es": "te encontré; lo encontré" }
