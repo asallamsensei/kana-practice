@@ -284,6 +284,21 @@ body.modo-es-jp #opciones{
     margin-bottom: 6px;
   }
 }
+
+@media (max-width: 900px){
+  .grid{
+    grid-template-columns: 1fr;
+  }
+
+  .grid > .card:first-child{
+    order: 1;
+  }
+
+  .grid > .card:last-child{
+    order: 2;
+  }
+}
+
   
 </style>
 </head>
