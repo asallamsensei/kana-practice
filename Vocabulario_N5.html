@@ -320,6 +320,39 @@
   transform: none;
   filter: none;
 }
+
+.body-grid{
+  display:grid;
+  grid-template-columns: minmax(0, 1fr) 260px;
+  gap:14px;
+  align-items:start;
+}
+
+.main-area{
+  min-width:0;
+}
+
+.side-panel{
+  position: sticky;
+  top: 16px;
+  padding: 16px;
+}
+
+.panel-title{
+  font-size: 18px;
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 12px;
+  color: #efe9ff;
+  letter-spacing: .3px;
+}
+
+.switch-panel{
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
   
 @media (max-width: 600px){
   h1{
@@ -334,6 +367,17 @@
   }
 
 }
+
+@media (max-width: 900px){
+  .body-grid{
+    grid-template-columns: 1fr;
+  }
+
+  .side-panel{
+    position: static;
+    order: -1;
+  }
+}
   
 </style>
 </head>
@@ -343,16 +387,11 @@
 
   <header>
     <h1>Vocabulario N5 — Asallam Sensei</h1>
-
-    <div class="switch">
-      <button class="btn btn-mode" id="m-jp-es" type="button" onclick="clickJpEs()">JP → ES</button>
-      <button class="btn btn-mode" id="m-es-jp" type="button" onclick="clickEsJp()">ES → JP</button>
-      <button class="btn btn-mode" id="m-dictado" type="button" onclick="setModo('dictado')">Dictado</button>
-      <button class="btn btn-mode" id="m-mixto" type="button" onclick="setModo('mixto')">Mix</button>
-    </div>
   </header>
 
-  <div class="solo">
+<div class="body-grid">
+
+  <div class="solo main-area">
     <div class="card big">
       <div class="panelGrid">
 
@@ -360,7 +399,7 @@
         <div id="promptSub"></div>
 
         <div id="opcionesTexto"></div>
-              
+        
         <div class="row" style="justify-content:center; margin-top: 2px;">
           <button id="btn-opcion-a" class="btn opcion-btn" type="button" onclick="responder('a')">A</button>
           <button id="btn-opcion-b" class="btn opcion-btn" type="button" onclick="responder('b')">B</button>
@@ -389,6 +428,21 @@
       </div>
     </div>
   </div>
+
+  <aside class="card side-panel">
+    <div class="panel-title">Modo</div>
+
+    <div class="switch switch-panel">
+      <button class="btn btn-mode" id="m-jp-es" type="button" onclick="clickJpEs()">JP → ES</button>
+      <button class="btn btn-mode" id="m-es-jp" type="button" onclick="clickEsJp()">ES → JP</button>
+      <button class="btn btn-mode" id="m-dictado" type="button" onclick="setModo('dictado')">Dictado</button>
+      <button class="btn btn-mode" id="m-mixto" type="button" onclick="setModo('mixto')">Mix</button>
+    </div>
+  </aside>
+
+</div>
+
+  
 </div>
 
 <script>
