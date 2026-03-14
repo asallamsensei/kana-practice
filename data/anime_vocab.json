@@ -493,7 +493,7 @@
         { "jp": "まけたくない", "romaji": "maketakunai", "es": "no quiero perder" },
         { "jp": "唇", "romaji": "kuchibiru", "es": "labios" },
     
-        { "jp": "許しあえば？", "romaji": "yurushiaeba?", "es": "¿y si nos perdonamos?" },
+        { "jp": "許しあえば？", "romaji": "yurushiaeba", "es": "¿y si nos perdonamos?" },
         { "jp": "強いままの決意", "romaji": "tsuyoi mama no ketsui", "es": "determinación intacta (lit. resolución que se mantiene fuerte)" },
         { "jp": "曖昧な終わり", "romaji": "aimai na owari", "es": "final ambiguo; poco claro, indefinido" },
         { "jp": "同じもの", "romaji": "onaji mono", "es": "lo mismo; la misma cosa" },
