@@ -354,29 +354,40 @@
   gap: 10px;
 }
   
-@media (max-width: 600px){
-  h1{
-    font-size: 20px;
-  }
-}
-
-@media (max-width: 600px){
-
-  #promptMain.esPregunta{
-    font-size: 30px;
-  }
-
-}
-
 @media (max-width: 900px){
+
   .body-grid{
     grid-template-columns: 1fr;
   }
 
   .side-panel{
     position: static;
-    order: -1;
+    order: 1;
+    padding: 14px;
   }
+
+  .panel-title{
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+
+  .switch-panel{
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .switch-panel .btn-mode{
+    font-size: 13px;
+    padding: 8px 10px;
+  }
+
+  .opcion-btn{
+    min-width: 85px;
+    min-height: 48px;
+    font-size: 18px;
+    padding: 8px 10px;
+  }
+
 }
   
 </style>
