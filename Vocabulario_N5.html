@@ -102,28 +102,43 @@
     font-weight: 700;
   }
 
-  .btn-mode{
-    background: rgba(255,255,255,.08);
-    border: 1px solid var(--border);
-    color: var(--text);
-    font-weight: 800;
-  }
-  .btn-mode.activo{
-    background: var(--accent);
-    border-color: transparent;
-  }
+.btn-mode{
+  background: rgba(255,255,255,.08);
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-weight: 800;
+  border-radius: 999px;
+  transition: .15s;
+}
 
-  .btn-mode.mix-activo{
-    background: var(--dictadoRed);
-    border-color: transparent;
-    color: white;
-  }
-  
-  .btn-mode.mix-sombra{
-    background: var(--dictadoRedSoft);
-    border-color: transparent;
-    color: white;
-  }
+.btn-mode:hover{
+  background: rgba(255,255,255,.12);
+}
+
+.btn-mode.activo{
+  background: rgba(125,92,255,.22);
+  border-color: rgba(125,92,255,.55);
+  color: #efe9ff;
+  box-shadow:
+    0 0 8px rgba(125,92,255,.22),
+    inset 0 0 8px rgba(125,92,255,.08);
+}
+
+.btn-mode.mix-activo{
+  background: rgba(214,40,40,.18);
+  border-color: rgba(214,40,40,.55);
+  color: #fecaca;
+  box-shadow:
+    0 0 8px rgba(214,40,40,.38),
+    0 0 18px rgba(214,40,40,.18),
+    inset 0 0 8px rgba(214,40,40,.08);
+}
+
+.btn-mode.mix-sombra{
+  background: rgba(214,40,40,.12);
+  border-color: rgba(214,40,40,.34);
+  color: #ffd6d6;
+}
   
   .big{
     text-align:center;
@@ -231,6 +246,63 @@
     width:100%;
     justify-self:stretch;
   }
+
+.opcion-btn{
+  min-width: 110px;
+  min-height: 62px;
+  padding: 12px 14px;
+  border-radius: 16px;
+
+  background: rgba(125,92,255,.12);
+  border: 1px solid rgba(125,92,255,.55);
+  color: #efe9ff;
+
+  font-size: 22px;
+  font-weight: 700;
+  text-align: center;
+
+  box-shadow:
+    0 0 6px rgba(125,92,255,.6),
+    0 0 14px rgba(125,92,255,.35),
+    inset 0 0 8px rgba(125,92,255,.15);
+}
+
+.opcion-btn:hover{
+  background: rgba(125,92,255,.22);
+  box-shadow:
+    0 0 10px rgba(125,92,255,.9),
+    0 0 24px rgba(125,92,255,.6);
+}
+
+.opcion-btn.correcta{
+  background: rgba(34,197,94,.18);
+  border-color: rgba(34,197,94,.45);
+  color: #dcfce7;
+  box-shadow:
+    0 0 10px rgba(34,197,94,.35),
+    0 0 22px rgba(34,197,94,.18),
+    inset 0 0 8px rgba(34,197,94,.10);
+}
+
+.opcion-btn.incorrecta{
+  background: rgba(239,68,68,.18);
+  border-color: rgba(239,68,68,.45);
+  color: #fecaca;
+  box-shadow:
+    0 0 10px rgba(239,68,68,.35),
+    0 0 22px rgba(239,68,68,.18),
+    inset 0 0 8px rgba(239,68,68,.10);
+}
+
+.opcion-btn:disabled{
+  opacity: 1;
+  cursor: default;
+}
+
+.opcion-btn:disabled:hover{
+  transform: none;
+  filter: none;
+}
   
 @media (max-width: 600px){
   h1{
@@ -271,11 +343,11 @@
         <div id="promptSub"></div>
 
         <div id="opcionesTexto"></div>
-        
+              
         <div class="row" style="justify-content:center; margin-top: 2px;">
-          <button class="btn btn-ghost" type="button" onclick="responder('a')">A</button>
-          <button class="btn btn-ghost" type="button" onclick="responder('b')">B</button>
-          <button class="btn btn-ghost" type="button" onclick="responder('c')">C</button>
+          <button id="btn-opcion-a" class="btn opcion-btn" type="button" onclick="responder('a')">A</button>
+          <button id="btn-opcion-b" class="btn opcion-btn" type="button" onclick="responder('b')">B</button>
+          <button id="btn-opcion-c" class="btn opcion-btn" type="button" onclick="responder('c')">C</button>
         </div>
 
         <div id="resultado"></div>
@@ -554,7 +626,16 @@ function pintarStats(){
 
 // ====== CONTROL DE OPCIONES ======
 function bloquearOpciones(){
-  // ya no hay botones de opciones que bloquear
+  document.querySelectorAll(".opcion-btn").forEach(btn => {
+    btn.disabled = true;
+  });
+}
+
+function habilitarOpciones(){
+  document.querySelectorAll(".opcion-btn").forEach(btn => {
+    btn.disabled = false;
+    btn.classList.remove("correcta", "incorrecta");
+  });
 }
 
 function pintarOpciones(letraElegida){
@@ -566,15 +647,30 @@ function pintarOpciones(letraElegida){
   box.innerHTML = opcionesActuales.map((txt, idx) => {
     const letra = letras[idx];
 
-    let color = "";
-    if(letra === correctaLetra){
-      color = ' style="color:#86efac; font-weight:900;"';
-    }else if(letra === letraElegida){
-      color = ' style="color:#fecaca; font-weight:900;"';
-    }
-
-    return `<div${color}>${letra}) ${txt}</div>`;
+    return `<div>${letra}) ${txt}</div>`;
   }).join("");
+
+  const btnA = document.getElementById("btn-opcion-a");
+  const btnB = document.getElementById("btn-opcion-b");
+  const btnC = document.getElementById("btn-opcion-c");
+
+  const mapa = {
+    a: btnA,
+    b: btnB,
+    c: btnC
+  };
+
+  [btnA, btnB, btnC].forEach(btn => {
+    if(btn) btn.classList.remove("correcta", "incorrecta");
+  });
+
+  if(mapa[correctaLetra]){
+    mapa[correctaLetra].classList.add("correcta");
+  }
+
+  if(letraElegida && letraElegida !== correctaLetra && mapa[letraElegida]){
+    mapa[letraElegida].classList.add("incorrecta");
+  }
 }
 
 // ====== SIGUIENTE (DOBLE CLICK SI ESTABA SIN CALIFICAR) ======
@@ -651,6 +747,7 @@ function siguiente(){
 
   renderPrompt(itemCorrecto);
   renderOpciones(opciones);
+  habilitarOpciones();
 
   limpiarResultado();
   aplicarUI();
