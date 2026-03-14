@@ -61,17 +61,6 @@
     gap:14px;
   }
 
-  @media (max-width: 860px){
-    .grid{ grid-template-columns: 1fr; }
-  
-    h1{
-      font-size: 22px;
-      line-height: 1.2;
-      margin-top: 8px;
-      margin-bottom: 6px;
-    }
-  }
-
   .card{
     background: linear-gradient(180deg, var(--card2), var(--card));
     border: 1px solid var(--border);
@@ -188,7 +177,7 @@
 
   #promptJP{
     font-size: 52px;
-    font-weight: 900;
+    font-weight: 500;
     letter-spacing: .5px;
     margin: 6px 0 8px;
   }
@@ -286,6 +275,16 @@ body.modo-es-jp #opciones{
     border-radius: 8px;
     font-weight: 700;
   }
+
+@media (max-width: 900px){
+  h1{
+    font-size: 20px;
+    line-height: 1.2;
+    margin-top: 8px;
+    margin-bottom: 6px;
+  }
+}
+  
 </style>
 </head>
 <body>
