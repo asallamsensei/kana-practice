@@ -153,6 +153,7 @@
     word-break: break-word;
     width: min(920px, 100%);
   }
+  
   #promptMain.esPregunta{
     font-size: 40px;
     font-weight: 500;
@@ -160,6 +161,11 @@
     line-height: 1.25;
   }
 
+#promptMain.dictado{
+  font-size: 0;
+  margin: 10px 0 12px;
+}
+  
   #promptSub{
     color: var(--muted);
     font-size: 16px;
@@ -217,7 +223,18 @@
   .btnAudioBig:hover{ filter: brightness(1.1); transform: translateY(-1px); }
   .btnAudioBig:active{ transform: translateY(0px); }
   .btnAudioBig[disabled]{ opacity:.35; cursor:not-allowed; transform:none; }
+  .btnAudioBig.dictado{
+    font-size: 38px;
+    padding: 22px 26px;
+    border-radius: 20px;
+  
+    box-shadow:
+      0 0 10px rgba(125,92,255,.6),
+      0 0 28px rgba(125,92,255,.35),
+      inset 0 0 12px rgba(125,92,255,.15);
+  }
 
+  
   #opcionesTexto{
     margin-top: 10px;
     font-size: 25px;
@@ -590,6 +607,9 @@ function renderPrompt(itemCorrecto){
   ultimoAudioKey = String(itemCorrecto.romaji || "").trim();
 
   if(rondaEsDictado){
+  
+    promptEl.classList.add("dictado");
+  
     const label = (rondaDir === "jp-es")
       ? "🎧 Dictado: elige el significado"
       : "🎧 Dictado: elige el japonés";
@@ -597,10 +617,15 @@ function renderPrompt(itemCorrecto){
     subEl.innerText = label;
   
     promptEl.innerHTML = `
-      <button id="promptSpeaker" class="btnAudioBig" type="button" title="Escuchar" onclick="reproducirAudioActual()">🔊</button>
+      <button id="promptSpeaker" class="btnAudioBig dictado" type="button" title="Escuchar" onclick="reproducirAudioActual()">🔊</button>
     `;
-  }else{
+  }
+  else{
+  
+    promptEl.classList.remove("dictado");
+  
     promptEl.textContent = textoPregunta(itemCorrecto);
+  
     subEl.innerHTML = `
       <button id="promptSpeaker" class="btnAudioBig" type="button" title="Escuchar" onclick="reproducirAudioActual()">🔊</button>
     `;
