@@ -956,35 +956,11 @@ function resetStats(){
    LISTA de canciones que SÍ tienen audio
    (exactamente igual a como viene en el JSON)
 =============================== */
-const CANCIONES_CON_AUDIO = new Set([
-  "MIND POWER… 気",
-  "参上!!ギニュー特戦隊!! (Sanjou!! Ginyuu Tokusentai!!)",
-  "8のチャヴォ (Hachi no Chavo)",
-  "KILL THE FIGHT (MATO LA PELEA)",
-  "予感… (Yokan…)",
-  "HUNTER×HUNTER – Capítulo de las serpientes",
-  "HUNTER×HUNTER – Entrenamiento de Netero",
-  "HEART OF MADNESS",
-  "七人の侍 (Shichinin no Samurai)",
-  "FUTURE (parte 1)",
-  "FUTURE (parte 2)",
-  "あんたなんて。 (parte 1)",
-  "あんたなんて。 (parte 2)",
-  "ぬきたし",
-  "めざせ天下一",
-  "黄昏のBAY CITY",
-  "仮面ライダーBLACK RX",
-  "歌え！！レクイエム",
-  "Hensuki"// "AQUI VA LA TERCERA CUANDO LA TENGAS"
-]);
   
 fetch("data/anime_vocab.json")
   .then(r => r.json())
   .then(json => {
     DATA = (json && json.bloques) ? json : { bloques: [] };
-
-    // Filtrar: dejar solo las canciones que están en la lista con audio
-    DATA.bloques = (DATA.bloques || []).filter(b => CANCIONES_CON_AUDIO.has(b.cancion));
 
     if(DATA.bloques.length === 0){
       $("promptJP").innerText = "No hay canciones habilitadas (revisa CANCIONES_CON_AUDIO)";
