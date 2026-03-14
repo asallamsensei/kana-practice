@@ -1,8 +1,8 @@
 import json
 import os
 
-json_path = "data/turista.json"
-audio_folder = "data/audios/turista"
+json_path = "data/anime_vocab.json"
+audio_folder = "data/audios/series"
 
 with open(json_path, "r", encoding="utf-8") as f:
     data = json.load(f)
