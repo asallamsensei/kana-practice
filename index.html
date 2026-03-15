@@ -176,7 +176,9 @@
   font-weight: 800;
   transition: .18s ease;
   position: relative;
+  z-index:0;
   overflow: hidden;
+  backdrop-filter: blur(6px);
 
   box-shadow:
     0 0 6px rgba(125,92,255,.35),
@@ -184,6 +186,25 @@
     inset 0 0 8px rgba(125,92,255,.08);
 }
 
+.btn::after{
+  content:"";
+  position:absolute;
+  inset:-6px;
+  border-radius:16px;
+  background:inherit;
+  filter: blur(14px);
+  opacity:.35;
+  z-index:-1;
+}
+
+.btn.libro::after{
+  background: rgba(125,92,255,.6);
+}
+
+.btn.curso::after{
+  background: rgba(34,197,94,.6);
+}
+  
   .gridLC{
     display:grid;
     grid-template-columns: 1fr 1fr;
@@ -210,6 +231,16 @@
     inset 0 0 12px rgba(125,92,255,.12);
 }
 
+@keyframes glowPulse{
+  0%{opacity:.25}
+  50%{opacity:.45}
+  100%{opacity:.25}
+}
+
+.btn::after{
+  animation: glowPulse 4s ease-in-out infinite;
+}
+  
 .btn small{
   display:block;
   font-weight: 600;
@@ -657,7 +688,7 @@
       </a>
 
       <a class="btn joyo" href="kanji_todos.html">
-        <span>Los 2136<br>Jōyō Kanji<small>Modo Bestia</small></span>
+        <span>Los 2136 Jōyō Kanji<small>Modo Bestia</small></span>
         <span class="icon">漢</span>
       </a>
 
