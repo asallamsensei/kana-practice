@@ -175,26 +175,27 @@
     margin-top: 10px;
   }
 
-  .btn{
-    display:flex;
-    gap:10px;
-    align-items:center;
-    justify-content:space-between;
-    width:100%;
-    padding: 13px 14px;
-    border-radius: 14px;
-    border: 1px solid rgba(255,255,255,.18);
-    background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04));
-    color: var(--text);
-    text-decoration:none;
-    font-weight: 900;
-    transition: .18s ease;
-    position: relative;
-    overflow: hidden;
-    box-shadow:
-      inset 0 1px 0 rgba(255,255,255,.08),
-      0 0 0 rgba(0,0,0,0);
-  }
+.btn{
+  display:flex;
+  gap:10px;
+  align-items:center;
+  justify-content:space-between;
+  width:100%;
+  padding: 13px 14px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,.18);
+  background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04));
+  color: var(--text);
+  text-decoration:none;
+  font-weight: 900;
+  transition: .18s ease;
+  position: relative;
+  overflow: hidden;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.08),
+    0 0 8px rgba(125,92,255,.10),
+    0 0 18px rgba(125,92,255,.05);
+}
 
   .gridLC{
     display:grid;
@@ -243,7 +244,8 @@
   flex: 0 0 auto;
   font-size: 18px;
   box-shadow:
-    0 0 10px rgba(125,92,255,.18),
+    0 0 8px rgba(125,92,255,.20),
+    0 0 16px rgba(125,92,255,.10),
     inset 0 0 10px rgba(255,255,255,.04);
   transition: .18s ease;
 }
@@ -255,47 +257,102 @@
     0 0 24px rgba(125,92,255,.20),
     inset 0 0 12px rgba(255,255,255,.06);
 }
+
+.btn.kana{
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.08),
+    0 0 8px rgba(34,197,94,.10),
+    0 0 18px rgba(34,197,94,.05);
+}
+
+.btn.kanji{
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.08),
+    0 0 8px rgba(125,92,255,.12),
+    0 0 18px rgba(125,92,255,.06);
+}
+
+.btn.joyo{
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.08),
+    0 0 8px rgba(239,68,68,.10),
+    0 0 18px rgba(239,68,68,.05);
+}
+
+.btn.n5{
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.08),
+    0 0 8px rgba(34,197,94,.10),
+    0 0 18px rgba(34,197,94,.05);
+}
+
+.btn.media{
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.08),
+    0 0 8px rgba(236,72,153,.10),
+    0 0 18px rgba(236,72,153,.05);
+}
+
+.btn.vivos{
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.08),
+    0 0 8px rgba(236,72,153,.12),
+    0 0 18px rgba(236,72,153,.06);
+}
+
+.btn.test{
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,.08),
+    0 0 8px rgba(255,255,255,.08),
+    0 0 16px rgba(255,255,255,.04);
+}
   
 .btn.kana .icon{
   background: rgba(34,197,94,.16);
   border-color: rgba(34,197,94,.45);
-  box-shadow: 0 0 12px rgba(34,197,94,.22);
+  box-shadow:
+    0 0 10px rgba(34,197,94,.22),
+    0 0 18px rgba(34,197,94,.10);
 }
 
 .btn.kanji .icon{
   background: rgba(125,92,255,.20);
   border-color: rgba(125,92,255,.45);
-  box-shadow: 0 0 12px rgba(125,92,255,.24);
+  box-shadow:
+    0 0 10px rgba(125,92,255,.24),
+    0 0 18px rgba(125,92,255,.12);
 }
 
 .btn.joyo .icon{
   background: rgba(239,68,68,.14);
   border-color: rgba(239,68,68,.42);
-  box-shadow: 0 0 12px rgba(239,68,68,.22);
+  box-shadow:
+    0 0 10px rgba(239,68,68,.22),
+    0 0 18px rgba(239,68,68,.10);
 }
 
 .btn.n5 .icon{
   background: rgba(34,197,94,.16);
   border-color: rgba(34,197,94,.45);
-  box-shadow: 0 0 12px rgba(34,197,94,.22);
+  box-shadow:
+    0 0 10px rgba(34,197,94,.22),
+    0 0 18px rgba(34,197,94,.10);
 }
 
 .btn.media .icon{
   background: rgba(236,72,153,.16);
   border-color: rgba(236,72,153,.42);
-  box-shadow: 0 0 12px rgba(236,72,153,.22);
-}
-
-.btn.test .icon{
-  background: rgba(255,255,255,.10);
-  border-color: rgba(255,255,255,.24);
-  box-shadow: 0 0 10px rgba(255,255,255,.10);
+  box-shadow:
+    0 0 10px rgba(236,72,153,.22),
+    0 0 18px rgba(236,72,153,.10);
 }
 
 .btn.vivos .icon{
   background: rgba(236,72,153,.16);
   border-color: rgba(236,72,153,.42);
-  box-shadow: 0 0 12px rgba(236,72,153,.22);
+  box-shadow:
+    0 0 10px rgba(236,72,153,.22),
+    0 0 18px rgba(236,72,153,.10);
 }
 
 .btn.kana:hover{
@@ -517,7 +574,7 @@
 
   <!-- DERECHA: HERRAMIENTAS -->
   <div class="card">
-    <p class="rightTitle">🛠️ ELIGE UNA HERRAMIENTA</p>
+    <p class="rightTitle">🛠️ HERRAMIENTAS</p>
     <div class="sep"></div>
 
     <div class="tools">
