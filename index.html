@@ -7,7 +7,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
 
 <style>
   :root{
@@ -30,7 +30,7 @@
 
   body{
     margin:0;
-    font-family: Arial, system-ui, sans-serif;
+    font-family: Inter, system-ui, sans-serif;
     background:
       radial-gradient(1200px 700px at 20% 10%, rgba(125,92,255,.35), transparent 60%),
       radial-gradient(900px 600px at 90% 20%, rgba(34,197,94,.22), transparent 60%),
@@ -55,7 +55,7 @@
   h1{
     margin: 0;
     font-size: clamp(28px, 6vw, 44px);
-    font-weight: 900;
+    font-weight: 700;
     letter-spacing: .3px;
     text-align: center;
   }
@@ -129,17 +129,9 @@
     display: block;
   }
 
-  .name{
-    font-weight: 900;
-    font-size: 18px;
-    margin:0;
-    letter-spacing: .2px;
-    color: var(--text);
-  }
-
   .phone{
     margin: 6px 0 0;
-    font-weight: 800;
+    font-weight: 700;
     font-size: 18px;
     color: var(--text);
   }
@@ -187,7 +179,7 @@
   background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04));
   color: var(--text);
   text-decoration:none;
-  font-weight: 900;
+  font-weight: 800;
   transition: .18s ease;
   position: relative;
   overflow: hidden;
@@ -224,14 +216,14 @@
     inset 0 1px 0 rgba(255,255,255,.10);
 }
 
-  .btn small{
-    display:block;
-    font-weight: 700;
-    font-size: 12px;
-    margin-top: 2px;
-    letter-spacing: .1px;
-    color: var(--text);
-  }
+.btn small{
+  display:block;
+  font-weight: 600;
+  font-size: 12px;
+  margin-top: 2px;
+  letter-spacing: .1px;
+  color: rgba(255,255,255,.88);
+}
 
 .icon{
   width: 34px;
@@ -427,7 +419,7 @@
   .rightTitle{
     margin:0;
     font-size: 14px;
-    font-weight: 900;
+    font-weight: 700;
     letter-spacing: .2px;
     color: var(--text);
   }
@@ -527,7 +519,7 @@
   <div class="gridLC">
     <!-- LIBROS -->
     <div>
-      <p class="rightTitle">📚 LIBROS</p>
+      <p class="rightTitle">📚 Libros</p>
       <div class="sep"></div>
 
       <!-- lista vertical -->
@@ -544,7 +536,7 @@
 
     <!-- CURSOS -->
     <div>
-      <p class="rightTitle">🎓 CURSOS</p>
+      <p class="rightTitle">🎓 Cursos</p>
       <div class="sep"></div>
 
       <!-- lista vertical -->
@@ -574,7 +566,7 @@
 
   <!-- DERECHA: HERRAMIENTAS -->
   <div class="card">
-    <p class="rightTitle">🛠️ HERRAMIENTAS</p>
+    <p class="rightTitle">🛠️ Herramientas</p>
     <div class="sep"></div>
 
     <div class="tools">
@@ -584,22 +576,22 @@
       </a>
 
       <a class="btn kanji" href="kanji.html">
-        <span>Kanji de grado 1<small>base sólida</small></span>
+        <span>Kanji de grado 1<small>Base sólida</small></span>
         <span class="icon">一</span>
       </a>
 
       <a class="btn joyo" href="kanji_todos.html">
-        <span>Los 2136 Jōyō Kanji<small>modo full power</small></span>
+        <span>Los 2136 Jōyō Kanji<small>Modo Bestia</small></span>
         <span class="icon">漢</span>
       </a>
 
       <a class="btn n5" href="Vocabulario_N5.html">
-        <span>Vocabulario N5<small>lo esencial</small></span>
+        <span>Vocabulario N5<small>Lo esencial</small></span>
         <span class="icon">N5</span>
       </a>
 
       <a class="btn media" href="vocabulario_series_y_anime.html">
-        <span>Canciones y series<small>vocab en contexto</small></span>
+        <span>Canciones y series<small>Vocab en contexto</small></span>
         <span class="icon">🎧</span>
       </a>
 
