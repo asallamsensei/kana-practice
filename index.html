@@ -497,6 +497,36 @@
   border-color: rgba(236,72,153,.35);
   box-shadow: 0 0 10px rgba(236,72,153,.12);
 }
+
+.btn.libro{
+  border-color: rgba(125,92,255,.35);
+
+  box-shadow:
+    0 0 8px rgba(125,92,255,.55),
+    0 0 20px rgba(125,92,255,.30),
+    inset 0 0 8px rgba(125,92,255,.10);
+}
+
+.btn.curso{
+  border-color: rgba(34,197,94,.35);
+
+  box-shadow:
+    0 0 8px rgba(34,197,94,.55),
+    0 0 20px rgba(34,197,94,.30),
+    inset 0 0 8px rgba(34,197,94,.10);
+}
+
+.btn.libro:hover{
+  box-shadow:
+    0 0 12px rgba(125,92,255,.85),
+    0 0 28px rgba(125,92,255,.55);
+}
+
+.btn.curso:hover{
+  box-shadow:
+    0 0 12px rgba(34,197,94,.85),
+    0 0 28px rgba(34,197,94,.55);
+}
   
 @media (max-width:900px){
 
@@ -571,12 +601,12 @@
       
       <!-- lista vertical -->
       <div class="tools" style="grid-template-columns: 1fr;">
-        <div class="btn">
-          <span>Kit de iniciación<br>al japonés</span>
+        <div class="btn libro">
+          <span>Kit de iniciación al japonés</span>
         </div>
-
-        <div class="btn">
-          <span>Los 2136<br>Jōyō Kanji</span>
+        
+        <div class="btn libro">
+          <span>Los 2136 Jōyō Kanji</span>
         </div>
       </div>
     </div>
@@ -587,20 +617,20 @@
       
       <!-- lista vertical -->
       <div class="tools" style="grid-template-columns: 1fr;">
-        <div class="btn">
+        <div class="btn curso">
           <span>Japonés desde 0!</span>
         </div>
-
-        <div class="btn">
+        
+        <div class="btn curso">
           <span>Anime sin subtítulos!</span>
         </div>
-
-        <div class="btn">
+        
+        <div class="btn curso">
           <span>Lea Manga Hoy!</span>
         </div>
-
-        <div class="btn">
-          <span>Preparación JLPT N5</span>
+        
+        <div class="btn curso">
+          <span>JLPT N5!</span>
         </div>
 
         <div id="n5" class="n5count">⏳ Cargando contador N5...</div>
