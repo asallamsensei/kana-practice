@@ -96,12 +96,6 @@
     }
   }
 
-  .sep{
-    height: 1px;
-    background: rgba(255,255,255,.10);
-    margin: 12px 0;
-  }
-
   /* Perfil */
   .profile{
     display:flex;
@@ -183,10 +177,11 @@
   transition: .18s ease;
   position: relative;
   overflow: hidden;
+
   box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.08),
-    0 0 8px rgba(125,92,255,.10),
-    0 0 18px rgba(125,92,255,.05);
+    0 0 6px rgba(125,92,255,.35),
+    0 0 18px rgba(125,92,255,.18),
+    inset 0 0 8px rgba(125,92,255,.08);
 }
 
   .gridLC{
@@ -208,12 +203,11 @@
   
 .btn:hover{
   transform: translateY(-2px);
-  background: linear-gradient(180deg, rgba(255,255,255,.12), rgba(255,255,255,.06));
-  border-color: rgba(255,255,255,.30);
+
   box-shadow:
-    0 0 14px rgba(125,92,255,.22),
-    0 0 28px rgba(125,92,255,.14),
-    inset 0 1px 0 rgba(255,255,255,.10);
+    0 0 12px rgba(125,92,255,.8),
+    0 0 28px rgba(125,92,255,.5),
+    inset 0 0 12px rgba(125,92,255,.12);
 }
 
 .btn small{
@@ -252,51 +246,51 @@
 
 .btn.kana{
   box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.08),
-    0 0 8px rgba(34,197,94,.10),
-    0 0 18px rgba(34,197,94,.05);
+    0 0 8px rgba(34,197,94,.6),
+    0 0 20px rgba(34,197,94,.35),
+    inset 0 0 10px rgba(34,197,94,.10);
 }
-
+  
 .btn.kanji{
   box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.08),
-    0 0 8px rgba(125,92,255,.12),
-    0 0 18px rgba(125,92,255,.06);
+    0 0 8px rgba(125,92,255,.7),
+    0 0 22px rgba(125,92,255,.4),
+    inset 0 0 10px rgba(125,92,255,.12);
 }
 
 .btn.joyo{
   box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.08),
-    0 0 8px rgba(239,68,68,.10),
-    0 0 18px rgba(239,68,68,.05);
+    0 0 8px rgba(239,68,68,.6),
+    0 0 20px rgba(239,68,68,.35),
+    inset 0 0 10px rgba(239,68,68,.12);
 }
 
 .btn.n5{
   box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.08),
-    0 0 8px rgba(34,197,94,.10),
-    0 0 18px rgba(34,197,94,.05);
+    0 0 8px rgba(34,197,94,.6),
+    0 0 20px rgba(34,197,94,.35),
+    inset 0 0 10px rgba(34,197,94,.10);
 }
 
 .btn.media{
   box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.08),
-    0 0 8px rgba(236,72,153,.10),
-    0 0 18px rgba(236,72,153,.05);
+    0 0 8px rgba(236,72,153,.6),
+    0 0 20px rgba(236,72,153,.35),
+    inset 0 0 10px rgba(236,72,153,.12);
 }
 
 .btn.vivos{
   box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.08),
-    0 0 8px rgba(236,72,153,.12),
-    0 0 18px rgba(236,72,153,.06);
+    0 0 8px rgba(236,72,153,.7),
+    0 0 22px rgba(236,72,153,.4),
+    inset 0 0 10px rgba(236,72,153,.14);
 }
 
 .btn.test{
   box-shadow:
-    inset 0 1px 0 rgba(255,255,255,.08),
-    0 0 8px rgba(255,255,255,.08),
-    0 0 16px rgba(255,255,255,.04);
+    0 0 8px rgba(255,255,255,.35),
+    0 0 18px rgba(255,255,255,.15),
+    inset 0 0 8px rgba(255,255,255,.08);
 }
   
 .btn.kana .icon{
@@ -462,6 +456,47 @@
     0 0 10px rgba(34,197,94,.15),
     inset 0 0 8px rgba(34,197,94,.05);
 }
+
+.badge-title{
+  display:inline-block;
+  padding:6px 12px;
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.18);
+  background: rgba(255,255,255,.06);
+
+  font-family: Inter, system-ui, sans-serif;
+  font-weight:800;
+  font-size:16px;
+  letter-spacing:.4px;
+
+  box-shadow:
+    0 0 8px rgba(125,92,255,.15),
+    inset 0 0 6px rgba(255,255,255,.04);
+
+  margin-bottom:14px;
+}
+
+.footer-badge{
+  display:block;
+  width:fit-content;
+  margin:18px auto 6px;
+  font-size:15px;
+}
+
+.badge-title.libros{
+  border-color: rgba(125,92,255,.35);
+  box-shadow: 0 0 10px rgba(125,92,255,.12);
+}
+
+.badge-title.cursos{
+  border-color: rgba(34,197,94,.35);
+  box-shadow: 0 0 10px rgba(34,197,94,.12);
+}
+
+.badge-title.tools{
+  border-color: rgba(236,72,153,.35);
+  box-shadow: 0 0 10px rgba(236,72,153,.12);
+}
   
 @media (max-width:900px){
 
@@ -532,7 +567,7 @@
   <div class="gridLC">
     <!-- LIBROS -->
     <div>
-      <p class="rightTitle">📚 Libros</p>
+      <p class="badge-title libros">📚 Libros</p>
       
       <!-- lista vertical -->
       <div class="tools" style="grid-template-columns: 1fr;">
@@ -548,7 +583,7 @@
 
     <!-- CURSOS -->
     <div>
-      <p class="rightTitle">🎓 Cursos</p>
+      <p class="badge-title cursos">🎓 Cursos</p>
       
       <!-- lista vertical -->
       <div class="tools" style="grid-template-columns: 1fr;">
@@ -576,10 +611,9 @@
 
 </div>
 
-
   <!-- DERECHA: HERRAMIENTAS -->
   <div class="card">
-    <p class="rightTitle">🛠️ Herramientas</p>
+    <p class="badge-title tools">🛠️ Herramientas</p>
     
     <div class="tools">
       <a class="btn kana" href="kana.html">
@@ -618,7 +652,7 @@
       </a>
     </div>
 
-    <footer>© Asallam Sensei</footer>
+    <footer class="badge-title footer-badge">© Asallam Sensei</footer>
   </div>
 
 </div>
