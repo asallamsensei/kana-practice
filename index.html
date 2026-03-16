@@ -188,9 +188,9 @@
   
   .tools {
       display: grid;
-      grid-template-columns: 1fr 1fr; /* o 1fr si quieres 1 columna */
-      gap: unset;       /* deja que herede o no tenga gap propio */
-      margin-top: 0;    /* igual que los otros grupos */
+      grid-template-columns: 1fr 1fr; /* 2 columnas */
+      gap: 14px; /* <-- esto da espacio horizontal y vertical */
+      margin-top: 0; /* sin espacio extra arriba */
   }
 
   .tools .btn:last-child {
@@ -234,9 +234,6 @@
       0 0 18px rgba(var(--glow-rgb), .10),
       inset 0 0 8px rgba(var(--glow-rgb), .04);
     transition: .18s ease;
-
-    /* NUEVO: margin estándar entre botones */
-    margin-bottom: 12px;   /* aquí defines el espacio entre todos los botones */
 }
 
 .btn:hover{
