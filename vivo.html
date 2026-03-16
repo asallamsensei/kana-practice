@@ -337,7 +337,6 @@
       <div class="toolbar">
         <button class="btn-primary" onclick="downloadAllCards()">Descargar todas las tarjetas</button>
       </div>
-      <!-- Input de búsqueda incluido en el panel superior -->
       <input type="text" id="tagSearch" placeholder="Buscar por tag..." style="padding:8px 12px; border-radius:12px; border:1px solid rgba(255,255,255,.2); background:rgba(255,255,255,.05); color:white; margin-top:12px;">
     </section>
 
@@ -370,7 +369,7 @@
       }
     }
 
-    // Cargar JSON y renderizar tarjetas
+    // Cargar JSON y renderizar tarjetas con Traducción literal y Matiz, y panel de palabras como los kanji
     fetch('data/elvivo.json')
       .then(res=>res.json())
       .then(data=>{
@@ -379,69 +378,4 @@
           const entry=document.createElement('article');
           entry.className='entry capture-card';
           entry.id=`entry-${index+1}`;
-
-          let piecesHTML='';
-          if(item.words){
-            item.words.forEach(w=>{
-              piecesHTML+=`
-                <div class="piece">
-                  <div>
-                    <div class="jp">${w.jp}</div>
-                    <div class="romaji">${w.romaji}</div>
-                  </div>
-                  <div class="exp">${w.es}</div>
-                </div>
-              `;
-            });
-          }
-
-          let kanjiHTML='';
-          if(item.kanjis){
-            item.kanjis.forEach(k=>{
-              kanjiHTML+=`
-                <div class="kanji-card">
-                  <div class="kanji-char">${k.char}</div>
-                  <div>${k.mean}</div>
-                </div>
-              `;
-            });
-          }
-
-          entry.innerHTML=`
-            <div class="entry-top">
-              <div><div class="entry-tag">${item.type}</div></div>
-              <div class="entry-date">Tema: ${item.theme}</div>
-            </div>
-            <div class="entry-body">
-              <div class="jp-line">${item.jp}</div>
-              <div class="reading-line">${item.romaji}</div>
-              <div class="meaning-boxes">
-                <div class="meaning-box">
-                  <span class="label">Traducción</span>
-                  <div class="value">${item.es}</div>
-                </div>
-              </div>
-              <section class="pieces">${piecesHTML}</section>
-              ${kanjiHTML?`<section class="kanji-panel"><div class="kanji-title">Kanji involucrados</div><div class="kanji-grid">${kanjiHTML}</div></section>`:''}
-              <div class="mini-actions">
-                <button class="capture-btn" onclick="downloadCard('entry-${index+1}','vivo-${index+1}')">Descargar esta tarjeta</button>
-              </div>
-            </div>
-          `;
-
-          grid.appendChild(entry);
-        });
-      });
-
-    // Filtro por tag
-    const searchInput=document.getElementById('tagSearch');
-    searchInput.addEventListener('input',e=>{
-      const val=e.target.value.toLowerCase();
-      document.querySelectorAll('.entry').forEach(entry=>{
-        const tag=entry.querySelector('.entry-tag').textContent.toLowerCase();
-        entry.style.display=tag.includes(val)?'grid':'none';
-      });
-    });
-  </script>
-</body>
 </html>
