@@ -38,13 +38,6 @@ body{
     radial-gradient(900px 600px at 30% 90%, rgba(239,68,68,.18), transparent 55%),
     var(--bg);
 
-  background-image:
-    radial-gradient(rgba(255,255,255,.10) 1px, transparent 1px),
-    radial-gradient(rgba(255,255,255,.05) 1px, transparent 1px);
-
-  background-size: 60px 60px, 120px 120px;
-  animation: particlesMove 120s linear infinite;
-
   color: var(--text);
   min-height:100vh;
   display:flex;
@@ -125,8 +118,6 @@ body::before{
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
 
-  transition: .25s ease;
-
   box-shadow:
     0 0 10px rgba(255,255,255,.05),
     0 18px 45px rgba(0,0,0,.35);
@@ -153,13 +144,6 @@ body::before{
   border-top-left-radius:18px;
   border-top-right-radius:18px;
   pointer-events:none;
-}
-  
-.card:hover{
-  box-shadow:
-    0 0 20px rgba(255,255,255,.15),
-    0 0 60px rgba(255,255,255,.05),
-    0 18px 45px rgba(0,0,0,.35);
 }
   
   .mainGrid{
@@ -671,6 +655,7 @@ body::before{
 @keyframes particlesMove{
   from{ background-position: 0 0, 0 0; }
   to{ background-position: 120px 120px, 240px 240px; }
+}
 
 @keyframes titleGlow{
   0%{
@@ -688,8 +673,6 @@ body::before{
       0 0 6px rgba(125,92,255,.35),
       0 0 10px rgba(236,72,153,.25);
   }
-}
-  
 }
 
 @keyframes starsFloat{
