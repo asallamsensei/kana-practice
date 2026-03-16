@@ -1,0 +1,42 @@
+[
+  {
+    "type": "oración",
+    "theme": "Rutina de la mañana",
+    "jp": "アラームを止める",
+    "romaji": "arāmu o tomeru",
+    "es": "Apagar la alarma",
+    "words": [
+      {"jp": "アラーム", "romaji": "arāmu", "es": "alarma"},
+      {"jp": "を", "romaji": "o", "es": "partícula objeto directo"},
+      {"jp": "止める", "romaji": "tomeru", "es": "detener, parar"}
+    ],
+    "kanjis": [
+      {"char": "止", "mean": "parar • detener"}
+    ]
+  },
+  {
+    "type": "palabra",
+    "theme": "Tecnología",
+    "jp": "電話",
+    "romaji": "denwa",
+    "es": "Teléfono",
+    "words": [
+      {"jp": "電話", "romaji": "denwa", "es": "teléfono"}
+    ],
+    "kanjis": [
+      {"char": "電", "mean": "electricidad"},
+      {"char": "話", "mean": "hablar • conversación"}
+    ]
+  },
+  {
+    "type": "kanji",
+    "theme": "Acción",
+    "jp": "走",
+    "romaji": "hashiru",
+    "es": "Correr",
+    "words": [],
+    "kanjis": [
+      {"char": "走", "mean": "correr • desplazarse rápido"}
+    ]
+  }
+]
