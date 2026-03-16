@@ -15,9 +15,8 @@
     --card: rgba(255,255,255,.08);
     --card2: rgba(255,255,255,.10);
 
-    /* TEXTO: un solo blanco */
     --text: #ffffff;
-    --muted: #ffffff; /* ya no se usa como gris */
+    --muted: #ffffff;
 
     --accent: #7d5cff;
     --accent2:#22c55e;
@@ -27,27 +26,25 @@
   }
 
   *{ box-sizing: border-box; }
-  
-body{
-  margin:0;
-  font-family: Inter, system-ui, sans-serif;
 
-  background: var(--bg);
+  body{
+    margin:0;
+    font-family: Inter, system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    padding: 26px 14px 70px;
+    position: relative;
+    overflow-x: hidden;
+  }
 
-  color: var(--text);
-  min-height:100vh;
-  display:flex;
-  justify-content:center;
-  padding: 26px 14px 70px;
-  position: relative;
-  overflow-x: hidden;  
-}
-
-.wrap{
-  width:min(1120px, 100%);
-  position: relative;
-  z-index: 1;
-}
+  .wrap{
+    width:min(1120px, 100%);
+    position: relative;
+    z-index: 1;
+  }
 
   header{
     display:flex;
@@ -56,16 +53,17 @@ body{
     margin-bottom: 18px;
   }
 
-h1{
-  margin: 0;
-  font-size: clamp(28px, 6vw, 44px);
-  font-weight: 700;
-  letter-spacing: .3px;
-  text-align: center;
+  h1{
+    margin: 0;
+    font-size: clamp(28px, 6vw, 44px);
+    font-weight: 700;
+    letter-spacing: .3px;
+    text-align: center;
+    text-shadow:
+      0 0 6px rgba(125,92,255,.22),
+      0 0 12px rgba(236,72,153,.12);
+  }
 
-  animation: titleGlow 4s ease-in-out infinite;
-}
-  
   h1 .sup{
     font-size: 12px;
     font-weight: 700;
@@ -75,93 +73,64 @@ h1{
     opacity: .85;
   }
 
-body::before{
-  content:"";
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  opacity: .45;
-  z-index: 0;
+  body::before{
+    content:"";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    opacity: .45;
+    z-index: 0;
+  }
 
-  background:
-    radial-gradient(circle at 12% 18%, rgba(255,255,255,.16) 0 1px, transparent 2px),
-    radial-gradient(circle at 78% 12%, rgba(255,255,255,.10) 0 1px, transparent 2px),
-    radial-gradient(circle at 35% 30%, rgba(255,255,255,.12) 0 1.2px, transparent 2px),
-    radial-gradient(circle at 88% 34%, rgba(255,255,255,.08) 0 1px, transparent 2px),
-    radial-gradient(circle at 22% 52%, rgba(255,255,255,.10) 0 1px, transparent 2px),
-    radial-gradient(circle at 67% 48%, rgba(255,255,255,.14) 0 1.2px, transparent 2px),
-    radial-gradient(circle at 14% 74%, rgba(255,255,255,.08) 0 1px, transparent 2px),
-    radial-gradient(circle at 52% 70%, rgba(255,255,255,.12) 0 1px, transparent 2px),
-    radial-gradient(circle at 84% 78%, rgba(255,255,255,.10) 0 1px, transparent 2px),
-    radial-gradient(circle at 40% 88%, rgba(255,255,255,.08) 0 1px, transparent 2px);
-
-  animation: starsFloat 28s ease-in-out infinite alternate;
-}
-  
   .grid{
     display:grid;
     grid-template-columns: .95fr 1.05fr;
     gap: 14px;
   }
 
-.card{
-  position: relative;
+  .card{
+    position: relative;
+    background: rgba(255,255,255,.08);
+    border: 1px solid rgba(255,255,255,.16);
+    border-radius: 18px;
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    box-shadow:
+      0 0 10px rgba(255,255,255,.05),
+      0 18px 45px rgba(0,0,0,.25);
+    padding: 16px;
+    overflow: hidden;
+  }
 
-  background: rgba(255,255,255,.08);
-  border: 1px solid rgba(255,255,255,.16);
-  border-radius: 18px;
+  .card::before{
+    content:"";
+    position:absolute;
+    top:0;
+    left:0;
+    right:0;
+    height:36px;
+    background: linear-gradient(
+      180deg,
+      rgba(255,255,255,.10),
+      rgba(255,255,255,.03),
+      transparent
+    );
+    border-top-left-radius:18px;
+    border-top-right-radius:18px;
+    pointer-events:none;
+  }
 
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-
-  box-shadow:
-    0 0 10px rgba(255,255,255,.05),
-    0 18px 45px rgba(0,0,0,.25);
-
-  padding: 16px;
-  overflow: hidden;
-}
-
-.card::before{
-  content:"";
-  position:absolute;
-  top:0;
-  left:0;
-  right:0;
-  height:36px;
-
-  background: linear-gradient(
-    180deg,
-    rgba(255,255,255,.10),
-    rgba(255,255,255,.03),
-    transparent
-  );
-
-  border-top-left-radius:18px;
-  border-top-right-radius:18px;
-  pointer-events:none;
-}
-  
   .mainGrid{
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 14px;
   }
-  
-  @media (max-width: 900px){
-    .mainGrid{
-      grid-template-columns: 1fr;
-    }
-  }
 
-  /* Perfil */
   .profile{
     display:flex;
     gap: 14px;
     align-items:center;
   }
-
-
 
   .avatarTop{
     width: 90px;
@@ -173,7 +142,7 @@ body::before{
     box-shadow: 0 10px 25px rgba(0,0,0,.35);
     flex: 0 0 auto;
   }
-  
+
   .avatarTop img{
     width: 100%;
     height: 100%;
@@ -193,11 +162,10 @@ body::before{
     max-width: 100%;
     margin: 0 auto 14px;
   }
-  
-  /* JLPT pill */
+
   #n5{
-    display: table;            /* ← permite centrado automático */
-    margin: 10px auto 18px;    /* ← ahora sí centra */
+    display: table;
+    margin: 10px auto 18px;
     padding: 6px 12px;
     border-radius: 999px;
     border: 1px solid rgba(255,255,255,.18);
@@ -208,10 +176,10 @@ body::before{
     text-align:center;
     color: var(--text);
   }
+
   #n5.good{ border-color: rgba(34,197,94,.55); }
   #n5.warn{ border-color: rgba(239,68,68,.55); }
 
-  /* Botones en grid */
   .tools{
     display:grid;
     grid-template-columns: 1fr 1fr;
@@ -219,286 +187,121 @@ body::before{
     margin-top: 10px;
   }
 
-.btn{
-  display:flex;
-  gap:10px;
-  align-items:center;
-  justify-content:space-between;
-  width:100%;
-  padding: 13px 14px;
-  border-radius: 14px;
-  border: 1px solid rgba(255,255,255,.18);
-  background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04));
-  color: var(--text);
-  text-decoration:none;
-  font-weight: 800;
-  transition: .18s ease;
-  position: relative;
-  z-index:0;
-  overflow: hidden;
-  backdrop-filter: blur(6px);
-
-  box-shadow:
-    0 0 6px rgba(125,92,255,.18),
-    0 0 18px rgba(125,92,255,.08),
-    inset 0 0 8px rgba(125,92,255,.05);
-}
-
-.btn::after{
-  content:"";
-  position:absolute;
-  inset:-6px;
-  border-radius:16px;
-  background:inherit;
-  filter: blur(8px);
-  opacity:.12;
-  z-index:-1;
-}
-
-.btn.libro::after{
-  background: rgba(125,92,255,.22);
-}
-
-.btn.curso::after{
-  background: rgba(34,197,94,.22);
-}
-  
   .gridLC{
     display:grid;
     grid-template-columns: 1fr 1fr;
     gap: 14px;
   }
 
-.profileTop{
-  display:flex;
-  align-items:center;
-  gap: 14px;
-  width: fit-content;
-}
+  .profileTop{
+    display:flex;
+    align-items:center;
+    gap: 14px;
+    width: fit-content;
+  }
 
-.infoTop{
-  flex: 1;
-}
-  
-.btn:hover{
-  transform: translateY(-2px);
+  .infoTop{
+    flex: 1;
+  }
 
-  box-shadow:
-    0 0 12px rgba(125,92,255,.8),
-    0 0 28px rgba(125,92,255,.5),
-    inset 0 0 12px rgba(125,92,255,.12);
-}
+  .btn{
+    --glow-rgb: 125,92,255;
 
-@keyframes glowPulse{
-  0%{opacity:.25}
-  50%{opacity:.45}
-  100%{opacity:.25}
-}
+    display:flex;
+    gap:10px;
+    align-items:center;
+    justify-content:space-between;
+    width:100%;
+    padding: 13px 14px;
+    border-radius: 14px;
+    border: 1px solid rgba(var(--glow-rgb), .28);
+    background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04));
+    color: var(--text);
+    text-decoration:none;
+    font-weight: 800;
+    transition: .18s ease;
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(6px);
+    box-shadow:
+      0 0 8px rgba(var(--glow-rgb), .22),
+      0 0 18px rgba(var(--glow-rgb), .10),
+      inset 0 0 8px rgba(var(--glow-rgb), .04);
+  }
 
-.btn::after{
-  animation: glowPulse 4s ease-in-out infinite;
-}
-  
-.btn small{
-  display:block;
-  font-weight: 600;
-  font-size: 12px;
-  margin-top: 2px;
-  letter-spacing: .1px;
-  color: rgba(255,255,255,.88);
-}
+  .btn:hover{
+    transform: translateY(-2px);
+    box-shadow:
+      0 0 12px rgba(var(--glow-rgb), .34),
+      0 0 26px rgba(var(--glow-rgb), .16),
+      inset 0 1px 0 rgba(255,255,255,.10);
+  }
 
-.icon{
-  width: 34px;
-  height: 34px;
-  border-radius: 12px;
-  display:grid;
-  place-items:center;
-  background: rgba(125,92,255,.18);
-  border: 1px solid rgba(125,92,255,.35);
-  flex: 0 0 auto;
-  font-size: 18px;
-  box-shadow:
-    0 0 8px rgba(125,92,255,.20),
-    0 0 16px rgba(125,92,255,.10),
-    inset 0 0 10px rgba(255,255,255,.05);
-  transition: .18s ease;
-}
+  .btn::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background: linear-gradient(
+      120deg,
+      transparent 0%,
+      rgba(255,255,255,.05) 35%,
+      rgba(255,255,255,.12) 50%,
+      transparent 65%
+    );
+    transform: translateX(-120%);
+    transition: transform .6s ease;
+    pointer-events:none;
+  }
 
-.btn:hover .icon{
-  transform: scale(1.06);
-  box-shadow:
-    0 0 12px rgba(125,92,255,.35),
-    0 0 24px rgba(125,92,255,.20),
-    inset 0 0 12px rgba(255,255,255,.05);
-}
+  .btn:hover::before{
+    transform: translateX(120%);
+  }
 
-.btn.kana{
-  box-shadow:
-    0 0 8px rgba(34,197,94,.6),
-    0 0 20px rgba(34,197,94,.35),
-    inset 0 0 10px rgba(34,197,94,.05);
-}
-  
-.btn.kanji{
-  box-shadow:
-    0 0 8px rgba(125,92,255,.7),
-    0 0 22px rgba(125,92,255,.4),
-    inset 0 0 10px rgba(125,92,255,.05);
-}
+  .btn small{
+    display:block;
+    font-weight: 600;
+    font-size: 12px;
+    margin-top: 2px;
+    letter-spacing: .1px;
+    color: rgba(255,255,255,.88);
+  }
 
-.btn.joyo{
-  box-shadow:
-    0 0 8px rgba(239,68,68,.6),
-    0 0 20px rgba(239,68,68,.35),
-    inset 0 0 10px rgba(239,68,68,.05);
-}
+  .icon{
+    width: 34px;
+    height: 34px;
+    border-radius: 12px;
+    display:grid;
+    place-items:center;
+    background: rgba(var(--glow-rgb), .16);
+    border: 1px solid rgba(var(--glow-rgb), .40);
+    flex: 0 0 auto;
+    font-size: 18px;
+    box-shadow:
+      0 0 10px rgba(var(--glow-rgb), .18),
+      0 0 16px rgba(var(--glow-rgb), .08),
+      inset 0 0 10px rgba(255,255,255,.04);
+    transition: .18s ease;
+  }
 
-.btn.n5{
-  box-shadow:
-    0 0 8px rgba(34,197,94,.6),
-    0 0 20px rgba(34,197,94,.35),
-    inset 0 0 10px rgba(34,197,94,.05);
-}
+  .btn:hover .icon{
+    transform: scale(1.06);
+    box-shadow:
+      0 0 12px rgba(var(--glow-rgb), .28),
+      0 0 22px rgba(var(--glow-rgb), .12),
+      inset 0 0 12px rgba(255,255,255,.05);
+  }
 
-.btn.media{
-  box-shadow:
-    0 0 8px rgba(236,72,153,.6),
-    0 0 20px rgba(236,72,153,.35),
-    inset 0 0 10px rgba(236,72,153,.05);
-}
+  /* COLORES */
+  .btn.libro{ --glow-rgb: 125,92,255; }
+  .btn.curso{ --glow-rgb: 34,197,94; }
+  .btn.kana{ --glow-rgb: 34,197,94; }
+  .btn.kanji{ --glow-rgb: 125,92,255; }
+  .btn.joyo{ --glow-rgb: 239,68,68; }
+  .btn.n5{ --glow-rgb: 34,197,94; }
+  .btn.media{ --glow-rgb: 236,72,153; }
+  .btn.vivos{ --glow-rgb: 236,72,153; }
+  .btn.test{ --glow-rgb: 255,255,255; }
 
-.btn.vivos{
-  box-shadow:
-    0 0 8px rgba(236,72,153,.7),
-    0 0 22px rgba(236,72,153,.4),
-    inset 0 0 10px rgba(236,72,153,.05);
-}
-
-.btn.test{
-  box-shadow:
-    0 0 8px rgba(255,255,255,.35),
-    0 0 18px rgba(255,255,255,.15),
-    inset 0 0 8px rgba(255,255,255,.10);
-}
-  
-.btn.kana .icon{
-  background: rgba(34,197,94,.16);
-  border-color: rgba(34,197,94,.45);
-  box-shadow:
-    0 0 10px rgba(34,197,94,.22),
-    0 0 18px rgba(34,197,94,.10);
-}
-
-.btn.kanji .icon{
-  background: rgba(125,92,255,.20);
-  border-color: rgba(125,92,255,.45);
-  box-shadow:
-    0 0 10px rgba(125,92,255,.24),
-    0 0 18px rgba(125,92,255,.12);
-}
-
-.btn.joyo .icon{
-  background: rgba(239,68,68,.14);
-  border-color: rgba(239,68,68,.42);
-  box-shadow:
-    0 0 10px rgba(239,68,68,.22),
-    0 0 18px rgba(239,68,68,.10);
-}
-
-.btn.n5 .icon{
-  background: rgba(34,197,94,.16);
-  border-color: rgba(34,197,94,.45);
-  box-shadow:
-    0 0 10px rgba(34,197,94,.22),
-    0 0 18px rgba(34,197,94,.10);
-}
-
-.btn.media .icon{
-  background: rgba(236,72,153,.16);
-  border-color: rgba(236,72,153,.42);
-  box-shadow:
-    0 0 10px rgba(236,72,153,.22),
-    0 0 18px rgba(236,72,153,.10);
-}
-
-.btn.vivos .icon{
-  background: rgba(236,72,153,.16);
-  border-color: rgba(236,72,153,.42);
-  box-shadow:
-    0 0 10px rgba(236,72,153,.22),
-    0 0 18px rgba(236,72,153,.10);
-}
-
-.btn.kana:hover{
-  box-shadow:
-    0 0 14px rgba(34,197,94,.20),
-    0 0 28px rgba(34,197,94,.12),
-    inset 0 1px 0 rgba(255,255,255,.10);
-}
-
-.btn.kanji:hover{
-  box-shadow:
-    0 0 14px rgba(125,92,255,.22),
-    0 0 28px rgba(125,92,255,.14),
-    inset 0 1px 0 rgba(255,255,255,.10);
-}
-
-.btn.joyo:hover{
-  box-shadow:
-    0 0 14px rgba(239,68,68,.20),
-    0 0 28px rgba(239,68,68,.12),
-    inset 0 1px 0 rgba(255,255,255,.10);
-}
-
-.btn.n5:hover{
-  box-shadow:
-    0 0 14px rgba(34,197,94,.20),
-    0 0 28px rgba(34,197,94,.12),
-    inset 0 1px 0 rgba(255,255,255,.10);
-}
-
-.btn.media:hover{
-  box-shadow:
-    0 0 14px rgba(236,72,153,.20),
-    0 0 28px rgba(236,72,153,.12),
-    inset 0 1px 0 rgba(255,255,255,.10);
-}
-
-.btn.test:hover{
-  box-shadow:
-    0 0 12px rgba(255,255,255,.14),
-    0 0 24px rgba(255,255,255,.08),
-    inset 0 1px 0 rgba(255,255,255,.10);
-}
-
-.btn.vivos:hover{
-  box-shadow:
-    0 0 14px rgba(236,72,153,.20),
-    0 0 28px rgba(236,72,153,.12),
-    inset 0 1px 0 rgba(255,255,255,.10);
-}  
-  
-.btn::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  background: linear-gradient(
-    120deg,
-    transparent 0%,
-    rgba(255,255,255,.05) 35%,
-    rgba(255,255,255,.12) 50%,
-    transparent 65%
-  );
-  transform: translateX(-120%);
-  transition: transform .6s ease;
-  pointer-events:none;
-}
-
-.btn:hover::before{
-  transform: translateX(120%);
-}
-  
   .rightTitle{
     margin:0;
     font-size: 14px;
@@ -530,152 +333,92 @@ body::before{
     line-height: 1.45;
     opacity: .95;
   }
-  
-.n5count{
-  margin-top:-5px;
-  padding:8px 12px;
-  border-radius:999px;
-  border:1px solid rgba(34,197,94,.35);
-  background: rgba(34,197,94,.10);
-  font-weight:800;
-  font-size:14px;
-  letter-spacing:.2px;
-  text-align:center;
-  box-shadow:
-    0 0 10px rgba(34,197,94,.15),
-    inset 0 0 8px rgba(34,197,94,.05);
-}
 
-.badge-title{
-  display:inline-block;
-  padding:6px 12px;
-  border-radius:999px;
-  border:1px solid rgba(255,255,255,.18);
-  background: rgba(255,255,255,.06);
-
-  font-family: Inter, system-ui, sans-serif;
-  font-weight:800;
-  font-size:16px;
-  letter-spacing:.4px;
-  
-  box-shadow:
-    0 0 8px rgba(125,92,255,.15),
-    inset 0 0 6px rgba(255,255,255,.05);
-
-  margin: 0 0 10px 0;   /* ← aquí controlas el espacio */
-}
-
-.footer-badge{
-  display:block;
-  width:fit-content;
-  margin:18px auto 6px;
-  font-size:15px;
-}
-
-.badge-title.libros{
-  border-color: rgba(125,92,255,.35);
-  box-shadow: 0 0 10px rgba(125,92,255,.05);
-}
-
-.badge-title.cursos{
-  border-color: rgba(34,197,94,.35);
-  box-shadow: 0 0 10px rgba(34,197,94,.05);
-}
-
-.badge-title.tools{
-  border-color: rgba(236,72,153,.35);
-  box-shadow: 0 0 10px rgba(236,72,153,.05);
-}
-
-.btn.libro{
-  border-color: rgba(125,92,255,.25);
-
-  box-shadow:
-    0 0 8px rgba(125,92,255,.55),
-    0 0 20px rgba(125,92,255,.30),
-    inset 0 0 8px rgba(125,92,255,.05);
-}
-
-.btn.curso{
-  border-color: rgba(34,197,94,.25);
-
-  box-shadow:
-    0 0 8px rgba(34,197,94,.55),
-    0 0 20px rgba(34,197,94,.30),
-    inset 0 0 8px rgba(34,197,94,.05);
-}
-
-.btn.libro:hover{
-  box-shadow:
-    0 0 12px rgba(125,92,255,.85),
-    0 0 28px rgba(125,92,255,.55);
-}
-
-.btn.curso:hover{
-  box-shadow:
-    0 0 12px rgba(34,197,94,.85),
-    0 0 28px rgba(34,197,94,.55);
-}
-  
-@media (max-width:900px){
-
-  .avatarTop{
-    width:70px;
-    height:70px;
-  }
-
-  .profileTop{
-    flex-direction: column;
-    text-align: center;
-  }
-
-  .grid{
-    grid-template-columns: 1fr;
-  }
-
-  .profile{
-    flex-direction:column;
+  .n5count{
+    margin-top:-5px;
+    padding:8px 12px;
+    border-radius:999px;
+    border:1px solid rgba(34,197,94,.35);
+    background: rgba(34,197,94,.10);
+    font-weight:800;
+    font-size:14px;
+    letter-spacing:.2px;
     text-align:center;
+    box-shadow:
+      0 0 10px rgba(34,197,94,.15),
+      inset 0 0 8px rgba(34,197,94,.05);
   }
 
-  .tools{
-    grid-template-columns: 1fr;
+  .badge-title{
+    display:inline-block;
+    padding:6px 12px;
+    border-radius:999px;
+    border:1px solid rgba(255,255,255,.18);
+    background: rgba(255,255,255,.06);
+    font-family: Inter, system-ui, sans-serif;
+    font-weight:800;
+    font-size:16px;
+    letter-spacing:.4px;
+    box-shadow:
+      0 0 8px rgba(255,255,255,.04),
+      inset 0 0 6px rgba(255,255,255,.05);
+    margin: 0 0 10px 0;
   }
 
-  .gridLC{
-    grid-template-columns: 1fr;
+  .footer-badge{
+    display:block;
+    width:fit-content;
+    margin:18px auto 6px;
+    font-size:15px;
   }
 
-}
-
-@keyframes particlesMove{
-  from{ background-position: 0 0, 0 0; }
-  to{ background-position: 120px 120px, 240px 240px; }
-}
-
-@keyframes titleGlow{
-  0%{
-    text-shadow:
-      0 0 6px rgba(125,92,255,.35),
-      0 0 10px rgba(236,72,153,.25);
+  .badge-title.libros{
+    border-color: rgba(125,92,255,.30);
+    box-shadow: 0 0 10px rgba(125,92,255,.05);
   }
-  50%{
-    text-shadow:
-      0 0 16px rgba(125,92,255,.75),
-      0 0 24px rgba(236,72,153,.45);
-  }
-  100%{
-    text-shadow:
-      0 0 6px rgba(125,92,255,.35),
-      0 0 10px rgba(236,72,153,.25);
-  }
-}
 
-@keyframes starsFloat{
-  from{ transform: translateY(0px); }
-  to{ transform: translateY(-10px); }
-}
-  
+  .badge-title.cursos{
+    border-color: rgba(34,197,94,.30);
+    box-shadow: 0 0 10px rgba(34,197,94,.05);
+  }
+
+  .badge-title.tools{
+    border-color: rgba(236,72,153,.30);
+    box-shadow: 0 0 10px rgba(236,72,153,.05);
+  }
+
+  @media (max-width:900px){
+    .avatarTop{
+      width:70px;
+      height:70px;
+    }
+
+    .profileTop{
+      flex-direction: column;
+      text-align: center;
+    }
+
+    .grid{
+      grid-template-columns: 1fr;
+    }
+
+    .mainGrid{
+      grid-template-columns: 1fr;
+    }
+
+    .profile{
+      flex-direction:column;
+      text-align:center;
+    }
+
+    .tools{
+      grid-template-columns: 1fr;
+    }
+
+    .gridLC{
+      grid-template-columns: 1fr;
+    }
+  }
 </style>
 
 </head>
@@ -683,130 +426,118 @@ body::before{
 <body>
   <div class="wrap">
 
-<h1>
-  Asallam Sensei
-  <sup class="sup">Potenciado por GPT</sup>
-</h1>
-   
-<!-- Bloque de perfil (debajo del título, antes del grid principal) -->
-<div class="card introCard">
-  <div class="profileTop">
-    <div class="avatarTop">
-      <img src="data/asallam.jpg" alt="Asallam Sensei">
-    </div>
+    <h1>
+      Asallam Sensei
+      <sup class="sup">Potenciado por GPT</sup>
+    </h1>
 
-    <div class="infoTop">
-      <p class="phone">WhatsApp +573217876009</p>
-      <p class="phone">paypal.me/asallamsensei</p>
-      <p class="quote">
-        “Entre más tarea, más aprendes.” — Asallam Sensei
-      </p>
-    </div>
-  </div>
-</div>
-
-<!-- GRID PRINCIPAL: Izquierda / Derecha -->
-<div class="mainGrid">
-
-<!-- IZQUIERDA: LIBROS + CURSOS -->
-<div class="card">
-
-  <div class="gridLC">
-    <!-- LIBROS -->
-    <div>
-      <p class="badge-title libros">📚 Libros</p>
-      
-      <!-- lista vertical -->
-      <div class="tools" style="grid-template-columns: 1fr;">
-        <div class="btn libro">
-          <span>Kit de iniciación al japonés</span>
+    <div class="card introCard">
+      <div class="profileTop">
+        <div class="avatarTop">
+          <img src="data/asallam.jpg" alt="Asallam Sensei">
         </div>
-        
-        <div class="btn libro">
-          <span>Los 2136 Jōyō Kanji</span>
+
+        <div class="infoTop">
+          <p class="phone">WhatsApp +573217876009</p>
+          <p class="phone">paypal.me/asallamsensei</p>
+          <p class="quote">“Entre más tarea, más aprendes.” — Asallam Sensei</p>
         </div>
       </div>
     </div>
 
-    <!-- CURSOS -->
-    <div>
-      <p class="badge-title cursos">🎓 Cursos</p>
-      
-      <!-- lista vertical -->
-      <div class="tools" style="grid-template-columns: 1fr;">
-        <div class="btn curso">
-          <span>Japonés desde 0!</span>
-        </div>
-        
-        <div class="btn curso">
-          <span>Anime sin subtítulos!</span>
-        </div>
-        
-        <div class="btn curso">
-          <span>Lea Manga Hoy!</span>
-        </div>
-        
-        <div class="btn curso">
-          <span>JLPT N5!</span>
-        </div>
+    <div class="mainGrid">
 
-        <div id="n5" class="n5count">⏳ Cargando contador N5...</div>
-        
+      <div class="card">
+        <div class="gridLC">
+
+          <div>
+            <p class="badge-title libros">📚 Libros</p>
+
+            <div class="tools" style="grid-template-columns: 1fr;">
+              <a class="btn libro" href="#">
+                <span>Kit de iniciación al japonés</span>
+              </a>
+
+              <a class="btn libro" href="#">
+                <span>Los 2136 Jōyō Kanji</span>
+              </a>
+            </div>
+          </div>
+
+          <div>
+            <p class="badge-title cursos">🎓 Cursos</p>
+
+            <div class="tools" style="grid-template-columns: 1fr;">
+              <a class="btn curso" href="#">
+                <span>Japonés desde 0!</span>
+              </a>
+
+              <a class="btn curso" href="#">
+                <span>Anime sin subtítulos!</span>
+              </a>
+
+              <a class="btn curso" href="#">
+                <span>Lea Manga Hoy!</span>
+              </a>
+
+              <a class="btn curso" href="#">
+                <span>JLPT N5!</span>
+              </a>
+
+              <div id="n5" class="n5count">⏳ Cargando contador N5...</div>
+            </div>
+          </div>
+
+        </div>
       </div>
+
+      <div class="card">
+        <p class="badge-title tools">🛠️ Herramientas</p>
+
+        <div class="tools">
+          <a class="btn kana" href="kana.html">
+            <span>Kana<small>Hiragana & Katakana</small></span>
+            <span class="icon">あ</span>
+          </a>
+
+          <a class="btn kanji" href="kanji.html">
+            <span>Kanji de grado 1<small>Base sólida</small></span>
+            <span class="icon">一</span>
+          </a>
+
+          <a class="btn joyo" href="kanji_todos.html">
+            <span>Los 2136 Jōyō Kanji<small>Modo Bestia</small></span>
+            <span class="icon">漢</span>
+          </a>
+
+          <a class="btn n5" href="Vocabulario_N5.html">
+            <span>Vocabulario N5<small>Lo esencial</small></span>
+            <span class="icon">N5</span>
+          </a>
+
+          <a class="btn media" href="vocabulario_series_y_anime.html">
+            <span>Canciones y series<small>Vocab en contexto</small></span>
+            <span class="icon">🎧</span>
+          </a>
+
+          <a class="btn vivos" href="vivo.html">
+            <span>EL VIVO!!<small>ver y descargar vocabulario</small></span>
+            <span class="icon">🃏</span>
+          </a>
+
+          <a class="btn test" href="test.html">
+            <span>TEST<small>ponte a prueba</small></span>
+            <span class="icon">✓</span>
+          </a>
+        </div>
+
+        <footer class="badge-title footer-badge">© Asallam Sensei</footer>
+      </div>
+
     </div>
   </div>
-
-</div>
-
-  <!-- DERECHA: HERRAMIENTAS -->
-  <div class="card">
-    <p class="badge-title tools">🛠️ Herramientas</p>
-    
-    <div class="tools">
-      <a class="btn kana" href="kana.html">
-        <span>Kana<small>Hiragana & Katakana</small></span>
-        <span class="icon">あ</span>
-      </a>
-      
-      <a class="btn kanji" href="kanji.html">
-        <span>Kanji de grado 1<small>Base sólida</small></span>
-        <span class="icon">一</span>
-      </a>
-
-      <a class="btn joyo" href="kanji_todos.html">
-        <span>Los 2136 Jōyō Kanji<small>Modo Bestia</small></span>
-        <span class="icon">漢</span>
-      </a>
-
-      <a class="btn n5" href="Vocabulario_N5.html">
-        <span>Vocabulario N5<small>Lo esencial</small></span>
-        <span class="icon">N5</span>
-      </a>
-
-      <a class="btn media" href="vocabulario_series_y_anime.html">
-        <span>Canciones y series<small>Vocab en contexto</small></span>
-        <span class="icon">🎧</span>
-      </a>
-
-      <a class="btn vivos" href="vivos.html">
-        <span>EL VIVO!!<small>ver y descargar vocabulario</small></span>
-        <span class="icon">🃏</span>
-      </a>
-      
-      <a class="btn test" href="test.html">
-        <span>TEST<small>ponte a prueba</small></span>
-        <span class="icon">✓</span>
-      </a>
-    </div>
-
-    <footer class="badge-title footer-badge">© Asallam Sensei</footer>
-  </div>
-
-</div>
-
 
   <script>
-    // ===== Contador JLPT N5 =====
     const dates = [
       new Date("2026-07-05T08:00:00-05:00"),
       new Date("2026-12-06T08:00:00-05:00")
@@ -814,11 +545,11 @@ body::before{
 
     function left(ms){
       if(ms <= 0) return "¡Es hoy! 🔥";
-      const s = Math.floor(ms/1000);
-      const d = Math.floor(s/86400);
-      const h = Math.floor((s%86400)/3600);
-      const m = Math.floor((s%3600)/60);
-      const ss = s%60;
+      const s = Math.floor(ms / 1000);
+      const d = Math.floor(s / 86400);
+      const h = Math.floor((s % 86400) / 3600);
+      const m = Math.floor((s % 3600) / 60);
+      const ss = s % 60;
       return `${d}d ${h}h ${m}m ${ss}s`;
     }
 
@@ -831,14 +562,13 @@ body::before{
       if(next){
         const diff = next.getTime() - now;
         el.textContent = `⏳ JLPT N5: ${left(diff)}`;
+        el.classList.remove("good", "warn");
 
-        // estilos “urgencia”
-        el.classList.remove("good","warn");
-        if(diff < 1000 * 60 * 60 * 24 * 30) el.classList.add("warn"); // < 30 días
+        if(diff < 1000 * 60 * 60 * 24 * 30) el.classList.add("warn");
         else el.classList.add("good");
       }else{
         el.textContent = "Configura nuevas fechas del N5.";
-        el.classList.remove("good","warn");
+        el.classList.remove("good", "warn");
       }
     }
 
@@ -846,4 +576,5 @@ body::before{
     setInterval(tick, 1000);
   </script>
 </body>
+  
 </html>
