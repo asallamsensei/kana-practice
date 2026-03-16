@@ -210,9 +210,7 @@
     flex: 1;
   }
 
-.btn{
-  --glow-rgb: 236,72,153; /* color por defecto */
-  
+.btn{  
   display:flex;
   gap:10px;
   align-items:center;
@@ -305,8 +303,10 @@
   }
 
   /* COLORES */
-  .btn.libro{ --glow-rgb: 128,100,255; }
-  .btn.curso { --glow-rgb: 150,120,230; } /* violeta-azulado intermedio */
+  /* COLORES GLOW DEFINIDOS SOLO PARA CADA CATEGORÍA */
+  .btn.libro       { --glow-rgb: 128,100,255; }  /* violeta */
+  .btn.curso       { --glow-rgb: 182,86,204; }   /* violeta-rosado */
+  .btn.tools       { --glow-rgb: 236,72,153; }   /* rojo/rosa */
   // .btn.kana{ --glow-rgb: 34,197,94; }
   // .btn.kanji{ --glow-rgb: 125,92,255; }
   // .btn.joyo{ --glow-rgb: 239,68,68; }
@@ -498,37 +498,37 @@
         <p class="badge-title tools">🛠️ Herramientas</p>
 
         <div class="tools">
-          <a class="btn kana" href="kana.html">
+          <a class="btn tools kana" href="kana.html">
             <span>Kana<small>Hiragana & Katakana</small></span>
             <span class="icon">あ</span>
           </a>
 
-          <a class="btn kanji" href="kanji.html">
+          <a class="btn tools kanji" href="kanji.html">
             <span>Kanji de grado 1<small>Base sólida</small></span>
             <span class="icon">一</span>
           </a>
 
-          <a class="btn joyo" href="kanji_todos.html">
+          <a class="btn tools joyo" href="kanji_todos.html">
             <span>Los 2136 Jōyō Kanji<small>Modo Bestia</small></span>
             <span class="icon">漢</span>
           </a>
 
-          <a class="btn n5" href="Vocabulario_N5.html">
+          <a class="btn tools n5" href="Vocabulario_N5.html">
             <span>Vocabulario N5<small>Lo esencial</small></span>
             <span class="icon">N5</span>
           </a>
 
-          <a class="btn media" href="vocabulario_series_y_anime.html">
+          <a class="btn tools media" href="vocabulario_series_y_anime.html">
             <span>Canciones y series<small>Vocab en contexto</small></span>
             <span class="icon">🎧</span>
           </a>
 
-          <a class="btn vivos" href="vivo.html">
+          <a class="btn tools vivos" href="vivo.html">
             <span>EL VIVO!!<small>ver y descargar vocabulario</small></span>
             <span class="icon">🃏</span>
           </a>
 
-          <a class="btn test" href="test.html">
+          <a class="btn tools test" href="test.html">
             <span>TEST<small>ponte a prueba</small></span>
             <span class="icon">✓</span>
           </a>
