@@ -193,6 +193,10 @@
       margin-top: 0;    /* igual que los otros grupos */
   }
 
+  .tools .btn:last-child {
+      margin-bottom: 0;
+  }
+  
   .gridLC{
     display:grid;
     grid-template-columns: 1fr 1fr;
@@ -210,26 +214,29 @@
     flex: 1;
   }
 
-.btn{  
-  display:flex;
-  gap:10px;
-  align-items:center;
-  justify-content:space-between;
-  width:100%;
-  padding: 13px 14px;
-  border-radius: 14px;
-  border: 1px solid rgba(var(--glow-rgb), .28);
-  background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04));
-  color: var(--text);
-  font-weight: 800;
-  position: relative;
-  overflow: hidden;
-  backdrop-filter: blur(6px);
-  box-shadow:
-    0 0 8px rgba(var(--glow-rgb), .22),
-    0 0 18px rgba(var(--glow-rgb), .10),
-    inset 0 0 8px rgba(var(--glow-rgb), .04);
-  transition: .18s ease;
+.btn {
+    display:flex;
+    gap:10px;
+    align-items:center;
+    justify-content:space-between;
+    width:100%;
+    padding: 13px 14px;
+    border-radius: 14px;
+    border: 1px solid rgba(var(--glow-rgb), .28);
+    background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04));
+    color: var(--text);
+    font-weight: 800;
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(6px);
+    box-shadow:
+      0 0 8px rgba(var(--glow-rgb), .22),
+      0 0 18px rgba(var(--glow-rgb), .10),
+      inset 0 0 8px rgba(var(--glow-rgb), .04);
+    transition: .18s ease;
+
+    /* NUEVO: margin estándar entre botones */
+    margin-bottom: 12px;   /* aquí defines el espacio entre todos los botones */
 }
 
 .btn:hover{
