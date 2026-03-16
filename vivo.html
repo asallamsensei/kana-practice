@@ -401,12 +401,13 @@
           // Panel de palabras involucradas
           // ✅ palabras con estilo original de pieces
           // Panel de palabras involucradas (dentro de un panel con título)
+          // Panel de palabras involucradas, cada palabra en su fila
           let wordsHTML = '';
           if(item.words && item.words.length){
             wordsHTML = `
               <section class="kanji-panel">
                 <div class="kanji-title">Palabras involucradas</div>
-                <div class="kanji-grid">
+                <div class="pieces">
                   ${item.words.map(w => `
                     <div class="piece">
                       <div>
