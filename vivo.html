@@ -399,21 +399,20 @@
           `;
     
           // Panel de palabras involucradas
+          // ✅ palabras con estilo original de pieces
           let wordsHTML = '';
-          if (item.words && item.words.length) {
+          if(item.words && item.words.length){
             wordsHTML = `
-              <section class="kanji-panel">
-                <div class="kanji-title">Palabras involucradas</div>
-                <div class="kanji-grid">
-                  ${item.words.map(w => `
-                    <div class="kanji-card">
-                      <div class="kanji-main">
-                        <div class="kanji-char">${w.jp}</div>
-                        <div>${w.romaji} - ${w.es}</div>
-                      </div>
+              <section class="pieces">
+                ${item.words.map(w => `
+                  <div class="piece">
+                    <div>
+                      <div class="jp">${w.jp}</div>
+                      <div class="romaji">${w.romaji}</div>
                     </div>
-                  `).join('')}
-                </div>
+                    <div class="exp">${w.es}</div>
+                  </div>
+                `).join('')}
               </section>
             `;
           }
