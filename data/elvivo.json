@@ -5,6 +5,8 @@
     "jp": "アラームを止める",
     "romaji": "arāmu o tomeru",
     "es": "Apagar la alarma",
+    "literal": "Detener la alarma",
+    "matiz": "Expresión muy natural para parar o apagar el sonido de una alarma",
     "words": [
       {"jp": "アラーム", "romaji": "arāmu", "es": "alarma"},
       {"jp": "を", "romaji": "o", "es": "partícula objeto directo"},
@@ -20,6 +22,8 @@
     "jp": "電話",
     "romaji": "denwa",
     "es": "Teléfono",
+    "literal": "Teléfono",
+    "matiz": "Palabra usada para referirse a teléfonos en general",
     "words": [
       {"jp": "電話", "romaji": "denwa", "es": "teléfono"}
     ],
@@ -34,6 +38,8 @@
     "jp": "走",
     "romaji": "hashiru",
     "es": "Correr",
+    "literal": "Correr",
+    "matiz": "Verbo que indica desplazamiento rápido a pie",
     "words": [],
     "kanjis": [
       {"char": "走", "mean": "correr • desplazarse rápido"}
