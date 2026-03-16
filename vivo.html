@@ -308,6 +308,20 @@
       text-align:center;
     }
 
+    .footer-badge{
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      padding:12px 0;
+      font-family: Inter, sans-serif;
+      font-size:.9rem;
+      font-weight:700;
+      color:#fff;
+      background: rgba(0,0,0,.2); /* fondo suave */
+      border-top:1px solid rgba(255,255,255,.1);
+      border-radius:12px; /* opcional para suavizar los bordes */
+    }
+    
     @media (max-width: 860px){
       .meaning-boxes{grid-template-columns:1fr}
       .piece{grid-template-columns:1fr}
@@ -318,25 +332,24 @@
 <body>
   <div class="wrap">
     <section class="hero">
-      <span class="eyebrow">Asallam Sensei • Vivo de estudio</span>
-      <h1>Vivo del 15 de marzo de 2026</h1>
-      <p>
-        Página pensada para guardar lo trabajado en tus vivos con una estética potente: expresión principal,
-        desglose palabra por palabra, explicación breve y kanji involucrados al final. Además, cada bloque se puede
-        descargar como imagen para subirlo a redes o reutilizarlo en tu web.
-      </p>
+      <span class="eyebrow">Asallam Sensei • EL VIVO!!</span>
+      <h1>Esto lo vimos en EL VIVO</h1>
       <div class="toolbar">
         <button class="btn-primary" onclick="downloadAllCards()">Descargar todas las tarjetas</button>
-        <button class="btn-secondary" onclick="window.scrollTo({top: document.querySelector('.vivo-grid').offsetTop - 12, behavior:'smooth'})">Ir al contenido</button>
       </div>
     </section>
 
+    <!-- Input de búsqueda -->
+    <div style="margin-bottom:16px;">
+      <input type="text" id="tagSearch" placeholder="Buscar por tag..." style="padding:8px 12px; border-radius:12px; border:1px solid rgba(255,255,255,.2); background:rgba(255,255,255,.05); color:white;">
+    </div>
+    
     <main class="vivo-grid">
       <article class="entry capture-card" id="entry-1">
         <div class="entry-top">
           <div>
             <div class="entry-tag">Expresión trabajada</div>
-            <div class="entry-date">Ejemplo de formato para tus vivos</div>
+            //<div class="entry-date">Ejemplo de formato para tus vivos</div>
           </div>
           <div class="entry-date">Tema: Rutina de la mañana</div>
         </div>
@@ -409,11 +422,16 @@
       </article>
     </main>
 
-    <p class="footer-note">
-      Consejo visual: cada expresión puede ir como una tarjeta independiente. Así luego puedes reutilizar una por una como imagen cuadrada, vertical o mini poster para redes.
-    </p>
+    //<p class="footer-note">
+    //  Consejo visual: cada expresión puede ir como una tarjeta independiente. Así luego puedes reutilizar una por una como imagen cuadrada, vertical o mini poster para redes.
+    //</p>
   </div>
 
+  <!-- Footer simple con bolita y texto juntos -->
+  <footer class="footer-badge">
+    © Asallam Sensei
+  </footer>
+  
   <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
   <script>
     async function renderCard(element){
@@ -441,6 +459,21 @@
         await downloadCard(name, name);
       }
     }
+
+    // JS para filtrar por tag
+    const searchInput = document.getElementById('tagSearch');
+    searchInput.addEventListener('input', (e) => {
+      const value = e.target.value.toLowerCase();
+      document.querySelectorAll('.entry').forEach(entry => {
+        const tag = entry.querySelector('.entry-tag').textContent.toLowerCase();
+        if(tag.includes(value)){
+          entry.style.display = 'grid';
+        } else {
+          entry.style.display = 'none';
+        }
+      });
+    });
+    
   </script>
 </body>
 </html>
