@@ -371,11 +371,95 @@
 
     // Cargar JSON y renderizar tarjetas con Traducción literal y Matiz, y panel de palabras como los kanji
     fetch('data/elvivo.json')
-      .then(res=>res.json())
-      .then(data=>{
-        const grid=document.getElementById('vivoGrid');
-        data.forEach((item,index)=>{
-          const entry=document.createElement('article');
-          entry.className='entry capture-card';
-          entry.id=`entry-${index+1}`;
+      .then(res => res.json())
+      .then(data => {
+        const grid = document.getElementById('vivoGrid');
+    
+        data.forEach((item, index) => {
+          const entry = document.createElement('article');
+          entry.className = 'entry capture-card';
+          entry.id = `entry-${index+1}`;
+    
+          // Construir el HTML de la tarjeta
+          const meaningHTML = `
+            <div class="meaning-boxes">
+              <div class="meaning-box">
+                <span class="label">Traducción natural</span>
+                <div class="value">${item.es}</div>
+              </div>
+              <div class="meaning-box">
+                <span class="label">Traducción literal</span>
+                <div class="value">${item.literal || ''}</div>
+              </div>
+              <div class="meaning-box">
+                <span class="label">Matiz</span>
+                <div class="value">${item.matiz || ''}</div>
+              </div>
+            </div>
+          `;
+    
+          // Panel de palabras involucradas
+          let wordsHTML = '';
+          if (item.words && item.words.length) {
+            wordsHTML = `
+              <section class="kanji-panel">
+                <div class="kanji-title">Palabras involucradas</div>
+                <div class="kanji-grid">
+                  ${item.words.map(w => `
+                    <div class="kanji-card">
+                      <div class="kanji-main">
+                        <div class="kanji-char">${w.jp}</div>
+                        <div>${w.romaji} - ${w.es}</div>
+                      </div>
+                    </div>
+                  `).join('')}
+                </div>
+              </section>
+            `;
+          }
+    
+          // Panel de kanjis
+          let kanjiHTML = '';
+          if (item.kanjis && item.kanjis.length) {
+            kanjiHTML = `
+              <section class="kanji-panel">
+                <div class="kanji-title">Kanji involucrados</div>
+                <div class="kanji-grid">
+                  ${item.kanjis.map(k => `
+                    <div class="kanji-card">
+                      <div class="kanji-main">
+                        <div class="kanji-char">${k.char}</div>
+                        <div>${k.mean}</div>
+                      </div>
+                    </div>
+                  `).join('')}
+                </div>
+              </section>
+            `;
+          }
+    
+          // Combinar todo en la entrada
+          entry.innerHTML = `
+            <div class="entry-top">
+              <div><div class="entry-tag">${item.type}</div></div>
+              <div class="entry-date">Tema: ${item.theme}</div>
+            </div>
+            <div class="entry-body">
+              <div class="jp-line">${item.jp}</div>
+              <div class="reading-line">${item.romaji}</div>
+              ${meaningHTML}
+              ${wordsHTML}
+              ${kanjiHTML}
+              <div class="mini-actions">
+                <button class="capture-btn" onclick="downloadCard('entry-${index+1}','vivo-${index+1}')">Descargar esta tarjeta</button>
+              </div>
+            </div>
+          `;
+    
+          // Añadir la tarjeta al grid
+          grid.appendChild(entry);
+        }); // fin del forEach
+      }); // fin del .then del fetch
+  </script>
+</body>
 </html>
