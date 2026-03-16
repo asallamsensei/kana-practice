@@ -400,19 +400,23 @@
     
           // Panel de palabras involucradas
           // ✅ palabras con estilo original de pieces
+          // Panel de palabras involucradas (dentro de un panel con título)
           let wordsHTML = '';
           if(item.words && item.words.length){
             wordsHTML = `
-              <section class="pieces">
-                ${item.words.map(w => `
-                  <div class="piece">
-                    <div>
-                      <div class="jp">${w.jp}</div>
-                      <div class="romaji">${w.romaji}</div>
+              <section class="kanji-panel">
+                <div class="kanji-title">Palabras involucradas</div>
+                <div class="kanji-grid">
+                  ${item.words.map(w => `
+                    <div class="piece">
+                      <div>
+                        <div class="jp">${w.jp}</div>
+                        <div class="romaji">${w.romaji}</div>
+                      </div>
+                      <div class="exp">${w.es}</div>
                     </div>
-                    <div class="exp">${w.es}</div>
-                  </div>
-                `).join('')}
+                  `).join('')}
+                </div>
               </section>
             `;
           }
