@@ -1109,15 +1109,29 @@ function reproducirAudioKana(romaji){
   audioKana.pause();
   audioKana.currentTime = 0;
 
-  const baseDir = "data/audios/";
+  const itemActual = kanaLista[actual];
+  const esExtraActual = extra.includes(itemActual);
+
+  const baseDir = esExtraActual
+    ? "data/audios/kana/extra/"
+    : "data/audios/";
 
   let i = 0;
+
   const intentar = () => {
     if (i >= opciones.length) return;
-    const nombre = opciones[i++];
 
+    const nombre = opciones[i++];
     audioKana.src = baseDir + encodeURIComponent(nombre) + ".mp3";
-    audioKana.play().catch(() => intentar());
+
+    audioKana.onerror = () => intentar();
+    audioKana.oncanplaythrough = () => {
+      audioKana.onerror = null;
+      audioKana.oncanplaythrough = null;
+      audioKana.play().catch(() => {});
+    };
+
+    audioKana.load();
   };
 
   intentar();
