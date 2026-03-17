@@ -1182,6 +1182,7 @@ function responderOpcion(indice){
 
   const correcta = kanaLista[actual];
   const correctaTexto = valorRespuesta(correcta, tipoPreguntaActual);
+  const fichaCorrecta = correcta[0] + " - " + correcta[1];
 
   const btns = document.querySelectorAll(".opcion-btn");
   const btnElegido = btns[indice];
@@ -1190,7 +1191,7 @@ function responderOpcion(indice){
   reproducirAudioKana(correcta[1]);
 
   if (indice === indiceCorrecto) {
-    document.getElementById("respuesta").innerText = "Correcto ✔ (" + correctaTexto + ")";
+    document.getElementById("respuesta").innerText = "Correcto ✔ (" + correctaTexto + ")\n" + fichaCorrecta;
     document.getElementById("respuesta").className = "correcto";
 
     btnElegido.classList.add("correcta");
@@ -1199,7 +1200,7 @@ function responderOpcion(indice){
     racha++;
     if (racha > mejorRacha) mejorRacha = racha;
   } else {
-    document.getElementById("respuesta").innerText = "Incorrecto ✘ (era: " + correctaTexto + ")";
+    document.getElementById("respuesta").innerText = "Incorrecto ✘ (era: " + correctaTexto + ")\n" + fichaCorrecta;
     document.getElementById("respuesta").className = "incorrecto";
 
     btnElegido.classList.add("incorrecta");
@@ -1239,8 +1240,9 @@ function siguienteDesdeBoton(){
 
     const correcta = kanaLista[actual];
     const correcto = valorRespuesta(correcta, tipoPreguntaActual);
-
-    document.getElementById("respuesta").innerText = "Incorrecto ✘ (era: " + correcto + ")";
+    const fichaCorrecta = correcta[0] + " - " + correcta[1];
+    
+    document.getElementById("respuesta").innerText = "Incorrecto ✘ (era: " + correcto + ")\n" + fichaCorrecta;
     document.getElementById("respuesta").className = "incorrecto";
 
     const btns = document.querySelectorAll(".opcion-btn");
