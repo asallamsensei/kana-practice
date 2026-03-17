@@ -539,6 +539,7 @@ let rondaDictado = false;
 let correctaLetra = "";
 let respuestaCorrecta = "";
 let yaValidado = false;
+let itemCorrectoActual = null;
 
 const letras = ["a","b","c"];
 
@@ -751,6 +752,11 @@ function textoRespuesta(item){
   return (rondaDir === "jp-es") ? item.es : item.jp;
 }
 
+function parRevision(item){
+  if(!item) return "";
+  return `${item.jp} — ${item.es}`;
+}
+  
 function renderPrompt(itemCorrecto){
   const promptEl = $("promptMain");
   const subEl = $("promptSub");
@@ -851,6 +857,7 @@ function siguiente(){
   const poolLocal = b.vocabulario;
 
   const itemCorrecto = pick(poolLocal);
+  itemCorrectoActual = itemCorrecto;
   respuestaCorrecta = textoRespuesta(itemCorrecto);
 
   const poolOpciones = getPool(poolScope);
@@ -885,9 +892,11 @@ function verificar(letraForzada){
     return;
   }
 
+  const extra = parRevision(itemCorrectoActual);
+  
   if(letra === correctaLetra){
     res.className = "correcto";
-    res.innerText = "Correcto ✔";
+    res.innerText = `Correcto ✔\n${extra}`;
   
     aciertos++;
     racha++;
@@ -896,7 +905,7 @@ function verificar(letraForzada){
   
   }else{
     res.className = "incorrecto";
-    res.innerText = `Incorrecto ✘ (era ${correctaLetra}) — ${respuestaCorrecta}`;
+    res.innerText = `Incorrecto ✘ (era ${correctaLetra}) — ${respuestaCorrecta}\n${extra}`;
   
     errores++;
     racha = 0;
@@ -921,7 +930,7 @@ function accionSiguiente(){
 
     const res = $("resultado");
     res.className = "incorrecto";
-    res.innerText = `Saltado ✘ (era ${correctaLetra}) — ${respuestaCorrecta}`;
+    res.innerText = `Saltado ✘ (era ${correctaLetra}) — ${respuestaCorrecta}\n${parRevision(itemCorrectoActual)}`;
 
     pintarOpciones(null);
     bloquearOpciones();
@@ -942,7 +951,7 @@ function mostrarRespuesta(){
 
   const res = $("resultado");
   res.className = "incorrecto";
-  res.innerText = `Respuesta: ${respuestaCorrecta}`;
+  res.innerText = `Respuesta: ${respuestaCorrecta}\n${parRevision(itemCorrectoActual)}`;
 
   yaValidado = true;
 
