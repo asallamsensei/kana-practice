@@ -421,7 +421,6 @@
 
       <div class="actions">
         <button class="btn" type="button" onclick="accionSiguiente()">Siguiente</button>
-        <button class="btn btn-ghost" type="button" onclick="mostrarRespuesta()">Mostrar respuesta</button>
       </div>
     </div>
 
@@ -940,25 +939,6 @@ function accionSiguiente(){
   }
 
   siguiente();
-}
-
-function mostrarRespuesta(){
-
-  if(!yaValidado){
-    errores++;
-    pintarStats();
-  }
-
-  const res = $("resultado");
-  res.className = "incorrecto";
-  res.innerText = `Respuesta: ${respuestaCorrecta}\n${parRevision(itemCorrectoActual)}`;
-
-  yaValidado = true;
-
-  pintarOpciones(null);
-  bloquearOpciones();
-
-  playAudio(ultimoAudioKey);
 }
 
 /* ===============================
