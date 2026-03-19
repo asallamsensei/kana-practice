@@ -666,7 +666,7 @@
   },
   {
     "kanji": "何",
-    "significado": "qué",
+    "significado": "¿qué?",
     "grado": 2
   },
   {
@@ -701,7 +701,7 @@
   },
   {
     "kanji": "家",
-    "significado": "casa, familia",
+    "significado": "casa, hogar, familia",
     "grado": 2
   },
   {
@@ -711,7 +711,7 @@
   },
   {
     "kanji": "科",
-    "significado": "sección, ciencia",
+    "significado": "departamento, sección, ciencia",
     "grado": 2
   },
   {
@@ -846,7 +846,7 @@
   },
   {
     "kanji": "会",
-    "significado": "reunión, encontrarse",
+    "significado": "reunión, encontrarse con",
     "grado": 2
   },
   {
@@ -1106,7 +1106,7 @@
   },
   {
     "kanji": "楽",
-    "significado": "placer, música, fácil",
+    "significado": "placer, disfrutar, música, fácil",
     "grado": 2
   },
   {
@@ -1146,7 +1146,7 @@
   },
   {
     "kanji": "活",
-    "significado": "vivir, actividad",
+    "significado": "vida, actividad",
     "grado": 2
   },
   {
@@ -1616,7 +1616,7 @@
   },
   {
     "kanji": "記",
-    "significado": "escribir, registro",
+    "significado": "registro, anotar",
     "grado": 2
   },
   {
@@ -1911,7 +1911,7 @@
   },
   {
     "kanji": "魚",
-    "significado": "pez",
+    "significado": "pez, pescado",
     "grado": 2
   },
   {
@@ -1966,7 +1966,7 @@
   },
   {
     "kanji": "強",
-    "significado": "fuerte, forzar",
+    "significado": "fuerte",
     "grado": 2
   },
   {
@@ -1986,7 +1986,7 @@
   },
   {
     "kanji": "教",
-    "significado": "enseñar, doctrina",
+    "significado": "enseñar",
     "grado": 2
   },
   {
@@ -2786,7 +2786,7 @@
   },
   {
     "kanji": "戸",
-    "significado": "puerta, casa",
+    "significado": "puerta (estilo japonés)",
     "grado": 2
   },
   {
@@ -2846,7 +2846,7 @@
   },
   {
     "kanji": "午",
-    "significado": "mediodía, “caballo” (zodiaco)",
+    "significado": "mediodía, caballo (zodiaco)",
     "grado": 2
   },
   {
@@ -2921,7 +2921,7 @@
   },
   {
     "kanji": "公",
-    "significado": "público, duque",
+    "significado": "público, oficial",
     "grado": 2
   },
   {
@@ -2986,7 +2986,7 @@
   },
   {
     "kanji": "工",
-    "significado": "trabajo, artesano",
+    "significado": "fabricar, artesanía",
     "grado": 2
   },
   {
@@ -3141,7 +3141,7 @@
   },
   {
     "kanji": "行",
-    "significado": "ir, línea, acto",
+    "significado": "ir, realizar, línea",
     "grado": 2
   },
   {
@@ -3446,7 +3446,7 @@
   },
   {
     "kanji": "才",
-    "significado": "talento",
+    "significado": "talento, años de edad",
     "grado": 2
   },
   {
@@ -4041,7 +4041,7 @@
   },
   {
     "kanji": "自",
-    "significado": "uno mismo",
+    "significado": "uno mismo, sí mismo",
     "grado": 2
   },
   {
@@ -4161,7 +4161,7 @@
   },
   {
     "kanji": "社",
-    "significado": "santuario, empresa",
+    "significado": "empresa, santuario",
     "grado": 2
   },
   {
@@ -4296,7 +4296,7 @@
   },
   {
     "kanji": "首",
-    "significado": "cuello, cabeza",
+    "significado": "cuello, cabeza, líder",
     "grado": 2
   },
   {
@@ -4661,7 +4661,7 @@
   },
   {
     "kanji": "書",
-    "significado": "escribir, libro",
+    "significado": "escribir",
     "grado": 2
   },
   {
@@ -4761,7 +4761,7 @@
   },
   {
     "kanji": "少",
-    "significado": "poco, joven",
+    "significado": "poco, escaso",
     "grado": 2
   },
   {
@@ -5081,7 +5081,7 @@
   },
   {
     "kanji": "色",
-    "significado": "color, sensualidad",
+    "significado": "color",
     "grado": 2
   },
   {
@@ -5211,7 +5211,7 @@
   },
   {
     "kanji": "親",
-    "significado": "padre/madre, cercano",
+    "significado": "padres (padre o madre), cercano",
     "grado": 2
   },
   {
@@ -5301,7 +5301,7 @@
   },
   {
     "kanji": "図",
-    "significado": "plano, diagrama",
+    "significado": "mapa, diagrama",
     "grado": 2
   },
   {
@@ -5481,7 +5481,7 @@
   },
   {
     "kanji": "晴",
-    "significado": "despejar, buen tiempo",
+    "significado": "cielo despejado, buen tiempo",
     "grado": 2
   },
   {
@@ -5656,7 +5656,7 @@
   },
   {
     "kanji": "切",
-    "significado": "cortar, urgente",
+    "significado": "cortar",
     "grado": 2
   },
   {
@@ -6301,7 +6301,7 @@
   },
   {
     "kanji": "太",
-    "significado": "gordo, grande",
+    "significado": "grueso, gordo",
     "grado": 2
   },
   {
@@ -6436,7 +6436,7 @@
   },
   {
     "kanji": "台",
-    "significado": "plataforma, máquina",
+    "significado": "pedestal, base",
     "grado": 2
   },
   {
@@ -6661,7 +6661,7 @@
   },
   {
     "kanji": "地",
-    "significado": "tierra, lugar",
+    "significado": "suelo, tierra",
     "grado": 2
   },
   {
@@ -6776,7 +6776,7 @@
   },
   {
     "kanji": "昼",
-    "significado": "día, mediodía",
+    "significado": "mediodía, el tiempo de día",
     "grado": 2
   },
   {
@@ -7256,7 +7256,7 @@
   },
   {
     "kanji": "点",
-    "significado": "punto, encender",
+    "significado": "marca, punto, encender",
     "grado": 2
   },
   {
@@ -7441,7 +7441,7 @@
   },
   {
     "kanji": "当",
-    "significado": "acertar, corresponder",
+    "significado": "acertar",
     "grado": 2
   },
   {
@@ -7456,7 +7456,7 @@
   },
   {
     "kanji": "答",
-    "significado": "respuesta",
+    "significado": "respuesta, responder",
     "grado": 2
   },
   {
@@ -7546,7 +7546,7 @@
   },
   {
     "kanji": "同",
-    "significado": "mismo",
+    "significado": "mismo, igual",
     "grado": 2
   },
   {
@@ -7701,7 +7701,7 @@
   },
   {
     "kanji": "内",
-    "significado": "dentro",
+    "significado": "dentro, interior",
     "grado": 2
   },
   {
@@ -8661,7 +8661,7 @@
   },
   {
     "kanji": "風",
-    "significado": "viento, estilo, resfriado",
+    "significado": "viento, estilo, manera",
     "grado": 2
   },
   {
@@ -8731,7 +8731,7 @@
   },
   {
     "kanji": "分",
-    "significado": "parte, minuto, entender",
+    "significado": "parte, minuto, dividir, entender",
     "grado": 2
   },
   {
@@ -8776,7 +8776,7 @@
   },
   {
     "kanji": "聞",
-    "significado": "oír, preguntar",
+    "significado": "oír, escuchar, preguntar",
     "grado": 2
   },
   {
@@ -9476,7 +9476,7 @@
   },
   {
     "kanji": "明",
-    "significado": "claro, brillante, amanecer",
+    "significado": "brillante, claro",
     "grado": 2
   },
   {
@@ -9541,7 +9541,7 @@
   },
   {
     "kanji": "毛",
-    "significado": "pelo, lana",
+    "significado": "pelo, pelaje, lana",
     "grado": 2
   },
   {
@@ -9601,7 +9601,7 @@
   },
   {
     "kanji": "門",
-    "significado": "puerta, portal",
+    "significado": "puerta, portón, portal",
     "grado": 2
   },
   {
@@ -9841,7 +9841,7 @@
   },
   {
     "kanji": "曜",
-    "significado": "día de la semana, brillo",
+    "significado": "día de la semana",
     "grado": 2
   },
   {
@@ -9861,7 +9861,7 @@
   },
   {
     "kanji": "用",
-    "significado": "usar, utilidad",
+    "significado": "uso, utilidad, utilizar",
     "grado": 2
   },
   {
@@ -10051,7 +10051,7 @@
   },
   {
     "kanji": "里",
-    "significado": "aldea, “ri” (unidad)",
+    "significado": "aldea, ri (unidad de longitud)",
     "grado": 2
   },
   {
