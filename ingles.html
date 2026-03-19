@@ -543,7 +543,10 @@ h1{
       <div id="resultado"></div>
 
       <div class="stats">
-        Aciertos: <span id="aciertos">0</span> — Errores: <span id="errores">0</span>
+        <div>Aciertos: <span id="aciertos">0</span> — Errores: <span id="errores">0</span></div>
+        <div style="margin-top:6px;">
+          Racha: <span id="racha">0</span> — Mejor racha: <span id="mejorRacha">0</span> — Precisión: <span id="precision">0%</span>
+        </div>
       </div>
 
       <div class="actions">
@@ -662,9 +665,18 @@ let poolScope = "seleccion";
 =============================== */
 let aciertos = 0;
 let errores  = 0;
+let racha = 0;
+let mejorRacha = 0;
+
 function pintarStats(){
   $("aciertos").innerText = aciertos;
   $("errores").innerText  = errores;
+  $("racha").innerText = racha;
+  $("mejorRacha").innerText = mejorRacha;
+
+  const total = aciertos + errores;
+  const precision = total > 0 ? Math.round((aciertos / total) * 100) : 0;
+  $("precision").innerText = precision + "%";
 }
 
 /* ===============================
@@ -1041,10 +1053,13 @@ function verificar(letraForzada){
     res.className = "correcto";
     res.innerText = "Correcto ✔";
     aciertos++;
+    racha++;
+    if(racha > mejorRacha) mejorRacha = racha;
   }else{
     res.className = "incorrecto";
     res.innerText = `Incorrecto ✘\nRespuesta: ${respuestaCorrecta}`;
     errores++;
+    racha = 0;
   }
 
   pintarStats();
@@ -1059,6 +1074,7 @@ function verificar(letraForzada){
 function accionSiguiente(){
   if(!yaValidado){
     errores++;
+    racha = 0;
     pintarStats();
     yaValidado = true;
   
