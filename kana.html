@@ -684,10 +684,11 @@ let usarDictado = true;
 let usarMix = true;
 
 let opcionesActuales = [];
-let indiceCorrecto = 0;
 
 let tipoPreguntaActual = "jp_es";
+let romajiCorrectoActual = "";
 
+  
 /* ===============================
    STATS (localStorage)
 =============================== */
@@ -758,6 +759,8 @@ function generarOpciones(){
   const correcta = kanaLista[actual];
   const correctaValor = valorRespuesta(correcta, tipoPreguntaActual);
 
+  romajiCorrectoActual = correcta[1];
+  
   const pool = kanaLista.filter(item => {
     return valorRespuesta(item, tipoPreguntaActual) !== correctaValor;
   });
@@ -765,7 +768,7 @@ function generarOpciones(){
   const distractores = mezclarArray(pool).slice(0, 2);
 
   opcionesActuales = mezclarArray([correcta, ...distractores]);
-  indiceCorrecto = opcionesActuales.findIndex(item => item === correcta);
+  
 
   const textos = opcionesActuales.map(item => valorRespuesta(item, tipoPreguntaActual));
 
@@ -775,12 +778,6 @@ function generarOpciones(){
 
   limpiarEstadoBotones();
 }
-
-  
-function valorOpcion(item){
-  return valorRespuesta(item, tipoPreguntaActual);
-}
-
   
 function mezclarArray(arr){
   const copia = [...arr];
@@ -789,6 +786,16 @@ function mezclarArray(arr){
     [copia[i], copia[j]] = [copia[j], copia[i]];
   }
   return copia;
+}
+
+function marcarOpcionesCorrectas(){
+  const btns = document.querySelectorAll(".opcion-btn");
+
+  btns.forEach((btn, i) => {
+    if (opcionesActuales[i][1] === romajiCorrectoActual) {
+      btn.classList.add("correcta");
+    }
+  });
 }
   
 function guardarStatsActual(){
@@ -1186,15 +1193,14 @@ function responderOpcion(indice){
 
   const btns = document.querySelectorAll(".opcion-btn");
   const btnElegido = btns[indice];
-  const btnCorrecto = btns[indiceCorrecto];
-
+  
   reproducirAudioKana(correcta[1]);
 
-  if (indice === indiceCorrecto) {
+  if (opcionesActuales[indice][1] === romajiCorrectoActual) {
     document.getElementById("respuesta").innerText = "Correcto ✔ (" + correctaTexto + ")\n" + fichaCorrecta;
     document.getElementById("respuesta").className = "correcto";
 
-    btnElegido.classList.add("correcta");
+    marcarOpcionesCorrectas();
 
     aciertos++;
     racha++;
@@ -1204,8 +1210,9 @@ function responderOpcion(indice){
     document.getElementById("respuesta").className = "incorrecto";
 
     btnElegido.classList.add("incorrecta");
-    btnCorrecto.classList.add("correcta");
 
+    marcarOpcionesCorrectas();
+    
     errores++;
     racha = 0;
   }
@@ -1245,11 +1252,8 @@ function siguienteDesdeBoton(){
     document.getElementById("respuesta").innerText = "Incorrecto ✘ (era: " + correcto + ")\n" + fichaCorrecta;
     document.getElementById("respuesta").className = "incorrecto";
 
-    const btns = document.querySelectorAll(".opcion-btn");
-    if (btns[indiceCorrecto]) {
-      btns[indiceCorrecto].classList.add("correcta");
-    }
-
+    marcarOpcionesCorrectas();
+    
     actualizarEstadisticas();
     guardarStatsActual();
 
