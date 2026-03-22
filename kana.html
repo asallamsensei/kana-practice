@@ -718,7 +718,6 @@ function statsKeyActual(){
   return scripts + "__" + tipos;
 }
 
-
 function cargarStatsActual(){
   const key = statsKeyActual();
   const stats = cargarStats();
@@ -741,6 +740,18 @@ function cargarStatsActual(){
   actualizarEstadisticas();
 }
 
+function marcarOpcionesResultado(){
+  const btns = document.querySelectorAll(".opcion-btn");
+
+  btns.forEach((btn, i) => {
+    if (opcionesActuales[i][1] === romajiCorrectoActual) {
+      btn.classList.add("correcta");
+    } else {
+      btn.classList.add("incorrecta");
+    }
+  });
+}
+  
 function setBotonesOpcionesHabilitados(estado){
   document.querySelectorAll(".opcion-btn").forEach(btn => {
     btn.disabled = !estado;
@@ -786,16 +797,6 @@ function mezclarArray(arr){
     [copia[i], copia[j]] = [copia[j], copia[i]];
   }
   return copia;
-}
-
-function marcarOpcionesCorrectas(){
-  const btns = document.querySelectorAll(".opcion-btn");
-
-  btns.forEach((btn, i) => {
-    if (opcionesActuales[i][1] === romajiCorrectoActual) {
-      btn.classList.add("correcta");
-    }
-  });
 }
   
 function guardarStatsActual(){
@@ -1200,8 +1201,6 @@ function responderOpcion(indice){
     document.getElementById("respuesta").innerText = "Correcto ✔ (" + correctaTexto + ")\n" + fichaCorrecta;
     document.getElementById("respuesta").className = "correcto";
 
-    marcarOpcionesCorrectas();
-
     aciertos++;
     racha++;
     if (racha > mejorRacha) mejorRacha = racha;
@@ -1209,14 +1208,13 @@ function responderOpcion(indice){
     document.getElementById("respuesta").innerText = "Incorrecto ✘ (era: " + correctaTexto + ")\n" + fichaCorrecta;
     document.getElementById("respuesta").className = "incorrecto";
 
-    btnElegido.classList.add("incorrecta");
-
-    marcarOpcionesCorrectas();
-    
     errores++;
     racha = 0;
   }
 
+  // 🔹 AQUÍ pintas todos los botones
+  marcarOpcionesResultado();
+  
   actualizarEstadisticas();
   guardarStatsActual();
 
@@ -1252,7 +1250,7 @@ function siguienteDesdeBoton(){
     document.getElementById("respuesta").innerText = "Incorrecto ✘ (era: " + correcto + ")\n" + fichaCorrecta;
     document.getElementById("respuesta").className = "incorrecto";
 
-    marcarOpcionesCorrectas();
+    marcarOpcionesResultado();
     
     actualizarEstadisticas();
     guardarStatsActual();
