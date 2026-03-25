@@ -450,10 +450,6 @@
         <h2>Parámetros</h2>
 
         <div class="form-grid">
-          <div class="field">
-            <label for="cantidad">Cantidad de ejercicios</label>
-            <input type="number" id="cantidad" min="1" max="100" value="10" />
-          </div>
 
           <div class="field">
             <label for="nivel">Nivel</label>
@@ -470,14 +466,6 @@
               <option value="10">Nivel 10</option>
             </select>
           </div>
-
-          <div class="field">
-            <label for="maxBase">Máximo valor base</label>
-            <input type="number" id="maxBase" min="1" max="1000" value="10" />
-            <div class="info-chip">
-              Este valor se usa como base para el rango de números. A mayor nivel, la dificultad sube un poco más.
-            </div>
-          </div>
         </div>
 
         <div class="btn-group">
@@ -488,7 +476,7 @@
         </div>
 
         <div class="footer-note">
-          <strong>Asallam Sensei</strong>
+          <strong>© Asallam Sensei</strong>
         </div>
       </aside>
 
@@ -552,14 +540,27 @@
     let modoActual = "Ninguno";
 
     function obtenerParametros() {
-      let cantidad = parseInt(document.getElementById("cantidad").value, 10);
       let nivel = parseInt(document.getElementById("nivel").value, 10);
-      let maxBase = parseInt(document.getElementById("maxBase").value, 10);
-
-      if (!cantidad || cantidad <= 0) cantidad = 10;
+    
       if (!nivel || nivel <= 0) nivel = 1;
-      if (!maxBase || maxBase <= 0) maxBase = 10;
-
+    
+      const cantidad = 10;
+    
+      let maxBase;
+      switch (nivel) {
+        case 1: maxBase = 10; break;
+        case 2: maxBase = 12; break;
+        case 3: maxBase = 14; break;
+        case 4: maxBase = 16; break;
+        case 5: maxBase = 18; break;
+        case 6: maxBase = 20; break;
+        case 7: maxBase = 24; break;
+        case 8: maxBase = 28; break;
+        case 9: maxBase = 32; break;
+        case 10: maxBase = 36; break;
+        default: maxBase = 10;
+      }
+    
       return { cantidad, nivel, maxBase };
     }
 
@@ -626,7 +627,7 @@
     }
 
     function generarOperacionNormal(nivel, maxBase) {
-      const maxVal = Math.max(5, maxBase + (nivel - 1) * 2);
+      const maxVal = Math.max(5, maxBase);
       const op = rndInt(1, 4);
       let a, b, texto, respuesta;
 
@@ -669,7 +670,7 @@
     }
 
     function generarEcuacionHueco(nivel, maxBase) {
-      const maxVal = Math.max(5, maxBase + (nivel - 1) * 2);
+      const maxVal = Math.max(5, maxBase);
       const tipo = rndInt(1, 4);
       let x = rndInt(0, maxVal);
       let a, b, c, texto, respuesta;
@@ -717,7 +718,7 @@
     }
 
     function generarOperacionFraccion(nivel, maxBase) {
-      const maxVal = Math.max(3, maxBase + (nivel - 1) * 2);
+      const maxVal = Math.max(3, maxBase);
       const op = rndInt(1, 4);
 
       let n1 = rndInt(1, maxVal);
