@@ -688,44 +688,49 @@ table {
 
     function generarEcuacionHueco(nivel, maxBase) {
       const maxVal = Math.max(5, maxBase);
+    
+      const maxA = Math.min(9, 2 + nivel);          // sube suave
+      const maxB = Math.min(18, 4 + nivel * 2);     // sube un poco más
+      const maxX = Math.max(4, Math.floor(maxVal * 0.85));
+    
       const tipo = rndInt(1, 4);
-      let x = rndInt(0, maxVal);
+      let x = rndInt(0, maxX);
       let a, b, c, texto, respuesta;
-
+    
       respuesta = x;
-
+    
       switch (tipo) {
         case 1:
-          a = rndInt(1, 5);
-          b = rndInt(0, 9);
+          a = rndInt(1, maxA);
+          b = rndInt(0, maxB);
           c = a * x + b;
           texto = `${a} × ___ + ${b} = ${c}`;
           break;
-
+    
         case 2:
-          a = rndInt(1, 5);
-          b = rndInt(0, 9);
+          a = rndInt(1, maxA);
+          b = rndInt(0, maxB);
           c = a * x - b;
           texto = `${a} × ___ - ${b} = ${c}`;
           break;
-
+    
         case 3:
-          a = rndInt(1, 5);
-          b = rndInt(0, 9);
+          a = rndInt(1, maxA);
+          b = rndInt(0, maxB);
           c = (x + b) * a;
           texto = `(___ + ${b}) × ${a} = ${c}`;
           break;
-
+    
         case 4:
-          a = rndInt(1, 5);
-          x = a * rndInt(0, Math.floor(maxVal / 2));
+          a = rndInt(1, maxA);
+          x = a * rndInt(0, Math.max(2, Math.floor(maxX / a)));
           respuesta = x;
-          b = rndInt(0, 9);
+          b = rndInt(0, Math.floor(maxB / 2));
           c = (x / a) + b;
           texto = `___ ÷ ${a} + ${b} = ${c}`;
           break;
       }
-
+    
       return {
         tipo: "hueco",
         texto,
