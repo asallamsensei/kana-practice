@@ -309,8 +309,24 @@
     table {
       width: 100%;
       border-collapse: collapse;
-      min-width: 860px;
-      background: rgba(8, 12, 26, 0.72);
+      table-layout: auto;
+    }
+    
+    .col-respuesta {
+      width: 130px;
+    }
+    
+    .col-correcta {
+      width: 130px;
+    }
+    
+    .col-resultado {
+      width: 120px;
+      text-align: center;
+    }
+    
+    .col-ejercicio {
+      width: auto;
     }
 
     thead th {
@@ -338,6 +354,7 @@
     }
 
     .exercise {
+      white-space: nowrap;
       font-weight: 800;
       font-size: 1rem;
       letter-spacing: 0.2px;
@@ -491,7 +508,7 @@
           </div>
     
           <div class="footer-note">
-            <strong>Nota:</strong> siempre se generan 10 ejercicios. El nivel controla automáticamente la dificultad.
+            <strong>© Asallam Sensei</strong>
           </div>
         </aside>
       </aside>
@@ -506,10 +523,10 @@
             <table>
               <thead>
                 <tr>
-                  <th>Ejercicio</th>
-                  <th style="width: 170px;">Tu respuesta</th>
-                  <th style="width: 170px;">Respuesta correcta</th>
-                  <th style="width: 140px;">Resultado</th>
+                  <th class="col-ejercicio">Ejercicio</th>
+                  <th class="col-respuesta">Tu respuesta</th>
+                  <th class="col-correcta">Respuesta correcta</th>
+                  <th class="col-resultado">Resultado</th>
                 </tr>
               </thead>
               <tbody id="tablaEjercicios">
@@ -522,9 +539,6 @@
             </table>
           </div>
     
-          <div class="footer-note">
-            En fracciones puedes responder por ejemplo: <strong>1/2</strong>, <strong>3/4</strong>, <strong>5</strong>.
-          </div>
         </section>
       </main>
     </div>
