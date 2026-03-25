@@ -502,7 +502,6 @@
         <section class="panel table-card">
           <div class="table-head">
             <h2>Tabla de ejercicios</h2>
-            <div class="badge" id="modoActual">Modo actual: Ninguno</div>
           </div>
 
           <div class="table-wrap">
@@ -536,7 +535,6 @@
 
   <script>
     let ejercicios = [];
-    let modoActual = "Ninguno";
 
     function obtenerParametros() {
       let nivel = parseInt(document.getElementById("nivel").value, 10);
@@ -784,13 +782,11 @@
 
     function renderTabla() {
       const tbody = document.getElementById("tablaEjercicios");
-      const modo = document.getElementById("modoActual");
-      modo.textContent = `Modo actual: ${modoActual}`;
 
       if (ejercicios.length === 0) {
         tbody.innerHTML = `
           <tr>
-            <td colspan="6" style="text-align:center; color:#a8b4d9; padding: 28px;">
+            <td colspan="5" style="text-align:center; color:#a8b4d9; padding: 28px;">
               Aquí aparecerán los ejercicios.
             </td>
           </tr>
@@ -800,7 +796,6 @@
 
       tbody.innerHTML = ejercicios.map((item, index) => `
         <tr>
-          <td>${index + 1}</td>
           <td class="exercise">${item.texto}</td>
           <td>
             <input
@@ -808,7 +803,7 @@
               class="answer-input"
               id="respuesta-${index}"
               value="${item.usuario ?? ""}"
-              placeholder=""
+              placeholder="Escribe aquí"
               autocomplete="off"
             />
           </td>
@@ -859,7 +854,6 @@
         });
       }
 
-      modoActual = "Ejercicios normales + huecos";
       resetResultados();
       renderTabla();
     }
@@ -882,7 +876,6 @@
         });
       }
 
-      modoActual = "Fracciones";
       resetResultados();
       renderTabla();
     }
