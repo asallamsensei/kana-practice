@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Entrenador Matemático</title>
+  <style>
+    :root {
+      --bg1: #080814;
+      --bg2: #111127;
+      --panel: rgba(17, 20, 40, 0.78);
+      --panel-2: rgba(25, 28, 56, 0.9);
+      --line: rgba(120, 180, 255, 0.22);
+      --text: #eef4ff;
+      --muted: #a8b4d9;
+      --cyan: #22d3ee;
+      --blue: #60a5fa;
+      --purple: #a855f7;
+      --pink: #ff4fd8;
+      --green: #4ade80;
+      --yellow: #facc15;
+      --red: #fb7185;
+      --shadow-cyan: 0 0 10px rgba(34, 211, 238, 0.45), 0 0 24px rgba(34, 211, 238, 0.22);
+      --shadow-pink: 0 0 10px rgba(255, 79, 216, 0.45), 0 0 24px rgba(255, 79, 216, 0.2);
+      --shadow-purple: 0 0 10px rgba(168, 85, 247, 0.45), 0 0 24px rgba(168, 85, 247, 0.2);
+      --radius: 18px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(168, 85, 247, 0.18), transparent 28%),
+        radial-gradient(circle at top right, rgba(34, 211, 238, 0.16), transparent 30%),
+        radial-gradient(circle at bottom center, rgba(255, 79, 216, 0.12), transparent 30%),
+        linear-gradient(135deg, var(--bg1), #0a1023 40%, var(--bg2));
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background:
+        linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+      background-size: 28px 28px;
+      pointer-events: none;
+      opacity: 0.35;
+    }
+
+    .container {
+      width: min(1200px, 94%);
+      margin: 28px auto 42px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero {
+      text-align: center;
+      margin-bottom: 22px;
+      padding: 28px 20px;
+      border: 1px solid rgba(96, 165, 250, 0.18);
+      border-radius: 26px;
+      background: linear-gradient(180deg, rgba(18, 22, 46, 0.92), rgba(10, 13, 30, 0.8));
+      box-shadow:
+        0 0 0 1px rgba(255,255,255,0.03) inset,
+        0 12px 40px rgba(0,0,0,0.35),
+        0 0 28px rgba(34, 211, 238, 0.1),
+        0 0 40px rgba(168, 85, 247, 0.08);
+      backdrop-filter: blur(12px);
+    }
+
+    .hero h1 {
+      margin: 0;
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 900;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      background: linear-gradient(90deg, #ffffff, #8be9ff, #d8b4fe, #ffffff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 24px rgba(255,255,255,0.08);
+    }
+
+    .hero p {
+      margin: 10px auto 0;
+      max-width: 760px;
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.5;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 360px 1fr;
+      gap: 22px;
+      align-items: start;
+    }
+
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.32),
+        0 0 0 1px rgba(255,255,255,0.03) inset;
+      backdrop-filter: blur(12px);
+    }
+
+    .controls {
+      padding: 20px;
+      position: sticky;
+      top: 18px;
+    }
+
+    .controls h2,
+    .results-card h2,
+    .table-card h2 {
+      margin: 0 0 14px;
+      font-size: 1.2rem;
+      letter-spacing: 0.4px;
+    }
+
+    .form-grid {
+      display: grid;
+      gap: 14px;
+    }
+
+    .field label {
+      display: block;
+      margin-bottom: 6px;
+      color: #dbe7ff;
+      font-size: 0.95rem;
+      font-weight: 700;
+    }
+
+    .field input,
+    .field select {
+      width: 100%;
+      background: rgba(8, 12, 26, 0.92);
+      color: var(--text);
+      border: 1px solid rgba(96, 165, 250, 0.22);
+      border-radius: 12px;
+      padding: 12px 14px;
+      font-size: 1rem;
+      outline: none;
+      transition: 0.25s ease;
+      box-shadow: inset 0 0 10px rgba(0,0,0,0.25);
+    }
+
+    .field input:focus,
+    .field select:focus {
+      border-color: var(--cyan);
+      box-shadow: var(--shadow-cyan), inset 0 0 12px rgba(0,0,0,0.18);
+      transform: translateY(-1px);
+    }
+
+    .info-chip {
+      margin-top: 8px;
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+
+    .btn-group {
+      display: grid;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .btn {
+      border: none;
+      border-radius: 14px;
+      padding: 14px 16px;
+      font-size: 1rem;
+      font-weight: 800;
+      letter-spacing: 0.3px;
+      color: white;
+      cursor: pointer;
+      transition: 0.22s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px) scale(1.01);
+    }
+
+    .btn:active {
+      transform: translateY(0);
+    }
+
+    .btn::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(120deg, transparent 10%, rgba(255,255,255,0.18), transparent 90%);
+      transform: translateX(-120%);
+      transition: transform 0.6s ease;
+    }
+
+    .btn:hover::after {
+      transform: translateX(120%);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #0ea5e9, #22d3ee);
+      box-shadow: var(--shadow-cyan);
+    }
+
+    .btn-secondary {
+      background: linear-gradient(135deg, #9333ea, #ec4899);
+      box-shadow: var(--shadow-purple);
+    }
+
+    .btn-success {
+      background: linear-gradient(135deg, #10b981, #84cc16);
+      box-shadow: 0 0 10px rgba(132, 204, 22, 0.45), 0 0 24px rgba(16, 185, 129, 0.24);
+    }
+
+    .btn-ghost {
+      background: linear-gradient(135deg, #1f2a44, #28365d);
+      color: #dce8ff;
+      box-shadow: 0 0 12px rgba(96, 165, 250, 0.12);
+    }
+
+    .main-area {
+      display: grid;
+      gap: 22px;
+    }
+
+    .results-card {
+      padding: 18px 20px;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(120px, 1fr));
+      gap: 14px;
+    }
+
+    .stat {
+      background: linear-gradient(180deg, rgba(14, 20, 40, 0.9), rgba(19, 25, 52, 0.9));
+      border: 1px solid rgba(96, 165, 250, 0.16);
+      border-radius: 16px;
+      padding: 16px;
+      text-align: center;
+      box-shadow: inset 0 0 0 1px rgba(255,255,255,0.02);
+    }
+
+    .stat .label {
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin-bottom: 8px;
+    }
+
+    .stat .value {
+      font-size: 1.65rem;
+      font-weight: 900;
+      color: white;
+      text-shadow: 0 0 16px rgba(96, 165, 250, 0.16);
+    }
+
+    .table-card {
+      padding: 16px;
+      overflow: hidden;
+    }
+
+    .table-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: center;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 12px;
+      border-radius: 999px;
+      background: rgba(10, 18, 38, 0.78);
+      border: 1px solid rgba(96, 165, 250, 0.18);
+      color: #d9e7ff;
+      font-size: 0.9rem;
+    }
+
+    .table-wrap {
+      overflow: auto;
+      border-radius: 16px;
+      border: 1px solid rgba(96, 165, 250, 0.14);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 860px;
+      background: rgba(8, 12, 26, 0.72);
+    }
+
+    thead th {
+      position: sticky;
+      top: 0;
+      z-index: 1;
+      background: linear-gradient(180deg, rgba(22, 28, 56, 0.98), rgba(14, 19, 40, 0.98));
+      color: #f5f9ff;
+      padding: 14px 12px;
+      text-align: left;
+      font-size: 0.95rem;
+      border-bottom: 1px solid rgba(96, 165, 250, 0.18);
+      text-shadow: 0 0 10px rgba(34, 211, 238, 0.1);
+    }
+
+    tbody td {
+      padding: 12px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      color: #eaf1ff;
+      vertical-align: middle;
+    }
+
+    tbody tr:hover {
+      background: rgba(96, 165, 250, 0.06);
+    }
+
+    .exercise {
+      font-weight: 800;
+      font-size: 1rem;
+      letter-spacing: 0.2px;
+      color: #ffffff;
+    }
+
+    .answer-input {
+      width: 100%;
+      min-width: 120px;
+      background: rgba(6, 10, 22, 0.95);
+      color: white;
+      border: 1px solid rgba(96, 165, 250, 0.18);
+      border-radius: 10px;
+      padding: 10px 12px;
+      font-size: 0.98rem;
+      outline: none;
+      transition: 0.2s ease;
+    }
+
+    .answer-input:focus {
+      border-color: var(--pink);
+      box-shadow: var(--shadow-pink);
+    }
+
+    .correct-answer.hidden-answer {
+      color: transparent;
+      text-shadow: none;
+      user-select: none;
+    }
+
+    .correct-answer.revealed {
+      color: #ffffff;
+      font-weight: 800;
+      text-shadow: 0 0 12px rgba(255,255,255,0.12);
+    }
+
+    .status-pill {
+      display: inline-block;
+      padding: 8px 10px;
+      border-radius: 999px;
+      font-weight: 800;
+      font-size: 0.88rem;
+      min-width: 110px;
+      text-align: center;
+    }
+
+    .status-correct {
+      background: rgba(34, 197, 94, 0.16);
+      color: #9ef2b2;
+      border: 1px solid rgba(34, 197, 94, 0.28);
+    }
+
+    .status-incorrect {
+      background: rgba(244, 63, 94, 0.16);
+      color: #ffb1be;
+      border: 1px solid rgba(244, 63, 94, 0.28);
+    }
+
+    .status-missing {
+      background: rgba(250, 204, 21, 0.16);
+      color: #ffe58a;
+      border: 1px solid rgba(250, 204, 21, 0.28);
+    }
+
+    .status-invalid {
+      background: rgba(251, 146, 60, 0.16);
+      color: #ffd0a3;
+      border: 1px solid rgba(251, 146, 60, 0.28);
+    }
+
+    .obs {
+      color: #dce6ff;
+      font-size: 0.94rem;
+    }
+
+    .footer-note {
+      margin-top: 12px;
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.45;
+    }
+
+    @media (max-width: 980px) {
+      .layout {
+        grid-template-columns: 1fr;
+      }
+
+      .controls {
+        position: static;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .stats {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        padding: 22px 16px;
+      }
+
+      .hero p {
+        font-size: 0.95rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <section class="hero">
+      <h1>Entrenador Matemático</h1>
+      <p>
+        Genera ejercicios normales, ecuaciones con hueco y operaciones con fracciones.
+        Responde en la tabla y luego pulsa <strong>Revisar</strong>. Puedes escribir números
+        normales o fracciones como <strong>3/4</strong>.
+      </p>
+    </section>
+
+    <div class="layout">
+      <aside class="panel controls">
+        <h2>Parámetros</h2>
+
+        <div class="form-grid">
+          <div class="field">
+            <label for="cantidad">Cantidad de ejercicios</label>
+            <input type="number" id="cantidad" min="1" max="100" value="10" />
+          </div>
+
+          <div class="field">
+            <label for="nivel">Nivel</label>
+            <select id="nivel">
+              <option value="1">Nivel 1</option>
+              <option value="2">Nivel 2</option>
+              <option value="3">Nivel 3</option>
+              <option value="4">Nivel 4</option>
+              <option value="5">Nivel 5</option>
+              <option value="6">Nivel 6</option>
+              <option value="7">Nivel 7</option>
+              <option value="8">Nivel 8</option>
+              <option value="9">Nivel 9</option>
+              <option value="10">Nivel 10</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="maxBase">Máximo valor base</label>
+            <input type="number" id="maxBase" min="1" max="1000" value="10" />
+            <div class="info-chip">
+              Este valor se usa como base para el rango de números. A mayor nivel, la dificultad sube un poco más.
+            </div>
+          </div>
+        </div>
+
+        <div class="btn-group">
+          <button class="btn btn-primary" onclick="generarEjercicios()">Generar ejercicios</button>
+          <button class="btn btn-secondary" onclick="generarFracciones()">Fracciones</button>
+          <button class="btn btn-success" onclick="revisarEjercicios()">Revisar</button>
+          <button class="btn btn-ghost" onclick="limpiarTodo()">Limpiar</button>
+        </div>
+
+        <div class="footer-note">
+          <strong>Nota:</strong> aquí ya se asume que siempre van activadas las operaciones básicas
+          y las ecuaciones con hueco, como pediste.
+        </div>
+      </aside>
+
+      <main class="main-area">
+        <section class="panel results-card">
+          <h2>Resultados</h2>
+          <div class="stats">
+            <div class="stat">
+              <div class="label">Aciertos</div>
+              <div class="value" id="aciertos">0</div>
+            </div>
+            <div class="stat">
+              <div class="label">Total</div>
+              <div class="value" id="total">0</div>
+            </div>
+            <div class="stat">
+              <div class="label">Porcentaje</div>
+              <div class="value" id="porcentaje">0%</div>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel table-card">
+          <div class="table-head">
+            <h2>Tabla de ejercicios</h2>
+            <div class="badge" id="modoActual">Modo actual: Ninguno</div>
+          </div>
+
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th style="width: 70px;">N°</th>
+                  <th>Ejercicio</th>
+                  <th style="width: 170px;">Tu respuesta</th>
+                  <th style="width: 170px;">Respuesta correcta</th>
+                  <th style="width: 140px;">Resultado</th>
+                  <th>Observación</th>
+                </tr>
+              </thead>
+              <tbody id="tablaEjercicios">
+                <tr>
+                  <td colspan="6" style="text-align:center; color:#a8b4d9; padding: 28px;">
+                    Aquí aparecerán los ejercicios.
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="footer-note">
+            En fracciones puedes responder por ejemplo: <strong>1/2</strong>, <strong>3/4</strong>, <strong>5</strong>.
+          </div>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <script>
+    let ejercicios = [];
+    let modoActual = "Ninguno";
+
+    function obtenerParametros() {
+      let cantidad = parseInt(document.getElementById("cantidad").value, 10);
+      let nivel = parseInt(document.getElementById("nivel").value, 10);
+      let maxBase = parseInt(document.getElementById("maxBase").value, 10);
+
+      if (!cantidad || cantidad <= 0) cantidad = 10;
+      if (!nivel || nivel <= 0) nivel = 1;
+      if (!maxBase || maxBase <= 0) maxBase = 10;
+
+      return { cantidad, nivel, maxBase };
+    }
+
+    function rndInt(min, max) {
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    function mcd(a, b) {
+      a = Math.abs(a);
+      b = Math.abs(b);
+
+      while (b !== 0) {
+        const t = b;
+        b = a % b;
+        a = t;
+      }
+      return a === 0 ? 1 : a;
+    }
+
+    function simplificar(n, d) {
+      if (d === 0) return { n, d };
+      if (d < 0) {
+        n = -n;
+        d = -d;
+      }
+      const g = mcd(n, d);
+      return { n: n / g, d: d / g };
+    }
+
+    function fracTexto(n, d) {
+      const s = simplificar(n, d);
+      n = s.n;
+      d = s.d;
+
+      if (n === 0) return "0";
+      if (d === 1) return String(n);
+      return `${n}/${d}`;
+    }
+
+    function intentarConvertirAValor(txt) {
+      if (txt == null) return { ok: false, valor: 0 };
+      let limpio = String(txt).trim().replace(/\s+/g, "").replace(",", ".");
+
+      if (limpio === "") return { ok: false, valor: 0 };
+
+      if (limpio.includes("/")) {
+        const partes = limpio.split("/");
+        if (partes.length !== 2) return { ok: false, valor: 0 };
+
+        const num = Number(partes[0]);
+        const den = Number(partes[1]);
+
+        if (Number.isNaN(num) || Number.isNaN(den) || den === 0) {
+          return { ok: false, valor: 0 };
+        }
+
+        return { ok: true, valor: num / den };
+      }
+
+      const valor = Number(limpio);
+      if (Number.isNaN(valor)) return { ok: false, valor: 0 };
+
+      return { ok: true, valor };
+    }
+
+    function generarOperacionNormal(nivel, maxBase) {
+      const maxVal = Math.max(5, maxBase + (nivel - 1) * 2);
+      const op = rndInt(1, 4);
+      let a, b, texto, respuesta;
+
+      switch (op) {
+        case 1:
+          a = rndInt(0, maxVal);
+          b = rndInt(0, maxVal);
+          texto = `${a} + ${b}`;
+          respuesta = a + b;
+          break;
+
+        case 2:
+          a = rndInt(0, maxVal);
+          b = rndInt(0, maxVal);
+          texto = `${a} - ${b}`;
+          respuesta = a - b;
+          break;
+
+        case 3:
+          a = rndInt(0, maxVal);
+          b = rndInt(0, maxVal);
+          texto = `${a} × ${b}`;
+          respuesta = a * b;
+          break;
+
+        case 4:
+          b = rndInt(1, maxVal);
+          respuesta = rndInt(0, maxVal);
+          a = b * respuesta;
+          texto = `${a} ÷ ${b}`;
+          break;
+      }
+
+      return {
+        tipo: "normal",
+        texto,
+        respuestaTexto: String(respuesta),
+        respuestaValor: respuesta
+      };
+    }
+
+    function generarEcuacionHueco(nivel, maxBase) {
+      const maxVal = Math.max(5, maxBase + (nivel - 1) * 2);
+      const tipo = rndInt(1, 4);
+      let x = rndInt(0, maxVal);
+      let a, b, c, texto, respuesta;
+
+      respuesta = x;
+
+      switch (tipo) {
+        case 1:
+          a = rndInt(1, 5);
+          b = rndInt(0, 9);
+          c = a * x + b;
+          texto = `${a} × ___ + ${b} = ${c}`;
+          break;
+
+        case 2:
+          a = rndInt(1, 5);
+          b = rndInt(0, 9);
+          c = a * x - b;
+          texto = `${a} × ___ - ${b} = ${c}`;
+          break;
+
+        case 3:
+          a = rndInt(1, 5);
+          b = rndInt(0, 9);
+          c = (x + b) * a;
+          texto = `(___ + ${b}) × ${a} = ${c}`;
+          break;
+
+        case 4:
+          a = rndInt(1, 5);
+          x = a * rndInt(0, Math.floor(maxVal / 2));
+          respuesta = x;
+          b = rndInt(0, 9);
+          c = (x / a) + b;
+          texto = `___ ÷ ${a} + ${b} = ${c}`;
+          break;
+      }
+
+      return {
+        tipo: "hueco",
+        texto,
+        respuestaTexto: String(respuesta),
+        respuestaValor: respuesta
+      };
+    }
+
+    function generarOperacionFraccion(nivel, maxBase) {
+      const maxVal = Math.max(3, maxBase + (nivel - 1) * 2);
+      const op = rndInt(1, 4);
+
+      let n1 = rndInt(1, maxVal);
+      let d1 = rndInt(1, maxVal);
+      let n2 = rndInt(1, maxVal);
+      let d2 = rndInt(1, maxVal);
+
+      let s1 = simplificar(n1, d1);
+      let s2 = simplificar(n2, d2);
+      n1 = s1.n; d1 = s1.d;
+      n2 = s2.n; d2 = s2.d;
+
+      let rn, rd, texto, respuestaTexto, respuestaValor;
+
+      switch (op) {
+        case 1:
+          rn = n1 * d2 + n2 * d1;
+          rd = d1 * d2;
+          ({ n: rn, d: rd } = simplificar(rn, rd));
+          texto = `${fracTexto(n1, d1)} + ${fracTexto(n2, d2)}`;
+          respuestaTexto = fracTexto(rn, rd);
+          respuestaValor = rn / rd;
+          break;
+
+        case 2:
+          if ((n1 / d1) < (n2 / d2)) {
+            [n1, n2] = [n2, n1];
+            [d1, d2] = [d2, d1];
+          }
+          rn = n1 * d2 - n2 * d1;
+          rd = d1 * d2;
+          ({ n: rn, d: rd } = simplificar(rn, rd));
+          texto = `${fracTexto(n1, d1)} - ${fracTexto(n2, d2)}`;
+          respuestaTexto = fracTexto(rn, rd);
+          respuestaValor = rn / rd;
+          break;
+
+        case 3:
+          rn = n1 * n2;
+          rd = d1 * d2;
+          ({ n: rn, d: rd } = simplificar(rn, rd));
+          texto = `${fracTexto(n1, d1)} × ${fracTexto(n2, d2)}`;
+          respuestaTexto = fracTexto(rn, rd);
+          respuestaValor = rn / rd;
+          break;
+
+        case 4:
+          rn = n1 * d2;
+          rd = d1 * n2;
+          ({ n: rn, d: rd } = simplificar(rn, rd));
+          texto = `${fracTexto(n1, d1)} ÷ ${fracTexto(n2, d2)}`;
+          respuestaTexto = fracTexto(rn, rd);
+          respuestaValor = rn / rd;
+          break;
+      }
+
+      return {
+        tipo: "fraccion",
+        texto,
+        respuestaTexto,
+        respuestaValor
+      };
+    }
+
+    function renderTabla() {
+      const tbody = document.getElementById("tablaEjercicios");
+      const modo = document.getElementById("modoActual");
+      modo.textContent = `Modo actual: ${modoActual}`;
+
+      if (ejercicios.length === 0) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="6" style="text-align:center; color:#a8b4d9; padding: 28px;">
+              Aquí aparecerán los ejercicios.
+            </td>
+          </tr>
+        `;
+        return;
+      }
+
+      tbody.innerHTML = ejercicios.map((item, index) => `
+        <tr>
+          <td>${index + 1}</td>
+          <td class="exercise">${item.texto}</td>
+          <td>
+            <input
+              type="text"
+              class="answer-input"
+              id="respuesta-${index}"
+              value="${item.usuario ?? ""}"
+              placeholder="Escribe aquí"
+              autocomplete="off"
+            />
+          </td>
+          <td>
+            <span class="correct-answer ${item.mostrarCorrecta ? "revealed" : "hidden-answer"}" id="correcta-${index}">
+              ${item.respuestaTexto}
+            </span>
+          </td>
+          <td id="resultado-${index}">
+            ${item.resultadoHtml || ""}
+          </td>
+          <td class="obs" id="obs-${index}">
+            ${item.observacion || ""}
+          </td>
+        </tr>
+      `).join("");
+    }
+
+    function guardarRespuestasActuales() {
+      ejercicios.forEach((item, index) => {
+        const input = document.getElementById(`respuesta-${index}`);
+        if (input) {
+          item.usuario = input.value;
+        }
+      });
+    }
+
+    function generarEjercicios() {
+      guardarRespuestasActuales();
+      const { cantidad, nivel, maxBase } = obtenerParametros();
+
+      ejercicios = [];
+
+      for (let i = 0; i < cantidad; i++) {
+        let ejercicio;
+        if (Math.random() < 0.2) {
+          ejercicio = generarEcuacionHueco(nivel, maxBase);
+        } else {
+          ejercicio = generarOperacionNormal(nivel, maxBase);
+        }
+
+        ejercicios.push({
+          ...ejercicio,
+          usuario: "",
+          mostrarCorrecta: false,
+          resultadoHtml: "",
+          observacion: ""
+        });
+      }
+
+      modoActual = "Ejercicios normales + huecos";
+      resetResultados();
+      renderTabla();
+    }
+
+    function generarFracciones() {
+      guardarRespuestasActuales();
+      const { cantidad, nivel, maxBase } = obtenerParametros();
+
+      ejercicios = [];
+
+      for (let i = 0; i < cantidad; i++) {
+        const ejercicio = generarOperacionFraccion(nivel, maxBase);
+
+        ejercicios.push({
+          ...ejercicio,
+          usuario: "",
+          mostrarCorrecta: false,
+          resultadoHtml: "",
+          observacion: ""
+        });
+      }
+
+      modoActual = "Fracciones";
+      resetResultados();
+      renderTabla();
+    }
+
+    function revisarEjercicios() {
+      if (ejercicios.length === 0) {
+        alert("Primero genera ejercicios.");
+        return;
+      }
+
+      guardarRespuestasActuales();
+
+      let aciertos = 0;
+      let total = 0;
+
+      ejercicios.forEach((item) => {
+        total++;
+        item.mostrarCorrecta = true;
+
+        const usuario = (item.usuario || "").trim();
+
+        if (usuario === "") {
+          item.resultadoHtml = `<span class="status-pill status-missing">Sin responder</span>`;
+          item.observacion = "Falta respuesta";
+          return;
+        }
+
+        const okUsuario = intentarConvertirAValor(usuario);
+        const okCorrecta = intentarConvertirAValor(item.respuestaTexto);
+
+        if (okUsuario.ok && okCorrecta.ok) {
+          if (Math.abs(okUsuario.valor - okCorrecta.valor) < 0.000001) {
+            item.resultadoHtml = `<span class="status-pill status-correct">Correcto</span>`;
+            item.observacion = "Bien";
+            aciertos++;
+          } else {
+            item.resultadoHtml = `<span class="status-pill status-incorrect">Incorrecto</span>`;
+            item.observacion = `La correcta era ${item.respuestaTexto}`;
+          }
+        } else {
+          item.resultadoHtml = `<span class="status-pill status-invalid">Inválido</span>`;
+          item.observacion = "Escribe número o fracción (ej: 3/4)";
+        }
+      });
+
+      document.getElementById("aciertos").textContent = aciertos;
+      document.getElementById("total").textContent = total;
+      document.getElementById("porcentaje").textContent = total > 0
+        ? `${((aciertos / total) * 100).toFixed(2)}%`
+        : "0%";
+
+      renderTabla();
+      alert("Revisión terminada.");
+    }
+
+    function resetResultados() {
+      document.getElementById("aciertos").textContent = "0";
+      document.getElementById("total").textContent = "0";
+      document.getElementById("porcentaje").textContent = "0%";
+    }
+
+    function limpiarTodo() {
+      ejercicios = [];
+      modoActual = "Ninguno";
+      resetResultados();
+      renderTabla();
+    }
+
+    renderTabla();
+  </script>
+</body>
+</html>
