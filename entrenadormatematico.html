@@ -487,7 +487,7 @@ table {
             <button class="btn btn-primary" onclick="generarEjercicios()">Generar ejercicios</button>
             <button class="btn btn-secondary" onclick="generarFracciones()">Fracciones</button>
             <button class="btn btn-success" onclick="revisarEjercicios()">Revisar</button>
-            <button class="btn btn-ghost" onclick="limpiarTodo()">Limpiar</button>
+            <button class="btn btn-ghost" onclick="limpiarTodo()">Reset Stats</button>
           </div>
     
           <div class="footer-note">
@@ -527,7 +527,35 @@ table {
   
   <script>
     let ejercicios = [];
+    let progreso = {
+      sesiones: 0,
+      ejerciciosTotales: 0,
+      aciertosTotales: 0
+    };
 
+    function cargarProgreso() {
+      const guardado = localStorage.getItem("entrenadorMatematicoProgreso");
+      if (guardado) {
+        progreso = JSON.parse(guardado);
+      }
+      renderProgreso();
+    }
+    
+    function guardarProgreso() {
+      localStorage.setItem("entrenadorMatematicoProgreso", JSON.stringify(progreso));
+    }
+    
+    function renderProgreso() {
+      document.getElementById("aciertos").textContent = progreso.aciertosTotales;
+      document.getElementById("total").textContent = progreso.ejerciciosTotales;
+    
+      const porcentaje = progreso.ejerciciosTotales > 0
+        ? (progreso.aciertosTotales / progreso.ejerciciosTotales) * 100
+        : 0;
+    
+      document.getElementById("porcentaje").textContent = `${porcentaje.toFixed(2)}%`;
+    }
+    
     function obtenerParametros() {
       let nivel = parseInt(document.getElementById("nivel").value, 10);
     
@@ -910,28 +938,35 @@ table {
         }
       });
 
-      document.getElementById("aciertos").textContent = aciertos;
-      document.getElementById("total").textContent = total;
-      document.getElementById("porcentaje").textContent = total > 0
-        ? `${((aciertos / total) * 100).toFixed(2)}%`
-        : "0%";
+      progreso.sesiones += 1;
+      progreso.aciertosTotales += aciertos;
+      progreso.ejerciciosTotales += total;
+      
+      guardarProgreso();
+      renderProgreso();
 
       renderTabla();
     }
 
     function resetResultados() {
-      document.getElementById("aciertos").textContent = "0";
-      document.getElementById("total").textContent = "0";
-      document.getElementById("porcentaje").textContent = "0%";
+      renderProgreso();
     }
 
     function limpiarTodo() {
-      ejercicios = [];
-      modoActual = "Ninguno";
-      resetResultados();
-      renderTabla();
+      const confirmar = confirm("¿Quieres borrar todo el progreso acumulado?");
+      if (!confirmar) return;
+    
+      progreso = {
+        sesiones: 0,
+        ejerciciosTotales: 0,
+        aciertosTotales: 0
+      };
+    
+      guardarProgreso();
+      renderProgreso();
     }
 
+    cargarProgreso();
     renderTabla();
   </script>
 </body>
