@@ -512,12 +512,7 @@
     }
 
     function renderKanjiCard(item, index){
-      const matizHTML = item.matiz ? `
-        <div class="meaning-boxes">
-          ${renderMatiz(item)}
-        </div>
-      ` : '';
-
+    
       const meanings = (item.kanjis && item.kanjis.length)
         ? item.kanjis.map(k => `
             <div class="kanji-card kanji-card--solo">
@@ -528,46 +523,34 @@
             </div>
           `).join('')
         : `
-            <div class="kanji-card kanji-card--solo">
-              <div class="kanji-main">
-                <div class="kanji-char">${escapeHtml(item.jp || '')}</div>
-                <div class="kanji-mean">${escapeHtml(item.es || '')}</div>
-              </div>
+          <div class="kanji-card kanji-card--solo">
+            <div class="kanji-main">
+              <div class="kanji-char">${escapeHtml(item.jp || '')}</div>
+              <div class="kanji-mean">${escapeHtml(item.es || '')}</div>
             </div>
-          `;
-
+          </div>
+        `;
+    
       return `
-        <article class="entry entry--kanji capture-card" id="entry-${index+1}" data-search="${escapeHtml((item.type||'') + ' ' + (item.theme||'') + ' ' + (item.jp||'') + ' ' + (item.romaji||'') + ' ' + (item.es||''))}">
+        <article class="entry entry--kanji capture-card" id="entry-${index+1}">
           <div class="entry-top">
             <div class="entry-tag">KANJI</div>
             <div class="entry-date">Tema: ${escapeHtml(item.theme || '')}</div>
           </div>
-
+    
           <div class="entry-body">
-            <div class="summary" onclick="toggleEntry(this.closest('.entry'))">
-              <div class="jp-line">${escapeHtml(item.jp || '')}</div>
-              ${item.romaji ? `<div class="reading-line">${escapeHtml(item.romaji)}</div>` : ''}
-              ${item.es ? `<div class="es-line">${escapeHtml(item.es)}</div>` : ''}
-              <div class="toggle-row">
-                <div class="toggle-hint">Toca para ver más</div>
-                <button class="toggle-btn" type="button">Expandir</button>
-              </div>
+    
+            <div class="kanji-grid">
+              ${meanings}
             </div>
-
-            <div class="details">
-              <section class="panel">
-                <div class="panel-title">Significados</div>
-                <div class="kanji-grid">
-                  ${meanings}
-                </div>
-              </section>
-
-              ${matizHTML}
-
-              <div class="mini-actions">
-                <button class="capture-btn" onclick="downloadCard('entry-${index+1}','vivo-kanji-${index+1}')">Descargar esta tarjeta</button>
-              </div>
+    
+            <div class="mini-actions">
+              <button class="capture-btn"
+                onclick="downloadCard('entry-${index+1}','vivo-kanji-${index+1}')">
+                Descargar esta tarjeta
+              </button>
             </div>
+    
           </div>
         </article>
       `;
