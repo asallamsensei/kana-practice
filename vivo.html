@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Vivo de Kanji y Palabras — Asallam Sensei</title>
+  <title>EL VIVO de Asallam Sensei</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -386,7 +386,7 @@
       <span class="eyebrow">Asallam Sensei • EL VIVO!!</span>
       <h1>Me lo contaron en EL VIVO!!</h1>
       <div class="toolbar">
-        <input class="search" type="text" id="tagSearch" placeholder="Buscar por tag, tema o japonés...">
+        <input class="search" type="text" id="tagSearch" placeholder="">
       </div>
     </section>
 
@@ -509,20 +509,13 @@
         <article class="entry entry--kanji capture-card" id="entry-${index+1}">
           <div class="entry-top">
             <div class="entry-tag">KANJIS</div>
-            <div class="entry-date">Tema: ${escapeHtml(item.theme || '')}</div>
+            <div class="entry-date">Tags: ${escapeHtml(item.theme || '')}</div>
           </div>
     
           <div class="entry-body">
     
             <div class="kanji-grid">
               ${meanings}
-            </div>
-    
-            <div class="mini-actions">
-              <button class="capture-btn"
-                onclick="downloadCard('entry-${index+1}','vivo-kanji-${index+1}')">
-                Descargar
-              </button>
             </div>
     
           </div>
@@ -544,7 +537,7 @@
         <article class="entry entry--word capture-card" id="entry-${index+1}" data-search="${escapeHtml((item.type||'') + ' ' + (item.theme||'') + ' ' + (item.jp||'') + ' ' + (item.romaji||'') + ' ' + (item.es||''))}">
           <div class="entry-top">
             <div class="entry-tag">PALABRA</div>
-            <div class="entry-date">Tema: ${escapeHtml(item.theme || '')}</div>
+            <div class="entry-date">Tags: ${escapeHtml(item.theme || '')}</div>
           </div>
 
           <div class="entry-body">
@@ -573,9 +566,6 @@
 
               ${renderKanjiPanel(item.kanjis)}
 
-              <div class="mini-actions">
-                <button class="capture-btn" onclick="downloadCard('entry-${index+1}','vivo-palabra-${index+1}')">Descargar</button>
-              </div>
             </div>
           </div>
         </article>
@@ -596,7 +586,7 @@
         <article class="entry entry--sentence capture-card" id="entry-${index+1}" data-search="${escapeHtml((item.type||'') + ' ' + (item.theme||'') + ' ' + (item.jp||'') + ' ' + (item.romaji||'') + ' ' + (item.es||''))}">
           <div class="entry-top">
             <div class="entry-tag">ORACIÓN</div>
-            <div class="entry-date">Tema: ${escapeHtml(item.theme || '')}</div>
+            <div class="entry-date">Tags: ${escapeHtml(item.theme || '')}</div>
           </div>
 
           <div class="entry-body">
@@ -626,9 +616,6 @@
               ${renderWordsPanel(item.words)}
               ${renderKanjiPanel(item.kanjis)}
 
-              <div class="mini-actions">
-                <button class="capture-btn" onclick="downloadCard('entry-${index+1}','vivo-oracion-${index+1}')">Descargar</button>
-              </div>
             </div>
           </div>
         </article>
