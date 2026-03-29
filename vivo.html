@@ -130,6 +130,7 @@
     .vivo-grid{
       display:grid;
       gap:18px;
+      justify-items:start;
     }
 
     .entry{
@@ -139,6 +140,8 @@
       box-shadow:var(--shadow);
       backdrop-filter:blur(10px);
       background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04));
+      height: fit-content;
+      width: fit-content;
     }
 
     .entry--kanji{background-image:var(--card-kanji)}
@@ -174,12 +177,12 @@
       padding:22px;
       display:grid;
       gap:18px;
+      align-content:start;
     }
 
     .summary{
       display:grid;
       gap:10px;
-      cursor:pointer;
       user-select:none;
     }
 
@@ -201,6 +204,7 @@
       font-size:1.12rem;
       font-weight:800;
       color:#fff;
+      line-height:1.35;
     }
 
     .details{
@@ -304,25 +308,27 @@
       grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));
       gap:14px;
     }
-
+  
     .kanji-card{
       background:rgba(255,255,255,.06);
       border:1px solid rgba(255,255,255,.10);
       border-radius:22px;
       padding:16px;
       display:grid;
-      gap:12px;
+      gap:10px;
+      justify-items:center;
+      text-align:center;
     }
 
     .kanji-card--solo{
       grid-template-columns:1fr;
     }
 
-    .kanji-main{
-      display:flex;
-      align-items:center;
-      gap:14px;
-    }
+.kanji-main{
+  display:grid;
+  gap:10px;
+  justify-items:center;
+}
 
     .kanji-char{
       width:76px;
@@ -338,12 +344,13 @@
       border:1px solid rgba(255,255,255,.12);
     }
 
-    .kanji-mean{
-      font-size:1rem;
-      line-height:1.6;
-      color:var(--text);
-      font-weight:700;
-    }
+.kanji-mean{
+  font-size:1rem;
+  line-height:1.5;
+  color:var(--text);
+  font-weight:700;
+  text-align:center;
+}
 
     .mini-actions{
       display:flex;
@@ -489,19 +496,15 @@
     
       const meanings = (item.kanjis && item.kanjis.length)
         ? item.kanjis.map(k => `
-            <div class="kanji-card kanji-card--solo">
-              <div class="kanji-main">
-                <div class="kanji-char">${escapeHtml(k.char || '')}</div>
-                <div class="kanji-mean">${escapeHtml(k.mean || '')}</div>
-              </div>
-            </div>
+          <div class="kanji-card kanji-card--solo">
+            <div class="kanji-char">${escapeHtml(k.char || '')}</div>
+            <div class="kanji-mean">${escapeHtml(k.mean || '')}</div>
+          </div>
           `).join('')
         : `
           <div class="kanji-card kanji-card--solo">
-            <div class="kanji-main">
-              <div class="kanji-char">${escapeHtml(item.jp || '')}</div>
-              <div class="kanji-mean">${escapeHtml(item.es || '')}</div>
-            </div>
+            <div class="kanji-char">${escapeHtml(item.jp || '')}</div>
+            <div class="kanji-mean">${escapeHtml(item.es || '')}</div>
           </div>
         `;
     
