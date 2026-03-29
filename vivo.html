@@ -203,30 +203,6 @@
       color:#fff;
     }
 
-    .toggle-row{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-      flex-wrap:wrap;
-    }
-
-    .toggle-hint{
-      color:var(--muted);
-      font-size:.9rem;
-      font-weight:700;
-    }
-
-    .toggle-btn{
-      background:rgba(255,255,255,.08);
-      color:var(--text);
-      border:1px solid rgba(255,255,255,.12);
-      padding:10px 14px;
-      border-radius:14px;
-      font-size:.88rem;
-      font-weight:800;
-    }
-
     .details{
       display:grid;
       gap:16px;
@@ -630,10 +606,6 @@
               <div class="jp-line">${escapeHtml(item.jp || '')}</div>
               ${item.romaji ? `<div class="reading-line">${escapeHtml(item.romaji)}</div>` : ''}
               ${item.es ? `<div class="es-line">${escapeHtml(item.es)}</div>` : ''}
-              <div class="toggle-row">
-                <div class="toggle-hint">Toca para ver más</div>
-                <button class="toggle-btn" type="button">Expandir</button>
-              </div>
             </div>
 
             <div class="details">
@@ -671,22 +643,6 @@
       if(type === 'KANJI') return renderKanjiCard(item, index);
       if(type === 'PALABRA') return renderWordCard(item, index);
       return renderSentenceCard(item, index);
-    }
-
-    function toggleEntry(entry){
-      const isOpen = entry.classList.contains('open');
-      entry.classList.toggle('open');
-
-      const btn = entry.querySelector('.toggle-btn');
-      const hint = entry.querySelector('.toggle-hint');
-
-      if(entry.classList.contains('open')){
-        if(btn) btn.textContent = 'Contraer';
-        if(hint) hint.textContent = 'Toca para ocultar';
-      } else {
-        if(btn) btn.textContent = 'Expandir';
-        if(hint) hint.textContent = 'Toca para ver más';
-      }
     }
 
     function setupSearch(){
