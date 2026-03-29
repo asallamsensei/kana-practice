@@ -1,29 +1,12 @@
 [
   {
-    "type": "oración",
-    "theme": "Rutina de la mañana",
-    "jp": "アラームを止める",
-    "romaji": "arāmu o tomeru",
-    "es": "Apagar la alarma",
-    "literal": "Detener la alarma",
-    "matiz": "Expresión muy natural para parar o apagar el sonido de una alarma",
-    "words": [
-      { "jp": "アラーム", "romaji": "arāmu", "es": "alarma" },
-      { "jp": "を", "romaji": "o", "es": "partícula de objeto directo" },
-      { "jp": "止める", "romaji": "tomeru", "es": "detener, parar" }
-    ],
-    "kanjis": [
-      { "char": "止", "mean": "parar • detener" }
-    ]
-  },
-  {
     "type": "palabra",
     "theme": "Tecnología",
     "jp": "電話",
     "romaji": "denwa",
     "es": "teléfono",
     "literal": "teléfono",
-    "matiz": "Palabra usada para referirse a teléfonos en general",
+    "matiz": "",
     "words": [],
     "kanjis": [
       { "char": "電", "mean": "electricidad" },
@@ -189,7 +172,7 @@
     "romaji": "hito",
     "es": "persona",
     "literal": "persona",
-    "matiz": "Lectura kun muy común del kanji 人",
+    "matiz": "Lectura kun del kanji 人",
     "words": [],
     "kanjis": [
       { "char": "人", "mean": "persona" }
@@ -229,7 +212,7 @@
     "romaji": "atashi",
     "es": "yo",
     "literal": "yo",
-    "matiz": "Forma más suave e informal de decir yo, asociada sobre todo al habla femenina",
+    "matiz": "Forma más suave e informal de decir yo, femenina",
     "words": [],
     "kanjis": []
   },
@@ -240,7 +223,7 @@
     "romaji": "anata",
     "es": "tú • usted",
     "literal": "tú",
-    "matiz": "Se usa, pero en japonés muchas veces se omite o se reemplaza por el nombre",
+    "matiz": "Se usa, pero muchas veces se omite o se reemplaza por el nombre",
     "words": [],
     "kanjis": []
   },
@@ -264,7 +247,7 @@
     "romaji": "hon",
     "es": "libro",
     "literal": "libro",
-    "matiz": "Palabra muy común para libro; el kanji también tiene otros sentidos según la palabra",
+    "matiz": "El kanji también tiene otros sentidos según la palabra",
     "words": [],
     "kanjis": [
       { "char": "本", "mean": "libro • origen • base" }
@@ -277,7 +260,7 @@
     "romaji": "hai",
     "es": "sí",
     "literal": "sí",
-    "matiz": "Respuesta afirmativa educada y muy común",
+    "matiz": "",
     "words": [],
     "kanjis": []
   },
@@ -288,7 +271,7 @@
     "romaji": "iie",
     "es": "no",
     "literal": "no",
-    "matiz": "Respuesta negativa básica",
+    "matiz": "",
     "words": [],
     "kanjis": []
   },
@@ -343,5 +326,22 @@
     "kanjis": [
       { "char": "君", "mean": "tú • señor • soberano" }
     ]
-  }
+  },
+    {
+    "type": "oración",
+    "theme": "Rutina de la mañana",
+    "jp": "アラームを止める",
+    "romaji": "arāmu o tomeru",
+    "es": "Apagar la alarma",
+    "literal": "Detener la alarma",
+    "matiz": "",
+    "words": [
+      { "jp": "アラーム", "romaji": "arāmu", "es": "alarma" },
+      { "jp": "を", "romaji": "o", "es": "partícula de objeto directo" },
+      { "jp": "止める", "romaji": "tomeru", "es": "detener, parar" }
+    ],
+    "kanjis": [
+      { "char": "止", "mean": "parar • detener" }
+    ]
+  },
 ]
