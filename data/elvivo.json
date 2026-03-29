@@ -8,12 +8,12 @@
     "literal": "Detener la alarma",
     "matiz": "Expresión muy natural para parar o apagar el sonido de una alarma",
     "words": [
-      {"jp": "アラーム", "romaji": "arāmu", "es": "alarma"},
-      {"jp": "を", "romaji": "o", "es": "partícula objeto directo"},
-      {"jp": "止める", "romaji": "tomeru", "es": "detener, parar"}
+      { "jp": "アラーム", "romaji": "arāmu", "es": "alarma" },
+      { "jp": "を", "romaji": "o", "es": "partícula de objeto directo" },
+      { "jp": "止める", "romaji": "tomeru", "es": "detener, parar" }
     ],
     "kanjis": [
-      {"char": "止", "mean": "parar • detener"}
+      { "char": "止", "mean": "parar • detener" }
     ]
   },
   {
@@ -21,28 +21,327 @@
     "theme": "Tecnología",
     "jp": "電話",
     "romaji": "denwa",
-    "es": "Teléfono",
-    "literal": "Teléfono",
+    "es": "teléfono",
+    "literal": "teléfono",
     "matiz": "Palabra usada para referirse a teléfonos en general",
-    "words": [
-      {"jp": "電話", "romaji": "denwa", "es": "teléfono"}
-    ],
+    "words": [],
     "kanjis": [
-      {"char": "電", "mean": "electricidad"},
-      {"char": "話", "mean": "hablar • conversación"}
+      { "char": "電", "mean": "electricidad" },
+      { "char": "話", "mean": "hablar • conversación" }
     ]
   },
   {
     "type": "kanji",
     "theme": "Acción",
     "jp": "走",
-    "romaji": "hashiru",
-    "es": "Correr",
-    "literal": "Correr",
-    "matiz": "Verbo que indica desplazamiento rápido a pie",
+    "es": "correr",
+    "literal": "",
+    "matiz": "",
+    "kun": "はしる",
+    "on": "ソウ",
     "words": [],
     "kanjis": [
-      {"char": "走", "mean": "correr • desplazarse rápido"}
+      { "char": "走", "mean": "correr • desplazarse rápido" }
+    ]
+  },
+  {
+    "type": "palabra",
+    "theme": "Saludo",
+    "jp": "おはよう",
+    "romaji": "ohayō",
+    "es": "buenos días",
+    "literal": "es temprano",
+    "matiz": "Saludo informal de la mañana",
+    "words": [],
+    "kanjis": []
+  },
+  {
+    "type": "palabra",
+    "theme": "Saludo",
+    "jp": "おはようございます",
+    "romaji": "ohayō gozaimasu",
+    "es": "buenos días",
+    "literal": "es temprano",
+    "matiz": "Versión formal y cortés de おはよう",
+    "words": [
+      { "jp": "おはよう", "romaji": "ohayō", "es": "buenos días" },
+      { "jp": "ございます", "romaji": "gozaimasu", "es": "forma cortés de ある en expresiones fijas" }
+    ],
+    "kanjis": []
+  },
+  {
+    "type": "palabra",
+    "theme": "Saludo",
+    "jp": "こんにちは",
+    "romaji": "konnichiwa",
+    "es": "hola • buenas tardes",
+    "literal": "hoy en cuanto a...",
+    "matiz": "Saludo común del día, desde media mañana hasta la tarde",
+    "words": [],
+    "kanjis": []
+  },
+  {
+    "type": "palabra",
+    "theme": "Saludo",
+    "jp": "こんばんは",
+    "romaji": "konbanwa",
+    "es": "buenas noches",
+    "literal": "esta noche en cuanto a...",
+    "matiz": "Saludo usado al anochecer o por la noche",
+    "words": [],
+    "kanjis": []
+  },
+  {
+    "type": "palabra",
+    "theme": "Cortesía",
+    "jp": "ありがとう",
+    "romaji": "arigatō",
+    "es": "gracias",
+    "literal": "difícil de existir",
+    "matiz": "Forma informal de dar las gracias",
+    "words": [],
+    "kanjis": []
+  },
+  {
+    "type": "palabra",
+    "theme": "Cortesía",
+    "jp": "ありがとうございます",
+    "romaji": "arigatō gozaimasu",
+    "es": "muchas gracias",
+    "literal": "es algo difícil de existir",
+    "matiz": "Forma formal y cortés de dar las gracias",
+    "words": [
+      { "jp": "ありがとう", "romaji": "arigatō", "es": "gracias" },
+      { "jp": "ございます", "romaji": "gozaimasu", "es": "forma cortés en expresiones fijas" }
+    ],
+    "kanjis": []
+  },
+  {
+    "type": "palabra",
+    "theme": "Países e idiomas",
+    "jp": "日本",
+    "romaji": "nihon",
+    "es": "Japón",
+    "literal": "origen del sol",
+    "matiz": "Nombre del país Japón",
+    "words": [],
+    "kanjis": [
+      { "char": "日", "mean": "sol • día" },
+      { "char": "本", "mean": "origen • base • libro" }
+    ]
+  },
+  {
+    "type": "palabra",
+    "theme": "Países e idiomas",
+    "jp": "日本語",
+    "romaji": "nihongo",
+    "es": "idioma japonés",
+    "literal": "lengua de Japón",
+    "matiz": "Se refiere al idioma japonés",
+    "words": [],
+    "kanjis": [
+      { "char": "日", "mean": "sol • día" },
+      { "char": "本", "mean": "origen • base • libro" },
+      { "char": "語", "mean": "idioma • palabra" }
+    ]
+  },
+  {
+    "type": "palabra",
+    "theme": "Personas y nacionalidades",
+    "jp": "日本人",
+    "romaji": "nihonjin",
+    "es": "japonés • persona japonesa",
+    "literal": "persona de Japón",
+    "matiz": "Se usa para una persona de nacionalidad japonesa",
+    "words": [],
+    "kanjis": [
+      { "char": "日", "mean": "sol • día" },
+      { "char": "本", "mean": "origen • base • libro" },
+      { "char": "人", "mean": "persona" }
+    ]
+  },
+  {
+    "type": "palabra",
+    "theme": "Lugares",
+    "jp": "トイレ",
+    "romaji": "toire",
+    "es": "baño",
+    "literal": "toilet",
+    "matiz": "Préstamo común para decir baño o servicio",
+    "words": [],
+    "kanjis": []
+  },
+  {
+    "type": "palabra",
+    "theme": "Despedida",
+    "jp": "さようなら",
+    "romaji": "sayōnara",
+    "es": "adiós",
+    "literal": "si es así",
+    "matiz": "Despedida más definitiva; no siempre es la más común en lo cotidiano",
+    "words": [],
+    "kanjis": []
+  },
+  {
+    "type": "palabra",
+    "theme": "Personas",
+    "jp": "人",
+    "romaji": "hito",
+    "es": "persona",
+    "literal": "persona",
+    "matiz": "Lectura kun muy común del kanji 人",
+    "words": [],
+    "kanjis": [
+      { "char": "人", "mean": "persona" }
+    ]
+  },
+  {
+    "type": "palabra",
+    "theme": "Escritura",
+    "jp": "漢字",
+    "romaji": "kanji",
+    "es": "kanji • caracteres chinos usados en japonés",
+    "literal": "caracteres han",
+    "matiz": "Se refiere a los caracteres de origen chino usados en japonés",
+    "words": [],
+    "kanjis": [
+      { "char": "漢", "mean": "han • chino" },
+      { "char": "字", "mean": "carácter • letra" }
+    ]
+  },
+  {
+    "type": "palabra",
+    "theme": "Pronombres",
+    "jp": "私",
+    "romaji": "watashi",
+    "es": "yo",
+    "literal": "yo",
+    "matiz": "Pronombre personal neutro y muy común",
+    "words": [],
+    "kanjis": [
+      { "char": "私", "mean": "yo • privado" }
+    ]
+  },
+  {
+    "type": "palabra",
+    "theme": "Pronombres",
+    "jp": "あたし",
+    "romaji": "atashi",
+    "es": "yo",
+    "literal": "yo",
+    "matiz": "Forma más suave e informal de decir yo, asociada sobre todo al habla femenina",
+    "words": [],
+    "kanjis": []
+  },
+  {
+    "type": "palabra",
+    "theme": "Pronombres",
+    "jp": "あなた",
+    "romaji": "anata",
+    "es": "tú • usted",
+    "literal": "tú",
+    "matiz": "Se usa, pero en japonés muchas veces se omite o se reemplaza por el nombre",
+    "words": [],
+    "kanjis": []
+  },
+  {
+    "type": "palabra",
+    "theme": "Esencia y ambiente",
+    "jp": "気",
+    "romaji": "ki",
+    "es": "energía • ánimo • espíritu • ambiente",
+    "literal": "energía",
+    "matiz": "Kanji muy frecuente en palabras sobre ánimo, atención, intención o ambiente",
+    "words": [],
+    "kanjis": [
+      { "char": "気", "mean": "energía • ánimo • espíritu • ambiente" }
+    ]
+  },
+  {
+    "type": "palabra",
+    "theme": "Objetos",
+    "jp": "本",
+    "romaji": "hon",
+    "es": "libro",
+    "literal": "libro",
+    "matiz": "Palabra muy común para libro; el kanji también tiene otros sentidos según la palabra",
+    "words": [],
+    "kanjis": [
+      { "char": "本", "mean": "libro • origen • base" }
+    ]
+  },
+  {
+    "type": "palabra",
+    "theme": "Respuesta",
+    "jp": "はい",
+    "romaji": "hai",
+    "es": "sí",
+    "literal": "sí",
+    "matiz": "Respuesta afirmativa educada y muy común",
+    "words": [],
+    "kanjis": []
+  },
+  {
+    "type": "palabra",
+    "theme": "Respuesta",
+    "jp": "いいえ",
+    "romaji": "iie",
+    "es": "no",
+    "literal": "no",
+    "matiz": "Respuesta negativa básica",
+    "words": [],
+    "kanjis": []
+  },
+  {
+    "type": "palabra",
+    "theme": "Cortesía",
+    "jp": "すみません",
+    "romaji": "sumimasen",
+    "es": "disculpe • perdón • gracias",
+    "literal": "no termina • no queda resuelto",
+    "matiz": "Muy útil para pedir disculpas, llamar la atención o incluso agradecer con modestia",
+    "words": [],
+    "kanjis": []
+  },
+  {
+    "type": "palabra",
+    "theme": "Existencia",
+    "jp": "いる",
+    "romaji": "iru",
+    "es": "haber • estar • existir",
+    "literal": "existir",
+    "matiz": "Se usa para personas y seres animados",
+    "words": [],
+    "kanjis": []
+  },
+  {
+    "type": "palabra",
+    "theme": "Existencia",
+    "jp": "ある",
+    "romaji": "aru",
+    "es": "haber • estar • existir",
+    "literal": "existir",
+    "matiz": "Se usa para cosas, objetos y seres inanimados",
+    "words": [],
+    "kanjis": []
+  },
+  {
+    "type": "oración",
+    "theme": "Afecto",
+    "jp": "君のそばにいたい",
+    "romaji": "kimi no soba ni itai",
+    "es": "quiero estar a tu lado",
+    "literal": "quiero estar al lado de ti",
+    "matiz": "Expresión afectiva y cercana; suena emocional y personal",
+    "words": [
+      { "jp": "君", "romaji": "kimi", "es": "tú" },
+      { "jp": "の", "romaji": "no", "es": "partícula posesiva o de relación" },
+      { "jp": "そば", "romaji": "soba", "es": "lado • cerca" },
+      { "jp": "に", "romaji": "ni", "es": "partícula de dirección o lugar" },
+      { "jp": "いたい", "romaji": "itai", "es": "querer estar" }
+    ],
+    "kanjis": [
+      { "char": "君", "mean": "tú • señor • soberano" }
     ]
   }
 ]
