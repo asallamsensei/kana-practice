@@ -562,19 +562,14 @@
             </div>
 
             <div class="details">
+              ${item.matiz ? `
               <div class="meaning-boxes">
-              
-                <div class="meaning-box">
-                  <span class="label">Traducción</span>
-                  <div class="value">${escapeHtml(item.es || '')}</div>
-                </div>
-              
-                ${item.matiz ? `
                 <div class="meaning-box">
                   <span class="label">Observación</span>
                   <div class="value">${escapeHtml(item.matiz)}</div>
                 </div>
-                ` : ''}
+              </div>
+              ` : ''}
               
               </div>
 
