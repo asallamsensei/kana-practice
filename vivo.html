@@ -228,7 +228,7 @@
     }
 
     .details{
-      display:none;
+      display:grid;
       gap:16px;
       padding-top:6px;
       animation:fadeIn .18s ease;
@@ -574,24 +574,27 @@
           </div>
 
           <div class="entry-body">
-            <div class="summary" onclick="toggleEntry(this.closest('.entry'))">
+            <div class="summary">
               <div class="jp-line">${escapeHtml(item.jp || '')}</div>
               ${item.romaji ? `<div class="reading-line">${escapeHtml(item.romaji)}</div>` : ''}
               ${item.es ? `<div class="es-line">${escapeHtml(item.es)}</div>` : ''}
-              <div class="toggle-row">
-                <div class="toggle-hint">Toca para ver más</div>
-                <button class="toggle-btn" type="button">Expandir</button>
-              </div>
             </div>
 
             <div class="details">
               <div class="meaning-boxes">
+              
                 <div class="meaning-box">
-                  <span class="label">Traducción natural</span>
+                  <span class="label">Traducción</span>
                   <div class="value">${escapeHtml(item.es || '')}</div>
                 </div>
-                ${literalHTML}
-                ${matizHTML}
+              
+                ${item.matiz ? `
+                <div class="meaning-box">
+                  <span class="label">Observación</span>
+                  <div class="value">${escapeHtml(item.matiz)}</div>
+                </div>
+                ` : ''}
+              
               </div>
 
               ${renderKanjiPanel(item.kanjis)}
@@ -623,7 +626,7 @@
           </div>
 
           <div class="entry-body">
-            <div class="summary" onclick="toggleEntry(this.closest('.entry'))">
+            <div class="summary">
               <div class="jp-line">${escapeHtml(item.jp || '')}</div>
               ${item.romaji ? `<div class="reading-line">${escapeHtml(item.romaji)}</div>` : ''}
               ${item.es ? `<div class="es-line">${escapeHtml(item.es)}</div>` : ''}
@@ -635,12 +638,19 @@
 
             <div class="details">
               <div class="meaning-boxes">
+              
                 <div class="meaning-box">
-                  <span class="label">Traducción natural</span>
+                  <span class="label">Traducción</span>
                   <div class="value">${escapeHtml(item.es || '')}</div>
                 </div>
-                ${literalHTML}
-                ${matizHTML}
+              
+                ${item.matiz ? `
+                <div class="meaning-box">
+                  <span class="label">Observación</span>
+                  <div class="value">${escapeHtml(item.matiz)}</div>
+                </div>
+                ` : ''}
+              
               </div>
 
               ${renderWordsPanel(item.words)}
