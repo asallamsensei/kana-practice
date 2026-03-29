@@ -127,22 +127,24 @@
       font-size:.96rem;
     }
 
-    .vivo-grid{
-      display:grid;
-      gap:18px;
-      justify-items:start;
-    }
+.vivo-grid{
+  display:grid;
+  gap:18px;
+  justify-items:start;
+  align-items:start;
+}
 
-    .entry{
-      border:1px solid var(--border);
-      border-radius:var(--radius-xl);
-      overflow:hidden;
-      box-shadow:var(--shadow);
-      backdrop-filter:blur(10px);
-      background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04));
-      height: fit-content;
-      width: fit-content;
-    }
+.entry{
+  border:1px solid var(--border);
+  border-radius:var(--radius-xl);
+  overflow:hidden;
+  box-shadow:var(--shadow);
+  backdrop-filter:blur(10px);
+  background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04));
+  width:fit-content;
+  max-width:100%;
+  height:auto;
+}
 
     .entry--kanji{background-image:var(--card-kanji)}
     .entry--word{background-image:var(--card-word)}
@@ -223,11 +225,13 @@
       to{opacity:1; transform:translateY(0)}
     }
 
-    .meaning-boxes{
-      display:grid;
-      grid-template-columns:repeat(3, minmax(0, 1fr));
-      gap:14px;
-    }
+.meaning-boxes{
+  display:grid;
+  grid-auto-flow:column;
+  grid-auto-columns:max-content;
+  gap:14px;
+  width:fit-content;
+}
 
     .meaning-box{
       background:rgba(255,255,255,.06);
@@ -268,21 +272,22 @@
       color:#fff;
     }
 
-    .pieces{
-      display:grid;
-      gap:12px;
-    }
+.pieces{
+  display:grid;
+  gap:12px;
+  width:fit-content;
+}
 
-    .piece{
-      display:grid;
-      grid-template-columns:170px 1fr;
-      gap:14px;
-      align-items:start;
-      padding:16px;
-      border-radius:18px;
-      background:rgba(255,255,255,.05);
-      border:1px solid rgba(255,255,255,.08);
-    }
+.piece{
+  display:grid;
+  gap:10px;
+  align-items:start;
+  padding:16px;
+  border-radius:18px;
+  background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.08);
+  width:fit-content;
+}
 
     .piece .jp{
       font-family:"Noto Sans JP", sans-serif;
@@ -298,16 +303,24 @@
       margin-top:4px;
     }
 
+.piece .es{
+  color:var(--muted);
+  line-height:1.6;
+  font-size:1rem;
+}
+    
     .piece .exp{
       color:var(--muted);
       line-height:1.65;
     }
 
-    .kanji-grid{
-      display:grid;
-      grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));
-      gap:14px;
-    }
+.kanji-grid{
+  display:grid;
+  grid-auto-flow:column;
+  grid-auto-columns:max-content;
+  gap:14px;
+  width:fit-content;
+}
   
     .kanji-card{
       background:rgba(255,255,255,.06);
@@ -480,11 +493,9 @@
           <div class="pieces">
             ${words.map(w => `
               <div class="piece">
-                <div>
-                  <div class="jp">${escapeHtml(w.jp || '')}</div>
-                  ${w.romaji ? `<div class="romaji">${escapeHtml(w.romaji)}</div>` : ''}
-                </div>
-                <div class="exp">${escapeHtml(w.es || '')}</div>
+                <div class="jp">${escapeHtml(w.jp || '')}</div>
+                ${w.romaji ? `<div class="romaji">${escapeHtml(w.romaji)}</div>` : ''}
+                ${w.es ? `<div class="es">${escapeHtml(w.es)}</div>` : ''}
               </div>
             `).join('')}
           </div>
@@ -600,21 +611,15 @@
             </div>
 
             <div class="details">
+
+              ${item.matiz ? `
               <div class="meaning-boxes">
-              
-                <div class="meaning-box">
-                  <span class="label">Traducción</span>
-                  <div class="value">${escapeHtml(item.es || '')}</div>
-                </div>
-              
-                ${item.matiz ? `
                 <div class="meaning-box">
                   <span class="label">Observación</span>
                   <div class="value">${escapeHtml(item.matiz)}</div>
                 </div>
-                ` : ''}
-              
               </div>
+              ` : ''}
 
               ${renderWordsPanel(item.words)}
               ${renderKanjiPanel(item.kanjis)}
