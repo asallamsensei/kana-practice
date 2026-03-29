@@ -381,7 +381,9 @@
           entry.id = `entry-${index+1}`;
     
           // Construir el HTML de la tarjeta
-          const meaningHTML = `
+          const isKanjiOnly = (item.type || '').toUpperCase() === 'KANJI';
+          
+          const meaningHTML = isKanjiOnly ? '' : `
             <div class="meaning-boxes">
               <div class="meaning-box">
                 <span class="label">Traducción natural</span>
@@ -448,9 +450,9 @@
             </div>
             <div class="entry-body">
               <div class="jp-line">${item.jp}</div>
-              <div class="reading-line">${item.romaji}</div>
+              ${isKanjiOnly ? '' : `<div class="reading-line">${item.romaji || ''}</div>`}
               ${meaningHTML}
-              ${wordsHTML}
+              ${isKanjiOnly ? '' : wordsHTML}
               ${kanjiHTML}
               <div class="mini-actions">
                 <button class="capture-btn" onclick="downloadCard('entry-${index+1}','vivo-${index+1}')">Descargar esta tarjeta</button>
