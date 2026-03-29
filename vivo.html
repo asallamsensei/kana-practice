@@ -384,10 +384,8 @@
   <div class="wrap">
     <section class="hero">
       <span class="eyebrow">Asallam Sensei • EL VIVO!!</span>
-      <h1>Esto lo vimos en EL VIVO</h1>
-
+      <h1>Me lo contaron en EL VIVO!!</h1>
       <div class="toolbar">
-        <button class="btn-primary" onclick="downloadAllCards()">Descargar todas las tarjetas</button>
         <input class="search" type="text" id="tagSearch" placeholder="Buscar por tag, tema o japonés...">
       </div>
     </section>
@@ -452,7 +450,7 @@
       if(!kanjis || !kanjis.length) return '';
       return `
         <section class="panel">
-          <div class="panel-title">Kanji involucrados</div>
+          <div class="panel-title">Kanjis</div>
           <div class="kanji-grid">
             ${kanjis.map(k => `
               <div class="kanji-card">
@@ -471,7 +469,7 @@
       if(!words || !words.length) return '';
       return `
         <section class="panel">
-          <div class="panel-title">Palabras involucradas</div>
+          <div class="panel-title">Palabras</div>
           <div class="pieces">
             ${words.map(w => `
               <div class="piece">
@@ -523,7 +521,7 @@
             <div class="mini-actions">
               <button class="capture-btn"
                 onclick="downloadCard('entry-${index+1}','vivo-kanji-${index+1}')">
-                Descargar esta tarjeta
+                Descargar
               </button>
             </div>
     
@@ -576,7 +574,7 @@
               ${renderKanjiPanel(item.kanjis)}
 
               <div class="mini-actions">
-                <button class="capture-btn" onclick="downloadCard('entry-${index+1}','vivo-palabra-${index+1}')">Descargar esta tarjeta</button>
+                <button class="capture-btn" onclick="downloadCard('entry-${index+1}','vivo-palabra-${index+1}')">Descargar</button>
               </div>
             </div>
           </div>
@@ -629,7 +627,7 @@
               ${renderKanjiPanel(item.kanjis)}
 
               <div class="mini-actions">
-                <button class="capture-btn" onclick="downloadCard('entry-${index+1}','vivo-oracion-${index+1}')">Descargar esta tarjeta</button>
+                <button class="capture-btn" onclick="downloadCard('entry-${index+1}','vivo-oracion-${index+1}')">Descargar</button>
               </div>
             </div>
           </div>
