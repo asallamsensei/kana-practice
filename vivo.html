@@ -431,10 +431,8 @@
                 <div class="kanji-grid">
                   ${item.kanjis.map(k => `
                     <div class="kanji-card">
-                      <div class="kanji-main">
-                        <div class="kanji-char">${k.char}</div>
-                        <div>${k.mean}</div>
-                      </div>
+                      <div class="kanji-char">${k.char}</div>
+                      <div class="value">${k.mean}</div>
                     </div>
                   `).join('')}
                 </div>
