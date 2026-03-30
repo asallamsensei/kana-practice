@@ -325,6 +325,11 @@
     margin-bottom:12px;
   }
 
+#singleOutput .visual-grid{
+  grid-template-columns:minmax(260px, 340px);
+  justify-content:start;
+}
+  
   @media (max-width:720px){
     .controls{
       flex-direction:column;
@@ -613,6 +618,7 @@
     }
 
     const s = simplify(n,d);
+
     out.innerHTML = `
       <div class="result-line">
         ${fracHtml(s.n, s.d)}
@@ -620,9 +626,7 @@
       </div>
 
       <div class="visual-grid">
-        ${makeVisualCard("Pizza", s.n, s.d, ["#5ea2ff","#8b5cf6","#ec4899"])}
-        ${makeVisualCard("Otra vista", s.n, s.d, ["#22d3ee","#5ea2ff","#8b5cf6"])}
-        ${makeVisualCard("Otra vista", s.n, s.d, ["#ec4899","#8b5cf6","#5ea2ff"])}
+        ${makeVisualCard("", s.n, s.d, ["#5ea2ff","#8b5cf6","#ec4899"])}
       </div>
     `;
   }
