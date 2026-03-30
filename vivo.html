@@ -690,15 +690,24 @@ function layoutMasonry(){
 
     let bestX = 0;
     let bestY = Infinity;
-
-    for(let x = 0; x <= Math.max(0, containerWidth - width); x += 6){
+    
+    const candidates = [0];
+    
+    // usar el borde derecho de cada tarjeta ya colocada
+    placed.forEach(p => {
+      candidates.push(p.right);
+    });
+    
+    candidates.forEach(x => {
+      if(x + width > containerWidth) return;
+    
       const y = getLowestYThatFits(width, height, x);
-
+    
       if(y < bestY){
         bestY = y;
         bestX = x;
       }
-    }
+    });
 
     card.style.left = `${bestX}px`;
     card.style.top = `${bestY}px`;
@@ -706,7 +715,7 @@ function layoutMasonry(){
     placed.push({
       left: bestX,
       top: bestY,
-      right: bestX + width,
+      right: bestX + width + gap,
       bottom: bestY + height
     });
   });
