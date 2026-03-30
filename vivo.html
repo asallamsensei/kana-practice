@@ -394,6 +394,22 @@
       background:rgba(0,0,0,.20);
       border-top:1px solid rgba(255,255,255,.10);
     }
+
+@media (max-width: 900px){
+  .vivo-grid{
+    position: static;
+    min-height: 0;
+    display: grid;
+    gap: 18px;
+    justify-items: start;
+  }
+
+  .entry{
+    position: static !important;
+    left: auto !important;
+    top: auto !important;
+  }
+}
     
   </style>
 </head>
@@ -636,6 +652,11 @@ function setupSearch(){
 function layoutMasonry(){
   const container = document.getElementById('vivoGrid');
   const cards = [...container.querySelectorAll('.entry:not([style*="display: none"])')];
+
+  if(window.innerWidth < 900){
+    container.style.height = 'auto';
+    return;
+  }
 
   if(!cards.length){
     container.style.height = '0px';
