@@ -128,13 +128,12 @@
     }
 
 .vivo-grid{
-  display:grid;
-  gap:18px;
-  justify-items:start;
-  align-items:start;
+  position: relative;
+  min-height: 200px;
 }
 
 .entry{
+  position: absolute;
   border:1px solid var(--border);
   border-radius:var(--radius-xl);
   overflow:hidden;
@@ -619,38 +618,128 @@ function renderWordCard(item, index){
       return renderSentenceCard(item, index);
     }
 
-    function setupSearch(){
-      const input = document.getElementById('tagSearch');
-      input.addEventListener('input', () => {
-        const q = input.value.trim().toLowerCase();
-        const cards = document.querySelectorAll('.entry');
+function setupSearch(){
+  const input = document.getElementById('tagSearch');
+  input.addEventListener('input', () => {
+    const q = input.value.trim().toLowerCase();
+    const cards = document.querySelectorAll('.entry');
 
-        cards.forEach(card => {
-          const text = (card.getAttribute('data-search') || '').toLowerCase();
-          card.style.display = text.includes(q) ? '' : 'none';
-        });
-      });
+    cards.forEach(card => {
+      const text = (card.getAttribute('data-search') || '').toLowerCase();
+      card.style.display = text.includes(q) ? '' : 'none';
+    });
+
+    layoutMasonry();
+  });
+}
+
+function layoutMasonry(){
+  const container = document.getElementById('vivoGrid');
+  const cards = [...container.querySelectorAll('.entry:not([style*="display: none"])')];
+
+  if(!cards.length){
+    container.style.height = '0px';
+    return;
+  }
+
+  const gap = 18;
+  const containerWidth = container.clientWidth;
+
+  const placed = [];
+
+  function intersects(a, b){
+    return !(
+      a.right <= b.left ||
+      a.left >= b.right ||
+      a.bottom <= b.top ||
+      a.top >= b.bottom
+    );
+  }
+
+  function collides(rect){
+    return placed.some(p => intersects(rect, p));
+  }
+
+  function getLowestYThatFits(width, height, startX){
+    let y = 0;
+
+    while(true){
+      const testRect = {
+        left: startX,
+        top: y,
+        right: startX + width,
+        bottom: y + height
+      };
+
+      const hit = placed.find(p => intersects(testRect, p));
+
+      if(!hit) return y;
+
+      y = hit.bottom + gap;
+    }
+  }
+
+  cards.forEach(card => {
+    card.style.left = '0px';
+    card.style.top = '0px';
+  });
+
+  cards.forEach(card => {
+    const width = Math.ceil(card.offsetWidth);
+    const height = Math.ceil(card.offsetHeight);
+
+    let bestX = 0;
+    let bestY = Infinity;
+
+    for(let x = 0; x <= Math.max(0, containerWidth - width); x += 6){
+      const y = getLowestYThatFits(width, height, x);
+
+      if(y < bestY){
+        bestY = y;
+        bestX = x;
+      }
     }
 
-    fetch('data/elvivo.json')
-      .then(res => res.json())
-      .then(data => {
-        const grid = document.getElementById('vivoGrid');
-        grid.innerHTML = data.map((item, index) => renderItem(item, index)).join('');
-        setupSearch();
-      })
-      .catch(err => {
-        const grid = document.getElementById('vivoGrid');
-        grid.innerHTML = `
-          <article class="entry">
-            <div class="entry-body">
-              <div class="es-line">No se pudo cargar el JSON.</div>
-              <div class="reading-line">${escapeHtml(err.message || 'Error desconocido')}</div>
-            </div>
-          </article>
-        `;
-        console.error(err);
-      });
+    card.style.left = `${bestX}px`;
+    card.style.top = `${bestY}px`;
+
+    placed.push({
+      left: bestX,
+      top: bestY,
+      right: bestX + width,
+      bottom: bestY + height
+    });
+  });
+
+  const maxBottom = Math.max(...placed.map(p => p.bottom), 0);
+  container.style.height = `${maxBottom}px`;
+}
+
+fetch('data/elvivo.json')
+  .then(res => res.json())
+  .then(data => {
+    const grid = document.getElementById('vivoGrid');
+    grid.innerHTML = data.map((item, index) => renderItem(item, index)).join('');
+    setupSearch();
+    layoutMasonry();
+    window.addEventListener('resize', layoutMasonry);
+  })
+  .catch(err => {
+    const grid = document.getElementById('vivoGrid');
+    grid.innerHTML = `
+      <article class="entry">
+        <div class="entry-body">
+          <div class="es-line">No se pudo cargar el JSON.</div>
+          <div class="reading-line">${escapeHtml(err.message || 'Error desconocido')}</div>
+        </div>
+      </article>
+    `;
+    console.error(err);
+  });
+
+window.addEventListener('load', layoutMasonry);
+document.fonts?.ready.then(layoutMasonry);
+    
   </script>
 </body>
 </html>
