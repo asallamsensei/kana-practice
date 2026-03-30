@@ -1,0 +1,1018 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Repaso de Fracciones — Aplicativo Online</title>
+<style>
+  :root{
+    --bg1:#f5f7fb;
+    --bg2:#eef3ff;
+    --card:#ffffff;
+    --text:#1f2937;
+    --muted:#6b7280;
+    --border:#dbe3f0;
+
+    --accent:#5b7cfa;
+    --accent2:#14b8a6;
+    --accent3:#f59e0b;
+    --accent4:#ef4444;
+    --accent5:#8b5cf6;
+
+    --soft1:#e8eeff;
+    --soft2:#e6fbf7;
+    --soft3:#fff5df;
+    --soft4:#ffe8e8;
+    --soft5:#f0e9ff;
+
+    --shadow:0 10px 25px rgba(34, 55, 105, .08);
+    --radius:18px;
+  }
+
+  *{ box-sizing:border-box; }
+
+  body{
+    margin:0;
+    font-family:Arial, sans-serif;
+    color:var(--text);
+    background:
+      radial-gradient(circle at top left, #ffffff 0%, #f5f7fb 35%, #eef3ff 100%);
+    line-height:1.4;
+  }
+
+  .wrap{
+    max-width:1100px;
+    margin:0 auto;
+    padding:28px 16px 60px;
+  }
+
+  .app-title{
+    font-size:1.35rem;
+    margin:0 0 8px;
+    font-weight:700;
+    color:#21304f;
+  }
+
+  .app-sub{
+    margin:0 0 24px;
+    color:var(--muted);
+    font-size:.97rem;
+  }
+
+  .section{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    box-shadow:var(--shadow);
+    padding:18px;
+    margin-bottom:18px;
+  }
+
+  .section-header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    margin-bottom:14px;
+    flex-wrap:wrap;
+  }
+
+  .section-title{
+    margin:0;
+    font-size:1.02rem;
+    font-weight:700;
+    color:#24324a;
+  }
+
+  .badge{
+    font-size:.8rem;
+    padding:6px 10px;
+    border-radius:999px;
+    background:var(--soft1);
+    color:var(--accent);
+    border:1px solid #d8e3ff;
+  }
+
+  .grid{
+    display:grid;
+    gap:14px;
+  }
+
+  .grid-2{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+
+  .grid-3{
+    grid-template-columns:repeat(3,minmax(0,1fr));
+  }
+
+  .card{
+    background:#fff;
+    border:1px solid var(--border);
+    border-radius:16px;
+    padding:14px;
+  }
+
+  .card.soft1{ background:linear-gradient(180deg,#ffffff,#f8fbff); }
+  .card.soft2{ background:linear-gradient(180deg,#ffffff,#f5fffd); }
+  .card.soft3{ background:linear-gradient(180deg,#ffffff,#fffaf0); }
+
+  .label{
+    display:block;
+    font-size:.88rem;
+    color:#445169;
+    margin-bottom:6px;
+    font-weight:700;
+  }
+
+  .inputs-row{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    align-items:end;
+  }
+
+  .mini-group{
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+  }
+
+  input[type="number"]{
+    width:100%;
+    min-width:88px;
+    padding:10px 12px;
+    border-radius:12px;
+    border:1px solid var(--border);
+    background:#fff;
+    font-size:1rem;
+    outline:none;
+  }
+
+  input[type="number"]:focus{
+    border-color:var(--accent);
+    box-shadow:0 0 0 3px rgba(91,124,250,.12);
+  }
+
+  .slash{
+    align-self:center;
+    font-size:1.2rem;
+    font-weight:700;
+    color:var(--muted);
+    padding-bottom:8px;
+  }
+
+  .btn{
+    border:none;
+    border-radius:12px;
+    padding:11px 16px;
+    font-weight:700;
+    cursor:pointer;
+    font-size:.95rem;
+    transition:.18s transform, .18s opacity, .18s box-shadow;
+    box-shadow:0 6px 14px rgba(0,0,0,.08);
+  }
+
+  .btn:hover{ transform:translateY(-1px); }
+  .btn:active{ transform:translateY(0); }
+
+  .btn-primary{
+    background:linear-gradient(135deg,var(--accent),#6d8dff);
+    color:white;
+  }
+
+  .btn-green{
+    background:linear-gradient(135deg,var(--accent2),#2dd4bf);
+    color:white;
+  }
+
+  .btn-orange{
+    background:linear-gradient(135deg,var(--accent3),#fbbf24);
+    color:white;
+  }
+
+  .fraction-display{
+    display:inline-flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    min-width:60px;
+    font-weight:700;
+    color:#1f2937;
+  }
+
+  .fraction-display .bar{
+    width:100%;
+    min-width:42px;
+    height:2px;
+    background:#263245;
+    margin:3px 0;
+    border-radius:999px;
+  }
+
+  .formula{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-bottom:12px;
+  }
+
+  .symbol{
+    font-size:1.25rem;
+    font-weight:700;
+    color:#42506b;
+  }
+
+  .result-box{
+    padding:12px 14px;
+    border-radius:14px;
+    border:1px dashed #bfd1ff;
+    background:var(--soft1);
+  }
+
+  .result-line{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-bottom:8px;
+  }
+
+  .result-line:last-child{ margin-bottom:0; }
+
+  .small-note{
+    font-size:.88rem;
+    color:var(--muted);
+  }
+
+  .visuals{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:12px;
+    margin-top:10px;
+  }
+
+  .visual-card{
+    border:1px solid var(--border);
+    border-radius:14px;
+    padding:12px;
+    background:#fff;
+  }
+
+  .visual-title{
+    margin:0 0 8px;
+    font-size:.92rem;
+    color:#334155;
+    font-weight:700;
+  }
+
+  /* Barras */
+  .bar-grid{
+    display:flex;
+    gap:4px;
+    flex-wrap:wrap;
+    align-items:center;
+  }
+
+  .bar-piece{
+    width:22px;
+    height:22px;
+    border-radius:6px;
+    border:1px solid #cfd8ea;
+    background:#f8fafc;
+  }
+
+  .bar-piece.filled{
+    background:linear-gradient(135deg,var(--accent),#8aa3ff);
+    border-color:#7c94ec;
+  }
+
+  /* Círculo */
+  .circle-wrap{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:8px 0;
+  }
+
+  svg.fraction-circle{
+    width:150px;
+    height:150px;
+    overflow:visible;
+  }
+
+  .circle-label{
+    text-anchor:middle;
+    dominant-baseline:middle;
+    font-size:14px;
+    font-weight:700;
+    fill:#263245;
+  }
+
+  /* Rectángulo / área */
+  .area-grid{
+    display:grid;
+    gap:3px;
+    justify-content:start;
+    margin-top:4px;
+  }
+
+  .area-cell{
+    width:22px;
+    height:22px;
+    border-radius:5px;
+    border:1px solid #d5deef;
+    background:#f8fafc;
+  }
+
+  .area-cell.filled{
+    background:linear-gradient(135deg,var(--accent2),#5eead4);
+    border-color:#65d9c7;
+  }
+
+  .area-cell.alt{
+    background:linear-gradient(135deg,var(--accent3),#fcd34d);
+    border-color:#f2c15d;
+  }
+
+  .legend{
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+    margin-top:8px;
+    font-size:.83rem;
+    color:var(--muted);
+  }
+
+  .dot{
+    width:12px;
+    height:12px;
+    border-radius:4px;
+    display:inline-block;
+    vertical-align:middle;
+    margin-right:5px;
+  }
+
+  .dot.blue{ background:var(--accent); }
+  .dot.green{ background:var(--accent2); }
+  .dot.orange{ background:var(--accent3); }
+
+  .empty{
+    color:var(--muted);
+    font-size:.92rem;
+  }
+
+  .op-title{
+    margin:0 0 10px;
+    font-size:.95rem;
+    font-weight:700;
+    color:#34435f;
+  }
+
+  @media (max-width:800px){
+    .grid-2,.grid-3{
+      grid-template-columns:1fr;
+    }
+
+    .formula{
+      flex-direction:column;
+      align-items:flex-start;
+    }
+
+    .fraction-display{
+      min-width:auto;
+    }
+  }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <h1 class="app-title">Repaso de Fracciones</h1>
+    <p class="app-sub">
+      Explora la representación visual de fracciones y observa cómo cambian al sumar, restar, multiplicar y dividir.
+    </p>
+
+    <!-- REPRESENTACIÓN VISUAL -->
+    <section class="section">
+      <div class="section-header">
+        <h2 class="section-title">Representación visual</h2>
+        <span class="badge">Una fracción, varias formas</span>
+      </div>
+
+      <div class="grid grid-2">
+        <div class="card soft1">
+          <label class="label">Ingresa la fracción</label>
+          <div class="inputs-row">
+            <div class="mini-group">
+              <span class="small-note">Numerador</span>
+              <input type="number" id="rep-num" value="3" min="0" />
+            </div>
+            <div class="slash">/</div>
+            <div class="mini-group">
+              <span class="small-note">Denominador</span>
+              <input type="number" id="rep-den" value="4" min="1" />
+            </div>
+            <button class="btn btn-primary" onclick="renderSingleFraction()">Mostrar</button>
+          </div>
+          <p class="small-note" style="margin-top:10px;">
+            Se mostrará como barras, círculo y cuadrícula.
+          </p>
+        </div>
+
+        <div class="card soft2">
+          <div class="op-title">Fracción actual</div>
+          <div id="single-fraction-text" class="result-box"></div>
+        </div>
+      </div>
+
+      <div id="single-visuals" class="visuals" style="margin-top:14px;"></div>
+    </section>
+
+    <!-- SUMA Y RESTA -->
+    <section class="section">
+      <div class="section-header">
+        <h2 class="section-title">Suma y resta de fracciones</h2>
+        <span class="badge" style="background:var(--soft2); color:var(--accent2); border-color:#c5f1ea;">
+          Comparación visual
+        </span>
+      </div>
+
+      <div class="grid grid-2">
+        <div class="card soft1">
+          <div class="op-title">Primera fracción</div>
+          <div class="inputs-row">
+            <div class="mini-group">
+              <span class="small-note">Numerador</span>
+              <input type="number" id="sr-a-num" value="1" min="0" />
+            </div>
+            <div class="slash">/</div>
+            <div class="mini-group">
+              <span class="small-note">Denominador</span>
+              <input type="number" id="sr-a-den" value="2" min="1" />
+            </div>
+          </div>
+        </div>
+
+        <div class="card soft3">
+          <div class="op-title">Segunda fracción</div>
+          <div class="inputs-row">
+            <div class="mini-group">
+              <span class="small-note">Numerador</span>
+              <input type="number" id="sr-b-num" value="1" min="0" />
+            </div>
+            <div class="slash">/</div>
+            <div class="mini-group">
+              <span class="small-note">Denominador</span>
+              <input type="number" id="sr-b-den" value="3" min="1" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top:14px;">
+        <button class="btn btn-green" onclick="renderSumRest()">Mostrar suma y resta</button>
+      </div>
+
+      <div id="sumrest-output" style="margin-top:14px;"></div>
+    </section>
+
+    <!-- MULTIPLICACIÓN Y DIVISIÓN -->
+    <section class="section">
+      <div class="section-header">
+        <h2 class="section-title">Multiplicación y división</h2>
+        <span class="badge" style="background:var(--soft3); color:#c07b00; border-color:#f4dfb2;">
+          Producto y cociente
+        </span>
+      </div>
+
+      <div class="grid grid-2">
+        <div class="card soft1">
+          <div class="op-title">Primera fracción</div>
+          <div class="inputs-row">
+            <div class="mini-group">
+              <span class="small-note">Numerador</span>
+              <input type="number" id="md-a-num" value="2" min="0" />
+            </div>
+            <div class="slash">/</div>
+            <div class="mini-group">
+              <span class="small-note">Denominador</span>
+              <input type="number" id="md-a-den" value="3" min="1" />
+            </div>
+          </div>
+        </div>
+
+        <div class="card soft3">
+          <div class="op-title">Segunda fracción</div>
+          <div class="inputs-row">
+            <div class="mini-group">
+              <span class="small-note">Numerador</span>
+              <input type="number" id="md-b-num" value="3" min="0" />
+            </div>
+            <div class="slash">/</div>
+            <div class="mini-group">
+              <span class="small-note">Denominador</span>
+              <input type="number" id="md-b-den" value="4" min="1" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top:14px;">
+        <button class="btn btn-orange" onclick="renderMultDiv()">Mostrar multiplicación y división</button>
+      </div>
+
+      <div id="multdiv-output" style="margin-top:14px;"></div>
+    </section>
+  </div>
+
+<script>
+  function gcd(a,b){
+    a = Math.abs(a);
+    b = Math.abs(b);
+    while(b !== 0){
+      const t = b;
+      b = a % b;
+      a = t;
+    }
+    return a || 1;
+  }
+
+  function simplifyFraction(n,d){
+    if(d === 0) return { n, d };
+    if(d < 0){ n = -n; d = -d; }
+    const g = gcd(n,d);
+    return { n:n/g, d:d/g };
+  }
+
+  function formatFraction(n,d){
+    if(d === 0) return "Indefinida";
+    const s = simplifyFraction(n,d);
+    return `${s.n}/${s.d}`;
+  }
+
+  function fractionToMixed(n,d){
+    if(d === 0) return null;
+    const sign = n < 0 ? -1 : 1;
+    n = Math.abs(n);
+    const entero = Math.floor(n / d);
+    const resto = n % d;
+    return {
+      sign,
+      entero,
+      resto,
+      d
+    };
+  }
+
+  function lcm(a,b){
+    return Math.abs(a*b)/gcd(a,b);
+  }
+
+  function makeFractionDisplay(n,d){
+    return `
+      <div class="fraction-display">
+        <div>${n}</div>
+        <div class="bar"></div>
+        <div>${d}</div>
+      </div>
+    `;
+  }
+
+  function validateFraction(n,d){
+    if(!Number.isFinite(n) || !Number.isFinite(d)) return "Ingresa números válidos.";
+    if(d === 0) return "El denominador no puede ser 0.";
+    if(d < 0) return "Usa denominador positivo para evitar confusión.";
+    if(n < 0) return "Por ahora usa numerador positivo o cero.";
+    return "";
+  }
+
+  function createBarVisual(n,d,colorClass="filled"){
+    if(d > 24){
+      return `<div class="empty">Denominador muy grande para barras. Intenta con uno menor o igual a 24.</div>`;
+    }
+
+    let html = `<div class="bar-grid">`;
+    for(let i=0;i<d;i++){
+      html += `<div class="bar-piece ${i < n ? colorClass : ""}"></div>`;
+    }
+    html += `</div>`;
+    return html;
+  }
+
+  function createCircleVisual(n,d){
+    if(d > 16){
+      return `<div class="empty">Para el círculo se ve mejor con denominadores de hasta 16.</div>`;
+    }
+
+    const size = 150;
+    const cx = 75;
+    const cy = 75;
+    const r = 58;
+    const angleStep = (Math.PI * 2) / d;
+    let paths = "";
+
+    for(let i=0;i<d;i++){
+      const start = -Math.PI/2 + i * angleStep;
+      const end = start + angleStep;
+
+      const x1 = cx + r * Math.cos(start);
+      const y1 = cy + r * Math.sin(start);
+      const x2 = cx + r * Math.cos(end);
+      const y2 = cy + r * Math.sin(end);
+
+      const largeArc = angleStep > Math.PI ? 1 : 0;
+      const fill = i < n ? "#5b7cfa" : "#f8fafc";
+      const stroke = i < n ? "#6f8cf3" : "#d6deed";
+
+      paths += `
+        <path d="M ${cx} ${cy} L ${x1} ${y1} A ${r} ${r} 0 ${largeArc} 1 ${x2} ${y2} Z"
+              fill="${fill}" stroke="${stroke}" stroke-width="1.5"></path>
+      `;
+    }
+
+    return `
+      <div class="circle-wrap">
+        <svg class="fraction-circle" viewBox="0 0 ${size} ${size}">
+          ${paths}
+          <circle cx="${cx}" cy="${cy}" r="21" fill="white" stroke="#d6deed" stroke-width="1.5"></circle>
+          <text x="${cx}" y="${cy}" class="circle-label">${n}/${d}</text>
+        </svg>
+      </div>
+    `;
+  }
+
+  function createAreaVisual(n,d,mode="single"){
+    if(d > 36){
+      return `<div class="empty">La cuadrícula se ve mejor con denominadores de hasta 36.</div>`;
+    }
+
+    const cols = Math.min(d, 6);
+    const rows = Math.ceil(d / cols);
+
+    let html = `<div class="area-grid" style="grid-template-columns:repeat(${cols},22px)">`;
+    for(let i=0;i<d;i++){
+      let cls = "area-cell";
+      if(i < n) cls += ` ${mode === "alt" ? "alt" : "filled"}`;
+      html += `<div class="${cls}"></div>`;
+    }
+    html += `</div>`;
+    return html;
+  }
+
+  function renderFractionVisualSet(container, n, d, titlePrefix="Fracción"){
+    container.innerHTML = `
+      <div class="visual-card">
+        <h3 class="visual-title">${titlePrefix}: barras</h3>
+        ${createBarVisual(n,d)}
+      </div>
+      <div class="visual-card">
+        <h3 class="visual-title">${titlePrefix}: círculo</h3>
+        ${createCircleVisual(n,d)}
+      </div>
+      <div class="visual-card">
+        <h3 class="visual-title">${titlePrefix}: cuadrícula</h3>
+        ${createAreaVisual(n,d)}
+      </div>
+    `;
+  }
+
+  function renderSingleFraction(){
+    const n = parseInt(document.getElementById("rep-num").value, 10);
+    const d = parseInt(document.getElementById("rep-den").value, 10);
+
+    const err = validateFraction(n,d);
+    const textBox = document.getElementById("single-fraction-text");
+    const visuals = document.getElementById("single-visuals");
+
+    if(err){
+      textBox.innerHTML = `<div class="empty">${err}</div>`;
+      visuals.innerHTML = "";
+      return;
+    }
+
+    const s = simplifyFraction(n,d);
+    const mixed = fractionToMixed(n,d);
+
+    textBox.innerHTML = `
+      <div class="result-line">
+        ${makeFractionDisplay(n,d)}
+        <span class="small-note">Forma simplificada:</span>
+        ${makeFractionDisplay(s.n,s.d)}
+      </div>
+      <div class="small-note">
+        Valor decimal: <strong>${(n/d).toFixed(4)}</strong>
+      </div>
+      <div class="small-note" style="margin-top:6px;">
+        Número mixto:
+        <strong>
+          ${
+            mixed.resto === 0
+              ? `${mixed.sign * mixed.entero}`
+              : mixed.entero === 0
+                ? `${mixed.sign < 0 ? "-" : ""}${mixed.resto}/${mixed.d}`
+                : `${mixed.sign < 0 ? "-" : ""}${mixed.entero} ${mixed.resto}/${mixed.d}`
+          }
+        </strong>
+      </div>
+    `;
+
+    renderFractionVisualSet(visuals, n, d, "Representación");
+  }
+
+  function createOperationVisuals(n1,d1,n2,d2,resultN,resultD, opName){
+    return `
+      <div class="visuals">
+        <div class="visual-card">
+          <h3 class="visual-title">Primera fracción</h3>
+          ${createBarVisual(n1,d1)}
+          <div class="legend"><span>${n1}/${d1}</span></div>
+        </div>
+        <div class="visual-card">
+          <h3 class="visual-title">Segunda fracción</h3>
+          ${createBarVisual(n2,d2)}
+          <div class="legend"><span>${n2}/${d2}</span></div>
+        </div>
+        <div class="visual-card">
+          <h3 class="visual-title">Resultado: ${opName}</h3>
+          ${createBarVisual(resultN,resultD)}
+          <div class="legend"><span>${formatFraction(resultN,resultD)}</span></div>
+        </div>
+      </div>
+    `;
+  }
+
+  function renderEquivalentBars(n1,d1,n2,d2, mode="sum"){
+    const common = lcm(d1,d2);
+    if(common > 36){
+      return `
+        <div class="visual-card">
+          <h3 class="visual-title">Comparación con denominador común</h3>
+          <div class="empty">El denominador común queda muy grande para mostrarlo claramente.</div>
+        </div>
+      `;
+    }
+
+    const a = n1 * (common / d1);
+    const b = n2 * (common / d2);
+    let r = mode === "sum" ? a + b : a - b;
+
+    let row1 = "", row2 = "", row3 = "";
+    for(let i=0;i<common;i++){
+      row1 += `<div class="area-cell ${i<a ? "filled" : ""}"></div>`;
+      row2 += `<div class="area-cell ${i<b ? "alt" : ""}"></div>`;
+      row3 += `<div class="area-cell ${i<Math.max(0,r) ? "filled" : ""}"></div>`;
+    }
+
+    return `
+      <div class="visual-card" style="grid-column:1/-1;">
+        <h3 class="visual-title">${mode === "sum" ? "Suma" : "Resta"} con denominador común (${common})</h3>
+        <div class="small-note" style="margin-bottom:8px;">
+          Se ve cada fracción llevada al mismo denominador.
+        </div>
+
+        <div class="small-note" style="margin:8px 0 4px;"><span class="dot blue"></span>Primera: ${a}/${common}</div>
+        <div class="area-grid" style="grid-template-columns:repeat(${Math.min(common,12)},22px)">${row1}</div>
+
+        <div class="small-note" style="margin:10px 0 4px;"><span class="dot orange"></span>Segunda: ${b}/${common}</div>
+        <div class="area-grid" style="grid-template-columns:repeat(${Math.min(common,12)},22px)">${row2}</div>
+
+        <div class="small-note" style="margin:10px 0 4px;"><span class="dot blue"></span>Resultado visual aproximado: ${Math.max(0,r)}/${common}</div>
+        <div class="area-grid" style="grid-template-columns:repeat(${Math.min(common,12)},22px)">${row3}</div>
+      </div>
+    `;
+  }
+
+  function renderSumRest(){
+    const n1 = parseInt(document.getElementById("sr-a-num").value, 10);
+    const d1 = parseInt(document.getElementById("sr-a-den").value, 10);
+    const n2 = parseInt(document.getElementById("sr-b-num").value, 10);
+    const d2 = parseInt(document.getElementById("sr-b-den").value, 10);
+
+    const out = document.getElementById("sumrest-output");
+    const err1 = validateFraction(n1,d1);
+    const err2 = validateFraction(n2,d2);
+
+    if(err1 || err2){
+      out.innerHTML = `<div class="empty">${err1 || err2}</div>`;
+      return;
+    }
+
+    const sumN = n1*d2 + n2*d1;
+    const sumD = d1*d2;
+    const sumS = simplifyFraction(sumN,sumD);
+
+    const restN = n1*d2 - n2*d1;
+    const restD = d1*d2;
+    const restS = simplifyFraction(restN,restD);
+
+    out.innerHTML = `
+      <div class="grid grid-2">
+        <div class="card soft2">
+          <div class="op-title">Suma</div>
+          <div class="formula">
+            ${makeFractionDisplay(n1,d1)}
+            <span class="symbol">+</span>
+            ${makeFractionDisplay(n2,d2)}
+            <span class="symbol">=</span>
+            ${makeFractionDisplay(sumS.n,sumS.d)}
+          </div>
+
+          <div class="result-box">
+            <div class="small-note">Resultado simplificado: <strong>${sumS.n}/${sumS.d}</strong></div>
+            <div class="small-note">Decimal: <strong>${(sumS.n/sumS.d).toFixed(4)}</strong></div>
+          </div>
+
+          ${createOperationVisuals(n1,d1,n2,d2,sumS.n,sumS.d,"suma")}
+          <div class="visuals" style="margin-top:12px;">
+            ${renderEquivalentBars(n1,d1,n2,d2,"sum")}
+          </div>
+        </div>
+
+        <div class="card soft3">
+          <div class="op-title">Resta</div>
+          <div class="formula">
+            ${makeFractionDisplay(n1,d1)}
+            <span class="symbol">−</span>
+            ${makeFractionDisplay(n2,d2)}
+            <span class="symbol">=</span>
+            ${makeFractionDisplay(restS.n,restS.d)}
+          </div>
+
+          <div class="result-box">
+            <div class="small-note">Resultado simplificado: <strong>${restS.n}/${restS.d}</strong></div>
+            <div class="small-note">Decimal: <strong>${(restS.n/restS.d).toFixed(4)}</strong></div>
+          </div>
+
+          ${createOperationVisuals(n1,d1,n2,d2,Math.abs(restS.n),restS.d,"resta")}
+          <div class="small-note" style="margin-top:10px;">
+            Nota: si la resta da negativa, la barra se muestra en valor absoluto para no romper la visualización.
+          </div>
+          <div class="visuals" style="margin-top:12px;">
+            ${renderEquivalentBars(n1,d1,n2,d2,"rest")}
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  function createMultiplicationArea(n1,d1,n2,d2){
+    if(d1 > 12 || d2 > 12){
+      return `<div class="empty">La representación por área se ve mejor con denominadores de hasta 12.</div>`;
+    }
+
+    let html = `<div class="area-grid" style="grid-template-columns:repeat(${d2},22px)">`;
+    for(let r=0;r<d1;r++){
+      for(let c=0;c<d2;c++){
+        let cls = "area-cell";
+        const inRows = r < n1;
+        const inCols = c < n2;
+        if(inRows && inCols){
+          cls += " filled";
+        }else if(inRows || inCols){
+          cls += " alt";
+        }
+        html += `<div class="${cls}"></div>`;
+      }
+    }
+    html += `</div>`;
+
+    return `
+      <div class="visual-card">
+        <h3 class="visual-title">Modelo de área para multiplicación</h3>
+        <div class="small-note" style="margin-bottom:8px;">
+          Filas tomadas: ${n1}/${d1} &nbsp;|&nbsp; Columnas tomadas: ${n2}/${d2}
+        </div>
+        ${html}
+        <div class="legend">
+          <span><span class="dot orange"></span>una sola selección</span>
+          <span><span class="dot blue"></span>superposición = producto</span>
+        </div>
+      </div>
+    `;
+  }
+
+  function createDivisionMeaning(n1,d1,n2,d2,resN,resD){
+    return `
+      <div class="visual-card">
+        <h3 class="visual-title">Idea visual de la división</h3>
+        <div class="small-note" style="margin-bottom:8px;">
+          Dividir fracciones responde a:
+          <strong>¿cuántas veces cabe la segunda fracción dentro de la primera?</strong>
+        </div>
+
+        <div class="result-box">
+          <div class="result-line">
+            ${makeFractionDisplay(n1,d1)}
+            <span class="symbol">÷</span>
+            ${makeFractionDisplay(n2,d2)}
+            <span class="symbol">=</span>
+            ${makeFractionDisplay(resN,resD)}
+          </div>
+          <div class="small-note">
+            También equivale a multiplicar por el recíproco:
+            <strong>${n1}/${d1} × ${d2}/${n2}</strong>
+          </div>
+        </div>
+
+        <div class="small-note" style="margin-top:10px;">
+          Ejemplo interpretado:
+          ¿cuántos grupos de <strong>${n2}/${d2}</strong> caben en <strong>${n1}/${d1}</strong>?
+        </div>
+      </div>
+    `;
+  }
+
+  function renderMultDiv(){
+    const n1 = parseInt(document.getElementById("md-a-num").value, 10);
+    const d1 = parseInt(document.getElementById("md-a-den").value, 10);
+    const n2 = parseInt(document.getElementById("md-b-num").value, 10);
+    const d2 = parseInt(document.getElementById("md-b-den").value, 10);
+
+    const out = document.getElementById("multdiv-output");
+    const err1 = validateFraction(n1,d1);
+    const err2 = validateFraction(n2,d2);
+
+    if(err1 || err2){
+      out.innerHTML = `<div class="empty">${err1 || err2}</div>`;
+      return;
+    }
+
+    if(n2 === 0){
+      out.innerHTML = `<div class="empty">No se puede dividir entre una fracción que vale 0.</div>`;
+      return;
+    }
+
+    const multN = n1*n2;
+    const multD = d1*d2;
+    const multS = simplifyFraction(multN,multD);
+
+    const divN = n1*d2;
+    const divD = d1*n2;
+    const divS = simplifyFraction(divN,divD);
+
+    out.innerHTML = `
+      <div class="grid grid-2">
+        <div class="card soft2">
+          <div class="op-title">Multiplicación</div>
+          <div class="formula">
+            ${makeFractionDisplay(n1,d1)}
+            <span class="symbol">×</span>
+            ${makeFractionDisplay(n2,d2)}
+            <span class="symbol">=</span>
+            ${makeFractionDisplay(multS.n,multS.d)}
+          </div>
+
+          <div class="result-box">
+            <div class="small-note">Resultado simplificado: <strong>${multS.n}/${multS.d}</strong></div>
+            <div class="small-note">Decimal: <strong>${(multS.n/multS.d).toFixed(4)}</strong></div>
+          </div>
+
+          <div class="visuals">
+            ${createMultiplicationArea(n1,d1,n2,d2)}
+            <div class="visual-card">
+              <h3 class="visual-title">Barra del resultado</h3>
+              ${createBarVisual(multS.n, multS.d)}
+            </div>
+          </div>
+        </div>
+
+        <div class="card soft3">
+          <div class="op-title">División</div>
+          <div class="formula">
+            ${makeFractionDisplay(n1,d1)}
+            <span class="symbol">÷</span>
+            ${makeFractionDisplay(n2,d2)}
+            <span class="symbol">=</span>
+            ${makeFractionDisplay(divS.n,divS.d)}
+          </div>
+
+          <div class="result-box">
+            <div class="small-note">Resultado simplificado: <strong>${divS.n}/${divS.d}</strong></div>
+            <div class="small-note">Decimal: <strong>${(divS.n/divS.d).toFixed(4)}</strong></div>
+          </div>
+
+          <div class="visuals">
+            ${createDivisionMeaning(n1,d1,n2,d2,divS.n,divS.d)}
+            <div class="visual-card">
+              <h3 class="visual-title">Barra del resultado</h3>
+              ${createBarVisual(
+                Math.min(divS.n, divS.d <= 24 ? divS.n : 0),
+                divS.d
+              )}
+              <div class="small-note" style="margin-top:8px;">
+                En división, la interpretación principal es “cuántas veces cabe”.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  renderSingleFraction();
+  renderSumRest();
+  renderMultDiv();
+</script>
+</body>
+</html>
