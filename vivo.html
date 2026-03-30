@@ -549,49 +549,37 @@
       `;
     }
 
-    function renderWordCard(item, index){
-      const literalHTML = item.literal ? `
-        <div class="meaning-box">
-          <span class="label">Traducción literal</span>
-          <div class="value">${escapeHtml(item.literal)}</div>
+function renderWordCard(item, index){
+  return `
+    <article class="entry entry--word capture-card" id="entry-${index+1}" data-search="${escapeHtml((item.type||'') + ' ' + (item.theme||'') + ' ' + (item.jp||'') + ' ' + (item.romaji||'') + ' ' + (item.es||''))}">
+      <div class="entry-top">
+        <div class="entry-tag">PALABRA</div>
+        <div class="entry-date">Tags: ${escapeHtml(item.theme || '')}</div>
+      </div>
+
+      <div class="entry-body">
+        <div class="summary">
+          <div class="jp-line">${escapeHtml(item.jp || '')}</div>
+          ${item.romaji ? `<div class="reading-line">${escapeHtml(item.romaji)}</div>` : ''}
+          ${item.es ? `<div class="es-line">${escapeHtml(item.es)}</div>` : ''}
         </div>
-      ` : '';
 
-      const matizHTML = renderMatiz(item);
-
-      return `
-        <article class="entry entry--word capture-card" id="entry-${index+1}" data-search="${escapeHtml((item.type||'') + ' ' + (item.theme||'') + ' ' + (item.jp||'') + ' ' + (item.romaji||'') + ' ' + (item.es||''))}">
-          <div class="entry-top">
-            <div class="entry-tag">PALABRA</div>
-            <div class="entry-date">Tags: ${escapeHtml(item.theme || '')}</div>
-          </div>
-
-          <div class="entry-body">
-            <div class="summary">
-              <div class="jp-line">${escapeHtml(item.jp || '')}</div>
-              ${item.romaji ? `<div class="reading-line">${escapeHtml(item.romaji)}</div>` : ''}
-              ${item.es ? `<div class="es-line">${escapeHtml(item.es)}</div>` : ''}
-            </div>
-
-            <div class="details">
-              ${item.matiz ? `
-              <div class="meaning-boxes">
-                <div class="meaning-box">
-                  <span class="label">Observación</span>
-                  <div class="value">${escapeHtml(item.matiz)}</div>
-                </div>
-              </div>
-              ` : ''}
-              
-              </div>
-
-              ${renderKanjiPanel(item.kanjis)}
-
+        <div class="details">
+          ${item.matiz ? `
+          <div class="meaning-boxes">
+            <div class="meaning-box">
+              <span class="label">Observación</span>
+              <div class="value">${escapeHtml(item.matiz)}</div>
             </div>
           </div>
-        </article>
-      `;
-    }
+          ` : ''}
+
+          ${renderKanjiPanel(item.kanjis)}
+        </div>
+      </div>
+    </article>
+  `;
+}
 
     function renderSentenceCard(item, index){
       const literalHTML = item.literal ? `
