@@ -1598,7 +1598,7 @@ function renderModuleMemorizar(){
       </div>
 
       <div id="memorizarFeedback" class="feedback ${completed ? 'ok' : ''}">
-        ${completed ? '✔ Ya puedes pasar al módulo Reconocer nota' : 'Completa las escuchas mínimas'}
+        ${completed ? '✔ Escuchas completadas' : 'Completa las escuchas mínimas'}
       </div>
     </section>
   `;
@@ -1660,7 +1660,9 @@ function drawQuizNote(){
       </div>
 
       <div class="answer-grid" id="quizAnswers"></div>
-      <div id="quizFeedback" class="feedback"></div>
+      <div id="quizFeedback" class="feedback">
+        ${state.reconocer.roundsDone >= state.reconocer.roundsRequired ? '✔ Ejercicios completados' : ''}
+      </div>
     </section>
   `;
 
@@ -1676,9 +1678,13 @@ function drawQuizNote(){
       const ok = opt.id === note.id;
       registerResult(note.id, ok);
 
-      feedback.textContent = ok
-        ? `✔ Correcto: era ${getDisplayName(note)}`
-        : `✘ Era ${getDisplayName(note)}`;
+      if(state.reconocer.roundsDone >= state.reconocer.roundsRequired){
+        feedback.textContent = "✔ Ejercicios completados";
+      }else{
+        feedback.textContent = ok
+          ? `✔ Correcto: era ${getDisplayName(note)}`
+          : `✘ Era ${getDisplayName(note)}`;
+      }
       feedback.className = `feedback ${ok ? "ok" : "error"}`;
 
       setTimeout(() => {
@@ -1721,7 +1727,9 @@ function drawKeyboardExercise(){
       </div>
 
       <div class="keyboard" id="keyboardWrap"></div>
-      <div id="keyboardFeedback" class="feedback"></div>
+      <div id="keyboardFeedback" class="feedback">
+        ${state.teclado.roundsDone >= state.teclado.roundsRequired ? '✔ Ejercicios completados' : ''}
+      </div>
     </section>
   `;
 
@@ -1769,9 +1777,13 @@ function drawKeyboardExercise(){
           }
         }
 
-        feedback.textContent = ok
-          ? `✔ Correcto: ${getDisplayName(note)}`
-          : `✘ Era ${getDisplayName(note)}`;
+        if(state.teclado.roundsDone >= state.teclado.roundsRequired){
+          feedback.textContent = "✔ Ejercicios completados";
+        }else{
+          feedback.textContent = ok
+            ? `✔ Correcto: ${getDisplayName(note)}`
+            : `✘ Era ${getDisplayName(note)}`;
+        }
         feedback.className = `feedback ${ok ? "ok" : "error"}`;
 
         setTimeout(() => {
@@ -1836,7 +1848,9 @@ function drawMemoryRound(){
         <button class="answer-btn" id="btnDifferent">No</button>
       </div>
 
-      <div id="memoryFeedback" class="feedback"></div>
+      <div id="memoryFeedback" class="feedback">
+        ${state.memoria.roundsDone >= state.memoria.roundsRequired ? '✔ Ejercicios completados' : ''}
+      </div>
     </section>
   `;
 
@@ -1854,9 +1868,13 @@ function drawMemoryRound(){
     const ok = base.id === probe.id;
     registerResult(base.id, ok);
 
-    feedback.textContent = ok
-      ? `✔ Correcto: sí era la misma nota`
-      : `✘ No era la misma`;
+    if(state.memoria.roundsDone >= state.memoria.roundsRequired){
+      feedback.textContent = "✔ Ejercicios completados";
+    }else{
+      feedback.textContent = ok
+        ? `✔ Correcto: sí era la misma nota`
+        : `✘ No era la misma`;
+    }
     feedback.className = `feedback ${ok ? "ok" : "error"}`;
 
     setTimeout(() => {
@@ -1869,9 +1887,13 @@ function drawMemoryRound(){
     const ok = base.id !== probe.id;
     registerResult(base.id, ok);
 
-    feedback.textContent = ok
-      ? `✔ Correcto: no era la misma`
-      : `✘ Sí era la misma`;
+    if(state.memoria.roundsDone >= state.memoria.roundsRequired){
+      feedback.textContent = "✔ Ejercicios completados";
+    }else{
+      feedback.textContent = ok
+        ? `✔ Correcto: no era la misma`
+        : `✘ Sí era la misma`;
+    }
     feedback.className = `feedback ${ok ? "ok" : "error"}`;
 
     setTimeout(() => {
