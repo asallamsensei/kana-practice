@@ -712,7 +712,7 @@
     <section class="hero">
       <div class="hero-top">
         <div class="brand">Asallam Sensei · Curso de Oído Absoluto</div>
-        <div id="studentChip" class="student-chip">Estudiante</div>
+        <div id="studentChip" class="student-chip hidden">Estudiante</div>
       </div>
       <h1>Entrena tu oído nota por nota</h1>
     </section>
@@ -1338,6 +1338,8 @@ function advanceStageIfNeeded(){
 function showWorkspace(){
   gateSection.classList.add("hidden");
   workspace.classList.add("show");
+  studentChip.classList.remove("hidden");
+  
   updateNotationUI();
   updateSummaryUI();
   updateModuleButtons();
