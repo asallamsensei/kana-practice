@@ -325,9 +325,19 @@
 }
 
 .stage-chip-wrap{
+  display:flex;
+  align-items:center;
+  gap:14px;
   margin-bottom:14px;
+  flex-wrap:wrap;
 }
 
+.notation-inline{
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+  
 .stage-chip{
   display:inline-flex;
   align-items:center;
@@ -699,20 +709,19 @@
       <main class="panel main">
 
       <div class="stage-chip-wrap">
+      
         <div class="stage-chip">
-          <!--
-          <span class="stage-chip-label">Etapa actual</span>
-          <span class="stage-chip-sep">·</span>
-          -->
           <span class="stage-chip-value" id="activeNotesValue">2 notas activas</span>
-          <span class="stage-chip-sep">·</span>
-      
-          <span class="stage-chip-label">Notas:</span>
-      
-          <div class="notation-buttons">
-            <button id="btnNotationLetter" class="notation-btn" type="button">C</button>
-            <button id="btnNotationSolfege" class="notation-btn" type="button">Do</button>
         </div>
+      
+        <div class="notation-inline">
+          <span class="stage-chip-label">Notación</span>
+          <div class="notation-buttons">
+            <button id="btnNotationLetter" class="notation-btn">C</button>
+            <button id="btnNotationSolfege" class="notation-btn">Do</button>
+          </div>
+        </div>
+      
       </div>
         
       <div class="module-top-list">
