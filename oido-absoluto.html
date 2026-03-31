@@ -31,25 +31,32 @@
     font-family: Arial, sans-serif;
     color:var(--text);
     background:
-      radial-gradient(1200px 700px at 15% 10%, rgba(125,92,255,.22), transparent 60%),
-      radial-gradient(900px 600px at 85% 20%, rgba(34,197,94,.12), transparent 60%),
+      radial-gradient(1200px 700px at 15% 10%, rgba(125,92,255,.20), transparent 60%),
+      radial-gradient(900px 600px at 85% 20%, rgba(34,197,94,.10), transparent 60%),
       linear-gradient(180deg, var(--bg), var(--bg2));
   }
 
   body{
     min-height:100vh;
-    display:flex;
-    justify-content:center;
-    padding:28px 16px 50px;
+    padding:22px 14px 40px;
   }
 
   .app{
-    width:min(1100px, 100%);
+    width:min(1200px, 100%);
+    margin:0 auto;
+  }
+
+  .panel{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    box-shadow:var(--shadow);
+    backdrop-filter:blur(12px);
   }
 
   .hero{
     text-align:center;
-    margin-bottom:24px;
+    margin-bottom:20px;
   }
 
   .brand{
@@ -65,42 +72,30 @@
 
   h1{
     margin:0 0 10px;
-    font-size:clamp(2rem, 5vw, 3.2rem);
+    font-size:clamp(2rem, 5vw, 3rem);
     line-height:1.08;
   }
 
   .subtitle{
     margin:0 auto;
-    max-width:760px;
+    max-width:820px;
     color:var(--muted);
-    font-size:1.04rem;
+    font-size:1.02rem;
     line-height:1.65;
   }
 
-  .panel{
-    background:var(--card);
-    border:1px solid var(--border);
-    border-radius:var(--radius);
-    box-shadow:var(--shadow);
-    backdrop-filter:blur(12px);
-  }
-
   .gate{
-    max-width:760px;
-    margin:0 auto 28px;
+    max-width:780px;
+    margin:0 auto 24px;
     padding:24px;
   }
 
-  .gate-head{
-    margin-bottom:16px;
-  }
-
-  .gate-title{
+  .gate h2{
     margin:0 0 8px;
-    font-size:1.4rem;
+    font-size:1.35rem;
   }
 
-  .gate-text{
+  .gate p{
     margin:0;
     color:var(--muted);
     line-height:1.6;
@@ -114,7 +109,7 @@
   }
 
   .input{
-    flex:1 1 260px;
+    flex:1 1 280px;
     min-width:0;
     height:54px;
     padding:0 16px;
@@ -132,19 +127,17 @@
   }
 
   .btn{
-    height:54px;
+    height:50px;
     border:none;
     border-radius:16px;
-    padding:0 20px;
+    padding:0 18px;
     font-weight:700;
     cursor:pointer;
     font-size:1rem;
     transition:transform .16s ease, opacity .16s ease, background .16s ease;
   }
 
-  .btn:hover{
-    transform:translateY(-1px);
-  }
+  .btn:hover{ transform:translateY(-1px); }
 
   .btn-primary{
     background:linear-gradient(135deg, var(--accent), #5f45d9);
@@ -157,216 +150,393 @@
     border:1px solid var(--border);
   }
 
-  .hint{
-    margin-top:14px;
-    color:var(--muted);
-    font-size:.95rem;
+  .btn-good{
+    background:linear-gradient(135deg, #22c55e, #179949);
+    color:white;
+  }
+
+  .btn-danger{
+    background:linear-gradient(135deg, #ef4444, #c53434);
+    color:white;
   }
 
   .message{
-    margin-top:16px;
     min-height:24px;
+    margin-top:14px;
     font-weight:700;
   }
 
   .message.ok{ color:var(--accent2); }
-  .message.error{ color:#ff8e8e; }
+  .message.error{ color:#ff9d9d; }
 
-  .levels{
+  .workspace{
     display:none;
-    margin-top:10px;
+    gap:18px;
   }
 
-  .levels.show{
-    display:block;
+  .workspace.show{
+    display:grid;
+    grid-template-columns:320px 1fr;
+    align-items:start;
   }
 
-  .level-card{
-    padding:24px;
-    margin-bottom:22px;
+  .sidebar, .main{
+    padding:18px;
   }
 
-  .level-top{
-    display:flex;
-    gap:14px;
-    justify-content:space-between;
-    align-items:flex-start;
-    flex-wrap:wrap;
-    margin-bottom:20px;
-  }
-
-  .level-badge{
+  .student-chip{
     display:inline-block;
-    padding:7px 12px;
+    padding:8px 12px;
     border-radius:999px;
     background:rgba(34,197,94,.12);
     color:#9bf0b5;
     border:1px solid rgba(34,197,94,.28);
-    font-size:.9rem;
     font-weight:700;
     margin-bottom:10px;
+    font-size:.92rem;
   }
 
-  .level-title{
-    margin:0 0 8px;
-    font-size:1.6rem;
+  .sidebar h2{
+    margin:0 0 10px;
+    font-size:1.3rem;
   }
 
-  .level-desc{
-    margin:0;
-    max-width:720px;
+  .muted{
     color:var(--muted);
-    line-height:1.65;
+    line-height:1.6;
   }
 
-  .level-side{
-    min-width:220px;
+  .toolbar{
+    margin:18px 0 16px;
     display:grid;
-    gap:10px;
+    gap:12px;
   }
 
-  .mini-stat{
-    background:rgba(255,255,255,.05);
+  .toggle-wrap{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:12px;
+    padding:12px 14px;
+    border-radius:16px;
     border:1px solid var(--border);
+    background:rgba(255,255,255,.04);
+  }
+
+  .switch{
+    position:relative;
+    width:58px;
+    height:32px;
+    flex:0 0 auto;
+  }
+
+  .switch input{ display:none; }
+
+  .slider{
+    position:absolute;
+    inset:0;
+    border-radius:999px;
+    background:rgba(255,255,255,.15);
+    transition:.2s ease;
+    cursor:pointer;
+  }
+
+  .slider:before{
+    content:"";
+    position:absolute;
+    width:24px;
+    height:24px;
+    left:4px;
+    top:4px;
+    background:white;
+    border-radius:50%;
+    transition:.2s ease;
+  }
+
+  .switch input:checked + .slider{
+    background:rgba(125,92,255,.8);
+  }
+
+  .switch input:checked + .slider:before{
+    transform:translateX(26px);
+  }
+
+  .info-grid{
+    display:grid;
+    gap:12px;
+    margin-top:16px;
+  }
+
+  .mini-card{
+    border:1px solid var(--border);
+    background:rgba(255,255,255,.05);
     border-radius:16px;
     padding:12px 14px;
   }
 
-  .mini-stat-label{
+  .mini-card .label{
     color:var(--muted);
     font-size:.88rem;
     margin-bottom:4px;
   }
 
-  .mini-stat-value{
+  .mini-card .value{
+    font-size:1.05rem;
+    font-weight:700;
+  }
+
+  .module-list{
+    display:grid;
+    gap:12px;
+    margin-top:16px;
+  }
+
+  .module-btn{
+    width:100%;
+    text-align:left;
+    border:1px solid var(--border);
+    background:rgba(255,255,255,.05);
+    color:var(--text);
+    padding:14px;
+    border-radius:16px;
+    cursor:pointer;
+    transition:.16s ease;
+    font-size:1rem;
+  }
+
+  .module-btn:hover{
+    background:rgba(255,255,255,.08);
+  }
+
+  .module-btn.active{
+    border-color:rgba(125,92,255,.55);
+    background:rgba(125,92,255,.14);
+  }
+
+  .module-btn small{
+    display:block;
+    color:var(--muted);
+    margin-top:5px;
+    line-height:1.45;
+  }
+
+  .level2{
+    margin-top:14px;
+    opacity:.75;
+    padding:14px;
+    border-radius:16px;
+    background:rgba(245,158,11,.08);
+    border:1px solid rgba(245,158,11,.22);
+  }
+
+  .main-header{
+    display:flex;
+    gap:12px;
+    justify-content:space-between;
+    align-items:flex-start;
+    flex-wrap:wrap;
+    margin-bottom:16px;
+  }
+
+  .main-header h2{
+    margin:0 0 6px;
+    font-size:1.6rem;
+  }
+
+  .main-header p{
+    margin:0;
+    color:var(--muted);
+    line-height:1.6;
+  }
+
+  .action-row{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-top:14px;
+  }
+
+  .exercise-card{
+    border:1px solid var(--border);
+    background:var(--card2);
+    border-radius:20px;
+    padding:20px;
+    margin-top:16px;
+  }
+
+  .center{
+    text-align:center;
+  }
+
+  .big-text{
+    font-size:clamp(2rem, 7vw, 4rem);
+    font-weight:700;
+    line-height:1.08;
+    margin:10px 0;
+  }
+
+  .sub-big{
+    color:var(--muted);
+    font-size:1rem;
+    line-height:1.6;
+  }
+
+  .answer-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(120px, 1fr));
+    gap:12px;
+    margin-top:18px;
+  }
+
+  .answer-btn{
+    min-height:58px;
+    border:none;
+    border-radius:16px;
+    background:rgba(255,255,255,.08);
+    color:var(--text);
+    border:1px solid var(--border);
+    font-size:1.05rem;
+    font-weight:700;
+    cursor:pointer;
+    transition:.16s ease;
+  }
+
+  .answer-btn:hover{
+    background:rgba(255,255,255,.12);
+  }
+
+  .feedback{
+    min-height:28px;
+    margin-top:16px;
+    font-weight:700;
+    text-align:center;
+  }
+
+  .feedback.ok{ color:#9bf0b5; }
+  .feedback.error{ color:#ff9d9d; }
+
+  .keyboard{
+    display:flex;
+    gap:10px;
+    justify-content:center;
+    flex-wrap:wrap;
+    margin-top:18px;
+  }
+
+  .key{
+    width:76px;
+    height:120px;
+    border-radius:14px;
+    border:1px solid rgba(0,0,0,.15);
+    background:linear-gradient(180deg, #ffffff, #e7e7ef);
+    color:#111;
+    font-weight:700;
+    cursor:pointer;
+    box-shadow:0 10px 18px rgba(0,0,0,.18);
+  }
+
+  .key:hover{
+    transform:translateY(-2px);
+  }
+
+  .stats{
+    margin-top:18px;
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(140px, 1fr));
+    gap:12px;
+  }
+
+  .stat-card{
+    border:1px solid var(--border);
+    background:rgba(255,255,255,.05);
+    border-radius:16px;
+    padding:12px;
+  }
+
+  .stat-card .label{
+    color:var(--muted);
+    font-size:.88rem;
+    margin-bottom:4px;
+  }
+
+  .stat-card .value{
     font-size:1.08rem;
     font-weight:700;
   }
 
-  .modules{
-    display:grid;
-    grid-template-columns:repeat(2, minmax(0,1fr));
-    gap:16px;
-  }
-
-  .module{
-    background:var(--card2);
-    border:1px solid var(--border);
-    border-radius:20px;
-    padding:18px;
-    display:flex;
-    flex-direction:column;
-    gap:12px;
-    min-height:220px;
-  }
-
-  .module-number{
-    width:42px;
-    height:42px;
-    border-radius:12px;
-    display:grid;
-    place-items:center;
-    font-weight:700;
-    background:rgba(125,92,255,.16);
-    border:1px solid rgba(125,92,255,.32);
-  }
-
-  .module h3{
-    margin:0;
-    font-size:1.14rem;
-  }
-
-  .module p{
-    margin:0;
-    color:var(--muted);
-    line-height:1.58;
-    flex:1;
-  }
-
-  .tag-row{
-    display:flex;
-    gap:8px;
-    flex-wrap:wrap;
-  }
-
-  .tag{
-    padding:7px 10px;
-    border-radius:999px;
-    border:1px solid var(--border);
-    background:rgba(255,255,255,.05);
-    color:var(--muted);
-    font-size:.84rem;
-  }
-
-  .module-actions{
-    display:flex;
-    gap:10px;
-    flex-wrap:wrap;
-  }
-
-  .module .btn{
-    height:46px;
-    padding:0 16px;
-    font-size:.95rem;
-  }
-
-  .locked{
-    opacity:.72;
-  }
-
-  .locked .module-number{
-    background:rgba(245,158,11,.12);
-    border-color:rgba(245,158,11,.26);
-  }
-
-  .note-box{
-    margin-top:22px;
-    padding:16px 18px;
-    border-radius:18px;
-    background:rgba(255,255,255,.05);
-    border:1px solid var(--border);
-    line-height:1.65;
-    color:var(--muted);
-  }
-
-  .footer-note{
-    text-align:center;
-    color:var(--muted);
+  .per-note{
     margin-top:18px;
-    font-size:.92rem;
   }
 
-  @media (max-width: 860px){
-    .modules{
+  .per-note h3{
+    margin:0 0 10px;
+    font-size:1.1rem;
+  }
+
+  .note-bars{
+    display:grid;
+    gap:10px;
+  }
+
+  .note-row{
+    border:1px solid var(--border);
+    background:rgba(255,255,255,.04);
+    border-radius:14px;
+    padding:10px 12px;
+  }
+
+  .note-row-top{
+    display:flex;
+    justify-content:space-between;
+    gap:12px;
+    margin-bottom:7px;
+    font-weight:700;
+  }
+
+  .bar{
+    width:100%;
+    height:10px;
+    background:rgba(255,255,255,.08);
+    border-radius:999px;
+    overflow:hidden;
+  }
+
+  .bar-fill{
+    height:100%;
+    background:linear-gradient(90deg, var(--accent), #22c55e);
+    width:0%;
+  }
+
+  .hidden{
+    display:none !important;
+  }
+
+  @media (max-width: 980px){
+    .workspace.show{
       grid-template-columns:1fr;
     }
   }
 
   @media (max-width: 640px){
     body{
-      padding:18px 12px 36px;
+      padding:16px 10px 28px;
     }
 
-    .gate,
-    .level-card{
-      padding:18px;
+    .gate, .sidebar, .main{
+      padding:16px;
     }
 
     .gate-form{
       flex-direction:column;
     }
 
-    .btn,
-    .input{
+    .btn, .input{
       width:100%;
     }
 
-    .level-title{
-      font-size:1.34rem;
-    }
-
-    .subtitle{
-      font-size:.98rem;
+    .key{
+      width:62px;
+      height:104px;
     }
   }
 </style>
@@ -377,264 +547,878 @@
       <div class="brand">Asallam Sensei · Curso de Oído Absoluto</div>
       <h1>Entrena tu oído nota por nota</h1>
       <p class="subtitle">
-        Accede a tus módulos con tu clave del curso. Por ahora está habilitado el
-        <strong>Nivel 1</strong>, centrado en memoria auditiva y reconocimiento de notas individuales.
+        Accede con tu clave, entra a tu nivel y entrena de forma progresiva.
+        El Nivel 1 aumenta desde 2 notas hasta las 7 naturales.
       </p>
     </section>
 
-    <section class="panel gate">
-      <div class="gate-head">
-        <h2 class="gate-title">Ingresa tu clave</h2>
-        <p class="gate-text">
-          La clave te ubica directamente en tu nivel. Más adelante podremos hacer que cada clave
-          abra diferentes contenidos, módulos y progresos guardados.
-        </p>
-      </div>
+    <section id="gateSection" class="panel gate">
+      <h2>Ingresa tu clave</h2>
+      <p>
+        Cada clave identifica al estudiante y lo ubica en su nivel.
+        Por ahora está habilitado completamente el <strong>Nivel 1</strong>.
+      </p>
 
       <div class="gate-form">
-        <input
-          id="accessKey"
-          class="input"
-          type="text"
-          placeholder="Ejemplo: OA-NIVEL1"
-          autocomplete="off"
-        />
+        <input id="accessKey" class="input" type="text" placeholder="Ejemplo: OA-ANA-01" autocomplete="off" />
         <button id="btnUnlock" class="btn btn-primary">Entrar</button>
-        <button id="btnDemo" class="btn btn-secondary">Probar demo</button>
+        <button id="btnDemo" class="btn btn-secondary">Demo</button>
       </div>
 
-      <div class="hint">
-        Por ahora la clave válida es: <strong>OA-NIVEL1</strong>
-      </div>
-
-      <div id="message" class="message"></div>
+      <div id="gateMessage" class="message"></div>
     </section>
 
-    <section id="levels" class="levels">
-      <article class="panel level-card">
-        <div class="level-top">
+    <section id="workspace" class="workspace">
+      <aside class="panel sidebar">
+        <div id="studentChip" class="student-chip">Estudiante</div>
+        <h2>Nivel 1 — Fundamentos del oído</h2>
+        <div class="muted">
+          Entrenamiento progresivo con notas naturales. El sistema empieza con pocas notas
+          y va ampliando el repertorio a medida que mejoras.
+        </div>
+
+        <div class="toolbar">
+          <div class="toggle-wrap">
+            <div>
+              <strong>Mostrar notas como</strong><br>
+              <span class="muted" id="notationLabel">Do Re Mi</span>
+            </div>
+            <label class="switch">
+              <input id="notationToggle" type="checkbox">
+              <span class="slider"></span>
+            </label>
+          </div>
+        </div>
+
+        <div class="info-grid">
+          <div class="mini-card">
+            <div class="label">Notas activas</div>
+            <div class="value" id="activeNotesValue">2</div>
+          </div>
+          <div class="mini-card">
+            <div class="label">Precisión global</div>
+            <div class="value" id="accuracyValue">0%</div>
+          </div>
+          <div class="mini-card">
+            <div class="label">Racha actual</div>
+            <div class="value" id="streakValue">0</div>
+          </div>
+          <div class="mini-card">
+            <div class="label">Módulo actual</div>
+            <div class="value" id="currentModuleValue">Escuchar y memorizar</div>
+          </div>
+        </div>
+
+        <div class="module-list">
+          <button class="module-btn active" data-module="memorizar">
+            1. Escuchar y memorizar
+            <small>Escucha una nota, mírala y empieza a grabar su identidad sonora.</small>
+          </button>
+
+          <button class="module-btn" data-module="reconocer">
+            2. Reconocer nota
+            <small>Escucha y elige la nota correcta entre las opciones activas.</small>
+          </button>
+
+          <button class="module-btn" data-module="teclado">
+            3. Identificar en teclado
+            <small>Escucha una nota y selecciónala en el teclado visual.</small>
+          </button>
+
+          <button class="module-btn" data-module="memoria">
+            4. Memoria de nota
+            <small>Escucha, guarda la nota y decide si luego suena la misma o no.</small>
+          </button>
+        </div>
+
+        <div class="level2">
+          <strong>Nivel 2:</strong> bloqueado por ahora. Luego lo ampliaremos con más dificultad.
+        </div>
+
+        <div class="action-row">
+          <button id="btnLogout" class="btn btn-secondary">Salir</button>
+          <button id="btnResetProgress" class="btn btn-danger">Reiniciar progreso</button>
+        </div>
+      </aside>
+
+      <main class="panel main">
+        <div class="main-header">
           <div>
-            <div class="level-badge">Desbloqueado</div>
-            <h2 class="level-title">Nivel 1 — Fundamentos del oído</h2>
-            <p class="level-desc">
-              Este nivel construye la base del curso. Aquí el estudiante empieza a grabar en la mente
-              el sonido de notas individuales, sin acordes ni escalas todavía. La idea es entrenar
-              primero la huella auditiva de cada nota.
-            </p>
-          </div>
-
-          <div class="level-side">
-            <div class="mini-stat">
-              <div class="mini-stat-label">Notas activas</div>
-              <div class="mini-stat-value">C · D · E</div>
-            </div>
-            <div class="mini-stat">
-              <div class="mini-stat-label">Modo pedagógico</div>
-              <div class="mini-stat-value">Opciones reducidas</div>
-            </div>
-            <div class="mini-stat">
-              <div class="mini-stat-label">Meta sugerida</div>
-              <div class="mini-stat-value">80% o más</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="modules">
-          <div class="module">
-            <div class="module-number">1</div>
-            <h3>Escuchar y memorizar</h3>
-            <p>
-              Módulo para crear huella auditiva. El alumno escucha una nota varias veces
-              y empieza a asociarla mentalmente con su identidad sonora.
-            </p>
-            <div class="tag-row">
-              <span class="tag">Memoria auditiva</span>
-              <span class="tag">Base del curso</span>
-              <span class="tag">Sin presión</span>
-            </div>
-            <div class="module-actions">
-              <button class="btn btn-primary" onclick="openModule('memorizar')">Abrir módulo</button>
-              <button class="btn btn-secondary" onclick="alert('Luego aquí podremos mostrar una vista previa del módulo.')">Vista previa</button>
-            </div>
-          </div>
-
-          <div class="module">
-            <div class="module-number">2</div>
-            <h3>Reconocer nota</h3>
-            <p>
-              La app reproduce una nota y el estudiante elige cuál cree que es. En Nivel 1
-              conviene empezar con pocas opciones para fortalecer la seguridad.
-            </p>
-            <div class="tag-row">
-              <span class="tag">Respuesta inmediata</span>
-              <span class="tag">2 a 3 opciones</span>
-              <span class="tag">Progreso medible</span>
-            </div>
-            <div class="module-actions">
-              <button class="btn btn-primary" onclick="openModule('reconocer')">Abrir módulo</button>
-              <button class="btn btn-secondary" onclick="alert('Más adelante aquí podremos mostrar estadísticas por nota.')">Ver detalles</button>
-            </div>
-          </div>
-
-          <div class="module">
-            <div class="module-number">3</div>
-            <h3>Identificar en teclado</h3>
-            <p>
-              Se escucha la nota y el estudiante debe señalarla dentro de un teclado visual.
-              Esto une el sonido con su ubicación musical.
-            </p>
-            <div class="tag-row">
-              <span class="tag">Sonido + posición</span>
-              <span class="tag">Visual</span>
-              <span class="tag">Muy intuitivo</span>
-            </div>
-            <div class="module-actions">
-              <button class="btn btn-primary" onclick="openModule('teclado')">Abrir módulo</button>
-              <button class="btn btn-secondary" onclick="alert('Luego este módulo puede abrir un piano interactivo.')">Vista previa</button>
-            </div>
-          </div>
-
-          <div class="module">
-            <div class="module-number">4</div>
-            <h3>Memoria de nota</h3>
-            <p>
-              El estudiante escucha una nota, la guarda en la mente y luego debe decidir si una nueva
-              reproducción corresponde o no a la misma nota.
-            </p>
-            <div class="tag-row">
-              <span class="tag">Comparación mental</span>
-              <span class="tag">Concentración</span>
-              <span class="tag">Refuerzo fino</span>
-            </div>
-            <div class="module-actions">
-              <button class="btn btn-primary" onclick="openModule('memoria')">Abrir módulo</button>
-              <button class="btn btn-secondary" onclick="alert('Aquí luego podemos meter rondas cortas de memoria auditiva.')">Ver detalles</button>
-            </div>
-          </div>
-        </div>
-
-        <div class="note-box">
-          <strong>Recomendación pedagógica para este nivel:</strong>
-          empieza con solo <strong>2 o 3 notas activas</strong>. Por ejemplo: C, D y E.
-          Cuando el alumno llegue a buena precisión, se amplían las opciones. Esto hace que el curso
-          se sienta claro, progresivo y mucho más entrenable.
-        </div>
-      </article>
-
-      <article class="panel level-card locked">
-        <div class="level-top">
-          <div>
-            <div class="level-badge" style="background:rgba(245,158,11,.12);color:#ffd48a;border-color:rgba(245,158,11,.24);">Bloqueado</div>
-            <h2 class="level-title">Nivel 2 — Próximamente</h2>
-            <p class="level-desc">
-              Aquí podremos ampliar cantidad de notas, subir dificultad, meter más velocidad
-              y empezar transición hacia entrenamiento más fino.
+            <h2 id="moduleTitle">Escuchar y memorizar</h2>
+            <p id="moduleDesc">
+              Aquí el estudiante escucha una nota visible para empezar a fijarla en la memoria.
             </p>
           </div>
         </div>
-      </article>
 
-      <div class="footer-note">
-        Base inicial lista para conectar con módulos reales, progreso y audio.
-      </div>
+        <div id="moduleContent"></div>
+
+        <section class="exercise-card">
+          <h2 style="margin-top:0;">Estadísticas del estudiante</h2>
+
+          <div class="stats">
+            <div class="stat-card">
+              <div class="label">Nombre</div>
+              <div class="value" id="studentNameStat">—</div>
+            </div>
+            <div class="stat-card">
+              <div class="label">Intentos</div>
+              <div class="value" id="attemptsStat">0</div>
+            </div>
+            <div class="stat-card">
+              <div class="label">Aciertos</div>
+              <div class="value" id="correctStat">0</div>
+            </div>
+            <div class="stat-card">
+              <div class="label">Precisión</div>
+              <div class="value" id="accuracyStat">0%</div>
+            </div>
+            <div class="stat-card">
+              <div class="label">Máxima racha</div>
+              <div class="value" id="bestStreakStat">0</div>
+            </div>
+            <div class="stat-card">
+              <div class="label">Etapa de dificultad</div>
+              <div class="value" id="stageStat">2 notas</div>
+            </div>
+          </div>
+
+          <div class="per-note">
+            <h3>Precisión por nota</h3>
+            <div id="noteBars" class="note-bars"></div>
+          </div>
+        </section>
+      </main>
     </section>
   </div>
 
 <script>
-  const VALID_KEYS = {
-    "OA-NIVEL1": {
-      level: 1,
-      name: "Nivel 1"
-    },
-    "DEMO": {
-      level: 1,
-      name: "Nivel 1"
-    }
+/* =========================
+   CONFIGURACIÓN MODULAR
+========================= */
+
+const STUDENT_KEYS = {
+  "OA-ANA-01": { name: "Ana", level: 1 },
+  "OA-LUIS-01": { name: "Luis", level: 1 },
+  "OA-MARIA-01": { name: "María", level: 1 },
+  "OA-DEMO": { name: "Demo", level: 1 }
+};
+
+const NOTES = [
+  { id:"C", solfege:"Do", freq:261.63 },
+  { id:"D", solfege:"Re", freq:293.66 },
+  { id:"E", solfege:"Mi", freq:329.63 },
+  { id:"F", solfege:"Fa", freq:349.23 },
+  { id:"G", solfege:"Sol", freq:392.00 },
+  { id:"A", solfege:"La", freq:440.00 },
+  { id:"B", solfege:"Si", freq:493.88 }
+];
+
+const MODULES = {
+  memorizar: {
+    title: "Escuchar y memorizar",
+    desc: "Escucha una nota visible y repítela mentalmente varias veces para fijarla en tu memoria auditiva."
+  },
+  reconocer: {
+    title: "Reconocer nota",
+    desc: "Escucha una nota y elige cuál es entre las opciones activas del nivel."
+  },
+  teclado: {
+    title: "Identificar en teclado",
+    desc: "Escucha una nota y selecciónala directamente en el teclado visual."
+  },
+  memoria: {
+    title: "Memoria de nota",
+    desc: "Escucha una nota y luego decide si la nueva reproducción es la misma o una diferente."
+  }
+};
+
+/* =========================
+   ESTADO GLOBAL
+========================= */
+
+const state = {
+  studentKey: "",
+  studentName: "",
+  level: 0,
+  notation: "solfege", // solfege | letter
+  module: "memorizar",
+
+  stats: {
+    attempts: 0,
+    correct: 0,
+    streak: 0,
+    bestStreak: 0,
+    perNote: {}
+  },
+
+  currentVisibleNote: null,
+  currentQuizNote: null,
+  currentMemoryBase: null,
+  currentMemoryProbe: null
+};
+
+NOTES.forEach(n => {
+  state.stats.perNote[n.id] = { attempts: 0, correct: 0 };
+});
+
+/* =========================
+   ELEMENTOS
+========================= */
+
+const gateSection = document.getElementById("gateSection");
+const workspace = document.getElementById("workspace");
+const accessKeyInput = document.getElementById("accessKey");
+const btnUnlock = document.getElementById("btnUnlock");
+const btnDemo = document.getElementById("btnDemo");
+const gateMessage = document.getElementById("gateMessage");
+
+const notationToggle = document.getElementById("notationToggle");
+const notationLabel = document.getElementById("notationLabel");
+const studentChip = document.getElementById("studentChip");
+const currentModuleValue = document.getElementById("currentModuleValue");
+const activeNotesValue = document.getElementById("activeNotesValue");
+const accuracyValue = document.getElementById("accuracyValue");
+const streakValue = document.getElementById("streakValue");
+
+const moduleTitle = document.getElementById("moduleTitle");
+const moduleDesc = document.getElementById("moduleDesc");
+const moduleContent = document.getElementById("moduleContent");
+
+const btnLogout = document.getElementById("btnLogout");
+const btnResetProgress = document.getElementById("btnResetProgress");
+
+const studentNameStat = document.getElementById("studentNameStat");
+const attemptsStat = document.getElementById("attemptsStat");
+const correctStat = document.getElementById("correctStat");
+const accuracyStat = document.getElementById("accuracyStat");
+const bestStreakStat = document.getElementById("bestStreakStat");
+const stageStat = document.getElementById("stageStat");
+const noteBars = document.getElementById("noteBars");
+
+/* =========================
+   AUDIO
+========================= */
+
+let audioCtx = null;
+
+function ensureAudio(){
+  if(!audioCtx){
+    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  }
+}
+
+function playTone(freq, duration = 1.0, type = "sine"){
+  ensureAudio();
+
+  const now = audioCtx.currentTime;
+  const osc = audioCtx.createOscillator();
+  const gain = audioCtx.createGain();
+
+  osc.type = type;
+  osc.frequency.setValueAtTime(freq, now);
+
+  gain.gain.setValueAtTime(0.0001, now);
+  gain.gain.exponentialRampToValueAtTime(0.22, now + 0.03);
+  gain.gain.exponentialRampToValueAtTime(0.18, now + 0.10);
+  gain.gain.exponentialRampToValueAtTime(0.0001, now + duration);
+
+  osc.connect(gain);
+  gain.connect(audioCtx.destination);
+
+  osc.start(now);
+  osc.stop(now + duration + 0.02);
+}
+
+/* =========================
+   HELPERS
+========================= */
+
+function normalizeKey(v){
+  return v.trim().toUpperCase();
+}
+
+function showGateMessage(text, type = ""){
+  gateMessage.textContent = text;
+  gateMessage.className = "message";
+  if(type) gateMessage.classList.add(type);
+}
+
+function getDisplayName(noteObj){
+  return state.notation === "letter" ? noteObj.id : noteObj.solfege;
+}
+
+function getActiveNoteCount(){
+  const attempts = state.stats.attempts;
+
+  if(attempts >= 60) return 7;
+  if(attempts >= 48) return 6;
+  if(attempts >= 36) return 5;
+  if(attempts >= 24) return 4;
+  if(attempts >= 12) return 3;
+  return 2;
+}
+
+function getActiveNotes(){
+  return NOTES.slice(0, getActiveNoteCount());
+}
+
+function randomFrom(arr){
+  return arr[Math.floor(Math.random() * arr.length)];
+}
+
+function shuffle(arr){
+  const a = [...arr];
+  for(let i = a.length - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function accuracyPercent(correct, attempts){
+  if(!attempts) return 0;
+  return Math.round((correct / attempts) * 100);
+}
+
+/* =========================
+   PERSISTENCIA
+========================= */
+
+function getStorageKey(){
+  return state.studentKey ? `oa_progress_${state.studentKey}` : "";
+}
+
+function saveProgress(){
+  if(!state.studentKey) return;
+
+  const payload = {
+    studentKey: state.studentKey,
+    studentName: state.studentName,
+    level: state.level,
+    notation: state.notation,
+    module: state.module,
+    stats: state.stats
   };
 
-  const accessKey = document.getElementById("accessKey");
-  const btnUnlock = document.getElementById("btnUnlock");
-  const btnDemo = document.getElementById("btnDemo");
-  const message = document.getElementById("message");
-  const levels = document.getElementById("levels");
+  localStorage.setItem(getStorageKey(), JSON.stringify(payload));
+  localStorage.setItem("oa_last_student_key", state.studentKey);
+}
 
-  function normalizeKey(value){
-    return value.trim().toUpperCase();
+function loadProgress(studentKey){
+  const raw = localStorage.getItem(`oa_progress_${studentKey}`);
+  if(!raw) return false;
+
+  try{
+    const data = JSON.parse(raw);
+
+    state.studentKey = data.studentKey || studentKey;
+    state.studentName = data.studentName || STUDENT_KEYS[studentKey].name;
+    state.level = data.level || 1;
+    state.notation = data.notation || "solfege";
+    state.module = data.module || "memorizar";
+    state.stats = data.stats || state.stats;
+
+    NOTES.forEach(n => {
+      if(!state.stats.perNote[n.id]){
+        state.stats.perNote[n.id] = { attempts: 0, correct: 0 };
+      }
+    });
+
+    return true;
+  } catch(err){
+    return false;
   }
+}
 
-  function showMessage(text, type = ""){
-    message.textContent = text;
-    message.className = "message";
-    if(type){
-      message.classList.add(type);
-    }
-  }
+function resetCurrentStudentProgress(){
+  if(!state.studentKey) return;
 
-  function unlockWithKey(rawKey){
-    const key = normalizeKey(rawKey);
-
-    if(!key){
-      showMessage("Escribe una clave para continuar.", "error");
-      levels.classList.remove("show");
-      return;
-    }
-
-    if(VALID_KEYS[key]){
-      showMessage("Clave correcta. Bienvenido al Nivel 1.", "ok");
-      levels.classList.add("show");
-
-      // aquí luego podremos guardar en localStorage
-      localStorage.setItem("oa_access_key", key);
-      localStorage.setItem("oa_unlocked_level", String(VALID_KEYS[key].level));
-
-      window.scrollTo({
-        top: document.getElementById("levels").offsetTop - 12,
-        behavior: "smooth"
-      });
-    } else {
-      showMessage("Clave no válida. Revisa e intenta otra vez.", "error");
-      levels.classList.remove("show");
-    }
-  }
-
-  btnUnlock.addEventListener("click", () => {
-    unlockWithKey(accessKey.value);
+  const freshPerNote = {};
+  NOTES.forEach(n => {
+    freshPerNote[n.id] = { attempts: 0, correct: 0 };
   });
 
-  btnDemo.addEventListener("click", () => {
-    accessKey.value = "OA-NIVEL1";
-    unlockWithKey(accessKey.value);
+  state.stats = {
+    attempts: 0,
+    correct: 0,
+    streak: 0,
+    bestStreak: 0,
+    perNote: freshPerNote
+  };
+
+  state.module = "memorizar";
+  saveProgress();
+}
+
+/* =========================
+   UI GENERAL
+========================= */
+
+function updateNotationUI(){
+  notationToggle.checked = state.notation === "letter";
+  notationLabel.textContent = state.notation === "letter" ? "C D E" : "Do Re Mi";
+}
+
+function updateSummaryUI(){
+  const activeCount = getActiveNoteCount();
+  const acc = accuracyPercent(state.stats.correct, state.stats.attempts);
+
+  studentChip.textContent = `Estudiante: ${state.studentName}`;
+  currentModuleValue.textContent = MODULES[state.module].title;
+  activeNotesValue.textContent = activeCount;
+  accuracyValue.textContent = `${acc}%`;
+  streakValue.textContent = state.stats.streak;
+
+  studentNameStat.textContent = state.studentName;
+  attemptsStat.textContent = state.stats.attempts;
+  correctStat.textContent = state.stats.correct;
+  accuracyStat.textContent = `${acc}%`;
+  bestStreakStat.textContent = state.stats.bestStreak;
+  stageStat.textContent = `${activeCount} ${activeCount === 1 ? "nota" : "notas"}`;
+
+  renderPerNoteStats();
+}
+
+function renderPerNoteStats(){
+  noteBars.innerHTML = "";
+
+  NOTES.forEach(note => {
+    const data = state.stats.perNote[note.id];
+    const attempts = data.attempts;
+    const correct = data.correct;
+    const pct = accuracyPercent(correct, attempts);
+
+    const row = document.createElement("div");
+    row.className = "note-row";
+
+    row.innerHTML = `
+      <div class="note-row-top">
+        <span>${getDisplayName(note)}</span>
+        <span>${pct}%</span>
+      </div>
+      <div class="bar">
+        <div class="bar-fill" style="width:${pct}%"></div>
+      </div>
+    `;
+
+    noteBars.appendChild(row);
   });
+}
 
-  accessKey.addEventListener("keydown", (e) => {
-    if(e.key === "Enter"){
-      unlockWithKey(accessKey.value);
-    }
+function updateModuleButtons(){
+  document.querySelectorAll(".module-btn").forEach(btn => {
+    btn.classList.toggle("active", btn.dataset.module === state.module);
   });
+}
 
-  function openModule(moduleName){
-    const savedLevel = Number(localStorage.getItem("oa_unlocked_level") || "0");
+function showWorkspace(){
+  gateSection.classList.add("hidden");
+  workspace.classList.add("show");
+  updateNotationUI();
+  updateSummaryUI();
+  updateModuleButtons();
+  renderCurrentModule();
+}
 
-    if(savedLevel < 1){
-      alert("Primero debes ingresar una clave válida.");
-      return;
+function logout(){
+  saveProgress();
+  workspace.classList.remove("show");
+  gateSection.classList.remove("hidden");
+  accessKeyInput.value = "";
+  showGateMessage("");
+}
+
+/* =========================
+   LÓGICA DE PROGRESO
+========================= */
+
+function registerResult(noteId, isCorrect){
+  state.stats.attempts += 1;
+  state.stats.perNote[noteId].attempts += 1;
+
+  if(isCorrect){
+    state.stats.correct += 1;
+    state.stats.perNote[noteId].correct += 1;
+    state.stats.streak += 1;
+    if(state.stats.streak > state.stats.bestStreak){
+      state.stats.bestStreak = state.stats.streak;
     }
-
-    // Por ahora solo marcamos cuál módulo abriría.
-    alert("Aquí luego abriremos el módulo: " + moduleName);
+  } else {
+    state.stats.streak = 0;
   }
 
-  // Si ya estaba desbloqueado antes, lo mostramos automáticamente
-  window.addEventListener("load", () => {
-    const savedKey = localStorage.getItem("oa_access_key");
-    const savedLevel = Number(localStorage.getItem("oa_unlocked_level") || "0");
+  saveProgress();
+  updateSummaryUI();
+}
 
-    if(savedKey && savedLevel >= 1){
-      accessKey.value = savedKey;
-      showMessage("Acceso restaurado. Nivel 1 listo.", "ok");
-      levels.classList.add("show");
-    }
+/* =========================
+   RENDER MÓDULOS
+========================= */
+
+function renderCurrentModule(){
+  moduleTitle.textContent = MODULES[state.module].title;
+  moduleDesc.textContent = MODULES[state.module].desc;
+  currentModuleValue.textContent = MODULES[state.module].title;
+
+  if(state.module === "memorizar") renderModuleMemorizar();
+  if(state.module === "reconocer") renderModuleReconocer();
+  if(state.module === "teclado") renderModuleTeclado();
+  if(state.module === "memoria") renderModuleMemoria();
+
+  updateSummaryUI();
+}
+
+/* ===== MÓDULO 1 ===== */
+
+function newVisibleNote(){
+  state.currentVisibleNote = randomFrom(getActiveNotes());
+}
+
+function renderModuleMemorizar(){
+  if(!state.currentVisibleNote){
+    newVisibleNote();
+  }
+
+  const note = state.currentVisibleNote;
+
+  moduleContent.innerHTML = `
+    <section class="exercise-card center">
+      <div class="sub-big">Memoriza esta nota</div>
+      <div class="big-text">${getDisplayName(note)}</div>
+      <div class="sub-big">
+        Escúchala varias veces. La idea aquí es que tu oído empiece a asociar este sonido con su identidad.
+      </div>
+
+      <div class="action-row" style="justify-content:center;">
+        <button class="btn btn-primary" id="btnPlayVisible">▶ Escuchar nota</button>
+        <button class="btn btn-secondary" id="btnNewVisible">Nueva nota</button>
+      </div>
+    </section>
+  `;
+
+  document.getElementById("btnPlayVisible").addEventListener("click", () => {
+    playTone(note.freq, 1.1, "sine");
   });
+
+  document.getElementById("btnNewVisible").addEventListener("click", () => {
+    newVisibleNote();
+    renderModuleMemorizar();
+  });
+}
+
+/* ===== MÓDULO 2 ===== */
+
+function newQuizNote(){
+  state.currentQuizNote = randomFrom(getActiveNotes());
+}
+
+function renderModuleReconocer(){
+  newQuizNote();
+  drawQuizNote();
+}
+
+function drawQuizNote(){
+  const activeNotes = getActiveNotes();
+  const note = state.currentQuizNote;
+  const options = shuffle(activeNotes);
+
+  moduleContent.innerHTML = `
+    <section class="exercise-card center">
+      <div class="sub-big">Escucha y elige la nota correcta</div>
+      <div class="action-row" style="justify-content:center;">
+        <button class="btn btn-primary" id="btnPlayQuiz">▶ Reproducir nota</button>
+        <button class="btn btn-secondary" id="btnReplayQuiz">↻ Repetir</button>
+      </div>
+
+      <div class="answer-grid" id="quizAnswers"></div>
+      <div id="quizFeedback" class="feedback"></div>
+    </section>
+  `;
+
+  const answersWrap = document.getElementById("quizAnswers");
+  const feedback = document.getElementById("quizFeedback");
+
+  options.forEach(opt => {
+    const btn = document.createElement("button");
+    btn.className = "answer-btn";
+    btn.textContent = getDisplayName(opt);
+
+    btn.addEventListener("click", () => {
+      const ok = opt.id === note.id;
+      registerResult(note.id, ok);
+
+      feedback.textContent = ok
+        ? `✔ Correcto: era ${getDisplayName(note)}`
+        : `✘ Era ${getDisplayName(note)}`;
+      feedback.className = `feedback ${ok ? "ok" : "error"}`;
+
+      setTimeout(() => {
+        newQuizNote();
+        drawQuizNote();
+      }, 850);
+    });
+
+    answersWrap.appendChild(btn);
+  });
+
+  document.getElementById("btnPlayQuiz").addEventListener("click", () => {
+    playTone(note.freq, 1.0, "sine");
+  });
+
+  document.getElementById("btnReplayQuiz").addEventListener("click", () => {
+    playTone(note.freq, 1.0, "sine");
+  });
+
+  setTimeout(() => playTone(note.freq, 1.0, "sine"), 120);
+}
+
+/* ===== MÓDULO 3 ===== */
+
+function renderModuleTeclado(){
+  state.currentQuizNote = randomFrom(getActiveNotes());
+  drawKeyboardExercise();
+}
+
+function drawKeyboardExercise(){
+  const activeNotes = getActiveNotes();
+  const note = state.currentQuizNote;
+
+  moduleContent.innerHTML = `
+    <section class="exercise-card center">
+      <div class="sub-big">Escucha la nota y tócala en el teclado</div>
+
+      <div class="action-row" style="justify-content:center;">
+        <button class="btn btn-primary" id="btnPlayKeyboard">▶ Reproducir nota</button>
+      </div>
+
+      <div class="keyboard" id="keyboardWrap"></div>
+      <div id="keyboardFeedback" class="feedback"></div>
+    </section>
+  `;
+
+  const keyboardWrap = document.getElementById("keyboardWrap");
+  const feedback = document.getElementById("keyboardFeedback");
+
+  activeNotes.forEach(n => {
+    const key = document.createElement("button");
+    key.className = "key";
+    key.textContent = getDisplayName(n);
+
+    key.addEventListener("click", () => {
+      const ok = n.id === note.id;
+      registerResult(note.id, ok);
+
+      playTone(n.freq, 0.9, "sine");
+
+      feedback.textContent = ok
+        ? `✔ Correcto: ${getDisplayName(note)}`
+        : `✘ Era ${getDisplayName(note)}`;
+      feedback.className = `feedback ${ok ? "ok" : "error"}`;
+
+      setTimeout(() => {
+        state.currentQuizNote = randomFrom(getActiveNotes());
+        drawKeyboardExercise();
+      }, 900);
+    });
+
+    keyboardWrap.appendChild(key);
+  });
+
+  document.getElementById("btnPlayKeyboard").addEventListener("click", () => {
+    playTone(note.freq, 1.0, "sine");
+  });
+
+  setTimeout(() => playTone(note.freq, 1.0, "sine"), 120);
+}
+
+/* ===== MÓDULO 4 ===== */
+
+function setupMemoryRound(){
+  const activeNotes = getActiveNotes();
+  state.currentMemoryBase = randomFrom(activeNotes);
+
+  const same = Math.random() < 0.5;
+  if(same){
+    state.currentMemoryProbe = state.currentMemoryBase;
+  } else {
+    const others = activeNotes.filter(n => n.id !== state.currentMemoryBase.id);
+    state.currentMemoryProbe = randomFrom(others);
+  }
+}
+
+function renderModuleMemoria(){
+  setupMemoryRound();
+  drawMemoryRound();
+}
+
+function drawMemoryRound(){
+  const base = state.currentMemoryBase;
+  const probe = state.currentMemoryProbe;
+
+  moduleContent.innerHTML = `
+    <section class="exercise-card center">
+      <div class="sub-big">Paso 1: memoriza esta nota</div>
+      <div class="action-row" style="justify-content:center;">
+        <button class="btn btn-primary" id="btnPlayBase">▶ Escuchar nota base</button>
+        <button class="btn btn-secondary" id="btnPlayProbe">▶ Escuchar nota de prueba</button>
+      </div>
+
+      <div class="sub-big" style="margin-top:14px;">
+        Paso 2: ¿la nota de prueba es la misma?
+      </div>
+
+      <div class="answer-grid" style="max-width:420px; margin-left:auto; margin-right:auto;">
+        <button class="answer-btn" id="btnSame">Sí</button>
+        <button class="answer-btn" id="btnDifferent">No</button>
+      </div>
+
+      <div id="memoryFeedback" class="feedback"></div>
+    </section>
+  `;
+
+  const feedback = document.getElementById("memoryFeedback");
+
+  document.getElementById("btnPlayBase").addEventListener("click", () => {
+    playTone(base.freq, 1.0, "sine");
+  });
+
+  document.getElementById("btnPlayProbe").addEventListener("click", () => {
+    playTone(probe.freq, 1.0, "sine");
+  });
+
+  document.getElementById("btnSame").addEventListener("click", () => {
+    const ok = base.id === probe.id;
+    registerResult(base.id, ok);
+
+    feedback.textContent = ok
+      ? `✔ Correcto: sí era la misma nota`
+      : `✘ No era la misma`;
+    feedback.className = `feedback ${ok ? "ok" : "error"}`;
+
+    setTimeout(() => {
+      setupMemoryRound();
+      drawMemoryRound();
+    }, 900);
+  });
+
+  document.getElementById("btnDifferent").addEventListener("click", () => {
+    const ok = base.id !== probe.id;
+    registerResult(base.id, ok);
+
+    feedback.textContent = ok
+      ? `✔ Correcto: no era la misma`
+      : `✘ Sí era la misma`;
+    feedback.className = `feedback ${ok ? "ok" : "error"}`;
+
+    setTimeout(() => {
+      setupMemoryRound();
+      drawMemoryRound();
+    }, 900);
+  });
+
+  setTimeout(() => playTone(base.freq, 1.0, "sine"), 120);
+}
+
+/* =========================
+   EVENTOS
+========================= */
+
+btnUnlock.addEventListener("click", handleUnlock);
+btnDemo.addEventListener("click", () => {
+  accessKeyInput.value = "OA-DEMO";
+  handleUnlock();
+});
+
+accessKeyInput.addEventListener("keydown", (e) => {
+  if(e.key === "Enter") handleUnlock();
+});
+
+notationToggle.addEventListener("change", () => {
+  state.notation = notationToggle.checked ? "letter" : "solfege";
+  saveProgress();
+  updateNotationUI();
+  renderCurrentModule();
+  updateSummaryUI();
+});
+
+document.querySelectorAll(".module-btn").forEach(btn => {
+  btn.addEventListener("click", () => {
+    state.module = btn.dataset.module;
+    saveProgress();
+    updateModuleButtons();
+    renderCurrentModule();
+  });
+});
+
+btnLogout.addEventListener("click", () => {
+  logout();
+});
+
+btnResetProgress.addEventListener("click", () => {
+  const ok = confirm("¿Seguro que quieres reiniciar el progreso de este estudiante?");
+  if(!ok) return;
+
+  resetCurrentStudentProgress();
+  renderCurrentModule();
+  updateSummaryUI();
+});
+
+function handleUnlock(){
+  const key = normalizeKey(accessKeyInput.value);
+
+  if(!key){
+    showGateMessage("Escribe una clave para continuar.", "error");
+    return;
+  }
+
+  const student = STUDENT_KEYS[key];
+
+  if(!student){
+    showGateMessage("Clave no válida.", "error");
+    return;
+  }
+
+  state.studentKey = key;
+  state.studentName = student.name;
+  state.level = student.level;
+
+  const loaded = loadProgress(key);
+
+  if(!loaded){
+    state.notation = "solfege";
+    state.module = "memorizar";
+
+    const freshPerNote = {};
+    NOTES.forEach(n => {
+      freshPerNote[n.id] = { attempts: 0, correct: 0 };
+    });
+
+    state.stats = {
+      attempts: 0,
+      correct: 0,
+      streak: 0,
+      bestStreak: 0,
+      perNote: freshPerNote
+    };
+  }
+
+  saveProgress();
+  showWorkspace();
+}
+
+/* =========================
+   AUTO-RESTAURAR
+========================= */
+
+window.addEventListener("load", () => {
+  const lastKey = localStorage.getItem("oa_last_student_key");
+
+  if(lastKey && STUDENT_KEYS[lastKey]){
+    accessKeyInput.value = lastKey;
+    handleUnlock();
+  }
+});
 </script>
 </body>
 </html>
