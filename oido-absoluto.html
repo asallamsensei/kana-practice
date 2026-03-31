@@ -794,7 +794,7 @@ const state = {
 
   memorizar: {
     listensDone: 0,
-    listensRequired: 10
+    listensRequired: 10,
    countedCurrentNote: false
   },
 
@@ -985,6 +985,10 @@ function loadProgress(studentKey){
     state.memorizar = data.memorizar || state.memorizar;
     state.history = data.history || state.history;
 
+    if(typeof state.memorizar.countedCurrentNote !== "boolean"){
+      state.memorizar.countedCurrentNote = false;
+    }
+    
     NOTES.forEach(n => {
       if(!state.stats.perNote[n.id]){
         state.stats.perNote[n.id] = { attempts: 0, correct: 0 };
@@ -1022,7 +1026,8 @@ function resetCurrentStudentProgress(){
 
   state.memorizar = {
     listensDone: 0,
-    listensRequired: 10
+    listensRequired: 10,
+    countedCurrentNote: false
   };
 
   state.history = {
