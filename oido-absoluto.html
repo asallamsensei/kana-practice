@@ -1570,14 +1570,6 @@ document.querySelectorAll(".module-btn").forEach(btn => {
   btn.addEventListener("click", () => {
     const targetModule = btn.dataset.module;
 
-    if(
-      targetModule === "reconocer" &&
-      state.memorizar.listensDone < state.memorizar.listensRequired
-    ){
-      alert(`Primero debes completar ${state.memorizar.listensRequired} escuchas en "Escuchar y memorizar".`);
-      return;
-    }
-
     state.module = targetModule;
     saveProgress();
     updateModuleButtons();
