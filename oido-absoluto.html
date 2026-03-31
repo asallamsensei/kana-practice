@@ -176,6 +176,16 @@
     box-shadow:0 0 18px rgba(125,92,255,.18);
   }
 
+  .btn-info{
+    background:linear-gradient(135deg, #0ea5e9, #2563eb);
+    color:#ffffff;
+    box-shadow:0 0 18px rgba(37,99,235,.18);
+  }
+
+  .btn-info:hover{
+    box-shadow:0 0 22px rgba(37,99,235,.28);
+  }
+  
   .btn-good{
     background:linear-gradient(135deg, #22c55e, #179949);
     color:#ffffff;
@@ -1657,6 +1667,7 @@ function drawQuizNote(){
       <div class="sub-big">Escucha y elige la nota correcta</div>
       <div class="action-row" style="justify-content:center;">
         <button class="btn btn-primary" id="btnPlayQuiz">▶ Reproducir nota</button>
+        <button class="btn btn-secondary" id="btnNextQuiz" disabled>Siguiente</button>
       </div>
 
       <div class="answer-grid" id="quizAnswers"></div>
@@ -1687,10 +1698,8 @@ function drawQuizNote(){
       }
       feedback.className = `feedback ${ok ? "ok" : "error"}`;
 
-      setTimeout(() => {
-        newQuizNote();
-        drawQuizNote();
-      }, 850);
+      document.querySelectorAll("#quizAnswers .answer-btn").forEach(b => b.disabled = true);
+      document.getElementById("btnNextQuiz").disabled = false;
     });
 
     answersWrap.appendChild(btn);
@@ -1700,8 +1709,9 @@ function drawQuizNote(){
     playTone(note.freq, 1.0, "sine");
   });
 
-  document.getElementById("btnReplayQuiz").addEventListener("click", () => {
-    playTone(note.freq, 1.0, "sine");
+  document.getElementById("btnNextQuiz").addEventListener("click", () => {
+    newQuizNote();
+    drawQuizNote();
   });
 
   setTimeout(() => playTone(note.freq, 1.0, "sine"), 120);
@@ -1724,6 +1734,7 @@ function drawKeyboardExercise(){
 
       <div class="action-row" style="justify-content:center;">
         <button class="btn btn-primary" id="btnPlayKeyboard">▶ Reproducir nota</button>
+        <button class="btn btn-secondary" id="btnNextKeyboard" disabled>Siguiente</button>
       </div>
 
       <div class="keyboard" id="keyboardWrap"></div>
@@ -1786,10 +1797,8 @@ function drawKeyboardExercise(){
         }
         feedback.className = `feedback ${ok ? "ok" : "error"}`;
 
-        setTimeout(() => {
-          state.currentQuizNote = randomFrom(getActiveNotes());
-          drawKeyboardExercise();
-        }, 900);
+        keyboardWrap.querySelectorAll(".key").forEach(k => k.disabled = true);
+        document.getElementById("btnNextKeyboard").disabled = false;
       });
     }
 
@@ -1800,6 +1809,11 @@ function drawKeyboardExercise(){
     playTone(note.freq, 1.0, "sine");
   });
 
+  document.getElementById("btnNextKeyboard").addEventListener("click", () => {
+    state.currentQuizNote = randomFrom(getActiveNotes());
+    drawKeyboardExercise();
+  });
+  
   setTimeout(() => {
     playTone(note.freq, 1.0, "sine");
   }, 120);
@@ -1833,8 +1847,9 @@ function drawMemoryRound(){
     <section class="exercise-card center">
       <div class="sub-big">Paso 1: memoriza esta nota</div>
       <div class="action-row" style="justify-content:center;">
-        <button class="btn btn-primary" id="btnPlayBase">▶ Escuchar nota base</button>
-        <button class="btn btn-secondary" id="btnPlayProbe">▶ Escuchar nota de prueba</button>
+        <button class="btn btn-primary" id="btnPlayBase">▶ Nota base</button>
+        <button class="btn btn-info" id="btnPlayProbe">▶ Nota de prueba</button>
+        <button class="btn btn-secondary" id="btnNextMemory" disabled>Siguiente</button>
       </div>
 
       <div class="sub-big" style="margin-top:14px;">
@@ -1862,44 +1877,57 @@ function drawMemoryRound(){
     playTone(probe.freq, 1.0, "sine");
   });
 
-  document.getElementById("btnSame").addEventListener("click", () => {
-    const ok = base.id === probe.id;
-    registerResult(base.id, ok);
+document.getElementById("btnSame").addEventListener("click", () => {
 
-    if(state.memoria.roundsDone >= state.memoria.roundsRequired){
-      feedback.textContent = "✔ Ejercicios completados";
-    }else{
-      feedback.textContent = ok
-        ? `✔ Correcto: sí era la misma nota`
-        : `✘ No era la misma`;
-    }
-    feedback.className = `feedback ${ok ? "ok" : "error"}`;
+  const correct = probe.freq === base.freq;
 
-    setTimeout(() => {
-      setupMemoryRound();
-      drawMemoryRound();
-    }, 900);
+  if(correct){
+    showFeedback(true,"¡Correcto! Era la misma nota.");
+    state.memory.correct++;
+    state.memory.streak++;
+  }else{
+    showFeedback(false,"Incorrecto. No era la misma.");
+    state.memory.streak = 0;
+  }
+
+  state.memory.attempts++;
+
+  document.getElementById("btnSame").disabled = true;
+  document.getElementById("btnDifferent").disabled = true;
+
+  document.getElementById("btnNextMemory").disabled = false;
+
+  updateSummaryUI();
+});
+
+document.getElementById("btnDifferent").addEventListener("click", () => {
+
+  const correct = probe.freq !== base.freq;
+
+  if(correct){
+    showFeedback(true,"¡Correcto! Eran diferentes.");
+    state.memory.correct++;
+    state.memory.streak++;
+  }else{
+    showFeedback(false,"Incorrecto. Sí eran iguales.");
+    state.memory.streak = 0;
+  }
+
+  state.memory.attempts++;
+
+  document.getElementById("btnSame").disabled = true;
+  document.getElementById("btnDifferent").disabled = true;
+
+  document.getElementById("btnNextMemory").disabled = false;
+
+  updateSummaryUI();
+});
+
+  document.getElementById("btnNextMemory").addEventListener("click", () => {
+    setupMemoryRound();
+    drawMemoryRound();
   });
-
-  document.getElementById("btnDifferent").addEventListener("click", () => {
-    const ok = base.id !== probe.id;
-    registerResult(base.id, ok);
-
-    if(state.memoria.roundsDone >= state.memoria.roundsRequired){
-      feedback.textContent = "✔ Ejercicios completados";
-    }else{
-      feedback.textContent = ok
-        ? `✔ Correcto: no era la misma`
-        : `✘ Sí era la misma`;
-    }
-    feedback.className = `feedback ${ok ? "ok" : "error"}`;
-
-    setTimeout(() => {
-      setupMemoryRound();
-      drawMemoryRound();
-    }, 900);
-  });
-
+  
   setTimeout(() => playTone(base.freq, 1.0, "sine"), 120);
 }
 
