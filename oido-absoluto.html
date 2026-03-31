@@ -304,6 +304,27 @@
     font-size:1rem;
   }
 
+.module-btn{
+  position:relative;
+  overflow:hidden;
+}
+
+.module-progress{
+  position:absolute;
+  left:0;
+  bottom:0;
+  width:100%;
+  height:8px;
+  background:rgba(255,255,255,.08);
+}
+
+.module-progress-fill{
+  height:100%;
+  width:0%;
+  background:linear-gradient(90deg, #3b82f6, #60a5fa);
+  transition:width .25s ease;
+}
+  
   .module-btn:hover{
     background:rgba(255,255,255,.08);
   }
@@ -613,21 +634,33 @@
           <button class="module-btn active" data-module="memorizar">
             1. Escuchar y memorizar
             <small>Escucha una nota, mírala y empieza a grabar su identidad sonora.</small>
+            <div class="module-progress">
+              <div class="module-progress-fill" id="progress-memorizar"></div>
+            </div>
           </button>
-
+          
           <button class="module-btn" data-module="reconocer">
             2. Reconocer nota
             <small>Escucha y elige la nota correcta entre las opciones activas.</small>
+            <div class="module-progress">
+              <div class="module-progress-fill" id="progress-reconocer"></div>
+            </div>
           </button>
-
+          
           <button class="module-btn" data-module="teclado">
             3. Identificar en teclado
             <small>Escucha una nota y selecciónala en el teclado visual.</small>
+            <div class="module-progress">
+              <div class="module-progress-fill" id="progress-teclado"></div>
+            </div>
           </button>
-
+          
           <button class="module-btn" data-module="memoria">
             4. Memoria de nota
             <small>Escucha, guarda la nota y decide si luego suena la misma o no.</small>
+            <div class="module-progress">
+              <div class="module-progress-fill" id="progress-memoria"></div>
+            </div>
           </button>
         </div>
 
@@ -741,7 +774,7 @@ const state = {
   studentKey: "",
   studentName: "",
   level: 0,
-  notation: "solfege", // solfege | letter
+  notation: "solfege",
   module: "memorizar",
 
   stats: {
@@ -750,6 +783,25 @@ const state = {
     streak: 0,
     bestStreak: 0,
     perNote: {}
+  },
+
+  moduleProgress: {
+    memorizar: 0,
+    reconocer: 0,
+    teclado: 0,
+    memoria: 0
+  },
+
+  memorizar: {
+    listensDone: 0,
+    listensRequired: 10
+  },
+
+  history: {
+    lastVisibleNoteId: null,
+    lastQuizNoteId: null,
+    lastMemoryBaseId: null,
+    lastMemoryProbeId: null
   },
 
   currentVisibleNote: null,
@@ -867,6 +919,13 @@ function randomFrom(arr){
   return arr[Math.floor(Math.random() * arr.length)];
 }
 
+function randomFromNoImmediateRepeat(arr, lastId){
+  if(arr.length <= 1) return arr[0];
+
+  const filtered = arr.filter(item => item.id !== lastId);
+  return randomFrom(filtered.length ? filtered : arr);
+}
+  
 function shuffle(arr){
   const a = [...arr];
   for(let i = a.length - 1; i > 0; i--){
@@ -898,7 +957,10 @@ function saveProgress(){
     level: state.level,
     notation: state.notation,
     module: state.module,
-    stats: state.stats
+    stats: state.stats,
+    moduleProgress: state.moduleProgress,
+    memorizar: state.memorizar,
+    history: state.history
   };
 
   localStorage.setItem(getStorageKey(), JSON.stringify(payload));
@@ -918,6 +980,9 @@ function loadProgress(studentKey){
     state.notation = data.notation || "solfege";
     state.module = data.module || "memorizar";
     state.stats = data.stats || state.stats;
+    state.moduleProgress = data.moduleProgress || state.moduleProgress;
+    state.memorizar = data.memorizar || state.memorizar;
+    state.history = data.history || state.history;
 
     NOTES.forEach(n => {
       if(!state.stats.perNote[n.id]){
@@ -947,6 +1012,30 @@ function resetCurrentStudentProgress(){
     perNote: freshPerNote
   };
 
+  state.moduleProgress = {
+    memorizar: 0,
+    reconocer: 0,
+    teclado: 0,
+    memoria: 0
+  };
+
+  state.memorizar = {
+    listensDone: 0,
+    listensRequired: 10
+  };
+
+  state.history = {
+    lastVisibleNoteId: null,
+    lastQuizNoteId: null,
+    lastMemoryBaseId: null,
+    lastMemoryProbeId: null
+  };
+
+  state.currentVisibleNote = null;
+  state.currentQuizNote = null;
+  state.currentMemoryBase = null;
+  state.currentMemoryProbe = null;
+  
   state.module = "memorizar";
   saveProgress();
 }
@@ -977,6 +1066,7 @@ function updateSummaryUI(){
   bestStreakStat.textContent = state.stats.bestStreak;
   stageStat.textContent = `${activeCount} ${activeCount === 1 ? "nota" : "notas"}`;
 
+  updateModuleProgressUI();
   renderPerNoteStats();
 }
 
@@ -1012,12 +1102,27 @@ function updateModuleButtons(){
   });
 }
 
+function clampProgress(value){
+  return Math.max(0, Math.min(100, value));
+}
+
+function updateModuleProgressUI(){
+  const memorizarPct = Math.round((state.memorizar.listensDone / state.memorizar.listensRequired) * 100);
+  state.moduleProgress.memorizar = clampProgress(memorizarPct);
+
+  document.getElementById("progress-memorizar").style.width = `${state.moduleProgress.memorizar}%`;
+  document.getElementById("progress-reconocer").style.width = `${clampProgress(state.moduleProgress.reconocer)}%`;
+  document.getElementById("progress-teclado").style.width = `${clampProgress(state.moduleProgress.teclado)}%`;
+  document.getElementById("progress-memoria").style.width = `${clampProgress(state.moduleProgress.memoria)}%`;
+}
+  
 function showWorkspace(){
   gateSection.classList.add("hidden");
   workspace.classList.add("show");
   updateNotationUI();
   updateSummaryUI();
   updateModuleButtons();
+  updateModuleProgressUI();
   renderCurrentModule();
 }
 
@@ -1048,6 +1153,18 @@ function registerResult(noteId, isCorrect){
     state.stats.streak = 0;
   }
 
+  if(state.module === "reconocer"){
+    state.moduleProgress.reconocer = clampProgress((state.stats.perNote[noteId].attempts / 20) * 100);
+  }
+
+  if(state.module === "teclado"){
+    state.moduleProgress.teclado = clampProgress((state.stats.perNote[noteId].attempts / 20) * 100);
+  }
+
+  if(state.module === "memoria"){
+    state.moduleProgress.memoria = clampProgress((state.stats.perNote[noteId].attempts / 20) * 100);
+  }
+  
   saveProgress();
   updateSummaryUI();
 }
@@ -1072,7 +1189,13 @@ function renderCurrentModule(){
 /* ===== MÓDULO 1 ===== */
 
 function newVisibleNote(){
-  state.currentVisibleNote = randomFrom(getActiveNotes());
+  const next = randomFromNoImmediateRepeat(
+    getActiveNotes(),
+    state.history.lastVisibleNoteId
+  );
+
+  state.currentVisibleNote = next;
+  state.history.lastVisibleNoteId = next.id;
 }
 
 function renderModuleMemorizar(){
@@ -1081,24 +1204,47 @@ function renderModuleMemorizar(){
   }
 
   const note = state.currentVisibleNote;
+  const listensDone = state.memorizar.listensDone;
+  const listensRequired = state.memorizar.listensRequired;
+  const completed = listensDone >= listensRequired;
 
   moduleContent.innerHTML = `
     <section class="exercise-card center">
       <div class="sub-big">Memoriza esta nota</div>
       <div class="big-text">${getDisplayName(note)}</div>
       <div class="sub-big">
-        Escúchala varias veces. La idea aquí es que tu oído empiece a asociar este sonido con su identidad.
+        Escúchala varias veces. Antes de pasar a reconocer, debes completar al menos
+        ${listensRequired} escuchas guiadas.
+      </div>
+
+      <div class="big-text" style="font-size:1.4rem; margin-top:14px;">
+        ${listensDone} / ${listensRequired}
       </div>
 
       <div class="action-row" style="justify-content:center;">
         <button class="btn btn-primary" id="btnPlayVisible">▶ Escuchar nota</button>
         <button class="btn btn-secondary" id="btnNewVisible">Nueva nota</button>
       </div>
+
+      <div id="memorizarFeedback" class="feedback ${completed ? 'ok' : ''}">
+        ${completed ? '✔ Ya puedes pasar al módulo Reconocer nota' : 'Completa las escuchas mínimas'}
+      </div>
     </section>
   `;
 
   document.getElementById("btnPlayVisible").addEventListener("click", () => {
     playTone(note.freq, 1.1, "sine");
+
+    if(state.memorizar.listensDone < state.memorizar.listensRequired){
+      state.memorizar.listensDone += 1;
+    }
+
+    const pct = Math.round((state.memorizar.listensDone / state.memorizar.listensRequired) * 100);
+    state.moduleProgress.memorizar = clampProgress(pct);
+
+    saveProgress();
+    renderModuleMemorizar();
+    updateSummaryUI();
   });
 
   document.getElementById("btnNewVisible").addEventListener("click", () => {
@@ -1110,7 +1256,13 @@ function renderModuleMemorizar(){
 /* ===== MÓDULO 2 ===== */
 
 function newQuizNote(){
-  state.currentQuizNote = randomFrom(getActiveNotes());
+  const next = randomFromNoImmediateRepeat(
+    getActiveNotes(),
+    state.history.lastQuizNoteId
+  );
+
+  state.currentQuizNote = next;
+  state.history.lastQuizNoteId = next.id;
 }
 
 function renderModuleReconocer(){
@@ -1344,7 +1496,17 @@ notationToggle.addEventListener("change", () => {
 
 document.querySelectorAll(".module-btn").forEach(btn => {
   btn.addEventListener("click", () => {
-    state.module = btn.dataset.module;
+    const targetModule = btn.dataset.module;
+
+    if(
+      targetModule === "reconocer" &&
+      state.memorizar.listensDone < state.memorizar.listensRequired
+    ){
+      alert(`Primero debes completar ${state.memorizar.listensRequired} escuchas en "Escuchar y memorizar".`);
+      return;
+    }
+
+    state.module = targetModule;
     saveProgress();
     updateModuleButtons();
     renderCurrentModule();
