@@ -176,7 +176,9 @@
 
 .workspace.show{
   display:grid;
-  grid-template-columns:1fr;
+  grid-template-columns:minmax(0, 1.3fr) minmax(320px, .9fr);
+  gap:18px;
+  align-items:start;
 }
 
   .sidebar, .main{
@@ -639,37 +641,12 @@
   font-size:1rem;
   line-height:1.6;
 }
-
-.content-grid{
-  display:grid;
-  grid-template-columns:minmax(0, 1.3fr) minmax(320px, .9fr);
-  gap:18px;
-  align-items:start;
-}
-
-.stats-panel{
-  margin-top:16px;
-}
-
-#moduleContent{
-  min-width:0;
-}
-
+  
 @media (max-width: 980px){
-  .content-grid{
+  .workspace.show{
     grid-template-columns:1fr;
   }
-
-  .stats-panel{
-    margin-top:0;
-  }
 }
-  
-  @media (max-width: 980px){
-    .workspace.show{
-      grid-template-columns:1fr;
-    }
-  }
 
   @media (max-width: 640px){
     body{
@@ -703,7 +680,6 @@
         <div id="studentChip" class="student-chip">Estudiante</div>
       </div>
       <h1>Entrena tu oído nota por nota</h1>
-      <p class="subtitle-compact">Nivel 1: Fundamentos · Entrenamiento progresivo del oído con notas naturales.</p>
     </section>
 
     <section id="gateSection" class="panel gate">
@@ -781,49 +757,49 @@
           </div>
         </div>
 
-      <div class="content-grid">
         <div id="moduleContent"></div>
-      
-        <section class="exercise-card stats-panel">
-          <h2 style="margin-top:0;">Estadísticas del estudiante</h2>
-    
-          <div class="stats">
-            <div class="stat-card">
-              <div class="label">Intentos</div>
-              <div class="value" id="attemptsStat">0</div>
-            </div>
-            <div class="stat-card">
-              <div class="label">Aciertos</div>
-              <div class="value" id="correctStat">0</div>
-            </div>
-            <div class="stat-card">
-              <div class="label">Precisión</div>
-              <div class="value" id="accuracyStat">0%</div>
-            </div>
-            <div class="stat-card">
-              <div class="label">Precisión global</div>
-              <div class="value" id="accuracyValue">0%</div>
-            </div>
-            <div class="stat-card">
-              <div class="label">Racha total</div>
-              <div class="value" id="streakValue">0</div>
-            </div>
-            <div class="stat-card">
-              <div class="label">Mejor racha</div>
-              <div class="value" id="bestStreakStat">0</div>
-            </div>
-          </div>
 
-          <div class="action-row" style="margin-top:14px;">
-            <button id="btnResetProgress" class="btn btn-danger">Reiniciar progreso</button>
-          </div>
-      
-          <div class="per-note">
-            <h3>Precisión por nota</h3>
-            <div id="noteBars" class="note-bars"></div>
-          </div>
-        </section>
-      </div>
+<section class="panel main stats-panel">
+
+  <h2 style="margin-top:0;">Estadísticas del estudiante</h2>
+
+  <div class="stats">
+    <div class="stat-card">
+      <div class="label">Intentos</div>
+      <div class="value" id="attemptsStat">0</div>
+    </div>
+    <div class="stat-card">
+      <div class="label">Aciertos</div>
+      <div class="value" id="correctStat">0</div>
+    </div>
+    <div class="stat-card">
+      <div class="label">Precisión</div>
+      <div class="value" id="accuracyStat">0%</div>
+    </div>
+    <div class="stat-card">
+      <div class="label">Precisión global</div>
+      <div class="value" id="accuracyValue">0%</div>
+    </div>
+    <div class="stat-card">
+      <div class="label">Racha total</div>
+      <div class="value" id="streakValue">0</div>
+    </div>
+    <div class="stat-card">
+      <div class="label">Mejor racha</div>
+      <div class="value" id="bestStreakStat">0</div>
+    </div>
+  </div>
+
+  <div class="action-row" style="margin-top:14px;">
+    <button id="btnResetProgress" class="btn btn-danger">Reiniciar progreso</button>
+  </div>
+
+  <div class="per-note">
+    <h3>Precisión por nota</h3>
+    <div id="noteBars" class="note-bars"></div>
+  </div>
+
+</section>
         
       </main>
     </section>
