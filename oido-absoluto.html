@@ -950,6 +950,11 @@ function getActiveNoteCount(){
   return state.activeNoteCount || 2;
 }
 
+function getRoundsRequired(){
+  const notes = getActiveNoteCount();
+  return 20 + (notes * 20);
+}
+  
 function getActiveNotes(){
   return NOTES.slice(0, getActiveNoteCount());
 }
@@ -1099,17 +1104,17 @@ function resetCurrentStudentProgress(){
 
   state.reconocer = {
     roundsDone: 0,
-    roundsRequired: 20
+    roundsRequired: getRoundsRequired()
   };
-
+  
   state.teclado = {
     roundsDone: 0,
-    roundsRequired: 20
+    roundsRequired: getRoundsRequired()
   };
-
+  
   state.memoria = {
     roundsDone: 0,
-    roundsRequired: 20
+    roundsRequired: getRoundsRequired()
   };
   
   state.history = {
@@ -1221,11 +1226,15 @@ function areAllModulesComplete(){
 }
 
 function advanceStageIfNeeded(){
+
   if(!areAllModulesComplete()) return;
 
-  if(state.activeNoteCount < NOTES.length){
-    state.activeNoteCount += 1;
+  // Si ya llegó al máximo (7 notas) no reiniciar módulos
+  if(state.activeNoteCount >= NOTES.length){
+    return;
   }
+
+  state.activeNoteCount += 1;
 
   state.memorizar = {
     listensDone: 0,
@@ -1235,17 +1244,17 @@ function advanceStageIfNeeded(){
 
   state.reconocer = {
     roundsDone: 0,
-    roundsRequired: 20
+    roundsRequired: getRoundsRequired()
   };
-
+  
   state.teclado = {
     roundsDone: 0,
-    roundsRequired: 20
+    roundsRequired: getRoundsRequired()
   };
-
+  
   state.memoria = {
     roundsDone: 0,
-    roundsRequired: 20
+    roundsRequired: getRoundsRequired()
   };
 
   state.module = "memorizar";
