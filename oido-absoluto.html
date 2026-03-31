@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Oído Absoluto — Asallam Sensei</title>
+
+<style>
+  :root{
+    --bg:#0b1020;
+    --bg2:#111936;
+    --card:rgba(255,255,255,.08);
+    --card2:rgba(255,255,255,.11);
+    --text:#eef2ff;
+    --muted:rgba(238,242,255,.72);
+    --accent:#7d5cff;
+    --accent2:#22c55e;
+    --danger:#ef4444;
+    --warning:#f59e0b;
+    --border:rgba(255,255,255,.14);
+    --shadow:0 18px 40px rgba(0,0,0,.28);
+    --radius:22px;
+  }
+
+  *{ box-sizing:border-box; }
+
+  html, body{
+    margin:0;
+    padding:0;
+    min-height:100%;
+    font-family: Arial, sans-serif;
+    color:var(--text);
+    background:
+      radial-gradient(1200px 700px at 15% 10%, rgba(125,92,255,.22), transparent 60%),
+      radial-gradient(900px 600px at 85% 20%, rgba(34,197,94,.12), transparent 60%),
+      linear-gradient(180deg, var(--bg), var(--bg2));
+  }
+
+  body{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    padding:28px 16px 50px;
+  }
+
+  .app{
+    width:min(1100px, 100%);
+  }
+
+  .hero{
+    text-align:center;
+    margin-bottom:24px;
+  }
+
+  .brand{
+    display:inline-block;
+    padding:8px 14px;
+    border:1px solid var(--border);
+    border-radius:999px;
+    background:rgba(255,255,255,.05);
+    color:var(--muted);
+    font-size:.95rem;
+    margin-bottom:14px;
+  }
+
+  h1{
+    margin:0 0 10px;
+    font-size:clamp(2rem, 5vw, 3.2rem);
+    line-height:1.08;
+  }
+
+  .subtitle{
+    margin:0 auto;
+    max-width:760px;
+    color:var(--muted);
+    font-size:1.04rem;
+    line-height:1.65;
+  }
+
+  .panel{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    box-shadow:var(--shadow);
+    backdrop-filter:blur(12px);
+  }
+
+  .gate{
+    max-width:760px;
+    margin:0 auto 28px;
+    padding:24px;
+  }
+
+  .gate-head{
+    margin-bottom:16px;
+  }
+
+  .gate-title{
+    margin:0 0 8px;
+    font-size:1.4rem;
+  }
+
+  .gate-text{
+    margin:0;
+    color:var(--muted);
+    line-height:1.6;
+  }
+
+  .gate-form{
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+    margin-top:18px;
+  }
+
+  .input{
+    flex:1 1 260px;
+    min-width:0;
+    height:54px;
+    padding:0 16px;
+    border-radius:16px;
+    border:1px solid var(--border);
+    background:rgba(255,255,255,.06);
+    color:var(--text);
+    outline:none;
+    font-size:1rem;
+  }
+
+  .input:focus{
+    border-color:rgba(125,92,255,.65);
+    box-shadow:0 0 0 3px rgba(125,92,255,.16);
+  }
+
+  .btn{
+    height:54px;
+    border:none;
+    border-radius:16px;
+    padding:0 20px;
+    font-weight:700;
+    cursor:pointer;
+    font-size:1rem;
+    transition:transform .16s ease, opacity .16s ease, background .16s ease;
+  }
+
+  .btn:hover{
+    transform:translateY(-1px);
+  }
+
+  .btn-primary{
+    background:linear-gradient(135deg, var(--accent), #5f45d9);
+    color:white;
+  }
+
+  .btn-secondary{
+    background:rgba(255,255,255,.07);
+    color:var(--text);
+    border:1px solid var(--border);
+  }
+
+  .hint{
+    margin-top:14px;
+    color:var(--muted);
+    font-size:.95rem;
+  }
+
+  .message{
+    margin-top:16px;
+    min-height:24px;
+    font-weight:700;
+  }
+
+  .message.ok{ color:var(--accent2); }
+  .message.error{ color:#ff8e8e; }
+
+  .levels{
+    display:none;
+    margin-top:10px;
+  }
+
+  .levels.show{
+    display:block;
+  }
+
+  .level-card{
+    padding:24px;
+    margin-bottom:22px;
+  }
+
+  .level-top{
+    display:flex;
+    gap:14px;
+    justify-content:space-between;
+    align-items:flex-start;
+    flex-wrap:wrap;
+    margin-bottom:20px;
+  }
+
+  .level-badge{
+    display:inline-block;
+    padding:7px 12px;
+    border-radius:999px;
+    background:rgba(34,197,94,.12);
+    color:#9bf0b5;
+    border:1px solid rgba(34,197,94,.28);
+    font-size:.9rem;
+    font-weight:700;
+    margin-bottom:10px;
+  }
+
+  .level-title{
+    margin:0 0 8px;
+    font-size:1.6rem;
+  }
+
+  .level-desc{
+    margin:0;
+    max-width:720px;
+    color:var(--muted);
+    line-height:1.65;
+  }
+
+  .level-side{
+    min-width:220px;
+    display:grid;
+    gap:10px;
+  }
+
+  .mini-stat{
+    background:rgba(255,255,255,.05);
+    border:1px solid var(--border);
+    border-radius:16px;
+    padding:12px 14px;
+  }
+
+  .mini-stat-label{
+    color:var(--muted);
+    font-size:.88rem;
+    margin-bottom:4px;
+  }
+
+  .mini-stat-value{
+    font-size:1.08rem;
+    font-weight:700;
+  }
+
+  .modules{
+    display:grid;
+    grid-template-columns:repeat(2, minmax(0,1fr));
+    gap:16px;
+  }
+
+  .module{
+    background:var(--card2);
+    border:1px solid var(--border);
+    border-radius:20px;
+    padding:18px;
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+    min-height:220px;
+  }
+
+  .module-number{
+    width:42px;
+    height:42px;
+    border-radius:12px;
+    display:grid;
+    place-items:center;
+    font-weight:700;
+    background:rgba(125,92,255,.16);
+    border:1px solid rgba(125,92,255,.32);
+  }
+
+  .module h3{
+    margin:0;
+    font-size:1.14rem;
+  }
+
+  .module p{
+    margin:0;
+    color:var(--muted);
+    line-height:1.58;
+    flex:1;
+  }
+
+  .tag-row{
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+  }
+
+  .tag{
+    padding:7px 10px;
+    border-radius:999px;
+    border:1px solid var(--border);
+    background:rgba(255,255,255,.05);
+    color:var(--muted);
+    font-size:.84rem;
+  }
+
+  .module-actions{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+  }
+
+  .module .btn{
+    height:46px;
+    padding:0 16px;
+    font-size:.95rem;
+  }
+
+  .locked{
+    opacity:.72;
+  }
+
+  .locked .module-number{
+    background:rgba(245,158,11,.12);
+    border-color:rgba(245,158,11,.26);
+  }
+
+  .note-box{
+    margin-top:22px;
+    padding:16px 18px;
+    border-radius:18px;
+    background:rgba(255,255,255,.05);
+    border:1px solid var(--border);
+    line-height:1.65;
+    color:var(--muted);
+  }
+
+  .footer-note{
+    text-align:center;
+    color:var(--muted);
+    margin-top:18px;
+    font-size:.92rem;
+  }
+
+  @media (max-width: 860px){
+    .modules{
+      grid-template-columns:1fr;
+    }
+  }
+
+  @media (max-width: 640px){
+    body{
+      padding:18px 12px 36px;
+    }
+
+    .gate,
+    .level-card{
+      padding:18px;
+    }
+
+    .gate-form{
+      flex-direction:column;
+    }
+
+    .btn,
+    .input{
+      width:100%;
+    }
+
+    .level-title{
+      font-size:1.34rem;
+    }
+
+    .subtitle{
+      font-size:.98rem;
+    }
+  }
+</style>
+</head>
+<body>
+  <div class="app">
+    <section class="hero">
+      <div class="brand">Asallam Sensei · Curso de Oído Absoluto</div>
+      <h1>Entrena tu oído nota por nota</h1>
+      <p class="subtitle">
+        Accede a tus módulos con tu clave del curso. Por ahora está habilitado el
+        <strong>Nivel 1</strong>, centrado en memoria auditiva y reconocimiento de notas individuales.
+      </p>
+    </section>
+
+    <section class="panel gate">
+      <div class="gate-head">
+        <h2 class="gate-title">Ingresa tu clave</h2>
+        <p class="gate-text">
+          La clave te ubica directamente en tu nivel. Más adelante podremos hacer que cada clave
+          abra diferentes contenidos, módulos y progresos guardados.
+        </p>
+      </div>
+
+      <div class="gate-form">
+        <input
+          id="accessKey"
+          class="input"
+          type="text"
+          placeholder="Ejemplo: OA-NIVEL1"
+          autocomplete="off"
+        />
+        <button id="btnUnlock" class="btn btn-primary">Entrar</button>
+        <button id="btnDemo" class="btn btn-secondary">Probar demo</button>
+      </div>
+
+      <div class="hint">
+        Por ahora la clave válida es: <strong>OA-NIVEL1</strong>
+      </div>
+
+      <div id="message" class="message"></div>
+    </section>
+
+    <section id="levels" class="levels">
+      <article class="panel level-card">
+        <div class="level-top">
+          <div>
+            <div class="level-badge">Desbloqueado</div>
+            <h2 class="level-title">Nivel 1 — Fundamentos del oído</h2>
+            <p class="level-desc">
+              Este nivel construye la base del curso. Aquí el estudiante empieza a grabar en la mente
+              el sonido de notas individuales, sin acordes ni escalas todavía. La idea es entrenar
+              primero la huella auditiva de cada nota.
+            </p>
+          </div>
+
+          <div class="level-side">
+            <div class="mini-stat">
+              <div class="mini-stat-label">Notas activas</div>
+              <div class="mini-stat-value">C · D · E</div>
+            </div>
+            <div class="mini-stat">
+              <div class="mini-stat-label">Modo pedagógico</div>
+              <div class="mini-stat-value">Opciones reducidas</div>
+            </div>
+            <div class="mini-stat">
+              <div class="mini-stat-label">Meta sugerida</div>
+              <div class="mini-stat-value">80% o más</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="modules">
+          <div class="module">
+            <div class="module-number">1</div>
+            <h3>Escuchar y memorizar</h3>
+            <p>
+              Módulo para crear huella auditiva. El alumno escucha una nota varias veces
+              y empieza a asociarla mentalmente con su identidad sonora.
+            </p>
+            <div class="tag-row">
+              <span class="tag">Memoria auditiva</span>
+              <span class="tag">Base del curso</span>
+              <span class="tag">Sin presión</span>
+            </div>
+            <div class="module-actions">
+              <button class="btn btn-primary" onclick="openModule('memorizar')">Abrir módulo</button>
+              <button class="btn btn-secondary" onclick="alert('Luego aquí podremos mostrar una vista previa del módulo.')">Vista previa</button>
+            </div>
+          </div>
+
+          <div class="module">
+            <div class="module-number">2</div>
+            <h3>Reconocer nota</h3>
+            <p>
+              La app reproduce una nota y el estudiante elige cuál cree que es. En Nivel 1
+              conviene empezar con pocas opciones para fortalecer la seguridad.
+            </p>
+            <div class="tag-row">
+              <span class="tag">Respuesta inmediata</span>
+              <span class="tag">2 a 3 opciones</span>
+              <span class="tag">Progreso medible</span>
+            </div>
+            <div class="module-actions">
+              <button class="btn btn-primary" onclick="openModule('reconocer')">Abrir módulo</button>
+              <button class="btn btn-secondary" onclick="alert('Más adelante aquí podremos mostrar estadísticas por nota.')">Ver detalles</button>
+            </div>
+          </div>
+
+          <div class="module">
+            <div class="module-number">3</div>
+            <h3>Identificar en teclado</h3>
+            <p>
+              Se escucha la nota y el estudiante debe señalarla dentro de un teclado visual.
+              Esto une el sonido con su ubicación musical.
+            </p>
+            <div class="tag-row">
+              <span class="tag">Sonido + posición</span>
+              <span class="tag">Visual</span>
+              <span class="tag">Muy intuitivo</span>
+            </div>
+            <div class="module-actions">
+              <button class="btn btn-primary" onclick="openModule('teclado')">Abrir módulo</button>
+              <button class="btn btn-secondary" onclick="alert('Luego este módulo puede abrir un piano interactivo.')">Vista previa</button>
+            </div>
+          </div>
+
+          <div class="module">
+            <div class="module-number">4</div>
+            <h3>Memoria de nota</h3>
+            <p>
+              El estudiante escucha una nota, la guarda en la mente y luego debe decidir si una nueva
+              reproducción corresponde o no a la misma nota.
+            </p>
+            <div class="tag-row">
+              <span class="tag">Comparación mental</span>
+              <span class="tag">Concentración</span>
+              <span class="tag">Refuerzo fino</span>
+            </div>
+            <div class="module-actions">
+              <button class="btn btn-primary" onclick="openModule('memoria')">Abrir módulo</button>
+              <button class="btn btn-secondary" onclick="alert('Aquí luego podemos meter rondas cortas de memoria auditiva.')">Ver detalles</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="note-box">
+          <strong>Recomendación pedagógica para este nivel:</strong>
+          empieza con solo <strong>2 o 3 notas activas</strong>. Por ejemplo: C, D y E.
+          Cuando el alumno llegue a buena precisión, se amplían las opciones. Esto hace que el curso
+          se sienta claro, progresivo y mucho más entrenable.
+        </div>
+      </article>
+
+      <article class="panel level-card locked">
+        <div class="level-top">
+          <div>
+            <div class="level-badge" style="background:rgba(245,158,11,.12);color:#ffd48a;border-color:rgba(245,158,11,.24);">Bloqueado</div>
+            <h2 class="level-title">Nivel 2 — Próximamente</h2>
+            <p class="level-desc">
+              Aquí podremos ampliar cantidad de notas, subir dificultad, meter más velocidad
+              y empezar transición hacia entrenamiento más fino.
+            </p>
+          </div>
+        </div>
+      </article>
+
+      <div class="footer-note">
+        Base inicial lista para conectar con módulos reales, progreso y audio.
+      </div>
+    </section>
+  </div>
+
+<script>
+  const VALID_KEYS = {
+    "OA-NIVEL1": {
+      level: 1,
+      name: "Nivel 1"
+    },
+    "DEMO": {
+      level: 1,
+      name: "Nivel 1"
+    }
+  };
+
+  const accessKey = document.getElementById("accessKey");
+  const btnUnlock = document.getElementById("btnUnlock");
+  const btnDemo = document.getElementById("btnDemo");
+  const message = document.getElementById("message");
+  const levels = document.getElementById("levels");
+
+  function normalizeKey(value){
+    return value.trim().toUpperCase();
+  }
+
+  function showMessage(text, type = ""){
+    message.textContent = text;
+    message.className = "message";
+    if(type){
+      message.classList.add(type);
+    }
+  }
+
+  function unlockWithKey(rawKey){
+    const key = normalizeKey(rawKey);
+
+    if(!key){
+      showMessage("Escribe una clave para continuar.", "error");
+      levels.classList.remove("show");
+      return;
+    }
+
+    if(VALID_KEYS[key]){
+      showMessage("Clave correcta. Bienvenido al Nivel 1.", "ok");
+      levels.classList.add("show");
+
+      // aquí luego podremos guardar en localStorage
+      localStorage.setItem("oa_access_key", key);
+      localStorage.setItem("oa_unlocked_level", String(VALID_KEYS[key].level));
+
+      window.scrollTo({
+        top: document.getElementById("levels").offsetTop - 12,
+        behavior: "smooth"
+      });
+    } else {
+      showMessage("Clave no válida. Revisa e intenta otra vez.", "error");
+      levels.classList.remove("show");
+    }
+  }
+
+  btnUnlock.addEventListener("click", () => {
+    unlockWithKey(accessKey.value);
+  });
+
+  btnDemo.addEventListener("click", () => {
+    accessKey.value = "OA-NIVEL1";
+    unlockWithKey(accessKey.value);
+  });
+
+  accessKey.addEventListener("keydown", (e) => {
+    if(e.key === "Enter"){
+      unlockWithKey(accessKey.value);
+    }
+  });
+
+  function openModule(moduleName){
+    const savedLevel = Number(localStorage.getItem("oa_unlocked_level") || "0");
+
+    if(savedLevel < 1){
+      alert("Primero debes ingresar una clave válida.");
+      return;
+    }
+
+    // Por ahora solo marcamos cuál módulo abriría.
+    alert("Aquí luego abriremos el módulo: " + moduleName);
+  }
+
+  // Si ya estaba desbloqueado antes, lo mostramos automáticamente
+  window.addEventListener("load", () => {
+    const savedKey = localStorage.getItem("oa_access_key");
+    const savedLevel = Number(localStorage.getItem("oa_unlocked_level") || "0");
+
+    if(savedKey && savedLevel >= 1){
+      accessKey.value = savedKey;
+      showMessage("Acceso restaurado. Nivel 1 listo.", "ok");
+      levels.classList.add("show");
+    }
+  });
+</script>
+</body>
+</html>
