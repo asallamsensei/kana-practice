@@ -343,5 +343,161 @@
     "kanjis": [
       { "char": "止", "mean": "parar • detener" }
     ]
+  },
+  {
+    "type": "palabra",
+    "theme": "Animales",
+    "jp": "犬",
+    "romaji": "inu",
+    "es": "perro",
+    "literal": "perro",
+    "matiz": "",
+    "words": [],
+    "kanjis": [
+      { "char": "犬", "mean": "perro" }
+    ]
+  },
+  {
+    "type": "palabra",
+    "theme": "Animales",
+    "jp": "猫",
+    "romaji": "neko",
+    "es": "gato",
+    "literal": "gato",
+    "matiz": "",
+    "words": [],
+    "kanjis": [
+      { "char": "猫", "mean": "gato" }
+    ]
+  },
+  {
+    "type": "palabra",
+    "theme": "Animales",
+    "jp": "鳥",
+    "romaji": "tori",
+    "es": "pájaro • ave",
+    "literal": "ave",
+    "matiz": "",
+    "words": [],
+    "kanjis": [
+      { "char": "鳥", "mean": "ave • pájaro" }
+    ]
+  },
+  {
+    "type": "palabra",
+    "theme": "Animales",
+    "jp": "魚",
+    "romaji": "sakana",
+    "es": "pez",
+    "literal": "pez",
+    "matiz": "",
+    "words": [],
+    "kanjis": [
+      { "char": "魚", "mean": "pez" }
+    ]
+  },
+  {
+    "type": "palabra",
+    "theme": "Animales",
+    "jp": "馬",
+    "romaji": "uma",
+    "es": "caballo",
+    "literal": "caballo",
+    "matiz": "",
+    "words": [],
+    "kanjis": [
+      { "char": "馬", "mean": "caballo" }
+    ]
+  },
+  {
+    "type": "palabra",
+    "theme": "Animales",
+    "jp": "牛",
+    "romaji": "ushi",
+    "es": "vaca",
+    "literal": "vaca",
+    "matiz": "",
+    "words": [],
+    "kanjis": [
+      { "char": "牛", "mean": "vaca • ganado" }
+    ]
+  },
+  {
+    "type": "palabra",
+    "theme": "Animales",
+    "jp": "豚",
+    "romaji": "buta",
+    "es": "cerdo",
+    "literal": "cerdo",
+    "matiz": "",
+    "words": [],
+    "kanjis": [
+      { "char": "豚", "mean": "cerdo" }
+    ]
+  },
+  {
+    "type": "palabra",
+    "theme": "Animales",
+    "jp": "羊",
+    "romaji": "hitsuji",
+    "es": "oveja",
+    "literal": "oveja",
+    "matiz": "",
+    "words": [],
+    "kanjis": [
+      { "char": "羊", "mean": "oveja" }
+    ]
+  },
+  {
+    "type": "palabra",
+    "theme": "Animales",
+    "jp": "猿",
+    "romaji": "saru",
+    "es": "mono",
+    "literal": "mono",
+    "matiz": "",
+    "words": [],
+    "kanjis": [
+      { "char": "猿", "mean": "mono" }
+    ]
+  },
+  {
+    "type": "palabra",
+    "theme": "Animales",
+    "jp": "熊",
+    "romaji": "kuma",
+    "es": "oso",
+    "literal": "oso",
+    "matiz": "",
+    "words": [],
+    "kanjis": [
+      { "char": "熊", "mean": "oso" }
+    ]
+  },
+  {
+    "type": "palabra",
+    "theme": "Animales",
+    "jp": "象",
+    "romaji": "zō",
+    "es": "elefante",
+    "literal": "elefante",
+    "matiz": "",
+    "words": [],
+    "kanjis": [
+      { "char": "象", "mean": "elefante • figura • imagen" }
+    ]
+  },
+  {
+    "type": "palabra",
+    "theme": "Animales",
+    "jp": "亀",
+    "romaji": "kame",
+    "es": "tortuga",
+    "literal": "tortuga",
+    "matiz": "",
+    "words": [],
+    "kanjis": [
+      { "char": "亀", "mean": "tortuga" }
+    ]
   }
 ]
