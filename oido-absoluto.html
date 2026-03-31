@@ -780,15 +780,6 @@
           </div>
         </button>
       </div>
-        
-        <div class="main-header">
-          <div>
-            <h2 id="moduleTitle">Escuchar y memorizar</h2>
-            <p id="moduleDesc">
-              Aquí el estudiante escucha una nota visible para empezar a fijarla en la memoria.
-            </p>
-          </div>
-        </div>
 
       <div id="moduleContent"></div>
               
@@ -856,28 +847,6 @@ const NOTES = [
   { id:"A", solfege:"La", freq:440.00 },
   { id:"B", solfege:"Si", freq:493.88 }
 ];
-
-const MODULES = {
-  memorizar: {
-    title: "Escuchar y memorizar",
-    desc: "Aquí el estudiante escucha una nota visible para empezar a fijarla en la memoria."
-  },
-
-  reconocer: {
-    title: "Reconocer nota",
-    desc: "Escucha una nota e identifica cuál es entre las notas activas."
-  },
-
-  teclado: {
-    title: "Identificar en teclado",
-    desc: "Escucha una nota y tócala directamente en el teclado visual."
-  },
-
-  memoria: {
-    title: "Memoria de nota",
-    desc: "Escucha una nota base y decide si la nota de prueba es la misma o diferente."
-  }
-};
 
 /* =========================
    ESTADO GLOBAL
@@ -1399,9 +1368,7 @@ if(state.module === "memoria"){
 ========================= */
 
 function renderCurrentModule(){
-  moduleTitle.textContent = MODULES[state.module].title;
-  moduleDesc.textContent = MODULES[state.module].desc;
-
+  
   if(state.module === "memorizar") renderModuleMemorizar();
   if(state.module === "reconocer") renderModuleReconocer();
   if(state.module === "teclado") renderModuleTeclado();
