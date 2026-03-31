@@ -998,10 +998,6 @@ function playTone(freq, duration = 1.0, type = "sine"){
    HELPERS
 ========================= */
 
-function normalizeKey(v){
-  return v.trim().toUpperCase();
-}
-
 function showGateMessage(text, type = ""){
   gateMessage.textContent = text;
   gateMessage.className = "message";
@@ -1751,7 +1747,7 @@ btnResetProgress.addEventListener("click", () => {
 });
 
 function handleUnlock(){
-  const key = normalizeKey(accessKeyInput.value);
+  const key = accessKeyInput.value.trim();
 
   if(!key){
     showGateMessage("Escribe una clave para continuar.", "error");
