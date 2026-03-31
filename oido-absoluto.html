@@ -60,7 +60,10 @@
   }
 
   .brand{
-    display:inline-block;
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    flex-wrap:wrap;
     padding:8px 14px;
     border:1px solid var(--border);
     border-radius:999px;
@@ -586,6 +589,34 @@
     display:none !important;
   }
 
+.notation-buttons{
+  display:inline-flex;
+  gap:8px;
+  align-items:center;
+}
+
+.notation-btn{
+  border:1px solid var(--border);
+  background:rgba(255,255,255,.06);
+  color:var(--text);
+  padding:7px 12px;
+  border-radius:999px;
+  font-size:.92rem;
+  font-weight:700;
+  cursor:pointer;
+  transition:.16s ease;
+}
+
+.notation-btn:hover{
+  background:rgba(255,255,255,.10);
+}
+
+.notation-btn.active{
+  background:rgba(125,92,255,.18);
+  border-color:rgba(125,92,255,.55);
+  color:#ddd6fe;
+}
+  
   @media (max-width: 980px){
     .workspace.show{
       grid-template-columns:1fr;
@@ -619,7 +650,10 @@
 <body>
   <div class="app">
     <section class="hero">
-      <div class="brand">Asallam Sensei · Curso de Oído Absoluto</div>
+      <div class="brand">
+        Asallam Sensei · Curso de Oído Absoluto
+        <span id="studentChip"></span>
+      </div>
       <h1>Entrena tu oído nota por nota</h1>
     </section>
 
@@ -641,23 +675,9 @@
 
     <section id="workspace" class="workspace">
       <aside class="panel sidebar">
-        <div id="studentChip" class="student-chip">Estudiante</div>
         <h2>Nivel 1: Fundamentos</h2>
         <div class="muted">
           Entrenamiento progresivo del oído con notas naturales.
-        </div>
-
-        <div class="toolbar">
-          <div class="toggle-wrap">
-            <div>
-              <strong>Mostrar notas como</strong><br>
-              <span class="muted" id="notationLabel">Do Re Mi</span>
-            </div>
-            <label class="switch">
-              <input id="notationToggle" type="checkbox">
-              <span class="slider"></span>
-            </label>
-          </div>
         </div>
 
         <div class="info-grid">
@@ -685,6 +705,13 @@
           <span class="stage-chip-sep">·</span>
           -->
           <span class="stage-chip-value" id="activeNotesValue">2 notas activas</span>
+          <span class="stage-chip-sep">·</span>
+      
+          <span class="stage-chip-label">Notas:</span>
+      
+          <div class="notation-buttons">
+            <button id="btnNotationLetter" class="notation-btn" type="button">C</button>
+            <button id="btnNotationSolfege" class="notation-btn" type="button">Do</button>
         </div>
       </div>
         
@@ -873,8 +900,8 @@ const btnUnlock = document.getElementById("btnUnlock");
 const btnDemo = document.getElementById("btnDemo");
 const gateMessage = document.getElementById("gateMessage");
 
-const notationToggle = document.getElementById("notationToggle");
-const notationLabel = document.getElementById("notationLabel");
+const btnNotationLetter = document.getElementById("btnNotationLetter");
+const btnNotationSolfege = document.getElementById("btnNotationSolfege");
 const studentChip = document.getElementById("studentChip");
 const activeNotesValue = document.getElementById("activeNotesValue");
 const accuracyValue = document.getElementById("accuracyValue");
@@ -1139,8 +1166,8 @@ function resetCurrentStudentProgress(){
 ========================= */
 
 function updateNotationUI(){
-  notationToggle.checked = state.notation === "letter";
-  notationLabel.textContent = state.notation === "letter" ? "C D E" : "Do Re Mi";
+  btnNotationLetter.classList.toggle("active", state.notation === "letter");
+  btnNotationSolfege.classList.toggle("active", state.notation === "solfege");
 }
 
 function updateSummaryUI(){
@@ -1654,8 +1681,16 @@ accessKeyInput.addEventListener("keydown", (e) => {
   if(e.key === "Enter") handleUnlock();
 });
 
-notationToggle.addEventListener("change", () => {
-  state.notation = notationToggle.checked ? "letter" : "solfege";
+btnNotationLetter.addEventListener("click", () => {
+  state.notation = "letter";
+  saveProgress();
+  updateNotationUI();
+  renderCurrentModule();
+  updateSummaryUI();
+});
+
+btnNotationSolfege.addEventListener("click", () => {
+  state.notation = "solfege";
   saveProgress();
   updateNotationUI();
   renderCurrentModule();
