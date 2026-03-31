@@ -689,21 +689,6 @@
         <div class="muted">
           Entrenamiento progresivo del oído con notas naturales.
         </div>
-
-        <div class="info-grid">
-          <div class="mini-card">
-            <div class="label">Precisión global</div>
-            <div class="value" id="accuracyValue">0%</div>
-          </div>
-          <div class="mini-card">
-            <div class="label">Racha actual</div>
-            <div class="value" id="streakValue">0</div>
-          </div>
-        </div>
-
-        <div class="action-row">
-          <button id="btnResetProgress" class="btn btn-danger">Reiniciar progreso</button>
-        </div>
       </aside>
 
       <main class="panel main">
@@ -793,8 +778,20 @@
               <div class="label">Etapa de dificultad</div>
               <div class="value" id="stageStat">2 notas</div>
             </div>
+            <div class="stat-card">
+              <div class="label">Precisión global</div>
+              <div class="value" id="accuracyValue">0%</div>
+            </div>
+            <div class="stat-card">
+              <div class="label">Racha actual</div>
+              <div class="value" id="streakValue">0</div>
+            </div>
           </div>
 
+          <div class="action-row">
+            <button id="btnResetProgress" class="btn btn-danger">Reiniciar progreso</button>
+          </div>
+          
           <div class="per-note">
             <h3>Precisión por nota</h3>
             <div id="noteBars" class="note-bars"></div>
