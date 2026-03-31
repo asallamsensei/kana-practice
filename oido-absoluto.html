@@ -755,10 +755,6 @@
 
           <div class="stats">
             <div class="stat-card">
-              <div class="label">Nombre</div>
-              <div class="value" id="studentNameStat">—</div>
-            </div>
-            <div class="stat-card">
               <div class="label">Intentos</div>
               <div class="value" id="attemptsStat">0</div>
             </div>
@@ -1185,7 +1181,6 @@ function updateSummaryUI(){
   accuracyValue.textContent = `${acc}%`;
   streakValue.textContent = state.stats.streak;
 
-  studentNameStat.textContent = state.studentName;
   attemptsStat.textContent = state.stats.attempts;
   correctStat.textContent = state.stats.correct;
   accuracyStat.textContent = `${acc}%`;
