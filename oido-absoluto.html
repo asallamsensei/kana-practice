@@ -1727,6 +1727,7 @@ function renderModuleTeclado(){
 function drawKeyboardExercise(){
   const activeNotes = getActiveNotes();
   const note = state.currentQuizNote;
+  let answered = false;
 
   moduleContent.innerHTML = `
     <section class="exercise-card center">
@@ -1764,6 +1765,8 @@ function drawKeyboardExercise(){
       key.disabled = true;
     } else {
       key.addEventListener("click", () => {
+        if(answered) return;
+        answered = true;
         const ok = n.id === note.id;
         registerResult(note.id, ok);
 
@@ -1797,7 +1800,6 @@ function drawKeyboardExercise(){
         }
         feedback.className = `feedback ${ok ? "ok" : "error"}`;
 
-        keyboardWrap.querySelectorAll(".key").forEach(k => k.disabled = true);
         document.getElementById("btnNextKeyboard").disabled = false;
       });
     }
