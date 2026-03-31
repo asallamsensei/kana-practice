@@ -309,6 +309,30 @@
   overflow:hidden;
 }
 
+.module-top-list{
+  display:grid;
+  grid-template-columns:repeat(4, 1fr);
+  gap:12px;
+  margin-bottom:16px;
+}
+
+.module-top-list .module-btn{
+  text-align:center;
+  padding:14px 10px;
+}
+
+@media (max-width: 900px){
+  .module-top-list{
+    grid-template-columns:1fr 1fr;
+  }
+}
+
+@media (max-width: 640px){
+  .module-top-list{
+    grid-template-columns:1fr;
+  }
+}
+  
 .module-progress{
   position:absolute;
   left:0;
@@ -567,10 +591,6 @@
     <section class="hero">
       <div class="brand">Asallam Sensei · Curso de Oído Absoluto</div>
       <h1>Entrena tu oído nota por nota</h1>
-      <p class="subtitle">
-        Accede con tu clave, entra a tu nivel y entrena de forma progresiva.
-        El Nivel 1 aumenta desde 2 notas hasta las 7 naturales.
-      </p>
     </section>
 
     <section id="gateSection" class="panel gate">
@@ -624,44 +644,6 @@
             <div class="label">Racha actual</div>
             <div class="value" id="streakValue">0</div>
           </div>
-          <div class="mini-card">
-            <div class="label">Módulo actual</div>
-            <div class="value" id="currentModuleValue">Escuchar y memorizar</div>
-          </div>
-        </div>
-
-        <div class="module-list">
-          <button class="module-btn active" data-module="memorizar">
-            1. Escuchar y memorizar
-            <small>Escucha una nota, mírala y empieza a grabar su identidad sonora.</small>
-            <div class="module-progress">
-              <div class="module-progress-fill" id="progress-memorizar"></div>
-            </div>
-          </button>
-          
-          <button class="module-btn" data-module="reconocer">
-            2. Reconocer nota
-            <small>Escucha y elige la nota correcta entre las opciones activas.</small>
-            <div class="module-progress">
-              <div class="module-progress-fill" id="progress-reconocer"></div>
-            </div>
-          </button>
-          
-          <button class="module-btn" data-module="teclado">
-            3. Identificar en teclado
-            <small>Escucha una nota y selecciónala en el teclado visual.</small>
-            <div class="module-progress">
-              <div class="module-progress-fill" id="progress-teclado"></div>
-            </div>
-          </button>
-          
-          <button class="module-btn" data-module="memoria">
-            4. Memoria de nota
-            <small>Escucha, guarda la nota y decide si luego suena la misma o no.</small>
-            <div class="module-progress">
-              <div class="module-progress-fill" id="progress-memoria"></div>
-            </div>
-          </button>
         </div>
 
         <div class="level2">
@@ -669,12 +651,42 @@
         </div>
 
         <div class="action-row">
-          <button id="btnLogout" class="btn btn-secondary">Salir</button>
           <button id="btnResetProgress" class="btn btn-danger">Reiniciar progreso</button>
         </div>
       </aside>
 
       <main class="panel main">
+
+      <div class="module-top-list">
+        <button class="module-btn active" data-module="memorizar">
+          Escuchar y memorizar
+          <div class="module-progress">
+            <div class="module-progress-fill" id="progress-memorizar"></div>
+          </div>
+        </button>
+      
+        <button class="module-btn" data-module="reconocer">
+          Reconocer nota
+          <div class="module-progress">
+            <div class="module-progress-fill" id="progress-reconocer"></div>
+          </div>
+        </button>
+      
+        <button class="module-btn" data-module="teclado">
+          Identificar en teclado
+          <div class="module-progress">
+            <div class="module-progress-fill" id="progress-teclado"></div>
+          </div>
+        </button>
+      
+        <button class="module-btn" data-module="memoria">
+          Memoria de nota
+          <div class="module-progress">
+            <div class="module-progress-fill" id="progress-memoria"></div>
+          </div>
+        </button>
+      </div>
+        
         <div class="main-header">
           <div>
             <h2 id="moduleTitle">Escuchar y memorizar</h2>
@@ -829,7 +841,6 @@ const gateMessage = document.getElementById("gateMessage");
 const notationToggle = document.getElementById("notationToggle");
 const notationLabel = document.getElementById("notationLabel");
 const studentChip = document.getElementById("studentChip");
-const currentModuleValue = document.getElementById("currentModuleValue");
 const activeNotesValue = document.getElementById("activeNotesValue");
 const accuracyValue = document.getElementById("accuracyValue");
 const streakValue = document.getElementById("streakValue");
@@ -838,7 +849,6 @@ const moduleTitle = document.getElementById("moduleTitle");
 const moduleDesc = document.getElementById("moduleDesc");
 const moduleContent = document.getElementById("moduleContent");
 
-const btnLogout = document.getElementById("btnLogout");
 const btnResetProgress = document.getElementById("btnResetProgress");
 
 const studentNameStat = document.getElementById("studentNameStat");
@@ -1060,7 +1070,6 @@ function updateSummaryUI(){
   const acc = accuracyPercent(state.stats.correct, state.stats.attempts);
 
   studentChip.textContent = `Estudiante: ${state.studentName}`;
-  currentModuleValue.textContent = MODULES[state.module].title;
   activeNotesValue.textContent = activeCount;
   accuracyValue.textContent = `${acc}%`;
   streakValue.textContent = state.stats.streak;
@@ -1182,7 +1191,6 @@ function registerResult(noteId, isCorrect){
 function renderCurrentModule(){
   moduleTitle.textContent = MODULES[state.module].title;
   moduleDesc.textContent = MODULES[state.module].desc;
-  currentModuleValue.textContent = MODULES[state.module].title;
 
   if(state.module === "memorizar") renderModuleMemorizar();
   if(state.module === "reconocer") renderModuleReconocer();
@@ -1522,10 +1530,6 @@ document.querySelectorAll(".module-btn").forEach(btn => {
     updateModuleButtons();
     renderCurrentModule();
   });
-});
-
-btnLogout.addEventListener("click", () => {
-  logout();
 });
 
 btnResetProgress.addEventListener("click", () => {
