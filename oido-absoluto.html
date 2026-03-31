@@ -822,7 +822,8 @@ const state = {
   level: 0,
   notation: "solfege",
   module: "memorizar",
-
+  activeNoteCount: 2,
+  
   stats: {
     attempts: 0,
     correct: 0,
@@ -946,14 +947,7 @@ function getDisplayName(noteObj){
 }
 
 function getActiveNoteCount(){
-  const attempts = state.stats.attempts;
-
-  if(attempts >= 60) return 7;
-  if(attempts >= 48) return 6;
-  if(attempts >= 36) return 5;
-  if(attempts >= 24) return 4;
-  if(attempts >= 12) return 3;
-  return 2;
+  return state.activeNoteCount || 2;
 }
 
 function getActiveNotes(){
@@ -1002,6 +996,7 @@ function saveProgress(){
     level: state.level,
     notation: state.notation,
     module: state.module,
+    activeNoteCount: state.activeNoteCount,
     stats: state.stats,
     moduleProgress: state.moduleProgress,
     memorizar: state.memorizar,
@@ -1027,6 +1022,7 @@ function loadProgress(studentKey){
     state.level = data.level || 1;
     state.notation = data.notation || "solfege";
     state.module = data.module || "memorizar";
+    state.activeNoteCount = data.activeNoteCount || 2;
     state.stats = data.stats || state.stats;
     state.moduleProgress = data.moduleProgress || state.moduleProgress;
     state.memorizar = data.memorizar || state.memorizar;
@@ -1128,6 +1124,7 @@ function resetCurrentStudentProgress(){
   state.currentMemoryBase = null;
   state.currentMemoryProbe = null;
   
+  state.activeNoteCount = 2;
   state.module = "memorizar";
   saveProgress();
 }
@@ -1192,7 +1189,7 @@ function updateModuleButtons(){
     btn.classList.toggle("active", btn.dataset.module === state.module);
   });
 }
-
+  
 function clampProgress(value){
   return Math.max(0, Math.min(100, value));
 }
@@ -1212,6 +1209,61 @@ function updateModuleProgressUI(){
   document.getElementById("progress-reconocer").style.width = `${state.moduleProgress.reconocer}%`;
   document.getElementById("progress-teclado").style.width = `${state.moduleProgress.teclado}%`;
   document.getElementById("progress-memoria").style.width = `${state.moduleProgress.memoria}%`;
+}
+
+function areAllModulesComplete(){
+  return (
+    state.memorizar.listensDone >= state.memorizar.listensRequired &&
+    state.reconocer.roundsDone >= state.reconocer.roundsRequired &&
+    state.teclado.roundsDone >= state.teclado.roundsRequired &&
+    state.memoria.roundsDone >= state.memoria.roundsRequired
+  );
+}
+
+function advanceStageIfNeeded(){
+  if(!areAllModulesComplete()) return;
+
+  if(state.activeNoteCount < NOTES.length){
+    state.activeNoteCount += 1;
+  }
+
+  state.memorizar = {
+    listensDone: 0,
+    listensRequired: 10,
+    countedCurrentNote: false
+  };
+
+  state.reconocer = {
+    roundsDone: 0,
+    roundsRequired: 20
+  };
+
+  state.teclado = {
+    roundsDone: 0,
+    roundsRequired: 20
+  };
+
+  state.memoria = {
+    roundsDone: 0,
+    roundsRequired: 20
+  };
+
+  state.module = "memorizar";
+
+  state.currentVisibleNote = null;
+  state.currentQuizNote = null;
+  state.currentMemoryBase = null;
+  state.currentMemoryProbe = null;
+
+  state.history.lastVisibleNoteId = null;
+  state.history.lastQuizNoteId = null;
+  state.history.lastMemoryBaseId = null;
+  state.history.lastMemoryProbeId = null;
+
+  saveProgress();
+  updateSummaryUI();
+  updateModuleButtons();
+  renderCurrentModule();
 }
   
 function showWorkspace(){
@@ -1268,6 +1320,7 @@ if(state.module === "memoria"){
   
   saveProgress();
   updateSummaryUI();
+  advanceStageIfNeeded();
 }
 
 /* =========================
@@ -1343,13 +1396,14 @@ document.getElementById("btnPlayVisible").addEventListener("click", () => {
     state.memorizar.countedCurrentNote = true;
   }
 
-    const pct = Math.round((state.memorizar.listensDone / state.memorizar.listensRequired) * 100);
-    state.moduleProgress.memorizar = clampProgress(pct);
+  const pct = Math.round((state.memorizar.listensDone / state.memorizar.listensRequired) * 100);
+  state.moduleProgress.memorizar = clampProgress(pct);
 
-    saveProgress();
-    renderModuleMemorizar();
-    updateSummaryUI();
-  });
+  saveProgress();
+  updateSummaryUI();
+  advanceStageIfNeeded();
+  renderModuleMemorizar();
+});
 
   document.getElementById("btnNewVisible").addEventListener("click", () => {
     newVisibleNote();
@@ -1643,6 +1697,7 @@ function handleUnlock(){
   if(!loaded){
     state.notation = "solfege";
     state.module = "memorizar";
+    state.activeNoteCount = 2;
   
     const freshPerNote = {};
     NOTES.forEach(n => {
