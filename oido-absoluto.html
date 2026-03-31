@@ -795,6 +795,7 @@ const state = {
   memorizar: {
     listensDone: 0,
     listensRequired: 10
+   countedCurrentNote: false
   },
 
   history: {
@@ -1232,12 +1233,16 @@ function renderModuleMemorizar(){
     </section>
   `;
 
-  document.getElementById("btnPlayVisible").addEventListener("click", () => {
-    playTone(note.freq, 1.1, "sine");
+document.getElementById("btnPlayVisible").addEventListener("click", () => {
+  playTone(note.freq, 1.1, "sine");
 
-    if(state.memorizar.listensDone < state.memorizar.listensRequired){
-      state.memorizar.listensDone += 1;
-    }
+  if(
+    !state.memorizar.countedCurrentNote &&
+    state.memorizar.listensDone < state.memorizar.listensRequired
+  ){
+    state.memorizar.listensDone += 1;
+    state.memorizar.countedCurrentNote = true;
+  }
 
     const pct = Math.round((state.memorizar.listensDone / state.memorizar.listensRequired) * 100);
     state.moduleProgress.memorizar = clampProgress(pct);
@@ -1249,6 +1254,7 @@ function renderModuleMemorizar(){
 
   document.getElementById("btnNewVisible").addEventListener("click", () => {
     newVisibleNote();
+    state.memorizar.countedCurrentNote = false;
     renderModuleMemorizar();
   });
 }
