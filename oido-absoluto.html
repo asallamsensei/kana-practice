@@ -576,6 +576,13 @@
   flex:0 0 auto;
 }
 
+.key.playing{
+  transform:translateY(2px);
+  box-shadow:
+    inset 0 3px 10px rgba(0,0,0,.12),
+    0 3px 8px rgba(0,0,0,.14);
+}
+  
 .key:hover{
   transform:translateY(-1px);
   box-shadow:
@@ -1127,6 +1134,19 @@ function playTone(freq, duration = 1.0, type = "sine"){
   osc.stop(now + duration + 0.02);
 }
 
+function animateKeyPress(noteId){
+  const keyEl = document.querySelector(`[data-note-id="${noteId}"]`);
+  if(!keyEl) return;
+
+  keyEl.classList.remove("playing");
+  void keyEl.offsetWidth;
+  keyEl.classList.add("playing");
+
+  setTimeout(() => {
+    keyEl.classList.remove("playing");
+  }, 180);
+}
+  
 /* =========================
    HELPERS
 ========================= */
@@ -1729,7 +1749,8 @@ function drawKeyboardExercise(){
         registerResult(note.id, ok);
 
         playTone(n.freq, 0.9, "sine");
-
+        animateKeyPress(n.id);
+        
         const correctKey = keyboardWrap.querySelector(`[data-note-id="${note.id}"]`);
 
         if(ok){
@@ -1765,9 +1786,13 @@ function drawKeyboardExercise(){
 
   document.getElementById("btnPlayKeyboard").addEventListener("click", () => {
     playTone(note.freq, 1.0, "sine");
+    animateKeyPress(note.id);
   });
 
-  setTimeout(() => playTone(note.freq, 1.0, "sine"), 120);
+  setTimeout(() => {
+    playTone(note.freq, 1.0, "sine");
+    animateKeyPress(note.id);
+  }, 120);
 }
 
 /* ===== MÓDULO 4 ===== */
