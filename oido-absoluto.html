@@ -1879,50 +1879,44 @@ function drawMemoryRound(){
     playTone(probe.freq, 1.0, "sine");
   });
 
+
+
 document.getElementById("btnSame").addEventListener("click", () => {
+  const ok = probe.id === base.id;
 
-  const correct = probe.freq === base.freq;
+  registerResult(base.id, ok);
 
-  if(correct){
-    showFeedback(true,"¡Correcto! Era la misma nota.");
-    state.memory.correct++;
-    state.memory.streak++;
+  if(state.memoria.roundsDone >= state.memoria.roundsRequired){
+    feedback.textContent = "✔ Ejercicios completados";
   }else{
-    showFeedback(false,"Incorrecto. No era la misma.");
-    state.memory.streak = 0;
+    feedback.textContent = ok
+      ? "✔ Correcto: era la misma nota."
+      : "✘ Incorrecto: no era la misma.";
   }
-
-  state.memory.attempts++;
+  feedback.className = `feedback ${ok ? "ok" : "error"}`;
 
   document.getElementById("btnSame").disabled = true;
   document.getElementById("btnDifferent").disabled = true;
-
   document.getElementById("btnNextMemory").disabled = false;
-
-  updateSummaryUI();
 });
 
 document.getElementById("btnDifferent").addEventListener("click", () => {
+  const ok = probe.id !== base.id;
 
-  const correct = probe.freq !== base.freq;
+  registerResult(base.id, ok);
 
-  if(correct){
-    showFeedback(true,"¡Correcto! Eran diferentes.");
-    state.memory.correct++;
-    state.memory.streak++;
+  if(state.memoria.roundsDone >= state.memoria.roundsRequired){
+    feedback.textContent = "✔ Ejercicios completados";
   }else{
-    showFeedback(false,"Incorrecto. Sí eran iguales.");
-    state.memory.streak = 0;
+    feedback.textContent = ok
+      ? "✔ Correcto: eran diferentes."
+      : "✘ Incorrecto: sí eran iguales.";
   }
-
-  state.memory.attempts++;
+  feedback.className = `feedback ${ok ? "ok" : "error"}`;
 
   document.getElementById("btnSame").disabled = true;
   document.getElementById("btnDifferent").disabled = true;
-
   document.getElementById("btnNextMemory").disabled = false;
-
-  updateSummaryUI();
 });
 
   document.getElementById("btnNextMemory").addEventListener("click", () => {
@@ -2031,20 +2025,20 @@ state.memorizar = {
   countedCurrentNote: false
 };
   
-    state.reconocer = {
-      roundsDone: 0,
-      roundsRequired: 20
-    };
-  
-    state.teclado = {
-      roundsDone: 0,
-      roundsRequired: 20
-    };
-  
-    state.memoria = {
-      roundsDone: 0,
-      roundsRequired: 20
-    };
+state.reconocer = {
+  roundsDone: 0,
+  roundsRequired: getRoundsRequired()
+};
+
+state.teclado = {
+  roundsDone: 0,
+  roundsRequired: getRoundsRequired()
+};
+
+state.memoria = {
+  roundsDone: 0,
+  roundsRequired: getRoundsRequired()
+};
   
     state.history = {
       lastVisibleNoteId: null,
