@@ -761,21 +761,25 @@ const NOTES = [
 
 const MODULES = {
   memorizar: {
-    title: "Escuchar y memorizar",
-    desc: "Escucha una nota visible y repítela mentalmente varias veces para fijarla en tu memoria auditiva."
+    listensDone: 0,
+    listensRequired: 10,
+    countedCurrentNote: false
   },
+
   reconocer: {
-    title: "Reconocer nota",
-    desc: "Escucha una nota y elige cuál es entre las opciones activas del nivel."
+    roundsDone: 0,
+    roundsRequired: 20
   },
+
   teclado: {
-    title: "Identificar en teclado",
-    desc: "Escucha una nota y selecciónala directamente en el teclado visual."
+    roundsDone: 0,
+    roundsRequired: 20
   },
+
   memoria: {
-    title: "Memoria de nota",
-    desc: "Escucha una nota y luego decide si la nueva reproducción es la misma o una diferente."
-  }
+    roundsDone: 0,
+    roundsRequired: 20
+  },
 };
 
 /* =========================
@@ -971,6 +975,9 @@ function saveProgress(){
     stats: state.stats,
     moduleProgress: state.moduleProgress,
     memorizar: state.memorizar,
+    reconocer: state.reconocer,
+    teclado: state.teclado,
+    memoria: state.memoria,
     history: state.history
   };
 
@@ -993,10 +1000,34 @@ function loadProgress(studentKey){
     state.stats = data.stats || state.stats;
     state.moduleProgress = data.moduleProgress || state.moduleProgress;
     state.memorizar = data.memorizar || state.memorizar;
+    state.reconocer = data.reconocer || state.reconocer;
+    state.teclado = data.teclado || state.teclado;
+    state.memoria = data.memoria || state.memoria;
     state.history = data.history || state.history;
 
     if(typeof state.memorizar.countedCurrentNote !== "boolean"){
       state.memorizar.countedCurrentNote = false;
+    }
+
+    if(typeof state.reconocer.roundsDone !== "number"){
+      state.reconocer.roundsDone = 0;
+    }
+    if(typeof state.reconocer.roundsRequired !== "number"){
+      state.reconocer.roundsRequired = 20;
+    }
+
+    if(typeof state.teclado.roundsDone !== "number"){
+      state.teclado.roundsDone = 0;
+    }
+    if(typeof state.teclado.roundsRequired !== "number"){
+      state.teclado.roundsRequired = 20;
+    }
+
+    if(typeof state.memoria.roundsDone !== "number"){
+      state.memoria.roundsDone = 0;
+    }
+    if(typeof state.memoria.roundsRequired !== "number"){
+      state.memoria.roundsRequired = 20;
     }
     
     NOTES.forEach(n => {
@@ -1040,6 +1071,21 @@ function resetCurrentStudentProgress(){
     countedCurrentNote: false
   };
 
+  state.reconocer = {
+    roundsDone: 0,
+    roundsRequired: 20
+  };
+
+  state.teclado = {
+    roundsDone: 0,
+    roundsRequired: 20
+  };
+
+  state.memoria = {
+    roundsDone: 0,
+    roundsRequired: 20
+  };
+  
   state.history = {
     lastVisibleNoteId: null,
     lastQuizNoteId: null,
@@ -1123,12 +1169,19 @@ function clampProgress(value){
 
 function updateModuleProgressUI(){
   const memorizarPct = Math.round((state.memorizar.listensDone / state.memorizar.listensRequired) * 100);
+  const reconocerPct = Math.round((state.reconocer.roundsDone / state.reconocer.roundsRequired) * 100);
+  const tecladoPct = Math.round((state.teclado.roundsDone / state.teclado.roundsRequired) * 100);
+  const memoriaPct = Math.round((state.memoria.roundsDone / state.memoria.roundsRequired) * 100);
+
   state.moduleProgress.memorizar = clampProgress(memorizarPct);
+  state.moduleProgress.reconocer = clampProgress(reconocerPct);
+  state.moduleProgress.teclado = clampProgress(tecladoPct);
+  state.moduleProgress.memoria = clampProgress(memoriaPct);
 
   document.getElementById("progress-memorizar").style.width = `${state.moduleProgress.memorizar}%`;
-  document.getElementById("progress-reconocer").style.width = `${clampProgress(state.moduleProgress.reconocer)}%`;
-  document.getElementById("progress-teclado").style.width = `${clampProgress(state.moduleProgress.teclado)}%`;
-  document.getElementById("progress-memoria").style.width = `${clampProgress(state.moduleProgress.memoria)}%`;
+  document.getElementById("progress-reconocer").style.width = `${state.moduleProgress.reconocer}%`;
+  document.getElementById("progress-teclado").style.width = `${state.moduleProgress.teclado}%`;
+  document.getElementById("progress-memoria").style.width = `${state.moduleProgress.memoria}%`;
 }
   
 function showWorkspace(){
@@ -1169,15 +1222,15 @@ function registerResult(noteId, isCorrect){
   }
 
   if(state.module === "reconocer"){
-    state.moduleProgress.reconocer = clampProgress((state.stats.perNote[noteId].attempts / 20) * 100);
+    state.reconocer.roundsDone += 1;
   }
 
   if(state.module === "teclado"){
-    state.moduleProgress.teclado = clampProgress((state.stats.perNote[noteId].attempts / 20) * 100);
+    state.teclado.roundsDone += 1;
   }
 
   if(state.module === "memoria"){
-    state.moduleProgress.memoria = clampProgress((state.stats.perNote[noteId].attempts / 20) * 100);
+    state.memoria.roundsDone += 1;
   }
   
   saveProgress();
@@ -1578,6 +1631,22 @@ function handleUnlock(){
       bestStreak: 0,
       perNote: freshPerNote
     };
+
+    state.reconocer = {
+      roundsDone: 0,
+      roundsRequired: 20
+    };
+
+    state.teclado = {
+      roundsDone: 0,
+      roundsRequired: 20
+    };
+
+    state.memoria = {
+      roundsDone: 0,
+      roundsRequired: 20
+    };
+    
   }
 
   saveProgress();
