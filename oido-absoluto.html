@@ -952,7 +952,7 @@ function getActiveNoteCount(){
 
 function getRoundsRequired(){
   const notes = getActiveNoteCount();
-  return 20 + (notes * 20);
+  return (notes ** 2) * 10;
 }
   
 function getActiveNotes(){
