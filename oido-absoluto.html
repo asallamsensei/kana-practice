@@ -1221,17 +1221,20 @@ function registerResult(noteId, isCorrect){
     state.stats.streak = 0;
   }
 
-  if(state.module === "reconocer"){
-    state.reconocer.roundsDone += 1;
-  }
+if(state.module === "reconocer"){
+  state.reconocer.roundsDone += isCorrect ? 1 : -1;
+  state.reconocer.roundsDone = Math.max(0, state.reconocer.roundsDone);
+}
 
-  if(state.module === "teclado"){
-    state.teclado.roundsDone += 1;
-  }
+if(state.module === "teclado"){
+  state.teclado.roundsDone += isCorrect ? 1 : -1;
+  state.teclado.roundsDone = Math.max(0, state.teclado.roundsDone);
+}
 
-  if(state.module === "memoria"){
-    state.memoria.roundsDone += 1;
-  }
+if(state.module === "memoria"){
+  state.memoria.roundsDone += isCorrect ? 1 : -1;
+  state.memoria.roundsDone = Math.max(0, state.memoria.roundsDone);
+}
   
   saveProgress();
   updateSummaryUI();
