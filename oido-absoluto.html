@@ -544,23 +544,24 @@
 
 .keyboard{
   display:flex;
-  gap:2px;
+  gap:0;
   justify-content:center;
   align-items:flex-start;
   flex-wrap:nowrap;
   margin-top:18px;
-  padding:18px 14px 14px;
+  padding:18px 22px 14px;
   border-radius:18px;
   background:linear-gradient(180deg, rgba(10,16,34,.96), rgba(6,10,24,.98));
   box-shadow:
     inset 0 1px 0 rgba(255,255,255,.05),
     0 12px 26px rgba(0,0,0,.28);
-  overflow-x:auto;
+  overflow:visible;
 }
 
 .key{
   position:relative;
   z-index:1;
+  overflow:visible;
   width:64px;
   height:150px;
   border-radius:0 0 14px 14px;
@@ -573,23 +574,21 @@
     inset 0 1px 0 rgba(255,255,255,.85),
     inset 0 -8px 14px rgba(0,0,0,.06),
     0 8px 16px rgba(0,0,0,.18);
-  transition:transform .14s ease, box-shadow .14s ease, opacity .14s ease, filter .14s ease;
+  transition:box-shadow .14s ease, opacity .14s ease, filter .14s ease;
   flex:0 0 auto;
 }
 
 .key.has-black-right{
-  z-index:3;
+  z-index:5;
 }
   
 .key.playing{
-  transform:translateY(2px);
   box-shadow:
     inset 0 3px 10px rgba(0,0,0,.12),
     0 3px 8px rgba(0,0,0,.14);
 }
   
 .key:hover{
-  transform:translateY(-1px);
   box-shadow:
     inset 0 1px 0 rgba(255,255,255,.9),
     inset 0 -8px 14px rgba(0,0,0,.07),
@@ -597,7 +596,6 @@
 }
 
 .key:active{
-  transform:translateY(1px);
   box-shadow:
     inset 0 2px 8px rgba(0,0,0,.10),
     0 4px 10px rgba(0,0,0,.16);
@@ -627,7 +625,6 @@
       inset 0 1px 0 rgba(255,255,255,.9),
       inset 0 -8px 14px rgba(0,0,0,.07),
       0 10px 18px rgba(0,0,0,.20);
-    transform:translateY(0);
   }
   35%{
     box-shadow:
@@ -636,14 +633,12 @@
       0 0 0 2px rgba(34,197,94,.22),
       0 0 24px rgba(34,197,94,.34),
       0 12px 22px rgba(0,0,0,.22);
-    transform:translateY(-1px);
   }
   100%{
     box-shadow:
       inset 0 1px 0 rgba(255,255,255,.85),
       inset 0 -8px 14px rgba(0,0,0,.06),
       0 8px 16px rgba(0,0,0,.18);
-    transform:translateY(0);
   }
 }
 
@@ -689,8 +684,8 @@
   content:"";
   position:absolute;
   top:0;
-  right:-18px;
-  width:36px;
+  right:-19px;
+  width:38px;
   height:90px;
   border-radius:0 0 10px 10px;
   background:linear-gradient(180deg, #1a1a1a, #050505);
@@ -698,7 +693,7 @@
   box-shadow:
     0 6px 10px rgba(0,0,0,.38),
     inset 0 1px 0 rgba(255,255,255,.08);
-  z-index:4;
+  z-index:10;
   pointer-events:none;
 }
 
@@ -710,8 +705,8 @@
   }
 
   .key.has-black-right::before{
-    right:-15px;
-    width:30px;
+    right:-16px;
+    width:32px;
     height:72px;
   }
 }
