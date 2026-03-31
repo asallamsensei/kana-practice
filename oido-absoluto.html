@@ -611,12 +611,6 @@
     0 4px 10px rgba(0,0,0,.16);
 }
 
-.key.inactive{
-  opacity:.42;
-  filter:saturate(.6);
-  cursor:not-allowed;
-}
-
 .key.inactive:hover{
   transform:none;
 }
@@ -1086,6 +1080,7 @@ NOTES.forEach(n => {
 const gateSection = document.getElementById("gateSection");
 const workspace = document.getElementById("workspace");
 const accessKeyInput = document.getElementById("accessKey");
+accessKeyInput.focus();
 const btnUnlock = document.getElementById("btnUnlock");
 const gateMessage = document.getElementById("gateMessage");
 
@@ -1761,9 +1756,6 @@ function drawKeyboardExercise(){
     }
 
     if(!isActive){
-      key.classList.add("inactive");
-      key.disabled = true;
-    } else {
       key.addEventListener("click", () => {
         if(answered) return;
         answered = true;
@@ -2057,18 +2049,6 @@ state.memoria = {
   showWorkspace();
 }
 
-/* =========================
-   AUTO-RESTAURAR
-========================= */
-
-window.addEventListener("load", () => {
-  const lastKey = localStorage.getItem("oa_last_student_key");
-
-  if(lastKey && STUDENT_KEYS[lastKey]){
-    accessKeyInput.value = lastKey;
-    handleUnlock();
-  }
-});
 </script>
 </body>
 </html>
