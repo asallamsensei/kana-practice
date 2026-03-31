@@ -767,20 +767,16 @@
               <div class="value" id="accuracyStat">0%</div>
             </div>
             <div class="stat-card">
-              <div class="label">Máxima racha</div>
-              <div class="value" id="bestStreakStat">0</div>
-            </div>
-            <div class="stat-card">
-              <div class="label">Etapa de dificultad</div>
-              <div class="value" id="stageStat">2 notas</div>
-            </div>
-            <div class="stat-card">
               <div class="label">Precisión global</div>
               <div class="value" id="accuracyValue">0%</div>
             </div>
             <div class="stat-card">
-              <div class="label">Racha actual</div>
+              <div class="label">Racha total</div>
               <div class="value" id="streakValue">0</div>
+            </div>
+            <div class="stat-card">
+              <div class="label">Mejor racha</div>
+              <div class="value" id="bestStreakStat">0</div>
             </div>
           </div>
 
@@ -1185,7 +1181,6 @@ function updateSummaryUI(){
   correctStat.textContent = state.stats.correct;
   accuracyStat.textContent = `${acc}%`;
   bestStreakStat.textContent = state.stats.bestStreak;
-  stageStat.textContent = `${activeCount} ${activeCount === 1 ? "nota" : "notas"}`;
 
   updateModuleProgressUI();
   renderPerNoteStats();
