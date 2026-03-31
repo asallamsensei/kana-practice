@@ -560,6 +560,7 @@
 
 .key{
   position:relative;
+  z-index:1;
   width:64px;
   height:150px;
   border-radius:0 0 14px 14px;
@@ -576,6 +577,10 @@
   flex:0 0 auto;
 }
 
+.key.has-black-right{
+  z-index:3;
+}
+  
 .key.playing{
   transform:translateY(2px);
   box-shadow:
@@ -693,7 +698,7 @@
   box-shadow:
     0 6px 10px rgba(0,0,0,.38),
     inset 0 1px 0 rgba(255,255,255,.08);
-  z-index:2;
+  z-index:4;
   pointer-events:none;
 }
 
@@ -1598,7 +1603,7 @@ function renderModuleMemorizar(){
       </div>
 
       <div id="memorizarFeedback" class="feedback ${completed ? 'ok' : ''}">
-        ${completed ? '✔ Escuchas completadas' : 'Completa las escuchas mínimas'}
+        ${completed ? '✔ Escuchas completadas' : ''}
       </div>
     </section>
   `;
@@ -1798,12 +1803,10 @@ function drawKeyboardExercise(){
 
   document.getElementById("btnPlayKeyboard").addEventListener("click", () => {
     playTone(note.freq, 1.0, "sine");
-    animateKeyPress(note.id);
   });
 
   setTimeout(() => {
     playTone(note.freq, 1.0, "sine");
-    animateKeyPress(note.id);
   }, 120);
 }
 
