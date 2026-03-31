@@ -553,12 +553,9 @@
   .feedback.error{ color:#ffb0b0; }
 
 .keyboard{
-  display:flex;
-  gap:0;
-  justify-content:center;
-  align-items:flex-start;
-  flex-wrap:nowrap;
-  margin-top:18px;
+  position:relative;
+  width:max-content;
+  margin:18px auto 0;
   padding:18px 22px 14px;
   border-radius:18px;
   background:linear-gradient(180deg, rgba(10,16,34,.96), rgba(6,10,24,.98));
@@ -568,10 +565,25 @@
   overflow:visible;
 }
 
-.key{
+.keyboard-white{
+  display:flex;
+  gap:0;
   position:relative;
   z-index:1;
-  overflow:visible;
+}
+
+.keyboard-black{
+  position:absolute;
+  top:18px;
+  left:22px;
+  width:100%;
+  height:0;
+  z-index:3;
+  pointer-events:none;
+}
+
+.key{
+  position:relative;
   width:64px;
   height:150px;
   border-radius:0 0 14px 14px;
@@ -588,16 +600,12 @@
   flex:0 0 auto;
 }
 
-.key.has-black-right{
-  z-index:5;
-}
-  
 .key.playing{
   box-shadow:
     inset 0 3px 10px rgba(0,0,0,.12),
     0 3px 8px rgba(0,0,0,.14);
 }
-  
+
 .key:hover{
   box-shadow:
     inset 0 1px 0 rgba(255,255,255,.9),
@@ -611,10 +619,6 @@
     0 4px 10px rgba(0,0,0,.16);
 }
 
-.key.inactive:hover{
-  transform:none;
-}
-  
 .key::after{
   content:"";
   position:absolute;
@@ -629,22 +633,38 @@
   display:none;
 }
 
-/* negras decorativas */
-.key.has-black-right::before{
-  content:"";
+.black-key{
   position:absolute;
-  top:0;
-  right:-19px;
   width:38px;
   height:90px;
   border-radius:0 0 10px 10px;
-  background:linear-gradient(180deg, #1a1a1a, #050505);
   border:1px solid rgba(255,255,255,.06);
+  background:linear-gradient(180deg, #1a1a1a, #050505);
+  color:#ffffff;
+  cursor:pointer;
   box-shadow:
     0 6px 10px rgba(0,0,0,.38),
     inset 0 1px 0 rgba(255,255,255,.08);
-  z-index:10;
-  pointer-events:none;
+  pointer-events:auto;
+  transition:box-shadow .14s ease, opacity .14s ease, filter .14s ease;
+}
+
+.black-key.playing{
+  box-shadow:
+    0 3px 8px rgba(0,0,0,.30),
+    inset 0 2px 8px rgba(255,255,255,.05);
+}
+
+.black-key:hover{
+  box-shadow:
+    0 8px 14px rgba(0,0,0,.42),
+    inset 0 1px 0 rgba(255,255,255,.10);
+}
+
+.black-key:active{
+  box-shadow:
+    0 4px 8px rgba(0,0,0,.34),
+    inset 0 2px 8px rgba(255,255,255,.04);
 }
 
 @media (max-width: 900px){
@@ -654,10 +674,26 @@
     font-size:.95rem;
   }
 
-  .key.has-black-right::before{
-    right:-16px;
+  .black-key{
     width:32px;
     height:72px;
+  }
+
+  .keyboard-black{
+    top:18px;
+    left:22px;
+  }
+}
+
+@media (max-width: 900px){
+  .key{
+    width:62px;
+    height:104px;
+  }
+
+  .black-key{
+    width:34px;
+    height:64px;
   }
 }
 
@@ -1666,7 +1702,6 @@ function renderModuleTeclado(){
 }
 
 function drawKeyboardExercise(){
-  const activeNotes = getActiveNotes();
   const note = state.currentQuizNote;
   let answered = false;
 
@@ -1679,50 +1714,80 @@ function drawKeyboardExercise(){
         <button class="btn btn-secondary" id="btnNextKeyboard" disabled>Siguiente</button>
       </div>
 
-      <div class="keyboard" id="keyboardWrap"></div>
+      <div class="keyboard" id="keyboardWrap">
+        <div class="keyboard-white" id="keyboardWhite"></div>
+        <div class="keyboard-black" id="keyboardBlack"></div>
+      </div>
+
       <div id="keyboardFeedback" class="feedback">
         ${state.teclado.roundsDone >= state.teclado.roundsRequired ? '✔ Ejercicios completados' : ''}
       </div>
     </section>
   `;
 
-  const keyboardWrap = document.getElementById("keyboardWrap");
+  const keyboardWhite = document.getElementById("keyboardWhite");
+  const keyboardBlack = document.getElementById("keyboardBlack");
   const feedback = document.getElementById("keyboardFeedback");
 
-  NOTES.forEach(n => {
+  const whiteNotes = [
+    { id:"C", solfege:"Do", freq:261.63 },
+    { id:"D", solfege:"Re", freq:293.66 },
+    { id:"E", solfege:"Mi", freq:329.63 },
+    { id:"F", solfege:"Fa", freq:349.23 },
+    { id:"G", solfege:"Sol", freq:392.00 },
+    { id:"A", solfege:"La", freq:440.00 },
+    { id:"B", solfege:"Si", freq:493.88 }
+  ];
 
+  const blackNotes = [
+    { id:"C#", solfege:"Do#", freq:277.18, leftDesktop:45, leftMobile:46 },
+    { id:"D#", solfege:"Re#", freq:311.13, leftDesktop:109, leftMobile:108 },
+    { id:"F#", solfege:"Fa#", freq:369.99, leftDesktop:237, leftMobile:232 },
+    { id:"G#", solfege:"Sol#", freq:415.30, leftDesktop:301, leftMobile:294 },
+    { id:"A#", solfege:"La#", freq:466.16, leftDesktop:365, leftMobile:356 }
+  ];
+
+  function handleKeyPress(n){
+    if(answered) return;
+
+    playTone(n.freq, 0.9, "sine");
+    animateKeyPress(n.id);
+
+    const ok = n.id === note.id;
+    answered = true;
+    registerResult(note.id, ok);
+
+    if(state.teclado.roundsDone >= state.teclado.roundsRequired){
+      feedback.textContent = "✔ Ejercicios completados";
+    }else{
+      feedback.textContent = ok
+        ? `✔ Correcto: ${getDisplayName(note)}`
+        : `✘ Era ${getDisplayName(note)}`;
+    }
+    feedback.className = `feedback ${ok ? "ok" : "error"}`;
+
+    document.getElementById("btnNextKeyboard").disabled = false;
+  }
+
+  whiteNotes.forEach(n => {
     const key = document.createElement("button");
     key.className = "key";
     key.textContent = getDisplayName(n);
     key.dataset.noteId = n.id;
+    key.addEventListener("click", () => handleKeyPress(n));
+    keyboardWhite.appendChild(key);
+  });
 
-    if(["C","D","F","G","A"].includes(n.id)){
-      key.classList.add("has-black-right");
-    }
+  const isMobile = window.innerWidth <= 900;
 
-    key.addEventListener("click", () => {
-      if(answered) return;
-    
-      playTone(n.freq, 0.9, "sine");
-      animateKeyPress(n.id);
-    
-      const ok = n.id === note.id;
-      answered = true;
-      registerResult(note.id, ok);
-    
-      if(state.teclado.roundsDone >= state.teclado.roundsRequired){
-        feedback.textContent = "✔ Ejercicios completados";
-      }else{
-        feedback.textContent = ok
-          ? `✔ Correcto: ${getDisplayName(note)}`
-          : `✘ Era ${getDisplayName(note)}`;
-      }
-      feedback.className = `feedback ${ok ? "ok" : "error"}`;
-    
-      document.getElementById("btnNextKeyboard").disabled = false;
-    });
-
-    keyboardWrap.appendChild(key);
+  blackNotes.forEach(n => {
+    const key = document.createElement("button");
+    key.className = "black-key";
+    key.dataset.noteId = n.id;
+    key.setAttribute("aria-label", getDisplayName(n));
+    key.style.left = `${isMobile ? n.leftMobile : n.leftDesktop}px`;
+    key.addEventListener("click", () => handleKeyPress(n));
+    keyboardBlack.appendChild(key);
   });
 
   document.getElementById("btnPlayKeyboard").addEventListener("click", () => {
@@ -1733,7 +1798,7 @@ function drawKeyboardExercise(){
     state.currentQuizNote = randomFrom(getActiveNotes());
     drawKeyboardExercise();
   });
-  
+
   setTimeout(() => {
     playTone(note.freq, 1.0, "sine");
   }, 120);
