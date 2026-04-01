@@ -425,12 +425,6 @@
     color:#d9cfff;
   }
 
-  @media (max-width: 900px){
-    .module-top-list{
-      grid-template-columns:1fr;
-    }
-  }
-
   .module-progress{
     position:absolute;
     left:0;
@@ -681,36 +675,6 @@
     inset 0 2px 8px rgba(255,255,255,.04);
 }
 
-@media (max-width: 900px){
-  .key{
-    width:52px;
-    height:120px;
-    font-size:.95rem;
-  }
-
-  .black-key{
-    width:32px;
-    height:72px;
-  }
-
-  .keyboard-black{
-    top:18px;
-    left:22px;
-  }
-}
-
-@media (max-width: 900px){
-  .key{
-    width:62px;
-    height:104px;
-  }
-
-  .black-key{
-    width:34px;
-    height:64px;
-  }
-}
-
   .stats{
     margin-top:18px;
     display:grid;
@@ -836,32 +800,35 @@
     line-height:1.6;
   }
 
-  @media (max-width: 900px){
-    .workspace.show{
-      grid-template-columns:1fr;
-    }
+@media (max-width: 900px){
+
+  body{
+    padding:16px 10px 28px;
   }
 
-  @media (max-width: 900px){
-    body{
-      padding:16px 10px 28px;
-    }
+  .workspace.show{
+    grid-template-columns:1fr;
+  }
 
-    .gate, .sidebar, .main{
-      padding:16px;
-    }
+  .module-top-list{
+    grid-template-columns:1fr;
+  }
 
-    .gate-form{
-      flex-direction:column;
-      gap:8px;
-    }
+  .gate, .sidebar, .main{
+    padding:16px;
+  }
 
-    .btn, .input{
-      width:100%;
-    }
+  .gate-form{
+    flex-direction:column;
+    gap:8px;
+  }
 
+  .btn,
   .input{
     width:100%;
+  }
+
+  .input{
     height:48px;
     min-height:48px;
     max-height:48px;
@@ -870,15 +837,28 @@
     border-radius:14px;
   }
 
-    .btn{
-      height:42px;
-    }
-
-    .key{
-      width:62px;
-      height:104px;
-    }
+  .btn{
+    height:42px;
   }
+
+  .key{
+    width:62px;
+    height:104px;
+    font-size:.95rem;
+  }
+
+  .black-key{
+    width:34px;
+    height:64px;
+  }
+
+  .keyboard-black{
+    top:18px;
+    left:22px;
+  }
+
+}
+  
 </style>
   
 </head>
