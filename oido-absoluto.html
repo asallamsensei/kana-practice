@@ -1638,10 +1638,7 @@ document.getElementById("btnPlayVisible").addEventListener("click", () => {
 /* ===== MÓDULO 2 ===== */
 
 function newQuizNote(){
-  const next = randomFromNoImmediateRepeat(
-    getActiveNotes(),
-    state.history.lastQuizNoteId
-  );
+  const next = randomFrom(getActiveNotes());
 
   state.currentQuizNote = next;
   state.history.lastQuizNoteId = next.id;
