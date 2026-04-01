@@ -434,5 +434,32 @@
     { "japones": "お好み焼きをひとつください。", "romaji": "okonomiyaki o hitotsu kudasai", "espanol": "Un okonomiyaki, por favor." },
     { "japones": "駅弁はどこで買えますか？", "romaji": "ekiben wa doko de kaemasu ka", "espanol": "¿Dónde puedo comprar un ekiben?" },
     { "japones": "たい焼きをください。", "romaji": "taiyaki o kudasai", "espanol": "Deme un taiyaki, por favor." }
-  ]
+  ],
+  "Expresiones de Gratitud": [
+    
+    { "japones": "ありがとう", "romaji": "arigatou", "espanol": "gracias (informal)" },
+    { "japones": "ありがとうね", "romaji": "arigatou ne", "espanol": "gracias, ¿vale? / gracias, ¿sí? (más cercano y amistoso)" },
+    { "japones": "ありがとうございます", "romaji": "arigatou gozaimasu", "espanol": "muchas gracias (formal)" },
+    { "japones": "どうもありがとうございます", "romaji": "doumo arigatou gozaimasu", "espanol": "muchísimas gracias (muy formal)" },
+    { "japones": "サンキュー", "romaji": "sankyuu", "espanol": "¡gracias! (muy informal, del inglés “thank you”)" },
+  
+    { "japones": "助かりました", "romaji": "tasukarimashita", "espanol": "me ayudaste mucho; gracias por ayudarme (formal)" },
+    { "japones": "助かった", "romaji": "tasukatta", "espanol": "me ayudaste mucho; gracias por ayudarme (informal)" },
+  
+    { "japones": "ありがとうございました", "romaji": "arigatou gozaimashita", "espanol": "muchas gracias (por lo que ya pasó)" },
+  
+    { "japones": "どういたしまして", "romaji": "dou itashimashite", "espanol": "de nada (formal)" },
+    { "japones": "こちらこそ", "romaji": "kochira koso", "espanol": "al contrario, gracias a ti" },
+    { "japones": "いえいえ", "romaji": "ie ie", "espanol": "no, no; no es nada (informal, muy común)" },
+    { "japones": "とんでもないです", "romaji": "tondemo nai desu", "espanol": "no es nada; no hay de qué" },
+    { "japones": "とんでもございません", "romaji": "tondemo gozaimasen", "espanol": "en absoluto; no es nada (muy formal)" },
+  
+    { "japones": "感謝", "romaji": "kansha", "espanol": "gratitud, agradecimiento" },
+    { "japones": "感謝する", "romaji": "kansha suru", "espanol": "agradecer, sentir gratitud" },
+    { "japones": "恩", "romaji": "on", "espanol": "favor, deuda moral, bondad recibida" },
+  
+    { "japones": "お客さん", "romaji": "okyakusan", "espanol": "cliente" },
+    { "japones": "店員さん", "romaji": "tenin-san", "espanol": "empleado de tienda" },
+    { "japones": "またお越しくださいませ", "romaji": "mata okoshi kudasaimase", "espanol": "por favor, visítenos de nuevo" }
+  ] 
 }
