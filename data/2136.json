@@ -46,12 +46,12 @@
   },
   {
     "kanji": "安",
-    "significado": "paz, seguro, barato",
+    "significado": "tranquilo, barato, seguro",
     "grado": 3
   },
   {
     "kanji": "暗",
-    "significado": "oscuro",
+    "significado": "oscuro, oscuridad",
     "grado": 3
   },
   {
@@ -91,7 +91,7 @@
   },
   {
     "kanji": "委",
-    "significado": "encargar, delegar",
+    "significado": "delegar, encomendar",
     "grado": 3
   },
   {
@@ -106,7 +106,7 @@
   },
   {
     "kanji": "意",
-    "significado": "idea, intención",
+    "significado": "idea, pensamiento, intención",
     "grado": 3
   },
   {
@@ -196,7 +196,7 @@
   },
   {
     "kanji": "育",
-    "significado": "criar, crecer, educación",
+    "significado": "criar, educar, crecer",
     "grado": 3
   },
   {
@@ -241,7 +241,7 @@
   },
   {
     "kanji": "員",
-    "significado": "miembro, empleado",
+    "significado": "empleado, miembro",
     "grado": 3
   },
   {
@@ -261,7 +261,7 @@
   },
   {
     "kanji": "飲",
-    "significado": "beber",
+    "significado": "beber, tomar (líquido)",
     "grado": 3
   },
   {
@@ -271,7 +271,7 @@
   },
   {
     "kanji": "院",
-    "significado": "institución, recinto",
+    "significado": "institución (hospitales, escuelas, templos, etc.)",
     "grado": 3
   },
   {
@@ -331,7 +331,7 @@
   },
   {
     "kanji": "運",
-    "significado": "transportar, suerte",
+    "significado": "transportar, suerte, destino",
     "grado": 3
   },
   {
@@ -411,7 +411,7 @@
   },
   {
     "kanji": "駅",
-    "significado": "estación",
+    "significado": "estación (tren, metro)",
     "grado": 3
   },
   {
@@ -526,7 +526,7 @@
   },
   {
     "kanji": "央",
-    "significado": "centro",
+    "significado": "centro, medio",
     "grado": 3
   },
   {
@@ -556,7 +556,7 @@
   },
   {
     "kanji": "横",
-    "significado": "lado, horizontal",
+    "significado": "lado, de lado, horizontal",
     "grado": 3
   },
   {
@@ -601,7 +601,7 @@
   },
   {
     "kanji": "屋",
-    "significado": "tienda, casa, -ero/-ista",
+    "significado": "techo, casa, tienda, quien se dedica a algo (-ero/-ista)",
     "grado": 3
   },
   {
@@ -636,7 +636,7 @@
   },
   {
     "kanji": "温",
-    "significado": "tibio, temperatura",
+    "significado": "cálido, tibio, temperatura",
     "grado": 3
   },
   {
@@ -656,7 +656,7 @@
   },
   {
     "kanji": "化",
-    "significado": "cambiar, -izar",
+    "significado": "cambio, transformación (-izar)",
     "grado": 3
   },
   {
@@ -771,7 +771,7 @@
   },
   {
     "kanji": "荷",
-    "significado": "carga, equipaje",
+    "significado": "equipaje, carga",
     "grado": 3
   },
   {
@@ -921,7 +921,7 @@
   },
   {
     "kanji": "界",
-    "significado": "mundo, límite",
+    "significado": "mundo, límite, frontera",
     "grado": 3
   },
   {
@@ -941,7 +941,7 @@
   },
   {
     "kanji": "階",
-    "significado": "piso, escalera",
+    "significado": "escalón, piso, nivel",
     "grado": 3
   },
   {
@@ -1216,7 +1216,7 @@
   },
   {
     "kanji": "寒",
-    "significado": "frío",
+    "significado": "frío (clima, ambiente)",
     "grado": 3
   },
   {
@@ -1281,7 +1281,7 @@
   },
   {
     "kanji": "感",
-    "significado": "sentir, emoción",
+    "significado": "sentir, sentimiento, emoción",
     "grado": 3
   },
   {
@@ -1326,7 +1326,7 @@
   },
   {
     "kanji": "漢",
-    "significado": "chino, varón",
+    "significado": "de China, dinastía Han",
     "grado": 3
   },
   {
@@ -1426,7 +1426,7 @@
   },
   {
     "kanji": "館",
-    "significado": "edificio, salón",
+    "significado": "gran edificio, mansión, salón",
     "grado": 3
   },
   {
@@ -1441,7 +1441,7 @@
   },
   {
     "kanji": "岸",
-    "significado": "orilla, costa",
+    "significado": "orilla, costa, ribera",
     "grado": 3
   },
   {
@@ -1556,7 +1556,7 @@
   },
   {
     "kanji": "期",
-    "significado": "período, esperar",
+    "significado": "período (tiempo), plazo",
     "grado": 3
   },
   {
@@ -1626,7 +1626,7 @@
   },
   {
     "kanji": "起",
-    "significado": "levantarse, ocurrir",
+    "significado": "levantarse, despertarse, ocurrir",
     "grado": 3
   },
   {
@@ -1741,7 +1741,7 @@
   },
   {
     "kanji": "客",
-    "significado": "invitado, cliente",
+    "significado": "invitado, cliente, visitante",
     "grado": 3
   },
   {
@@ -1786,7 +1786,7 @@
   },
   {
     "kanji": "宮",
-    "significado": "santuario, palacio",
+    "significado": "santuario sintoísta, palacio",
     "grado": 3
   },
   {
@@ -1796,7 +1796,7 @@
   },
   {
     "kanji": "急",
-    "significado": "urgente, rápido",
+    "significado": "apresurarse, urgencia, emergencia, repentino",
     "grado": 3
   },
   {
