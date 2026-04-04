@@ -491,7 +491,7 @@
         <div class="sideTitle">Tareas</div>
         <div id="tasksWrap" class="tasks"></div>
         <div class="actions" style="margin-top:12px;">
-          <button class="action clean" onclick="seleccionarTodas()">Todas</button>
+          <button id="btnTodas" class="action clean" onclick="seleccionarTodas()">Todas</button>
           <button class="action clean" onclick="limpiarTareas()">Ninguna</button>
         </div>
       </div>
@@ -767,6 +767,11 @@
       renderBadges();
       renderStats();
       updateFooterInfo();
+    
+      document.getElementById("btnTodas")?.classList.toggle(
+        "active",
+        tareasSeleccionadas.size === tareasDisponibles.length
+      );
     }
 
     function updateSpecialUI(){
@@ -1028,7 +1033,7 @@
     }
 
     function limpiarTareas(){
-      tareasSeleccionadas = new Set(tareasDisponibles);
+      tareasSeleccionadas.clear();
       savePrefs();
       cargarStats();
       refreshUI();
