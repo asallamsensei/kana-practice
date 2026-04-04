@@ -64,6 +64,7 @@
     .panel{
       padding:22px;
       min-width:0;
+      text-align:center;
     }
 
     .sidepanel{
@@ -90,6 +91,7 @@
       flex-wrap:wrap;
       gap:8px;
       margin-bottom:14px;
+      justify-content:center;
     }
 
     .badge{
@@ -114,6 +116,18 @@
       box-shadow:var(--glow-accent);
     }
 
+    .badge-kanji{
+      display:inline-block;
+      background:#ef4444;
+      color:white;
+      font-weight:800;
+      font-size:12px;
+      letter-spacing:.08em;
+      padding:4px 10px;
+      border-radius:999px;
+      margin-bottom:10px;
+    }
+
     #promptWrap{
       min-height:180px;
       display:flex;
@@ -130,7 +144,7 @@
       line-height:1.08;
       word-break:break-word;
       letter-spacing:-.02em;
-      margin-bottom:12px;
+      margin-bottom:6px;
     }
 
     #prompt.small{
@@ -139,25 +153,52 @@
       font-weight:800;
     }
 
+    .audio-btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      width:42px;
+      height:42px;
+      border-radius:999px;
+      border:2px solid var(--accent);
+      background:transparent;
+      color:var(--text);
+      cursor:pointer;
+      user-select:none;
+      transition:.15s;
+      font-size:18px;
+      margin-top:6px;
+    }
+
+    .audio-btn:hover{
+      transform:translateY(-1px);
+      box-shadow:var(--glow-accent);
+    }
+
     #extra{
       color:var(--muted);
       font-size:14px;
       min-height:20px;
+      margin-top:10px;
     }
 
     .optionsBox{
       margin:18px auto 10px;
-      width:min(100%, 700px);
+      width:fit-content;
+      max-width:100%;
       border:1px dashed rgba(255,255,255,.18);
       background:rgba(255,255,255,.04);
       border-radius:18px;
-      padding:14px;
+      padding:14px 16px;
     }
 
     #opciones{
       font-size:clamp(18px,2.4vw,26px);
       line-height:1.75;
       white-space:pre-line;
+      text-align:left;
+      width:fit-content;
+      max-width:100%;
     }
 
     .jp-font{
@@ -176,7 +217,6 @@
     .btnABC,
     .action{
       appearance:none;
-      border:none;
       color:var(--text);
       cursor:pointer;
       transition:.16s ease;
@@ -225,6 +265,19 @@
       box-shadow:var(--glow-green);
     }
 
+    .btn.mix-active{
+      background:linear-gradient(180deg, rgba(216,79,127,.28), rgba(216,79,127,.16));
+      border-color:rgba(216,79,127,.45);
+      box-shadow:0 0 0 1px rgba(216,79,127,.22), 0 0 18px rgba(216,79,127,.24), 0 10px 24px rgba(0,0,0,.35);
+      color:#fff;
+    }
+
+    .btn.mix-secondary{
+      background:rgba(216,79,127,.14);
+      border-color:rgba(216,79,127,.32);
+      color:#ffd6e5;
+    }
+
     .btnABC{
       min-width:72px;
       padding:12px 18px;
@@ -264,12 +317,6 @@
       background:linear-gradient(180deg, rgba(124,92,255,.25), rgba(124,92,255,.14));
       border:1px solid rgba(124,92,255,.34);
       box-shadow:var(--glow-accent);
-    }
-
-    .action.alt{
-      background:linear-gradient(180deg, rgba(25,194,255,.18), rgba(25,194,255,.1));
-      border-color:rgba(25,194,255,.28);
-      box-shadow:var(--glow-cyan);
     }
 
     .action.clean{
@@ -336,13 +383,6 @@
       gap:10px;
     }
 
-    .tiny{
-      font-size:12px;
-      color:var(--muted);
-      margin-top:10px;
-      line-height:1.5;
-    }
-
     .footerInfo{
       margin-top:8px;
       font-size:12px;
@@ -367,6 +407,12 @@
       .tasks{ grid-template-columns:1fr 1fr; }
       #promptWrap{ min-height:150px; }
       #resultado{ font-size:18px; }
+      .optionsBox{
+        width:100%;
+      }
+      #opciones{
+        width:100%;
+      }
     }
   </style>
 </head>
@@ -374,7 +420,7 @@
   <div class="app">
     <main class="panel">
       <h1>Manga Study Quiz</h1>
-      <div class="subtitle">Palabras, kanji y mix — Asallam Sensei</div>
+      <div class="subtitle">Palabras, kanjis y mix — Asallam Sensei</div>
 
       <div class="badges">
         <div id="badgeTipo" class="badge">—</div>
@@ -383,7 +429,9 @@
       </div>
 
       <div id="promptWrap">
+        <div id="badgeKanji" class="badge-kanji" style="display:none;">KANJI</div>
         <div id="prompt">Cargando…</div>
+        <button id="audioBtn" class="audio-btn" type="button" onclick="reproducirAudioActual()" style="display:none;" aria-label="Reproducir audio">🔊</button>
         <div id="extra"></div>
       </div>
 
@@ -398,9 +446,7 @@
       </div>
 
       <div class="actions">
-        <button class="action" onclick="siguiente()">Siguiente</button>
-        <button class="action alt" onclick="reproducirAudioActual()">Audio</button>
-        <button class="action clean" onclick="reiniciarStats()">Reset stats</button>
+        <button class="action" onclick="siguienteDesdeBoton()">Siguiente</button>
       </div>
 
       <div id="resultado"></div>
@@ -412,7 +458,12 @@
         Errores: <strong id="errores">0</strong> ·
         Racha: <strong id="racha">0</strong> ·
         Mejor racha: <strong id="mejorRacha">0</strong> ·
-        Precisión: <strong id="precision">0%</strong></div>
+        Precisión: <strong id="precision">0%</strong>
+      </div>
+
+      <div class="actions" style="margin-top:12px;">
+        <button class="btn" style="width:auto;" onclick="reiniciarStats()">Reset stats</button>
+      </div>
 
       <div class="footerInfo" id="footerInfo">Pool actual: 0 items</div>
     </main>
@@ -421,8 +472,8 @@
       <div class="section">
         <div class="sideTitle">Tipo de pool</div>
         <div class="stack">
-          <button class="btn success" id="btnPoolPalabras" onclick="setTipoPool('palabras')">Solo palabras</button>
-          <button class="btn secondary" id="btnPoolKanji" onclick="setTipoPool('kanji')">Solo kanji</button>
+          <button class="btn success" id="btnPoolPalabras" onclick="setTipoPool('palabras')">Palabras</button>
+          <button class="btn secondary" id="btnPoolKanji" onclick="setTipoPool('kanji')">Kanjis</button>
           <button class="btn" id="btnPoolMix" onclick="setTipoPool('mix')">Mix</button>
         </div>
       </div>
@@ -444,12 +495,6 @@
           <button class="action clean" onclick="limpiarTareas()">Ninguna</button>
         </div>
       </div>
-
-      <div class="tiny">
-        <strong>Rutas usadas:</strong><br>
-        JSON: <code>data/manga.json</code><br>
-        Audios: <code>data/audios/manga/</code>
-      </div>
     </aside>
   </div>
 
@@ -467,8 +512,8 @@
     let tareasDisponibles = [];
     let tareasSeleccionadas = new Set();
 
-    let tipoPool = "mix";          // palabras | kanji | mix
-    let modoPregunta = "mix";      // jp_es | es_jp | mix
+    let tipoPool = "mix";
+    let modoPregunta = "mix";
     let modoPreguntaActual = "jp_es";
 
     let poolActual = [];
@@ -488,8 +533,8 @@
     /* ==============================
        STORAGE
     ============================== */
-    const LS_STATS = "mangaQuizStats_v1";
-    const LS_PREFS = "mangaQuizPrefs_v1";
+    const LS_STATS = "mangaQuizStats_v2";
+    const LS_PREFS = "mangaQuizPrefs_v2";
 
     function statsKey() {
       const tareas = [...tareasSeleccionadas].sort().join("|") || "sin_tareas";
@@ -545,8 +590,10 @@
     function loadPrefs(){
       try{
         const prefs = JSON.parse(localStorage.getItem(LS_PREFS)) || {};
+
         if (["palabras","kanji","mix"].includes(prefs.tipoPool)) tipoPool = prefs.tipoPool;
         if (["jp_es","es_jp","mix"].includes(prefs.modoPregunta)) modoPregunta = prefs.modoPregunta;
+
         if (Array.isArray(prefs.tareasSeleccionadas)) {
           tareasSeleccionadas = new Set(prefs.tareasSeleccionadas);
         }
@@ -587,14 +634,13 @@
       for(const item of items){
         const type = itemType(item);
         const key = `${type}__${item.japones}`;
-        if(!map.has(key)) map.set(key, item); // si se repite entre tareas, se queda el primero
+        if(!map.has(key)) map.set(key, item);
       }
       return [...map.values()];
     }
 
     function getAudioKey(item){
       if (isPalabra(item)) return String(item.romaji || "").trim();
-      if (isKanji(item)) return String(item.lecturas_kanji || "").trim();
       return "";
     }
 
@@ -605,12 +651,10 @@
     }
 
     async function reproducirAudioActual(){
-      if (!actualItem) return;
+      if (!actualItem || isKanji(actualItem)) return;
+
       const src = buildAudioSrc(actualItem);
-      if (!src){
-        setResultado("Este item no tiene audio usable.", "bad");
-        return;
-      }
+      if (!src) return;
 
       try{
         audio.pause();
@@ -619,13 +663,18 @@
         audio.load();
         await audio.play();
       }catch{
-        setResultado("No se pudo reproducir el audio.", "bad");
+        // silencioso, como en turista
       }
     }
 
+    async function reproducirAudioSiCorresponde(){
+      if (!actualItem || isKanji(actualItem)) return;
+      await reproducirAudioActual();
+    }
+
     function labelTipoPool(){
-      if (tipoPool === "palabras") return "solo palabras";
-      if (tipoPool === "kanji") return "solo kanji";
+      if (tipoPool === "palabras") return "palabras";
+      if (tipoPool === "kanji") return "kanjis";
       return "mix";
     }
 
@@ -633,10 +682,6 @@
       if (modo === "jp_es") return "japonés → español";
       if (modo === "es_jp") return "español → japonés";
       return "mix";
-    }
-
-    function labelItemType(item){
-      return isKanji(item) ? "KANJI" : "PALABRA";
     }
 
     function setResultado(texto, tipo = ""){
@@ -671,13 +716,31 @@
     }
 
     function renderButtons(){
-      document.getElementById("btnPoolPalabras").classList.toggle("active", tipoPool === "palabras");
-      document.getElementById("btnPoolKanji").classList.toggle("active", tipoPool === "kanji");
-      document.getElementById("btnPoolMix").classList.toggle("active", tipoPool === "mix");
+      document.getElementById("btnPoolPalabras").classList.remove("active", "mix-secondary");
+      document.getElementById("btnPoolKanji").classList.remove("active", "mix-secondary");
+      document.getElementById("btnPoolMix").classList.remove("active", "mix-active");
 
-      document.getElementById("btnModoJpEs").classList.toggle("active", modoPregunta === "jp_es");
-      document.getElementById("btnModoEsJp").classList.toggle("active", modoPregunta === "es_jp");
-      document.getElementById("btnModoMix").classList.toggle("active", modoPregunta === "mix");
+      if (tipoPool === "mix"){
+        document.getElementById("btnPoolMix").classList.add("mix-active");
+        document.getElementById("btnPoolPalabras").classList.add("mix-secondary");
+        document.getElementById("btnPoolKanji").classList.add("mix-secondary");
+      } else {
+        document.getElementById("btnPoolPalabras").classList.toggle("active", tipoPool === "palabras");
+        document.getElementById("btnPoolKanji").classList.toggle("active", tipoPool === "kanji");
+      }
+
+      document.getElementById("btnModoJpEs").classList.remove("active", "mix-secondary");
+      document.getElementById("btnModoEsJp").classList.remove("active", "mix-secondary");
+      document.getElementById("btnModoMix").classList.remove("active", "mix-active");
+
+      if (modoPregunta === "mix"){
+        document.getElementById("btnModoMix").classList.add("mix-active");
+        document.getElementById("btnModoJpEs").classList.add("mix-secondary");
+        document.getElementById("btnModoEsJp").classList.add("mix-secondary");
+      } else {
+        document.getElementById("btnModoJpEs").classList.toggle("active", modoPregunta === "jp_es");
+        document.getElementById("btnModoEsJp").classList.toggle("active", modoPregunta === "es_jp");
+      }
     }
 
     function renderTasks(){
@@ -704,6 +767,15 @@
       renderBadges();
       renderStats();
       updateFooterInfo();
+    }
+
+    function updateSpecialUI(){
+      const badgeKanji = document.getElementById("badgeKanji");
+      const audioBtn = document.getElementById("audioBtn");
+
+      const hayKanji = !!actualItem && isKanji(actualItem);
+      badgeKanji.style.display = hayKanji ? "inline-block" : "none";
+      audioBtn.style.display = (!hayKanji && actualItem) ? "inline-flex" : "none";
     }
 
     /* ==============================
@@ -785,6 +857,7 @@
         actualItem = null;
         opcionesActuales = [];
         correctaClave = "";
+        updateSpecialUI();
         updateFooterInfo();
         renderBadges();
         return;
@@ -797,7 +870,12 @@
       pickModoActual();
       actualItem = poolActual[Math.floor(Math.random() * poolActual.length)];
 
-      const distractores = sample(poolActual, 2, x => x === actualItem || getOptionText(x, modoPreguntaActual) === getOptionText(actualItem, modoPreguntaActual));
+      const distractores = sample(
+        poolActual,
+        2,
+        x => x === actualItem || getOptionText(x, modoPreguntaActual) === getOptionText(actualItem, modoPreguntaActual)
+      );
+
       if (distractores.length < 2){
         generarPregunta();
         return;
@@ -820,6 +898,7 @@
       document.getElementById("opciones").classList.toggle("jp-font", modoPreguntaActual === "es_jp");
       document.getElementById("opciones").textContent = opcionesActuales.map(x => `${x.key.toUpperCase()}. ${x.text}`).join("\n");
 
+      updateSpecialUI();
       renderBadges();
       updateFooterInfo();
     }
@@ -841,9 +920,17 @@
       }
     }
 
-    function responder(key){
+    function lineaLectura(item){
+      if (!item) return "";
+      if (isKanji(item)) return `\nLectura: ${item.lecturas_kanji || ""}`;
+      return item.romaji ? `\nRomaji: ${item.romaji}` : "";
+    }
+
+    async function responder(key){
       if (!actualItem || yaRespondido) return;
       yaRespondido = true;
+
+      await reproducirAudioSiCorresponde();
 
       const correctaTexto = opcionesActuales.find(x => x.key === correctaClave)?.text || "";
       const escogidaTexto = opcionesActuales.find(x => x.key === key)?.text || "";
@@ -856,14 +943,36 @@
         if (racha > mejorRacha) mejorRacha = racha;
         guardarStats();
         renderStats();
-        setResultado(`Correcto.\n${correctaTexto}`, "ok");
+        setResultado(`Correcto ✔${lineaLectura(actualItem)}`, "ok");
       } else {
         errores++;
         racha = 0;
         guardarStats();
         renderStats();
-        setResultado(`Incorrecto.\nTu respuesta: ${escogidaTexto}\nCorrecta: ${correctaTexto}`, "bad");
+        setResultado(`Incorrecto ✘ (era ${correctaClave.toUpperCase()})\nRespuesta: ${correctaTexto}${lineaLectura(actualItem)}`, "bad");
       }
+    }
+
+    async function siguienteDesdeBoton(){
+      if (!actualItem) return;
+
+      if (!yaRespondido){
+        await reproducirAudioSiCorresponde();
+
+        errores++;
+        racha = 0;
+        guardarStats();
+        renderStats();
+
+        const correctaTexto = opcionesActuales.find(x => x.key === correctaClave)?.text || "";
+        setResultado(`Saltado ✘ (era ${correctaClave.toUpperCase()})\nRespuesta: ${correctaTexto}${lineaLectura(actualItem)}`, "bad");
+
+        yaRespondido = true;
+        marcarBotonesABC("_");
+        return;
+      }
+
+      generarPregunta();
     }
 
     function siguiente(){
@@ -897,7 +1006,7 @@
       }
 
       if (!tareasSeleccionadas.size && tareasDisponibles.length) {
-        tareasSeleccionadas.add(tareasDisponibles[0]);
+        tareasSeleccionadas = new Set(tareasDisponibles);
       }
 
       savePrefs();
@@ -915,8 +1024,7 @@
     }
 
     function limpiarTareas(){
-      tareasSeleccionadas.clear();
-      if (tareasDisponibles.length) tareasSeleccionadas.add(tareasDisponibles[0]);
+      tareasSeleccionadas = new Set(tareasDisponibles);
       savePrefs();
       cargarStats();
       refreshUI();
@@ -944,19 +1052,33 @@
         tareasSeleccionadas = new Set([...tareasSeleccionadas].filter(t => tareasValidas.has(t)));
 
         if (!tareasSeleccionadas.size && tareasDisponibles.length) {
-          tareasSeleccionadas.add(tareasDisponibles[0]);
+          tareasSeleccionadas = new Set(tareasDisponibles);
         }
+
+        if (!["palabras","kanji","mix"].includes(tipoPool)) tipoPool = "mix";
+        if (!["jp_es","es_jp","mix"].includes(modoPregunta)) modoPregunta = "mix";
 
         cargarStats();
         refreshUI();
         generarPregunta();
 
-        document.addEventListener("keydown", (e) => {
+        document.addEventListener("keydown", async (e) => {
           const k = e.key.toLowerCase();
-          if (k === "a" || k === "b" || k === "c") responder(k);
-          if (k === "enter" || k === " ") {
+
+          if (k === "a" || k === "b" || k === "c"){
+            await responder(k);
+            return;
+          }
+
+          if (k === "enter"){
             e.preventDefault();
-            siguiente();
+            await siguienteDesdeBoton();
+            return;
+          }
+
+          if (k === " ") {
+            e.preventDefault();
+            await reproducirAudioActual();
           }
         });
 
