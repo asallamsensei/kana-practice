@@ -419,14 +419,7 @@
 <body>
   <div class="app">
     <main class="panel">
-      <h1>Manga Study Quiz</h1>
-      <div class="subtitle">Palabras, kanjis y mix — Asallam Sensei</div>
-
-      <div class="badges">
-        <div id="badgeTipo" class="badge">—</div>
-        <div id="badgeModoPregunta" class="badge">—</div>
-        <div id="badgeTareas" class="badge">0 tareas</div>
-      </div>
+      <h1>Manga — Asallam Sensei</h1>
 
       <div id="promptWrap">
         <div id="badgeKanji" class="badge-kanji" style="display:none;">KANJI</div>
@@ -700,21 +693,6 @@
       document.getElementById("precision").textContent = `${precision}%`;
     }
 
-    function renderBadges(){
-      const bTipo = document.getElementById("badgeTipo");
-      const bModo = document.getElementById("badgeModoPregunta");
-      const bTareas = document.getElementById("badgeTareas");
-
-      bTipo.textContent = labelTipoPool();
-      bTipo.classList.add("show");
-
-      bModo.textContent = labelModoPregunta(modoPreguntaActual);
-      bModo.classList.add("show");
-
-      bTareas.textContent = `${tareasSeleccionadas.size} tarea${tareasSeleccionadas.size === 1 ? "" : "s"}`;
-      bTareas.classList.add("show");
-    }
-
     function renderButtons(){
       document.getElementById("btnPoolPalabras").classList.remove("active", "mix-secondary");
       document.getElementById("btnPoolKanji").classList.remove("active", "mix-secondary");
@@ -764,7 +742,6 @@
     function refreshUI(){
       renderButtons();
       renderTasks();
-      renderBadges();
       renderStats();
       updateFooterInfo();
     
@@ -864,7 +841,6 @@
         correctaClave = "";
         updateSpecialUI();
         updateFooterInfo();
-        renderBadges();
         return;
       }
 
@@ -908,7 +884,6 @@
       document.getElementById("opciones").textContent = opcionesActuales.map(x => `${x.key.toUpperCase()}. ${x.text}`).join("\n");
 
       updateSpecialUI();
-      renderBadges();
       updateFooterInfo();
     }
 
