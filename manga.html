@@ -1,0 +1,973 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Manga Study Quiz — Asallam Sensei</title>
+  <style>
+    :root{
+      --bg:#0a0d16;
+      --bg2:#121829;
+      --panel:rgba(255,255,255,.06);
+      --panel-strong:rgba(255,255,255,.09);
+      --border:rgba(255,255,255,.12);
+      --text:#eef2ff;
+      --muted:#b7c0de;
+      --accent:#7c5cff;
+      --accent2:#19c2ff;
+      --accent3:#16c784;
+      --danger:#ff5d73;
+      --warning:#ffb84d;
+      --shadow:0 0 0 1px rgba(255,255,255,.04), 0 12px 30px rgba(0,0,0,.35);
+      --glow-accent:0 0 0 1px rgba(124,92,255,.28), 0 0 18px rgba(124,92,255,.35), 0 10px 24px rgba(0,0,0,.35);
+      --glow-cyan:0 0 0 1px rgba(25,194,255,.22), 0 0 18px rgba(25,194,255,.22), 0 10px 24px rgba(0,0,0,.35);
+      --glow-green:0 0 0 1px rgba(22,199,132,.22), 0 0 18px rgba(22,199,132,.22), 0 10px 24px rgba(0,0,0,.35);
+    }
+
+    *{ box-sizing:border-box; }
+
+    html,body{
+      margin:0;
+      padding:0;
+      min-height:100%;
+      background:
+        radial-gradient(900px 500px at 10% 0%, rgba(124,92,255,.18), transparent 60%),
+        radial-gradient(700px 500px at 100% 20%, rgba(25,194,255,.12), transparent 55%),
+        radial-gradient(900px 700px at 50% 100%, rgba(22,199,132,.08), transparent 55%),
+        linear-gradient(180deg, #0a0d16 0%, #0d1220 100%);
+      color:var(--text);
+      font-family: Inter, Arial, Helvetica, sans-serif;
+    }
+
+    body{
+      padding:22px 14px 40px;
+    }
+
+    .app{
+      max-width:1180px;
+      margin:0 auto;
+      display:grid;
+      grid-template-columns:minmax(0,1fr) 360px;
+      gap:18px;
+      align-items:start;
+    }
+
+    .panel,
+    .sidepanel{
+      background:var(--panel);
+      border:1px solid var(--border);
+      border-radius:22px;
+      box-shadow:var(--shadow);
+      backdrop-filter: blur(10px);
+    }
+
+    .panel{
+      padding:22px;
+      min-width:0;
+    }
+
+    .sidepanel{
+      padding:16px;
+      position:sticky;
+      top:14px;
+    }
+
+    h1{
+      margin:0 0 16px;
+      font-size:clamp(24px,4vw,40px);
+      line-height:1.08;
+      letter-spacing:-.02em;
+    }
+
+    .subtitle{
+      color:var(--muted);
+      font-size:14px;
+      margin-bottom:18px;
+    }
+
+    .badges{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      margin-bottom:14px;
+    }
+
+    .badge{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:7px 12px;
+      border-radius:999px;
+      font-size:12px;
+      font-weight:800;
+      letter-spacing:.06em;
+      text-transform:uppercase;
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.05);
+      color:var(--muted);
+    }
+
+    .badge.show{
+      color:#fff;
+      background:rgba(124,92,255,.14);
+      border-color:rgba(124,92,255,.35);
+      box-shadow:var(--glow-accent);
+    }
+
+    #promptWrap{
+      min-height:180px;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:center;
+      text-align:center;
+      padding:10px 6px 4px;
+    }
+
+    #prompt{
+      font-size:clamp(30px,5vw,56px);
+      font-weight:900;
+      line-height:1.08;
+      word-break:break-word;
+      letter-spacing:-.02em;
+      margin-bottom:12px;
+    }
+
+    #prompt.small{
+      font-size:clamp(22px,3.2vw,34px);
+      line-height:1.22;
+      font-weight:800;
+    }
+
+    #extra{
+      color:var(--muted);
+      font-size:14px;
+      min-height:20px;
+    }
+
+    .optionsBox{
+      margin:18px auto 10px;
+      width:min(100%, 700px);
+      border:1px dashed rgba(255,255,255,.18);
+      background:rgba(255,255,255,.04);
+      border-radius:18px;
+      padding:14px;
+    }
+
+    #opciones{
+      font-size:clamp(18px,2.4vw,26px);
+      line-height:1.75;
+      white-space:pre-line;
+    }
+
+    .jp-font{
+      font-family:"Yu Gothic","Hiragino Sans","Meiryo","Noto Sans JP",sans-serif;
+    }
+
+    .abc{
+      display:flex;
+      gap:10px;
+      justify-content:center;
+      flex-wrap:wrap;
+      margin-top:14px;
+    }
+
+    .btn,
+    .btnABC,
+    .action{
+      appearance:none;
+      border:none;
+      color:var(--text);
+      cursor:pointer;
+      transition:.16s ease;
+      user-select:none;
+    }
+
+    .btn:hover,
+    .btnABC:hover,
+    .action:hover{
+      transform:translateY(-1px);
+    }
+
+    .btn:active,
+    .btnABC:active,
+    .action:active{
+      transform:translateY(0);
+    }
+
+    .btn{
+      width:100%;
+      text-align:left;
+      padding:11px 14px;
+      border-radius:14px;
+      background:rgba(255,255,255,.05);
+      border:1px solid var(--border);
+      font-size:15px;
+      font-weight:700;
+    }
+
+    .btn.active{
+      background:linear-gradient(180deg, rgba(124,92,255,.28), rgba(124,92,255,.16));
+      border-color:rgba(124,92,255,.45);
+      box-shadow:var(--glow-accent);
+      color:#fff;
+    }
+
+    .btn.secondary.active{
+      background:linear-gradient(180deg, rgba(25,194,255,.22), rgba(25,194,255,.12));
+      border-color:rgba(25,194,255,.35);
+      box-shadow:var(--glow-cyan);
+    }
+
+    .btn.success.active{
+      background:linear-gradient(180deg, rgba(22,199,132,.22), rgba(22,199,132,.12));
+      border-color:rgba(22,199,132,.35);
+      box-shadow:var(--glow-green);
+    }
+
+    .btnABC{
+      min-width:72px;
+      padding:12px 18px;
+      border-radius:14px;
+      font-size:20px;
+      font-weight:900;
+      background:linear-gradient(180deg, #1d2438 0%, #171d2d 100%);
+      border:1px solid rgba(255,255,255,.12);
+      box-shadow:0 0 0 1px rgba(255,255,255,.04), 0 8px 18px rgba(0,0,0,.24);
+    }
+
+    .btnABC.good{
+      background:linear-gradient(180deg, rgba(22,199,132,.26), rgba(22,199,132,.14));
+      border-color:rgba(22,199,132,.4);
+      box-shadow:var(--glow-green);
+    }
+
+    .btnABC.bad{
+      background:linear-gradient(180deg, rgba(255,93,115,.22), rgba(255,93,115,.10));
+      border-color:rgba(255,93,115,.35);
+      box-shadow:0 0 0 1px rgba(255,93,115,.18), 0 0 18px rgba(255,93,115,.18);
+    }
+
+    .actions{
+      display:flex;
+      justify-content:center;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-top:16px;
+    }
+
+    .action{
+      padding:12px 18px;
+      border-radius:14px;
+      font-size:15px;
+      font-weight:800;
+      background:linear-gradient(180deg, rgba(124,92,255,.25), rgba(124,92,255,.14));
+      border:1px solid rgba(124,92,255,.34);
+      box-shadow:var(--glow-accent);
+    }
+
+    .action.alt{
+      background:linear-gradient(180deg, rgba(25,194,255,.18), rgba(25,194,255,.1));
+      border-color:rgba(25,194,255,.28);
+      box-shadow:var(--glow-cyan);
+    }
+
+    .action.clean{
+      background:rgba(255,255,255,.05);
+      border:1px solid var(--border);
+      box-shadow:none;
+    }
+
+    #resultado{
+      margin-top:14px;
+      min-height:46px;
+      text-align:center;
+      white-space:pre-line;
+      font-size:20px;
+      line-height:1.4;
+      font-weight:700;
+    }
+
+    .ok{ color:var(--accent3); }
+    .bad{ color:var(--danger); }
+
+    .divider{
+      height:1px;
+      background:var(--border);
+      margin:18px 0 14px;
+    }
+
+    .stats{
+      color:var(--muted);
+      font-size:15px;
+      line-height:1.8;
+      text-align:center;
+    }
+
+    .stats strong{
+      color:var(--text);
+      font-weight:800;
+    }
+
+    .section + .section{
+      margin-top:16px;
+      padding-top:16px;
+      border-top:1px solid var(--border);
+    }
+
+    .sideTitle{
+      color:var(--muted);
+      font-size:12px;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      font-weight:900;
+      margin-bottom:10px;
+    }
+
+    .stack{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+
+    .tasks{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:10px;
+    }
+
+    .tiny{
+      font-size:12px;
+      color:var(--muted);
+      margin-top:10px;
+      line-height:1.5;
+    }
+
+    .footerInfo{
+      margin-top:8px;
+      font-size:12px;
+      color:var(--muted);
+      text-align:center;
+    }
+
+    @media (max-width: 980px){
+      .app{
+        grid-template-columns:1fr;
+      }
+      .sidepanel{
+        position:static;
+      }
+    }
+
+    @media (max-width: 640px){
+      body{ padding:16px 10px 30px; }
+      .panel,.sidepanel{ border-radius:18px; }
+      .panel{ padding:16px; }
+      .sidepanel{ padding:14px; }
+      .tasks{ grid-template-columns:1fr 1fr; }
+      #promptWrap{ min-height:150px; }
+      #resultado{ font-size:18px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <main class="panel">
+      <h1>Manga Study Quiz</h1>
+      <div class="subtitle">Palabras, kanji y mix — Asallam Sensei</div>
+
+      <div class="badges">
+        <div id="badgeTipo" class="badge">—</div>
+        <div id="badgeModoPregunta" class="badge">—</div>
+        <div id="badgeTareas" class="badge">0 tareas</div>
+      </div>
+
+      <div id="promptWrap">
+        <div id="prompt">Cargando…</div>
+        <div id="extra"></div>
+      </div>
+
+      <div class="optionsBox">
+        <div id="opciones">…</div>
+      </div>
+
+      <div class="abc">
+        <button class="btnABC" id="btnA" onclick="responder('a')">A</button>
+        <button class="btnABC" id="btnB" onclick="responder('b')">B</button>
+        <button class="btnABC" id="btnC" onclick="responder('c')">C</button>
+      </div>
+
+      <div class="actions">
+        <button class="action" onclick="siguiente()">Siguiente</button>
+        <button class="action alt" onclick="reproducirAudioActual()">Audio</button>
+        <button class="action clean" onclick="reiniciarStats()">Reset stats</button>
+      </div>
+
+      <div id="resultado"></div>
+
+      <div class="divider"></div>
+
+      <div class="stats">
+        Aciertos: <strong id="aciertos">0</strong> ·
+        Errores: <strong id="errores">0</strong> ·
+        Racha: <strong id="racha">0</strong> ·
+        Mejor racha: <strong id="mejorRacha">0</strong> ·
+        Precisión: <strong id="precision">0%</strong></div>
+
+      <div class="footerInfo" id="footerInfo">Pool actual: 0 items</div>
+    </main>
+
+    <aside class="sidepanel">
+      <div class="section">
+        <div class="sideTitle">Tipo de pool</div>
+        <div class="stack">
+          <button class="btn success" id="btnPoolPalabras" onclick="setTipoPool('palabras')">Solo palabras</button>
+          <button class="btn secondary" id="btnPoolKanji" onclick="setTipoPool('kanji')">Solo kanji</button>
+          <button class="btn" id="btnPoolMix" onclick="setTipoPool('mix')">Mix</button>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="sideTitle">Dirección de la pregunta</div>
+        <div class="stack">
+          <button class="btn" id="btnModoJpEs" onclick="setModoPregunta('jp_es')">Japonés → Español</button>
+          <button class="btn" id="btnModoEsJp" onclick="setModoPregunta('es_jp')">Español → Japonés</button>
+          <button class="btn" id="btnModoMix" onclick="setModoPregunta('mix')">Mix</button>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="sideTitle">Tareas</div>
+        <div id="tasksWrap" class="tasks"></div>
+        <div class="actions" style="margin-top:12px;">
+          <button class="action clean" onclick="seleccionarTodas()">Todas</button>
+          <button class="action clean" onclick="limpiarTareas()">Ninguna</button>
+        </div>
+      </div>
+
+      <div class="tiny">
+        <strong>Rutas usadas:</strong><br>
+        JSON: <code>data/manga.json</code><br>
+        Audios: <code>data/audios/manga/</code>
+      </div>
+    </aside>
+  </div>
+
+  <script>
+    /* ==============================
+       CONFIG
+    ============================== */
+    const DATA_PATH = "data/manga.json";
+    const AUDIO_DIR = "data/audios/manga/";
+
+    /* ==============================
+       STATE
+    ============================== */
+    let dataRaw = {};
+    let tareasDisponibles = [];
+    let tareasSeleccionadas = new Set();
+
+    let tipoPool = "mix";          // palabras | kanji | mix
+    let modoPregunta = "mix";      // jp_es | es_jp | mix
+    let modoPreguntaActual = "jp_es";
+
+    let poolActual = [];
+    let actualItem = null;
+    let opcionesActuales = [];
+    let correctaClave = "";
+    let yaRespondido = false;
+
+    let aciertos = 0;
+    let errores = 0;
+    let racha = 0;
+    let mejorRacha = 0;
+
+    const audio = new Audio();
+    audio.preload = "auto";
+
+    /* ==============================
+       STORAGE
+    ============================== */
+    const LS_STATS = "mangaQuizStats_v1";
+    const LS_PREFS = "mangaQuizPrefs_v1";
+
+    function statsKey() {
+      const tareas = [...tareasSeleccionadas].sort().join("|") || "sin_tareas";
+      return `${tipoPool}__${modoPregunta}__${tareas}`;
+    }
+
+    function loadStatsObj(){
+      try { return JSON.parse(localStorage.getItem(LS_STATS)) || {}; }
+      catch { return {}; }
+    }
+
+    function saveStatsObj(obj){
+      localStorage.setItem(LS_STATS, JSON.stringify(obj));
+    }
+
+    function cargarStats(){
+      const all = loadStatsObj();
+      const s = all[statsKey()] || { aciertos:0, errores:0, racha:0, mejorRacha:0 };
+      aciertos = s.aciertos || 0;
+      errores = s.errores || 0;
+      racha = s.racha || 0;
+      mejorRacha = s.mejorRacha || 0;
+      renderStats();
+    }
+
+    function guardarStats(){
+      const all = loadStatsObj();
+      all[statsKey()] = { aciertos, errores, racha, mejorRacha };
+      saveStatsObj(all);
+    }
+
+    function reiniciarStats(){
+      const all = loadStatsObj();
+      delete all[statsKey()];
+      saveStatsObj(all);
+      aciertos = 0;
+      errores = 0;
+      racha = 0;
+      mejorRacha = 0;
+      renderStats();
+      setResultado("Stats reiniciadas para esta combinación.", "ok");
+    }
+
+    function savePrefs(){
+      const prefs = {
+        tipoPool,
+        modoPregunta,
+        tareasSeleccionadas: [...tareasSeleccionadas]
+      };
+      localStorage.setItem(LS_PREFS, JSON.stringify(prefs));
+    }
+
+    function loadPrefs(){
+      try{
+        const prefs = JSON.parse(localStorage.getItem(LS_PREFS)) || {};
+        if (["palabras","kanji","mix"].includes(prefs.tipoPool)) tipoPool = prefs.tipoPool;
+        if (["jp_es","es_jp","mix"].includes(prefs.modoPregunta)) modoPregunta = prefs.modoPregunta;
+        if (Array.isArray(prefs.tareasSeleccionadas)) {
+          tareasSeleccionadas = new Set(prefs.tareasSeleccionadas);
+        }
+      }catch{}
+    }
+
+    /* ==============================
+       HELPERS
+    ============================== */
+    function shuffle(arr){
+      const a = [...arr];
+      for(let i = a.length - 1; i > 0; i--){
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+      }
+      return a;
+    }
+
+    function sample(arr, n, excludeFn = null){
+      const base = excludeFn ? arr.filter(x => !excludeFn(x)) : [...arr];
+      return shuffle(base).slice(0, n);
+    }
+
+    function isKanji(item){
+      return Object.prototype.hasOwnProperty.call(item, "lecturas_kanji");
+    }
+
+    function isPalabra(item){
+      return Object.prototype.hasOwnProperty.call(item, "romaji");
+    }
+
+    function itemType(item){
+      return isKanji(item) ? "kanji" : "palabra";
+    }
+
+    function uniqueItems(items){
+      const map = new Map();
+      for(const item of items){
+        const type = itemType(item);
+        const key = `${type}__${item.japones}`;
+        if(!map.has(key)) map.set(key, item); // si se repite entre tareas, se queda el primero
+      }
+      return [...map.values()];
+    }
+
+    function getAudioKey(item){
+      if (isPalabra(item)) return String(item.romaji || "").trim();
+      if (isKanji(item)) return String(item.lecturas_kanji || "").trim();
+      return "";
+    }
+
+    function buildAudioSrc(item){
+      const key = getAudioKey(item);
+      if (!key) return null;
+      return AUDIO_DIR + encodeURIComponent(key) + ".mp3";
+    }
+
+    async function reproducirAudioActual(){
+      if (!actualItem) return;
+      const src = buildAudioSrc(actualItem);
+      if (!src){
+        setResultado("Este item no tiene audio usable.", "bad");
+        return;
+      }
+
+      try{
+        audio.pause();
+        audio.currentTime = 0;
+        audio.src = src;
+        audio.load();
+        await audio.play();
+      }catch{
+        setResultado("No se pudo reproducir el audio.", "bad");
+      }
+    }
+
+    function labelTipoPool(){
+      if (tipoPool === "palabras") return "solo palabras";
+      if (tipoPool === "kanji") return "solo kanji";
+      return "mix";
+    }
+
+    function labelModoPregunta(modo){
+      if (modo === "jp_es") return "japonés → español";
+      if (modo === "es_jp") return "español → japonés";
+      return "mix";
+    }
+
+    function labelItemType(item){
+      return isKanji(item) ? "KANJI" : "PALABRA";
+    }
+
+    function setResultado(texto, tipo = ""){
+      const el = document.getElementById("resultado");
+      el.className = tipo;
+      el.textContent = texto;
+    }
+
+    function renderStats(){
+      const total = aciertos + errores;
+      const precision = total ? Math.round((aciertos / total) * 100) : 0;
+      document.getElementById("aciertos").textContent = aciertos;
+      document.getElementById("errores").textContent = errores;
+      document.getElementById("racha").textContent = racha;
+      document.getElementById("mejorRacha").textContent = mejorRacha;
+      document.getElementById("precision").textContent = `${precision}%`;
+    }
+
+    function renderBadges(){
+      const bTipo = document.getElementById("badgeTipo");
+      const bModo = document.getElementById("badgeModoPregunta");
+      const bTareas = document.getElementById("badgeTareas");
+
+      bTipo.textContent = labelTipoPool();
+      bTipo.classList.add("show");
+
+      bModo.textContent = labelModoPregunta(modoPreguntaActual);
+      bModo.classList.add("show");
+
+      bTareas.textContent = `${tareasSeleccionadas.size} tarea${tareasSeleccionadas.size === 1 ? "" : "s"}`;
+      bTareas.classList.add("show");
+    }
+
+    function renderButtons(){
+      document.getElementById("btnPoolPalabras").classList.toggle("active", tipoPool === "palabras");
+      document.getElementById("btnPoolKanji").classList.toggle("active", tipoPool === "kanji");
+      document.getElementById("btnPoolMix").classList.toggle("active", tipoPool === "mix");
+
+      document.getElementById("btnModoJpEs").classList.toggle("active", modoPregunta === "jp_es");
+      document.getElementById("btnModoEsJp").classList.toggle("active", modoPregunta === "es_jp");
+      document.getElementById("btnModoMix").classList.toggle("active", modoPregunta === "mix");
+    }
+
+    function renderTasks(){
+      const wrap = document.getElementById("tasksWrap");
+      wrap.innerHTML = "";
+
+      for(const key of tareasDisponibles){
+        const btn = document.createElement("button");
+        btn.className = "btn";
+        btn.textContent = dataRaw[key]?.nombre || key.replace("_", " ");
+        btn.classList.toggle("active", tareasSeleccionadas.has(key));
+        btn.onclick = () => toggleTarea(key);
+        wrap.appendChild(btn);
+      }
+    }
+
+    function updateFooterInfo(){
+      document.getElementById("footerInfo").textContent = `Pool actual: ${poolActual.length} items`;
+    }
+
+    function refreshUI(){
+      renderButtons();
+      renderTasks();
+      renderBadges();
+      renderStats();
+      updateFooterInfo();
+    }
+
+    /* ==============================
+       POOL
+    ============================== */
+    function construirPool(){
+      if (!tareasSeleccionadas.size){
+        poolActual = [];
+        return;
+      }
+
+      let palabras = [];
+      let kanji = [];
+
+      for(const tarea of tareasSeleccionadas){
+        const bloque = dataRaw[tarea];
+        if (!bloque) continue;
+
+        if (Array.isArray(bloque.palabras)) palabras.push(...bloque.palabras);
+        if (Array.isArray(bloque.kanji)) kanji.push(...bloque.kanji);
+      }
+
+      palabras = uniqueItems(palabras);
+      kanji = uniqueItems(kanji);
+
+      if (tipoPool === "palabras") {
+        poolActual = palabras;
+      } else if (tipoPool === "kanji") {
+        poolActual = kanji;
+      } else {
+        poolActual = uniqueItems([...palabras, ...kanji]);
+      }
+    }
+
+    function pickModoActual(){
+      if (modoPregunta === "mix") {
+        modoPreguntaActual = Math.random() < 0.5 ? "jp_es" : "es_jp";
+      } else {
+        modoPreguntaActual = modoPregunta;
+      }
+    }
+
+    function getPromptText(item, modo){
+      return modo === "jp_es" ? item.japones : item.espanol;
+    }
+
+    function getOptionText(item, modo){
+      if (modo === "jp_es") {
+        return item.espanol;
+      }
+      return isKanji(item) ? `${item.japones} (${item.lecturas_kanji})` : item.japones;
+    }
+
+    function getExtraText(item, modo){
+      if (modo === "jp_es") {
+        if (isKanji(item)) return `Lectura: ${item.lecturas_kanji}`;
+        return `Romaji: ${item.romaji}`;
+      } else {
+        if (isKanji(item)) return `Kanji · ${item.lecturas_kanji}`;
+        return `Palabra · ${item.romaji}`;
+      }
+    }
+
+    function setPromptClass(text){
+      const prompt = document.getElementById("prompt");
+      const isLong = String(text).length > 18;
+      prompt.classList.toggle("small", isLong);
+      prompt.classList.toggle("jp-font", /[\u3040-\u30ff\u3400-\u9fbf]/.test(text));
+    }
+
+    function generarPregunta(){
+      construirPool();
+
+      if (poolActual.length < 3){
+        document.getElementById("prompt").textContent = "Selecciona tareas suficientes";
+        document.getElementById("extra").textContent = "Necesitas al menos 3 items en el pool actual.";
+        document.getElementById("opciones").textContent = "—";
+        setResultado("", "");
+        actualItem = null;
+        opcionesActuales = [];
+        correctaClave = "";
+        updateFooterInfo();
+        renderBadges();
+        return;
+      }
+
+      yaRespondido = false;
+      limpiarEstadoBotonesABC();
+      setResultado("", "");
+
+      pickModoActual();
+      actualItem = poolActual[Math.floor(Math.random() * poolActual.length)];
+
+      const distractores = sample(poolActual, 2, x => x === actualItem || getOptionText(x, modoPreguntaActual) === getOptionText(actualItem, modoPreguntaActual));
+      if (distractores.length < 2){
+        generarPregunta();
+        return;
+      }
+
+      opcionesActuales = shuffle([actualItem, ...distractores]).map((item, idx) => ({
+        key: ["a","b","c"][idx],
+        item,
+        text: getOptionText(item, modoPreguntaActual)
+      }));
+
+      const correcta = opcionesActuales.find(x => x.item === actualItem);
+      correctaClave = correcta.key;
+
+      const promptText = getPromptText(actualItem, modoPreguntaActual);
+      document.getElementById("prompt").textContent = promptText;
+      setPromptClass(promptText);
+
+      document.getElementById("extra").textContent = getExtraText(actualItem, modoPreguntaActual);
+      document.getElementById("opciones").classList.toggle("jp-font", modoPreguntaActual === "es_jp");
+      document.getElementById("opciones").textContent = opcionesActuales.map(x => `${x.key.toUpperCase()}. ${x.text}`).join("\n");
+
+      renderBadges();
+      updateFooterInfo();
+    }
+
+    /* ==============================
+       RESPUESTAS
+    ============================== */
+    function limpiarEstadoBotonesABC(){
+      ["btnA","btnB","btnC"].forEach(id => {
+        document.getElementById(id).classList.remove("good", "bad");
+      });
+    }
+
+    function marcarBotonesABC(userKey){
+      const map = { a:"btnA", b:"btnB", c:"btnC" };
+      document.getElementById(map[correctaClave])?.classList.add("good");
+      if (userKey !== correctaClave) {
+        document.getElementById(map[userKey])?.classList.add("bad");
+      }
+    }
+
+    function responder(key){
+      if (!actualItem || yaRespondido) return;
+      yaRespondido = true;
+
+      const correctaTexto = opcionesActuales.find(x => x.key === correctaClave)?.text || "";
+      const escogidaTexto = opcionesActuales.find(x => x.key === key)?.text || "";
+
+      marcarBotonesABC(key);
+
+      if (key === correctaClave){
+        aciertos++;
+        racha++;
+        if (racha > mejorRacha) mejorRacha = racha;
+        guardarStats();
+        renderStats();
+        setResultado(`Correcto.\n${correctaTexto}`, "ok");
+      } else {
+        errores++;
+        racha = 0;
+        guardarStats();
+        renderStats();
+        setResultado(`Incorrecto.\nTu respuesta: ${escogidaTexto}\nCorrecta: ${correctaTexto}`, "bad");
+      }
+    }
+
+    function siguiente(){
+      generarPregunta();
+    }
+
+    /* ==============================
+       CONTROLES
+    ============================== */
+    function setTipoPool(tipo){
+      tipoPool = tipo;
+      savePrefs();
+      cargarStats();
+      refreshUI();
+      generarPregunta();
+    }
+
+    function setModoPregunta(modo){
+      modoPregunta = modo;
+      savePrefs();
+      cargarStats();
+      refreshUI();
+      generarPregunta();
+    }
+
+    function toggleTarea(key){
+      if (tareasSeleccionadas.has(key)) {
+        tareasSeleccionadas.delete(key);
+      } else {
+        tareasSeleccionadas.add(key);
+      }
+
+      if (!tareasSeleccionadas.size && tareasDisponibles.length) {
+        tareasSeleccionadas.add(tareasDisponibles[0]);
+      }
+
+      savePrefs();
+      cargarStats();
+      refreshUI();
+      generarPregunta();
+    }
+
+    function seleccionarTodas(){
+      tareasSeleccionadas = new Set(tareasDisponibles);
+      savePrefs();
+      cargarStats();
+      refreshUI();
+      generarPregunta();
+    }
+
+    function limpiarTareas(){
+      tareasSeleccionadas.clear();
+      if (tareasDisponibles.length) tareasSeleccionadas.add(tareasDisponibles[0]);
+      savePrefs();
+      cargarStats();
+      refreshUI();
+      generarPregunta();
+    }
+
+    /* ==============================
+       INIT
+    ============================== */
+    async function init(){
+      try{
+        const res = await fetch(DATA_PATH);
+        if (!res.ok) throw new Error("No se pudo cargar manga.json");
+        dataRaw = await res.json();
+
+        tareasDisponibles = Object.keys(dataRaw).filter(k => /^tarea_\d+$/i.test(k)).sort((a,b) => {
+          const na = Number(a.replace(/\D/g, ""));
+          const nb = Number(b.replace(/\D/g, ""));
+          return na - nb;
+        });
+
+        loadPrefs();
+
+        const tareasValidas = new Set(tareasDisponibles);
+        tareasSeleccionadas = new Set([...tareasSeleccionadas].filter(t => tareasValidas.has(t)));
+
+        if (!tareasSeleccionadas.size && tareasDisponibles.length) {
+          tareasSeleccionadas.add(tareasDisponibles[0]);
+        }
+
+        cargarStats();
+        refreshUI();
+        generarPregunta();
+
+        document.addEventListener("keydown", (e) => {
+          const k = e.key.toLowerCase();
+          if (k === "a" || k === "b" || k === "c") responder(k);
+          if (k === "enter" || k === " ") {
+            e.preventDefault();
+            siguiente();
+          }
+        });
+
+      } catch (err){
+        document.getElementById("prompt").textContent = "Error cargando el quiz";
+        document.getElementById("extra").textContent = String(err?.message || err);
+        document.getElementById("opciones").textContent = "Revisa que exista data/manga.json";
+      }
+    }
+
+    init();
+  </script>
+</body>
+</html>
