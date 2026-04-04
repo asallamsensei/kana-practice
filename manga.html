@@ -826,7 +826,7 @@
       if (modo === "jp_es") {
         return item.espanol;
       }
-      return isKanji(item) ? `${item.japones} (${item.lecturas_kanji})` : item.japones;
+      return isKanji(item) ? item.japones : item.japones;
     }
 
     function getExtraText(item, modo){
@@ -870,8 +870,12 @@
       pickModoActual();
       actualItem = poolActual[Math.floor(Math.random() * poolActual.length)];
 
+      const basePool = isKanji(actualItem)
+        ? poolActual.filter(x => isKanji(x))
+        : poolActual.filter(x => isPalabra(x));
+      
       const distractores = sample(
-        poolActual,
+        basePool,
         2,
         x => x === actualItem || getOptionText(x, modoPreguntaActual) === getOptionText(actualItem, modoPreguntaActual)
       );
