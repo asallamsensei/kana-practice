@@ -358,6 +358,35 @@ let dirActual = "kanji-sig";
 
 const letras = ["a","b","c"];
 
+const STORAGE_KEY = "kanji_g1_estado";
+
+function guardarEstado(){
+  const estado = {
+    aciertos,
+    errores,
+    racha,
+    mejorRacha,
+    modoActual
+  };
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(estado));
+}
+
+function cargarEstado(){
+  const raw = localStorage.getItem(STORAGE_KEY);
+  if (!raw) return;
+
+  try {
+    const estado = JSON.parse(raw);
+    aciertos = estado.aciertos || 0;
+    errores = estado.errores || 0;
+    racha = estado.racha || 0;
+    mejorRacha = estado.mejorRacha || 0;
+    modoActual = estado.modoActual || "mix";
+  } catch(e) {
+    console.error("Estado corrupto en localStorage", e);
+  }
+}
+  
 function actualizarStatsUI(){
   document.getElementById("aciertos").innerText = aciertos;
   document.getElementById("errores").innerText = errores;
@@ -374,10 +403,11 @@ fetch("data/kanji_1.json")
   .then(res => res.json())
   .then(data => {
     lista = (data || []).filter(x => x && x.kanji && x.significado);
-    setModo("mix");
+
+    cargarEstado();
     actualizarStatsUI();
+    setModo(modoActual); // usa el modo guardado
   })
-  
   .catch((err) => {
     console.error(err);
     document.getElementById("resultado").innerText =
@@ -392,17 +422,17 @@ function getModo(){
 function setModo(m){
   modoActual = m;
 
-  dirActual = (m === "mix") ? "kanji-sig" : m; // valor inicial; en mix se redefine en siguiente()
-  
-  // activar/desactivar estilos de botones
+  dirActual = (m === "mix") ? "kanji-sig" : m;
+
   document.getElementById("btnKS").classList.toggle("active", m==="kanji-sig");
   document.getElementById("btnSK").classList.toggle("active", m==="sig-kanji");
   document.getElementById("btnMix").classList.toggle("active", m==="mix");
 
-  // limpiar y siguiente (sin tocar stats)
   yaValidado = false;
   document.getElementById("resultado").innerText = "";
   document.getElementById("resultado").className = "";
+
+  guardarEstado();
   siguiente();
 }
 
@@ -493,6 +523,7 @@ function verificar(letraElegida = ""){
   }
 
   actualizarStatsUI();
+  guardarEstado();
   yaValidado = true;
 }
 
@@ -528,6 +559,7 @@ function resetStats(){
   racha = 0;
   mejorRacha = 0;
   actualizarStatsUI();
+  guardarEstado();
   siguiente();
 }
   
