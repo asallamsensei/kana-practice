@@ -911,7 +911,10 @@
     fetch('data/elvivo.json')
       .then(res => res.json())
       .then(data => {
-        state.data = Array.isArray(data) ? data : [];
+    
+        const shuffled = [...data].sort(() => Math.random() - 0.5);
+    
+        state.data = Array.isArray(shuffled) ? shuffled : [];
 
         buildTags(state.data);
 
