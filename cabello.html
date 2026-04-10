@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>El Paciente Calvo - Vocabulario Japonés</title>
+  <style>
+    :root {
+      --bg1: #fff7e6;
+      --bg2: #ffe4c7;
+      --panel: rgba(255,255,255,0.88);
+      --text: #2b2118;
+      --accent: #ff9f43;
+      --accent-2: #ff6b6b;
+      --good: #2ecc71;
+      --bad: #e74c3c;
+      --money: #157f3b;
+      --shadow: 0 10px 30px rgba(0,0,0,0.12);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, Arial, sans-serif;
+      background: radial-gradient(circle at top, var(--bg1), var(--bg2));
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    .wrap {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 18px;
+    }
+
+    .title {
+      text-align: center;
+      margin: 10px 0 18px;
+    }
+
+    .title h1 {
+      margin: 0;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      line-height: 1;
+    }
+
+    .title p {
+      margin: 10px auto 0;
+      max-width: 760px;
+      font-size: 1rem;
+      opacity: 0.86;
+    }
+
+    .game {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 18px;
+      align-items: start;
+    }
+
+    .card {
+      background: var(--panel);
+      border: 2px solid rgba(0,0,0,0.06);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(6px);
+    }
+
+    .scene {
+      padding: 18px;
+      min-height: 700px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .ui {
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      position: sticky;
+      top: 16px;
+    }
+
+    .hud {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+
+    .pill {
+      padding: 12px 14px;
+      border-radius: 16px;
+      background: #fff;
+      border: 2px solid rgba(0,0,0,0.05);
+      font-weight: 700;
+      text-align: center;
+    }
+
+    .money { color: var(--money); }
+    .wrong { color: var(--bad); }
+
+    .questionBox {
+      background: #fff;
+      border-radius: 20px;
+      padding: 18px;
+      border: 2px dashed rgba(0,0,0,0.12);
+      min-height: 180px;
+    }
+
+    .label {
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      opacity: 0.65;
+      font-weight: 800;
+    }
+
+    .word {
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 900;
+      margin: 8px 0;
+    }
+
+    .reading {
+      font-size: 1rem;
+      opacity: 0.78;
+      margin-bottom: 10px;
+    }
+
+    .promptHair {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: #fff4ea;
+      border: 2px solid #ffd2a8;
+      border-radius: 999px;
+      padding: 6px 12px;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+
+    .options {
+      display: grid;
+      gap: 10px;
+    }
+
+    button {
+      border: 0;
+      cursor: pointer;
+      font: inherit;
+    }
+
+    .optionBtn,
+    .mainBtn,
+    .smallBtn {
+      border-radius: 16px;
+      transition: transform .15s ease, box-shadow .15s ease, background .2s ease;
+    }
+
+    .optionBtn:hover,
+    .mainBtn:hover,
+    .smallBtn:hover {
+      transform: translateY(-2px);
+    }
+
+    .optionBtn {
+      background: #fff;
+      border: 2px solid rgba(0,0,0,0.08);
+      padding: 14px 14px;
+      font-weight: 700;
+      text-align: left;
+    }
+
+    .optionBtn:disabled {
+      cursor: default;
+      opacity: 0.95;
+      transform: none;
+    }
+
+    .optionBtn.correct {
+      background: rgba(46,204,113,.14);
+      border-color: rgba(46,204,113,.6);
+    }
+
+    .optionBtn.wrong {
+      background: rgba(231,76,60,.14);
+      border-color: rgba(231,76,60,.55);
+    }
+
+    .controls {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .mainBtn {
+      background: linear-gradient(180deg, #ffbe76, #ff9f43);
+      color: #3b2200;
+      padding: 14px 18px;
+      font-weight: 900;
+      box-shadow: 0 8px 18px rgba(255,159,67,.35);
+    }
+
+    .smallBtn {
+      background: #fff;
+      border: 2px solid rgba(0,0,0,0.08);
+      padding: 12px 14px;
+      font-weight: 800;
+    }
+
+    .message {
+      min-height: 74px;
+      background: #fff;
+      border-radius: 18px;
+      border: 2px solid rgba(0,0,0,0.06);
+      padding: 14px;
+      font-weight: 700;
+    }
+
+    .message.good { color: #166534; background: #effdf5; }
+    .message.bad { color: #8f1d14; background: #fff0ee; }
+    .message.neutral { color: #4d3b2c; }
+
+    .legend {
+      font-size: .95rem;
+      opacity: .85;
+      line-height: 1.45;
+      background: #fff;
+      border: 2px solid rgba(0,0,0,0.06);
+      border-radius: 18px;
+      padding: 14px;
+    }
+
+    .results {
+      position: absolute;
+      inset: 0;
+      background: rgba(255,248,240,.88);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      z-index: 7;
+    }
+
+    .results.show { display: flex; }
+
+    .resultsCard {
+      max-width: 640px;
+      width: 100%;
+      background: white;
+      border-radius: 26px;
+      box-shadow: var(--shadow);
+      padding: 28px;
+      text-align: center;
+      border: 3px solid rgba(0,0,0,0.05);
+    }
+
+    .resultsCard h2 {
+      margin-top: 0;
+      font-size: clamp(2rem, 4vw, 2.8rem);
+    }
+
+    .resultsMoney {
+      font-size: clamp(2rem, 5vw, 3.4rem);
+      font-weight: 1000;
+      color: var(--money);
+      margin: 10px 0 16px;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin: 18px 0;
+    }
+
+    .stat {
+      background: #fff8ef;
+      border: 2px solid #ffe0ba;
+      border-radius: 18px;
+      padding: 12px;
+      font-weight: 800;
+    }
+
+    .sceneHeader {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .sceneBadge {
+      background: #fff;
+      border: 2px solid rgba(0,0,0,0.06);
+      border-radius: 999px;
+      padding: 8px 12px;
+      font-size: .92rem;
+      font-weight: 800;
+    }
+
+    svg {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .floatingText {
+      position: absolute;
+      left: 50%;
+      top: 32px;
+      transform: translateX(-50%);
+      background: #fff;
+      border-radius: 999px;
+      padding: 10px 16px;
+      border: 2px solid rgba(0,0,0,0.08);
+      box-shadow: var(--shadow);
+      font-weight: 900;
+      z-index: 6;
+      opacity: 0;
+      pointer-events: none;
+      transition: .35s ease;
+    }
+
+    .floatingText.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(4px);
+    }
+
+    .patientLeft {
+      position: absolute;
+      right: -380px;
+      bottom: 62px;
+      font-size: 2rem;
+      font-weight: 1000;
+      color: #8b0000;
+      background: rgba(255,255,255,.85);
+      padding: 12px 18px;
+      border-radius: 18px;
+      border: 3px solid rgba(139,0,0,.18);
+      transition: right 1.2s ease;
+      z-index: 5;
+    }
+
+    .patientLeft.show { right: 10px; }
+
+    .footer {
+      text-align: center;
+      opacity: .72;
+      font-size: .9rem;
+      margin-top: 14px;
+    }
+
+    @media (max-width: 900px) {
+      .game { grid-template-columns: 1fr; }
+      .scene { min-height: 560px; }
+      .ui { position: static; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="title">
+      <h1>💈 El Paciente Calvo</h1>
+      <p>Responde vocabulario japonés. Cada acierto implanta un pelo. Cada fallo deja un hueco calvo para siempre. Si te equivocas mucho, el paciente se enfada, se pone rojo, se larga y encima no paga.</p>
+    </div>
+
+    <div class="game">
+      <section class="card scene">
+        <div class="sceneHeader">
+          <div class="sceneBadge">Clínica capilar japonesa</div>
+          <div class="sceneBadge" id="progressBadge">Pregunta 0 / 0</div>
+        </div>
+
+        <div class="floatingText" id="floatingText"></div>
+        <div class="patientLeft" id="patientLeft">🚶‍♂️ EL PACIENTE SE FUE SIN PAGAR</div>
+
+        <svg viewBox="0 0 700 760" aria-label="Paciente calvo">
+          <defs>
+            <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
+              <feDropShadow dx="0" dy="10" stdDeviation="10" flood-opacity="0.15"/>
+            </filter>
+          </defs>
+
+          <ellipse cx="350" cy="680" rx="180" ry="28" fill="rgba(0,0,0,0.08)" />
+
+          <g id="patientGroup" filter="url(#softShadow)">
+            <path d="M225 680 Q350 620 475 680 L475 748 L225 748 Z" fill="#7ec8e3" id="bodyColor"/>
+            <path d="M255 650 Q350 600 445 650" fill="none" stroke="#6aa9c1" stroke-width="18" stroke-linecap="round"/>
+
+            <g id="headGroup">
+              <ellipse id="headBase" cx="350" cy="300" rx="170" ry="190" fill="#f2c7a5" stroke="rgba(0,0,0,0.08)" stroke-width="4"/>
+              <ellipse cx="350" cy="260" rx="126" ry="110" fill="rgba(255,255,255,0.10)"/>
+
+              <ellipse cx="185" cy="315" rx="20" ry="46" fill="#f2c7a5"/>
+              <ellipse cx="515" cy="315" rx="20" ry="46" fill="#f2c7a5"/>
+
+              <g id="browGroup">
+                <path id="browLeft" d="M275 255 Q307 245 326 255" stroke="#4c2f1a" stroke-width="8" stroke-linecap="round" fill="none"/>
+                <path id="browRight" d="M374 255 Q394 245 425 255" stroke="#4c2f1a" stroke-width="8" stroke-linecap="round" fill="none"/>
+              </g>
+
+              <g id="eyesGroup">
+                <ellipse cx="300" cy="290" rx="26" ry="18" fill="#fff"/>
+                <ellipse cx="400" cy="290" rx="26" ry="18" fill="#fff"/>
+                <circle id="eyeLeftPupil" cx="300" cy="292" r="9" fill="#2a1b12"/>
+                <circle id="eyeRightPupil" cx="400" cy="292" r="9" fill="#2a1b12"/>
+                <circle cx="303" cy="289" r="2.5" fill="#fff"/>
+                <circle cx="403" cy="289" r="2.5" fill="#fff"/>
+              </g>
+
+              <path d="M350 300 Q342 338 350 372 Q357 380 369 377" fill="none" stroke="#c5906f" stroke-width="5" stroke-linecap="round"/>
+
+              <g id="mouthGroup">
+                <path id="mouth" d="M295 408 Q350 450 405 408" fill="none" stroke="#8f4d4a" stroke-width="8" stroke-linecap="round"/>
+              </g>
+
+              <g id="cheeks">
+                <ellipse id="cheekLeft" cx="255" cy="365" rx="28" ry="16" fill="rgba(255,120,140,0.16)"/>
+                <ellipse id="cheekRight" cx="445" cy="365" rx="28" ry="16" fill="rgba(255,120,140,0.16)"/>
+              </g>
+
+              <g id="hairRoot"></g>
+            </g>
+          </g>
+        </svg>
+
+        <div class="results" id="resultsOverlay">
+          <div class="resultsCard">
+            <h2 id="resultsTitle">Resultado</h2>
+            <div>Lo que te paga el paciente:</div>
+            <div class="resultsMoney" id="resultsMoney">¥0</div>
+            <div class="stats">
+              <div class="stat">Aciertos<br><span id="statCorrect">0</span></div>
+              <div class="stat">Errores<br><span id="statWrong">0</span></div>
+              <div class="stat">Huecos<br><span id="statBald">0</span></div>
+            </div>
+            <p id="resultsText"></p>
+            <div class="controls" style="justify-content:center; margin-top:18px;">
+              <button class="mainBtn" id="playAgainBtn">Jugar otra vez</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <aside class="card ui">
+        <div class="hud">
+          <div class="pill money">Pago: <span id="moneyValue">¥0</span></div>
+          <div class="pill wrong">Errores: <span id="wrongValue">0</span></div>
+          <div class="pill">Aciertos: <span id="correctValue">0</span></div>
+          <div class="pill">Pelos puestos: <span id="hairValue">0</span></div>
+        </div>
+
+        <div class="questionBox">
+          <div class="promptHair">🪮 Pregunta-pelo</div>
+          <div class="label">Palabra en japonés</div>
+          <div class="word" id="wordText">Pulsa jugar</div>
+          <div class="reading" id="readingText">El paciente espera su injerto.</div>
+          <div class="label" style="margin-top:10px;">¿Qué significa?</div>
+        </div>
+
+        <div class="options" id="options"></div>
+
+        <div class="controls">
+          <button class="mainBtn" id="startBtn">▶ Jugar</button>
+          <button class="smallBtn" id="nextBtn" disabled>Siguiente</button>
+          <button class="smallBtn" id="restartBtn">Reiniciar</button>
+        </div>
+
+        <div class="message neutral" id="messageBox">
+          Responde bien para que el cabello vuelva. Responde mal y ese hueco se queda para siempre.
+        </div>
+
+        <div class="legend">
+          <strong>Reglas:</strong><br>
+          Cada palabra correcta mete un pelo en la cabeza. Cada fallo deja un hueco calvo permanente y te resta dinero. Cuando los fallos se acumulan, el paciente se enfada, se afea, se pone rojo y si la cosa va muy mal, se marcha sin pagar.
+        </div>
+      </aside>
+    </div>
+
+    <div class="footer">Un solo archivo HTML. Ábrelo en tu navegador y listo.</div>
+  </div>
+
+  <script>
+    const vocabulary = [
+      {
+        word: "猫",
+        reading: "ねこ (neko)",
+        correct: "gato",
+        options: ["perro", "gato", "casa", "agua"]
+      },
+      {
+        word: "水",
+        reading: "みず (mizu)",
+        correct: "agua",
+        options: ["fuego", "aire", "agua", "comida"]
+      },
+      {
+        word: "山",
+        reading: "やま (yama)",
+        correct: "montaña",
+        options: ["río", "montaña", "coche", "escuela"]
+      },
+      {
+        word: "食べる",
+        reading: "たべる (taberu)",
+        correct: "comer",
+        options: ["beber", "dormir", "comer", "correr"]
+      },
+      {
+        word: "大きい",
+        reading: "おおきい (ookii)",
+        correct: "grande",
+        options: ["pequeño", "rápido", "grande", "frío"]
+      },
+      {
+        word: "友達",
+        reading: "ともだち (tomodachi)",
+        correct: "amigo",
+        options: ["enemigo", "profesor", "amigo", "libro"]
+      },
+      {
+        word: "赤",
+        reading: "あか (aka)",
+        correct: "rojo",
+        options: ["azul", "rojo", "verde", "blanco"]
+      },
+      {
+        word: "早い",
+        reading: "はやい (hayai)",
+        correct: "rápido / temprano",
+        options: ["lento", "rápido / temprano", "feliz", "viejo"]
+      }
+    ];
+
+    const BASE_MONEY = 1000;
+    const REWARD_PER_CORRECT = 120;
+    const PENALTY_PER_WRONG = 180;
+
+    const state = {
+      questions: [],
+      current: 0,
+      started: false,
+      locked: false,
+      correct: 0,
+      wrong: 0,
+      money: BASE_MONEY,
+      hairsPlaced: 0,
+      hairSlots: [],
+      failCount: 0,
+      patientLeft: false
+    };
+
+    const el = {
+      wordText: document.getElementById('wordText'),
+      readingText: document.getElementById('readingText'),
+      options: document.getElementById('options'),
+      startBtn: document.getElementById('startBtn'),
+      nextBtn: document.getElementById('nextBtn'),
+      restartBtn: document.getElementById('restartBtn'),
+      moneyValue: document.getElementById('moneyValue'),
+      wrongValue: document.getElementById('wrongValue'),
+      correctValue: document.getElementById('correctValue'),
+      hairValue: document.getElementById('hairValue'),
+      messageBox: document.getElementById('messageBox'),
+      hairRoot: document.getElementById('hairRoot'),
+      browLeft: document.getElementById('browLeft'),
+      browRight: document.getElementById('browRight'),
+      mouth: document.getElementById('mouth'),
+      cheekLeft: document.getElementById('cheekLeft'),
+      cheekRight: document.getElementById('cheekRight'),
+      headBase: document.getElementById('headBase'),
+      bodyColor: document.getElementById('bodyColor'),
+      eyeLeftPupil: document.getElementById('eyeLeftPupil'),
+      eyeRightPupil: document.getElementById('eyeRightPupil'),
+      resultsOverlay: document.getElementById('resultsOverlay'),
+      resultsMoney: document.getElementById('resultsMoney'),
+      resultsTitle: document.getElementById('resultsTitle'),
+      resultsText: document.getElementById('resultsText'),
+      statCorrect: document.getElementById('statCorrect'),
+      statWrong: document.getElementById('statWrong'),
+      statBald: document.getElementById('statBald'),
+      playAgainBtn: document.getElementById('playAgainBtn'),
+      floatingText: document.getElementById('floatingText'),
+      patientLeft: document.getElementById('patientLeft'),
+      progressBadge: document.getElementById('progressBadge')
+    };
+
+    function shuffle(arr) {
+      const copy = [...arr];
+      for (let i = copy.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [copy[i], copy[j]] = [copy[j], copy[i]];
+      }
+      return copy;
+    }
+
+    function setupHairSlots() {
+      el.hairRoot.innerHTML = '';
+      state.hairSlots = [];
+
+      const slots = [
+        {x: 260, y: 145, r: -25}, {x: 295, y: 126, r: -10}, {x: 335, y: 117, r: -2}, {x: 375, y: 118, r: 4}, {x: 413, y: 128, r: 14}, {x: 446, y: 150, r: 24},
+        {x: 235, y: 182, r: -38}, {x: 276, y: 170, r: -18}, {x: 318, y: 160, r: -6}, {x: 360, y: 158, r: 0}, {x: 402, y: 163, r: 10}, {x: 442, y: 175, r: 22}, {x: 473, y: 194, r: 35},
+        {x: 225, y: 225, r: -44}, {x: 268, y: 210, r: -20}, {x: 310, y: 203, r: -8}, {x: 350, y: 200, r: 0}, {x: 390, y: 204, r: 8}, {x: 432, y: 214, r: 20}, {x: 470, y: 230, r: 38},
+        {x: 235, y: 265, r: -42}, {x: 277, y: 253, r: -18}, {x: 320, y: 247, r: -6}, {x: 364, y: 246, r: 3}, {x: 405, y: 250, r: 12}, {x: 447, y: 260, r: 24},
+        {x: 255, y: 305, r: -28}, {x: 298, y: 298, r: -12}, {x: 342, y: 295, r: -2}, {x: 384, y: 296, r: 6}, {x: 427, y: 303, r: 19}
+      ];
+
+      slots.forEach((slot, i) => {
+        const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+        g.setAttribute('transform', `translate(${slot.x} ${slot.y}) rotate(${slot.r})`);
+        g.setAttribute('data-index', i);
+
+        const follicle = document.createElementNS('http://www.w3.org/2000/svg', 'ellipse');
+        follicle.setAttribute('cx', '0');
+        follicle.setAttribute('cy', '0');
+        follicle.setAttribute('rx', '14');
+        follicle.setAttribute('ry', '9');
+        follicle.setAttribute('fill', 'rgba(255,255,255,0.07)');
+
+        const hair = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        hair.setAttribute('d', 'M -8 2 Q -3 -28 0 -3 Q 4 -34 8 1');
+        hair.setAttribute('stroke', '#2f1b10');
+        hair.setAttribute('stroke-width', '4');
+        hair.setAttribute('stroke-linecap', 'round');
+        hair.setAttribute('fill', 'none');
+        hair.style.opacity = '0';
+        hair.style.transformOrigin = 'center';
+        hair.style.transition = 'opacity .35s ease';
+
+        const bald = document.createElementNS('http://www.w3.org/2000/svg', 'ellipse');
+        bald.setAttribute('cx', '0');
+        bald.setAttribute('cy', '0');
+        bald.setAttribute('rx', '18');
+        bald.setAttribute('ry', '10');
+        bald.setAttribute('fill', '#ebbc98');
+        bald.style.opacity = '0';
+
+        g.appendChild(follicle);
+        g.appendChild(bald);
+        g.appendChild(hair);
+        el.hairRoot.appendChild(g);
+        state.hairSlots.push({ g, hair, bald, filled: false, failed: false });
+      });
+    }
+
+    function updateHUD() {
+      el.moneyValue.textContent = `¥${Math.max(0, state.money)}`;
+      el.wrongValue.textContent = state.wrong;
+      el.correctValue.textContent = state.correct;
+      el.hairValue.textContent = state.hairsPlaced;
+      el.progressBadge.textContent = `Pregunta ${Math.min(state.current + (state.started ? 1 : 0), state.questions.length)} / ${state.questions.length}`;
+    }
+
+    function showMessage(text, type='neutral') {
+      el.messageBox.textContent = text;
+      el.messageBox.className = `message ${type}`;
+    }
+
+    function showFloating(text, type='neutral') {
+      el.floatingText.textContent = text;
+      el.floatingText.style.color = type === 'good' ? '#166534' : type === 'bad' ? '#8f1d14' : '#4d3b2c';
+      el.floatingText.style.background = type === 'good' ? '#effdf5' : type === 'bad' ? '#fff0ee' : '#fff';
+      el.floatingText.classList.add('show');
+      setTimeout(() => el.floatingText.classList.remove('show'), 950);
+    }
+
+    function getMoodLevel() {
+      return Math.min(4, state.wrong);
+    }
+
+    function updateFace() {
+      const mood = getMoodLevel();
+
+      if (mood === 0) {
+        el.browLeft.setAttribute('d', 'M275 255 Q307 245 326 255');
+        el.browRight.setAttribute('d', 'M374 255 Q394 245 425 255');
+        el.mouth.setAttribute('d', 'M295 408 Q350 450 405 408');
+        el.cheekLeft.setAttribute('fill', 'rgba(255,120,140,0.16)');
+        el.cheekRight.setAttribute('fill', 'rgba(255,120,140,0.16)');
+        el.headBase.setAttribute('fill', '#f2c7a5');
+        el.bodyColor.setAttribute('fill', '#7ec8e3');
+        el.eyeLeftPupil.setAttribute('cy', '292');
+        el.eyeRightPupil.setAttribute('cy', '292');
+      } else if (mood === 1) {
+        el.browLeft.setAttribute('d', 'M274 260 Q307 244 326 252');
+        el.browRight.setAttribute('d', 'M374 252 Q396 244 426 260');
+        el.mouth.setAttribute('d', 'M300 418 Q350 435 400 418');
+        el.cheekLeft.setAttribute('fill', 'rgba(255,120,140,0.18)');
+        el.cheekRight.setAttribute('fill', 'rgba(255,120,140,0.18)');
+        el.headBase.setAttribute('fill', '#efc19d');
+      } else if (mood === 2) {
+        el.browLeft.setAttribute('d', 'M272 264 Q307 240 327 248');
+        el.browRight.setAttribute('d', 'M373 248 Q396 240 428 264');
+        el.mouth.setAttribute('d', 'M300 425 Q350 420 400 425');
+        el.cheekLeft.setAttribute('fill', 'rgba(255,105,120,0.24)');
+        el.cheekRight.setAttribute('fill', 'rgba(255,105,120,0.24)');
+        el.headBase.setAttribute('fill', '#e9b18d');
+        el.eyeLeftPupil.setAttribute('cy', '294');
+        el.eyeRightPupil.setAttribute('cy', '294');
+      } else if (mood === 3) {
+        el.browLeft.setAttribute('d', 'M270 268 Q307 236 328 245');
+        el.browRight.setAttribute('d', 'M372 245 Q398 236 430 268');
+        el.mouth.setAttribute('d', 'M302 432 Q350 414 398 432');
+        el.cheekLeft.setAttribute('fill', 'rgba(255,90,100,0.32)');
+        el.cheekRight.setAttribute('fill', 'rgba(255,90,100,0.32)');
+        el.headBase.setAttribute('fill', '#e69487');
+        el.bodyColor.setAttribute('fill', '#77b8d1');
+      } else {
+        el.browLeft.setAttribute('d', 'M268 272 Q307 232 330 242');
+        el.browRight.setAttribute('d', 'M370 242 Q398 232 432 272');
+        el.mouth.setAttribute('d', 'M304 438 Q350 404 396 438');
+        el.cheekLeft.setAttribute('fill', 'rgba(220,45,45,0.45)');
+        el.cheekRight.setAttribute('fill', 'rgba(220,45,45,0.45)');
+        el.headBase.setAttribute('fill', '#dd7b75');
+        el.bodyColor.setAttribute('fill', '#f09a8f');
+        el.eyeLeftPupil.setAttribute('cy', '296');
+        el.eyeRightPupil.setAttribute('cy', '296');
+      }
+    }
+
+    function findNextAvailableSlot() {
+      return state.hairSlots.find(slot => !slot.filled && !slot.failed);
+    }
+
+    function placeHair() {
+      const slot = findNextAvailableSlot();
+      if (!slot) return false;
+      slot.filled = true;
+      slot.hair.style.opacity = '1';
+      slot.bald.style.opacity = '0';
+      state.hairsPlaced++;
+      return true;
+    }
+
+    function markBaldSpot() {
+      const slot = findNextAvailableSlot();
+      if (!slot) return false;
+      slot.failed = true;
+      slot.hair.style.opacity = '0';
+      slot.bald.style.opacity = '1';
+      return true;
+    }
+
+    function currentQuestion() {
+      return state.questions[state.current];
+    }
+
+    function renderQuestion() {
+      if (!state.started) return;
+      const q = currentQuestion();
+      el.wordText.textContent = q.word;
+      el.readingText.textContent = q.reading;
+      el.options.innerHTML = '';
+      state.locked = false;
+      el.nextBtn.disabled = true;
+      updateHUD();
+
+      q.options.forEach(option => {
+        const btn = document.createElement('button');
+        btn.className = 'optionBtn';
+        btn.textContent = option;
+        btn.addEventListener('click', () => answer(option, btn));
+        el.options.appendChild(btn);
+      });
+    }
+
+    function answer(selected, clickedBtn) {
+      if (state.locked || state.patientLeft) return;
+      state.locked = true;
+      const q = currentQuestion();
+      const allButtons = [...document.querySelectorAll('.optionBtn')];
+      allButtons.forEach(btn => btn.disabled = true);
+
+      const isCorrect = selected === q.correct;
+      allButtons.forEach(btn => {
+        if (btn.textContent === q.correct) btn.classList.add('correct');
+      });
+
+      if (isCorrect) {
+        clickedBtn.classList.add('correct');
+        state.correct++;
+        state.money += REWARD_PER_CORRECT;
+        placeHair();
+        showMessage('✅ Correcto. Ese pelo sí agarró. El paciente sonríe un poquito.', 'good');
+        showFloating('+Pelo +Dinero', 'good');
+      } else {
+        clickedBtn.classList.add('wrong');
+        state.wrong++;
+        state.money -= PENALTY_PER_WRONG;
+        markBaldSpot();
+        updateFace();
+        showMessage(`❌ No. La respuesta correcta era “${q.correct}”. Ese hueco ya no se recupera.`, 'bad');
+        showFloating('-Dinero +Calva', 'bad');
+      }
+
+      updateFace();
+      updateHUD();
+      el.nextBtn.disabled = false;
+
+      if (state.wrong >= 5 && !state.patientLeft) {
+        patientLeaves();
+      }
+    }
+
+    function patientLeaves() {
+      state.patientLeft = true;
+      state.money = 0;
+      updateHUD();
+      showMessage('💥 Demasiados errores. El paciente se puso rojo, se enfadó y se fue sin pagar.', 'bad');
+      el.patientLeft.classList.add('show');
+      el.options.innerHTML = '';
+      el.nextBtn.disabled = true;
+      setTimeout(finishGame, 1200);
+    }
+
+    function nextQuestion() {
+      if (!state.started || state.patientLeft) return;
+      if (!state.locked) return;
+
+      state.current++;
+      if (state.current >= state.questions.length) {
+        finishGame();
+      } else {
+        renderQuestion();
+      }
+    }
+
+    function finishGame() {
+      const total = Math.max(0, state.money);
+      el.resultsMoney.textContent = `¥${total}`;
+      el.statCorrect.textContent = state.correct;
+      el.statWrong.textContent = state.wrong;
+      el.statBald.textContent = state.hairSlots.filter(s => s.failed).length;
+
+      let title = 'Trabajo terminado';
+      let text = 'El tratamiento capilar terminó.';
+
+      if (state.patientLeft || total === 0) {
+        title = 'El paciente se fue sin pagar';
+        text = 'La clínica queda en silencio. Demasiados errores. El paciente salió rojo de ira y no dejó ni una moneda.';
+      } else if (state.wrong === 0) {
+        title = 'Obra maestra capilar';
+        text = 'Injerto perfecto. El paciente casi llora de felicidad y paga encantado.';
+      } else if (state.wrong <= 2) {
+        title = 'Buen tratamiento';
+        text = 'Hubo algún tropiezo, pero el paciente se fue bastante satisfecho y con más confianza.';
+      } else {
+        title = 'Resultado tenso';
+        text = 'El paciente no quedó muy contento. Pagó, sí, pero mirándote mal.';
+      }
+
+      el.resultsTitle.textContent = title;
+      el.resultsText.textContent = text;
+      el.resultsOverlay.classList.add('show');
+    }
+
+    function startGame() {
+      state.questions = shuffle(vocabulary);
+      state.current = 0;
+      state.started = true;
+      state.locked = false;
+      state.correct = 0;
+      state.wrong = 0;
+      state.money = BASE_MONEY;
+      state.hairsPlaced = 0;
+      state.failCount = 0;
+      state.patientLeft = false;
+
+      setupHairSlots();
+      updateFace();
+      updateHUD();
+      el.resultsOverlay.classList.remove('show');
+      el.patientLeft.classList.remove('show');
+      showMessage('Empieza la consulta. Cada palabra correcta mete un pelo en la cabeza.', 'neutral');
+      renderQuestion();
+    }
+
+    el.startBtn.addEventListener('click', startGame);
+    el.restartBtn.addEventListener('click', startGame);
+    el.nextBtn.addEventListener('click', nextQuestion);
+    el.playAgainBtn.addEventListener('click', startGame);
+
+    setupHairSlots();
+    updateFace();
+    updateHUD();
+  </script>
+</body>
+</html>
