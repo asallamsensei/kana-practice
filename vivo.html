@@ -41,6 +41,7 @@
 
     *{box-sizing:border-box}
     html,body{margin:0;padding:0}
+
     body{
       font-family:Inter,system-ui,sans-serif;
       color:var(--text);
@@ -52,116 +53,136 @@
         linear-gradient(180deg, var(--bg), var(--bg2));
     }
 
-.wrap{
-  width:min(1400px, calc(100% - 32px));
-  margin:0 auto;
-  padding:32px 0 64px;
-}
+    .wrap{
+      width:min(1400px, calc(100% - 32px));
+      margin:0 auto;
+      padding:32px 0 64px;
+    }
 
-    .hero{
+    .page-title{
+      margin:0 0 22px;
+      font-size:clamp(2rem, 4.5vw, 3.4rem);
+      line-height:1.02;
+      letter-spacing:-.03em;
+      font-weight:900;
+    }
+
+    .filters-panel{
       display:grid;
-      gap:16px;
+      grid-template-columns: minmax(280px, 360px) 1fr;
+      gap:18px;
       margin-bottom:28px;
-      padding:28px;
+      padding:22px;
       border-radius:32px;
       border:1px solid rgba(255,255,255,.12);
-      background:linear-gradient(135deg, rgba(109,40,217,.18), rgba(37,99,235,.10), rgba(239,68,68,.08));
+      background:linear-gradient(135deg, rgba(109,40,217,.16), rgba(37,99,235,.10), rgba(239,68,68,.08));
       box-shadow:var(--shadow);
       backdrop-filter: blur(10px);
     }
 
-    .eyebrow{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      width:max-content;
-      padding:8px 12px;
-      border-radius:999px;
-      font-size:.86rem;
-      font-weight:800;
-      color:#f5d0fe;
-      background:rgba(147,51,234,.14);
-      border:1px solid rgba(147,51,234,.30);
+    .filter-block{
+      display:grid;
+      gap:14px;
+      align-content:start;
+      padding:18px;
+      border-radius:24px;
+      background:linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.04));
+      border:1px solid rgba(255,255,255,.10);
     }
 
-    h1{
-      margin:0;
-      font-size:clamp(1.8rem, 4vw, 3.2rem);
-      line-height:1.02;
-      letter-spacing:-.03em;
+    .filter-title{
+      font-size:.92rem;
+      font-weight:900;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      color:#ddd6fe;
     }
 
-    .toolbar{
+    .toggle-group{
       display:flex;
       flex-wrap:wrap;
-      gap:12px;
-      margin-top:4px;
+      gap:10px;
     }
 
-    button{
-      border:0;
-      cursor:pointer;
-      border-radius:16px;
-      padding:14px 18px;
-      font-weight:800;
-      font-size:.95rem;
-      transition:.2s transform ease, .2s opacity ease, .2s box-shadow ease;
-    }
-
-    button:hover{transform:translateY(-1px)}
-
-    .btn-primary{
-      color:white;
-      background:linear-gradient(135deg, var(--violet-2), var(--blue-1), var(--red-2));
-      box-shadow:0 12px 30px rgba(109,40,217,.25);
-    }
-
-    .search{
-      padding:12px 14px;
-      border-radius:16px;
-      border:1px solid rgba(255,255,255,.16);
+    .toggle-chip{
+      appearance:none;
+      border:1px solid rgba(255,255,255,.12);
       background:rgba(255,255,255,.05);
-      color:white;
-      outline:none;
-      width:min(360px, 100%);
+      color:var(--text);
+      border-radius:999px;
+      padding:12px 16px;
+      font-size:.95rem;
+      font-weight:800;
+      line-height:1;
+      cursor:pointer;
+      transition:.2s transform ease, .2s background ease, .2s border-color ease, .2s box-shadow ease, .2s opacity ease;
+    }
+
+    .toggle-chip:hover{
+      transform:translateY(-1px);
+      border-color:rgba(255,255,255,.24);
+    }
+
+    .toggle-chip.is-active{
+      background:linear-gradient(135deg, rgba(147,51,234,.32), rgba(37,99,235,.28), rgba(239,68,68,.24));
+      border-color:rgba(255,255,255,.22);
+      box-shadow:0 10px 24px rgba(0,0,0,.22);
+    }
+
+    .tags-wrap{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      align-content:start;
+      max-height:none;
+    }
+
+    .empty-tags{
+      color:var(--muted);
+      font-weight:700;
       font-size:.96rem;
     }
 
-.vivo-grid{
-  position: relative;
-  min-height: 200px;
-}
+    .results-info{
+      margin:0 0 18px;
+      color:var(--muted);
+      font-weight:700;
+      font-size:.96rem;
+    }
 
-.entry{
-  position: absolute;
-  border:1px solid var(--border);
-  border-radius:var(--radius-xl);
-  overflow:hidden;
-  box-shadow:var(--shadow);
-  backdrop-filter:blur(10px);
-  background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04));
-  width:fit-content;
-  max-width:100%;
-  height:auto;
-}
+    .vivo-grid{
+      position: relative;
+      min-height: 200px;
+    }
+
+    .entry{
+      position: absolute;
+      border:1px solid var(--border);
+      border-radius:var(--radius-xl);
+      overflow:hidden;
+      box-shadow:var(--shadow);
+      backdrop-filter:blur(10px);
+      background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04));
+      width:fit-content;
+      max-width:100%;
+      height:auto;
+    }
 
     .entry--kanji{background-image:var(--card-kanji)}
     .entry--word{background-image:var(--card-word)}
     .entry--sentence{background-image:var(--card-sentence)}
 
+    .entry-top{
+      display:inline-flex;
+      align-items:center;
+      gap:14px;
+      padding:18px 22px;
+      border-bottom:1px solid rgba(255,255,255,.10);
+      background:rgba(255,255,255,.05);
+      width:fit-content;
+      border-radius:0 0 18px 0;
+    }
 
-.entry-top{
-  display:inline-flex;
-  align-items:center;
-  gap:14px;
-  padding:18px 22px;
-  border-bottom:1px solid rgba(255,255,255,.10);
-  background:rgba(255,255,255,.05);
-  width:fit-content;
-  border-radius:0 0 18px 0;
-}
-
-    
     .entry-tag{
       font-size:.82rem;
       font-weight:900;
@@ -227,13 +248,13 @@
       to{opacity:1; transform:translateY(0)}
     }
 
-.meaning-boxes{
-  display:grid;
-  grid-auto-flow:column;
-  grid-auto-columns:max-content;
-  gap:14px;
-  width:fit-content;
-}
+    .meaning-boxes{
+      display:grid;
+      grid-auto-flow:column;
+      grid-auto-columns:max-content;
+      gap:14px;
+      width:fit-content;
+    }
 
     .meaning-box{
       background:rgba(255,255,255,.06);
@@ -274,23 +295,23 @@
       color:#fff;
     }
 
-.pieces{
-  display:flex;
-  flex-wrap:wrap;
-  gap:12px;
-  width:fit-content;
-}
+    .pieces{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      width:fit-content;
+    }
 
-.piece{
-  display:grid;
-  gap:10px;
-  align-items:start;
-  padding:16px;
-  border-radius:18px;
-  background:rgba(255,255,255,.05);
-  border:1px solid rgba(255,255,255,.08);
-  width:fit-content;
-}
+    .piece{
+      display:grid;
+      gap:10px;
+      align-items:start;
+      padding:16px;
+      border-radius:18px;
+      background:rgba(255,255,255,.05);
+      border:1px solid rgba(255,255,255,.08);
+      width:fit-content;
+    }
 
     .piece .jp{
       font-family:"Noto Sans JP", sans-serif;
@@ -306,25 +327,25 @@
       margin-top:4px;
     }
 
-.piece .es{
-  color:var(--muted);
-  line-height:1.6;
-  font-size:1rem;
-}
-    
+    .piece .es{
+      color:var(--muted);
+      line-height:1.6;
+      font-size:1rem;
+    }
+
     .piece .exp{
       color:var(--muted);
       line-height:1.65;
     }
 
-.kanji-grid{
-  display:grid;
-  grid-auto-flow:column;
-  grid-auto-columns:max-content;
-  gap:14px;
-  width:fit-content;
-}
-  
+    .kanji-grid{
+      display:grid;
+      grid-auto-flow:column;
+      grid-auto-columns:max-content;
+      gap:14px;
+      width:fit-content;
+    }
+
     .kanji-card{
       background:rgba(255,255,255,.06);
       border:1px solid rgba(255,255,255,.10);
@@ -340,11 +361,11 @@
       grid-template-columns:1fr;
     }
 
-.kanji-main{
-  display:grid;
-  gap:10px;
-  justify-items:center;
-}
+    .kanji-main{
+      display:grid;
+      gap:10px;
+      justify-items:center;
+    }
 
     .kanji-char{
       width:76px;
@@ -360,27 +381,12 @@
       border:1px solid rgba(255,255,255,.12);
     }
 
-.kanji-mean{
-  font-size:1rem;
-  line-height:1.5;
-  color:var(--text);
-  font-weight:700;
-  text-align:center;
-}
-
-    .mini-actions{
-      display:flex;
-      justify-content:flex-end;
-      padding-top:2px;
-    }
-
-    .capture-btn{
-      background:rgba(255,255,255,.08);
+    .kanji-mean{
+      font-size:1rem;
+      line-height:1.5;
       color:var(--text);
-      border:1px solid rgba(255,255,255,.12);
-      padding:11px 14px;
-      border-radius:14px;
-      font-size:.88rem;
+      font-weight:700;
+      text-align:center;
     }
 
     .footer-badge{
@@ -395,33 +401,74 @@
       border-top:1px solid rgba(255,255,255,.10);
     }
 
-@media (max-width: 900px){
-  .vivo-grid{
-    position: static;
-    min-height: 0;
-    display: grid;
-    gap: 18px;
-    justify-items: start;
-  }
+    @media (max-width: 980px){
+      .filters-panel{
+        grid-template-columns:1fr;
+      }
+    }
 
-  .entry{
-    position: static !important;
-    left: auto !important;
-    top: auto !important;
-  }
-}
-    
+    @media (max-width: 900px){
+      .vivo-grid{
+        position: static;
+        min-height: 0;
+        display: grid;
+        gap: 18px;
+        justify-items: start;
+      }
+
+      .entry{
+        position: static !important;
+        left: auto !important;
+        top: auto !important;
+      }
+    }
+
+    @media (max-width: 640px){
+      .wrap{
+        width:min(100% - 20px, 1400px);
+        padding:24px 0 52px;
+      }
+
+      .page-title{
+        margin-bottom:18px;
+      }
+
+      .filters-panel{
+        padding:16px;
+        border-radius:24px;
+      }
+
+      .filter-block{
+        padding:16px;
+        border-radius:20px;
+      }
+
+      .toggle-chip{
+        padding:11px 14px;
+        font-size:.92rem;
+      }
+    }
   </style>
 </head>
 <body>
   <div class="wrap">
-    <section class="hero">
-      <span class="eyebrow">Asallam Sensei • EL VIVO!!</span>
-      <h1>Me lo contaron en EL VIVO!!</h1>
-      <div class="toolbar">
-        <input class="search" type="text" id="tagSearch" placeholder="">
+    <h1 class="page-title">Me lo contaron en el vivo de Asallam Sensei</h1>
+
+    <section class="filters-panel">
+      <div class="filter-block">
+        <div class="filter-title">Modo</div>
+        <div class="toggle-group" id="modeFilters"></div>
+      </div>
+
+      <div class="filter-block">
+        <div class="filter-title">Tags</div>
+        <div class="tags-wrap" id="tagFilters">
+          <div class="empty-tags">Cargando tags...</div>
+        </div>
       </div>
     </section>
+
+    <p class="results-info" id="resultsInfo"></p>
 
     <main class="vivo-grid" id="vivoGrid"></main>
   </div>
@@ -430,6 +477,19 @@
 
   <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
   <script>
+    const MODE_CONFIG = [
+      { key: 'PALABRA', label: 'Palabras', active: true },
+      { key: 'ORACION', label: 'Frases', active: false },
+      { key: 'KANJI', label: 'Kanji', active: false }
+    ];
+
+    const state = {
+      data: [],
+      activeModes: new Set(MODE_CONFIG.filter(m => m.active).map(m => m.key)),
+      activeTags: new Set(),
+      allTags: []
+    };
+
     async function renderCard(element){
       return await html2canvas(element,{backgroundColor:null,scale:2,useCORS:true});
     }
@@ -467,6 +527,18 @@
         .replace(/>/g, '&gt;')
         .replace(/"/g, '&quot;')
         .replace(/'/g, '&#039;');
+    }
+
+    function parseTags(theme=''){
+      return String(theme)
+        .split(/[,|/•]+/g)
+        .map(tag => tag.trim())
+        .filter(Boolean);
+    }
+
+    function getItemTags(item){
+      const tags = parseTags(item.theme || '');
+      return tags.length ? tags : ['Sin tag'];
     }
 
     function renderMatiz(item){
@@ -517,85 +589,51 @@
     }
 
     function renderKanjiCard(item, index){
-    
       const meanings = (item.kanjis && item.kanjis.length)
         ? item.kanjis.map(k => `
           <div class="kanji-card kanji-card--solo">
             <div class="kanji-char">${escapeHtml(k.char || '')}</div>
             <div class="kanji-mean">${escapeHtml(k.mean || '')}</div>
           </div>
-          `).join('')
+        `).join('')
         : `
           <div class="kanji-card kanji-card--solo">
             <div class="kanji-char">${escapeHtml(item.jp || '')}</div>
             <div class="kanji-mean">${escapeHtml(item.es || '')}</div>
           </div>
         `;
-    
+
       return `
-        <article class="entry entry--kanji capture-card" id="entry-${index+1}">
+        <article
+          class="entry entry--kanji capture-card"
+          id="entry-${index+1}"
+          data-type="KANJI"
+          data-tags="${escapeHtml(getItemTags(item).join('||'))}"
+        >
           <div class="entry-top">
-            <div class="entry-tag">KANJIS</div>
+            <div class="entry-tag">KANJI</div>
             <div class="entry-date">Tags: ${escapeHtml(item.theme || '')}</div>
           </div>
-    
+
           <div class="entry-body">
-    
             <div class="kanji-grid">
               ${meanings}
             </div>
-    
           </div>
         </article>
       `;
     }
 
-function renderWordCard(item, index){
-  return `
-    <article class="entry entry--word capture-card" id="entry-${index+1}" data-search="${escapeHtml((item.type||'') + ' ' + (item.theme||'') + ' ' + (item.jp||'') + ' ' + (item.romaji||'') + ' ' + (item.es||''))}">
-      <div class="entry-top">
-        <div class="entry-tag">PALABRA</div>
-        <div class="entry-date">Tags: ${escapeHtml(item.theme || '')}</div>
-      </div>
-
-      <div class="entry-body">
-        <div class="summary">
-          <div class="jp-line">${escapeHtml(item.jp || '')}</div>
-          ${item.romaji ? `<div class="reading-line">${escapeHtml(item.romaji)}</div>` : ''}
-          ${item.es ? `<div class="es-line">${escapeHtml(item.es)}</div>` : ''}
-        </div>
-
-        <div class="details">
-          ${item.matiz ? `
-          <div class="meaning-boxes">
-            <div class="meaning-box">
-              <span class="label">Observación</span>
-              <div class="value">${escapeHtml(item.matiz)}</div>
-            </div>
-          </div>
-          ` : ''}
-
-          ${renderKanjiPanel(item.kanjis)}
-        </div>
-      </div>
-    </article>
-  `;
-}
-
-    function renderSentenceCard(item, index){
-      const literalHTML = item.literal ? `
-        <div class="meaning-box">
-          <span class="label">Traducción literal</span>
-          <div class="value">${escapeHtml(item.literal)}</div>
-        </div>
-      ` : '';
-
-      const matizHTML = renderMatiz(item);
-
+    function renderWordCard(item, index){
       return `
-        <article class="entry entry--sentence capture-card" id="entry-${index+1}" data-search="${escapeHtml((item.type||'') + ' ' + (item.theme||'') + ' ' + (item.jp||'') + ' ' + (item.romaji||'') + ' ' + (item.es||''))}">
+        <article
+          class="entry entry--word capture-card"
+          id="entry-${index+1}"
+          data-type="PALABRA"
+          data-tags="${escapeHtml(getItemTags(item).join('||'))}"
+        >
           <div class="entry-top">
-            <div class="entry-tag">ORACIÓN</div>
+            <div class="entry-tag">PALABRA</div>
             <div class="entry-date">Tags: ${escapeHtml(item.theme || '')}</div>
           </div>
 
@@ -607,19 +645,54 @@ function renderWordCard(item, index){
             </div>
 
             <div class="details">
-
               ${item.matiz ? `
-              <div class="meaning-boxes">
-                <div class="meaning-box">
-                  <span class="label">Observación</span>
-                  <div class="value">${escapeHtml(item.matiz)}</div>
+                <div class="meaning-boxes">
+                  <div class="meaning-box">
+                    <span class="label">Observación</span>
+                    <div class="value">${escapeHtml(item.matiz)}</div>
+                  </div>
                 </div>
-              </div>
+              ` : ''}
+
+              ${renderKanjiPanel(item.kanjis)}
+            </div>
+          </div>
+        </article>
+      `;
+    }
+
+    function renderSentenceCard(item, index){
+      return `
+        <article
+          class="entry entry--sentence capture-card"
+          id="entry-${index+1}"
+          data-type="ORACION"
+          data-tags="${escapeHtml(getItemTags(item).join('||'))}"
+        >
+          <div class="entry-top">
+            <div class="entry-tag">FRASE</div>
+            <div class="entry-date">Tags: ${escapeHtml(item.theme || '')}</div>
+          </div>
+
+          <div class="entry-body">
+            <div class="summary">
+              <div class="jp-line">${escapeHtml(item.jp || '')}</div>
+              ${item.romaji ? `<div class="reading-line">${escapeHtml(item.romaji)}</div>` : ''}
+              ${item.es ? `<div class="es-line">${escapeHtml(item.es)}</div>` : ''}
+            </div>
+
+            <div class="details">
+              ${item.matiz ? `
+                <div class="meaning-boxes">
+                  <div class="meaning-box">
+                    <span class="label">Observación</span>
+                    <div class="value">${escapeHtml(item.matiz)}</div>
+                  </div>
+                </div>
               ` : ''}
 
               ${renderWordsPanel(item.words)}
               ${renderKanjiPanel(item.kanjis)}
-
             </div>
           </div>
         </article>
@@ -634,142 +707,240 @@ function renderWordCard(item, index){
       return renderSentenceCard(item, index);
     }
 
-function setupSearch(){
-  const input = document.getElementById('tagSearch');
-  input.addEventListener('input', () => {
-    const q = input.value.trim().toLowerCase();
-    const cards = document.querySelectorAll('.entry');
+    function buildTags(data){
+      const tagSet = new Set();
 
-    cards.forEach(card => {
-      const text = (card.getAttribute('data-search') || '').toLowerCase();
-      card.style.display = text.includes(q) ? '' : 'none';
-    });
+      data.forEach(item => {
+        getItemTags(item).forEach(tag => tagSet.add(tag));
+      });
 
-    layoutMasonry();
-  });
-}
-
-function layoutMasonry(){
-  const container = document.getElementById('vivoGrid');
-  const cards = [...container.querySelectorAll('.entry:not([style*="display: none"])')];
-
-  if(window.innerWidth < 900){
-    container.style.height = 'auto';
-    return;
-  }
-
-  if(!cards.length){
-    container.style.height = '0px';
-    return;
-  }
-
-  const gap = 18;
-  const containerWidth = container.clientWidth;
-
-  const placed = [];
-
-  function intersects(a, b){
-    return !(
-      a.right <= b.left ||
-      a.left >= b.right ||
-      a.bottom <= b.top ||
-      a.top >= b.bottom
-    );
-  }
-
-  function collides(rect){
-    return placed.some(p => intersects(rect, p));
-  }
-
-  function getLowestYThatFits(width, height, startX){
-    let y = 0;
-
-    while(true){
-      const testRect = {
-        left: startX,
-        top: y,
-        right: startX + width,
-        bottom: y + height
-      };
-
-      const hit = placed.find(p => intersects(testRect, p));
-
-      if(!hit) return y;
-
-      y = hit.bottom + gap;
+      state.allTags = Array.from(tagSet).sort((a,b) => a.localeCompare(b, 'es'));
+      state.activeTags = new Set(state.allTags);
     }
-  }
 
-  cards.forEach(card => {
-    card.style.left = '0px';
-    card.style.top = '0px';
-  });
+    function renderModeFilters(){
+      const container = document.getElementById('modeFilters');
 
-  cards.forEach(card => {
-    const width = Math.ceil(card.offsetWidth);
-    const height = Math.ceil(card.offsetHeight);
+      container.innerHTML = MODE_CONFIG.map(mode => `
+        <button
+          type="button"
+          class="toggle-chip ${state.activeModes.has(mode.key) ? 'is-active' : ''}"
+          data-mode="${escapeHtml(mode.key)}"
+        >
+          ${escapeHtml(mode.label)}
+        </button>
+      `).join('');
 
-    let bestX = 0;
-    let bestY = Infinity;
-    
-    const candidates = [0];
-    
-    // usar el borde derecho de cada tarjeta ya colocada
-    placed.forEach(p => {
-      candidates.push(p.right);
-    });
-    
-    candidates.forEach(x => {
-      if(x + width > containerWidth) return;
-    
-      const y = getLowestYThatFits(width, height, x);
-    
-      if(y < bestY){
-        bestY = y;
-        bestX = x;
+      container.querySelectorAll('[data-mode]').forEach(button => {
+        button.addEventListener('click', () => {
+          const mode = button.dataset.mode;
+
+          if(state.activeModes.has(mode)){
+            state.activeModes.delete(mode);
+          }else{
+            state.activeModes.add(mode);
+          }
+
+          renderModeFilters();
+          applyFilters();
+        });
+      });
+    }
+
+    function renderTagFilters(){
+      const container = document.getElementById('tagFilters');
+
+      if(!state.allTags.length){
+        container.innerHTML = `<div class="empty-tags">No hay tags disponibles.</div>`;
+        return;
       }
-    });
 
-    card.style.left = `${bestX}px`;
-    card.style.top = `${bestY}px`;
+      container.innerHTML = state.allTags.map(tag => `
+        <button
+          type="button"
+          class="toggle-chip ${state.activeTags.has(tag) ? 'is-active' : ''}"
+          data-tag="${escapeHtml(tag)}"
+        >
+          ${escapeHtml(tag)}
+        </button>
+      `).join('');
 
-    placed.push({
-      left: bestX,
-      top: bestY,
-      right: bestX + width + gap,
-      bottom: bestY + height
-    });
-  });
+      container.querySelectorAll('[data-tag]').forEach(button => {
+        button.addEventListener('click', () => {
+          const tag = button.dataset.tag;
 
-  const maxBottom = Math.max(...placed.map(p => p.bottom), 0);
-  container.style.height = `${maxBottom}px`;
-}
+          if(state.activeTags.has(tag)){
+            state.activeTags.delete(tag);
+          }else{
+            state.activeTags.add(tag);
+          }
 
-fetch('data/elvivo.json')
-  .then(res => res.json())
-  .then(data => {
-    const grid = document.getElementById('vivoGrid');
-    grid.innerHTML = data.map((item, index) => renderItem(item, index)).join('');
-    setupSearch();
-    layoutMasonry();
-    window.addEventListener('resize', layoutMasonry);
-  })
-  .catch(err => {
-    const grid = document.getElementById('vivoGrid');
-    grid.innerHTML = `
-      <article class="entry">
-        <div class="entry-body">
-          <div class="es-line">No se pudo cargar el JSON.</div>
-          <div class="reading-line">${escapeHtml(err.message || 'Error desconocido')}</div>
-        </div>
-      </article>
-    `;
-    console.error(err);
-  });
+          renderTagFilters();
+          applyFilters();
+        });
+      });
+    }
 
-window.addEventListener('load', layoutMasonry);
-document.fonts?.ready.then(layoutMasonry);
-    
+    function applyFilters(){
+      const cards = [...document.querySelectorAll('.entry')];
+      let visibleCount = 0;
+
+      cards.forEach(card => {
+        const type = card.dataset.type || '';
+        const cardTags = String(card.dataset.tags || '')
+          .split('||')
+          .map(tag => tag.trim())
+          .filter(Boolean);
+
+        const modeMatch = state.activeModes.has(type);
+        const tagMatch = cardTags.some(tag => state.activeTags.has(tag));
+
+        const visible = modeMatch && tagMatch;
+
+        card.style.display = visible ? '' : 'none';
+
+        if(visible) visibleCount++;
+      });
+
+      updateResultsInfo(visibleCount);
+      layoutMasonry();
+    }
+
+    function updateResultsInfo(count){
+      const info = document.getElementById('resultsInfo');
+
+      const activeModeLabels = MODE_CONFIG
+        .filter(mode => state.activeModes.has(mode.key))
+        .map(mode => mode.label);
+
+      const modeText = activeModeLabels.length
+        ? activeModeLabels.join(', ')
+        : 'ninguno';
+
+      info.textContent = `${count} tarjeta${count === 1 ? '' : 's'} visibles · modos: ${modeText} · tags activadas: ${state.activeTags.size}/${state.allTags.length}`;
+    }
+
+    function layoutMasonry(){
+      const container = document.getElementById('vivoGrid');
+      const cards = [...container.querySelectorAll('.entry:not([style*="display: none"])')];
+
+      if(window.innerWidth < 900){
+        container.style.height = 'auto';
+        return;
+      }
+
+      if(!cards.length){
+        container.style.height = '0px';
+        return;
+      }
+
+      const gap = 18;
+      const containerWidth = container.clientWidth;
+      const placed = [];
+
+      function intersects(a, b){
+        return !(
+          a.right <= b.left ||
+          a.left >= b.right ||
+          a.bottom <= b.top ||
+          a.top >= b.bottom
+        );
+      }
+
+      function getLowestYThatFits(width, height, startX){
+        let y = 0;
+
+        while(true){
+          const testRect = {
+            left: startX,
+            top: y,
+            right: startX + width,
+            bottom: y + height
+          };
+
+          const hit = placed.find(p => intersects(testRect, p));
+
+          if(!hit) return y;
+          y = hit.bottom + gap;
+        }
+      }
+
+      cards.forEach(card => {
+        card.style.left = '0px';
+        card.style.top = '0px';
+      });
+
+      cards.forEach(card => {
+        const width = Math.ceil(card.offsetWidth);
+        const height = Math.ceil(card.offsetHeight);
+
+        let bestX = 0;
+        let bestY = Infinity;
+        const candidates = [0];
+
+        placed.forEach(p => {
+          candidates.push(p.right);
+        });
+
+        candidates.forEach(x => {
+          if(x + width > containerWidth) return;
+
+          const y = getLowestYThatFits(width, height, x);
+
+          if(y < bestY){
+            bestY = y;
+            bestX = x;
+          }
+        });
+
+        card.style.left = `${bestX}px`;
+        card.style.top = `${bestY}px`;
+
+        placed.push({
+          left: bestX,
+          top: bestY,
+          right: bestX + width + gap,
+          bottom: bestY + height
+        });
+      });
+
+      const maxBottom = Math.max(...placed.map(p => p.bottom), 0);
+      container.style.height = `${maxBottom}px`;
+    }
+
+    fetch('data/elvivo.json')
+      .then(res => res.json())
+      .then(data => {
+        state.data = Array.isArray(data) ? data : [];
+
+        buildTags(state.data);
+
+        const grid = document.getElementById('vivoGrid');
+        grid.innerHTML = state.data.map((item, index) => renderItem(item, index)).join('');
+
+        renderModeFilters();
+        renderTagFilters();
+        applyFilters();
+
+        window.addEventListener('resize', layoutMasonry);
+      })
+      .catch(err => {
+        const grid = document.getElementById('vivoGrid');
+        grid.innerHTML = `
+          <article class="entry" style="position:static;">
+            <div class="entry-body">
+              <div class="es-line">No se pudo cargar el JSON.</div>
+              <div class="reading-line">${escapeHtml(err.message || 'Error desconocido')}</div>
+            </div>
+          </article>
+        `;
+        document.getElementById('tagFilters').innerHTML = `<div class="empty-tags">No se pudieron cargar las tags.</div>`;
+        document.getElementById('resultsInfo').textContent = '0 tarjetas visibles';
+        console.error(err);
+      });
+
+    window.addEventListener('load', layoutMasonry);
+    document.fonts?.ready.then(layoutMasonry);
   </script>
 </body>
 </html>
