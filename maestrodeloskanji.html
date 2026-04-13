@@ -1512,6 +1512,12 @@ function mostrarErrorGeneracion(msg){
 }
 
 function siguiente(){
+
+  if(!yaValidado && actual){
+    verificar(null);
+    return;
+  }
+
   if(gradosSeleccionados.size === 0){
     setPromptTop([]);
     setPreguntaVisual("—", "visual-jp");
@@ -1538,11 +1544,11 @@ function responder(letra){
 
 function verificar(input){
   input = (input || "").trim().toLowerCase();
-
-  if(!["a","b","c"].includes(input)){
-    $("resultado").className = "incorrecto";
-    $("resultado").innerText = "Usa solo: a / b / c";
-    return;
+  
+  const sinResponder = !["a","b","c"].includes(input);
+  
+  if(sinResponder){
+    input = null;
   }
 
   const res = $("resultado");
@@ -1554,13 +1560,19 @@ function verificar(input){
     aciertos++;
     racha++;
     if(racha > mejorRacha) mejorRacha = racha;
-    sonidoCorrecto(); // 👈 aquí
+    sonidoCorrecto();
   }else{
     res.className = "incorrecto";
-    res.innerText = `Incorrecto ✘ (era ${actual.correcta})\nRespuesta: ${actual.correcta}) ${actual.respuesta}`;
+  
+    if(input === null){
+      res.innerText = `Incorrecto ✘\nRespuesta: ${actual.correcta}) ${actual.respuesta}`;
+    }else{
+      res.innerText = `Incorrecto ✘ (era ${actual.correcta})\nRespuesta: ${actual.correcta}) ${actual.respuesta}`;
+    }
+  
     errores++;
     racha = 0;
-    sonidoIncorrecto(); // 👈 aquí
+    sonidoIncorrecto();
   }
   
   /* 👇 AGREGA ESTO JUSTO DESPUÉS DEL IF/ELSE 👇 */
