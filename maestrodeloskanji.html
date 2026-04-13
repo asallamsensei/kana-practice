@@ -504,6 +504,24 @@
         <button class="btn btn-mode" id="m-v-mix" type="button" onclick="activarMixVocab()">Mix</button>
       </div>
 
+      <div class="row" style="justify-content:flex-start; margin-top:12px;">
+        <span class="pill">¿Pueden tener kanjis de grado superior?</span>
+      </div>
+      
+      <div class="row" style="justify-content:flex-start; margin-top:8px; gap:10px; flex-wrap:wrap;">
+        <button class="btn btn-mode" id="vocab-superior-si" type="button" onclick="setPermitirSuperioresVocab(true)">Sí</button>
+        <button class="btn btn-mode" id="vocab-superior-no" type="button" onclick="setPermitirSuperioresVocab(false)">No</button>
+      </div>
+      
+      <div class="row" style="justify-content:flex-start; margin-top:12px;">
+        <span class="pill">¿Incluir palabras sin kanji graduado?</span>
+      </div>
+      
+      <div class="row" style="justify-content:flex-start; margin-top:8px; gap:10px; flex-wrap:wrap;">
+        <button class="btn btn-mode" id="vocab-sinkanji-si" type="button" onclick="setIncluirSinKanjiGraduado(true)">Sí</button>
+        <button class="btn btn-mode" id="vocab-sinkanji-no" type="button" onclick="setIncluirSinKanjiGraduado(false)">No</button>
+      </div>
+      
       <div class="sep"></div>
 
       <div class="row" style="justify-content:flex-start;">
@@ -539,6 +557,7 @@
         <div id="pillModo">Modo: —</div>
         <div id="pillPool">Pool: —</div>
         <div id="pillScope">Distractores: —</div>
+        <div id="pillVocabExtra">Vocab extra: —</div>
       </div>
     </div>
   </div>
@@ -656,7 +675,8 @@ let modosActivos = new Set([
   "audio_jp"
 ]);
 let poolScope = "seleccion";
-
+let permitirGradosSuperioresVocab = true;
+let incluirSinKanjiGraduado = false;
 /* =========================================================
    STATS
 ========================================================= */
@@ -782,6 +802,8 @@ function refrescarPills(){
   $("pillModo").innerText = `Modo: ${descripcionModoActual()}`;
   $("pillPool").innerText = `Pool: ${poolDisponibleActual()}`;
   $("pillScope").innerText = `Distractores: ${poolScope === "global" ? "Global" : "Solo selección"}`;
+  $("pillVocabExtra").innerText =
+  `Vocab extra: superiores ${permitirGradosSuperioresVocab ? "sí" : "no"} · sin kanji ${incluirSinKanjiGraduado ? "sí" : "no"}`;
 }
 
 function descripcionModoActual(){
@@ -854,6 +876,32 @@ function actualizarBotonesPool(){
   $("pool-glob").classList.toggle("activo", poolScope === "global");
 }
 
+function actualizarBotonesFiltrosVocab(){
+  $("vocab-superior-si").classList.toggle("activo", permitirGradosSuperioresVocab === true);
+  $("vocab-superior-no").classList.toggle("activo", permitirGradosSuperioresVocab === false);
+
+  $("vocab-sinkanji-si").classList.toggle("activo", incluirSinKanjiGraduado === true);
+  $("vocab-sinkanji-no").classList.toggle("activo", incluirSinKanjiGraduado === false);
+}
+
+function setPermitirSuperioresVocab(valor){
+  permitirGradosSuperioresVocab = valor;
+  actualizarBotonesFiltrosVocab();
+  aplicarFiltros();
+  yaValidado = false;
+  limpiarResultado();
+  siguiente();
+}
+
+function setIncluirSinKanjiGraduado(valor){
+  incluirSinKanjiGraduado = valor;
+  actualizarBotonesFiltrosVocab();
+  aplicarFiltros();
+  yaValidado = false;
+  limpiarResultado();
+  siguiente();
+}
+  
 /* =========================================================
    KEYBOARD
 ========================================================= */
@@ -1023,7 +1071,24 @@ function aplicarFiltros(){
   }
 
   kanjiFiltrado = kanjiCompleto.filter(item => gradosSeleccionados.has(Number(item.grado)));
-  vocabFiltrado = vocabCompleto.filter(item => anySelected(item.grados_detectados || [], gradosSeleccionados));
+  vocabFiltrado = vocabCompleto.filter(item => {
+    const grados = Array.isArray(item.grados_detectados) ? item.grados_detectados : [];
+    const gradosValidos = grados.filter(g => !Number.isNaN(Number(g))).map(Number);
+  
+    if(gradosValidos.length === 0){
+      return incluirSinKanjiGraduado;
+    }
+  
+    const tieneAlgunoSeleccionado = gradosValidos.some(g => gradosSeleccionados.has(g));
+    if(!tieneAlgunoSeleccionado) return false;
+  
+    if(permitirGradosSuperioresVocab){
+      return true;
+    }
+  
+    const gradoMaxSeleccionado = Math.max(...[...gradosSeleccionados]);
+    return gradosValidos.every(g => g <= gradoMaxSeleccionado);
+  });
 
   refrescarPills();
 }
@@ -1653,12 +1718,13 @@ Promise.all([
         .map(n => Number(n))
         .filter(n => !Number.isNaN(n))
     }))
-    .filter(x => x.palabra && x.romaji && x.grados_detectados.length > 0);
+    .filter(x => x.palabra && x.romaji);
 
   construirChipsGrados();
   actualizarBotonesContenido();
-  actualizarBotonesModos()
+  actualizarBotonesModos();
   actualizarBotonesPool();
+  actualizarBotonesFiltrosVocab();
   aplicarFiltros();
   siguiente();
 })
