@@ -734,9 +734,6 @@ function descripcionModoActual(){
 }
 
 function poolDisponibleActual(){
-  if(modoExtra){
-    return `${kanjiFiltrado.length} kanji`;
-  }
   if(contenidoActivo.kanji && contenidoActivo.vocab){
     return `${kanjiFiltrado.length} kanji + ${vocabFiltrado.length} vocab`;
   }
@@ -865,7 +862,7 @@ function syncChipsGrados(){
   $("btnTodo").classList.toggle("mix-activo", todosActivos);
 }
 
-function activarMixGrados()
+function activarMixGrados(){
   gradosSeleccionados = new Set(gradosDisponibles);
   syncChipsGrados();
   aplicarFiltros();
@@ -1268,7 +1265,7 @@ const MODOS = {
       if(filteredPool.length < 3) return false;
       const grados = uniqueValues(filteredPool.map(x => String(x.grado)));
       if(grados.length === 0) return false;
-      return distractorPool.some(x => !grados.includes("___") && true);
+      return distractorPool.some(x => !grados.includes(String(x.grado)));
     },
     getCandidates: ({ filteredPool }) => filteredPool,
     build: ({ filteredPool, distractorPool }) => {
