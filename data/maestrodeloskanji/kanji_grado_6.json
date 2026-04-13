@@ -2,7 +2,7 @@
   {
     "kanji": "異",
     "significado_en": "uncommon, different, queerness, strangeness, wonderful, curious, unusual",
-    "significado_es": "",
+    "significado_es": "diferente, extraño",
     "kunyomi": "こと, こと.なる, け",
     "onyomi": "イ",
     "grado": 6
@@ -10,7 +10,7 @@
   {
     "kanji": "胃",
     "significado_en": "stomach, paunch, crop, craw",
-    "significado_es": "",
+    "significado_es": "estómago",
     "kunyomi": "",
     "onyomi": "イ",
     "grado": 6
@@ -18,7 +18,7 @@
   {
     "kanji": "遺",
     "significado_en": "bequeath, leave behind, reserve",
-    "significado_es": "",
+    "significado_es": "dejar, legado",
     "kunyomi": "のこ.す",
     "onyomi": "イ, ユイ",
     "grado": 6
@@ -26,7 +26,7 @@
   {
     "kanji": "域",
     "significado_en": "range, region, limits, stage, level",
-    "significado_es": "",
+    "significado_es": "región, área, límite",
     "kunyomi": "",
     "onyomi": "イキ",
     "grado": 6
@@ -34,7 +34,7 @@
   {
     "kanji": "宇",
     "significado_en": "eaves, roof, house, heaven",
-    "significado_es": "",
+    "significado_es": "universo, techo",
     "kunyomi": "",
     "onyomi": "ウ",
     "grado": 6
@@ -42,7 +42,7 @@
   {
     "kanji": "映",
     "significado_en": "reflect, reflection, projection",
-    "significado_es": "",
+    "significado_es": "reflejar, proyectar",
     "kunyomi": "うつ.る, うつ.す, は.える, -ば.え",
     "onyomi": "エイ",
     "grado": 6
@@ -50,7 +50,7 @@
   {
     "kanji": "延",
     "significado_en": "prolong, stretching",
-    "significado_es": "",
+    "significado_es": "extender, prolongar",
     "kunyomi": "の.びる, の.べる, の.べ, の.ばす",
     "onyomi": "エン",
     "grado": 6
@@ -58,7 +58,7 @@
   {
     "kanji": "沿",
     "significado_en": "run alongside, follow along, run along, lie along",
-    "significado_es": "",
+    "significado_es": "a lo largo de, seguir",
     "kunyomi": "そ.う, -ぞ.い",
     "onyomi": "エン",
     "grado": 6
@@ -66,7 +66,7 @@
   {
     "kanji": "恩",
     "significado_en": "grace, kindness, goodness, favor, mercy, blessing, benefit",
-    "significado_es": "",
+    "significado_es": "favor, gracia",
     "kunyomi": "",
     "onyomi": "オン",
     "grado": 6
@@ -74,7 +74,7 @@
   {
     "kanji": "我",
     "significado_en": "ego, I, selfish, our, oneself",
-    "significado_es": "",
+    "significado_es": "yo, propio",
     "kunyomi": "われ, わ, わ.が-, わが-",
     "onyomi": "ガ",
     "grado": 6
@@ -82,7 +82,7 @@
   {
     "kanji": "灰",
     "significado_en": "ashes, puckery juice, cremate",
-    "significado_es": "",
+    "significado_es": "ceniza",
     "kunyomi": "はい",
     "onyomi": "カイ",
     "grado": 6
@@ -90,7 +90,7 @@
   {
     "kanji": "拡",
     "significado_en": "broaden, extend, expand, enlarge",
-    "significado_es": "",
+    "significado_es": "expandir, ampliar",
     "kunyomi": "ひろ.がる, ひろ.げる, ひろ.める",
     "onyomi": "カク, コウ",
     "grado": 6
@@ -98,7 +98,7 @@
   {
     "kanji": "閣",
     "significado_en": "tower, tall building, palace",
-    "significado_es": "",
+    "significado_es": "torre, gabinete",
     "kunyomi": "",
     "onyomi": "カク",
     "grado": 6
@@ -106,7 +106,7 @@
   {
     "kanji": "革",
     "significado_en": "leather, skin, reform, become serious",
-    "significado_es": "",
+    "significado_es": "cuero, reforma",
     "kunyomi": "かわ",
     "onyomi": "カク",
     "grado": 6
@@ -114,7 +114,7 @@
   {
     "kanji": "割",
     "significado_en": "proportion, comparatively, divide, cut, separate, split",
-    "significado_es": "",
+    "significado_es": "dividir, romper, tasa",
     "kunyomi": "わ.る, わり, わ.り, わ.れる, さ.く",
     "onyomi": "カツ",
     "grado": 6
@@ -122,7 +122,7 @@
   {
     "kanji": "株",
     "significado_en": "stocks, stump, shares, stock, counter for small plants",
-    "significado_es": "",
+    "significado_es": "acción (empresa), tocón",
     "kunyomi": "かぶ",
     "onyomi": "シュ",
     "grado": 6
@@ -130,7 +130,7 @@
   {
     "kanji": "巻",
     "significado_en": "scroll, volume, book, part, roll up, wind up, tie, coil, counter for texts (or book scrolls)",
-    "significado_es": "",
+    "significado_es": "enrollar, volumen",
     "kunyomi": "ま.く, まき, ま.き",
     "onyomi": "カン, ケン",
     "grado": 6
@@ -138,7 +138,7 @@
   {
     "kanji": "干",
     "significado_en": "dry, parch, ebb, recede, interfere, intercede",
-    "significado_es": "",
+    "significado_es": "secar, intervenir",
     "kunyomi": "ほ.す, ほ.し-, -ぼ.し, ひ.る",
     "onyomi": "カン",
     "grado": 6
@@ -146,7 +146,7 @@
   {
     "kanji": "看",
     "significado_en": "watch over, see",
-    "significado_es": "",
+    "significado_es": "vigilar, cuidar (paciente)",
     "kunyomi": "み.る",
     "onyomi": "カン",
     "grado": 6
@@ -154,7 +154,7 @@
   {
     "kanji": "簡",
     "significado_en": "simplicity, brevity",
-    "significado_es": "",
+    "significado_es": "simple, breve",
     "kunyomi": "えら.ぶ, ふだ",
     "onyomi": "カン, ケン",
     "grado": 6
@@ -162,7 +162,7 @@
   {
     "kanji": "危",
     "significado_en": "dangerous, fear, uneasy",
-    "significado_es": "",
+    "significado_es": "peligroso",
     "kunyomi": "あぶ.ない, あや.うい, あや.ぶむ",
     "onyomi": "キ",
     "grado": 6
@@ -170,7 +170,7 @@
   {
     "kanji": "揮",
     "significado_en": "brandish, wave, wag, swing, shake",
-    "significado_es": "",
+    "significado_es": "blandir, dirigir",
     "kunyomi": "ふる.う",
     "onyomi": "キ",
     "grado": 6
@@ -178,7 +178,7 @@
   {
     "kanji": "机",
     "significado_en": "desk, table",
-    "significado_es": "",
+    "significado_es": "escritorio",
     "kunyomi": "つくえ",
     "onyomi": "キ",
     "grado": 6
@@ -186,7 +186,7 @@
   {
     "kanji": "貴",
     "significado_en": "precious, value, prize, esteem, honor",
-    "significado_es": "",
+    "significado_es": "valioso, noble",
     "kunyomi": "たっと.い, とうと.い, たっと.ぶ, とうと.ぶ",
     "onyomi": "キ",
     "grado": 6
@@ -194,7 +194,7 @@
   {
     "kanji": "疑",
     "significado_en": "doubt, distrust, be suspicious, question",
-    "significado_es": "",
+    "significado_es": "dudar, sospechar",
     "kunyomi": "うたが.う",
     "onyomi": "ギ",
     "grado": 6
@@ -202,7 +202,7 @@
   {
     "kanji": "吸",
     "significado_en": "suck, imbibe, inhale, sip",
-    "significado_es": "",
+    "significado_es": "inhalar, absorber",
     "kunyomi": "す.う",
     "onyomi": "キュウ",
     "grado": 6
@@ -210,7 +210,7 @@
   {
     "kanji": "供",
     "significado_en": "submit, offer, present, serve (meal), accompany",
-    "significado_es": "",
+    "significado_es": "ofrecer, acompañante",
     "kunyomi": "そな.える, とも, -ども",
     "onyomi": "キョウ, ク, クウ, グ",
     "grado": 6
@@ -218,7 +218,7 @@
   {
     "kanji": "胸",
     "significado_en": "bosom, breast, chest, heart, feelings",
-    "significado_es": "",
+    "significado_es": "pecho, corazón (sentimientos)",
     "kunyomi": "むね, むな-",
     "onyomi": "キョウ",
     "grado": 6
@@ -226,7 +226,7 @@
   {
     "kanji": "郷",
     "significado_en": "home town, village, native place, district",
-    "significado_es": "",
+    "significado_es": "pueblo natal, aldea",
     "kunyomi": "さと",
     "onyomi": "キョウ, ゴウ",
     "grado": 6
@@ -234,7 +234,7 @@
   {
     "kanji": "勤",
     "significado_en": "diligence, become employed, serve",
-    "significado_es": "",
+    "significado_es": "trabajar, diligencia",
     "kunyomi": "つと.める, -づと.め, つと.まる, いそ.しむ",
     "onyomi": "キン, ゴン",
     "grado": 6
@@ -242,7 +242,7 @@
   {
     "kanji": "筋",
     "significado_en": "muscle, sinew, tendon, fiber, plot, plan, descent",
-    "significado_es": "",
+    "significado_es": "músculo, línea",
     "kunyomi": "すじ",
     "onyomi": "キン",
     "grado": 6
@@ -250,7 +250,7 @@
   {
     "kanji": "敬",
     "significado_en": "awe, respect, honor, revere",
-    "significado_es": "",
+    "significado_es": "respeto",
     "kunyomi": "うやま.う",
     "onyomi": "ケイ, キョウ",
     "grado": 6
@@ -258,7 +258,7 @@
   {
     "kanji": "系",
     "significado_en": "lineage, system",
-    "significado_es": "",
+    "significado_es": "sistema, linaje",
     "kunyomi": "",
     "onyomi": "ケイ",
     "grado": 6
@@ -266,7 +266,7 @@
   {
     "kanji": "警",
     "significado_en": "admonish, commandment",
-    "significado_es": "",
+    "significado_es": "policía, advertir",
     "kunyomi": "いまし.める",
     "onyomi": "ケイ",
     "grado": 6
@@ -274,7 +274,7 @@
   {
     "kanji": "劇",
     "significado_en": "drama, play",
-    "significado_es": "",
+    "significado_es": "drama, teatro",
     "kunyomi": "",
     "onyomi": "ゲキ",
     "grado": 6
@@ -282,7 +282,7 @@
   {
     "kanji": "激",
     "significado_en": "violent, get excited, enraged, chafe, incite",
-    "significado_es": "",
+    "significado_es": "intenso, violento",
     "kunyomi": "はげ.しい",
     "onyomi": "ゲキ",
     "grado": 6
@@ -290,7 +290,7 @@
   {
     "kanji": "穴",
     "significado_en": "hole, aperture, slit, cave, den",
-    "significado_es": "",
+    "significado_es": "agujero",
     "kunyomi": "あな",
     "onyomi": "ケツ",
     "grado": 6
@@ -298,7 +298,7 @@
   {
     "kanji": "券",
     "significado_en": "ticket",
-    "significado_es": "",
+    "significado_es": "cupón, boleto",
     "kunyomi": "",
     "onyomi": "ケン",
     "grado": 6
@@ -306,7 +306,7 @@
   {
     "kanji": "憲",
     "significado_en": "constitution, law",
-    "significado_es": "",
+    "significado_es": "constitución",
     "kunyomi": "",
     "onyomi": "ケン",
     "grado": 6
@@ -314,7 +314,7 @@
   {
     "kanji": "権",
     "significado_en": "authority, power, rights",
-    "significado_es": "",
+    "significado_es": "autoridad, derecho",
     "kunyomi": "おもり, かり, はか.る",
     "onyomi": "ケン, ゴン",
     "grado": 6
@@ -322,7 +322,7 @@
   {
     "kanji": "絹",
     "significado_en": "silk",
-    "significado_es": "",
+    "significado_es": "seda",
     "kunyomi": "きぬ",
     "onyomi": "ケン",
     "grado": 6
@@ -330,7 +330,7 @@
   {
     "kanji": "厳",
     "significado_en": "stern, strictness, severity, rigidity",
-    "significado_es": "",
+    "significado_es": "estricto, severo",
     "kunyomi": "おごそ.か, きび.しい, いか.めしい, いつくし",
     "onyomi": "ゲン, ゴン",
     "grado": 6
@@ -338,7 +338,7 @@
   {
     "kanji": "源",
     "significado_en": "source, origin",
-    "significado_es": "",
+    "significado_es": "fuente, origen",
     "kunyomi": "みなもと",
     "onyomi": "ゲン",
     "grado": 6
@@ -346,7 +346,7 @@
   {
     "kanji": "呼",
     "significado_en": "call, call out to, invite",
-    "significado_es": "",
+    "significado_es": "llamar",
     "kunyomi": "よ.ぶ",
     "onyomi": "コ",
     "grado": 6
@@ -354,7 +354,7 @@
   {
     "kanji": "己",
     "significado_en": "self",
-    "significado_es": "",
+    "significado_es": "uno mismo",
     "kunyomi": "おのれ, つちのと, な",
     "onyomi": "コ, キ",
     "grado": 6
@@ -362,7 +362,7 @@
   {
     "kanji": "誤",
     "significado_en": "mistake, err, do wrong, mislead",
-    "significado_es": "",
+    "significado_es": "error, equivocar",
     "kunyomi": "あやま.る, -あやま.る",
     "onyomi": "ゴ",
     "grado": 6
@@ -370,7 +370,7 @@
   {
     "kanji": "后",
     "significado_en": "empress, queen, after, behind, back, later",
-    "significado_es": "",
+    "significado_es": "emperatriz",
     "kunyomi": "きさき",
     "onyomi": "コウ, ゴ",
     "grado": 6
@@ -378,7 +378,7 @@
   {
     "kanji": "孝",
     "significado_en": "filial piety, child's respect",
-    "significado_es": "",
+    "significado_es": "piedad filial",
     "kunyomi": "",
     "onyomi": "コウ, キョウ",
     "grado": 6
@@ -386,7 +386,7 @@
   {
     "kanji": "皇",
     "significado_en": "emperor",
-    "significado_es": "",
+    "significado_es": "emperador, imperial",
     "kunyomi": "",
     "onyomi": "コウ, オウ",
     "grado": 6
@@ -394,7 +394,7 @@
   {
     "kanji": "紅",
     "significado_en": "crimson, deep red",
-    "significado_es": "",
+    "significado_es": "rojo carmesí",
     "kunyomi": "べに, くれない, あか.い",
     "onyomi": "コウ, ク",
     "grado": 6
@@ -402,7 +402,7 @@
   {
     "kanji": "鋼",
     "significado_en": "steel",
-    "significado_es": "",
+    "significado_es": "acero",
     "kunyomi": "はがね",
     "onyomi": "コウ",
     "grado": 6
@@ -410,7 +410,7 @@
   {
     "kanji": "降",
     "significado_en": "descend, precipitate, fall, surrender",
-    "significado_es": "",
+    "significado_es": "bajar, caer (lluvia)",
     "kunyomi": "お.りる, お.ろす, ふ.る, ふ.り, くだ.る, くだ.す",
     "onyomi": "コウ, ゴ",
     "grado": 6
@@ -418,7 +418,7 @@
   {
     "kanji": "刻",
     "significado_en": "engrave, cut fine, chop, hash, mince, time, carving",
-    "significado_es": "",
+    "significado_es": "tallar, momento",
     "kunyomi": "きざ.む, きざ.み",
     "onyomi": "コク",
     "grado": 6
@@ -426,7 +426,7 @@
   {
     "kanji": "穀",
     "significado_en": "cereals, grain",
-    "significado_es": "",
+    "significado_es": "grano, cereal",
     "kunyomi": "",
     "onyomi": "コク",
     "grado": 6
@@ -434,7 +434,7 @@
   {
     "kanji": "骨",
     "significado_en": "skeleton, bone, remains, frame",
-    "significado_es": "",
+    "significado_es": "hueso",
     "kunyomi": "ほね",
     "onyomi": "コツ",
     "grado": 6
@@ -442,7 +442,7 @@
   {
     "kanji": "困",
     "significado_en": "quandary, become distressed, annoyed",
-    "significado_es": "",
+    "significado_es": "dificultad, estar en apuros",
     "kunyomi": "こま.る",
     "onyomi": "コン",
     "grado": 6
@@ -450,7 +450,7 @@
   {
     "kanji": "砂",
     "significado_en": "sand",
-    "significado_es": "",
+    "significado_es": "arena",
     "kunyomi": "すな",
     "onyomi": "サ, シャ",
     "grado": 6
@@ -458,7 +458,7 @@
   {
     "kanji": "座",
     "significado_en": "squat, seat, cushion, gathering, sit",
-    "significado_es": "",
+    "significado_es": "asiento, sentarse",
     "kunyomi": "すわ.る",
     "onyomi": "ザ",
     "grado": 6
@@ -466,7 +466,7 @@
   {
     "kanji": "済",
     "significado_en": "settle (debt, etc.), relieve (burden), finish, come to an end, excusable, need not",
-    "significado_es": "",
+    "significado_es": "terminar, pagar, “Saí”",
     "kunyomi": "す.む, -ず.み, -ずみ, す.まない, す.ます, -す.ます, すく.う, な.す, わたし, わた.る",
     "onyomi": "サイ, セイ",
     "grado": 6
@@ -474,7 +474,7 @@
   {
     "kanji": "裁",
     "significado_en": "tailor, judge, decision, cut out (pattern)",
-    "significado_es": "",
+    "significado_es": "juzgar, confeccionar",
     "kunyomi": "た.つ, さば.く",
     "onyomi": "サイ",
     "grado": 6
@@ -482,7 +482,7 @@
   {
     "kanji": "策",
     "significado_en": "scheme, plan, policy, step, means",
-    "significado_es": "",
+    "significado_es": "plan, estrategia",
     "kunyomi": "",
     "onyomi": "サク",
     "grado": 6
@@ -490,7 +490,7 @@
   {
     "kanji": "冊",
     "significado_en": "tome, counter for books, volume",
-    "significado_es": "",
+    "significado_es": "volumen, tomo",
     "kunyomi": "ふみ",
     "onyomi": "サツ, サク",
     "grado": 6
@@ -498,7 +498,7 @@
   {
     "kanji": "蚕",
     "significado_en": "silkworm",
-    "significado_es": "",
+    "significado_es": "gusano de seda",
     "kunyomi": "かいこ, こ",
     "onyomi": "サン, テン",
     "grado": 6
@@ -506,7 +506,7 @@
   {
     "kanji": "姿",
     "significado_en": "figure, form, shape",
-    "significado_es": "",
+    "significado_es": "figura, apariencia",
     "kunyomi": "すがた",
     "onyomi": "シ",
     "grado": 6
@@ -514,7 +514,7 @@
   {
     "kanji": "私",
     "significado_en": "private, I, me",
-    "significado_es": "",
+    "significado_es": "yo, privado",
     "kunyomi": "わたくし, わたし",
     "onyomi": "シ",
     "grado": 6
@@ -522,7 +522,7 @@
   {
     "kanji": "至",
     "significado_en": "climax, arrive, proceed, reach, attain, result in",
-    "significado_es": "",
+    "significado_es": "hasta, llegar a",
     "kunyomi": "いた.る",
     "onyomi": "シ",
     "grado": 6
@@ -530,7 +530,7 @@
   {
     "kanji": "視",
     "significado_en": "inspection, regard as, see, look at",
-    "significado_es": "",
+    "significado_es": "ver, visión",
     "kunyomi": "み.る",
     "onyomi": "シ",
     "grado": 6
@@ -538,7 +538,7 @@
   {
     "kanji": "詞",
     "significado_en": "part of speech, words, poetry",
-    "significado_es": "",
+    "significado_es": "palabras, letra (canción)",
     "kunyomi": "ことば",
     "onyomi": "シ",
     "grado": 6
@@ -546,7 +546,7 @@
   {
     "kanji": "誌",
     "significado_en": "document, records",
-    "significado_es": "",
+    "significado_es": "revista, registro",
     "kunyomi": "",
     "onyomi": "シ",
     "grado": 6
@@ -554,7 +554,7 @@
   {
     "kanji": "磁",
     "significado_en": "magnet, porcelain",
-    "significado_es": "",
+    "significado_es": "magnetismo",
     "kunyomi": "",
     "onyomi": "ジ",
     "grado": 6
@@ -562,7 +562,7 @@
   {
     "kanji": "射",
     "significado_en": "shoot, shine into, onto, archery",
-    "significado_es": "",
+    "significado_es": "disparar, irradiar",
     "kunyomi": "い.る, さ.す, う.つ",
     "onyomi": "シャ",
     "grado": 6
@@ -570,7 +570,7 @@
   {
     "kanji": "捨",
     "significado_en": "discard, throw away, abandon, resign, reject, sacrifice",
-    "significado_es": "",
+    "significado_es": "tirar, abandonar",
     "kunyomi": "す.てる",
     "onyomi": "シャ",
     "grado": 6
@@ -578,7 +578,7 @@
   {
     "kanji": "尺",
     "significado_en": "shaku, Japanese foot, measure, scale, rule",
-    "significado_es": "",
+    "significado_es": "regla, shaku",
     "kunyomi": "さし",
     "onyomi": "シャク, セキ",
     "grado": 6
@@ -586,7 +586,7 @@
   {
     "kanji": "若",
     "significado_en": "young, if, perhaps, possibly, low number, immature",
-    "significado_es": "",
+    "significado_es": "joven, si",
     "kunyomi": "わか.い, わか-, も.しくわ, も.し, も.しくは, ごと.し",
     "onyomi": "ジャク, ニャク, ニャ",
     "grado": 6
@@ -594,7 +594,7 @@
   {
     "kanji": "樹",
     "significado_en": "timber, trees, wood, establish, set up",
-    "significado_es": "",
+    "significado_es": "árbol (leñoso)",
     "kunyomi": "き",
     "onyomi": "ジュ",
     "grado": 6
@@ -602,7 +602,7 @@
   {
     "kanji": "収",
     "significado_en": "income, obtain, reap, pay, supply, store",
-    "significado_es": "",
+    "significado_es": "recoger, ingresos",
     "kunyomi": "おさ.める, おさ.まる",
     "onyomi": "シュウ",
     "grado": 6
@@ -610,7 +610,7 @@
   {
     "kanji": "宗",
     "significado_en": "religion, sect, denomination, main point, origin, essence",
-    "significado_es": "",
+    "significado_es": "religión, origen",
     "kunyomi": "むね",
     "onyomi": "シュウ, ソウ",
     "grado": 6
@@ -618,7 +618,7 @@
   {
     "kanji": "就",
     "significado_en": "concerning, settle, take position, depart, study, per",
-    "significado_es": "",
+    "significado_es": "ocupar, conseguir",
     "kunyomi": "つ.く, つ.ける",
     "onyomi": "シュウ, ジュ",
     "grado": 6
@@ -626,7 +626,7 @@
   {
     "kanji": "衆",
     "significado_en": "masses, great numbers, multitude, populace",
-    "significado_es": "",
+    "significado_es": "multitud, público",
     "kunyomi": "おお.い",
     "onyomi": "シュウ, シュ",
     "grado": 6
@@ -634,7 +634,7 @@
   {
     "kanji": "従",
     "significado_en": "accompany, obey, submit to, comply, follow, secondary, incidental, subordinate",
-    "significado_es": "",
+    "significado_es": "obedecer, acompañar",
     "kunyomi": "したが.う, したが.える, より",
     "onyomi": "ジュウ, ショウ, ジュ",
     "grado": 6
@@ -642,7 +642,7 @@
   {
     "kanji": "縦",
     "significado_en": "vertical, length, height, self-indulgent, wayward",
-    "significado_es": "",
+    "significado_es": "vertical, longitudinal",
     "kunyomi": "たて",
     "onyomi": "ジュウ",
     "grado": 6
@@ -650,7 +650,7 @@
   {
     "kanji": "縮",
     "significado_en": "shrink, contract, shrivel, wrinkle, reduce",
-    "significado_es": "",
+    "significado_es": "encoger, abreviar",
     "kunyomi": "ちぢ.む, ちぢ.まる, ちぢ.める, ちぢ.れる, ちぢ.らす",
     "onyomi": "シュク",
     "grado": 6
@@ -658,7 +658,7 @@
   {
     "kanji": "熟",
     "significado_en": "mellow, ripen, mature, acquire skill",
-    "significado_es": "",
+    "significado_es": "maduro, dominar",
     "kunyomi": "う.れる",
     "onyomi": "ジュク",
     "grado": 6
@@ -666,7 +666,7 @@
   {
     "kanji": "純",
     "significado_en": "genuine, purity, innocence, net (profit)",
-    "significado_es": "",
+    "significado_es": "puro",
     "kunyomi": "",
     "onyomi": "ジュン",
     "grado": 6
@@ -674,7 +674,7 @@
   {
     "kanji": "処",
     "significado_en": "dispose, manage, deal with, sentence, condemn, act, behave, place",
-    "significado_es": "",
+    "significado_es": "tratar, lugar",
     "kunyomi": "ところ, -こ, お.る",
     "onyomi": "ショ",
     "grado": 6
@@ -682,7 +682,7 @@
   {
     "kanji": "署",
     "significado_en": "signature, govt office, police station",
-    "significado_es": "",
+    "significado_es": "oficina, firmar",
     "kunyomi": "",
     "onyomi": "ショ",
     "grado": 6
@@ -690,7 +690,7 @@
   {
     "kanji": "諸",
     "significado_en": "various, many, several, together",
-    "significado_es": "",
+    "significado_es": "varios, diversos",
     "kunyomi": "もろ",
     "onyomi": "ショ",
     "grado": 6
@@ -698,7 +698,7 @@
   {
     "kanji": "除",
     "significado_en": "exclude, division (x/3), remove, abolish, cancel, except",
-    "significado_es": "",
+    "significado_es": "quitar, excluir",
     "kunyomi": "のぞ.く, -よ.け",
     "onyomi": "ジョ, ジ",
     "grado": 6
@@ -706,7 +706,7 @@
   {
     "kanji": "傷",
     "significado_en": "wound, hurt, injure, impair, pain, injury, cut, gash, scar, weak point",
-    "significado_es": "",
+    "significado_es": "herida, dañar",
     "kunyomi": "きず, いた.む, いた.める",
     "onyomi": "ショウ",
     "grado": 6
@@ -714,7 +714,7 @@
   {
     "kanji": "将",
     "significado_en": "leader, commander, general, admiral, or, and again, soon, from now on, just about",
-    "significado_es": "",
+    "significado_es": "comandante, futuro",
     "kunyomi": "まさ.に, はた, まさ, ひきい.る, もって",
     "onyomi": "ショウ, ソウ",
     "grado": 6
@@ -722,7 +722,7 @@
   {
     "kanji": "承",
     "significado_en": "acquiesce, hear, listen to, be informed, receive",
-    "significado_es": "",
+    "significado_es": "aceptar, heredar",
     "kunyomi": "うけたまわ.る, う.ける",
     "onyomi": "ショウ, ジョウ",
     "grado": 6
@@ -730,7 +730,7 @@
   {
     "kanji": "障",
     "significado_en": "hinder, hurt, harm",
-    "significado_es": "",
+    "significado_es": "obstáculo, impedir",
     "kunyomi": "さわ.る",
     "onyomi": "ショウ",
     "grado": 6
@@ -738,7 +738,7 @@
   {
     "kanji": "蒸",
     "significado_en": "steam, heat, sultry, foment, get musty",
-    "significado_es": "",
+    "significado_es": "vapor, cocinar al vapor",
     "kunyomi": "む.す, む.れる, む.らす",
     "onyomi": "ジョウ, セイ",
     "grado": 6
@@ -746,7 +746,7 @@
   {
     "kanji": "針",
     "significado_en": "needle, pin, staple, stinger",
-    "significado_es": "",
+    "significado_es": "aguja",
     "kunyomi": "はり",
     "onyomi": "シン",
     "grado": 6
@@ -754,7 +754,7 @@
   {
     "kanji": "仁",
     "significado_en": "humanity, virtue, benevolence, charity, man, kernel",
-    "significado_es": "",
+    "significado_es": "benevolencia",
     "kunyomi": "",
     "onyomi": "ジン, ニ, ニン",
     "grado": 6
@@ -762,7 +762,7 @@
   {
     "kanji": "垂",
     "significado_en": "droop, suspend, hang, slouch",
-    "significado_es": "",
+    "significado_es": "colgar, gotear",
     "kunyomi": "た.れる, た.らす, た.れ, -た.れ, なんなんと.す",
     "onyomi": "スイ",
     "grado": 6
@@ -770,7 +770,7 @@
   {
     "kanji": "推",
     "significado_en": "conjecture, infer, guess, suppose, support, push (for)",
-    "significado_es": "",
+    "significado_es": "inferir, empujar",
     "kunyomi": "お.す",
     "onyomi": "スイ",
     "grado": 6
@@ -778,7 +778,7 @@
   {
     "kanji": "寸",
     "significado_en": "measurement, tenth of a shaku, a little, small",
-    "significado_es": "",
+    "significado_es": "pulgada (sun), medida",
     "kunyomi": "",
     "onyomi": "スン",
     "grado": 6
@@ -786,7 +786,7 @@
   {
     "kanji": "盛",
     "significado_en": "boom, prosper, copulate",
-    "significado_es": "",
+    "significado_es": "prosperar, servir (comida)",
     "kunyomi": "も.る, さか.る, さか.ん",
     "onyomi": "セイ, ジョウ",
     "grado": 6
@@ -794,7 +794,7 @@
   {
     "kanji": "聖",
     "significado_en": "holy, saint, sage, master, priest",
-    "significado_es": "",
+    "significado_es": "santo, sagrado",
     "kunyomi": "ひじり",
     "onyomi": "セイ, ショウ",
     "grado": 6
@@ -802,7 +802,7 @@
   {
     "kanji": "誠",
     "significado_en": "sincerity, admonish, warn, prohibit, truth, fidelity",
-    "significado_es": "",
+    "significado_es": "sinceridad",
     "kunyomi": "まこと",
     "onyomi": "セイ",
     "grado": 6
@@ -810,7 +810,7 @@
   {
     "kanji": "舌",
     "significado_en": "tongue, reed, clapper",
-    "significado_es": "",
+    "significado_es": "lengua",
     "kunyomi": "した",
     "onyomi": "ゼツ",
     "grado": 6
@@ -818,7 +818,7 @@
   {
     "kanji": "宣",
     "significado_en": "proclaim, say, announce",
-    "significado_es": "",
+    "significado_es": "declarar, anunciar",
     "kunyomi": "のたま.う",
     "onyomi": "セン",
     "grado": 6
@@ -826,7 +826,7 @@
   {
     "kanji": "専",
     "significado_en": "specialty, exclusive, mainly, solely",
-    "significado_es": "",
+    "significado_es": "exclusivo, especializarse",
     "kunyomi": "もっぱ.ら",
     "onyomi": "セン",
     "grado": 6
@@ -834,7 +834,7 @@
   {
     "kanji": "泉",
     "significado_en": "spring, fountain",
-    "significado_es": "",
+    "significado_es": "manantial, fuente",
     "kunyomi": "いずみ",
     "onyomi": "セン",
     "grado": 6
@@ -842,7 +842,7 @@
   {
     "kanji": "洗",
     "significado_en": "wash, inquire into, probe",
-    "significado_es": "",
+    "significado_es": "lavar",
     "kunyomi": "あら.う",
     "onyomi": "セン",
     "grado": 6
@@ -850,7 +850,7 @@
   {
     "kanji": "染",
     "significado_en": "dye, color, paint, stain, print",
-    "significado_es": "",
+    "significado_es": "teñir, manchar",
     "kunyomi": "そ.める, そ.まる, し.みる, し.み",
     "onyomi": "セン",
     "grado": 6
@@ -858,7 +858,7 @@
   {
     "kanji": "銭",
     "significado_en": "coin, .01 yen, money",
-    "significado_es": "",
+    "significado_es": "dinero, moneda",
     "kunyomi": "ぜに, すき",
     "onyomi": "セン, ゼン",
     "grado": 6
@@ -866,7 +866,7 @@
   {
     "kanji": "善",
     "significado_en": "virtuous, good, goodness",
-    "significado_es": "",
+    "significado_es": "bueno, virtud",
     "kunyomi": "よ.い, い.い, よ.く, よし.とする",
     "onyomi": "ゼン",
     "grado": 6
@@ -874,7 +874,7 @@
   {
     "kanji": "創",
     "significado_en": "genesis, wound, injury, hurt, start, originate",
-    "significado_es": "",
+    "significado_es": "crear, herida",
     "kunyomi": "つく.る, はじ.める, きず, けず.しける",
     "onyomi": "ソウ, ショウ",
     "grado": 6
@@ -882,7 +882,7 @@
   {
     "kanji": "奏",
     "significado_en": "play music, speak to a ruler, complete",
-    "significado_es": "",
+    "significado_es": "tocar (música), informar",
     "kunyomi": "かな.でる",
     "onyomi": "ソウ",
     "grado": 6
@@ -890,7 +890,7 @@
   {
     "kanji": "層",
     "significado_en": "stratum, social class, layer, story, floor",
-    "significado_es": "",
+    "significado_es": "capa, estrato",
     "kunyomi": "",
     "onyomi": "ソウ",
     "grado": 6
@@ -898,7 +898,7 @@
   {
     "kanji": "操",
     "significado_en": "maneuver, manipulate, operate, steer, chastity, virginity, fidelity",
-    "significado_es": "",
+    "significado_es": "manejar, ejercicio",
     "kunyomi": "みさお, あやつ.る",
     "onyomi": "ソウ, サン",
     "grado": 6
@@ -906,7 +906,7 @@
   {
     "kanji": "窓",
     "significado_en": "window, pane",
-    "significado_es": "",
+    "significado_es": "ventana",
     "kunyomi": "まど, てんまど, けむだし",
     "onyomi": "ソウ, ス",
     "grado": 6
@@ -914,7 +914,7 @@
   {
     "kanji": "装",
     "significado_en": "attire, dress, pretend, disguise, profess",
-    "significado_es": "",
+    "significado_es": "vestir, equipar",
     "kunyomi": "よそお.う, よそお.い",
     "onyomi": "ソウ, ショウ",
     "grado": 6
@@ -922,7 +922,7 @@
   {
     "kanji": "臓",
     "significado_en": "entrails, viscera, bowels",
-    "significado_es": "",
+    "significado_es": "víscera, órgano",
     "kunyomi": "はらわた",
     "onyomi": "ゾウ",
     "grado": 6
@@ -930,7 +930,7 @@
   {
     "kanji": "蔵",
     "significado_en": "storehouse, hide, own, have, possess",
-    "significado_es": "",
+    "significado_es": "almacén, guardar",
     "kunyomi": "くら, おさ.める, かく.れる",
     "onyomi": "ゾウ, ソウ",
     "grado": 6
@@ -938,7 +938,7 @@
   {
     "kanji": "存",
     "significado_en": "exist, suppose, be aware of, believe, feel",
-    "significado_es": "",
+    "significado_es": "existir, conservar",
     "kunyomi": "ながら.える, あ.る, たも.つ, と.う",
     "onyomi": "ソン, ゾン",
     "grado": 6
@@ -946,7 +946,7 @@
   {
     "kanji": "尊",
     "significado_en": "revered, valuable, precious, noble, exalted",
-    "significado_es": "",
+    "significado_es": "respetar, valioso",
     "kunyomi": "たっと.い, とうと.い, たっと.ぶ, とうと.ぶ",
     "onyomi": "ソン",
     "grado": 6
@@ -954,7 +954,7 @@
   {
     "kanji": "退",
     "significado_en": "retreat, withdraw, retire, resign, repel, expel, reject",
-    "significado_es": "",
+    "significado_es": "retirarse",
     "kunyomi": "しりぞ.く, しりぞ.ける, ひ.く, の.く, の.ける, ど.く",
     "onyomi": "タイ",
     "grado": 6
@@ -962,7 +962,7 @@
   {
     "kanji": "宅",
     "significado_en": "home, house, residence, our house, my husband",
-    "significado_es": "",
+    "significado_es": "casa, domicilio",
     "kunyomi": "",
     "onyomi": "タク",
     "grado": 6
@@ -970,7 +970,7 @@
   {
     "kanji": "担",
     "significado_en": "shouldering, carry, raise, bear",
-    "significado_es": "",
+    "significado_es": "cargar, responsabilidad",
     "kunyomi": "かつ.ぐ, にな.う",
     "onyomi": "タン",
     "grado": 6
@@ -978,7 +978,7 @@
   {
     "kanji": "探",
     "significado_en": "grope, search, look for",
-    "significado_es": "",
+    "significado_es": "buscar, explorar",
     "kunyomi": "さぐ.る, さが.す",
     "onyomi": "タン",
     "grado": 6
@@ -986,7 +986,7 @@
   {
     "kanji": "誕",
     "significado_en": "nativity, be born, declension, lie, be arbitrary",
-    "significado_es": "",
+    "significado_es": "nacimiento",
     "kunyomi": "",
     "onyomi": "タン",
     "grado": 6
@@ -994,7 +994,7 @@
   {
     "kanji": "暖",
     "significado_en": "warmth",
-    "significado_es": "",
+    "significado_es": "cálido",
     "kunyomi": "あたた.か, あたた.かい, あたた.まる, あたた.める",
     "onyomi": "ダン, ノン",
     "grado": 6
@@ -1002,7 +1002,7 @@
   {
     "kanji": "段",
     "significado_en": "grade, steps, stairs",
-    "significado_es": "",
+    "significado_es": "escalón, nivel",
     "kunyomi": "",
     "onyomi": "ダン, タン",
     "grado": 6
@@ -1010,7 +1010,7 @@
   {
     "kanji": "値",
     "significado_en": "price, cost, value",
-    "significado_es": "",
+    "significado_es": "valor, precio",
     "kunyomi": "ね, あたい",
     "onyomi": "チ",
     "grado": 6
@@ -1018,7 +1018,7 @@
   {
     "kanji": "宙",
     "significado_en": "mid-air, air, space, sky, memorization, interval of time",
-    "significado_es": "",
+    "significado_es": "espacio",
     "kunyomi": "",
     "onyomi": "チュウ",
     "grado": 6
@@ -1026,7 +1026,7 @@
   {
     "kanji": "忠",
     "significado_en": "loyalty, fidelity, faithfulness",
-    "significado_es": "",
+    "significado_es": "lealtad",
     "kunyomi": "",
     "onyomi": "チュウ",
     "grado": 6
@@ -1034,7 +1034,7 @@
   {
     "kanji": "著",
     "significado_en": "renowned, publish, write, remarkable, phenomenal, put on, don, wear, arrival, finish (race), counter for suits of clothing, literary work",
-    "significado_es": "",
+    "significado_es": "notable, escribir",
     "kunyomi": "あらわ.す, いちじる.しい",
     "onyomi": "チョ, チャク",
     "grado": 6
@@ -1042,7 +1042,7 @@
   {
     "kanji": "庁",
     "significado_en": "government office",
-    "significado_es": "",
+    "significado_es": "oficina gubernamental",
     "kunyomi": "やくしょ",
     "onyomi": "チョウ, テイ",
     "grado": 6
@@ -1050,7 +1050,7 @@
   {
     "kanji": "潮",
     "significado_en": "tide, salt water, opportunity",
-    "significado_es": "",
+    "significado_es": "marea",
     "kunyomi": "しお, うしお",
     "onyomi": "チョウ",
     "grado": 6
@@ -1058,7 +1058,7 @@
   {
     "kanji": "腸",
     "significado_en": "intestines, guts, bowels, viscera",
-    "significado_es": "",
+    "significado_es": "intestino",
     "kunyomi": "はらわた, わた",
     "onyomi": "チョウ",
     "grado": 6
@@ -1066,7 +1066,7 @@
   {
     "kanji": "頂",
     "significado_en": "place on the head, receive, top of head, top, summit, peak",
-    "significado_es": "",
+    "significado_es": "cima, recibir (humilde)",
     "kunyomi": "いただ.く, いただき",
     "onyomi": "チョウ",
     "grado": 6
@@ -1074,7 +1074,7 @@
   {
     "kanji": "賃",
     "significado_en": "fare, fee, hire, rent, wages, charge",
-    "significado_es": "",
+    "significado_es": "alquiler, tarifa",
     "kunyomi": "",
     "onyomi": "チン",
     "grado": 6
@@ -1082,7 +1082,7 @@
   {
     "kanji": "痛",
     "significado_en": "pain, hurt, damage, bruise",
-    "significado_es": "",
+    "significado_es": "dolor, doler",
     "kunyomi": "いた.い, いた.む, いた.ましい, いた.める",
     "onyomi": "ツウ",
     "grado": 6
@@ -1090,7 +1090,7 @@
   {
     "kanji": "敵",
     "significado_en": "enemy, foe, opponent",
-    "significado_es": "",
+    "significado_es": "enemigo",
     "kunyomi": "かたき, あだ, かな.う",
     "onyomi": "テキ",
     "grado": 6
@@ -1098,7 +1098,7 @@
   {
     "kanji": "展",
     "significado_en": "unfold, expand",
-    "significado_es": "",
+    "significado_es": "exhibir, expandir",
     "kunyomi": "",
     "onyomi": "テン",
     "grado": 6
@@ -1106,7 +1106,7 @@
   {
     "kanji": "党",
     "significado_en": "party, faction, clique",
-    "significado_es": "",
+    "significado_es": "partido, facción",
     "kunyomi": "なかま, むら",
     "onyomi": "トウ",
     "grado": 6
@@ -1114,7 +1114,7 @@
   {
     "kanji": "糖",
     "significado_en": "sugar",
-    "significado_es": "",
+    "significado_es": "azúcar",
     "kunyomi": "",
     "onyomi": "トウ",
     "grado": 6
@@ -1122,7 +1122,7 @@
   {
     "kanji": "討",
     "significado_en": "chastise, attack, defeat, destroy, conquer",
-    "significado_es": "",
+    "significado_es": "castigar, atacar",
     "kunyomi": "う.つ",
     "onyomi": "トウ",
     "grado": 6
@@ -1130,7 +1130,7 @@
   {
     "kanji": "届",
     "significado_en": "deliver, reach, arrive, report, notify, forward",
-    "significado_es": "",
+    "significado_es": "llegar, entregar",
     "kunyomi": "とど.ける, -とど.け, とど.く",
     "onyomi": "カイ",
     "grado": 6
@@ -1138,7 +1138,7 @@
   {
     "kanji": "難",
     "significado_en": "difficult, impossible, trouble, accident, defect",
-    "significado_es": "",
+    "significado_es": "difícil",
     "kunyomi": "かた.い, -がた.い, むずか.しい, むづか.しい, むつか.しい, -にく.い",
     "onyomi": "ナン",
     "grado": 6
@@ -1146,7 +1146,7 @@
   {
     "kanji": "乳",
     "significado_en": "milk, breasts",
-    "significado_es": "",
+    "significado_es": "leche, pecho",
     "kunyomi": "ちち, ち",
     "onyomi": "ニュウ",
     "grado": 6
@@ -1154,7 +1154,7 @@
   {
     "kanji": "認",
     "significado_en": "acknowledge, witness, discern, recognize, appreciate, believe",
-    "significado_es": "",
+    "significado_es": "reconocer",
     "kunyomi": "みと.める, したた.める",
     "onyomi": "ニン",
     "grado": 6
@@ -1162,7 +1162,7 @@
   {
     "kanji": "納",
     "significado_en": "settlement, obtain, reap, pay, supply, store",
-    "significado_es": "",
+    "significado_es": "pagar, entregar",
     "kunyomi": "おさ.める, -おさ.める, おさ.まる",
     "onyomi": "ノウ, ナッ, ナ, ナン, トウ",
     "grado": 6
@@ -1170,7 +1170,7 @@
   {
     "kanji": "脳",
     "significado_en": "brain, memory",
-    "significado_es": "",
+    "significado_es": "cerebro",
     "kunyomi": "のうずる",
     "onyomi": "ノウ, ドウ",
     "grado": 6
@@ -1178,7 +1178,7 @@
   {
     "kanji": "派",
     "significado_en": "faction, group, party, clique, sect, school",
-    "significado_es": "",
+    "significado_es": "facción; corriente",
     "kunyomi": "",
     "onyomi": "ハ",
     "grado": 6
@@ -1186,7 +1186,7 @@
   {
     "kanji": "俳",
     "significado_en": "haiku, actor",
-    "significado_es": "",
+    "significado_es": "actor, haiku",
     "kunyomi": "",
     "onyomi": "ハイ",
     "grado": 6
@@ -1194,7 +1194,7 @@
   {
     "kanji": "拝",
     "significado_en": "worship, adore, pray to",
-    "significado_es": "",
+    "significado_es": "reverenciar",
     "kunyomi": "おが.む, おろが.む",
     "onyomi": "ハイ",
     "grado": 6
@@ -1202,7 +1202,7 @@
   {
     "kanji": "背",
     "significado_en": "stature, height, back, behind, disobey, defy, go back on, rebel",
-    "significado_es": "",
+    "significado_es": "espalda, altura",
     "kunyomi": "せ, せい, そむ.く, そむ.ける",
     "onyomi": "ハイ",
     "grado": 6
@@ -1210,7 +1210,7 @@
   {
     "kanji": "肺",
     "significado_en": "lungs",
-    "significado_es": "",
+    "significado_es": "pulmón",
     "kunyomi": "",
     "onyomi": "ハイ",
     "grado": 6
@@ -1218,7 +1218,7 @@
   {
     "kanji": "班",
     "significado_en": "squad, corps, unit, group",
-    "significado_es": "",
+    "significado_es": "grupo, equipo",
     "kunyomi": "",
     "onyomi": "ハン",
     "grado": 6
@@ -1226,7 +1226,7 @@
   {
     "kanji": "晩",
     "significado_en": "nightfall, night",
-    "significado_es": "",
+    "significado_es": "noche, tarde",
     "kunyomi": "",
     "onyomi": "バン",
     "grado": 6
@@ -1234,7 +1234,7 @@
   {
     "kanji": "否",
     "significado_en": "negate, no, noes, refuse, decline, deny",
-    "significado_es": "",
+    "significado_es": "negación, no",
     "kunyomi": "いな, いや",
     "onyomi": "ヒ",
     "grado": 6
@@ -1242,7 +1242,7 @@
   {
     "kanji": "批",
     "significado_en": "criticism, strike",
-    "significado_es": "",
+    "significado_es": "criticar",
     "kunyomi": "",
     "onyomi": "ヒ",
     "grado": 6
@@ -1250,7 +1250,7 @@
   {
     "kanji": "秘",
     "significado_en": "secret, conceal",
-    "significado_es": "",
+    "significado_es": "secreto",
     "kunyomi": "ひ.める, ひそ.か, かく.す",
     "onyomi": "ヒ",
     "grado": 6
@@ -1258,7 +1258,7 @@
   {
     "kanji": "俵",
     "significado_en": "bag, bale, sack, counter for bags",
-    "significado_es": "",
+    "significado_es": "saco, fardo",
     "kunyomi": "たわら",
     "onyomi": "ヒョウ",
     "grado": 6
@@ -1266,7 +1266,7 @@
   {
     "kanji": "腹",
     "significado_en": "abdomen, belly, stomach",
-    "significado_es": "",
+    "significado_es": "abdomen, barriga",
     "kunyomi": "はら",
     "onyomi": "フク",
     "grado": 6
@@ -1274,7 +1274,7 @@
   {
     "kanji": "奮",
     "significado_en": "stirred up, be invigorated, flourish",
-    "significado_es": "",
+    "significado_es": "esforzarse, animarse",
     "kunyomi": "ふる.う",
     "onyomi": "フン",
     "grado": 6
@@ -1282,7 +1282,7 @@
   {
     "kanji": "並",
     "significado_en": "row, and, besides, as well as, line up, rank with, rival, equal",
-    "significado_es": "",
+    "significado_es": "fila, igual, común",
     "kunyomi": "な.み, なみ, なら.べる, なら.ぶ, なら.びに",
     "onyomi": "ヘイ, ホウ",
     "grado": 6
@@ -1290,7 +1290,7 @@
   {
     "kanji": "閉",
     "significado_en": "closed, shut",
-    "significado_es": "",
+    "significado_es": "cerrar",
     "kunyomi": "と.じる, と.ざす, し.める, し.まる, た.てる",
     "onyomi": "ヘイ",
     "grado": 6
@@ -1298,7 +1298,7 @@
   {
     "kanji": "陛",
     "significado_en": "highness, steps (of throne)",
-    "significado_es": "",
+    "significado_es": "escalones del trono, majestad",
     "kunyomi": "",
     "onyomi": "ヘイ",
     "grado": 6
@@ -1306,7 +1306,7 @@
   {
     "kanji": "片",
     "significado_en": "one-sided, leaf, sheet, right-side kata radical (no. 91)",
-    "significado_es": "",
+    "significado_es": "fragmento, un lado",
     "kunyomi": "かた-, かた",
     "onyomi": "ヘン",
     "grado": 6
@@ -1314,7 +1314,7 @@
   {
     "kanji": "補",
     "significado_en": "supplement, supply, make good, offset, compensate, assistant, learner",
-    "significado_es": "",
+    "significado_es": "complementar, suplir",
     "kunyomi": "おぎな.う",
     "onyomi": "ホ",
     "grado": 6
@@ -1322,7 +1322,7 @@
   {
     "kanji": "暮",
     "significado_en": "evening, twilight, season's end, livelihood, make a living, spend time",
-    "significado_es": "",
+    "significado_es": "anochecer, vivir",
     "kunyomi": "く.れる, く.らす",
     "onyomi": "ボ",
     "grado": 6
@@ -1330,7 +1330,7 @@
   {
     "kanji": "宝",
     "significado_en": "treasure, wealth, valuables",
-    "significado_es": "",
+    "significado_es": "tesoro",
     "kunyomi": "たから",
     "onyomi": "ホウ",
     "grado": 6
@@ -1338,7 +1338,7 @@
   {
     "kanji": "訪",
     "significado_en": "call on, visit, look up, offer sympathy",
-    "significado_es": "",
+    "significado_es": "visitar",
     "kunyomi": "おとず.れる, たず.ねる, と.う",
     "onyomi": "ホウ",
     "grado": 6
@@ -1346,7 +1346,7 @@
   {
     "kanji": "亡",
     "significado_en": "deceased, the late, dying, perish",
-    "significado_es": "",
+    "significado_es": "morir, desaparecer",
     "kunyomi": "な.い, な.き-, ほろ.びる, ほろ.ぶ, ほろ.ぼす",
     "onyomi": "ボウ, モウ",
     "grado": 6
@@ -1354,7 +1354,7 @@
   {
     "kanji": "忘",
     "significado_en": "forget",
-    "significado_es": "",
+    "significado_es": "olvidar",
     "kunyomi": "わす.れる",
     "onyomi": "ボウ",
     "grado": 6
@@ -1362,7 +1362,7 @@
   {
     "kanji": "棒",
     "significado_en": "rod, stick, cane, pole, club, line",
-    "significado_es": "",
+    "significado_es": "palo, barra",
     "kunyomi": "",
     "onyomi": "ボウ",
     "grado": 6
@@ -1370,7 +1370,7 @@
   {
     "kanji": "枚",
     "significado_en": "sheet of..., counter for flat thin objects or sheets",
-    "significado_es": "",
+    "significado_es": "hoja (contador), lámina",
     "kunyomi": "",
     "onyomi": "マイ, バイ",
     "grado": 6
@@ -1378,7 +1378,7 @@
   {
     "kanji": "幕",
     "significado_en": "curtain, bunting, act of play",
-    "significado_es": "",
+    "significado_es": "telón, acto, carpa",
     "kunyomi": "とばり",
     "onyomi": "マク, バク",
     "grado": 6
@@ -1386,7 +1386,7 @@
   {
     "kanji": "密",
     "significado_en": "secrecy, density (pop), minuteness, carefulness",
-    "significado_es": "",
+    "significado_es": "secreto, denso",
     "kunyomi": "ひそ.か",
     "onyomi": "ミツ",
     "grado": 6
@@ -1394,7 +1394,7 @@
   {
     "kanji": "盟",
     "significado_en": "alliance, oath",
-    "significado_es": "",
+    "significado_es": "alianza, juramento",
     "kunyomi": "",
     "onyomi": "メイ",
     "grado": 6
@@ -1402,7 +1402,7 @@
   {
     "kanji": "模",
     "significado_en": "imitation, copy, mock",
-    "significado_es": "",
+    "significado_es": "modelo, imitación",
     "kunyomi": "",
     "onyomi": "モ, ボ",
     "grado": 6
@@ -1410,7 +1410,7 @@
   {
     "kanji": "訳",
     "significado_en": "translate, reason, circumstance, case",
-    "significado_es": "",
+    "significado_es": "traducción, razón",
     "kunyomi": "わけ",
     "onyomi": "ヤク",
     "grado": 6
@@ -1418,7 +1418,7 @@
   {
     "kanji": "優",
     "significado_en": "tenderness, excel, surpass, actor, superiority, gentleness",
-    "significado_es": "",
+    "significado_es": "superior, amable",
     "kunyomi": "やさ.しい, すぐ.れる, まさ.る",
     "onyomi": "ユウ, ウ",
     "grado": 6
@@ -1426,7 +1426,7 @@
   {
     "kanji": "郵",
     "significado_en": "mail, stagecoach stop",
-    "significado_es": "",
+    "significado_es": "correo",
     "kunyomi": "",
     "onyomi": "ユウ",
     "grado": 6
@@ -1434,7 +1434,7 @@
   {
     "kanji": "預",
     "significado_en": "deposit, custody, leave with, entrust to",
-    "significado_es": "",
+    "significado_es": "depositar, confiar, guardar",
     "kunyomi": "あず.ける, あず.かる",
     "onyomi": "ヨ",
     "grado": 6
@@ -1442,7 +1442,7 @@
   {
     "kanji": "幼",
     "significado_en": "infancy, childhood",
-    "significado_es": "",
+    "significado_es": "infantil, pequeño",
     "kunyomi": "おさな.い",
     "onyomi": "ヨウ",
     "grado": 6
@@ -1450,7 +1450,7 @@
   {
     "kanji": "欲",
     "significado_en": "longing, covetousness, greed, passion, desire, craving",
-    "significado_es": "",
+    "significado_es": "deseo",
     "kunyomi": "ほっ.する, ほ.しい",
     "onyomi": "ヨク",
     "grado": 6
@@ -1458,7 +1458,7 @@
   {
     "kanji": "翌",
     "significado_en": "the following, next",
-    "significado_es": "",
+    "significado_es": "siguiente (día)",
     "kunyomi": "",
     "onyomi": "ヨク",
     "grado": 6
@@ -1466,7 +1466,7 @@
   {
     "kanji": "乱",
     "significado_en": "riot, war, disorder, disturb",
-    "significado_es": "",
+    "significado_es": "caos, rebelión",
     "kunyomi": "みだ.れる, みだ.る, みだ.す, みだ, おさ.める, わた.る",
     "onyomi": "ラン, ロン",
     "grado": 6
@@ -1474,7 +1474,7 @@
   {
     "kanji": "卵",
     "significado_en": "egg, ovum, spawn, roe",
-    "significado_es": "",
+    "significado_es": "huevo",
     "kunyomi": "たまご",
     "onyomi": "ラン",
     "grado": 6
@@ -1482,7 +1482,7 @@
   {
     "kanji": "覧",
     "significado_en": "perusal, see",
-    "significado_es": "",
+    "significado_es": "ver, consultar",
     "kunyomi": "み.る",
     "onyomi": "ラン",
     "grado": 6
@@ -1490,7 +1490,7 @@
   {
     "kanji": "裏",
     "significado_en": "back, amidst, in, reverse, inside, palm, sole, rear, lining, wrong side",
-    "significado_es": "",
+    "significado_es": "reverso, detrás",
     "kunyomi": "うら",
     "onyomi": "リ",
     "grado": 6
@@ -1498,7 +1498,7 @@
   {
     "kanji": "律",
     "significado_en": "rhythm, law, regulation, gauge, control",
-    "significado_es": "",
+    "significado_es": "ley, ritmo",
     "kunyomi": "",
     "onyomi": "リツ, リチ, レツ",
     "grado": 6
@@ -1506,7 +1506,7 @@
   {
     "kanji": "臨",
     "significado_en": "look to, face, meet, confront, attend, call on",
-    "significado_es": "",
+    "significado_es": "afrontar, estar presente",
     "kunyomi": "のぞ.む",
     "onyomi": "リン",
     "grado": 6
@@ -1514,7 +1514,7 @@
   {
     "kanji": "朗",
     "significado_en": "melodious, clear, bright, serene, cheerful",
-    "significado_es": "",
+    "significado_es": "alegre, claro",
     "kunyomi": "ほが.らか, あき.らか",
     "onyomi": "ロウ",
     "grado": 6
@@ -1522,7 +1522,7 @@
   {
     "kanji": "論",
     "significado_en": "argument, discourse",
-    "significado_es": "",
+    "significado_es": "teoría, debatir",
     "kunyomi": "あげつら.う",
     "onyomi": "ロン",
     "grado": 6
