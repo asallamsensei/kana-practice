@@ -595,7 +595,14 @@ function normalizeText(s){
 }
 
 function getSignificado(item){
-  return normalizeText(item.significado_es) || normalizeText(item.significado_en);
+  const raw = normalizeText(item.significado_es) || normalizeText(item.significado_en);
+  if(!raw) return "";
+
+  return raw
+    .split(",")
+    .map(s => s.trim())
+    .slice(0, 2)   // 👈 SOLO LOS 2 PRIMEROS
+    .join(", ");
 }
 
 function parseLecturas(raw){
