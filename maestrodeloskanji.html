@@ -443,7 +443,7 @@
       </div>
 
       <div class="row" style="justify-content:flex-start; margin-top:10px; gap:10px;">
-        <button id="btnTodo" class="btn btn-ghost btn-danger" type="button" onclick="seleccionarTodo()">Todo</button>
+        <button id="btnTodo" class="btn btn-mode" type="button" onclick="activarMixGrados()">Mix</button>
       </div>
 
       <div class="sep"></div>
@@ -465,9 +465,9 @@
       </div>
 
       <div class="row" style="justify-content:flex-start; margin-top: 8px; gap:10px; flex-wrap:wrap;">
-        <button class="btn btn-mode" id="m-kanji-es" type="button" onclick="setModoBase('kanji_es')">Kanji → ES</button>
-        <button class="btn btn-mode" id="m-es-kanji" type="button" onclick="setModoBase('es_kanji')">ES → Kanji</button>
-        <button class="btn btn-mode" id="m-mix-base" type="button" onclick="setModoBase('mix_base')">Mix</button>
+        <button class="btn btn-mode" id="m-kanji-es" type="button" onclick="toggleModo('kanji_es')">Kanji → ES</button>
+        <button class="btn btn-mode" id="m-es-kanji" type="button" onclick="toggleModo('es_kanji')">ES → Kanji</button>
+        <button class="btn btn-mode" id="m-mix-base" type="button" onclick="activarMixKanji()">Mix</button>
       </div>
 
       <div class="sep"></div>
@@ -477,10 +477,11 @@
       </div>
 
       <div class="row" style="justify-content:flex-start; margin-top: 8px; gap:10px; flex-wrap:wrap;">
-        <button class="btn btn-mode" id="m-v-jpes" type="button" onclick="setModoVocab('jp_es')">JP → ES</button>
-        <button class="btn btn-mode" id="m-v-esjp" type="button" onclick="setModoVocab('es_jp')">ES → JP</button>
-        <button class="btn btn-mode" id="m-v-audioes" type="button" onclick="setModoVocab('audio_es')">Audio → ES</button>
-        <button class="btn btn-mode" id="m-v-audiojp" type="button" onclick="setModoVocab('audio_jp')">Audio → JP</button>
+        <button class="btn btn-mode" id="m-v-jpes" type="button" onclick="toggleModo('jp_es')">JP → ES</button>
+        <button class="btn btn-mode" id="m-v-esjp" type="button" onclick="toggleModo('es_jp')">ES → JP</button>
+        <button class="btn btn-mode" id="m-v-audioes" type="button" onclick="toggleModo('audio_es')">Audio → ES</button>
+        <button class="btn btn-mode" id="m-v-audiojp" type="button" onclick="toggleModo('audio_jp')">Audio → JP</button>
+        <button class="btn btn-mode" id="m-v-mix" type="button" onclick="activarMixVocab()">Mix</button>
       </div>
 
       <div class="sep"></div>
@@ -490,12 +491,13 @@
       </div>
 
       <div class="row" style="justify-content:flex-start; margin-top: 8px; gap:10px; flex-wrap:wrap;">
-        <button class="btn btn-mode" id="x-kanji-kun" type="button" onclick="setModoExtra('kanji_kunyomi')">Kanji → kunyomi</button>
-        <button class="btn btn-mode" id="x-kanji-on" type="button" onclick="setModoExtra('kanji_onyomi')">Kanji → onyomi</button>
-        <button class="btn btn-mode" id="x-kun-kanji" type="button" onclick="setModoExtra('kunyomi_kanji')">Kunyomi → kanji</button>
-        <button class="btn btn-mode" id="x-on-kanji" type="button" onclick="setModoExtra('onyomi_kanji')">Onyomi → kanji</button>
-        <button class="btn btn-mode" id="x-kanji-grado" type="button" onclick="setModoExtra('kanji_grado')">Kanji → grado</button>
-        <button class="btn btn-mode" id="x-grado-kanji" type="button" onclick="setModoExtra('grado_kanji')">Grado → kanji</button>
+        <button class="btn btn-mode" id="x-kanji-kun" type="button" onclick="toggleModo('kanji_kunyomi')">Kanji → kunyomi</button>
+        <button class="btn btn-mode" id="x-kanji-on" type="button" onclick="toggleModo('kanji_onyomi')">Kanji → onyomi</button>
+        <button class="btn btn-mode" id="x-kun-kanji" type="button" onclick="toggleModo('kunyomi_kanji')">Kunyomi → kanji</button>
+        <button class="btn btn-mode" id="x-on-kanji" type="button" onclick="toggleModo('onyomi_kanji')">Onyomi → kanji</button>
+        <button class="btn btn-mode" id="x-kanji-grado" type="button" onclick="toggleModo('kanji_grado')">Kanji → grado</button>
+        <button class="btn btn-mode" id="x-grado-kanji" type="button" onclick="toggleModo('grado_kanji')">Grado → kanji</button>
+        <button class="btn btn-mode" id="x-mix" type="button" onclick="activarMixExtra()">Mix</button>
       </div>
 
       <div class="sep"></div>
@@ -591,9 +593,14 @@ let contenidoActivo = {
   vocab: false
 };
 
-let modoBase = "mix_base";
-let modoVocab = "jp_es";
-let modoExtra = null;
+let modosActivos = new Set([
+  "kanji_es",
+  "es_kanji",
+  "jp_es",
+  "es_jp",
+  "audio_es",
+  "audio_jp"
+]);
 let poolScope = "seleccion";
 
 /* =========================================================
@@ -718,8 +725,12 @@ function refrescarPills(){
 }
 
 function descripcionModoActual(){
-  const modo = getModoActivoConfig();
-  return modo ? modo.label : "—";
+  const activos = getModeKeysDisponiblesAhora()
+    .map(k => MODOS[k]?.label)
+    .filter(Boolean);
+
+  if(!activos.length) return "—";
+  return activos.join(" + ");
 }
 
 function poolDisponibleActual(){
@@ -747,40 +758,38 @@ function actualizarBotonesContenido(){
   $("content-mix").classList.toggle("mix-activo", mixOn);
 }
 
-function actualizarBotonesBase(){
-  ["m-kanji-es","m-es-kanji","m-mix-base"].forEach(id => $(id).classList.remove("activo"));
-  const map = {
-    kanji_es: "m-kanji-es",
-    es_kanji: "m-es-kanji",
-    mix_base: "m-mix-base"
+function actualizarBotonesModos(){
+  const mapa = {
+    "kanji_es": "m-kanji-es",
+    "es_kanji": "m-es-kanji",
+    "jp_es": "m-v-jpes",
+    "es_jp": "m-v-esjp",
+    "audio_es": "m-v-audioes",
+    "audio_jp": "m-v-audiojp",
+    "kanji_kunyomi": "x-kanji-kun",
+    "kanji_onyomi": "x-kanji-on",
+    "kunyomi_kanji": "x-kun-kanji",
+    "onyomi_kanji": "x-on-kanji",
+    "kanji_grado": "x-kanji-grado",
+    "grado_kanji": "x-grado-kanji"
   };
-  if(map[modoBase]) $(map[modoBase]).classList.add("activo");
-}
 
-function actualizarBotonesVocab(){
-  ["m-v-jpes","m-v-esjp","m-v-audioes","m-v-audiojp"].forEach(id => $(id).classList.remove("activo"));
-  const map = {
-    jp_es: "m-v-jpes",
-    es_jp: "m-v-esjp",
-    audio_es: "m-v-audioes",
-    audio_jp: "m-v-audiojp"
-  };
-  if(map[modoVocab]) $(map[modoVocab]).classList.add("activo");
-}
+  Object.entries(mapa).forEach(([modo, id]) => {
+    $(id).classList.toggle("activo", modosActivos.has(modo));
+  });
 
-function actualizarBotonesExtra(){
-  ["x-kanji-kun","x-kanji-on","x-kun-kanji","x-on-kanji","x-kanji-grado","x-grado-kanji"]
-    .forEach(id => $(id).classList.remove("activo"));
+  const mixKanji = MODOS_KANJI.every(m => modosActivos.has(m));
+  const mixVocab = MODOS_VOCAB.every(m => modosActivos.has(m));
+  const mixExtra = MODOS_EXTRA.every(m => modosActivos.has(m));
 
-  const map = {
-    kanji_kunyomi: "x-kanji-kun",
-    kanji_onyomi: "x-kanji-on",
-    kunyomi_kanji: "x-kun-kanji",
-    onyomi_kanji: "x-on-kanji",
-    kanji_grado: "x-kanji-grado",
-    grado_kanji: "x-grado-kanji"
-  };
-  if(modoExtra && map[modoExtra]) $(map[modoExtra]).classList.add("activo");
+  $("m-mix-base").classList.toggle("activo", mixKanji);
+  $("m-mix-base").classList.toggle("mix-activo", mixKanji);
+
+  $("m-v-mix").classList.toggle("activo", mixVocab);
+  $("m-v-mix").classList.toggle("mix-activo", mixVocab);
+
+  $("x-mix").classList.toggle("activo", mixExtra);
+  $("x-mix").classList.toggle("mix-activo", mixExtra);
 }
 
 function actualizarBotonesPool(){
@@ -853,10 +862,10 @@ function syncChipsGrados(){
   });
 
   const todosActivos = gradosDisponibles.every(g => gradosSeleccionados.has(g));
-  $("btnTodo").classList.toggle("activo", todosActivos);
+  $("btnTodo").classList.toggle("mix-activo", todosActivos);
 }
 
-function seleccionarTodo(){
+function activarMixGrados()
   gradosSeleccionados = new Set(gradosDisponibles);
   syncChipsGrados();
   aplicarFiltros();
@@ -894,31 +903,50 @@ function activarMixContenido(){
   siguiente();
 }
 
-function setModoBase(modo){
-  modoExtra = null;
-  modoBase = modo;
-  actualizarBotonesBase();
-  actualizarBotonesExtra();
+function toggleModo(modo){
+  if(modosActivos.has(modo)){
+    modosActivos.delete(modo);
+  }else{
+    modosActivos.add(modo);
+  }
+
+  actualizarBotonesModos();
   limpiarResultado();
   siguiente();
 }
 
-function setModoVocab(modo){
-  modoExtra = null;
-  modoVocab = modo;
-  actualizarBotonesVocab();
-  actualizarBotonesExtra();
+const MODOS_KANJI = ["kanji_es", "es_kanji"];
+const MODOS_VOCAB = ["jp_es", "es_jp", "audio_es", "audio_jp"];
+const MODOS_EXTRA = [
+  "kanji_kunyomi",
+  "kanji_onyomi",
+  "kunyomi_kanji",
+  "onyomi_kanji",
+  "kanji_grado",
+  "grado_kanji"
+];
+
+function activarMixKanji(){
+  MODOS_KANJI.forEach(m => modosActivos.add(m));
+  actualizarBotonesModos();
   limpiarResultado();
   siguiente();
 }
 
-function setModoExtra(modo){
-  modoExtra = (modoExtra === modo) ? null : modo;
-  actualizarBotonesExtra();
+function activarMixVocab(){
+  MODOS_VOCAB.forEach(m => modosActivos.add(m));
+  actualizarBotonesModos();
   limpiarResultado();
   siguiente();
 }
 
+function activarMixExtra(){
+  MODOS_EXTRA.forEach(m => modosActivos.add(m));
+  actualizarBotonesModos();
+  limpiarResultado();
+  siguiente();
+}
+  
 function setPoolScope(scope){
   poolScope = scope;
   actualizarBotonesPool();
@@ -1340,32 +1368,18 @@ function buildQuestionFromMode(modeKey){
   };
 }
 
-function getModoActivoConfig(){
-  if(modoExtra) return MODOS[modoExtra];
-  if(contenidoActivo.kanji && !contenidoActivo.vocab) return MODOS[modoBase];
-  if(contenidoActivo.vocab && !contenidoActivo.kanji) return MODOS[modoVocab];
-  if(contenidoActivo.kanji && contenidoActivo.vocab) return null;
-  return null;
-}
-
 function getModeKeysDisponiblesAhora(){
-  if(modoExtra) return [modoExtra];
+  const keys = [...modosActivos];
 
-  const keys = [];
+  return keys.filter(key => {
+    const modo = MODOS[key];
+    if(!modo) return false;
 
-  if(contenidoActivo.kanji){
-    if(modoBase === "mix_base"){
-      keys.push("kanji_es", "es_kanji");
-    }else{
-      keys.push(modoBase);
-    }
-  }
+    if(modo.source === "kanji" && !contenidoActivo.kanji) return false;
+    if(modo.source === "vocab" && !contenidoActivo.vocab) return false;
 
-  if(contenidoActivo.vocab){
-    keys.push(modoVocab);
-  }
-
-  return keys;
+    return true;
+  });
 }
 
 function generarPreguntaActual(){
@@ -1561,9 +1575,7 @@ Promise.all([
 
   construirChipsGrados();
   actualizarBotonesContenido();
-  actualizarBotonesBase();
-  actualizarBotonesVocab();
-  actualizarBotonesExtra();
+  actualizarBotonesModos()
   actualizarBotonesPool();
   aplicarFiltros();
   siguiente();
