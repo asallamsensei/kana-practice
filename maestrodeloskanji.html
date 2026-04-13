@@ -1103,7 +1103,7 @@ const MODOS = {
       options: build3OptionsFromItems(distractorPool, getSignificado(item), x => getSignificado(x)),
       opcionesClass: "opciones-es",
       usaAudio: true,
-      audioSrc: `data/maestrodeloskanji/audios/${normalizeText(item.romaji)}.mp3`,
+      audioSrc: item.palabra,
       romaji: normalizeText(item.romaji),
       familia: "vocab"
     })
@@ -1126,7 +1126,7 @@ const MODOS = {
       options: build3OptionsFromItems(distractorPool, item.palabra, x => x.palabra),
       opcionesClass: "opciones-jp",
       usaAudio: true,
-      audioSrc: `data/maestrodeloskanji/audios/${normalizeText(item.romaji)}.mp3`,
+      audioSrc: item.palabra,
       romaji: normalizeText(item.romaji),
       familia: "vocab"
     })
@@ -1406,34 +1406,44 @@ function generarPreguntaActual(){
 /* =========================================================
    AUDIO
 ========================================================= */
-let audioActual = null;
+let vozJaponesa = null;
 
-function reproducirAudio(src){
-  if(!src){
-    renderNoAudio("No hay audio");
+function cargarVocesJaponesas(){
+  const voces = speechSynthesis.getVoices() || [];
+  vozJaponesa =
+    voces.find(v => v.lang === "ja-JP") ||
+    voces.find(v => (v.lang || "").toLowerCase().startsWith("ja")) ||
+    null;
+}
+
+cargarVocesJaponesas();
+speechSynthesis.onvoiceschanged = cargarVocesJaponesas;
+
+function reproducirAudio(texto){
+  const palabra = normalizeText(texto);
+
+  if(!palabra){
+    renderNoAudio("No se pudo reproducir");
     return;
   }
 
   try{
-    if(audioActual){
-      audioActual.pause();
-      audioActual.currentTime = 0;
-    }
+    speechSynthesis.cancel();
 
-    const audio = new Audio(src);
-    audioActual = audio;
+    const u = new SpeechSynthesisUtterance(palabra);
+    u.lang = "ja-JP";
+    u.rate = 0.9;
+    u.pitch = 1;
 
-    audio.addEventListener("error", () => {
-      renderNoAudio("No hay audio");
-    });
+    if(vozJaponesa) u.voice = vozJaponesa;
 
-    audio.play().then(() => {
-      renderNoAudio("");
-    }).catch(() => {
-      renderNoAudio("No hay audio");
-    });
+    u.onstart = () => renderNoAudio("");
+    u.onerror = () => renderNoAudio("No se pudo reproducir");
+    u.onend = () => renderNoAudio("");
+
+    speechSynthesis.speak(u);
   }catch{
-    renderNoAudio("No hay audio");
+    renderNoAudio("No se pudo reproducir");
   }
 }
 
