@@ -1379,8 +1379,19 @@ function getModeKeysDisponiblesAhora(){
   if(modoExtra) return [modoExtra];
 
   const keys = [];
-  if(contenidoActivo.kanji) keys.push(modoBase);
-  if(contenidoActivo.vocab) keys.push(modoVocab);
+
+  if(contenidoActivo.kanji){
+    if(modoBase === "mix_base"){
+      keys.push("kanji_es", "es_kanji");
+    }else{
+      keys.push(modoBase);
+    }
+  }
+
+  if(contenidoActivo.vocab){
+    keys.push(modoVocab);
+  }
+
   return keys;
 }
 
