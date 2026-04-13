@@ -367,6 +367,10 @@
     white-space: pre-line;
   }
 
+  #opciones div{
+    margin: 2px 0;
+  }
+  
   #extraResultado{
     min-height: 26px;
     margin-top: 8px;
@@ -674,9 +678,9 @@ function setOpciones(opciones, styleClass){
   const el = $("opciones");
   el.className = styleClass || "";
   el.innerHTML =
-    `a) ${opciones[0]}<br>
-     b) ${opciones[1]}<br>
-     c) ${opciones[2]}`;
+    `<div>a) ${opciones[0]}</div>
+     <div>b) ${opciones[1]}</div>
+     <div>c) ${opciones[2]}</div>`;
 }
 
 function setPromptTop(tags){
