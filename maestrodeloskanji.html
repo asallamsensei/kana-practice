@@ -72,6 +72,7 @@
     display:grid;
     grid-template-columns: 1.1fr .95fr;
     gap:14px;
+    align-items: start;
   }
 
   @media (max-width: 920px){
@@ -458,7 +459,6 @@
 
       <div class="row" style="justify-content:flex-start; margin-top:10px; gap:10px;">
         <button id="btnTodo" class="btn btn-ghost btn-danger" type="button" onclick="seleccionarTodo()">Todo</button>
-        <button id="btnNinguna" class="btn btn-ghost" type="button" onclick="seleccionarNinguna()">Ninguna</button>
       </div>
 
       <div class="sep"></div>
@@ -878,18 +878,6 @@ function seleccionarTodo(){
   yaValidado = false;
   limpiarResultado();
   siguiente();
-}
-
-function seleccionarNinguna(){
-  gradosSeleccionados.clear();
-  syncChipsGrados();
-  aplicarFiltros();
-  $("preguntaVisual").innerText = "—";
-  $("opciones").innerHTML = "";
-  $("resultado").className = "incorrecto";
-  $("resultado").innerText = "Activa al menos un grado.";
-  $("extraResultado").innerText = "";
-  refrescarPills();
 }
 
 /* =========================================================
