@@ -561,7 +561,8 @@ function playBeep(freq, duration){
 }
 
 function sonidoCorrecto(){
-  playBeep(800, 0.12); // tono alto
+  playBeep(700, 0.08);
+  setTimeout(() => playBeep(900, 0.12), 80);
 }
 
 function sonidoIncorrecto(){
