@@ -1,0 +1,1584 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Maestro de los Kanji — Asallam Sensei</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --bg: #0b1020;
+    --card: rgba(255,255,255,.08);
+    --card2: rgba(255,255,255,.10);
+    --text: #eef2ff;
+    --muted: rgba(238,242,255,.75);
+    --accent: #7d5cff;
+    --accent2:#22c55e;
+    --danger:#ef4444;
+    --border: rgba(255,255,255,.14);
+
+    --badge-kanji-bg: rgba(125,92,255,.18);
+    --badge-kanji-bd: rgba(125,92,255,.48);
+    --badge-kanji-tx: #ddd6fe;
+
+    --badge-vocab-bg: rgba(34,197,94,.16);
+    --badge-vocab-bd: rgba(34,197,94,.45);
+    --badge-vocab-tx: #bbf7d0;
+
+    --mix-bg: linear-gradient(135deg, #7d5cff, #22c55e);
+    --font-jp: "Noto Sans JP", "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", "MS PGothic", system-ui, sans-serif;
+  }
+
+  *{ box-sizing:border-box; }
+
+  body{
+    margin:0;
+    font-family: Arial, sans-serif;
+    background:
+      radial-gradient(1200px 700px at 20% 10%, rgba(125,92,255,.35), transparent 60%),
+      radial-gradient(900px 600px at 90% 20%, rgba(34,197,94,.22), transparent 60%),
+      radial-gradient(900px 600px at 30% 90%, rgba(239,68,68,.18), transparent 55%),
+      var(--bg);
+    color: var(--text);
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    padding:28px 14px 70px;
+  }
+
+  .wrap{ width:min(1080px, 100%); }
+
+  header{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    margin-bottom:16px;
+  }
+
+  h1{
+    margin:0;
+    font-size:clamp(22px, 5vw, 32px);
+    margin-top:16px;
+    margin-bottom:10px;
+    text-align:center;
+    letter-spacing:.2px;
+  }
+
+  .grid{
+    display:grid;
+    grid-template-columns: 1.1fr .95fr;
+    gap:14px;
+  }
+
+  @media (max-width: 920px){
+    .grid{ grid-template-columns: 1fr; }
+    h1{
+      font-size: 22px;
+      line-height: 1.2;
+      margin-top: 8px;
+      margin-bottom: 6px;
+    }
+  }
+
+  .card{
+    background: linear-gradient(180deg, var(--card2), var(--card));
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    box-shadow: 0 18px 45px rgba(0,0,0,.35);
+    padding: 16px;
+  }
+
+  .row{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    align-items:center;
+    justify-content:center;
+  }
+
+  .pill{
+    padding: 8px 12px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: rgba(255,255,255,.06);
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.35;
+  }
+
+  .sep{
+    height: 1px;
+    background: rgba(255,255,255,.10);
+    margin: 12px 0;
+  }
+
+  .hint{
+    color: rgba(238,242,255,.7);
+    font-size: 13px;
+    line-height: 1.35;
+    text-align:center;
+  }
+
+  .miniStatus{
+    margin-top: 6px;
+    color: rgba(238,242,255,.78);
+    font-size: 13px;
+    line-height: 1.45;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .miniStatus > div{
+    padding: 0;
+    border: 0;
+    background: transparent;
+    border-radius: 0;
+    color: inherit;
+  }
+
+  code.kbd{
+    background: rgba(255,255,255,.08);
+    border: 1px solid rgba(255,255,255,.14);
+    padding: 2px 7px;
+    border-radius: 8px;
+    font-weight: 700;
+  }
+
+  .btn{
+    border: none;
+    border-radius: 12px;
+    padding: 11px 14px;
+    cursor: pointer;
+    color: white;
+    background: var(--accent);
+    font-weight: bold;
+    transition: .15s;
+  }
+  .btn:hover{ transform: translateY(-1px); filter: brightness(1.06); }
+
+  .btn-ghost{
+    background: rgba(255,255,255,.08);
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-weight: 700;
+  }
+
+  .btn-danger{
+    background: rgba(239,68,68,.15);
+    border: 1px solid rgba(239,68,68,.5);
+    color: #fecaca;
+  }
+
+  .btn-danger.activo{
+    background: var(--danger);
+    border-color: transparent;
+    color: white;
+  }
+
+  .btn-mode{
+    background: rgba(255,255,255,.08);
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-weight: 700;
+  }
+
+  .btn-mode.activo{
+    background: var(--accent);
+    border-color: transparent;
+    color: white;
+  }
+
+  .btn-mode.mix-activo{
+    background: var(--mix-bg);
+    border-color: transparent;
+    color: white;
+    box-shadow: 0 0 0 1px rgba(255,255,255,.06), 0 10px 24px rgba(34,197,94,.18);
+  }
+
+  .btn-audio{
+    background: rgba(34,197,94,.16);
+    border: 1px solid rgba(34,197,94,.40);
+    color: #bbf7d0;
+  }
+
+  .chips{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-top:8px;
+  }
+
+  .chip{
+    padding: 9px 12px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: rgba(255,255,255,.06);
+    color: var(--muted);
+    cursor:pointer;
+    user-select:none;
+    font-size: 13px;
+    font-weight: 800;
+    transition:.12s;
+  }
+  .chip:hover{ transform: translateY(-1px); }
+
+  .chip.activo{
+    background: var(--accent);
+    color: white;
+    border-color: transparent;
+  }
+
+  .big{
+    text-align:center;
+    padding: 14px 10px 10px;
+  }
+
+  #promptTop{
+    min-height: 34px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:8px;
+    flex-wrap:wrap;
+    margin-bottom: 4px;
+  }
+
+  .badge{
+    padding: 6px 10px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 900;
+    letter-spacing: .3px;
+    border: 1px solid transparent;
+  }
+
+  .badge-kanji{
+    background: var(--badge-kanji-bg);
+    border-color: var(--badge-kanji-bd);
+    color: var(--badge-kanji-tx);
+  }
+
+  .badge-vocab{
+    background: var(--badge-vocab-bg);
+    border-color: var(--badge-vocab-bd);
+    color: var(--badge-vocab-tx);
+  }
+
+  .badge-sub{
+    background: rgba(255,255,255,.07);
+    border-color: rgba(255,255,255,.14);
+    color: var(--muted);
+  }
+
+  #preguntaVisual{
+    min-height: 110px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    margin: 8px 0 6px;
+    line-height: 1.2;
+    word-break: break-word;
+  }
+
+  .visual-jp{
+    font-family: var(--font-jp);
+    font-size: clamp(40px, 6vw, 90px);
+    font-weight: 200;
+    letter-spacing: .5px;
+  }
+
+  .visual-es{
+    font-family: Arial, sans-serif;
+    font-size: clamp(24px, 3.2vw, 36px);
+    font-weight: 800;
+    letter-spacing: .2px;
+  }
+
+  .visual-grado{
+    font-size: clamp(34px, 4vw, 54px);
+    font-weight: 900;
+  }
+
+  #audioWrap{
+    min-height: 46px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    margin-top: 6px;
+    margin-bottom: 2px;
+    gap:10px;
+    flex-wrap:wrap;
+  }
+
+  #audioMsg{
+    font-size: 14px;
+    color: #fecaca;
+    min-height: 20px;
+  }
+
+  #opciones{
+    margin-top: 10px;
+    font-size: 20px;
+    line-height: 1.75;
+    text-align:left;
+    width: fit-content;
+    max-width: 100%;
+    margin-left:auto;
+    margin-right:auto;
+    padding: 10px 14px;
+    border-radius: 14px;
+    border: 1px dashed rgba(255,255,255,.22);
+    background: rgba(0,0,0,.18);
+    white-space: pre-line;
+  }
+
+  .opciones-jp{
+    font-family: var(--font-jp);
+    font-size: 34px !important;
+    line-height: 1.65;
+    letter-spacing: .04em;
+  }
+
+  .opciones-es{
+    font-size: 20px !important;
+    line-height: 1.7;
+  }
+
+  .opciones-grado{
+    font-size: 28px !important;
+    line-height: 1.7;
+    font-weight: 900;
+  }
+
+  .opbtns{
+    display:flex;
+    justify-content:center;
+    gap:10px;
+    margin-top: 12px;
+    flex-wrap:wrap;
+  }
+
+  .opbtns button{ min-width: 90px; }
+
+  #resultado{
+    margin-top: 12px;
+    font-size: 20px;
+    min-height: 34px;
+    text-align:center;
+    font-weight: 800;
+    white-space: pre-line;
+  }
+
+  #extraResultado{
+    min-height: 26px;
+    margin-top: 8px;
+    text-align:center;
+    color: rgba(238,242,255,.88);
+    font-size: 16px;
+    white-space: pre-line;
+  }
+
+  .correcto{ color: var(--accent2); }
+  .incorrecto{ color: var(--danger); }
+
+  .stats{
+    margin-top: 12px;
+    text-align:center;
+    color: var(--muted);
+    font-size: 15px;
+  }
+</style>
+</head>
+
+<body>
+<div class="wrap">
+  <header>
+    <h1>Maestro de los Kanji — Asallam Sensei</h1>
+  </header>
+
+  <div class="grid">
+
+    <div class="card big">
+      <div id="promptTop"></div>
+
+      <div id="preguntaVisual" class="visual-jp">—</div>
+
+      <div id="audioWrap"></div>
+
+      <div id="opciones"></div>
+
+      <div class="opbtns">
+        <button class="btn btn-ghost" type="button" onclick="responder('a')">a</button>
+        <button class="btn btn-ghost" type="button" onclick="responder('b')">b</button>
+        <button class="btn btn-ghost" type="button" onclick="responder('c')">c</button>
+      </div>
+
+      <div id="resultado"></div>
+      <div id="extraResultado"></div>
+
+      <div class="stats">
+        <div>
+          Aciertos: <span id="aciertos">0</span> —
+          Errores: <span id="errores">0</span>
+        </div>
+        <div style="margin-top:6px;">
+          Racha: <span id="racha">0</span> —
+          Mejor racha: <span id="mejorRacha">0</span> —
+          Precisión: <span id="precision">0%</span>
+        </div>
+      </div>
+
+      <div class="row" style="margin-top: 14px;">
+        <button class="btn" type="button" onclick="siguiente()">Siguiente</button>
+        <button class="btn btn-ghost" type="button" onclick="resetStats()">Reset stats</button>
+      </div>
+
+      <div class="sep"></div>
+
+      <div class="hint">
+        Usa <code class="kbd">A</code>, <code class="kbd">B</code> o <code class="kbd">C</code>.
+        <code class="kbd">Enter</code> pasa a la siguiente.
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="row" style="justify-content:flex-start;">
+        <span class="pill">Grados</span>
+      </div>
+
+      <div class="row" style="justify-content:flex-start; margin-top: 8px;">
+        <div id="chipsGrados" class="chips"></div>
+      </div>
+
+      <div class="row" style="justify-content:flex-start; margin-top:10px; gap:10px;">
+        <button id="btnTodo" class="btn btn-ghost btn-danger" type="button" onclick="seleccionarTodo()">Todo</button>
+        <button id="btnNinguna" class="btn btn-ghost" type="button" onclick="seleccionarNinguna()">Ninguna</button>
+      </div>
+
+      <div class="sep"></div>
+
+      <div class="row" style="justify-content:flex-start;">
+        <span class="pill">Contenido</span>
+      </div>
+
+      <div class="row" style="justify-content:flex-start; margin-top:8px; gap:10px; flex-wrap:wrap;">
+        <button class="btn btn-mode" id="content-kanji" type="button" onclick="toggleContenido('kanji')">Kanji</button>
+        <button class="btn btn-mode" id="content-vocab" type="button" onclick="toggleContenido('vocab')">Vocabulario</button>
+        <button class="btn btn-mode" id="content-mix" type="button" onclick="activarMixContenido()">Mix</button>
+      </div>
+
+      <div class="sep"></div>
+
+      <div class="row" style="justify-content:flex-start;">
+        <span class="pill">Kanji</span>
+      </div>
+
+      <div class="row" style="justify-content:flex-start; margin-top: 8px; gap:10px; flex-wrap:wrap;">
+        <button class="btn btn-mode" id="m-kanji-es" type="button" onclick="setModoBase('kanji_es')">Kanji → ES</button>
+        <button class="btn btn-mode" id="m-es-kanji" type="button" onclick="setModoBase('es_kanji')">ES → Kanji</button>
+        <button class="btn btn-mode" id="m-mix-base" type="button" onclick="setModoBase('mix_base')">Mix</button>
+      </div>
+
+      <div class="sep"></div>
+
+      <div class="row" style="justify-content:flex-start;">
+        <span class="pill">Vocabulario</span>
+      </div>
+
+      <div class="row" style="justify-content:flex-start; margin-top: 8px; gap:10px; flex-wrap:wrap;">
+        <button class="btn btn-mode" id="m-v-jpes" type="button" onclick="setModoVocab('jp_es')">JP → ES</button>
+        <button class="btn btn-mode" id="m-v-esjp" type="button" onclick="setModoVocab('es_jp')">ES → JP</button>
+        <button class="btn btn-mode" id="m-v-audioes" type="button" onclick="setModoVocab('audio_es')">Audio → ES</button>
+        <button class="btn btn-mode" id="m-v-audiojp" type="button" onclick="setModoVocab('audio_jp')">Audio → JP</button>
+      </div>
+
+      <div class="sep"></div>
+
+      <div class="row" style="justify-content:flex-start;">
+        <span class="pill">Extra</span>
+      </div>
+
+      <div class="row" style="justify-content:flex-start; margin-top: 8px; gap:10px; flex-wrap:wrap;">
+        <button class="btn btn-mode" id="x-kanji-kun" type="button" onclick="setModoExtra('kanji_kunyomi')">Kanji → kunyomi</button>
+        <button class="btn btn-mode" id="x-kanji-on" type="button" onclick="setModoExtra('kanji_onyomi')">Kanji → onyomi</button>
+        <button class="btn btn-mode" id="x-kun-kanji" type="button" onclick="setModoExtra('kunyomi_kanji')">Kunyomi → kanji</button>
+        <button class="btn btn-mode" id="x-on-kanji" type="button" onclick="setModoExtra('onyomi_kanji')">Onyomi → kanji</button>
+        <button class="btn btn-mode" id="x-kanji-grado" type="button" onclick="setModoExtra('kanji_grado')">Kanji → grado</button>
+        <button class="btn btn-mode" id="x-grado-kanji" type="button" onclick="setModoExtra('grado_kanji')">Grado → kanji</button>
+      </div>
+
+      <div class="sep"></div>
+
+      <div class="row" style="justify-content:flex-start;">
+        <span class="pill">Pool de distractores</span>
+      </div>
+
+      <div class="row" style="justify-content:flex-start; margin-top: 8px; gap:10px;">
+        <button class="btn btn-mode" id="pool-sel" type="button" onclick="setPoolScope('seleccion')">Solo selección</button>
+        <button class="btn btn-mode" id="pool-glob" type="button" onclick="setPoolScope('global')">Global</button>
+      </div>
+
+      <div class="sep"></div>
+
+      <div class="miniStatus">
+        <div id="pillGrados">Grados activos: —</div>
+        <div id="pillContenido">Contenido: —</div>
+        <div id="pillModo">Modo: —</div>
+        <div id="pillPool">Pool: —</div>
+        <div id="pillScope">Distractores: —</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+/* =========================================================
+   HELPERS
+========================================================= */
+function $(id){ return document.getElementById(id); }
+
+function pick(arr){
+  return arr[Math.floor(Math.random() * arr.length)];
+}
+
+function shuffle(arr){
+  const copia = arr.slice();
+  for(let i = copia.length - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * (i + 1));
+    [copia[i], copia[j]] = [copia[j], copia[i]];
+  }
+  return copia;
+}
+
+function normalizeText(s){
+  return String(s || "").trim();
+}
+
+function getSignificado(item){
+  return normalizeText(item.significado_es) || normalizeText(item.significado_en);
+}
+
+function parseLecturas(raw){
+  const txt = normalizeText(raw);
+  if(!txt) return [];
+  return txt
+    .split(/[、,\/・\s]+/g)
+    .map(x => x.trim())
+    .filter(Boolean);
+}
+
+function anySelected(arr, set){
+  return arr.some(v => set.has(Number(v)));
+}
+
+function uniqueValues(arr){
+  return [...new Set(arr.filter(v => v !== null && v !== undefined && v !== ""))];
+}
+
+function randomChoice(arr){
+  if(!Array.isArray(arr) || arr.length === 0) return null;
+  return pick(arr);
+}
+
+/* =========================================================
+   DATA + ESTADO
+========================================================= */
+let kanjiCompleto = [];
+let vocabCompleto = [];
+
+let kanjiFiltrado = [];
+let vocabFiltrado = [];
+
+let actual = null;
+let yaValidado = false;
+
+const gradosDisponibles = [1,2,3,4,5,6,8];
+let gradosSeleccionados = new Set(gradosDisponibles);
+
+let contenidoActivo = {
+  kanji: true,
+  vocab: false
+};
+
+let modoBase = "mix_base";
+let modoVocab = "jp_es";
+let modoExtra = null;
+let poolScope = "seleccion";
+
+/* =========================================================
+   STATS
+========================================================= */
+const STATS_KEY = "maestro_kanji_vocab_stats_v1";
+
+let aciertos = 0;
+let errores = 0;
+let racha = 0;
+let mejorRacha = 0;
+
+function cargarStats(){
+  try{
+    const s = JSON.parse(localStorage.getItem(STATS_KEY)) || {};
+    aciertos = s.aciertos || 0;
+    errores = s.errores || 0;
+    racha = s.racha || 0;
+    mejorRacha = s.mejorRacha || 0;
+  }catch{
+    aciertos = 0;
+    errores = 0;
+    racha = 0;
+    mejorRacha = 0;
+  }
+  pintarStats();
+}
+
+function guardarStats(){
+  localStorage.setItem(STATS_KEY, JSON.stringify({ aciertos, errores, racha, mejorRacha }));
+}
+
+function resetStats(){
+  aciertos = 0;
+  errores = 0;
+  racha = 0;
+  mejorRacha = 0;
+  pintarStats();
+  guardarStats();
+}
+
+function precisionPct(){
+  const total = aciertos + errores;
+  if(total <= 0) return "0%";
+  return Math.round((aciertos / total) * 100) + "%";
+}
+
+function pintarStats(){
+  $("aciertos").innerText = aciertos;
+  $("errores").innerText = errores;
+  $("racha").innerText = racha;
+  $("mejorRacha").innerText = mejorRacha;
+  $("precision").innerText = precisionPct();
+}
+
+/* =========================================================
+   UI
+========================================================= */
+function limpiarResultado(){
+  $("resultado").innerText = "";
+  $("resultado").className = "";
+  $("extraResultado").innerText = "";
+}
+
+function setPreguntaVisual(texto, estilo){
+  const el = $("preguntaVisual");
+  el.className = estilo;
+  el.innerText = texto || "—";
+}
+
+function setOpciones(opciones, styleClass){
+  const el = $("opciones");
+  el.className = styleClass || "";
+  el.innerHTML =
+    `a) ${opciones[0]}<br>
+     b) ${opciones[1]}<br>
+     c) ${opciones[2]}`;
+}
+
+function setPromptTop(tags){
+  $("promptTop").innerHTML = tags.join("");
+}
+
+function renderAudioUI(question){
+  const wrap = $("audioWrap");
+  wrap.innerHTML = "";
+
+  if(!question || !question.usaAudio) return;
+
+  const btn = document.createElement("button");
+  btn.type = "button";
+  btn.className = "btn btn-audio";
+  btn.textContent = "▶ Reproducir audio";
+  btn.onclick = () => reproducirAudio(question.audioSrc);
+  wrap.appendChild(btn);
+
+  const msg = document.createElement("div");
+  msg.id = "audioMsg";
+  wrap.appendChild(msg);
+}
+
+function renderNoAudio(msgText){
+  const msg = $("audioMsg");
+  if(msg) msg.innerText = msgText || "";
+}
+
+function refrescarPills(){
+  const todosActivos = gradosDisponibles.every(g => gradosSeleccionados.has(g));
+  const gradosTxt = todosActivos
+    ? "Todos"
+    : ([...gradosSeleccionados].sort((a,b)=>a-b).join(", ") || "Ninguno");
+
+  let contenidoTxt = [];
+  if(contenidoActivo.kanji) contenidoTxt.push("Kanji");
+  if(contenidoActivo.vocab) contenidoTxt.push("Vocabulario");
+
+  $("pillGrados").innerText = `Grados activos: ${gradosTxt}`;
+  $("pillContenido").innerText = `Contenido: ${contenidoTxt.join(" + ") || "—"}`;
+  $("pillModo").innerText = `Modo: ${descripcionModoActual()}`;
+  $("pillPool").innerText = `Pool: ${poolDisponibleActual()}`;
+  $("pillScope").innerText = `Distractores: ${poolScope === "global" ? "Global" : "Solo selección"}`;
+}
+
+function descripcionModoActual(){
+  const modo = getModoActivoConfig();
+  return modo ? modo.label : "—";
+}
+
+function poolDisponibleActual(){
+  if(modoExtra){
+    return `${kanjiFiltrado.length} kanji`;
+  }
+  if(contenidoActivo.kanji && contenidoActivo.vocab){
+    return `${kanjiFiltrado.length} kanji + ${vocabFiltrado.length} vocab`;
+  }
+  if(contenidoActivo.kanji){
+    return `${kanjiFiltrado.length} kanji`;
+  }
+  if(contenidoActivo.vocab){
+    return `${vocabFiltrado.length} vocab`;
+  }
+  return "0";
+}
+
+function actualizarBotonesContenido(){
+  $("content-kanji").classList.toggle("activo", contenidoActivo.kanji);
+  $("content-vocab").classList.toggle("activo", contenidoActivo.vocab);
+
+  const mixOn = contenidoActivo.kanji && contenidoActivo.vocab;
+  $("content-mix").classList.toggle("activo", mixOn);
+  $("content-mix").classList.toggle("mix-activo", mixOn);
+}
+
+function actualizarBotonesBase(){
+  ["m-kanji-es","m-es-kanji","m-mix-base"].forEach(id => $(id).classList.remove("activo"));
+  const map = {
+    kanji_es: "m-kanji-es",
+    es_kanji: "m-es-kanji",
+    mix_base: "m-mix-base"
+  };
+  if(map[modoBase]) $(map[modoBase]).classList.add("activo");
+}
+
+function actualizarBotonesVocab(){
+  ["m-v-jpes","m-v-esjp","m-v-audioes","m-v-audiojp"].forEach(id => $(id).classList.remove("activo"));
+  const map = {
+    jp_es: "m-v-jpes",
+    es_jp: "m-v-esjp",
+    audio_es: "m-v-audioes",
+    audio_jp: "m-v-audiojp"
+  };
+  if(map[modoVocab]) $(map[modoVocab]).classList.add("activo");
+}
+
+function actualizarBotonesExtra(){
+  ["x-kanji-kun","x-kanji-on","x-kun-kanji","x-on-kanji","x-kanji-grado","x-grado-kanji"]
+    .forEach(id => $(id).classList.remove("activo"));
+
+  const map = {
+    kanji_kunyomi: "x-kanji-kun",
+    kanji_onyomi: "x-kanji-on",
+    kunyomi_kanji: "x-kun-kanji",
+    onyomi_kanji: "x-on-kanji",
+    kanji_grado: "x-kanji-grado",
+    grado_kanji: "x-grado-kanji"
+  };
+  if(modoExtra && map[modoExtra]) $(map[modoExtra]).classList.add("activo");
+}
+
+function actualizarBotonesPool(){
+  $("pool-sel").classList.toggle("activo", poolScope === "seleccion");
+  $("pool-glob").classList.toggle("activo", poolScope === "global");
+}
+
+/* =========================================================
+   KEYBOARD
+========================================================= */
+document.addEventListener("keydown", (e) => {
+  const k = (e.key || "").toLowerCase();
+  if(!yaValidado && ["a","b","c"].includes(k)){
+    e.preventDefault();
+    responder(k);
+  }
+});
+
+document.addEventListener("keydown", (e) => {
+  if(e.key !== "Enter") return;
+  e.preventDefault();
+  if(!actual) return;
+  if(yaValidado) siguiente();
+});
+
+/* =========================================================
+   CHIPS DE GRADOS
+========================================================= */
+function construirChipsGrados(){
+  const cont = $("chipsGrados");
+  cont.innerHTML = "";
+
+  gradosDisponibles.forEach(g => {
+    const chip = document.createElement("div");
+    chip.className = "chip" + (gradosSeleccionados.has(g) ? " activo" : "");
+    chip.textContent = String(g);
+
+    chip.onclick = () => {
+      const todosActivos = gradosDisponibles.every(x => gradosSeleccionados.has(x));
+
+      if(todosActivos){
+        gradosSeleccionados = new Set([g]);
+      }else{
+        if(gradosSeleccionados.has(g)) gradosSeleccionados.delete(g);
+        else gradosSeleccionados.add(g);
+
+        if(gradosSeleccionados.size === 0){
+          gradosSeleccionados = new Set(gradosDisponibles);
+        }
+      }
+
+      syncChipsGrados();
+      aplicarFiltros();
+      yaValidado = false;
+      limpiarResultado();
+      siguiente();
+    };
+
+    cont.appendChild(chip);
+  });
+
+  syncChipsGrados();
+}
+
+function syncChipsGrados(){
+  const cont = $("chipsGrados");
+  [...cont.children].forEach((el, idx) => {
+    const g = gradosDisponibles[idx];
+    el.classList.toggle("activo", gradosSeleccionados.has(g));
+  });
+
+  const todosActivos = gradosDisponibles.every(g => gradosSeleccionados.has(g));
+  $("btnTodo").classList.toggle("activo", todosActivos);
+}
+
+function seleccionarTodo(){
+  gradosSeleccionados = new Set(gradosDisponibles);
+  syncChipsGrados();
+  aplicarFiltros();
+  yaValidado = false;
+  limpiarResultado();
+  siguiente();
+}
+
+function seleccionarNinguna(){
+  gradosSeleccionados.clear();
+  syncChipsGrados();
+  aplicarFiltros();
+  $("preguntaVisual").innerText = "—";
+  $("opciones").innerHTML = "";
+  $("resultado").className = "incorrecto";
+  $("resultado").innerText = "Activa al menos un grado.";
+  $("extraResultado").innerText = "";
+  refrescarPills();
+}
+
+/* =========================================================
+   CONTENIDO / MODOS
+========================================================= */
+function toggleContenido(tipo){
+  if(tipo === "kanji"){
+    if(contenidoActivo.kanji && !contenidoActivo.vocab) return;
+    contenidoActivo.kanji = !contenidoActivo.kanji;
+  }else if(tipo === "vocab"){
+    if(contenidoActivo.vocab && !contenidoActivo.kanji) return;
+    contenidoActivo.vocab = !contenidoActivo.vocab;
+  }
+
+  actualizarBotonesContenido();
+  aplicarFiltros();
+  yaValidado = false;
+  limpiarResultado();
+  siguiente();
+}
+
+function activarMixContenido(){
+  contenidoActivo.kanji = true;
+  contenidoActivo.vocab = true;
+  actualizarBotonesContenido();
+  aplicarFiltros();
+  yaValidado = false;
+  limpiarResultado();
+  siguiente();
+}
+
+function setModoBase(modo){
+  modoExtra = null;
+  modoBase = modo;
+  actualizarBotonesBase();
+  actualizarBotonesExtra();
+  limpiarResultado();
+  siguiente();
+}
+
+function setModoVocab(modo){
+  modoExtra = null;
+  modoVocab = modo;
+  actualizarBotonesVocab();
+  actualizarBotonesExtra();
+  limpiarResultado();
+  siguiente();
+}
+
+function setModoExtra(modo){
+  modoExtra = (modoExtra === modo) ? null : modo;
+  actualizarBotonesExtra();
+  limpiarResultado();
+  siguiente();
+}
+
+function setPoolScope(scope){
+  poolScope = scope;
+  actualizarBotonesPool();
+  limpiarResultado();
+  siguiente();
+}
+
+/* =========================================================
+   FILTROS
+========================================================= */
+function aplicarFiltros(){
+  if(gradosSeleccionados.size === 0){
+    kanjiFiltrado = [];
+    vocabFiltrado = [];
+    refrescarPills();
+    return;
+  }
+
+  kanjiFiltrado = kanjiCompleto.filter(item => gradosSeleccionados.has(Number(item.grado)));
+  vocabFiltrado = vocabCompleto.filter(item => anySelected(item.grados_detectados || [], gradosSeleccionados));
+
+  refrescarPills();
+}
+
+function getSourcePool(sourceKey){
+  if(sourceKey === "kanji"){
+    const base = (poolScope === "global") ? kanjiCompleto : kanjiFiltrado;
+    return (Array.isArray(base) && base.length) ? base : kanjiFiltrado;
+  }
+
+  if(sourceKey === "vocab"){
+    const base = (poolScope === "global") ? vocabCompleto : vocabFiltrado;
+    return (Array.isArray(base) && base.length) ? base : vocabFiltrado;
+  }
+
+  return [];
+}
+
+function getCurrentFilteredPool(sourceKey){
+  if(sourceKey === "kanji") return kanjiFiltrado;
+  if(sourceKey === "vocab") return vocabFiltrado;
+  return [];
+}
+
+/* =========================================================
+   MOTOR DE MODOS
+========================================================= */
+const MODOS = {
+  kanji_es: {
+    key: "kanji_es",
+    label: "Kanji → ES",
+    tipo: "kanji",
+    source: "kanji",
+    badge: "Kanji",
+    badgeClass: "badge-kanji",
+    badgeSub: "Kanji → ES",
+    isAvailable: ({ filteredPool }) => filteredPool.length >= 3,
+    getCandidates: ({ filteredPool }) => filteredPool.filter(item => !!getSignificado(item)),
+    build: ({ item, distractorPool }) => ({
+      prompt: item.kanji,
+      promptStyle: "visual-jp",
+      correct: getSignificado(item),
+      options: build3OptionsFromItems(distractorPool, getSignificado(item), x => getSignificado(x)),
+      opcionesClass: "opciones-es",
+      usaAudio: false,
+      audioSrc: "",
+      romaji: "",
+      familia: "kanji"
+    })
+  },
+
+  es_kanji: {
+    key: "es_kanji",
+    label: "ES → Kanji",
+    tipo: "kanji",
+    source: "kanji",
+    badge: "Kanji",
+    badgeClass: "badge-kanji",
+    badgeSub: "ES → Kanji",
+    isAvailable: ({ filteredPool }) => filteredPool.length >= 3,
+    getCandidates: ({ filteredPool }) => filteredPool.filter(item => !!getSignificado(item)),
+    build: ({ item, distractorPool }) => ({
+      prompt: getSignificado(item),
+      promptStyle: "visual-es",
+      correct: item.kanji,
+      options: build3OptionsFromItems(distractorPool, item.kanji, x => x.kanji),
+      opcionesClass: "opciones-jp",
+      usaAudio: false,
+      audioSrc: "",
+      romaji: "",
+      familia: "kanji"
+    })
+  },
+
+  jp_es: {
+    key: "jp_es",
+    label: "Vocab JP → ES",
+    tipo: "vocabulario",
+    source: "vocab",
+    badge: "Vocabulario",
+    badgeClass: "badge-vocab",
+    badgeSub: "JP → ES",
+    isAvailable: ({ filteredPool }) => filteredPool.length >= 3,
+    getCandidates: ({ filteredPool }) => filteredPool.filter(item => !!getSignificado(item)),
+    build: ({ item, distractorPool }) => ({
+      prompt: item.palabra,
+      promptStyle: "visual-jp",
+      correct: getSignificado(item),
+      options: build3OptionsFromItems(distractorPool, getSignificado(item), x => getSignificado(x)),
+      opcionesClass: "opciones-es",
+      usaAudio: false,
+      audioSrc: "",
+      romaji: normalizeText(item.romaji),
+      familia: "vocab"
+    })
+  },
+
+  es_jp: {
+    key: "es_jp",
+    label: "Vocab ES → JP",
+    tipo: "vocabulario",
+    source: "vocab",
+    badge: "Vocabulario",
+    badgeClass: "badge-vocab",
+    badgeSub: "ES → JP",
+    isAvailable: ({ filteredPool }) => filteredPool.length >= 3,
+    getCandidates: ({ filteredPool }) => filteredPool.filter(item => !!getSignificado(item)),
+    build: ({ item, distractorPool }) => ({
+      prompt: getSignificado(item),
+      promptStyle: "visual-es",
+      correct: item.palabra,
+      options: build3OptionsFromItems(distractorPool, item.palabra, x => x.palabra),
+      opcionesClass: "opciones-jp",
+      usaAudio: false,
+      audioSrc: "",
+      romaji: normalizeText(item.romaji),
+      familia: "vocab"
+    })
+  },
+
+  audio_es: {
+    key: "audio_es",
+    label: "Vocab Audio → ES",
+    tipo: "dictado",
+    source: "vocab",
+    badge: "Vocabulario",
+    badgeClass: "badge-vocab",
+    badgeSub: "Audio → ES",
+    isAvailable: ({ filteredPool }) => filteredPool.length >= 3,
+    getCandidates: ({ filteredPool }) => filteredPool.filter(item => !!getSignificado(item) && !!normalizeText(item.romaji)),
+    build: ({ item, distractorPool }) => ({
+      prompt: "♪",
+      promptStyle: "visual-es",
+      correct: getSignificado(item),
+      options: build3OptionsFromItems(distractorPool, getSignificado(item), x => getSignificado(x)),
+      opcionesClass: "opciones-es",
+      usaAudio: true,
+      audioSrc: `data/maestrodeloskanji/audios/${normalizeText(item.romaji)}.mp3`,
+      romaji: normalizeText(item.romaji),
+      familia: "vocab"
+    })
+  },
+
+  audio_jp: {
+    key: "audio_jp",
+    label: "Vocab Audio → JP",
+    tipo: "dictado",
+    source: "vocab",
+    badge: "Vocabulario",
+    badgeClass: "badge-vocab",
+    badgeSub: "Audio → Japonés",
+    isAvailable: ({ filteredPool }) => filteredPool.length >= 3,
+    getCandidates: ({ filteredPool }) => filteredPool.filter(item => !!normalizeText(item.romaji)),
+    build: ({ item, distractorPool }) => ({
+      prompt: "♪",
+      promptStyle: "visual-es",
+      correct: item.palabra,
+      options: build3OptionsFromItems(distractorPool, item.palabra, x => x.palabra),
+      opcionesClass: "opciones-jp",
+      usaAudio: true,
+      audioSrc: `data/maestrodeloskanji/audios/${normalizeText(item.romaji)}.mp3`,
+      romaji: normalizeText(item.romaji),
+      familia: "vocab"
+    })
+  },
+
+  kanji_kunyomi: {
+    key: "kanji_kunyomi",
+    label: "Extra · Kanji → kunyomi",
+    tipo: "extra",
+    source: "kanji",
+    badge: "Kanji",
+    badgeClass: "badge-kanji",
+    badgeSub: "Kanji → kunyomi",
+    isAvailable: ({ filteredPool }) => filteredPool.filter(x => parseLecturas(x.kunyomi).length > 0).length >= 3,
+    getCandidates: ({ filteredPool }) => filteredPool.filter(x => parseLecturas(x.kunyomi).length > 0),
+    build: ({ item, distractorPool }) => ({
+      prompt: item.kanji,
+      promptStyle: "visual-jp",
+      correct: parseLecturas(item.kunyomi)[0],
+      options: build3OptionsFromItems(
+        distractorPool.filter(x => parseLecturas(x.kunyomi).length > 0),
+        parseLecturas(item.kunyomi)[0],
+        x => parseLecturas(x.kunyomi)[0] || ""
+      ),
+      opcionesClass: "opciones-es",
+      usaAudio: false,
+      audioSrc: "",
+      romaji: "",
+      familia: "kanji"
+    })
+  },
+
+  kanji_onyomi: {
+    key: "kanji_onyomi",
+    label: "Extra · Kanji → onyomi",
+    tipo: "extra",
+    source: "kanji",
+    badge: "Kanji",
+    badgeClass: "badge-kanji",
+    badgeSub: "Kanji → onyomi",
+    isAvailable: ({ filteredPool }) => filteredPool.filter(x => parseLecturas(x.onyomi).length > 0).length >= 3,
+    getCandidates: ({ filteredPool }) => filteredPool.filter(x => parseLecturas(x.onyomi).length > 0),
+    build: ({ item, distractorPool }) => ({
+      prompt: item.kanji,
+      promptStyle: "visual-jp",
+      correct: parseLecturas(item.onyomi)[0],
+      options: build3OptionsFromItems(
+        distractorPool.filter(x => parseLecturas(x.onyomi).length > 0),
+        parseLecturas(item.onyomi)[0],
+        x => parseLecturas(x.onyomi)[0] || ""
+      ),
+      opcionesClass: "opciones-es",
+      usaAudio: false,
+      audioSrc: "",
+      romaji: "",
+      familia: "kanji"
+    })
+  },
+
+  kunyomi_kanji: {
+    key: "kunyomi_kanji",
+    label: "Extra · Kunyomi → kanji",
+    tipo: "extra",
+    source: "kanji",
+    badge: "Kanji",
+    badgeClass: "badge-kanji",
+    badgeSub: "Kunyomi → kanji",
+    isAvailable: ({ filteredPool }) => filteredPool.filter(x => parseLecturas(x.kunyomi).length > 0).length >= 3,
+    getCandidates: ({ filteredPool }) => filteredPool.filter(x => parseLecturas(x.kunyomi).length > 0),
+    build: ({ item, distractorPool }) => ({
+      prompt: parseLecturas(item.kunyomi)[0],
+      promptStyle: "visual-es",
+      correct: item.kanji,
+      options: build3OptionsFromItems(distractorPool, item.kanji, x => x.kanji),
+      opcionesClass: "opciones-jp",
+      usaAudio: false,
+      audioSrc: "",
+      romaji: "",
+      familia: "kanji"
+    })
+  },
+
+  onyomi_kanji: {
+    key: "onyomi_kanji",
+    label: "Extra · Onyomi → kanji",
+    tipo: "extra",
+    source: "kanji",
+    badge: "Kanji",
+    badgeClass: "badge-kanji",
+    badgeSub: "Onyomi → kanji",
+    isAvailable: ({ filteredPool }) => filteredPool.filter(x => parseLecturas(x.onyomi).length > 0).length >= 3,
+    getCandidates: ({ filteredPool }) => filteredPool.filter(x => parseLecturas(x.onyomi).length > 0),
+    build: ({ item, distractorPool }) => ({
+      prompt: parseLecturas(item.onyomi)[0],
+      promptStyle: "visual-es",
+      correct: item.kanji,
+      options: build3OptionsFromItems(distractorPool, item.kanji, x => x.kanji),
+      opcionesClass: "opciones-jp",
+      usaAudio: false,
+      audioSrc: "",
+      romaji: "",
+      familia: "kanji"
+    })
+  },
+
+  kanji_grado: {
+    key: "kanji_grado",
+    label: "Extra · Kanji → grado",
+    tipo: "extra",
+    source: "kanji",
+    badge: "Kanji",
+    badgeClass: "badge-kanji",
+    badgeSub: "Kanji → grado",
+    isAvailable: ({ filteredPool }) => filteredPool.length >= 3,
+    getCandidates: ({ filteredPool }) => filteredPool,
+    build: ({ item, distractorPool }) => ({
+      prompt: item.kanji,
+      promptStyle: "visual-jp",
+      correct: String(item.grado),
+      options: build3OptionsFromValues(distractorPool.map(x => String(x.grado)), String(item.grado)),
+      opcionesClass: "opciones-grado",
+      usaAudio: false,
+      audioSrc: "",
+      romaji: "",
+      familia: "kanji"
+    })
+  },
+
+  grado_kanji: {
+    key: "grado_kanji",
+    label: "Extra · Grado → kanji",
+    tipo: "extra",
+    source: "kanji",
+    badge: "Kanji",
+    badgeClass: "badge-kanji",
+    badgeSub: "Grado → kanji",
+    isAvailable: ({ filteredPool, distractorPool }) => {
+      if(filteredPool.length < 3) return false;
+      const grados = uniqueValues(filteredPool.map(x => String(x.grado)));
+      if(grados.length === 0) return false;
+      return distractorPool.some(x => !grados.includes("___") && true);
+    },
+    getCandidates: ({ filteredPool }) => filteredPool,
+    build: ({ filteredPool, distractorPool }) => {
+      const gradoElegido = pick(uniqueValues(filteredPool.map(x => String(x.grado))));
+      const delGrado = filteredPool.filter(x => String(x.grado) === gradoElegido);
+      const correctItem = pick(delGrado);
+      const distractores = shuffle(
+        uniqueValues(
+          distractorPool
+            .filter(x => String(x.grado) !== gradoElegido)
+            .map(x => x.kanji)
+        )
+      ).slice(0, 2);
+
+      if(!correctItem || distractores.length < 2) return null;
+
+      const options = shuffle([correctItem.kanji, ...distractores]);
+
+      return {
+        prompt: `Grado ${gradoElegido}`,
+        promptStyle: "visual-grado",
+        correct: correctItem.kanji,
+        options,
+        opcionesClass: "opciones-jp",
+        usaAudio: false,
+        audioSrc: "",
+        romaji: "",
+        familia: "kanji"
+      };
+    }
+  }
+};
+
+/* =========================================================
+   MOTOR DE PREGUNTAS
+========================================================= */
+function build3OptionsFromValues(poolValues, correctValue){
+  const cleanPool = uniqueValues(poolValues.map(v => normalizeText(v))).filter(Boolean);
+  const opciones = [normalizeText(correctValue)];
+
+  let tries = 0;
+  while(opciones.length < 3 && tries < 600){
+    tries++;
+    const v = pick(cleanPool);
+    if(v && !opciones.includes(v)) opciones.push(v);
+  }
+
+  while(opciones.length < 3){
+    opciones.push("—");
+  }
+
+  return shuffle(opciones);
+}
+
+function build3OptionsFromItems(poolItems, correctValue, mapFn){
+  const mapped = uniqueValues(poolItems.map(mapFn).map(v => normalizeText(v))).filter(Boolean);
+  return build3OptionsFromValues(mapped, correctValue);
+}
+
+function buildQuestionFromMode(modeKey){
+  const modo = MODOS[modeKey];
+  if(!modo) return null;
+
+  const filteredPool = getCurrentFilteredPool(modo.source);
+  const distractorPool = getSourcePool(modo.source);
+
+  if(!modo.isAvailable({ filteredPool, distractorPool })) return null;
+
+  const candidates = modo.getCandidates({ filteredPool, distractorPool });
+  if(!Array.isArray(candidates) || candidates.length === 0) return null;
+
+  const item = randomChoice(candidates);
+  if(!item && modo.key !== "grado_kanji") return null;
+
+  const built = modo.build({ item, filteredPool, distractorPool });
+  if(!built || !Array.isArray(built.options) || built.options.length < 3) return null;
+
+  const correcta = ["a","b","c"][built.options.indexOf(built.correct)];
+  if(!correcta) return null;
+
+  return {
+    familia: built.familia,
+    subtipo: modo.key,
+    badge: modo.badge,
+    badgeClass: modo.badgeClass,
+    badgeSub: modo.badgeSub,
+    prompt: built.prompt,
+    promptStyle: built.promptStyle,
+    opciones: built.options,
+    opcionesClass: built.opcionesClass,
+    correcta,
+    respuesta: built.correct,
+    extra: item || null,
+    usaAudio: !!built.usaAudio,
+    audioSrc: built.audioSrc || "",
+    romaji: built.romaji || ""
+  };
+}
+
+function getModoActivoConfig(){
+  if(modoExtra) return MODOS[modoExtra];
+  if(contenidoActivo.kanji && !contenidoActivo.vocab) return MODOS[modoBase];
+  if(contenidoActivo.vocab && !contenidoActivo.kanji) return MODOS[modoVocab];
+  if(contenidoActivo.kanji && contenidoActivo.vocab) return null;
+  return null;
+}
+
+function getModeKeysDisponiblesAhora(){
+  if(modoExtra) return [modoExtra];
+
+  const keys = [];
+  if(contenidoActivo.kanji) keys.push(modoBase);
+  if(contenidoActivo.vocab) keys.push(modoVocab);
+  return keys;
+}
+
+function generarPreguntaActual(){
+  const modeKeys = getModeKeysDisponiblesAhora();
+  if(modeKeys.length === 0) return null;
+
+  const keyElegida = pick(shuffle(modeKeys));
+  return buildQuestionFromMode(keyElegida);
+}
+
+/* =========================================================
+   AUDIO
+========================================================= */
+let audioActual = null;
+
+function reproducirAudio(src){
+  if(!src){
+    renderNoAudio("No hay audio");
+    return;
+  }
+
+  try{
+    if(audioActual){
+      audioActual.pause();
+      audioActual.currentTime = 0;
+    }
+
+    const audio = new Audio(src);
+    audioActual = audio;
+
+    audio.addEventListener("error", () => {
+      renderNoAudio("No hay audio");
+    });
+
+    audio.play().then(() => {
+      renderNoAudio("");
+    }).catch(() => {
+      renderNoAudio("No hay audio");
+    });
+  }catch{
+    renderNoAudio("No hay audio");
+  }
+}
+
+/* =========================================================
+   FLUJO
+========================================================= */
+function mostrarPregunta(q){
+  actual = q;
+  yaValidado = false;
+  limpiarResultado();
+
+  const tags = [
+    `<span class="badge ${q.badgeClass}">${q.badge}</span>`,
+    `<span class="badge badge-sub">${q.badgeSub}</span>`
+  ];
+
+  setPromptTop(tags);
+  setPreguntaVisual(q.prompt, q.promptStyle);
+  setOpciones(q.opciones, q.opcionesClass);
+  renderAudioUI(q);
+  refrescarPills();
+
+  if(q.usaAudio){
+    setTimeout(() => reproducirAudio(q.audioSrc), 120);
+  }
+}
+
+function mostrarErrorGeneracion(msg){
+  setPromptTop([]);
+  setPreguntaVisual("—", "visual-jp");
+  $("opciones").innerHTML = "";
+  $("audioWrap").innerHTML = "";
+  $("resultado").className = "incorrecto";
+  $("resultado").innerText = msg;
+}
+
+function siguiente(){
+  if(gradosSeleccionados.size === 0){
+    setPromptTop([]);
+    setPreguntaVisual("—", "visual-jp");
+    $("opciones").innerHTML = "";
+    $("audioWrap").innerHTML = "";
+    return;
+  }
+
+  aplicarFiltros();
+
+  const q = generarPreguntaActual();
+  if(!q){
+    mostrarErrorGeneracion("No hay suficiente pool con los grados y modos activos.");
+    return;
+  }
+
+  mostrarPregunta(q);
+}
+
+function responder(letra){
+  if(yaValidado || !actual) return;
+  verificar(letra);
+}
+
+function verificar(input){
+  input = (input || "").trim().toLowerCase();
+
+  if(!["a","b","c"].includes(input)){
+    $("resultado").className = "incorrecto";
+    $("resultado").innerText = "Usa solo: a / b / c";
+    return;
+  }
+
+  const res = $("resultado");
+  const extra = $("extraResultado");
+
+  if(input === actual.correcta){
+    res.className = "correcto";
+    res.innerText = "Correcto ✔";
+    aciertos++;
+    racha++;
+    if(racha > mejorRacha) mejorRacha = racha;
+  }else{
+    res.className = "incorrecto";
+    res.innerText = `Incorrecto ✘ (era ${actual.correcta})\nRespuesta: ${actual.correcta}) ${actual.respuesta}`;
+    errores++;
+    racha = 0;
+  }
+
+  if(actual.familia === "vocab"){
+    extra.innerText = actual.romaji ? `Romaji: ${actual.romaji}` : "";
+  }else{
+    extra.innerText = "";
+  }
+
+  pintarStats();
+  guardarStats();
+  yaValidado = true;
+}
+
+/* =========================================================
+   CARGA JSON
+========================================================= */
+cargarStats();
+
+Promise.all([
+  fetch("data/maestrodeloskanji/kanji_todos.json").then(r => r.json()),
+  fetch("data/maestrodeloskanji/vocabulario_todos.json").then(r => r.json())
+])
+.then(([kanjiData, vocabData]) => {
+  kanjiCompleto = (Array.isArray(kanjiData) ? kanjiData : [])
+    .filter(x =>
+      x &&
+      typeof x.kanji === "string" && x.kanji.trim() !== "" &&
+      (typeof x.grado === "number" || typeof x.grado === "string")
+    )
+    .map(x => ({
+      kanji: normalizeText(x.kanji),
+      significado_en: normalizeText(x.significado_en),
+      significado_es: normalizeText(x.significado_es),
+      kunyomi: normalizeText(x.kunyomi),
+      onyomi: normalizeText(x.onyomi),
+      grado: Number(x.grado)
+    }))
+    .filter(x => x.kanji && !Number.isNaN(x.grado));
+
+  vocabCompleto = (Array.isArray(vocabData) ? vocabData : [])
+    .filter(x =>
+      x &&
+      typeof x.palabra === "string" && x.palabra.trim() !== "" &&
+      typeof x.romaji === "string" && x.romaji.trim() !== "" &&
+      Array.isArray(x.grados_detectados)
+    )
+    .map(x => ({
+      palabra: normalizeText(x.palabra),
+      romaji: normalizeText(x.romaji),
+      significado_en: normalizeText(x.significado_en),
+      significado_es: normalizeText(x.significado_es),
+      kanji_contenidos: Array.isArray(x.kanji_contenidos) ? x.kanji_contenidos : [],
+      grados_detectados: (Array.isArray(x.grados_detectados) ? x.grados_detectados : [])
+        .map(n => Number(n))
+        .filter(n => !Number.isNaN(n))
+    }))
+    .filter(x => x.palabra && x.romaji && x.grados_detectados.length > 0);
+
+  construirChipsGrados();
+  actualizarBotonesContenido();
+  actualizarBotonesBase();
+  actualizarBotonesVocab();
+  actualizarBotonesExtra();
+  actualizarBotonesPool();
+  aplicarFiltros();
+  siguiente();
+})
+.catch(err => {
+  $("resultado").className = "incorrecto";
+  $("resultado").innerText = "No se pudieron cargar los JSON de data/maestrodeloskanji/.";
+  console.error(err);
+});
+</script>
+</body>
+</html>
