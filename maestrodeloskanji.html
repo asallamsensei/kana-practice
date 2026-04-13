@@ -270,6 +270,18 @@
     color: var(--muted);
   }
 
+.opbtns button.correcto{
+  background: var(--accent2);
+  border-color: transparent;
+  color: white;
+}
+
+.opbtns button.incorrecto{
+  background: var(--danger);
+  border-color: transparent;
+  color: white;
+}
+  
   #preguntaVisual{
     display:flex;
     align-items:center;
@@ -400,9 +412,9 @@
       <div id="opciones"></div>
 
       <div class="opbtns">
-        <button class="btn btn-ghost" type="button" onclick="responder('a')">a</button>
-        <button class="btn btn-ghost" type="button" onclick="responder('b')">b</button>
-        <button class="btn btn-ghost" type="button" onclick="responder('c')">c</button>
+        <button id="btnA" class="btn btn-ghost" type="button" onclick="responder('a')">a</button>
+        <button id="btnB" class="btn btn-ghost" type="button" onclick="responder('b')">b</button>
+        <button id="btnC" class="btn btn-ghost" type="button" onclick="responder('c')">c</button>
       </div>
 
       <div id="resultado"></div>
@@ -663,6 +675,12 @@ function limpiarResultado(){
   $("resultado").innerText = "";
   $("resultado").className = "";
   $("extraResultado").innerText = "";
+
+  ["btnA","btnB","btnC"].forEach(id => {
+    const b = $(id);
+    b.classList.remove("correcto","incorrecto");
+  });
+  
 }
 
 function setPreguntaVisual(texto, estilo){
@@ -1513,6 +1531,17 @@ function verificar(input){
     errores++;
     racha = 0;
   }
+  
+  /* 👇 AGREGA ESTO JUSTO DESPUÉS DEL IF/ELSE 👇 */
+  ["a","b","c"].forEach(l => {
+    const btn = $("btn" + l.toUpperCase());
+  
+    if(l === actual.correcta){
+      btn.classList.add("correcto"); // verde
+    }else{
+      btn.classList.add("incorrecto"); // rojo
+    }
+  });
 
   if(actual.familia === "vocab"){
     extra.innerText = actual.romaji ? `Romaji: ${actual.romaji}` : "";
