@@ -475,6 +475,33 @@ function pintarStats(){
   $("precision").innerText = precisionPct();
 }
 
+const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+function playBeep(freq, duration){
+  const osc = audioCtx.createOscillator();
+  const gain = audioCtx.createGain();
+
+  osc.connect(gain);
+  gain.connect(audioCtx.destination);
+
+  osc.frequency.value = freq;
+  osc.type = "sine";
+
+  gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
+
+  osc.start();
+  osc.stop(audioCtx.currentTime + duration);
+}
+
+function sonidoCorrecto(){
+  playBeep(700, 0.08);
+  setTimeout(() => playBeep(900, 0.12), 80);
+}
+
+function sonidoIncorrecto(){
+  playBeep(250, 0.2);
+}
+  
 /* =========================================================
    UI HELPERS
 ========================================================= */
@@ -510,6 +537,12 @@ document.addEventListener("keydown", (e) => {
   }
 });
 
+document.addEventListener("click", () => {
+  if(audioCtx.state === "suspended"){
+    audioCtx.resume();
+  }
+}, { once: true });
+  
 document.addEventListener("keydown", (e) => {
   if (e.key !== "Enter") return;
   e.preventDefault();
@@ -819,11 +852,16 @@ function verificar(input){
     aciertos++;
     racha++;
     if(racha > mejorRacha) mejorRacha = racha;
+  
+    sonidoCorrecto();   // 🔥 AÑADE ESTO
+  
   }else{
     res.className = "incorrecto";
     res.innerText = `Incorrecto ✘ (era ${actual.correcta})\nRespuesta: ${actual.correcta}) ${actual.respuesta}`;
     errores++;
     racha = 0;
+  
+    sonidoIncorrecto(); // 🔥 Y ESTO
   }
 
   pintarStats();
