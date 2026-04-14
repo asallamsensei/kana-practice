@@ -1643,7 +1643,7 @@ function reproducirAudio(texto){
     if(vozJaponesa) u.voice = vozJaponesa;
 
     u.onstart = () => renderNoAudio("");
-    u.onerror = () => renderNoAudio("No se pudo reproducir");
+    u.onerror = () => renderNoAudio("");
     u.onend = () => renderNoAudio("");
 
     speechSynthesis.speak(u);
