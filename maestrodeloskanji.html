@@ -337,6 +337,12 @@
     font-weight: 900;
   }
 
+.btn-mode:disabled{
+  opacity: .35;
+  cursor: not-allowed;
+  filter: grayscale(.3);
+}
+  
   #audioWrap{
     display:flex;
     justify-content:center;
@@ -915,8 +921,46 @@ function actualizarBotonesModos(){
 
   $("x-mix").classList.toggle("activo", mixExtra);
   $("x-mix").classList.toggle("mix-activo", mixExtra);
+
+  const bloquearExtra = !puedeUsarExtra();
+  
+  MODOS_EXTRA.forEach(modo => {
+    const mapa = {
+      "kanji_kunyomi": "x-kanji-kun",
+      "kanji_onyomi": "x-kanji-on",
+      "kunyomi_kanji": "x-kun-kanji",
+      "onyomi_kanji": "x-on-kanji",
+      "kanji_grado": "x-kanji-grado",
+      "grado_kanji": "x-grado-kanji"
+    };
+  
+    const id = mapa[modo];
+    const btn = $(id);
+  
+    if(!btn) return;
+  
+    btn.disabled = bloquearExtra;
+  
+    if(bloquearExtra){
+      btn.classList.remove("activo", "mix-activo");
+    }
+  });
+  
+  // también el botón Mix de Extra
+  const btnMixExtra = $("x-mix");
+  if(btnMixExtra){
+    btnMixExtra.disabled = bloquearExtra;
+    if(bloquearExtra){
+      btnMixExtra.classList.remove("activo", "mix-activo");
+    }
+  }
+  
 }
 
+function puedeUsarExtra(){
+  return gradosSeleccionados.size > 1;
+}
+  
 function actualizarBotonesPool(){
   $("pool-sel").classList.toggle("activo", poolScope === "seleccion");
   $("pool-glob").classList.toggle("activo", poolScope === "global");
@@ -993,6 +1037,7 @@ function construirChipsGrados(){
       }
 
       syncChipsGrados();
+      actualizarBotonesModos();
       aplicarFiltros();
       yaValidado = false;
       limpiarResultado();
@@ -1019,6 +1064,7 @@ function syncChipsGrados(){
 function activarMixGrados(){
   gradosSeleccionados = new Set(gradosDisponibles);
   syncChipsGrados();
+  actualizarBotonesModos();
   aplicarFiltros();
   yaValidado = false;
   limpiarResultado();
@@ -1055,6 +1101,10 @@ function activarMixContenido(){
 }
 
 function toggleModo(modo){
+  if(MODOS_EXTRA.includes(modo) && !puedeUsarExtra()){
+    return;
+  }
+  
   if(modosActivos.has(modo)){
     modosActivos.delete(modo);
   }else{
