@@ -551,9 +551,9 @@
       </div>
       
       <div class="row" style="justify-content:flex-start; margin-top: 8px; gap:10px; flex-wrap:wrap;">
-        <button class="btn btn-mode" id="lang-es" type="button" onclick="setIdiomaSignificado('es')">Español</button>
-        <button class="btn btn-mode" id="lang-en" type="button" onclick="setIdiomaSignificado('en')">Inglés</button>
-        <button class="btn btn-mode" id="lang-ambos" type="button" onclick="setIdiomaSignificado('ambos')">Ambos</button>
+        <button class="btn btn-mode" id="lang-es" type="button" onclick="toggleIdioma('es')">Español</button>
+        <button class="btn btn-mode" id="lang-en" type="button" onclick="toggleIdioma('en')">Inglés</button>
+        <button class="btn btn-mode" id="lang-ambos" type="button" onclick="activarAmbosIdiomas()">Ambos</button>
       </div>
       
       <div class="sep"></div>
@@ -685,17 +685,17 @@ function getSignificado(item){
   const es = getSignificadoES(item);
   const en = getSignificadoEN(item);
 
-  if(idiomaSignificado === "es"){
-    return es || en || "";
-  }
-
-  if(idiomaSignificado === "en"){
-    return en || es || "";
-  }
-
-  if(idiomaSignificado === "ambos"){
+  if(idiomasActivos.es && idiomasActivos.en){
     if(es && en) return `${es}\n${en}`;
     return es || en || "";
+  }
+
+  if(idiomasActivos.es){
+    return es || en || "";
+  }
+
+  if(idiomasActivos.en){
+    return en || es || "";
   }
 
   return es || en || "";
@@ -776,7 +776,10 @@ let modosActivos = new Set([
   "audio_jp"
 ]);
 let poolScope = "seleccion";
-let idiomaSignificado = "es"; // "es" | "en" | "ambos"
+let idiomasActivos = {
+  es: true,
+  en: false
+};
 let permitirGradosSuperioresVocab = true;
 let incluirSinKanjiGraduado = false;
 /* =========================================================
@@ -907,12 +910,15 @@ function refrescarPills(){
   $("pillVocabExtra").innerText =
   `Vocab extra: superiores ${permitirGradosSuperioresVocab ? "sí" : "no"} · sin kanji ${incluirSinKanjiGraduado ? "sí" : "no"}`;
   
-  const idiomaTxt =
-    idiomaSignificado === "es" ? "Español" :
-    idiomaSignificado === "en" ? "Inglés" :
-    "Ambos";
+  let idiomaTxt = "Español";
   
-  $("pillIdioma").innerText = `Idioma: ${idiomaTxt}`; 
+  if(idiomasActivos.es && idiomasActivos.en){
+    idiomaTxt = "Ambos";
+  }else if(idiomasActivos.en){
+    idiomaTxt = "Inglés";
+  }
+  
+  $("pillIdioma").innerText = `Idioma: ${idiomaTxt}`;
 }
 
 function descripcionModoActual(){
@@ -1024,13 +1030,29 @@ function actualizarBotonesPool(){
 }
 
 function actualizarBotonesIdioma(){
-  $("lang-es").classList.toggle("activo", idiomaSignificado === "es");
-  $("lang-en").classList.toggle("activo", idiomaSignificado === "en");
-  $("lang-ambos").classList.toggle("activo", idiomaSignificado === "ambos");
+  $("lang-es").classList.toggle("activo", idiomasActivos.es);
+  $("lang-en").classList.toggle("activo", idiomasActivos.en);
+
+  const ambos = idiomasActivos.es && idiomasActivos.en;
+  $("lang-ambos").classList.toggle("activo", ambos);
+  $("lang-ambos").classList.toggle("mix-activo", ambos);
 }
 
-function setIdiomaSignificado(valor){
-  idiomaSignificado = valor;
+function toggleIdioma(lang){
+  idiomasActivos[lang] = !idiomasActivos[lang];
+
+  if(!idiomasActivos.es && !idiomasActivos.en){
+    idiomasActivos.es = true;
+  }
+
+  actualizarBotonesIdioma();
+  limpiarResultado();
+  siguiente();
+}
+
+function activarAmbosIdiomas(){
+  idiomasActivos.es = true;
+  idiomasActivos.en = true;
   actualizarBotonesIdioma();
   limpiarResultado();
   siguiente();
