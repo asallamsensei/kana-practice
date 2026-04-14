@@ -1046,16 +1046,14 @@ function toggleIdioma(lang){
   }
 
   actualizarBotonesIdioma();
-  limpiarResultado();
-  siguiente();
+  refrescarPreguntaPorIdioma();
 }
 
 function activarAmbosIdiomas(){
   idiomasActivos.es = true;
   idiomasActivos.en = true;
   actualizarBotonesIdioma();
-  limpiarResultado();
-  siguiente();
+  refrescarPreguntaPorIdioma();
 }
   
 function actualizarBotonesFiltrosVocab(){
@@ -1700,6 +1698,56 @@ function generarPreguntaActual(){
   return buildQuestionFromMode(keyElegida);
 }
 
+function refrescarPreguntaPorIdioma(){
+  if(!actual || !actual.extra) return;
+
+  const sourceKey = actual.familia === "kanji" ? "kanji" : "vocab";
+  const pool = getSourcePool(sourceKey);
+
+  if(actual.subtipo === "kanji_es" || actual.subtipo === "jp_es" || actual.subtipo === "audio_es"){
+    actual.prompt = actual.extra.palabra || actual.extra.kanji || actual.prompt;
+    actual.respuesta = getSignificado(actual.extra);
+    actual.opciones = build3OptionsFromItems(pool, actual.respuesta, x => getSignificado(x));
+    actual.correcta = ["a","b","c"][actual.opciones.indexOf(actual.respuesta)];
+
+    setPreguntaVisual(actual.prompt, actual.promptStyle);
+    setOpciones(actual.opciones, actual.opcionesClass);
+  }
+
+  else if(actual.subtipo === "es_kanji" || actual.subtipo === "es_jp"){
+    actual.prompt = getSignificado(actual.extra);
+
+    setPreguntaVisual(actual.prompt, actual.promptStyle);
+    setOpciones(actual.opciones, actual.opcionesClass);
+  }
+
+  else if(actual.subtipo === "audio_jp"){
+    setPreguntaVisual(actual.prompt, actual.promptStyle);
+
+    if(yaValidado){
+      const partes = [];
+
+      if(actual.romaji){
+        partes.push(`Romaji: ${actual.romaji}`);
+      }
+
+      const significado = getSignificado(actual.extra);
+      if(significado){
+        partes.push(`Significado: ${significado}`);
+      }
+
+      $("extraResultado").innerText = partes.join(" — ");
+    }
+  }
+
+  else{
+    setPreguntaVisual(actual.prompt, actual.promptStyle);
+    setOpciones(actual.opciones, actual.opcionesClass);
+  }
+
+  refrescarPills();
+}
+  
 /* =========================================================
    AUDIO
 ========================================================= */
