@@ -645,11 +645,22 @@ function getSignificado(item){
   const raw = normalizeText(item.significado_es) || normalizeText(item.significado_en);
   if(!raw) return "";
 
-  return raw
+  const partes = raw
     .split(",")
     .map(s => s.trim())
-    .slice(0, 2)   // 👈 SOLO LOS 2 PRIMEROS
-    .join(", ");
+    .filter(Boolean);
+
+  const unicas = [];
+  const vistas = new Set();
+
+  for(const p of partes){
+    const key = p.toLowerCase();
+    if(vistas.has(key)) continue;
+    vistas.add(key);
+    unicas.push(p);
+  }
+
+  return unicas.slice(0, 2).join(", ");
 }
 
 function parseLecturas(raw){
