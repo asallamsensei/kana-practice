@@ -773,6 +773,13 @@ function preguntaESKanji(){
    FLUJO
 ========================================================= */
 function siguiente(){
+
+  // 🔥 SI NO HA RESPONDIDO → MARCAR ERROR
+  if(!yaValidado && actual){
+    verificar(null);
+    return;
+  }
+  
   if(gradosSeleccionados.size === 0){
     $("kanji").innerText = "—";
     $("opciones").innerHTML = "";
@@ -842,7 +849,17 @@ function verificar(input){
 
   if(!["a","b","c"].includes(input)){
     res.className = "incorrecto";
-    res.innerText = "Usa solo: a / b / c";
+    res.innerText = `Incorrecto ✘\nRespuesta: ${actual.correcta}) ${actual.respuesta}`;
+  
+    errores++;
+    racha = 0;
+  
+    sonidoIncorrecto();
+  
+    pintarStats();
+    guardarStats();
+  
+    yaValidado = true; // 🔥 CLAVE
     return;
   }
 
