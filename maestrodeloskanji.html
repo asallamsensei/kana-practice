@@ -1761,7 +1761,24 @@ function verificar(input){
   });
 
   if(actual.familia === "vocab"){
-    extra.innerText = actual.romaji ? `Romaji: ${actual.romaji}` : "";
+    if(actual.subtipo === "audio_jp"){
+      const partes = [];
+  
+      if(actual.romaji){
+        partes.push(`Romaji: ${actual.romaji}`);
+      }
+  
+      if(actual.extra){
+        const significado = getSignificado(actual.extra);
+        if(significado){
+          partes.push(`ES: ${significado}`);
+        }
+      }
+  
+      extra.innerText = partes.join(" — ");
+    }else{
+      extra.innerText = actual.romaji ? `Romaji: ${actual.romaji}` : "";
+    }
   }else{
     extra.innerText = "";
   }
