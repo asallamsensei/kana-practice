@@ -667,6 +667,30 @@ function randomChoice(arr){
   return pick(arr);
 }
 
+function autenticarEstudiante(){
+  let clave = "";
+  let estudiante = "";
+
+  while(true){
+    clave = prompt("Ingresa tu clave de estudiante:") || "";
+
+    clave = clave.trim();
+
+    if(!clave){
+      continue;
+    }
+
+    if(CLAVES_ESTUDIANTES[clave]){
+      estudiante = CLAVES_ESTUDIANTES[clave];
+      break;
+    }
+
+    alert("Clave incorrecta");
+  }
+
+  $("studentName").innerText = "Estudiante: " + estudiante;
+}
+  
 /* =========================================================
    DATA + ESTADO
 ========================================================= */
@@ -1699,6 +1723,7 @@ function verificar(input){
 /* =========================================================
    CARGA JSON
 ========================================================= */
+autenticarEstudiante();
 cargarStats();
 
 Promise.all([
