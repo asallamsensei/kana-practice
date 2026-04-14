@@ -693,7 +693,7 @@ function getSignificado(item){
   const en = getSignificadoEN(item);
 
   if(idiomasActivos.es && idiomasActivos.en){
-    if(es && en) return `${es}\n${en}`;
+    if(es && en) return `${es} / ${en}`;
     return es || en || "";
   }
 
