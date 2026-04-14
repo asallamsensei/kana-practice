@@ -574,6 +574,17 @@
 
       <div class="sep"></div>
 
+      <div class="row" style="justify-content:flex-start; margin-top:12px;">
+        <span class="pill">Significados</span>
+      </div>
+      
+      <div class="row" style="justify-content:flex-start; margin-top:8px; gap:10px; flex-wrap:wrap;">
+        <button class="btn btn-mode" id="meaning-max2" type="button" onclick="setModoSignificados(false)">Máx. 2</button>
+        <button class="btn btn-mode" id="meaning-all" type="button" onclick="setModoSignificados(true)">Todos</button>
+      </div>
+      
+      <div class="sep"></div>
+
       <div class="row" style="justify-content:flex-start;">
         <span class="pill">Pool de distractores</span>
       </div>
@@ -670,7 +681,7 @@ function limpiarSignificados(raw){
     unicas.push(p);
   }
 
-  return unicas.slice(0, 2).join(", ");
+  return (mostrarTodosSignificados ? unicas : unicas.slice(0, 2)).join(", ");
 }
 
 function getSignificadoES(item){
@@ -780,6 +791,7 @@ let idiomasActivos = {
   es: true,
   en: false
 };
+let mostrarTodosSignificados = false;
 let permitirGradosSuperioresVocab = true;
 let incluirSinKanjiGraduado = false;
 /* =========================================================
@@ -1038,6 +1050,17 @@ function actualizarBotonesIdioma(){
   $("lang-ambos").classList.toggle("mix-activo", ambos);
 }
 
+function actualizarBotonesSignificados(){
+  $("meaning-max2").classList.toggle("activo", !mostrarTodosSignificados);
+  $("meaning-all").classList.toggle("activo", mostrarTodosSignificados);
+}
+
+function setModoSignificados(valor){
+  mostrarTodosSignificados = valor;
+  actualizarBotonesSignificados();
+  refrescarPreguntaPorIdioma();
+}
+  
 function toggleIdioma(lang){
   idiomasActivos[lang] = !idiomasActivos[lang];
 
@@ -1980,6 +2003,7 @@ Promise.all([
   actualizarBotonesPool();
   actualizarBotonesFiltrosVocab();
   actualizarBotonesIdioma();
+  actualizarBotonesSignificados();
   aplicarFiltros();
   siguiente();
 })
