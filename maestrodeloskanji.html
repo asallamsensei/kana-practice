@@ -14,8 +14,8 @@
     --bg: #0b1020;
     --card: rgba(255,255,255,.08);
     --card2: rgba(255,255,255,.10);
-    --text: #eef2ff;
-    --muted: rgba(238,242,255,.75);
+    --text: #ffffff;
+    --muted: rgba(255,255,255,.82);
     --accent: #7d5cff;
     --accent2:#22c55e;
     --danger:#ef4444;
@@ -115,14 +115,14 @@
   }
 
   .hint{
-    color: rgba(238,242,255,.7);
+    color: rgba(255,255,255,.78);
     font-size: 13px;
     text-align:center;
   }
 
   .miniStatus{
     margin-top: 6px;
-    color: rgba(238,242,255,.78);
+    color: rgba(255,255,255,.84);
     font-size: 13px;
     display: flex;
     flex-direction: column;
@@ -283,6 +283,20 @@
   color: #fecaca;
   box-shadow: 0 0 10px rgba(239,68,68,.22);
 }
+
+.student-subtitle{
+  text-align: center;
+  font-size: clamp(15px, 2.2vw, 20px);
+  font-weight: 800;
+  color: #ffffff;
+  margin-top: -2px;
+  margin-bottom: 8px;
+  letter-spacing: .3px;
+  text-shadow:
+    0 0 6px rgba(255,255,255,.55),
+    0 0 14px rgba(125,92,255,.45),
+    0 0 24px rgba(125,92,255,.28);
+}
   
   #preguntaVisual{
     display:flex;
@@ -390,7 +404,7 @@
   #extraResultado{
     margin-top: 8px;
     text-align:center;
-    color: rgba(238,242,255,.88);
+    color: rgba(255,255,255,.92);
     font-size: 16px;
   }
 
@@ -410,6 +424,7 @@
 <div class="wrap">
   <header>
     <h1>Maestro de los Kanji — Asallam Sensei</h1>
+    <div id="studentName" class="student-subtitle">Estudiante: —</div>
   </header>
 
   <div class="grid">
@@ -564,6 +579,12 @@
 </div>
 
 <script>
+
+const CLAVES_ESTUDIANTES = {
+  "maestradeloskanji": "Laura",
+  "aguecuca": "Guillermoster",
+};
+  
 /* =========================================================
    HELPERS
 ========================================================= */
