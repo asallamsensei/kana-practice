@@ -225,6 +225,12 @@
     border-color: transparent;
   }
 
+  .chip.bloqueado{
+    opacity: .35;
+    cursor: not-allowed;
+    filter: grayscale(.4);
+  }
+  
   .big{
     text-align:center;
     padding: 14px 10px 10px;
@@ -608,8 +614,9 @@
 <script>
 
 const CLAVES_ESTUDIANTES = {
-  "maestradeloskanji": "Laura",
-  "aguecuca": "Guillermoster",
+  "maestradeloskanji": { nombre: "Laura", maxGrado: 1 },
+  "aguecuca": { nombre: "Guillermoster", maxGrado: 3 },
+  "profe": { nombre: "Sensei", maxGrado: 8 },
 };
   
 /* =========================================================
@@ -732,16 +739,13 @@ function randomChoice(arr){
 
 function autenticarEstudiante(){
   let clave = "";
-  let estudiante = "";
+  let estudiante = null;
 
   while(true){
     clave = prompt("Ingresa tu clave de estudiante:") || "";
-
     clave = clave.trim();
 
-    if(!clave){
-      continue;
-    }
+    if(!clave) continue;
 
     if(CLAVES_ESTUDIANTES[clave]){
       estudiante = CLAVES_ESTUDIANTES[clave];
@@ -751,7 +755,11 @@ function autenticarEstudiante(){
     alert("Clave incorrecta");
   }
 
-  $("studentName").innerText = "Estudiante: " + estudiante;
+  $("studentName").innerText = "Estudiante: " + estudiante.nombre;
+  gradoMaxPermitido = Number(estudiante.maxGrado) || 8;
+
+  const gradosPermitidos = gradosDisponibles.filter(g => g <= gradoMaxPermitido);
+  gradosSeleccionados = new Set(gradosPermitidos);
 }
   
 /* =========================================================
@@ -767,6 +775,7 @@ let actual = null;
 let yaValidado = false;
 
 const gradosDisponibles = [1,2,3,4,5,6,8];
+let gradoMaxPermitido = 8;
 let gradosSeleccionados = new Set(gradosDisponibles);
 
 let contenidoActivo = {
@@ -1128,11 +1137,18 @@ function construirChipsGrados(){
 
   gradosDisponibles.forEach(g => {
     const chip = document.createElement("div");
+    const bloqueado = g > gradoMaxPermitido;
+
     chip.className = "chip" + (gradosSeleccionados.has(g) ? " activo" : "");
+    if(bloqueado) chip.classList.add("bloqueado");
+
     chip.textContent = String(g);
 
     chip.onclick = () => {
-      const todosActivos = gradosDisponibles.every(x => gradosSeleccionados.has(x));
+      if(bloqueado) return;
+
+      const gradosPermitidos = gradosDisponibles.filter(x => x <= gradoMaxPermitido);
+      const todosActivos = gradosPermitidos.every(x => gradosSeleccionados.has(x));
 
       if(todosActivos){
         gradosSeleccionados = new Set([g]);
@@ -1141,7 +1157,7 @@ function construirChipsGrados(){
         else gradosSeleccionados.add(g);
 
         if(gradosSeleccionados.size === 0){
-          gradosSeleccionados = new Set(gradosDisponibles);
+          gradosSeleccionados = new Set(gradosPermitidos);
         }
       }
 
@@ -1164,14 +1180,17 @@ function syncChipsGrados(){
   [...cont.children].forEach((el, idx) => {
     const g = gradosDisponibles[idx];
     el.classList.toggle("activo", gradosSeleccionados.has(g));
+    el.classList.toggle("bloqueado", g > gradoMaxPermitido);
   });
 
-  const todosActivos = gradosDisponibles.every(g => gradosSeleccionados.has(g));
+  const gradosPermitidos = gradosDisponibles.filter(g => g <= gradoMaxPermitido);
+  const todosActivos = gradosPermitidos.every(g => gradosSeleccionados.has(g));
   $("btnTodo").classList.toggle("mix-activo", todosActivos);
 }
 
 function activarMixGrados(){
-  gradosSeleccionados = new Set(gradosDisponibles);
+  const gradosPermitidos = gradosDisponibles.filter(g => g <= gradoMaxPermitido);
+  gradosSeleccionados = new Set(gradosPermitidos);
   syncChipsGrados();
   actualizarBotonesModos();
   aplicarFiltros();
