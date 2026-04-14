@@ -543,6 +543,18 @@
         <button class="btn btn-mode" id="vocab-sinkanji-si" type="button" onclick="setIncluirSinKanjiGraduado(true)">Sí</button>
         <button class="btn btn-mode" id="vocab-sinkanji-no" type="button" onclick="setIncluirSinKanjiGraduado(false)">No</button>
       </div>
+
+      <div class="sep"></div>
+      
+      <div class="row" style="justify-content:flex-start;">
+        <span class="pill">Idiomas</span>
+      </div>
+      
+      <div class="row" style="justify-content:flex-start; margin-top: 8px; gap:10px; flex-wrap:wrap;">
+        <button class="btn btn-mode" id="lang-es" type="button" onclick="setIdiomaSignificado('es')">Español</button>
+        <button class="btn btn-mode" id="lang-en" type="button" onclick="setIdiomaSignificado('en')">Inglés</button>
+        <button class="btn btn-mode" id="lang-ambos" type="button" onclick="setIdiomaSignificado('ambos')">Ambos</button>
+      </div>
       
       <div class="sep"></div>
 
@@ -579,6 +591,7 @@
         <div id="pillModo">Modo: —</div>
         <div id="pillPool">Pool: —</div>
         <div id="pillScope">Distractores: —</div>
+        <div id="pillIdioma">Idioma: —</div>
         <div id="pillVocabExtra">Vocab extra: —</div>
       </div>
     </div>
@@ -641,11 +654,8 @@ function normalizeText(s){
   return String(s || "").trim();
 }
 
-function getSignificado(item){
-  const raw = normalizeText(item.significado_es) || normalizeText(item.significado_en);
-  if(!raw) return "";
-
-  const partes = raw
+function limpiarSignificados(raw){
+  const partes = normalizeText(raw)
     .split(",")
     .map(s => s.trim())
     .filter(Boolean);
@@ -654,13 +664,41 @@ function getSignificado(item){
   const vistas = new Set();
 
   for(const p of partes){
-    const key = p.toLowerCase();
+    const key = p.toLowerCase().replace(/\s+/g, " ").trim();
     if(vistas.has(key)) continue;
     vistas.add(key);
     unicas.push(p);
   }
 
   return unicas.slice(0, 2).join(", ");
+}
+
+function getSignificadoES(item){
+  return limpiarSignificados(item.significado_es);
+}
+
+function getSignificadoEN(item){
+  return limpiarSignificados(item.significado_en);
+}
+
+function getSignificado(item){
+  const es = getSignificadoES(item);
+  const en = getSignificadoEN(item);
+
+  if(idiomaSignificado === "es"){
+    return es || en || "";
+  }
+
+  if(idiomaSignificado === "en"){
+    return en || es || "";
+  }
+
+  if(idiomaSignificado === "ambos"){
+    if(es && en) return `${es}\n${en}`;
+    return es || en || "";
+  }
+
+  return es || en || "";
 }
 
 function parseLecturas(raw){
@@ -738,6 +776,7 @@ let modosActivos = new Set([
   "audio_jp"
 ]);
 let poolScope = "seleccion";
+let idiomaSignificado = "es"; // "es" | "en" | "ambos"
 let permitirGradosSuperioresVocab = true;
 let incluirSinKanjiGraduado = false;
 /* =========================================================
@@ -867,6 +906,13 @@ function refrescarPills(){
   $("pillScope").innerText = `Distractores: ${poolScope === "global" ? "Global" : "Solo selección"}`;
   $("pillVocabExtra").innerText =
   `Vocab extra: superiores ${permitirGradosSuperioresVocab ? "sí" : "no"} · sin kanji ${incluirSinKanjiGraduado ? "sí" : "no"}`;
+  
+  const idiomaTxt =
+    idiomaSignificado === "es" ? "Español" :
+    idiomaSignificado === "en" ? "Inglés" :
+    "Ambos";
+  
+  $("pillIdioma").innerText = `Idioma: ${idiomaTxt}`; 
 }
 
 function descripcionModoActual(){
@@ -977,6 +1023,19 @@ function actualizarBotonesPool(){
   $("pool-glob").classList.toggle("activo", poolScope === "global");
 }
 
+function actualizarBotonesIdioma(){
+  $("lang-es").classList.toggle("activo", idiomaSignificado === "es");
+  $("lang-en").classList.toggle("activo", idiomaSignificado === "en");
+  $("lang-ambos").classList.toggle("activo", idiomaSignificado === "ambos");
+}
+
+function setIdiomaSignificado(valor){
+  idiomaSignificado = valor;
+  actualizarBotonesIdioma();
+  limpiarResultado();
+  siguiente();
+}
+  
 function actualizarBotonesFiltrosVocab(){
   $("vocab-superior-si").classList.toggle("activo", permitirGradosSuperioresVocab === true);
   $("vocab-superior-no").classList.toggle("activo", permitirGradosSuperioresVocab === false);
@@ -1850,6 +1909,7 @@ Promise.all([
   actualizarBotonesModos();
   actualizarBotonesPool();
   actualizarBotonesFiltrosVocab();
+  actualizarBotonesIdioma();
   aplicarFiltros();
   siguiente();
 })
