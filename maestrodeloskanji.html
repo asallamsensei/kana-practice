@@ -1695,11 +1695,15 @@ function getModeKeysDisponiblesAhora(){
 }
 
 function generarPreguntaActual(){
-  const modeKeys = getModeKeysDisponiblesAhora();
+  const modeKeys = shuffle(getModeKeysDisponiblesAhora());
   if(modeKeys.length === 0) return null;
 
-  const keyElegida = pick(shuffle(modeKeys));
-  return buildQuestionFromMode(keyElegida);
+  for(const key of modeKeys){
+    const q = buildQuestionFromMode(key);
+    if(q) return q;
+  }
+
+  return null;
 }
 
 function refrescarPreguntaPorIdioma(){
