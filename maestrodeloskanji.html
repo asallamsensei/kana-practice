@@ -869,8 +869,15 @@ function limpiarResultado(){
 
 function setPreguntaVisual(texto, estilo){
   const el = $("preguntaVisual");
+
+  if(!texto){
+    el.style.display = "none"; // 👈 oculta completamente
+    return;
+  }
+
+  el.style.display = "flex"; // 👈 vuelve a mostrar si hay texto
   el.className = estilo;
-  el.innerText = texto || "—";
+  el.innerText = texto;
 }
 
 function setOpciones(opciones, styleClass){
@@ -895,7 +902,7 @@ function renderAudioUI(question){
   const btn = document.createElement("button");
   btn.type = "button";
   btn.className = "btn btn-audio";
-  btn.textContent = "▶ Reproducir audio";
+  btn.textContent = "🔊";
   btn.onclick = () => reproducirAudio(question.audioSrc);
   wrap.appendChild(btn);
 
@@ -1444,7 +1451,7 @@ const MODOS = {
     isAvailable: ({ filteredPool }) => filteredPool.length >= 3,
     getCandidates: ({ filteredPool }) => filteredPool.filter(item => !!getSignificado(item) && !!normalizeText(item.romaji)),
     build: ({ item, distractorPool }) => ({
-      prompt: "♪",
+      prompt: "",
       promptStyle: "visual-es",
       correct: getSignificado(item),
       options: build3OptionsFromItems(distractorPool, getSignificado(item), x => getSignificado(x)),
@@ -1467,7 +1474,7 @@ const MODOS = {
     isAvailable: ({ filteredPool }) => filteredPool.length >= 3,
     getCandidates: ({ filteredPool }) => filteredPool.filter(item => !!normalizeText(item.romaji)),
     build: ({ item, distractorPool }) => ({
-      prompt: "♪",
+      prompt: "",
       promptStyle: "visual-es",
       correct: item.palabra,
       options: build3OptionsFromItems(distractorPool, item.palabra, x => x.palabra),
