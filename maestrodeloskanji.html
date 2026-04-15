@@ -1923,10 +1923,14 @@ function verificar(input){
   }else{
     res.className = "incorrecto";
   
-    if(input === null){
-      res.innerText = `Incorrecto ✘\nRespuesta: ${actual.correcta}) ${actual.respuesta}`;
+    if(actual.familia === "kanji"){
+      res.innerText = `✘ Incorrecto, era ${actual.correcta}) ${actual.respuesta}`;
     }else{
-      res.innerText = `Incorrecto ✘ (era ${actual.correcta})\nRespuesta: ${actual.correcta}) ${actual.respuesta}`;
+      if(input === null){
+        res.innerText = `Incorrecto ✘\nRespuesta: ${actual.correcta}) ${actual.respuesta}`;
+      }else{
+        res.innerText = `Incorrecto ✘ (era ${actual.correcta})\nRespuesta: ${actual.correcta}) ${actual.respuesta}`;
+      }
     }
   
     errores++;
@@ -1979,6 +1983,22 @@ if(actual.familia === "vocab"){
       extra.innerText = actual.romaji ? `Romaji: ${actual.romaji}` : "";
     }
   }
+}else if(actual.familia === "kanji"){
+  const kun = parseLecturas(actual.extra?.kunyomi).join(", ");
+  const on = parseLecturas(actual.extra?.onyomi).join(", ");
+
+  let texto = "";
+
+  if(kun){
+    texto += `Kun: ${kun}`;
+  }
+
+  if(on){
+    if(texto) texto += "\n";
+    texto += `On: ${on}`;
+  }
+
+  extra.innerText = texto;
 }else{
   extra.innerText = "";
 }
