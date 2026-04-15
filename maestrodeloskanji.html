@@ -1009,28 +1009,6 @@ function actualizarBotonesModos(){
 
   $("x-mix").classList.toggle("activo", mixExtra);
   $("x-mix").classList.toggle("mix-activo", mixExtra);
-  
-  MODOS_EXTRA.forEach(modo => {
-    const mapa = {
-      "kanji_kunyomi": "x-kanji-kun",
-      "kanji_onyomi": "x-kanji-on",
-      "kunyomi_kanji": "x-kun-kanji",
-      "onyomi_kanji": "x-on-kanji",
-      "kanji_grado": "x-kanji-grado",
-      "grado_kanji": "x-grado-kanji"
-    };
-  
-    const id = mapa[modo];
-    const btn = $(id);
-  
-    if(!btn) return;
-  
-    btn.disabled = false;
-  });
-}
-
-function puedeUsarExtra(){
-  return gradosSeleccionados.size > 1;
 }
   
 function actualizarBotonesPool(){
@@ -1221,10 +1199,6 @@ function activarMixContenido(){
 }
 
 function toggleModo(modo){
-  if(MODOS_EXTRA.includes(modo) && !puedeUsarExtra()){
-    return;
-  }
-  
   if(modosActivos.has(modo)){
     modosActivos.delete(modo);
   }else{
