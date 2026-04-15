@@ -1938,28 +1938,43 @@ function verificar(input){
     }
   });
 
-  if(actual.familia === "vocab"){
-    if(actual.subtipo === "audio_jp"){
-      const partes = [];
+if(actual.familia === "vocab"){
+  if(actual.subtipo === "audio_jp"){
+    const partes = [];
   
+    if(actual.romaji){
+      partes.push(`Romaji: ${actual.romaji}`);
+    }
+  
+    if(actual.extra){
+      const significado = getSignificado(actual.extra);
+      if(significado){
+        partes.push(`ES: ${significado}`);
+      }
+    }
+  
+    extra.innerText = partes.join(" — ");
+  }else{
+    // 👇 AQUÍ EL FIX
+    if(actual.subtipo === "audio_es"){
+      const partes = [];
+
+      if(actual.extra?.palabra){
+        partes.push(`JP: ${actual.extra.palabra}`);
+      }
+
       if(actual.romaji){
         partes.push(`Romaji: ${actual.romaji}`);
       }
-  
-      if(actual.extra){
-        const significado = getSignificado(actual.extra);
-        if(significado){
-          partes.push(`ES: ${significado}`);
-        }
-      }
-  
+
       extra.innerText = partes.join(" — ");
     }else{
       extra.innerText = actual.romaji ? `Romaji: ${actual.romaji}` : "";
     }
-  }else{
-    extra.innerText = "";
   }
+}else{
+  extra.innerText = "";
+}
 
   pintarStats();
   guardarStats();
