@@ -1458,11 +1458,11 @@ const MODOS = {
     build: ({ item, distractorPool }) => ({
       prompt: item.kanji,
       promptStyle: "visual-jp",
-      correct: parseLecturas(item.kunyomi)[0],
+      correct: parseLecturas(item.kunyomi).join(", "),
       options: build3OptionsFromItems(
         distractorPool.filter(x => parseLecturas(x.kunyomi).length > 0),
         parseLecturas(item.kunyomi)[0],
-        x => parseLecturas(x.kunyomi)[0] || ""
+        x => parseLecturas(x.kunyomi).join(", ") || ""
       ),
       opcionesClass: "opciones-es",
       usaAudio: false,
@@ -1485,11 +1485,11 @@ const MODOS = {
     build: ({ item, distractorPool }) => ({
       prompt: item.kanji,
       promptStyle: "visual-jp",
-      correct: parseLecturas(item.onyomi)[0],
+      correct: parseLecturas(item.onyomi).join(", "),
       options: build3OptionsFromItems(
         distractorPool.filter(x => parseLecturas(x.onyomi).length > 0),
         parseLecturas(item.onyomi)[0],
-        x => parseLecturas(x.onyomi)[0] || ""
+        x => parseLecturas(x.onyomi).join(", ") || ""
       ),
       opcionesClass: "opciones-es",
       usaAudio: false,
