@@ -1009,8 +1009,6 @@ function actualizarBotonesModos(){
 
   $("x-mix").classList.toggle("activo", mixExtra);
   $("x-mix").classList.toggle("mix-activo", mixExtra);
-
-  const bloquearExtra = !puedeUsarExtra();
   
   MODOS_EXTRA.forEach(modo => {
     const mapa = {
@@ -1027,22 +1025,8 @@ function actualizarBotonesModos(){
   
     if(!btn) return;
   
-    btn.disabled = bloquearExtra;
-  
-    if(bloquearExtra){
-      btn.classList.remove("activo", "mix-activo");
-    }
+    btn.disabled = false;
   });
-  
-  // también el botón Mix de Extra
-  const btnMixExtra = $("x-mix");
-  if(btnMixExtra){
-    btnMixExtra.disabled = bloquearExtra;
-    if(bloquearExtra){
-      btnMixExtra.classList.remove("activo", "mix-activo");
-    }
-  }
-  
 }
 
 function puedeUsarExtra(){
