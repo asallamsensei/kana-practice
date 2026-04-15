@@ -1922,17 +1922,7 @@ function verificar(input){
     sonidoCorrecto();
   }else{
     res.className = "incorrecto";
-  
-    if(actual.familia === "kanji"){
-      res.innerText = `✘ Incorrecto, era ${actual.correcta}) ${actual.respuesta}`;
-    }else{
-      if(input === null){
-        res.innerText = `Incorrecto ✘\nRespuesta: ${actual.correcta}) ${actual.respuesta}`;
-      }else{
-        res.innerText = `Incorrecto ✘ (era ${actual.correcta})\nRespuesta: ${actual.correcta}) ${actual.respuesta}`;
-      }
-    }
-  
+    res.innerText = `✘ Incorrecto, era ${actual.correcta}) ${actual.respuesta}`;
     errores++;
     racha = 0;
     sonidoIncorrecto();
