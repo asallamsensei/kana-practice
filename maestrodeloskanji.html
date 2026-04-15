@@ -1953,15 +1953,15 @@ if(actual.familia === "vocab"){
   if(actual.subtipo === "audio_jp"){
     const partes = [];
   
-    if(actual.romaji){
-      partes.push(`Romaji: ${actual.romaji}`);
-    }
-  
     if(actual.extra){
       const significado = getSignificado(actual.extra);
       if(significado){
         partes.push(`ES: ${significado}`);
       }
+    }
+  
+    if(actual.romaji){
+      partes.push(`Romaji: ${actual.romaji}`);
     }
   
     extra.innerText = partes.join(" — ");
