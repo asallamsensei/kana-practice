@@ -670,7 +670,7 @@ function normalizeText(s){
 
 function limpiarSignificados(raw){
   const partes = normalizeText(raw)
-    .split(",")
+    .split(/,(?![^()]*\))/) // 👈 AQUÍ EL FIX
     .map(s => s.trim())
     .filter(Boolean);
 
