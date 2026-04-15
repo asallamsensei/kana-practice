@@ -1411,7 +1411,7 @@ const MODOS = {
       options: build3OptionsFromItems(distractorPool, getSignificado(item), x => getSignificado(x)),
       opcionesClass: "opciones-es",
       usaAudio: true,
-      audioSrc: item.palabra,
+      audioSrc: item.lectura || item.palabra,
       romaji: normalizeText(item.romaji),
       familia: "vocab"
     })
@@ -1434,7 +1434,7 @@ const MODOS = {
       options: build3OptionsFromItems(distractorPool, item.palabra, x => x.palabra),
       opcionesClass: "opciones-jp",
       usaAudio: true,
-      audioSrc: item.palabra,
+      audioSrc: item.lectura || item.palabra,
       romaji: normalizeText(item.romaji),
       familia: "vocab"
     })
@@ -1457,7 +1457,7 @@ const MODOS = {
       options: build3OptionsFromItems(distractorPool, getSignificado(item), x => getSignificado(x)),
       opcionesClass: "opciones-es",
       usaAudio: true,
-      audioSrc: item.palabra,
+      audioSrc: item.lectura || item.palabra,
       romaji: normalizeText(item.romaji),
       familia: "vocab"
     })
@@ -1480,7 +1480,7 @@ const MODOS = {
       options: build3OptionsFromItems(distractorPool, item.palabra, x => x.palabra),
       opcionesClass: "opciones-jp",
       usaAudio: true,
-      audioSrc: item.palabra,
+      audioSrc: item.lectura || item.palabra,
       romaji: normalizeText(item.romaji),
       familia: "vocab"
     })
