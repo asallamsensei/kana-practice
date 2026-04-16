@@ -258,6 +258,31 @@ img{
 #quizArea button{
   margin-top: 4px;
 }
+
+@media (max-width: 900px){
+
+  .quizRow{
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .quizLeft{
+    width: 100%;
+    max-width: 100%;
+    text-align: center;
+  }
+
+  .quizRight{
+    width: 100%;
+    order: -1;   /* imagen arriba */
+    margin-bottom: 10px;
+  }
+
+  .quizRight img{
+    width: 120px;
+  }
+}
+  
 </style>
 </head>
 
