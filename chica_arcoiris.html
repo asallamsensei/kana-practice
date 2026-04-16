@@ -833,6 +833,9 @@ function renderMenuFromJSON(){
   a.onerror = () => { a.removeAttribute("src"); };
 }
 
+window.addEventListener("load", () => {
+  document.getElementById("password").focus();
+});
   
 </script>
 
