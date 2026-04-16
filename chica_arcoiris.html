@@ -126,6 +126,32 @@ img{
   border:1px solid #ddd;
 }
 
+.quizRow{
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.quizLeft{
+  flex: 1;
+  max-width: 420px;
+  text-align: left;
+}
+
+.quizRight{
+  width: 200px;
+  display: flex;
+  justify-content: center;
+}
+
+.quizRight img{
+  width: 180px;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+}
+  
 /* 📖 Modo lectura: imágenes del cuento más pequeñas y uniformes */
 /* Contenedor de imágenes en lectura */
 #pageImages{
@@ -611,6 +637,19 @@ function showQuestion(){
   const fb = document.getElementById("quizFeedback");
 
   div.innerHTML = "";
+
+const row = document.createElement("div");
+row.className = "quizRow";
+
+const left = document.createElement("div");
+left.className = "quizLeft";
+
+const right = document.createElement("div");
+right.className = "quizRight";
+
+div.appendChild(row);
+row.appendChild(left);
+row.appendChild(right);
   
   fb.innerHTML = "";
   fb.style.display = "none";
@@ -627,19 +666,16 @@ function showQuestion(){
   renderQuizStats();
 
   // 🖼️ Imagen
-  const imgWrap = document.createElement("div");
-  imgWrap.id = "quizImageWrap";
-  const img = document.createElement("img");
-  loadImgWithFallback(img, getQuizImageId(q));
-  imgWrap.appendChild(img);
-  div.appendChild(imgWrap);
+const img = document.createElement("img");
+loadImgWithFallback(img, getQuizImageId(q));
+right.appendChild(img);
 
   // 🧾 Enunciado
   const h = document.createElement("h3");
 
   if(q.type === "ear"){
     h.innerText = "¿Qué escuchaste?";
-    div.appendChild(h);
+    left.appendChild(h);
   
     const pnum = q.question.page.page_id;
     const li = q.question.lineIndex + 1;
@@ -659,14 +695,14 @@ function showQuestion(){
     div.appendChild(repeatBtn);
   }else{
     h.innerText = q.question;
-    div.appendChild(h);
+    left.appendChild(h);
   
     if(q.type === "jp_es" || q.type === "es_jp"){
       const btn = document.createElement("button");
       btn.textContent = "🔊 Escuchar palabra";
       btn.style.marginTop = "10px";
       btn.onclick = () => playWordAudio(q.word);
-      div.appendChild(btn);
+      left.appendChild(btn);
     }
   }
 
@@ -679,7 +715,7 @@ function showQuestion(){
 
     b.onclick = () => answerWithFeedback(q, opt);
 
-    div.appendChild(b);
+    left.appendChild(b);
   });
 }
 
