@@ -305,6 +305,33 @@ const AUDIO_PATH = "data/arcoiris/audios/";
 const WORD_AUDIO_PATH = "data/arcoiris/audios/palabras/";
 const IMG_PATH = "data/arcoiris/imagenes/";
 
+const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+function playBeep(freq, duration){
+  const osc = audioCtx.createOscillator();
+  const gain = audioCtx.createGain();
+
+  osc.connect(gain);
+  gain.connect(audioCtx.destination);
+
+  osc.frequency.value = freq;
+  osc.type = "sine";
+
+  gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
+
+  osc.start();
+  osc.stop(audioCtx.currentTime + duration);
+}
+
+function sonidoCorrecto(){
+  playBeep(700, 0.08);
+  setTimeout(() => playBeep(900, 0.12), 80);
+}
+
+function sonidoIncorrecto(){
+  playBeep(250, 0.2);
+}
+  
 let DATA;
 let currentPage = 1;
 
@@ -568,7 +595,15 @@ function showQuestion(){
   div.innerHTML = "";
   fb.innerHTML = ""; // limpio feedback
 
-  document.getElementById("progress").innerText = `Pregunta ${currentQuestionIndex+1}/100`;
+  let tipoTxt = "";
+  
+  if(q.type === "jp_es") tipoTxt = "JP → ES";
+  if(q.type === "es_jp") tipoTxt = "ES → JP";
+  if(q.type === "kanji") tipoTxt = "KANJI";
+  if(q.type === "ear") tipoTxt = "OÍDO";
+  
+  document.getElementById("progress").innerText =
+    `Pregunta ${currentQuestionIndex+1}/100 ✦ Tipo: ${tipoTxt}`;
   renderQuizStats();
 
   // 🖼️ Imagen
@@ -709,10 +744,12 @@ function answerWithFeedback(q, opt){
 
   if(ok){
     score[q.type]++;
+    sonidoCorrecto();
     fb.className = "quizFeedback ok";
     fb.innerHTML = `✅ Correcto`;
   }else{
     score.wrong++;
+    sonidoIncorrecto();
     fb.className = "quizFeedback bad";
     fb.innerHTML = `✘ Incorrecto<br>✅ Respuesta: <b>${q.correct}</b>`;
   }
@@ -765,6 +802,12 @@ document.getElementById("password").addEventListener("keydown", function(e){
   }
 });
 
+document.addEventListener("click", () => {
+  if(audioCtx.state === "suspended"){
+    audioCtx.resume();
+  }
+}, { once: true });
+  
 function renderMenuFromJSON(){
   if(!DATA?.story) return;
 
