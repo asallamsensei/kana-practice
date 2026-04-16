@@ -334,7 +334,8 @@ function sonidoIncorrecto(){
   
 let DATA;
 let currentPage = 1;
-
+let currentAudio = null;
+  
 const EXTRA_IMAGES = [
   "img_extra_01",
   "img_extra_02",
@@ -417,10 +418,11 @@ function prevPage(){ if(currentPage>1){currentPage--;renderPage();}}
 function nextPage(){ if(currentPage<DATA.pages.length){currentPage++;renderPage();}}
 
 function playPageAudio(){
-  new Audio(AUDIO_PATH+"p"+String(currentPage).padStart(2,"0")+".mp3").play();
+  playManagedAudio(AUDIO_PATH+"p"+String(currentPage).padStart(2,"0")+".mp3");
 }
+  
 function playLine(p,l){
-  new Audio(AUDIO_PATH+"p"+String(p).padStart(2,"0")+"_l0"+l+".mp3").play();
+  playManagedAudio(AUDIO_PATH+"p"+String(p).padStart(2,"0")+"_l0"+l+".mp3");
 }
 
 function playWordAudio(word){
@@ -428,15 +430,31 @@ function playWordAudio(word){
 
   // si en el futuro agregas "audio" en el JSON, lo usa
   if(word.audio){
-    new Audio(WORD_AUDIO_PATH + word.audio).play();
+    playManagedAudio(WORD_AUDIO_PATH + word.audio);
     return;
   }
 
   // si no hay "audio", intenta con romaji
   if(word.romaji){
     const fileName = word.romaji.trim().toLowerCase() + ".mp3";
-    new Audio(WORD_AUDIO_PATH + fileName).play();
+    playManagedAudio(WORD_AUDIO_PATH + fileName);
   }
+}
+
+function playManagedAudio(src){
+  // si ya hay uno sonando, lo paramos
+  if(currentAudio){
+    currentAudio.pause();
+    currentAudio.currentTime = 0;
+  }
+
+  currentAudio = new Audio(src);
+  currentAudio.play().catch(() => {});
+
+  // cuando termine, liberar referencia
+  currentAudio.onended = () => {
+    currentAudio = null;
+  };
 }
   
 function startQuiz(){
@@ -628,16 +646,14 @@ function showQuestion(){
     const audioFile = AUDIO_PATH + "p" + String(pnum).padStart(2,"0") + "_l0" + li + ".mp3";
   
     // 🔊 Reproducir automáticamente
-    const audio = new Audio(audioFile);
-    audio.play();
+    playManagedAudio(audioFile);
   
     // 🔘 Botón repetir
     const repeatBtn = document.createElement("button");
     repeatBtn.textContent = "🔊 Repetir audio";
     repeatBtn.style.marginTop = "10px";
     repeatBtn.onclick = () => {
-      const a = new Audio(audioFile);
-      a.play();
+      playManagedAudio(audioFile);
     };
   
     div.appendChild(repeatBtn);
