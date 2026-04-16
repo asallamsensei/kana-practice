@@ -292,7 +292,7 @@ img{
   <div class="progress" id="progress"></div>
 
   <div id="quizArea"></div>
-  <div id="quizFeedback"></div>
+  <div id="quizFeedback" style="display:none;"></div>
   <div class="progress" id="quizStats"></div>
 </div>
 
@@ -593,7 +593,9 @@ function showQuestion(){
   const fb = document.getElementById("quizFeedback");
 
   div.innerHTML = "";
-  fb.innerHTML = ""; // limpio feedback
+  
+  fb.innerHTML = "";
+  fb.style.display = "none";
 
   let tipoTxt = "";
   
@@ -739,6 +741,7 @@ function findLineAudio(line){
 
 function answerWithFeedback(q, opt){
   const fb = document.getElementById("quizFeedback");
+  fb.style.display = "block";
 
   const ok = (opt === q.correct);
 
