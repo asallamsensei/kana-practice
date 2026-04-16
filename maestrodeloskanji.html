@@ -619,6 +619,36 @@ const CLAVES_ESTUDIANTES = {
   "profe": { nombre: "Sensei", maxGrado: 8 },
   "paopao": { nombre: "Paola", maxGrado: 8 },
 };
+
+function aplicarConfiguracionPorClave(esExtra){
+  if(esExtra){
+    contenidoActivo = {
+      kanji: true,
+      vocab: false
+    };
+
+    modosActivos = new Set([
+      "kunyomi_kanji",
+      "onyomi_kanji",
+      "kanji_onyomi",
+      "kanji_kunyomi"
+    ]);
+  }else{
+    contenidoActivo = {
+      kanji: true,
+      vocab: true
+    };
+
+    modosActivos = new Set([
+      "kanji_es",
+      "es_kanji",
+      "jp_es",
+      "es_jp",
+      "audio_es",
+      "audio_jp"
+    ]);
+  }
+}
   
 /* =========================================================
    HELPERS
@@ -763,28 +793,39 @@ function randomChoice(arr){
 }
 
 function autenticarEstudiante(){
-  let clave = "";
+  let claveIngresada = "";
+  let claveBase = "";
   let estudiante = null;
+  let esExtra = false;
 
   while(true){
-    clave = prompt("Ingresa tu clave de estudiante:") || "";
-    clave = clave.trim();
+    claveIngresada = prompt("Ingresa tu clave de estudiante:") || "";
+    claveIngresada = claveIngresada.trim().toLowerCase();
 
-    if(!clave) continue;
+    if(!claveIngresada) continue;
 
-    if(CLAVES_ESTUDIANTES[clave]){
-      estudiante = CLAVES_ESTUDIANTES[clave];
+    esExtra = claveIngresada.endsWith("-extra");
+    claveBase = esExtra
+      ? claveIngresada.slice(0, -6)
+      : claveIngresada;
+
+    if(CLAVES_ESTUDIANTES[claveBase]){
+      estudiante = CLAVES_ESTUDIANTES[claveBase];
       break;
     }
 
     alert("Clave incorrecta");
   }
 
-  $("studentName").innerText = "Estudiante: " + estudiante.nombre;
+  $("studentName").innerText =
+    "Estudiante: " + estudiante.nombre + (esExtra ? " (Extra)" : "");
+
   gradoMaxPermitido = Number(estudiante.maxGrado) || 8;
 
   const gradosPermitidos = gradosDisponibles.filter(g => g <= gradoMaxPermitido);
   gradosSeleccionados = new Set(gradosPermitidos);
+
+  aplicarConfiguracionPorClave(esExtra);
 }
   
 /* =========================================================
