@@ -302,6 +302,7 @@ img{
 <script>
 const JSON_PATH = "data/arcoiris/super_json.json";
 const AUDIO_PATH = "data/arcoiris/audios/";
+const WORD_AUDIO_PATH = "data/arcoiris/audios/palabras/";
 const IMG_PATH = "data/arcoiris/imagenes/";
 
 let DATA;
@@ -395,6 +396,22 @@ function playLine(p,l){
   new Audio(AUDIO_PATH+"p"+String(p).padStart(2,"0")+"_l0"+l+".mp3").play();
 }
 
+function playWordAudio(word){
+  if(!word) return;
+
+  // si en el futuro agregas "audio" en el JSON, lo usa
+  if(word.audio){
+    new Audio(WORD_AUDIO_PATH + word.audio).play();
+    return;
+  }
+
+  // si no hay "audio", intenta con romaji
+  if(word.romaji){
+    const fileName = word.romaji.trim().toLowerCase() + ".mp3";
+    new Audio(WORD_AUDIO_PATH + fileName).play();
+  }
+}
+  
 function startQuiz(){
   document.getElementById("menu").classList.add("hidden");
   document.getElementById("quiz").classList.remove("hidden");
@@ -458,17 +475,19 @@ function generateQuiz(){
       type:"jp_es",
       correct: x.w.es,
       question: x.w.jp,
-      page: x.page
+      page: x.page,
+      word: x.w
     });
   });
-
+  
   // 25 ES -> JP (vocab)
   words.slice(25,50).forEach(x=>{
     quizData.push({
       type:"es_jp",
       correct: x.w.jp,
       question: x.w.es,
-      page: x.page
+      page: x.page,
+      word: x.w
     });
   });
 
@@ -588,6 +607,14 @@ function showQuestion(){
   }else{
     h.innerText = q.question;
     div.appendChild(h);
+  
+    if(q.type === "jp_es" || q.type === "es_jp"){
+      const btn = document.createElement("button");
+      btn.textContent = "🔊 Escuchar palabra";
+      btn.style.marginTop = "10px";
+      btn.onclick = () => playWordAudio(q.word);
+      div.appendChild(btn);
+    }
   }
 
   // 🅰️🅱️🅾️ Opciones
