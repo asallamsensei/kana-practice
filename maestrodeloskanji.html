@@ -725,6 +725,30 @@ function parseLecturas(raw){
     .filter(Boolean);
 }
 
+function limpiarLecturas(raw){
+  const lecturas = parseLecturas(raw);
+
+  const unicas = [];
+  const vistas = new Set();
+
+  for(const l of lecturas){
+    const key = l.toLowerCase().trim();
+    if(vistas.has(key)) continue;
+    vistas.add(key);
+    unicas.push(l);
+  }
+
+  return mostrarTodosSignificados ? unicas : unicas.slice(0, 2);
+}
+
+function getKunyomi(item){
+  return limpiarLecturas(item.kunyomi).join(", ");
+}
+
+function getOnyomi(item){
+  return limpiarLecturas(item.onyomi).join(", ");
+}
+  
 function anySelected(arr, set){
   return arr.some(v => set.has(Number(v)));
 }
@@ -778,7 +802,7 @@ let yaValidado = false;
 const gradosDisponibles = [1,2,3,4,5,6,8];
 let gradoMaxPermitido = 8;
 let gradosSeleccionados = new Set(gradosDisponibles);
-
+  
 let contenidoActivo = {
   kanji: true,
   vocab: true
@@ -1458,11 +1482,11 @@ const MODOS = {
     build: ({ item, distractorPool }) => ({
       prompt: item.kanji,
       promptStyle: "visual-jp",
-      correct: parseLecturas(item.kunyomi).join(", "),
+      correct: getKunyomi(item),
       options: build3OptionsFromItems(
         distractorPool.filter(x => parseLecturas(x.kunyomi).length > 0),
-        parseLecturas(item.kunyomi)[0],
-        x => parseLecturas(x.kunyomi).join(", ") || ""
+        getKunyomi(item),
+        x => getKunyomi(x)
       ),
       opcionesClass: "opciones-es",
       usaAudio: false,
@@ -1485,11 +1509,11 @@ const MODOS = {
     build: ({ item, distractorPool }) => ({
       prompt: item.kanji,
       promptStyle: "visual-jp",
-      correct: parseLecturas(item.onyomi).join(", "),
+      correct: getOnyomi(item),
       options: build3OptionsFromItems(
         distractorPool.filter(x => parseLecturas(x.onyomi).length > 0),
-        parseLecturas(item.onyomi)[0],
-        x => parseLecturas(x.onyomi).join(", ") || ""
+        getOnyomi(item),
+        x => getOnyomi(x)
       ),
       opcionesClass: "opciones-es",
       usaAudio: false,
@@ -1510,7 +1534,7 @@ const MODOS = {
     isAvailable: ({ filteredPool }) => filteredPool.filter(x => parseLecturas(x.kunyomi).length > 0).length >= 3,
     getCandidates: ({ filteredPool }) => filteredPool.filter(x => parseLecturas(x.kunyomi).length > 0),
     build: ({ item, distractorPool }) => ({
-      prompt: parseLecturas(item.kunyomi)[0],
+      prompt: getKunyomi(item),
       promptStyle: "visual-es",
       correct: item.kanji,
       options: build3OptionsFromItems(distractorPool, item.kanji, x => x.kanji),
@@ -1533,7 +1557,7 @@ const MODOS = {
     isAvailable: ({ filteredPool }) => filteredPool.filter(x => parseLecturas(x.onyomi).length > 0).length >= 3,
     getCandidates: ({ filteredPool }) => filteredPool.filter(x => parseLecturas(x.onyomi).length > 0),
     build: ({ item, distractorPool }) => ({
-      prompt: parseLecturas(item.onyomi)[0],
+      prompt: getOnyomi(item),
       promptStyle: "visual-es",
       correct: item.kanji,
       options: build3OptionsFromItems(distractorPool, item.kanji, x => x.kanji),
