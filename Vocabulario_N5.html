@@ -405,6 +405,16 @@
   }
   
 }
+
+.jp{
+  font-family:
+    "Hiragino Kaku Gothic ProN",
+    "Hiragino Sans",
+    "Yu Gothic",
+    "Meiryo",
+    "Noto Sans JP",
+    sans-serif;
+}
   
 </style>
 </head>
@@ -701,8 +711,14 @@ function renderPrompt(itemCorrecto){
   
     promptEl.classList.remove("dictado");
     subEl.classList.remove("oculto");
-  
-    promptEl.textContent = textoPregunta(itemCorrecto);
+
+    const pregunta = textoPregunta(itemCorrecto);
+    
+    if(rondaDir === "jp-es"){
+      promptEl.innerHTML = `<span class="jp">${pregunta}</span>`;
+    }else{
+      promptEl.textContent = pregunta;
+    }
   
     subEl.innerHTML = `
       <button id="promptSpeaker" class="btnAudioBig" type="button" title="Escuchar" onclick="reproducirAudioActual()">🔊</button>
@@ -750,7 +766,8 @@ function pintarOpciones(letraElegida){
   box.innerHTML = opcionesActuales.map((txt, idx) => {
     const letra = letras[idx];
 
-    return `<div>${letra}) ${txt}</div>`;
+    const usarJp = (rondaDir === "es-jp");
+    return `<div>${letra}) ${usarJp ? `<span class="jp">${txt}</span>` : txt}</div>`;
   }).join("");
 
   const btnA = document.getElementById("btn-opcion-a");
@@ -862,10 +879,13 @@ function siguiente(){
 
 function renderOpciones(opciones){
   const box = document.getElementById("opcionesTexto");
+
+  const usarJp = (rondaDir === "es-jp");
+
   box.innerHTML = `
-    a) ${opciones[0]}<br>
-    b) ${opciones[1]}<br>
-    c) ${opciones[2]}
+    a) ${usarJp ? `<span class="jp">${opciones[0]}</span>` : opciones[0]}<br>
+    b) ${usarJp ? `<span class="jp">${opciones[1]}</span>` : opciones[1]}<br>
+    c) ${usarJp ? `<span class="jp">${opciones[2]}</span>` : opciones[2]}
   `;
 }
 
