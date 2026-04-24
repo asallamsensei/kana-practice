@@ -916,6 +916,8 @@ function layoutMasonry(){
 
   const maxBottom = Math.max(...placed.map(p => p.bottom), 0);
   container.style.height = `${maxBottom + gap}px`;
+
+  magnetCards();
 }
 
 function magnetCards(){
