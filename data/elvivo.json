@@ -5,6 +5,7 @@
     "romaji": "denwa",
     "es": "teléfono",
     "kanjis": ["電", "話"],
+    "tags": ["general"],
     "extra": ""
   },
   {
@@ -12,6 +13,7 @@
     "jp": "おはよう",
     "romaji": "ohayō",
     "es": "buenos días",
+    "tags": ["saludo"],
     "extra": ""
   },
   {
@@ -19,6 +21,7 @@
     "jp": "おはようございます",
     "romaji": "ohayō gozaimasu",
     "es": "buenos días",
+    "tags": ["saludo"],
     "extra": "formal"
   },
   {
@@ -26,6 +29,7 @@
     "jp": "こんにちは",
     "romaji": "konnichiwa",
     "es": "hola, buenas tardes",
+    "tags": ["saludo"],
     "extra": ""
   },
   {
@@ -33,6 +37,7 @@
     "jp": "こんばんは",
     "romaji": "konbanwa",
     "es": "buenas noches",
+    "tags": ["saludo"],
     "extra": ""
   },
   {
@@ -40,6 +45,7 @@
     "jp": "ありがとう",
     "romaji": "arigatō",
     "es": "gracias",
+    "tags": ["cortesia"],
     "extra": ""
   },
   {
@@ -47,6 +53,7 @@
     "jp": "ありがとうございます",
     "romaji": "arigatō gozaimasu",
     "es": "muchas gracias",
+    "tags": ["cortesia"],
     "extra": "formal"
   },
   {
@@ -55,6 +62,7 @@
     "romaji": "nihon",
     "es": "Japón",
     "kanjis": ["日", "本"],
+    "tags": ["general"],
     "extra": ""
   },
   {
@@ -63,6 +71,7 @@
     "romaji": "nihongo",
     "es": "idioma japonés",
     "kanjis": ["日", "本", "語"],
+    "tags": ["general"],
     "extra": ""
   },
   {
@@ -71,6 +80,7 @@
     "romaji": "nihonjin",
     "es": "japonés, persona japonesa",
     "kanjis": ["日", "本", "人"],
+    "tags": ["general"],
     "extra": ""
   },
   {
@@ -78,6 +88,7 @@
     "jp": "トイレ",
     "romaji": "toire",
     "es": "baño",
+    "tags": ["general"],
     "extra": ""
   },
   {
@@ -85,6 +96,7 @@
     "jp": "さようなら",
     "romaji": "sayōnara",
     "es": "adiós",
+    "tags": ["despedida"],
     "extra": ""
   },
   {
@@ -93,6 +105,7 @@
     "romaji": "hito",
     "es": "persona",
     "kanjis": ["人"],
+    "tags": ["general"],
     "extra": ""
   },
   {
@@ -101,6 +114,7 @@
     "romaji": "kanji",
     "es": "kanji, caracteres chinos usados en japonés",
     "kanjis": ["漢", "字"],
+    "tags": ["general"],
     "extra": ""
   },
   {
@@ -109,6 +123,7 @@
     "romaji": "watashi",
     "es": "yo",
     "kanjis": ["私"],
+    "tags": ["general"],
     "extra": ""
   },
   {
@@ -116,6 +131,7 @@
     "jp": "あたし",
     "romaji": "atashi",
     "es": "yo",
+    "tags": ["general"],
     "extra": "informal"
   },
   {
@@ -123,6 +139,7 @@
     "jp": "あなた",
     "romaji": "anata",
     "es": "tú, usted",
+    "tags": ["general"],
     "extra": ""
   },
   {
@@ -131,6 +148,7 @@
     "romaji": "ki",
     "es": "energía, ánimo, espíritu, ambiente",
     "kanjis": ["気"],
+    "tags": ["general"],
     "extra": ""
   },
   {
@@ -139,6 +157,7 @@
     "romaji": "hon",
     "es": "libro",
     "kanjis": ["本"],
+    "tags": ["general"],
     "extra": ""
   },
   {
@@ -146,6 +165,7 @@
     "jp": "はい",
     "romaji": "hai",
     "es": "sí",
+    "tags": ["general"],
     "extra": ""
   },
   {
@@ -153,6 +173,7 @@
     "jp": "いいえ",
     "romaji": "iie",
     "es": "no",
+    "tags": ["general"],
     "extra": ""
   },
   {
@@ -160,6 +181,7 @@
     "jp": "すみません",
     "romaji": "sumimasen",
     "es": "disculpe, perdón, gracias",
+    "tags": ["cortesia"],
     "extra": ""
   },
   {
@@ -167,6 +189,7 @@
     "jp": "いる",
     "romaji": "iru",
     "es": "haber, estar, existir",
+    "tags": ["verbo"],
     "extra": "para personas y seres animados"
   },
   {
@@ -174,6 +197,7 @@
     "jp": "ある",
     "romaji": "aru",
     "es": "haber, estar, existir",
+    "tags": ["verbo"],
     "extra": "para cosas y seres inanimados"
   },
   {
@@ -182,6 +206,7 @@
     "romaji": "kimi",
     "es": "tú",
     "kanjis": ["君"],
+    "tags": ["general"],
     "extra": ""
   },
   {
@@ -189,6 +214,7 @@
     "jp": "の",
     "romaji": "no",
     "es": "partícula posesiva o de relación",
+    "tags": ["particula"],
     "extra": ""
   },
   {
@@ -196,6 +222,7 @@
     "jp": "そば",
     "romaji": "soba",
     "es": "lado, cerca",
+    "tags": ["general"],
     "extra": ""
   },
   {
@@ -203,6 +230,7 @@
     "jp": "に",
     "romaji": "ni",
     "es": "partícula de dirección o lugar",
+    "tags": ["particula"],
     "extra": ""
   },
   {
@@ -210,6 +238,7 @@
     "jp": "いたい",
     "romaji": "itai",
     "es": "querer estar",
+    "tags": ["verbo"],
     "extra": ""
   },
   {
@@ -218,6 +247,7 @@
     "romaji": "kimi no soba ni itai",
     "es": "quiero estar a tu lado",
     "palabras": ["君", "の", "そば", "に", "いたい"],
+    "tags": ["general"],
     "extra": ""
   },
   {
@@ -225,6 +255,7 @@
     "jp": "アラーム",
     "romaji": "arāmu",
     "es": "alarma",
+    "tags": ["general"],
     "extra": ""
   },
   {
@@ -232,6 +263,7 @@
     "jp": "を",
     "romaji": "o",
     "es": "partícula de objeto directo",
+    "tags": ["particula"],
     "extra": ""
   },
   {
@@ -240,6 +272,7 @@
     "romaji": "tomeru",
     "es": "detener, parar",
     "kanjis": ["止"],
+    "tags": ["verbo"],
     "extra": ""
   },
   {
@@ -248,6 +281,7 @@
     "romaji": "arāmu o tomeru",
     "es": "apagar la alarma",
     "palabras": ["アラーム", "を", "止める"],
+    "tags": ["verbo"],
     "extra": ""
   },
   {
@@ -256,6 +290,7 @@
     "romaji": "inu",
     "es": "perro",
     "kanjis": ["犬"],
+    "tags": ["animal"],
     "extra": ""
   },
   {
@@ -264,6 +299,7 @@
     "romaji": "neko",
     "es": "gato",
     "kanjis": ["猫"],
+    "tags": ["animal"],
     "extra": ""
   },
   {
@@ -272,6 +308,7 @@
     "romaji": "tori",
     "es": "pájaro, ave",
     "kanjis": ["鳥"],
+    "tags": ["animal"],
     "extra": ""
   },
   {
@@ -280,6 +317,7 @@
     "romaji": "sakana",
     "es": "pez",
     "kanjis": ["魚"],
+    "tags": ["animal"],
     "extra": ""
   },
   {
@@ -288,6 +326,7 @@
     "romaji": "uma",
     "es": "caballo",
     "kanjis": ["馬"],
+    "tags": ["animal"],
     "extra": ""
   },
   {
@@ -296,6 +335,7 @@
     "romaji": "ushi",
     "es": "vaca",
     "kanjis": ["牛"],
+    "tags": ["animal"],
     "extra": ""
   },
   {
@@ -304,6 +344,7 @@
     "romaji": "buta",
     "es": "cerdo",
     "kanjis": ["豚"],
+    "tags": ["animal"],
     "extra": ""
   },
   {
@@ -312,6 +353,7 @@
     "romaji": "hitsuji",
     "es": "oveja",
     "kanjis": ["羊"],
+    "tags": ["animal"],
     "extra": ""
   },
   {
@@ -320,6 +362,7 @@
     "romaji": "saru",
     "es": "mono",
     "kanjis": ["猿"],
+    "tags": ["animal"],
     "extra": ""
   },
   {
@@ -328,6 +371,7 @@
     "romaji": "kuma",
     "es": "oso",
     "kanjis": ["熊"],
+    "tags": ["animal"],
     "extra": ""
   },
   {
@@ -336,6 +380,7 @@
     "romaji": "zō",
     "es": "elefante",
     "kanjis": ["象"],
+    "tags": ["animal"],
     "extra": ""
   },
   {
@@ -344,6 +389,7 @@
     "romaji": "kame",
     "es": "tortuga",
     "kanjis": ["亀"],
+    "tags": ["animal"],
     "extra": ""
   },
   {
@@ -352,6 +398,7 @@
     "es": "electricidad",
     "kun": "",
     "on": "",
+    "tags": ["general"],
     "extra": ""
   },
   {
@@ -360,6 +407,7 @@
     "es": "hablar, conversación",
     "kun": "",
     "on": "",
+    "tags": ["general"],
     "extra": ""
   },
   {
@@ -368,6 +416,7 @@
     "es": "correr, desplazarse rápido",
     "kun": "はしる",
     "on": "ソウ",
+    "tags": ["verbo"],
     "extra": ""
   },
   {
@@ -376,6 +425,7 @@
     "es": "sol, día",
     "kun": "",
     "on": "",
+    "tags": ["general"],
     "extra": ""
   },
   {
@@ -384,6 +434,7 @@
     "es": "origen, base, libro",
     "kun": "",
     "on": "",
+    "tags": ["general"],
     "extra": ""
   },
   {
@@ -392,6 +443,7 @@
     "es": "idioma, palabra",
     "kun": "",
     "on": "",
+    "tags": ["general"],
     "extra": ""
   },
   {
@@ -400,6 +452,7 @@
     "es": "persona",
     "kun": "",
     "on": "",
+    "tags": ["general"],
     "extra": ""
   },
   {
@@ -408,6 +461,7 @@
     "es": "han, chino",
     "kun": "",
     "on": "",
+    "tags": ["general"],
     "extra": ""
   },
   {
@@ -416,6 +470,7 @@
     "es": "carácter, letra",
     "kun": "",
     "on": "",
+    "tags": ["general"],
     "extra": ""
   },
   {
@@ -424,6 +479,7 @@
     "es": "yo, privado",
     "kun": "",
     "on": "",
+    "tags": ["general"],
     "extra": ""
   },
   {
@@ -432,6 +488,7 @@
     "es": "energía, ánimo, espíritu, ambiente",
     "kun": "",
     "on": "",
+    "tags": ["general"],
     "extra": ""
   },
   {
@@ -440,6 +497,7 @@
     "es": "tú, señor, soberano",
     "kun": "",
     "on": "",
+    "tags": ["general"],
     "extra": ""
   },
   {
@@ -448,6 +506,7 @@
     "es": "parar, detener",
     "kun": "",
     "on": "",
+    "tags": ["verbo"],
     "extra": ""
   },
   {
@@ -456,6 +515,7 @@
     "es": "perro",
     "kun": "",
     "on": "",
+    "tags": ["animal"],
     "extra": ""
   },
   {
@@ -464,6 +524,7 @@
     "es": "gato",
     "kun": "",
     "on": "",
+    "tags": ["animal"],
     "extra": ""
   },
   {
@@ -472,6 +533,7 @@
     "es": "ave, pájaro",
     "kun": "",
     "on": "",
+    "tags": ["animal"],
     "extra": ""
   },
   {
@@ -480,6 +542,7 @@
     "es": "pez",
     "kun": "",
     "on": "",
+    "tags": ["animal"],
     "extra": ""
   },
   {
@@ -488,6 +551,7 @@
     "es": "caballo",
     "kun": "",
     "on": "",
+    "tags": ["animal"],
     "extra": ""
   },
   {
@@ -496,6 +560,7 @@
     "es": "vaca, ganado",
     "kun": "",
     "on": "",
+    "tags": ["animal"],
     "extra": ""
   },
   {
@@ -504,6 +569,7 @@
     "es": "cerdo",
     "kun": "",
     "on": "",
+    "tags": ["animal"],
     "extra": ""
   },
   {
@@ -512,6 +578,7 @@
     "es": "oveja",
     "kun": "",
     "on": "",
+    "tags": ["animal"],
     "extra": ""
   },
   {
@@ -520,6 +587,7 @@
     "es": "mono",
     "kun": "",
     "on": "",
+    "tags": ["animal"],
     "extra": ""
   },
   {
@@ -528,6 +596,7 @@
     "es": "oso",
     "kun": "",
     "on": "",
+    "tags": ["animal"],
     "extra": ""
   },
   {
@@ -536,6 +605,7 @@
     "es": "elefante, figura, imagen",
     "kun": "",
     "on": "",
+    "tags": ["animal"],
     "extra": ""
   },
   {
@@ -544,6 +614,7 @@
     "es": "tortuga",
     "kun": "",
     "on": "",
+    "tags": ["animal"],
     "extra": ""
   }
 ]
