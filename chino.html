@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Repaso de Chino Básico — Asallam Sensei</title>
+<style>
+  :root{
+    --bg:#0b1020; --card:rgba(255,255,255,.08); --card2:rgba(255,255,255,.11);
+    --text:#fff; --muted:rgba(255,255,255,.78); --accent:#7d5cff;
+    --ok:#22c55e; --bad:#ef4444; --border:rgba(255,255,255,.14);
+    --font-zh:"Noto Sans SC","Microsoft YaHei","PingFang SC","Heiti SC",system-ui,sans-serif;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:Arial,sans-serif;background:var(--bg);color:var(--text);display:flex;justify-content:center;padding:28px 14px 70px}
+  .wrap{width:min(980px,100%)}
+  h1{text-align:center;margin:12px 0 18px;font-size:clamp(24px,5vw,34px)}
+  .grid{display:grid;grid-template-columns:1.2fr .8fr;gap:14px;align-items:start}
+  @media(max-width:820px){.grid{grid-template-columns:1fr}}
+  .card{background:linear-gradient(180deg,var(--card2),var(--card));border:1px solid var(--border);border-radius:18px;box-shadow:0 18px 45px rgba(0,0,0,.35);padding:16px}
+  .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;justify-content:center}
+  .pill{padding:8px 12px;border-radius:999px;border:1px solid var(--border);background:rgba(255,255,255,.06);color:var(--muted);font-size:13px}
+  .btn{border:none;border-radius:12px;padding:11px 14px;cursor:pointer;color:#fff;background:var(--accent);font-weight:800;transition:.15s}
+  .btn:hover{transform:translateY(-1px);filter:brightness(1.06)}
+  .btn-ghost,.btn-mode{background:rgba(255,255,255,.08);border:1px solid var(--border);color:var(--text)}
+  .btn-mode.activo{background:var(--accent);border-color:transparent}
+  .btn-audio{background:rgba(34,197,94,.16);border:1px solid rgba(34,197,94,.40);color:#bbf7d0}
+  .btn.correcto{background:rgba(34,197,94,.15);border:1px solid rgba(34,197,94,.45);color:#bbf7d0;box-shadow:0 0 10px rgba(34,197,94,.25)}
+  .btn.incorrecto{background:rgba(239,68,68,.15);border:1px solid rgba(239,68,68,.45);color:#fecaca;box-shadow:0 0 10px rgba(239,68,68,.22)}
+  .big{text-align:center;padding:18px 12px}
+  #modoActual{margin-bottom:8px}
+  #pregunta{display:flex;justify-content:center;align-items:center;min-height:92px;margin:8px 0;word-break:break-word}
+  .visual-zh{font-family:var(--font-zh);font-size:clamp(46px,8vw,92px);font-weight:400;letter-spacing:.03em}
+  .visual-es{font-size:clamp(24px,4vw,36px);font-weight:900;line-height:1.25}
+  #pinyin{min-height:24px;color:var(--muted);font-size:18px;margin-top:-4px}
+  #audioWrap{display:flex;justify-content:center;align-items:center;gap:10px;margin:10px 0 4px}
+  #opciones{margin-top:10px;font-size:20px;text-align:left;width:fit-content;max-width:100%;margin-left:auto;margin-right:auto;padding:8px 14px;border-radius:14px;border:1px dashed rgba(255,255,255,.22);background:rgba(0,0,0,.18)}
+  #opciones div{margin:4px 0}.opciones-zh{font-family:var(--font-zh);font-size:32px!important}.opciones-es{font-size:20px!important}
+  .opbtns{display:flex;justify-content:center;gap:10px;margin-top:12px;flex-wrap:wrap}.opbtns button{min-width:90px}
+  #resultado{margin-top:12px;font-size:20px;text-align:center;font-weight:900}.correcto-txt{color:var(--ok)}.incorrecto-txt{color:var(--bad)}
+  #extraResultado{margin-top:8px;text-align:center;color:rgba(255,255,255,.92);font-size:16px;min-height:22px}
+  .stats{margin-top:12px;text-align:center;color:var(--muted);font-size:15px;line-height:1.7}
+  .sep{height:1px;background:rgba(255,255,255,.10);margin:14px 0}.hint{color:var(--muted);font-size:13px;line-height:1.5}.miniStatus{color:var(--muted);font-size:14px;line-height:1.7}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Repaso de Chino Básico — Asallam Sensei</h1>
+  <div class="grid">
+    <div class="card big">
+      <div id="modoActual" class="pill">Modo: —</div>
+      <div id="pregunta" class="visual-zh">—</div>
+      <div id="pinyin"></div>
+      <div id="audioWrap"></div>
+      <div id="opciones"></div>
+      <div class="opbtns">
+        <button id="btnA" class="btn btn-ghost" type="button" onclick="responder('a')">a</button>
+        <button id="btnB" class="btn btn-ghost" type="button" onclick="responder('b')">b</button>
+        <button id="btnC" class="btn btn-ghost" type="button" onclick="responder('c')">c</button>
+      </div>
+      <div id="resultado"></div>
+      <div id="extraResultado"></div>
+      <div class="row" style="margin-top:14px"><button class="btn" type="button" onclick="siguiente()">Siguiente</button></div>
+      <div class="stats">
+        <div>Aciertos: <span id="aciertos">0</span> — Errores: <span id="errores">0</span></div>
+        <div>Racha: <span id="racha">0</span> — Mejor racha: <span id="mejorRacha">0</span> — Precisión: <span id="precision">0%</span></div>
+      </div>
+      <div class="row" style="margin-top:10px"><button class="btn btn-ghost" type="button" onclick="resetStats()">Reset stats</button></div>
+    </div>
+
+    <div class="card">
+      <div class="row" style="justify-content:flex-start"><span class="pill">Modos</span></div>
+      <div class="row" style="justify-content:flex-start;margin-top:10px">
+        <button class="btn btn-mode activo" id="m-zh-es" type="button" onclick="setModo('zh_es')">Chino → Español</button>
+        <button class="btn btn-mode" id="m-es-zh" type="button" onclick="setModo('es_zh')">Español → Chino</button>
+      </div>
+      <div class="sep"></div>
+      <div class="miniStatus">
+        <div id="poolInfo">Vocabulario: —</div>
+        <div>Atajos: <b>a</b>, <b>b</b>, <b>c</b> para responder; <b>Enter</b> para siguiente.</div>
+      </div>
+      <div class="sep"></div>
+      <div class="hint">
+        El botón 🔊 usa la síntesis de voz del navegador en chino mandarín (<b>zh-CN</b>). Si no suena natural, revisa que el dispositivo tenga instalada una voz china.
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const VOCABULARIO = [
+  { "hanzi": "一", "pinyin": "yī", "es": "uno" },
+  { "hanzi": "二", "pinyin": "èr", "es": "dos" },
+  { "hanzi": "三", "pinyin": "sān", "es": "tres" },
+  { "hanzi": "四", "pinyin": "sì", "es": "cuatro" },
+  { "hanzi": "五", "pinyin": "wǔ", "es": "cinco" },
+  { "hanzi": "一起", "pinyin": "yìqǐ", "es": "juntos" },
+  { "hanzi": "二楼", "pinyin": "èrlóu", "es": "segundo piso" },
+  { "hanzi": "三天", "pinyin": "sān tiān", "es": "tres días" },
+  { "hanzi": "四十", "pinyin": "sìshí", "es": "cuarenta" },
+  { "hanzi": "五月", "pinyin": "wǔyuè", "es": "mayo" },
+  { "hanzi": "一个", "pinyin": "yí gè", "es": "una cosa o persona" },
+  { "hanzi": "两个", "pinyin": "liǎng gè", "es": "dos cosas o personas" },
+  { "hanzi": "三个", "pinyin": "sān gè", "es": "tres cosas o personas" },
+  { "hanzi": "四个", "pinyin": "sì gè", "es": "cuatro cosas o personas" },
+  { "hanzi": "五个", "pinyin": "wǔ gè", "es": "cinco cosas o personas" },
+  { "hanzi": "四只", "pinyin": "sì zhī", "es": "cuatro animales pequeños" },
+  { "hanzi": "五杯", "pinyin": "wǔ bēi", "es": "cinco vasos de algo" },
+  { "hanzi": "六", "pinyin": "liù", "es": "seis" },
+  { "hanzi": "七", "pinyin": "qī", "es": "siete" },
+  { "hanzi": "八", "pinyin": "bā", "es": "ocho" },
+  { "hanzi": "九", "pinyin": "jiǔ", "es": "nueve" },
+  { "hanzi": "十", "pinyin": "shí", "es": "diez" },
+  { "hanzi": "六十", "pinyin": "liùshí", "es": "sesenta" },
+  { "hanzi": "七月", "pinyin": "qīyuè", "es": "julio" },
+  { "hanzi": "八点", "pinyin": "bā diǎn", "es": "ocho en punto" },
+  { "hanzi": "九天", "pinyin": "jiǔ tiān", "es": "nueve días" },
+  { "hanzi": "十块", "pinyin": "shí kuài", "es": "diez yuanes" },
+  { "hanzi": "六个", "pinyin": "liù gè", "es": "seis cosas o personas" },
+  { "hanzi": "七年", "pinyin": "qī nián", "es": "siete años" },
+  { "hanzi": "七彩", "pinyin": "qīcǎi", "es": "multicolor, de siete colores" },
+  { "hanzi": "七夕", "pinyin": "qīxī", "es": "festival del doble siete" },
+  { "hanzi": "九成", "pinyin": "jiǔchéng", "es": "90%, muy probable" },
+  { "hanzi": "十分", "pinyin": "shífēn", "es": "muy, extremadamente" },
+  { "hanzi": "一百", "pinyin": "yī bǎi", "es": "cien" },
+  { "hanzi": "三百", "pinyin": "sān bǎi", "es": "trescientos" },
+  { "hanzi": "千", "pinyin": "qiān", "es": "mil" },
+  { "hanzi": "千克", "pinyin": "qiān kè", "es": "kilogramo" },
+  { "hanzi": "上", "pinyin": "shàng", "es": "arriba, subir" },
+  { "hanzi": "下", "pinyin": "xià", "es": "abajo, bajar" },
+  { "hanzi": "下午", "pinyin": "xià wǔ", "es": "tarde, después del mediodía" },
+  { "hanzi": "左", "pinyin": "zuǒ", "es": "izquierda" },
+  { "hanzi": "右", "pinyin": "yòu", "es": "derecha" },
+  { "hanzi": "右手", "pinyin": "yòushǒu", "es": "mano derecha" },
+  { "hanzi": "中", "pinyin": "zhōng", "es": "medio, dentro" },
+  { "hanzi": "中午", "pinyin": "zhōngwǔ", "es": "mediodía" },
+  { "hanzi": "大", "pinyin": "dà", "es": "grande" },
+  { "hanzi": "大学", "pinyin": "dàxué", "es": "universidad" },
+  { "hanzi": "小", "pinyin": "xiǎo", "es": "pequeño, pequeña" },
+  { "hanzi": "一月", "pinyin": "yīyuè", "es": "enero, un mes" },
+  { "hanzi": "日", "pinyin": "rì", "es": "sol, día" },
+  { "hanzi": "年", "pinyin": "nián", "es": "año" },
+  { "hanzi": "年纪", "pinyin": "niánjì", "es": "edad" },
+  { "hanzi": "早！", "pinyin": "zǎo!", "es": "buenos días, informal" },
+  { "hanzi": "早饭", "pinyin": "zǎofàn", "es": "desayuno" },
+  { "hanzi": "木头", "pinyin": "mùtou", "es": "madera" },
+  { "hanzi": "木偶", "pinyin": "mù’ǒu", "es": "marioneta" },
+  { "hanzi": "森林", "pinyin": "sēnlín", "es": "selva, bosque denso" }
+];
+
+const STATS_KEY = "repaso_chino_basico_stats_v1";
+let modo = "zh_es";
+let actual = null;
+let opciones = [];
+let correcta = "";
+let yaValidado = false;
+let aciertos = 0, errores = 0, racha = 0, mejorRacha = 0;
+
+const $ = id => document.getElementById(id);
+const pick = arr => arr[Math.floor(Math.random() * arr.length)];
+function shuffle(arr){ const a = arr.slice(); for(let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
+
+const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+function playBeep(freq, duration){
+  const osc = audioCtx.createOscillator(); const gain = audioCtx.createGain();
+  osc.connect(gain); gain.connect(audioCtx.destination); osc.frequency.value = freq; osc.type = "sine";
+  gain.gain.setValueAtTime(0.1, audioCtx.currentTime); osc.start(); osc.stop(audioCtx.currentTime + duration);
+}
+function sonidoCorrecto(){ playBeep(700, 0.08); setTimeout(() => playBeep(900, 0.12), 80); }
+function sonidoIncorrecto(){ playBeep(250, 0.2); }
+
+function hablarChino(texto){
+  if(!("speechSynthesis" in window)) return;
+  window.speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(texto.replace(/[！!]/g, ""));
+  u.lang = "zh-CN"; u.rate = 0.78; u.pitch = 1;
+  const voces = window.speechSynthesis.getVoices();
+  const vozChina = voces.find(v => /zh|chinese|mandarin/i.test(v.lang + " " + v.name));
+  if(vozChina) u.voice = vozChina;
+  window.speechSynthesis.speak(u);
+}
+
+function cargarStats(){
+  try{ const s = JSON.parse(localStorage.getItem(STATS_KEY)) || {}; aciertos=s.aciertos||0; errores=s.errores||0; racha=s.racha||0; mejorRacha=s.mejorRacha||0; }catch{}
+  pintarStats();
+}
+function guardarStats(){ localStorage.setItem(STATS_KEY, JSON.stringify({aciertos, errores, racha, mejorRacha})); }
+function resetStats(){ aciertos=0; errores=0; racha=0; mejorRacha=0; pintarStats(); guardarStats(); }
+function precisionPct(){ const total=aciertos+errores; return total ? Math.round((aciertos/total)*100)+"%" : "0%"; }
+function pintarStats(){ $("aciertos").innerText=aciertos; $("errores").innerText=errores; $("racha").innerText=racha; $("mejorRacha").innerText=mejorRacha; $("precision").innerText=precisionPct(); }
+
+function setModo(nuevo){ modo = nuevo; $("m-zh-es").classList.toggle("activo", modo==="zh_es"); $("m-es-zh").classList.toggle("activo", modo==="es_zh"); siguiente(); }
+function limpiarResultado(){
+  $("resultado").innerText=""; $("resultado").className=""; $("extraResultado").innerText="";
+  ["btnA","btnB","btnC"].forEach(id => $(id).classList.remove("correcto","incorrecto"));
+}
+function setOpciones(arr, clase){
+  $("opciones").className = clase;
+  $("opciones").innerHTML = `<div>a) ${arr[0]}</div><div>b) ${arr[1]}</div><div>c) ${arr[2]}</div>`;
+}
+function crearOpciones(campoCorrecto){
+  const valores = VOCABULARIO.map(x => x[campoCorrecto]).filter(v => v !== actual[campoCorrecto]);
+  const distractores = shuffle([...new Set(valores)]).slice(0,2);
+  return shuffle([actual[campoCorrecto], ...distractores]);
+}
+function renderAudio(){
+  const wrap = $("audioWrap"); wrap.innerHTML = "";
+  const b = document.createElement("button");
+  b.type = "button"; b.className = "btn btn-audio"; b.textContent = "🔊 Escuchar chino";
+  b.onclick = () => hablarChino(actual.hanzi);
+  wrap.appendChild(b);
+}
+function siguiente(){
+  yaValidado = false; limpiarResultado(); actual = pick(VOCABULARIO);
+  $("modoActual").innerText = modo === "zh_es" ? "Modo: Chino → Español" : "Modo: Español → Chino";
+  if(modo === "zh_es"){
+    $("pregunta").className = "visual-zh"; $("pregunta").innerText = actual.hanzi; $("pinyin").innerText = actual.pinyin;
+    opciones = crearOpciones("es"); correcta = actual.es; setOpciones(opciones, "opciones-es");
+  }else{
+    $("pregunta").className = "visual-es"; $("pregunta").innerText = actual.es; $("pinyin").innerText = "";
+    opciones = crearOpciones("hanzi"); correcta = actual.hanzi; setOpciones(opciones, "opciones-zh");
+  }
+  renderAudio(); $("poolInfo").innerText = `Vocabulario: ${VOCABULARIO.length} palabras`;
+}
+function responder(letra){
+  if(yaValidado || !actual) return;
+  yaValidado = true;
+  const idx = {a:0,b:1,c:2}[letra];
+  const elegido = opciones[idx];
+  const esCorrecto = elegido === correcta;
+  const btnId = {a:"btnA",b:"btnB",c:"btnC"}[letra];
+  if(esCorrecto){
+    sonidoCorrecto(); aciertos++; racha++; mejorRacha = Math.max(mejorRacha, racha);
+    $("resultado").innerText = "¡Correcto!"; $("resultado").className = "correcto-txt"; $(btnId).classList.add("correcto");
+  }else{
+    sonidoIncorrecto(); errores++; racha = 0;
+    $("resultado").innerText = "Incorrecto"; $("resultado").className = "incorrecto-txt"; $(btnId).classList.add("incorrecto");
+    const letraCorrecta = ["a","b","c"][opciones.findIndex(x => x === correcta)];
+    $({a:"btnA",b:"btnB",c:"btnC"}[letraCorrecta]).classList.add("correcto");
+  }
+  $("extraResultado").innerText = `${actual.hanzi} (${actual.pinyin}) = ${actual.es}`;
+  pintarStats(); guardarStats();
+}
+
+document.addEventListener("keydown", e => {
+  const k = (e.key || "").toLowerCase();
+  if(!yaValidado && ["a","b","c"].includes(k)){ e.preventDefault(); responder(k); }
+  if(e.key === "Enter"){ e.preventDefault(); if(yaValidado) siguiente(); }
+});
+
+if("speechSynthesis" in window){ window.speechSynthesis.onvoiceschanged = () => {}; }
+cargarStats(); siguiente();
+</script>
+</body>
+</html>
