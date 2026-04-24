@@ -537,72 +537,61 @@
     }
 
     function getItemTags(item){
-      const tags = parseTags(item.theme || '');
-      return tags.length ? tags : ['Sin tag'];
-    }
-
-    function renderMatiz(item){
-      if(!item.matiz) return '';
-      return `
-        <div class="meaning-box">
-          <span class="label">Matiz</span>
-          <div class="value">${escapeHtml(item.matiz)}</div>
-        </div>
-      `;
+      if(Array.isArray(item.tags) && item.tags.length){
+        return item.tags.map(tag => String(tag).trim()).filter(Boolean);
+      }
+    
+      return ['Sin tag'];
     }
 
     function renderKanjiPanel(kanjis){
       if(!kanjis || !kanjis.length) return '';
+    
       return `
         <section class="panel">
           <div class="panel-title">Kanjis</div>
           <div class="kanji-grid">
-            ${kanjis.map(k => `
-              <div class="kanji-card">
-                <div class="kanji-main">
-                  <div class="kanji-char">${escapeHtml(k.char || '')}</div>
-                  <div class="kanji-mean">${escapeHtml(k.mean || '')}</div>
+            ${kanjis.map(ref => {
+              const k = state.kanjiByJp?.get(ref);
+    
+              return `
+                <div class="kanji-card">
+                  <div class="kanji-main">
+                    <div class="kanji-char">${escapeHtml(ref)}</div>
+                    ${k?.es ? `<div class="kanji-mean">${escapeHtml(k.es)}</div>` : ''}
+                  </div>
                 </div>
-              </div>
-            `).join('')}
+              `;
+            }).join('')}
           </div>
         </section>
       `;
     }
 
-    function renderWordsPanel(words){
-      if(!words || !words.length) return '';
+    function renderWordsPanel(palabras){
+      if(!palabras || !palabras.length) return '';
+    
       return `
         <section class="panel">
           <div class="panel-title">Palabras</div>
           <div class="pieces">
-            ${words.map(w => `
-              <div class="piece">
-                <div class="jp">${escapeHtml(w.jp || '')}</div>
-                ${w.romaji ? `<div class="romaji">${escapeHtml(w.romaji)}</div>` : ''}
-                ${w.es ? `<div class="es">${escapeHtml(w.es)}</div>` : ''}
-              </div>
-            `).join('')}
+            ${palabras.map(ref => {
+              const w = state.wordsByJp?.get(ref);
+    
+              return `
+                <div class="piece">
+                  <div class="jp">${escapeHtml(ref)}</div>
+                  ${w?.romaji ? `<div class="romaji">${escapeHtml(w.romaji)}</div>` : ''}
+                  ${w?.es ? `<div class="es">${escapeHtml(w.es)}</div>` : ''}
+                </div>
+              `;
+            }).join('')}
           </div>
         </section>
       `;
     }
 
     function renderKanjiCard(item, index){
-      const meanings = (item.kanjis && item.kanjis.length)
-        ? item.kanjis.map(k => `
-          <div class="kanji-card kanji-card--solo">
-            <div class="kanji-char">${escapeHtml(k.char || '')}</div>
-            <div class="kanji-mean">${escapeHtml(k.mean || '')}</div>
-          </div>
-        `).join('')
-        : `
-          <div class="kanji-card kanji-card--solo">
-            <div class="kanji-char">${escapeHtml(item.jp || '')}</div>
-            <div class="kanji-mean">${escapeHtml(item.es || '')}</div>
-          </div>
-        `;
-
       return `
         <article
           class="entry entry--kanji capture-card"
@@ -612,12 +601,38 @@
         >
           <div class="entry-top">
             <div class="entry-tag">KANJI</div>
-            <div class="entry-date">Tags: ${escapeHtml(item.theme || '')}</div>
+            <div class="entry-date">Tags: ${escapeHtml(getItemTags(item).join(', '))}</div>
           </div>
-
+    
           <div class="entry-body">
-            <div class="kanji-grid">
-              ${meanings}
+            <div class="summary">
+              <div class="jp-line">${escapeHtml(item.jp || '')}</div>
+              ${item.es ? `<div class="es-line">${escapeHtml(item.es)}</div>` : ''}
+            </div>
+    
+            <div class="details">
+              <div class="meaning-boxes">
+                ${item.kun ? `
+                  <div class="meaning-box">
+                    <span class="label">Kun</span>
+                    <div class="value">${escapeHtml(item.kun)}</div>
+                  </div>
+                ` : ''}
+                ${item.on ? `
+                  <div class="meaning-box">
+                    <span class="label">On</span>
+                    <div class="value">${escapeHtml(item.on)}</div>
+                  </div>
+                ` : ''}
+              </div>
+              ${item.extra ? `
+                <div class="meaning-boxes">
+                  <div class="meaning-box">
+                    <span class="label">Extra</span>
+                    <div class="value">${escapeHtml(item.extra)}</div>
+                  </div>
+                </div>
+              ` : ''}
             </div>
           </div>
         </article>
@@ -634,7 +649,7 @@
         >
           <div class="entry-top">
             <div class="entry-tag">PALABRA</div>
-            <div class="entry-date">Tags: ${escapeHtml(item.theme || '')}</div>
+            <div class="entry-date">Tags: ${escapeHtml(getItemTags(item).join(', '))}</div>
           </div>
 
           <div class="entry-body">
@@ -645,11 +660,11 @@
             </div>
 
             <div class="details">
-              ${item.matiz ? `
+              ${item.extra ? `
                 <div class="meaning-boxes">
                   <div class="meaning-box">
-                    <span class="label">Observación</span>
-                    <div class="value">${escapeHtml(item.matiz)}</div>
+                    <span class="label">Extra</span>
+                    <div class="value">${escapeHtml(item.extra)}</div>
                   </div>
                 </div>
               ` : ''}
@@ -661,6 +676,18 @@
       `;
     }
 
+    function buildIndex(data){
+      state.wordsByJp = new Map(
+        data.filter(x => normalizeType(x.tipo) === 'PALABRA')
+          .map(x => [x.jp, x])
+      );
+    
+      state.kanjiByJp = new Map(
+        data.filter(x => normalizeType(x.tipo) === 'KANJI')
+          .map(x => [x.jp, x])
+      );
+    }
+    
     function renderSentenceCard(item, index){
       return `
         <article
@@ -671,7 +698,7 @@
         >
           <div class="entry-top">
             <div class="entry-tag">FRASE</div>
-            <div class="entry-date">Tags: ${escapeHtml(item.theme || '')}</div>
+            <div class="entry-date">Tags: ${escapeHtml(getItemTags(item).join(', '))}</div>
           </div>
 
           <div class="entry-body">
@@ -682,17 +709,16 @@
             </div>
 
             <div class="details">
-              ${item.matiz ? `
+              ${item.extra ? `
                 <div class="meaning-boxes">
                   <div class="meaning-box">
                     <span class="label">Observación</span>
-                    <div class="value">${escapeHtml(item.matiz)}</div>
+                    <div class="value">${escapeHtml(item.extra)}</div>
                   </div>
                 </div>
               ` : ''}
 
-              ${renderWordsPanel(item.words)}
-              ${renderKanjiPanel(item.kanjis)}
+              ${renderWordsPanel(item.palabras)}
             </div>
           </div>
         </article>
@@ -700,8 +726,8 @@
     }
 
     function renderItem(item, index){
-      const type = normalizeType(item.type || '');
-
+      const type = normalizeType(item.tipo || '');
+    
       if(type === 'KANJI') return renderKanjiCard(item, index);
       if(type === 'PALABRA') return renderWordCard(item, index);
       return renderSentenceCard(item, index);
@@ -915,7 +941,7 @@
         const shuffled = [...data].sort(() => Math.random() - 0.5);
     
         state.data = Array.isArray(shuffled) ? shuffled : [];
-
+        buildIndex(state.data);
         buildTags(state.data);
 
         const grid = document.getElementById('vivoGrid');
