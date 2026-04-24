@@ -882,7 +882,7 @@ function layoutMasonry(){
   const cardWidths = cards.map(card => Math.ceil(card.offsetWidth));
   const maxCardWidth = Math.max(...cardWidths);
   const columnWidth = maxCardWidth + gap;
-  const columnsCount = Math.max(1, Math.floor((containerWidth + gap) / columnWidth));
+  const columnsCount = Math.min(4, Math.max(1, Math.floor((containerWidth + gap) / columnWidth)));
 
   const totalGridWidth = columnsCount * columnWidth - gap;
   const startX = Math.max(0, (containerWidth - totalGridWidth) / 2);
