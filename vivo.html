@@ -107,10 +107,21 @@ body{
   cursor:pointer;
 }
 
-.toggle-chip:hover,
-.toggle-chip.is-active{
+.toggle-chip:hover{
   background:var(--panel-strong);
   box-shadow:0 0 16px rgba(255,255,255,.18);
+}
+
+.toggle-group .toggle-chip.is-active{
+  background:rgba(59,130,246,.35);
+  border-color:rgba(59,130,246,.7);
+  box-shadow:0 0 12px rgba(59,130,246,.35);
+}
+
+.tags-wrap .toggle-chip.is-active{
+  background:rgba(168,85,247,.35);
+  border-color:rgba(168,85,247,.7);
+  box-shadow:0 0 12px rgba(168,85,247,.35);
 }
 
 .empty-tags,
