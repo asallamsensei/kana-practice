@@ -857,93 +857,55 @@ body{
       info.textContent = `${count} tarjeta${count === 1 ? '' : 's'} visibles · modos: ${modeText} · tags activadas: ${state.activeTags.size}/${state.allTags.length}`;
     }
 
-    function layoutMasonry(){
-      const container = document.getElementById('vivoGrid');
-      const cards = [...container.querySelectorAll('.entry:not([style*="display: none"])')];
+function layoutMasonry(){
+  const container = document.getElementById('vivoGrid');
+  const cards = [...container.querySelectorAll('.entry:not([style*="display: none"])')];
 
-      if(window.innerWidth < 900){
-        container.style.height = 'auto';
-        return;
-      }
+  if(window.innerWidth < 900){
+    container.style.height = 'auto';
+    return;
+  }
 
-      if(!cards.length){
-        container.style.height = '0px';
-        return;
-      }
+  if(!cards.length){
+    container.style.height = '0px';
+    return;
+  }
 
-      const gap = 18;
-      const containerWidth = container.clientWidth;
-      const placed = [];
+  const gap = 18;
+  const containerWidth = container.clientWidth;
 
-      function intersects(a, b){
-        return !(
-          a.right <= b.left ||
-          a.left >= b.right ||
-          a.bottom <= b.top ||
-          a.top >= b.bottom
-        );
-      }
+  cards.forEach(card => {
+    card.style.left = '0px';
+    card.style.top = '0px';
+  });
 
-      function getLowestYThatFits(width, height, startX){
-        let y = 0;
+  const cardWidths = cards.map(card => Math.ceil(card.offsetWidth));
+  const maxCardWidth = Math.max(...cardWidths);
+  const columnWidth = maxCardWidth + gap;
+  const columnsCount = Math.max(1, Math.floor((containerWidth + gap) / columnWidth));
 
-        while(true){
-          const testRect = {
-            left: startX,
-            top: y,
-            right: startX + width,
-            bottom: y + height
-          };
+  const totalGridWidth = columnsCount * columnWidth - gap;
+  const startX = Math.max(0, (containerWidth - totalGridWidth) / 2);
 
-          const hit = placed.find(p => intersects(testRect, p));
+  const columns = Array(columnsCount).fill(0);
 
-          if(!hit) return y;
-          y = hit.bottom + gap;
-        }
-      }
+  cards.forEach(card => {
+    const width = Math.ceil(card.offsetWidth);
+    const height = Math.ceil(card.offsetHeight);
 
-      cards.forEach(card => {
-        card.style.left = '0px';
-        card.style.top = '0px';
-      });
+    const columnIndex = columns.indexOf(Math.min(...columns));
 
-      cards.forEach(card => {
-        const width = Math.ceil(card.offsetWidth);
-        const height = Math.ceil(card.offsetHeight);
+    const x = startX + columnIndex * columnWidth + (maxCardWidth - width) / 2;
+    const y = columns[columnIndex];
 
-        let bestX = 0;
-        let bestY = Infinity;
-        const candidates = [0];
+    card.style.left = `${x}px`;
+    card.style.top = `${y}px`;
 
-        placed.forEach(p => {
-          candidates.push(p.right);
-        });
+    columns[columnIndex] += height + gap;
+  });
 
-        candidates.forEach(x => {
-          if(x + width > containerWidth) return;
-
-          const y = getLowestYThatFits(width, height, x);
-
-          if(y < bestY){
-            bestY = y;
-            bestX = x;
-          }
-        });
-
-        card.style.left = `${bestX}px`;
-        card.style.top = `${bestY}px`;
-
-        placed.push({
-          left: bestX,
-          top: bestY,
-          right: bestX + width + gap,
-          bottom: bestY + height
-        });
-      });
-
-      const maxBottom = Math.max(...placed.map(p => p.bottom), 0);
-      container.style.height = `${maxBottom}px`;
-    }
+  container.style.height = `${Math.max(...columns)}px`;
+}
 
     fetch('data/elvivo.json')
       .then(res => res.json())
