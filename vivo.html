@@ -342,11 +342,9 @@ body{
 }
 
 .layout{
-  display:grid;
-  grid-template-columns:auto 320px;
+  display:flex;
   gap:var(--gap);
-  justify-content:center;
-  align-items:start;
+  align-items:flex-start;
 }
 
 .side-panel{
@@ -361,6 +359,8 @@ body{
   top:12px;
   justify-items:center;
   text-align:center;
+  width:320px;
+  flex-shrink:0;
 }
 
 .side-panel .filters-panel{
@@ -381,8 +381,7 @@ body{
 .vivo-grid{
   position:relative;
   min-height:200px;
-  width:85%;
-  margin:0 auto;
+  flex:1;
 }
     
 @media (max-width: 900px){
@@ -433,10 +432,11 @@ body{
     grid-template-columns:1fr;
   }
   
-  .side-panel{
-    position:static;
-    order:-1;
-  }
+.side-panel{
+  position:static;
+  order:-1;
+  width:100%;
+}
 
 }    
     
