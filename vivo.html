@@ -918,6 +918,84 @@ function layoutMasonry(){
   container.style.height = `${maxBottom + gap}px`;
 }
 
+function magnetCards(){
+  const container = document.getElementById('vivoGrid');
+  const cards = [...container.querySelectorAll('.entry:not([style*="display: none"])')];
+  const gap = 12;
+
+  function rectOf(card){
+    const left = parseFloat(card.style.left) || 0;
+    const top = parseFloat(card.style.top) || 0;
+
+    return {
+      left,
+      top,
+      right:left + card.offsetWidth,
+      bottom:top + card.offsetHeight,
+      width:card.offsetWidth,
+      height:card.offsetHeight
+    };
+  }
+
+  function collides(a, b){
+    return !(
+      a.right + gap <= b.left ||
+      a.left >= b.right + gap ||
+      a.bottom + gap <= b.top ||
+      a.top >= b.bottom + gap
+    );
+  }
+
+  function canMove(card, newLeft, newTop){
+    const test = {
+      left:newLeft,
+      top:newTop,
+      right:newLeft + card.offsetWidth,
+      bottom:newTop + card.offsetHeight
+    };
+
+    if(test.left < 0) return false;
+    if(test.right > container.clientWidth) return false;
+
+    return !cards.some(other => {
+      if(other === card) return false;
+      return collides(test, rectOf(other));
+    });
+  }
+
+  for(let pass = 0; pass < 30; pass++){
+    cards.forEach(card => {
+      const r = rectOf(card);
+      const sameRow = cards
+        .filter(other => other !== card)
+        .map(other => rectOf(other))
+        .filter(o => r.top < o.bottom && r.bottom > o.top);
+
+      if(!sameRow.length) return;
+
+      const nearest = sameRow
+        .map(o => {
+          const dist = o.right <= r.left ? r.left - o.right : o.left - r.right;
+          return {o, dist};
+        })
+        .filter(x => x.dist > gap)
+        .sort((a,b) => a.dist - b.dist)[0];
+
+      if(!nearest) return;
+
+      const target = nearest.o.right <= r.left
+        ? nearest.o.right + gap
+        : nearest.o.left - r.width - gap;
+
+      const step = Math.sign(target - r.left) * Math.min(gap, Math.abs(target - r.left));
+
+      if(canMove(card, r.left + step, r.top)){
+        card.style.left = `${r.left + step}px`;
+      }
+    });
+  }
+}
+    
     fetch('data/elvivo.json')
       .then(res => res.json())
       .then(data => {
