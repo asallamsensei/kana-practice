@@ -87,10 +87,16 @@ body{
   text-transform:uppercase;
 }
 
-.toggle-group,
-.tags-wrap{
+.toggle-group{
   display:flex;
   flex-wrap:wrap;
+  gap:var(--gap);
+  justify-content:center;
+}
+
+.tags-wrap{
+  display:grid;
+  grid-template-columns:repeat(3,max-content);
   gap:var(--gap);
   justify-content:center;
 }
