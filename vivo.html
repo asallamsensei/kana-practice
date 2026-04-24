@@ -60,6 +60,7 @@ body{
   width:min(1400px, calc(100% - 32px));
   margin:0 auto;
   padding:32px 0 64px;
+  text-align:center;
 }
 
 .page-title{
@@ -72,19 +73,14 @@ body{
 }
 
 .filters-panel{
-  display:flex;
-  flex-wrap:wrap;
-  justify-content:center;
+  display:inline-flex;
   gap:var(--gap);
-  margin-bottom:20px;
+  margin:0 auto 20px;
   padding:var(--pad);
   border-radius:32px;
   border:1px solid rgba(255,255,255,.12);
-  background:linear-gradient(135deg, rgba(109,40,217,.16), rgba(37,99,235,.10), rgba(239,68,68,.08));
+  background:rgba(255,255,255,.05);
   box-shadow:var(--shadow);
-  backdrop-filter:blur(10px);
-  width:fit-content;
-  max-width:100%;
 }
 
 .filter-block{
@@ -97,6 +93,7 @@ body{
   border:1px solid rgba(255,255,255,.10);
   width:fit-content;
   max-width:100%;
+  text-align:center;
 }
 
 .filter-title{
