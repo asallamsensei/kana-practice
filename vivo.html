@@ -136,11 +136,14 @@ body{
   margin:0 0 18px;
 }
 
-.vivo-grid{
-  position:relative;
-  min-height:200px;
-  max-width:80%;
+.cards-panel{
+  width:80%;
   margin:0 auto;
+  padding:var(--pad);
+  border:1px solid var(--border);
+  border-radius:var(--radius-xl);
+  background:var(--panel);
+  box-shadow:var(--shadow);
 }
 
 .entry{
@@ -435,6 +438,10 @@ body{
     position:static;
     order:-1;
   }
+
+  .cards-panel{
+    width:100%;
+  }
 }    
     
   </style>
@@ -445,7 +452,9 @@ body{
 
 <div class="layout">
 
-  <main class="vivo-grid" id="vivoGrid"></main>
+  <section class="cards-panel">
+    <main class="vivo-grid" id="vivoGrid"></main>
+  </section>
 
   <aside class="side-panel">
     <section class="filters-panel">
@@ -466,7 +475,7 @@ body{
   </aside>
 
 </div>
-
+</div>
   <footer class="footer-badge">© Asallam Sensei</footer>
 
   <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
