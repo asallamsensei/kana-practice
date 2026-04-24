@@ -1,503 +1,549 @@
 [
   {
-    "type": "palabra",
-    "theme": "Tecnología",
+    "tipo": "palabra",
     "jp": "電話",
     "romaji": "denwa",
     "es": "teléfono",
-    "literal": "teléfono",
-    "matiz": "",
-    "words": [],
-    "kanjis": [
-      { "char": "電", "mean": "electricidad" },
-      { "char": "話", "mean": "hablar • conversación" }
-    ]
+    "kanjis": ["電", "話"],
+    "extra": ""
   },
   {
-    "type": "kanji",
-    "theme": "Acción",
-    "jp": "走",
-    "es": "correr",
-    "literal": "",
-    "matiz": "",
-    "kun": "はしる",
-    "on": "ソウ",
-    "words": [],
-    "kanjis": [
-      { "char": "走", "mean": "correr • desplazarse rápido" }
-    ]
-  },
-  {
-    "type": "palabra",
-    "theme": "Saludo",
+    "tipo": "palabra",
     "jp": "おはよう",
     "romaji": "ohayō",
     "es": "buenos días",
-    "literal": "es temprano",
-    "matiz": "Saludo informal de la mañana",
-    "words": [],
-    "kanjis": []
+    "extra": ""
   },
   {
-    "type": "palabra",
-    "theme": "Saludo",
+    "tipo": "palabra",
     "jp": "おはようございます",
     "romaji": "ohayō gozaimasu",
     "es": "buenos días",
-    "literal": "es temprano",
-    "matiz": "Versión formal y cortés de おはよう",
-    "words": [
-      { "jp": "おはよう", "romaji": "ohayō", "es": "buenos días" },
-      { "jp": "ございます", "romaji": "gozaimasu", "es": "forma cortés de ある en expresiones fijas" }
-    ],
-    "kanjis": []
+    "extra": "formal"
   },
   {
-    "type": "palabra",
-    "theme": "Saludo",
+    "tipo": "palabra",
     "jp": "こんにちは",
     "romaji": "konnichiwa",
-    "es": "hola • buenas tardes",
-    "literal": "hoy en cuanto a...",
-    "matiz": "Saludo común del día, desde media mañana hasta la tarde",
-    "words": [],
-    "kanjis": []
+    "es": "hola, buenas tardes",
+    "extra": ""
   },
   {
-    "type": "palabra",
-    "theme": "Saludo",
+    "tipo": "palabra",
     "jp": "こんばんは",
     "romaji": "konbanwa",
     "es": "buenas noches",
-    "literal": "esta noche en cuanto a...",
-    "matiz": "Saludo usado al anochecer o por la noche",
-    "words": [],
-    "kanjis": []
+    "extra": ""
   },
   {
-    "type": "palabra",
-    "theme": "Cortesía",
+    "tipo": "palabra",
     "jp": "ありがとう",
     "romaji": "arigatō",
     "es": "gracias",
-    "literal": "difícil de existir",
-    "matiz": "Forma informal de dar las gracias",
-    "words": [],
-    "kanjis": []
+    "extra": ""
   },
   {
-    "type": "palabra",
-    "theme": "Cortesía",
+    "tipo": "palabra",
     "jp": "ありがとうございます",
     "romaji": "arigatō gozaimasu",
     "es": "muchas gracias",
-    "literal": "es algo difícil de existir",
-    "matiz": "Forma formal y cortés de dar las gracias",
-    "words": [
-      { "jp": "ありがとう", "romaji": "arigatō", "es": "gracias" },
-      { "jp": "ございます", "romaji": "gozaimasu", "es": "forma cortés en expresiones fijas" }
-    ],
-    "kanjis": []
+    "extra": "formal"
   },
   {
-    "type": "palabra",
-    "theme": "Países e idiomas",
+    "tipo": "palabra",
     "jp": "日本",
     "romaji": "nihon",
     "es": "Japón",
-    "literal": "origen del sol",
-    "matiz": "Nombre del país Japón",
-    "words": [],
-    "kanjis": [
-      { "char": "日", "mean": "sol • día" },
-      { "char": "本", "mean": "origen • base • libro" }
-    ]
+    "kanjis": ["日", "本"],
+    "extra": ""
   },
   {
-    "type": "palabra",
-    "theme": "Países e idiomas",
+    "tipo": "palabra",
     "jp": "日本語",
     "romaji": "nihongo",
     "es": "idioma japonés",
-    "literal": "lengua de Japón",
-    "matiz": "Se refiere al idioma japonés",
-    "words": [],
-    "kanjis": [
-      { "char": "日", "mean": "sol • día" },
-      { "char": "本", "mean": "origen • base • libro" },
-      { "char": "語", "mean": "idioma • palabra" }
-    ]
+    "kanjis": ["日", "本", "語"],
+    "extra": ""
   },
   {
-    "type": "palabra",
-    "theme": "Personas y nacionalidades",
+    "tipo": "palabra",
     "jp": "日本人",
     "romaji": "nihonjin",
-    "es": "japonés • persona japonesa",
-    "literal": "persona de Japón",
-    "matiz": "Se usa para una persona de nacionalidad japonesa",
-    "words": [],
-    "kanjis": [
-      { "char": "日", "mean": "sol • día" },
-      { "char": "本", "mean": "origen • base • libro" },
-      { "char": "人", "mean": "persona" }
-    ]
+    "es": "japonés, persona japonesa",
+    "kanjis": ["日", "本", "人"],
+    "extra": ""
   },
   {
-    "type": "palabra",
-    "theme": "Lugares",
+    "tipo": "palabra",
     "jp": "トイレ",
     "romaji": "toire",
     "es": "baño",
-    "literal": "toilet",
-    "matiz": "Préstamo común para decir baño o servicio",
-    "words": [],
-    "kanjis": []
+    "extra": ""
   },
   {
-    "type": "palabra",
-    "theme": "Despedida",
+    "tipo": "palabra",
     "jp": "さようなら",
     "romaji": "sayōnara",
     "es": "adiós",
-    "literal": "si es así",
-    "matiz": "Despedida más definitiva; no siempre es la más común en lo cotidiano",
-    "words": [],
-    "kanjis": []
+    "extra": ""
   },
   {
-    "type": "palabra",
-    "theme": "Personas",
+    "tipo": "palabra",
     "jp": "人",
     "romaji": "hito",
     "es": "persona",
-    "literal": "persona",
-    "matiz": "Lectura kun del kanji 人",
-    "words": [],
-    "kanjis": [
-      { "char": "人", "mean": "persona" }
-    ]
+    "kanjis": ["人"],
+    "extra": ""
   },
   {
-    "type": "palabra",
-    "theme": "Escritura",
+    "tipo": "palabra",
     "jp": "漢字",
     "romaji": "kanji",
-    "es": "kanji • caracteres chinos usados en japonés",
-    "literal": "caracteres han",
-    "matiz": "Se refiere a los caracteres de origen chino usados en japonés",
-    "words": [],
-    "kanjis": [
-      { "char": "漢", "mean": "han • chino" },
-      { "char": "字", "mean": "carácter • letra" }
-    ]
+    "es": "kanji, caracteres chinos usados en japonés",
+    "kanjis": ["漢", "字"],
+    "extra": ""
   },
   {
-    "type": "palabra",
-    "theme": "Pronombres",
+    "tipo": "palabra",
     "jp": "私",
     "romaji": "watashi",
     "es": "yo",
-    "literal": "yo",
-    "matiz": "Pronombre personal neutro y muy común",
-    "words": [],
-    "kanjis": [
-      { "char": "私", "mean": "yo • privado" }
-    ]
+    "kanjis": ["私"],
+    "extra": ""
   },
   {
-    "type": "palabra",
-    "theme": "Pronombres",
+    "tipo": "palabra",
     "jp": "あたし",
     "romaji": "atashi",
     "es": "yo",
-    "literal": "yo",
-    "matiz": "Forma más suave e informal de decir yo, femenina",
-    "words": [],
-    "kanjis": []
+    "extra": "informal"
   },
   {
-    "type": "palabra",
-    "theme": "Pronombres",
+    "tipo": "palabra",
     "jp": "あなた",
     "romaji": "anata",
-    "es": "tú • usted",
-    "literal": "tú",
-    "matiz": "Se usa, pero muchas veces se omite o se reemplaza por el nombre",
-    "words": [],
-    "kanjis": []
+    "es": "tú, usted",
+    "extra": ""
   },
   {
-    "type": "palabra",
-    "theme": "Esencia y ambiente",
+    "tipo": "palabra",
     "jp": "気",
     "romaji": "ki",
-    "es": "energía • ánimo • espíritu • ambiente",
-    "literal": "energía",
-    "matiz": "Kanji muy frecuente en palabras sobre ánimo, atención, intención o ambiente",
-    "words": [],
-    "kanjis": [
-      { "char": "気", "mean": "energía • ánimo • espíritu • ambiente" }
-    ]
+    "es": "energía, ánimo, espíritu, ambiente",
+    "kanjis": ["気"],
+    "extra": ""
   },
   {
-    "type": "palabra",
-    "theme": "Objetos",
+    "tipo": "palabra",
     "jp": "本",
     "romaji": "hon",
     "es": "libro",
-    "literal": "libro",
-    "matiz": "El kanji también tiene otros sentidos según la palabra",
-    "words": [],
-    "kanjis": [
-      { "char": "本", "mean": "libro • origen • base" }
-    ]
+    "kanjis": ["本"],
+    "extra": ""
   },
   {
-    "type": "palabra",
-    "theme": "Respuesta",
+    "tipo": "palabra",
     "jp": "はい",
     "romaji": "hai",
     "es": "sí",
-    "literal": "sí",
-    "matiz": "",
-    "words": [],
-    "kanjis": []
+    "extra": ""
   },
   {
-    "type": "palabra",
-    "theme": "Respuesta",
+    "tipo": "palabra",
     "jp": "いいえ",
     "romaji": "iie",
     "es": "no",
-    "literal": "no",
-    "matiz": "",
-    "words": [],
-    "kanjis": []
+    "extra": ""
   },
   {
-    "type": "palabra",
-    "theme": "Cortesía",
+    "tipo": "palabra",
     "jp": "すみません",
     "romaji": "sumimasen",
-    "es": "disculpe • perdón • gracias",
-    "literal": "no termina • no queda resuelto",
-    "matiz": "Muy útil para pedir disculpas, llamar la atención o incluso agradecer con modestia",
-    "words": [],
-    "kanjis": []
+    "es": "disculpe, perdón, gracias",
+    "extra": ""
   },
   {
-    "type": "palabra",
-    "theme": "Existencia",
+    "tipo": "palabra",
     "jp": "いる",
     "romaji": "iru",
-    "es": "haber • estar • existir",
-    "literal": "existir",
-    "matiz": "Se usa para personas y seres animados",
-    "words": [],
-    "kanjis": []
+    "es": "haber, estar, existir",
+    "extra": "para personas y seres animados"
   },
   {
-    "type": "palabra",
-    "theme": "Existencia",
+    "tipo": "palabra",
     "jp": "ある",
     "romaji": "aru",
-    "es": "haber • estar • existir",
-    "literal": "existir",
-    "matiz": "Se usa para cosas, objetos y seres inanimados",
-    "words": [],
-    "kanjis": []
+    "es": "haber, estar, existir",
+    "extra": "para cosas y seres inanimados"
   },
   {
-    "type": "oración",
-    "theme": "Afecto",
+    "tipo": "palabra",
+    "jp": "君",
+    "romaji": "kimi",
+    "es": "tú",
+    "kanjis": ["君"],
+    "extra": ""
+  },
+  {
+    "tipo": "palabra",
+    "jp": "の",
+    "romaji": "no",
+    "es": "partícula posesiva o de relación",
+    "extra": ""
+  },
+  {
+    "tipo": "palabra",
+    "jp": "そば",
+    "romaji": "soba",
+    "es": "lado, cerca",
+    "extra": ""
+  },
+  {
+    "tipo": "palabra",
+    "jp": "に",
+    "romaji": "ni",
+    "es": "partícula de dirección o lugar",
+    "extra": ""
+  },
+  {
+    "tipo": "palabra",
+    "jp": "いたい",
+    "romaji": "itai",
+    "es": "querer estar",
+    "extra": ""
+  },
+  {
+    "tipo": "oracion",
     "jp": "君のそばにいたい",
     "romaji": "kimi no soba ni itai",
     "es": "quiero estar a tu lado",
-    "literal": "quiero estar al lado de ti",
-    "matiz": "Expresión afectiva y cercana; suena emocional y personal",
-    "words": [
-      { "jp": "君", "romaji": "kimi", "es": "tú" },
-      { "jp": "の", "romaji": "no", "es": "partícula posesiva o de relación" },
-      { "jp": "そば", "romaji": "soba", "es": "lado • cerca" },
-      { "jp": "に", "romaji": "ni", "es": "partícula de dirección o lugar" },
-      { "jp": "いたい", "romaji": "itai", "es": "querer estar" }
-    ],
-    "kanjis": [
-      { "char": "君", "mean": "tú • señor • soberano" }
-    ]
+    "palabras": ["君", "の", "そば", "に", "いたい"],
+    "extra": ""
   },
   {
-    "type": "oración",
-    "theme": "Rutina de la mañana",
+    "tipo": "palabra",
+    "jp": "アラーム",
+    "romaji": "arāmu",
+    "es": "alarma",
+    "extra": ""
+  },
+  {
+    "tipo": "palabra",
+    "jp": "を",
+    "romaji": "o",
+    "es": "partícula de objeto directo",
+    "extra": ""
+  },
+  {
+    "tipo": "palabra",
+    "jp": "止める",
+    "romaji": "tomeru",
+    "es": "detener, parar",
+    "kanjis": ["止"],
+    "extra": ""
+  },
+  {
+    "tipo": "oracion",
     "jp": "アラームを止める",
     "romaji": "arāmu o tomeru",
-    "es": "Apagar la alarma",
-    "literal": "Detener la alarma",
-    "matiz": "",
-    "words": [
-      { "jp": "アラーム", "romaji": "arāmu", "es": "alarma" },
-      { "jp": "を", "romaji": "o", "es": "partícula de objeto directo" },
-      { "jp": "止める", "romaji": "tomeru", "es": "detener, parar" }
-    ],
-    "kanjis": [
-      { "char": "止", "mean": "parar • detener" }
-    ]
+    "es": "apagar la alarma",
+    "palabras": ["アラーム", "を", "止める"],
+    "extra": ""
   },
   {
-    "type": "palabra",
-    "theme": "Animales",
+    "tipo": "palabra",
     "jp": "犬",
     "romaji": "inu",
     "es": "perro",
-    "literal": "perro",
-    "matiz": "",
-    "words": [],
-    "kanjis": [
-      { "char": "犬", "mean": "perro" }
-    ]
+    "kanjis": ["犬"],
+    "extra": ""
   },
   {
-    "type": "palabra",
-    "theme": "Animales",
+    "tipo": "palabra",
     "jp": "猫",
     "romaji": "neko",
     "es": "gato",
-    "literal": "gato",
-    "matiz": "",
-    "words": [],
-    "kanjis": [
-      { "char": "猫", "mean": "gato" }
-    ]
+    "kanjis": ["猫"],
+    "extra": ""
   },
   {
-    "type": "palabra",
-    "theme": "Animales",
+    "tipo": "palabra",
     "jp": "鳥",
     "romaji": "tori",
-    "es": "pájaro • ave",
-    "literal": "ave",
-    "matiz": "",
-    "words": [],
-    "kanjis": [
-      { "char": "鳥", "mean": "ave • pájaro" }
-    ]
+    "es": "pájaro, ave",
+    "kanjis": ["鳥"],
+    "extra": ""
   },
   {
-    "type": "palabra",
-    "theme": "Animales",
+    "tipo": "palabra",
     "jp": "魚",
     "romaji": "sakana",
     "es": "pez",
-    "literal": "pez",
-    "matiz": "",
-    "words": [],
-    "kanjis": [
-      { "char": "魚", "mean": "pez" }
-    ]
+    "kanjis": ["魚"],
+    "extra": ""
   },
   {
-    "type": "palabra",
-    "theme": "Animales",
+    "tipo": "palabra",
     "jp": "馬",
     "romaji": "uma",
     "es": "caballo",
-    "literal": "caballo",
-    "matiz": "",
-    "words": [],
-    "kanjis": [
-      { "char": "馬", "mean": "caballo" }
-    ]
+    "kanjis": ["馬"],
+    "extra": ""
   },
   {
-    "type": "palabra",
-    "theme": "Animales",
+    "tipo": "palabra",
     "jp": "牛",
     "romaji": "ushi",
     "es": "vaca",
-    "literal": "vaca",
-    "matiz": "",
-    "words": [],
-    "kanjis": [
-      { "char": "牛", "mean": "vaca • ganado" }
-    ]
+    "kanjis": ["牛"],
+    "extra": ""
   },
   {
-    "type": "palabra",
-    "theme": "Animales",
+    "tipo": "palabra",
     "jp": "豚",
     "romaji": "buta",
     "es": "cerdo",
-    "literal": "cerdo",
-    "matiz": "",
-    "words": [],
-    "kanjis": [
-      { "char": "豚", "mean": "cerdo" }
-    ]
+    "kanjis": ["豚"],
+    "extra": ""
   },
   {
-    "type": "palabra",
-    "theme": "Animales",
+    "tipo": "palabra",
     "jp": "羊",
     "romaji": "hitsuji",
     "es": "oveja",
-    "literal": "oveja",
-    "matiz": "",
-    "words": [],
-    "kanjis": [
-      { "char": "羊", "mean": "oveja" }
-    ]
+    "kanjis": ["羊"],
+    "extra": ""
   },
   {
-    "type": "palabra",
-    "theme": "Animales",
+    "tipo": "palabra",
     "jp": "猿",
     "romaji": "saru",
     "es": "mono",
-    "literal": "mono",
-    "matiz": "",
-    "words": [],
-    "kanjis": [
-      { "char": "猿", "mean": "mono" }
-    ]
+    "kanjis": ["猿"],
+    "extra": ""
   },
   {
-    "type": "palabra",
-    "theme": "Animales",
+    "tipo": "palabra",
     "jp": "熊",
     "romaji": "kuma",
     "es": "oso",
-    "literal": "oso",
-    "matiz": "",
-    "words": [],
-    "kanjis": [
-      { "char": "熊", "mean": "oso" }
-    ]
+    "kanjis": ["熊"],
+    "extra": ""
   },
   {
-    "type": "palabra",
-    "theme": "Animales",
+    "tipo": "palabra",
     "jp": "象",
     "romaji": "zō",
     "es": "elefante",
-    "literal": "elefante",
-    "matiz": "",
-    "words": [],
-    "kanjis": [
-      { "char": "象", "mean": "elefante • figura • imagen" }
-    ]
+    "kanjis": ["象"],
+    "extra": ""
   },
   {
-    "type": "palabra",
-    "theme": "Animales",
+    "tipo": "palabra",
     "jp": "亀",
     "romaji": "kame",
     "es": "tortuga",
-    "literal": "tortuga",
-    "matiz": "",
-    "words": [],
-    "kanjis": [
-      { "char": "亀", "mean": "tortuga" }
-    ]
+    "kanjis": ["亀"],
+    "extra": ""
+  },
+  {
+    "tipo": "kanji",
+    "jp": "電",
+    "es": "electricidad",
+    "kun": "",
+    "on": "",
+    "extra": ""
+  },
+  {
+    "tipo": "kanji",
+    "jp": "話",
+    "es": "hablar, conversación",
+    "kun": "",
+    "on": "",
+    "extra": ""
+  },
+  {
+    "tipo": "kanji",
+    "jp": "走",
+    "es": "correr, desplazarse rápido",
+    "kun": "はしる",
+    "on": "ソウ",
+    "extra": ""
+  },
+  {
+    "tipo": "kanji",
+    "jp": "日",
+    "es": "sol, día",
+    "kun": "",
+    "on": "",
+    "extra": ""
+  },
+  {
+    "tipo": "kanji",
+    "jp": "本",
+    "es": "origen, base, libro",
+    "kun": "",
+    "on": "",
+    "extra": ""
+  },
+  {
+    "tipo": "kanji",
+    "jp": "語",
+    "es": "idioma, palabra",
+    "kun": "",
+    "on": "",
+    "extra": ""
+  },
+  {
+    "tipo": "kanji",
+    "jp": "人",
+    "es": "persona",
+    "kun": "",
+    "on": "",
+    "extra": ""
+  },
+  {
+    "tipo": "kanji",
+    "jp": "漢",
+    "es": "han, chino",
+    "kun": "",
+    "on": "",
+    "extra": ""
+  },
+  {
+    "tipo": "kanji",
+    "jp": "字",
+    "es": "carácter, letra",
+    "kun": "",
+    "on": "",
+    "extra": ""
+  },
+  {
+    "tipo": "kanji",
+    "jp": "私",
+    "es": "yo, privado",
+    "kun": "",
+    "on": "",
+    "extra": ""
+  },
+  {
+    "tipo": "kanji",
+    "jp": "気",
+    "es": "energía, ánimo, espíritu, ambiente",
+    "kun": "",
+    "on": "",
+    "extra": ""
+  },
+  {
+    "tipo": "kanji",
+    "jp": "君",
+    "es": "tú, señor, soberano",
+    "kun": "",
+    "on": "",
+    "extra": ""
+  },
+  {
+    "tipo": "kanji",
+    "jp": "止",
+    "es": "parar, detener",
+    "kun": "",
+    "on": "",
+    "extra": ""
+  },
+  {
+    "tipo": "kanji",
+    "jp": "犬",
+    "es": "perro",
+    "kun": "",
+    "on": "",
+    "extra": ""
+  },
+  {
+    "tipo": "kanji",
+    "jp": "猫",
+    "es": "gato",
+    "kun": "",
+    "on": "",
+    "extra": ""
+  },
+  {
+    "tipo": "kanji",
+    "jp": "鳥",
+    "es": "ave, pájaro",
+    "kun": "",
+    "on": "",
+    "extra": ""
+  },
+  {
+    "tipo": "kanji",
+    "jp": "魚",
+    "es": "pez",
+    "kun": "",
+    "on": "",
+    "extra": ""
+  },
+  {
+    "tipo": "kanji",
+    "jp": "馬",
+    "es": "caballo",
+    "kun": "",
+    "on": "",
+    "extra": ""
+  },
+  {
+    "tipo": "kanji",
+    "jp": "牛",
+    "es": "vaca, ganado",
+    "kun": "",
+    "on": "",
+    "extra": ""
+  },
+  {
+    "tipo": "kanji",
+    "jp": "豚",
+    "es": "cerdo",
+    "kun": "",
+    "on": "",
+    "extra": ""
+  },
+  {
+    "tipo": "kanji",
+    "jp": "羊",
+    "es": "oveja",
+    "kun": "",
+    "on": "",
+    "extra": ""
+  },
+  {
+    "tipo": "kanji",
+    "jp": "猿",
+    "es": "mono",
+    "kun": "",
+    "on": "",
+    "extra": ""
+  },
+  {
+    "tipo": "kanji",
+    "jp": "熊",
+    "es": "oso",
+    "kun": "",
+    "on": "",
+    "extra": ""
+  },
+  {
+    "tipo": "kanji",
+    "jp": "象",
+    "es": "elefante, figura, imagen",
+    "kun": "",
+    "on": "",
+    "extra": ""
+  },
+  {
+    "tipo": "kanji",
+    "jp": "亀",
+    "es": "tortuga",
+    "kun": "",
+    "on": "",
+    "extra": ""
   }
 ]
