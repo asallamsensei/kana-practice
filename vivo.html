@@ -344,6 +344,39 @@ body{
   background:rgba(0,0,0,.20);
   border-top:1px solid var(--border);
 }
+
+.layout{
+  display:grid;
+  grid-template-columns:1fr 320px;
+  gap:var(--gap);
+  align-items:start;
+}
+
+.side-panel{
+  display:grid;
+  gap:var(--gap);
+  padding:var(--pad);
+  border:1px solid var(--border);
+  border-radius:var(--radius-xl);
+  background:var(--panel);
+  box-shadow:var(--shadow);
+  position:sticky;
+  top:12px;
+}
+
+.side-panel .filters-panel{
+  display:grid;
+  gap:var(--gap);
+  margin:0;
+  padding:0;
+  border:0;
+  background:none;
+  box-shadow:none;
+}
+
+.results-info{
+  margin:0;
+}
     
 @media (max-width: 900px){
   .wrap{
@@ -387,13 +420,29 @@ body{
     top:auto !important;
     max-width:100%;
   }
+
+  .layout{
+    display:grid;
+    grid-template-columns:1fr;
+  }
+  
+  .side-panel{
+    position:static;
+    order:-1;
+  }
 }    
+    
   </style>
 </head>
 <body>
   <div class="wrap">
     <h1 class="page-title">Me lo contaron en el vivo de Asallam Sensei</h1>
 
+<div class="layout">
+
+  <main class="vivo-grid" id="vivoGrid"></main>
+
+  <aside class="side-panel">
     <section class="filters-panel">
       <div class="filter-block">
         <div class="filter-title">Modo</div>
@@ -409,9 +458,9 @@ body{
     </section>
 
     <p class="results-info" id="resultsInfo"></p>
+  </aside>
 
-    <main class="vivo-grid" id="vivoGrid"></main>
-  </div>
+</div>
 
   <footer class="footer-badge">© Asallam Sensei</footer>
 
