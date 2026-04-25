@@ -7,6 +7,11 @@
 <title>Asallam Sensei te hace tu página 😏</title>
 
 <style>
+
+html{
+    scroll-behavior:smooth;
+}
+    
 *{
     box-sizing:border-box;
 }
@@ -89,7 +94,7 @@ h1{
 .section{
     max-width:1100px;
     margin:auto;
-    padding:45px 20px;
+    padding:28px 20px;
 }
 
 .section h2{
@@ -164,6 +169,19 @@ h1{
     animation:shine 1s ease;
 }
 
+.divider{
+    max-width:900px;
+    height:1px;
+    margin:10px auto;
+    background:linear-gradient(
+        90deg,
+        transparent,
+        rgba(125,92,255,.7),
+        rgba(255,215,0,.45),
+        transparent
+    );
+}
+    
 @keyframes shine{
     100%{ left:150%; }
 }
@@ -282,7 +300,7 @@ footer{
     font-size:14px;
 }
 
-@media(max-width:600px){
+@media(max-width:900px){
     h1{
         font-size:34px;
     }
@@ -294,13 +312,24 @@ footer{
     .section h2{
         font-size:26px;
     }
+
+    .section{
+        padding:24px 16px;
+    }
 }
 </style>
 </head>
 
 <body>
 
-<header>
+<div class="side-panel">
+    <a href="#inicio">🏠</a>
+    <a href="#servicios">🧩</a>
+    <a href="#ejemplos">🖼️</a>
+    <a href="https://wa.me/TU_NUMERO_DE_WHATSAPP" target="_blank">💬</a>
+</div>
+    
+<header id="inicio">
     <div class="hero">
         <h1>Asallam Sensei te hace tu página 😏</h1>
 
@@ -320,7 +349,9 @@ footer{
     </div>
 </header>
 
-<section class="section">
+<div class="divider"></div>
+    
+<section class="section" id="servicios">
     <h2>Tu página puede tener todo esto</h2>
     <p>
         Páginas simples, bonitas, rápidas y pensadas para presentar tu negocio,
@@ -366,6 +397,8 @@ footer{
     </div>
 </section>
 
+<div class="divider"></div>
+    
 <section class="section">
     <div class="panel">
         <h2>El estilo lo eliges tú</h2>
@@ -402,6 +435,8 @@ footer{
     </div>
 </section>
 
+<div class="divider"></div>
+    
 <section class="section">
     <h2>Opciones disponibles</h2>
     <p>Sin precios fijos: cada página se cotiza según lo que necesites.</p>
@@ -432,7 +467,9 @@ footer{
     </div>
 </section>
 
-<section class="section">
+<div class="divider"></div>
+    
+<section class="section" id="ejemplos">
     <h2>Ejemplos de lo que puedo mostrar</h2>
     <p>
         Aquí puedes poner capturas, fotos, logos o ejemplos de páginas.
@@ -458,6 +495,8 @@ footer{
     </div>
 </section>
 
+<div class="divider"></div>
+    
 <section class="section">
     <div class="cta">
         <h2>Cotiza la tuya 😏</h2>
