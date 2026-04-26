@@ -379,6 +379,42 @@ body.elegant{
         flex-direction:row;
     }
 }
+
+/* CONTACTO FINAL */
+.contacto-final{
+    grid-template-columns:1fr 280px;
+    gap:16px;
+    align-items:center;
+}
+
+.contacto-final-logo{
+    min-height:220px;
+}
+
+.contacto-final-logo .logo{
+    width:130px;
+    height:130px;
+}
+
+.contacto-buttons{
+    justify-content:flex-start;
+    flex-wrap:wrap;
+}
+
+@media(max-width:900px){
+    .contacto-final{
+        grid-template-columns:1fr;
+    }
+
+    .contacto-final-logo{
+        min-height:180px;
+    }
+
+    .contacto-buttons{
+        justify-content:center;
+    }
+}
+    
 </style>
 </head>
 
@@ -523,7 +559,7 @@ body.elegant{
 </section>
 
 <section class="section" id="contacto">
-    <div class="hero contacto-hero">
+    <div class="hero contacto-final">
 
         <div class="hero-content">
             <span class="badge">Cotiza tu página</span>
@@ -556,7 +592,7 @@ body.elegant{
             </div>
         </div>
 
-        <div class="logo-area contacto-logo">
+        <div class="logo-area contacto-final-logo">
             <div>
                 <div>Tu logo aquí 👇</div>
                 <img class="logo" src="data/paginas/logo.jpg" alt="Logo">
