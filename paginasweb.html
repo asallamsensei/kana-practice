@@ -3,331 +3,327 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Tu Página Web</title>
+<title>Tarjeta Digital Elegante</title>
 
 <style>
-html{scroll-behavior:smooth}
+:root{
+    --bg1:#080914;
+    --bg2:#15142d;
+    --card:rgba(255,255,255,.07);
+    --line:rgba(255,255,255,.16);
+    --glow:#b76cff;
+    --text:#ffffff;
+    --soft:#cfd2ff;
+}
+
 *{box-sizing:border-box}
+
+html{scroll-behavior:smooth}
 
 body{
     margin:0;
-    font-family:"Segoe UI Emoji","Apple Color Emoji",Arial,sans-serif;
-    background:radial-gradient(circle at top,#1a2142,#050814 60%);
-    color:white;
+    font-family:"Trebuchet MS","Segoe UI",Arial,sans-serif;
+    background:
+        radial-gradient(circle at 20% 10%,rgba(183,108,255,.25),transparent 30%),
+        radial-gradient(circle at 80% 20%,rgba(255,105,180,.16),transparent 28%),
+        linear-gradient(160deg,var(--bg1),var(--bg2));
+    color:var(--text);
     text-align:center;
+    overflow-x:hidden;
+}
+
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    background-image:
+        linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);
+    background-size:42px 42px;
+    mask-image:linear-gradient(to bottom,black,transparent 85%);
 }
 
 a{text-decoration:none;color:inherit}
 
 .side-panel{
     position:fixed;
-    right:18px;
+    right:16px;
     top:50%;
     transform:translateY(-50%);
-    z-index:99;
+    z-index:20;
     display:flex;
     flex-direction:column;
-    gap:12px;
-    padding:12px;
+    gap:10px;
+    padding:10px;
     border-radius:999px;
     background:rgba(255,255,255,.08);
-    border:1px solid rgba(255,255,255,.18);
+    border:1px solid var(--line);
     backdrop-filter:blur(12px);
-    box-shadow:0 12px 30px rgba(0,0,0,.45);
 }
 
 .side-panel a{
-    width:42px;
-    height:42px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
+    width:40px;
+    height:40px;
+    display:grid;
+    place-items:center;
     border-radius:50%;
     background:rgba(255,255,255,.08);
-    transition:.3s;
+    transition:.25s;
 }
 
 .side-panel a:hover{
     transform:scale(1.12);
-    background:rgba(125,92,255,.45);
-}
-
-header{
-    padding:55px 20px 25px;
-}
-
-.hero{
-    max-width:1050px;
-    margin:auto;
-    display:grid;
-    grid-template-columns:320px 1fr;
-    gap:28px;
-    align-items:center;
-    padding:30px;
-    border-radius:30px;
-    background:linear-gradient(145deg,rgba(255,255,255,.10),rgba(255,255,255,.03));
-    border:1px solid rgba(255,255,255,.18);
-    box-shadow:0 24px 70px rgba(0,0,0,.55);
-}
-
-.logo-box{
-    min-height:360px;
-    border-radius:26px;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-    background:
-        radial-gradient(circle at top,rgba(255,215,0,.24),transparent 55%),
-        linear-gradient(145deg,rgba(255,215,0,.12),rgba(255,255,255,.04));
-    border:1px solid rgba(255,215,0,.35);
-    box-shadow:inset 0 0 35px rgba(255,215,0,.08);
-}
-
-.logo-text{
-    color:#ffd166;
-    font-size:18px;
-    margin-bottom:14px;
-}
-
-.logo{
-    width:180px;
-    height:180px;
-    object-fit:cover;
-    border-radius:50%;
-    border:3px solid rgba(255,215,0,.8);
-    box-shadow:0 0 28px rgba(255,215,0,.45),0 18px 40px rgba(0,0,0,.5);
-}
-
-.hero-content{
-    text-align:left;
-    padding:15px;
-}
-
-.badge{
-    display:inline-block;
-    padding:8px 14px;
-    border-radius:999px;
-    background:rgba(255,215,0,.12);
-    border:1px solid rgba(255,215,0,.35);
-    color:#ffd166;
-    font-weight:bold;
-    margin-bottom:16px;
-}
-
-h1{
-    font-size:48px;
-    line-height:1.05;
-    margin:0 0 18px;
-}
-
-.highlight{
-    color:#ffd700;
-    text-shadow:0 0 12px rgba(255,215,0,.45);
-}
-
-.hero-content p{
-    color:#d8dcff;
-    font-size:19px;
-    line-height:1.6;
-    margin-bottom:22px;
-}
-
-.buttons{
-    display:flex;
-    flex-wrap:wrap;
-    gap:14px;
-}
-
-.btn{
-    display:flex;
-    align-items:center;
-    gap:9px;
-    padding:13px 19px;
-    border-radius:999px;
-    font-weight:bold;
-    background:linear-gradient(145deg,#7d5cff,#4c36d8);
-    border:1px solid rgba(255,255,255,.22);
-    box-shadow:0 10px 25px rgba(0,0,0,.35);
-    transition:.3s;
-}
-
-.btn:hover{
-    transform:translateY(-4px);
-    box-shadow:0 15px 35px rgba(125,92,255,.45);
-}
-
-.btn.secondary{
-    background:rgba(255,255,255,.08);
-}
-
-.btn img{
-    width:22px;
-    height:22px;
-    object-fit:contain;
+    box-shadow:0 0 18px var(--glow);
 }
 
 .section{
-    max-width:1100px;
+    max-width:1080px;
     margin:auto;
-    padding:28px 20px;
+    padding:24px 18px;
 }
 
-.section h2{
-    font-size:32px;
-    margin-bottom:12px;
-}
-
-.section p{
-    color:#c8ceff;
-    line-height:1.6;
-}
-
-.divider{
-    max-width:900px;
-    height:1px;
-    margin:12px auto;
-    background:linear-gradient(90deg,transparent,rgba(125,92,255,.7),rgba(255,215,0,.45),transparent);
-}
-
-.grid,.options,.gallery{
+.hero{
+    margin-top:24px;
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-    gap:22px;
-    margin-top:30px;
-}
-
-.card,.option,.mockup{
+    grid-template-columns:300px 1fr;
+    gap:18px;
+    align-items:center;
+    padding:18px;
+    border-radius:28px;
+    background:linear-gradient(145deg,var(--card),rgba(255,255,255,.025));
+    border:1px solid var(--line);
+    box-shadow:0 22px 60px rgba(0,0,0,.48);
     position:relative;
     overflow:hidden;
-    border-radius:18px;
-    padding:24px;
-    background:rgba(255,255,255,.05);
-    border:1px solid rgba(255,255,255,.15);
-    box-shadow:0 10px 25px rgba(0,0,0,.35);
-    transition:.3s;
 }
 
-.card:nth-child(4n+1),
-.option.normal{
-    border-color:#ffd700;
-    background:linear-gradient(145deg,rgba(255,215,0,.14),rgba(255,255,255,.05));
-}
-
-.card:nth-child(4n+2){
-    border-color:#c0c0c0;
-    background:linear-gradient(145deg,rgba(192,192,192,.14),rgba(255,255,255,.05));
-}
-
-.card:nth-child(4n+3){
-    border-color:#cd7f32;
-    background:linear-gradient(145deg,rgba(205,127,50,.14),rgba(255,255,255,.05));
-}
-
-.card:nth-child(4n),
-.option.premium{
-    border-color:#7d5cff;
-    background:linear-gradient(145deg,rgba(125,92,255,.18),rgba(255,255,255,.05));
-}
-
-.option.premium{
-    border-color:#ffd700;
-    background:linear-gradient(145deg,rgba(255,215,0,.16),rgba(125,92,255,.10));
-}
-
-.card:hover,.option:hover,.mockup:hover{
-    transform:translateY(-6px);
-    border-color:#aab3ff;
-}
-
-.card::before,.option::before,.mockup::before{
+.hero::after,
+.card::after,
+.option::after{
     content:"";
     position:absolute;
     top:0;
     left:-100%;
     width:60%;
     height:100%;
-    background:linear-gradient(120deg,transparent,rgba(255,255,255,.35),transparent);
+    background:linear-gradient(120deg,transparent,rgba(255,255,255,.28),transparent);
     transform:skewX(-25deg);
 }
 
-.card:hover::before,.option:hover::before,.mockup:hover::before{
+.hero:hover::after,
+.card:hover::after,
+.option:hover::after{
     animation:shine 1s ease;
 }
 
 @keyframes shine{
-    100%{left:150%}
+    to{left:150%}
 }
 
-.icon{
-    font-size:34px;
+.logo-area{
+    min-height:310px;
+    border-radius:24px;
+    display:grid;
+    place-items:center;
+    background:
+        radial-gradient(circle at top,rgba(255,255,255,.12),transparent 58%),
+        linear-gradient(145deg,rgba(183,108,255,.18),rgba(255,255,255,.04));
+    border:1px solid rgba(255,255,255,.18);
+}
+
+.logo-area div{
+    color:var(--soft);
+    font-size:16px;
     margin-bottom:10px;
 }
 
-.card h3,.option h3{
-    margin:8px 0;
+.logo{
+    width:175px;
+    height:175px;
+    border-radius:50%;
+    object-fit:cover;
+    border:2px solid rgba(255,255,255,.55);
+    box-shadow:0 0 28px var(--glow),0 18px 40px rgba(0,0,0,.5);
+}
+
+.hero-content{
+    text-align:left;
+    padding:8px;
+    position:relative;
+    z-index:1;
+}
+
+.badge{
+    display:inline-block;
+    padding:7px 13px;
+    border-radius:999px;
+    color:white;
+    border:1px solid rgba(255,255,255,.18);
+    background:rgba(255,255,255,.08);
+    box-shadow:0 0 18px rgba(183,108,255,.25);
+    font-size:14px;
+}
+
+h1{
+    font-size:46px;
+    line-height:1.05;
+    margin:14px 0;
+}
+
+.glow{
+    color:#fff;
+    text-shadow:
+        0 0 8px var(--glow),
+        0 0 18px var(--glow),
+        0 0 30px rgba(255,105,180,.45);
+}
+
+p{
+    color:var(--soft);
+    line-height:1.55;
+    font-size:18px;
+}
+
+.icon-buttons{
+    display:flex;
+    gap:12px;
+    margin-top:18px;
+}
+
+.icon-btn{
+    width:48px;
+    height:48px;
+    display:grid;
+    place-items:center;
+    border-radius:50%;
     font-size:23px;
+    background:rgba(255,255,255,.08);
+    border:1px solid var(--line);
+    box-shadow:0 10px 25px rgba(0,0,0,.35);
+    transition:.25s;
+}
+
+.icon-btn:hover{
+    transform:translateY(-4px) scale(1.05);
+    box-shadow:0 0 22px var(--glow);
+}
+
+h2{
+    font-size:30px;
+    margin:8px 0;
+}
+
+.grid,
+.options,
+.gallery{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+    gap:16px;
+    margin-top:18px;
+}
+
+.card,
+.option,
+.mockup{
+    position:relative;
+    overflow:hidden;
+    border-radius:20px;
+    padding:20px;
+    background:linear-gradient(145deg,var(--card),rgba(255,255,255,.025));
+    border:1px solid var(--line);
+    box-shadow:0 12px 30px rgba(0,0,0,.36);
+    transition:.25s;
+}
+
+.card:hover,
+.option:hover,
+.mockup:hover{
+    transform:translateY(-5px);
+    box-shadow:0 0 24px rgba(183,108,255,.28);
+}
+
+.card h3,
+.option h3{
+    margin:8px 0;
+    font-size:21px;
 }
 
 .card p{
-    color:#d8dcff;
     font-size:15px;
+    margin:0;
+}
+
+.icon{
+    font-size:32px;
 }
 
 .option{
     text-align:left;
 }
 
-.option h3{
-    font-size:27px;
+.option ul{
+    padding-left:18px;
+    color:var(--soft);
+    line-height:1.7;
 }
 
-.option ul{
-    padding-left:20px;
-    color:#d8dcff;
-    line-height:1.8;
+.style-card{
+    cursor:pointer;
 }
 
 .mockup{
     padding:0;
-    min-height:220px;
 }
 
 .mockup img{
     width:100%;
-    height:220px;
+    height:210px;
     object-fit:cover;
     display:block;
 }
 
-.placeholder{
-    height:220px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    flex-direction:column;
-    color:#aab3ff;
-    padding:20px;
-}
-
-.placeholder strong{
-    color:white;
-    font-size:20px;
-    margin-bottom:8px;
-}
-
 footer{
-    padding:35px 20px;
-    color:#889;
+    color:#888ca8;
+    padding:25px;
     font-size:14px;
 }
 
-@media(max-width:850px){
-    body{padding-bottom:90px}
+body.light{
+    --bg1:#f6f3ff;
+    --bg2:#e8e0ff;
+    --card:rgba(255,255,255,.72);
+    --line:rgba(80,70,120,.18);
+    --glow:#b46cff;
+    --text:#171427;
+    --soft:#4d4a68;
+}
+
+body.elegant{
+    --bg1:#060606;
+    --bg2:#19151f;
+    --card:rgba(255,255,255,.065);
+    --line:rgba(255,255,255,.18);
+    --glow:#d7a6ff;
+    --text:#ffffff;
+    --soft:#d8d3e8;
+}
+
+@media(max-width:900px){
+    body{padding-bottom:76px}
 
     .hero{
         grid-template-columns:1fr;
-        padding:22px;
+        margin-top:12px;
+    }
+
+    .logo-area{
+        min-height:220px;
+    }
+
+    .logo{
+        width:130px;
+        height:130px;
     }
 
     .hero-content{
@@ -335,17 +331,35 @@ footer{
     }
 
     h1{
-        font-size:36px;
+        font-size:30px;
     }
 
-    .buttons{
+    h2{
+        font-size:24px;
+    }
+
+    p{
+        font-size:15px;
+    }
+
+    .card h3,
+    .option h3{
+        font-size:18px;
+    }
+
+    .card p,
+    .option li{
+        font-size:14px;
+    }
+
+    .icon-buttons{
         justify-content:center;
     }
 
     .side-panel{
         top:auto;
         right:50%;
-        bottom:14px;
+        bottom:12px;
         transform:translateX(50%);
         flex-direction:row;
     }
@@ -358,188 +372,142 @@ footer{
 <div class="side-panel">
     <a href="#inicio">🏠</a>
     <a href="#opciones">💎</a>
-    <a href="#puedes">🧩</a>
+    <a href="#estilos">🎨</a>
     <a href="#ejemplos">🖼️</a>
-    <a href="#contacto">📩</a>
 </div>
 
-<header id="inicio">
+<section class="section" id="inicio">
     <div class="hero">
-
-        <div class="logo-box">
-            <div class="logo-text">Tu logo aquí 👇</div>
-            <img class="logo" src="data/paginas/logo.jpg" alt="Logo">
-        </div>
-
-        <div class="hero-content">
-            <div class="badge">Tarjeta digital elegante</div>
-
-            <h1>
-                Tu negocio merece una
-                <span class="highlight">presentación brutal</span>
-            </h1>
-
-            <p>
-                Una página simple, moderna y elegante para mostrar quién eres,
-                qué ofreces y cómo pueden contactarte.
-            </p>
-
-            <div class="buttons">
-                <a class="btn" href="https://wa.me/TU_NUMERO_DE_WHATSAPP" target="_blank">
-                    <img src="data/paginas/whatsapp.png" alt=""> WhatsApp
-                </a>
-
-                <a class="btn secondary" href="https://instagram.com/TU_INSTAGRAM" target="_blank">
-                    <img src="data/paginas/instagram.png" alt=""> Instagram
-                </a>
-
-                <a class="btn secondary" href="TU_LINK_DE_FORMULARIO" target="_blank">
-                    <img src="data/paginas/formulario.png" alt=""> Formulario
-                </a>
+        <div class="logo-area">
+            <div>
+                <div>Tu logo aquí 👇</div>
+                <img class="logo" src="data/paginas/logo.jpg" alt="Logo">
             </div>
         </div>
 
-    </div>
-</header>
+        <div class="hero-content">
+            <span class="badge">Tarjeta digital premium</span>
 
-<div class="divider"></div>
+            <h1>
+                Una presencia web
+                <span class="glow">simple, elegante y memorable</span>
+            </h1>
+
+            <p>
+                Presenta tu marca, muestra lo que haces y deja tus contactos en una página
+                bonita, rápida y fácil de compartir.
+            </p>
+
+            <div class="icon-buttons">
+                <a class="icon-btn" href="https://wa.me/TU_NUMERO_DE_WHATSAPP" target="_blank" title="WhatsApp">💬</a>
+                <a class="icon-btn" href="https://instagram.com/TU_INSTAGRAM" target="_blank" title="Instagram">📸</a>
+                <a class="icon-btn" href="TU_LINK_DE_FORMULARIO" target="_blank" title="Formulario">📝</a>
+            </div>
+        </div>
+    </div>
+</section>
 
 <section class="section" id="opciones">
-    <h2>Opciones disponibles</h2>
-    <p>Elige una versión sencilla o una más completa para verte más profesional.</p>
+    <h2>Opciones</h2>
 
     <div class="options">
-        <div class="option normal">
+        <div class="option">
             <h3>Normal</h3>
             <ul>
-                <li>Tarjeta de presentación digital</li>
-                <li>Logo, descripción y botones</li>
-                <li>Información principal</li>
-                <li>Diseño responsive para celular</li>
-                <li>Ideal para empezar rápido</li>
+                <li>Tarjeta digital elegante</li>
+                <li>Logo, descripción y contactos</li>
+                <li>Sección de servicios</li>
+                <li>Galería simple</li>
+                <li>Diseño para celular</li>
             </ul>
         </div>
 
-        <div class="option premium">
+        <div class="option">
             <h3>Premium ✨</h3>
             <ul>
-                <li>Diseño más elegante y personalizado</li>
+                <li>Diseño más personalizado</li>
                 <li>Más secciones visuales</li>
-                <li>Galería o portafolio</li>
-                <li>Formulario o enlaces avanzados</li>
-                <li>Ideal para negocios y marcas</li>
+                <li>Portafolio o catálogo</li>
+                <li>Formulario y enlaces avanzados</li>
+                <li>Estilo más profesional</li>
             </ul>
         </div>
     </div>
 </section>
 
-<div class="divider"></div>
+<section class="section" id="estilos">
+    <h2>Estilos</h2>
+    <p>Presiona una tarjeta para cambiar la vibra de la página.</p>
 
-<section class="section" id="puedes">
-    <h2>Qué puedes hacer en tu página</h2>
+    <div class="grid">
+        <div class="card style-card" onclick="setStyle('dark')">
+            <div class="icon">🌙</div>
+            <h3>Dark</h3>
+            <p>Moderno, profundo y con glow violeta.</p>
+        </div>
+
+        <div class="card style-card" onclick="setStyle('light')">
+            <div class="icon">☁️</div>
+            <h3>Light</h3>
+            <p>Limpio, suave y más luminoso.</p>
+        </div>
+
+        <div class="card style-card" onclick="setStyle('elegant')">
+            <div class="icon">🥂</div>
+            <h3>Elegante</h3>
+            <p>Oscuro, sobrio y más fino.</p>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <h2>Qué puedes mostrar</h2>
 
     <div class="grid">
         <div class="card">
             <div class="icon">👤</div>
-            <h3>Presentarte</h3>
-            <p>Cuenta quién eres y qué hace especial tu proyecto.</p>
+            <h3>Quién eres</h3>
+            <p>Tu historia, marca o proyecto.</p>
         </div>
 
         <div class="card">
             <div class="icon">🛍️</div>
-            <h3>Mostrar servicios</h3>
-            <p>Organiza productos, clases, paquetes o servicios.</p>
-        </div>
-
-        <div class="card">
-            <div class="icon">🖼️</div>
-            <h3>Mostrar ejemplos</h3>
-            <p>Sube fotos, trabajos anteriores o capturas reales.</p>
+            <h3>Servicios</h3>
+            <p>Productos, clases, paquetes o asesorías.</p>
         </div>
 
         <div class="card">
             <div class="icon">📲</div>
-            <h3>Recibir mensajes</h3>
-            <p>Conecta WhatsApp, Instagram o formulario.</p>
+            <h3>Contacto</h3>
+            <p>WhatsApp, Instagram o formulario.</p>
         </div>
     </div>
 </section>
-
-<div class="divider"></div>
 
 <section class="section" id="ejemplos">
     <h2>Páginas ejemplo</h2>
-    <p>Guarda tus capturas en <strong>data/paginas/</strong>.</p>
+    <p>Guarda tus imágenes en <strong>data/paginas/</strong>.</p>
 
     <div class="gallery">
-        <div class="mockup">
-            <img src="data/paginas/pagina1.jpg" alt="Ejemplo 1">
-        </div>
-
-        <div class="mockup">
-            <img src="data/paginas/pagina2.jpg" alt="Ejemplo 2">
-        </div>
-
-        <div class="mockup">
-            <img src="data/paginas/pagina3.jpg" alt="Ejemplo 3">
-        </div>
-
-        <div class="mockup">
-            <img src="data/paginas/pagina4.jpg" alt="Ejemplo 4">
-        </div>
-    </div>
-</section>
-
-<div class="divider"></div>
-
-<section class="section" id="contacto">
-    <div class="hero">
-        <div class="logo-box">
-            <div class="logo-text">Listo para empezar 👇</div>
-            <img class="logo" src="data/paginas/logo.jpg" alt="Logo">
-        </div>
-
-        <div class="hero-content">
-            <div class="badge">Cotiza tu página</div>
-
-            <h1>Hagamos que tu marca se vea seria 😏</h1>
-
-            <p>
-                Escríbeme, dime qué necesitas mostrar y armamos una página
-                clara, bonita y fácil de compartir.
-            </p>
-
-            <div class="buttons">
-                <a class="btn" href="https://wa.me/TU_NUMERO_DE_WHATSAPP" target="_blank">
-                    <img src="data/paginas/whatsapp.png" alt=""> WhatsApp
-                </a>
-
-                <a class="btn secondary" href="https://instagram.com/TU_INSTAGRAM" target="_blank">
-                    <img src="data/paginas/instagram.png" alt=""> Instagram
-                </a>
-
-                <a class="btn secondary" href="TU_LINK_DE_FORMULARIO" target="_blank">
-                    <img src="data/paginas/formulario.png" alt=""> Formulario
-                </a>
-            </div>
-        </div>
+        <div class="mockup"><img src="data/paginas/pagina1.jpg" alt="Ejemplo 1"></div>
+        <div class="mockup"><img src="data/paginas/pagina2.jpg" alt="Ejemplo 2"></div>
+        <div class="mockup"><img src="data/paginas/pagina3.jpg" alt="Ejemplo 3"></div>
     </div>
 </section>
 
 <footer>
-    Asallam Sensei Web Studio
-    <br>
-    Páginas simples, elegantes y con personalidad.
+    Asallam Sensei Web Studio · páginas simples con estilo
 </footer>
 
 <script>
+function setStyle(style){
+    document.body.className = style === "dark" ? "" : style;
+}
+
 document.querySelectorAll("img").forEach(img=>{
     img.onerror=function(){
-        const box=document.createElement("div");
-        box.className="placeholder";
-        box.innerHTML="<strong>Aquí va una imagen</strong><span>Sube el archivo a data/paginas/</span>";
-        img.replaceWith(box);
-    };
+        this.outerHTML="<div style='padding:40px;color:var(--soft)'>Imagen no encontrada<br>Revisa el nombre y la ruta</div>";
+    }
 });
 </script>
 
