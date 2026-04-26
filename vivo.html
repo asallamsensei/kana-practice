@@ -439,6 +439,77 @@ body{
 }
 
 }    
+
+/* ESTILO PREMIUM PARA TARJETAS */
+
+.entry{
+  overflow:hidden;
+  background:rgba(255,255,255,0.05);
+  border:1px solid rgba(255,255,255,0.15);
+  box-shadow:0 10px 25px rgba(0,0,0,0.35);
+  transition:0.3s;
+}
+
+.entry:hover{
+  transform:translateY(-5px);
+  border-color:#7d5cff;
+}
+
+.entry::before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:-100%;
+  width:60%;
+  height:100%;
+  background:linear-gradient(
+    120deg,
+    transparent,
+    rgba(255,255,255,0.35),
+    transparent
+  );
+  transform:skewX(-25deg);
+  pointer-events:none;
+}
+
+.entry:hover::before{
+  animation:shine 1s ease;
+}
+
+@keyframes shine{
+  100%{
+    left:150%;
+  }
+}
+
+/* VARIACIÓN POR TIPO */
+
+.entry--kanji{
+  border-color:#ffd700;
+  background:linear-gradient(
+    145deg,
+    rgba(255,215,0,0.16),
+    rgba(255,255,255,0.05)
+  );
+}
+
+.entry--word{
+  border-color:#cd7f32;
+  background:linear-gradient(
+    145deg,
+    rgba(205,127,50,0.16),
+    rgba(255,255,255,0.05)
+  );
+}
+
+.entry--sentence{
+  border-color:#7d5cff;
+  background:linear-gradient(
+    145deg,
+    rgba(125,92,255,0.20),
+    rgba(255,255,255,0.05)
+  );
+}
     
   </style>
 </head>
