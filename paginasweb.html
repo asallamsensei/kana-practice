@@ -418,6 +418,80 @@ body.elegant{
         justify-content:center;
     }
 }
+
+/* OPCIONES FINAL */
+.opciones-final{
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:20px;
+}
+
+.opcion-normal,
+.opcion-premium{
+    padding:26px;
+    border-radius:22px;
+    background:linear-gradient(145deg,var(--card),rgba(255,255,255,.025));
+}
+
+.opcion-normal{
+    border-color:rgba(183,108,255,.55);
+    box-shadow:
+        0 0 24px rgba(183,108,255,.22),
+        0 12px 30px rgba(0,0,0,.36);
+}
+
+.opcion-premium{
+    border-color:rgba(255,214,120,.58);
+    box-shadow:
+        0 0 24px rgba(255,214,120,.20),
+        0 12px 30px rgba(0,0,0,.36);
+}
+
+.opcion-normal:hover{
+    box-shadow:
+        0 0 34px rgba(183,108,255,.38),
+        0 12px 30px rgba(0,0,0,.36);
+}
+
+.opcion-premium:hover{
+    box-shadow:
+        0 0 34px rgba(255,214,120,.34),
+        0 12px 30px rgba(0,0,0,.36);
+}
+
+.opcion-top{
+    font-size:34px;
+    margin-bottom:6px;
+}
+
+.option-highlight{
+    font-weight:bold;
+    color:white;
+}
+
+.option-highlight.violet{
+    text-shadow:
+        0 0 7px rgba(183,108,255,.95),
+        0 0 18px rgba(183,108,255,.65),
+        0 0 30px rgba(255,105,180,.35);
+}
+
+.option-highlight.gold{
+    text-shadow:
+        0 0 7px rgba(255,214,120,.95),
+        0 0 18px rgba(255,214,120,.60),
+        0 0 30px rgba(183,108,255,.35);
+}
+
+@media(max-width:900px){
+    .opcion-normal,
+    .opcion-premium{
+        padding:20px;
+    }
+
+    .opcion-top{
+        font-size:28px;
+    }
+}
     
 </style>
 </head>
@@ -476,27 +550,32 @@ body.elegant{
 
 <section class="section" id="opciones">
     <h2>Opciones</h2>
+    <p>Elige la versión que mejor se ajuste a tu marca.</p>
 
-    <div class="options">
-        <div class="option">
+    <div class="options opciones-final">
+        <div class="option opcion-normal">
+            <div class="opcion-top">💜</div>
             <h3>Normal</h3>
+
             <ul>
                 <li>Tarjeta digital elegante</li>
                 <li>Logo, descripción y contactos</li>
                 <li>Sección de servicios</li>
                 <li>Galería simple</li>
-                <li>Diseño para celular</li>
+                <li><span class="option-highlight violet">Publicación económica en GitHub Pages</span></li>
             </ul>
         </div>
 
-        <div class="option">
-            <h3>Premium ✨</h3>
+        <div class="option opcion-premium">
+            <div class="opcion-top">✨</div>
+            <h3>Premium</h3>
+
             <ul>
                 <li>Diseño más personalizado</li>
                 <li>Más secciones visuales</li>
                 <li>Portafolio o catálogo</li>
                 <li>Formulario y enlaces avanzados</li>
-                <li>Estilo más profesional</li>
+                <li><span class="option-highlight gold">Dominio propio &#10022; nombre&bull;de&bull;tu&bull;empresa.com</span></li>
             </ul>
         </div>
     </div>
