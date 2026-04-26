@@ -3,8 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>Tu página elegante</title>
+<title>Tu Página Web</title>
 
 <style>
 html{scroll-behavior:smooth}
@@ -12,25 +11,20 @@ html{scroll-behavior:smooth}
 
 body{
     margin:0;
-    font-family:"Segoe UI Emoji","Apple Color Emoji","Noto Color Emoji",Arial,sans-serif;
-    background:
-        radial-gradient(circle at top,#151b35,#050814 55%),
-        linear-gradient(180deg,#050814,#090d1f);
+    font-family:"Segoe UI Emoji","Apple Color Emoji",Arial,sans-serif;
+    background:radial-gradient(circle at top,#1a2142,#050814 60%);
     color:white;
     text-align:center;
 }
 
-a{
-    color:inherit;
-    text-decoration:none;
-}
+a{text-decoration:none;color:inherit}
 
 .side-panel{
     position:fixed;
     right:18px;
     top:50%;
     transform:translateY(-50%);
-    z-index:999;
+    z-index:99;
     display:flex;
     flex-direction:column;
     gap:12px;
@@ -62,89 +56,98 @@ header{
     padding:55px 20px 25px;
 }
 
-.main-card{
-    max-width:950px;
+.hero{
+    max-width:1050px;
     margin:auto;
-    padding:38px 28px;
-    border-radius:28px;
-    background:linear-gradient(145deg,rgba(255,255,255,.09),rgba(255,255,255,.03));
+    display:grid;
+    grid-template-columns:320px 1fr;
+    gap:28px;
+    align-items:center;
+    padding:30px;
+    border-radius:30px;
+    background:linear-gradient(145deg,rgba(255,255,255,.10),rgba(255,255,255,.03));
     border:1px solid rgba(255,255,255,.18);
-    box-shadow:0 22px 60px rgba(0,0,0,.5);
-    position:relative;
-    overflow:hidden;
+    box-shadow:0 24px 70px rgba(0,0,0,.55);
 }
 
-.main-card::before{
-    content:"";
-    position:absolute;
-    inset:-1px;
-    background:radial-gradient(circle at top,rgba(255,215,0,.18),transparent 45%);
-    pointer-events:none;
+.logo-box{
+    min-height:360px;
+    border-radius:26px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    background:
+        radial-gradient(circle at top,rgba(255,215,0,.24),transparent 55%),
+        linear-gradient(145deg,rgba(255,215,0,.12),rgba(255,255,255,.04));
+    border:1px solid rgba(255,215,0,.35);
+    box-shadow:inset 0 0 35px rgba(255,215,0,.08);
 }
 
-.logo-label{
+.logo-text{
     color:#ffd166;
     font-size:18px;
-    margin-bottom:12px;
-    position:relative;
-    z-index:1;
+    margin-bottom:14px;
 }
 
 .logo{
-    width:135px;
-    height:135px;
-    margin:auto;
-    border-radius:50%;
+    width:180px;
+    height:180px;
     object-fit:cover;
-    border:2px solid rgba(255,215,0,.7);
-    box-shadow:
-        0 0 22px rgba(255,215,0,.35),
-        0 12px 35px rgba(0,0,0,.45);
-    position:relative;
-    z-index:1;
+    border-radius:50%;
+    border:3px solid rgba(255,215,0,.8);
+    box-shadow:0 0 28px rgba(255,215,0,.45),0 18px 40px rgba(0,0,0,.5);
+}
+
+.hero-content{
+    text-align:left;
+    padding:15px;
+}
+
+.badge{
+    display:inline-block;
+    padding:8px 14px;
+    border-radius:999px;
+    background:rgba(255,215,0,.12);
+    border:1px solid rgba(255,215,0,.35);
+    color:#ffd166;
+    font-weight:bold;
+    margin-bottom:16px;
 }
 
 h1{
-    font-size:44px;
-    margin:22px 0 12px;
-    position:relative;
-    z-index:1;
-}
-
-.subtitle{
-    max-width:720px;
-    margin:auto;
-    color:#d8dcff;
-    font-size:19px;
-    line-height:1.6;
-    position:relative;
-    z-index:1;
+    font-size:48px;
+    line-height:1.05;
+    margin:0 0 18px;
 }
 
 .highlight{
     color:#ffd700;
-    font-weight:bold;
-    text-shadow:
-        0 0 6px rgba(255,215,0,.65),
-        0 0 14px rgba(255,215,0,.35);
+    text-shadow:0 0 12px rgba(255,215,0,.45);
+}
+
+.hero-content p{
+    color:#d8dcff;
+    font-size:19px;
+    line-height:1.6;
+    margin-bottom:22px;
 }
 
 .buttons{
-    margin-top:28px;
     display:flex;
-    justify-content:center;
     flex-wrap:wrap;
     gap:14px;
-    position:relative;
-    z-index:1;
 }
 
 .btn{
-    padding:13px 22px;
+    display:flex;
+    align-items:center;
+    gap:9px;
+    padding:13px 19px;
     border-radius:999px;
-    background:linear-gradient(145deg,#7d5cff,#4c36d8);
-    border:1px solid rgba(255,255,255,.25);
     font-weight:bold;
+    background:linear-gradient(145deg,#7d5cff,#4c36d8);
+    border:1px solid rgba(255,255,255,.22);
     box-shadow:0 10px 25px rgba(0,0,0,.35);
     transition:.3s;
 }
@@ -158,6 +161,12 @@ h1{
     background:rgba(255,255,255,.08);
 }
 
+.btn img{
+    width:22px;
+    height:22px;
+    object-fit:contain;
+}
+
 .section{
     max-width:1100px;
     margin:auto;
@@ -165,7 +174,7 @@ h1{
 }
 
 .section h2{
-    font-size:31px;
+    font-size:32px;
     margin-bottom:12px;
 }
 
@@ -177,24 +186,24 @@ h1{
 .divider{
     max-width:900px;
     height:1px;
-    margin:10px auto;
+    margin:12px auto;
     background:linear-gradient(90deg,transparent,rgba(125,92,255,.7),rgba(255,215,0,.45),transparent);
 }
 
-.grid{
+.grid,.options,.gallery{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
-    gap:20px;
-    margin-top:28px;
+    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+    gap:22px;
+    margin-top:30px;
 }
 
 .card,.option,.mockup{
     position:relative;
     overflow:hidden;
-    background:rgba(255,255,255,.05);
-    border:1px solid rgba(255,255,255,.15);
     border-radius:18px;
     padding:24px;
+    background:rgba(255,255,255,.05);
+    border:1px solid rgba(255,255,255,.15);
     box-shadow:0 10px 25px rgba(0,0,0,.35);
     transition:.3s;
 }
@@ -256,20 +265,13 @@ h1{
 }
 
 .card h3,.option h3{
-    margin:6px 0;
-    font-size:22px;
+    margin:8px 0;
+    font-size:23px;
 }
 
 .card p{
-    font-size:15px;
     color:#d8dcff;
-}
-
-.options{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-    gap:22px;
-    margin-top:30px;
+    font-size:15px;
 }
 
 .option{
@@ -277,21 +279,13 @@ h1{
 }
 
 .option h3{
-    font-size:26px;
-    margin-top:0;
+    font-size:27px;
 }
 
 .option ul{
     padding-left:20px;
     color:#d8dcff;
     line-height:1.8;
-}
-
-.gallery{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-    gap:22px;
-    margin-top:30px;
 }
 
 .mockup{
@@ -323,20 +317,30 @@ h1{
 }
 
 footer{
-    margin-top:35px;
     padding:35px 20px;
     color:#889;
     font-size:14px;
 }
 
-@media(max-width:900px){
+@media(max-width:850px){
     body{padding-bottom:90px}
 
-    h1{font-size:33px}
+    .hero{
+        grid-template-columns:1fr;
+        padding:22px;
+    }
 
-    .subtitle{font-size:17px}
+    .hero-content{
+        text-align:center;
+    }
 
-    .section h2{font-size:26px}
+    h1{
+        font-size:36px;
+    }
+
+    .buttons{
+        justify-content:center;
+    }
 
     .side-panel{
         top:auto;
@@ -357,31 +361,44 @@ footer{
     <a href="#puedes">🧩</a>
     <a href="#ejemplos">🖼️</a>
     <a href="#contacto">📩</a>
-    <a href="https://wa.me/TU_NUMERO_DE_WHATSAPP" target="_blank">💬</a>
 </div>
 
 <header id="inicio">
-    <div class="main-card">
-        <div class="logo-label">Tu logo aquí 👆</div>
+    <div class="hero">
 
-        <img class="logo" src="data/paginas/logo.png" alt="Logo principal">
-
-        <h1>Tu página web elegante</h1>
-
-        <p class="subtitle">
-            Una tarjeta de presentación digital, bonita y profesional para que tu negocio,
-            proyecto o servicio se vea más confiable desde el primer vistazo.
-        </p>
-
-        <p class="subtitle">
-            <span class="highlight">Simple, clara, moderna y lista para compartir.</span>
-        </p>
-
-        <div class="buttons">
-            <a class="btn" href="https://wa.me/TU_NUMERO_DE_WHATSAPP" target="_blank">Cotizar por WhatsApp</a>
-            <a class="btn secondary" href="https://instagram.com/TU_INSTAGRAM" target="_blank">Ver Instagram</a>
-            <a class="btn secondary" href="#opciones">Ver opciones</a>
+        <div class="logo-box">
+            <div class="logo-text">Tu logo aquí 👇</div>
+            <img class="logo" src="data/paginas/logo.jpg" alt="Logo">
         </div>
+
+        <div class="hero-content">
+            <div class="badge">Tarjeta digital elegante</div>
+
+            <h1>
+                Tu negocio merece una
+                <span class="highlight">presentación brutal</span>
+            </h1>
+
+            <p>
+                Una página simple, moderna y elegante para mostrar quién eres,
+                qué ofreces y cómo pueden contactarte.
+            </p>
+
+            <div class="buttons">
+                <a class="btn" href="https://wa.me/TU_NUMERO_DE_WHATSAPP" target="_blank">
+                    <img src="data/paginas/whatsapp.png" alt=""> WhatsApp
+                </a>
+
+                <a class="btn secondary" href="https://instagram.com/TU_INSTAGRAM" target="_blank">
+                    <img src="data/paginas/instagram.png" alt=""> Instagram
+                </a>
+
+                <a class="btn secondary" href="TU_LINK_DE_FORMULARIO" target="_blank">
+                    <img src="data/paginas/formulario.png" alt=""> Formulario
+                </a>
+            </div>
+        </div>
+
     </div>
 </header>
 
@@ -389,16 +406,15 @@ footer{
 
 <section class="section" id="opciones">
     <h2>Opciones disponibles</h2>
-    <p>Elige algo sencillo o una versión más completa según lo que necesites mostrar.</p>
+    <p>Elige una versión sencilla o una más completa para verte más profesional.</p>
 
     <div class="options">
         <div class="option normal">
             <h3>Normal</h3>
             <ul>
-                <li>Página tipo tarjeta de presentación</li>
-                <li>Logo, descripción y botones de contacto</li>
-                <li>Sección de servicios o información principal</li>
-                <li>Ejemplos visuales o imágenes</li>
+                <li>Tarjeta de presentación digital</li>
+                <li>Logo, descripción y botones</li>
+                <li>Información principal</li>
                 <li>Diseño responsive para celular</li>
                 <li>Ideal para empezar rápido</li>
             </ul>
@@ -409,10 +425,9 @@ footer{
             <ul>
                 <li>Diseño más elegante y personalizado</li>
                 <li>Más secciones visuales</li>
-                <li>Galería, catálogo o portafolio</li>
-                <li>Formulario o botones avanzados</li>
-                <li>Mejor estructura para presentar tu marca</li>
-                <li>Ideal para verse más profesional</li>
+                <li>Galería o portafolio</li>
+                <li>Formulario o enlaces avanzados</li>
+                <li>Ideal para negocios y marcas</li>
             </ul>
         </div>
     </div>
@@ -422,31 +437,30 @@ footer{
 
 <section class="section" id="puedes">
     <h2>Qué puedes hacer en tu página</h2>
-    <p>Estas páginas sirven para mostrar lo esencial sin complicarse.</p>
 
     <div class="grid">
         <div class="card">
             <div class="icon">👤</div>
             <h3>Presentarte</h3>
-            <p>Cuenta quién eres, qué haces y por qué deberían contactarte.</p>
+            <p>Cuenta quién eres y qué hace especial tu proyecto.</p>
         </div>
 
         <div class="card">
             <div class="icon">🛍️</div>
             <h3>Mostrar servicios</h3>
-            <p>Organiza tus productos, clases, paquetes o servicios principales.</p>
+            <p>Organiza productos, clases, paquetes o servicios.</p>
         </div>
 
         <div class="card">
             <div class="icon">🖼️</div>
-            <h3>Enseñar ejemplos</h3>
-            <p>Sube fotos, capturas, trabajos anteriores o diseños de muestra.</p>
+            <h3>Mostrar ejemplos</h3>
+            <p>Sube fotos, trabajos anteriores o capturas reales.</p>
         </div>
 
         <div class="card">
             <div class="icon">📲</div>
             <h3>Recibir mensajes</h3>
-            <p>Conecta WhatsApp, Instagram, correo o formulario de contacto.</p>
+            <p>Conecta WhatsApp, Instagram o formulario.</p>
         </div>
     </div>
 </section>
@@ -455,26 +469,23 @@ footer{
 
 <section class="section" id="ejemplos">
     <h2>Páginas ejemplo</h2>
-    <p>
-        Puedes cambiar estas imágenes por capturas reales.
-        Guárdalas en <strong>data/paginas/</strong>.
-    </p>
+    <p>Guarda tus capturas en <strong>data/paginas/</strong>.</p>
 
     <div class="gallery">
         <div class="mockup">
-            <img src="data/paginas/pagina1.jpg" alt="Ejemplo de página 1">
+            <img src="data/paginas/pagina1.jpg" alt="Ejemplo 1">
         </div>
 
         <div class="mockup">
-            <img src="data/paginas/pagina2.jpg" alt="Ejemplo de página 2">
+            <img src="data/paginas/pagina2.jpg" alt="Ejemplo 2">
         </div>
 
         <div class="mockup">
-            <img src="data/paginas/pagina3.jpg" alt="Ejemplo de página 3">
+            <img src="data/paginas/pagina3.jpg" alt="Ejemplo 3">
         </div>
 
         <div class="mockup">
-            <img src="data/paginas/pagina4.jpg" alt="Ejemplo de página 4">
+            <img src="data/paginas/pagina4.jpg" alt="Ejemplo 4">
         </div>
     </div>
 </section>
@@ -482,16 +493,35 @@ footer{
 <div class="divider"></div>
 
 <section class="section" id="contacto">
-    <div class="main-card">
-        <h2>¿Quieres una página así? 😏</h2>
-        <p class="subtitle">
-            Escríbeme y dime qué quieres mostrar. Yo te ayudo a convertirlo en una página clara, bonita y elegante.
-        </p>
+    <div class="hero">
+        <div class="logo-box">
+            <div class="logo-text">Listo para empezar 👇</div>
+            <img class="logo" src="data/paginas/logo.jpg" alt="Logo">
+        </div>
 
-        <div class="buttons">
-            <a class="btn" href="https://wa.me/TU_NUMERO_DE_WHATSAPP" target="_blank">Escríbeme por WhatsApp</a>
-            <a class="btn secondary" href="https://instagram.com/TU_INSTAGRAM" target="_blank">Instagram</a>
-            <a class="btn secondary" href="TU_LINK_DE_FORMULARIO" target="_blank">Formulario</a>
+        <div class="hero-content">
+            <div class="badge">Cotiza tu página</div>
+
+            <h1>Hagamos que tu marca se vea seria 😏</h1>
+
+            <p>
+                Escríbeme, dime qué necesitas mostrar y armamos una página
+                clara, bonita y fácil de compartir.
+            </p>
+
+            <div class="buttons">
+                <a class="btn" href="https://wa.me/TU_NUMERO_DE_WHATSAPP" target="_blank">
+                    <img src="data/paginas/whatsapp.png" alt=""> WhatsApp
+                </a>
+
+                <a class="btn secondary" href="https://instagram.com/TU_INSTAGRAM" target="_blank">
+                    <img src="data/paginas/instagram.png" alt=""> Instagram
+                </a>
+
+                <a class="btn secondary" href="TU_LINK_DE_FORMULARIO" target="_blank">
+                    <img src="data/paginas/formulario.png" alt=""> Formulario
+                </a>
+            </div>
         </div>
     </div>
 </section>
@@ -503,14 +533,11 @@ footer{
 </footer>
 
 <script>
-document.querySelectorAll("img").forEach(img => {
-    img.onerror = function(){
-        const box = document.createElement("div");
-        box.className = "placeholder";
-        box.innerHTML = `
-            <strong>Aquí va una imagen</strong>
-            <span>Sube el archivo a data/paginas/</span>
-        `;
+document.querySelectorAll("img").forEach(img=>{
+    img.onerror=function(){
+        const box=document.createElement("div");
+        box.className="placeholder";
+        box.innerHTML="<strong>Aquí va una imagen</strong><span>Sube el archivo a data/paginas/</span>";
         img.replaceWith(box);
     };
 });
