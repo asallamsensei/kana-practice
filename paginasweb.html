@@ -656,6 +656,12 @@ body.light .option-highlight.gold{
                     <img src="data/paginas/formulario.png" alt="Formulario">
                     <span>Formulario</span>
                 </a>
+
+                <button class="icon-btn" onclick="sharePage()" title="Compartir">
+                    📤
+                    <span>Compartir</span>
+                </button>
+                
             </div>
         </div>
     </div>
@@ -815,6 +821,22 @@ body.light .option-highlight.gold{
 </footer>
 
 <script>
+
+function sharePage(){
+    const shareData = {
+        title: "Tarjeta digital premium",
+        text: "Mira esta tarjeta digital elegante",
+        url: window.location.href
+    };
+
+    if(navigator.share){
+        navigator.share(shareData);
+    }else{
+        navigator.clipboard.writeText(window.location.href);
+        alert("Enlace copiado para compartir");
+    }
+}
+    
 function setStyle(style){
     document.body.className = style === "dark" ? "" : style;
 }
