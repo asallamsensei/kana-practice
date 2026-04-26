@@ -204,6 +204,12 @@ p{
     transition:.25s;
 }
 
+.icon-btn img{
+    width:24px;
+    height:24px;
+    object-fit:contain;
+}
+    
 .icon-btn:hover{
     transform:translateY(-4px) scale(1.05);
     box-shadow:0 0 22px var(--glow);
@@ -309,6 +315,15 @@ body.elegant{
     --soft:#d8d3e8;
 }
 
+.contacto-card{
+    max-width:720px;
+    margin:auto;
+}
+
+.contacto-buttons{
+    justify-content:center;
+}
+    
 @media(max-width:900px){
     body{padding-bottom:76px}
 
@@ -374,6 +389,7 @@ body.elegant{
     <a href="#opciones">💎</a>
     <a href="#estilos">🎨</a>
     <a href="#ejemplos">🖼️</a>
+    <a href="#contacto">📩</a>
 </div>
 
 <section class="section" id="inicio">
@@ -399,9 +415,17 @@ body.elegant{
             </p>
 
             <div class="icon-buttons">
-                <a class="icon-btn" href="https://wa.me/TU_NUMERO_DE_WHATSAPP" target="_blank" title="WhatsApp">💬</a>
-                <a class="icon-btn" href="https://instagram.com/TU_INSTAGRAM" target="_blank" title="Instagram">📸</a>
-                <a class="icon-btn" href="TU_LINK_DE_FORMULARIO" target="_blank" title="Formulario">📝</a>
+                <a class="icon-btn" href="https://wa.me/TU_NUMERO_DE_WHATSAPP" target="_blank" title="WhatsApp">
+                    <img src="data/paginas/whatsapp.png" alt="WhatsApp">
+                </a>
+            
+                <a class="icon-btn" href="https://instagram.com/TU_INSTAGRAM" target="_blank" title="Instagram">
+                    <img src="data/paginas/instagram.png" alt="Instagram">
+                </a>
+            
+                <a class="icon-btn" href="TU_LINK_DE_FORMULARIO" target="_blank" title="Formulario">
+                    <img src="data/paginas/formulario.png" alt="Formulario">
+                </a>
             </div>
         </div>
     </div>
@@ -495,6 +519,47 @@ body.elegant{
     </div>
 </section>
 
+<section class="section" id="contacto">
+    <div class="hero contacto-hero">
+
+        <div class="logo-area contacto-logo">
+            <div>
+                <div>Hablemos 👇</div>
+                <img class="logo" src="data/paginas/logo.jpg" alt="Logo">
+            </div>
+        </div>
+
+        <div class="hero-content">
+            <span class="badge">Cotiza tu página</span>
+
+            <h1>
+                Haz que tu marca se vea
+                <span class="glow">inolvidable</span>
+            </h1>
+
+            <p>
+                Escríbeme y armamos una página elegante,
+                rápida y fácil de compartir.
+            </p>
+
+            <div class="icon-buttons contacto-buttons">
+                <a class="icon-btn" href="https://wa.me/TU_NUMERO_DE_WHATSAPP" target="_blank" title="WhatsApp">
+                    <img src="data/paginas/whatsapp.png" alt="WhatsApp">
+                </a>
+
+                <a class="icon-btn" href="https://instagram.com/TU_INSTAGRAM" target="_blank" title="Instagram">
+                    <img src="data/paginas/instagram.png" alt="Instagram">
+                </a>
+
+                <a class="icon-btn" href="TU_LINK_DE_FORMULARIO" target="_blank" title="Formulario">
+                    <img src="data/paginas/formulario.png" alt="Formulario">
+                </a>
+            </div>
+        </div>
+
+    </div>
+</section>
+    
 <footer>
     Asallam Sensei Web Studio · páginas simples con estilo
 </footer>
