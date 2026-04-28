@@ -358,6 +358,33 @@ let dirActual = "kanji-sig";
 
 const letras = ["a","b","c"];
 
+const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+function playBeep(freq, duration){
+  const osc = audioCtx.createOscillator();
+  const gain = audioCtx.createGain();
+
+  osc.connect(gain);
+  gain.connect(audioCtx.destination);
+
+  osc.frequency.value = freq;
+  osc.type = "sine";
+
+  gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
+
+  osc.start();
+  osc.stop(audioCtx.currentTime + duration);
+}
+
+function sonidoCorrecto(){
+  playBeep(700, 0.08);
+  setTimeout(() => playBeep(900, 0.12), 80);
+}
+
+function sonidoIncorrecto(){
+  playBeep(250, 0.2);
+}
+  
 const STORAGE_KEY = "kanji_g1_estado";
 
 function guardarEstado(){
@@ -510,12 +537,14 @@ function verificar(letraElegida = ""){
   const res = document.getElementById("resultado");
 
   if (r === correcta) {
+    sonidoCorrecto();
     res.innerText = "Correcto ✔";
     res.className = "correcto";
     aciertos++;
     racha++;
     if (racha > mejorRacha) mejorRacha = racha;
   } else {
+    sonidoIncorrecto();
     res.innerText = `Incorrecto ✘ — correcta: ${correcta}) ${respuestaCorrecta}`;
     res.className = "incorrecto";
     errores++;
