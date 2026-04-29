@@ -270,6 +270,8 @@ function siguiente(){
   if(modoPregunta === "zh_es"){
     $("pregunta").className = "visual-zh";
     $("pregunta").innerText = actual.hanzi;
+    
+    $("pinyin").style.display = "block";
     $("pinyin").innerText = actual.pinyin;
 
     opciones = crearOpciones("es");
@@ -278,7 +280,7 @@ function siguiente(){
   }else{
     $("pregunta").className = "visual-es";
     $("pregunta").innerText = actual.es;
-    $("pinyin").innerText = "";
+    $("pinyin").style.display = "none";
 
     opciones = crearOpciones("hanzi");
     correcta = actual.hanzi;
