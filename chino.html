@@ -206,7 +206,7 @@ function crearOpciones(campoCorrecto){
 function renderAudio(){
   const wrap = $("audioWrap"); wrap.innerHTML = "";
   const b = document.createElement("button");
-  b.type = "button"; b.className = "btn btn-audio"; b.textContent = "🔊 Escuchar chino";
+  b.type = "button"; b.className = "btn btn-audio"; b.textContent = "🔊";
   b.onclick = () => hablarChino(actual.hanzi);
   wrap.appendChild(b);
 }
@@ -221,6 +221,7 @@ function siguiente(){
     opciones = crearOpciones("hanzi"); correcta = actual.hanzi; setOpciones(opciones, "opciones-zh");
   }
   renderAudio(); $("poolInfo").innerText = `Vocabulario: ${VOCABULARIO.length} palabras`;
+  hablarChino(actual.hanzi);
 }
 function responder(letra){
   if(yaValidado || !actual) return;
