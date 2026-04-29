@@ -24,6 +24,14 @@
   .btn:hover{transform:translateY(-1px);filter:brightness(1.06)}
   .btn-ghost,.btn-mode{background:rgba(255,255,255,.08);border:1px solid var(--border);color:var(--text)}
   .btn-mode.activo{background:var(--accent);border-color:transparent}
+
+  .btn-mode.mixto-activo{
+    background:rgba(239,68,68,.22);
+    border:1px solid rgba(239,68,68,.65);
+    color:#fecaca;
+    box-shadow:0 0 14px rgba(239,68,68,.38);
+  }
+  
   .btn-audio{background:rgba(34,197,94,.16);border:1px solid rgba(34,197,94,.40);color:#bbf7d0}
   .btn.correcto{background:rgba(34,197,94,.15);border:1px solid rgba(34,197,94,.45);color:#bbf7d0;box-shadow:0 0 10px rgba(34,197,94,.25)}
   .btn.incorrecto{background:rgba(239,68,68,.15);border:1px solid rgba(239,68,68,.45);color:#fecaca;box-shadow:0 0 10px rgba(239,68,68,.22)}
@@ -48,7 +56,6 @@
   <h1>Repaso de Chino Básico — Asallam Sensei</h1>
   <div class="grid">
     <div class="card big">
-      <div id="modoActual" class="pill">Modo: —</div>
       <div id="pregunta" class="visual-zh">—</div>
       <div id="pinyin"></div>
       <div id="audioWrap"></div>
@@ -71,8 +78,9 @@
     <div class="card">
       <div class="row" style="justify-content:flex-start"><span class="pill">Modos</span></div>
       <div class="row" style="justify-content:flex-start;margin-top:10px">
-        <button class="btn btn-mode activo" id="m-zh-es" type="button" onclick="setModo('zh_es')">Chino → Español</button>
-        <button class="btn btn-mode" id="m-es-zh" type="button" onclick="setModo('es_zh')">Español → Chino</button>
+        <button class="btn btn-mode mixto-activo" id="m-zh-es" type="button" onclick="toggleModo('zh_es')">Chino → Español</button>
+        <button class="btn btn-mode mixto-activo" id="m-es-zh" type="button" onclick="toggleModo('es_zh')">Español → Chino</button>
+        <button class="btn btn-mode mixto-activo" id="m-mixto" type="button" onclick="setModo('mixto')">Mixto</button>
       </div>
       <div class="sep"></div>
       <div class="miniStatus">
@@ -149,7 +157,7 @@ const VOCABULARIO = [
 ];
 
 const STATS_KEY = "repaso_chino_basico_stats_v1";
-let modo = "zh_es";
+let modo = "mixto";
 let actual = null;
 let opciones = [];
 let correcta = "";
@@ -189,7 +197,40 @@ function resetStats(){ aciertos=0; errores=0; racha=0; mejorRacha=0; pintarStats
 function precisionPct(){ const total=aciertos+errores; return total ? Math.round((aciertos/total)*100)+"%" : "0%"; }
 function pintarStats(){ $("aciertos").innerText=aciertos; $("errores").innerText=errores; $("racha").innerText=racha; $("mejorRacha").innerText=mejorRacha; $("precision").innerText=precisionPct(); }
 
-function setModo(nuevo){ modo = nuevo; $("m-zh-es").classList.toggle("activo", modo==="zh_es"); $("m-es-zh").classList.toggle("activo", modo==="es_zh"); siguiente(); }
+function pintarBotonesModo(){
+  ["m-zh-es","m-es-zh","m-mixto"].forEach(id => {
+    $(id).classList.remove("activo", "mixto-activo");
+  });
+
+  if(modo === "mixto"){
+    $("m-zh-es").classList.add("mixto-activo");
+    $("m-es-zh").classList.add("mixto-activo");
+    $("m-mixto").classList.add("mixto-activo");
+  }else{
+    $("m-zh-es").classList.toggle("activo", modo === "zh_es");
+    $("m-es-zh").classList.toggle("activo", modo === "es_zh");
+  }
+}
+
+function setModo(nuevo){
+  modo = nuevo;
+  pintarBotonesModo();
+  siguiente();
+}
+
+function toggleModo(tipo){
+  if(modo === "mixto"){
+    modo = tipo === "zh_es" ? "es_zh" : "zh_es";
+  }else if(modo === tipo){
+    modo = "mixto";
+  }else{
+    modo = "mixto";
+  }
+
+  pintarBotonesModo();
+  siguiente();
+}
+  
 function limpiarResultado(){
   $("resultado").innerText=""; $("resultado").className=""; $("extraResultado").innerText="";
   ["btnA","btnB","btnC"].forEach(id => $(id).classList.remove("correcto","incorrecto"));
@@ -210,19 +251,38 @@ function renderAudio(){
   b.onclick = () => hablarChino(actual.hanzi);
   wrap.appendChild(b);
 }
+  
 function siguiente(){
-  yaValidado = false; limpiarResultado(); actual = pick(VOCABULARIO);
-  $("modoActual").innerText = modo === "zh_es" ? "Modo: Chino → Español" : "Modo: Español → Chino";
-  if(modo === "zh_es"){
-    $("pregunta").className = "visual-zh"; $("pregunta").innerText = actual.hanzi; $("pinyin").innerText = actual.pinyin;
-    opciones = crearOpciones("es"); correcta = actual.es; setOpciones(opciones, "opciones-es");
+  yaValidado = false;
+  limpiarResultado();
+  actual = pick(VOCABULARIO);
+
+  const modoPregunta = modo === "mixto" ? pick(["zh_es", "es_zh"]) : modo;
+
+  if(modoPregunta === "zh_es"){
+    $("pregunta").className = "visual-zh";
+    $("pregunta").innerText = actual.hanzi;
+    $("pinyin").innerText = actual.pinyin;
+
+    opciones = crearOpciones("es");
+    correcta = actual.es;
+    setOpciones(opciones, "opciones-es");
   }else{
-    $("pregunta").className = "visual-es"; $("pregunta").innerText = actual.es; $("pinyin").innerText = "";
-    opciones = crearOpciones("hanzi"); correcta = actual.hanzi; setOpciones(opciones, "opciones-zh");
+    $("pregunta").className = "visual-es";
+    $("pregunta").innerText = actual.es;
+    $("pinyin").innerText = "";
+
+    opciones = crearOpciones("hanzi");
+    correcta = actual.hanzi;
+    setOpciones(opciones, "opciones-zh");
   }
-  renderAudio(); $("poolInfo").innerText = `Vocabulario: ${VOCABULARIO.length} palabras`;
+
+  renderAudio();
+  $("poolInfo").innerText = `Vocabulario: ${VOCABULARIO.length} palabras`;
+
   hablarChino(actual.hanzi);
 }
+  
 function responder(letra){
   if(yaValidado || !actual) return;
   yaValidado = true;
