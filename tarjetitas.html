@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Palabra del día — Asallam Sensei</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+
+  <style>
+    :root{
+      --bg:#070A12;
+      --panel:rgba(255,255,255,.075);
+      --panel-strong:rgba(255,255,255,.13);
+      --stroke:rgba(255,255,255,.18);
+      --text:#fff;
+      --muted:rgba(255,255,255,.75);
+      --accent:#8b5cf6;
+      --accent2:#06b6d4;
+      --accent3:#f97316;
+      --card-bg:#111827;
+      --card-text:#ffffff;
+      --radius:28px;
+      --shadow:0 24px 90px rgba(0,0,0,.42);
+    }
+
+    *{box-sizing:border-box}
+    html,body{margin:0; min-height:100%}
+    body{
+      font-family:Inter,system-ui,sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at 20% 15%, color-mix(in srgb, var(--accent) 35%, transparent), transparent 32%),
+        radial-gradient(circle at 80% 10%, color-mix(in srgb, var(--accent2) 28%, transparent), transparent 30%),
+        radial-gradient(circle at 50% 90%, color-mix(in srgb, var(--accent3) 22%, transparent), transparent 35%),
+        var(--bg);
+      padding:26px;
+    }
+
+    .app{max-width:1220px; margin:0 auto; display:grid; gap:22px}
+    .hero{display:flex; justify-content:space-between; gap:18px; align-items:flex-end; flex-wrap:wrap}
+    h1{font-size:clamp(2rem,4.4vw,4.4rem); line-height:.92; letter-spacing:-.07em; margin:0; max-width:760px}
+    .subtitle{margin:10px 0 0; color:var(--muted); font-weight:600}
+
+    .shell{display:grid; grid-template-columns:360px 1fr; gap:22px; align-items:start}
+    .controls,.preview-shell{
+      border:1px solid var(--stroke);
+      background:linear-gradient(145deg, rgba(255,255,255,.12), rgba(255,255,255,.045));
+      box-shadow:var(--shadow);
+      border-radius:32px;
+      backdrop-filter:blur(18px);
+    }
+    .controls{padding:18px; display:grid; gap:14px; position:sticky; top:18px}
+    .group{display:grid; gap:9px; padding:14px; border:1px solid var(--stroke); background:rgba(255,255,255,.055); border-radius:24px}
+    label,.label{font-size:.78rem; text-transform:uppercase; letter-spacing:.12em; font-weight:900; color:var(--muted)}
+    select,input,button{
+      font:inherit;
+      border:1px solid var(--stroke);
+      border-radius:16px;
+      padding:12px 13px;
+      background:rgba(0,0,0,.24);
+      color:var(--text);
+      outline:none;
+    }
+    select option{background:#101421; color:white}
+    .row{display:grid; grid-template-columns:1fr 1fr; gap:10px}
+    .chips{display:flex; flex-wrap:wrap; gap:8px}
+    .chip{cursor:pointer; padding:10px 12px; border-radius:999px; font-weight:800; font-size:.88rem}
+    .chip.active{background:linear-gradient(135deg,var(--accent),var(--accent2)); border-color:transparent}
+    .btn{
+      cursor:pointer; font-weight:900; border:0;
+      background:linear-gradient(135deg,var(--accent),var(--accent2));
+      box-shadow:0 15px 40px color-mix(in srgb, var(--accent) 25%, transparent);
+    }
+    .btn.secondary{background:rgba(255,255,255,.11); border:1px solid var(--stroke); box-shadow:none}
+    .btn:hover,.chip:hover{transform:translateY(-1px)}
+
+    .preview-shell{padding:22px; display:grid; place-items:center; min-height:760px; overflow:auto}
+    .stage{display:grid; place-items:center; transform-origin:top center}
+
+    .card{
+      width:1080px;
+      height:1080px;
+      position:relative;
+      overflow:hidden;
+      color:var(--card-text);
+      background:var(--card-bg);
+      border-radius:58px;
+      box-shadow:0 40px 120px rgba(0,0,0,.4);
+      isolation:isolate;
+    }
+
+    .card::before{
+      content:""; position:absolute; inset:-2px; z-index:-1;
+      background:
+        radial-gradient(circle at 20% 18%, var(--accent), transparent 34%),
+        radial-gradient(circle at 86% 10%, var(--accent2), transparent 30%),
+        radial-gradient(circle at 80% 86%, var(--accent3), transparent 34%),
+        linear-gradient(145deg, var(--card-bg), #020617);
+      opacity:.95;
+    }
+    .card::after{
+      content:""; position:absolute; inset:0; pointer-events:none;
+      background:linear-gradient(120deg, transparent 0 30%, rgba(255,255,255,.15), transparent 58% 100%);
+      mix-blend-mode:screen; opacity:.55;
+    }
+
+    .card-inner{position:absolute; inset:54px; display:grid; grid-template-rows:auto 1fr auto; gap:30px}
+    .card-top{display:flex; justify-content:space-between; align-items:flex-start; gap:20px}
+    .badge,.level{
+      border:1px solid rgba(255,255,255,.24);
+      background:rgba(255,255,255,.13);
+      backdrop-filter:blur(12px);
+      border-radius:999px;
+      padding:14px 20px;
+      font-weight:900;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      font-size:28px;
+    }
+    .level{font-size:24px; color:rgba(255,255,255,.86)}
+    .main{display:grid; align-content:center; justify-items:center; text-align:center; gap:16px}
+    .jp{font-family:"Noto Sans JP", sans-serif; font-size:160px; font-weight:900; line-height:.98; letter-spacing:-.05em; text-shadow:0 18px 50px rgba(0,0,0,.38)}
+    .kana{font-family:"Noto Sans JP", sans-serif; font-size:58px; font-weight:800; color:rgba(255,255,255,.88)}
+    .romaji{font-size:44px; font-weight:900; color:rgba(255,255,255,.74)}
+    .es{font-size:72px; font-weight:900; letter-spacing:-.05em; line-height:.98; max-width:900px}
+
+    .extra{display:grid; gap:16px; width:100%}
+    .note{
+      background:rgba(0,0,0,.22);
+      border:1px solid rgba(255,255,255,.16);
+      border-radius:30px;
+      padding:24px 28px;
+      font-size:30px;
+      line-height:1.32;
+      font-weight:700;
+    }
+    .note b{font-size:20px; display:block; text-transform:uppercase; letter-spacing:.12em; color:rgba(255,255,255,.72); margin-bottom:7px}
+
+    .kanji-strip{display:flex; gap:14px; flex-wrap:wrap; justify-content:center}
+    .kanji-box{
+      min-width:146px;
+      border-radius:28px;
+      border:1px solid rgba(255,255,255,.2);
+      background:rgba(255,255,255,.12);
+      padding:15px 16px;
+      text-align:center;
+      backdrop-filter:blur(10px);
+    }
+    .kanji-char{font-family:"Noto Sans JP",sans-serif; font-size:54px; font-weight:900; line-height:1}
+    .kanji-read{font-size:19px; font-weight:900; color:rgba(255,255,255,.75); margin-top:7px}
+    .kanji-es{font-size:18px; color:rgba(255,255,255,.72); line-height:1.15; margin-top:5px}
+    .signature{display:flex; justify-content:space-between; align-items:end; color:rgba(255,255,255,.82); font-weight:900; font-size:26px}
+    .tags{font-size:20px; color:rgba(255,255,255,.68); max-width:650px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+
+    .theme-minimal .card::before{background:linear-gradient(160deg,#f8fafc,#e2e8f0)}
+    .theme-minimal .card{--card-text:#101827}
+    .theme-minimal .badge,.theme-minimal .level,.theme-minimal .note,.theme-minimal .kanji-box{background:rgba(255,255,255,.6); border-color:rgba(15,23,42,.12)}
+    .theme-minimal .kana,.theme-minimal .romaji,.theme-minimal .tags,.theme-minimal .signature,.theme-minimal .kanji-read,.theme-minimal .kanji-es{color:rgba(15,23,42,.65)}
+
+    .theme-sumi .card::before{background:radial-gradient(circle at 18% 16%,#ef4444,transparent 24%), linear-gradient(135deg,#0b0b0c,#2b1111 55%,#050505)}
+    .theme-pastel .card::before{background:radial-gradient(circle at 20% 20%,#f9a8d4,transparent 35%),radial-gradient(circle at 80% 16%,#a7f3d0,transparent 32%),linear-gradient(145deg,#818cf8,#f0abfc)}
+    .theme-neon .card::before{background:radial-gradient(circle at 16% 20%,#22d3ee,transparent 30%),radial-gradient(circle at 82% 15%,#fb7185,transparent 32%),radial-gradient(circle at 72% 84%,#a3e635,transparent 30%),#050816}
+    .theme-pop .card::before{background:radial-gradient(circle at 10% 18%,#facc15,transparent 28%),radial-gradient(circle at 85% 20%,#ec4899,transparent 30%),radial-gradient(circle at 65% 90%,#06b6d4,transparent 30%),#371062}
+    .theme-forest .card::before{background:radial-gradient(circle at 20% 10%,#86efac,transparent 30%),radial-gradient(circle at 80% 80%,#14b8a6,transparent 30%),linear-gradient(145deg,#052e16,#064e3b)}
+    .theme-sakura .card::before{background:radial-gradient(circle at 15% 14%,#fff1f2,transparent 28%),radial-gradient(circle at 85% 12%,#fb7185,transparent 32%),linear-gradient(145deg,#be185d,#f9a8d4)}
+    .theme-gold .card::before{background:radial-gradient(circle at 20% 18%,#fde68a,transparent 30%),radial-gradient(circle at 82% 82%,#f97316,transparent 30%),linear-gradient(145deg,#1c1917,#78350f)}
+
+    @media(max-width:980px){.shell{grid-template-columns:1fr}.controls{position:static}.preview-shell{min-height:520px} body{padding:14px}}
+  </style>
+</head>
+<body>
+  <div class="app" id="themeRoot">
+    <header class="hero">
+      <div>
+        <h1>Generador de tarjetas japonesas</h1>
+        <p class="subtitle">JSON en <b>datos/tarjetas.json</b> · estilos random · descarga PNG limpio</p>
+      </div>
+    </header>
+
+    <div class="shell">
+      <aside class="controls">
+        <div class="group">
+          <label for="wordSelect">Palabra</label>
+          <select id="wordSelect"></select>
+          <button class="btn secondary" id="randomWordBtn">Palabra random</button>
+        </div>
+
+        <div class="group">
+          <div class="label">Formato</div>
+          <div class="chips" id="formatChips"></div>
+          <div class="row">
+            <input id="customW" type="number" placeholder="Ancho" min="300" value="1080" />
+            <input id="customH" type="number" placeholder="Alto" min="300" value="1080" />
+          </div>
+          <button class="btn secondary" id="applyCustomBtn">Aplicar personalizado</button>
+        </div>
+
+        <div class="group">
+          <label for="themeSelect">Tema</label>
+          <select id="themeSelect"></select>
+          <button class="btn secondary" id="randomThemeBtn">Random de familia</button>
+          <button class="btn secondary" id="superRandomBtn">Super random random</button>
+        </div>
+
+        <div class="group">
+          <label for="scaleRange">Vista previa</label>
+          <input id="scaleRange" type="range" min="20" max="70" value="42" />
+        </div>
+
+        <button class="btn" id="downloadBtn">Descargar esta tarjeta</button>
+      </aside>
+
+      <main class="preview-shell">
+        <div class="stage" id="stage">
+          <article class="card" id="captureCard">
+            <div class="card-inner" id="cardInner"></div>
+          </article>
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script>
+    const DATA_URL = 'datos/tarjetas.json';
+
+    const formats = [
+      { id:'1-1', label:'Cuadrada 1:1', w:1080, h:1080 },
+      { id:'4-5', label:'Vertical 4:5', w:1080, h:1350 },
+      { id:'9-16', label:'Story 9:16', w:1080, h:1920 },
+      { id:'custom', label:'Personalizado', w:1080, h:1080 }
+    ];
+
+    const themes = [
+      { id:'theme-neon', label:'Neón' },
+      { id:'theme-pastel', label:'Pastel' },
+      { id:'theme-sumi', label:'Sumi samurái' },
+      { id:'theme-minimal', label:'Minimal japonés' },
+      { id:'theme-pop', label:'Anime pop' },
+      { id:'theme-forest', label:'Bosque' },
+      { id:'theme-sakura', label:'Sakura' },
+      { id:'theme-gold', label:'Oro oscuro' }
+    ];
+
+    const state = { data:null, word:null, kanjiMap:new Map(), format:formats[0], theme:themes[0] };
+    const $ = sel => document.querySelector(sel);
+    const esc = v => String(v ?? '').replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
+    const pick = arr => arr[Math.floor(Math.random()*arr.length)];
+    const randHex = () => '#' + Math.floor(Math.random()*16777215).toString(16).padStart(6,'0');
+
+    function setFormat(format){
+      state.format = format;
+      const card = $('#captureCard');
+      card.style.width = format.w + 'px';
+      card.style.height = format.h + 'px';
+      renderFormatChips();
+      fitStage();
+    }
+
+    function renderFormatChips(){
+      $('#formatChips').innerHTML = formats.map(f => `<button class="chip ${state.format.id===f.id?'active':''}" data-format="${f.id}">${esc(f.label)}</button>`).join('');
+      document.querySelectorAll('[data-format]').forEach(btn => btn.onclick = () => setFormat(formats.find(f => f.id === btn.dataset.format)));
+    }
+
+    function setTheme(theme){
+      state.theme = theme;
+      const root = $('#themeRoot');
+      root.className = 'app ' + theme.id;
+      $('#themeSelect').value = theme.id;
+      document.documentElement.style.setProperty('--accent', '#8b5cf6');
+      document.documentElement.style.setProperty('--accent2', '#06b6d4');
+      document.documentElement.style.setProperty('--accent3', '#f97316');
+      renderCard();
+    }
+
+    function superRandom(){
+      const root = $('#themeRoot');
+      root.className = 'app theme-neon';
+      document.documentElement.style.setProperty('--accent', randHex());
+      document.documentElement.style.setProperty('--accent2', randHex());
+      document.documentElement.style.setProperty('--accent3', randHex());
+      document.documentElement.style.setProperty('--card-bg', randHex());
+      renderCard();
+    }
+
+    function renderCard(){
+      if(!state.word) return;
+      const w = state.word;
+      const kanjis = (w.kanjis || []).map(k => state.kanjiMap.get(k)).filter(Boolean);
+      const notes = [
+        w.literal ? `<div class="note"><b>Literal</b>${esc(w.literal)}</div>` : '',
+        w.matiz ? `<div class="note"><b>Matiz</b>${esc(w.matiz)}</div>` : '',
+        w.dato_curioso ? `<div class="note"><b>Dato curioso</b>${esc(w.dato_curioso)}</div>` : ''
+      ].filter(Boolean).join('');
+
+      $('#cardInner').innerHTML = `
+        <header class="card-top">
+          <div class="badge">Palabra del día</div>
+          <div class="level">${esc(w.nivel || '')}</div>
+        </header>
+
+        <section class="main">
+          <div class="jp">${esc(w.jp)}</div>
+          <div class="kana">${esc(w.kana)}</div>
+          <div class="romaji">${esc(w.romaji)}</div>
+          <div class="es">${esc(w.es)}</div>
+          <div class="extra">${notes}</div>
+        </section>
+
+        <footer>
+          <div class="kanji-strip">
+            ${kanjis.map(k => `
+              <div class="kanji-box">
+                <div class="kanji-char">${esc(k.jp)}</div>
+                <div class="kanji-read">${esc(k.lecturas)}</div>
+                <div class="kanji-es">${esc(k.es)}</div>
+              </div>
+            `).join('')}
+          </div>
+          <div class="signature">
+            <span>Asallam Sensei</span>
+            <span class="tags">${esc((w.tags || []).map(t => '#'+t.replaceAll(' ','_')).join(' '))}</span>
+          </div>
+        </footer>
+      `;
+      fitStage();
+    }
+
+    function fitStage(){
+      const scale = $('#scaleRange').value / 100;
+      $('#stage').style.transform = `scale(${scale})`;
+      const c = $('#captureCard');
+      $('#stage').style.width = (c.offsetWidth * scale) + 'px';
+      $('#stage').style.height = (c.offsetHeight * scale) + 'px';
+    }
+
+    async function downloadCard(){
+      const card = $('#captureCard');
+      const canvas = await html2canvas(card, { backgroundColor:null, scale:2, useCORS:true });
+      const a = document.createElement('a');
+      a.download = `asallam-${state.word.id}-${state.format.id}.png`;
+      a.href = canvas.toDataURL('image/png');
+      a.click();
+    }
+
+    async function init(){
+      const res = await fetch(DATA_URL);
+      const json = await res.json();
+      state.data = json;
+      state.kanjiMap = new Map((json.kanjis || []).map(k => [k.jp, k]));
+
+      $('#wordSelect').innerHTML = json.palabras.map(p => `<option value="${esc(p.id)}">${esc(p.jp)} — ${esc(p.es)}</option>`).join('');
+      $('#themeSelect').innerHTML = themes.map(t => `<option value="${t.id}">${esc(t.label)}</option>`).join('');
+
+      renderFormatChips();
+      state.word = json.palabras[0];
+      setTheme(themes[0]);
+      setFormat(formats[0]);
+
+      $('#wordSelect').onchange = e => { state.word = state.data.palabras.find(p => p.id === e.target.value); renderCard(); };
+      $('#randomWordBtn').onclick = () => { state.word = pick(state.data.palabras); $('#wordSelect').value = state.word.id; renderCard(); };
+      $('#themeSelect').onchange = e => setTheme(themes.find(t => t.id === e.target.value));
+      $('#randomThemeBtn').onclick = () => setTheme(pick(themes));
+      $('#superRandomBtn').onclick = superRandom;
+      $('#applyCustomBtn').onclick = () => setFormat({ id:'custom', label:'Personalizado', w:+$('#customW').value || 1080, h:+$('#customH').value || 1080 });
+      $('#scaleRange').oninput = fitStage;
+      $('#downloadBtn').onclick = downloadCard;
+      window.addEventListener('resize', fitStage);
+      document.fonts?.ready.then(renderCard);
+    }
+
+    init().catch(err => {
+      document.body.innerHTML = `<pre style="white-space:pre-wrap;color:white;padding:24px">No se pudo cargar datos/tarjetas.json\n\n${esc(err.message)}\n\nSúbelo a GitHub Pages o usa un servidor local.</pre>`;
+    });
+  </script>
+</body>
+</html>
