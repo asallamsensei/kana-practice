@@ -177,7 +177,7 @@
     <header class="hero">
       <div>
         <h1>Generador de tarjetas japonesas</h1>
-        <p class="subtitle">JSON en <b>datos/tarjetas.json</b> · estilos random · descarga PNG limpio</p>
+        <p class="subtitle">JSON en <b>data/tarjetas.json</b> · estilos random · descarga PNG limpio</p>
       </div>
     </header>
 
@@ -225,7 +225,7 @@
   </div>
 
   <script>
-    const DATA_URL = 'datos/tarjetas.json';
+    const DATA_URL = 'data/tarjetas.json';
 
     const formats = [
       { id:'1-1', label:'Cuadrada 1:1', w:1080, h:1080 },
@@ -373,7 +373,7 @@
     }
 
     init().catch(err => {
-      document.body.innerHTML = `<pre style="white-space:pre-wrap;color:white;padding:24px">No se pudo cargar datos/tarjetas.json\n\n${esc(err.message)}\n\nSúbelo a GitHub Pages o usa un servidor local.</pre>`;
+      document.body.innerHTML = `<pre style="white-space:pre-wrap;color:white;padding:24px">No se pudo cargar data/tarjetas.json\n\n${esc(err.message)}\n\nSúbelo a GitHub Pages o usa un servidor local.</pre>`;
     });
   </script>
 </body>
