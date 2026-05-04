@@ -559,35 +559,35 @@
       requestAnimationFrame(autoFit);
     }
 
-    function renderCard(){
-      if(!state.word) return;
-      const w = state.word;
-      const kanjis = (w.kanjis || []).map(x => state.kanjiMap.get(x)).filter(Boolean);
-      const notes = [
-        w.literal && ['Literal', w.literal],
-        w.matiz && ['Matiz', w.matiz],
-        w.dato_curioso && ['Ejemplo', w.dato_curioso]
-      ].filter(Boolean);
+function renderCard(){
+  if(!state.word) return;
+  const w = state.word;
+  const kanjis = (w.kanjis || []).map(x => state.kanjiMap.get(x)).filter(Boolean);
+  const notes = [
+    w.literal && ['Literal', w.literal],
+    w.matiz && ['Matiz', w.matiz],
+    w.dato_curioso && ['Ejemplo', w.dato_curioso]
+  ].filter(Boolean);
 
-      $('#cardContent').innerHTML = `
-        <header class="top">
-          <div class="pill">Palabra #${esc(w.id)}</div>
-          <div class="pill">${esc(w.nivel || '')}</div>
-        </header>
+  $('#cardContent').innerHTML = `
+    <header class="top">
+      <div class="pill">Palabra #${esc(w.id)}</div>
+      <div class="pill">${esc(w.nivel || '')}</div>
+    </header>
 
-        <section class="center">
-          <div class="jp">${esc(w.jp)}</div>
-          <div class="romaji">${esc(w.romaji)}</div>
-          <div class="es">${esc(w.es)}</div>
-          <div class="notes">
-            ${notes.map(n => `
-              <div class="note ${n[0] === 'Literal' || n[0] === 'Matiz' ? 'half' : ''}">
-                <b>${esc(n[0])}</b>
-                ${esc(n[1])}
-              </div>
-            `).join('')}
+    <section class="center">
+      <div class="jp">${esc(w.jp)}</div>
+      <div class="romaji">${esc(w.romaji)}</div>
+      <div class="es">${esc(w.es)}</div>
+
+      <div class="notes">
+        ${notes.map(n => `
+          <div class="note ${n[0] === 'Literal' || n[0] === 'Matiz' ? 'half' : ''}">
+            <b>${esc(n[0])}</b>
+            ${esc(n[1])}
           </div>
-        </section>
+        `).join('')}
+      </div>
 
       <div class="kanji-panel">
         <div class="kanji-title">Kanjis en esta palabra</div>
@@ -600,17 +600,18 @@
           `).join('')}
         </div>
       </div>
-      
-      <footer class="bottom">
-        <div class="signature">
-          <span class="brand">Asallam Sensei</span>
-          <span class="tags">${esc((w.tags || []).map(t => '#'+String(t).replaceAll(' ','_')).join(' '))}</span>
-        </div>
-      </footer>
-      `;
+    </section>
 
-      requestAnimationFrame(autoFit);
-    }
+    <footer class="bottom">
+      <div class="signature">
+        <span class="brand">Asallam Sensei</span>
+        <span class="tags">${esc((w.tags || []).map(t => '#'+String(t).replaceAll(' ','_')).join(' '))}</span>
+      </div>
+    </footer>
+  `;
+
+  requestAnimationFrame(autoFit);
+}
 
     function autoFit(){
       const card = $('#card');
