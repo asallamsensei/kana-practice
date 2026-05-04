@@ -322,10 +322,9 @@
 .notes{
   width:100%;
   display:flex;
-  flex-direction:column;
-
-  gap:clamp(6px,1.2cqw,10px);
-  margin-top:clamp(2px,.6cqw,6px);   /* 👈 BAJAMOS espacio */
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:2px;
   flex-shrink:1;
 }
 
@@ -354,9 +353,8 @@
   display:flex;
   flex-direction:column;
   align-items:center;
-
-  gap:clamp(6px,1.2cqw,12px);   /* 👈 ANTES ERA MUCHO MÁS */
-  margin-top:clamp(4px,1cqw,10px); /* 👈 REDUCIDO FUERTE */
+  gap:6px;
+  margin-top:2px;
   min-width:0;
 }
 
@@ -453,9 +451,9 @@
   flex-wrap:wrap;
   gap:clamp(6px,1.2cqw,10px);
 }
-
+  
 .note.half{
-  width:calc(50% - 5px); /* 👈 mitad exacta */
+  flex:1 1 calc(50% - 5px);
 }
 
 .note.half:only-child{
