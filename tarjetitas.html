@@ -390,14 +390,6 @@
   font-weight:900;
 }
 
-.kanji-read{
-  margin-top:.4em;
-  font-size:clamp(.8rem,2.2cqw,1.3rem);
-  line-height:1.1;
-  font-weight:900;
-  color:rgba(255,255,255,.8);
-}
-
 .kanji-es{
   margin-top:.3em;
   font-size:clamp(.75rem,2cqw,1.15rem);
@@ -454,6 +446,20 @@
   display:grid;
   grid-template-columns:1fr 1fr;
   gap:10px;
+}
+
+.notes{
+  display:flex;
+  flex-wrap:wrap;
+  gap:clamp(6px,1.2cqw,10px);
+}
+
+.note.half{
+  width:calc(50% - 5px); /* 👈 mitad exacta */
+}
+
+.note.half:only-child{
+  width:100%;
 }
   
 </style>
@@ -570,7 +576,8 @@
       const w = state.word;
       const kanjis = (w.kanjis || []).map(x => state.kanjiMap.get(x)).filter(Boolean);
       const notes = [
-        (w.literal || w.matiz) && ['dual', [w.literal, w.matiz]],
+        w.literal && ['Literal', w.literal],
+        w.matiz && ['Matiz', w.matiz],
         w.dato_curioso && ['Dato curioso', w.dato_curioso]
       ].filter(Boolean);
 
@@ -585,17 +592,12 @@
           <div class="romaji">${esc(w.romaji)}</div>
           <div class="es">${esc(w.es)}</div>
           <div class="notes">
-            ${notes.map(n => {
-              if(n[0] === 'dual'){
-                return `
-                  <div class="note dual">
-                    ${n[1][0] ? `<div><b>Literal</b>${esc(n[1][0])}</div>` : ''}
-                    ${n[1][1] ? `<div><b>Matiz</b>${esc(n[1][1])}</div>` : ''}
-                  </div>
-                `;
-              }
-              return `<div class="note"><b>${esc(n[0])}</b>${esc(n[1])}</div>`;
-            }).join('')}
+            ${notes.map(n => `
+              <div class="note ${n[0] === 'Literal' || n[0] === 'Matiz' ? 'half' : ''}">
+                <b>${esc(n[0])}</b>
+                ${esc(n[1])}
+              </div>
+            `).join('')}
           </div>
         </section>
 
@@ -606,7 +608,6 @@
               ${kanjis.map(k => `
                 <div class="kanji">
                   <div class="kanji-char">${esc(k.jp)}</div>
-                  <div class="kanji-read">${esc(k.lecturas)}</div>
                   <div class="kanji-es">${esc(k.es)}</div>
                 </div>
               `).join('')}
