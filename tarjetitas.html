@@ -180,7 +180,13 @@ button{
     .note{border:1px solid rgba(255,255,255,.16);background:rgba(0,0,0,.24);border-radius:clamp(14px,2.5cqw,28px);padding:.75em 1em;font-size:clamp(.82rem,2.2cqw,1.65rem);line-height:1.25;font-weight:800;text-align:center}
     .note b{display:block;margin-bottom:.35em;font-size:.62em;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.68)}
 
-    .bottom{display:grid;gap:clamp(8px,1.5cqw,16px);min-width:0}
+    .bottom{
+      display:grid;
+      gap:clamp(16px,2.8cqw,28px); /* MÁS espacio */
+      margin-top:clamp(10px,2cqw,24px); /* separación extra arriba */
+      min-width:0;
+    }
+
     .kanjis{display:flex;flex-wrap:wrap;justify-content:center;gap:clamp(7px,1.3cqw,14px)}
     .kanji{flex:1 1 0;min-width:clamp(86px,18cqw,170px);max-width:clamp(120px,24cqw,220px);padding:.7em .6em;border:1px solid rgba(255,255,255,.20);background:rgba(255,255,255,.12);border-radius:clamp(14px,2.4cqw,26px);text-align:center;backdrop-filter:blur(10px)}
     .kanji-char{font-family:"Noto Sans JP",sans-serif;font-size:clamp(1.8rem,5.2cqw,3.5rem);line-height:1;font-weight:900}
@@ -328,14 +334,18 @@ button{
         </section>
 
         <footer class="bottom">
-          <div class="kanjis">
-            ${kanjis.map(k => `
-              <div class="kanji">
-                <div class="kanji-char">${esc(k.jp)}</div>
-                <div class="kanji-read">${esc(k.lecturas)}</div>
-                <div class="kanji-es">${esc(k.es)}</div>
+          <div class="kanji-panel">
+            <div class="kanji-title">Kanjis en esta palabra</div>
+              <div class="kanjis">
+                ${kanjis.map(k => `
+                  <div class="kanji">
+                    <div class="kanji-char">${esc(k.jp)}</div>
+                    <div class="kanji-read">${esc(k.lecturas)}</div>
+                    <div class="kanji-es">${esc(k.es)}</div>
+                  </div>
+                `).join('')}
               </div>
-            `).join('')}
+            </div>
           </div>
           <div class="signature">
             <span class="brand">Asallam Sensei</span>
