@@ -248,11 +248,28 @@
 
 .brand{
   margin-right:auto;
-  font-size:clamp(1.1rem,2.8cqw,1.9rem);
-  font-weight:700;
-  white-space:normal; /* 👈 permite salto de línea */
+  font-size:clamp(1rem,2.4cqw,1.6rem); /* 👈 un poco más pequeño */
+  font-weight:600;
+  white-space:normal;
 }
 
+.site{
+  display:block;
+
+  font-size:clamp(1.3rem,3.2cqw,2.2rem); /* 👈 MÁS GRANDE */
+  font-weight:900;
+
+  color:#fff;
+
+  text-shadow:
+    0 0 6px rgba(34,211,238,.6),
+    0 0 14px rgba(34,211,238,.45),
+    0 0 24px rgba(251,113,133,.35); /* 👈 glow bonito */
+
+  letter-spacing:.02em;
+  margin-top:2px; /* 👈 pequeño respiro */
+}
+  
 .tags{
   margin-left:auto;
   text-align:right;
@@ -444,12 +461,6 @@
 
 .note.half:only-child{
   flex-basis:100%;
-}
-
-.site{
-  display:block; /* 👈 baja a la siguiente línea */
-  font-size:.7em;
-  opacity:.7;
 }
   
 </style>
