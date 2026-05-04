@@ -155,22 +155,53 @@ button{
       mix-blend-mode:screen;opacity:.48;
     }
 
-    .card-content{
-      position:absolute;inset:6%;z-index:1;
-      display:grid;grid-template-rows:auto minmax(0,1fr) auto;
-      gap:clamp(10px,2.1cqw,24px);
-      transform-origin:center;
-      transform:scale(var(--fit,1));
-    }
+.card-content{
+  position:absolute;
+  inset:4%;
+  z-index:1;
 
-    .top,.signature{display:flex;justify-content:space-between;align-items:center;gap:12px;min-width:0}
-    .pill{
-      border:1px solid rgba(255,255,255,.26);background:rgba(255,255,255,.14);
-      border-radius:999px;padding:.55em .9em;font-weight:900;text-transform:uppercase;letter-spacing:.08em;
-      font-size:clamp(.62rem,2.1cqw,1.45rem);white-space:nowrap;backdrop-filter:blur(10px)
-    }
+  display:grid;
+  grid-template-rows:auto minmax(0,1fr) auto;
+  gap:clamp(8px,1.8cqw,18px);
 
-    .center{min-height:0;display:grid;align-content:center;justify-items:center;text-align:center;gap:clamp(6px,1.4cqw,16px)}
+  transform-origin:center;
+  transform:scale(var(--fit,1));
+}
+
+.top,
+.signature{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:6px;
+  min-width:0;
+
+  padding:0;            /* 👈 quitamos padding interno */
+  margin:0 -2px;        /* 👈 empuja visualmente hacia los bordes */
+}
+
+.pill{
+  border:1px solid rgba(255,255,255,.26);
+  background:rgba(255,255,255,.14);
+  border-radius:999px;
+  padding:.42em .7em;
+  font-weight:900;
+  text-transform:uppercase;
+  letter-spacing:.07em;
+  font-size:clamp(.58rem,1.85cqw,1.25rem);
+  white-space:nowrap;
+  backdrop-filter:blur(10px);
+}
+
+.center{
+  min-height:0;
+  display:grid;
+  align-content:center;
+  justify-items:center;
+  text-align:center;
+  gap:clamp(7px,1.5cqw,16px);
+  overflow:hidden;
+}
 
 .jp{
   font-family:"Noto Sans JP",sans-serif;
@@ -287,6 +318,7 @@ button{
   text-transform:uppercase;
   font-size:clamp(.7rem,1.8cqw,1.2rem);
   color:rgba(255,255,255,.7);
+  margin-bottom:8px; /* 👈 ajuste fino */
 }
 
 .center,
@@ -306,6 +338,12 @@ button{
   flex-direction:column;
   align-items:center;   /* 👈 esto permite autofit real */
   gap:clamp(12px,2cqw,20px);
+}
+
+.note.dual{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
 }
     
   </style>
@@ -422,14 +460,13 @@ button{
       const w = state.word;
       const kanjis = (w.kanjis || []).map(x => state.kanjiMap.get(x)).filter(Boolean);
       const notes = [
-        w.literal && ['Literal', w.literal],
-        w.matiz && ['Matiz', w.matiz],
+        (w.literal || w.matiz) && ['dual', [w.literal, w.matiz]],
         w.dato_curioso && ['Dato curioso', w.dato_curioso]
       ].filter(Boolean);
 
       $('#cardContent').innerHTML = `
         <header class="top">
-          <div class="pill">Palabra del día</div>
+          <div class="pill">Palabra #${esc(w.id)}</div>
           <div class="pill">${esc(w.nivel || '')}</div>
         </header>
 
@@ -439,7 +476,17 @@ button{
           <div class="romaji">${esc(w.romaji)}</div>
           <div class="es">${esc(w.es)}</div>
           <div class="notes">
-            ${notes.map(n => `<div class="note"><b>${esc(n[0])}</b>${esc(n[1])}</div>`).join('')}
+            ${notes.map(n => {
+              if(n[0] === 'dual'){
+                return `
+                  <div class="note dual">
+                    ${n[1][0] ? `<div><b>Literal</b>${esc(n[1][0])}</div>` : ''}
+                    ${n[1][1] ? `<div><b>Matiz</b>${esc(n[1][1])}</div>` : ''}
+                  </div>
+                `;
+              }
+              return `<div class="note"><b>${esc(n[0])}</b>${esc(n[1])}</div>`;
+            }).join('')}
           </div>
         </section>
 
