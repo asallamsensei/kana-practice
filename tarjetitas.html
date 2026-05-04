@@ -319,24 +319,19 @@
 }
 
 /* 🔧 MENOS SEPARACIÓN CON KANJIS */
-.notes{
-  width:100%;
-  display:flex;
-  flex-wrap:wrap;
-  gap:10px;
-  margin-top:2px;
-  flex-shrink:1;
-}
 
 .note{
+  flex:0 1 100%; /* 👈 layout */
+
   border:1px solid rgba(255,255,255,.16);
   background:rgba(0,0,0,.22);
   border-radius:clamp(14px,2.5cqw,28px);
 
   padding:.7em 1em;
-  font-size:clamp(.9rem,2.4cqw,1.6rem); /* 👈 MÁS GRANDE */
+  font-size:clamp(.9rem,2.4cqw,1.6rem);
   line-height:1.25;
   font-weight:800;
+  text-align:center;
 }
 
 .note b{
@@ -449,15 +444,16 @@
 .notes{
   display:flex;
   flex-wrap:wrap;
+  justify-content:center;
   gap:clamp(6px,1.2cqw,10px);
 }
-  
+
 .note.half{
-  flex:1 1 calc(50% - 5px);
+  flex:0 1 calc(50% - 5px);
 }
 
 .note.half:only-child{
-  width:100%;
+  flex-basis:100%;
 }
   
 </style>
@@ -576,7 +572,7 @@
       const notes = [
         w.literal && ['Literal', w.literal],
         w.matiz && ['Matiz', w.matiz],
-        w.dato_curioso && ['Dato curioso', w.dato_curioso]
+        w.dato_curioso && ['Ejemplo', w.dato_curioso]
       ].filter(Boolean);
 
       $('#cardContent').innerHTML = `
