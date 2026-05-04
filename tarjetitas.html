@@ -219,7 +219,7 @@
   z-index:1;
 
   display:grid;
-  grid-template-rows:auto auto auto;
+  grid-template-rows:auto auto auto auto;
   align-content:space-between; /* 👈 CLAVE */
 
   gap:clamp(5px,1.1cqw,12px);
@@ -343,13 +343,7 @@
 
 /* 🔥 ESTE ES EL QUE TE SEPARABA TODO */
 .bottom{
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-
-  width:100%;     /* 👈 se mantiene */
-  gap:6px;
-  margin-top:0;   /* 👈 quita el espacio extra */
+  width:100%;
   min-width:0;
 }
 
@@ -595,24 +589,24 @@
           </div>
         </section>
 
-        <footer class="bottom">
-          <div class="kanji-panel">
-            <div class="kanji-title">Kanjis en esta palabra</div>
-            <div class="kanjis">
-              ${kanjis.map(k => `
-                <div class="kanji">
-                  <div class="kanji-char">${esc(k.jp)}</div>
-                  <div class="kanji-es">${esc(k.es)}</div>
-                </div>
-              `).join('')}
+      <div class="kanji-panel">
+        <div class="kanji-title">Kanjis en esta palabra</div>
+        <div class="kanjis">
+          ${kanjis.map(k => `
+            <div class="kanji">
+              <div class="kanji-char">${esc(k.jp)}</div>
+              <div class="kanji-es">${esc(k.es)}</div>
             </div>
-          </div>
-        
-          <div class="signature">
-            <span class="brand">Asallam Sensei</span>
-            <span class="tags">${esc((w.tags || []).map(t => '#'+String(t).replaceAll(' ','_')).join(' '))}</span>
-          </div>
-        </footer>
+          `).join('')}
+        </div>
+      </div>
+      
+      <footer class="bottom">
+        <div class="signature">
+          <span class="brand">Asallam Sensei</span>
+          <span class="tags">${esc((w.tags || []).map(t => '#'+String(t).replaceAll(' ','_')).join(' '))}</span>
+        </div>
+      </footer>
       `;
 
       requestAnimationFrame(autoFit);
