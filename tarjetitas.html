@@ -248,6 +248,9 @@
 
 .brand{
   margin-right:auto;
+  font-size:clamp(1.1rem,2.8cqw,1.9rem);
+  font-weight:700;
+  white-space:normal; /* 👈 permite salto de línea */
 }
 
 .tags{
@@ -382,13 +385,6 @@
   color:rgba(255,255,255,.75);
 }
 
-/* FIRMA MÁS GRANDE */
-.brand{
-  font-size:clamp(1.1rem,2.8cqw,1.9rem);
-  font-weight:700;
-  white-space:nowrap;
-}
-
 .tags{
   min-width:0;
   overflow:hidden;
@@ -448,6 +444,12 @@
 
 .note.half:only-child{
   flex-basis:100%;
+}
+
+.site{
+  display:block; /* 👈 baja a la siguiente línea */
+  font-size:.7em;
+  opacity:.7;
 }
   
 </style>
