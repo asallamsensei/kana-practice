@@ -269,10 +269,21 @@
   letter-spacing:.02em;
   margin-top:2px; /* 👈 pequeño respiro */
 }
-  
+
 .tags{
-  margin-left:auto;
+  min-width:0;
+
+  white-space:normal;        /* 👈 permite varias líneas */
+  overflow:visible;          /* 👈 no recorta */
+  text-overflow:unset;
+
   text-align:right;
+
+  font-size:clamp(.8rem,2.2cqw,1.4rem);
+  font-weight:900;
+  color:rgba(255,255,255,.7);
+
+  line-height:1.2;           /* 👈 mejora lectura */
 }
 
 .pill{
@@ -400,18 +411,6 @@
   font-size:clamp(.75rem,2cqw,1.15rem);
   line-height:1.15;
   color:rgba(255,255,255,.75);
-}
-
-.tags{
-  min-width:0;
-  overflow:hidden;
-  text-overflow:ellipsis;
-  white-space:nowrap;
-  text-align:right;
-
-  font-size:clamp(.8rem,2.2cqw,1.4rem);
-  font-weight:700;
-  color:rgba(255,255,255,.7);
 }
 
 /* PANEL KANJI MÁS CERCA */
