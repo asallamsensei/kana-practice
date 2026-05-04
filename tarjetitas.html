@@ -141,11 +141,12 @@ button{
       color:var(--card-text);
       border-radius:clamp(24px,5cqw,60px);
       box-shadow:0 40px 120px rgba(0,0,0,.45);
+    
       background:
-        radial-gradient(circle at 18% 18%, var(--a), transparent 30%),
-        radial-gradient(circle at 82% 16%, var(--b), transparent 32%),
-        radial-gradient(circle at 76% 86%, var(--c), transparent 30%),
-        linear-gradient(145deg,var(--card-bg),#020617);
+        radial-gradient(circle at 20% 20%, color-mix(in srgb, var(--a) 22%, transparent), transparent 65%),
+        radial-gradient(circle at 80% 80%, color-mix(in srgb, var(--b) 22%, transparent), transparent 65%),
+        linear-gradient(160deg, var(--card-bg), #020617);
+    
       container-type:inline-size;
     }
 
