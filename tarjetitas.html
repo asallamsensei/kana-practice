@@ -456,6 +456,7 @@
   gap:10px;
 }
   
+</style>
 </head>
 <body>
   <div class="app theme-neon" id="app">
@@ -601,17 +602,17 @@
         <footer class="bottom">
           <div class="kanji-panel">
             <div class="kanji-title">Kanjis en esta palabra</div>
-              <div class="kanjis">
-                ${kanjis.map(k => `
-                  <div class="kanji">
-                    <div class="kanji-char">${esc(k.jp)}</div>
-                    <div class="kanji-read">${esc(k.lecturas)}</div>
-                    <div class="kanji-es">${esc(k.es)}</div>
-                  </div>
-                `).join('')}
-              </div>
+            <div class="kanjis">
+              ${kanjis.map(k => `
+                <div class="kanji">
+                  <div class="kanji-char">${esc(k.jp)}</div>
+                  <div class="kanji-read">${esc(k.lecturas)}</div>
+                  <div class="kanji-es">${esc(k.es)}</div>
+                </div>
+              `).join('')}
             </div>
           </div>
+        
           <div class="signature">
             <span class="brand">Asallam Sensei</span>
             <span class="tags">${esc((w.tags || []).map(t => '#'+String(t).replaceAll(' ','_')).join(' '))}</span>
