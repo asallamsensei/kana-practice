@@ -169,18 +169,43 @@ button{
   transform:scale(var(--fit,1));
 }
 
-.top,
-.signature{
+.top{
   display:flex;
   justify-content:space-between;
   align-items:center;
+
+  width:100%;
   gap:6px;
   min-width:0;
 
-  padding:0;            /* 👈 quitamos padding interno */
-  margin:0 -2px;        /* 👈 empuja visualmente hacia los bordes */
+  padding:0;
 }
 
+.signature{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+
+  width:100%;        /* 👈 clave */
+  gap:6px;
+  min-width:0;
+
+  padding:0;
+}
+
+.brand{
+  margin-right:auto;   /* izquierda */
+}
+
+.tags{
+  margin-left:auto;    /* derecha */
+  text-align:right;
+}
+
+.bottom{
+  width:100%;
+}
+    
 .pill{
   border:1px solid rgba(255,255,255,.26);
   background:rgba(255,255,255,.14);
