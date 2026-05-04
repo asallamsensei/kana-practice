@@ -604,7 +604,10 @@ function renderCard(){
 
     <footer class="bottom">
       <div class="signature">
-        <span class="brand">Asallam Sensei</span>
+        <div class="brand">
+          Asallam Sensei
+          <span class="site">asallamsensei.com</span>
+        </div>
         <span class="tags">${esc((w.tags || []).map(t => '#'+String(t).replaceAll(' ','_')).join(' '))}</span>
       </div>
     </footer>
