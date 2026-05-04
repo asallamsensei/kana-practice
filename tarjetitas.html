@@ -65,11 +65,98 @@
     .preview-shell{padding:22px;display:grid;place-items:center;min-height:760px;overflow:auto}
     .stage{display:grid;place-items:center;transform-origin:top center}
 
-    .card{
-      width:1080px;height:1080px;position:relative;overflow:hidden;color:var(--card-text);background:var(--card-bg);
-      border-radius:58px;box-shadow:0 40px 120px rgba(0,0,0,.4);isolation:isolate;
-      --pad:64px;--jp-size:132px;--kana-size:44px;--romaji-size:30px;--es-size:52px;--note-size:25px;--kanji-size:44px;--badge-size:22px;--gap:18px;
-    }
+.card{
+  width:1080px;
+  height:1080px;
+  position:relative;
+  overflow:hidden;
+  color:var(--card-text);
+  background:var(--card-bg);
+  border-radius:58px;
+  box-shadow:0 40px 120px rgba(0,0,0,.4);
+  isolation:isolate;
+}
+
+.card-inner{
+  position:absolute;
+  inset:6%;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  gap:28px;
+}
+
+.main{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  gap:14px;
+  flex:1;
+}
+
+.jp{
+  font-family:"Noto Sans JP",sans-serif;
+  font-size:clamp(72px, 13vw, 150px);
+  font-weight:900;
+  line-height:1;
+}
+
+.kana{
+  font-family:"Noto Sans JP",sans-serif;
+  font-size:clamp(28px, 5vw, 56px);
+  font-weight:900;
+}
+
+.romaji{
+  font-size:clamp(22px, 3.4vw, 38px);
+  font-weight:900;
+}
+
+.es{
+  font-size:clamp(34px, 6vw, 68px);
+  font-weight:900;
+  line-height:1.05;
+  max-width:90%;
+}
+
+.extra{
+  display:grid;
+  gap:12px;
+  width:100%;
+}
+
+.note{
+  background:rgba(0,0,0,.24);
+  border:1px solid rgba(255,255,255,.16);
+  border-radius:26px;
+  padding:16px 22px;
+  font-size:clamp(18px, 2.4vw, 28px);
+  line-height:1.25;
+  font-weight:800;
+}
+
+.badge,.level{
+  font-size:clamp(14px, 2vw, 24px);
+}
+
+.kanji-strip{
+  display:flex;
+  gap:14px;
+  flex-wrap:wrap;
+  justify-content:center;
+}
+
+.kanji-box{
+  flex:1 1 140px;
+  max-width:220px;
+}
+
+.kanji-char{
+  font-size:clamp(34px, 5vw, 58px);
+}
+    
     .card.is-4-5{--pad:68px;--jp-size:154px;--kana-size:50px;--romaji-size:34px;--es-size:58px;--note-size:28px;--kanji-size:48px;--gap:24px}
     .card.is-9-16{--pad:76px;--jp-size:170px;--kana-size:56px;--romaji-size:38px;--es-size:64px;--note-size:31px;--kanji-size:54px;--gap:34px}
     .card.is-custom{--pad:6%;--jp-size:12cqw;--kana-size:4.2cqw;--romaji-size:3cqw;--es-size:5cqw;--note-size:2.3cqw;--kanji-size:4.4cqw;--gap:2cqw}
