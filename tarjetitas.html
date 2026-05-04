@@ -13,114 +13,165 @@
   <style>
     :root{
       --page-bg:#070A12;
-      --panel:rgba(255,255,255,.075);
+      --text:#ffffff;
+      --muted:rgba(255,255,255,.70);
       --stroke:rgba(255,255,255,.18);
-      --text:#fff;
-      --muted:rgba(255,255,255,.7);
+
       --a:#22d3ee;
       --b:#fb7185;
       --c:#a3e635;
-      --card-bg:#050816;
-      --card-text:#fff;
+      --d:#8b5cf6;
+
       --card-w:1080;
       --card-h:1080;
+      --card-text:#ffffff;
+      --ink-panel:rgba(0,0,0,.18);
+      --glass:rgba(255,255,255,.11);
     }
 
     *{box-sizing:border-box}
-    html,body{margin:0;min-height:100%}
+
+    html,body{
+      margin:0;
+      min-height:100%;
+    }
+
     body{
       font-family:Inter,system-ui,sans-serif;
       color:var(--text);
       background:
-        radial-gradient(circle at 15% 8%, color-mix(in srgb, var(--a) 30%, transparent), transparent 30%),
-        radial-gradient(circle at 88% 12%, color-mix(in srgb, var(--b) 24%, transparent), transparent 28%),
+        radial-gradient(circle at 16% 12%, color-mix(in srgb, var(--a) 24%, transparent), transparent 28%),
+        radial-gradient(circle at 82% 10%, color-mix(in srgb, var(--b) 22%, transparent), transparent 28%),
+        radial-gradient(circle at 60% 92%, color-mix(in srgb, var(--d) 18%, transparent), transparent 34%),
         var(--page-bg);
       padding:24px;
     }
 
-    .app{max-width:1320px;margin:0 auto;display:grid;gap:20px}
-    h1{font-size:clamp(2rem,5vw,4.8rem);line-height:.9;letter-spacing:-.075em;margin:0}
-    .subtitle{margin:8px 0 0;color:var(--muted);font-weight:800}
+    .app{
+      width:min(1320px,100%);
+      margin:0 auto;
+      display:grid;
+      gap:20px;
+    }
+
+    h1{
+      margin:0;
+      font-size:clamp(2rem,5vw,4.5rem);
+      line-height:.9;
+      letter-spacing:-.075em;
+    }
+
+    .subtitle{
+      margin:8px 0 0;
+      color:var(--muted);
+      font-weight:800;
+    }
 
     .layout{
       display:grid;
-      grid-template-columns:minmax(380px, 420px) minmax(0,1fr);
+      grid-template-columns:minmax(360px,420px) minmax(0,1fr);
       gap:20px;
       align-items:start;
     }
+
     .controls{
-      display:grid;gap:14px;align-self:start;position:sticky;top:18px;
-      padding:16px;border:1px solid var(--stroke);border-radius:28px;
+      position:sticky;
+      top:18px;
+      display:grid;
+      gap:14px;
+      padding:16px;
+      border:1px solid var(--stroke);
+      border-radius:28px;
       background:linear-gradient(145deg,rgba(255,255,255,.12),rgba(255,255,255,.045));
-      backdrop-filter:blur(18px);box-shadow:0 24px 80px rgba(0,0,0,.35);
+      backdrop-filter:blur(18px);
+      box-shadow:0 24px 80px rgba(0,0,0,.35);
     }
-    .group{display:grid;gap:10px;padding:13px;border:1px solid var(--stroke);border-radius:22px;background:rgba(255,255,255,.055)}
-    label,.label{font-size:.78rem;text-transform:uppercase;letter-spacing:.12em;font-weight:900;color:var(--muted)}
-select,
-input,
-button{
-  width:100%;
-  min-width:0;
-  font:inherit;
-  color:var(--text);
-  border:1px solid var(--stroke);
-  border-radius:15px;
-  padding:12px 13px;
-  background:rgba(0,0,0,.25);
-  outline:0;
-}
 
-select option{
-  background:#101421;
-  color:#fff;
-}
+    .group{
+      display:grid;
+      gap:10px;
+      padding:13px;
+      border:1px solid var(--stroke);
+      border-radius:22px;
+      background:rgba(255,255,255,.055);
+    }
 
-button{
-  cursor:pointer;
-  font-weight:900;
-}
+    label,
+    .label{
+      font-size:.78rem;
+      text-transform:uppercase;
+      letter-spacing:.12em;
+      font-weight:900;
+      color:var(--muted);
+    }
 
-.btn{
-  border:0;
-  background:linear-gradient(135deg,var(--a),var(--b));
-  box-shadow:0 14px 34px rgba(0,0,0,.25);
-  white-space:normal;
-  line-height:1.15;
-}
+    select,
+    input,
+    button{
+      width:100%;
+      min-width:0;
+      font:inherit;
+      color:var(--text);
+      border:1px solid var(--stroke);
+      border-radius:15px;
+      padding:12px 13px;
+      background:rgba(0,0,0,.25);
+      outline:0;
+    }
 
-.btn.secondary{
-  background:rgba(255,255,255,.11);
-  border:1px solid var(--stroke);
-  box-shadow:none;
-}
+    select option{
+      background:#101421;
+      color:#fff;
+    }
 
-.row{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:10px;
-}
-    
-.chips{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:8px;
-}
+    button{
+      cursor:pointer;
+      font-weight:900;
+    }
 
-.chip{
-  width:100%;
-  min-width:0;
-  border-radius:999px;
-  padding:10px 12px;
-  font-size:.84rem;
-  line-height:1.15;
-  background:rgba(0,0,0,.25);
-  white-space:normal;
-  text-align:center;
-}
-    
-    .chip.active{background:linear-gradient(135deg,var(--a),var(--b));border-color:transparent}
+    .btn{
+      border:0;
+      background:linear-gradient(135deg,var(--a),var(--b));
+      box-shadow:0 14px 34px rgba(0,0,0,.25);
+      white-space:normal;
+      line-height:1.15;
+    }
 
-    /* EL PANEL DERECHO ES LA TARJETA */
+    .btn.secondary{
+      background:rgba(255,255,255,.11);
+      border:1px solid var(--stroke);
+      box-shadow:none;
+    }
+
+    .row{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:10px;
+    }
+
+    .chips{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:8px;
+    }
+
+    .chip{
+      width:100%;
+      min-width:0;
+      border-radius:999px;
+      padding:10px 12px;
+      font-size:.84rem;
+      line-height:1.15;
+      background:rgba(0,0,0,.25);
+      white-space:normal;
+      text-align:center;
+    }
+
+    .chip.active{
+      background:linear-gradient(135deg,var(--a),var(--b));
+      border-color:transparent;
+    }
+
     .card-wrap{
       min-height:680px;
       display:grid;
@@ -134,187 +185,354 @@ button{
 
     .card{
       width:min(100%, calc((100vh - 180px) * var(--card-w) / var(--card-h)));
-      max-width:820px;
+      max-width:850px;
       aspect-ratio:calc(var(--card-w) / var(--card-h));
       position:relative;
       overflow:hidden;
       color:var(--card-text);
-      border-radius:clamp(24px,5cqw,60px);
+      border-radius:clamp(24px,5cqw,58px);
       box-shadow:0 40px 120px rgba(0,0,0,.45);
-      background:
-        radial-gradient(circle at 18% 18%, var(--a), transparent 30%),
-        radial-gradient(circle at 82% 16%, var(--b), transparent 32%),
-        radial-gradient(circle at 76% 86%, var(--c), transparent 30%),
-        linear-gradient(145deg,var(--card-bg),#020617);
       container-type:inline-size;
+
+      background:
+        radial-gradient(circle at 16% 16%, color-mix(in srgb, var(--a) 78%, transparent), transparent 34%),
+        radial-gradient(circle at 88% 10%, color-mix(in srgb, var(--b) 76%, transparent), transparent 34%),
+        radial-gradient(circle at 86% 88%, color-mix(in srgb, var(--c) 60%, transparent), transparent 36%),
+        radial-gradient(circle at 10% 90%, color-mix(in srgb, var(--d) 55%, transparent), transparent 34%),
+        linear-gradient(145deg, #08111f, #0f172a 48%, #111827);
+    }
+
+    .card::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        linear-gradient(135deg,rgba(255,255,255,.16),transparent 36%),
+        linear-gradient(315deg,rgba(255,255,255,.08),transparent 42%);
+      pointer-events:none;
+      mix-blend-mode:screen;
     }
 
     .card::after{
-      content:"";position:absolute;inset:0;pointer-events:none;
-      background:linear-gradient(120deg,transparent 0 34%,rgba(255,255,255,.13),transparent 62% 100%);
-      mix-blend-mode:screen;opacity:.48;
+      content:"";
+      position:absolute;
+      inset:0;
+      background-image:
+        linear-gradient(rgba(255,255,255,.055) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.045) 1px, transparent 1px);
+      background-size:44px 44px;
+      mask-image:linear-gradient(to bottom, rgba(0,0,0,.75), transparent 78%);
+      pointer-events:none;
+      opacity:.45;
     }
 
     .card-content{
-      position:absolute;inset:6%;z-index:1;
-      display:grid;grid-template-rows:auto minmax(0,1fr) auto;
-      gap:clamp(10px,2.1cqw,24px);
+      position:absolute;
+      inset:6%;
+      z-index:1;
+      display:grid;
+      grid-template-rows:auto minmax(0,1fr) auto;
+      gap:clamp(10px,2cqw,22px);
       transform-origin:center;
       transform:scale(var(--fit,1));
     }
 
-    .top,.signature{display:flex;justify-content:space-between;align-items:center;gap:12px;min-width:0}
-    .pill{
-      border:1px solid rgba(255,255,255,.26);background:rgba(255,255,255,.14);
-      border-radius:999px;padding:.55em .9em;font-weight:900;text-transform:uppercase;letter-spacing:.08em;
-      font-size:clamp(.62rem,2.1cqw,1.45rem);white-space:nowrap;backdrop-filter:blur(10px)
-    }
-
-    .center{min-height:0;display:grid;align-content:center;justify-items:center;text-align:center;gap:clamp(6px,1.4cqw,16px)}
-
-.jp{
-  font-family:"Noto Sans JP",sans-serif;
-  font-size:clamp(2.6rem,12cqw,6.4rem);
-  line-height:1;
-  font-weight:800;
-  letter-spacing:-.03em;
-  text-wrap:balance;
-  text-shadow:0 10px 28px rgba(0,0,0,.28);
-}
-
-.kana{
-  font-family:"Noto Sans JP",sans-serif;
-  font-size:clamp(1rem,4.2cqw,2.4rem);
-  line-height:1.08;
-  font-weight:700;
-  color:rgba(255,255,255,.85);
-}
-
-.romaji{
-  font-size:clamp(.95rem,2.8cqw,1.8rem);
-  line-height:1.1;
-  font-weight:700;
-  color:rgba(255,255,255,.65);
-}
-
-.es{
-  max-width:90%;
-  font-size:clamp(1.4rem,5.2cqw,3.4rem);
-  line-height:1.05;
-  font-weight:800;
-  letter-spacing:-.04em;
-  text-wrap:balance;
-}
-
-    .notes{
-      width:100%;
+    .top,
+    .signature{
       display:flex;
-      flex-direction:column;
-      gap:clamp(6px,1.2cqw,12px);
-      margin-top:clamp(4px,1cqw,10px);
-      flex-shrink:1;
-    }
-    
-    .note{
-      border:1px solid rgba(255,255,255,.16);
-      background:rgba(0,0,0,.24);
-      border-radius:clamp(14px,2.5cqw,28px);
-      padding:.6em .9em;
-      font-size:clamp(.75rem,2cqw,1.4rem);
-      line-height:1.2;
-      font-weight:700;
-    }
-    
-    .note b{display:block;margin-bottom:.35em;font-size:.62em;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.68)}
-
-    .bottom{
-      display:grid;
-      gap:clamp(16px,2.8cqw,28px); /* MÁS espacio */
-      margin-top:clamp(10px,2cqw,24px); /* separación extra arriba */
-      min-width:0;
-    }
-
-.kanjis{
-  display:inline-flex;     /* 👈 CLAVE */
-  gap:clamp(8px,1.4cqw,14px);
-  flex-wrap:wrap;
-  justify-content:center;
-}
-    
-    .kanji{
-      display:flex;
-      flex-direction:column;
+      justify-content:space-between;
       align-items:center;
-      justify-content:center;
-      padding:.6em;
-      border:1px solid rgba(255,255,255,.20);
-      background:rgba(255,255,255,.12);
-      border-radius:clamp(12px,2cqw,22px);
-      text-align:center;
-      backdrop-filter:blur(10px);
+      gap:12px;
       min-width:0;
     }
-    
-    .kanji-char{font-family:"Noto Sans JP",sans-serif;font-size:clamp(1.8rem,5.2cqw,3.5rem);line-height:1;font-weight:900}
-    .kanji-read{margin-top:.35em;font-size:clamp(.72rem,1.8cqw,1.1rem);line-height:1.1;font-weight:900;color:rgba(255,255,255,.75)}
-    .kanji-es{margin-top:.25em;font-size:clamp(.68rem,1.6cqw,1rem);line-height:1.12;color:rgba(255,255,255,.72)}
-    .brand{font-size:clamp(.95rem,2.3cqw,1.6rem);font-weight:900;white-space:nowrap}
-    .tags{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-align:right;font-size:clamp(.68rem,1.7cqw,1.15rem);font-weight:900;color:rgba(255,255,255,.65)}
 
-    .theme-minimal{--card-text:#101827;--card-bg:#f8fafc;--a:#f8fafc;--b:#e2e8f0;--c:#cbd5e1}
-    .theme-minimal .card{background:linear-gradient(160deg,#f8fafc,#e2e8f0)}
-    .theme-minimal .pill,.theme-minimal .note,.theme-minimal .kanji{background:rgba(255,255,255,.64);border-color:rgba(15,23,42,.14)}
-    .theme-minimal .kana,.theme-minimal .romaji,.theme-minimal .kanji-read,.theme-minimal .kanji-es,.theme-minimal .tags,.theme-minimal .note b{color:rgba(15,23,42,.66)}
+    .pill{
+      border:1px solid rgba(255,255,255,.24);
+      background:rgba(255,255,255,.13);
+      border-radius:999px;
+      padding:.55em .9em;
+      font-weight:900;
+      text-transform:uppercase;
+      letter-spacing:.08em;
+      font-size:clamp(.62rem,2cqw,1.35rem);
+      white-space:nowrap;
+      backdrop-filter:blur(10px);
+    }
 
-    @media(max-width:980px){body{padding:14px}.layout{grid-template-columns:1fr}.controls{position:static}.card-wrap{min-height:520px}.card{width:min(100%,88vh)}}
+    .grid{
+      min-height:0;
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      grid-template-rows:repeat(2,minmax(0,1fr));
+      gap:clamp(10px,2cqw,20px);
+    }
 
-.kanji-panel{
-  display:inline-block;      /* 👈 CLAVE REAL */
-  text-align:center;
+    .panel{
+      min-width:0;
+      min-height:0;
+      border:1px solid rgba(255,255,255,.17);
+      background:
+        linear-gradient(145deg,rgba(255,255,255,.14),rgba(255,255,255,.045)),
+        var(--ink-panel);
+      border-radius:clamp(16px,2.7cqw,30px);
+      padding:clamp(12px,2.1cqw,22px);
+      backdrop-filter:blur(12px);
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.12);
+      overflow:hidden;
+    }
 
-  border:1px solid rgba(255,255,255,.18);
-  background:rgba(0,0,0,.28);
-  border-radius:clamp(18px,3cqw,32px);
-  padding:clamp(12px,2cqw,20px);
+    .word-panel{
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:center;
+      text-align:center;
+      gap:clamp(5px,1cqw,11px);
+    }
 
-  max-width:100%;
-}
+    .jp{
+      font-family:"Noto Sans JP",sans-serif;
+      font-size:clamp(2.5rem,11cqw,6.1rem);
+      line-height:1;
+      font-weight:750;
+      letter-spacing:-.03em;
+      text-wrap:balance;
+      text-shadow:0 10px 28px rgba(0,0,0,.25);
+    }
 
-.kanji-title{
-  text-align:center;
-  font-weight:900;
-  letter-spacing:.08em;
-  text-transform:uppercase;
-  font-size:clamp(.7rem,1.8cqw,1.2rem);
-  color:rgba(255,255,255,.7);
-}
+    .kana{
+      font-family:"Noto Sans JP",sans-serif;
+      font-size:clamp(1rem,3.7cqw,2.2rem);
+      line-height:1.08;
+      font-weight:700;
+      color:rgba(255,255,255,.86);
+    }
 
-.center,
-.bottom,
-.notes,
-.kanji-panel{
-  min-height:0;
-  min-width:0;
-}
+    .romaji{
+      font-size:clamp(.9rem,2.5cqw,1.55rem);
+      line-height:1.1;
+      font-weight:700;
+      color:rgba(255,255,255,.68);
+    }
 
-.center{
-  overflow:hidden;
-}
+    .es{
+      max-width:92%;
+      font-size:clamp(1.25rem,4.5cqw,2.85rem);
+      line-height:1.05;
+      font-weight:850;
+      letter-spacing:-.04em;
+      text-wrap:balance;
+    }
 
-.bottom{
-  display:flex;
-  flex-direction:column;
-  align-items:center;   /* 👈 esto permite autofit real */
-  gap:clamp(12px,2cqw,20px);
-}
-    
+    .literal{
+      margin-top:.25em;
+      font-size:clamp(.72rem,1.75cqw,1.05rem);
+      line-height:1.18;
+      color:rgba(255,255,255,.72);
+      font-weight:750;
+    }
+
+    .literal b,
+    .panel-title{
+      display:block;
+      margin-bottom:.35em;
+      font-size:.7em;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      color:rgba(255,255,255,.68);
+      font-weight:900;
+    }
+
+    .kanji-panel{
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:center;
+      text-align:center;
+      gap:clamp(8px,1.5cqw,14px);
+    }
+
+    .kanjis{
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:center;
+      align-items:center;
+      gap:clamp(8px,1.4cqw,14px);
+      max-width:100%;
+    }
+
+    .kanji{
+      min-width:clamp(86px,15cqw,132px);
+      max-width:clamp(110px,18cqw,160px);
+      display:grid;
+      gap:.25em;
+      justify-items:center;
+      padding:.65em .7em;
+      border:1px solid rgba(255,255,255,.18);
+      background:rgba(255,255,255,.10);
+      border-radius:clamp(12px,2cqw,22px);
+    }
+
+    .kanji-char{
+      font-family:"Noto Sans JP",sans-serif;
+      font-size:clamp(1.9rem,5.1cqw,3.25rem);
+      line-height:1;
+      font-weight:850;
+    }
+
+    .kanji-read{
+      font-size:clamp(.68rem,1.55cqw,.92rem);
+      line-height:1.1;
+      font-weight:800;
+      color:rgba(255,255,255,.73);
+    }
+
+    .kanji-es{
+      font-size:clamp(.64rem,1.35cqw,.82rem);
+      line-height:1.12;
+      color:rgba(255,255,255,.70);
+    }
+
+    .text-panel{
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      align-items:flex-start;
+      text-align:left;
+      gap:.5em;
+      font-size:clamp(.95rem,2.45cqw,1.55rem);
+      line-height:1.25;
+      font-weight:760;
+    }
+
+    .text-panel b{
+      font-size:.62em;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      color:rgba(255,255,255,.65);
+      font-weight:900;
+    }
+
+    .placeholder{
+      color:rgba(255,255,255,.45);
+      font-weight:800;
+    }
+
+    .brand{
+      font-size:clamp(.95rem,2.25cqw,1.55rem);
+      font-weight:900;
+      white-space:nowrap;
+    }
+
+    .tags{
+      min-width:0;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      white-space:nowrap;
+      text-align:right;
+      font-size:clamp(.68rem,1.65cqw,1.05rem);
+      font-weight:900;
+      color:rgba(255,255,255,.66);
+    }
+
+    .theme-pastel{
+      --a:#f9a8d4;
+      --b:#a7f3d0;
+      --c:#818cf8;
+      --d:#fde68a;
+      --ink-panel:rgba(255,255,255,.10);
+    }
+
+    .theme-sumi{
+      --a:#ef4444;
+      --b:#f97316;
+      --c:#a16207;
+      --d:#7f1d1d;
+      --ink-panel:rgba(0,0,0,.26);
+    }
+
+    .theme-pop{
+      --a:#facc15;
+      --b:#ec4899;
+      --c:#06b6d4;
+      --d:#8b5cf6;
+      --ink-panel:rgba(0,0,0,.16);
+    }
+
+    .theme-forest{
+      --a:#86efac;
+      --b:#14b8a6;
+      --c:#22c55e;
+      --d:#0f766e;
+      --ink-panel:rgba(0,0,0,.20);
+    }
+
+    .theme-sakura{
+      --a:#fff1f2;
+      --b:#fb7185;
+      --c:#f9a8d4;
+      --d:#be185d;
+      --ink-panel:rgba(0,0,0,.13);
+    }
+
+    .theme-gold{
+      --a:#fde68a;
+      --b:#f97316;
+      --c:#facc15;
+      --d:#92400e;
+      --ink-panel:rgba(0,0,0,.22);
+    }
+
+    .theme-minimal{
+      --card-text:#101827;
+      --a:#f8fafc;
+      --b:#e2e8f0;
+      --c:#cbd5e1;
+      --d:#ffffff;
+      --ink-panel:rgba(255,255,255,.42);
+    }
+
+    .theme-minimal .card{
+      background:
+        radial-gradient(circle at 20% 15%, #fff, transparent 35%),
+        radial-gradient(circle at 80% 88%, #cbd5e1, transparent 38%),
+        linear-gradient(160deg,#f8fafc,#e2e8f0);
+    }
+
+    .theme-minimal .pill,
+    .theme-minimal .panel,
+    .theme-minimal .kanji{
+      background:rgba(255,255,255,.58);
+      border-color:rgba(15,23,42,.14);
+    }
+
+    .theme-minimal .kana,
+    .theme-minimal .romaji,
+    .theme-minimal .literal,
+    .theme-minimal .literal b,
+    .theme-minimal .panel-title,
+    .theme-minimal .kanji-read,
+    .theme-minimal .kanji-es,
+    .theme-minimal .tags,
+    .theme-minimal .text-panel b{
+      color:rgba(15,23,42,.66);
+    }
+
+    @media(max-width:980px){
+      body{padding:14px}
+      .layout{grid-template-columns:1fr}
+      .controls{position:static}
+      .card-wrap{min-height:520px}
+      .card{width:min(100%,88vh)}
+    }
   </style>
 </head>
+
 <body>
   <div class="app theme-neon" id="app">
     <header>
       <h1>Generador de tarjetas japonesas</h1>
-      <p class="subtitle">JSON en <b>data/tarjetas.json</b> · el panel derecho ES la tarjeta · descarga PNG limpio</p>
+      <p class="subtitle">JSON en <b>data/tarjetas.json</b> · panel derecho = tarjeta · descarga PNG limpio</p>
     </header>
 
     <main class="layout">
@@ -364,20 +582,34 @@ button{
     ];
 
     const themes = [
-      {id:'theme-neon', label:'Neón', a:'#22d3ee', b:'#fb7185', c:'#a3e635', bg:'#050816'},
-      {id:'theme-pastel', label:'Pastel', a:'#f9a8d4', b:'#a7f3d0', c:'#818cf8', bg:'#6d5dfc'},
-      {id:'theme-sumi', label:'Sumi samurái', a:'#ef4444', b:'#7f1d1d', c:'#f97316', bg:'#050505'},
-      {id:'theme-pop', label:'Anime pop', a:'#facc15', b:'#ec4899', c:'#06b6d4', bg:'#371062'},
-      {id:'theme-forest', label:'Bosque', a:'#86efac', b:'#14b8a6', c:'#22c55e', bg:'#052e16'},
-      {id:'theme-sakura', label:'Sakura', a:'#fff1f2', b:'#fb7185', c:'#f9a8d4', bg:'#be185d'},
-      {id:'theme-gold', label:'Oro oscuro', a:'#fde68a', b:'#f97316', c:'#facc15', bg:'#1c1917'},
-      {id:'theme-minimal', label:'Minimal japonés', a:'#f8fafc', b:'#e2e8f0', c:'#cbd5e1', bg:'#f8fafc'}
+      {id:'theme-neon', label:'Neón'},
+      {id:'theme-pastel', label:'Pastel'},
+      {id:'theme-sumi', label:'Sumi samurái'},
+      {id:'theme-pop', label:'Anime pop'},
+      {id:'theme-forest', label:'Bosque'},
+      {id:'theme-sakura', label:'Sakura'},
+      {id:'theme-gold', label:'Oro oscuro'},
+      {id:'theme-minimal', label:'Minimal japonés'}
     ];
 
-    const state = {data:null, word:null, kanjiMap:new Map(), format:formats[0], theme:themes[0]};
+    const state = {
+      data:null,
+      word:null,
+      kanjiMap:new Map(),
+      format:formats[0],
+      theme:themes[0]
+    };
+
     const $ = s => document.querySelector(s);
-    const esc = v => String(v ?? '').replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
-    const pick = arr => arr[Math.floor(Math.random()*arr.length)];
+    const esc = v => String(v ?? '').replace(/[&<>"']/g, m => ({
+      '&':'&amp;',
+      '<':'&lt;',
+      '>':'&gt;',
+      '"':'&quot;',
+      "'":'&#039;'
+    }[m]));
+
+    const pick = arr => arr[Math.floor(Math.random() * arr.length)];
     const randHex = () => '#' + Math.floor(Math.random()*16777215).toString(16).padStart(6,'0');
 
     function applyFormat(format){
@@ -385,47 +617,50 @@ button{
       document.documentElement.style.setProperty('--card-w', format.w);
       document.documentElement.style.setProperty('--card-h', format.h);
       renderFormatChips();
-      requestAnimationFrame(() => {
-      autoFit();
-      microFit();
-    });
+      requestAnimationFrame(autoFit);
     }
 
     function renderFormatChips(){
-      $('#formatChips').innerHTML = formats.map(f => `<button class="chip ${state.format.id===f.id?'active':''}" data-format="${f.id}">${esc(f.label)}</button>`).join('');
-      document.querySelectorAll('[data-format]').forEach(btn => btn.onclick = () => applyFormat(formats.find(f => f.id === btn.dataset.format)));
+      $('#formatChips').innerHTML = formats.map(f => `
+        <button class="chip ${state.format.id === f.id ? 'active' : ''}" data-format="${f.id}">
+          ${esc(f.label)}
+        </button>
+      `).join('');
+
+      document.querySelectorAll('[data-format]').forEach(btn => {
+        btn.onclick = () => applyFormat(formats.find(f => f.id === btn.dataset.format));
+      });
     }
 
     function applyTheme(theme){
       state.theme = theme;
       $('#app').className = 'app ' + theme.id;
-      document.documentElement.style.setProperty('--a', theme.a);
-      document.documentElement.style.setProperty('--b', theme.b);
-      document.documentElement.style.setProperty('--c', theme.c);
-      document.documentElement.style.setProperty('--card-bg', theme.bg);
       $('#themeSelect').value = theme.id;
       requestAnimationFrame(autoFit);
     }
 
     function chaosTheme(){
-      const theme = {id:'theme-chaos', label:'Chaos', a:randHex(), b:randHex(), c:randHex(), bg:randHex()};
       $('#app').className = 'app';
-      document.documentElement.style.setProperty('--a', theme.a);
-      document.documentElement.style.setProperty('--b', theme.b);
-      document.documentElement.style.setProperty('--c', theme.c);
-      document.documentElement.style.setProperty('--card-bg', theme.bg);
+      document.documentElement.style.setProperty('--a', randHex());
+      document.documentElement.style.setProperty('--b', randHex());
+      document.documentElement.style.setProperty('--c', randHex());
+      document.documentElement.style.setProperty('--d', randHex());
       requestAnimationFrame(autoFit);
+    }
+
+    function bestExample(w){
+      return w.frase || w.ejemplo || w.dato_curioso || '';
     }
 
     function renderCard(){
       if(!state.word) return;
+
       const w = state.word;
       const kanjis = (w.kanjis || []).map(x => state.kanjiMap.get(x)).filter(Boolean);
-      const notes = [
-        w.literal && ['Literal', w.literal],
-        w.matiz && ['Matiz', w.matiz],
-        w.dato_curioso && ['Dato curioso', w.dato_curioso]
-      ].filter(Boolean);
+      const literal = w.literal || '';
+      const matiz = w.matiz || '';
+      const ejemplo = bestExample(w);
+      const tags = (w.tags || []).map(t => '#' + String(t).replaceAll(' ','_')).join(' ');
 
       $('#cardContent').innerHTML = `
         <header class="top">
@@ -433,34 +668,42 @@ button{
           <div class="pill">${esc(w.nivel || '')}</div>
         </header>
 
-        <section class="center">
-          <div class="jp">${esc(w.jp)}</div>
-          <div class="kana">${esc(w.kana)}</div>
-          <div class="romaji">${esc(w.romaji)}</div>
-          <div class="es">${esc(w.es)}</div>
-          <div class="notes">
-            ${notes.map(n => `<div class="note"><b>${esc(n[0])}</b>${esc(n[1])}</div>`).join('')}
+        <section class="grid">
+          <div class="panel word-panel">
+            <div class="jp">${esc(w.jp)}</div>
+            <div class="kana">${esc(w.kana)}</div>
+            <div class="romaji">${esc(w.romaji)}</div>
+            <div class="es">${esc(w.es)}</div>
+            ${literal ? `<div class="literal"><b>Literal</b>${esc(literal)}</div>` : ''}
+          </div>
+
+          <div class="panel kanji-panel">
+            <div class="panel-title">Kanjis en esta palabra</div>
+            <div class="kanjis">
+              ${kanjis.map(k => `
+                <div class="kanji">
+                  <div class="kanji-char">${esc(k.jp)}</div>
+                  <div class="kanji-read">${esc(k.lecturas)}</div>
+                  <div class="kanji-es">${esc(k.es)}</div>
+                </div>
+              `).join('') || `<div class="placeholder">Sin kanji</div>`}
+            </div>
+          </div>
+
+          <div class="panel text-panel">
+            <b>Matiz</b>
+            ${matiz ? esc(matiz) : `<span class="placeholder">Sin matiz por ahora.</span>`}
+          </div>
+
+          <div class="panel text-panel">
+            <b>Frase ejemplo</b>
+            ${ejemplo ? esc(ejemplo) : `<span class="placeholder">Sin frase por ahora.</span>`}
           </div>
         </section>
 
-        <footer class="bottom">
-          <div class="kanji-panel">
-            <div class="kanji-title">Kanjis en esta palabra</div>
-              <div class="kanjis">
-                ${kanjis.map(k => `
-                  <div class="kanji">
-                    <div class="kanji-char">${esc(k.jp)}</div>
-                    <div class="kanji-read">${esc(k.lecturas)}</div>
-                    <div class="kanji-es">${esc(k.es)}</div>
-                  </div>
-                `).join('')}
-              </div>
-            </div>
-          </div>
-          <div class="signature">
-            <span class="brand">Asallam Sensei</span>
-            <span class="tags">${esc((w.tags || []).map(t => '#'+String(t).replaceAll(' ','_')).join(' '))}</span>
-          </div>
+        <footer class="signature">
+          <span class="brand">Asallam Sensei</span>
+          <span class="tags">${esc(tags)}</span>
         </footer>
       `;
 
@@ -468,40 +711,36 @@ button{
     }
 
     function autoFit(){
-      const card = $('#card');
       const content = $('#cardContent');
-      if(!card || !content) return;
+      if(!content) return;
+
       content.style.setProperty('--fit', 1);
 
       let fit = 1;
-      for(let i=0;i<35;i++){
+      for(let i = 0; i < 40; i++){
         const tooTall = content.scrollHeight > content.clientHeight + 2;
         const tooWide = content.scrollWidth > content.clientWidth + 2;
+
         if(!tooTall && !tooWide) break;
-        fit -= 0.015;
+
+        fit -= 0.0125;
         content.style.setProperty('--fit', fit.toFixed(3));
       }
     }
 
-function microFit(){
-  const blocks = document.querySelectorAll('.note, .kanji');
-  
-  blocks.forEach(el => {
-    let size = 1;
-    while (el.scrollHeight > el.clientHeight && size > 0.85){
-      size -= 0.03;
-      el.style.transform = `scale(${size})`;
-      el.style.transformOrigin = 'top center';
-    }
-  });
-}
-    
     async function downloadCard(){
       await document.fonts?.ready;
       autoFit();
+
       const card = $('#card');
       const scale = state.format.w / card.getBoundingClientRect().width;
-      const canvas = await html2canvas(card, {backgroundColor:null, scale, useCORS:true});
+
+      const canvas = await html2canvas(card, {
+        backgroundColor:null,
+        scale,
+        useCORS:true
+      });
+
       const a = document.createElement('a');
       a.download = `asallam-${state.word.id}-${state.format.id}.png`;
       a.href = canvas.toDataURL('image/png');
@@ -511,32 +750,72 @@ function microFit(){
     async function init(){
       const res = await fetch(DATA_URL);
       const json = await res.json();
+
       state.data = json;
       state.kanjiMap = new Map((json.kanjis || []).map(k => [k.jp, k]));
 
-      $('#wordSelect').innerHTML = json.palabras.map(p => `<option value="${esc(p.id)}">${esc(p.jp)} — ${esc(p.es)}</option>`).join('');
-      $('#themeSelect').innerHTML = themes.map(t => `<option value="${t.id}">${esc(t.label)}</option>`).join('');
+      $('#wordSelect').innerHTML = json.palabras.map(p => `
+        <option value="${esc(p.id)}">${esc(p.jp)} — ${esc(p.es)}</option>
+      `).join('');
+
+      $('#themeSelect').innerHTML = themes.map(t => `
+        <option value="${t.id}">${esc(t.label)}</option>
+      `).join('');
 
       state.word = json.palabras[0];
+
       renderFormatChips();
       applyFormat(formats[0]);
       applyTheme(themes[0]);
       renderCard();
 
-      $('#wordSelect').onchange = e => { state.word = state.data.palabras.find(p => p.id === e.target.value); renderCard(); };
-      $('#randomWord').onclick = () => { state.word = pick(state.data.palabras); $('#wordSelect').value = state.word.id; renderCard(); };
-      $('#themeSelect').onchange = e => applyTheme(themes.find(t => t.id === e.target.value));
-      $('#randomTheme').onclick = () => applyTheme(pick(themes));
+      $('#wordSelect').onchange = e => {
+        state.word = state.data.palabras.find(p => p.id === e.target.value);
+        renderCard();
+      };
+
+      $('#randomWord').onclick = () => {
+        state.word = pick(state.data.palabras);
+        $('#wordSelect').value = state.word.id;
+        renderCard();
+      };
+
+      $('#themeSelect').onchange = e => {
+        applyTheme(themes.find(t => t.id === e.target.value));
+      };
+
+      $('#randomTheme').onclick = () => {
+        applyTheme(pick(themes));
+      };
+
       $('#chaosTheme').onclick = chaosTheme;
-      $('#applyCustom').onclick = () => applyFormat({id:'custom', label:'Personalizado', w:+$('#customW').value || 1080, h:+$('#customH').value || 1080});
+
+      $('#applyCustom').onclick = () => {
+        applyFormat({
+          id:'custom',
+          label:'Personalizado',
+          w:+$('#customW').value || 1080,
+          h:+$('#customH').value || 1080
+        });
+      };
+
       $('#download').onclick = downloadCard;
+
       window.addEventListener('resize', autoFit);
       await document.fonts?.ready;
       renderCard();
     }
 
     init().catch(err => {
-      document.body.innerHTML = `<pre style="white-space:pre-wrap;color:white;padding:24px">No se pudo cargar data/tarjetas.json\n\n${esc(err.message)}\n\nUsa GitHub Pages o un servidor local.</pre>`;
+      document.body.innerHTML = `
+        <pre style="white-space:pre-wrap;color:white;padding:24px">
+No se pudo cargar data/tarjetas.json
+
+${esc(err.message)}
+
+Usa GitHub Pages o un servidor local.
+        </pre>
+      `;
     });
   </script>
 </body>
