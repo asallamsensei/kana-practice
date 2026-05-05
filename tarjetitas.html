@@ -19,7 +19,8 @@
   --muted:var(--text);
 
   --light-strength:.35;
-
+  --light-wall: 244;
+  
   --scale:1;
   --space-scale:1;
   --font-scale:1;
@@ -502,7 +503,7 @@ button{
 body.light-mode{
   --muted:#000;
   --page-bg:#ffffff;
-  --card-bg:#f4f4f5;
+  --card-bg:rgb(var(--light-wall),var(--light-wall),var(--light-wall));
   --text:#000;
   --stroke:rgba(0,0,0,.15);
 
@@ -594,9 +595,13 @@ body.light-mode .kanji-panel{
         </section>
 
         <section class="group">
-          <label for="lightStrength">Fuerza modo claro</label>
+          <label for="lightWall">Pared blanca modo claro</label>
+          <input id="lightWall" type="number" min="180" max="255" step="1" value="244">
+        
+          <label for="lightStrength">Brillo extra modo claro</label>
           <input id="lightStrength" type="number" min="0" max="1" step="0.05" value="0.35">
-        </section> 
+        </section>
+        
         <button class="btn secondary" id="toggleMode">Modo claro / oscuro</button>
         
         <button class="btn" id="download">Descargar esta tarjeta</button>
@@ -841,8 +846,11 @@ async function downloadCard(){
       $('#download').onclick = downloadCard;
       $('#toggleMode').onclick = () => {
         const strength = Math.min(1, Math.max(0, +$('#lightStrength').value || 0));
+        const wall = Math.min(255, Math.max(180, +$('#lightWall').value || 244));
       
         document.documentElement.style.setProperty('--light-strength', strength);
+        document.documentElement.style.setProperty('--light-wall', wall);
+      
         document.body.classList.toggle('light-mode');
       };
       window.addEventListener('resize', autoFit);
