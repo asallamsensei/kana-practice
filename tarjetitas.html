@@ -499,6 +499,68 @@ button{
 .note.half:only-child{
   flex-basis:100%;
 }
+
+@media (prefers-color-scheme: light){
+
+  :root{
+    --page-bg:#ffffff;
+    --card-bg:#f4f4f5;
+    --text:#000;
+    --muted:#000;
+    --stroke:rgba(0,0,0,.15);
+  }
+
+  body{
+    background:
+      radial-gradient(circle at 15% 8%, color-mix(in srgb, var(--a) 20%, transparent), transparent 40%),
+      radial-gradient(circle at 88% 12%, color-mix(in srgb, var(--b) 18%, transparent), transparent 40%),
+      var(--page-bg);
+  }
+
+  .card{
+    background:
+      radial-gradient(circle at 20% 20%, color-mix(in srgb, var(--a) 18%, transparent), transparent 70%),
+      radial-gradient(circle at 80% 80%, color-mix(in srgb, var(--b) 18%, transparent), transparent 70%),
+      linear-gradient(160deg, var(--card-bg), #e5e7eb);
+  }
+
+  .note,
+  .kanji,
+  .kanji-panel{
+    background:rgba(0,0,0,.05);
+    border-color:rgba(0,0,0,.1);
+  }
+
+}
+
+body.light-mode{
+  --page-bg:#ffffff;
+  --card-bg:#f4f4f5;
+  --text:#000;
+  --muted:#000;
+  --stroke:rgba(0,0,0,.15);
+}
+
+body.light-mode{
+  background:
+    radial-gradient(circle at 15% 8%, color-mix(in srgb, var(--a) 20%, transparent), transparent 40%),
+    radial-gradient(circle at 88% 12%, color-mix(in srgb, var(--b) 18%, transparent), transparent 40%),
+    var(--page-bg);
+}
+
+body.light-mode .card{
+  background:
+    radial-gradient(circle at 20% 20%, color-mix(in srgb, var(--a) 18%, transparent), transparent 70%),
+    radial-gradient(circle at 80% 80%, color-mix(in srgb, var(--b) 18%, transparent), transparent 70%),
+    linear-gradient(160deg, var(--card-bg), #e5e7eb);
+}
+
+body.light-mode .note,
+body.light-mode .kanji,
+body.light-mode .kanji-panel{
+  background:rgba(0,0,0,.05);
+  border-color:rgba(0,0,0,.1);
+}
   
 </style>
 </head>
@@ -534,6 +596,8 @@ button{
           <button class="btn secondary" id="chaosTheme">Super random random</button>
         </section>
 
+        <button class="btn secondary" id="toggleMode">Modo claro / oscuro</button>
+        
         <button class="btn" id="download">Descargar esta tarjeta</button>
       </aside>
 
@@ -729,6 +793,9 @@ function microFit(){
       $('#chaosTheme').onclick = chaosTheme;
       $('#applyCustom').onclick = () => applyFormat({id:'custom', label:'Personalizado', w:+$('#customW').value || 1080, h:+$('#customH').value || 1080});
       $('#download').onclick = downloadCard;
+      $('#toggleMode').onclick = () => {
+        document.body.classList.toggle('light-mode');
+      };
       window.addEventListener('resize', autoFit);
       await document.fonts?.ready;
       renderCard();
