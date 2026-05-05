@@ -44,8 +44,8 @@ body{
   font-family:Inter,system-ui,sans-serif;
   color:var(--text);
   background:
-    radial-gradient(circle at 15% 8%, color-mix(in srgb, var(--a) 24%, transparent), transparent 34%),
-    radial-gradient(circle at 88% 12%, color-mix(in srgb, var(--b) 20%, transparent), transparent 32%),
+    radial-gradient(circle at 15% 8%, rgba(255,255,255,.12), transparent 34%),
+    radial-gradient(circle at 88% 12%, rgba(255,255,255,.10), transparent 32%),
     var(--page-bg);
   padding:18px;
 }
@@ -208,8 +208,8 @@ button{
   box-shadow:0 40px 120px rgba(0,0,0,.45);
 
   background:
-    radial-gradient(circle at 20% 20%, color-mix(in srgb, var(--a) 22%, transparent), transparent 65%),
-    radial-gradient(circle at 80% 80%, color-mix(in srgb, var(--b) 22%, transparent), transparent 65%),
+    radial-gradient(circle at 20% 20%, rgba(255,255,255,.12), transparent 65%),
+    radial-gradient(circle at 80% 80%, rgba(255,255,255,.10), transparent 65%),
     linear-gradient(160deg, var(--card-bg), #020617);
 
   container-type:inline-size;
@@ -515,8 +515,8 @@ body.light-mode{
   --stroke:rgba(0,0,0,.15);
 
   background:
-    radial-gradient(circle at 15% 8%, color-mix(in srgb, var(--a) 20%, transparent), transparent 40%),
-    radial-gradient(circle at 88% 12%, color-mix(in srgb, var(--b) 18%, transparent), transparent 40%),
+    radial-gradient(circle at 15% 8%, rgba(0,0,0,.08), transparent 40%),
+    radial-gradient(circle at 88% 12%, rgba(0,0,0,.06), transparent 40%),
     var(--page-bg);
 }
 
@@ -743,26 +743,31 @@ function microFit(){
 }
     
 async function downloadCard(){
+  const card = $('#card');
+
   try{
     await document.fonts?.ready;
     autoFit();
 
-    const card = $('#card');
+    card.classList.add('exporting');
+
     const scale = state.format.w / card.getBoundingClientRect().width;
 
     const canvas = await html2canvas(card, {
       backgroundColor:null,
       scale,
-      useCORS:true,
-      allowTaint:true
+      useCORS:true
     });
 
     const a = document.createElement('a');
     a.download = `asallam-${state.word.id}-${state.format.id}.png`;
     a.href = canvas.toDataURL('image/png');
     a.click();
+
   }catch(err){
     alert('Error al descargar: ' + err.message);
+  }finally{
+    card.classList.remove('exporting');
   }
 }
 
