@@ -490,9 +490,10 @@ button{
 }
 
 .notes{
+  width:100%;
   display:flex;
   flex-wrap:wrap;
-  justify-content:center;
+  justify-content:flex-start;
   gap:clamp(6px,1.2cqw,10px);
 }
 
@@ -537,10 +538,11 @@ body.light-mode .kanji-panel{
 }
 
 .example-note{
-  display:inline-block;
+  flex:0 0 auto;
   width:max-content;
   max-width:100%;
-  align-self:flex-start;
+  text-align:left;
+  align-items:flex-start;
 }
   
 </style>
