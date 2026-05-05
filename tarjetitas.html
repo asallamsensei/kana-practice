@@ -16,14 +16,14 @@
   --panel:rgba(255,255,255,.075);
   --stroke:rgba(255,255,255,.18);
   --text:#fff;
-  --muted:#fff;
+  --muted:var(--text);
 
   --a:#22d3ee;
   --b:#fb7185;
   --c:#a3e635;
 
   --card-bg:#050816;
-  --card-text:#fff;
+  --card-text:var(--text);
   --card-w:1080;
   --card-h:1080;
 }
@@ -125,7 +125,7 @@ button{
 
 select option{
   background:#101421;
-  color:#fff;
+  color:var(--text);
 }
 
 button{
@@ -271,7 +271,7 @@ button{
   font-size:clamp(1.3rem,3.2cqw,2.2rem);
   font-weight:900;
 
-  color:#fff;
+  color:var(--text);
 
   text-shadow:
     0 0 6px rgba(34,211,238,.6),
@@ -295,7 +295,7 @@ button{
 
   font-size:clamp(.8rem,2.2cqw,1.4rem);
   font-weight:900;
-  color:#fff;
+  color:var(--text);
 
   line-height:1.2;
   text-shadow:0 2px 6px rgba(0,0,0,.3);
@@ -346,7 +346,7 @@ button{
   font-size:clamp(1.2rem,5cqw,2.8rem);
   line-height:1.1;
   font-weight:600;
-  color:#fff;
+  color:var(--text);
   text-shadow:0 4px 12px rgba(0,0,0,.25); /* 👈 añadido */
 }
   
@@ -354,7 +354,7 @@ button{
   font-size:clamp(1.4rem,4.4cqw,2.8rem);
   line-height:1.15;
   font-weight:600;
-  color:#fff;
+  color:var(--text);
 
   text-shadow:
     0 0 4px color-mix(in srgb, var(--a) 30%, transparent), /* 👈 menos fuerte */
@@ -433,7 +433,7 @@ button{
   margin-top:.3em;
   font-size:clamp(.75rem,2cqw,1.15rem);
   line-height:1.15;
-  color:#fff;
+  color:var(--text);
 
   white-space:normal;      /* 👈 permite salto */
   text-align:center;
@@ -468,7 +468,7 @@ button{
   text-transform:uppercase;
 
   font-size:clamp(.75rem,1.7cqw,1.1rem);
-  color:#fff;
+  color:var(--text);
 
   margin-bottom:12px;
 
@@ -503,7 +503,7 @@ button{
 @media (prefers-color-scheme: light){
 
   :root{
-    --page-bg:#ffffff;
+    --page-bg:var(--text)fff;
     --card-bg:#f4f4f5;
     --text:#000;
     --muted:#000;
@@ -534,7 +534,7 @@ button{
 }
 
 body.light-mode{
-  --page-bg:#ffffff;
+  --page-bg:var(--text)fff;
   --card-bg:#f4f4f5;
   --text:#000;
   --muted:#000;
@@ -625,7 +625,7 @@ body.light-mode .kanji-panel{
       {id:'theme-sumi', label:'Sumi samurái', a:'#ef4444', b:'#7f1d1d', c:'#f97316', bg:'#050505'},
       {id:'theme-pop', label:'Anime pop', a:'#facc15', b:'#ec4899', c:'#06b6d4', bg:'#371062'},
       {id:'theme-forest', label:'Bosque', a:'#86efac', b:'#14b8a6', c:'#22c55e', bg:'#052e16'},
-      {id:'theme-sakura', label:'Sakura', a:'#fff1f2', b:'#fb7185', c:'#f9a8d4', bg:'#be185d'},
+      {id:'theme-sakura', label:'Sakura', a:'var(--text)1f2', b:'#fb7185', c:'#f9a8d4', bg:'#be185d'},
       {id:'theme-gold', label:'Oro oscuro', a:'#fde68a', b:'#f97316', c:'#facc15', bg:'#1c1917'},
       {id:'theme-minimal', label:'Minimal japonés', a:'#f8fafc', b:'#e2e8f0', c:'#cbd5e1', bg:'#f8fafc'}
     ];
