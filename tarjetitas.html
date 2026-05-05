@@ -361,8 +361,8 @@ button{
   color:var(--text);
 
   text-shadow:
-    0 0 4px color-mix(in srgb, var(--a) 30%, transparent), /* 👈 menos fuerte */
-    0 2px 8px rgba(0,0,0,.35); /* 👈 sombra limpia */
+    0 0 6px rgba(255,255,255,.35),
+    0 2px 8px rgba(0,0,0,.35);
 }
 
 .es{
@@ -462,7 +462,6 @@ button{
 
   margin:0 auto;
 }
-
 .kanji-title{
   display:block;
   text-align:center;
@@ -478,8 +477,8 @@ button{
   margin-bottom:12px;
 
   text-shadow:
-    0 0 6px color-mix(in srgb, var(--a) 65%, transparent),
-    0 0 12px color-mix(in srgb, var(--b) 40%, transparent),
+    0 0 6px rgba(255,255,255,.45),
+    0 0 12px rgba(255,255,255,.25),
     0 2px 8px rgba(0,0,0,.35);
 }
 
@@ -522,8 +521,8 @@ body.light-mode{
 
 body.light-mode .card{
   background:
-    radial-gradient(circle at 20% 20%, color-mix(in srgb, var(--a) 18%, transparent), transparent 70%),
-    radial-gradient(circle at 80% 80%, color-mix(in srgb, var(--b) 18%, transparent), transparent 70%),
+    radial-gradient(circle at 20% 20%, rgba(0,0,0,.06), transparent 70%),
+    radial-gradient(circle at 80% 80%, rgba(0,0,0,.05), transparent 70%),
     linear-gradient(160deg, var(--card-bg), #e5e7eb);
 }
 
