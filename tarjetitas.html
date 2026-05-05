@@ -557,7 +557,16 @@ body.light-mode .kanji-panel{
           </div>
           <button class="btn secondary" id="applyCustom">Aplicar personalizado</button>
         </section>
-
+        
+        <section class="group">
+          <div class="label">Escala visual</div>
+          <div class="row">
+            <input id="fontScale" type="number" step="0.05" value="1" placeholder="Fuente">
+            <input id="spaceScale" type="number" step="0.05" value="1" placeholder="Espacio">
+          </div>
+          <button class="btn secondary" id="applyScale">Aplicar escala</button>
+        </section>
+        
         <section class="group">
           <label for="themeSelect">Tema</label>
           <select id="themeSelect"></select>
@@ -605,9 +614,10 @@ body.light-mode .kanji-panel{
     const pick = arr => arr[Math.floor(Math.random()*arr.length)];
     const randHex = () => '#' + Math.floor(Math.random()*16777215).toString(16).padStart(6,'0');
 
-function adjustLayout(scale=1.2, space=0.8){
-  document.documentElement.style.setProperty('--scale', scale);
-  document.documentElement.style.setProperty('--space-scale', space);
+function adjustLayout(scale=1, space=1){
+  document.documentElement.style.setProperty('--scale', scale || 1);
+  document.documentElement.style.setProperty('--space-scale', space || 1);
+  requestAnimationFrame(autoFit);
 }
     
     function applyFormat(format){
@@ -791,7 +801,8 @@ async function downloadCard(){
 
       $('#wordSelect').innerHTML = json.palabras.map(p => `<option value="${esc(p.id)}">${esc(p.jp)} — ${esc(p.es)}</option>`).join('');
       $('#themeSelect').innerHTML = themes.map(t => `<option value="${t.id}">${esc(t.label)}</option>`).join('');
-
+      $('#applyScale').onclick = () => adjustLayout(+$('#fontScale').value || 1, +$('#spaceScale').value || 1);
+      
       state.word = json.palabras[0];
       renderFormatChips();
       applyFormat(formats[0]);
