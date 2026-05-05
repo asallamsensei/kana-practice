@@ -247,7 +247,7 @@ button{
 .signature{
   display:flex;
   align-items:center;
-  justify-content:space-between;
+  justify-content:flex-start; /* 👈 CAMBIO CLAVE */
   width:100%;
   gap:6px;
   min-width:0;
@@ -255,11 +255,11 @@ button{
 }
 
 .brand{
-  margin-right:auto;
+  margin-right:0; /* 👈 CAMBIO */
   font-size:clamp(1rem,2.4cqw,1.6rem);
   font-weight:600;
   white-space:normal;
-  text-shadow:0 2px 6px rgba(0,0,0,.25); /* 👈 añadido */
+  text-shadow:0 2px 6px rgba(0,0,0,.25);
 }
 
 .site{
@@ -613,7 +613,9 @@ function renderCard(){
   $('#cardContent').innerHTML = `
     <header class="top">
       <div class="pill">Palabra #${esc(w.id)}</div>
-      <div class="pill">${esc(w.nivel || '')}</div>
+      <div class="tags">
+        ${(w.tags || []).map(t => `<span class="tag">#${esc(String(t).replaceAll(' ','_'))}</span>`).join('')}
+      </div>
     </header>
 
     <section class="center">
@@ -648,7 +650,6 @@ function renderCard(){
           Asallam Sensei
           <span class="site">asallamsensei.com</span>
         </div>
-        <span class="tags">${esc((w.tags || []).map(t => '#'+String(t).replaceAll(' ','_')).join(' '))}</span>
       </div>
     </footer>
   `;
