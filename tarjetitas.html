@@ -18,6 +18,8 @@
   --text:#fff;
   --muted:var(--text);
 
+  --light-strength:.35;
+
   --scale:1;
   --space-scale:1;
   --font-scale:1;
@@ -514,7 +516,11 @@ body.light-mode .card{
   background:
     radial-gradient(circle at 20% 20%, var(--glow-a), transparent 70%),
     radial-gradient(circle at 80% 80%, var(--glow-b), transparent 70%),
-    linear-gradient(160deg, var(--card-bg), #e5e7eb);
+    linear-gradient(
+      160deg,
+      var(--card-bg),
+      rgba(229,231,235,var(--light-strength))
+    );
 }
 
 body.light-mode .note,
@@ -587,6 +593,10 @@ body.light-mode .kanji-panel{
           <button class="btn secondary" id="chaosTheme">Super random random</button>
         </section>
 
+        <section class="group">
+          <label for="lightStrength">Fuerza modo claro</label>
+          <input id="lightStrength" type="number" min="0" max="1" step="0.05" value="0.35">
+        </section> 
         <button class="btn secondary" id="toggleMode">Modo claro / oscuro</button>
         
         <button class="btn" id="download">Descargar esta tarjeta</button>
@@ -830,6 +840,9 @@ async function downloadCard(){
       $('#applyCustom').onclick = () => applyFormat({id:'custom', label:'Personalizado', w:+$('#customW').value || 1080, h:+$('#customH').value || 1080});
       $('#download').onclick = downloadCard;
       $('#toggleMode').onclick = () => {
+        const strength = Math.min(1, Math.max(0, +$('#lightStrength').value || 0));
+      
+        document.documentElement.style.setProperty('--light-strength', strength);
         document.body.classList.toggle('light-mode');
       };
       window.addEventListener('resize', autoFit);
