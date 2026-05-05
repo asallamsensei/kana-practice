@@ -28,6 +28,10 @@
   --card-h:1080;
 }
 
+body{
+  --text:#fff;
+}
+  
 *{box-sizing:border-box}
 
 html,
@@ -500,48 +504,12 @@ button{
   flex-basis:100%;
 }
 
-@media (prefers-color-scheme: light){
-
-  :root{
-    --page-bg:#ffffff;
-    --card-bg:#f4f4f5;
-    --text:#000;
-    --muted:#000;
-    --stroke:rgba(0,0,0,.15);
-  }
-
-  body{
-    background:
-      radial-gradient(circle at 15% 8%, color-mix(in srgb, var(--a) 20%, transparent), transparent 40%),
-      radial-gradient(circle at 88% 12%, color-mix(in srgb, var(--b) 18%, transparent), transparent 40%),
-      var(--page-bg);
-  }
-
-  .card{
-    background:
-      radial-gradient(circle at 20% 20%, color-mix(in srgb, var(--a) 18%, transparent), transparent 70%),
-      radial-gradient(circle at 80% 80%, color-mix(in srgb, var(--b) 18%, transparent), transparent 70%),
-      linear-gradient(160deg, var(--card-bg), #e5e7eb);
-  }
-
-  .note,
-  .kanji,
-  .kanji-panel{
-    background:rgba(0,0,0,.05);
-    border-color:rgba(0,0,0,.1);
-  }
-
-}
-
 body.light-mode{
   --page-bg:#ffffff;
   --card-bg:#f4f4f5;
   --text:#000;
-  --muted:#000;
   --stroke:rgba(0,0,0,.15);
-}
 
-body.light-mode{
   background:
     radial-gradient(circle at 15% 8%, color-mix(in srgb, var(--a) 20%, transparent), transparent 40%),
     radial-gradient(circle at 88% 12%, color-mix(in srgb, var(--b) 18%, transparent), transparent 40%),
@@ -678,8 +646,7 @@ function renderCard(){
   const w = state.word;
   const kanjis = (w.kanjis || []).map(x => state.kanjiMap.get(x)).filter(Boolean);
   const notes = [
-    w.literal && ['Literal', w.literal],
-    w.matiz && ['Matiz', w.matiz],
+    w.matiz && ['Extra', w.matiz],
     w.dato_curioso && ['Ejemplo', w.dato_curioso]
   ].filter(Boolean);
 
