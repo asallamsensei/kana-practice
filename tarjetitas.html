@@ -671,14 +671,6 @@ function renderCard(){
     <div class="jp">${esc(w.jp)}</div>
     <div class="romaji">${esc(w.romaji)}</div>
     <div class="es">${esc(w.es)}</div>
-  
-    <div class="notes">
-      ${notes.map(n => `
-        <div class="note">
-          ${esc(n[1]).replace(/\n/g, '<br>')}
-        </div>
-      `).join('')}
-    </div>
 
       <div class="kanji-panel">
         <div class="kanji-title">Kanjis en esta palabra</div>
@@ -691,6 +683,15 @@ function renderCard(){
           `).join('')}
         </div>
       </div>
+  
+    <div class="notes">
+      ${notes.map(n => `
+        <div class="note">
+          ${esc(n[1]).replace(/\n/g, '<br>')}
+        </div>
+      `).join('')}
+    </div>
+
     </section>
 
     <footer class="bottom">
