@@ -380,18 +380,6 @@ button{
   text-shadow:0 4px 12px rgba(0,0,0,.25);
 }
 
-.note b{
-  display:inline;
-  margin-bottom:0;
-  font-size:1em;
-  letter-spacing:0;
-  text-transform:none;
-  color:#fff;
-  font-weight:700;
-
-  text-shadow:0 2px 6px rgba(0,0,0,.3); /* 👈 sombra normal, sin glow */
-}
-
 /* 🔥 ESTE ES EL QUE TE SEPARABA TODO */
 .bottom{
   width:100%;
@@ -633,7 +621,7 @@ function renderCard(){
       <div class="notes">
         ${notes.map(n => `
           <div class="note ${n[0] === 'Literal' || n[0] === 'Matiz' ? 'half' : ''}">
-            <b>${esc(n[0])}:</b> ${esc(n[1])}
+            ${esc(n[0])}: ${esc(n[1])}
           </div>
         `).join('')}
       </div>
