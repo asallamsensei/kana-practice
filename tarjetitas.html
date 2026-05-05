@@ -421,7 +421,7 @@ button{
 
 .kanji-char{
   font-family:"Noto Sans JP",sans-serif;
-  font-size:clamp(2.2rem,6cqw,4.2rem);
+  font-size:calc(clamp(2.2rem,6cqw,4.2rem) * var(--font-scale));
   line-height:1;
   font-weight:700;
   text-shadow:0 6px 18px rgba(0,0,0,.3);
@@ -429,7 +429,7 @@ button{
 
 .kanji-es{
   margin-top:.3em;
-  font-size:clamp(.75rem,2cqw,1.15rem);
+  font-size:calc(clamp(.75rem,2cqw,1.15rem) * var(--font-scale));
   line-height:1.15;
   color:var(--text);
 
@@ -464,7 +464,7 @@ button{
   letter-spacing:.08em;
   text-transform:uppercase;
 
-  font-size:clamp(.75rem,1.7cqw,1.1rem);
+  font-size:calc(clamp(.75rem,1.7cqw,1.1rem) * var(--font-scale));
   color:var(--text);
 
   margin-bottom:12px;
