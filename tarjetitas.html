@@ -247,7 +247,7 @@ button{
 .signature{
   display:flex;
   align-items:center;
-  justify-content:flex-start; /* 👈 CAMBIO CLAVE */
+  justify-content:flex-end;
   width:100%;
   gap:6px;
   min-width:0;
@@ -282,9 +282,10 @@ button{
 .tags{
   min-width:0;
 
-  white-space:normal;
-  overflow:visible;
-  text-overflow:unset;
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:flex-end;
+  gap:6px;
 
   text-align:right;
 
@@ -293,7 +294,11 @@ button{
   color:rgba(255,255,255,.7);
 
   line-height:1.2;
-  text-shadow:0 2px 6px rgba(0,0,0,.3); /* 👈 añadido */
+  text-shadow:0 2px 6px rgba(0,0,0,.3);
+}
+
+.tag{
+  white-space:nowrap;
 }
 
 .pill{
@@ -575,7 +580,7 @@ button{
     }
 
     function renderFormatChips(){
-      $('#formatChips').innerHTML = formats.map(f => `<button class="chip ${state.format.id===f.id?'active':''}" data-format="${f.id}">${esc(f.label)}</button>`).join('');
+      $('#formatChips').innerHTML = formats.map(f => `<button class="chip ${state.format.id===f.id?'active':''}" data-format="${f.id}">${esc(f.label)}</button>`).join(' ');
       document.querySelectorAll('[data-format]').forEach(btn => btn.onclick = () => applyFormat(formats.find(f => f.id === btn.dataset.format)));
     }
 
@@ -614,7 +619,7 @@ function renderCard(){
     <header class="top">
       <div class="pill">Palabra #${esc(w.id)}</div>
       <div class="tags">
-        ${(w.tags || []).map(t => `<span class="tag">#${esc(String(t).replaceAll(' ','_'))}</span>`).join('')}
+        ${(w.tags || []).map(t => `<span class="tag">#${esc(String(t).replaceAll(' ','_'))}</span>`).join(' ')}
       </div>
     </header>
 
