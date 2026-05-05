@@ -324,6 +324,7 @@ button{
   text-align:center;
 
   gap:clamp(10px,2.2cqw,22px);
+  justify-items:start;
 }
 
 /* 🔥 MÁS GRANDE TODO */
@@ -439,11 +440,11 @@ button{
 /* PANEL KANJI MÁS CERCA */
 .kanji-panel{
   display:inline-block;
-  justify-self:center;
+  justify-self:start;   /* 👈 CLAVE: lo manda a la izquierda */
   width:max-content;
   max-width:100%;
 
-  text-align:center;
+  text-align:left;      /* 👈 alinea contenido interno */
 
   border:1px solid rgba(255,255,255,.18);
   background:rgba(0,0,0,.25);
@@ -451,7 +452,7 @@ button{
 
   padding:clamp(10px,1.6cqw,16px);
 
-  margin:0 auto; /* 👈 AGREGA SOLO ESTO */
+  margin:0;             /* 👈 quita el centrado */
 }
 
 .kanji-title{
