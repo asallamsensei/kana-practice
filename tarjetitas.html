@@ -650,7 +650,9 @@ body.light-mode .kanji-panel{
 function renderCard(){
   if(!state.word) return;
   const w = state.word;
-  const kanjis = (w.kanjis || []).map(x => state.kanjiMap.get(x)).filter(Boolean);
+  const kanjis = (w.kanjis || [])
+    .map(x => state.kanjiMap.get(String(x).trim()))
+    .filter(Boolean);
   const notes = [
     w.extra && ['Extra', w.extra],
     w.ejemplo && ['Ejemplo', w.ejemplo]
@@ -664,18 +666,18 @@ function renderCard(){
       </div>
     </header>
 
-    <section class="center">
-      <div class="jp">${esc(w.jp)}</div>
-      <div class="romaji">${esc(w.romaji)}</div>
-      <div class="es">${esc(w.es)}</div>
-
-      <div class="notes">
-        ${notes.map(n => `
-          <div class="note ${n[0] === 'Literal' || n[0] === 'Matiz' ? 'half' : ''}">
-            ${esc(n[0])}: ${esc(n[1]).replace(/\n/g, '<br>')}
-          </div>
-        `).join('')}
-      </div>
+   <section class="center">
+    <div class="jp">${esc(w.jp)}</div>
+    <div class="romaji">${esc(w.romaji)}</div>
+    <div class="es">${esc(w.es)}</div>
+  
+    <div class="notes">
+      ${notes.map(n => `
+        <div class="note">
+          ${esc(n[1]).replace(/\n/g, '<br>')}
+        </div>
+      `).join('')}
+    </div>
 
       <div class="kanji-panel">
         <div class="kanji-title">Kanjis en esta palabra</div>
