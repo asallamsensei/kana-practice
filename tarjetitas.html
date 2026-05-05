@@ -18,6 +18,9 @@
   --text:#fff;
   --muted:var(--text);
 
+  --scale:1;
+  --space-scale:1;
+  
   --a:#22d3ee;
   --b:#fb7185;
   --c:#a3e635;
@@ -236,7 +239,7 @@ button{
 
   display:grid;
   grid-template-rows:auto 1fr auto;
-  gap:clamp(5px,1.1cqw,12px);
+  gap:calc(clamp(5px,1.1cqw,12px) * var(--space-scale));
 
   transform-origin:center;
   transform:scale(var(--fit,1));
@@ -325,7 +328,7 @@ button{
   align-content:space-between;
   justify-items:center;
   text-align:center;
-  gap:clamp(10px,2.2cqw,22px);
+  gap:calc(clamp(10px,2.2cqw,22px) * var(--space-scale));
 }
 
 .jp{
@@ -380,7 +383,7 @@ button{
   background:rgba(0,0,0,.22);
   border-radius:clamp(14px,2.5cqw,28px);
 
-  padding:.7em 1em;
+  padding:calc(.7em * var(--space-scale)) calc(1em * var(--space-scale));
   font-size:clamp(.9rem,2.4cqw,1.6rem);
   line-height:1.25;
   font-weight:600;
@@ -524,6 +527,10 @@ body.light-mode .kanji-panel{
   width:max-content;
   max-width:100%;
 }
+
+.card{
+  font-size:calc(1rem * var(--scale));
+}
   
 </style>
 </head>
@@ -598,6 +605,11 @@ body.light-mode .kanji-panel{
     const pick = arr => arr[Math.floor(Math.random()*arr.length)];
     const randHex = () => '#' + Math.floor(Math.random()*16777215).toString(16).padStart(6,'0');
 
+function adjustLayout(scale=1.2, space=0.8){
+  document.documentElement.style.setProperty('--scale', scale);
+  document.documentElement.style.setProperty('--space-scale', space);
+}
+    
     function applyFormat(format){
       state.format = format;
       document.documentElement.style.setProperty('--card-w', format.w);
