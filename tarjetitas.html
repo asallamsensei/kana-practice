@@ -625,15 +625,19 @@ body.light-mode .kanji-panel{
       requestAnimationFrame(autoFit);
     }
 
-    function chaosTheme(){
-      const theme = {id:'theme-chaos', label:'Chaos', a:randHex(), b:randHex(), c:randHex(), bg:randHex()};
-      $('#app').className = 'app';
-      document.documentElement.style.setProperty('--a', theme.a);
-      document.documentElement.style.setProperty('--b', theme.b);
-      document.documentElement.style.setProperty('--c', theme.c);
-      document.documentElement.style.setProperty('--card-bg', theme.bg);
-      requestAnimationFrame(autoFit);
-    }
+function chaosTheme(){
+  const randColor = () => {
+    const r = Math.floor(Math.random()*255);
+    const g = Math.floor(Math.random()*255);
+    const b = Math.floor(Math.random()*255);
+    return `rgba(${r},${g},${b},0.25)`;
+  };
+
+  document.documentElement.style.setProperty('--glow-a', randColor());
+  document.documentElement.style.setProperty('--glow-b', randColor());
+
+  document.documentElement.style.setProperty('--card-bg', randHex());
+}
 
 function renderCard(){
   if(!state.word) return;
