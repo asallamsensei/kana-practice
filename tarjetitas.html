@@ -742,17 +742,29 @@ function microFit(){
   });
 }
     
-    async function downloadCard(){
-      await document.fonts?.ready;
-      autoFit();
-      const card = $('#card');
-      const scale = state.format.w / card.getBoundingClientRect().width;
-      const canvas = await html2canvas(card, {backgroundColor:null, scale, useCORS:true});
-      const a = document.createElement('a');
-      a.download = `asallam-${state.word.id}-${state.format.id}.png`;
-      a.href = canvas.toDataURL('image/png');
-      a.click();
-    }
+async function downloadCard(){
+  try{
+    await document.fonts?.ready;
+    autoFit();
+
+    const card = $('#card');
+    const scale = state.format.w / card.getBoundingClientRect().width;
+
+    const canvas = await html2canvas(card, {
+      backgroundColor:null,
+      scale,
+      useCORS:true,
+      allowTaint:true
+    });
+
+    const a = document.createElement('a');
+    a.download = `asallam-${state.word.id}-${state.format.id}.png`;
+    a.href = canvas.toDataURL('image/png');
+    a.click();
+  }catch(err){
+    alert('Error al descargar: ' + err.message);
+  }
+}
 
     async function init(){
       const res = await fetch(DATA_URL);
