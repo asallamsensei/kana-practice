@@ -20,6 +20,7 @@
 
   --scale:1;
   --space-scale:1;
+  --font-scale:1;
   
   --a:#22d3ee;
   --b:#fb7185;
@@ -333,7 +334,7 @@ button{
 
 .jp{
   font-family:"Noto Serif JP",serif;
-  font-size:clamp(3.2rem,14cqw,7.4rem);
+  font-size:calc(clamp(3.2rem,14cqw,7.4rem) * var(--font-scale));
   line-height:1;
   font-weight:700;
   letter-spacing:-.03em;
@@ -343,7 +344,7 @@ button{
 
 .kana{
   font-family:"Noto Sans JP",sans-serif;
-  font-size:clamp(1.2rem,5cqw,2.8rem);
+  font-size:calc(clamp(1.2rem,5cqw,2.8rem) * var(--font-scale));
   line-height:1.1;
   font-weight:600;
   color:var(--text);
@@ -351,7 +352,7 @@ button{
 }
   
 .romaji{
-  font-size:clamp(1.4rem,4.4cqw,2.8rem);
+  font-size:calc(clamp(1.4rem,4.4cqw,2.8rem) * var(--font-scale));
   line-height:1.15;
   font-weight:600;
   color:var(--text);
@@ -363,7 +364,7 @@ button{
 
 .es{
   max-width:92%;
-  font-size:clamp(1.5rem,5.4cqw,3.4rem);
+  font-size:calc(clamp(1.5rem,5.4cqw,3.4rem) * var(--font-scale));
   line-height:1.08;
   font-weight:600;
   letter-spacing:-.04em;
@@ -615,7 +616,7 @@ body.light-mode .kanji-panel{
     const randHex = () => '#' + Math.floor(Math.random()*16777215).toString(16).padStart(6,'0');
 
 function adjustLayout(scale=1, space=1){
-  document.documentElement.style.setProperty('--scale', scale || 1);
+  document.documentElement.style.setProperty('--font-scale', scale || 1);
   document.documentElement.style.setProperty('--space-scale', space || 1);
   requestAnimationFrame(autoFit);
 }
