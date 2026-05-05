@@ -120,5 +120,26 @@
       "tags": ["pensamiento"],
       "kanjis": ["理", "由"]
     }
+    ],
+  "kanjis": [
+    { "jp": "時", "lecturas": "とき / ジ", "es": "tiempo, hora" },
+    { "jp": "間", "lecturas": "あいだ / カン", "es": "intervalo, espacio" },
+    { "jp": "気", "lecturas": "き / ケ", "es": "energía, ánimo, aire" },
+    { "jp": "持", "lecturas": "もつ / ジ", "es": "tener, sostener" },
+    { "jp": "大", "lecturas": "おおきい / ダイ", "es": "grande" },
+    { "jp": "切", "lecturas": "きる / セツ", "es": "cortar; importante" },
+    { "jp": "習", "lecturas": "ならう / シュウ", "es": "aprender, practicar" },
+    { "jp": "慣", "lecturas": "なれる / カン", "es": "acostumbrarse" },
+    { "jp": "挑", "lecturas": "いどむ / チョウ", "es": "desafiar" },
+    { "jp": "戦", "lecturas": "たたかう / セン", "es": "luchar, guerra" },
+    { "jp": "安", "lecturas": "やすい / アン", "es": "paz, seguro" },
+    { "jp": "心", "lecturas": "こころ / シン", "es": "corazón, mente" },
+    { "jp": "自", "lecturas": "みずから / ジ", "es": "uno mismo" },
+    { "jp": "由", "lecturas": "よし / ユウ", "es": "razón, causa, origen" },
+    { "jp": "経", "lecturas": "へる / ケイ", "es": "pasar por" },
+    { "jp": "験", "lecturas": "ケン", "es": "prueba, experiencia" },
+    { "jp": "必", "lecturas": "かならず / ヒツ", "es": "inevitable, necesario" },
+    { "jp": "要", "lecturas": "いる / ヨウ", "es": "necesario, esencial" },
+    { "jp": "理", "lecturas": "リ", "es": "lógica, razón" }
   ]
 }
