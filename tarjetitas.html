@@ -22,6 +22,10 @@
   --b:#fb7185;
   --c:#a3e635;
 
+  /* 🔥 NUEVO: focos dinámicos */
+  --glow-a:rgba(34,211,238,.24);
+  --glow-b:rgba(251,113,133,.20);
+
   --card-bg:#050816;
   --card-text:var(--text);
   --card-w:1080;
@@ -44,8 +48,8 @@ body{
   font-family:Inter,system-ui,sans-serif;
   color:var(--text);
   background:
-    radial-gradient(circle at 15% 8%, rgba(255,255,255,.12), transparent 34%),
-    radial-gradient(circle at 88% 12%, rgba(255,255,255,.10), transparent 32%),
+    radial-gradient(circle at 15% 8%, var(--glow-a), transparent 34%),
+    radial-gradient(circle at 88% 12%, var(--glow-b), transparent 32%),
     var(--page-bg);
   padding:18px;
 }
@@ -62,14 +66,14 @@ h1{
   line-height:.9;
   letter-spacing:-.075em;
   margin:0;
-  text-shadow:0 6px 18px rgba(0,0,0,.35); /* 👈 añadido */
+  text-shadow:0 6px 18px rgba(0,0,0,.35);
 }
 
 .subtitle{
   margin:8px 0 0;
   color:var(--muted);
   font-weight:600;
-  text-shadow:0 2px 8px rgba(0,0,0,.25); /* 👈 añadido */
+  text-shadow:0 2px 8px rgba(0,0,0,.25);
 }
 
 .layout{
@@ -110,7 +114,7 @@ label,
   letter-spacing:.12em;
   font-weight:700;
   color:var(--muted);
-  text-shadow:0 2px 6px rgba(0,0,0,.25); /* 👈 añadido */
+  text-shadow:0 2px 6px rgba(0,0,0,.25);
 }
 
 select,
@@ -135,7 +139,7 @@ select option{
 button{
   cursor:pointer;
   font-weight:700;
-  text-shadow:0 2px 6px rgba(0,0,0,.25); /* 👈 añadido */
+  text-shadow:0 2px 6px rgba(0,0,0,.25);
 }
 
 .btn{
@@ -144,14 +148,14 @@ button{
   box-shadow:0 14px 34px rgba(0,0,0,.25);
   white-space:normal;
   line-height:1.15;
-  text-shadow:0 2px 6px rgba(0,0,0,.3); /* 👈 añadido */
+  text-shadow:0 2px 6px rgba(0,0,0,.3);
 }
 
 .btn.secondary{
   background:rgba(255,255,255,.11);
   border:1px solid var(--stroke);
   box-shadow:none;
-  text-shadow:0 2px 6px rgba(0,0,0,.25); /* 👈 añadido */
+  text-shadow:0 2px 6px rgba(0,0,0,.25);
 }
 
 .row{
@@ -176,13 +180,13 @@ button{
   background:rgba(0,0,0,.25);
   white-space:normal;
   text-align:center;
-  text-shadow:0 2px 6px rgba(0,0,0,.3); /* 👈 añadido */
+  text-shadow:0 2px 6px rgba(0,0,0,.3);
 }
 
 .chip.active{
   background:linear-gradient(135deg,var(--a),var(--b));
   border-color:transparent;
-  text-shadow:0 2px 8px rgba(0,0,0,.35); /* 👈 añadido */
+  text-shadow:0 2px 8px rgba(0,0,0,.35);
 }
 
 /* EL PANEL DERECHO ES LA TARJETA */
@@ -208,8 +212,8 @@ button{
   box-shadow:0 40px 120px rgba(0,0,0,.45);
 
   background:
-    radial-gradient(circle at 20% 20%, rgba(255,255,255,.12), transparent 65%),
-    radial-gradient(circle at 80% 80%, rgba(255,255,255,.10), transparent 65%),
+    radial-gradient(circle at 20% 20%, var(--glow-a), transparent 65%),
+    radial-gradient(circle at 80% 80%, var(--glow-b), transparent 65%),
     linear-gradient(160deg, var(--card-bg), #020617);
 
   container-type:inline-size;
@@ -263,24 +267,20 @@ button{
   font-size:clamp(1rem,2.4cqw,1.6rem);
   font-weight:600;
   white-space:normal;
-
-  text-align:right; /* 👈 CLAVE */
-  
+  text-align:right;
   text-shadow:0 2px 6px rgba(0,0,0,.25);
 }
 
 .site{
   display:block;
-
   font-size:clamp(1.3rem,3.2cqw,2.2rem);
   font-weight:900;
-
   color:var(--text);
 
   text-shadow:
-    0 0 6px rgba(34,211,238,.6),
-    0 0 14px rgba(34,211,238,.45),
-    0 0 24px rgba(251,113,133,.35);
+    0 0 6px var(--glow-a),
+    0 0 14px var(--glow-a),
+    0 0 24px var(--glow-b);
 
   letter-spacing:.02em;
   margin-top:2px;
@@ -289,18 +289,14 @@ button{
 
 .tags{
   min-width:0;
-
   display:flex;
   flex-wrap:wrap;
   justify-content:flex-end;
   gap:6px;
-
   text-align:right;
-
   font-size:clamp(.8rem,2.2cqw,1.4rem);
   font-weight:900;
   color:var(--text);
-
   line-height:1.2;
   text-shadow:0 2px 6px rgba(0,0,0,.3);
 }
@@ -320,21 +316,18 @@ button{
   font-size:clamp(.7rem,2.15cqw,1.45rem);
   white-space:nowrap;
   backdrop-filter:blur(10px);
-  text-shadow:0 2px 6px rgba(0,0,0,.3); /* 👈 añadido */
+  text-shadow:0 2px 6px rgba(0,0,0,.3);
 }
   
 .center{
   min-height:100%;
   display:grid;
-
-  align-content:space-between; /* 👈 clave */
+  align-content:space-between;
   justify-items:center;
   text-align:center;
-
   gap:clamp(10px,2.2cqw,22px);
 }
 
-/* 🔥 MÁS GRANDE TODO */
 .jp{
   font-family:"Noto Serif JP",serif;
   font-size:clamp(3.2rem,14cqw,7.4rem);
@@ -351,7 +344,7 @@ button{
   line-height:1.1;
   font-weight:600;
   color:var(--text);
-  text-shadow:0 4px 12px rgba(0,0,0,.25); /* 👈 añadido */
+  text-shadow:0 4px 12px rgba(0,0,0,.25);
 }
   
 .romaji{
@@ -361,7 +354,7 @@ button{
   color:var(--text);
 
   text-shadow:
-    0 0 6px rgba(255,255,255,.35),
+    0 0 6px var(--glow-a),
     0 2px 8px rgba(0,0,0,.35);
 }
 
@@ -372,17 +365,16 @@ button{
   font-weight:600;
   letter-spacing:-.04em;
   text-wrap:balance;
-  text-shadow:0 6px 18px rgba(0,0,0,.3); /* 👈 añadido */
+  text-shadow:0 6px 18px rgba(0,0,0,.3);
 }
-
-/* 🔧 MENOS SEPARACIÓN CON KANJIS */
 
 .note{
   display:flex;
   flex-direction:column;
   justify-content:center;
 
-  flex:0 1 100%;
+  flex:0 0 auto;
+  max-width:300px;
 
   border:1px solid rgba(255,255,255,.16);
   background:rgba(0,0,0,.22);
@@ -394,16 +386,13 @@ button{
   font-weight:600;
   text-align:center;
   text-shadow:0 4px 12px rgba(0,0,0,.25);
-  max-width:300px;
 }
 
-/* 🔥 ESTE ES EL QUE TE SEPARABA TODO */
 .bottom{
   width:100%;
   min-width:0;
 }
 
-/* KANJIS MÁS GRANDES */
 .kanjis{
   display:flex;
   justify-content:center;
@@ -431,7 +420,7 @@ button{
   font-size:clamp(2.2rem,6cqw,4.2rem);
   line-height:1;
   font-weight:700;
-  text-shadow:0 6px 18px rgba(0,0,0,.3); /* 👈 añadido */
+  text-shadow:0 6px 18px rgba(0,0,0,.3);
 }
 
 .kanji-es{
@@ -440,12 +429,11 @@ button{
   line-height:1.15;
   color:var(--text);
 
-  white-space:normal;      /* 👈 permite salto */
+  white-space:normal;
   text-align:center;
-  max-width:100px;          /* 👈 fuerza a partir línea */
+  max-width:100px;
 }
 
-/* PANEL KANJI MÁS CERCA */
 .kanji-panel{
   display:block;
   justify-self:center;
@@ -462,6 +450,7 @@ button{
 
   margin:0 auto;
 }
+
 .kanji-title{
   display:block;
   text-align:center;
@@ -477,12 +466,11 @@ button{
   margin-bottom:12px;
 
   text-shadow:
-    0 0 6px rgba(255,255,255,.45),
-    0 0 12px rgba(255,255,255,.25),
+    0 0 6px var(--glow-a),
+    0 0 12px var(--glow-b),
     0 2px 8px rgba(0,0,0,.35);
 }
 
-/* dual */
 .note.dual{
   display:grid;
   grid-template-columns:1fr 1fr;
@@ -491,7 +479,6 @@ button{
 
 .notes{
   width:100%;
-  
   display:flex;
   flex-wrap:nowrap;
   justify-content:flex-start;
@@ -514,15 +501,15 @@ body.light-mode{
   --stroke:rgba(0,0,0,.15);
 
   background:
-    radial-gradient(circle at 15% 8%, rgba(0,0,0,.08), transparent 40%),
-    radial-gradient(circle at 88% 12%, rgba(0,0,0,.06), transparent 40%),
+    radial-gradient(circle at 15% 8%, var(--glow-a), transparent 40%),
+    radial-gradient(circle at 88% 12%, var(--glow-b), transparent 40%),
     var(--page-bg);
 }
 
 body.light-mode .card{
   background:
-    radial-gradient(circle at 20% 20%, rgba(0,0,0,.06), transparent 70%),
-    radial-gradient(circle at 80% 80%, rgba(0,0,0,.05), transparent 70%),
+    radial-gradient(circle at 20% 20%, var(--glow-a), transparent 70%),
+    radial-gradient(circle at 80% 80%, var(--glow-b), transparent 70%),
     linear-gradient(160deg, var(--card-bg), #e5e7eb);
 }
 
@@ -531,10 +518,6 @@ body.light-mode .kanji,
 body.light-mode .kanji-panel{
   background:rgba(0,0,0,.05);
   border-color:rgba(0,0,0,.1);
-}
-  
-.note{
-  flex:0 0 auto;
 }
 
 .example-note{
