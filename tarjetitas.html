@@ -650,9 +650,10 @@ body.light-mode .kanji-panel{
 function renderCard(){
   if(!state.word) return;
   const w = state.word;
-  const kanjis = (w.kanjis || [])
-    .map(x => state.kanjiMap.get(String(x).trim()))
-    .filter(Boolean);
+  const kanjis = (w.kanjis || []).map(x => {
+    const char = String(x).trim();
+    return state.kanjiMap.get(char) || { jp: char, es: '' };
+  });
   const notes = [
     w.extra && ['Extra', w.extra],
     w.ejemplo && ['Ejemplo', w.ejemplo]
