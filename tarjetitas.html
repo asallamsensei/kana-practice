@@ -617,10 +617,24 @@ body.light-mode .kanji-panel{
     function applyTheme(theme){
       state.theme = theme;
       $('#app').className = 'app ' + theme.id;
+
       document.documentElement.style.setProperty('--a', theme.a);
       document.documentElement.style.setProperty('--b', theme.b);
       document.documentElement.style.setProperty('--c', theme.c);
       document.documentElement.style.setProperty('--card-bg', theme.bg);
+      
+      /* 🔥 IMPORTANTE: sincronizar focos */
+      const toRGBA = (hex, alpha=0.25) => {
+        const bigint = parseInt(hex.replace('#',''), 16);
+        const r = (bigint >> 16) & 255;
+        const g = (bigint >> 8) & 255;
+        const b = bigint & 255;
+        return `rgba(${r},${g},${b},${alpha})`;
+      };
+      
+      document.documentElement.style.setProperty('--glow-a', toRGBA(theme.a));
+      document.documentElement.style.setProperty('--glow-b', toRGBA(theme.b));
+      
       $('#themeSelect').value = theme.id;
       requestAnimationFrame(autoFit);
     }
