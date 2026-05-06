@@ -21,7 +21,7 @@
       "extra": "Puede referirse a emociones o sensaciones físicas.",
       "ejemplo": "気持ちいい\nkimochi ii\nse siente bien",
       "nivel": "N5",
-      "tags": ["emociones", "básico", "N5"],
+      "tags": ["emociones", "básico", "N4"],
       "kanjis": ["気", "持"]
     },
     {
@@ -57,7 +57,7 @@
       "extra": "Intentar hacer algo difícil o nuevo.",
       "ejemplo": "挑戦しよう\nchousen shiyou\nintentémoslo",
       "nivel": "N3",
-      "tags": ["acciones", "común", "N3"],
+      "tags": ["acciones", "común", "N1"],
       "kanjis": ["挑", "戦"]
     },
     {
@@ -81,7 +81,7 @@
       "extra": "Poder actuar sin restricciones.",
       "ejemplo": "自由時間\njiyuu jikan\ntiempo libre",
       "nivel": "N5",
-      "tags": ["conceptos", "básico", "N5"],
+      "tags": ["conceptos", "básico", "N4"],
       "kanjis": ["自", "由"]
     },
     {
@@ -93,7 +93,7 @@
       "extra": "Conocimiento obtenido por experiencias vividas.",
       "ejemplo": "経験があります\nkeiken ga arimasu\ntengo experiencia",
       "nivel": "N4",
-      "tags": ["trabajo", "común", "N4"],
+      "tags": ["trabajo", "común", "N3"],
       "kanjis": ["経", "験"]
     },
     {
@@ -117,7 +117,7 @@
       "extra": "Se usa para explicar la causa de algo.",
       "ejemplo": "理由は何ですか\nriyuu wa nan desu ka\ncuál es la razón",
       "nivel": "N5",
-      "tags": ["comunicación", "básico", "N5"],
+      "tags": ["comunicación", "básico", "N4"],
       "kanjis": ["理", "由"]
     }
   ],
