@@ -355,6 +355,11 @@
 
       <div class="sep"></div>
 
+      <div class="sideTitle" style="font-size:15px; margin-bottom:10px;">Bloques</div>
+      <div class="modeGrid" id="bloquesBar"></div>
+
+      <div class="sep"></div>
+
       <div class="smallStatus">
         <div id="statusModo">Modo: —</div>
         <div id="statusPool">Pool: —</div>
@@ -390,7 +395,12 @@ const MODO_LABEL = {
   mix: "Mix"
 };
 
+let dataRaw = [];
+let listaCompleta = [];
 let lista = [];
+let bloques = [];
+let bloquesSeleccionados = new Set();
+let todosActivo = true;
 let modoActual = "mix";
 let rondaModo = "pt_es";
 let actual = null;
@@ -412,14 +422,14 @@ function $(id){ return document.getElementById(id); }
 /* =========================================================
    UTILIDADES
 ========================================================= */
-function normalizarItem(x){
+function normalizarItem(x, bloque = ""){
   const portugues = String(x.portugues || x.pt || x.br || "").trim();
   const espanol = String(x.espanol || x.es || x.significado || "").trim();
-  const categoria = String(x.categoria || x.bloque || x.tema || "General").trim();
+  const categoria = String(x.categoria || x.bloque || bloque || x.tema || "General").trim();
   const extra = String(x.extra || x.nota || "").trim();
 
   if(!portugues || !espanol) return null;
-  return { portugues, espanol, categoria, extra };
+  return { portugues, espanol, categoria, extra, bloque: categoria };
 }
 
 function fisherRandom(arr){
@@ -604,6 +614,14 @@ function pintarBotonesModo(){
     el.classList.toggle("mixActivo", modoActual === modo && modo === "mix");
   });
 
+  document.querySelectorAll(".btnBloque").forEach(btn => {
+    const k = btn.dataset.bloque;
+    btn.classList.toggle("activo", bloquesSeleccionados.has(k));
+  });
+
+  const btnTodos = $("btn-todos-bloques");
+  if(btnTodos) btnTodos.classList.toggle("mixActivo", todosActivo);
+
   $("statusModo").innerText = `Modo: ${MODO_LABEL[modoActual]}`;
 }
 
@@ -611,6 +629,82 @@ function setModo(modo){
   modoActual = modo;
   pintarBotonesModo();
   if(lista.length) siguiente();
+}
+
+function construirBotonesBloques(){
+  const bar = $("bloquesBar");
+  if(!bar) return;
+
+  bar.innerHTML = "";
+
+  bloques.forEach(k => {
+    const btn = document.createElement("button");
+    btn.className = "btn btnMode btnBloque";
+    btn.dataset.bloque = k;
+    btn.type = "button";
+    btn.textContent = k.replaceAll("_", " ");
+    btn.onclick = () => toggleBloque(k);
+    bar.appendChild(btn);
+  });
+
+  const btnTodos = document.createElement("button");
+  btnTodos.className = "btn btnMode";
+  btnTodos.id = "btn-todos-bloques";
+  btnTodos.type = "button";
+  btnTodos.textContent = "Todos";
+  btnTodos.onclick = toggleTodosBloques;
+  bar.appendChild(btnTodos);
+
+  pintarBotonesModo();
+}
+
+function actualizarPoolDesdeBloques(){
+  lista = listaCompleta.filter(item => bloquesSeleccionados.has(item.bloque));
+
+  if(lista.length < 3){
+    $("pregunta").className = "es";
+    $("pregunta").innerText = "Pool muy pequeño";
+    $("subPregunta").innerText = "Activa al menos un bloque con 3 entradas combinadas.";
+    $("opciones").innerHTML = "";
+    return false;
+  }
+
+  $("statusPool").innerText = `Pool: ${lista.length} entradas`;
+  return true;
+}
+
+function toggleTodosBloques(){
+  if(!bloques.length) return;
+
+  if(todosActivo){
+    todosActivo = false;
+    bloquesSeleccionados = new Set([bloques[0]]);
+  }else{
+    todosActivo = true;
+    bloquesSeleccionados = new Set(bloques);
+  }
+
+  actualizarPoolDesdeBloques();
+  pintarBotonesModo();
+  siguiente();
+}
+
+function toggleBloque(k){
+  if(todosActivo){
+    todosActivo = false;
+    bloquesSeleccionados = new Set([k]);
+  }else{
+    if(bloquesSeleccionados.has(k)) bloquesSeleccionados.delete(k);
+    else bloquesSeleccionados.add(k);
+
+    if(bloquesSeleccionados.size === 0) bloquesSeleccionados.add(k);
+  }
+
+  todosActivo = bloquesSeleccionados.size === bloques.length;
+
+  actualizarPoolDesdeBloques();
+  pintarBotonesModo();
+  siguiente();
 }
 
 function renderBadges(item){
@@ -666,7 +760,7 @@ function pintarOpcionCorrecta(letraElegida){
 }
 
 function siguiente(){
-  if(!lista.length) return;
+  if(!actualizarPoolDesdeBloques()) return;
 
   limpiarResultado();
   elegirModoRonda();
@@ -731,6 +825,49 @@ document.addEventListener("keydown", (e) => {
 /* =========================================================
    CARGA DATA
 ========================================================= */
+function normalizarData(data){
+  dataRaw = data;
+
+  // Formato recomendado:
+  // [ { "bloque": "saludos", "items": [ ... ] } ]
+  if(Array.isArray(data) && data.some(x => x && Array.isArray(x.items))){
+    const salida = [];
+
+    data.forEach(grupo => {
+      const nombreBloque = String(grupo.bloque || grupo.categoria || grupo.nombre || "General").trim();
+      (grupo.items || []).forEach(x => {
+        const item = normalizarItem(x, nombreBloque);
+        if(item) salida.push(item);
+      });
+    });
+
+    return salida;
+  }
+
+  // Formato objeto:
+  // { "saludos": [ ... ], "comida": [ ... ] }
+  if(data && !Array.isArray(data) && typeof data === "object"){
+    const salida = [];
+
+    Object.keys(data).forEach(k => {
+      if(!Array.isArray(data[k])) return;
+      data[k].forEach(x => {
+        const item = normalizarItem(x, k);
+        if(item) salida.push(item);
+      });
+    });
+
+    if(salida.length) return salida;
+
+    const base = data.items || data.vocabulario || [];
+    return Array.isArray(base) ? base.map(x => normalizarItem(x)).filter(Boolean) : [];
+  }
+
+  // Formato plano antiguo:
+  // [ { "portugues": "oi", "espanol": "hola", "categoria": "saludos" } ]
+  return Array.isArray(data) ? data.map(x => normalizarItem(x)).filter(Boolean) : [];
+}
+
 async function cargarData(){
   cargarStats();
   pintarBotonesModo();
@@ -740,11 +877,16 @@ async function cargarData(){
     if(!res.ok) throw new Error("HTTP " + res.status);
 
     const data = await res.json();
-    const base = Array.isArray(data) ? data : (data.items || data.vocabulario || []);
+    listaCompleta = normalizarData(data);
 
-    lista = base.map(normalizarItem).filter(Boolean);
+    bloques = [...new Set(listaCompleta.map(x => x.bloque || "General"))];
+    bloquesSeleccionados = new Set(bloques);
+    todosActivo = true;
+    lista = listaCompleta.slice();
 
-    if(lista.length < 3){
+    construirBotonesBloques();
+
+    if(listaCompleta.length < 3){
       $("pregunta").className = "es";
       $("pregunta").innerText = "Necesito al menos 3 entradas válidas en data/brasil.json";
       $("subPregunta").innerText = "Cada entrada debe tener portugués y español.";
