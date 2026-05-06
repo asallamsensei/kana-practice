@@ -1,0 +1,81 @@
+[
+  {
+    "bloque": "saludos",
+    "items": [
+      { "portugues": "oi", "espanol": "hola", "extra": "" },
+      { "portugues": "bom dia", "espanol": "buenos días", "extra": "" },
+      { "portugues": "boa tarde", "espanol": "buenas tardes", "extra": "" },
+      { "portugues": "boa noite", "espanol": "buenas noches", "extra": "" },
+      { "portugues": "tudo bem?", "espanol": "¿todo bien?", "extra": "" },
+      { "portugues": "prazer", "espanol": "mucho gusto", "extra": "" },
+      { "portugues": "como você está?", "espanol": "¿cómo estás?", "extra": "" },
+      { "portugues": "até logo", "espanol": "hasta luego", "extra": "" },
+      { "portugues": "até amanhã", "espanol": "hasta mañana", "extra": "" },
+      { "portugues": "tchau", "espanol": "chao", "extra": "" }
+    ]
+  },
+
+  {
+    "bloque": "cotidiano",
+    "items": [
+      { "portugues": "eu quero", "espanol": "yo quiero", "extra": "" },
+      { "portugues": "eu preciso", "espanol": "yo necesito", "extra": "" },
+      { "portugues": "vamos", "espanol": "vamos", "extra": "" },
+      { "portugues": "estou cansado", "espanol": "estoy cansado", "extra": "" },
+      { "portugues": "não entendo", "espanol": "no entiendo", "extra": "" },
+      { "portugues": "fala devagar", "espanol": "habla despacio", "extra": "" },
+      { "portugues": "que horas são?", "espanol": "¿qué hora es?", "extra": "" },
+      { "portugues": "estou com sono", "espanol": "tengo sueño", "extra": "" },
+      { "portugues": "vamos embora", "espanol": "vámonos", "extra": "" },
+      { "portugues": "eu gosto disso", "espanol": "me gusta eso", "extra": "" }
+    ]
+  },
+
+  {
+    "bloque": "comida",
+    "items": [
+      { "portugues": "água", "espanol": "agua", "extra": "" },
+      { "portugues": "café", "espanol": "café", "extra": "" },
+      { "portugues": "arroz", "espanol": "arroz", "extra": "" },
+      { "portugues": "feijão", "espanol": "frijoles", "extra": "" },
+      { "portugues": "carne", "espanol": "carne", "extra": "" },
+      { "portugues": "frango", "espanol": "pollo", "extra": "" },
+      { "portugues": "estou com fome", "espanol": "tengo hambre", "extra": "" },
+      { "portugues": "estou com sede", "espanol": "tengo sed", "extra": "" },
+      { "portugues": "a conta, por favor", "espanol": "la cuenta, por favor", "extra": "" },
+      { "portugues": "muito gostoso", "espanol": "muy rico", "extra": "" }
+    ]
+  },
+
+  {
+    "bloque": "transporte",
+    "items": [
+      { "portugues": "esquerda", "espanol": "izquierda", "extra": "" },
+      { "portugues": "direita", "espanol": "derecha", "extra": "" },
+      { "portugues": "ônibus", "espanol": "bus", "extra": "" },
+      { "portugues": "metrô", "espanol": "metro", "extra": "" },
+      { "portugues": "aeroporto", "espanol": "aeropuerto", "extra": "" },
+      { "portugues": "quanto custa?", "espanol": "¿cuánto cuesta?", "extra": "" },
+      { "portugues": "onde fica?", "espanol": "¿dónde queda?", "extra": "" },
+      { "portugues": "me leva aqui", "espanol": "llévame aquí", "extra": "" },
+      { "portugues": "está longe?", "espanol": "¿está lejos?", "extra": "" },
+      { "portugues": "vamos de uber", "espanol": "vamos en uber", "extra": "" }
+    ]
+  },
+
+  {
+    "bloque": "social",
+    "items": [
+      { "portugues": "você é linda", "espanol": "eres linda", "extra": "" },
+      { "portugues": "gostei de você", "espanol": "me gustaste", "extra": "" },
+      { "portugues": "vamos sair?", "espanol": "¿salimos?", "extra": "" },
+      { "portugues": "me manda mensagem", "espanol": "mándame mensaje", "extra": "" },
+      { "portugues": "saudade", "espanol": "te extraño", "extra": "" },
+      { "portugues": "você é muito legal", "espanol": "eres muy chévere", "extra": "" },
+      { "portugues": "estou feliz", "espanol": "estoy feliz", "extra": "" },
+      { "portugues": "que bonito", "espanol": "qué bonito", "extra": "" },
+      { "portugues": "vamos tirar uma foto?", "espanol": "¿tomamos una foto?", "extra": "" },
+      { "portugues": "adorei te conhecer", "espanol": "me encantó conocerte", "extra": "" }
+    ]
+  }
+]
