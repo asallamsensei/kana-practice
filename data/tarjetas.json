@@ -9,7 +9,7 @@
       "extra": "Se usa para hablar de duración y horas específicas.",
       "ejemplo": "時間がない\njikan ga nai\nno tengo tiempo",
       "nivel": "N5",
-      "tags": ["tiempo", "comun", "N5"],
+      "tags": ["tiempo", "básico", "N5"],
       "kanjis": ["時", "間"]
     },
     {
@@ -21,7 +21,7 @@
       "extra": "Puede referirse a emociones o sensaciones físicas.",
       "ejemplo": "気持ちいい\nkimochi ii\nse siente bien",
       "nivel": "N5",
-      "tags": ["emociones", "comun", "N5"],
+      "tags": ["emociones", "básico", "N5"],
       "kanjis": ["気", "持"]
     },
     {
@@ -33,7 +33,7 @@
       "extra": "Se usa para personas, recuerdos o cosas importantes.",
       "ejemplo": "大切な人\ntaisetsu na hito\npersona importante",
       "nivel": "N5",
-      "tags": ["valor", "comun", "N5"],
+      "tags": ["relaciones", "básico", "N5"],
       "kanjis": ["大", "切"]
     },
     {
@@ -45,7 +45,7 @@
       "extra": "Algo que se hace regularmente.",
       "ejemplo": "いい習慣\nii shuukan\nbuen hábito",
       "nivel": "N4",
-      "tags": ["habitos", "vida", "N4"],
+      "tags": ["acciones", "común", "N4"],
       "kanjis": ["習", "慣"]
     },
     {
@@ -57,7 +57,7 @@
       "extra": "Intentar hacer algo difícil o nuevo.",
       "ejemplo": "挑戦しよう\nchousen shiyou\nintentémoslo",
       "nivel": "N3",
-      "tags": ["accion", "metas", "N3"],
+      "tags": ["acciones", "común", "N3"],
       "kanjis": ["挑", "戦"]
     },
     {
@@ -69,7 +69,7 @@
       "extra": "Sensación de calma y seguridad.",
       "ejemplo": "安心してください\nanshin shite kudasai\nno te preocupes",
       "nivel": "N4",
-      "tags": ["emociones", "seguridad", "N4"],
+      "tags": ["emociones", "común", "N4"],
       "kanjis": ["安", "心"]
     },
     {
@@ -81,7 +81,7 @@
       "extra": "Poder actuar sin restricciones.",
       "ejemplo": "自由時間\njiyuu jikan\ntiempo libre",
       "nivel": "N5",
-      "tags": ["vida", "comun", "N5"],
+      "tags": ["conceptos", "básico", "N5"],
       "kanjis": ["自", "由"]
     },
     {
@@ -93,7 +93,7 @@
       "extra": "Conocimiento obtenido por experiencias vividas.",
       "ejemplo": "経験があります\nkeiken ga arimasu\ntengo experiencia",
       "nivel": "N4",
-      "tags": ["aprendizaje", "vida", "N4"],
+      "tags": ["trabajo", "común", "N4"],
       "kanjis": ["経", "験"]
     },
     {
@@ -105,7 +105,7 @@
       "extra": "Algo indispensable o requerido.",
       "ejemplo": "必要ない\nhitsuyou nai\nno es necesario",
       "nivel": "N4",
-      "tags": ["uso", "comun", "N4"],
+      "tags": ["conceptos", "básico", "N4"],
       "kanjis": ["必", "要"]
     },
     {
@@ -117,7 +117,7 @@
       "extra": "Se usa para explicar la causa de algo.",
       "ejemplo": "理由は何ですか\nriyuu wa nan desu ka\ncuál es la razón",
       "nivel": "N5",
-      "tags": ["pensamiento", "comun", "N5"],
+      "tags": ["comunicación", "básico", "N5"],
       "kanjis": ["理", "由"]
     }
   ],
