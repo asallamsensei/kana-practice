@@ -380,8 +380,8 @@ button{
   flex-direction:column;
   justify-content:center;
 
-  flex:0 0 auto;
-  max-width:300px;
+  flex:1 1 0;        /* 👈 clave: se reparten el espacio */
+  max-width:none;    /* 👈 elimina el tope fijo */
 
   border:1px solid rgba(255,255,255,.16);
   background:rgba(0,0,0,.22);
@@ -483,15 +483,16 @@ button{
   grid-template-columns:1fr 1fr;
   gap:10px;
 }
-
+  
 .notes{
   width:100%;
-  max-width:260px;
+  max-width:520px;
   margin:0 auto;
 
   display:flex;
   flex-wrap:nowrap;
-  justify-content:center; /* 👈 centradas */
+  justify-content:center;
+  align-items:stretch;
   gap:clamp(10px,2cqw,20px);
 }
 
@@ -535,8 +536,8 @@ body.light-mode .kanji-panel{
 }
 
 .example-note{
-  width:max-content;
-  max-width:100%;
+  width:auto;
+  max-width:none;
 }
 
 .card{
