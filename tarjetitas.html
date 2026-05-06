@@ -486,10 +486,12 @@ button{
 
 .notes{
   width:100%;
+  max-width:360px; /* más compacto */
+  margin:0 auto;
+
   display:flex;
-  max-width:420px;
-  flex-wrap:nowrap;
-  justify-content:flex-start;
+  flex-wrap:wrap; /* 👈 clave */
+  justify-content:center; /* 👈 clave */
   gap:clamp(10px,2cqw,20px);
 }
 
