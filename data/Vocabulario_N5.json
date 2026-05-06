@@ -509,7 +509,7 @@
 { "kanji": "死ぬ", "significado": "morir (intransitivo)", "romaji": "shinu" },
 
 { "kanji": "帰る", "significado": "volver, regresar (a casa o lugar base)", "romaji": "kaeru" },
-{ "kanji": "多い", "significado": "mucho, abundante (suele ir como predicado)", "romaji": "ōi" },
+{ "kanji": "多い", "significado": "mucho, abundante (suele ir como predicado)", "romaji": "ooi" },
 { "kanji": "悪い", "significado": "malo, incorrecto; perdón (informal)", "romaji": "warui" },
 { "kanji": "教える", "significado": "enseñar, decir (algo a alguien)", "romaji": "oshieru" },
 
@@ -534,13 +534,13 @@
 { "kanji": "生まれる", "significado": "nacer (intransitivo)", "romaji": "umareru" },
 
 { "kanji": "なぜ", "significado": "¿por qué? (lógico, busca razones)", "romaji": "naze" },
-{ "kanji": "どうして", "significado": "¿por qué? (busca explicación, puede tener matiz emocional)", "romaji": "dōshite" },
+{ "kanji": "どうして", "significado": "¿por qué? (busca explicación, puede tener matiz emocional)", "romaji": "doushite" },
 { "kanji": "歩く", "significado": "caminar (intransitivo)", "romaji": "aruku" },
 { "kanji": "かける", "significado": "llamar (por teléfono)", "romaji": "kakeru" },
 
 { "kanji": "一日", "significado": "un día; todo el día", "romaji": "ichinichi" },
 { "kanji": "１日", "significado": "primer día del mes", "romaji": "tsuitachi" },
-{ "kanji": "どうやって", "significado": "¿cómo? / ¿de qué manera?", "romaji": "dōyatte" },
+{ "kanji": "どうやって", "significado": "¿cómo? / ¿de qué manera?", "romaji": "douyatte" },
 { "kanji": "寒い", "significado": "frío (clima, ambiente)", "romaji": "samui" },
 
 { "kanji": "貸す", "significado": "prestar (algo a alguien)", "romaji": "kasu" },
@@ -549,7 +549,7 @@
 { "kanji": "風", "significado": "viento", "romaji": "kaze" },
 { "kanji": "違う", "significado": "estar equivocado, ser diferente (intransitivo)", "romaji": "chigau" },
 
-{ "kanji": "ちょうど", "significado": "justo, exacto (tiempo, cantidad, situación)", "romaji": "chōdo" },
+{ "kanji": "ちょうど", "significado": "justo, exacto (tiempo, cantidad, situación)", "romaji": "choudo" },
 { "kanji": "つける", "significado": "encender, prender (luz, TV); poner (sal, nombre, precio)", "romaji": "tsukeru" },
 { "kanji": "一", "significado": "uno", "romaji": "ichi" },
 { "kanji": "見せる", "significado": "mostrar, enseñar (algo a alguien)", "romaji": "miseru" },
@@ -571,7 +571,7 @@
 
 { "kanji": "やさしい", "significado": "fácil, simple, sencillo", "romaji": "yasashii" },
 { "kanji": "重い", "significado": "pesado", "romaji": "omoi" },
-{ "kanji": "遠い", "significado": "lejos, distante", "romaji": "tōi" },
+{ "kanji": "遠い", "significado": "lejos, distante", "romaji": "tooi" },
 { "kanji": "閉まる", "significado": "cerrarse (intransitivo)", "romaji": "shimaru" },
 
 { "kanji": "消す", "significado": "apagar (luz, TV), borrar (texto, datos)", "romaji": "kesu" },
@@ -597,7 +597,7 @@
 { "kanji": "零", "significado": "cero", "romaji": "rei" },
 
 { "kanji": "脱ぐ", "significado": "quitarse (ropa, zapatos), desvestirse", "romaji": "nugu" },
-{ "kanji": "吸う", "significado": "inhalar, aspirar; fumar; succionar", "romaji": "sū" },
+{ "kanji": "吸う", "significado": "inhalar, aspirar; fumar; succionar", "romaji": "suu" },
 { "kanji": "だんだん", "significado": "poco a poco, gradualmente", "romaji": "dandan" },
 { "kanji": "習う", "significado": "aprender, recibir clases (de alguien)", "romaji": "narau" },
 
@@ -608,9 +608,9 @@
 
 { "kanji": "つまらない", "significado": "aburrido, sin importancia, insignificante", "romaji": "tsumaranai" },
 { "kanji": "汚い", "significado": "sucio, mugriento", "romaji": "kitanai" },
-{ "kanji": "お兄さん", "significado": "hermano mayor; chico (respetuoso)", "romaji": "onīsan" },
+{ "kanji": "お兄さん", "significado": "hermano mayor; chico (respetuoso)", "romaji": "oniisan" },
 
-{ "kanji": "お姉さん", "significado": "hermana mayor; chica (respetuoso)", "romaji": "onēsan" },
+{ "kanji": "お姉さん", "significado": "hermana mayor; chica (respetuoso)", "romaji": "oneesan" },
 { "kanji": "まっすぐ", "significado": "derecho, recto; directamente", "romaji": "massugu" },
 { "kanji": "まずい", "significado": "malo (sabor, situación)", "romaji": "mazui" },
 
@@ -629,7 +629,7 @@
 { "kanji": "２０日", "significado": "día 20 (del mes); 20 días", "romaji": "hatsuka" },
 { "kanji": "再来年", "significado": "dentro de dos años; el año siguiente al próximo", "romaji": "sarainen" },
 
-{ "kanji": "おばあさん", "significado": "abuela; señora mayor (respetuoso)", "romaji": "obāsan" },
+{ "kanji": "おばあさん", "significado": "abuela; señora mayor (respetuoso)", "romaji": "obaasan" },
 { "kanji": "厚い", "significado": "grueso, espeso", "romaji": "atsui" },
 { "kanji": "黄色い", "significado": "amarillo (adjetivo)", "romaji": "kiiroi" },
 { "kanji": "下", "significado": "abajo, debajo", "romaji": "shita" },
