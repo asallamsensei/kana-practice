@@ -306,12 +306,10 @@
 <div class="wrap">
   <header>
     <h1>Portugués Brasilero — Asallam Sensei</h1>
-    <div class="subtitle">Repaso simple · Fischer random · voz interna pt-BR</div>
   </header>
 
   <div class="grid">
     <main class="card main">
-      <div class="badgeRow" id="badges"></div>
 
       <div id="pregunta">—</div>
       <div id="subPregunta"></div>
@@ -366,14 +364,6 @@
         <div id="statusVoz">Voz: buscando pt-BR…</div>
       </div>
 
-      <div class="sep"></div>
-
-      <div class="hint">
-        JSON esperado en <b>data/brasil.json</b>:<br><br>
-        <code>{ "portugues": "obrigado", "espanol": "gracias", "categoria": "básico", "extra": "formal/neutro" }</code>
-        <br><br>
-        También acepta <code>pt</code>/<code>es</code> si quieres nombres más cortos.
-      </div>
     </aside>
   </div>
 </div>
@@ -707,14 +697,6 @@ function toggleBloque(k){
   siguiente();
 }
 
-function renderBadges(item){
-  const tags = [];
-  tags.push(`<span class="badge badgeModo">${MODO_LABEL[rondaModo]}</span>`);
-  tags.push(`<span class="badge badgeExtra">${item.categoria || "General"}</span>`);
-  if(item.extra) tags.push(`<span class="badge">${item.extra}</span>`);
-  $("badges").innerHTML = tags.join("");
-}
-
 function renderPregunta(item){
   const pregunta = preguntaDe(item);
   const p = $("pregunta");
@@ -727,7 +709,6 @@ function renderPregunta(item){
   if(rondaModo === "audio_es" || rondaModo === "audio_pt" || rondaModo === "dictado"){
     p.className = "dictado";
     p.innerHTML = `<button class="btn btnAudio big" type="button" onclick="hablarActual()">🔊</button>`;
-    sub.innerText = rondaModo === "dictado" ? "Escucha y elige cómo se escribe en portugués" : "Escucha la palabra en portugués";
     setTimeout(() => hablar(item.portugues), 250);
     return;
   }
@@ -769,7 +750,6 @@ function siguiente(){
   opcionesActuales = opcionesDesde(actual);
   correctaLetra = LETRAS[opcionesActuales.findIndex(x => x === respuestaDe(actual))];
 
-  renderBadges(actual);
   renderPregunta(actual);
   renderOpciones(opcionesActuales);
 
