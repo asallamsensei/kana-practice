@@ -79,42 +79,14 @@
     gap: 14px;
   }
 
-  .card{
-    position: relative;
-    background: rgba(255,255,255,.08);
-    border: 1px solid rgba(255,255,255,.16);
-    border-radius: 18px;
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
-    box-shadow:
-      0 0 10px rgba(255,255,255,.05),
-      0 18px 45px rgba(0,0,0,.25);
-    padding: 16px;
-    overflow: hidden;
-  }
+
 
   a.btn,
   a.btn span {
     text-decoration: none !important;
   }
   
-  .card::before{
-    content:"";
-    position:absolute;
-    top:0;
-    left:0;
-    right:0;
-    height:36px;
-    background: linear-gradient(
-      180deg,
-      rgba(255,255,255,.10),
-      rgba(255,255,255,.03),
-      transparent
-    );
-    border-top-left-radius:18px;
-    border-top-right-radius:18px;
-    pointer-events:none;
-  }
+
 
   .mainGrid{
     display: grid;
@@ -153,6 +125,22 @@
     color: var(--text);
   }
 
+  .waLink{
+    color: var(--text);
+    text-decoration:none;
+  }
+  
+  .waLink:hover{
+    text-decoration:underline;
+  }
+  
+  .waNote{
+    margin:4px 0 0;
+    font-size:13px;
+    font-weight:600;
+    color:#aab3ff;
+  }
+  
   .quote{
     margin-top: 10px;
     font-size: 18px;
@@ -182,9 +170,51 @@
     text-align:center;
     color: var(--text);
   }
-
+  
   #n5.good{ border-color: rgba(34,197,94,.55); }
   #n5.warn{ border-color: rgba(239,68,68,.55); }
+
+.card{
+  position:relative;
+  overflow:hidden;
+  background:rgba(255,255,255,0.05);
+  border:1px solid rgba(255,255,255,0.15);
+  border-radius:14px;
+  padding:20px;
+  transition:0.3s;
+  box-shadow:0 10px 25px rgba(0,0,0,0.35);
+}
+
+.card:hover{
+  transform:translateY(-5px);
+  border-color:#7d5cff;
+}
+
+.card::before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:-100%;
+  width:60%;
+  height:100%;
+  background:linear-gradient(
+    120deg,
+    transparent,
+    rgba(255,255,255,0.35),
+    transparent
+  );
+  transform:skewX(-25deg);
+}
+
+.card:hover::before{
+  animation:shine 1s ease;
+}
+
+@keyframes shine{
+  100%{
+    left:150%;
+  }
+}
   
   .tools {
       display: grid;
@@ -444,7 +474,13 @@
         </div>
 
         <div class="infoTop">
-          <p class="contact">WhatsApp +573217876009</p>
+          <p class="contact">
+            <a class="waLink"
+               href="https://wa.me/573217876009"
+               target="_blank">
+              WhatsApp +57 321 787 6009
+            </a>
+          </p>
           <p class="contact">paypal.me/asallamsensei</p>
           <p class="quote">“Entre más tarea, más aprendes.” — Asallam Sensei</p>
         </div>
