@@ -552,6 +552,30 @@ body.light-mode .kanji-panel{
 .bottom{
   margin-top:calc(6px * var(--space-scale));
 }
+
+@media (max-width: 1400px){
+
+  .card{
+    border-radius:clamp(16px,3cqw,32px); /* antes era más grande */
+  }
+
+  .card-content{
+    gap:calc(clamp(4px,0.8cqw,8px) * var(--space-scale));
+  }
+
+  .center{
+    gap:calc(clamp(6px,1.4cqw,14px) * var(--space-scale));
+  }
+
+  .kanji-panel{
+    border-radius:clamp(12px,2cqw,20px);
+  }
+
+  .note{
+    border-radius:clamp(10px,2cqw,18px);
+  }
+
+}
   
 </style>
 </head>
