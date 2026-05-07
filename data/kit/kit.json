@@ -2386,5 +2386,821 @@
         "extra": ""
       }
     ]
-  }
+  },
+  {
+    "bloque": "katakana_serio",
+    "titulo": "Katakana para el estudiante serio de japonés",
+    "items": [
+      {
+        "japones": "エアコン",
+        "espanol": "aire acondicionado",
+        "audio": "eakon.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "アメリカ",
+        "espanol": "Estados Unidos, América",
+        "audio": "amerika.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "アイス",
+        "espanol": "helado, hielo",
+        "audio": "aisu.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "カメラ",
+        "espanol": "cámara fotográfica",
+        "audio": "kamera.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "ピンク",
+        "espanol": "rosa, rosado (color) (del inglés \"pink\")",
+        "audio": "pinku.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "グラス",
+        "espanol": "vaso, copa",
+        "audio": "gurasu.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "セーター",
+        "espanol": "suéter",
+        "audio": "seetaa.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "シカゴ",
+        "espanol": "Chicago (ciudad)",
+        "audio": "shikago.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "スカート",
+        "espanol": "falda (del inglés \"skirt\")",
+        "audio": "sukaato.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "パソコン",
+        "espanol": "computadora personal, PC",
+        "audio": "pasokon.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "タクシー",
+        "espanol": "taxi",
+        "audio": "takushii.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "トイレ",
+        "espanol": "baño (el cuarto de baño)",
+        "audio": "toire.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "テレビ",
+        "espanol": "televisor, televisión",
+        "audio": "terebi.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "トマト",
+        "espanol": "tomate",
+        "audio": "tomato.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "チーズ",
+        "espanol": "queso (del inglés \"cheese\")",
+        "audio": "chiizu.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "ナイフ",
+        "espanol": "cuchillo (del inglés \"knife\")",
+        "audio": "naifu.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "テニス",
+        "espanol": "tenis (deporte)",
+        "audio": "tenisu.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "ピアノ",
+        "espanol": "piano",
+        "audio": "piano.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "ネクタイ",
+        "espanol": "corbata (del inglés \"necktie\")",
+        "audio": "nekutai.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "メニュー",
+        "espanol": "menú (del francés \"menu\")",
+        "audio": "menyuu.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "ホラー",
+        "espanol": "horror (género de películas y libros)",
+        "audio": "horaa.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "ホテル",
+        "espanol": "hotel",
+        "audio": "hoteru.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "ヘレン",
+        "espanol": "Helen (nombre propio)",
+        "audio": "heren.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "ヒーロー",
+        "espanol": "héroe (del inglés \"hero\")",
+        "audio": "hiiroo.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "ハープ",
+        "espanol": "arpa (del inglés \"harp\")",
+        "audio": "haapu.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "アニメ",
+        "espanol": "anime",
+        "audio": "anime.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "チーム",
+        "espanol": "equipo (del inglés \"team\")",
+        "audio": "chiimu.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "ミルク",
+        "espanol": "leche (del inglés \"milk\")",
+        "audio": "miruku.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "コメント",
+        "espanol": "comentario (en redes sociales)",
+        "audio": "komento.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "マリオ",
+        "espanol": "Mario (nombre propio)",
+        "audio": "mario.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "ビタミン",
+        "espanol": "vitamina",
+        "audio": "bitamin.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "ユーロ",
+        "espanol": "euro",
+        "audio": "yuuro.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "ヤクザ",
+        "espanol": "yakuza",
+        "audio": "yakuza.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "ヤムチャ",
+        "espanol": "Yamucha (nombre propio)",
+        "audio": "yamucha.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "ユーモア",
+        "espanol": "humor",
+        "audio": "yuumoa.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "マヨネーズ",
+        "espanol": "mayonesa",
+        "audio": "mayoneezu.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "ラーメン",
+        "espanol": "ramen (del chino \"lāmiàn\")",
+        "audio": "raamen.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "ラジオ",
+        "espanol": "radio",
+        "audio": "rajio.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "カミロ",
+        "espanol": "Camilo (nombre propio)",
+        "audio": "camiro.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "レストラン",
+        "espanol": "restaurante (del francés \"restaurant\")",
+        "audio": "resutoran.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "ロボット",
+        "espanol": "robot",
+        "audio": "robotto.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "ハワイ",
+        "espanol": "Hawái",
+        "audio": "hawai.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "スワン",
+        "espanol": "cisne (del inglés \"swan\")",
+        "audio": "suwan.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "ペン",
+        "espanol": "bolígrafo, pluma (del inglés \"pen\")",
+        "audio": "pen.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "トロント",
+        "espanol": "Toronto (ciudad en Canadá)",
+        "audio": "toronto.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "ロンドン",
+        "espanol": "Londres (capital de Inglaterra)",
+        "audio": "rondon.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "ギター",
+        "espanol": "guitarra",
+        "audio": "gitaa.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "ゲーム",
+        "espanol": "juego (del inglés \"game\")",
+        "audio": "geemu.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "ゴリラ",
+        "espanol": "gorila",
+        "audio": "gorira.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "ヨーグルト",
+        "espanol": "yogur, yogurt",
+        "audio": "yooguruto.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "ガム",
+        "espanol": "chicle, goma de mascar (del inglés \"gum\")",
+        "audio": "gamu.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "パオラ",
+        "espanol": "Paola (nombre propio)",
+        "audio": "paora.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "パスポート",
+        "espanol": "pasaporte",
+        "audio": "pasupooto.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "ピエロ",
+        "espanol": "payaso (del francés \"pierrot\")",
+        "audio": "piero.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "ペット",
+        "espanol": "mascota (del inglés \"pet\")",
+        "audio": "petto.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "ピザ",
+        "espanol": "pizza (del italiano \"pizza\")",
+        "audio": "piza.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "ダニエル",
+        "espanol": "Daniel (nombre propio)",
+        "audio": "danieru.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "ダリオ",
+        "espanol": "Dario (nombre propio)",
+        "audio": "dario.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "メイド",
+        "espanol": "maid, sirvienta (del inglés \"maid\")",
+        "audio": "meido.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "デート",
+        "espanol": "cita romántica (del inglés \"date\")",
+        "audio": "deeto.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "サラダ",
+        "espanol": "ensalada (del inglés \"salad\")",
+        "audio": "sarada.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "ビール",
+        "espanol": "cerveza",
+        "audio": "biiru.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "バナナ",
+        "espanol": "banano, plátano (fruta)",
+        "audio": "banana.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "ベッド",
+        "espanol": "cama (del inglés \"bed\")",
+        "audio": "beddo.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "ビキニ",
+        "espanol": "bikini",
+        "audio": "bikini.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "ベロ",
+        "espanol": "lengua (coloquial)",
+        "audio": "bero.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "ボール",
+        "espanol": "bola (del inglés \"ball\")",
+        "audio": "booru.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "デザート",
+        "espanol": "postre (del inglés \"dessert\")",
+        "audio": "dezaato.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "オレンジ",
+        "espanol": "naranja, color naranja (del inglés \"orange\")",
+        "audio": "orenji.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "ジーンズ",
+        "espanol": "jeans, pantalones vaqueros",
+        "audio": "jiinzu.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "プレゼント",
+        "espanol": "regalo, presente (del inglés \"present\")",
+        "audio": "purezento.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "キャベツ",
+        "espanol": "repollo (del inglés \"cabbage\")",
+        "audio": "kyabetsu.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "サンキュー",
+        "espanol": "gracias coloquial (del inglés \"thank you\")",
+        "audio": "sankyuu.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "キョロキョロ",
+        "espanol": "mirar de un lado a otro con curiosidad o inquietud",
+        "audio": "kyorokyoro.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "キャロル",
+        "espanol": "Carol (nombre propio)",
+        "audio": "kyaroru.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "シャンプー",
+        "espanol": "champú (del inglés \"shampoo\")",
+        "audio": "shanpuu.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "シャツ",
+        "espanol": "camisa (del inglés \"shirt\")",
+        "audio": "shatsu.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "ショー",
+        "espanol": "show, espectáculo (del inglés \"show\")",
+        "audio": "shoo.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "シュークリーム",
+        "espanol": "cream puff, pastelito relleno de crema (del francés \"chou à la crème\")",
+        "audio": "shuukuriimu.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "シャワー",
+        "espanol": "ducha (del inglés \"shower\")",
+        "audio": "shawaa.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "チャット",
+        "espanol": "chat en redes sociales (del inglés \"chat\")",
+        "audio": "chatto.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "チャンス",
+        "espanol": "oportunidad (del inglés \"chance\")",
+        "audio": "chansu.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "チョコ",
+        "espanol": "choco, abreviatura",
+        "audio": "choko.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "チューブ",
+        "espanol": "tubo (del inglés \"tube\")",
+        "audio": "chuubu.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "チョコレート",
+        "espanol": "chocolate",
+        "audio": "chokoreeto.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "コニャック",
+        "espanol": "coñac (del francés \"cognac\")",
+        "audio": "konyakku.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "ニャー",
+        "espanol": "miau, onomatopeya",
+        "audio": "nyaa.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "ポニョ",
+        "espanol": "Ponyo (nombre propio)",
+        "audio": "ponyo.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "ニューヨーク",
+        "espanol": "Nueva York (del inglés \"New York\")",
+        "audio": "nyuuyooku.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "ニュース",
+        "espanol": "noticias (del inglés \"news\")",
+        "audio": "nyuusu.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "ギャル",
+        "espanol": "chica gal o gyaru (del inglés \"gal\")",
+        "audio": "gyaru.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "キンギョ",
+        "espanol": "pez dorado",
+        "audio": "kingyo.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "ギャグ",
+        "espanol": "chiste, broma (del inglés \"gag\")",
+        "audio": "gyagu.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "レギュラー",
+        "espanol": "regular (del inglés \"regular\")",
+        "audio": "regyuraa.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "ギョサン",
+        "espanol": "sandalias de plástico",
+        "audio": "gyosan.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "ジャム",
+        "espanol": "mermelada (del inglés \"jam\")",
+        "audio": "jamu.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "ジャズ",
+        "espanol": "jazz, música jazz",
+        "audio": "jazu.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "ジュース",
+        "espanol": "jugo, zumo",
+        "audio": "juusu.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "ジョーカー",
+        "espanol": "guasón, joker",
+        "audio": "jookaa.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "ジャケット",
+        "espanol": "chaqueta (del inglés \"jacket\")",
+        "audio": "jaketto.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "ソファ",
+        "espanol": "sofá",
+        "audio": "sofa.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "カフェ",
+        "espanol": "café, cafetería (del francés \"café\")",
+        "audio": "kafe.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "ファン",
+        "espanol": "fan, ventilador según el contexto",
+        "audio": "fan.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "メイドカフェ",
+        "espanol": "maid café",
+        "audio": "meidokafe.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "フォロー",
+        "espanol": "seguir en redes sociales (del inglés \"follow\")",
+        "audio": "foroo.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "ウォッカ",
+        "espanol": "vodka (del ruso \"водка\")",
+        "audio": "wokka.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "チェス",
+        "espanol": "ajedrez (del inglés \"chess\")",
+        "audio": "chesu.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "チェロ",
+        "espanol": "violonchelo, chelo (del italiano \"violoncello\")",
+        "audio": "chero.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "スパゲティ",
+        "espanol": "espagueti (del italiano \"spaghetti\")",
+        "audio": "supageti.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "パーティー",
+        "espanol": "fiesta (del inglés \"party\")",
+        "audio": "paatii.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "シェア",
+        "espanol": "compartir en redes sociales (del inglés \"share\")",
+        "audio": "shea.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "バス",
+        "espanol": "autobús, bus",
+        "audio": "basu.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "バイク",
+        "espanol": "motocicleta",
+        "audio": "baiku.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "カラオケ",
+        "espanol": "karaoke",
+        "audio": "karaoke.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "アパート",
+        "espanol": "apartamento",
+        "audio": "apaato.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "スープ",
+        "espanol": "sopa (del inglés \"soup\")",
+        "audio": "suupu.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "カレー",
+        "espanol": "curry",
+        "audio": "karee.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "ケーキ",
+        "espanol": "pastel, torta (del inglés \"cake\")",
+        "audio": "keeki.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "サンドイッチ",
+        "espanol": "sándwich",
+        "audio": "sandoicchi.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "アルコール",
+        "espanol": "alcohol (del inglés \"alcohol\")",
+        "audio": "arukooru.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "ドア",
+        "espanol": "puerta (del inglés \"door\")",
+        "audio": "doa.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "パン",
+        "espanol": "pan (del portugués \"pão\")",
+        "audio": "pan.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "レモン",
+        "espanol": "limón (del inglés \"lemon\")",
+        "audio": "remon.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "テーブル",
+        "espanol": "mesa (del inglés \"table\")",
+        "audio": "teeburu.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "コンビニ",
+        "espanol": "tienda de conveniencia",
+        "audio": "konbini.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "メール",
+        "espanol": "correo electrónico (del inglés \"mail\")",
+        "audio": "meeru.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "マスク",
+        "espanol": "mascarilla (del inglés \"mask\")",
+        "audio": "masuku.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "クラス",
+        "espanol": "clase (del inglés \"class\")",
+        "audio": "kurasu.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "チケット",
+        "espanol": "ticket, boleto (del inglés \"ticket\")",
+        "audio": "chiketto.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "ドキドキ",
+        "espanol": "latidos rápidos del corazón por emoción o nervios",
+        "audio": "dokidoki.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "パワー",
+        "espanol": "fuerza, energía, potencia (del inglés \"power\")",
+        "audio": "pawaa.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "スマホ",
+        "espanol": "teléfono inteligente, smartphone",
+        "audio": "sumaho.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "ペルー",
+        "espanol": "Perú",
+        "audio": "peruu.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "ブラジル",
+        "espanol": "Brasil",
+        "audio": "burajiru.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "メキシコ",
+        "espanol": "México",
+        "audio": "mekishiko.mp3",
+        "extra": ""
+      }
+    ]
+  },
 ]
