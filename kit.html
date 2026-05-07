@@ -1038,17 +1038,41 @@ function responder(letra){
   guardarStats();
   pintarStats();
 
-  let romaji = "";
-  
-  if(actual.audio){
-    romaji = actual.audio
-      .replace(".mp3", "")
-      .replaceAll("_", " ");
-  }
-  
-  if(romaji){
-    $("resultado").innerHTML += `<br><span style="font-size:16px; opacity:.9;">Romaji: ${romaji}</span>`;
-  }
+let romaji = "";
+let japones = "";
+
+if(actual.audio){
+  romaji = actual.audio
+    .replace(".mp3", "")
+    .replaceAll("_", " ");
+}
+
+if(
+  rondaModo === "audio_es" ||
+  rondaModo === "audio_jp" ||
+  rondaModo === "dictado"
+){
+  japones = textoJapones(actual);
+}
+
+const extras = [];
+
+if(japones){
+  extras.push(japones);
+}
+
+if(romaji){
+  extras.push(`Romaji: ${romaji}`);
+}
+
+if(extras.length){
+  $("resultado").innerHTML += `
+    <br>
+    <span style="font-size:16px; opacity:.9;">
+      ${extras.join(" ✦ ")}
+    </span>
+  `;
+}
   
 }
 
