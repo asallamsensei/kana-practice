@@ -1031,12 +1031,25 @@ function responder(letra){
     sonidoIncorrecto();
     errores++;
     racha = 0;
-    $("resultado").innerText = `No. Era: ${respuestaDe(actual)}`;
+    $("resultado").innerText = `Incorrecto, era: ${respuestaDe(actual)}`;
     $("resultado").className = "incorrecto";
   }
 
   guardarStats();
   pintarStats();
+
+  let romaji = "";
+  
+  if(actual.audio){
+    romaji = actual.audio
+      .replace(".mp3", "")
+      .replaceAll("_", " ");
+  }
+  
+  if(romaji){
+    $("resultado").innerHTML += `<br><span style="font-size:16px; opacity:.9;">Romaji: ${romaji}</span>`;
+  }
+  
 }
 
 /* =========================================================
