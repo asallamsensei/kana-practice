@@ -953,6 +953,11 @@ function pintarOpcionCorrecta(letraElegida){
 }
 
 function siguiente(){
+  if(!yaValidado && actual){
+    responder("");
+    return;
+  }
+
   if(!actualizarPoolDesdeBloques()) return;
 
   limpiarResultado();
@@ -973,7 +978,7 @@ function responder(letra){
   if(yaValidado || !actual) return;
   yaValidado = true;
 
-  const ok = letra === correctaLetra;
+  const ok = letra && letra === correctaLetra;
   pintarOpcionCorrecta(letra);
 
   if(ok){
