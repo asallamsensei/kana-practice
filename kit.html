@@ -316,11 +316,6 @@
 
   <div class="grid">
     <main class="card main">
-      <div class="badgeRow">
-        <span id="badgeModo" class="badge badgeModo">Modo: —</span>
-        <span id="badgeBloque" class="badge badgeExtra">Bloque: —</span>
-        <span id="badgeVista" class="badge">Vista: —</span>
-      </div>
 
       <div id="pregunta">—</div>
       <div id="subPregunta"></div>
@@ -826,8 +821,6 @@ function pintarBotonesModo(){
   $("statusModo").innerText =
     `Modos: ${[...modosActivos].join(" + ")}`;
 
-  $("badgeVista").innerText =
-    `Vista: ${vistaJapones === "avanzado" ? "Avanzado" : "Básico"}`;
 }
 
 function setModo(modo){
@@ -949,9 +942,6 @@ function renderPregunta(item){
   sub.innerText = "";
   ultimoItemAudio = item;
   ultimoTextoAudio = textoAudio(item);
-
-  $("badgeModo").innerText = `Modo: ${MODO_LABEL[rondaModo]}`;
-  $("badgeBloque").innerText = `Bloque: ${nombreBloqueLegible(item.bloque)}`;
 
   if(rondaModo === "audio_es" || rondaModo === "audio_jp" || rondaModo === "dictado"){
     p.className = "dictado";
