@@ -311,6 +311,7 @@
   <header>
     <h1>Kit de Japonés — Asallam Sensei</h1>
     <div class="subtitle">Hiragana, katakana, kanji y vocabulario común</div>
+    <div id="studentName" class="subtitle">Estudiante: —</div>
   </header>
 
   <div class="grid">
@@ -392,6 +393,35 @@
 /* =========================================================
    CONFIG SIMPLE
 ========================================================= */
+const CLAVES_ESTUDIANTES = {
+  "dogtora": { nombre: "Laura" },
+  "aguecuca": { nombre: "Guillermoster" },
+  "profe": { nombre: "Sensei" },
+  "paopao": { nombre: "Paola" },
+  "hombreviejolaneta": { nombre: "Esteban" },
+  "ahbuenonosonmuchos": { nombre: "Liz" },
+};
+
+function autenticarEstudiante(){
+  let estudiante = null;
+
+  while(true){
+    let clave = prompt("Ingresa tu clave de estudiante:") || "";
+    clave = clave.trim().toLowerCase();
+
+    if(!clave) continue;
+
+    if(CLAVES_ESTUDIANTES[clave]){
+      estudiante = CLAVES_ESTUDIANTES[clave];
+      break;
+    }
+
+    alert("Clave incorrecta");
+  }
+
+  $("studentName").innerText = "Estudiante: " + estudiante.nombre;
+}
+  
 const DATA_URL = "data/kit/kit.json";
 const AUDIO_BASE_URL = "data/kit/audios/";
 const STATS_KEY = "japones_kit_stats_v1";
@@ -1026,6 +1056,7 @@ async function cargarData(){
   }
 }
 
+autenticarEstudiante();
 cargarData();
 </script>
 </body>
