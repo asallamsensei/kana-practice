@@ -3203,4 +3203,1108 @@
       }
     ]
   },
+  {
+    "bloque": "kanji_serio",
+    "titulo": "Kanji para el estudiante serio de japonés",
+    "items": [
+      {
+        "japones": "一",
+        "espanol": "uno",
+        "audio": "ichi.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "二",
+        "espanol": "dos",
+        "audio": "ni.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "三",
+        "espanol": "tres",
+        "audio": "san.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "四",
+        "espanol": "cuatro",
+        "audio": "shi.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "五",
+        "espanol": "cinco",
+        "audio": "go.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "一つ",
+        "espanol": "una cosa",
+        "audio": "hitotsu.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "二つ",
+        "espanol": "dos cosas",
+        "audio": "futatsu.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "三つ",
+        "espanol": "tres cosas",
+        "audio": "mittsu.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "四つ",
+        "espanol": "cuatro cosas",
+        "audio": "yottsu.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "五つ",
+        "espanol": "cinco cosas",
+        "audio": "itsutsu.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "一つください",
+        "espanol": "uno por favor",
+        "audio": "hitotsu_kudasai.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "六",
+        "espanol": "seis",
+        "audio": "roku.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "七",
+        "espanol": "siete",
+        "audio": "nana.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "七",
+        "espanol": "siete",
+        "audio": "shichi.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "八",
+        "espanol": "ocho",
+        "audio": "hachi.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "九",
+        "espanol": "nueve",
+        "audio": "kyuu.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "十",
+        "espanol": "diez",
+        "audio": "juu.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "百",
+        "espanol": "100",
+        "audio": "hyaku.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "千",
+        "espanol": "1000",
+        "audio": "sen.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "上",
+        "espanol": "arriba",
+        "audio": "ue.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "下",
+        "espanol": "abajo",
+        "audio": "shita.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "左",
+        "espanol": "izquierda",
+        "audio": "hidari.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "小さい",
+        "espanol": "pequeño",
+        "audio": "chiisai.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "右",
+        "espanol": "derecha",
+        "audio": "migi.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "月",
+        "espanol": "luna",
+        "audio": "tsuki.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "大きい",
+        "espanol": "grande",
+        "audio": "ookii.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "中",
+        "espanol": "dentro, medio",
+        "audio": "naka.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "大",
+        "espanol": "gran",
+        "audio": "dai.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "年",
+        "espanol": "año",
+        "audio": "toshi.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "早い",
+        "espanol": "temprano, rápido",
+        "audio": "hayai.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "林",
+        "espanol": "bosque, arboleda",
+        "audio": "hayashi.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "八日",
+        "espanol": "ocho días, octavo día del mes",
+        "audio": "youka.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "早く",
+        "espanol": "rápidamente, pronto",
+        "audio": "hayaku.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "木",
+        "espanol": "árbol",
+        "audio": "ki.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "水曜日",
+        "espanol": "miércoles, día del agua",
+        "audio": "suiyoubi.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "山",
+        "espanol": "montaña",
+        "audio": "yama.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "川",
+        "espanol": "río, corriente",
+        "audio": "kawa.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "土",
+        "espanol": "tierra, suelo",
+        "audio": "tsuchi.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "土曜日",
+        "espanol": "sábado, día de la tierra",
+        "audio": "doyoubi.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "空",
+        "espanol": "cielo",
+        "audio": "sora.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "空いた",
+        "espanol": "se vació el estómago",
+        "audio": "suita.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "田んぼ",
+        "espanol": "campo de arroz",
+        "audio": "tanbo.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "天の川",
+        "espanol": "la vía láctea, nuestra galaxia",
+        "audio": "amanogawa.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "天",
+        "espanol": "cielo (figurativo o espiritual)",
+        "audio": "ten.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "お腹がすいた",
+        "espanol": "tengo hambre, literalmente: el estómago se vació",
+        "audio": "onaka_ga_suita.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "生",
+        "espanol": "crudo",
+        "audio": "nama.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "草",
+        "espanol": "pasto",
+        "audio": "kusa.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "花",
+        "espanol": "flor",
+        "audio": "hana.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "花火",
+        "espanol": "fuegos artificiales",
+        "audio": "hanabi.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "花見",
+        "espanol": "hanami, contemplar las flores",
+        "audio": "hanami.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "虫",
+        "espanol": "insecto, gusano",
+        "audio": "mushi.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "犬",
+        "espanol": "perro",
+        "audio": "inu.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "一人",
+        "espanol": "una persona, estar solo",
+        "audio": "hitori.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "大人",
+        "espanol": "adulto",
+        "audio": "otona.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "名前",
+        "espanol": "nombre",
+        "audio": "namae.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "女",
+        "espanol": "mujer",
+        "audio": "onna.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "男",
+        "espanol": "hombre",
+        "audio": "otoko.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "女の子",
+        "espanol": "niña, chica",
+        "audio": "onnanoko.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "男の子",
+        "espanol": "niño, chico",
+        "audio": "otokonoko.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "目",
+        "espanol": "ojo",
+        "audio": "me.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "耳",
+        "espanol": "oreja",
+        "audio": "mimi.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "口",
+        "espanol": "boca",
+        "audio": "kuchi.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "出口",
+        "espanol": "salida",
+        "audio": "deguchi.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "手",
+        "espanol": "mano",
+        "audio": "te.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "空手",
+        "espanol": "karate, mano vacía",
+        "audio": "karate.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "子供",
+        "espanol": "niño, niña",
+        "audio": "kodomo.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "駄目",
+        "espanol": "incorrecto, no se puede (comúnmente se escribe だめ o ダメ)",
+        "audio": "dame.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "足",
+        "espanol": "pie, pierna",
+        "audio": "ashi.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "足す",
+        "espanol": "agregar",
+        "audio": "tasu.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "足りる",
+        "espanol": "ser suficiente, ser bastante",
+        "audio": "tariru.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "見る",
+        "espanol": "ver, mirar",
+        "audio": "miru.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "音",
+        "espanol": "sonido, ruido",
+        "audio": "oto.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "気",
+        "espanol": "energía, espíritu",
+        "audio": "ki.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "元気",
+        "espanol": "saludable, enérgico",
+        "audio": "genki.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "天気",
+        "espanol": "clima",
+        "audio": "tenki.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "力",
+        "espanol": "fuerza, poder",
+        "audio": "chikara.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "円",
+        "espanol": "yen",
+        "audio": "en.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "入る",
+        "espanol": "entrar",
+        "audio": "hairu.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "入れる",
+        "espanol": "meter",
+        "audio": "ireru.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "入り口",
+        "espanol": "entrada, lugar",
+        "audio": "iriguchi.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "出る",
+        "espanol": "salir, irse",
+        "audio": "deru.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "出す",
+        "espanol": "sacar",
+        "audio": "dasu.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "出口",
+        "espanol": "salida, lugar",
+        "audio": "deguchi.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "立つ",
+        "espanol": "ponerse de pie, estar de pie",
+        "audio": "tatsu.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "休む",
+        "espanol": "tomar un día libre, descansar",
+        "audio": "yasumu.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "先生",
+        "espanol": "profesor, maestro",
+        "audio": "sensei.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "夕方",
+        "espanol": "tarde, atardecer",
+        "audio": "yuugata.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "本",
+        "espanol": "libro",
+        "audio": "hon.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "本棚",
+        "espanol": "estante para libros",
+        "audio": "hondana.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "文化",
+        "espanol": "cultura",
+        "audio": "bunka.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "漢字",
+        "espanol": "kanji, caracteres de China",
+        "audio": "kanji.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "学校",
+        "espanol": "escuela, colegio",
+        "audio": "gakkou.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "大学",
+        "espanol": "universidad",
+        "audio": "daigaku.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "学生",
+        "espanol": "estudiante",
+        "audio": "gakusei.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "村",
+        "espanol": "aldea, pueblo pequeño",
+        "audio": "mura.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "町",
+        "espanol": "pueblo, ciudad pequeña",
+        "audio": "machi.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "下町",
+        "espanol": "ciudad baja, ambiente tradicional, comercial y artesanal",
+        "audio": "shitamachi.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "森",
+        "espanol": "bosque",
+        "audio": "mori.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "王",
+        "espanol": "rey",
+        "audio": "ou.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "-様",
+        "espanol": "honorífico que añade respeto",
+        "audio": "sama.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "王様",
+        "espanol": "su majestad el rey",
+        "audio": "ousama.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "正しい",
+        "espanol": "correcto, justo",
+        "audio": "tadashii.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "水",
+        "espanol": "agua",
+        "audio": "mizu.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "火",
+        "espanol": "fuego",
+        "audio": "hi.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "花火",
+        "espanol": "fuegos artificiales, literalmente flores de fuego",
+        "audio": "hanabi.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "火山",
+        "espanol": "volcán",
+        "audio": "kazan.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "玉",
+        "espanol": "bola, esfera, joya, gema",
+        "audio": "tama.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "玉ねぎ",
+        "espanol": "cebolla",
+        "audio": "tamanegi.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "石",
+        "espanol": "piedra",
+        "audio": "ishi.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "石鹸",
+        "espanol": "jabón",
+        "audio": "sekken.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "石炭",
+        "espanol": "carbón",
+        "audio": "sekitan.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "竹",
+        "espanol": "bambú",
+        "audio": "take.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "糸",
+        "espanol": "hilo",
+        "audio": "ito.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "貝",
+        "espanol": "concha, marisco",
+        "audio": "kai.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "車",
+        "espanol": "carro, vehículo",
+        "audio": "kuruma.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "電車",
+        "espanol": "tren eléctrico",
+        "audio": "densha.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "お金",
+        "espanol": "dinero",
+        "audio": "okane.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "金曜日",
+        "espanol": "viernes",
+        "audio": "kinyoubi.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "雨",
+        "espanol": "lluvia",
+        "audio": "ame.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "大雨",
+        "espanol": "lluvia intensa, lluvia fuerte",
+        "audio": "ooame.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "赤",
+        "espanol": "rojo, sustantivo",
+        "audio": "aka.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "青",
+        "espanol": "azul, sustantivo",
+        "audio": "ao.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "白",
+        "espanol": "blanco, sustantivo",
+        "audio": "shiro.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "面白い",
+        "espanol": "interesante, divertido",
+        "audio": "omoshiroi.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "赤い",
+        "espanol": "rojo, adjetivo",
+        "audio": "akai.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "青い",
+        "espanol": "azul, adjetivo",
+        "audio": "aoi.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "白い",
+        "espanol": "blanco, adjetivo",
+        "audio": "shiroi.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "青が好きです",
+        "espanol": "me gusta el color azul",
+        "audio": "ao_ga_suki_desu.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "青い空",
+        "espanol": "cielo azul",
+        "audio": "aoi_sora.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "百万",
+        "espanol": "un millón",
+        "audio": "hyakuman.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "千円",
+        "espanol": "mil yenes",
+        "audio": "senen.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "上手",
+        "espanol": "hábil",
+        "audio": "jouzu.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "地下",
+        "espanol": "subterráneo",
+        "audio": "chika.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "左手",
+        "espanol": "mano izquierda",
+        "audio": "hidarite.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "右手",
+        "espanol": "mano derecha",
+        "audio": "migite.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "今日",
+        "espanol": "hoy",
+        "audio": "kyou.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "月曜日",
+        "espanol": "lunes",
+        "audio": "getsuyoubi.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "来年",
+        "espanol": "próximo año",
+        "audio": "rainen.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "富士山",
+        "espanol": "Monte Fuji",
+        "audio": "fujisan.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "川口",
+        "espanol": "boca del río",
+        "audio": "kawaguchi.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "空気",
+        "espanol": "aire",
+        "audio": "kuuki.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "日本人",
+        "espanol": "persona japonesa",
+        "audio": "nihonjin.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "女王",
+        "espanol": "reina",
+        "audio": "joou.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "男性",
+        "espanol": "hombre",
+        "audio": "dansei.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "赤ちゃん",
+        "espanol": "bebé",
+        "audio": "akachan.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "白鳥",
+        "espanol": "cisne",
+        "audio": "hakuchou.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "青春",
+        "espanol": "juventud",
+        "audio": "seishun.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "自動車",
+        "espanol": "automóvil",
+        "audio": "jidousha.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "金持ち",
+        "espanol": "persona rica",
+        "audio": "kanemochi.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "梅雨",
+        "espanol": "temporada de lluvias en Japón",
+        "audio": "tsuyu.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "手紙",
+        "espanol": "carta escrita a mano",
+        "audio": "tegami.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "火曜日",
+        "espanol": "martes, día del fuego",
+        "audio": "kayoubi.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "水泳",
+        "espanol": "natación",
+        "audio": "suiei.mp3",
+        "extra": ""
+      } 
+    ]
+  },
+  {
+    "bloque": "vocabulario_comun",
+    "titulo": "Vocabulario común",
+    "items": [
+      {
+        "japones": "おはよう",
+        "espanol": "buenos días",
+        "audio": "ohayou.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "おはようございます",
+        "espanol": "buenos días, cortés",
+        "audio": "ohayou_gozaimasu.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "こんにちは",
+        "espanol": "hola, buenas tardes, del mediodía al atardecer",
+        "audio": "konnichiwa.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "こんばんは",
+        "espanol": "buenas noches, saludo",
+        "audio": "konbanwa.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "おやすみなさい",
+        "espanol": "buenas noches, que descanses, despedida antes de dormir",
+        "audio": "oyasuminasai.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "いらっしゃいませ",
+        "espanol": "bienvenido, saludo al entrar a una tienda",
+        "audio": "irasshaimase.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "もしもし",
+        "espanol": "aló, en el teléfono",
+        "audio": "moshi_moshi.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "またね",
+        "espanol": "hasta luego, informal",
+        "audio": "mata_ne.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "いってきます",
+        "espanol": "me voy y volveré",
+        "audio": "ittekimasu.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "いってらっしゃい",
+        "espanol": "que te vaya bien",
+        "audio": "itterasshai.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "ただいま",
+        "espanol": "ya estoy en casa",
+        "audio": "tadaima.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "おかえりなさい",
+        "espanol": "bienvenido de vuelta",
+        "audio": "okaerinasai.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "ありがとう",
+        "espanol": "gracias",
+        "audio": "arigatou.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "ありがとうございます",
+        "espanol": "muchas gracias, cortés",
+        "audio": "arigatou_gozaimasu.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "どういたしまして",
+        "espanol": "de nada",
+        "audio": "dou_itashimashite.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "いえいえ",
+        "espanol": "no fue nada, literalmente no no",
+        "audio": "ie_ie.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "はい",
+        "espanol": "sí",
+        "audio": "hai.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "いいえ",
+        "espanol": "no",
+        "audio": "iie.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "うん",
+        "espanol": "sí, informal",
+        "audio": "un.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "ううん",
+        "espanol": "no, informal",
+        "audio": "uun.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "すみません",
+        "espanol": "disculpe, perdón, para atraer atención, pedir permiso o disculparse",
+        "audio": "sumimasen.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "ごめんなさい",
+        "espanol": "perdón, más emocional que sumimasen",
+        "audio": "gomennasai.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "はじめまして",
+        "espanol": "mucho gusto, encantado, inicia la presentación",
+        "audio": "hajimemashite.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "メキシコ出身です",
+        "espanol": "soy de México",
+        "audio": "mekishiko_shusshin_desu.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "私は田中です",
+        "espanol": "yo soy Tanaka, me llamo Tanaka",
+        "audio": "watashi_wa_tanaka_desu.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "チリ人です",
+        "espanol": "soy chileno",
+        "audio": "chiri_jin_desu.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "日本語を勉強しています",
+        "espanol": "estoy estudiando japonés",
+        "audio": "nihongo_o_benkyou_shiteimasu.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "お名前は何ですか？",
+        "espanol": "¿cuál es tu nombre?, ¿cómo te llamas?",
+        "audio": "onamae_wa_nan_desu_ka.mp3",
+        "extra": ""
+      },
+      {
+        "japones": "よろしくお願いします",
+        "espanol": "mucho gusto, encantado, llevémonos bien por favor",
+        "audio": "yoroshiku_onegaishimasu.mp3",
+        "extra": ""
+      }
+    ]
+  } 
 ]
