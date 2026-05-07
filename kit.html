@@ -442,7 +442,13 @@ let lista = [];
 let bloques = [];
 let bloquesSeleccionados = new Set();
 let todosActivo = true;
-let modoActual = "mix";
+let modosActivos = new Set([
+  "jp_es",
+  "es_jp",
+  "audio_es",
+  "audio_jp",
+  "dictado"
+]);
 let rondaModo = "jp_es";
 let vistaJapones = "basico";
 let actual = null;
@@ -720,7 +726,10 @@ function modosDeMix(){
 }
 
 function elegirModoRonda(){
-  rondaModo = (modoActual === "mix") ? pick(modosDeMix()) : modoActual;
+
+  const activos = [...modosActivos];
+
+  rondaModo = pick(activos);
 }
 
 function preguntaDe(item){
@@ -781,21 +790,27 @@ function limpiarResultado(){
 }
 
 function pintarBotonesModo(){
+
   const ids = {
     jp_es: "m-jp-es",
     es_jp: "m-es-jp",
     audio_es: "m-audio-es",
     audio_jp: "m-audio-jp",
-    dictado: "m-dictado",
-    mix: "m-mix"
+    dictado: "m-dictado"
   };
 
   Object.entries(ids).forEach(([modo, id]) => {
     const el = $(id);
     if(!el) return;
-    el.classList.toggle("activo", modoActual === modo && modo !== "mix");
-    el.classList.toggle("mixActivo", modoActual === modo && modo === "mix");
+
+    el.classList.toggle("activo", modosActivos.has(modo));
   });
+
+  const todosActivos =
+    ["jp_es","es_jp","audio_es","audio_jp","dictado"]
+      .every(m => modosActivos.has(m));
+
+  $("m-mix").classList.toggle("mixActivo", todosActivos);
 
   $("v-basico").classList.toggle("activo", vistaJapones === "basico");
   $("v-avanzado").classList.toggle("activo", vistaJapones === "avanzado");
@@ -808,14 +823,38 @@ function pintarBotonesModo(){
   const btnTodos = $("btn-todos-bloques");
   if(btnTodos) btnTodos.classList.toggle("mixActivo", todosActivo);
 
-  $("statusModo").innerText = `Modo: ${MODO_LABEL[modoActual]}`;
-  $("badgeModo").innerText = `Modo: ${MODO_LABEL[rondaModo] || MODO_LABEL[modoActual]}`;
-  $("badgeVista").innerText = `Vista: ${vistaJapones === "avanzado" ? "Avanzado" : "Básico"}`;
+  $("statusModo").innerText =
+    `Modos: ${[...modosActivos].join(" + ")}`;
+
+  $("badgeVista").innerText =
+    `Vista: ${vistaJapones === "avanzado" ? "Avanzado" : "Básico"}`;
 }
 
 function setModo(modo){
-  modoActual = modo;
+
+  if(modo === "mix"){
+    modosActivos = new Set([
+      "jp_es",
+      "es_jp",
+      "audio_es",
+      "audio_jp",
+      "dictado"
+    ]);
+  }else{
+
+    if(modosActivos.has(modo)){
+      modosActivos.delete(modo);
+    }else{
+      modosActivos.add(modo);
+    }
+
+    if(modosActivos.size === 0){
+      modosActivos.add(modo);
+    }
+  }
+
   pintarBotonesModo();
+
   if(lista.length) siguiente();
 }
 
