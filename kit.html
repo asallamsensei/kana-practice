@@ -1,0 +1,1032 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Kit de Japonés — Asallam Sensei</title>
+
+<style>
+  :root{
+    --bg:#0b1020;
+    --card:rgba(255,255,255,.08);
+    --card2:rgba(255,255,255,.11);
+    --text:#ffffff;
+    --muted:rgba(255,255,255,.78);
+    --accent:#22c55e;
+    --accentAlt:#7d5cff;
+    --danger:#ef4444;
+    --border:rgba(255,255,255,.14);
+    --gold:#facc15;
+  }
+
+  *{ box-sizing:border-box; }
+
+  body{
+    margin:0;
+    font-family: Arial, sans-serif;
+    min-height:100vh;
+    color:var(--text);
+    background:
+      radial-gradient(900px 580px at 18% 12%, rgba(34,197,94,.28), transparent 62%),
+      radial-gradient(900px 580px at 88% 18%, rgba(125,92,255,.25), transparent 62%),
+      radial-gradient(780px 520px at 50% 92%, rgba(250,204,21,.13), transparent 60%),
+      var(--bg);
+    display:flex;
+    justify-content:center;
+    padding:28px 14px 70px;
+  }
+
+  .wrap{ width:min(1080px,100%); }
+
+  header{
+    text-align:center;
+    margin-bottom:16px;
+  }
+
+  h1{
+    margin:0;
+    font-size:clamp(24px,5vw,34px);
+    letter-spacing:.2px;
+  }
+
+  .subtitle{
+    margin-top:8px;
+    color:var(--muted);
+    font-size:15px;
+    font-weight:700;
+  }
+
+  .grid{
+    display:grid;
+    grid-template-columns:minmax(0,1fr) 280px;
+    gap:14px;
+    align-items:start;
+  }
+
+  @media(max-width:900px){
+    .grid{ grid-template-columns:1fr; }
+  }
+
+  .card{
+    background:linear-gradient(180deg,var(--card2),var(--card));
+    border:1px solid var(--border);
+    border-radius:18px;
+    box-shadow:0 18px 45px rgba(0,0,0,.35);
+    padding:16px;
+  }
+
+  .main{
+    text-align:center;
+    min-height:520px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+  }
+
+  .badgeRow{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:8px;
+    flex-wrap:wrap;
+    margin-bottom:8px;
+  }
+
+  .badge{
+    padding:6px 10px;
+    border-radius:999px;
+    border:1px solid rgba(255,255,255,.15);
+    background:rgba(255,255,255,.07);
+    color:var(--muted);
+    font-size:12px;
+    font-weight:900;
+    letter-spacing:.3px;
+  }
+
+  .badgeModo{
+    background:rgba(34,197,94,.14);
+    border-color:rgba(34,197,94,.45);
+    color:#bbf7d0;
+  }
+
+  .badgeExtra{
+    background:rgba(125,92,255,.14);
+    border-color:rgba(125,92,255,.45);
+    color:#ddd6fe;
+  }
+
+  #pregunta{
+    min-height:92px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:clamp(30px,6vw,64px);
+    font-weight:800;
+    line-height:1.14;
+    word-break:break-word;
+    margin:6px auto 8px;
+    max-width:880px;
+  }
+
+  #pregunta.es{
+    font-size:clamp(23px,3.4vw,36px);
+    font-weight:800;
+  }
+
+  #pregunta.dictado{
+    min-height:82px;
+    font-size:0;
+  }
+
+  #subPregunta{
+    color:var(--muted);
+    min-height:24px;
+    font-size:15px;
+    margin-bottom:8px;
+  }
+
+  .btn{
+    border:none;
+    border-radius:12px;
+    padding:11px 14px;
+    cursor:pointer;
+    color:white;
+    background:var(--accent);
+    font-weight:900;
+    transition:.15s;
+  }
+
+  .btn:hover{ transform:translateY(-1px); filter:brightness(1.07); }
+  .btn:disabled{ opacity:.5; cursor:not-allowed; transform:none; filter:none; }
+
+  .btnGhost{
+    background:rgba(255,255,255,.08);
+    border:1px solid var(--border);
+    color:var(--text);
+  }
+
+  .btnMode{
+    width:100%;
+    border-radius:999px;
+    background:rgba(255,255,255,.08);
+    border:1px solid var(--border);
+    color:var(--text);
+  }
+
+  .btnMode.activo{
+    background:rgba(34,197,94,.22);
+    border-color:rgba(34,197,94,.55);
+    color:#dcfce7;
+    box-shadow:0 0 12px rgba(34,197,94,.25), inset 0 0 8px rgba(34,197,94,.10);
+  }
+
+  .btnMode.mixActivo{
+    background:linear-gradient(135deg,var(--accent),var(--accentAlt));
+    border-color:transparent;
+    color:white;
+    box-shadow:0 12px 28px rgba(34,197,94,.16);
+  }
+
+  .btnAudio{
+    background:rgba(34,197,94,.16);
+    border:1px solid rgba(34,197,94,.45);
+    color:#bbf7d0;
+    font-size:24px;
+    min-width:62px;
+  }
+
+  .btnAudio.big{
+    font-size:44px;
+    padding:22px 28px;
+    border-radius:22px;
+    box-shadow:0 0 14px rgba(34,197,94,.45), 0 0 34px rgba(34,197,94,.20);
+  }
+
+  #opciones{
+    margin:12px auto 0;
+    width:fit-content;
+    max-width:100%;
+    text-align:left;
+    padding:10px 14px;
+    border-radius:14px;
+    border:1px dashed rgba(255,255,255,.22);
+    background:rgba(0,0,0,.18);
+    font-size:clamp(18px,2.8vw,24px);
+    line-height:1.65;
+  }
+
+  .opBtns{
+    display:flex;
+    justify-content:center;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-top:12px;
+  }
+
+  .opBtn{
+    min-width:92px;
+    min-height:52px;
+    background:rgba(125,92,255,.12);
+    border:1px solid rgba(125,92,255,.52);
+    color:#efe9ff;
+    box-shadow:0 0 9px rgba(125,92,255,.25);
+  }
+
+  .opBtn.correcta{
+    background:rgba(34,197,94,.18);
+    border-color:rgba(34,197,94,.55);
+    color:#dcfce7;
+  }
+
+  .opBtn.incorrecta{
+    background:rgba(239,68,68,.18);
+    border-color:rgba(239,68,68,.55);
+    color:#fecaca;
+  }
+
+  #resultado{
+    min-height:30px;
+    margin-top:12px;
+    font-size:20px;
+    font-weight:900;
+  }
+
+  .correcto{ color:var(--accent); }
+  .incorrecto{ color:var(--danger); }
+
+  .actions{
+    display:flex;
+    justify-content:center;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-top:12px;
+  }
+
+  .stats{
+    margin-top:14px;
+    color:var(--muted);
+    font-size:15px;
+    line-height:1.65;
+  }
+
+  .sideTitle{
+    font-size:18px;
+    font-weight:900;
+    text-align:center;
+    margin-bottom:12px;
+  }
+
+  .modeGrid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:9px;
+  }
+
+  .modeGrid.one{
+    grid-template-columns:1fr;
+  }
+
+  .sep{
+    height:1px;
+    background:rgba(255,255,255,.10);
+    margin:14px 0;
+  }
+
+  .hint{
+    color:var(--muted);
+    font-size:13px;
+    line-height:1.45;
+  }
+
+  .smallStatus{
+    color:var(--muted);
+    font-size:13px;
+    line-height:1.55;
+  }
+</style>
+</head>
+
+<body>
+<div class="wrap">
+  <header>
+    <h1>Kit de Japonés — Asallam Sensei</h1>
+    <div class="subtitle">Hiragana, katakana, kanji y vocabulario común</div>
+  </header>
+
+  <div class="grid">
+    <main class="card main">
+      <div class="badgeRow">
+        <span id="badgeModo" class="badge badgeModo">Modo: —</span>
+        <span id="badgeBloque" class="badge badgeExtra">Bloque: —</span>
+        <span id="badgeVista" class="badge">Vista: —</span>
+      </div>
+
+      <div id="pregunta">—</div>
+      <div id="subPregunta"></div>
+
+      <div id="opciones"></div>
+
+      <div class="opBtns">
+        <button id="btnA" class="btn opBtn" type="button" onclick="responder('a')">A</button>
+        <button id="btnB" class="btn opBtn" type="button" onclick="responder('b')">B</button>
+        <button id="btnC" class="btn opBtn" type="button" onclick="responder('c')">C</button>
+      </div>
+
+      <div id="resultado"></div>
+
+      <div class="actions">
+        <button class="btn" type="button" onclick="siguiente()">Siguiente</button>
+      </div>
+
+      <div class="stats">
+        <div>Aciertos: <span id="aciertos">0</span> — Errores: <span id="errores">0</span></div>
+        <div>Racha: <span id="racha">0</span> — Mejor racha: <span id="mejorRacha">0</span> — Precisión: <span id="precision">0%</span></div>
+      </div>
+
+      <div class="actions">
+        <button class="btn btnGhost" type="button" onclick="resetStats()">Reset stats</button>
+      </div>
+    </main>
+
+    <aside class="card">
+      <div class="sideTitle">Modo</div>
+
+      <div class="modeGrid">
+        <button id="m-jp-es" class="btn btnMode" type="button" onclick="setModo('jp_es')">JP → ES</button>
+        <button id="m-es-jp" class="btn btnMode" type="button" onclick="setModo('es_jp')">ES → JP</button>
+        <button id="m-audio-es" class="btn btnMode" type="button" onclick="setModo('audio_es')">🔊 → ES</button>
+        <button id="m-audio-jp" class="btn btnMode" type="button" onclick="setModo('audio_jp')">🔊 → JP</button>
+        <button id="m-dictado" class="btn btnMode" type="button" onclick="setModo('dictado')">Dictado</button>
+        <button id="m-mix" class="btn btnMode" type="button" onclick="setModo('mix')">Mix</button>
+      </div>
+
+      <div class="sep"></div>
+
+      <div class="sideTitle" style="font-size:15px; margin-bottom:10px;">Vista japonesa</div>
+      <div class="modeGrid">
+        <button id="v-basico" class="btn btnMode" type="button" onclick="setVista('basico')">Básico</button>
+        <button id="v-avanzado" class="btn btnMode" type="button" onclick="setVista('avanzado')">Avanzado</button>
+      </div>
+
+      <div class="sep"></div>
+
+      <div class="sideTitle" style="font-size:15px; margin-bottom:10px;">Bloques</div>
+      <div class="modeGrid" id="bloquesBar"></div>
+
+      <div class="sep"></div>
+
+      <div class="smallStatus">
+        <div id="statusModo">Modo: —</div>
+        <div id="statusPool">Pool: —</div>
+        <div id="statusVoz">Voz: buscando ja-JP…</div>
+        <div class="hint" style="margin-top:8px;">
+          Teclado: A/B/C responde, Enter avanza, Espacio reproduce audio.
+        </div>
+      </div>
+
+    </aside>
+  </div>
+</div>
+
+<script>
+/* =========================================================
+   CONFIG SIMPLE
+========================================================= */
+const DATA_URL = "data/kit/kit.json";
+const AUDIO_BASE_URL = "data/kit/audios/";
+const STATS_KEY = "japones_kit_stats_v1";
+const LETRAS = ["a", "b", "c"];
+
+const MODO_LABEL = {
+  jp_es: "JP → ES",
+  es_jp: "ES → JP",
+  audio_es: "🔊 → ES",
+  audio_jp: "🔊 → JP",
+  dictado: "Dictado",
+  mix: "Mix"
+};
+
+let dataRaw = [];
+let listaCompleta = [];
+let lista = [];
+let bloques = [];
+let bloquesSeleccionados = new Set();
+let todosActivo = true;
+let modoActual = "mix";
+let rondaModo = "jp_es";
+let vistaJapones = "basico";
+let actual = null;
+let opcionesActuales = [];
+let correctaLetra = "";
+let yaValidado = false;
+
+let aciertos = 0;
+let errores = 0;
+let racha = 0;
+let mejorRacha = 0;
+
+let voces = [];
+let vozJa = null;
+let ultimoItemAudio = null;
+let ultimoTextoAudio = "";
+
+function $(id){ return document.getElementById(id); }
+
+/* =========================================================
+   UTILIDADES
+========================================================= */
+const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+function playBeep(freq, duration){
+  try{
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+
+    osc.connect(gain);
+    gain.connect(audioCtx.destination);
+
+    osc.frequency.value = freq;
+    osc.type = "sine";
+    gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
+
+    osc.start();
+    osc.stop(audioCtx.currentTime + duration);
+  }catch{}
+}
+
+function sonidoCorrecto(){
+  playBeep(700, 0.08);
+  setTimeout(() => playBeep(900, 0.12), 80);
+}
+
+function sonidoIncorrecto(){
+  playBeep(250, 0.2);
+}
+
+function limpiarTexto(s){
+  return String(s || "").trim().replace(/\s+/g, " ");
+}
+
+function pick(arr){
+  return arr[Math.floor(Math.random() * arr.length)];
+}
+
+function fisherRandom(arr){
+  const copia = arr.slice();
+  for(let i = copia.length - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * (i + 1));
+    [copia[i], copia[j]] = [copia[j], copia[i]];
+  }
+  return copia;
+}
+
+function totalPreguntas(){ return aciertos + errores; }
+
+function precisionPct(){
+  const total = totalPreguntas();
+  if(!total) return "0%";
+  return Math.round((aciertos / total) * 100) + "%";
+}
+
+function nombreBloqueLegible(k){
+  return String(k || "General").replaceAll("_", " ");
+}
+
+/* =========================================================
+   NORMALIZACIÓN
+========================================================= */
+function normalizarItem(x, bloque = ""){
+  const japones = limpiarTexto(x.japones || x.jp || x.kana || x.kanji || x.palabra || "");
+  const avanzado = limpiarTexto(x.avanzado || x.kanji || "");
+  const espanol = limpiarTexto(x.espanol || x.es || x.significado || "");
+  const audio = limpiarTexto(x.audio || x.audioFile || "");
+  const categoria = limpiarTexto(x.categoria || x.bloque || bloque || x.tema || "General");
+  const extra = limpiarTexto(x.extra || "");
+
+  if(!japones || !espanol) return null;
+  return { japones, avanzado, espanol, audio, extra, categoria, bloque: categoria };
+}
+
+function normalizarData(data){
+  dataRaw = data;
+
+  // Formato recomendado:
+  // [ { "bloque": "hiragana_serio", "titulo": "...", "items": [ ... ] } ]
+  if(Array.isArray(data) && data.some(x => x && Array.isArray(x.items))){
+    const salida = [];
+
+    data.forEach(grupo => {
+      const nombreBloque = limpiarTexto(grupo.bloque || grupo.categoria || grupo.nombre || grupo.titulo || "General");
+      const titulo = limpiarTexto(grupo.titulo || nombreBloque);
+
+      (grupo.items || []).forEach(x => {
+        const item = normalizarItem(x, nombreBloque);
+        if(item){
+          item.tituloBloque = titulo;
+          salida.push(item);
+        }
+      });
+    });
+
+    return salida;
+  }
+
+  // Formato objeto:
+  // { "hiragana": [ ... ], "katakana": [ ... ] }
+  if(data && !Array.isArray(data) && typeof data === "object"){
+    const salida = [];
+
+    Object.keys(data).forEach(k => {
+      if(!Array.isArray(data[k])) return;
+      data[k].forEach(x => {
+        const item = normalizarItem(x, k);
+        if(item){
+          item.tituloBloque = k;
+          salida.push(item);
+        }
+      });
+    });
+
+    if(salida.length) return salida;
+
+    const base = data.items || data.vocabulario || [];
+    return Array.isArray(base) ? base.map(x => normalizarItem(x)).filter(Boolean) : [];
+  }
+
+  // Formato plano:
+  return Array.isArray(data) ? data.map(x => normalizarItem(x)).filter(Boolean) : [];
+}
+
+function textoJapones(item){
+  if(!item) return "";
+  if(vistaJapones === "avanzado" && item.avanzado) return item.avanzado;
+  return item.japones;
+}
+
+function textoAudio(item){
+  return item ? item.japones : "";
+}
+
+/* =========================================================
+   STATS
+========================================================= */
+function cargarStats(){
+  try{
+    const s = JSON.parse(localStorage.getItem(STATS_KEY)) || {};
+    aciertos = s.aciertos || 0;
+    errores = s.errores || 0;
+    racha = s.racha || 0;
+    mejorRacha = s.mejorRacha || 0;
+  }catch{
+    aciertos = 0; errores = 0; racha = 0; mejorRacha = 0;
+  }
+  pintarStats();
+}
+
+function guardarStats(){
+  localStorage.setItem(STATS_KEY, JSON.stringify({ aciertos, errores, racha, mejorRacha }));
+}
+
+function pintarStats(){
+  $("aciertos").innerText = aciertos;
+  $("errores").innerText = errores;
+  $("racha").innerText = racha;
+  $("mejorRacha").innerText = mejorRacha;
+  $("precision").innerText = precisionPct();
+}
+
+function resetStats(){
+  aciertos = 0; errores = 0; racha = 0; mejorRacha = 0;
+  guardarStats();
+  pintarStats();
+}
+
+/* =========================================================
+   AUDIO REAL + FALLBACK SÍNTESIS JA-JP
+========================================================= */
+function cargarVoces(){
+  voces = window.speechSynthesis ? speechSynthesis.getVoices() : [];
+  vozJa = voces.find(v => String(v.lang).toLowerCase() === "ja-jp")
+       || voces.find(v => String(v.lang).toLowerCase().startsWith("ja"))
+       || null;
+
+  $("statusVoz").innerText = vozJa
+    ? `Voz fallback: ${vozJa.name} (${vozJa.lang})`
+    : "Voz fallback: ja-JP no detectada; usando voz disponible";
+}
+
+function hablarSintesis(texto){
+  const t = limpiarTexto(texto);
+  ultimoTextoAudio = t;
+  if(!t || !window.speechSynthesis) return;
+
+  try{ speechSynthesis.cancel(); }catch{}
+
+  const u = new SpeechSynthesisUtterance(t);
+  u.lang = "ja-JP";
+  if(vozJa) u.voice = vozJa;
+  u.rate = 0.82;
+  u.pitch = 1;
+  speechSynthesis.speak(u);
+}
+
+function rutaAudio(item){
+  if(!item || !item.audio) return "";
+  return AUDIO_BASE_URL + item.audio;
+}
+
+function reproducirAudioItem(item){
+  if(!item) return;
+
+  ultimoItemAudio = item;
+  ultimoTextoAudio = textoAudio(item);
+
+  const src = rutaAudio(item);
+
+  if(!src){
+    hablarSintesis(textoAudio(item));
+    return;
+  }
+
+  try{
+    const audio = new Audio(src);
+    audio.preload = "auto";
+
+    let fallbackLanzado = false;
+
+    const fallback = () => {
+      if(fallbackLanzado) return;
+      fallbackLanzado = true;
+      hablarSintesis(textoAudio(item));
+    };
+
+    audio.addEventListener("error", fallback, { once:true });
+
+    const p = audio.play();
+    if(p && typeof p.catch === "function"){
+      p.catch(() => fallback());
+    }
+  }catch{
+    hablarSintesis(textoAudio(item));
+  }
+}
+
+function hablarActual(){
+  if(ultimoItemAudio) reproducirAudioItem(ultimoItemAudio);
+  else if(actual) reproducirAudioItem(actual);
+  else if(ultimoTextoAudio) hablarSintesis(ultimoTextoAudio);
+}
+
+if(window.speechSynthesis){
+  cargarVoces();
+  speechSynthesis.onvoiceschanged = cargarVoces;
+}
+
+/* =========================================================
+   MODOS
+========================================================= */
+function modosDeMix(){
+  return ["jp_es", "es_jp", "audio_es", "audio_jp", "dictado"];
+}
+
+function elegirModoRonda(){
+  rondaModo = (modoActual === "mix") ? pick(modosDeMix()) : modoActual;
+}
+
+function preguntaDe(item){
+  if(rondaModo === "jp_es") return textoJapones(item);
+  if(rondaModo === "es_jp") return item.espanol;
+  if(rondaModo === "audio_es") return "";
+  if(rondaModo === "audio_jp") return "";
+  if(rondaModo === "dictado") return "";
+  return textoJapones(item);
+}
+
+function respuestaDe(item){
+  if(rondaModo === "jp_es") return item.espanol;
+  if(rondaModo === "es_jp") return textoJapones(item);
+  if(rondaModo === "audio_es") return item.espanol;
+  if(rondaModo === "audio_jp") return textoJapones(item);
+  if(rondaModo === "dictado") return item.japones;
+  return item.espanol;
+}
+
+function opcionesDesde(itemCorrecto){
+  const correcta = respuestaDe(itemCorrecto);
+  const pool = fisherRandom(lista)
+    .filter(x => respuestaDe(x) !== correcta)
+    .map(x => respuestaDe(x));
+
+  const unicas = [];
+  const vistas = new Set([correcta.toLowerCase()]);
+
+  for(const p of pool){
+    const key = p.toLowerCase();
+    if(vistas.has(key)) continue;
+    vistas.add(key);
+    unicas.push(p);
+    if(unicas.length >= 2) break;
+  }
+
+  while(unicas.length < 2){
+    unicas.push("—");
+  }
+
+  return fisherRandom([correcta, ...unicas]);
+}
+
+/* =========================================================
+   UI
+========================================================= */
+function limpiarResultado(){
+  yaValidado = false;
+  $("resultado").innerText = "";
+  $("resultado").className = "";
+
+  ["btnA", "btnB", "btnC"].forEach(id => {
+    const b = $(id);
+    b.disabled = false;
+    b.classList.remove("correcta", "incorrecta");
+  });
+}
+
+function pintarBotonesModo(){
+  const ids = {
+    jp_es: "m-jp-es",
+    es_jp: "m-es-jp",
+    audio_es: "m-audio-es",
+    audio_jp: "m-audio-jp",
+    dictado: "m-dictado",
+    mix: "m-mix"
+  };
+
+  Object.entries(ids).forEach(([modo, id]) => {
+    const el = $(id);
+    if(!el) return;
+    el.classList.toggle("activo", modoActual === modo && modo !== "mix");
+    el.classList.toggle("mixActivo", modoActual === modo && modo === "mix");
+  });
+
+  $("v-basico").classList.toggle("activo", vistaJapones === "basico");
+  $("v-avanzado").classList.toggle("activo", vistaJapones === "avanzado");
+
+  document.querySelectorAll(".btnBloque").forEach(btn => {
+    const k = btn.dataset.bloque;
+    btn.classList.toggle("activo", bloquesSeleccionados.has(k));
+  });
+
+  const btnTodos = $("btn-todos-bloques");
+  if(btnTodos) btnTodos.classList.toggle("mixActivo", todosActivo);
+
+  $("statusModo").innerText = `Modo: ${MODO_LABEL[modoActual]}`;
+  $("badgeModo").innerText = `Modo: ${MODO_LABEL[rondaModo] || MODO_LABEL[modoActual]}`;
+  $("badgeVista").innerText = `Vista: ${vistaJapones === "avanzado" ? "Avanzado" : "Básico"}`;
+}
+
+function setModo(modo){
+  modoActual = modo;
+  pintarBotonesModo();
+  if(lista.length) siguiente();
+}
+
+function setVista(vista){
+  vistaJapones = vista;
+  pintarBotonesModo();
+  if(lista.length) siguiente();
+}
+
+function construirBotonesBloques(){
+  const bar = $("bloquesBar");
+  if(!bar) return;
+
+  bar.innerHTML = "";
+
+  bloques.forEach(k => {
+    const btn = document.createElement("button");
+    btn.className = "btn btnMode btnBloque";
+    btn.dataset.bloque = k;
+    btn.type = "button";
+    btn.textContent = nombreBloqueLegible(k);
+    btn.onclick = () => toggleBloque(k);
+    bar.appendChild(btn);
+  });
+
+  const btnTodos = document.createElement("button");
+  btnTodos.className = "btn btnMode";
+  btnTodos.id = "btn-todos-bloques";
+  btnTodos.type = "button";
+  btnTodos.textContent = "Todos";
+  btnTodos.onclick = toggleTodosBloques;
+  bar.appendChild(btnTodos);
+
+  pintarBotonesModo();
+}
+
+function actualizarPoolDesdeBloques(){
+  lista = listaCompleta.filter(item => bloquesSeleccionados.has(item.bloque));
+
+  if(lista.length < 3){
+    $("pregunta").className = "es";
+    $("pregunta").innerText = "Pool muy pequeño";
+    $("subPregunta").innerText = "Activa al menos un bloque con 3 entradas combinadas.";
+    $("opciones").innerHTML = "";
+    return false;
+  }
+
+  $("statusPool").innerText = `Pool: ${lista.length} entradas`;
+  return true;
+}
+
+function toggleTodosBloques(){
+  if(!bloques.length) return;
+
+  if(todosActivo){
+    todosActivo = false;
+    bloquesSeleccionados = new Set([bloques[0]]);
+  }else{
+    todosActivo = true;
+    bloquesSeleccionados = new Set(bloques);
+  }
+
+  actualizarPoolDesdeBloques();
+  pintarBotonesModo();
+  siguiente();
+}
+
+function toggleBloque(k){
+  if(todosActivo){
+    todosActivo = false;
+    bloquesSeleccionados = new Set([k]);
+  }else{
+    if(bloquesSeleccionados.has(k)) bloquesSeleccionados.delete(k);
+    else bloquesSeleccionados.add(k);
+
+    if(bloquesSeleccionados.size === 0) bloquesSeleccionados.add(k);
+  }
+
+  todosActivo = bloquesSeleccionados.size === bloques.length;
+
+  actualizarPoolDesdeBloques();
+  pintarBotonesModo();
+  siguiente();
+}
+
+function renderPregunta(item){
+  const pregunta = preguntaDe(item);
+  const p = $("pregunta");
+  const sub = $("subPregunta");
+
+  p.className = "";
+  sub.innerText = "";
+  ultimoItemAudio = item;
+  ultimoTextoAudio = textoAudio(item);
+
+  $("badgeModo").innerText = `Modo: ${MODO_LABEL[rondaModo]}`;
+  $("badgeBloque").innerText = `Bloque: ${nombreBloqueLegible(item.bloque)}`;
+
+  if(rondaModo === "audio_es" || rondaModo === "audio_jp" || rondaModo === "dictado"){
+    p.className = "dictado";
+    p.innerHTML = `<button class="btn btnAudio big" type="button" onclick="hablarActual()">🔊</button>`;
+    setTimeout(() => reproducirAudioItem(item), 250);
+    return;
+  }
+
+  if(rondaModo === "es_jp"){
+    p.className = "es";
+    p.textContent = pregunta;
+    sub.innerHTML = `<button class="btn btnAudio" type="button" onclick="hablarActual()">🔊</button>`;
+    return;
+  }
+
+  p.textContent = pregunta;
+  sub.innerHTML = `<button class="btn btnAudio" type="button" onclick="hablarActual()">🔊</button>`;
+
+  if(item.extra){
+    sub.innerHTML += ` <span class="badge">${item.extra}</span>`;
+  }
+}
+
+function renderOpciones(opciones){
+  $("opciones").innerHTML = opciones.map((op, i) => {
+    const letra = LETRAS[i];
+    return `<div>${letra}) ${op}</div>`;
+  }).join("");
+}
+
+function pintarOpcionCorrecta(letraElegida){
+  const btns = { a: $("btnA"), b: $("btnB"), c: $("btnC") };
+  Object.values(btns).forEach(b => b.disabled = true);
+  btns[correctaLetra].classList.add("correcta");
+  if(letraElegida !== correctaLetra){
+    btns[letraElegida].classList.add("incorrecta");
+  }
+}
+
+function siguiente(){
+  if(!actualizarPoolDesdeBloques()) return;
+
+  limpiarResultado();
+  elegirModoRonda();
+
+  actual = pick(lista);
+  opcionesActuales = opcionesDesde(actual);
+  correctaLetra = LETRAS[opcionesActuales.findIndex(x => x === respuestaDe(actual))];
+
+  renderPregunta(actual);
+  renderOpciones(opcionesActuales);
+
+  $("statusPool").innerText = `Pool: ${lista.length} entradas`;
+  pintarBotonesModo();
+}
+
+function responder(letra){
+  if(yaValidado || !actual) return;
+  yaValidado = true;
+
+  const ok = letra === correctaLetra;
+  pintarOpcionCorrecta(letra);
+
+  if(ok){
+    sonidoCorrecto();
+    aciertos++;
+    racha++;
+    mejorRacha = Math.max(mejorRacha, racha);
+    $("resultado").innerText = "¡Correcto!";
+    $("resultado").className = "correcto";
+  }else{
+    sonidoIncorrecto();
+    errores++;
+    racha = 0;
+    $("resultado").innerText = `No. Era: ${respuestaDe(actual)}`;
+    $("resultado").className = "incorrecto";
+  }
+
+  guardarStats();
+  pintarStats();
+}
+
+/* =========================================================
+   TECLADO
+========================================================= */
+document.addEventListener("keydown", (e) => {
+  const k = String(e.key || "").toLowerCase();
+
+  if(["a", "b", "c"].includes(k) && !yaValidado){
+    e.preventDefault();
+    responder(k);
+  }
+
+  if(e.key === "Enter"){
+    e.preventDefault();
+    siguiente();
+  }
+
+  if(e.code === "Space"){
+    e.preventDefault();
+    hablarActual();
+  }
+});
+
+/* =========================================================
+   CARGA DATA
+========================================================= */
+async function cargarData(){
+  cargarStats();
+  pintarBotonesModo();
+
+  try{
+    const res = await fetch(DATA_URL);
+    if(!res.ok) throw new Error("HTTP " + res.status);
+
+    const data = await res.json();
+    listaCompleta = normalizarData(data);
+
+    bloques = [...new Set(listaCompleta.map(x => x.bloque || "General"))];
+    bloquesSeleccionados = new Set(bloques);
+    todosActivo = true;
+    lista = listaCompleta.slice();
+
+    construirBotonesBloques();
+
+    if(listaCompleta.length < 3){
+      $("pregunta").className = "es";
+      $("pregunta").innerText = "Necesito al menos 3 entradas válidas en data/kit/kit.json";
+      $("subPregunta").innerText = "Cada entrada debe tener japones y espanol.";
+      return;
+    }
+
+    siguiente();
+  }catch(err){
+    console.error(err);
+    $("pregunta").className = "es";
+    $("pregunta").innerText = "No se pudo cargar data/kit/kit.json";
+    $("subPregunta").innerText = "Revisa la ruta y usa GitHub Pages o Live Server.";
+    $("opciones").innerHTML = "";
+    $("statusPool").innerText = "Pool: error al cargar";
+  }
+}
+
+cargarData();
+</script>
+</body>
+</html>
