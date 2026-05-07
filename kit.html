@@ -971,13 +971,24 @@ function renderOpciones(opciones){
   }).join("");
 }
 
-function pintarOpcionCorrecta(letraElegida){
-  const btns = { a: $("btnA"), b: $("btnB"), c: $("btnC") };
-  Object.values(btns).forEach(b => b.disabled = true);
-  btns[correctaLetra].classList.add("correcta");
-  if(letraElegida !== correctaLetra){
-    btns[letraElegida].classList.add("incorrecta");
-  }
+function pintarOpcionCorrecta(){
+
+  const btns = {
+    a: $("btnA"),
+    b: $("btnB"),
+    c: $("btnC")
+  };
+
+  Object.entries(btns).forEach(([letra, btn]) => {
+
+    btn.disabled = true;
+
+    if(letra === correctaLetra){
+      btn.classList.add("correcta");
+    }else{
+      btn.classList.add("incorrecta");
+    }
+  });
 }
 
 function siguiente(){
@@ -1007,7 +1018,7 @@ function responder(letra){
   yaValidado = true;
 
   const ok = letra && letra === correctaLetra;
-  pintarOpcionCorrecta(letra);
+  pintarOpcionCorrecta();
 
   if(ok){
     sonidoCorrecto();
