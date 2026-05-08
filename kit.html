@@ -184,6 +184,37 @@
     box-shadow:0 12px 28px rgba(34,197,94,.16);
   }
 
+.kanjiTitle{
+  font-size:15px;
+  margin-bottom:10px;
+  color:#fecaca;
+  text-shadow:
+    0 0 8px rgba(239,68,68,.45),
+    0 0 18px rgba(239,68,68,.22);
+}
+
+.btnKanji{
+  display:block;
+  width:100%;
+  text-align:center;
+  text-decoration:none;
+  border-radius:999px;
+  background:rgba(239,68,68,.18);
+  border:1px solid rgba(248,113,113,.55);
+  color:#fee2e2;
+  box-shadow:
+    0 0 12px rgba(239,68,68,.35),
+    inset 0 0 10px rgba(248,113,113,.10);
+}
+
+.btnKanji:hover{
+  background:rgba(239,68,68,.28);
+  box-shadow:
+    0 0 16px rgba(239,68,68,.50),
+    0 0 30px rgba(239,68,68,.18),
+    inset 0 0 10px rgba(248,113,113,.14);
+}
+  
   .btnAudio{
     background:rgba(34,197,94,.16);
     border:1px solid rgba(34,197,94,.45);
@@ -379,6 +410,20 @@
       <div class="modeGrid" id="bloquesBar"></div>
 
       <div class="sep"></div>
+      
+      <div class="sideTitle kanjiTitle">Kanji</div>
+      
+      <div class="modeGrid one">
+        <a class="btn btnKanji" href="https://asallamsensei.com/kanji.html">
+          Kanji de Grado 1
+        </a>
+      
+        <a class="btn btnKanji" href="https://asallamsensei.com/kanji_todos.html">
+          Los 2136 Jōyō Kanji
+        </a>
+      </div>
+      
+      <div class="sep"></div>
 
       <div class="smallStatus">
         <div id="statusModo">Modo: —</div>
@@ -399,7 +444,7 @@
 ========================================================= */
 const CLAVES_ESTUDIANTES = {
   "dogtora": { nombre: "Laura" },
-  "aguecuca": { nombre: "Guillermoster" },
+  "aguecuca": { nombre: "Daniel Arenales" },
   "profe": { nombre: "Sensei" },
   "paopao": { nombre: "Paola" },
   "hombreviejolaneta": { nombre: "Esteban" },
