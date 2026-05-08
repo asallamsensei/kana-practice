@@ -797,30 +797,28 @@ function pintarOpciones(letraElegida){
     const letra = letras[idx];
 
     const usarJp = (rondaDir === "es-jp");
+
     return `<div>${letra}) ${usarJp ? `<span class="jp">${txt}</span>` : txt}</div>`;
   }).join("");
 
-  const btnA = document.getElementById("btn-opcion-a");
-  const btnB = document.getElementById("btn-opcion-b");
-  const btnC = document.getElementById("btn-opcion-c");
-
-  const mapa = {
-    a: btnA,
-    b: btnB,
-    c: btnC
+  const botones = {
+    a: document.getElementById("btn-opcion-a"),
+    b: document.getElementById("btn-opcion-b"),
+    c: document.getElementById("btn-opcion-c")
   };
 
-  [btnA, btnB, btnC].forEach(btn => {
-    if(btn) btn.classList.remove("correcta", "incorrecta");
+  Object.entries(botones).forEach(([letra, btn]) => {
+
+    if(!btn) return;
+
+    btn.classList.remove("correcta", "incorrecta");
+
+    if(letra === correctaLetra){
+      btn.classList.add("correcta");
+    }else{
+      btn.classList.add("incorrecta");
+    }
   });
-
-  if(mapa[correctaLetra]){
-    mapa[correctaLetra].classList.add("correcta");
-  }
-
-  if(letraElegida && letraElegida !== correctaLetra && mapa[letraElegida]){
-    mapa[letraElegida].classList.add("incorrecta");
-  }
 }
 
 // ====== SIGUIENTE (DOBLE CLICK SI ESTABA SIN CALIFICAR) ======
