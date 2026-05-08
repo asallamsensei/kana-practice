@@ -455,7 +455,7 @@
       <div class="sideTitle audioTitle">Audio</div>
       
       <div class="modeGrid one">
-        <button id="audio-real" class="btn btnMode btnAudioMode activo" type="button" onclick="setAudioMode('real')">
+        <button id="audio-ia" class="btn btnMode btnAudioMode activo" type="button" onclick="setAudioMode('ia')">
           🎤 Audios IA
         </button>
       
@@ -556,13 +556,13 @@ let vozJa = null;
 let ultimoItemAudio = null;
 let ultimoTextoAudio = "";
 
-let modoAudio = "real";
+let modoAudio = "ia";
 
 function setAudioMode(modo){
 
   modoAudio = modo;
 
-  $("audio-real").classList.toggle("activo", modo === "real");
+  $("audio-ia").classList.toggle("activo", modo === "ia");
   $("audio-tts").classList.toggle("activo", modo === "tts");
 
 }
@@ -780,15 +780,16 @@ function reproducirAudioItem(item){
 
   const src = rutaAudio(item);
 
-  // Si el usuario quiere síntesis:
+  // Modo Síntesis: siempre usa speechSynthesis
   if(modoAudio === "tts"){
-    usarSintesis();
-    salir;
+    hablarSintesis(textoAudio(item));
+    return;
   }
-  
-  // Si eligió audio IA:
-  if(noExisteMp3){
-    usarSintesis(); // fallback automático
+
+  // Modo Audio IA: intenta usar mp3; si no hay ruta, cae a síntesis
+  if(!src){
+    hablarSintesis(textoAudio(item));
+    return;
   }
 
   try{
