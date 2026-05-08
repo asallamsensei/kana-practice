@@ -641,6 +641,94 @@
 { "kanji": "背", "significado": "espalda, estatura", "romaji": "se" },
 
 { "kanji": "黄色い声", "significado": "voz chillona", "romaji": "kiiroi koe" },
-{ "kanji": "風邪を引く", "significado": "resfriarse", "romaji": "kaze o hiku" }
-  
+{ "kanji": "風邪を引く", "significado": "resfriarse", "romaji": "kaze o hiku" },
+
+  { "kanji": "ワイシャツ", "significado": "camisa de vestir (del inglés “white shirt”)", "romaji": "waishatsu" },
+  { "kanji": "カレンダー", "significado": "calendario (del inglés “calendar”)", "romaji": "karendaa" },
+
+  { "kanji": "ページ", "significado": "página (del inglés “page”)", "romaji": "peeji" },
+  { "kanji": "マッチ", "significado": "fósforo, cerillo; partido, competencia (del inglés “match”)", "romaji": "macchi" },
+  { "kanji": "プール", "significado": "piscina, alberca [México] (del inglés “pool”)", "romaji": "puuru" },
+
+  { "kanji": "ラジカセ", "significado": "radiocasete (radios con grabadora, muy comunes en Japón entre los 70s–90s)", "romaji": "rajikase" },
+  { "kanji": "シャワー", "significado": "ducha (del inglés “shower”)", "romaji": "shawaa" },
+  { "kanji": "パン", "significado": "pan (del portugués “pão”)", "romaji": "pan" },
+
+  { "kanji": "コート", "significado": "abrigo (del inglés “coat”)", "romaji": "kooto" },
+  { "kanji": "カメラ", "significado": "cámara (fotográfica o de video)", "romaji": "kamera" },
+  { "kanji": "グラム", "significado": "gramo (del francés “gramme”)", "romaji": "guramu" },
+
+  { "kanji": "ペン", "significado": "bolígrafo, pluma, lapicero (del inglés “pen”)", "romaji": "pen" },
+  { "kanji": "テスト", "significado": "examen, prueba (del inglés “test”)", "romaji": "tesuto" },
+  { "kanji": "ラジウム", "significado": "radio (elemento químico, del inglés “radium”)", "romaji": "rajiumu" },
+
+  { "kanji": "ラジオ", "significado": "radio (aparato o medio de transmisión)", "romaji": "rajio" },
+  { "kanji": "バス", "significado": "autobús, bus, camión [México] (del inglés “bus”)", "romaji": "basu" },
+  { "kanji": "ニュース", "significado": "noticias (del inglés “news”)", "romaji": "nyuusu" },
+
+  { "kanji": "キロメートル", "significado": "kilómetro (del francés “kilomètre”)", "romaji": "kiromeetoru" },
+  { "kanji": "ネクタイ", "significado": "corbata (del inglés “necktie”)", "romaji": "nekutai" },
+
+  { "kanji": "ベッド", "significado": "cama (del inglés “bed”)", "romaji": "beddo" },
+  { "kanji": "コーヒー", "significado": "café (bebida, del neerlandés “koffie”)", "romaji": "koohii" },
+  { "kanji": "ホテル", "significado": "hotel (del inglés “hotel”)", "romaji": "hoteru" },
+
+  { "kanji": "スポーツ", "significado": "deportes (del inglés “sports”)", "romaji": "supootsu" },
+  { "kanji": "テーブル", "significado": "mesa (del inglés “table”)", "romaji": "teeburu" },
+  { "kanji": "ナイフ", "significado": "cuchillo (del inglés “knife”)", "romaji": "naifu" },
+
+  { "kanji": "フォーク", "significado": "tenedor (del inglés “fork”)", "romaji": "fooku" },
+  { "kanji": "タクシー", "significado": "taxi (del inglés “taxi”)", "romaji": "takushii" },
+  { "kanji": "カレー", "significado": "curry (del inglés “curry”)", "romaji": "karee" },
+
+  { "kanji": "ポスト", "significado": "buzón de correo (son rojos en Japón)", "romaji": "posuto" },
+  { "kanji": "スカート", "significado": "falda (del inglés “skirt”)", "romaji": "sukaato" },
+  { "kanji": "ギター", "significado": "guitarra (del inglés “guitar”)", "romaji": "gitaa" },
+
+  { "kanji": "メートル", "significado": "metro (del francés “mètre”)", "romaji": "meetoru" },
+  { "kanji": "バター", "significado": "mantequilla (del inglés “butter”)", "romaji": "bataa" },
+  { "kanji": "シャツ", "significado": "camisa (formal, de botones)", "romaji": "shatsu" },
+
+  { "kanji": "セーター", "significado": "suéter (del inglés “sweater”)", "romaji": "seetaa" },
+  { "kanji": "コピー", "significado": "copia, fotocopia", "romaji": "kopii" },
+  { "kanji": "ハンカチ", "significado": "pañuelo (del inglés “handkerchief”)", "romaji": "hankachi" },
+
+  { "kanji": "アパート", "significado": "apartamento (más pequeño y económico que un マンション)", "romaji": "apaato" },
+  { "kanji": "レコード", "significado": "disco de vinilo, long play, LP (del inglés “phonograph record”)", "romaji": "reekodo" },
+  { "kanji": "クラス", "significado": "clase (grupo de alumnos o categoría)", "romaji": "kurasu" },
+
+  { "kanji": "キロ", "significado": "kilo (del francés “kilo”)", "romaji": "kiro" },
+  { "kanji": "ボタン", "significado": "botón (de la ropa o para presionar)", "romaji": "botan" },
+  { "kanji": "マンション", "significado": "apartamento (del inglés “mansion”)", "romaji": "manshon" },
+
+  { "kanji": "エレベーター", "significado": "ascensor, elevador", "romaji": "erebeetaa" },
+  { "kanji": "ポケット", "significado": "bolsillo (del inglés “pocket”)", "romaji": "poketto" },
+
+  { "kanji": "フィルム", "significado": "película, rollo fotográfico (del inglés “film”)", "romaji": "firumu" },
+  { "kanji": "テレビ", "significado": "televisor, televisión, TV (del inglés “television”)", "romaji": "terebi" },
+  { "kanji": "ズボン", "significado": "pantalón (del francés “jupon”)", "romaji": "zubon" },
+
+  { "kanji": "ペット", "significado": "mascota (del inglés “pet”)", "romaji": "petto" },
+  { "kanji": "スプーン", "significado": "cuchara (del inglés “spoon”)", "romaji": "supuun" },
+  { "kanji": "ストーブ", "significado": "estufa, calefactor (del inglés “stove”)", "romaji": "sutoobu" },
+
+  { "kanji": "テープ", "significado": "cinta (del inglés “tape”)", "romaji": "teepu" },
+  { "kanji": "カップ", "significado": "taza (del inglés “cup”)", "romaji": "kappu" },
+  { "kanji": "ボールペン", "significado": "bolígrafo (del inglés “ball pen”)", "romaji": "boorupen" },
+
+  { "kanji": "キログラム", "significado": "kilogramo (del francés “kilogramme”)", "romaji": "kiroguramu" },
+  { "kanji": "レストラン", "significado": "restaurante (del francés “restaurant”)", "romaji": "resutoran" },
+
+  { "kanji": "テープレコーダー", "significado": "grabadora de casetes (del inglés “tape recorder”)", "romaji": "teepu rekoodaa" },
+  { "kanji": "コップ", "significado": "vaso (del holandés “kop”)", "romaji": "koppu" },
+
+  { "kanji": "スリッパ", "significado": "pantuflas (del inglés “slipper”)", "romaji": "surippa" },
+  { "kanji": "トイレ", "significado": "baño; inodoro (del inglés “toilet”)", "romaji": "toire" },
+  { "kanji": "デパート", "significado": "tienda de departamentos (del inglés “department store”)", "romaji": "depaato" },
+
+  { "kanji": "ドア", "significado": "puerta (estilo occidental, con bisagra o pomo/perilla)", "romaji": "doa" },
+  { "kanji": "ノート", "significado": "cuaderno, libreta (del inglés “note”)", "romaji": "nooto" },
+  { "kanji": "パーティー", "significado": "fiesta; grupo de personas (del inglés “party”)", "romaji": "paatii" },
+
+  { "kanji": "ＰＥＴ", "significado": "plástico PET (como el de las botellas)", "romaji": "petto" }
 ]
