@@ -343,6 +343,33 @@
     0 0 6px rgba(125,92,255,.45),
     0 0 14px rgba(125,92,255,.22);
 }
+
+.audioTitle{
+  font-size:15px;
+  margin-bottom:10px;
+  color:#bfdbfe;
+  text-shadow:
+    0 0 8px rgba(59,130,246,.45),
+    0 0 18px rgba(59,130,246,.22);
+}
+
+.btnAudioMode{
+  background:rgba(59,130,246,.14);
+  border:1px solid rgba(96,165,250,.45);
+  color:#dbeafe;
+  box-shadow:
+    0 0 10px rgba(59,130,246,.20),
+    inset 0 0 8px rgba(96,165,250,.08);
+}
+
+.btnAudioMode.activo{
+  background:rgba(59,130,246,.28);
+  border-color:rgba(147,197,253,.75);
+  box-shadow:
+    0 0 16px rgba(59,130,246,.45),
+    0 0 30px rgba(59,130,246,.18),
+    inset 0 0 10px rgba(147,197,253,.12);
+}
   
 </style>
 </head>
@@ -421,6 +448,20 @@
         <a class="btn btnKanji" href="https://asallamsensei.com/kanji_todos.html">
           Los 2136 Jōyō Kanji
         </a>
+      </div>
+
+      <div class="sep"></div>
+      
+      <div class="sideTitle audioTitle">Audio</div>
+      
+      <div class="modeGrid one">
+        <button id="audio-real" class="btn btnMode btnAudioMode activo" type="button" onclick="setAudioMode('real')">
+          🎤 Audios IA
+        </button>
+      
+        <button id="audio-tts" class="btn btnMode btnAudioMode" type="button" onclick="setAudioMode('tts')">
+          🧠 Voz Sintetizada
+        </button>
       </div>
       
       <div class="sep"></div>
@@ -515,6 +556,17 @@ let vozJa = null;
 let ultimoItemAudio = null;
 let ultimoTextoAudio = "";
 
+let modoAudio = "real";
+
+function setAudioMode(modo){
+
+  modoAudio = modo;
+
+  $("audio-real").classList.toggle("activo", modo === "real");
+  $("audio-tts").classList.toggle("activo", modo === "tts");
+
+}
+  
 function $(id){ return document.getElementById(id); }
 
 /* =========================================================
@@ -728,9 +780,15 @@ function reproducirAudioItem(item){
 
   const src = rutaAudio(item);
 
-  if(!src){
-    hablarSintesis(textoAudio(item));
-    return;
+  // Si el usuario quiere síntesis:
+  if(modoAudio === "tts"){
+    usarSintesis();
+    salir;
+  }
+  
+  // Si eligió audio IA:
+  if(noExisteMp3){
+    usarSintesis(); // fallback automático
   }
 
   try{
