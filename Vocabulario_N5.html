@@ -494,6 +494,7 @@ let mejorRacha = 0;
 let correctaLetra = "";        // "a"/"b"/"c"
 let respuestaCorrecta = "";    // texto correcto (según dirección de la ronda)
 let yaValidado = false;
+let itemActualCorrecto = null;
 let actualOpcionesTexto = [];
 
 const letras = ["a","b","c"];
@@ -805,7 +806,7 @@ function accionSiguiente(){
 
     const res = document.getElementById("resultado");
     res.className = "incorrecto";
-    res.innerText = `Saltado ✘ (era ${correctaLetra}) — ${respuestaCorrecta}`;
+    res.innerText = `Saltado ✘ (era ${correctaLetra}) — ${respuestaCorrecta} — ${detalleCorrecto(itemActualCorrecto)}`;
 
     pintarOpciones(null);
     bloquearOpciones();
@@ -851,7 +852,8 @@ function siguiente(){
 
   actual = Math.floor(Math.random() * lista.length);
   const itemCorrecto = lista[actual];
-
+  itemActualCorrecto = itemCorrecto;
+  
   respuestaCorrecta = textoRespuesta(itemCorrecto);
 
   let opciones = [respuestaCorrecta];
@@ -903,6 +905,17 @@ function responder(letra){
   verificar(letra);
 }
 
+function detalleCorrecto(item){
+  const jp = item.kanji;
+  const romaji = item.romaji;
+
+  if(rondaDir === "jp-es"){
+    return `★ romaji: ${romaji}`;
+  }
+
+  return `${jp} ★ romaji: ${romaji}`;
+}
+  
 function verificar(letraForzada){
   const res = document.getElementById("resultado");
 
@@ -918,13 +931,13 @@ function verificar(letraForzada){
 
   if(letra === correctaLetra){
     res.className = "correcto";
-    res.innerText = "Correcto ✔";
+    res.innerText = `Correcto ✔ — ${detalleCorrecto(itemActualCorrecto)}`;
     aciertos++;
     racha++;
     if(racha > mejorRacha) mejorRacha = racha;
   }else{
     res.className = "incorrecto";
-    res.innerText = `Incorrecto ✘ (era ${correctaLetra}) — ${respuestaCorrecta}`;
+    res.innerText = `Incorrecto ✘ (era ${correctaLetra}) — ${respuestaCorrecta} — ${detalleCorrecto(itemActualCorrecto)}`;
     errores++;
     racha = 0;
   }
