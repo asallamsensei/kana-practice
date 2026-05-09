@@ -787,7 +787,7 @@ function habilitarOpciones(){
   });
 }
 
-function pintarOpciones(letraElegida){
+function pintarOpciones(){
   const box = document.getElementById("opcionesTexto");
 
   const opcionesActuales = actualOpcionesTexto;
@@ -943,7 +943,7 @@ function verificar(letraForzada){
     (rondaDir === "es-jp" || rondaEsDictado)
     && respuestaCorrecta !== jp
   ){
-    extraInfo = `${jp} ★ romaji: ${romaji}`;
+    extraInfo = `\n${jp} ★ romaji: ${romaji}`;
   }
   
   if(letra === correctaLetra){
@@ -969,7 +969,7 @@ function verificar(letraForzada){
   guardarStats();
   yaValidado = true;
 
-  pintarOpciones(letra);
+  pintarOpciones();
   bloquearOpciones();
 }
 
@@ -993,11 +993,9 @@ document.addEventListener("keydown", (e) => {
 
   if(k === "enter"){
     e.preventDefault();
-
-    if(yaValidado){
-      siguiente();
-    }
+    accionSiguiente();
   }
+  
 });
   
 cargarStats();
