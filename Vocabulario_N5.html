@@ -937,7 +937,7 @@ function verificar(letraForzada){
   const jp = itemActualCorrecto.kanji;
   const romaji = itemActualCorrecto.romaji;
   
-  let extraInfo = `★ romaji: ${romaji}`;
+  let extraInfo = `\n${jp} ★ romaji: ${romaji}`;
   
   if(rondaEsDictado){
   
@@ -947,12 +947,6 @@ function verificar(letraForzada){
       extraInfo = `\n${jp} ★ romaji: ${romaji}`;
     }
   
-  }
-  else if(
-    rondaDir === "es-jp"
-    && respuestaCorrecta !== jp
-  ){
-    extraInfo = `\n${jp} ★ romaji: ${romaji}`;
   }
   
   if(letra === correctaLetra){
