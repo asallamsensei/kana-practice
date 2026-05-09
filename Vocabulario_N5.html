@@ -825,20 +825,7 @@ function pintarOpciones(letraElegida){
 function accionSiguiente(){
 
   if(!yaValidado){
-    errores++;
-    racha = 0;
-    pintarStats();
-    guardarStats();
-    yaValidado = true;
-
-    const res = document.getElementById("resultado");
-    res.className = "incorrecto";
-    res.innerText = `Saltado ✘, era ${correctaLetra}) ${respuestaCorrecta} ${detalleCorrecto(itemActualCorrecto)}`;
-
-    pintarOpciones(null);
-    bloquearOpciones();
-    
-    sonidoIncorrecto();
+    verificar("");
     return;
   }
 
@@ -931,42 +918,49 @@ function responder(letra){
   if(yaValidado) return;
   verificar(letra);
 }
-
-function detalleCorrecto(item){
-  const jp = item.kanji;
-  const romaji = item.romaji;
-
-  if(rondaDir === "es-jp" || rondaEsDictado){
-    return `${jp} ★ romaji: ${romaji}`;
-  }
-
-  return `★ romaji: ${romaji}`;
-}
   
 function verificar(letraForzada){
   const res = document.getElementById("resultado");
 
   const r = (letraForzada || "").toString().toLowerCase().trim();
   
-  if(!["a","b","c"].includes(r)){
+  const esSaltado = r === "";
+  
+  if(!esSaltado && !["a","b","c"].includes(r)){
     res.className = "incorrecto";
     res.innerText = "Usa solo: a / b / c";
     return;
   }
   
-  const letra = r;
+  const letra = esSaltado ? "" : r;
 
+  const jp = itemActualCorrecto.kanji;
+  const romaji = itemActualCorrecto.romaji;
+  
+  let extraInfo = `★ romaji: ${romaji}`;
+  
+  if(
+    (rondaDir === "es-jp" || rondaEsDictado)
+    && respuestaCorrecta !== jp
+  ){
+    extraInfo = `${jp} ★ romaji: ${romaji}`;
+  }
+  
   if(letra === correctaLetra){
     sonidoCorrecto();
     res.className = "correcto";
-    res.innerText = `Correcto ✔ ${detalleCorrecto(itemActualCorrecto)}`;
+    res.innerText = `Correcto ✔ ${extraInfo}`;
     aciertos++;
     racha++;
     if(racha > mejorRacha) mejorRacha = racha;
   }else{
     sonidoIncorrecto();
     res.className = "incorrecto";
-    res.innerText = `Incorrecto ✘, era ${correctaLetra}) ${respuestaCorrecta} ${detalleCorrecto(itemActualCorrecto)}`;
+
+    res.innerText = esSaltado
+      ? `Saltado ✘, era ${correctaLetra}) ${respuestaCorrecta} ${extraInfo}`
+      : `Incorrecto ✘, era ${correctaLetra}) ${respuestaCorrecta} ${extraInfo}`;
+    
     errores++;
     racha = 0;
   }
