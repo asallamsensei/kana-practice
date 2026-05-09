@@ -939,8 +939,17 @@ function verificar(letraForzada){
   
   let extraInfo = `★ romaji: ${romaji}`;
   
-  if(
-    (rondaDir === "es-jp" || rondaEsDictado)
+  if(rondaEsDictado){
+  
+    if(respuestaCorrecta === jp){
+      extraInfo = `${itemActualCorrecto.significado} ★ romaji: ${romaji}`;
+    }else{
+      extraInfo = `\n${jp} ★ romaji: ${romaji}`;
+    }
+  
+  }
+  else if(
+    rondaDir === "es-jp"
     && respuestaCorrecta !== jp
   ){
     extraInfo = `\n${jp} ★ romaji: ${romaji}`;
