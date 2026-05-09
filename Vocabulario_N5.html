@@ -933,14 +933,8 @@ function responder(letra){
 }
 
 function detalleCorrecto(item){
-  const jp = item.kanji;
   const romaji = item.romaji;
-
-  if(rondaDir === "jp-es"){
-    return `★ romaji: ${romaji}`;
-  }
-
-  return `${jp} ★ romaji: ${romaji}`;
+  return `★ romaji: ${romaji}`;
 }
   
 function verificar(letraForzada){
