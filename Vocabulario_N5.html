@@ -954,7 +954,7 @@ function verificar(letraForzada){
   if(letra === correctaLetra){
     sonidoCorrecto();
     res.className = "correcto";
-    res.innerText = `Correcto ✔ ${extraInfo}`;
+    res.innerText = `Correcto ✔\n${extraInfo}`;
     aciertos++;
     racha++;
     if(racha > mejorRacha) mejorRacha = racha;
