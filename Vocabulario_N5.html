@@ -833,7 +833,7 @@ function accionSiguiente(){
 
     const res = document.getElementById("resultado");
     res.className = "incorrecto";
-    res.innerText = `Saltado ✘ (era ${correctaLetra}) — ${respuestaCorrecta} — ${detalleCorrecto(itemActualCorrecto)}`;
+    res.innerText = `Saltado ✘, era ${correctaLetra}) ${respuestaCorrecta} — ${detalleCorrecto(itemActualCorrecto)}`;
 
     pintarOpciones(null);
     bloquearOpciones();
@@ -966,7 +966,7 @@ function verificar(letraForzada){
   }else{
     sonidoIncorrecto();
     res.className = "incorrecto";
-    res.innerText = `Incorrecto ✘ (era ${correctaLetra}) — ${respuestaCorrecta} — ${detalleCorrecto(itemActualCorrecto)}`;
+    res.innerText = `Incorrecto ✘, era ${correctaLetra}) ${respuestaCorrecta} — ${detalleCorrecto(itemActualCorrecto)}`;
     errores++;
     racha = 0;
   }
