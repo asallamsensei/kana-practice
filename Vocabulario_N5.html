@@ -938,14 +938,14 @@ function verificar(letraForzada){
   const jp = itemActualCorrecto.kanji;
   const romaji = itemActualCorrecto.romaji;
   
-  let extraInfo = `\n${jp} ★ romaji: ${romaji}`;
+  let extraInfo = `${jp} ★ romaji: ${romaji}`;
   
   if(rondaEsDictado){
   
     if(respuestaCorrecta === jp){
       extraInfo = `${itemActualCorrecto.significado} ★ romaji: ${romaji}`;
     }else{
-      extraInfo = `\n${jp} ★ romaji: ${romaji}`;
+      extraInfo = `${jp} ★ romaji: ${romaji}`;
     }
   
   }
