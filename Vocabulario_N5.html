@@ -67,13 +67,14 @@
     padding: 16px;
   }
 
-  .panelGrid{
-    display:grid;
-    grid-template-columns: minmax(0, 1fr);
-    gap: 12px;
-    justify-items: center;
-    width: 100%;
-  }
+.panelGrid{
+  display:grid;
+  grid-template-columns: minmax(0, 1fr);
+  row-gap: 6px;
+  column-gap: 12px;
+  justify-items: center;
+  width: 100%;
+}
 
   .row{
     display:flex;
@@ -163,7 +164,7 @@
 
 #promptMain.dictado{
   font-size: 0;
-  margin: 10px 0 12px;
+  margin: 0;
 }
   
   #promptSub{
@@ -175,6 +176,7 @@
   }
 
 #promptSub.oculto{
+  display: none;
   min-height: 0;
   margin: 0;
   font-size: 0;
