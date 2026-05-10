@@ -536,7 +536,7 @@
 
       <div class="panel main-play">
         <div id="kanaBox">
-          <div id="kana" onclick="if(esDictadoTipo(tipoPreguntaActual)) reproducirAudioKana(kanaLista[actual][1])">あ</div>
+          <div id="kana" onclick="replayAudio()">あ</div>
 
           <div class="audio-row">
             <button id="btnReplay" class="ghost-btn" type="button" onclick="replayAudio()">🔊</button>
@@ -1221,11 +1221,7 @@ function responderOpcion(indice){
   if (yaValidado) return;
 
   const correcta = kanaLista[actual];
-  const correctaTexto = valorRespuesta(correcta, tipoPreguntaActual);
   const fichaCorrecta = correcta[0] + " - " + correcta[1];
-
-  const btns = document.querySelectorAll(".opcion-btn");
-  const btnElegido = btns[indice];
 
 if (opcionesActuales[indice][1] === romajiCorrectoActual) {
   sonidoCorrecto();
@@ -1357,7 +1353,7 @@ document.addEventListener("keydown", (event) => {
 
   if (key === "enter") {
     event.preventDefault();
-    if (yaValidado) siguienteKana();
+    siguienteDesdeBoton();
   }
 });
   
