@@ -1202,16 +1202,18 @@ function responderOpcion(indice){
   reproducirAudioKana(correcta[1]);
 
   if (opcionesActuales[indice][1] === romajiCorrectoActual) {
-    document.getElementById("respuesta").innerText = "Correcto ✔ (" + correctaTexto + ")\n" + fichaCorrecta;
+    document.getElementById("respuesta").innerText =
+      "Correcto ✔\n" + fichaCorrecta;
     document.getElementById("respuesta").className = "correcto";
-
+  
     aciertos++;
     racha++;
     if (racha > mejorRacha) mejorRacha = racha;
   } else {
-    document.getElementById("respuesta").innerText = "Incorrecto ✘ (era: " + correctaTexto + ")\n" + fichaCorrecta;
+    document.getElementById("respuesta").innerText =
+      "Incorrecto ✘\nera: " + fichaCorrecta;
     document.getElementById("respuesta").className = "incorrecto";
-
+  
     errores++;
     racha = 0;
   }
@@ -1251,7 +1253,7 @@ function siguienteDesdeBoton(){
     const correcto = valorRespuesta(correcta, tipoPreguntaActual);
     const fichaCorrecta = correcta[0] + " - " + correcta[1];
     
-    document.getElementById("respuesta").innerText = "Incorrecto ✘ (era: " + correcto + ")\n" + fichaCorrecta;
+    document.getElementById("respuesta").innerText = "Incorrecto ✘\nera: " + fichaCorrecta;
     document.getElementById("respuesta").className = "incorrecto";
 
     marcarOpcionesResultado();
