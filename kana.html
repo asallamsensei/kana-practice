@@ -837,6 +837,34 @@ function limpiarUI(){
   setBotonesOpcionesHabilitados(true);
 }
 
+const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+function playBeep(freq, duration){
+  try{
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+
+    osc.connect(gain);
+    gain.connect(audioCtx.destination);
+
+    osc.frequency.value = freq;
+    osc.type = "sine";
+    gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
+
+    osc.start();
+    osc.stop(audioCtx.currentTime + duration);
+  }catch{}
+}
+
+function sonidoCorrecto(){
+  playBeep(700, 0.08);
+  setTimeout(() => playBeep(900, 0.12), 80);
+}
+
+function sonidoIncorrecto(){
+  playBeep(250, 0.2);
+}
+  
 function actualizarBotonAudio(){
   const btn = document.getElementById("btnReplay");
   const kanaEl = document.getElementById("kana");
@@ -1198,25 +1226,27 @@ function responderOpcion(indice){
 
   const btns = document.querySelectorAll(".opcion-btn");
   const btnElegido = btns[indice];
-  
-  reproducirAudioKana(correcta[1]);
 
-  if (opcionesActuales[indice][1] === romajiCorrectoActual) {
-    document.getElementById("respuesta").innerText =
-      "Correcto ✔\n" + fichaCorrecta;
-    document.getElementById("respuesta").className = "correcto";
-  
-    aciertos++;
-    racha++;
-    if (racha > mejorRacha) mejorRacha = racha;
-  } else {
-    document.getElementById("respuesta").innerText =
-      "Incorrecto ✘\nera: " + fichaCorrecta;
-    document.getElementById("respuesta").className = "incorrecto";
-  
-    errores++;
-    racha = 0;
-  }
+if (opcionesActuales[indice][1] === romajiCorrectoActual) {
+  sonidoCorrecto();
+
+  document.getElementById("respuesta").innerText =
+    "Correcto ✔\n" + fichaCorrecta;
+  document.getElementById("respuesta").className = "correcto";
+
+  aciertos++;
+  racha++;
+  if (racha > mejorRacha) mejorRacha = racha;
+} else {
+  sonidoIncorrecto();
+
+  document.getElementById("respuesta").innerText =
+    "Incorrecto ✘\nera: " + fichaCorrecta;
+  document.getElementById("respuesta").className = "incorrecto";
+
+  errores++;
+  racha = 0;
+}
 
   // 🔹 AQUÍ pintas todos los botones
   marcarOpcionesResultado();
