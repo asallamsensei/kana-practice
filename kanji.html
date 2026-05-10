@@ -380,7 +380,7 @@
   </div>
 
 
-  
+  <div id="resultado"></div>
   <div id="lecturas"></div>
     
   <div id="estadisticas">
@@ -487,7 +487,6 @@ function cargarEstado(){
     errores = estado.errores || 0;
     racha = estado.racha || 0;
     mejorRacha = estado.mejorRacha || 0;
-    modoActual = estado.modoActual || "mix";
   } catch(e) {
     console.error("Estado corrupto en localStorage", e);
   }
@@ -510,9 +509,10 @@ fetch("data/kanji_1.json")
   .then(data => {
     lista = (data || []).filter(x => x && x.kanji && x.significado_es);
 
-    cargarEstado();
-    actualizarStatsUI();
-    setModo(modoActual); // usa el modo guardado
+  cargarEstado();
+  modoActual = "mix";
+  actualizarStatsUI();
+  setModo("mix");
   })
   .catch((err) => {
     console.error(err);
@@ -568,6 +568,8 @@ function limpiarUIParaNueva(){
   const res = document.getElementById("resultado");
   res.innerText = "";
   res.className = "";
+
+  document.getElementById("lecturas").innerHTML = "";
   yaValidado = false;
 }
 
