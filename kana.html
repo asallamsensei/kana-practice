@@ -528,7 +528,7 @@
 <body>
 
 <div class="wrap">
-  <h1>Repaso de Kana — Asallam Sensei</h1>
+  <h1>Kana ★ Asallam Sensei</h1>
 
   <div class="card">
 
@@ -675,8 +675,8 @@ let racha = 0;
 let mejorRacha = 0;
 
 let usarHiragana = true;
-let usarKatakana = true;
-let usarExtra = true;
+let usarKatakana = false;
+let usarExtra = false;
 
 let usarJPES = true;
 let usarESJP = true;
@@ -848,8 +848,12 @@ function actualizarBotonAudio(){
   kanaEl.classList.remove("dictado");
   box.classList.remove("dictado-only");
 
+  // 🔊 Siempre visible
+  btn.classList.add("visible");
+
+  // Solo agrandarlo en dictado
   if (esDictadoTipo(tipoPreguntaActual)) {
-    btn.classList.add("visible", "big-sound");
+    btn.classList.add("big-sound");
     kanaEl.classList.add("dictado");
     box.classList.add("dictado-only");
   }
