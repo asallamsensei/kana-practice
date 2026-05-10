@@ -120,6 +120,29 @@
   transform: translateY(-1px);
 }
 
+.btnABC.correcta{
+  background:rgba(34,197,94,.30);
+  border-color:rgba(34,197,94,.75);
+  color:#dcfce7;
+  box-shadow:
+    0 0 14px rgba(34,197,94,.45),
+    inset 0 0 10px rgba(34,197,94,.12);
+}
+
+.btnABC.incorrecta{
+  background:rgba(239,68,68,.25);
+  border-color:rgba(239,68,68,.75);
+  color:#fee2e2;
+  box-shadow:
+    0 0 14px rgba(239,68,68,.35),
+    inset 0 0 10px rgba(239,68,68,.10);
+}
+
+.btnABC:disabled{
+  cursor:not-allowed;
+  opacity:.95;
+}
+  
   /* Nav debajo del input */
   #navBtns{
     margin-top:4px;
@@ -379,9 +402,9 @@
 
   <div class="answerGrid">
     <div id="opbtns">
-      <button class="btnABC" type="button" onclick="responder('a')">a</button>
-      <button class="btnABC" type="button" onclick="responder('b')">b</button>
-      <button class="btnABC" type="button" onclick="responder('c')">c</button>
+      <button id="btnA" class="btnABC" type="button" onclick="responder('a')">a</button>
+      <button id="btnB" class="btnABC" type="button" onclick="responder('b')">b</button>
+      <button id="btnC" class="btnABC" type="button" onclick="responder('c')">c</button>
     </div>
   
     <div id="navBtns">
@@ -606,6 +629,13 @@ function limpiarUIParaNueva(){
   res.className = "";
 
   document.getElementById("lecturas").innerHTML = "";
+
+  ["btnA", "btnB", "btnC"].forEach(id => {
+    const btn = document.getElementById(id);
+    btn.disabled = false;
+    btn.classList.remove("correcta", "incorrecta");
+  });
+
   yaValidado = false;
 }
 
@@ -645,13 +675,33 @@ function siguiente(){
      c) ${opciones[2]}`;
 }
 
+function pintarBotonesRespuesta(){
+  const botones = {
+    a: document.getElementById("btnA"),
+    b: document.getElementById("btnB"),
+    c: document.getElementById("btnC")
+  };
+
+  Object.entries(botones).forEach(([letra, btn]) => {
+    btn.disabled = true;
+
+    if (letra === correcta) {
+      btn.classList.add("correcta");
+    } else {
+      btn.classList.add("incorrecta");
+    }
+  });
+}
+  
 /* ✅ Verificar la letra elegida */
 function verificar(letraElegida = ""){
   if (yaValidado) return;
 
   const r = String(letraElegida).toLowerCase().trim();
   const res = document.getElementById("resultado");
+  pintarBotonesRespuesta();
 
+  
   if (r === correcta) {
     sonidoCorrecto();
     res.innerText = "Correcto ✔";
@@ -661,7 +711,7 @@ function verificar(letraElegida = ""){
     if (racha > mejorRacha) mejorRacha = racha;
   } else {
     sonidoIncorrecto();
-    res.innerText = `Incorrecto ✘ — correcta: ${correcta}) ${respuestaCorrecta}`;
+    res.innerText = `Incorrecto ✘, era ${correcta}) ${respuestaCorrecta}`;
     res.className = "incorrecto";
     errores++;
     racha = 0;
