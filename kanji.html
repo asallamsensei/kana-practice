@@ -220,13 +220,23 @@
     background: rgba(255,255,255,.09);
     transform: translateY(-1px);
   }
+  
   .btnMode.active{
-    background:#111;
-    color:white;
-    border-color: rgba(255,255,255,.22);
+    background:rgba(34,197,94,.22);
+    border-color:rgba(34,197,94,.55);
+    color:#dcfce7;
+    box-shadow:
+      0 0 12px rgba(34,197,94,.25),
+      inset 0 0 8px rgba(34,197,94,.10);
   }
 
-  
+  .btnMode.mixActive{
+    background:linear-gradient(135deg, #22c55e, #7d5cff);
+    border-color:transparent;
+    color:white;
+    box-shadow:0 12px 28px rgba(34,197,94,.16);
+  }
+
   /* --- Grid pregunta + opciones --- */
   .qaGrid{
     display:inline-grid;            /* ✅ clave */
@@ -563,7 +573,9 @@ function pintarBotonesModo(){
 
   document.getElementById("btnKS").classList.toggle("active", ksActivo);
   document.getElementById("btnSK").classList.toggle("active", skActivo);
-  document.getElementById("btnMix").classList.toggle("active", mixActivo);
+
+  document.getElementById("btnMix").classList.toggle("mixActive", mixActivo);
+  document.getElementById("btnMix").classList.toggle("active", false);
 }
   
 function textoPregunta(item){
