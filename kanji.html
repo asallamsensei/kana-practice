@@ -357,7 +357,7 @@
 
 <body>
   <div class="wrap">
-  <h1>Kanji de Grado 1 — Asallam Sensei</h1>
+  <h1>Kanji de Grado 1 ★ Asallam Sensei</h1>
 
   <div class="layout">
     <main class="mainQuiz">
@@ -432,7 +432,8 @@ let yaValidado = false;        // ya se verificó la respuesta actual
 
 let itemActual = null;
   
-let modoActual = "mix"; // por defecto mezcla
+let modosActivos = new Set(["kanji-sig", "sig-kanji"]);
+let modoActual = "mix";
 let dirActual = "kanji-sig";
 
 const letras = ["a","b","c"];
@@ -510,6 +511,7 @@ fetch("data/kanji_1.json")
     lista = (data || []).filter(x => x && x.kanji && x.significado_es);
 
   cargarEstado();
+  modosActivos = new Set(["kanji-sig", "sig-kanji"]);
   modoActual = "mix";
   actualizarStatsUI();
   setModo("mix");
@@ -522,26 +524,48 @@ fetch("data/kanji_1.json")
   });
   
 function getModo(){
-  return modoActual;
+  return modosActivos.size === 2 ? "mix" : [...modosActivos][0];
 }
 
 function setModo(m){
-  modoActual = m;
+  if (m === "mix") {
+    modosActivos = new Set(["kanji-sig", "sig-kanji"]);
+  } else {
+    if (modosActivos.has(m)) {
+      modosActivos.delete(m);
+    } else {
+      modosActivos.add(m);
+    }
 
-  dirActual = (m === "mix") ? "kanji-sig" : m;
+    // Evita que no quede ningún modo activo
+    if (modosActivos.size === 0) {
+      modosActivos.add(m);
+    }
+  }
 
-  document.getElementById("btnKS").classList.toggle("active", m==="kanji-sig");
-  document.getElementById("btnSK").classList.toggle("active", m==="sig-kanji");
-  document.getElementById("btnMix").classList.toggle("active", m==="mix");
+  modoActual = modosActivos.size === 2 ? "mix" : [...modosActivos][0];
+
+  pintarBotonesModo();
 
   yaValidado = false;
   document.getElementById("resultado").innerText = "";
   document.getElementById("resultado").className = "";
+  document.getElementById("lecturas").innerHTML = "";
 
   guardarEstado();
   siguiente();
 }
 
+function pintarBotonesModo(){
+  const ksActivo = modosActivos.has("kanji-sig");
+  const skActivo = modosActivos.has("sig-kanji");
+  const mixActivo = ksActivo && skActivo;
+
+  document.getElementById("btnKS").classList.toggle("active", ksActivo);
+  document.getElementById("btnSK").classList.toggle("active", skActivo);
+  document.getElementById("btnMix").classList.toggle("active", mixActivo);
+}
+  
 function textoPregunta(item){
   return (dirActual === "kanji-sig") ? item.kanji : item.significado_es;
 }
@@ -584,11 +608,8 @@ function siguiente(){
   document.getElementById("lecturas").innerHTML = "";
 
   // decidir dirección real para ESTA pregunta (sin mutar el objeto)
-  if (getModo() === "mix") {
-    dirActual = (Math.random() < 0.5) ? "kanji-sig" : "sig-kanji";
-  } else {
-    dirActual = getModo();
-  }
+  const activos = [...modosActivos];
+  dirActual = activos[Math.floor(Math.random() * activos.length)];
 
 
   respuestaCorrecta = textoRespuesta(itemCorrecto);
