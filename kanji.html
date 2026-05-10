@@ -197,19 +197,51 @@
   .correcto{ color:var(--ok); font-weight:900; }
   .incorrecto{ color:var(--bad); font-weight:900; }
 
-  #lecturas{
-    margin-top:8px;
-    text-align:center;
-    font-size:18px;
-    line-height:1.5;
-    color:rgba(255,255,255,.92);
-    min-height:54px;
-  }
-  
-  #lecturas .jp{
-    font-family: var(--jp);
-    font-weight:700;
-  }
+#lecturas{
+  margin-top:12px;
+  display:flex;
+  justify-content:center;
+  gap:12px;
+  flex-wrap:wrap;
+  min-height:54px;
+}
+
+.readingBox{
+  padding:10px 14px;
+  border-radius:14px;
+  border:1px solid rgba(255,255,255,.14);
+  background:linear-gradient(180deg, var(--card2), var(--card));
+  box-shadow:var(--shadow);
+  min-width:180px;
+  text-align:center;
+}
+
+.readingLabel{
+  font-size:13px;
+  font-weight:900;
+  letter-spacing:.6px;
+  margin-bottom:6px;
+  opacity:.9;
+}
+
+.readingBox.kun .readingLabel{
+  color:#86efac;
+  text-shadow:
+    0 0 8px rgba(34,197,94,.35);
+}
+
+.readingBox.on .readingLabel{
+  color:#c4b5fd;
+  text-shadow:
+    0 0 8px rgba(125,92,255,.35);
+}
+
+#lecturas .jp{
+  font-family: var(--jp);
+  font-size:22px;
+  font-weight:700;
+  line-height:1.45;
+}
   
   #estadisticas{
     margin-top:8px;
@@ -719,8 +751,15 @@ function verificar(letraElegida = ""){
 
   actualizarStatsUI();
   document.getElementById("lecturas").innerHTML = `
-    <div>Kun: <span class="jp">${itemActual.kunyomi || "—"}</span></div>
-    <div>On: <span class="jp">${itemActual.onyomi || "—"}</span></div>
+    <div class="readingBox kun">
+      <div class="readingLabel">KUNYOMI</div>
+      <div class="jp">${itemActual.kunyomi || "—"}</div>
+    </div>
+  
+    <div class="readingBox on">
+      <div class="readingLabel">ONYOMI</div>
+      <div class="jp">${itemActual.onyomi || "—"}</div>
+    </div>
   `;
   guardarEstado();
   yaValidado = true;
