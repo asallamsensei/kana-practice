@@ -979,6 +979,251 @@
           "explicacion": "買う = comprar."
         }
       ]
+    },
+    {
+      "nombre": "Preguntas 5",
+      "preguntas": [
+        {
+          "id": 81,
+          "titulo": "「暑いですね。＿＿＿へ行きませんか。」\n¿Cuál opción completa mejor la frase?",
+          "opciones": {
+            "a": "プール",
+            "b": "テスト",
+            "c": "ネクタイ",
+            "d": "ベッド"
+          },
+          "correcta": "a",
+          "explicacion": "暑い日にはプールへ行くのが自然です。"
+        },
+        {
+          "id": 82,
+          "titulo": "「コピーをしてください。」\n¿Qué quiere hacer probablemente la persona?",
+          "opciones": {
+            "a": "写真を撮る",
+            "b": "料理を作る",
+            "c": "コピーをする",
+            "d": "服を洗う"
+          },
+          "correcta": "c",
+          "explicacion": "コピーをする = sacar una copia o fotocopia."
+        },
+        {
+          "id": 83,
+          "titulo": "「レストランで＿＿＿を飲みました。」\n¿Cuál opción suena más natural?",
+          "opciones": {
+            "a": "コーヒー",
+            "b": "ボタン",
+            "c": "スカート",
+            "d": "ページ"
+          },
+          "correcta": "a",
+          "explicacion": "コーヒーを飲みました = Tomé café."
+        },
+        {
+          "id": 84,
+          "titulo": "「ホテルの部屋にベッドが二つあります。」\nホテル es…",
+          "opciones": {
+            "a": "escuela",
+            "b": "estación",
+            "c": "hotel",
+            "d": "parque"
+          },
+          "correcta": "c",
+          "explicacion": "ホテル = hotel."
+        },
+        {
+          "id": 85,
+          "titulo": "「タクシーで会社へ行きます。」\nタクシー es…",
+          "opciones": {
+            "a": "comida",
+            "b": "medio de transporte",
+            "c": "ropa",
+            "d": "mueble"
+          },
+          "correcta": "b",
+          "explicacion": "タクシー = taxi, un medio de transporte."
+        },
+        {
+          "id": 86,
+          "titulo": "Elige la frase más natural.",
+          "opciones": {
+            "a": "ギターを弾きます。",
+            "b": "ギターを飲みます。",
+            "c": "ギターを洗います。",
+            "d": "ギターを食べます。"
+          },
+          "correcta": "a",
+          "explicacion": "ギターには「弾く」を使うのが自然です。"
+        },
+        {
+          "id": 87,
+          "titulo": "「雨なので＿＿＿を着ます。」\n¿Cuál opción tiene más sentido?",
+          "opciones": {
+            "a": "コート",
+            "b": "フィルム",
+            "c": "フォーク",
+            "d": "カレンダー"
+          },
+          "correcta": "a",
+          "explicacion": "コートを着ます = ponerse un abrigo."
+        },
+        {
+          "id": 88,
+          "titulo": "「ニュースを＿＿＿。」\n¿Cuál verbo encaja mejor?",
+          "opciones": {
+            "a": "見ます",
+            "b": "食べます",
+            "c": "着ます",
+            "d": "泳ぎます"
+          },
+          "correcta": "a",
+          "explicacion": "ニュースを見る = ver noticias."
+        },
+        {
+          "id": 89,
+          "titulo": "¿Cuál palabra NO pertenece al mismo grupo?",
+          "opciones": {
+            "a": "フォーク",
+            "b": "ナイフ",
+            "c": "スプーン",
+            "d": "シャワー"
+          },
+          "correcta": "d",
+          "explicacion": "フォーク・ナイフ・スプーンは食器ですが、シャワーは違います。"
+        },
+        {
+          "id": 90,
+          "titulo": "「カメラで写真を＿＿＿。」\n¿Cuál verbo completa mejor la frase?",
+          "opciones": {
+            "a": "撮ります",
+            "b": "飲みます",
+            "c": "読みます",
+            "d": "開けます"
+          },
+          "correcta": "a",
+          "explicacion": "写真を撮る = tomar fotografías."
+        },
+        {
+          "id": 91,
+          "titulo": "「デパートで母に＿＿＿を買いました。」\n¿Cuál regalo tiene más sentido?",
+          "opciones": {
+            "a": "スカート",
+            "b": "トイレ",
+            "c": "プール",
+            "d": "テープ"
+          },
+          "correcta": "a",
+          "explicacion": "スカートはプレゼントとして自然です。"
+        },
+        {
+          "id": 92,
+          "titulo": "「ボールペンを忘れました。」\n¿Qué necesita probablemente la persona?",
+          "opciones": {
+            "a": "algo para escribir",
+            "b": "algo para comer",
+            "c": "un transporte",
+            "d": "una bebida"
+          },
+          "correcta": "a",
+          "explicacion": "ボールペン = bolígrafo; sirve para escribir."
+        },
+        {
+          "id": 93,
+          "titulo": "「エレベーターで七階へ行きます。」\nエレベーター es…",
+          "opciones": {
+            "a": "ascensor",
+            "b": "ventana",
+            "c": "puerta",
+            "d": "escalera"
+          },
+          "correcta": "a",
+          "explicacion": "エレベーター = ascensor/elevador."
+        },
+        {
+          "id": 94,
+          "titulo": "「カレンダーを見てください。」\n¿Qué información buscas normalmente?",
+          "opciones": {
+            "a": "fecha o día",
+            "b": "comida",
+            "c": "música",
+            "d": "ropa"
+          },
+          "correcta": "a",
+          "explicacion": "カレンダーでは日付や予定を確認します。"
+        },
+        {
+          "id": 95,
+          "titulo": "Elige la frase más natural.",
+          "opciones": {
+            "a": "シャワーを浴びます。",
+            "b": "シャワーを食べます。",
+            "c": "シャワーを飲みます。",
+            "d": "シャワーを読みます。"
+          },
+          "correcta": "a",
+          "explicacion": "シャワーを浴びる = tomar una ducha."
+        },
+        {
+          "id": 96,
+          "titulo": "「スポーツが好きです。」\n¿Cuál actividad probablemente le gusta?",
+          "opciones": {
+            "a": "運動",
+            "b": "料理",
+            "c": "睡眠",
+            "d": "掃除"
+          },
+          "correcta": "a",
+          "explicacion": "スポーツが好きな人は運動も好きだと考えられます。"
+        },
+        {
+          "id": 97,
+          "titulo": "「パンを＿＿＿。」\n¿Cuál verbo encaja mejor?",
+          "opciones": {
+            "a": "食べます",
+            "b": "着ます",
+            "c": "乗ります",
+            "d": "弾きます"
+          },
+          "correcta": "a",
+          "explicacion": "パンを食べます = comer pan."
+        },
+        {
+          "id": 98,
+          "titulo": "「ポケットに鍵があります。」\nポケット significa…",
+          "opciones": {
+            "a": "bolsillo",
+            "b": "maleta",
+            "c": "puerta",
+            "d": "armario"
+          },
+          "correcta": "a",
+          "explicacion": "ポケット = bolsillo."
+        },
+        {
+          "id": 99,
+          "titulo": "¿Cuál palabra viene originalmente del portugués?",
+          "opciones": {
+            "a": "パン",
+            "b": "ホテル",
+            "c": "シャワー",
+            "d": "ナイフ"
+          },
+          "correcta": "a",
+          "explicacion": "パン viene del portugués «pão»."
+        },
+        {
+          "id": 100,
+          "titulo": "「テレビを＿＿＿。」\n¿Cuál verbo completa mejor la frase?",
+          "opciones": {
+            "a": "見ます",
+            "b": "飲みます",
+            "c": "歩きます",
+            "d": "作ります"
+          },
+          "correcta": "a",
+          "explicacion": "テレビを見る = ver televisión."
+        }
+      ]
     }
   ]
 }
