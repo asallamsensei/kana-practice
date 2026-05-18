@@ -482,7 +482,7 @@
       </div>
 
       <div class="section">
-        <div class="sideTitle">Tareas</div>
+        <div class="sideTitle">Bloques</div>
         <div id="tasksWrap" class="tasks"></div>
         <div class="actions" style="margin-top:12px;">
           <button id="btnTodas" class="action clean" onclick="seleccionarTodas()">Todas</button>
@@ -1025,7 +1025,7 @@
         if (!res.ok) throw new Error("No se pudo cargar manga.json");
         dataRaw = await res.json();
 
-        tareasDisponibles = Object.keys(dataRaw).filter(k => /^tarea_\d+$/i.test(k)).sort((a,b) => {
+        tareasDisponibles = Object.keys(dataRaw).filter(k => /^Bloque_\d+$/i.test(k)).sort((a,b) => {
           const na = Number(a.replace(/\D/g, ""));
           const nb = Number(b.replace(/\D/g, ""));
           return na - nb;
