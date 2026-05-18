@@ -1,6 +1,6 @@
 {
-  "tarea_1": {
-    "nombre": "Tarea 1",
+  "Bloque_1": {
+    "nombre": "Bloque 1",
     "palabras": [
       { "japones": "破壊", "romaji": "hakai", "espanol": "destrucción" },
       { "japones": "カネ", "romaji": "kane", "espanol": "dinero" },
@@ -44,8 +44,8 @@
       { "japones": "能", "lecturas_kanji": "nou", "espanol": "capacidad, habilidad" }
     ]
   },
-  "tarea_2": {
-    "nombre": "Tarea 2",
+  "Bloque_2": {
+    "nombre": "Bloque 2",
     "palabras": [
       { "japones": "衝突", "romaji": "shoutotsu", "espanol": "colisión, impacto" },
       { "japones": "バーダック", "romaji": "baadakku", "espanol": "Bardock" },
@@ -78,8 +78,8 @@
       { "japones": "殺", "lecturas_kanji": "koro / satsu", "espanol": "matar" }
     ]
   },
-  "tarea_3": {
-    "nombre": "Tarea 3",
+  "Bloque_3": {
+    "nombre": "Bloque 3",
     "palabras": [
       { "japones": "悟空", "romaji": "gokuu", "espanol": "Goku" },
       { "japones": "逃げねぇ", "romaji": "nigenee", "espanol": "no voy a escapar" },
@@ -117,8 +117,8 @@
       { "japones": "所", "lecturas_kanji": "sho / tokoro", "espanol": "lugar" }
     ]
   },
-  "tarea_4": {
-    "nombre": "Tarea 4",
+  "Bloque_4": {
+    "nombre": "Bloque 4",
     "palabras": [
       { "japones": "吸収した", "romaji": "kyuushuu shita", "espanol": "absorbiste" },
       { "japones": "元通り", "romaji": "motodoori", "espanol": "como antes, de vuelta a su estado original" },
@@ -151,8 +151,8 @@
       { "japones": "闘", "lecturas_kanji": "tou / tatakau", "espanol": "luchar, combatir" }
     ]
   },
-  "tarea_5": {
-    "nombre": "Tarea 5",
+  "Bloque_5": {
+    "nombre": "Bloque 5",
     "palabras": [
       { "japones": "おわり", "romaji": "owari", "espanol": "fin" },
       { "japones": "を", "romaji": "o", "espanol": "partícula que marca el objeto directo" },
@@ -182,8 +182,8 @@
       { "japones": "力", "lecturas_kanji": "chikara / ryoku", "espanol": "fuerza, poder" }
     ]
   },
-  "tarea_6": {
-    "nombre": "Tarea 6",
+  "Bloque_6": {
+    "nombre": "Bloque 6",
     "palabras": [
       { "japones": "急ぐぞ", "romaji": "isogu zo", "espanol": "date prisa, vamos" },
       { "japones": "新しい", "romaji": "atarashii", "espanol": "nuevo" },
@@ -222,8 +222,8 @@
       { "japones": "豆", "lecturas_kanji": "zu / mame", "espanol": "frijol, semilla" }
     ]
   },
-  "tarea_7": {
-    "nombre": "Tarea 7",
+  "Bloque_7": {
+    "nombre": "Bloque 7",
     "palabras": [
       { "japones": "分かるか", "romaji": "wakaru ka", "espanol": "¿lo entiendes?" },
       { "japones": "くそ…", "romaji": "kuso…", "espanol": "maldición…, mierda…" },
@@ -264,8 +264,8 @@
       { "japones": "変", "lecturas_kanji": "ka / hen", "espanol": "cambiar, extraño" }
     ]
   },
-  "tarea_8": {
-    "nombre": "Tarea 8",
+  "Bloque_8": {
+    "nombre": "Bloque 8",
     "palabras": [
       { "japones": "固まりました", "romaji": "katamarimashita", "espanol": "se volvió firme, se solidificó" },
       { "japones": "美しすぎる", "romaji": "utsukushi sugiru", "espanol": "demasiado hermosa" },
@@ -303,8 +303,8 @@
       { "japones": "訳", "lecturas_kanji": "wake / yaku", "espanol": "razón, significado, excusa" }
     ]
   },
-  "tarea_9": {
-    "nombre": "Tarea 9",
+  "Bloque_9": {
+    "nombre": "Bloque 9",
     "palabras": [
       { "japones": "ジワジワと", "romaji": "jiwajiwa to", "espanol": "poco a poco, gradualmente" },
       { "japones": "青年", "romaji": "seinen", "espanol": "joven, adulto joven" },
