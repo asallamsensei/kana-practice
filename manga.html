@@ -415,6 +415,21 @@
         width:100%;
       }
     }
+    
+    .action.clean.active{
+      background:linear-gradient(180deg, rgba(22,199,132,.24), rgba(22,199,132,.12));
+      border-color:rgba(22,199,132,.45);
+      box-shadow:var(--glow-green);
+      color:#dcfce7;
+    } 
+
+    .btn.all-active{
+      background:linear-gradient(180deg, rgba(22,199,132,.22), rgba(22,199,132,.10));
+      border-color:rgba(22,199,132,.42);
+      box-shadow:var(--glow-green);
+      color:#dcfce7;
+    }
+    
   </style>
 </head>
 <body>
@@ -486,7 +501,6 @@
         <div id="tasksWrap" class="tasks"></div>
         <div class="actions" style="margin-top:12px;">
           <button id="btnTodas" class="action clean" onclick="seleccionarTodas()">Todas</button>
-          <button class="action clean" onclick="limpiarTareas()">Ninguna</button>
         </div>
       </div>
     </aside>
@@ -758,7 +772,12 @@ function sonidoIncorrecto(){
         const btn = document.createElement("button");
         btn.className = "btn";
         btn.textContent = dataRaw[key]?.nombre || key.replace("_", " ");
-        btn.classList.toggle("active", tareasSeleccionadas.has(key));
+
+        const estanTodas = tareasSeleccionadas.size === tareasDisponibles.length;
+        
+        btn.classList.toggle("active", tareasSeleccionadas.has(key) && !estanTodas);
+        btn.classList.toggle("all-active", tareasSeleccionadas.has(key) && estanTodas);
+        
         btn.onclick = () => toggleTarea(key);
         wrap.appendChild(btn);
       }
@@ -925,11 +944,18 @@ function sonidoIncorrecto(){
       });
     }
 
-    function marcarBotonesABC(userKey){
+    function marcarBotonesABC(){
       const map = { a:"btnA", b:"btnB", c:"btnC" };
-      document.getElementById(map[correctaClave])?.classList.add("good");
-      if (userKey !== correctaClave) {
-        document.getElementById(map[userKey])?.classList.add("bad");
+    
+      for (const key of ["a","b","c"]) {
+        const btn = document.getElementById(map[key]);
+        if (!btn) continue;
+    
+        if (key === correctaClave) {
+          btn.classList.add("good");
+        } else {
+          btn.classList.add("bad");
+        }
       }
     }
 
