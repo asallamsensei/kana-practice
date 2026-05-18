@@ -221,5 +221,138 @@
       { "japones": "仙", "lecturas_kanji": "sen", "espanol": "ermitaño, sabio inmortal" },
       { "japones": "豆", "lecturas_kanji": "zu / mame", "espanol": "frijol, semilla" }
     ]
+  },
+  "tarea_7": {
+    "nombre": "Tarea 7",
+    "palabras": [
+      { "japones": "分かるか", "romaji": "wakaru ka", "espanol": "¿lo entiendes?" },
+      { "japones": "くそ…", "romaji": "kuso…", "espanol": "maldición…, mierda…" },
+      { "japones": "この数年に", "romaji": "kono sūnen ni", "espanol": "en estos últimos años, en estos varios años" },
+      { "japones": "ブロリー", "romaji": "Burorī", "espanol": "Broly" },
+      { "japones": "感じて", "romaji": "kanjite", "espanol": "siente, percibe" },
+  
+      { "japones": "原作", "romaji": "gensaku", "espanol": "obra original, historia original" },
+      { "japones": "スピリット", "romaji": "supiritto", "espanol": "espíritu" },
+      { "japones": "おめえが", "romaji": "omee ga", "espanol": "tú, tú eres / tú..." },
+      { "japones": "そして", "romaji": "soshite", "espanol": "y, y también" },
+      { "japones": "ジャマするな", "romaji": "jama suru na", "espanol": "no estorbes, no interfieras" },
+  
+      { "japones": "父", "romaji": "chichi", "espanol": "padre" },
+      { "japones": "こんな技", "romaji": "konna waza", "espanol": "una técnica como esta" },
+      { "japones": "鳥山明", "romaji": "Toriyama Akira", "espanol": "Akira Toriyama" },
+      { "japones": "失敗だ", "romaji": "shippai da", "espanol": "fallé, es un fracaso" },
+      { "japones": "変わったなあ", "romaji": "kawatta naa", "espanol": "has cambiado, vaya que has cambiado" }
+    ],
+    "kanji": [
+      { "japones": "分", "lecturas_kanji": "wa / fun / bun", "espanol": "entender, dividir, parte" },
+      { "japones": "数", "lecturas_kanji": "suu / kazu", "espanol": "número, cantidad" },
+      { "japones": "年", "lecturas_kanji": "nen / toshi", "espanol": "año" },
+      { "japones": "感", "lecturas_kanji": "kan", "espanol": "sentir, sensación" },
+  
+      { "japones": "原", "lecturas_kanji": "gen / hara", "espanol": "origen, campo, original" },
+      { "japones": "作", "lecturas_kanji": "saku / tsuku", "espanol": "crear, hacer, obra" },
+  
+      { "japones": "父", "lecturas_kanji": "chichi / fu", "espanol": "padre" },
+      { "japones": "技", "lecturas_kanji": "waza / gi", "espanol": "técnica, habilidad" },
+  
+      { "japones": "鳥", "lecturas_kanji": "tori / chou", "espanol": "pájaro" },
+      { "japones": "山", "lecturas_kanji": "yama / san", "espanol": "montaña" },
+      { "japones": "明", "lecturas_kanji": "akira / mei / myou", "espanol": "luz, claridad, brillo" },
+  
+      { "japones": "失", "lecturas_kanji": "shitsu / ushina", "espanol": "perder, fallar" },
+      { "japones": "敗", "lecturas_kanji": "hai / yabu", "espanol": "fracaso, derrota" },
+      { "japones": "変", "lecturas_kanji": "ka / hen", "espanol": "cambiar, extraño" }
+    ]
+  },
+  "tarea_8": {
+    "nombre": "Tarea 8",
+    "palabras": [
+      { "japones": "固まりました", "romaji": "katamarimashita", "espanol": "se volvió firme, se solidificó" },
+      { "japones": "美しすぎる", "romaji": "utsukushi sugiru", "espanol": "demasiado hermosa" },
+      { "japones": "不純な動機", "romaji": "fujun na dōki", "espanol": "motivos impuros" },
+      { "japones": "1つだけ", "romaji": "hitotsu dake", "espanol": "solo uno" },
+  
+      { "japones": "いや", "romaji": "iya", "espanol": "no, espera" },
+      { "japones": "叶えて", "romaji": "kanaete", "espanol": "conceder, cumplir" },
+      { "japones": "なっちまった", "romaji": "nacchimatta", "espanol": "se volvió, terminó pasando" },
+      { "japones": "おぬし", "romaji": "onushi", "espanol": "tú (término antiguo)" },
+      { "japones": "私の心", "romaji": "watashi no kokoro", "espanol": "mi corazón" },
+  
+      { "japones": "前より", "romaji": "mae yori", "espanol": "más que antes" },
+      { "japones": "透けてないか？", "romaji": "sukete nai ka", "espanol": "¿no te estás volviendo transparente?" },
+      { "japones": "申し訳ありません", "romaji": "mōshiwake arimasen", "espanol": "lo siento mucho, no tengo excusa" },
+      { "japones": "まさか", "romaji": "masaka", "espanol": "no puede ser" }
+    ],
+    "kanji": [
+      { "japones": "固", "lecturas_kanji": "kata / ko", "espanol": "duro, firme, sólido" },
+      { "japones": "美", "lecturas_kanji": "bi / utsukushii", "espanol": "bello, hermoso" },
+      { "japones": "不", "lecturas_kanji": "fu / bu", "espanol": "no, negativo" },
+      { "japones": "純", "lecturas_kanji": "jun", "espanol": "puro" },
+      { "japones": "動", "lecturas_kanji": "dou / ugo", "espanol": "mover, movimiento" },
+      { "japones": "機", "lecturas_kanji": "ki / hata", "espanol": "máquina, oportunidad, motivo" },
+  
+      { "japones": "叶", "lecturas_kanji": "kana", "espanol": "cumplir, conceder" },
+  
+      { "japones": "私", "lecturas_kanji": "watashi / shi", "espanol": "yo, privado" },
+      { "japones": "心", "lecturas_kanji": "kokoro / shin", "espanol": "corazón, mente" },
+  
+      { "japones": "前", "lecturas_kanji": "mae / zen", "espanol": "antes, frente" },
+      { "japones": "透", "lecturas_kanji": "su / tou", "espanol": "transparentarse, atravesar" },
+  
+      { "japones": "申", "lecturas_kanji": "mou / shin", "espanol": "decir humildemente, declarar" },
+      { "japones": "訳", "lecturas_kanji": "wake / yaku", "espanol": "razón, significado, excusa" }
+    ]
+  },
+  "tarea_9": {
+    "nombre": "Tarea 9",
+    "palabras": [
+      { "japones": "ジワジワと", "romaji": "jiwajiwa to", "espanol": "poco a poco, gradualmente" },
+      { "japones": "青年", "romaji": "seinen", "espanol": "joven, adulto joven" },
+      { "japones": "油断させる", "romaji": "yudan saseru", "espanol": "hacer que alguien baje la guardia" },
+      { "japones": "見たところ", "romaji": "mita tokoro", "espanol": "por lo que se ve, a simple vista" },
+      { "japones": "シッポ", "romaji": "shippo", "espanol": "cola" },
+  
+      { "japones": "その後", "romaji": "sono ato", "espanol": "después de eso" },
+      { "japones": "我儘の極意", "romaji": "wagamama no gokui", "espanol": "doctrina del egoísmo, Ultra Ego" },
+      { "japones": "地球人にそっくり", "romaji": "chikyūjin ni sokkuri", "espanol": "idéntico a los humanos de la Tierra" },
+      { "japones": "あんな", "romaji": "anna", "espanol": "ese tipo de, como ese" },
+  
+      { "japones": "本部", "romaji": "honbu", "espanol": "cuartel general, base principal" },
+      { "japones": "身勝手", "romaji": "migatte", "espanol": "egoísta, centrado en sí mismo" },
+      { "japones": "おそろしいな", "romaji": "osoroshii na", "espanol": "qué aterrador, da miedo" },
+      { "japones": "出来事", "romaji": "dekigoto", "espanol": "sucesos, acontecimientos" },
+      { "japones": "んだけどさ", "romaji": "n dakedo sa", "espanol": "pero, sabes…, aunque..." }
+    ],
+    "kanji": [
+      { "japones": "青", "lecturas_kanji": "ao / sei", "espanol": "azul, joven" },
+      { "japones": "年", "lecturas_kanji": "nen / toshi", "espanol": "año" },
+  
+      { "japones": "油", "lecturas_kanji": "abura / yu", "espanol": "aceite" },
+      { "japones": "断", "lecturas_kanji": "dan / tato", "espanol": "cortar, descuidarse" },
+  
+      { "japones": "見", "lecturas_kanji": "mi / ken", "espanol": "ver" },
+  
+      { "japones": "後", "lecturas_kanji": "ato / go", "espanol": "después, atrás" },
+  
+      { "japones": "我", "lecturas_kanji": "ware / ga", "espanol": "yo, uno mismo" },
+      { "japones": "儘", "lecturas_kanji": "mama", "espanol": "tal como es, capricho" },
+      { "japones": "極", "lecturas_kanji": "goku / kiwamu", "espanol": "extremo, máximo" },
+      { "japones": "意", "lecturas_kanji": "i", "espanol": "intención, voluntad" },
+  
+      { "japones": "地", "lecturas_kanji": "chi / ji", "espanol": "tierra, suelo" },
+      { "japones": "球", "lecturas_kanji": "kyuu / tama", "espanol": "esfera, bola" },
+      { "japones": "人", "lecturas_kanji": "jin / nin / hito", "espanol": "persona" },
+  
+      { "japones": "本", "lecturas_kanji": "hon / moto", "espanol": "origen, base, libro" },
+      { "japones": "部", "lecturas_kanji": "bu", "espanol": "sección, departamento, base" },
+  
+      { "japones": "身", "lecturas_kanji": "mi / shin", "espanol": "cuerpo, uno mismo" },
+      { "japones": "勝", "lecturas_kanji": "katsu / shou", "espanol": "ganar, victoria" },
+      { "japones": "手", "lecturas_kanji": "te / shu", "espanol": "mano" },
+  
+      { "japones": "出", "lecturas_kanji": "de / shutsu", "espanol": "salir" },
+      { "japones": "来", "lecturas_kanji": "ku / rai", "espanol": "venir, llegar" },
+      { "japones": "事", "lecturas_kanji": "koto / ji", "espanol": "cosa, asunto, acontecimiento" }
+    ]
   }
 }
