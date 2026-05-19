@@ -226,9 +226,9 @@
     "nombre": "Bloque 7",
     "palabras": [
       { "japones": "分かるか", "romaji": "wakaru ka", "espanol": "¿lo entiendes?" },
-      { "japones": "くそ…", "romaji": "kuso…", "espanol": "maldición…, mierda…" },
-      { "japones": "この数年に", "romaji": "kono sūnen ni", "espanol": "en estos últimos años, en estos varios años" },
-      { "japones": "ブロリー", "romaji": "Burorī", "espanol": "Broly" },
+      { "japones": "くそ…", "romaji": "kuso", "espanol": "maldición…, mierda…" },
+      { "japones": "この数年に", "romaji": "kono suunen ni", "espanol": "en estos últimos años, en estos varios años" },
+      { "japones": "ブロリー", "romaji": "Burorii", "espanol": "Broly" },
       { "japones": "感じて", "romaji": "kanjite", "espanol": "siente, percibe" },
   
       { "japones": "原作", "romaji": "gensaku", "espanol": "obra original, historia original" },
@@ -269,7 +269,7 @@
     "palabras": [
       { "japones": "固まりました", "romaji": "katamarimashita", "espanol": "se volvió firme, se solidificó" },
       { "japones": "美しすぎる", "romaji": "utsukushi sugiru", "espanol": "demasiado hermosa" },
-      { "japones": "不純な動機", "romaji": "fujun na dōki", "espanol": "motivos impuros" },
+      { "japones": "不純な動機", "romaji": "fujun na douki", "espanol": "motivos impuros" },
       { "japones": "1つだけ", "romaji": "hitotsu dake", "espanol": "solo uno" },
   
       { "japones": "いや", "romaji": "iya", "espanol": "no, espera" },
@@ -280,7 +280,7 @@
   
       { "japones": "前より", "romaji": "mae yori", "espanol": "más que antes" },
       { "japones": "透けてないか？", "romaji": "sukete nai ka", "espanol": "¿no te estás volviendo transparente?" },
-      { "japones": "申し訳ありません", "romaji": "mōshiwake arimasen", "espanol": "lo siento mucho, no tengo excusa" },
+      { "japones": "申し訳ありません", "romaji": "moushiwake arimasen", "espanol": "lo siento mucho, no tengo excusa" },
       { "japones": "まさか", "romaji": "masaka", "espanol": "no puede ser" }
     ],
     "kanji": [
@@ -314,7 +314,7 @@
   
       { "japones": "その後", "romaji": "sono ato", "espanol": "después de eso" },
       { "japones": "我儘の極意", "romaji": "wagamama no gokui", "espanol": "doctrina del egoísmo, Ultra Ego" },
-      { "japones": "地球人にそっくり", "romaji": "chikyūjin ni sokkuri", "espanol": "idéntico a los humanos de la Tierra" },
+      { "japones": "地球人にそっくり", "romaji": "chikyuujin ni sokkuri", "espanol": "idéntico a los humanos de la Tierra" },
       { "japones": "あんな", "romaji": "anna", "espanol": "ese tipo de, como ese" },
   
       { "japones": "本部", "romaji": "honbu", "espanol": "cuartel general, base principal" },
