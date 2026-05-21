@@ -218,23 +218,30 @@ h1{
   padding: 12px 16px;
   cursor: pointer;
 
-  color: #ffffff;
-  background: #c0265c;
+  color: #f3f0ff;
+
+  background: rgba(140, 110, 255, .14);
+
+  border: 1px solid rgba(180, 160, 255, .18);
 
   font-weight: 900;
   font-size: 15px;
   transition: .15s;
 
+  backdrop-filter: blur(8px);
+
   box-shadow:
-    0 0 10px rgba(192,38,92,.28),
-    0 0 18px rgba(192,38,92,.14);
+    0 0 8px rgba(125,92,255,.10),
+    inset 0 0 6px rgba(255,255,255,.03);
 }
+
 .btn:hover{
-  transform: translateY(-1px);
-  filter: brightness(1.06);
+  background: rgba(140, 110, 255, .20);
+
   box-shadow:
-    0 0 14px rgba(125,92,255,.40),
-    0 0 26px rgba(125,92,255,.18);
+    0 0 12px rgba(125,92,255,.16);
+
+  transform: translateY(-1px);
 }
   
   .btn:disabled{ opacity:.45; cursor:not-allowed; transform:none; filter:none; }
