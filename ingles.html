@@ -912,23 +912,23 @@ function pintarOpciones(letraElegida){
     return `<div>${letra}) ${txt}</div>`;
   }).join("");
 
-  const btnA = $("btn-opcion-a");
-  const btnB = $("btn-opcion-b");
-  const btnC = $("btn-opcion-c");
+  const mapa = {
+    a: $("btn-opcion-a"),
+    b: $("btn-opcion-b"),
+    c: $("btn-opcion-c")
+  };
 
-  const mapa = { a: btnA, b: btnB, c: btnC };
-
-  [btnA, btnB, btnC].forEach(btn => {
-    if(btn) btn.classList.remove("correcta", "incorrecta");
+  Object.values(mapa).forEach(btn => {
+    btn.classList.remove("correcta", "incorrecta");
   });
 
-  if(mapa[correctaLetra]){
-    mapa[correctaLetra].classList.add("correcta");
-  }
-
-  if(letraElegida && letraElegida !== correctaLetra && mapa[letraElegida]){
-    mapa[letraElegida].classList.add("incorrecta");
-  }
+  Object.entries(mapa).forEach(([letra, btn]) => {
+    if(letra === correctaLetra){
+      btn.classList.add("correcta");
+    }else{
+      btn.classList.add("incorrecta");
+    }
+  });
 }
 
 function aplicarEstiloPregunta(){
