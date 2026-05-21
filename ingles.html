@@ -517,13 +517,6 @@ h1{
         👤 <span id="studentLabel">Estudiante: —</span>
       </span>
     </div>
-
-    <div class="switch">
-      <button class="btn btn-mode" id="m-en-es" type="button" onclick="setModoBase('en-es')">EN → ES</button>
-      <button class="btn btn-mode" id="m-es-en" type="button" onclick="setModoBase('es-en')">ES → EN</button>
-      <button class="btn btn-mode" id="m-dictado" type="button" onclick="toggleDictado()">Dictado</button>
-      <button class="btn btn-mode" id="m-mix" type="button" onclick="setModoBase('mix')">Mix</button>
-    </div>
   </header>
 
   <div class="grid">
@@ -554,6 +547,17 @@ h1{
       </div>
     </div>
 
+    <div class="row" style="justify-content:flex-start;">
+      <span class="pill">Modos</span>
+    </div>
+    
+    <div class="switch" style="margin-top:12px;">
+      <button class="btn btn-mode" id="m-en-es" type="button" onclick="setModoBase('en-es')">EN → ES</button>
+      <button class="btn btn-mode" id="m-es-en" type="button" onclick="setModoBase('es-en')">ES → EN</button>
+      <button class="btn btn-mode" id="m-dictado" type="button" onclick="toggleDictado()">Dictado</button>
+      <button class="btn btn-mode" id="m-mix" type="button" onclick="setModoBase('mix')">Mix</button>
+    </div>
+    
     <div class="card">
       <div class="row" style="justify-content:flex-start;">
         <span class="pill">Bloques (English)</span>
@@ -564,10 +568,8 @@ h1{
       </div>
 
       <div class="row" style="justify-content:flex-start; margin-top:14px;">
-        <button id="btnTodo" class="btn btn-ghost btn-danger" type="button" onclick="seleccionarTodo()">Todo</button>
-        <button id="btnNinguna" class="btn btn-ghost" type="button" onclick="seleccionarNinguna()">Ninguna</button>
+        <button id="btnTodo" class="chip" type="button" onclick="seleccionarTodo()">Todos</button>
       </div>
-
       <div class="row" style="justify-content:flex-start; margin-top:18px;">
         <span class="pill">Pool de distractores</span>
       </div>
@@ -577,14 +579,6 @@ h1{
         <button class="btn btn-mode" id="pool-glob" type="button" onclick="setPoolScope('global')">Global</button>
       </div>
 
-      <div class="row" style="justify-content:flex-start; margin-top:18px;">
-        <span class="pill">Tip</span>
-      </div>
-      <div class="row" style="justify-content:flex-start; margin-top:10px;">
-        <div style="color:rgba(238,242,255,.7); font-size:14px; line-height:1.45;">
-              Lee las opciones arriba y responde con A, B o C. Siguiente salta o avanza.
-        </div>
-      </div>
     </div>
 
   </div>
@@ -942,11 +936,6 @@ function renderPrompt(itemCorrecto){
     subEl.innerHTML = `
       <button id="promptSpeaker" class="btnAudioBig" type="button" title="Escuchar" onclick="reproducirAudioActual()">🔊</button>
     `;
-    
-    // deshabilitar audio si la pregunta es español → inglés
-    if(rondaDir === "es-en" && !rondaDictado){
-      document.getElementById("promptSpeaker").disabled = true;
-    }
   }
 }
 
@@ -1051,12 +1040,14 @@ function verificar(letraForzada){
   const letra = String(letraForzada || "").toLowerCase().trim();
 
   if(letra === correctaLetra){
+    sonidoCorrecto();
     res.className = "correcto";
     res.innerText = "Correcto ✔";
     aciertos++;
     racha++;
     if(racha > mejorRacha) mejorRacha = racha;
   }else{
+    sonidoIncorrecto();
     res.className = "incorrecto";
     res.innerText = `Incorrecto ✘\nRespuesta: ${respuestaCorrecta}`;
     errores++;
@@ -1068,12 +1059,11 @@ function verificar(letraForzada){
 
   pintarOpciones(letra);
   bloquearOpciones();
-
-  playAudio(ultimoAudioKey);
 }
   
 function accionSiguiente(){
   if(!yaValidado){
+    sonidoIncorrecto();
     errores++;
     racha = 0;
     pintarStats();
@@ -1086,18 +1076,40 @@ function accionSiguiente(){
     pintarOpciones(null);
     bloquearOpciones();
   
-    if(rondaDir === "es-en" && !rondaDictado){
-      const sp = document.getElementById("promptSpeaker");
-      if(sp) sp.disabled = false;
-    }
-  
-    playAudio(ultimoAudioKey);
     return;
   }
 
   siguiente();
 }
 
+const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+function playBeep(freq, duration){
+  try{
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+
+    osc.connect(gain);
+    gain.connect(audioCtx.destination);
+
+    osc.frequency.value = freq;
+    osc.type = "sine";
+    gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
+
+    osc.start();
+    osc.stop(audioCtx.currentTime + duration);
+  }catch{}
+}
+
+function sonidoCorrecto(){
+  playBeep(700, 0.08);
+  setTimeout(() => playBeep(900, 0.12), 80);
+}
+
+function sonidoIncorrecto(){
+  playBeep(250, 0.2);
+}
+  
 /* ===============================
    CARGA JSON + chips bloques
 =============================== */
