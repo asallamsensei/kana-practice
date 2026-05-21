@@ -177,6 +177,7 @@ h1{
 
 .opcion-btn:not(:disabled):hover{
   background: rgba(125,92,255,.22);
+
   box-shadow:
     0 0 10px rgba(125,92,255,.9),
     0 0 24px rgba(125,92,255,.6);
@@ -184,8 +185,9 @@ h1{
 
 .opcion-btn.correcta{
   background: rgba(34,197,94,.18);
-  border-color: rgba(34,197,94,.45);
+  border: 1px solid rgba(34,197,94,.45);
   color: #dcfce7;
+
   box-shadow:
     0 0 10px rgba(34,197,94,.35),
     0 0 22px rgba(34,197,94,.18),
@@ -194,12 +196,17 @@ h1{
 
 .opcion-btn.incorrecta{
   background: rgba(239,68,68,.18);
-  border-color: rgba(239,68,68,.45);
+  border: 1px solid rgba(239,68,68,.45);
   color: #fecaca;
+
   box-shadow:
     0 0 10px rgba(239,68,68,.35),
     0 0 22px rgba(239,68,68,.18),
     inset 0 0 8px rgba(239,68,68,.10);
+}
+
+.opcion-btn:disabled{
+  cursor: default;
 }
 
 .opcion-btn:disabled{
