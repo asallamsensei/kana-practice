@@ -962,9 +962,7 @@ function renderPrompt(itemCorrecto){
   ultimoAudioKey = String(itemCorrecto.en || "").trim();
 
   if(rondaDictado){
-    const label = (rondaDir === "en-es")
-      ? "🎧 Dictado: elige el significado (ES)"
-      : "🎧 Dictado: elige la palabra (EN)";
+    const label = "🎧 Dictado";
 
     subEl.innerText = label;
 
