@@ -25,9 +25,9 @@
     --badge-kanji-bd: rgba(244,63,94,.45);   /* borde más fuerte */
     --badge-kanji-tx: #fecdd3;               /* rosita claro */
 
-    --badge-vocab-bg: rgba(34,197,94,.16);
-    --badge-vocab-bd: rgba(34,197,94,.45);
-    --badge-vocab-tx: #bbf7d0;
+--badge-vocab-bg: rgba(59,130,246,.16);
+--badge-vocab-bd: rgba(59,130,246,.45);
+--badge-vocab-tx: #bfdbfe;
 
     --mix-bg: linear-gradient(135deg, #7d5cff, #22c55e);
     --font-jp: "Zen Kaku Gothic New", "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", sans-serif;
@@ -171,25 +171,37 @@
     color: white;
   }
 
-  .btn-mode{
-    background: rgba(255,255,255,.08);
-    border: 1px solid var(--border);
-    color: var(--text);
-    font-weight: 700;
-  }
+.btn-mode{
+  background: rgba(255,255,255,.08);
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-weight: 700;
+  border-radius: 999px;
+  transition: .15s;
+}
 
-  .btn-mode.activo{
-    background: var(--accent);
-    border-color: transparent;
-    color: white;
-  }
+.btn-mode:hover{
+  background: rgba(255,255,255,.12);
+}
 
-  .btn-mode.mix-activo{
-    background: var(--mix-bg);
-    border-color: transparent;
-    color: white;
-    box-shadow: 0 0 0 1px rgba(255,255,255,.06), 0 10px 24px rgba(34,197,94,.18);
-  }
+.btn-mode.activo{
+  background: rgba(125,92,255,.22);
+  border-color: rgba(125,92,255,.55);
+  color: #efe9ff;
+  box-shadow:
+    0 0 8px rgba(125,92,255,.22),
+    inset 0 0 8px rgba(125,92,255,.08);
+}
+
+.btn-mode.mix-activo{
+  background: rgba(214,40,40,.18);
+  border-color: rgba(214,40,40,.55);
+  color: #fecaca;
+  box-shadow:
+    0 0 8px rgba(214,40,40,.38),
+    0 0 18px rgba(214,40,40,.18),
+    inset 0 0 8px rgba(214,40,40,.08);
+}
 
   .btn-audio{
     background: rgba(34,197,94,.16);
@@ -286,6 +298,33 @@
   box-shadow: 0 0 10px rgba(239,68,68,.22);
 }
 
+.opbtns button{
+  min-width: 110px;
+  min-height: 62px;
+  padding: 12px 14px;
+  border-radius: 16px;
+
+  background: rgba(125,92,255,.12);
+  border: 1px solid rgba(125,92,255,.55);
+  color: #efe9ff;
+
+  font-size: 20px;
+  font-weight: 700;
+  text-align: center;
+
+  box-shadow:
+    0 0 6px rgba(125,92,255,.6),
+    0 0 14px rgba(125,92,255,.35),
+    inset 0 0 8px rgba(125,92,255,.15);
+}
+
+.opbtns button:hover{
+  background: rgba(125,92,255,.22);
+  box-shadow:
+    0 0 10px rgba(125,92,255,.9),
+    0 0 24px rgba(125,92,255,.6);
+}
+  
 .student-subtitle{
   text-align: center;
   font-size: clamp(15px, 2.2vw, 20px);
