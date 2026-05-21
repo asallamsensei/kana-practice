@@ -730,5 +730,127 @@
   { "kanji": "ノート", "significado": "cuaderno, libreta (del inglés “note”)", "romaji": "nooto" },
   { "kanji": "パーティー", "significado": "fiesta; grupo de personas (del inglés “party”)", "romaji": "paatii" },
 
-  { "kanji": "ＰＥＴ", "significado": "plástico PET (como el de las botellas)", "romaji": "petto" }
+  { "kanji": "ＰＥＴ", "significado": "plástico PET (como el de las botellas)", "romaji": "petto" },
+
+{ "kanji": "磨く", "significado": "pulir, lustrar, cepillar,\nlavarse (los dientes)", "romaji": "migaku" },
+{ "kanji": "差す", "significado": "abrir, usar\n(un paraguas)", "romaji": "sasu" },
+{ "kanji": "醤油", "significado": "salsa de soya\n(o soja)", "romaji": "shouyu" },
+{ "kanji": "賑やか", "significado": "animado,\nconcurrido, bullicioso", "romaji": "nigiyaka" },
+{ "kanji": "次", "significado": "siguiente,\npróximo", "romaji": "tsugi" },
+
+{ "kanji": "夕飯", "significado": "cena (lit. comida\nde la tarde)", "romaji": "yuuhan" },
+{ "kanji": "そこ", "significado": "ahí, ese lugar\n(cerca del oyente)", "romaji": "soko" },
+{ "kanji": "角", "significado": "esquina,\nborde", "romaji": "kado" },
+{ "kanji": "角", "significado": "cuerno,\nasta", "romaji": "tsuno" },
+{ "kanji": "角", "significado": "ángulo", "romaji": "kaku" },
+{ "kanji": "答える", "significado": "responder, contestar\n(verbo intransitivo)", "romaji": "kotaeru" },
+
+{ "kanji": "おまわりさん", "significado": "oficial de policía (forma cercana y amigable)", "romaji": "omawari-san" },
+{ "kanji": "鳴く", "significado": "cantar, piar, ladrar,\nmaullar, croar, etc.", "romaji": "naku" },
+{ "kanji": "小さな", "significado": "pequeño (rentaishi, va\nantes de un sustantivo)", "romaji": "chiisana" },
+
+{ "kanji": "朝ごはん", "significado": "desayuno (lit. comida de la mañana)", "romaji": "asagohan" },
+{ "kanji": "昼ごはん", "significado": "almuerzo (lit. comida del mediodía)", "romaji": "hirugohan" },
+{ "kanji": "お弁当", "significado": "comida en caja", "romaji": "obentou" },
+
+{ "kanji": "どちら", "significado": "¿hacia dónde?, ¿dónde?;\n¿cuál? (entre dos opciones)", "romaji": "dochira" },
+{ "kanji": "でも", "significado": "pero", "romaji": "demo" },
+{ "kanji": "はがき", "significado": "tarjeta postal", "romaji": "hagaki" },
+{ "kanji": "いる", "significado": "estar, existir (personas,\nanimales, seres animados)", "romaji": "iru" },
+
+{ "kanji": "お風呂", "significado": "baño (lugar para bañarse);\nbañera, tina", "romaji": "ofuro" },
+{ "kanji": "温い", "significado": "poco caliente, tibio\n(puede sonar a queja)", "romaji": "nurui" },
+{ "kanji": "どれ", "significado": "¿cuál? (entre tres\no más opciones)", "romaji": "dore" },
+{ "kanji": "あちら", "significado": "por allá, por aquella dirección;\naquella persona (cortés)", "romaji": "achira" },
+
+{ "kanji": "もう一度", "significado": "una vez más, otra vez", "romaji": "mou ichido" },
+{ "kanji": "晩ごはん", "significado": "cena (lit. comida de la noche)", "romaji": "bangohan" },
+{ "kanji": "明後日", "significado": "pasado mañana", "romaji": "asatte" },
+
+{ "kanji": "２０歳", "significado": "20 años de edad", "romaji": "hatachi" },
+{ "kanji": "忘れる", "significado": "olvidar (verbo transitivo)", "romaji": "wasureru" },
+{ "kanji": "それから", "significado": "después de eso, y luego", "romaji": "sorekara" },
+
+{ "kanji": "では", "significado": "entonces, bueno;\nnos vemos", "romaji": "dewa" },
+{ "kanji": "じゃ", "significado": "entonces, bueno; nos vemos\n(contracción casual de では)", "romaji": "ja" },
+{ "kanji": "７日", "significado": "siete días,\ndía 7 del mes", "romaji": "nanoka" },
+{ "kanji": "など", "significado": "cosas como, etc.,\ny cosas así", "romaji": "nado" },
+{ "kanji": "する", "significado": "hacer\n(verbo irregular)", "romaji": "suru" },
+
+{ "kanji": "そして", "significado": "y entonces, y luego\n(conector narrativo)", "romaji": "soshite" },
+{ "kanji": "そうして", "significado": "así, de esa manera; y así", "romaji": "soushite" },
+{ "kanji": "はい", "significado": "sí, aquí tienes, presente\n(según contexto)", "romaji": "hai" },
+
+{ "kanji": "後", "significado": "después, luego;\nel resto", "romaji": "ato" },
+{ "kanji": "４日", "significado": "cuatro días,\ndía 4 del mes", "romaji": "yokka" },
+{ "kanji": "どう", "significado": "¿cómo?, ¿qué tal?,\n¿de qué manera?", "romaji": "dou" },
+{ "kanji": "来る", "significado": "venir\n(verbo irregular)", "romaji": "kuru" },
+{ "kanji": "こんな", "significado": "de este tipo, así,\ncomo esto", "romaji": "konna" },
+
+{ "kanji": "一昨日", "significado": "anteayer, antier", "romaji": "ototoi" },
+{ "kanji": "ゆっくり", "significado": "despacio, lentamente, con calma", "romaji": "yukkuri" },
+{ "kanji": "一ヶ月", "significado": "un mes (duración)", "romaji": "ikkagetsu" },
+
+{ "kanji": "七", "significado": "7\n(uso general)", "romaji": "nana" },
+{ "kanji": "七", "significado": "7\n(horas, fechas)", "romaji": "shichi" },
+{ "kanji": "もう", "significado": "ya, más, ¡ay, ya!\n(según el contexto)", "romaji": "mou" },
+{ "kanji": "２日", "significado": "dos días,\ndía 2 del mes", "romaji": "futsuka" },
+{ "kanji": "じゃあ", "significado": "entonces, bueno, bien\n(conjunción de transición)", "romaji": "jaa" },
+
+{ "kanji": "開く", "significado": "abrir, abrirse\n(acción de abrir)", "romaji": "hiraku" },
+{ "kanji": "開く", "significado": "abrirse,\nestar abierto", "romaji": "aku" },
+{ "kanji": "あれ", "significado": "eso, aquello (lejos del\nhablante y del oyente)", "romaji": "are" },
+{ "kanji": "入口", "significado": "entrada (入り口\nes menos común)", "romaji": "iriguchi" },
+{ "kanji": "一人", "significado": "una persona,\nsolo (sobre todo ひとり)", "romaji": "hitori" },
+
+{ "kanji": "辛い", "significado": "picante", "romaji": "karai" },
+{ "kanji": "つらい", "significado": "doloroso, difícil, amargo\n(emocional, situacional)", "romaji": "tsurai" },
+{ "kanji": "いつ", "significado": "¿cuándo?", "romaji": "itsu" },
+{ "kanji": "５日", "significado": "cinco días,\ndía 5 del mes", "romaji": "itsuka" },
+{ "kanji": "６日", "significado": "seis días,\ndía 6 del mes", "romaji": "muika" },
+
+{ "kanji": "出口", "significado": "salida", "romaji": "deguchi" },
+{ "kanji": "もっと", "significado": "más", "romaji": "motto" },
+{ "kanji": "お皿", "significado": "plato", "romaji": "osara" },
+{ "kanji": "二人", "significado": "dos personas", "romaji": "futari" },
+{ "kanji": "ほか", "significado": "otro, otros", "romaji": "hoka" },
+
+{ "kanji": "どうも", "significado": "gracias, hola (también intensifica,\ncomo en どうもありがとう)", "romaji": "doumo" },
+{ "kanji": "あの", "significado": "aquel, aquella (antes de sustantivo);\neh… este… (titubeo antes de hablar)", "romaji": "ano" },
+{ "kanji": "すぐに", "significado": "enseguida,\ninmediatamente", "romaji": "sugu ni" },
+
+{ "kanji": "そば", "significado": "al lado (de),\njunto (a), cerca (de)", "romaji": "soba" },
+{ "kanji": "蕎麦", "significado": "soba (fideos de\ntrigo sarraceno)", "romaji": "soba" },
+{ "kanji": "それでは", "significado": "bien, entonces; en ese caso;\nsiendo así; bien, me despido", "romaji": "soredewa" },
+{ "kanji": "どうぞ", "significado": "adelante, aquí tiene, pase\n(matiz de “siéntase libre de”)", "romaji": "douzo" },
+
+{ "kanji": "方", "significado": "manera, forma;\npersona (cortés)", "romaji": "kata" },
+{ "kanji": "方", "significado": "dirección,\nlado", "romaji": "hou" },
+{ "kanji": "前", "significado": "delante, enfrente (espacio),\nantes (tiempo)", "romaji": "mae" },
+{ "kanji": "お酒", "significado": "bebida alcohólica\n(en general)", "romaji": "osake" },
+{ "kanji": "日本酒", "significado": "sake japonés (lit. bebida\nalcohólica japonesa)", "romaji": "nihonshu" },
+
+{ "kanji": "おばさん", "significado": "tía, señora (de mediana edad)", "romaji": "obasan" },
+{ "kanji": "だれか", "significado": "alguien", "romaji": "dareka" },
+{ "kanji": "１月", "significado": "enero (lit. mes 1)", "romaji": "ichigatsu" },
+
+{ "kanji": "ええ", "significado": "sí (suena menos\nrígido que はい)", "romaji": "ee" },
+{ "kanji": "ここ", "significado": "aquí, este lugar\n(cerca del hablante)", "romaji": "koko" },
+{ "kanji": "毎月", "significado": "cada mes,\ntodos los meses", "romaji": "maitsuki" },
+{ "kanji": "９日", "significado": "nueve días,\ndía 9 del mes", "romaji": "kokonoka" },
+{ "kanji": "１０日", "significado": "diez días,\ndía 10 del mes", "romaji": "touka" },
+
+{ "kanji": "側", "significado": "lado, parte\n(de algo)", "romaji": "gawa" },
+{ "kanji": "３日", "significado": "tres días,\ndía 3 del mes", "romaji": "mikka" },
+{ "kanji": "８日", "significado": "ocho días,\ndía 8 del mes", "romaji": "youka" },
+{ "kanji": "四", "significado": "4", "romaji": "yon" },
+{ "kanji": "四", "significado": "4 (suena\na muerte)", "romaji": "shi" },
+{ "kanji": "死", "significado": "muerte", "romaji": "shi" },
+
+{ "kanji": "門", "significado": "portón, entrada\n(de escuela, templo,\nciudad, etc.)", "romaji": "mon" },
+{ "kanji": "中", "significado": "dentro,\ninterior,\nen medio", "romaji": "naka" },
+{ "kanji": "中", "significado": "dentro de;\ndurante,\nen curso", "romaji": "chuu" },
+{ "kanji": "さあ", "significado": "¡vamos! (animar),\nbueno… (iniciar algo),\npues… (evadir)", "romaji": "saa" },
+{ "kanji": "まだ", "significado": "todavía, aún;\ntodavía no, aún no\n(en oraciones negativas)", "romaji": "mada" }
+  
 ]
