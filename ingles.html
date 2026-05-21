@@ -671,7 +671,19 @@ let estudianteActual = null;
 =============================== */
 function $(id){ return document.getElementById(id); }
 function pick(arr){ return arr[Math.floor(Math.random()*arr.length)]; }
-function shuffle(arr){ return arr.slice().sort(()=>Math.random()-0.5); }
+
+function shuffle(arr){
+  const copia = [...arr];
+
+  for(let i = copia.length - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * (i + 1));
+
+    [copia[i], copia[j]] = [copia[j], copia[i]];
+  }
+
+  return copia;
+}
+  
 function norm(s){
   return String(s || "")
     .trim()
@@ -926,7 +938,7 @@ function seleccionarTodo(){
 
 function seleccionarNinguna(){
   bloquesActivos.clear();
-  [...$("chipsBloques").children].forEach(ch=>ch.classList.remove("activo"));
+  [...$("chipsBloques").children].forEach(ch=>ch.classList.remove("activo","mix-sombra"));
   const total = DATA.bloques.length;
   const activos = bloquesActivos.size;
   
@@ -1079,6 +1091,12 @@ function elegirRondaDir(){
 }
 
 function elegirRondaDictado(){
+  const mixActivo = usarEnEs && usarEsEn && usarDictado;
+
+  if(mixActivo){
+    return shuffle([true, false])[0];
+  }
+
   return usarDictado;
 }
 
@@ -1228,21 +1246,24 @@ function renderChips(){
     chip.textContent = b.nombre || `Bloque ${i+1}`;
 
     chip.onclick = ()=>{
-      bloquesActivos = new Set(DATA.bloques.map((_, idx)=>idx));
+      if(bloquesActivos.has(i)){
+        bloquesActivos.delete(i);
+        chip.classList.remove("activo", "mix-sombra");
+      }else{
+        bloquesActivos.add(i);
+        chip.classList.add("activo");
+      }
     
-      [...cont.children].forEach(el=>{
-        el.classList.add("activo");
-      });
-    
-      $("btnTodo")?.classList.add("activo");
+      $("btnTodo")?.classList.toggle(
+        "activo",
+        bloquesActivos.size === DATA.bloques.length
+      );
     
       yaValidado = false;
       limpiarResultado();
       siguiente();
     };
-
-    cont.appendChild(chip);
-  });
+    
 }
 
 fetch(JSON_PATH)
