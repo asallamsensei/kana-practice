@@ -1,0 +1,70 @@
+{
+  "bloques": [
+    {
+      "id": "eng_01",
+      "nombre": "Saludos y despedidas",
+      "vocabulario": [
+        { "en": "hello", "es": "hola" },
+        { "en": "hi", "es": "hola (informal)" },
+        { "en": "hey", "es": "hola (muy informal)" },
+
+        { "en": "good morning", "es": "buenos días" },
+        { "en": "good afternoon", "es": "buenas tardes" },
+        { "en": "good evening", "es": "buenas noches (saludo)" },
+        { "en": "good night", "es": "buenas noches (despedida)" },
+
+        { "en": "how are you", "es": "cómo estás" },
+        { "en": "how are you doing", "es": "cómo te va" },
+        { "en": "how have you been", "es": "cómo has estado" },
+
+        { "en": "what's up", "es": "qué tal" },
+        { "en": "how's it going", "es": "cómo va todo" },
+
+        { "en": "nice to meet you", "es": "mucho gusto" },
+        { "en": "pleased to meet you", "es": "encantado de conocerte" },
+
+        { "en": "long time no see", "es": "cuánto tiempo sin verte" },
+
+        { "en": "welcome", "es": "bienvenido" },
+        { "en": "welcome back", "es": "bienvenido de nuevo" },
+
+        { "en": "good to see you", "es": "qué bueno verte" },
+        { "en": "good to have you back", "es": "qué bueno tenerte de vuelta" },
+        { "en": "it's nice to see you again", "es": "qué bueno verte otra vez" },
+
+        { "en": "bye", "es": "chau" },
+        { "en": "goodbye", "es": "adiós" },
+        { "en": "farewell", "es": "adiós (formal)" },
+        { "en": "goodbye everyone", "es": "adiós a todos" },
+
+        { "en": "see you", "es": "nos vemos" },
+        { "en": "see you later", "es": "hasta luego" },
+        { "en": "see you soon", "es": "nos vemos pronto" },
+        { "en": "see you tomorrow", "es": "nos vemos mañana" },
+        { "en": "see you around", "es": "nos vemos por ahí" },
+        { "en": "see you next time", "es": "nos vemos la próxima vez" },
+
+        { "en": "talk to you later", "es": "hablamos luego" },
+        { "en": "catch you later", "es": "nos vemos luego (informal)" },
+
+        { "en": "take care", "es": "cuídate" },
+        { "en": "take it easy", "es": "cuídate" },
+
+        { "en": "have a nice day", "es": "que tengas un lindo día" },
+        { "en": "have a good day", "es": "que tengas un buen día" },
+        { "en": "have a great day", "es": "que tengas un excelente día" },
+        { "en": "have a good one", "es": "que te vaya bien" },
+
+        { "en": "have fun", "es": "diviértete" },
+
+        { "en": "see ya", "es": "nos vemos (informal)" },
+        { "en": "later", "es": "hasta luego (muy informal)" },
+
+        { "en": "have a good night", "es": "que pases una buena noche" },
+        { "en": "sleep well", "es": "duerme bien" },
+
+        { "en": "good luck", "es": "buena suerte" }
+      ]
+    }
+  ]
+}
