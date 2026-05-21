@@ -17,8 +17,6 @@
     --danger:#ef4444;
     --border: rgba(255,255,255,.14);
 
-    --dictadoRed: #ff3b30;
-    --dictadoRedSoft:#d94a45;
   }
 
   body{
@@ -109,6 +107,12 @@ h1{
     justify-content:center;
   }
 
+.btn-mode.mix-sombra{
+  background: rgba(145,95,210,.14);
+  border-color: rgba(145,95,210,.34);
+  color: #efe9ff;
+}
+  
   .chips{
     display:flex;
     flex-wrap:wrap;
@@ -184,7 +188,7 @@ h1{
 }
 
 .opcion-btn.correcta{
-  background: rgba(34,197,94,.18);
+  background: rgba(34,197,94,.24);
   border: 1px solid rgba(34,197,94,.45);
   color: #dcfce7;
 
@@ -195,7 +199,7 @@ h1{
 }
 
 .opcion-btn.incorrecta{
-  background: rgba(239,68,68,.18);
+  background: rgba(239,68,68,.24);
   border: 1px solid rgba(239,68,68,.45);
   color: #fecaca;
 
@@ -203,10 +207,6 @@ h1{
     0 0 10px rgba(239,68,68,.35),
     0 0 22px rgba(239,68,68,.18),
     inset 0 0 8px rgba(239,68,68,.10);
-}
-
-.opcion-btn:disabled{
-  cursor: default;
 }
 
 .opcion-btn:disabled{
@@ -245,7 +245,7 @@ h1{
 .btn:not(:disabled):hover{
   transform: translateY(-1px);
 
-  background: rgba(190, 65, 120, .48);
+  background: rgba(155, 95, 210, .54);
 
   box-shadow:
     0 0 14px rgba(190,65,120,.24),
@@ -775,12 +775,24 @@ function getPool(scope){
    UI MODO
 =============================== */
 function aplicarUI(){
+
+  ["m-en-es","m-es-en","m-dictado","m-mix"].forEach(id=>{
+    $(id)?.classList.remove("mix-sombra");
+  });
+
   $("m-en-es")?.classList.toggle("activo", usarEnEs);
   $("m-es-en")?.classList.toggle("activo", usarEsEn);
   $("m-dictado")?.classList.toggle("activo", usarDictado);
 
   const mixActivo = usarEnEs && usarEsEn && usarDictado;
+
   $("m-mix")?.classList.toggle("activo", mixActivo);
+
+  if(mixActivo){
+    $("m-en-es")?.classList.add("mix-sombra");
+    $("m-es-en")?.classList.add("mix-sombra");
+    $("m-dictado")?.classList.add("mix-sombra");
+  }
 }
 
 function refrescarModo(){
