@@ -140,12 +140,13 @@ h1{
   .chip:hover{ transform: translateY(-1px); }
   
 .chip.activo{
-  background: var(--accent);
-  color: white;
-  border-color: transparent;
+  background: rgba(214,40,40,.14);
+  color: #ffd6d6;
+  border-color: rgba(214,40,40,.34);
+
   box-shadow:
-    0 0 10px rgba(125,92,255,.34),
-    0 0 20px rgba(125,92,255,.14);
+    0 0 8px rgba(214,40,40,.12),
+    inset 0 0 6px rgba(214,40,40,.06);
 }
 
 #opcionesTexto{
@@ -527,6 +528,17 @@ h1{
     font-size: 22px;
   }
 }
+
+.chip.activo.mix-sombra{
+  background: rgba(214,40,40,.14);
+  color: #ffd6d6;
+  border-color: rgba(214,40,40,.34);
+
+  box-shadow:
+    0 0 8px rgba(214,40,40,.12),
+    inset 0 0 6px rgba(214,40,40,.06);
+}
+  
 </style>
 </head>
 
@@ -898,6 +910,7 @@ function seleccionarTodo(){
 
   [...$("chipsBloques").children].forEach(ch=>{
     ch.classList.add("activo");
+    ch.classList.add("mix-sombra");
   });
 
   $("btnTodo")?.classList.add("activo");
