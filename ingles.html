@@ -217,14 +217,17 @@ h1{
   border-radius: 12px;
   padding: 12px 16px;
   cursor: pointer;
-  color: white;
-  background: var(--accent);
+
+  color: #ffffff;
+  background: #c0265c;
+
   font-weight: 900;
   font-size: 15px;
   transition: .15s;
+
   box-shadow:
-    0 0 10px rgba(125,92,255,.28),
-    0 0 18px rgba(125,92,255,.14);
+    0 0 10px rgba(192,38,92,.28),
+    0 0 18px rgba(192,38,92,.14);
 }
 .btn:hover{
   transform: translateY(-1px);
@@ -680,8 +683,9 @@ function pintarStats(){
    En "mix":
      - cada ronda decide dirección y decide dictado al azar
 =============================== */
-let modoBase  = "en-es";
-let dictadoOn = false;
+let usarEnEs = true;
+let usarEsEn = false;
+let usarDictado = false;
 
 // efectivos por ronda
 let rondaDir = "en-es";
@@ -755,48 +759,64 @@ function getPool(scope){
 /* ===============================
    UI MODO
 =============================== */
-function limpiarActivos(){
-  ["m-en-es","m-es-en","m-mix","m-dictado"].forEach(id=>{
-    const el = $(id);
-    if(!el) return;
-    el.classList.remove("activo","dictado-on","base-dictado");
-  });
-}
-
 function aplicarUI(){
-  limpiarActivos();
+  $("m-en-es")?.classList.toggle("activo", usarEnEs);
+  $("m-es-en")?.classList.toggle("activo", usarEsEn);
+  $("m-dictado")?.classList.toggle("activo", usarDictado);
 
-  const enBtn   = $("m-en-es");
-  const esBtn   = $("m-es-en");
-  const mixBtn  = $("m-mix");
-  const dictBtn = $("m-dictado");
-
-  if(modoBase === "en-es") enBtn?.classList.add("activo");
-  if(modoBase === "es-en") esBtn?.classList.add("activo");
-  if(modoBase === "mix")   mixBtn?.classList.add("activo");
-
-  if(modoBase !== "mix" && dictadoOn){
-    dictBtn?.classList.add("dictado-on");
-    const baseBtn = (modoBase === "en-es") ? enBtn : esBtn;
-    baseBtn?.classList.add("base-dictado");
-  }
+  const mixActivo = usarEnEs && usarEsEn && usarDictado;
+  $("m-mix")?.classList.toggle("activo", mixActivo);
 }
 
-function setModoBase(nuevoBase){
-  modoBase = nuevoBase;
+function refrescarModo(){
   aplicarUI();
   yaValidado = false;
   limpiarResultado();
   siguiente();
+}
+
+function setModoBase(modo){
+  if(modo === "en-es"){
+    if(usarEnEs && !usarEsEn && !usarDictado) return;
+
+    usarEnEs = true;
+    usarEsEn = false;
+    usarDictado = false;
+  }
+
+  if(modo === "es-en"){
+    if(usarEsEn && !usarEnEs && !usarDictado) return;
+
+    usarEnEs = false;
+    usarEsEn = true;
+    usarDictado = false;
+  }
+
+  if(modo === "mix"){
+    const mixActivo = usarEnEs && usarEsEn && usarDictado;
+
+    if(mixActivo){
+      usarEnEs = true;
+      usarEsEn = false;
+      usarDictado = false;
+    }else{
+      usarEnEs = true;
+      usarEsEn = true;
+      usarDictado = true;
+    }
+  }
+
+  refrescarModo();
 }
 
 function toggleDictado(){
-  if(modoBase === "mix") return;
-  dictadoOn = !dictadoOn;
-  aplicarUI();
-  yaValidado = false;
-  limpiarResultado();
-  siguiente();
+  usarDictado = !usarDictado;
+
+  if(!usarEnEs && !usarEsEn && !usarDictado){
+    usarEnEs = true;
+  }
+
+  refrescarModo();
 }
 
 /* ===============================
@@ -815,12 +835,6 @@ function setPoolScope(scope){
    Selección de bloques
 =============================== */
 function seleccionarTodo(){
-  const total = DATA.bloques.length;
-
-  if(bloquesActivos.size === total){
-    return;
-  }
-
   bloquesActivos = new Set(DATA.bloques.map((_, i)=>i));
 
   [...$("chipsBloques").children].forEach(ch=>{
@@ -976,16 +990,22 @@ function responder(letra){
    Flujo ronda (SUPER MIX)
 =============================== */
 function elegirRondaDir(){
-  if(modoBase === "en-es") return "en-es";
-  if(modoBase === "es-en") return "es-en";
-  return (Math.random() < 0.5) ? "en-es" : "es-en";
+  const dirs = [];
+
+  if(usarEnEs) dirs.push("en-es");
+  if(usarEsEn) dirs.push("es-en");
+
+  if(dirs.length === 0){
+    usarEnEs = true;
+    aplicarUI();
+    return "en-es";
+  }
+
+  return pick(dirs);
 }
 
 function elegirRondaDictado(){
-  if(modoBase === "mix"){
-    return (Math.random() < 0.45);
-  }
-  return dictadoOn;
+  return usarDictado;
 }
 
 function build3Options(pool, correctValue, mapFn){
@@ -1134,17 +1154,14 @@ function renderChips(){
     chip.textContent = b.nombre || `Bloque ${i+1}`;
 
     chip.onclick = ()=>{
-      $("btnTodo")?.classList.remove("activo");
-
-      if(bloquesActivos.has(i)) bloquesActivos.delete(i);
-      else bloquesActivos.add(i);
-
-      if(bloquesActivos.size === 0) bloquesActivos.add(i);
-
-      [...cont.children].forEach((el, idx)=>{
-        el.classList.toggle("activo", bloquesActivos.has(idx));
+      bloquesActivos = new Set(DATA.bloques.map((_, idx)=>idx));
+    
+      [...cont.children].forEach(el=>{
+        el.classList.add("activo");
       });
-
+    
+      $("btnTodo")?.classList.add("activo");
+    
       yaValidado = false;
       limpiarResultado();
       siguiente();
