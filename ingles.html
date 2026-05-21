@@ -1253,17 +1253,19 @@ function renderChips(){
         bloquesActivos.add(i);
         chip.classList.add("activo");
       }
-    
+
       $("btnTodo")?.classList.toggle(
         "activo",
         bloquesActivos.size === DATA.bloques.length
       );
-    
+
       yaValidado = false;
       limpiarResultado();
       siguiente();
     };
-    
+
+    cont.appendChild(chip);
+  });
 }
 
 fetch(JSON_PATH)
