@@ -10,8 +10,8 @@
     --bg: #0b1020;
     --card: rgba(255,255,255,.08);
     --card2: rgba(255,255,255,.10);
-    --text: #eef2ff;
-    --muted: rgba(238,242,255,.75);
+    --text: #ffffff;
+    --muted: #ffffff;
     --accent: #7d5cff;
     --accent2:#22c55e;
     --danger:#ef4444;
@@ -89,15 +89,19 @@ h1{
   padding: 20px;
 }
 
-  .pill{
-    padding: 10px 14px;
-    border-radius: 999px;
-    border: 1px solid var(--border);
-    background: rgba(255,255,255,.06);
-    color: var(--muted);
-    font-size: 14px;
-    font-weight: 900;
-  }
+.pill{
+  padding: 10px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: rgba(255,255,255,.06);
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 900;
+
+  box-shadow:
+    0 0 8px rgba(125,92,255,.12),
+    inset 0 0 6px rgba(125,92,255,.05);
+}
 
   .row{
     display:flex;
