@@ -2068,18 +2068,17 @@ function verificar(input){
     const kun = parseLecturas(actual.extra?.kunyomi).join(", ");
     const on = parseLecturas(actual.extra?.onyomi).join(", ");
 
-    let texto = "";
-
+    let html = "";
+    
     if(kun){
-      texto += `Kun: ${kun}`;
+      html += `<div><span class="extra-romaji">Kun:</span> <span class="extra-jp">${kun}</span></div>`;
     }
-
+    
     if(on){
-      if(texto) texto += "\n";
-      texto += `On: ${on}`;
+      html += `<div><span class="extra-romaji">On:</span> <span class="extra-jp">${on}</span></div>`;
     }
-
-    extra.innerText = texto;
+    
+    extra.innerHTML = html;
   }else{
     extra.innerHTML = "";
   }
