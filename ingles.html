@@ -343,7 +343,7 @@ h1{
     font-size: 40px;
     font-weight: 900;
     letter-spacing: .5px;
-    margin: 6px 0 10px;
+    margin: 0 0 10px;
     word-break: break-word;
   }
   #promptMain.esPregunta{
@@ -541,6 +541,12 @@ h1{
   box-shadow:
     0 0 8px rgba(214,40,40,.12),
     inset 0 0 6px rgba(214,40,40,.06);
+}
+
+.btnAudioDictado{
+  font-size: 42px;
+  padding: 22px 26px;
+  border-radius: 22px;
 }
   
 </style>
@@ -1036,14 +1042,15 @@ function renderPrompt(itemCorrecto){
 
   if(rondaDictado){
     const label = "🎧 Dictado";
-
+  
     subEl.innerText = label;
-
+  
     promptEl.innerHTML = `
-      <button id="promptSpeaker" class="btnAudioBig" type="button" title="Escuchar" onclick="reproducirAudioActual()">🔊</button>
+      <button id="promptSpeaker" class="btnAudioBig btnAudioDictado" type="button" title="Escuchar" onclick="reproducirAudioActual()">🔊</button>
     `;
   }else{
     promptEl.textContent = textoPregunta(itemCorrecto);
+  
     subEl.innerHTML = `
       <button id="promptSpeaker" class="btnAudioBig" type="button" title="Escuchar" onclick="reproducirAudioActual()">🔊</button>
     `;
