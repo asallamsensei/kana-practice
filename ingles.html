@@ -379,14 +379,15 @@ h1{
   .btnAudioBig:active{ transform: translateY(0px); }
   .btnAudioBig[disabled]{ opacity:.35; cursor:not-allowed; transform:none; }
 
-  .actions{
-    display:grid;
-    grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
-    gap:12px;
-    width:min(820px, 100%);
-    margin-top: 14px;
-  }
-  .actions .btn, .actions .btn-ghost{ width:100%; }
+.actions{
+  display:flex;
+  justify-content:center;
+  margin-top: 14px;
+}
+
+.btn-next{
+  min-width: 220px;
+}
 
   /* ========== MODAL CLAVE ========== */
   .modalBack{
@@ -534,17 +535,24 @@ h1{
       </div>
 
       <div id="resultado"></div>
-
+      
+      <div class="actions">
+        <button class="btn btn-next" type="button" onclick="accionSiguiente()">Siguiente</button>
+      </div>
+      
       <div class="stats">
-        <div>Aciertos: <span id="aciertos">0</span> — Errores: <span id="errores">0</span></div>
+        <div>
+          Aciertos: <span id="aciertos">0</span> —
+          Errores: <span id="errores">0</span>
+        </div>
+      
         <div style="margin-top:6px;">
-          Racha: <span id="racha">0</span> — Mejor racha: <span id="mejorRacha">0</span> — Precisión: <span id="precision">0%</span>
+          Racha: <span id="racha">0</span> —
+          Mejor racha: <span id="mejorRacha">0</span> —
+          Precisión: <span id="precision">0%</span>
         </div>
       </div>
-
-      <div class="actions">
-        <button class="btn" type="button" onclick="accionSiguiente()">Siguiente</button>
-      </div>
+      
     </div>
 
     <div class="card">
@@ -1050,7 +1058,7 @@ function verificar(letraForzada){
   }else{
     sonidoIncorrecto();
     res.className = "incorrecto";
-    res.innerText = `Incorrecto ✘\nRespuesta: ${respuestaCorrecta}`;
+    res.innerText = `Incorrecto ✘\nEra: ${respuestaCorrecta}`;
     errores++;
     racha = 0;
   }
@@ -1072,7 +1080,7 @@ function accionSiguiente(){
   
     const res = $("resultado");
     res.className = "incorrecto";
-    res.innerText = `Saltado ✘\nRespuesta: ${respuestaCorrecta}`;
+    res.innerText = `Saltado ✘\nEra: ${respuestaCorrecta}`;
   
     pintarOpciones(null);
     bloquearOpciones();
