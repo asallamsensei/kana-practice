@@ -209,6 +209,17 @@
     color: #bbf7d0;
   }
 
+  .btn-audio-dictado{
+    font-size: 34px;
+    padding: 18px 22px;
+    border-radius: 18px;
+  
+    box-shadow:
+      0 0 10px rgba(125,92,255,.6),
+      0 0 28px rgba(125,92,255,.35),
+      inset 0 0 12px rgba(125,92,255,.15);
+  }
+  
   .chips{
     display:flex;
     flex-wrap:wrap;
@@ -1047,7 +1058,9 @@ function renderAudioUI(question){
 
   const btn = document.createElement("button");
   btn.type = "button";
-  btn.className = "btn btn-audio";
+  btn.className = question.subtipo?.includes("audio")
+    ? "btn btn-audio btn-audio-dictado"
+    : "btn btn-audio";
   btn.textContent = "🔊";
   btn.onclick = () => reproducirAudio(question.audioSrc);
   wrap.appendChild(btn);
