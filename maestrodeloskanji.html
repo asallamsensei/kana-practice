@@ -98,7 +98,7 @@
     padding: 8px 12px;
     border-radius: 999px;
     border: 1px solid var(--border);
-    background: rgba(255,255,255,.06);
+    background: rgba(255,255,255,.08);
     color: var(--muted);
     font-size: 13px;
   }
@@ -230,11 +230,15 @@
   }
   .chip:hover{ transform: translateY(-1px); }
 
-  .chip.activo{
-    background: var(--accent);
-    color: white;
-    border-color: transparent;
-  }
+.chip.activo{
+  background: rgba(125,92,255,.22);
+  border-color: rgba(125,92,255,.55);
+  color: #efe9ff;
+
+  box-shadow:
+    0 0 8px rgba(125,92,255,.22),
+    inset 0 0 8px rgba(125,92,255,.08);
+}
 
   .chip.bloqueado{
     opacity: .35;
