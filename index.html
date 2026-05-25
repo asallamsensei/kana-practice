@@ -14,7 +14,7 @@
     --bg: #0b1020;
     --card: rgba(255,255,255,.08);
     --card2: rgba(255,255,255,.10);
-
+    --line:rgba(255,255,255,.16);
     --text: #ffffff;
     --muted: #ffffff;
 
@@ -204,6 +204,11 @@
   animation:shine 1s ease;
 }
 
+.icon-btn{
+    color:white;
+    text-decoration:none;
+}
+  
 @keyframes shine{
   100%{
     left:150%;
@@ -491,21 +496,24 @@
   box-shadow:
     0 0 8px rgba(125,92,255,.08);
 }
-
+  
 .skillsLabel{
   margin:0 0 8px;
-  font-size:14px;
+  font-size:18px;
   font-weight:800;
   text-align:center;
-  opacity:.9;
+  line-height:1.4;
 }
 
 .mainQuote{
-  margin:0 auto 12px;
-  text-align:left;
+  text-align:center;
   font-size:16px;
   font-weight:700;
   font-style:italic;
+  color:#d8d8ff;
+
+  text-shadow:
+    0 0 8px rgba(125,92,255,.18);
 }
 
 .icon-buttons{
@@ -526,6 +534,9 @@
 
     border-radius:999px;
     font-size:16px;
+
+    color:inherit;
+    text-decoration:none;
 
     background:rgba(255,255,255,.08);
     border:1px solid var(--line);
@@ -571,7 +582,10 @@
 
         <div class="infoTop">
         
-          <p class="skillsLabel">Profesor de japonés, inglés, portugués, chino,\nmatemáticas, física & programación.</p>
+        <p class="skillsLabel">
+          Profesor de japonés, inglés, portugués, chino,<br>
+          matemáticas, física & programación.
+        </p>
           
           <p class="contact">
             <a class="waLink"
