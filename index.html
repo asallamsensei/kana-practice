@@ -609,6 +609,14 @@ body::before{
     transform:translateY(-4px) scale(1.05);
     box-shadow:0 0 22px var(--glow);
 }
+
+.libros,
+.cursos{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:14px;
+}
   
 </style>
 
@@ -707,7 +715,7 @@ body::before{
   <div class="card">
     <p class="badge-title libros">📚 Libros</p>
 
-    <div class="tools">
+    <div class="libros">
       <a class="btn libro" href="https://wa.me/573217876009" target="_blank" onclick="alert('Escríbeme al WhatsApp guap@ ✨')">
         <span>Kit de iniciación al japonés</span>
       </a>
@@ -725,7 +733,7 @@ body::before{
   <div class="card">
     <p class="badge-title cursos">🎓 Cursos</p>
 
-    <div class="tools">
+    <div class="cursos">
       <a class="btn curso" href="https://wa.me/573217876009" target="_blank" onclick="alert('Escríbeme al WhatsApp guap@ ✨')">
         <span>Japonés desde 0!</span>
       </a>
