@@ -467,59 +467,6 @@ body::before{
     box-shadow: 0 0 10px rgba(236,72,153,.05);
   }
 
-@media (max-width:900px){
-
-  body{
-    padding:18px 10px 60px;
-  }
-
-  .layoutGrid{
-    grid-template-columns:1fr;
-  }
-
-  .leftColumn{
-    display:flex;
-    flex-direction:column;
-    gap:14px;
-  }
-
-  .card{
-    width:94%;
-    margin:0 auto;
-  }
-
-  .tools{
-    grid-template-columns:1fr;
-  }
-
-  .avatarTop{
-    width:70px;
-    height:70px;
-  }
-
-  .profileTop{
-    flex-direction:column;
-    text-align:center;
-    width:100%;
-  }
-
-  .grid,
-  .mainGrid{
-    grid-template-columns:1fr;
-  }
-
-  .profile{
-    flex-direction:column;
-    text-align:center;
-  }
-
-  .icon-buttons{
-    flex-wrap:wrap;
-    justify-content:center;
-  }
-
-}
-
 .contact a{
   color: var(--text);
   text-decoration: none;
@@ -661,7 +608,44 @@ body::before{
     text-align:center;
 }
 
+@media (max-width:900px){
 
+  .layoutGrid{
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+  }
+
+  .leftColumn{
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+  }
+
+  .card{
+    width:94%;
+    margin:0 auto;
+  }
+
+  .tools{
+    grid-template-columns:1fr;
+  }
+
+  .profileTop{
+    flex-direction:column;
+    text-align:center;
+  }
+
+  .avatarTop{
+    width:70px;
+    height:70px;
+  }
+
+  .icon-buttons{
+    flex-wrap:wrap;
+    justify-content:center;
+  }
+}
   
 </style>
 
