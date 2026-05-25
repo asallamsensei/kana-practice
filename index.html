@@ -469,26 +469,43 @@ body::before{
 
 @media (max-width:900px){
 
+  body{
+    padding:18px 10px 60px;
+  }
+
+  .layoutGrid{
+    grid-template-columns:1fr;
+  }
+
+  .leftColumn{
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+  }
+
+  .card{
+    width:94%;
+    margin:0 auto;
+  }
+
   .tools{
     grid-template-columns:1fr;
   }
-  
+
   .avatarTop{
     width:70px;
     height:70px;
   }
 
   .profileTop{
-    flex-direction: column;
-    text-align: center;
+    flex-direction:column;
+    text-align:center;
+    width:100%;
   }
 
-  .grid{
-    grid-template-columns: 1fr;
-  }
-
+  .grid,
   .mainGrid{
-    grid-template-columns: 1fr;
+    grid-template-columns:1fr;
   }
 
   .profile{
@@ -496,10 +513,11 @@ body::before{
     text-align:center;
   }
 
-  .layoutGrid{
-    grid-template-columns:1fr;
+  .icon-buttons{
+    flex-wrap:wrap;
+    justify-content:center;
   }
-  
+
 }
 
 .contact a{
@@ -643,18 +661,7 @@ body::before{
     text-align:center;
 }
 
-@media (max-width:900px){
 
-  .layoutGrid{
-    grid-template-columns:1fr;
-  }
-
-  .leftColumn{
-    display:flex;
-    flex-direction:column;
-  }
-
-}
   
 </style>
 
