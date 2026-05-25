@@ -200,11 +200,11 @@ body::before{
   }
   
   .introCard{
-    width:fit-content;
-    max-width:720px;
-    margin:0 auto 14px;
+      width:100%;
+      max-width:none;
+      margin:0;
   }
-
+  
   #n5{
     display: table;
     margin: 10px auto 18px;
@@ -630,16 +630,12 @@ body::before{
 }
 
 .leftColumn{
-  display:flex;
-  flex-direction:column;
+  display:grid;
+  grid-template-columns:1fr 1fr;
   gap:14px;
 }
 
-.introCard{
-  width:100%;
-  max-width:none;
-  margin:0;
-}
+
 
 .toolsCard{
   height:100%;
