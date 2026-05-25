@@ -74,7 +74,7 @@
   }
 
   .grid{
-    display:grid;
+    display:flex;
     grid-template-columns: .95fr 1.05fr;
     gap: 14px;
   }
@@ -216,19 +216,23 @@
   }
 }
   
-  .tools {
-      display: grid;
-      grid-template-columns: 1fr 1fr; /* 2 columnas */
-      gap: 14px; /* <-- esto da espacio horizontal y vertical */
-      margin-top: 0; /* sin espacio extra arriba */
-  }
+.tools{
+    display:flex;
+    flex-wrap:wrap;
+
+    justify-content:center;
+    align-items:flex-start;
+
+    gap:14px;
+    margin-top:0;
+}
 
   .tools .btn:last-child {
       margin-bottom: 0;
   }
   
   .gridLC{
-    display:grid;
+    display:flex;
     grid-template-columns: 1fr 1fr;
     gap: 14px;
   }
@@ -311,12 +315,13 @@
     color: rgba(255,255,255,.88);
   }
 
-  .icon{
+.icon{
     width: 34px;
     height: 34px;
     border-radius: 12px;
-    display:grid;
-    place-items:center;
+    display:flex;
+    align-items:center;
+    justify-content:center;
     background: rgba(var(--glow-rgb), .16);
     border: 1px solid rgba(var(--glow-rgb), .40);
     flex: 0 0 auto;
@@ -325,7 +330,7 @@
       0 0 10px rgba(var(--glow-rgb), .18),
       0 0 16px rgba(var(--glow-rgb), .08),
       inset 0 0 10px rgba(255,255,255,.04);
-  }
+}
 
   .btn:hover .icon{
     transform: scale(1.06);
