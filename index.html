@@ -486,6 +486,24 @@
   line-height:1.5;
   color:#ffffff;
 }
+
+.miniSkills{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-top:12px;
+}
+
+.miniSkills span{
+  padding:6px 12px;
+  border-radius:999px;
+  background:rgba(255,255,255,.07);
+  border:1px solid rgba(255,255,255,.14);
+  font-size:13px;
+  font-weight:700;
+  box-shadow:
+    0 0 8px rgba(125,92,255,.08);
+}
   
 </style>
 
@@ -529,10 +547,15 @@
             </a>
           </p>
 
-          <p class="skillsText">
-            Profesor de japonés, inglés, portugués brasileño, chino,
-            matemáticas, física y programación.
-          </p>
+          <div class="miniSkills">
+            <span>🇯🇵 Japonés</span>
+            <span>🇺🇸 Inglés</span>
+            <span>🇧🇷 Portugués</span>
+            <span>🇨🇳 Chino</span>
+            <span>📐 Matemáticas</span>
+            <span>⚛️ Física</span>
+            <span>💻 Programación</span>
+          </div>
           
         </div>
       </div>
