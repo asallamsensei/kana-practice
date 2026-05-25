@@ -633,8 +633,6 @@ body::before{
   gap:14px;
 }
 
-
-
 .toolsCard{
   height:100%;
 }
@@ -643,6 +641,19 @@ body::before{
 .cursos .btn{
     justify-content:center;
     text-align:center;
+}
+
+@media (max-width:900px){
+
+  .layoutGrid{
+    grid-template-columns:1fr;
+  }
+
+  .leftColumn{
+    display:flex;
+    flex-direction:column;
+  }
+
 }
   
 </style>
