@@ -10,35 +10,81 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
 
 <style>
-  :root{
-    --bg: #0b1020;
-    --card: rgba(255,255,255,.08);
-    --card2: rgba(255,255,255,.10);
-    --line:rgba(255,255,255,.16);
-    --text: #ffffff;
-    --muted: #ffffff;
+:root{
 
-    --accent: #7d5cff;
-    --accent2:#22c55e;
-    --danger:#ef4444;
+    /* FONDO */
+    --bg1:#080914;
+    --bg2:#15142d;
+
+    /* TARJETAS */
+    --card: rgba(255,255,255,.07);
+    --card2: rgba(255,255,255,.10);
+
+    /* LÍNEAS */
+    --line: rgba(255,255,255,.16);
     --border: rgba(255,255,255,.14);
-    --font-jp: "Noto Sans JP", "Hiragino Kaku Gothic ProN", "Yu Gothic", "Meiryo", "MS PGothic", system-ui, sans-serif;
-  }
+
+    /* TEXTO */
+    --text:#ffffff;
+    --muted:#cfd2ff;
+
+    /* GLOW / ACENTOS */
+    --accent:#b76cff;
+    --accent2:#ff69b4;
+    --danger:#ef4444;
+
+    /* EFECTO GLOW GENERAL */
+    --glow:#b76cff;
+
+    /* FUENTE JP */
+    --font-jp:
+      "Noto Sans JP",
+      "Hiragino Kaku Gothic ProN",
+      "Yu Gothic",
+      "Meiryo",
+      "MS PGothic",
+      system-ui,
+      sans-serif;
+}
 
   *{ box-sizing: border-box; }
 
-  body{
+body{
     margin:0;
     font-family: Inter, system-ui, sans-serif;
-    background: var(--bg);
-    color: var(--text);
+
+    background:
+        radial-gradient(circle at 20% 10%,rgba(183,108,255,.25),transparent 30%),
+        radial-gradient(circle at 80% 20%,rgba(255,105,180,.16),transparent 28%),
+        linear-gradient(160deg,var(--bg1),var(--bg2));
+
+    color:var(--text);
+
     min-height:100vh;
     display:flex;
     justify-content:center;
-    padding: 26px 14px 70px;
-    position: relative;
-    overflow-x: hidden;
-  }
+
+    padding:26px 14px 70px;
+
+    position:relative;
+    overflow-x:hidden;
+}
+
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+
+    background-image:
+        linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);
+
+    background-size:42px 42px;
+
+    mask-image:
+        linear-gradient(to bottom,black,transparent 85%);
+}
 
   .wrap{
     width:min(1120px, 100%);
@@ -581,11 +627,6 @@
         </div>
 
         <div class="infoTop">
-        
-        <p class="skillsLabel">
-          Profesor de japonés, inglés, portugués, chino,<br>
-          matemáticas, física & programación.
-        </p>
           
           <p class="contact">
             <a class="waLink"
