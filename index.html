@@ -498,6 +498,10 @@ body::before{
     text-align:center;
   }
 
+  .layoutGrid{
+    grid-template-columns:1fr;
+  }
+  
 }
 
 .contact a{
@@ -617,6 +621,29 @@ body::before{
     justify-content:center;
     gap:14px;
 }
+
+.layoutGrid{
+  display:grid;
+  grid-template-columns: 1fr 420px;
+  gap:14px;
+  align-items:start;
+}
+
+.leftColumn{
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+}
+
+.introCard{
+  width:100%;
+  max-width:none;
+  margin:0;
+}
+
+.toolsCard{
+  height:100%;
+}
   
 </style>
 
@@ -634,6 +661,10 @@ body::before{
       Entre más tarea, más aprendes.
     </p>
     
+<div class="layoutGrid">
+
+  <div class="leftColumn">
+
     <div class="card introCard">
       <div class="profileTop">
         <div class="avatarTop">
@@ -641,200 +672,180 @@ body::before{
         </div>
 
         <div class="infoTop">
-          
+
           <p class="contact">
-            <a class="waLink"
-               href="https://wa.me/573217876009"
-               target="_blank">
+            <a class="waLink" href="https://wa.me/573217876009" target="_blank">
               WhatsApp: +57 321 787 6009
             </a>
           </p>
 
           <p class="contact">
-            <a class="waLink"
-               href="https://wa.me/573217876009"
-               target="_blank">
+            <a class="waLink" href="https://wa.me/573217876009" target="_blank">
               wa.me/573217876009
             </a>
           </p>
-          
+
           <p class="contact">
-            <a class="waLink"
-               href="https://paypal.me/asallamsensei"
-               target="_blank">
+            <a class="waLink" href="https://paypal.me/asallamsensei" target="_blank">
               paypal.me/asallamsensei
             </a>
           </p>
-          
+
           <div class="icon-buttons presentacionButtons">
 
-            <a class="icon-btn"
-               href="https://wa.me/573217876009"
-               target="_blank">
-          
+            <a class="icon-btn" href="https://wa.me/573217876009" target="_blank">
               <img src="data/paginas/whatsapp.png" alt="WhatsApp">
               <span>WhatsApp</span>
-          
             </a>
-          
-            <a class="icon-btn"
-               href="https://instagram.com/asallamsensei"
-               target="_blank">
-          
+
+            <a class="icon-btn" href="https://instagram.com/asallamsensei" target="_blank">
               <img src="data/paginas/instagram.png" alt="Instagram">
               <span>Instagram</span>
-          
             </a>
-          
-            <a class="icon-btn"
-               href="https://tiktok.com/@asallamsensei"
-               target="_blank">
-          
+
+            <a class="icon-btn" href="https://tiktok.com/@asallamsensei" target="_blank">
               <img src="data/paginas/tiktok.png" alt="TikTok">
               <span>TikTok</span>
-          
             </a>
-          
-            <a class="icon-btn"
-               href="https://youtube.com/@asallamsensei"
-               target="_blank">
-          
+
+            <a class="icon-btn" href="https://youtube.com/@asallamsensei" target="_blank">
               <img src="data/paginas/youtube.png" alt="YouTube">
               <span>YouTube</span>
-          
             </a>
-          
+
           </div>
-          
+
         </div>
       </div>
     </div>
 
-<div class="mainGrid">
+    <div class="card">
+      <p class="badge-title libros">📚 Libros</p>
 
-  <div class="card">
-    <p class="badge-title libros">📚 Libros</p>
+      <div class="libros">
+        <a class="btn libro" href="https://wa.me/573217876009" target="_blank" onclick="alert('Escríbeme al WhatsApp guap@ ✨')">
+          <span>Kit de iniciación al japonés</span>
+        </a>
 
-    <div class="libros">
-      <a class="btn libro" href="https://wa.me/573217876009" target="_blank" onclick="alert('Escríbeme al WhatsApp guap@ ✨')">
-        <span>Kit de iniciación al japonés</span>
-      </a>
+        <a class="btn libro" href="https://wa.me/573217876009" target="_blank" onclick="alert('Escríbeme al WhatsApp guap@ ✨')">
+          <span>Los 2136 Jōyō Kanji</span>
+        </a>
 
-      <a class="btn libro" href="https://wa.me/573217876009" target="_blank" onclick="alert('Escríbeme al WhatsApp guap@ ✨')">
-        <span>Los 2136 Jōyō Kanji</span>
-      </a>
-
-      <a class="btn libro" href="https://wa.me/573217876009" target="_blank" onclick="alert('Escríbeme al WhatsApp guap@ ✨')">
-        <span>La chica de cabello arcoíris</span>
-      </a>
+        <a class="btn libro" href="https://wa.me/573217876009" target="_blank" onclick="alert('Escríbeme al WhatsApp guap@ ✨')">
+          <span>La chica de cabello arcoíris</span>
+        </a>
+      </div>
     </div>
+
+    <div class="card">
+      <p class="badge-title cursos">🎓 Cursos</p>
+
+      <div class="cursos">
+        <a class="btn curso" href="https://wa.me/573217876009" target="_blank" onclick="alert('Escríbeme al WhatsApp guap@ ✨')">
+          <span>Japonés desde 0!</span>
+        </a>
+
+        <a class="btn curso" href="https://wa.me/573217876009" target="_blank" onclick="alert('Escríbeme al WhatsApp guap@ ✨')">
+          <span>Anime sin subtítulos!</span>
+        </a>
+
+        <a class="btn curso" href="https://wa.me/573217876009" target="_blank" onclick="alert('Escríbeme al WhatsApp guap@ ✨')">
+          <span>Lea Manga Hoy!</span>
+        </a>
+
+        <a class="btn curso" href="https://wa.me/573217876009" target="_blank" onclick="alert('Escríbeme al WhatsApp guap@ ✨')">
+          <span>JLPT N5!</span>
+        </a>
+
+        <div id="n5" class="n5count">⏳ Cargando contador N5...</div>
+      </div>
+    </div>
+
   </div>
 
-  <div class="card">
-    <p class="badge-title cursos">🎓 Cursos</p>
-
-    <div class="cursos">
-      <a class="btn curso" href="https://wa.me/573217876009" target="_blank" onclick="alert('Escríbeme al WhatsApp guap@ ✨')">
-        <span>Japonés desde 0!</span>
-      </a>
-
-      <a class="btn curso" href="https://wa.me/573217876009" target="_blank" onclick="alert('Escríbeme al WhatsApp guap@ ✨')">
-        <span>Anime sin subtítulos!</span>
-      </a>
-
-      <a class="btn curso" href="https://wa.me/573217876009" target="_blank" onclick="alert('Escríbeme al WhatsApp guap@ ✨')">
-        <span>Lea Manga Hoy!</span>
-      </a>
-
-      <a class="btn curso" href="https://wa.me/573217876009" target="_blank" onclick="alert('Escríbeme al WhatsApp guap@ ✨')">
-        <span>JLPT N5!</span>
-      </a>
-
-      <div id="n5" class="n5count">⏳ Cargando contador N5...</div>
-    </div>
-  </div>
-
-  <div class="card">
+  <div class="card toolsCard">
     <p class="badge-title tools">🛠️ Herramientas</p>
 
-<div class="tools">
+    <div class="tools">
 
-  <a class="btn tools kana" href="kana.html">
-    <span>
-      Kana
-      <small>Hiragana & Katakana</small>
-    </span>
-    <span class="icon">あ</span>
-  </a>
+      <a class="btn tools kana" href="kana.html">
+        <span>
+          Kana
+          <small>Hiragana & Katakana</small>
+        </span>
+        <span class="icon">あ</span>
+      </a>
 
-  <a class="btn tools" href="katakana.html">
-    <span>
-      Katakana
-      <small>Vocabulario en katakana</small>
-    </span>
-    <span class="icon">カ</span>
-  </a>
+      <a class="btn tools" href="katakana.html">
+        <span>
+          Katakana
+          <small>Vocabulario en katakana</small>
+        </span>
+        <span class="icon">カ</span>
+      </a>
 
-  <a class="btn tools kanji" href="kanji.html">
-    <span>
-      Kanji de grado 1
-      <small>Base sólida</small>
-    </span>
-    <span class="icon">一</span>
-  </a>
+      <a class="btn tools kanji" href="kanji.html">
+        <span>
+          Kanji de grado 1
+          <small>Base sólida</small>
+        </span>
+        <span class="icon">一</span>
+      </a>
 
-  <a class="btn tools joyo" href="kanji_todos.html">
-    <span>
-      Los 2136 Jōyō Kanji
-      <small>Modo Bestia</small>
-    </span>
-    <span class="icon">漢</span>
-  </a>
+      <a class="btn tools joyo" href="kanji_todos.html">
+        <span>
+          Los 2136 Jōyō Kanji
+          <small>Modo Bestia</small>
+        </span>
+        <span class="icon">漢</span>
+      </a>
 
-  <a class="btn tools n5" href="Vocabulario_N5.html">
-    <span>
-      Vocabulario N5
-      <small>Lo esencial</small>
-    </span>
-    <span class="icon">N5</span>
-  </a>
+      <a class="btn tools n5" href="Vocabulario_N5.html">
+        <span>
+          Vocabulario N5
+          <small>Lo esencial</small>
+        </span>
+        <span class="icon">N5</span>
+      </a>
 
-  <a class="btn tools media" href="vocabulario_series_y_anime.html">
-    <span>
-      Canciones y series
-      <small>Vocab en contexto</small>
-    </span>
-    <span class="icon">🎧</span>
-  </a>
+      <a class="btn tools media" href="vocabulario_series_y_anime.html">
+        <span>
+          Canciones y series
+          <small>Vocab en contexto</small>
+        </span>
+        <span class="icon">🎧</span>
+      </a>
 
-  <a class="btn tools" href="turista.html">
-    <span>
-      Turista en Japón
-      <small>Vocabulario útil</small>
-    </span>
-    <span class="icon">🗾</span>
-  </a>
+      <a class="btn tools" href="turista.html">
+        <span>
+          Turista en Japón
+          <small>Vocabulario útil</small>
+        </span>
+        <span class="icon">🗾</span>
+      </a>
 
-  <a class="btn tools vivos" href="vivo.html">
-    <span>
-      EL VIVO!!
-      <small>Ver y descargar vocabulario</small>
-    </span>
-    <span class="icon">🃏</span>
-  </a>
+      <a class="btn tools vivos" href="vivo.html">
+        <span>
+          EL VIVO!!
+          <small>Ver y descargar vocabulario</small>
+        </span>
+        <span class="icon">🃏</span>
+      </a>
 
-  <a class="btn tools test" href="test.html">
-    <span>
-      TEST
-      <small>Ponte a prueba</small>
-    </span>
-    <span class="icon">✓</span>
-  </a>
+      <a class="btn tools test" href="test.html">
+        <span>
+          TEST
+          <small>Ponte a prueba</small>
+        </span>
+        <span class="icon">✓</span>
+      </a>
 
-</div>
+    </div>
 
     <footer class="badge-title footer-badge">© Asallam Sensei</footer>
   </div>
+
+</div>
 
 </div>
 
