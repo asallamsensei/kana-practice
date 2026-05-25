@@ -514,6 +514,45 @@
   text-shadow:
     0 0 8px rgba(125,92,255,.18);
 }
+
+.icon-buttons{
+    display:flex;
+    gap:12px;
+    margin-top:18px;
+}
+
+.icon-btn{
+    min-height:48px;
+    width:auto;
+    padding:0 16px;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+
+    border-radius:999px;
+    font-size:16px;
+
+    background:rgba(255,255,255,.08);
+    border:1px solid var(--line);
+
+    box-shadow:0 10px 25px rgba(0,0,0,.35);
+
+    transition:.25s;
+    white-space:nowrap;
+}
+
+.icon-btn img{
+    width:24px;
+    height:24px;
+    object-fit:contain;
+}
+
+.icon-btn:hover{
+    transform:translateY(-4px) scale(1.05);
+    box-shadow:0 0 22px var(--glow);
+}
   
 </style>
 
