@@ -378,7 +378,6 @@
 <div class="wrap">
   <header>
     <h1>Kit de Iniciación al Japonés ★ Asallam Sensei</h1>
-    <div id="studentName" class="subtitle">Estudiante: —</div>
   </header>
 
   <div class="grid">
@@ -488,39 +487,6 @@
 /* =========================================================
    CONFIG SIMPLE
 ========================================================= */
-const CLAVES_ESTUDIANTES = {
-  "dogtora": { nombre: "Laura" },
-  "surrealismo": { nombre: "Searge ⚜️" },  
-  "aguecuca": { nombre: "Daniel Arenales" },
-  "profe": { nombre: "Sensei" },
-  "penne": { nombre: "Akane" },
-  "hombreviejolaneta": { nombre: "Esteban" },
-  "concha": { nombre: "Freddy" },
-  "excelente": { nombre: "꧁ঔৣ☬༒𝓩𝓪𝓯𝓯𝓻𝓮𝓷༒☬ঔৣ꧂" },
-  "aprendiendo": { nombre: "Sofía" },
-  "batman": { nombre: "Bruce" },
-  "elmejordeperu": { nombre: "Yeyson" },  
-};
-
-function autenticarEstudiante(){
-  let estudiante = null;
-
-  while(true){
-    let clave = prompt("Ingresa tu clave de estudiante:") || "";
-    clave = clave.trim().toLowerCase();
-
-    if(!clave) continue;
-
-    if(CLAVES_ESTUDIANTES[clave]){
-      estudiante = CLAVES_ESTUDIANTES[clave];
-      break;
-    }
-
-    alert("Clave incorrecta");
-  }
-
-  $("studentName").innerText = "Estudiante: " + estudiante.nombre;
-}
   
 const DATA_URL = "data/kit/kit.json";
 const AUDIO_BASE_URL = "data/kit/audios/";
@@ -1261,7 +1227,6 @@ async function cargarData(){
   }
 }
 
-autenticarEstudiante();
 cargarData();
 </script>
 </body>
