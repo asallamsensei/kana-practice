@@ -75,7 +75,8 @@
       </div>
       <div id="resultado"></div>
       <div id="extraResultado"></div>
-      <div class="row" style="margin-top:14px"><button class="btn" type="button" onclick="siguiente()">Siguiente</button></div>
+      <div class="row" style="margin-top:14px">
+        <button class="btn" type="button" onclick="manejarSiguiente()">Siguiente</button>
       <div class="stats">
         <div>Aciertos: <span id="aciertos">0</span> — Errores: <span id="errores">0</span></div>
         <div>Racha: <span id="racha">0</span> — Mejor racha: <span id="mejorRacha">0</span> — Precisión: <span id="precision">0%</span></div>
@@ -246,24 +247,71 @@ function siguiente(){
   hablarChino(actual.hanzi);
 }
   
+function marcarOpciones(){
+  opciones.forEach((opcion, i) => {
+    const btnId = ["btnA", "btnB", "btnC"][i];
+
+    if(opcion === correcta){
+      $(btnId).classList.add("correcto");
+    }else{
+      $(btnId).classList.add("incorrecto");
+    }
+  });
+}
+
 function responder(letra){
   if(yaValidado || !actual) return;
+
   yaValidado = true;
+
   const idx = {a:0,b:1,c:2}[letra];
   const elegido = opciones[idx];
   const esCorrecto = elegido === correcta;
-  const btnId = {a:"btnA",b:"btnB",c:"btnC"}[letra];
+
+  marcarOpciones();
+
   if(esCorrecto){
-    sonidoCorrecto(); aciertos++; racha++; mejorRacha = Math.max(mejorRacha, racha);
-    $("resultado").innerText = "¡Correcto!"; $("resultado").className = "correcto-txt"; $(btnId).classList.add("correcto");
+    sonidoCorrecto();
+    aciertos++;
+    racha++;
+    mejorRacha = Math.max(mejorRacha, racha);
+
+    $("resultado").innerText = "¡Correcto!";
+    $("resultado").className = "correcto-txt";
   }else{
-    sonidoIncorrecto(); errores++; racha = 0;
-    $("resultado").innerText = "Incorrecto"; $("resultado").className = "incorrecto-txt"; $(btnId).classList.add("incorrecto");
-    const letraCorrecta = ["a","b","c"][opciones.findIndex(x => x === correcta)];
-    $({a:"btnA",b:"btnB",c:"btnC"}[letraCorrecta]).classList.add("correcto");
+    sonidoIncorrecto();
+    errores++;
+    racha = 0;
+
+    $("resultado").innerText = "Incorrecto";
+    $("resultado").className = "incorrecto-txt";
   }
+
   $("extraResultado").innerText = `${actual.hanzi} (${actual.pinyin}) = ${actual.es}`;
-  pintarStats(); guardarStats();
+  pintarStats();
+  guardarStats();
+}
+
+function manejarSiguiente(){
+  if(!yaValidado){
+    sonidoIncorrecto();
+    errores++;
+    racha = 0;
+    yaValidado = true;
+
+    marcarOpciones();
+
+    $("resultado").innerText = "Incorrecto";
+    $("resultado").className = "incorrecto-txt";
+    $("extraResultado").innerText = `${actual.hanzi} (${actual.pinyin}) = ${actual.es}`;
+
+    pintarStats();
+    guardarStats();
+
+    return;
+  }
+
+  siguiente();
 }
 
 document.addEventListener("keydown", e => {
