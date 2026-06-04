@@ -709,9 +709,25 @@ function normalizarData(data){
   return Array.isArray(data) ? data.map(x => normalizarItem(x)).filter(Boolean) : [];
 }
 
+function usaVistaKanaAvanzado(item){
+  return item && (
+    item.bloque === "101_hiragana" ||
+    item.bloque === "hiragana_serio"
+  );
+}
+  
 function textoJapones(item){
   if(!item) return "";
-  if(vistaJapones === "avanzado" && item.avanzado) return item.avanzado;
+
+  // Solo estos bloques cambian entre kana y kanji
+  if(usaVistaKanaAvanzado(item)){
+    if(vistaJapones === "avanzado" && item.avanzado){
+      return item.avanzado;
+    }
+    return item.japones;
+  }
+
+  // Los demás bloques siempre usan japones normal
   return item.japones;
 }
 
@@ -949,6 +965,13 @@ function pintarBotonesModo(){
   $("statusModo").innerText =
     `Modos: ${[...modosActivos].join(" + ")}`;
 
+const hayBloqueKanaAvanzado =
+  bloquesSeleccionados.has("101_hiragana") ||
+  bloquesSeleccionados.has("hiragana_serio");
+
+$("v-basico").disabled = !hayBloqueKanaAvanzado;
+$("v-avanzado").disabled = !hayBloqueKanaAvanzado;
+  
 }
 
 function setModo(modo){
