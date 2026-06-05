@@ -225,22 +225,6 @@
     flex-wrap: wrap;
   }
 
-  .btnABC{
-    padding: 10px 16px;
-    font-size: 18px;
-    border-radius: 10px;
-    border: none;
-    background: #b94a48;
-    color: #fff;
-    cursor: pointer;
-    min-width: 64px;
-    font-weight: 800;
-  }
-
-  .btnABC:hover{
-    background: #a94442;
-  }
-
   .acciones{
     margin-top: 14px;
     display: flex;
@@ -330,6 +314,41 @@
   border-radius:999px;
   margin-bottom:8px;
 }
+
+.opBtns{
+  display:flex;
+  justify-content:center;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-top:12px;
+}
+
+.opBtn{
+  min-width:92px;
+  min-height:52px;
+  background:rgba(125,92,255,.12);
+  border:1px solid rgba(125,92,255,.52);
+  color:#efe9ff;
+  box-shadow:0 0 9px rgba(125,92,255,.25);
+  font-weight:900;
+}
+
+.opBtn.correcta{
+  background:rgba(34,197,94,.18);
+  border-color:rgba(34,197,94,.55);
+  color:#dcfce7;
+}
+
+.opBtn.incorrecta{
+  background:rgba(239,68,68,.18);
+  border-color:rgba(239,68,68,.55);
+  color:#fecaca;
+}
+
+.opBtn:disabled{
+  opacity:1;
+  cursor:not-allowed;
+}
   
   @media (max-width: 900px){
     h1{
@@ -391,10 +410,10 @@
 
     <div id="opciones"></div>
 
-    <div id="opbtns">
-      <button class="btnABC" type="button" onclick="responder('a')">a</button>
-      <button class="btnABC" type="button" onclick="responder('b')">b</button>
-      <button class="btnABC" type="button" onclick="responder('c')">c</button>
+    <div id="opbtns" class="opBtns">
+      <button id="btnA" class="btn opBtn" type="button" onclick="responder('a')">A</button>
+      <button id="btnB" class="btn opBtn" type="button" onclick="responder('b')">B</button>
+      <button id="btnC" class="btn opBtn" type="button" onclick="responder('c')">C</button>
     </div>
 
     <div class="acciones">
@@ -750,8 +769,9 @@ function itemEsDeKanji(item){
 }  
   
 function siguiente(){
+  
   if(pool.length < 3) return;
-
+  limpiarBotonesOpcion();
   yaValidado = false;
   $("resultado").innerText = "";
   $("resultado").className = "";
@@ -801,6 +821,35 @@ if(modoPreguntaActual === "es_jp") promptEl.classList.add("prompt-es-jp");
   if(modoPreguntaActual === "es_jp") $("opciones").classList.add("jp");
 }
 
+function limpiarBotonesOpcion(){
+  ["btnA","btnB","btnC"].forEach(id => {
+    const b = $(id);
+    if(!b) return;
+    b.disabled = false;
+    b.classList.remove("correcta", "incorrecta");
+  });
+}
+
+function pintarOpcionCorrecta(){
+  const btns = {
+    a: $("btnA"),
+    b: $("btnB"),
+    c: $("btnC")
+  };
+
+  Object.entries(btns).forEach(([letra, btn]) => {
+    if(!btn) return;
+
+    btn.disabled = true;
+
+    if(letra === correcta){
+      btn.classList.add("correcta");
+    }else{
+      btn.classList.add("incorrecta");
+    }
+  });
+}
+  
 function escapeHTML(str){
   return String(str)
     .replaceAll("&","&amp;")
@@ -822,7 +871,7 @@ function responder(letra){
 async function verificar(letra){
   const r = String(letra).toLowerCase().trim();
   const res = $("resultado");
-
+  pintarOpcionCorrecta();
   if(!itemEsDeKanji(actualItem) && actualItem.romaji){
     await playAudioForRomaji(actualItem.romaji);
   }
