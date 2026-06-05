@@ -943,6 +943,7 @@ async function siguienteDesdeBoton(){
   const res = $("resultado");
   
   if(!yaValidado){
+      sonidoIncorrecto();
       if(!itemEsDeKanji(actualItem) && actualItem.romaji){
         await playAudioForRomaji(actualItem.romaji);
       }
