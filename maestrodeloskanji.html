@@ -379,14 +379,14 @@
   text-shadow: 0 0 14px rgba(250,204,21,.65);
 }
 
-.extra-romaji{
+.extra-significado{
   font-family: "Inter", Arial, sans-serif;
   font-size: clamp(16px, 2vw, 28px);
-  color: #93c5fd;
-  letter-spacing: .5px;
+  color: #fde68a;
+  letter-spacing: .3px;
   text-shadow:
-    0 0 8px rgba(59,130,246,.75),
-    0 0 20px rgba(125,92,255,.45);
+    0 0 8px rgba(250,204,21,.65),
+    0 0 20px rgba(250,204,21,.35);
 }
   
   #preguntaVisual{
@@ -2022,10 +2022,10 @@ function responder(letra){
   verificar(letra);
 }
 
-function renderExtraJpRomaji(jp, romaji){
+function renderExtraJpRomaji(jp, romaji, significado){
   const extra = $("extraResultado");
 
-  if(!jp && !romaji){
+  if(!jp && !romaji && !significado){
     extra.innerHTML = "";
     return;
   }
@@ -2035,6 +2035,8 @@ function renderExtraJpRomaji(jp, romaji){
       ${jp ? `<span class="extra-jp">${jp}</span>` : ""}
       ${jp && romaji ? `<span class="extra-star">★</span>` : ""}
       ${romaji ? `<span class="extra-romaji">${romaji}</span>` : ""}
+      ${(jp || romaji) && significado ? `<span class="extra-star">★</span>` : ""}
+      ${significado ? `<span class="extra-significado">${significado}</span>` : ""}
     </div>
   `;
 }
@@ -2079,8 +2081,9 @@ function verificar(input){
   if(actual.familia === "vocab"){
     const jp = actual.extra?.palabra || "";
     const romaji = actual.romaji || "";
-
-    renderExtraJpRomaji(jp, romaji);
+    const significado = getSignificado(actual.extra);
+  
+    renderExtraJpRomaji(jp, romaji, significado);
 
   }else if(actual.familia === "kanji"){
     const kun = parseLecturas(actual.extra?.kunyomi).join(", ");
