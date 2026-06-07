@@ -515,6 +515,11 @@
     color: var(--muted);
     font-size: 15px;
   }
+
+.extra-significado{
+  color: #fde68a;
+}
+  
 </style>
 </head>
 
@@ -2022,10 +2027,10 @@ function responder(letra){
   verificar(letra);
 }
 
-function renderExtraJpRomaji(jp, romaji){
+function renderExtraJpRomaji(jp, romaji, significado){
   const extra = $("extraResultado");
 
-  if(!jp && !romaji){
+  if(!jp && !romaji && !significado){
     extra.innerHTML = "";
     return;
   }
@@ -2035,6 +2040,8 @@ function renderExtraJpRomaji(jp, romaji){
       ${jp ? `<span class="extra-jp">${jp}</span>` : ""}
       ${jp && romaji ? `<span class="extra-star">★</span>` : ""}
       ${romaji ? `<span class="extra-romaji">${romaji}</span>` : ""}
+      ${(jp || romaji) && significado ? `<span class="extra-star">★</span>` : ""}
+      ${significado ? `<span class="extra-significado">${significado}</span>` : ""}
     </div>
   `;
 }
@@ -2079,8 +2086,9 @@ function verificar(input){
   if(actual.familia === "vocab"){
     const jp = actual.extra?.palabra || "";
     const romaji = actual.romaji || "";
-
-    renderExtraJpRomaji(jp, romaji);
+    const significado = getSignificado(actual.extra);
+  
+    renderExtraJpRomaji(jp, romaji, significado);
 
   }else if(actual.familia === "kanji"){
     const kun = parseLecturas(actual.extra?.kunyomi).join(", ");
