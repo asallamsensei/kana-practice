@@ -501,32 +501,32 @@
   ],
 
   "De Compras": [
-    { "japones": "これをください。", "romaji": "kore o kudasai.", "espanol": "Deme esto, por favor." },
-    { "japones": "いくらですか。", "romaji": "ikura desu ka.", "espanol": "¿Cuánto cuesta?" },
-    { "japones": "ちょっと高いですね。", "romaji": "chotto takai desu ne.", "espanol": "Está un poco caro, ¿eh?" },
-    { "japones": "安いですね。", "romaji": "yasui desu ne.", "espanol": "Está barato, ¿eh?" },
-    { "japones": "ちょうどです。", "romaji": "choudo desu.", "espanol": "Traigo exacto/justo." },
+    { "japones": "これをください。", "romaji": "kore o kudasai", "espanol": "Deme esto, por favor." },
+    { "japones": "いくらですか。", "romaji": "ikura desu ka", "espanol": "¿Cuánto cuesta?" },
+    { "japones": "ちょっと高いですね。", "romaji": "chotto takai desu ne", "espanol": "Está un poco caro, ¿eh?" },
+    { "japones": "安いですね。", "romaji": "yasui desu ne", "espanol": "Está barato, ¿eh?" },
+    { "japones": "ちょうどです。", "romaji": "choudo desu", "espanol": "Traigo exacto/justo." },
   
-    { "japones": "ありますか。", "romaji": "arimasu ka.", "espanol": "¿Hay? / ¿Tiene?" },
-    { "japones": "あります。", "romaji": "arimasu.", "espanol": "Sí hay." },
-    { "japones": "ありません。", "romaji": "arimasen.", "espanol": "No hay." },
-    { "japones": "これでお願いします。", "romaji": "kore de onegaishimasu.", "espanol": "Me quedo con este." },
-    { "japones": "少し待ってください。", "romaji": "sukoshi matte kudasai.", "espanol": "Espere un momento, por favor." },
+    { "japones": "ありますか。", "romaji": "arimasu ka", "espanol": "¿Hay? / ¿Tiene?" },
+    { "japones": "あります。", "romaji": "arimasu", "espanol": "Sí hay." },
+    { "japones": "ありません。", "romaji": "arimasen", "espanol": "No hay." },
+    { "japones": "これでお願いします。", "romaji": "kore de onegaishimasu", "espanol": "Me quedo con este." },
+    { "japones": "少し待ってください。", "romaji": "sukoshi matte kudasai", "espanol": "Espere un momento, por favor." },
   
-    { "japones": "袋をお願いします。", "romaji": "fukuro o onegaishimasu.", "espanol": "Una bolsa, por favor." },
-    { "japones": "袋はいりません。", "romaji": "fukuro wa irimasen.", "espanol": "No necesito bolsa." },
-    { "japones": "レシートをお願いします。", "romaji": "reshiito o onegaishimasu.", "espanol": "El recibo, por favor." },
-    { "japones": "カードで払います。", "romaji": "kaado de haraimasu.", "espanol": "Pago con tarjeta." },
+    { "japones": "袋をお願いします。", "romaji": "fukuro o onegaishimasu", "espanol": "Una bolsa, por favor." },
+    { "japones": "袋はいりません。", "romaji": "fukuro wa irimasen", "espanol": "No necesito bolsa." },
+    { "japones": "レシートをお願いします。", "romaji": "reshiito o onegaishimasu", "espanol": "El recibo, por favor." },
+    { "japones": "カードで払います。", "romaji": "kaado de haraimasu", "espanol": "Pago con tarjeta." },
   
-    { "japones": "現金で払います。", "romaji": "genkin de haraimasu.", "espanol": "Pago en efectivo." },
-    { "japones": "もう一つください。", "romaji": "mou hitotsu kudasai.", "espanol": "Déme otro/a." },
-    { "japones": "小さいのはありますか。", "romaji": "chiisai no wa arimasu ka.", "espanol": "¿Tiene uno más pequeño?" },
-    { "japones": "大きいのはありますか。", "romaji": "ookii no wa arimasu ka.", "espanol": "¿Tiene uno más grande?" },
+    { "japones": "現金で払います。", "romaji": "genkin de haraimasu", "espanol": "Pago en efectivo." },
+    { "japones": "もう一つください。", "romaji": "mou hitotsu kudasai", "espanol": "Déme otro/a." },
+    { "japones": "小さいのはありますか。", "romaji": "chiisai no wa arimasu ka", "espanol": "¿Tiene uno más pequeño?" },
+    { "japones": "大きいのはありますか。", "romaji": "ookii no wa arimasu ka", "espanol": "¿Tiene uno más grande?" },
   
-    { "japones": "別の色はありますか。", "romaji": "betsu no iro wa arimasu ka.", "espanol": "¿Tiene otro color?" },
-    { "japones": "見てもいいですか。", "romaji": "mite mo ii desu ka.", "espanol": "¿Lo puedo ver?" },
-    { "japones": "試着できますか。", "romaji": "shichaku dekimasu ka.", "espanol": "¿Me lo puedo probar?" },
-    { "japones": "ありがとうございます。", "romaji": "arigatou gozaimasu.", "espanol": "Muchas gracias." }
+    { "japones": "別の色はありますか。", "romaji": "betsu no iro wa arimasu ka", "espanol": "¿Tiene otro color?" },
+    { "japones": "見てもいいですか。", "romaji": "mite mo ii desu ka", "espanol": "¿Lo puedo ver?" },
+    { "japones": "試着できますか。", "romaji": "shichaku dekimasu ka", "espanol": "¿Me lo puedo probar?" },
+    { "japones": "ありがとうございます。", "romaji": "arigatou gozaimasu", "espanol": "Muchas gracias." }
   ]
   
 }
