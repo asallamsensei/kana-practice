@@ -825,9 +825,13 @@ const pregunta = (modoPreguntaActual === "jp_es") ? actualItem.japones : actualI
 const campoOpciones = (modoPreguntaActual === "jp_es") ? "espanol" : "japones";
   const correctoTexto = actualItem[campoOpciones];
 
+  const poolOpciones = itemEsDeKanji(actualItem)
+    ? pool.filter(itemEsDeKanji)
+    : pool;
+  
   let opciones = [correctoTexto];
   while(opciones.length < 3){
-    const r = pool[Math.floor(Math.random() * pool.length)][campoOpciones];
+    const r = poolOpciones[Math.floor(Math.random() * poolOpciones.length)][campoOpciones];
     if(r && !opciones.includes(r)) opciones.push(r);
   }
   opciones = mezclar(opciones);
