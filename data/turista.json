@@ -1,5 +1,5 @@
 {
-  "saludos_y_despedidas": [
+  "Saludos y Despedidas": [
     
     { "japones": "こんにちは", "romaji": "konnichiwa", "espanol": "hola (desde media mañana hasta antes del anochecer)" },
     { "japones": "こんばんは", "romaji": "konbanwa", "espanol": "buenas noches (saludo)" },
@@ -57,7 +57,7 @@
     { "japones": "お大事に", "romaji": "odaiji ni", "espanol": "que te mejores (despedida)" }
     
   ],
-  "¡Corre al konbini!": [
+  "¡Corre al Konbini!": [
     { "japones": "歯ブラシ", "romaji": "haburashi", "espanol": "cepillo de dientes" },
     { "japones": "歯磨き", "romaji": "hamigaki", "espanol": "pasta de dientes" },
     { "japones": "シャンプー", "romaji": "shanpuu", "espanol": "champú" },
@@ -124,7 +124,7 @@
     { "japones": "コピー機", "romaji": "kopiiki", "espanol": "fotocopiadora" },
     { "japones": "ATM", "romaji": "ee tii emu", "espanol": "cajero automático" }
   ],
-  "Lugares clave": [
+  "Lugares Clave": [
     { "japones": "駅", "romaji": "eki", "espanol": "estación (tren/metro)" },
     { "japones": "空港", "romaji": "kuukou", "espanol": "aeropuerto" },
     { "japones": "ホテル", "romaji": "hoteru", "espanol": "hotel" },
@@ -192,7 +192,7 @@
     { "japones": "広場", "romaji": "hiroba", "espanol": "plaza" },
     { "japones": "港", "romaji": "minato", "espanol": "puerto" }
   ],
-  "Vocabulario clave para el viaje": [
+  "Vocabulario Clave para el Viaje": [
     { "japones": "トイレ", "romaji": "toire", "espanol": "baño" },
     { "japones": "トイレットペーパー", "romaji": "toiretto peepaa", "espanol": "papel higiénico" },
     { "japones": "トイレはどこですか？", "romaji": "toire wa doko desu ka", "espanol": "¿Dónde está el baño?" },
@@ -253,7 +253,7 @@
     { "japones": "禁煙", "romaji": "kin'en", "espanol": "prohibido fumar" },
     { "japones": "喫煙所", "romaji": "kitsuenjo", "espanol": "zona para fumar" }
   ],
-  "Kanjis vitales para el turista": [
+  "Kanjis Vitales para el Turista": [
     { "japones": "口", "lecturas_kanji": "kuchi", "espanol": "boca" },
     { "japones": "入", "lecturas_kanji": "hairu / nyuu", "espanol": "entrar" },
     { "japones": "出", "lecturas_kanji": "deru / shutsu", "espanol": "salir" },
@@ -462,4 +462,42 @@
     { "japones": "店員さん", "romaji": "tenin-san", "espanol": "empleado de tienda" },
     { "japones": "またお越しくださいませ", "romaji": "mata okoshi kudasaimase", "espanol": "por favor, visítenos de nuevo" }
   ] 
+
+  "Frases Útiles": [
+    { "japones": "わかりません", "romaji": "wakarimasen", "espanol": "no entiendo" },
+    { "japones": "わかりませんでした", "romaji": "wakarimasen deshita", "espanol": "no entendí" },
+    { "japones": "全然日本語が話せません", "romaji": "zenzen nihongo ga hanasemasen", "espanol": "no hablo nada de japonés" },
+    { "japones": "下痢です", "romaji": "geri desu", "espanol": "tengo diarrea" },
+  
+    { "japones": "間違えそうです", "romaji": "machigaesou desu", "espanol": "creo/parece que me voy a equivocar" },
+    { "japones": "間違えました", "romaji": "machigaemashita", "espanol": "me equivoqué" },
+    { "japones": "日本語を勉強しています", "romaji": "nihongo o benkyou shiteimasu", "espanol": "estoy estudiando japonés" },
+    { "japones": "できません", "romaji": "dekimasen", "espanol": "no puedo" },
+  
+    { "japones": "ゆっくりお願いします", "romaji": "yukkuri onegaishimasu", "espanol": "despacio, por favor" },
+    { "japones": "もっとゆっくりお願いします", "romaji": "motto yukkuri onegaishimasu", "espanol": "más despacio, por favor" },
+    { "japones": "英語が話せますか？", "romaji": "eigo ga hanasemasu ka?", "espanol": "¿habla inglés?" },
+  
+    { "japones": "いいえ、英語が話せません", "romaji": "iie, eigo ga hanasemasen", "espanol": "no, no hablo inglés" },
+    { "japones": "よかった、私もです", "romaji": "yokatta, watashi mo desu", "espanol": "qué bueno, yo tampoco (por contexto, literalmente es “yo también”)" },
+    { "japones": "何も読めません", "romaji": "nani mo yomemasen", "espanol": "no puedo leer nada" },
+  
+    { "japones": "漢字が読めません", "romaji": "kanji ga yomemasen", "espanol": "no puedo leer kanji" },
+    { "japones": "わかったふりをしています", "romaji": "wakatta furi o shiteimasu", "espanol": "estoy fingiendo que entiendo" },
+    { "japones": "これで合っていますか", "romaji": "kore de atteimasu ka", "espanol": "¿así está bien?" },
+  
+    { "japones": "ひらがなが読めません", "romaji": "hiragana ga yomemasen", "espanol": "no puedo leer hiragana" },
+    { "japones": "カタカナが読めません", "romaji": "katakana ga yomemasen", "espanol": "no puedo leer katakana" },
+    { "japones": "お腹を壊しています", "romaji": "onaka o kowashiteimasu", "espanol": "tengo mal el estómago" },
+  
+    { "japones": "まだまだです", "romaji": "mada mada desu", "espanol": "todavía me falta mucho" },
+    { "japones": "笑っていますが、わかっていません", "romaji": "waratteimasu ga, wakatteimasen", "espanol": "me estoy riendo, pero no entiendo" },
+    { "japones": "書いてもらえますか", "romaji": "kaite moraemasu ka", "espanol": "¿me lo puede escribir?" },
+  
+    { "japones": "無理です", "romaji": "muri desu", "espanol": "es imposible, no puedo hacerlo" },
+    { "japones": "もう無理です", "romaji": "mou muri desu", "espanol": "ya no puedo más" },
+    { "japones": "その言葉がわかりません", "romaji": "sono kotoba ga wakarimasen", "espanol": "no entiendo esa palabra" },
+    { "japones": "自信がありません", "romaji": "jishin ga arimasen", "espanol": "no tengo confianza, no estoy seguro" }
+  ]
+  
 }
