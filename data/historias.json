@@ -1,0 +1,3302 @@
+[
+  {
+    "kanji": "一",
+    "historia": "El número 1 se fue a Japón nadando y por eso llegó acostado."
+  },
+  {
+    "kanji": "二",
+    "historia": "El número 1 se sentía solo y por eso llevó otro 1 al Japón."
+  },
+  {
+    "kanji": "三",
+    "historia": "Son 3 números 1 que se fueron nadando al Japón."
+  },
+  {
+    "kanji": "四",
+    "historia": "Es una boca tan grande, que caben 4 personas, pero a la cuarta se le ven las piernas."
+  },
+  {
+    "kanji": "五",
+    "historia": "El número 5 tiene 3 líneas horizontales y 2 verticales. 3 + 2 = 5."
+  },
+  {
+    "kanji": "六",
+    "historia": "El sobrero de copa que le compré a mi animalito por 6 dólares le quedó grande, solo se le ven las patas."
+  },
+  {
+    "kanji": "七",
+    "historia": "Es el mismo número 7 pero dándole media vuelta."
+  },
+  {
+    "kanji": "八",
+    "historia": "El volcán ha estado inactivo por 8 millones de años."
+  },
+  {
+    "kanji": "九",
+    "historia": "Una persona arrodillada en el suelo está buscando 9 monedas que se le cayeron."
+  },
+  {
+    "kanji": "十",
+    "historia": "Son dos manos formando una cruz. Es decir, hay 10 dedos."
+  },
+  {
+    "kanji": "百",
+    "historia": "Es como un número 100 rotado 90° en el sentido de las manecillas del reloj."
+  },
+  {
+    "kanji": "千",
+    "historia": "Para armar el número 1000 necesitamos muchas gotas de 10."
+  },
+  {
+    "kanji": "上",
+    "historia": "La varita mágica está apuntando hacia arriba y se sostiene mágicamente encima del suelo. 卜 = varita mágica."
+  },
+  {
+    "kanji": "下",
+    "historia": "Hay una varita mágica pegada en el techo y está apuntando hacia abajo."
+  },
+  {
+    "kanji": "左",
+    "historia": "Parece una t con una i mayúscula. Le diremos entonces “tirección izquierda”."
+  },
+  {
+    "kanji": "右",
+    "historia": "El baño es un hueco 口 que está al fondo a la derecha. No olvides llevar una toalla."
+  },
+  {
+    "kanji": "中",
+    "historia": "Yo me pongo un palito adentro de la boca para lucir más genial."
+  },
+  {
+    "kanji": "大",
+    "historia": "¿Qué tan grande? Así de grande."
+  },
+  {
+    "kanji": "小",
+    "historia": "Es un pequeño pingüino con sus alitas a los lados."
+  },
+  {
+    "kanji": "月",
+    "historia": "Es un pictograma de la luna y una nube que pasaba por ahí."
+  },
+  {
+    "kanji": "日",
+    "historia": "Es el sol que dibujan los niños, con una sonrisa y gafas de sol, pero cuadrado y sin las gafas de sol."
+  },
+  {
+    "kanji": "年",
+    "historia": "午 = Medio día, signo del caballo. El caballo pirata celebra año nuevo con su tripulación. Las dos líneas extra son el parche en el ojo."
+  },
+  {
+    "kanji": "早",
+    "historia": "El girasol se despierta temprano para seguir al sol."
+  },
+  {
+    "kanji": "木",
+    "historia": "Es el pictograma de un árbol."
+  },
+  {
+    "kanji": "林",
+    "historia": "Dos árboles forman una pequeña arboleda."
+  },
+  {
+    "kanji": "山",
+    "historia": "Es un pictograma de una montaña."
+  },
+  {
+    "kanji": "川",
+    "historia": "Es el pictograma de un río que fluye de arriba hacia abajo."
+  },
+  {
+    "kanji": "土",
+    "historia": "Es una letra t de tierra clavada en el suelo."
+  },
+  {
+    "kanji": "空",
+    "historia": "Techo + piernas + columna en forma de I. El cielo se ve a través del hueco en el techo, me subí en la columna para repararlo."
+  },
+  {
+    "kanji": "田",
+    "historia": "Es un pictograma de un campo de arroz que fue dividido en 4 para sembrar 4 tipos diferentes de arroz."
+  },
+  {
+    "kanji": "天",
+    "historia": "Una línea encima de una persona representa el cielo."
+  },
+  {
+    "kanji": "生",
+    "historia": "Con una sola gota de lluvia, el arbusto creció y creció lleno de vida."
+  },
+  {
+    "kanji": "花",
+    "historia": "艹 = radical de pasto, 化 = kanji de cambio. El pasto guarda un secreto, que las flores cambian de color."
+  },
+  {
+    "kanji": "草",
+    "historia": "El pasto crece más temprano que los girasoles."
+  },
+  {
+    "kanji": "虫",
+    "historia": "¡Oh no! Hay un insecto chupando sangre de mi brazo. Los dos cuadrados a los lados son las alas."
+  },
+  {
+    "kanji": "犬",
+    "historia": "Mi perro es mi mejor amigo, por eso siempre lo llevo encima del hombro."
+  },
+  {
+    "kanji": "人",
+    "historia": "Son las piernas de una persona que va caminando."
+  },
+  {
+    "kanji": "名",
+    "historia": "En la tarde, su boca pronunció mi nombre. 夕 = tarde."
+  },
+  {
+    "kanji": "女",
+    "historia": "Es el pictograma de una mujer sentada con las piernas cruzadas."
+  },
+  {
+    "kanji": "男",
+    "historia": "Para trabajar en el campo de arroz necesitamos el poder de los hombres. 力 = poder, fuerza."
+  },
+  {
+    "kanji": "子",
+    "historia": "Es el pictograma de un niño con los brazos abiertos y las piernas envueltas en una tela."
+  },
+  {
+    "kanji": "目",
+    "historia": "Con imaginación podemos ver aquí un ojo."
+  },
+  {
+    "kanji": "耳",
+    "historia": "Una oreja es como un ojo, pero para escuchar. Las líneas extras son cabello cerca de la oreja."
+  },
+  {
+    "kanji": "口",
+    "historia": "Es una boca abierta."
+  },
+  {
+    "kanji": "手",
+    "historia": "Este kanji no parece una mano hasta que nos damos cuenta de que es un dibujo de las líneas de las manos!!!"
+  },
+  {
+    "kanji": "足",
+    "historia": "Con imaginación vemos una bota con estilo de la edad media. Por supuesto, las botas van en los pies."
+  },
+  {
+    "kanji": "見",
+    "historia": "¿Qué hace un ojo con piernas? Respuesta: ver."
+  },
+  {
+    "kanji": "音",
+    "historia": "Te aseguro que si estás de pie sobre el sol vas a empezar a hacer un sonido. ¡Ahhhhh mis pies!"
+  },
+  {
+    "kanji": "力",
+    "historia": "Es un fisicoculturista muy musculoso flexionando su brazo para mostrar su poder."
+  },
+  {
+    "kanji": "気",
+    "historia": "Es una sopa de letras X al vapor. Está tapada con una tela y sale humo en forma de E de espíritu. Casi podemos ver arriba la E de Espíritu."
+  },
+  {
+    "kanji": "円",
+    "historia": "Es la ventanilla del banco donde te entregan yenes. El símbolo del yen es ¥."
+  },
+  {
+    "kanji": "入",
+    "historia": "Se parece a la letra griega lambda λ. Cuando fui a Grecia no me dejaron entrar por no saber escribir bien la letra lambda."
+  },
+  {
+    "kanji": "出",
+    "historia": "Para encontrar la salida debes escalar la montaña doble."
+  },
+  {
+    "kanji": "立",
+    "historia": "La vasija es tan pesada que no me puedo poner de pie cuando la sostengo."
+  },
+  {
+    "kanji": "休",
+    "historia": "Siempre que voy a tomar un descanso me hago al lado de un árbol. 亻= radical de persona."
+  },
+  {
+    "kanji": "先",
+    "historia": "Parece un centauro. Nunca antes había visto un centauro."
+  },
+  {
+    "kanji": "夕",
+    "historia": "Este kanji se parece al katakana ta = タ. Tarde empieza por ta."
+  },
+  {
+    "kanji": "本",
+    "historia": "Es un árbol con la raíz señalada. La raíz es el origen del árbol. El origen del conocimiento son los libros."
+  },
+  {
+    "kanji": "文",
+    "historia": "El profesor de literatura se cree mucho porque usa sombrero de copa y camina estirando las piernas."
+  },
+  {
+    "kanji": "字",
+    "historia": "Papá, ¿por qué tengo que llevar este techo en la cabeza? ¡Cállate! Es para que desarrolles carácter. Es carácter de letra pero esta historia ayuda a recordar la palabra."
+  },
+  {
+    "kanji": "学",
+    "historia": "El niño con la corona estudia tanto que le salen chispas de la cabeza."
+  },
+  {
+    "kanji": "校",
+    "historia": "Los 6 árboles de la escuela están marcados con una x. Eso que significa que está prohibido cortarlos. Recordemos que 六 = 6."
+  },
+  {
+    "kanji": "村",
+    "historia": "En la aldea todas las casas son de madera y tienen las mismas medidas. 寸 es el kanji de medida."
+  },
+  {
+    "kanji": "町",
+    "historia": "El pueblo es fácil de encontrar, está al lado de un campo de arroz y tiene un letrero gigante en forma de T que dice bienvenidos."
+  },
+  {
+    "kanji": "森",
+    "historia": "Este bosque es tan pequeño que solamente tiene 3 árboles."
+  },
+  {
+    "kanji": "王",
+    "historia": "El rey apenas tiene 3 años, por eso se le dificulta estar de pie cuando da sus discursos."
+  },
+  {
+    "kanji": "正",
+    "historia": "No es correcto escribir el kanji de rey así."
+  },
+  {
+    "kanji": "玉",
+    "historia": "El rey camina con una bola al aire, dice que es para mantenerse fresco."
+  },
+  {
+    "kanji": "水",
+    "historia": "El agua la sacamos apretando el río 川."
+  },
+  {
+    "kanji": "火",
+    "historia": "Es un pictograma del fuego. Podemos ver claramente las llamas elevándose."
+  },
+  {
+    "kanji": "石",
+    "historia": "¿Quién fue el chistoso que colgó una piedra del techo?"
+  },
+  {
+    "kanji": "竹",
+    "historia": "Es un pictograma de dos plantas de bambú."
+  },
+  {
+    "kanji": "糸",
+    "historia": "El gusanito hace su crisálida con hilos muy pequeños. Imaginemos que 幺 = crisálida. 小 = kanji de pequeño."
+  },
+  {
+    "kanji": "貝",
+    "historia": "Un ojo con patas está saliendo del mar. Es una nueva especie de marisco."
+  },
+  {
+    "kanji": "車",
+    "historia": "Con imaginación podemos ver un carro de fórmula 1 visto desde arriba."
+  },
+  {
+    "kanji": "金",
+    "historia": "Imaginemos que es una bóveda llena de oro y dinero."
+  },
+  {
+    "kanji": "雨",
+    "historia": "La lluvia cae desde el cielo y cuatro gotas golpean mi ventana."
+  },
+  {
+    "kanji": "赤",
+    "historia": "Debajo de la tierra veo unas raíces rojas, quizás sean de una remolacha."
+  },
+  {
+    "kanji": "青",
+    "historia": "Los arbustos que crecen en la luna siempre son azules."
+  },
+  {
+    "kanji": "白",
+    "historia": "El color blanco es una gota del sol."
+  },
+  {
+    "kanji": "数",
+    "historia": "La mujer 女 entrenó levantando un gran número de bultos de arroz 米 para convertirse en maestra de obra 攵."
+  },
+  {
+    "kanji": "多",
+    "historia": "Mi TATArabuelo tiene muchos años. El katakana ta se escribe así: タ."
+  },
+  {
+    "kanji": "少",
+    "historia": "Pocos tienen una cara tan bonita como la mía: Dos ojos coquetos, una nariz larga y una boca atravesada."
+  },
+  {
+    "kanji": "万",
+    "historia": "El jinete sin cabeza tiene diez mil años."
+  },
+  {
+    "kanji": "半",
+    "historia": "Algún chistoso atravesó al número 3 三 por la mitad. Arriba se ven dos pedacitos que salieron volando."
+  },
+  {
+    "kanji": "春",
+    "historia": "Aquí vemos 3 三 personas 人 disfrutando del sol 日 en la primavera."
+  },
+  {
+    "kanji": "夏",
+    "historia": "Este verano me debo poner una 一 gota en cada ojo 目 antes de salir a correr. Imaginemos que 夂 son dos piernas corriendo."
+  },
+  {
+    "kanji": "秋",
+    "historia": "En el otoño los árboles dejan caer sus hojas como si fueran gotas, y se ponen rojos como el fuego 火."
+  },
+  {
+    "kanji": "冬",
+    "historia": "Cuando corres en invierno, tus huellas van quedando marcadas en la nieve."
+  },
+  {
+    "kanji": "今",
+    "historia": "Se me hace que este kanji parece un reloj de esos antiguos de pared. El reloj de pared está dañado, pero no se preocupen, ahora mismo lo arreglo."
+  },
+  {
+    "kanji": "新",
+    "historia": "Arriba del árbol en una vasija encontré un hacha nuevecita. 斤 = hacha."
+  },
+  {
+    "kanji": "古",
+    "historia": "El viejito en el parque alimenta 10 bocas: 5 patos y 5 palomas."
+  },
+  {
+    "kanji": "間",
+    "historia": "La puerta estelar necesita que pase un intervalo de 24 horas para poder volver a funcionar. 門 = puerta, portón."
+  },
+  {
+    "kanji": "方",
+    "historia": "Aquí vemos una personita muy feliz, corriendo en esa dirección."
+  },
+  {
+    "kanji": "北",
+    "historia": "En el polo norte hace mucho frío, por eso hay que dormir espalda contra espalda para compartir el calor."
+  },
+  {
+    "kanji": "南",
+    "historia": "Se parece mucho al kanji de felicidad = 幸. En el sur la gente es feliz usando faldas largas."
+  },
+  {
+    "kanji": "東",
+    "historia": "Es fácil encontrar el este en Japón. Es la dirección en la que el sol se ve detrás de los árboles por la mañana."
+  },
+  {
+    "kanji": "西",
+    "historia": "Cuando vaya al viejo oeste me voy a tomar un buen licor, de ese que venden en esas botellas antiguas."
+  },
+  {
+    "kanji": "遠",
+    "historia": "El perrito marciano lleva tierra en su cabeza y va en camino a su planeta lejano. ⻌ = radical de camino."
+  },
+  {
+    "kanji": "近",
+    "historia": "Cerca de aquí vivía un leñador, por eso vemos hachas en el camino. 斤 = hacha."
+  },
+  {
+    "kanji": "前",
+    "historia": "En la tienda de al frente atiende un sapo, vende piedras lunares y sables de juguete."
+  },
+  {
+    "kanji": "後",
+    "historia": "Detrás de la columna vi una gran crisálida. Después de verla salí corriendo. Imaginemos que幺 = crisálida."
+  },
+  {
+    "kanji": "内",
+    "historia": "Yo compro el cereal únicamente por el muñequito que viene adentro. Me encantan, tengo toda la colección."
+  },
+  {
+    "kanji": "外",
+    "historia": "El mago eminente dice: Voy a estar afuera toda la tarde, practicando mi magia con mi varita mágica."
+  },
+  {
+    "kanji": "場",
+    "historia": "Hice un hueco en la tierra para esconder mi alcancía. Lo malo es que no recuerdo el lugar exacto."
+  },
+  {
+    "kanji": "地",
+    "historia": "¡Cuidado! Hay escorpiones 也 bajo la tierra que rodea las tumbas. Imaginemos que 也 es escorpión."
+  },
+  {
+    "kanji": "国",
+    "historia": "Los países tienen fronteras para proteger sus joyas. El kanji de joya es 玉."
+  },
+  {
+    "kanji": "園",
+    "historia": "El parque está encerrado para que los perritos extraterrestres no se lleven la tierra en la cabeza."
+  },
+  {
+    "kanji": "谷",
+    "historia": "Ah, no hay nada como estar en mi cabañita en el valle, escuchando las gotas de lluvia que caen sobre el techo."
+  },
+  {
+    "kanji": "野",
+    "historia": "El computador dijo: De antemano les pido disculpas, pero me iré a las llanuras, me cansé de tantos cálculos. 予 es el kanji de ‘de antemano’."
+  },
+  {
+    "kanji": "原",
+    "historia": "Debajo del acantilado (厂) hay una hermosa pradera, llena de gotas de sol y pequeños 小 animalitos felices."
+  },
+  {
+    "kanji": "里",
+    "historia": "Parece un computador. En mi aldea, el computador más grande está en el hogar de mis padres."
+  },
+  {
+    "kanji": "市",
+    "historia": "En el mercado solo se venden dos artículos: sombreros de copa y toallas. 巾 es el kanji de toalla."
+  },
+  {
+    "kanji": "京",
+    "historia": "La gente de la capital es extraña. Tienen bocas muy pequeñas (小), pero usan sombreros de copa muy altos."
+  },
+  {
+    "kanji": "風",
+    "historia": "Cuando hay viento, los insectos 虫 buscan protección dentro de las cajas de cereal."
+  },
+  {
+    "kanji": "雪",
+    "historia": "La nieve es 3 veces más divertida que la lluvia. La parte de abajo se parece a un 3.  雨 = lluvia."
+  },
+  {
+    "kanji": "雲",
+    "historia": "Las nubes de lluvia tienen formas curiosas. Esa, por ejemplo, parece que tiene dos (二) “brazos musculosos” (厶)."
+  },
+  {
+    "kanji": "池",
+    "historia": "No nades en el estanque, está lleno de “escorpiones” (也). El radical agua (氵) lo asocio aquí con nadar."
+  },
+  {
+    "kanji": "海",
+    "historia": "Si estás en el medio del mar, vas a ver agua en cada una de las direcciones. 毎 significa “cada” o “todo”."
+  },
+  {
+    "kanji": "岩",
+    "historia": "En la montaña (山), las piedras son tan grandes que es mejor llamarlas rocas. 石 es el kanji de piedra."
+  },
+  {
+    "kanji": "形",
+    "historia": "Esa letra A tiene una forma muy fea, y ese número 3 está muy torcido. Debes practicar más tu caligrafía."
+  },
+  {
+    "kanji": "太",
+    "historia": "No soy rechoncho, lo que pasa es que soy grande y… ay se me cayó mi barra de chocolate."
+  },
+  {
+    "kanji": "細",
+    "historia": "糸 es hilo pero imaginemos que es el hombre araña. El hombre araña antes era muy delicado, no podía trabajar en los campos de arroz."
+  },
+  {
+    "kanji": "広",
+    "historia": "Me gusta la cueva porque es amplia y puedo hacer mis levantamientos de pesas sin golpearme los codos con las paredes."
+  },
+  {
+    "kanji": "長",
+    "historia": "Es un kit para el cabello largo. Arriba hay una peineta y abajo hay una especie de broche."
+  },
+  {
+    "kanji": "点",
+    "historia": "El mago eminente sacó 100 puntos en el examen de magia. Se debe a que pudo hacer fuego sin abrir la boca. Imaginemos que 卜 = varita mágica."
+  },
+  {
+    "kanji": "丸",
+    "historia": "Al 9 le hace falta una gota para ser un número redondo. 九 = 9"
+  },
+  {
+    "kanji": "交",
+    "historia": "Mi padre usa su sombrero de copa cuando va a mezclarse con la gente elegante. Padre = 父."
+  },
+  {
+    "kanji": "光",
+    "historia": "Einstein estaba equivocado, los rayos de luz no están hechos de fotones, sino de pequeños seres luminosos."
+  },
+  {
+    "kanji": "角",
+    "historia": "Romeo quiso envolver la luna para regalo, pero la luna ha engordado de tanto comer campos de arroz y por eso no pudo cubrir ni las esquinas. 勹 = radical de envolver."
+  },
+  {
+    "kanji": "計",
+    "historia": "El plan es tan simple que te la puedo decir con 10 palabras. 言 = decir."
+  },
+  {
+    "kanji": "直",
+    "historia": "Si te salen 10 ojos después de que te pica una araña, debes Lárgarte inmediatamente al médico. La L en Lárgate es la L que aparece abajo."
+  },
+  {
+    "kanji": "線",
+    "historia": "La línea telefónica es un hilo blanco cubierto de plástico para protegerlo del agua. 糸 = hilo. 白 = blanco."
+  },
+  {
+    "kanji": "矢",
+    "historia": "El campeón de tiro al blanco con dardos tiene tanta habilidad, que los lanza con la cabeza."
+  },
+  {
+    "kanji": "弱",
+    "historia": "Parece débil, pero este arco hecho con plumas tiene el doble de fuerza que un arco normal. 弓 = arco. 羽 = pluma."
+  },
+  {
+    "kanji": "強",
+    "historia": "El arquero legendario tiene la fuerza del escarabajo hércules. Insecto = 虫."
+  },
+  {
+    "kanji": "高",
+    "historia": "Una boca se para encima de otra boca para parecer más alta. La de arriba se pone un sombrero y la de abajo una falda."
+  },
+  {
+    "kanji": "同",
+    "historia": "En la caja de cereal venían 10 muñequitos, pero todos eran iguales ☹. El número 10 está rotado 90°."
+  },
+  {
+    "kanji": "親",
+    "historia": "Mis padres suben el tarro de las galletas arriba del árbol para que yo no lo alcance, solo lo puedo ver."
+  },
+  {
+    "kanji": "母",
+    "historia": "Aquí vemos una madre: Es el kanji de mujer 女, pero está ancho por el embarazo y tiene marcados los senos que están llenos de leche."
+  },
+  {
+    "kanji": "父",
+    "historia": "Aquí se ven los ojos, la nariz y el bigote de mi padre."
+  },
+  {
+    "kanji": "姉",
+    "historia": "Mi hermana mayor es una mujer que vende sombreros y toallas en el mercado. 市 = mercado."
+  },
+  {
+    "kanji": "兄",
+    "historia": "Mi hermano mayor es una boca con patas. 😱"
+  },
+  {
+    "kanji": "弟",
+    "historia": "Mi hermano menor tiene cuernos, un arco y brinca en una pierna. Así es, se cree un vikingo saltarín."
+  },
+  {
+    "kanji": "妹",
+    "historia": "La mujer que todavía no es grande es la hermana menor. 未 = todavía no."
+  },
+  {
+    "kanji": "自",
+    "historia": "Uno mismo puede ponerse gotas en los ojos, pero si alguien puede ayudarte sería mucho mejor. 目 = ojo."
+  },
+  {
+    "kanji": "友",
+    "historia": "Un verdadero amigo te dice si se te ve la entrepierna por tener el cierre abierto. Imaginamos que又 es entrepierna."
+  },
+  {
+    "kanji": "体",
+    "historia": "El señor T cuida su cuerpo con una estricta dieta de hojas de libros. Dice que no tienen grasa."
+  },
+  {
+    "kanji": "毛",
+    "historia": "La cola de mi perro tiene un pelaje muy bonito."
+  },
+  {
+    "kanji": "頭",
+    "historia": "Los fríjoles tienen vitaminas importantes para la cabeza. Eso escribió el médico en una página de papel. 豆 = frijol, 頁 = página."
+  },
+  {
+    "kanji": "顔",
+    "historia": "Hay 3 hojas de afeitar en la vasija. Antes de afeitar mi rostro, corto una página de papel para verificar su filo. 頁 = página."
+  },
+  {
+    "kanji": "首",
+    "historia": "Aquí vemos el cuello de una hermosa mujer, del cual cuelga una piedra preciosa en forma de ojo. 目 = ojo."
+  },
+  {
+    "kanji": "心",
+    "historia": "Si completas mentalmente los trazos, podrás ver un corazón humano."
+  },
+  {
+    "kanji": "時",
+    "historia": "En el templo no hay reloj, el tiempo lo miden con el sol. 寺 = templo."
+  },
+  {
+    "kanji": "曜",
+    "historia": "Todos los días de la semana sale el sol y veo 33 aves cruzar el cielo. 隹 = radical de ave."
+  },
+  {
+    "kanji": "朝",
+    "historia": "En la mañana, 10 girasoles se despiden de la luna."
+  },
+  {
+    "kanji": "昼",
+    "historia": "El chavo del 8 se pone su gorra con orejeras desde el amanecer hasta la noche para protegerse del sol durante el día."
+  },
+  {
+    "kanji": "夜",
+    "historia": "En la noche me pondré mi sombrero de copa, tomaré mi bastón más elegante y caminaré hasta muy tarde."
+  },
+  {
+    "kanji": "分",
+    "historia": "El lanzador de espadas en el circo es capaz de lanzar 8 en 1 minuto. 八 = 8."
+  },
+  {
+    "kanji": "週",
+    "historia": "Esta semana se pasó volando, parecía que íbamos en una carretera, pero circular porque volvimos al lunes. ⻌ = radical de camino. 周 = circunferencia."
+  },
+  {
+    "kanji": "星",
+    "historia": "Arriba está el kanji de sol. Abajo está el kanji de vida. El sol es la estrella de la vida."
+  },
+  {
+    "kanji": "室",
+    "historia": "Pinté un cuadro en el techo de mi habitación. Ven, te invito a que veas el clímax de mi expresión artística. 至 = clímax."
+  },
+  {
+    "kanji": "戸",
+    "historia": "El que creó este kanji era muy perezoso: solo puso una (一) P de puerta."
+  },
+  {
+    "kanji": "家",
+    "historia": "Mi casa es pequeña. Bajo su techo solamente cabe mi cerdito. 豕 = cerdo, marrano."
+  },
+  {
+    "kanji": "寺",
+    "historia": "土 = tierra. 寸 = medida. El templo no me aceptó. Midieron mi fuerza haciéndome levantar tierra y fallé."
+  },
+  {
+    "kanji": "黒",
+    "historia": "Detestaba mi computador blanco, así que le prendí fuego para que quedara negro. Ahora no enciende ☹."
+  },
+  {
+    "kanji": "来",
+    "historia": "Si vas a venir, trae dos libras más de arroz por favor. 米 = arroz."
+  },
+  {
+    "kanji": "行",
+    "historia": "Me gustaría ir a Roma a ver las columnas. Algunas tienen forma de i y otras de t. イ = i, テ = te."
+  },
+  {
+    "kanji": "帰",
+    "historia": "Cuando el guerrero volvió a casa, cambió su sable 刂 por una escoba y un delantal."
+  },
+  {
+    "kanji": "歩",
+    "historia": "Cuando salgo a caminar, la gente se detiene a admirar mi bello rostro. 止 = parar, detenerse."
+  },
+  {
+    "kanji": "走",
+    "historia": "Cuando tengo tierra en las botas no puedo correr bien."
+  },
+  {
+    "kanji": "止",
+    "historia": "El policía de tránsito detiene los carros para que el pequeño niño pueda pasar la calle."
+  },
+  {
+    "kanji": "活",
+    "historia": "La reunión se puso muy animada después de que las personas mojaron sus lenguas con licor. 舌 = lengua."
+  },
+  {
+    "kanji": "店",
+    "historia": "Esta tienda me gusta mucho, está en una cueva y venden varitas mágicas que hablan. Imaginemos que 卜 = varita mágica."
+  },
+  {
+    "kanji": "買",
+    "historia": "El cíclope ⺲ gigante usa conchas como si fuesen dinero para comprar sus cosas. 貝 = concha, molusco."
+  },
+  {
+    "kanji": "売",
+    "historia": "El samurái 士 perdió su trabajo, pero no se preocupen, ahora vende coronas 冖 y medias veladas."
+  },
+  {
+    "kanji": "午",
+    "historia": "Al mediodía me voy a recostar para dormir 10 minutos."
+  },
+  {
+    "kanji": "汽",
+    "historia": "Ah, nada como el vapor de agua para tranquilizar mi espíritu気, hasta se me quitaron las arrugas en forma de x."
+  },
+  {
+    "kanji": "弓",
+    "historia": "¿Estás seguro de que esto es un arco? Claro, solo está un poquito doblado."
+  },
+  {
+    "kanji": "回",
+    "historia": "Ya sé que te gustan las donas, me lo has dicho muchas veces."
+  },
+  {
+    "kanji": "会",
+    "historia": "Las dos 二 vacas que hacen mu siempre se reunen bajo esa sombrilla. El katakana mu = ム."
+  },
+  {
+    "kanji": "組",
+    "historia": "El hombre araña 糸 detesta el edificio de la asociación de héroes, pues tiene muchos pisos y siempre se pierde."
+  },
+  {
+    "kanji": "船",
+    "historia": "En el barco, visto desde arriba, hay 1 persona remando con un remo doble, pero es tan fuerte que parecen 8 八 bocas (personas)."
+  },
+  {
+    "kanji": "明",
+    "historia": "El sol y la luna son dos cuerpos brillantes en el cielo."
+  },
+  {
+    "kanji": "社",
+    "historia": "Este altar tiene mucha tierra, es mejor llamar a la compañía limpiadora. Imaginemos que 礻 es altar."
+  },
+  {
+    "kanji": "切",
+    "historia": "Siete 七 + cuchillo 刀. Usar 7 cuchillos para cortar una sola zanahoria es exagerado pero funciona."
+  },
+  {
+    "kanji": "電",
+    "historia": "Las anguilas eléctricas recargan su electricidad cuando llueve."
+  },
+  {
+    "kanji": "毎",
+    "historia": "Cada madre merece un día de descanso donde pueda recostarse tranquilamente y relajarse. 母 = madre."
+  },
+  {
+    "kanji": "合",
+    "historia": "No vas a poder encajar toda tu colección de sombrillas en una sola caja. 合 se refiere a la idea de ajustar o adaptar cosas entre sí de manera armoniosa."
+  },
+  {
+    "kanji": "当",
+    "historia": "El dardo logró acertar en la escoba, pero le pegó tan fuerte que la volteó. Imaginemos queヨ = escoba."
+  },
+  {
+    "kanji": "台",
+    "historia": "¡Oigan! Nada de levantar pesas sobre el pedestal. 😠"
+  },
+  {
+    "kanji": "楽",
+    "historia": "¿De dónde viene esa música? Del parlante que pusieron arriba del árbol."
+  },
+  {
+    "kanji": "公",
+    "historia": "En el baño público había 8 personas haciendo levantamiento de pesas. Preferí buscar otro baño."
+  },
+  {
+    "kanji": "引",
+    "historia": "Un arco no puede lanzar la flecha por sí solo. Necesita alguien que lo hale hacia atrás."
+  },
+  {
+    "kanji": "科",
+    "historia": "¿Departamento de trigo? No, este es el de cucharones. 斗 = osa mayor (tiene forma de cucharón)."
+  },
+  {
+    "kanji": "歌",
+    "historia": "¿Qué qué hago? Pues arreglo esta canción, le falta todo. 欠 = faltar, carecer."
+  },
+  {
+    "kanji": "刀",
+    "historia": "¡Por fin!, tengo la espada legendaria: Excálibur. ¡Oh no!, se ha doblado, seguro era Excalipobre."
+  },
+  {
+    "kanji": "番",
+    "historia": "Sembré 1 gota de arroz en el campo y le dije al suelo: Ahora es tu turno, por favor haz crecer el arroz."
+  },
+  {
+    "kanji": "用",
+    "historia": "Si vuelves a utilizar la estantería, por favor muévela con cuidado, la vez pasada le torciste las patas."
+  },
+  {
+    "kanji": "何",
+    "historia": "¿T o J? ¿Qué letra te gusta más?"
+  },
+  {
+    "kanji": "通",
+    "historia": "Para evitar el tráfico, voy a utilizar otro camino; así llegaré más rápido. マ = katakana ma. 用 = utilizar."
+  },
+  {
+    "kanji": "門",
+    "historia": "Se parece a esas puertas de las cantinas que se ven en las películas del viejo oeste."
+  },
+  {
+    "kanji": "道",
+    "historia": "A mi perro le encanta sacar el cuello por la ventana cuando vamos por la carretera. ⻌ = radical de camino. 首 = cuello."
+  },
+  {
+    "kanji": "話",
+    "historia": "Cuando hablo, evito palabras con s porque se me sale la lengua y empiezo a chispear saliva. チ = katakana chi. 舌 = lengua."
+  },
+  {
+    "kanji": "言",
+    "historia": "La boca dice 1 palabrita, 1 palabrota, y 2 palabras de tamaño normal."
+  },
+  {
+    "kanji": "答",
+    "historia": "El bambú fue la solución adecuada para construir el techo de la casita. ⺮ = radical de bambú."
+  },
+  {
+    "kanji": "声",
+    "historia": "La voz del samurái es muy potente. Abajo se ve el po de potente. 士 = samurái."
+  },
+  {
+    "kanji": "聞",
+    "historia": "Las orejas son las puertas del sonido que nos permiten escuchar. 耳 = oreja."
+  },
+  {
+    "kanji": "語",
+    "historia": "Él dice que habla 5 idiomas, pero cuando le dicen que diga algo nunca abre la boca. 言 = decir."
+  },
+  {
+    "kanji": "読",
+    "historia": "Dicen que este vendedor es muy ilustrado, pues antes de vender cada libro, los lee. 売 = vender."
+  },
+  {
+    "kanji": "書",
+    "historia": "El pincel mágico escribe con tinta solar, la cual brilla durante la noche. 聿 = pincel."
+  },
+  {
+    "kanji": "記",
+    "historia": "La serpiente de tierra caliente quiere ser escriba, pero le dicen que no puede porque no tiene manos. 言 = decir."
+  },
+  {
+    "kanji": "紙",
+    "historia": "El hombre araña nunca pone su apellido real en ningún papel. 糸 = hilo (le decimos hombre araña). 氏 = apellido."
+  },
+  {
+    "kanji": "画",
+    "historia": "Aquí vemos un pincel bien gordo dentro de una botella de tinta, listo para dar una gran pincelada."
+  },
+  {
+    "kanji": "絵",
+    "historia": "En esta pintura aparece el hombre araña reunido con los X-Men y el resto de héroes. 会 = reunión, encontrarse con."
+  },
+  {
+    "kanji": "図",
+    "historia": "El mapa marca el lugar del tesoro con una X en el TSUelo. La sílaba tsu en katakana es ツ."
+  },
+  {
+    "kanji": "工",
+    "historia": "Estas artesanías están muy feas, les voy a poner una I de Insuficiente."
+  },
+  {
+    "kanji": "教",
+    "historia": "El maestro de obra siente piedad filial hacia su padre, pues fue él quien le enseñó todo lo que sabe. 孝 = piedad filial. A 攵 le diremos “maestro de obra”."
+  },
+  {
+    "kanji": "晴",
+    "historia": "El sol despejó el cielo y ahora está de un color azul muy bonito. 日 = sol, día. 青 = azul."
+  },
+  {
+    "kanji": "思",
+    "historia": "Nunca dejo de pensar en el campo de arroz donde pasé mi infancia, siempre tendrá un lugar especial en mi corazón. 田 = campo de arroz. 心 = corazón."
+  },
+  {
+    "kanji": "考",
+    "historia": "Cuando debo considerar algo importante, me entierro en el suelo 土. Claro que llevo un tubo (trazo 4) para respirar."
+  },
+  {
+    "kanji": "知",
+    "historia": "El sabio no permite que salgan dardos 矢 de su boca. Es decir, nunca dice groserías ni trata mal a nadie."
+  },
+  {
+    "kanji": "才",
+    "historia": "Incluso los genios confunden el kanji de talento con el katakana オ (o)."
+  },
+  {
+    "kanji": "理",
+    "historia": "El rey 王 siempre usa su computador cuando tiene que tomar decisiones lógicas."
+  },
+  {
+    "kanji": "算",
+    "historia": "Para calcular es bueno tener un ábaco de bambú ⺮, un buen ojo 目 para las matemáticas y algo de Habilidad numérica."
+  },
+  {
+    "kanji": "作",
+    "historia": "El señor T puede hacer muchas cosas en madera cuando su serrucho está bien afilado. 乍 es “mientras, aunque”, pero en las historias le diremos serrucho."
+  },
+  {
+    "kanji": "元",
+    "historia": "El génesis dice que en el origen había 2 pares de piernas: Adán y Eva."
+  },
+  {
+    "kanji": "食",
+    "historia": "El restaurante no tiene techo y siempre llueve, pero la comida es tan buena que todos llevan su propia sombrilla. 良 = bueno."
+  },
+  {
+    "kanji": "肉",
+    "historia": "Las cajas de cereal no traen carne, traen un muñequito o a veces incluso dos muñequitos. 人 es “persona”, pero le diremos muñequito."
+  },
+  {
+    "kanji": "馬",
+    "historia": "Aquí se ve la cabeza exagerada de un caballo, sus 4 patas y su cola."
+  },
+  {
+    "kanji": "牛",
+    "historia": "Es una vaca algo deformada, pero se ve su cabeza, sus 4 patas y su cola. Es la vaca lola, que tiene cabeza y tiene cola."
+  },
+  {
+    "kanji": "魚",
+    "historia": "Con imaginación, se ve que arriba está la cabeza del pez, en la mitad el cuerpo, y abajo sus 4 aletas."
+  },
+  {
+    "kanji": "鳥",
+    "historia": "Con algo de imaginación podemos ver un pájaro: pico, cabeza, ojo, ala, cola y algunos dedos de las patas."
+  },
+  {
+    "kanji": "羽",
+    "historia": "Es un pictograma de dos alas llenas de plumas."
+  },
+  {
+    "kanji": "鳴",
+    "historia": "La boca del pájaro hace un gorjeo muy bonito. Lástima que lo haga a medianoche y no me deje dormir."
+  },
+  {
+    "kanji": "麦",
+    "historia": "Arriba se ve la planta de la cebada creciendo en el campo, y abajo soy yo corriendo al baño porque la cebada me movió el estómago."
+  },
+  {
+    "kanji": "米",
+    "historia": "Este es un tipo especial de arroz que crece encima de los árboles. Arriba podemos ver dos granos de arroz."
+  },
+  {
+    "kanji": "茶",
+    "historia": "El mesero pomposo pone flores en mi té, una sombrilla de coctel y se ríe: ho ho ho. En katakanaホ = ho."
+  },
+  {
+    "kanji": "色",
+    "historia": "Mi cartuchera de colores tiene forma de C, una agarradera arriba y dos cajones para los colores."
+  },
+  {
+    "kanji": "黄",
+    "historia": "Una situación totalmente normal: El campo de arroz con patas lleva una bandeja de letras H a la mesa amarilla."
+  },
+  {
+    "kanji": "丁",
+    "historia": "Es una especie de poste o letrero en la calle."
+  },
+  {
+    "kanji": "世",
+    "historia": "Este microscopio ha pasado de generación en generación en mi familia. Es quizás el primero que se hizo."
+  },
+  {
+    "kanji": "両",
+    "historia": "Me gustan ambas cosas: Una 一 buena caja de cereal invertida 冂, y caminar en las montañas 山."
+  },
+  {
+    "kanji": "主",
+    "historia": "El rey: Estoy usando un nuevo acondicionador para mi cabello. El asistente real: Pero mi lord, eso es popó de pájaro."
+  },
+  {
+    "kanji": "乗",
+    "historia": "Con mucha imaginación, podemos ver una persona montada en un árbol."
+  },
+  {
+    "kanji": "定",
+    "historia": "Lo de abajo parece un gato hidráulico. He determinado que quiero que mi techo esté más arriba, así que usaré un gato para subirlo."
+  },
+  {
+    "kanji": "実",
+    "historia": "El gigante de 6 brazos trabaja colocando techos. La verdad es que lo hace muy bien."
+  },
+  {
+    "kanji": "客",
+    "historia": "Todo huésped es bienvenido bajo mi techo. 各 = todo."
+  },
+  {
+    "kanji": "宮",
+    "historia": "El techo del palacio está sostenido con una columna vertebral. 呂 = columna vertebral"
+  },
+  {
+    "kanji": "宿",
+    "historia": "Bajo el techo de la posada caben 100 百 personas 亻."
+  },
+  {
+    "kanji": "寒",
+    "historia": "Lo de abajo parece un kotatsu (mesa con calentador). Hace mucho frío afuera, mejor pongámonos bajo techo y sentémonos en el kotatsu."
+  },
+  {
+    "kanji": "対",
+    "historia": "El profesor de literatura 文 se opone a que yo lleve una regla para hacer mediciones 寸 en su clase, dice que es literatura no matemáticas."
+  },
+  {
+    "kanji": "局",
+    "historia": "La secretaria de la oficina está embarazada, aquí podemos verla con la barriga inchada por la nueva boca que vendrá al mundo."
+  },
+  {
+    "kanji": "屋",
+    "historia": "bandera 尸 + clímax 至. He puesto una bandera en el techo de mi casa, pues mi locura ha alcanzado su clímax y ahora me creo Nepoleón Bonaparte."
+  },
+  {
+    "kanji": "岸",
+    "historia": "Bajo la montaña 山 hay un precipio 厂, y bajo el precipicio se puede ver a la gente secándose en la orilla de la playa. 干 = secar."
+  },
+  {
+    "kanji": "島",
+    "historia": "En la isla de Simbad el marino hay un ave 鳥 gigante que hace su nido sobre una montaña."
+  },
+  {
+    "kanji": "州",
+    "historia": "Así como el río está formado por gotas, el estado está formado por personas."
+  },
+  {
+    "kanji": "帳",
+    "historia": "Toalla 巾 + Largo 長. El comerciante lleva sus cuentas en el libro de cuentas, sobre todo las de las ventas de toallas largas."
+  },
+  {
+    "kanji": "平",
+    "historia": "Con mucha imaginación vemos una balanza que está igualada en ambos lados."
+  },
+  {
+    "kanji": "幸",
+    "historia": "Se parece al kanji de picante 辛. Oye, yo no soy feliz sin picante, así que tráeme 1 一 orden más de papas picantes."
+  },
+  {
+    "kanji": "度",
+    "historia": "La cueva 广 está a 20 grados centígrados bajo 0. Por eso pongo mi entrepierna cerca del caldero, para calentarme."
+  },
+  {
+    "kanji": "庫",
+    "historia": "Usaremos esta cueva como bodega para guardar carros."
+  },
+  {
+    "kanji": "庭",
+    "historia": "A quién se le ocurrió poner un tribunal en medio del patio, sería mejor en una cueva. 廷 = tribunal."
+  },
+  {
+    "kanji": "式",
+    "historia": "Imaginemos que弋 = flecha. Me gusta que mis flechas tengan estilo, por eso las hago en forma de エ."
+  },
+  {
+    "kanji": "役",
+    "historia": "La columna 彳 de soldados tiene garrotes 殳 en las manos y dicen: Cumpliremos nuestro deber."
+  },
+  {
+    "kanji": "待",
+    "historia": "En las columnas del templo 寺 dice: Espere a que salga el monje."
+  },
+  {
+    "kanji": "急",
+    "historia": "Arriba hay un cepillo para la ropa. ¡Rápido, es una emergencia! Se quiso limpiar el corazón 心 con un cepillo para la ropa."
+  },
+  {
+    "kanji": "息",
+    "historia": "Uno mismo 自 puede respirar a voluntad, pero casi siempre es involuntario. Luego el corazón reparte el oxígeno por el cuerpo."
+  },
+  {
+    "kanji": "悪",
+    "historia": "Lo de arriba es una lámpara antigua. Oye no te tomes el aceite de la lámpara antigua, es malo para el corazón."
+  },
+  {
+    "kanji": "悲",
+    "historia": "La tristeza es como una carcel para el corazón."
+  },
+  {
+    "kanji": "想",
+    "historia": "Este árbol tiene ojos y corazón 心, pero eso no es todo, también puede adivinar tus ideas."
+  },
+  {
+    "kanji": "意",
+    "historia": "Mi corazón suena 音 diferente cuando estoy contigo, eso significa amor."
+  },
+  {
+    "kanji": "感",
+    "historia": "Con imaginación arriba vemos un horno de leña. Mis sentimientos por ti queman como un horno de leña encendido sobre mi corazón."
+  },
+  {
+    "kanji": "所",
+    "historia": "El mejor lugar para poner el hacha 斤 es al lado de la puerta."
+  },
+  {
+    "kanji": "打",
+    "historia": "Oye no deberías golpear el clavo con las manos 扌 peladas."
+  },
+  {
+    "kanji": "投",
+    "historia": "No es recomendable lanzar el misil 殳 con las manos 扌."
+  },
+  {
+    "kanji": "拾",
+    "historia": "Esta casita la armé con ladrillos que recogí de la calle con mis propias manos."
+  },
+  {
+    "kanji": "持",
+    "historia": "Siempre que voy al templo me gusta tener una vela de incienso en mis manos."
+  },
+  {
+    "kanji": "指",
+    "historia": "En mis manos 扌siempre tengo algo delicioso旨. Es por eso que siempre tengo los dedos untados de comida."
+  },
+  {
+    "kanji": "放",
+    "historia": "Terminé mi trabajo y corrí hacia el maestro de obra 攵 para ver si me liberaba por el día."
+  },
+  {
+    "kanji": "整",
+    "historia": "Al maestro de obra 攵 no le gusta ver manojos 束 de zanahorias, dice que lo correcto 正 es verlas organizadas por tamaño."
+  },
+  {
+    "kanji": "旅",
+    "historia": "A lo de la izquierda le diremos trapos. En esa dirección 方 hay una compañía de viajes baratos, pero me da desconfianza que el avión está hecho con trapos."
+  },
+  {
+    "kanji": "族",
+    "historia": "En esa dirección hay una tribu muy peligrosa, lanzan dardos 矢 con la cabeza. Incluso pueden lanzar 2 a la vez."
+  },
+  {
+    "kanji": "昔",
+    "historia": "Érase una vez una tumba doble, donde se decía que estaba enterrado el sol."
+  },
+  {
+    "kanji": "昭",
+    "historia": "El sol es brillante, es su forma de seducir 召 a las demás estrellas."
+  },
+  {
+    "kanji": "暑",
+    "historia": "Si alguien 者 se coloca el sol sobre su cabeza naturalmente va a sentir mucho bochorno."
+  },
+  {
+    "kanji": "暗",
+    "historia": "En lugares oscuros, como las cuevas, donde no entra el sol, los murciélagos usan el sonido 音 para ubicarse."
+  },
+  {
+    "kanji": "曲",
+    "historia": "Aquí vemos la boca de Bender, el robot doblador de Futurama. Bender en inglés es doblador."
+  },
+  {
+    "kanji": "有",
+    "historia": "t de tambor + luna Durante el día no vemos la luna pero sabemos que existe, de hecho, durante el día toca su tambor."
+  },
+  {
+    "kanji": "服",
+    "historia": "Con imaginación vemos un vestidor a la derecha. Aquí vemos a la señora luna entrando al vestidor para probarse ropa nueva."
+  },
+  {
+    "kanji": "期",
+    "historia": "Imaginemos que 其 es un tablero de ajedrez. Esta partida de ajedrez dura un período de tiempo tan largo que cada jugada toma 1 mes月."
+  },
+  {
+    "kanji": "板",
+    "historia": "El árbol es anti-tablón porque sabe que están hechos de madera. 反 = anti-."
+  },
+  {
+    "kanji": "柱",
+    "historia": "Mi lord主, ya llegó el nuevo pilar, es del mismo tamaño que un árbol."
+  },
+  {
+    "kanji": "根",
+    "historia": "Lo de la derecha lo llamo “casi bueno” porque es casi el kanji de bueno 良. El árbol es casi bueno, si tan solo su raíz fuese más grande podría crecer más."
+  },
+  {
+    "kanji": "植",
+    "historia": "El árbol no crece de inmediato 直, al principio solo es una pequeña planta."
+  },
+  {
+    "kanji": "予",
+    "historia": "Se parece al kanji de alabarda 矛. De antemano te digo que alabarda no se escribe así, le falta un trazo."
+  },
+  {
+    "kanji": "事",
+    "historia": "t + boca + tenedor Ese asunto importante lo discutiremos en el almuerzo. Vamos a comer espaguetis, no olvides llevar tu boca y un tenedor."
+  },
+  {
+    "kanji": "仕",
+    "historia": "Aquí vemos a una persona 亻 atendiendo al samurái士."
+  },
+  {
+    "kanji": "他",
+    "historia": "Hay una persona 亻 con un escorpión 也. A otras personas no les gustan, pero a mí sí. Imaginemos que 也 es escorpión."
+  },
+  {
+    "kanji": "代",
+    "historia": "Esta persona 亻 está buscando un sustituto para el perro de porcelana que rompió. Al romperse perdió una pata. 犬 = perro."
+  },
+  {
+    "kanji": "業",
+    "historia": "La oveja 羊 cambió a una ocupación más rentable y ahora viste con sombreros finos y capas elegantes."
+  },
+  {
+    "kanji": "様",
+    "historia": "Al lado del árbol vemos a una oveja羊 que toma agua水. Luego de tomar dice: gracias Dios (神様 = kamisama)."
+  },
+  {
+    "kanji": "横",
+    "historia": "Por favor, hazte al lado del árbol amarillo 黄."
+  },
+  {
+    "kanji": "橋",
+    "historia": "Imaginemos que喬 es una torre elegante. Después de pasar el puente vas a ver un árbol y una torre elegante."
+  },
+  {
+    "kanji": "次",
+    "historia": "冫 = radical de hielo, 欠 = falta A esta bebida le falta hielo, dame la siguiente por favor."
+  },
+  {
+    "kanji": "歯",
+    "historia": "Debes parar 止 de comer arroz 米 crudo o tendré que sacarte los dientes y ponerlos en esta cajita 凵."
+  },
+  {
+    "kanji": "死",
+    "historia": "Cuando 1 muere ya no puede ver la tarde 夕 ni comer con cuchara 匕."
+  },
+  {
+    "kanji": "氷",
+    "historia": "El agua se convierte en hielo si agregamos una gota de frío."
+  },
+  {
+    "kanji": "決",
+    "historia": "Imaginemos que 夬 = caballete para pintar. El pintor ha decidido que usará pinturas de agua para su siguiente cuadro."
+  },
+  {
+    "kanji": "油",
+    "historia": "Parece agua 氵 pero es aceite que sale de la botella de aceite."
+  },
+  {
+    "kanji": "波",
+    "historia": "Las olas de agua 氵 siempre me mojan el pellejo皮."
+  },
+  {
+    "kanji": "注",
+    "historia": "No vayas a derramar agua sobre el lord 主, porque solo se baña los sábados."
+  },
+  {
+    "kanji": "泳",
+    "historia": "Cuando entro al agua siento que puedo nadar durante toda la eternidad 永."
+  },
+  {
+    "kanji": "洋",
+    "historia": "Si hay agua en la oveja 羊 probablemente es porque estuvo nadando en el océano."
+  },
+  {
+    "kanji": "流",
+    "historia": "Con imaginación vemos al bebé Moisés siendo llevado por la corriente hacia su madre adoptiva."
+  },
+  {
+    "kanji": "消",
+    "historia": "Oye ten cuidado con esa agua 氵, no vayas a extinguir la vela."
+  },
+  {
+    "kanji": "深",
+    "historia": "En estas aguas profundas se encuentran cosas bien extrañas, como coronas 冖, piernas 儿 de estatuas antiguas y hasta árboles acuáticos."
+  },
+  {
+    "kanji": "温",
+    "historia": "El agua en el plato se puso tibia gracias al calor del sol."
+  },
+  {
+    "kanji": "港",
+    "historia": "Aquí vemos un puerto vikingo, está el agua, el puerto y un barco en forma de serpiente que va entrando."
+  },
+  {
+    "kanji": "湖",
+    "historia": "El agua del lago saluda a su vieja 古 amiga la luna 月."
+  },
+  {
+    "kanji": "湯",
+    "historia": "Para proteger mi alcancía de marranito 昜 la llené de agua caliente, lo malo es que se dañaron los billetes 😭."
+  },
+  {
+    "kanji": "漢",
+    "historia": "En los cultivos acuáticos de china se ponen espantapájaros para proteger la cosecha."
+  },
+  {
+    "kanji": "炭",
+    "historia": "Debajo de la montaña hay cenizas灰, lo que significa que quemaron carbón cerca."
+  },
+  {
+    "kanji": "物",
+    "historia": "La vaca 牛 disfruta echarse en el pasto después de haber comido muchas cosas como pasto o maíz."
+  },
+  {
+    "kanji": "球",
+    "historia": "El rey siempre hace la misma petición求, que le traigan su pelota favorita."
+  },
+  {
+    "kanji": "由",
+    "historia": "Hemos puesto este tubo en el campo de arroz por una razón muy importante, para regarlo automáticamente."
+  },
+  {
+    "kanji": "申",
+    "historia": "Aquí vemos a uno de los 3 monos sabios. Se pone el dedo en la boca para resaltar lo importante que es callar algunas veces."
+  },
+  {
+    "kanji": "界",
+    "historia": "Ya no caben más campos de arroz en el mundo, por eso puse mi campo de arroz sobre el techo de mi casita."
+  },
+  {
+    "kanji": "畑",
+    "historia": "En la granja hay que quemar de vez en cuando el campo de arroz para hacer otro nuevo."
+  },
+  {
+    "kanji": "病",
+    "historia": "Con imaginación aquí vemos a una persona enferma en una cama de hospital."
+  },
+  {
+    "kanji": "発",
+    "historia": "Con imaginación vemos el tren partiendo de la estación. En el techo de la estación vemos diferentes señales para que la gente sepa que tren tomar."
+  },
+  {
+    "kanji": "登",
+    "historia": "豆 es frijoles, que es beans en inglés Mr. Bean se trepa en su techo para poner letreros."
+  },
+  {
+    "kanji": "皮",
+    "historia": "Aquí vemos la piel de una serpiente colgada en un perchero."
+  },
+  {
+    "kanji": "皿",
+    "historia": "Hay gelatina de 3 colores sobre el plato."
+  },
+  {
+    "kanji": "相",
+    "historia": "El bosque está interconectado, es como si todos los árboles tuviesen ojos."
+  },
+  {
+    "kanji": "県",
+    "historia": "Aquí vemos a un ojo sentado en una silla de oficina, está atendiendo la oficina de la prefectura (jurisdicciones territoriales en las que está dividido Japón)."
+  },
+  {
+    "kanji": "真",
+    "historia": "La verdad es que con 10 herramientas具 puedes construir muchas cosas."
+  },
+  {
+    "kanji": "着",
+    "historia": "La oveja 羊 no necesita ponerse nada de ropa porque ya tiene su lana, aunque sí le gusta usar gafas para sus ojos."
+  },
+  {
+    "kanji": "短",
+    "historia": "Estos dardos 矢 son cortos, del tamaño de un fríjol."
+  },
+  {
+    "kanji": "研",
+    "historia": "Aquí vemos una piedra 石 que será afilada en el afilador que está a la derecha."
+  },
+  {
+    "kanji": "礼",
+    "historia": "Al lado del altar 礻 hay un gusanito haciendo una reverencia."
+  },
+  {
+    "kanji": "神",
+    "historia": "Al lado del altar 礻 vemos un mono 申 agradeciendo a Dios todas las bananas que tiene para comer."
+  },
+  {
+    "kanji": "祭",
+    "historia": "Para el festival hemos adornado el altar 示 poniéndole algunas cosas encima, como una luna 月 de juguete y una banderita."
+  },
+  {
+    "kanji": "福",
+    "historia": "Al lado del altar hay una 一 persona abriendo la boca para agradecer la bendición de haber tenido una gran cosecha en su campo de arroz."
+  },
+  {
+    "kanji": "秒",
+    "historia": "Imaginemos que 禾 = trigo. Este es trigo 禾 de rápido crecimiento, en tan solo unos segundos ya hay algunos 少 brotes."
+  },
+  {
+    "kanji": "究",
+    "historia": "Hay un gran agujero 穴 en la capa de ozono y hemos mandado 9 九 científicos para que hagan una investigación."
+  },
+  {
+    "kanji": "章",
+    "historia": "Por tus logros en el campo de la excelencia te daremos la medalla del jarrón girasol."
+  },
+  {
+    "kanji": "童",
+    "historia": "En esta escuela le enseñan a los niños con cuentos infantiles."
+  },
+  {
+    "kanji": "笛",
+    "historia": "Con imaginación vemos una flauta hecha de bambú ⺮."
+  },
+  {
+    "kanji": "第",
+    "historia": "Mi hermano menor 弟 organiza sus juguetes de bambú y a cada uno le pone un número para organizarlos. Dice: Tú eres el primero, tú el segundo, …"
+  },
+  {
+    "kanji": "住",
+    "historia": "Mi lord, con la novedad de que el señor T se pasó a vivir (habitar, residir) a la casa de la izquierda."
+  },
+  {
+    "kanji": "使",
+    "historia": "El señor T le dice al oficial 吏. Si veo a alguien usando pólvora le avisaré inmediatamente. 吏 = oficial."
+  },
+  {
+    "kanji": "係",
+    "historia": "El señor T fue escogido para ser la persona a cargo de la empresa, por su habilidad y no por su linaje. 系 = linaje."
+  },
+  {
+    "kanji": "倍",
+    "historia": "El señor T tiene el doble de hambre de lo normal, así que se metió todas las galletas a la boca, incluyendo la vasija en la que estaban."
+  },
+  {
+    "kanji": "全",
+    "historia": "El rey 王 ocupa todo el espacio bajo su sombrilla."
+  },
+  {
+    "kanji": "筆",
+    "historia": "El pincel para escribir es un pincel 聿 hecho de bambú ⺮."
+  },
+  {
+    "kanji": "等",
+    "historia": "En Japón hay bambú, templos, etc."
+  },
+  {
+    "kanji": "箱",
+    "historia": "Aquí vemos el bambú inter-conectado para formar una caja. 相 = inter-."
+  },
+  {
+    "kanji": "級",
+    "historia": "El hombre araña 糸 quiere alcanzar 及 el grado más alto de super héroe, pero nunca pasa el examen."
+  },
+  {
+    "kanji": "終",
+    "historia": "El hombre araña dice que el fin de año debería ser cuando acaba el invierno 冬."
+  },
+  {
+    "kanji": "緑",
+    "historia": "En la fiesta de super héroes, el hombre araña ofreció pastel verde con agua verde, desde entonces nadie volvió a sus fiestas."
+  },
+  {
+    "kanji": "練",
+    "historia": "El hombre araña siempre entrena al este 東 de la ciudad."
+  },
+  {
+    "kanji": "羊",
+    "historia": "Aquí vemos a una oveja perfectamente normal, con 2 cuernos, 6 patas y su cola."
+  },
+  {
+    "kanji": "美",
+    "historia": "Me parecen hermosas las ovejas grandes 大, quizás porque tienen mucha lana."
+  },
+  {
+    "kanji": "習",
+    "historia": "Para aprender a volar, el pequeño pájaro extiende sus plumas 羽 blancas 白 y salta desde el nido."
+  },
+  {
+    "kanji": "者",
+    "historia": "Aquí vemos una espada al lado de la tumba de alguien. Resulta que ese alguien fue el héroe solar."
+  },
+  {
+    "kanji": "育",
+    "historia": "Arriba está el pequeño Moisés, que será criado por su madre adoptiva durante sus primeros meses 月."
+  },
+  {
+    "kanji": "苦",
+    "historia": "El pasto viejo 古 es muy amargo."
+  },
+  {
+    "kanji": "荷",
+    "historia": "¿Qué? 何 ¡Solo llevas flores en tu equipaje!"
+  },
+  {
+    "kanji": "落",
+    "historia": "Las flores hay que cuidarlas. Debes regar cada 各 una para que no se caigan sus hojas."
+  },
+  {
+    "kanji": "葉",
+    "historia": "Varias generaciones 世 de mariposas han puesto sus huevos en las hojas de este árbol."
+  },
+  {
+    "kanji": "薬",
+    "historia": "Como medicina le recetaré flores 艹 y música 楽."
+  },
+  {
+    "kanji": "血",
+    "historia": "No vayas a dejar caer gotas de sangre en el plato 皿."
+  },
+  {
+    "kanji": "表",
+    "historia": "En la superficie vemos la planta pero abajo hay unas largas raíces."
+  },
+  {
+    "kanji": "詩",
+    "historia": "¿Qué es un poema? Son palabras 言 que se dicen en el templo."
+  },
+  {
+    "kanji": "調",
+    "historia": "Para afinar mis cuerdas vocales digo 言 varias veces la palabra circunferencia 周."
+  },
+  {
+    "kanji": "談",
+    "historia": "Al conversar, debemos tener cuidado con lo que decimos 言, sino podríamos provocar una situación peor que un doble incendio."
+  },
+  {
+    "kanji": "豆",
+    "historia": "Con imaginación vemos un retrete, una persona que comió muchos frijoles va a usarlo."
+  },
+  {
+    "kanji": "負",
+    "historia": "El marisco perdió su concha 貝, pero no se siente derrotado, se va a envolver 勹 en cualquier otra cosa que encuentre."
+  },
+  {
+    "kanji": "起",
+    "historia": "La serpiente de tierra caliente se despierta temprano para ir a correr走, pero como no tiene piernas no pudo correr 😭."
+  },
+  {
+    "kanji": "路",
+    "historia": "Los pies 足 van dejando marcado el camino con cada 各 pisada."
+  },
+  {
+    "kanji": "身",
+    "historia": "Se parece al kanji de uno mismo 自, pero este 身 hace más referencia al cuerpo, por eso vemos líneas extra para las extremidades."
+  },
+  {
+    "kanji": "転",
+    "historia": "Imaginemos que 云 = nube. Cuando las llantas del carro dan vueltas se levanta una nube de polvo."
+  },
+  {
+    "kanji": "軽",
+    "historia": "Lo de la derecha lo llamaremos “hacer popó en la tierra”. Para que el carro quede más liviano, todos vamos a hacer popó en la tierra."
+  },
+  {
+    "kanji": "農",
+    "historia": "Ahora Bender 曲 de futurama se dedica a la agricultura, y su marca lleva el signo del dragón辰."
+  },
+  {
+    "kanji": "返",
+    "historia": "Yo soy anti-caminos, por eso mejor me devuelvo. ⻌ = camino, 反 = anti-."
+  },
+  {
+    "kanji": "追",
+    "historia": "La B es James Bond. James Bond está persiguiendo a alguien en el camino."
+  },
+  {
+    "kanji": "送",
+    "historia": "¿Qué es eso sobre el camino? Es un mamut que va a enviar un paquete."
+  },
+  {
+    "kanji": "速",
+    "historia": "Haz un té con este manojo 束 de hierbas y te volverás muy rápido, sobre todo para recorrer el camino al baño."
+  },
+  {
+    "kanji": "進",
+    "historia": "Imaginemos que 隹 = pavo. El pavo avanza en el camino."
+  },
+  {
+    "kanji": "遊",
+    "historia": "Imaginemos que 𠂉 = una persona tendida en el suelo. En esa dirección 方 hay un niño tendido en el suelo. Está jugando a que él era un camino."
+  },
+  {
+    "kanji": "運",
+    "historia": "¿Qué hace el ejército sobre el camino? Están llevando suministros a la base."
+  },
+  {
+    "kanji": "部",
+    "historia": "Imaginemos que 阝 = El Pináculo, una ciudad super avanzada. En el Pináculo hay una sección donde los jarrones tienen boca."
+  },
+  {
+    "kanji": "都",
+    "historia": "En el Pináculo hay más de una persona者, hay muchas y por eso es una metrópoli."
+  },
+  {
+    "kanji": "配",
+    "historia": "Imaginemos que己 = la serpiente de tierra caliente. Ahora la serpiente de tierra caliente se dedica a distribuir bebidas alcohólicas 酉."
+  },
+  {
+    "kanji": "酒",
+    "historia": "No le pongas agua a la bebida alcohólica, le dañas el sabor."
+  },
+  {
+    "kanji": "重",
+    "historia": "El carro車quedó muy pesado con esas llantas adicionales, será mejor quitárselas."
+  },
+  {
+    "kanji": "鉄",
+    "historia": "Creer que el hierro es oro 金 es un error 失 muy grande."
+  },
+  {
+    "kanji": "銀",
+    "historia": "Como 艮 se parece a 良 (bueno) le diremos casi bueno. Esta plata es casi tan buena como el oro 金."
+  },
+  {
+    "kanji": "開",
+    "historia": "En las puertas 門 hay una a mayúscula mal dibujada, significa abrir."
+  },
+  {
+    "kanji": "院",
+    "historia": "El Pináculo no es perfecto 完 pero tiene buenas instituciones, como hospitales, escuelas, etc."
+  },
+  {
+    "kanji": "陽",
+    "historia": "Imaginemos que 昜 = alcancía. En el Pináculo las alcancías 昜 se hacen de barro y se dejan secar con luz solar."
+  },
+  {
+    "kanji": "階",
+    "historia": "En el Pináculo no hay escaleras, todos 皆 suben por el ascensor."
+  },
+  {
+    "kanji": "集",
+    "historia": "Un gran grupo de pavos隹 se ha reunido sobre ese árbol."
+  },
+  {
+    "kanji": "面",
+    "historia": "Alguien se ha puesto unos calzoncillos como máscara y solo se le ve un ojo目. Lo de arriba es la marquilla de los calzoncillos."
+  },
+  {
+    "kanji": "具",
+    "historia": "Antes de tomar cualquier herramienta y sentarte en tu mesa de trabajo, es importante que protegas tus ojos 目 con las gafas de seguridad."
+  },
+  {
+    "kanji": "写",
+    "historia": "Por haber tomado la mejor foto del mundo, le vamos a conceder esta corona冖. 与 = conceder."
+  },
+  {
+    "kanji": "列",
+    "historia": "Aquí vemos una fila de esqueletos con sables 刂. Imaginemos que 歹 es esqueleto."
+  },
+  {
+    "kanji": "助",
+    "historia": "Esta estantería está muy pesada y me va a apachurrar un pie, voy a necesitar mucha ayuda de personas con fuerza 力."
+  },
+  {
+    "kanji": "勉",
+    "historia": "Para tener fuerza力 no se necesitan excusas 免, sino esfuerzo. 免 = excusa, permiso"
+  },
+  {
+    "kanji": "題",
+    "historia": "En esta página 頁 hay un tema muy interesante, dice que sol está justo 是 a la distancia correcta de la Tierra."
+  },
+  {
+    "kanji": "飲",
+    "historia": "Con la comida 飠no me puede faltar 欠 algo para beber."
+  },
+  {
+    "kanji": "館",
+    "historia": "No debes comer 飠en el gran edificio o vendrá un burócrata 官 a regañarte."
+  },
+  {
+    "kanji": "駅",
+    "historia": "Aquí vemos un caballo 馬 tocando el shakuhachi 尺 mientras espera su tren en la estación. 尺八 = shakuhachi"
+  },
+  {
+    "kanji": "鼻",
+    "historia": "Uno mismo 自 puede sembrar un campo de arroz 田 con H de hidropónico, siempre y cuando use agua y no mocos de la nariz."
+  },
+  {
+    "kanji": "動",
+    "historia": "Para mover esto tan pesado 重 necesitamos mucha fuerza 力."
+  },
+  {
+    "kanji": "勝",
+    "historia": "luna 月 + cuarta parte + fuerza 力 Esta noche ganaré la carrera, pues la luna aumenta mi fuerza en una cuarta parte."
+  },
+  {
+    "kanji": "化",
+    "historia": "El señor T va a cambiar su dieta, y como acto simbólico, fue a comprar una nueva cuchara 匕."
+  },
+  {
+    "kanji": "区",
+    "historia": "Espera te doy un mapa del distrito x; está en mi cajón 匚."
+  },
+  {
+    "kanji": "医",
+    "historia": "El doctor guarda sus inyecciones (dardos 矢) en el cajón 匚."
+  },
+  {
+    "kanji": "去",
+    "historia": "El que pone la tierra en las tumbas se ha ido, por eso el codo 厶 quedó afuera."
+  },
+  {
+    "kanji": "反",
+    "historia": "La última vez que fui al precipicio 厂 me oriné toda la entrepierna del miedo, desde entonces soy anti-precipicios."
+  },
+  {
+    "kanji": "取",
+    "historia": "Me dijo al oido 耳 que quería tomar mi entrepierna. 😏"
+  },
+  {
+    "kanji": "受",
+    "historia": "Garra + corona + entrepierna He recibido de mi novia los siguientes regalos: una garra, una corona y la foto de su entrepierna. 😏"
+  },
+  {
+    "kanji": "号",
+    "historia": "Boca + trampa Esta es la trampa modelo 16, es muy efectiva para atrapar las bocas de la gente chismosa."
+  },
+  {
+    "kanji": "向",
+    "historia": "Si miras hacia allá vas a ver un marcianito, con su casco puesto solo se le ve la boca y una antena."
+  },
+  {
+    "kanji": "君",
+    "historia": "Cuando era más joven agarraba los espaguetis con un tenedor y me los chupaba. Oye tú no hagas eso me decían."
+  },
+  {
+    "kanji": "味",
+    "historia": "La boca todavía no ha tragado, es porque está sintiendo bien el sabor de los alimentos."
+  },
+  {
+    "kanji": "命",
+    "historia": "Sombrilla + 1 + op En la sombrilla que compré venía 1 papelito que decía: Tú creas tu propio destino, así que busca tus oportunidades."
+  },
+  {
+    "kanji": "和",
+    "historia": "La paz es cuando todas las personas tienen pan de trigo 禾 para llevarse a su boca."
+  },
+  {
+    "kanji": "品",
+    "historia": "Aquí vemos unas cajas llenas de bienes."
+  },
+  {
+    "kanji": "員",
+    "historia": "En esta empresa marina los empleados son moluscos 貝 con boca."
+  },
+  {
+    "kanji": "商",
+    "historia": "El comerciante usa falda y se pone de pie sobre una caja para parecer más alto. Dice que de así se le facilita hace tratos."
+  },
+  {
+    "kanji": "問",
+    "historia": "Cuando pasas por estas puertas 門 hay una boca que te hace muchas preguntas."
+  },
+  {
+    "kanji": "坂",
+    "historia": "La tierra es resbalosa y el precipico 厂 está muy empinado (mucha pendiente). Por suerte traje estas botas anti-deslizantes. 反 = anti."
+  },
+  {
+    "kanji": "央",
+    "historia": "Esta persona tiene una gran boca y siempre quiere ser el centro de atención."
+  },
+  {
+    "kanji": "始",
+    "historia": "La mujer se repite: Si voy a comenzar una relación no debo poner a mi pareja en un pedestal 台."
+  },
+  {
+    "kanji": "委",
+    "historia": "Este es el comité de mujeres con sombreros hechos de trigo."
+  },
+  {
+    "kanji": "守",
+    "historia": "El techo tiene las medidas 寸 correctas para defendernos de la lluvia."
+  },
+  {
+    "kanji": "安",
+    "historia": "La mujer está tranquila bajo el techo de su propia casa que acaba de comprar muy barata."
+  },
+  {
+    "kanji": "不",
+    "historia": "Una flecha ↑ señalando al signo menos − significa negativo."
+  },
+  {
+    "kanji": "争",
+    "historia": "Oye, vamos a competir para ver quién envuelve 勹 más espaguetis con un tenedor."
+  },
+  {
+    "kanji": "付",
+    "historia": "El señor T hace manualidades y mide 寸 muy bien las cosas antes de adherirlas."
+  },
+  {
+    "kanji": "令",
+    "historia": "Todos los katakana ma マ deben traer sombrilla mañana para evitar las gotas de lluvia. Es una orden."
+  },
+  {
+    "kanji": "以",
+    "historia": "Comparado con otros kanji, este no tiene forma. Veo una T invertida, una gota y una persona 人."
+  },
+  {
+    "kanji": "各",
+    "historia": "Cada uno de nosotros camina y habla de forma diferente."
+  },
+  {
+    "kanji": "告",
+    "historia": "Hace poco tuve una revelación: Una vaca 牛 abría la boca y me decía: Ya no comas carne. Desde entonces soy vegetariano."
+  },
+  {
+    "kanji": "周",
+    "historia": "A lo de adentro lo llamaremos tarro con tapa.  En el experimento de hoy mediremos la circunferencia de la Tierra usando un casco 冂 y un tarro con tapa. ¡No se lo pierdan!"
+  },
+  {
+    "kanji": "唱",
+    "historia": "Aquí vemos una boca recitando de sol a sol todos sus poemas favoritos."
+  },
+  {
+    "kanji": "喜",
+    "historia": "¡Ojo, lo de arriba NO es tarro con tapa!  El samurái 士 se llena de alegría cuando puede llevarse unos buenos fríjoles 豆 a su boca."
+  },
+  {
+    "kanji": "器",
+    "historia": "Aquí vemos 4 platos en una gran 大 mesa. Solamente faltan los utensilios para comer."
+  },
+  {
+    "kanji": "囲",
+    "historia": "Es buena idea rodear el pozo井 con una cerca para evitar que ocurran accidentes."
+  },
+  {
+    "kanji": "固",
+    "historia": "La tumba no estaba suficientemente firme así que la rodeamos de concreto."
+  },
+  {
+    "kanji": "型",
+    "historia": "castigo 刑 + tierra 土. Como castigo vas a practicar tus katas hasta que la tierra esté mojada de sudor."
+  },
+  {
+    "kanji": "堂",
+    "historia": "En el techo del gran salón dice en letras de neón: Tenemos el mejor baño aquí. Fuimos a ver y el baño era solo un hueco en la tierra."
+  },
+  {
+    "kanji": "塩",
+    "historia": "Había algo en el suelo 土, me agaché para probarlo con la boca y era sal en un plato 皿."
+  },
+  {
+    "kanji": "士",
+    "historia": "Aquí vemos a un verdadero caballero, todo de negro muy elegante, con sus brazos bien extendidos. Muy limpio, sin nada de tierra 土."
+  },
+  {
+    "kanji": "変",
+    "historia": "Le digo manzana a 亦 porque se parece al kanji de rojo赤. Es inusual que las manzanas tengan pies y salgan corriendo."
+  },
+  {
+    "kanji": "夫",
+    "historia": "Mi esposo tiene 4 brazos, por eso vale por 2."
+  },
+  {
+    "kanji": "失",
+    "historia": "Aquí vemos a mi esposo que empezó a perder el cabello, el trazo 1 es un cabello que cae."
+  },
+  {
+    "kanji": "好",
+    "historia": "Para una mujer su hijo siempre será su favorito."
+  },
+  {
+    "kanji": "季",
+    "historia": "¿Por qué llevas ese trigo en la cabeza hijo? Porque ya casi llega el invierno, la estación más fría."
+  },
+  {
+    "kanji": "孫",
+    "historia": "A lo de la izquierda lo llamaremos ADN. El nieto tiene los ojos de su abuelo, se debe al funcionamiento del ADN."
+  },
+  {
+    "kanji": "完",
+    "historia": "Para lograr una impresión perfecta desde el comienzo 元, quítate los zapatos cuando entres a la casa."
+  },
+  {
+    "kanji": "官",
+    "historia": "Aquí vemos a un funcionario del gobierno bajo el techo de su oficina, solo se le ve la cabeza y la barriga."
+  },
+  {
+    "kanji": "害",
+    "historia": "¡Oh no! La planta creció demasiado y dañó el techo de la casa. Lo de abajo es la matera."
+  },
+  {
+    "kanji": "察",
+    "historia": "El policía pudo adivinar que bajo ese techo se hacían los rituales 祭."
+  },
+  {
+    "kanji": "巣",
+    "historia": "¿Qué es eso arriba del árbol de frutas果? Es un nido."
+  },
+  {
+    "kanji": "差",
+    "historia": "La distinción entre esta lana y otras es que esta es de ovejas 羊 muy inteligentes. Ahí vemos la I de inteligentes."
+  },
+  {
+    "kanji": "希",
+    "historia": "Se me rompió mi tela 布 favorita. Tengo la esperanza de encontrar otra igual."
+  },
+  {
+    "kanji": "席",
+    "historia": "En esta cueva caben 20 廿 asientos. Para que no se ensucien con la tierra de la cueva les pondremos toallas encima."
+  },
+  {
+    "kanji": "帯",
+    "historia": "El rey primero se pasa el cinturón por las trabillas (trazos 1 a 5), luego se pone la corona y por último se seca el sudor con una toalla porque eso fue mucho trabajo."
+  },
+  {
+    "kanji": "底",
+    "historia": "A lo de adentro le diremos tarjeta de presentación (氏 es apellido). En el fondo de la cueva encontré una tarjeta de presentación."
+  },
+  {
+    "kanji": "府",
+    "historia": "Van a poner la oficina del gobierno local en esta cueva, por eso vemos al señor T tomando algunas mediciones 寸."
+  },
+  {
+    "kanji": "康",
+    "historia": "Para mantener mi bienestar me gusta ir a explorar cuevas, comer con tenedor y tomar mucha agua."
+  },
+  {
+    "kanji": "建",
+    "historia": "Antes de constrir el edificio el arquitecto dibuja los planos con un pincel 聿 y los estira 廴 sobre una mesa."
+  },
+  {
+    "kanji": "径",
+    "historia": "Sí voy a medir el díametro de la columna 彳 pero primero voy a hacer popó en el suelo. Nota: El papél higiénico también tiene díametro."
+  },
+  {
+    "kanji": "徒",
+    "historia": "Columna 彳 y caminar 歩. A los pupilos les enseñan a mantener su columna bien derecha mientras caminan."
+  },
+  {
+    "kanji": "得",
+    "historia": "Para ganar más conocimiento me leeré una columna de libros hasta que el sol se ponga. Mi meta es aprender sin medida 寸."
+  },
+  {
+    "kanji": "必",
+    "historia": "Inevitablemente voy a dibujar bien este kanji si sigo este orden: Una especie de ソ (so) modificado, luego un gancho, y por último los lados."
+  },
+  {
+    "kanji": "念",
+    "historia": "Mi deseo es que vayamos ahora 今 mismo a comer chocolates en forma de corazón 心."
+  },
+  {
+    "kanji": "愛",
+    "historia": "Lo de arriba es una garra 爪. Mi pareja siempre me agarra para darme besitos, me pone una corona, me dice corazón y luego sale corriendo. Eso es amor."
+  },
+  {
+    "kanji": "成",
+    "historia": "Una letra h no se puede convertir en una alabarda 戈 porque la palabra alabarda no tiene ninguna h."
+  },
+  {
+    "kanji": "戦",
+    "historia": "Es más simple 単 firmar la paz que hacer alabardas 戈 para la guerra."
+  },
+  {
+    "kanji": "折",
+    "historia": "Vas a ver, con solo doblar este papel con las manos 扌voy a hacer un hacha 斤 de papel. Es el ori en origami."
+  },
+  {
+    "kanji": "挙",
+    "historia": "Si salen chispas de tu mesa de trabajo (trazos 4 a 6), es mejor que levantes las manos para que no te electrocutes."
+  },
+  {
+    "kanji": "改",
+    "historia": "La serpiente de tierra caliente le pide al maestro de obra 攵 que hagan una reforma al sistema de contratación para que también puedan contratar serpientes."
+  },
+  {
+    "kanji": "救",
+    "historia": "Le hice una petición 求 al maestro de obra: Que nos salvara de tener que trabajar el sábado, pero dijo que éramos unos perezosos y nos puso a trabajar hasta el domingo."
+  },
+  {
+    "kanji": "敗",
+    "historia": "En kanjis compuestos vamos a imaginar que 貝 (concha) es dinero. Le di dinero al maestro de obra para que me enseñe cómo dejar de fracasar."
+  },
+  {
+    "kanji": "散",
+    "historia": "A los trazos 1 a 4 les diremos ensalada. El maestro de obra sí come ensalada lunar, pero primero le esparce por encima su condimento favorito."
+  },
+  {
+    "kanji": "料",
+    "historia": "Vamos a decir que 斗 es una taza medidora. Para saber la tarifa que hay que pagar por el arroz 米, primero hay que saber cuánto hay usando la taza medidora."
+  },
+  {
+    "kanji": "旗",
+    "historia": "En esa dirección 方 hay ‘personas tendidas en el suelo’ 𠂉 jugando un juego de mesa 棋. Cada jugador tiene al lado la bandera de su país."
+  },
+  {
+    "kanji": "昨",
+    "historia": "A lo de la derecha le digo super F. Ayer hicimos una super Fiesta."
+  },
+  {
+    "kanji": "景",
+    "historia": "Que paisaje tan hermoso: El sol encima de la capital 京."
+  },
+  {
+    "kanji": "最",
+    "historia": "Cuando el sol está en su punto máximo nadie lo puede agarrar 取. Ni siquiera la persona más alta puede."
+  },
+  {
+    "kanji": "仲",
+    "historia": "El señor T está adentro 中 de mi corazón porque nuestra relación de amistad es grande."
+  },
+  {
+    "kanji": "伝",
+    "historia": "El señor T transmite sus respuestas con el katakana ム. Para decir sí escribe mu y para decir no escribe 2 mu."
+  },
+  {
+    "kanji": "位",
+    "historia": "El señor T ocupó el primer lugar en levantamiento de vasijas de galletas."
+  },
+  {
+    "kanji": "低",
+    "historia": "El señor T dice que nadie es de bajo rango y por eso todos debemos subrayar y valorar nuestros apellidos氏."
+  },
+  {
+    "kanji": "例",
+    "historia": "El señor T hace la fila 列 para dar buen ejemplo."
+  },
+  {
+    "kanji": "望",
+    "historia": "El rey dice que su última ambición es poder ver la luna antes de perecer 亡."
+  },
+  {
+    "kanji": "未",
+    "historia": "La rama de arriba todavía no ha crecido lo suficiente."
+  },
+  {
+    "kanji": "末",
+    "historia": "La rama de arriba del árbol ha crecido mucho, mira hasta donde llegan sus extremos."
+  },
+  {
+    "kanji": "札",
+    "historia": "-Oye, ¿sería este un buen lugar para sembrar el árbol de billetes de dinero? -Shi (し)."
+  },
+  {
+    "kanji": "材",
+    "historia": "Aquí vemos un árbol feliz, porque el genio 才 encontró la manera de producir madera sintética en el laboratorio."
+  },
+  {
+    "kanji": "束",
+    "historia": "Fui por un manojo de trigo y por equivocación me dieron un manojo de árboles."
+  },
+  {
+    "kanji": "松",
+    "historia": "En este parque público 公園 lo más común es encontrar árboles de pino."
+  },
+  {
+    "kanji": "果",
+    "historia": "En esta árbol las frutas salen en la punta y son grandísimas, tan grandes como un campo de arroz."
+  },
+  {
+    "kanji": "栄",
+    "historia": "Este árbol vendió todas sus frutas para volverse próspero. Ahora usa una corona tan reluciente que le salen chispas."
+  },
+  {
+    "kanji": "案",
+    "historia": "Mi plan 安 es descansar todo el día sobre ese árbol."
+  },
+  {
+    "kanji": "梅",
+    "historia": "El ciruelo le regala ciruelas a cada 毎 animalito que se las pide."
+  },
+  {
+    "kanji": "械",
+    "historia": "Los 10 mandamientos 戒 eran muy pesados, así que Moisés hizo un artilugio con madera para cargarlos."
+  },
+  {
+    "kanji": "極",
+    "historia": "Se parece mucho al kanji de podrido 朽. Si vas a los polos sin protección, el frío hará que se te pudra primero la boca y luego la entrepierna."
+  },
+  {
+    "kanji": "標",
+    "historia": "En el letrero del poste dice: En la próxima votación deme su voto 票."
+  },
+  {
+    "kanji": "機",
+    "historia": "¿Cuántos 幾 árboles necesitamos para hacer este mecanismo? Ninguno porque se hace con partes metálicas."
+  },
+  {
+    "kanji": "欠",
+    "historia": "Si una persona come muchos envueltos 勹, luego le harán falta unos pantalones más grandes."
+  },
+  {
+    "kanji": "歴",
+    "historia": "Se parece al kanji de calendario 暦. Tengo 20 años de experiencia laboral haciendo almanaques, pero un día me aburrí y por eso me detuve 止."
+  },
+  {
+    "kanji": "残",
+    "historia": "Se parece al kanji de moneda 銭. Con el resto de mis monedas me compré algo de comer para no parecer un hueso pelado 歹."
+  },
+  {
+    "kanji": "殺",
+    "historia": "Arriba del árbol hay un letrero con una x roja. Dice: Este árbol es peligroso, si le cortas una rama te lanzará un misil para matarte."
+  },
+  {
+    "kanji": "毒",
+    "historia": "Arbusto + No hacer 毋 Algo que absolutamente no debes hacer es comerte ese arbusto. ¡Es venenoso!"
+  },
+  {
+    "kanji": "氏",
+    "historia": "Parece una F combinada con una T. Yo nunca escribo mis apellidos completos, solo las dos letras más importantes: F y T. Mis apellidos son Feoncio Tontolio."
+  },
+  {
+    "kanji": "民",
+    "historia": "Parece boca + apellido氏. En una fiesta dice el payaso: ¡Bueno mi gente linda! ¡Abran la boca para decir sus apellidos en voz alta!"
+  },
+  {
+    "kanji": "求",
+    "historia": "Se parece al kanji de agua 水 más una gota y una t. Te voy a solicitar que tomes un vaso de agua con unas gotas de toronja."
+  },
+  {
+    "kanji": "治",
+    "historia": "El rey del agua gobierna desde un pedestal."
+  },
+  {
+    "kanji": "法",
+    "historia": "Para que ese problema del agua (goteras) sea cosa del pasado 去, necesitamos aplicar este nuevo método para arreglar el techo."
+  },
+  {
+    "kanji": "泣",
+    "historia": "Si lloras mucho mucho, vas a poder llenar esta vasija con lágrimas."
+  },
+  {
+    "kanji": "浅",
+    "historia": "A lo de la izquierda le diré super alabarda 戈. El río (agua 氵) es poco profundo, voy a lavar mi super alabarda ahí."
+  },
+  {
+    "kanji": "浴",
+    "historia": "Ahh, no hay nada como bañarse en el agua del valle 谷."
+  },
+  {
+    "kanji": "清",
+    "historia": "Esta agua azul 青 no se ve muy pura que digamos."
+  },
+  {
+    "kanji": "満",
+    "historia": "Lo de la izquierda parece la unión de los kanjis 共 (juntos) más 両 (ambos). Cuando comimos juntos en el río te comiste lo de ambos, y por eso quedaste tan lleno."
+  },
+  {
+    "kanji": "漁",
+    "historia": "Pescar es sacar un pez 魚 del agua 氵."
+  },
+  {
+    "kanji": "灯",
+    "historia": "¿Qué es una lámpara de calle? Fuego en un poste."
+  },
+  {
+    "kanji": "無",
+    "historia": "Le diremos tina o bañera de madera a los trazos 1 a 8. Cometí el error de poner fuego 灬 bajo mi tina de madera, se quemó y no quedó nada."
+  },
+  {
+    "kanji": "然",
+    "historia": "A lo de arriba le diremos perro caliente. Nunca sabemos con qué hacen los perros calientes, en ese caso mejor échalo al fuego."
+  },
+  {
+    "kanji": "焼",
+    "historia": "A lo de la derecha le diremos hombre de paja. Nunca vas a ver al hombre de paja horneando, le tiene mucho miedo al fuego."
+  },
+  {
+    "kanji": "照",
+    "historia": "La maga dice: ¡Llamas brillantes! ¡Iluminen!"
+  },
+  {
+    "kanji": "熱",
+    "historia": "Con mucha imaginación podemos ver a Mario saltando la llama que tira Bowser. ¡Abajo hay lava caliente!"
+  },
+  {
+    "kanji": "牧",
+    "historia": "¿Por qué la vaca 牛 sigue al maestro de obra? Porque él cría animales."
+  },
+  {
+    "kanji": "特",
+    "historia": "Una vaca en el templo, eso sí es una situación especial."
+  },
+  {
+    "kanji": "産",
+    "historia": "Aquí vemos al comerciante al borde del precipicio diciendole a la gente abajo: ¡Con estos productos saludables prodrán vivir 生 más años!"
+  },
+  {
+    "kanji": "的",
+    "historia": "El propósito de este juego es lanzar una pelota con este cucharón 勺 blanco 白 y dar en el blanco."
+  },
+  {
+    "kanji": "省",
+    "historia": "Pocas 少 veces veo en tus ojos esa mirada reflexiva."
+  },
+  {
+    "kanji": "祝",
+    "historia": "Al lado del altar 礻 está mi hermano mayor 兄 celebrando su cumpleaños."
+  },
+  {
+    "kanji": "票",
+    "historia": "Con imaginación podemos ver a alguien introduciendo su voto en la urna electoral."
+  },
+  {
+    "kanji": "種",
+    "historia": "Esta especie de trigo genera semillas muy pesadas重い."
+  },
+  {
+    "kanji": "積",
+    "historia": "Este trigo azul 青 ocupa demasiado volumen."
+  },
+  {
+    "kanji": "競",
+    "historia": "Los dos hermanos mayores 兄 compiten para ver quién puede llevar la vasija más pesada sobre la cabeza."
+  },
+  {
+    "kanji": "笑",
+    "historia": "Para evitar una muerte prematura 夭 hay que reír bastante y comer cosas saludables como los brotes de bambú ⺮."
+  },
+  {
+    "kanji": "管",
+    "historia": "Las tuberías son de bambú en la casa del burócrata 官."
+  },
+  {
+    "kanji": "節",
+    "historia": "Contar los nodos del bambú es una forma inmediata 即 de saber más o menos cuántos años tiene."
+  },
+  {
+    "kanji": "便",
+    "historia": "El señor T sabe que los nuevos celulares son muy convenientes y por eso no espera que se le haga tarde 更 para ir a comprar uno. 更 = hacerse tarde."
+  },
+  {
+    "kanji": "信",
+    "historia": "El señor T dice 言 que tiene toda su fe en Dios."
+  },
+  {
+    "kanji": "倉",
+    "historia": "En este almacén se guardan sombrillas, 1 bandera de dos colores y algunas cajas."
+  },
+  {
+    "kanji": "候",
+    "historia": "Imaginemos que la línea extra en marqués 侯 es un bastón. El viejo marqués sale a ver cómo está el clima."
+  },
+  {
+    "kanji": "借",
+    "historia": "El señor T pide prestados algunos cuentos, pero solo los que empiezan por érase una vez昔々."
+  },
+  {
+    "kanji": "粉",
+    "historia": "Si divides el arroz 米 en muchas partes 分 vas a obtener harina de arroz."
+  },
+  {
+    "kanji": "紀",
+    "historia": "El hombre araña le pidió a la serpiente de tierra caliente que le escribiera una crónica, pero la serpiente no tiene manos, y no la pudo escribir."
+  },
+  {
+    "kanji": "約",
+    "historia": "El hombre araña hace la promesa solemne de recuperar el cucharón 勺 de su tía May."
+  },
+  {
+    "kanji": "結",
+    "historia": "El hombre araña ata al delincuente y le dice: Buena suerte saliendo de ahí."
+  },
+  {
+    "kanji": "給",
+    "historia": "El hombre araña lleva un estilo de vida que no encaja合con su salario. Necesita rápido un aumento."
+  },
+  {
+    "kanji": "続",
+    "historia": "El hombre araña continúa vendiendole 売 sus fotos a su jefe en el periodico."
+  },
+  {
+    "kanji": "置",
+    "historia": "Al ojo rotado le digo joya en forma de ojo. ¡Oye! Pon esa joya en forma de ojo donde la encontraste de inmediato 直."
+  },
+  {
+    "kanji": "老",
+    "historia": "El anciano que cuida las tumbas bebe con pitillo (trazo 4) y come con cuchara 匕. Pitillo = popote, pajilla, cañita, sorbete."
+  },
+  {
+    "kanji": "胃",
+    "historia": "A la luna a veces le decimos “órgano” o “parte del cuerpo” en los kanjis compuestos. Mi estómago es un organo tan grande que le cabe un campo de arroz."
+  },
+  {
+    "kanji": "脈",
+    "historia": "Las venas son parte del cuerpo y se ramifican de forma parecida a como lo hacen los trazos del 5 a 9."
+  },
+  {
+    "kanji": "腸",
+    "historia": "El lado izquierdo es una alcancía marranito. Me voy a demorar 1 mes 月 en llenar los intestinos de mi alcancía marranito."
+  },
+  {
+    "kanji": "臣",
+    "historia": "Aquí vemos al servidor público desde arriba. Ha servido tanto a su país que ha desarrollado grandes hombros."
+  },
+  {
+    "kanji": "航",
+    "historia": "A lo de la izquierda le digo capitán viento 几. No se preocupen, el barco 舟 está siendo navegado por el capitán viento."
+  },
+  {
+    "kanji": "良",
+    "historia": "Aquí vemos a un niño que se ha portado muy bien, incluso le pusieron un gorrito (trazo 1) que dice niño bueno."
+  },
+  {
+    "kanji": "芸",
+    "historia": "A lo de abajo le digo mu mu porque son 2 (二) mu (ム en katakana). La técnica que uso para dibujar una vaca es primero ser la vaca, por eso como pasto 艹 y digo mu mu."
+  },
+  {
+    "kanji": "芽",
+    "historia": "Oh mira, en los colmillos 牙 de ese animal han salido brotes de plantas y flores."
+  },
+  {
+    "kanji": "英",
+    "historia": "En el centro 央 de Inglaterra hay muchas flores 艹."
+  },
+  {
+    "kanji": "菜",
+    "historia": "A la garra 爫 le diremos buitre. Este es un buitre vegetariano. Usa flores en la cabeza y aquí lo vemos comiendo verduras encima del árbol."
+  },
+  {
+    "kanji": "街",
+    "historia": "Con imaginación podemos ver una calle amplia, con faroles a los lados y mucha gente pasando en el medio."
+  },
+  {
+    "kanji": "衣",
+    "historia": "Con imaginación vemos una prenda de vestir colgada de un gancho de ropa."
+  },
+  {
+    "kanji": "要",
+    "historia": "A lo de arriba le digo viejo oeste 覀. En el viejo oeste a veces era necesario que las mujeres 女 aprendieran a disparar."
+  },
+  {
+    "kanji": "覚",
+    "historia": "Para memorizar los kanji, el príncipe (lleva corona 冖) los ve 見 hasta que le salen chispas de la cabeza."
+  },
+  {
+    "kanji": "観",
+    "historia": "A lo de la izquierda le digo unicornio alado. Tu punto de vista sobre la vida cambia cuando puedes volar sobre un unicornio alado."
+  },
+  {
+    "kanji": "訓",
+    "historia": "¿Por qué el maestro le dice 言 cosas al río 川? Es porque en Japón incluso los ríos reciben instrucción."
+  },
+  {
+    "kanji": "試",
+    "historia": "El profesor de arte dice 言: Este examen no una prueba de conocimiento, sino de estilo 式."
+  },
+  {
+    "kanji": "説",
+    "historia": "Lo de la izquierda parece un hermano mayor 兄 enojado. Te voy a dar la explicación, pero no te vayas a enojar hermano mayor."
+  },
+  {
+    "kanji": "課",
+    "historia": "El profesor dice 言: Hoy trabajaremos la lección 5 del libro, la que habla sobre las frutas 果."
+  },
+  {
+    "kanji": "議",
+    "historia": "Tras mucha deliberación mis palabras 言 fueron justas 義."
+  },
+  {
+    "kanji": "象",
+    "historia": "Con imaginación podemos ver un elefante: La cabeza, dos orejas, 5 patas y la cola."
+  },
+  {
+    "kanji": "貨",
+    "historia": "Concha 貝 toma el significado de dinero en algunos kanji compuestos. A cambio 化 de dinero 貝 transportaré la carga de mercancías."
+  },
+  {
+    "kanji": "貯",
+    "historia": "Mis ahorros los escondo así: Guardo mi dinero en bolsas y lo cuelgo en el techo 宀 con clavos."
+  },
+  {
+    "kanji": "費",
+    "historia": "A lo de arriba le diremos dólares. Un gasto es un gasto, ya sea que se pague con dólares o con dinero local."
+  },
+  {
+    "kanji": "賞",
+    "historia": "Como premio por ser el empleado 員 del mes le vamos a poner 2 cuernos al techo de tu casa. 員 = empleado."
+  },
+  {
+    "kanji": "軍",
+    "historia": "El rey loco ha decretado que todos los carros del ejército deben llevar una corona 冖 gigante encima de ellos."
+  },
+  {
+    "kanji": "輪",
+    "historia": "Hay que ser metódico para inventar el carro: Primero se inventan las ruedas. 侖 = ser métodico (este kanji no se usa en el japonés actual)."
+  },
+  {
+    "kanji": "辞",
+    "historia": "En ese trabajo me ponían a probar comida muy picante 辛 con la lengua 舌, por eso renuncié."
+  },
+  {
+    "kanji": "辺",
+    "historia": "Hay una katana 刀 en el camino, es porque por estos alrededores viven muchos ninjas."
+  },
+  {
+    "kanji": "連",
+    "historia": "Es bueno llevar consigo unos amigos cuando vas por el camino en tu carro 車."
+  },
+  {
+    "kanji": "達",
+    "historia": "La oveja 羊 lleva tierra 土 sobre la cabeza porque está en camino ⻌ de alcanzar su meta de construir 101 túneles."
+  },
+  {
+    "kanji": "選",
+    "historia": "Las dos serpientes van juntas 共 por el camino. ¿A dónde van? Pues a elegir al siguiente presidente de la selva."
+  },
+  {
+    "kanji": "郡",
+    "historia": "Esto 阝 parece una B. La película 君の名は (kimi no na wa) fue un gran éxito en todos los condados que empiezan con B."
+  },
+  {
+    "kanji": "量",
+    "historia": "Desde que veo salir el sol en el horizonte empiezo a repasar una buena cantidad de kanjis en el computador."
+  },
+  {
+    "kanji": "録",
+    "historia": "A lo de la derecha le diremos pastel y agua. Me invitaron a una boda para que la grabara, pero me dijeron que no me pagarían con oro 金 sino con pastel y agua."
+  },
+  {
+    "kanji": "鏡",
+    "historia": "Mi hermano mayor 兄 está loco, se pone un jarrón en la cabeza y se pasa todo el día 日 mirándose en el espejo de oro."
+  },
+  {
+    "kanji": "関",
+    "historia": "A esto 关 le diremos mamut. ¿Qué conexión existe entre las entradas y los mamuts? Bueno, contienen la letra a."
+  },
+  {
+    "kanji": "陸",
+    "historia": "A lo de la derecha le diremos Mario saltando (como hicimos en el kanji de caliente). Aquí Bemos a Mario saltando en una tierra lejana, buscando a la princesa."
+  },
+  {
+    "kanji": "隊",
+    "historia": "El regimiento de cerdos 豕 con cuernos nunca ha estado en Batalla."
+  },
+  {
+    "kanji": "静",
+    "historia": "¿Qué es la tranquilidad? Ver el cielo azul 青 y evitar todo tipo de disputas 争."
+  },
+  {
+    "kanji": "順",
+    "historia": "Es importante leer las páginas 頁 del libro en orden para que la historia fluya como un río 川."
+  },
+  {
+    "kanji": "願",
+    "historia": "Por favor, firma esta página 頁, es una petición para salvar la pradera 原."
+  },
+  {
+    "kanji": "停",
+    "historia": "El señor T hace una parada en un pabellón chino亭 (o gazebo chino) para admirar el panorama. 亭 = pabellón o gazebo chino."
+  },
+  {
+    "kanji": "健",
+    "historia": "El señor T es muy saludable porque hace mucho ejercicio en su trabajo donde construye 建 edificios."
+  },
+  {
+    "kanji": "側",
+    "historia": "El señor T está del lado de las reglas 則 de la buena conducta."
+  },
+  {
+    "kanji": "働",
+    "historia": "El señor T trabaja moviendo 動 cosas de un lado a otro."
+  },
+  {
+    "kanji": "億",
+    "historia": "El señor T tiene cien millones de ideas 意 de negocios."
+  },
+  {
+    "kanji": "類",
+    "historia": "Aquí le diremos menú a la página 頁. En el menú hay varios tipos de arroz 米, yo pedí el que tiene los granos más grandes 大."
+  },
+  {
+    "kanji": "飛",
+    "historia": "A los trazos 1, 2 y 3 les diremos colibrí. Aquí vemos 2 colibríes volando mientras toman agua azucarada de una masu 升 (caja para medir)."
+  },
+  {
+    "kanji": "飯",
+    "historia": "Vamos a comer 飠 pero soy anti-comida rápida así que vamos a hacer comida de verdad. 反 = anti-."
+  },
+  {
+    "kanji": "養",
+    "historia": "Para críar bien la oveja 羊 el primer paso es no comértela 食."
+  },
+  {
+    "kanji": "験",
+    "historia": "A lo de la derecha le digo la inspectora de pechos grandes. La inspectora de pechos grandes vendrá a hacer la verificación de los caballos 馬."
+  },
+  {
+    "kanji": "兆",
+    "historia": "Los pelos de mis piernas se erizaron, es un presagio de que va a llover pronto."
+  },
+  {
+    "kanji": "児",
+    "historia": "Hay que cuidar bien al recién nacido hasta que cumpla 18 años."
+  },
+  {
+    "kanji": "共",
+    "historia": "Los dos cisnes bailan tan juntos que solo se ven dos patas."
+  },
+  {
+    "kanji": "兵",
+    "historia": "¿Eso que está ahí es un soldado? No, es un hacha 斤 con patas de animal."
+  },
+  {
+    "kanji": "典",
+    "historia": "Los dos cisnes del kanji de 共 llevan puesto un elegante abrigo (trazos 1 y 2) porque van a una ceremonia muy importante."
+  },
+  {
+    "kanji": "冷",
+    "historia": "No importa cuántas veces le digas al hielo 冫 que se ponga más frío, no va a seguir tus órdenes 令."
+  },
+  {
+    "kanji": "初",
+    "historia": "衣 (ropa) → 衤. Imaginemos que 衤 es capa. Es la primera vez que veo una capa resistente a las dagas 刀."
+  },
+  {
+    "kanji": "別",
+    "historia": "A la izquierda hay una papa con muchas raíces, con este sable 刂 las voy a separar."
+  },
+  {
+    "kanji": "利",
+    "historia": "Con este trigo 禾 y este sable para cortarlo podré hacer pan y tener muchas ganancias."
+  },
+  {
+    "kanji": "刷",
+    "historia": "Esta impresora es tan buena que imprime sobre banderas 尸, toallas 巾, e incluso sables."
+  },
+  {
+    "kanji": "副",
+    "historia": "Aquí vemos al vice-presidente de la compañía, siempre tan gordo como si se hubiera comido un campo de arroz, y siempre carga un sable."
+  },
+  {
+    "kanji": "功",
+    "historia": "El negocio de las artesanías 工 ha cobrado mucha fuerza 力. Se puede decir que es un gran éxito."
+  },
+  {
+    "kanji": "加",
+    "historia": "Parece que dice カロ karo en katakana. Si sigues comiendo tanto vas a agregar demasiadas karorías (calorías)."
+  },
+  {
+    "kanji": "努",
+    "historia": "Ese chico奴 (やつ) tiene mucha fuerza, la ha ganado a base de mucho esfuerzo."
+  },
+  {
+    "kanji": "労",
+    "historia": "El príncipe trabaja sacándole brillo a las coronas 冖, para ello necesita mucha fuerza."
+  },
+  {
+    "kanji": "勇",
+    "historia": "Lo de arriba se parece al katakana ma マ. Ma nos enseñó a ser hombres 男 valientes."
+  },
+  {
+    "kanji": "包",
+    "historia": "Aquí vemos a la serpiente quitándose su antigua piel que la envolvía."
+  },
+  {
+    "kanji": "卒",
+    "historia": "En mi graduación me pondré mi sombrero de copa, invitaré a mis dos personas 人 más importantes, y celebraremos hasta las 10."
+  },
+  {
+    "kanji": "協",
+    "historia": "3 personas parecen tener la fuerza de 10 cuando cooperan."
+  },
+  {
+    "kanji": "単",
+    "historia": "Todo es simple cuando tienes 10 cerebros con chispas."
+  },
+  {
+    "kanji": "博",
+    "historia": "Cuando tienes amplios conocimientos en 10 especialidades 専 te dan el título de Dr. y te premian con un trazo adicional (el trazo 9)."
+  },
+  {
+    "kanji": "印",
+    "historia": "Aquí vemos la E y la P de la palabra estampa."
+  },
+  {
+    "kanji": "参",
+    "historia": "Tengo una vaca que se llama MU ム, es grande y siempre se orina de la felicidad cuando la voy a visitar."
+  },
+  {
+    "kanji": "史",
+    "historia": "Aquí vemos a una persona caminando con su libro de historia bajo el brazo."
+  },
+  {
+    "kanji": "司",
+    "historia": "Yo pensaba que todos los directores eran iguales同, pero este es diferente."
+  },
+  {
+    "kanji": "久",
+    "historia": "Aquí vemos a alguien haciendo una reverencia mientras dice: Largo tiempo sin verte."
+  },
+  {
+    "kanji": "仏",
+    "historia": "El señor T le dice a Buda que debe levantar pesas para tener brazos fuertes. 厶 = imaginemos un brazo levantando pesas."
+  },
+  {
+    "kanji": "仮",
+    "historia": "Al señor T le gustan las cosas temporales, por eso es anti-permanente. 反 = anti-."
+  },
+  {
+    "kanji": "件",
+    "historia": "El señor T tiene un asunto muy importante que tratar con la vaca. 牛 = vaca, buey."
+  },
+  {
+    "kanji": "任",
+    "historia": "El señor T le dice al portero de su edificio que su responsabilidad es cuidar la puerta. 壬 = a esto le diremos portero de edificio."
+  },
+  {
+    "kanji": "属",
+    "historia": "Esta bandera le pertenece a Yu el Grande. 禹 hace referencia al legendario emperador chino Yu el grande."
+  },
+  {
+    "kanji": "布",
+    "historia": "Es el logo de una fábrica de telas: Una “t” de telas y una toalla 巾."
+  },
+  {
+    "kanji": "師",
+    "historia": "A lo de la izquierda le diremos “James Bond”. James Bond es un maestro en el arte de colgar toallas 巾 del techo."
+  },
+  {
+    "kanji": "常",
+    "historia": "En mi barrio, es común que los techos 宀 tengan cuernos y que la gente use toallas 巾 bajo la boca 口 como si fuesen servilletas."
+  },
+  {
+    "kanji": "幹",
+    "historia": "La línea principal o troncal del tren pasa por diez 十 girasoles, una sombrilla y un tendedero con ropa seca 干. Nota: Troncal viene de tronco."
+  },
+  {
+    "kanji": "序",
+    "historia": "Leer un libro es como hacer una cueva 广: hay que seguir un orden. De antemano 予, lo más importante es leer el prefacio."
+  },
+  {
+    "kanji": "弁",
+    "historia": "Arriba vemos el katakanaム (mu), y abajo hay una especie de “H”. “Esta válvula es muy Hermosa”, dijo el ingeniero loco en un dialecto extraño."
+  },
+  {
+    "kanji": "張",
+    "historia": "Al estirar la cuerda elástica del arco 弓, esta se hace más larga長."
+  },
+  {
+    "kanji": "往",
+    "historia": "A 彳 le diremos “señor T caminando” (se pone un gorro cuando camina). Milord 主, el señor T caminante 彳 va a ir a otro país en un viaje de negocios."
+  },
+  {
+    "kanji": "復",
+    "historia": "Para restaurar su energía, el señor T caminante 彳 se agacha 𠂉, ve el sol 日 y estira sus piernas para caminar 夂. 夂 = piernas para caminar."
+  },
+  {
+    "kanji": "徳",
+    "historia": "El señor T caminante 彳, en un acto de benevolencia, le sacó una aguja 十 del ojo al gigante ⺲, y así se ganó su corazón 心. A veces le diremos aguja al 10 十."
+  },
+  {
+    "kanji": "志",
+    "historia": "¿Qué lleva el samurái 士 en su corazón 心? La intención de ser cada día mejor."
+  },
+  {
+    "kanji": "応",
+    "historia": "Esta cueva 广 responde a las necesidades de mi corazón 心 cuando quiero un lugar callado."
+  },
+  {
+    "kanji": "快",
+    "historia": "El pintor entra en un agradable estado de la mente 忄, donde es uno con las pinturas y el caballete夬. 夬 parece un caballete de pintura."
+  },
+  {
+    "kanji": "性",
+    "historia": "Mi estado de la mente 忄 me permite ver la vida 生 sin hacer distinciones de género, raza, color o idioma: todos somos herman@s. A 忄 le diremos “estado de la mente”."
+  },
+  {
+    "kanji": "恩",
+    "historia": "La gratitud es la causa de todas las cosas buenas que nacen del corazón. 因 = causa, factor."
+  },
+  {
+    "kanji": "情",
+    "historia": "Mis emociones no son “estados de la mente” 忄, sino colores. Hoy por ejemplo me siento azul 青 (blue en inglés es triste)."
+  },
+  {
+    "kanji": "態",
+    "historia": "Un problema de actitud ocurre cuando tienes mucha habilidad 能, pero no le pones el corazón 心 a lo que haces."
+  },
+  {
+    "kanji": "慣",
+    "historia": "El “estado de la mente” 忄 más precioso es el que te permite acostumbrarte a tener buenos hábitos. 貴 = precioso/a."
+  },
+  {
+    "kanji": "承",
+    "historia": "El niño 子 de 6 brazos no se quería meter al agua 水 pero el calor lo hizo ceder."
+  },
+  {
+    "kanji": "技",
+    "historia": "Esta es mi técnica especial: Transformar mis manos en ramas. 支 = Rama, sostener."
+  },
+  {
+    "kanji": "招",
+    "historia": "Le hago señas con la mano a mi pareja para seducirla 😏, pero no funciona. 召 = Seducir."
+  },
+  {
+    "kanji": "授",
+    "historia": "El profesor mueve sus manos mientras imparte su clase, y el estudiante acepta el conocimiento. 受 = Aceptar."
+  },
+  {
+    "kanji": "採",
+    "historia": "El granjero usa sus manos para recolectar las frutas de los árboles, mientras el “gavilán frutero” usa sus garras 爫."
+  },
+  {
+    "kanji": "接",
+    "historia": "Para conectarte al Wi-Fi, debes levantar la mano y pedirle la clave a la chica que tiene la vasija en la cabeza."
+  },
+  {
+    "kanji": "提",
+    "historia": "Si alguien quiere proponer algo, debe levantar su mano justo así. 是 = justo así. 扌 = radical de mano."
+  },
+  {
+    "kanji": "損",
+    "historia": "Cuando el jefe preguntó: «¿Quién dañó la máquina? », el empleado levantó la mano."
+  },
+  {
+    "kanji": "支",
+    "historia": "Mi árbol genealógico tiene más de 10 ramas, y esto es gracias a las activas entrepiernas de mis antepasados. Imaginemos que 又 es entrepierna."
+  },
+  {
+    "kanji": "政",
+    "historia": "Lo correcto 正 es que el maestro de obra se lance a la política, porque tiene gran aprobación popular. Imaginemos que 攵 es maestro de obra."
+  },
+  {
+    "kanji": "故",
+    "historia": "El viejo 古 maestro de obra sabe que no es posible planear las casualidades."
+  },
+  {
+    "kanji": "敵",
+    "historia": "A lo de la izquierda le diremos vasija antigua. El maestro de obra 攵 me regaló una vasija antigua, y desde entonces ya no es mi enemigo."
+  },
+  {
+    "kanji": "断",
+    "historia": "Veo a un viejito con bastón llevando un saco de arroz 米 en la espalda. Le pregunté si quería ayuda, pero me dijo: ¡La rechazo, todavía puedo!"
+  },
+  {
+    "kanji": "旧",
+    "historia": "Ahh, todavía recuerdo los viejos tiempos, cuando tenía apenas 18 años."
+  },
+  {
+    "kanji": "易",
+    "historia": "Veo un perrito echado tomando el sol, disfrutando de una vida simple."
+  },
+  {
+    "kanji": "暴",
+    "historia": "A juntos 共 + agua 水 le diremos: Arca de Noé. Después de 40 días en el arca de Noé, la gente ya no podía soportarlo y empezaron a tener arrebatos de ira."
+  },
+  {
+    "kanji": "条",
+    "historia": "En el congreso aprobaron un nuevo artículo: Los maestros de obra no se pueden subir a los árboles."
+  },
+  {
+    "kanji": "枝",
+    "historia": "Esta sí es una rama de un árbol 木. 支 también es “rama”, pero abstracta o figurativa, como una sucursal (rama de una empresa)."
+  },
+  {
+    "kanji": "査",
+    "historia": "Imaginemos que 且 = estante de libros. Vamos a investigar cómo es posible que este árbol haya crecido encima del estante de libros 且."
+  },
+  {
+    "kanji": "格",
+    "historia": "Biólogos eminentes descubrieron que cada árbol tiene un estatus en el bosque: hay líderes, seguidores y hasta cuidadores. 各 = cada."
+  },
+  {
+    "kanji": "桜",
+    "historia": "La chica estaba tan feliz de ver el cerezo que le salieron chispas de la cabeza."
+  },
+  {
+    "kanji": "検",
+    "historia": "La inspección de los árboles la hace la chica del ‘sombrero chino’ 𠆢 y pechos grandes."
+  },
+  {
+    "kanji": "構",
+    "historia": "Construimos una estructura de madera en forma de signo número #. Como quedó mal, la haremos otra vez. 再 = otra vez, de nuevo"
+  },
+  {
+    "kanji": "武",
+    "historia": "A 弋 le diremos flecha. La historia de Aquiles dice que una 一 flecha 弋 puede detener a un guerrero."
+  },
+  {
+    "kanji": "比",
+    "historia": "Estas dos cucharas se parecen, pero si las comparamos bien, se ve que son diferentes. 匕 = radical de cuchara."
+  },
+  {
+    "kanji": "永",
+    "historia": "Fuente de la juventud: Una gota 丶 de esta agua 水 especial te da juventud eterna. El agua es especial porque el trazo 2 es diferente."
+  },
+  {
+    "kanji": "河",
+    "historia": "El agua 氵 de este río es tan clara que es posible 可 ver el fondo. Recordemos que 可 = posible."
+  },
+  {
+    "kanji": "液",
+    "historia": "Le dieron agua a Drácula, el señor de la noche 夜, pero dijo que prefería otra clase de líquido, uno más rojo."
+  },
+  {
+    "kanji": "混",
+    "historia": "El agua no se debe mezclar con contaminantes, por nuestro bien y el de nuestros descendientes. 昆 = Descendientes, insecto."
+  },
+  {
+    "kanji": "減",
+    "historia": "A esto 戌 le diremos “marcha”. Las personas en la marcha abrieron sus bocas 口 para recibir las gotas de lluvia y así disminuir su sed."
+  },
+  {
+    "kanji": "測",
+    "historia": "La última medición del gasto de agua fue tan alta que establecieron una nueva regla en la vecindad para ahorrar agua. 則 = Regla, ley."
+  },
+  {
+    "kanji": "似",
+    "historia": "Este kanji se parece a: una T, un 1 al revés y una especie de X."
+  },
+  {
+    "kanji": "余",
+    "historia": "Hay tanto exceso de oro 金, que el piso del kanji desapareció y los dos lingotes de abajo se voltearon."
+  },
+  {
+    "kanji": "価",
+    "historia": "El señor T solo toma coñac de alto valor. Lo de la derecha parece una botella de coñac."
+  },
+  {
+    "kanji": "保",
+    "historia": "El señor T se sube al árbol y abre su boca para decir: Debemos proteger a los árboles."
+  },
+  {
+    "kanji": "修",
+    "historia": "El señor T usa un palo para reparar la fuga de agua, claro que lo hace bajo la supervisión del maestro de obra 攵."
+  },
+  {
+    "kanji": "準",
+    "historia": "A 淮 le diremos “pavo de agua”. El pavo de agua se trepa al árbol porque quiere romper con los estándares que la sociedad le impone."
+  },
+  {
+    "kanji": "演",
+    "historia": "La actuación fue maravillosa, sobre todo cuando el agua cayó sobre el signo del tigre y lo transformó en uno real. 寅 = Signo del tigre (zodiaco chino)"
+  },
+  {
+    "kanji": "潔",
+    "historia": "Agua + arbusto + katana + hilo. Bajo la cascada que está rodeada de arbustos, el samurái purifica su mente, imaginándose a sí mismo como una katana que corta el hilo del mal."
+  },
+  {
+    "kanji": "災",
+    "historia": "Al río curvado 巛 le diremos “inundación”. Primero hubo una inundación y luego todo se prendió fuego. Es un verdadero desastre."
+  },
+  {
+    "kanji": "燃",
+    "historia": "Con tanto fuego, todo se te va a quemar. Debes dejar de cocinar de esa manera. 然 = De esa manera, así."
+  },
+  {
+    "kanji": "版",
+    "historia": "Con imaginación, vemos a alguien llevando el bloque de impresión (trazo 2) a la máquina que está a la derecha."
+  },
+  {
+    "kanji": "犯",
+    "historia": "A lo de la derecha le diremos “huellas digitales”. Los crímenes a veces se resuelven con “perros salvajes” 犭 entrenados y huellas digitales."
+  },
+  {
+    "kanji": "状",
+    "historia": "Con imaginación, vemos en los trazos 1 a 3 la cara de una tortuga rotada 90°. El estatus quo es que la carrera sea entre una tortuga y una liebre, pero aquí es entre una tortuga y un perro."
+  },
+  {
+    "kanji": "独",
+    "historia": "En tu apartamento hay “perros salvajes” 犭 e insectos, por eso sigues soltero. 虫 = Insecto, bicho."
+  },
+  {
+    "kanji": "率",
+    "historia": "Las chispas misteriosas en el cielo han aumentado por 10 十 la tasa de turistas por día que visitan el pueblo. 玄 = Misterioso/a."
+  },
+  {
+    "kanji": "現",
+    "historia": "El rey tiene una bola de cristal especial que le vendieron carísima. Es especial porque solo puede ver el presente. 見 = Ver."
+  },
+  {
+    "kanji": "留",
+    "historia": "Los trazos 1 a 3 son como una “G” de globo. Mi plan para quedarme en otro país: voy en globo y, cuando llegue, lo pincho con mi katana y caigo en un campo de arroz."
+  },
+  {
+    "kanji": "略",
+    "historia": "En el campo de arroz, cada cosa tiene su abreviatura. Así ahorramos tiempo y el trabajo nos rinde más. 各 = Cada."
+  },
+  {
+    "kanji": "益",
+    "historia": "Los trazos 1 a 3 son una “cara de tortuga”. La tortuga ya se comió ocho platos. Debe ser que tuvo muy buenas ganancias en su última carrera contra la liebre."
+  },
+  {
+    "kanji": "眼",
+    "historia": "El doctor dijo algo que no entendí: “Sus globos oculares están radicalmente buenos”. 艮 = Radical de bueno."
+  },
+  {
+    "kanji": "破",
+    "historia": "Ten cuidado con esa piedra, no te vayas a romper el cuero. 皮 = Piel, cuero, pelaje."
+  },
+  {
+    "kanji": "確",
+    "historia": "Ciertamente, la corona del pavo real tiene muchas piedras 石 preciosas. 隹 = Radical de ave (lo llamaremos “pavo”). Corona 冖 + pavo 隹 = Pavo real."
+  },
+  {
+    "kanji": "示",
+    "historia": "Pasen de a 2 二 al altar a mostrar lo que trajeron para el pequeño小compartir. Es kanjis compuestos le diremos altar."
+  },
+  {
+    "kanji": "祖",
+    "historia": "Al lado del altarcito está la estantería con las cenizas de nuestros ancestros. Como 礻 proviene de 示, le diremos “altarcito”."
+  },
+  {
+    "kanji": "禁",
+    "historia": "¿Dos árboles encima del altar? No, eso está totalmente prohibido."
+  },
+  {
+    "kanji": "移",
+    "historia": "Te vamos a transferir al departamento de trigo 禾. Ahí hay mucho 多 trabajo. Le diremos “trigo” a禾. 多 = Mucho."
+  },
+  {
+    "kanji": "程",
+    "historia": "Toda esta extensión de trigo 禾 se va directo a la boca 口 del rey 王."
+  },
+  {
+    "kanji": "税",
+    "historia": "Todo el trigo 禾 se lo llevó el diablo. Así le dicen al recaudador de impuestos."
+  },
+  {
+    "kanji": "築",
+    "historia": "El bambú ⺮ es un excelente material para construir columnas en forma de 工. Mucho mejor que esta mediocre 凡 madera 木. 凡 = Mediocre. 木 = Árbol, madera."
+  },
+  {
+    "kanji": "精",
+    "historia": "El arroz 米 sin refinar es azul 青. No es cierto, pero me gusta la historia. 米 = Arroz. 青 = Azul."
+  },
+  {
+    "kanji": "素",
+    "historia": "Debajo del arbusto había un hilo de oro. El oro es el elemento número 79 en la tabla periódica. 糸 = Hilo."
+  },
+  {
+    "kanji": "経",
+    "historia": "Spiderman recita un sutra sentado en flor de loto (piernas cruzadas 又) en el suelo 土. A veces le decimos “Hombre araña” a 糸."
+  },
+  {
+    "kanji": "統",
+    "historia": "Los emperadores se ataron un hilo blanco para simbolizar la paz. Luego llenaron el cielo de faroles y unificaron sus países. 充 = Llenar, abastecer, recargar."
+  },
+  {
+    "kanji": "絶",
+    "historia": "No señora, el hilo de ese color se descontinuó hace años."
+  },
+  {
+    "kanji": "綿",
+    "historia": "¿Un hilo blanco para hacer toallas? El algodón. 白 = Blanco. 巾 = Toalla."
+  },
+  {
+    "kanji": "総",
+    "historia": "En general, el Hombre Araña es querido por todos, es decir, tiene un lugar en el corazón del público. 公 = Público. 心 = Corazón."
+  },
+  {
+    "kanji": "編",
+    "historia": "El hombre araña compila sus mejores fotos en varios libros que pone al lado de su puerta para ver si alguien los compra. 戸 = Puerta. 冊 = Contador para libros."
+  },
+  {
+    "kanji": "績",
+    "historia": "Spiderman ha tenido grandes logros gracias a que se toma su trabajo de superhéroe con mucha responsabilidad. 責 = Responsabilidad, reproche, culpa."
+  },
+  {
+    "kanji": "織",
+    "historia": "Spiderman no puede tocar el kazoo mientras teje con sus telarañas. Le diremos kazoo (instrumento musical) a 戠 porque tiene 音 = sonido."
+  },
+  {
+    "kanji": "罪",
+    "historia": "A 罒 le diremos cícople gigante. El cícople gigante es culpable de tener las piernas peludas. Esto es un crimen grave en el país de los calvos."
+  },
+  {
+    "kanji": "群",
+    "historia": "Todas las ovejas 羊 del rebaño tienen nombre. Esta es Lana-kun, esa es Nieve-kun, y así. 君 = tú (きみ), -kun. 羊 = Oveja."
+  },
+  {
+    "kanji": "義",
+    "historia": "A la oveja 羊 sin cola le diremos “oveja rey”. 我 = Ego, yo, mí. La oveja rey dejó a un lado su ego e hizo lo correcto."
+  },
+  {
+    "kanji": "耕",
+    "historia": "Estos maravillosos árboles triples son los #1 del país. Todo se debe a la forma novedosa en que labramos la tierra."
+  },
+  {
+    "kanji": "職",
+    "historia": "Mi empleo consiste en escuchar con mis orejas diferentes kazoos para verificar que su sonido sea el correcto. 耳 = Oreja. A 戠 le diremos kazoo."
+  },
+  {
+    "kanji": "肥",
+    "historia": "Soñé que iba a la luna a fertilizarla con algo que traía en mi cartuchera, y que luego brotaban flores de todos los colores. A 巴 le diremos “cartuchera” o “estuche de colores”. Recordemos que 色 = Color."
+  },
+  {
+    "kanji": "能",
+    "historia": "Mi habilidad especial solo funciona cuando digo las palabras mágicas: mu-luna-hi-hi. ム = mu. 月 = luna. ヒ = hi."
+  },
+  {
+    "kanji": "興",
+    "historia": "Me entretiene mucho hacer salsa en mi nuevo molcajete. Es igual al anterior, pero este tiene patas. 臼 = molcajete, mortero. 同 = mismo, igual."
+  },
+  {
+    "kanji": "舌",
+    "historia": "La gota (trazo 1) de saliva en la lengua del viejo indica que todavía está vivo. 古 = viejo."
+  },
+  {
+    "kanji": "舎",
+    "historia": "Es el peor alojamiento que he visto: el techo es una sombrilla, no hay piso, solo tierra, y el baño es un hueco. 土 = suelo, tierra."
+  },
+  {
+    "kanji": "術",
+    "historia": "Ayer limpiaron las tierras del bulevar y colocaron una obra de arte que parece un árbol con ramas flotantes y un moño. 街 = bulevar, calle, avenida."
+  },
+  {
+    "kanji": "衛",
+    "historia": "En el bulevar 街 hay un medallón que aumentará tu defensa contra los vampiros. Este 韋 es el radical de cuero curtido, pero le diremos “medallón”."
+  },
+  {
+    "kanji": "製",
+    "historia": "Nuestro sistema de producción es maravilloso porque podemos fabricar mil prendas en un solo día. 制 = Sistema, ley, regla. 衣 = Prenda, ropa."
+  },
+  {
+    "kanji": "複",
+    "historia": "En la fiesta había alguien con un duplicado de mi disfraz, así que volví al pasado para ponerme otro. 衤 viene de 衣. Le diremos “disfraz”. A 复 le diremos “volver al pasado”."
+  },
+  {
+    "kanji": "規",
+    "historia": "La nueva regulación dice que el esposo 夫 solo puede ver a su mujer, y si mira a otra, tendrá una multa. 夫 = esposo. 見 = ver, mirar."
+  },
+  {
+    "kanji": "解",
+    "historia": "Necesitamos un nuevo ángulo para desenredar este problema: ¿por qué está cortada la leche? 角 = ángulo. 刀 = espada, cuchillo. 牛 = vaca."
+  },
+  {
+    "kanji": "俵",
+    "historia": "Aquí vemos al señor T haciendo un fardo de paja. En la superficie 表 le pone: Marca señor T."
+  },
+  {
+    "kanji": "個",
+    "historia": "El señor T es un individuo con convicciones firmes 固."
+  },
+  {
+    "kanji": "備",
+    "historia": "El señor T quiere utilizar 用 unas flores 艹 en la cima del barranco 厂, por eso va a equiparse para escalarlo."
+  },
+  {
+    "kanji": "像",
+    "historia": "El señor T viajó sobre su elefante 象 para ver una estatua de Buda."
+  },
+  {
+    "kanji": "再",
+    "historia": "Parece rey 王 (trazos 1, 4, 5, 6) con una especie de cinturón (trazos 2 y 3). El rey está comiendo tanto que otra vez se le rompió su cinturón."
+  },
+  {
+    "kanji": "設",
+    "historia": "En este establecimiento, está prohibida la palabra misil. 言 = decir, palabra. A 殳 le diremos “misil”."
+  },
+  {
+    "kanji": "許",
+    "historia": "En este país, no está permitido decirle malas palabras a las vacas. 牛 = vaca, buey, ganado."
+  },
+  {
+    "kanji": "証",
+    "historia": "Las palabras no son evidencia de que eres una persona correcta, lo importante son tus actos. 正 = correcto, justo."
+  },
+  {
+    "kanji": "評",
+    "historia": "Mi evaluación del hotel fue con palabras niveladas, porque mencioné tanto las cosas positivas como las negativas. 平 = plano, nivelado, paz."
+  },
+  {
+    "kanji": "講",
+    "historia": "La clase de hoy es sobre el #1 otra vez, porque la vez pasada nadie entendió nada. 再 = otra vez, de nuevo."
+  },
+  {
+    "kanji": "謝",
+    "historia": "Para disculparse, debes decir palabras amables. Ni se te ocurra disparar más insultos. 言 = Decir. 射 = Disparar, tirar."
+  },
+  {
+    "kanji": "識",
+    "historia": "Dicen que se requiere mucho conocimiento para reconocer un kazoo de una flauta normal, pero yo creo que eso es una exageración. A 戠 le diremos “kazoo”."
+  },
+  {
+    "kanji": "護",
+    "historia": "Dicen que, para salvaguardar las abejas, van a traer 10 barcos llenos de flores. 隻 es un contador para barcos."
+  },
+  {
+    "kanji": "豊",
+    "historia": "Dicen que, si se doblan los frijoles antes de sembrarlos, se obtendrá una cosecha abundante. 曲 = Doblar. 豆 = Frijol."
+  },
+  {
+    "kanji": "財",
+    "historia": "Con mi dinero compré propiedades muy valiosas. ¡Soy un genio! 貝 = Concha, dinero en kanjis compuestos. 才 = Genio."
+  },
+  {
+    "kanji": "貧",
+    "historia": "Una parte de mi dinero es para ayudar a los pobres. 分 = parte, minuto. A 貝 (concha) le decimos “dinero” en kanjis compuestos."
+  },
+  {
+    "kanji": "責",
+    "historia": "Estos arbustos me costaron tanto dinero que ahora siento culpa. Debí haber usado mejor mi dinero."
+  },
+  {
+    "kanji": "貸",
+    "historia": "Prestar dinero es como sustituirlo por un activo que genera más dinero gracias a los intereses. 代 = sustitución, reemplazo."
+  },
+  {
+    "kanji": "貿",
+    "historia": "Este signo de la liebre tiene la mitad derecha cortada. Mejor voy a ver si alguien me lo intercambia por dinero. 卯 = signo de la liebre. 刀 = espada, cuchillo."
+  },
+  {
+    "kanji": "賀",
+    "historia": "Voy a añadir algo de dinero a la tarjeta de felicitación que voy a enviar. 加 = añadir, agregar."
+  },
+  {
+    "kanji": "資",
+    "historia": "Voy a necesitar muchos recursos para mi siguiente proyecto: hacer una estatua de oro con forma de concha. 次 = siguiente."
+  },
+  {
+    "kanji": "賛",
+    "historia": "La suegra dice: “Entre estos dos posibles esposos, solo aprobaré al que tenga más dinero.” 夫 = esposo, marido."
+  },
+  {
+    "kanji": "質",
+    "historia": "Ni con dos hachas hemos logrado partir esta concha; es de una sustancia fuertísima. 斤 = hacha."
+  },
+  {
+    "kanji": "輸",
+    "historia": "Este carro transporta productos valiosísimos de exportación, pero no se preocupen, el guardián es “el samurái luna sable”. A 俞 le digo “el samurái luna sable”."
+  },
+  {
+    "kanji": "述",
+    "historia": "El katakana ホ (ho) recibió su misión y, sin mencionar nada, se puso su gorro y salió en camino, lleno de determinación. ⻌ = camino."
+  },
+  {
+    "kanji": "迷",
+    "historia": "Hansel no quería perderse en el camino a casa, así que dejó caer pequeños granitos de arroz a lo largo del camino. ⻌ = radical de camino."
+  },
+  {
+    "kanji": "退",
+    "historia": "¡El general dice que debemos retirarnos hacia el noreste! 艮 = noreste (zodiaco chino), radical de bueno."
+  },
+  {
+    "kanji": "逆",
+    "historia": "La cabra de montaña tiene tanta habilidad que puede caminar sobre caminos invertidos, como el techo de una cueva. A los trazos 1 a 6 le diremos cabra de montaña."
+  },
+  {
+    "kanji": "造",
+    "historia": "En el camino tuve una revelación: debo crear un arca gigante y meter dos de cada animal. 告 = revelación."
+  },
+  {
+    "kanji": "過",
+    "historia": "Me excedí con mi velocidad al caminar y caí en el camino; por eso ahora tengo la boca torcida. 咼 = boca torcida, maldad, deshonesto."
+  },
+  {
+    "kanji": "適",
+    "historia": "No me parece adecuado que vayas pateando la urna con las cenizas de los ancestros por el camino. A los trazos 1 a 11 les diremos “urna con las cenizas de los ancestros”."
+  },
+  {
+    "kanji": "酸",
+    "historia": "Para vender alcohol con sabor a limón ácido, se requiere una licencia, pero hay que ir corriendo a sacarla porque el trámite es largo. 酉 = radical de sake. 允 = licencia. A夂 le diremos “piernas corriendo”."
+  },
+  {
+    "kanji": "鉱",
+    "historia": "Es mejor extraer los minerales de cuevas espaciosas, ya que así entra más aire. 金 = oro, 広 = amplio, espacioso."
+  },
+  {
+    "kanji": "銅",
+    "historia": "El oro, al igual que el cobre, es un metal valioso. 同 = mismo, igual."
+  },
+  {
+    "kanji": "銭",
+    "historia": "Este andamio es carísimo porque está hecho con monedas de oro. Es muy bonito, pero poco resistente. A la parte derecha le diremos “andamio”."
+  },
+  {
+    "kanji": "防",
+    "historia": "En el Pináculo han logrado prevenir todas las enfermedades; realmente van en la dirección del progreso médico. A 阝 le diremos “el Pináculo”, una ciudad altamente avanzada. 方 = dirección."
+  },
+  {
+    "kanji": "限",
+    "historia": "El avance del Pináculo no tiene límites; incluso está más desarrollada que el noreste chino. 艮 = noreste (zodiaco chino)."
+  },
+  {
+    "kanji": "険",
+    "historia": "El Pináculo está en una montaña muy escarpada. Como es tan peligrosa, es bueno ir con una guía de sombrero chino y pechos grandes."
+  },
+  {
+    "kanji": "際",
+    "historia": "En el Pináculo, siempre que hay una ocasión especial, la gente realiza rituales. 祭 = ritual."
+  },
+  {
+    "kanji": "雑",
+    "historia": "Sobre el árbol hay 9 pavos gigantes, pero de colores misceláneos (variados). 隹 es el antiguo radical de ave, pero le diremos pavo."
+  },
+  {
+    "kanji": "非",
+    "historia": "Es in-creíble que este kanji no signifique “cepillos de dientes”. Parecen dos cabezas de cepillos de dientes espalda contra espalda."
+  },
+  {
+    "kanji": "預",
+    "historia": "De antemano, te encomiendo esta página con la clave secreta de la caja fuerte. 予 = de antemano. 頁 = página."
+  },
+  {
+    "kanji": "領",
+    "historia": "Las órdenes del general llegaron escritas en una hoja de papel. Dice: ¡Protejan el territorio! 令 = órdenes."
+  },
+  {
+    "kanji": "額",
+    "historia": "En este hotel, los invitados no firman, sino que se ponen tinta en la frente y luego la estampan en una página de papel. 客 = invitado, huésped."
+  },
+  {
+    "kanji": "飼",
+    "historia": "Sabemos que el león está bien domesticado porque no se ha comido al director del circo. 飠 = radical de comer o comida. 司 = director."
+  },
+  {
+    "kanji": "刊",
+    "historia": "La publicación de un libro involucra una parte de secado 干 y otra parte de cortado 刂. 刂 = radical de cuchillo o espada."
+  },
+  {
+    "kanji": "判",
+    "historia": "Durante el juicio el rey Salomón dijo: Dividan al bebé a la mitad 半 con una espada 刂."
+  },
+  {
+    "kanji": "制",
+    "historia": "La vaca 牛 lleva cinturón y espada porque sigue el sistema de honor de los samuráis, llamado Bushidō."
+  },
+  {
+    "kanji": "券",
+    "historia": "A los trazos 1 a 6 les diremos “cuarta parte” porque parece mitad 半 pero con otra patica. En la entrada del avión el agente parte el boleto en 4 usando su espada 刀."
+  },
+  {
+    "kanji": "則",
+    "historia": "El kanji de molusco 貝 a veces toma el significado de dinero en kanjis compuestos. En este ciudad hay reglas para el uso del dinero 貝 y de las espadas 刂."
+  },
+  {
+    "kanji": "効",
+    "historia": "Al mezclar 交 nuestras fuerzas 力 el efecto será que lograremos tener un gran poder, le dijo Nail a Pikkoro en Namekku-sei."
+  },
+  {
+    "kanji": "務",
+    "historia": "De antemano 予 te digo que el maestro de obra 攵 se toma muy en serio su deber, por eso usa toda tu fuerza 力 en la obra."
+  },
+  {
+    "kanji": "勢",
+    "historia": "Es como calor 熱, pero con fuerza 力 en vez de fuego 灬. El guerrero caliente convirtió el fuego de su alma en fuerza, y así obtuvo el poder para influir sobre los demás."
+  },
+  {
+    "kanji": "厚",
+    "historia": "El niño se refugió bajo un acantilado de paredes gruesas porque sentía que el sol estaba justo encima de él."
+  },
+  {
+    "kanji": "句",
+    "historia": "El enamorado dice este tipo de frases cursis: Envuelve tu boca para mí en papel de regalo. 勹 = radical de envolver."
+  },
+  {
+    "kanji": "可",
+    "historia": "Este kanji se puede confundir con las letras oT."
+  },
+  {
+    "kanji": "営",
+    "historia": "Al rey siempre le salen chispas de la corona 冖, y sudor del espinazo 呂, cuando gestiona los negocios del reino."
+  },
+  {
+    "kanji": "因",
+    "historia": "La causa de la indigestión fue que te llevaste pedazos de comida muy grandes 大 a la boca 口."
+  },
+  {
+    "kanji": "団",
+    "historia": "Para entrar a este grupo primero tenemos que medir 寸 el tamaño de tu boca 口."
+  },
+  {
+    "kanji": "圧",
+    "historia": "Es natural que la tierra 土 debajo del acantilado 厂 esté sometida a una fuerte presión."
+  },
+  {
+    "kanji": "在",
+    "historia": "A los trazos 1 a 3 les digo: entrada a la mina. Existe una entrada secreta a la mina bajo este montón de tierra."
+  },
+  {
+    "kanji": "均",
+    "historia": "Lo de la derecha parece una perrita dándole leche a sus dos cachorros. En esta tierra 土 las perritas tienen en promedio dos cachorros."
+  },
+  {
+    "kanji": "基",
+    "historia": "A esto 其 le digo tablero de ajedrez. Mi profesor de ajedrez me dijo que si quiero aprender los fundamentos del ajedrez debo cargar tierra en los bolsillos."
+  },
+  {
+    "kanji": "報",
+    "historia": "A lo de la derecha le digo vestidor. El informe del tiempo dice: Hoy habrá una lluvia de felicidad 幸 dentro de los vestidores."
+  },
+  {
+    "kanji": "境",
+    "historia": "Es como espejo 鏡 pero con tierra 土 en vez de oro 金. En la frontera de este país hay espejos de oro enterrados bajo la tierra."
+  },
+  {
+    "kanji": "墓",
+    "historia": "Las flores 艹 le preguntaron al sol 日: ¿De quién es esa gran 大 tumba en la tierra 土?"
+  },
+  {
+    "kanji": "増",
+    "historia": "El precio de la tierra 土 se ha incrementado, anteriormente 曽 era más barata. 曽 = anteriormente."
+  },
+  {
+    "kanji": "夢",
+    "historia": "A ⺲ le digo gigante o cíclope. Soñé que el gigante ⺲ usaba flores 艹 en la cabeza porque perdió su corona 冖 la tarde 夕 de ayer."
+  },
+  {
+    "kanji": "妻",
+    "historia": "A los trazos 2 a 4 les digo tenedor. Mi esposa es una mujer 女 que usa 10 十 tenedores para arreglarse el pelo."
+  },
+  {
+    "kanji": "婦",
+    "historia": "La dama fue a comprar 3 coronas 冖 y una toalla 巾."
+  },
+  {
+    "kanji": "容",
+    "historia": "No puedes contener un valle 谷 entero bajo un techo 宀."
+  },
+  {
+    "kanji": "寄",
+    "historia": "Imaginemos que lo de abajo es la ventana de una casita. Esta casa es muy extraña 奇, tiene un aviso en la ventana que dice “acércate”."
+  },
+  {
+    "kanji": "富",
+    "historia": "¿Qué es la riqueza? Es tener un techo 宀, una 一 boca 口, y un campo de arroz 田que te alimenta."
+  },
+  {
+    "kanji": "導",
+    "historia": "El guía nos dice que es mejor no ir por ese camino 道, porque la medida 寸 de su ancho es de solamente 1 cm."
+  },
+  {
+    "kanji": "居",
+    "historia": "La bandera 尸 es vieja 古, pero eso no importa, porque es la bandera del lugar donde me gusta residir."
+  }
+]
