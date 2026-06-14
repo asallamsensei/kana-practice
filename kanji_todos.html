@@ -366,8 +366,8 @@
 
       <div class="opbtns">
         <button id="btnA" class="btn opcion-btn" type="button" onclick="responder('a')">a</button>
-        <button id="btnA" class="btn opcion-btn" type="button" onclick="responder('b')">b</button>
-        <button id="btnA" class="btn opcion-btn" type="button" onclick="responder('c')">c</button>
+        <button id="btnB" class="btn opcion-btn" type="button" onclick="responder('b')">b</button>
+        <button id="btnC" class="btn opcion-btn" type="button" onclick="responder('c')">c</button>
       </div>
 
       <div id="resultado"></div>
@@ -973,57 +973,47 @@ function verificar(input){
 ========================================================= */
 cargarStats();
 
-fetch("data/historias.json")
-  .then(res => res.json())
-  .then(data => {
-    historiasPorKanji = {};
 
-    data.forEach(x => {
-      if(x.kanji && x.historia){
-        historiasPorKanji[String(x.kanji).trim()] = String(x.historia).trim();
-      }
-    });
-  })
-  .catch(err => {
-    console.warn("No se pudo cargar historias.json", err);
-  });
   
-fetch("data/maestrodeloskanji/kanji_todos.json")
-  .then(res => res.json())
-  .then(data => {
-    // Normaliza y filtra entradas inválidas
-    listaCompleta = (Array.isArray(data) ? data : [])
-      .filter(x =>
-        x &&
-        typeof x.kanji === "string" &&
-        x.kanji.trim() !== "" &&
-    
-        typeof x.significado_es === "string" &&
-        x.significado_es.trim() !== "" &&
-    
-        (typeof x.grado === "number" || typeof x.grado === "string")
-      )
-      .map(x => ({
-        kanji: String(x.kanji).trim(),
-        significado: String(x.significado_es).trim(),
-        grado: Number(x.grado)
-      }));
+Promise.all([
+  fetch("data/historias.json").then(res => res.json()),
+  fetch("data/maestrodeloskanji/kanji_todos.json").then(res => res.json())
+])
+.then(([historiasData, kanjiData]) => {
+  historiasPorKanji = {};
 
-    construirChipsGrados();
-    aplicarFiltro();
-
-    // defaults UI
-    setPoolScope("seleccion");
-    setModo("mix");
-
-    siguiente();
-  })
-  .catch(err => {
-    $("resultado").className = "incorrecto";
-    $("resultado").innerText =
-      "No se pudo cargar data/2136.json (revisa ruta y servidor).";
-    console.error(err);
+  historiasData.forEach(x => {
+    if(x.kanji && x.historia){
+      historiasPorKanji[String(x.kanji).trim()] = String(x.historia).trim();
+    }
   });
+
+  listaCompleta = (Array.isArray(kanjiData) ? kanjiData : [])
+    .filter(x =>
+      x &&
+      typeof x.kanji === "string" &&
+      x.kanji.trim() !== "" &&
+      typeof x.significado_es === "string" &&
+      x.significado_es.trim() !== "" &&
+      (typeof x.grado === "number" || typeof x.grado === "string")
+    )
+    .map(x => ({
+      kanji: String(x.kanji).trim(),
+      significado: String(x.significado_es).trim(),
+      grado: Number(x.grado)
+    }));
+
+  construirChipsGrados();
+  aplicarFiltro();
+
+  setPoolScope("seleccion");
+  setModo("mix");
+})
+.catch(err => {
+  $("resultado").className = "incorrecto";
+  $("resultado").innerText = "No se pudo cargar algún JSON. Revisa rutas y servidor.";
+  console.error(err);
+});
 </script>
 
 </body>
