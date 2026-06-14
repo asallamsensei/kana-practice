@@ -1097,11 +1097,12 @@ btnReplay?.classList.remove("big-sound");
 
 // dictado: NO mostrar 🔊 arriba, solo el botón grande
 if(actual.tipo === "dict_es" || actual.tipo === "dict_jp"){
-  $("promptJP").textContent = "";          // o "DICTADO" si quieres
+  $("promptJP").style.display = "none";
   btnReplay?.classList.add("big-sound");
 }
 // kanji: badge + kanji
 else if(actual.tipo === "kanji_mc"){
+  $("promptJP").style.display = "";
   $("promptJP").innerHTML = `
     <div class="tag-kanji">(KANJI)</div>
     <div class="kanji-prompt">${actual.prompt}</div>
@@ -1109,23 +1110,24 @@ else if(actual.tipo === "kanji_mc"){
 }
 // resto: prompt normal
 else{
+  $("promptJP").style.display = "";
   $("promptJP").textContent = actual.prompt;
 }
 
-  $("opciones").innerHTML =
-    `a) ${actual.opciones[0]}<br>b) ${actual.opciones[1]}<br>c) ${actual.opciones[2]}`;
+$("opciones").innerHTML =
+  `a) ${actual.opciones[0]}<br>b) ${actual.opciones[1]}<br>c) ${actual.opciones[2]}`;
 
-  limpiarResultado();
-  yaValidado = false;
+limpiarResultado();
+yaValidado = false;
 
-  // dictado: reproduce apenas sale
-  if(actual.tipo === "dict_es" || actual.tipo === "dict_jp"){
-    audioHabilitado = true;
-    if(actual.extra?.romaji) playAudioForRomaji(actual.extra.romaji);
-  }
+// dictado: reproduce apenas sale
+if(actual.tipo === "dict_es" || actual.tipo === "dict_jp"){
+  audioHabilitado = true;
+  if(actual.extra?.romaji) playAudioForRomaji(actual.extra.romaji);
+}
 
-  // stats por (bloque + modo) ya queda bien
-  cargarStatsActual();
+// stats por (bloque + modo) ya queda bien
+cargarStatsActual();
 }
 
 function responder(letra){
