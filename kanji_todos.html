@@ -345,6 +345,13 @@
 
       <div id="resultado"></div>
 
+      <div class="row" style="margin-top: 12px;">
+        <button class="btn btn-ghost" type="button" onclick="mostrarHistoria()">Mostrar historia</button>
+        <button class="btn" type="button" onclick="siguiente()">Siguiente</button>
+      </div>
+      
+      <div id="historiaBox" class="hint" style="display:none; margin-top:12px; text-align:left;"></div>
+      
       <div class="stats">
         <div>
           Aciertos: <span id="aciertos">0</span> —
@@ -358,16 +365,9 @@
       </div>
 
       <div class="row" style="margin-top: 14px;">
-        <button class="btn" type="button" onclick="siguiente()">Siguiente</button>
         <button class="btn btn-ghost" type="button" onclick="resetStats()">Reset stats</button>
       </div>
 
-      <div class="sep"></div>
-
-      <div class="hint" id="ayuda">
-        Usa <code class="kbd">A</code>, <code class="kbd">B</code> o <code class="kbd">C</code>.
-        <code class="kbd">Enter</code> pasa a la siguiente.
-      </div>
     </div>
 
     <!-- Panel derecho: controles -->
@@ -412,10 +412,7 @@
       <div class="sep"></div>
       
       <div class="miniStatus" id="miniStatus">
-        <div id="pillGrados">Grados activos: —</div>
         <div id="pillPool">Pool: —</div>
-        <div id="pillModo">Modo: —</div>
-        <div id="pillScope">Distractores: —</div>
       </div>
 
     </div>
@@ -429,7 +426,8 @@
 ========================================================= */
 let listaCompleta = [];     // [{kanji, significado, grado}]
 let listaFiltrada = [];     // filtrado por grados seleccionados
-
+let historiasPorKanji = {};
+  
 let actual = null;          // { tipo, prompt, opciones, correcta, respuesta, extra }
 let yaValidado = false;
 
@@ -539,10 +537,7 @@ function refrescarPills(){
     ? "Todos"
     : [...gradosSeleccionados].sort((a,b)=>a-b).join(", ");
 
-  $("pillGrados").innerText = `Grados activos: ${gradosTxt}`;
   $("pillPool").innerText = `Pool: ${listaFiltrada.length}`;
-  $("pillModo").innerText = `Modo: ${modoActual === "kanji_es" ? "Kanji → ES" : (modoActual === "es_kanji" ? "ES → Kanji" : "Mix")}`;
-  $("pillScope").innerText = `Distractores: ${poolScope === "global" ? "Global" : "Solo selección"}`;
 }
 
 /* Evita teclado móvil por defecto; se activa si el usuario interactúa con input o teclado */
@@ -793,6 +788,9 @@ function preguntaESKanji(){
 ========================================================= */
 function siguiente(){
 
+$("historiaBox").style.display = "none";
+$("historiaBox").innerText = "";
+  
   // 🔥 SI NO HA RESPONDIDO → MARCAR ERROR
   if(!yaValidado && actual){
     verificar(null);
@@ -855,6 +853,24 @@ function siguiente(){
   refrescarPills();
 }
 
+function mostrarHistoria(){
+  if(!actual || !actual.extra || !actual.extra.kanji) return;
+
+  const kanji = actual.extra.kanji;
+  const historia = historiasPorKanji[kanji];
+
+  const box = $("historiaBox");
+
+  if(!historia){
+    box.style.display = "block";
+    box.innerText = "No hay historia para este kanji.";
+    return;
+  }
+
+  box.style.display = "block";
+  box.innerText = historia;
+}
+  
 function responder(letra){
   if(yaValidado) return;
   verificar(letra);
@@ -930,6 +946,21 @@ function verificar(input){
 ========================================================= */
 cargarStats();
 
+fetch("data/historias.json")
+  .then(res => res.json())
+  .then(data => {
+    historiasPorKanji = {};
+
+    data.forEach(x => {
+      if(x.kanji && x.historia){
+        historiasPorKanji[String(x.kanji).trim()] = String(x.historia).trim();
+      }
+    });
+  })
+  .catch(err => {
+    console.warn("No se pudo cargar historias.json", err);
+  });
+  
 fetch("data/maestrodeloskanji/kanji_todos.json")
   .then(res => res.json())
   .then(data => {
