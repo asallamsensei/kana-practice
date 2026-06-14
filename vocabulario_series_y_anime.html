@@ -508,9 +508,15 @@ body.modo-es-jp #opciones{
 
       <div class="sep"></div>
 
-      <div class="hint">
-        A / B / C = responder · Enter = siguiente
+      <div class="row" style="justify-content:flex-start;">
+        <span class="pill">Audio</span>
       </div>
+      
+      <div class="row" style="justify-content:flex-start; margin-top: 8px;">
+        <button class="btn btn-mode activo" id="audio-ia" onclick="setAudioMode('ia')">🎤 Audios IA</button>
+        <button class="btn btn-mode" id="audio-tts" onclick="setAudioMode('tts')">🧠 Voz Sintetizada</button>
+      </div>
+      
     </div>
   </div>
 
@@ -534,6 +540,15 @@ let bloquesActivos = new Set([0]); // por defecto, el primero activo
 // Pool de distractores: por defecto "seleccion"
 let poolScope = "seleccion"; // "seleccion" | "global"
 
+let modoAudio = "ia";
+
+function setAudioMode(modo){
+  modoAudio = modo;
+
+  $("audio-ia")?.classList.toggle("activo", modo === "ia");
+  $("audio-tts")?.classList.toggle("activo", modo === "tts");
+}
+  
 /* ===============================
    AUDIO (ROMAJI EXACTO)
    Regla: archivo = romaji EXACTO + ".mp3"
@@ -543,6 +558,64 @@ const AUDIO_DIR = "data/audios/series/";
 let audio = new Audio();
 audio.preload = "auto";
 
+const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+function playBeep(freq, duration){
+  try{
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+
+    osc.connect(gain);
+    gain.connect(audioCtx.destination);
+
+    osc.frequency.value = freq;
+    osc.type = "sine";
+    gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
+
+    osc.start();
+    osc.stop(audioCtx.currentTime + duration);
+  }catch{}
+}
+
+function sonidoCorrecto(){
+  playBeep(700, 0.08);
+  setTimeout(() => playBeep(900, 0.12), 80);
+}
+
+function sonidoIncorrecto(){
+  playBeep(250, 0.2);
+}
+
+let voces = [];
+let vozJa = null;
+
+function cargarVoces(){
+  voces = window.speechSynthesis ? speechSynthesis.getVoices() : [];
+  vozJa = voces.find(v => String(v.lang).toLowerCase() === "ja-jp")
+       || voces.find(v => String(v.lang).toLowerCase().startsWith("ja"))
+       || null;
+}
+
+function hablarSintesis(texto){
+  const t = String(texto || "").trim();
+  if(!t || !window.speechSynthesis) return;
+
+  try{ speechSynthesis.cancel(); }catch{}
+
+  const u = new SpeechSynthesisUtterance(t);
+  u.lang = "ja-JP";
+  if(vozJa) u.voice = vozJa;
+  u.rate = 0.82;
+  u.pitch = 1;
+
+  speechSynthesis.speak(u);
+}
+
+if(window.speechSynthesis){
+  cargarVoces();
+  speechSynthesis.onvoiceschanged = cargarVoces;
+}
+  
 // autoplay policy: habilitar audio tras primer click/tecla
 let audioHabilitado = false;
 document.addEventListener("pointerdown", () => (audioHabilitado = true), { once:true });
@@ -555,6 +628,11 @@ function audioUrlDesdeRomaji(romaji){
 function playAudioForRomaji(romaji){
   if(!romaji) return;
 
+  if(modoAudio === "tts"){
+    hablarSintesis(actual?.extra?.jp || romaji);
+    return;
+  }
+
   const src = audioUrlDesdeRomaji(romaji);
 
   try{
@@ -562,14 +640,18 @@ function playAudioForRomaji(romaji){
     audio.currentTime = 0;
   }catch(e){}
 
-  audio.onerror = () => {
-    console.warn("[audio] No cargó:", src, "romaji=", romaji);
+  let fallbackLanzado = false;
+
+  const fallback = () => {
+    if(fallbackLanzado) return;
+    fallbackLanzado = true;
+    hablarSintesis(actual?.extra?.jp || romaji);
   };
 
+  audio.onerror = fallback;
   audio.src = src;
-  audio.play().catch(err => {
-    console.warn("[audio] play() falló:", err);
-  });
+
+  audio.play().catch(() => fallback());
 }
   
 /* ===============================
@@ -935,6 +1017,20 @@ function preguntaKanjiMC(b){
    Flujo
 =============================== */
 function siguiente(){
+  if(!yaValidado && actual){
+    sonidoIncorrecto();
+    errores++;
+    racha = 0;
+    pintarStats();
+    guardarStatsActual();
+    yaValidado = true;
+
+    $("resultado").className = "incorrecto";
+    $("resultado").innerText = `Incorrecto ✘\nRespuesta: ${actual.correcta}) ${actual.respuesta}`;
+
+    return;
+  }
+  
   const activos = [...bloquesActivos].filter(i => DATA.bloques[i]);
   if(activos.length === 0){
     $("promptJP").innerText = "Selecciona una canción/serie";
@@ -1045,12 +1141,14 @@ function verificar(letra = ""){
   }
 
   if(input === actual.correcta){
+    sonidoCorrecto();
     res.className = "correcto";
     res.innerText = "Correcto ✔";
     aciertos++;
     racha++;
     if(racha > mejorRacha) mejorRacha = racha;
   }else{
+    sonidoIncorrecto();
     const extra = (actual.extra?.romaji && ["vocab_jp_es","vocab_es_jp","dict_es","dict_jp"].includes(actual.tipo))
       ? `\nRomaji: ${actual.extra.romaji}`
       : "";
