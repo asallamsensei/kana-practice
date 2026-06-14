@@ -738,9 +738,10 @@ function setPoolScope(scope){
   poolScope = scope;
   $("pool-sel")?.classList.toggle("activo", poolScope === "seleccion");
   $("pool-glob")?.classList.toggle("activo", poolScope === "global");
-  yaValidado = false;
-  limpiarResultado();
-  siguiente();
+actual = null;
+yaValidado = true;
+limpiarResultado();
+siguiente();
 }
 
 /* ===============================
@@ -756,9 +757,10 @@ function seleccionarTodo(){
 
   $("btnTodo")?.classList.add("activo");
 
-  yaValidado = false;
-  limpiarResultado();
-  siguiente();
+actual = null;
+yaValidado = true;
+limpiarResultado();
+siguiente();
 }
 
 function seleccionarNinguna(){
@@ -830,10 +832,13 @@ function setModo(modo){
   };
   $(map[modo])?.classList.add("activo");
 
-  yaValidado = false;
-  limpiarResultado();
+actual = null;
+yaValidado = true;
+limpiarResultado();
+siguiente();
+
   cargarStatsActual();
-  siguiente();
+
 }
 
 /* ===============================
@@ -1218,9 +1223,10 @@ fetch("data/anime_vocab.json")
           el.classList.toggle("activo", bloquesActivos.has(idx));
         });
 
-        yaValidado = false;
-        limpiarResultado();
-        siguiente();
+actual = null;
+yaValidado = true;
+limpiarResultado();
+siguiente();
       };
 
       cont.appendChild(chip);
