@@ -627,7 +627,16 @@ h1{
         <button class="btn btn-mode" id="m-dictado" type="button" onclick="toggleDictado()">Dictado</button>
         <button class="btn btn-mode" id="m-mix" type="button" onclick="setModoBase('mix')">Mix</button>
       </div>
-    
+
+<div class="row" style="justify-content:flex-start; margin-top:18px;">
+  <span class="pill">Audio</span>
+</div>
+
+<div class="switch">
+  <button class="btn btn-mode" id="audio-mp3" type="button" onclick="setAudioModo('mp3')">MP3</button>
+  <button class="btn btn-mode" id="audio-tts" type="button" onclick="setAudioModo('tts')">Sintetizador</button>
+</div>
+      
       <div class="row" style="justify-content:flex-start; margin-top:18px;">
         <span class="pill">Bloques</span>
       </div>
@@ -660,6 +669,8 @@ h1{
 const JSON_PATH  = "data/english_vocab.json";
 const AUDIO_BASE = "data/audios/english/";
 
+
+  
 /* ===============================
    CLAVES -> ESTUDIANTES
    (agrega más aquí)
@@ -786,12 +797,35 @@ const letras = ["a","b","c"];
    - usa item.en como "key" de mp3
    - reproduce en dictado y también como apoyo
 =============================== */
+
+function setAudioModo(modo){
+  audioModo = modo;
+
+  $("audio-mp3")?.classList.toggle("activo", audioModo === "mp3");
+  $("audio-tts")?.classList.toggle("activo", audioModo === "tts");
+}
+
+function hablarIngles(texto){
+  if(!audioHabilitado) return;
+  if(!("speechSynthesis" in window)) return;
+
+  speechSynthesis.cancel();
+
+  const voz = new SpeechSynthesisUtterance(texto);
+  voz.lang = "en-US";
+  voz.rate = 0.85;
+  voz.pitch = 1;
+
+  speechSynthesis.speak(voz);
+}
+  
 const audio = new Audio();
 audio.preload = "auto";
 let ultimoAudioKey = "";
 
 // autoplay policy: solo tras interacción
 let audioHabilitado = false;
+let audioModo = "tts"; // "mp3" o "tts"
 document.addEventListener("pointerdown", () => (audioHabilitado = true), { once:true });
 document.addEventListener("keydown",     () => (audioHabilitado = true), { once:true });
 
@@ -803,20 +837,32 @@ function buildExactAudioSrc(key){
 function detenerAudio(){
   try{ audio.pause(); audio.currentTime = 0; }catch{}
 }
+
 async function playAudio(key){
   ultimoAudioKey = String(key || "").trim();
   if(!audioHabilitado) return;
+  if(!ultimoAudioKey) return;
+
+  if(audioModo === "tts"){
+    detenerAudio();
+    hablarIngles(ultimoAudioKey);
+    return;
+  }
 
   const src = buildExactAudioSrc(ultimoAudioKey);
   if(!src) return;
 
   try{
+    speechSynthesis.cancel();
     detenerAudio();
     audio.src = src;
     audio.load();
     await audio.play();
-  }catch{}
+  }catch{
+    hablarIngles(ultimoAudioKey);
+  }
 }
+  
 function reproducirAudioActual(){
   if(ultimoAudioKey) playAudio(ultimoAudioKey);
 }
@@ -1291,10 +1337,12 @@ fetch(JSON_PATH)
     $("btnTodo")?.classList.add("activo");
 
     renderChips();
-
+    
     // defaults
+    setAudioModo(audioModo); // ✅ activa visualmente MP3 o Sintetizador
     setPoolScope("seleccion");
     setModoBase("mix"); // ✅ Mix default
+    
   })
   .catch(err=>{
     console.error(err);
