@@ -304,6 +304,26 @@ h1{
     0 0 20px rgba(125,92,255,.10);
 }
 
+#audio-mp3.activo,
+#audio-tts.activo{
+  background: rgba(34,197,94,.24);
+  border-color: rgba(34,197,94,.70);
+  color: #dcfce7;
+
+  box-shadow:
+    0 0 10px rgba(34,197,94,.55),
+    0 0 24px rgba(34,197,94,.28),
+    inset 0 0 10px rgba(34,197,94,.12);
+}
+
+#audio-mp3:not(.activo),
+#audio-tts:not(.activo){
+  background: rgba(255,255,255,.06);
+  border-color: rgba(255,255,255,.18);
+  color: rgba(255,255,255,.65);
+  box-shadow: none;
+}
+  
 .btn-mode.mix-sombra{
   background: rgba(214,40,40,.08);
 
@@ -801,8 +821,16 @@ const letras = ["a","b","c"];
 function setAudioModo(modo){
   audioModo = modo;
 
-  $("audio-mp3")?.classList.toggle("activo", audioModo === "mp3");
-  $("audio-tts")?.classList.toggle("activo", audioModo === "tts");
+  $("audio-mp3")?.classList.remove("activo");
+  $("audio-tts")?.classList.remove("activo");
+
+  if(audioModo === "mp3"){
+    $("audio-mp3")?.classList.add("activo");
+  }
+
+  if(audioModo === "tts"){
+    $("audio-tts")?.classList.add("activo");
+  }
 
   detenerAudio();
   speechSynthesis.cancel();
