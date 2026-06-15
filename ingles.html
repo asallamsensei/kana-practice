@@ -803,6 +803,9 @@ function setAudioModo(modo){
 
   $("audio-mp3")?.classList.toggle("activo", audioModo === "mp3");
   $("audio-tts")?.classList.toggle("activo", audioModo === "tts");
+
+  detenerAudio();
+  speechSynthesis.cancel();
 }
 
 function hablarIngles(texto){
@@ -825,7 +828,7 @@ let ultimoAudioKey = "";
 
 // autoplay policy: solo tras interacción
 let audioHabilitado = false;
-let audioModo = "tts"; // "mp3" o "tts"
+let audioModo = "mp3"; // "mp3" o "tts"
 document.addEventListener("pointerdown", () => (audioHabilitado = true), { once:true });
 document.addEventListener("keydown",     () => (audioHabilitado = true), { once:true });
 
@@ -843,22 +846,35 @@ async function playAudio(key){
   if(!audioHabilitado) return;
   if(!ultimoAudioKey) return;
 
+  detenerAudio();
+  speechSynthesis.cancel();
+
+  // Si está en Sintetizador, siempre sintetiza
   if(audioModo === "tts"){
-    detenerAudio();
     hablarIngles(ultimoAudioKey);
     return;
   }
 
+  // Si está en MP3, intenta MP3 primero
   const src = buildExactAudioSrc(ultimoAudioKey);
-  if(!src) return;
+  if(!src){
+    hablarIngles(ultimoAudioKey);
+    return;
+  }
 
   try{
-    speechSynthesis.cancel();
-    detenerAudio();
     audio.src = src;
     audio.load();
+
+    await new Promise((resolve, reject)=>{
+      audio.oncanplaythrough = resolve;
+      audio.onerror = reject;
+    });
+
     await audio.play();
+
   }catch{
+    // Si no existe el MP3 o falla, usa sintetizador
     hablarIngles(ultimoAudioKey);
   }
 }
