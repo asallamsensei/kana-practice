@@ -66,6 +66,84 @@
 
         { "en": "good luck", "es": "buena suerte" }
       ]
+    },
+    {
+    "id": "eng_02",
+    "nombre": "Presentaciones personales",
+    "vocabulario": [
+    { "en": "my name is", "es": "mi nombre es" },
+    { "en": "I am", "es": "yo soy, yo estoy" },
+    { "en": "I'm", "es": "contracción de 'I am'" },
+    
+    { "en": "what is your name", "es": "cómo te llamas" },
+    { "en": "what's your name", "es": "cómo te llamas (informal)" },
+    
+    { "en": "nice to meet you", "es": "mucho gusto" },
+    { "en": "where are you from", "es": "de dónde eres" },
+    { "en": "I am from", "es": "soy de" },
+    
+    { "en": "how old are you", "es": "cuántos años tienes" },
+    { "en": "I am ___ years old", "es": "tengo ___ años" },
+    
+    { "en": "what do you do", "es": "a qué te dedicas" },
+    { "en": "I work as", "es": "trabajo como" },
+    { "en": "student", "es": "estudiante" },
+    { "en": "teacher", "es": "profesor" },
+    { "en": "engineer", "es": "ingeniero" },
+    { "en": "developer", "es": "desarrollador" },
+    
+    { "en": "I live in", "es": "vivo en" },
+    { "en": "I speak", "es": "hablo" },
+    
+    { "en": "english", "es": "inglés" },
+    { "en": "spanish", "es": "español" },
+    
+    { "en": "this is my friend", "es": "este es mi amigo" },
+    { "en": "let me introduce myself", "es": "déjame presentarme" },
+    
+    { "en": "I'm happy to meet you", "es": "me alegra conocerte" },
+    { "en": "it's a pleasure to meet you", "es": "es un placer conocerte" }
+    
+    ]
+    },
+    
+    {
+    "id": "eng_03",
+    "nombre": "Cortesía y expresiones básicas",
+    "vocabulario": [
+    { "en": "please", "es": "por favor" },
+    { "en": "thank you", "es": "gracias" },
+    { "en": "thanks", "es": "gracias (informal)" },
+    { "en": "you're welcome", "es": "de nada" },
+    
+    { "en": "excuse me", "es": "disculpa, con permiso" },
+    { "en": "sorry", "es": "lo siento, perdón" },
+    { "en": "no problem", "es": "no hay problema" },
+    
+    { "en": "yes", "es": "sí" },
+    { "en": "no", "es": "no" },
+    { "en": "maybe", "es": "tal vez, quizás" },
+    
+    { "en": "of course", "es": "por supuesto" },
+    { "en": "sure", "es": "claro, seguro" },
+    { "en": "okay", "es": "está bien, ok" },
+    
+    { "en": "I don't understand", "es": "no entiendo" },
+    { "en": "I understand", "es": "entiendo" },
+    
+    { "en": "can you repeat that", "es": "¿puedes repetir eso?" },
+    { "en": "could you help me", "es": "¿podrías ayudarme?" },
+    
+    { "en": "help me, please", "es": "ayúdame, por favor" },
+    { "en": "one moment, please", "es": "un momento, por favor" },
+    { "en": "wait, please", "es": "espera, por favor" },
+    
+    { "en": "that's okay", "es": "está bien, no pasa nada" },
+    { "en": "don't worry", "es": "no te preocupes" },
+    { "en": "it's okay", "es": "está bien" }
+    
+    ]
     }
+    
   ]
 }
