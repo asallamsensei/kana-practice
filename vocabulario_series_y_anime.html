@@ -522,7 +522,8 @@ body.modo-es-jp #opciones{
 
 <script>
 let DATA = { bloques: [] };
-
+let KANJI_MASTER = {};
+  
 let bloqueIdx = 0;
 let modoActual = "mix";
 let yaValidado = false;
@@ -1187,9 +1188,14 @@ function resetStats(){
    (exactamente igual a como viene en el JSON)
 =============================== */
   
-fetch("data/anime_vocab.json")
-  .then(r => r.json())
-  .then(json => {
+  Promise.all([
+    fetch("data/anime_vocab.json").then(r => r.json()),
+    fetch("data/maestrodeloskanji/kanji_todos.json")
+      .then(r => r.ok ? r.json() : [])
+      .catch(() => [])
+  ])
+  .then(([json, kanjiMasterJson]) => {
+    console.log("Kanji maestro cargado:", kanjiMasterJson);
     DATA = (json && json.bloques) ? json : { bloques: [] };
 
     if(DATA.bloques.length === 0){
