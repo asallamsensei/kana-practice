@@ -523,6 +523,19 @@ body.modo-es-jp #opciones{
 <script>
 let DATA = { bloques: [] };
 let KANJI_MASTER = {};
+
+function normalizarKanjiMaster(lista){
+  const mapa = {};
+
+  lista.forEach(item => {
+    const k = item.kanji;
+    if(!k) return;
+
+    mapa[k] = item;
+  });
+
+  return mapa;
+}
   
 let bloqueIdx = 0;
 let modoActual = "mix";
@@ -1195,7 +1208,8 @@ function resetStats(){
       .catch(() => [])
   ])
   .then(([json, kanjiMasterJson]) => {
-    console.log("Kanji maestro cargado:", kanjiMasterJson);
+    KANJI_MASTER = normalizarKanjiMaster(kanjiMasterJson);
+    console.log("Kanji maestro cargado:", KANJI_MASTER);
     DATA = (json && json.bloques) ? json : { bloques: [] };
 
     if(DATA.bloques.length === 0){
