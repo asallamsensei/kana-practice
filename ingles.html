@@ -625,12 +625,20 @@ h1{
           Aciertos: <span id="aciertos">0</span> —
           Errores: <span id="errores">0</span>
         </div>
-      
+
+
+        
         <div style="margin-top:6px;">
           Racha: <span id="racha">0</span> —
           Mejor racha: <span id="mejorRacha">0</span> —
           Precisión: <span id="precision">0%</span>
         </div>
+      </div>
+
+      <div class="actions" style="margin-top:14px;">
+        <button class="btn btn-ghost" type="button" onclick="resetStats()">
+          Reset stats
+        </button>
       </div>
       
     </div>
@@ -969,6 +977,20 @@ function reproducirAudioActual(){
   if(ultimoAudioKey) playAudio(ultimoAudioKey);
 }
 
+
+function resetStats(){
+  aciertos = 0;
+  errores = 0;
+  racha = 0;
+  mejorRacha = 0;
+
+  pintarStats();
+  guardarStats();
+
+  $("resultado").className = "";
+  $("resultado").innerText = "Stats reiniciadas 🔄";
+}
+  
 /* ===============================
    POOLS
 =============================== */
