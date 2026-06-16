@@ -536,6 +536,19 @@ function normalizarKanjiMaster(lista){
 
   return mapa;
 }
+
+function resolverKanji(k){
+  const maestro = KANJI_MASTER[k.kanji];
+
+  if(maestro){
+    return {
+      kanji: k.kanji,
+      significado: maestro.significado || maestro.es || maestro.meaning || k.significado
+    };
+  }
+
+  return k;
+}
   
 let bloqueIdx = 0;
 let modoActual = "mix";
@@ -1010,13 +1023,21 @@ function preguntaKanjiMC(b){
   const poolLocal = b.kanji || [];
   if(poolLocal.length < 3) return null;
 
-  const k = pick(poolLocal);
+  const k = resolverKanji(pick(poolLocal));
   const correct = k.significado;
 
-  const poolOpciones = getKanjiPool(poolScope);
-  const basePool = (poolOpciones.length >= 3) ? poolOpciones : poolLocal;
+  const poolOpciones = getKanjiPool(poolScope).map(resolverKanji);
+  const basePool = (poolOpciones.length >= 3)
+    ? poolOpciones
+    : poolLocal.map(resolverKanji);
 
-  const opciones = build3Options(basePool, correct, x => x.significado);
+  const opciones = build3Options(
+    basePool,
+    correct,
+    x => x.significado,
+    x => x.kanji !== k.kanji
+  );
+
   const letras = ["a","b","c"];
   const correcta = letras[opciones.indexOf(correct)];
 
