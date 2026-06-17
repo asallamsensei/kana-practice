@@ -961,7 +961,6 @@ function verificar(input){
   if(!["a","b","c"].includes(input)){
     res.innerHTML =
     `<div class="incorrecto">Incorrecto ✘</div>
-    Respuesta: ${actual.correcta}) ${actual.respuesta}<br>
     Kun: ${getKunyomi(actual.extra)}<br>
     On: ${getOnyomi(actual.extra)}`;
 
@@ -1002,7 +1001,6 @@ function verificar(input){
   }else{
     res.innerHTML =
     `<div class="incorrecto">Incorrecto ✘ (era ${actual.correcta})</div>
-    Respuesta: ${actual.correcta}) ${actual.respuesta}<br>
     Kun: ${getKunyomi(actual.extra)}<br>
     On: ${getOnyomi(actual.extra)}`;
     errores++;
