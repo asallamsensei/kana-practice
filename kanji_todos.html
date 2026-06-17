@@ -572,6 +572,27 @@ function sonidoIncorrecto(){
 ========================================================= */
 function $(id){ return document.getElementById(id); }
 
+function normalizeText(s){
+  return String(s || "").trim();
+}
+
+function parseLecturas(raw){
+  const txt = normalizeText(raw);
+  if(!txt) return [];
+  return txt
+    .split(/[、,\/・\s]+/g)
+    .map(x => x.trim())
+    .filter(Boolean);
+}
+
+function getKunyomi(item){
+  return parseLecturas(item.kunyomi).slice(0, 2).join(", ");
+}
+
+function getOnyomi(item){
+  return parseLecturas(item.onyomi).slice(0, 2).join(", ");
+}
+  
 function limpiarResultado(){
   const r = $("resultado");
   r.innerText = "";
@@ -935,7 +956,12 @@ function verificar(input){
 
   if(!["a","b","c"].includes(input)){
     res.className = "incorrecto";
-    res.innerText = `Incorrecto ✘\nRespuesta: ${actual.correcta}) ${actual.respuesta}`;
+    res.innerText =
+    `Incorrecto ✘
+    Respuesta: ${actual.correcta}) ${actual.respuesta}
+    
+    Kun: ${getKunyomi(actual.extra)}
+    On: ${getOnyomi(actual.extra)}`;
 
     errores++;
     racha = 0;
@@ -962,7 +988,11 @@ function verificar(input){
 
   if(input === actual.correcta){
     res.className = "correcto";
-    res.innerText = "Correcto ✔";
+    res.innerText =
+    `Correcto ✔
+    
+    Kun: ${getKunyomi(actual.extra)}
+    On: ${getOnyomi(actual.extra)}`;
     aciertos++;
     racha++;
     if(racha > mejorRacha) mejorRacha = racha;
@@ -971,7 +1001,12 @@ function verificar(input){
 
   }else{
     res.className = "incorrecto";
-    res.innerText = `Incorrecto ✘ (era ${actual.correcta})\nRespuesta: ${actual.correcta}) ${actual.respuesta}`;
+    res.innerText =
+    `Incorrecto ✘ (era ${actual.correcta})
+    Respuesta: ${actual.correcta}) ${actual.respuesta}
+    
+    Kun: ${getKunyomi(actual.extra)}
+    On: ${getOnyomi(actual.extra)}`;
     errores++;
     racha = 0;
 
@@ -1026,6 +1061,8 @@ Promise.all([
     .map(x => ({
       kanji: String(x.kanji).trim(),
       significado: String(x.significado_es).trim(),
+      kunyomi: normalizeText(x.kunyomi),
+      onyomi: normalizeText(x.onyomi),
       grado: Number(x.grado)
     }));
 
