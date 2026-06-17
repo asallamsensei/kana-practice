@@ -973,9 +973,9 @@ function verificar(letraForzada){
     sonidoIncorrecto();
     res.className = "incorrecto";
   
-    res.innerText = esSaltado
-      ? `Saltado ✘, era ${correctaLetra}`
-      : `Incorrecto ✘, era ${correctaLetra}`;
+    res.innerHTML = esSaltado
+      ? `Saltado ✘<span style="color: white;">, era ${correctaLetra}</span>`
+      : `Incorrecto ✘<span style="color: white;">, era ${correctaLetra}</span>`;
       info.innerText = `${jp} ★ ${romaji} ★ ${itemActualCorrecto.significado}`;
     errores++;
     racha = 0;
