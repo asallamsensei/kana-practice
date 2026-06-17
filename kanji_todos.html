@@ -31,7 +31,6 @@
                 radial-gradient(900px 600px at 30% 90%, rgba(239,68,68,.18), transparent 55%),
                 var(--bg);
     color: var(--text);
-    min-height:100vh;
     display:flex;
     justify-content:center;
     padding:28px 14px 70px;
@@ -183,7 +182,6 @@
 
 .opcion-btn{
   min-width: 110px;
-  min-height: 62px;
   padding: 12px 14px;
   border-radius: 16px;
 
@@ -247,7 +245,7 @@
     cursor:pointer;
     user-select:none;
     font-size: 13px;
-    font-weight: 800;
+    font-weight: 700;
     transition:.12s;
   }
   .chip:hover{ transform: translateY(-1px); }
@@ -327,15 +325,22 @@
 #resultado{
   margin-top: 12px;
   font-size: 20px;
-  min-height: 32px;
-  text-align:center;
-  font-weight: 800;
-  white-space: pre-line;
+  text-align: center;
   color: white;
 }
 
-  .correcto{ color: var(--accent2); }
-  .incorrecto{ color: var(--danger); }
+.correcto,
+.incorrecto{
+  font-weight: 700;
+}
+
+.correcto{
+  color: var(--accent2);
+}
+
+.incorrecto{
+  color: var(--danger);
+}
 
   .stats{
     margin-top: 12px;
@@ -713,7 +718,6 @@ function seleccionarNinguna(){
   // Si queda vacío, mostramos mensaje (no forzamos a todos aquí para que el usuario lo note)
   $("kanji").innerText = "—";
   $("opciones").innerHTML = "";
-  $("resultado").className = "incorrecto";
   $("resultado").innerText = "Activa al menos un grado.";
   refrescarPills();
 }
@@ -798,7 +802,6 @@ function aplicarFiltro(){
   refrescarPills();
 
   if(listaFiltrada.length < 3){
-    $("resultado").className = "incorrecto";
     $("resultado").innerText = "Pool muy pequeño: activa más grados (mínimo 3 kanji).";
   }
 }
@@ -895,7 +898,6 @@ $("historiaBox").innerText = "";
   if(!q){
     $("kanji").innerText = "—";
     $("opciones").innerHTML = "";
-    $("resultado").className = "incorrecto";
     $("resultado").innerText = "No se pudo generar pregunta (revisa pool).";
     return;
   }
@@ -957,10 +959,10 @@ function verificar(input){
 
   if(!["a","b","c"].includes(input)){
     res.innerHTML =
-    `<span class="incorrecto">Incorrecto ✘</span><br>
-    <span>Respuesta: ${actual.correcta}) ${actual.respuesta}</span><br><br>
-    <span>Kun: ${getKunyomi(actual.extra)}</span><br>
-    <span>On: ${getOnyomi(actual.extra)}</span>`;
+    `<div class="incorrecto">Incorrecto ✘</div>
+    Respuesta: ${actual.correcta}) ${actual.respuesta}<br>
+    Kun: ${getKunyomi(actual.extra)}<br>
+    On: ${getOnyomi(actual.extra)}`;
 
     errores++;
     racha = 0;
@@ -986,11 +988,10 @@ function verificar(input){
   }
 
   if(input === actual.correcta){
-    res.className = "correcto";
     res.innerHTML =
-    `<span class="correcto">Correcto ✔</span><br><br>
-    <span>Kun: ${getKunyomi(actual.extra)}</span><br>
-    <span>On: ${getOnyomi(actual.extra)}</span>`;
+    `<div class="correcto">Correcto ✔</div>
+    Kun: ${getKunyomi(actual.extra)}<br>
+    On: ${getOnyomi(actual.extra)}`;
     aciertos++;
     racha++;
     if(racha > mejorRacha) mejorRacha = racha;
@@ -998,12 +999,11 @@ function verificar(input){
     sonidoCorrecto();
 
   }else{
-    res.className = "incorrecto";
     res.innerHTML =
-    `<span class="incorrecto">Incorrecto ✘ (era ${actual.correcta})</span><br>
-    <span>Respuesta: ${actual.correcta}) ${actual.respuesta}</span><br><br>
-    <span>Kun: ${getKunyomi(actual.extra)}</span><br>
-    <span>On: ${getOnyomi(actual.extra)}</span>`;
+    `<div class="incorrecto">Incorrecto ✘ (era ${actual.correcta})</div>
+    Respuesta: ${actual.correcta}) ${actual.respuesta}<br>
+    Kun: ${getKunyomi(actual.extra)}<br>
+    On: ${getOnyomi(actual.extra)}`;
     errores++;
     racha = 0;
 
@@ -1068,7 +1068,6 @@ Promise.all([
   setModo("mix");
 })
 .catch(err => {
-  $("resultado").className = "incorrecto";
   $("resultado").innerText = "No se pudo cargar algún JSON. Revisa rutas y servidor.";
   console.error(err);
 });
