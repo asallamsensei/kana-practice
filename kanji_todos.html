@@ -324,14 +324,15 @@
   box-shadow: 0 0 10px rgba(239,68,68,.22);
 }
   
-  #resultado{
-    margin-top: 12px;
-    font-size: 20px;
-    min-height: 32px;
-    text-align:center;
-    font-weight: 800;
-    white-space: pre-line;
-  }
+#resultado{
+  margin-top: 12px;
+  font-size: 20px;
+  min-height: 32px;
+  text-align:center;
+  font-weight: 800;
+  white-space: pre-line;
+  color: white;
+}
 
   .correcto{ color: var(--accent2); }
   .incorrecto{ color: var(--danger); }
@@ -595,7 +596,7 @@ function getOnyomi(item){
   
 function limpiarResultado(){
   const r = $("resultado");
-  r.innerText = "";
+  r.innerHTML = "";
   r.className = "";
 
   ["btnA","btnB","btnC"].forEach(id => {
@@ -955,13 +956,11 @@ function verificar(input){
   const res = $("resultado");
 
   if(!["a","b","c"].includes(input)){
-    res.className = "incorrecto";
-    res.innerText =
-    `Incorrecto ✘
-    Respuesta: ${actual.correcta}) ${actual.respuesta}
-    
-    Kun: ${getKunyomi(actual.extra)}
-    On: ${getOnyomi(actual.extra)}`;
+    res.innerHTML =
+    `<span class="incorrecto">Incorrecto ✘</span><br>
+    <span>Respuesta: ${actual.correcta}) ${actual.respuesta}</span><br><br>
+    <span>Kun: ${getKunyomi(actual.extra)}</span><br>
+    <span>On: ${getOnyomi(actual.extra)}</span>`;
 
     errores++;
     racha = 0;
@@ -988,11 +987,10 @@ function verificar(input){
 
   if(input === actual.correcta){
     res.className = "correcto";
-    res.innerText =
-    `Correcto ✔
-    
-    Kun: ${getKunyomi(actual.extra)}
-    On: ${getOnyomi(actual.extra)}`;
+    res.innerHTML =
+    `<span class="correcto">Correcto ✔</span><br><br>
+    <span>Kun: ${getKunyomi(actual.extra)}</span><br>
+    <span>On: ${getOnyomi(actual.extra)}</span>`;
     aciertos++;
     racha++;
     if(racha > mejorRacha) mejorRacha = racha;
@@ -1001,12 +999,11 @@ function verificar(input){
 
   }else{
     res.className = "incorrecto";
-    res.innerText =
-    `Incorrecto ✘ (era ${actual.correcta})
-    Respuesta: ${actual.correcta}) ${actual.respuesta}
-    
-    Kun: ${getKunyomi(actual.extra)}
-    On: ${getOnyomi(actual.extra)}`;
+    res.innerHTML =
+    `<span class="incorrecto">Incorrecto ✘ (era ${actual.correcta})</span><br>
+    <span>Respuesta: ${actual.correcta}) ${actual.respuesta}</span><br><br>
+    <span>Kun: ${getKunyomi(actual.extra)}</span><br>
+    <span>On: ${getOnyomi(actual.extra)}</span>`;
     errores++;
     racha = 0;
 
