@@ -483,6 +483,17 @@
       <button class="btn btn-mode" id="m-es-jp" type="button" onclick="clickEsJp()">ES → JP</button>
       <button class="btn btn-mode" id="m-dictado" type="button" onclick="setModo('dictado')">Dictado</button>
       <button class="btn btn-mode" id="m-mixto" type="button" onclick="setModo('mixto')">Mix</button>
+      
+      <div style="grid-column:1 / -1; height:1px; background:rgba(255,255,255,.12); margin:8px 0;"></div>
+      
+      <button id="audio-ia" class="btn btn-mode activo" type="button" onclick="setAudioMode('ia')">
+        🎤 Audios IA
+      </button>
+      
+      <button id="audio-tts" class="btn btn-mode" type="button" onclick="setAudioMode('tts')">
+        🧠 Sintetizador
+      </button>
+      
     </div>
   </aside>
 
@@ -494,7 +505,7 @@
 <script>
 let lista = [];
 let actual = 0;
-
+let primeraRonda = true;
 let aciertos = 0;
 let errores = 0;
 let racha = 0;
@@ -581,6 +592,45 @@ function sonidoIncorrecto(){
 audio.preload = "auto";
 let ultimoAudioKey = "";                // romaji actual tal cual del JSON
 
+let modoAudio = "ia";
+let voces = [];
+let vozJa = null;
+
+function setAudioMode(modo){
+  modoAudio = modo;
+
+  document.getElementById("audio-ia").classList.toggle("activo", modo === "ia");
+  document.getElementById("audio-tts").classList.toggle("activo", modo === "tts");
+}
+
+function cargarVoces(){
+  voces = window.speechSynthesis ? speechSynthesis.getVoices() : [];
+
+  vozJa = voces.find(v => String(v.lang).toLowerCase() === "ja-jp")
+       || voces.find(v => String(v.lang).toLowerCase().startsWith("ja"))
+       || null;
+}
+
+if(window.speechSynthesis){
+  cargarVoces();
+  speechSynthesis.onvoiceschanged = cargarVoces;
+}
+
+function sintetizarJapones(texto){
+  const t = String(texto || "").trim();
+  if(!t || !window.speechSynthesis) return;
+
+  try{ speechSynthesis.cancel(); }catch{}
+
+  const u = new SpeechSynthesisUtterance(t);
+  u.lang = "ja-JP";
+  if(vozJa) u.voice = vozJa;
+  u.rate = 0.82;
+  u.pitch = 1;
+
+  speechSynthesis.speak(u);
+}
+  
 function buildExactAudioSrc(romaji){
   const key = String(romaji || "").trim();
   if(!key) return "";
@@ -599,20 +649,28 @@ async function playAudio(romaji){
   const key = String(romaji || "").trim();
   ultimoAudioKey = key;
 
-  const src = buildExactAudioSrc(key);
-  if(!src) return;
+  const japones = itemActualCorrecto ? itemActualCorrecto.kanji : "";
 
-  // ya no comprobamos existencia: si falla, falla y ya
-  const speaker = document.getElementById("promptSpeaker");
-  if(speaker) speaker.disabled = false;
+  if(modoAudio === "tts"){
+    sintetizarJapones(japones);
+    return;
+  }
+
+  const src = buildExactAudioSrc(key);
+
+  if(!src){
+    sintetizarJapones(japones);
+    return;
+  }
 
   try{
     detenerAudio();
     audio.src = src;
     audio.load();
+
     await audio.play();
   }catch{
-    // silencioso
+    sintetizarJapones(japones);
   }
 }
 
@@ -859,7 +917,18 @@ function elegirRonda(){
     return { dir, dictado: true };
   }
 
-  // Mix = super mixto
+  // Primera ronda en Mix: nunca dictado
+  if(primeraRonda){
+    primeraRonda = false;
+
+    if(Math.random() < 0.5){
+      return { dir: "jp-es", dictado: false };
+    }
+
+    return { dir: "es-jp", dictado: false };
+  }
+
+  // Mix normal
   const r = Math.random();
 
   if(r < 0.25) return { dir: "jp-es", dictado: false };
