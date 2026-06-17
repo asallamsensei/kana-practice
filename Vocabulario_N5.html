@@ -1015,8 +1015,9 @@ function verificar(letraForzada){
   
   const letra = esSaltado ? "" : r;
 
-  const jp = itemActualCorrecto.kanji;
-  const romaji = itemActualCorrecto.romaji;
+const jp = itemActualCorrecto.kanji;
+const romaji = itemActualCorrecto.romaji;
+const romajiVisible = romaji.replace(/_\d+$/, "");
   
   let extraInfo = `${jp} ★ romaji: ${romaji}`;
   
@@ -1034,7 +1035,7 @@ function verificar(letraForzada){
     sonidoCorrecto();
     res.className = "correcto";
     res.innerText = "Correcto ✔";
-    info.innerText = `${jp} ★ ${romaji} ★ ${itemActualCorrecto.significado}`;
+    info.innerText = `${jp} ★ ${romajiVisible} ★ ${itemActualCorrecto.significado}`;
     aciertos++;
     racha++;
     if(racha > mejorRacha) mejorRacha = racha;
@@ -1045,7 +1046,7 @@ function verificar(letraForzada){
     res.innerHTML = esSaltado
       ? `Saltado ✘<span style="color: white;">, era ${correctaLetra}</span>`
       : `Incorrecto ✘<span style="color: white;">, era ${correctaLetra}</span>`;
-      info.innerText = `${jp} ★ ${romaji} ★ ${itemActualCorrecto.significado}`;
+      info.innerText = `${jp} ★ ${romajiVisible} ★ ${itemActualCorrecto.significado}`;
     errores++;
     racha = 0;
   }
