@@ -340,6 +340,27 @@ body.modo-es-jp #opciones{
   .correcto{ color: var(--accent2); }
   .incorrecto{ color: var(--danger); }
 
+.detalle-respuesta{
+  margin-top: 8px;
+  font-size: 20px;
+  font-weight: 800;
+  line-height: 1.45;
+  color: #dbeafe;
+}
+
+.detalle-respuesta span{
+  font-size: 20px;
+  font-weight: 800;
+}
+
+.detalle-respuesta .jp{ color: #93c5fd; }
+.detalle-respuesta .romaji{ color: #c4b5fd; }
+.detalle-respuesta .es{ color: #bfdbfe; }
+.detalle-respuesta .star{
+  color: #a78bfa;
+  padding: 0 7px;
+}
+  
   .stats{
     margin-top: 12px;
     text-align:center;
@@ -1166,6 +1187,25 @@ function responder(letra){
   verificar(letra);
 }
 
+function detalleRespuestaHtml(){
+  if(!actual?.extra) return "";
+
+  const jp = actual.extra.jp || actual.extra.kanji || actual.prompt || "";
+  const romaji = actual.extra.romaji || "";
+  const es = actual.extra.es || actual.extra.significado || actual.respuesta || "";
+
+  if(!jp && !romaji && !es) return "";
+
+  return `
+    <div class="detalle-respuesta">
+      <span class="jp">${jp}</span>
+      ${romaji ? `<span class="star">★</span><span class="romaji">${romaji}</span>` : ""}
+      <span class="star">★</span>
+      <span class="es">${es}</span>
+    </div>
+  `;
+}
+  
 function verificar(letra = ""){
   const input = String(letra || "").trim().toLowerCase();
   const res = $("resultado");
@@ -1183,7 +1223,10 @@ function verificar(letra = ""){
   if(input === actual.correcta){
     sonidoCorrecto();
     res.className = "correcto";
-    res.innerText = "Correcto ✔";
+    res.innerHTML = `
+      <div>Correcto ✔</div>
+      ${detalleRespuestaHtml()}
+    `;
     aciertos++;
     racha++;
     if(racha > mejorRacha) mejorRacha = racha;
@@ -1194,7 +1237,11 @@ function verificar(letra = ""){
       : "";
 
     res.className = "incorrecto";
-    res.innerText = `Incorrecto ✘ (era ${actual.correcta})\nRespuesta: ${actual.correcta}) ${actual.respuesta}${extra}`;
+    res.innerHTML = `
+      <div>Incorrecto ✘ (era ${actual.correcta})</div>
+      <div>Respuesta: ${actual.correcta}) ${actual.respuesta}</div>
+      ${detalleRespuestaHtml()}
+    `;
     errores++;
     racha = 0;
   }
