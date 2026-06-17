@@ -415,6 +415,14 @@
     "Noto Sans JP",
     sans-serif;
 }
+
+#infoExtra{
+  margin-top: 8px;
+  text-align: center;
+  color: var(--text);
+  font-size: 18px;
+  font-weight: 700;
+}
   
 </style>
 </head>
@@ -444,7 +452,8 @@
         </div>
 
         <div id="resultado"></div>
-
+        <div id="infoExtra"></div>
+        
         <div class="actions">
           <button class="btn" type="button" onclick="accionSiguiente()">Siguiente</button>
         </div>
@@ -763,6 +772,8 @@ function limpiarResultado(){
   const res = document.getElementById("resultado");
   res.innerText = "";
   res.className = "";
+
+  document.getElementById("infoExtra").innerText = "";
 }
   
 function pintarStats(){
@@ -921,6 +932,7 @@ function responder(letra){
   
 function verificar(letraForzada){
   const res = document.getElementById("resultado");
+  const info = document.getElementById("infoExtra");
 
   const r = (letraForzada || "").toString().toLowerCase().trim();
   
@@ -952,18 +964,19 @@ function verificar(letraForzada){
   if(letra === correctaLetra){
     sonidoCorrecto();
     res.className = "correcto";
-    res.innerText = `Correcto ✔\n${extraInfo}`;
+    res.innerText = "Correcto ✔";
+    info.innerText = `${jp} ★ ${romaji} ★ ${itemActualCorrecto.significado}`;
     aciertos++;
     racha++;
     if(racha > mejorRacha) mejorRacha = racha;
   }else{
     sonidoIncorrecto();
     res.className = "incorrecto";
-
+  
     res.innerText = esSaltado
-      ? `Saltado ✘, era ${correctaLetra}) ${respuestaCorrecta} ${extraInfo}`
-      : `Incorrecto ✘, era ${correctaLetra}) ${respuestaCorrecta} ${extraInfo}`;
-    
+      ? `Saltado ✘, era ${correctaLetra}`
+      : `Incorrecto ✘, era ${correctaLetra}`;
+      info.innerText = `${jp} ★ ${romaji} ★ ${itemActualCorrecto.significado}`;
     errores++;
     racha = 0;
   }
