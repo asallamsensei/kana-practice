@@ -1294,10 +1294,16 @@ function resetStats(){
       chip.textContent = b.cancion || `Bloque ${i+1}`;
 
       chip.onclick = () => {
+        const estabaTodoActivo = $("btnTodo")?.classList.contains("activo");
+        
         $("btnTodo")?.classList.remove("activo");
-
-        if(bloquesActivos.has(i)) bloquesActivos.delete(i);
-        else bloquesActivos.add(i);
+        
+        if(estabaTodoActivo){
+          bloquesActivos = new Set([i]);
+        }else{
+          if(bloquesActivos.has(i)) bloquesActivos.delete(i);
+          else bloquesActivos.add(i);
+        }
 
         // nunca dejar vacío: si apaga el último, lo volvemos a prender
         if(bloquesActivos.size === 0) bloquesActivos.add(i);
