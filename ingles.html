@@ -737,6 +737,20 @@ function norm(s){
     .replace(/\s+/g," ");
 }
 
+function ordenarBloquesPorId(bloques){
+  return [...bloques].sort((a, b) => {
+    const pa = String(a.id || "").replace("eng_", "").split("_").map(Number);
+    const pb = String(b.id || "").replace("eng_", "").split("_").map(Number);
+
+    const principalA = pa[0] || 0;
+    const principalB = pb[0] || 0;
+
+    if(principalA !== principalB) return principalA - principalB;
+
+    return (pa[1] || 0) - (pb[1] || 0);
+  });
+}
+  
 /* ===============================
    MODAL CLAVE
 =============================== */
@@ -1281,14 +1295,25 @@ function elegirRondaDictado(){
 
 function build3Options(pool, correctValue, mapFn){
   const opciones = [correctValue];
-  let tries = 0;
+  const usadas = new Set([norm(correctValue)]);
 
-  while(opciones.length < 3 && tries < 200){
-    tries++;
-    const v = mapFn(pick(pool));
-    if(v != null && v !== "" && !opciones.includes(v)) opciones.push(v);
+  const candidatos = shuffle(pool)
+    .map(item => mapFn(item))
+    .filter(v => v != null && String(v).trim() !== "")
+    .filter(v => {
+      const key = norm(v);
+      if(usadas.has(key)) return false;
+      usadas.add(key);
+      return true;
+    });
+
+  for(const v of candidatos){
+    if(opciones.length >= 3) break;
+    opciones.push(v);
   }
+
   while(opciones.length < 3) opciones.push("—");
+
   return shuffle(opciones);
 }
 
@@ -1453,7 +1478,9 @@ function renderChips(){
 fetch(JSON_PATH)
   .then(r=>r.json())
   .then(json=>{
-    DATA = (json && json.bloques) ? json : { bloques: [] };
+    DATA = (json && json.bloques)
+      ? { ...json, bloques: ordenarBloquesPorId(json.bloques) }
+      : { bloques: [] };
 
     if(DATA.bloques.length === 0){
       $("promptMain").innerText = "No hay bloques en el JSON";
