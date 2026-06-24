@@ -1,75 +1,83 @@
 {
   "bloques": [
-    {
-      "id": "eng_01",
-      "nombre": "Saludos y despedidas",
-      "vocabulario": [
-        { "en": "hello", "es": "hola" },
-        { "en": "hi", "es": "hola (informal)" },
-        { "en": "hey", "es": "hola (muy informal)" },
+{
+  "id": "eng_01",
+  "nombre": "Saludos",
+  "vocabulario": [
+    { "en": "hello", "es": "hola" },
+    { "en": "hi", "es": "hola (informal)" },
+    { "en": "hey", "es": "hola (muy informal)" },
 
-        { "en": "good morning", "es": "buenos días" },
-        { "en": "morning", "es": "buenos días (informal)" },
-        { "en": "good afternoon", "es": "buenas tardes" },
-        { "en": "good evening", "es": "buenas tardes, buenas noches (saludo)" },
-        { "en": "good night", "es": "buenas noches (despedida)" },
+    { "en": "good morning", "es": "buenos días" },
+    { "en": "morning", "es": "buenos días (informal)" },
+    { "en": "good afternoon", "es": "buenas tardes" },
+    { "en": "good evening", "es": "buenas tardes, buenas noches (saludo)" },
 
-        { "en": "how are you", "es": "cómo estás" },
-        { "en": "how are you doing", "es": "cómo te va" },
-        { "en": "how have you been", "es": "cómo has estado" },
+    { "en": "how are you", "es": "cómo estás" },
+    { "en": "how are you doing", "es": "cómo te va" },
+    { "en": "how have you been", "es": "cómo has estado" },
 
-        { "en": "what's up", "es": "qué hay de nuevo (muy informal)" },
-        { "en": "how's it going", "es": "cómo va todo" },
+    { "en": "what's up", "es": "qué hay de nuevo (muy informal)" },
+    { "en": "how's it going", "es": "cómo va todo" },
 
-        { "en": "nice to meet you", "es": "mucho gusto" },
-        { "en": "pleased to meet you", "es": "encantado de conocerte" },
+    { "en": "nice to meet you", "es": "mucho gusto" },
+    { "en": "pleased to meet you", "es": "encantado de conocerte" },
 
-        { "en": "long time no see", "es": "cuánto tiempo sin verte" },
+    { "en": "long time no see", "es": "cuánto tiempo sin verte" },
 
-        { "en": "welcome", "es": "bienvenido" },
-        { "en": "welcome back", "es": "bienvenido de nuevo" },
+    { "en": "welcome", "es": "bienvenido" },
+    { "en": "welcome back", "es": "bienvenido de nuevo" },
 
-        { "en": "good to see you", "es": "qué bueno verte" },
-        { "en": "good to have you back", "es": "qué bueno tenerte de vuelta" },
-        { "en": "it's nice to see you again", "es": "me alegra verte de nuevo" },
+    { "en": "good to see you", "es": "qué bueno verte" },
+    { "en": "good to have you back", "es": "qué bueno tenerte de vuelta" },
+    { "en": "it's nice to see you again", "es": "me alegra verte de nuevo" }
+  ]
+},
 
-        { "en": "bye", "es": "chau, chao, adiós (informal)" },
-        { "en": "goodbye", "es": "adiós" },
-        { "en": "farewell", "es": "adiós (formal)" },
-        { "en": "goodbye everyone", "es": "adiós a todos" },
+{
+  "id": "eng_01_1",
+  "nombre": "Despedidas",
+  "vocabulario": [
+    { "en": "good night", "es": "buenas noches (despedida)" },
 
-        { "en": "see you", "es": "nos vemos" },
-        { "en": "see you later", "es": "nos vemos luego, hasta luego" },
-        { "en": "see you soon", "es": "nos vemos pronto" },
-        { "en": "see you tomorrow", "es": "nos vemos mañana" },
-        { "en": "see you around", "es": "nos vemos por ahí" },
-        { "en": "see you next time", "es": "nos vemos la próxima vez" },
+    { "en": "bye", "es": "chau, chao, adiós (informal)" },
+    { "en": "goodbye", "es": "adiós" },
+    { "en": "farewell", "es": "adiós (formal)" },
+    { "en": "goodbye everyone", "es": "adiós a todos" },
 
-        { "en": "talk to you later", "es": "hablamos luego" },
-        { "en": "catch you later", "es": "nos vemos luego (informal)" },
+    { "en": "see you", "es": "nos vemos" },
+    { "en": "see you later", "es": "nos vemos luego, hasta luego" },
+    { "en": "see you soon", "es": "nos vemos pronto" },
+    { "en": "see you tomorrow", "es": "nos vemos mañana" },
+    { "en": "see you around", "es": "nos vemos por ahí" },
+    { "en": "see you next time", "es": "nos vemos la próxima vez" },
 
-        { "en": "take care", "es": "cuídate" },
-        { "en": "take it easy", "es": "tómalo con calma (despedida informal)" },
+    { "en": "talk to you later", "es": "hablamos luego" },
+    { "en": "catch you later", "es": "nos vemos luego (informal)" },
 
-        { "en": "have a nice day", "es": "que tengas un lindo día" },
-        { "en": "have a good day", "es": "que tengas un buen día" },
-        { "en": "have a great day", "es": "que tengas un excelente día" },
-        { "en": "have a good one", "es": "que te vaya bien (lit. ten uno bueno)" },
+    { "en": "take care", "es": "cuídate" },
+    { "en": "take it easy", "es": "tómalo con calma (despedida informal)" },
 
-        { "en": "have fun", "es": "diviértete" },
+    { "en": "have a nice day", "es": "que tengas un lindo día" },
+    { "en": "have a good day", "es": "que tengas un buen día" },
+    { "en": "have a great day", "es": "que tengas un excelente día" },
+    { "en": "have a good one", "es": "que te vaya bien" },
 
-        { "en": "see ya", "es": "nos vemos (muy informal)" },
-        { "en": "later", "es": "nos vemos luego (muy informal)" },
+    { "en": "have fun", "es": "diviértete" },
 
-        { "en": "have a good night", "es": "que pases una buena noche" },
-        { "en": "sleep well", "es": "duerme bien" },
+    { "en": "see ya", "es": "nos vemos (muy informal)" },
+    { "en": "later", "es": "nos vemos luego (muy informal)" },
 
-        { "en": "good luck", "es": "buena suerte" }
-      ]
-    },
+    { "en": "have a good night", "es": "que pases una buena noche" },
+    { "en": "sleep well", "es": "duerme bien" },
+
+    { "en": "good luck", "es": "buena suerte" }
+  ]
+},
+    
     {
     "id": "eng_02",
-    "nombre": "Presentaciones personales",
+    "nombre": "Presentarse",
     "vocabulario": [
     { "en": "my name is", "es": "mi nombre es" },
     { "en": "I am", "es": "yo soy, yo estoy" },
@@ -107,43 +115,849 @@
     ]
     },
     
-    {
-    "id": "eng_03",
-    "nombre": "Cortesía y expresiones básicas",
-    "vocabulario": [
+{
+  "id": "eng_03",
+  "nombre": "Cortesía",
+  "vocabulario": [
     { "en": "please", "es": "por favor" },
+
     { "en": "thank you", "es": "gracias" },
     { "en": "thanks", "es": "gracias (informal)" },
     { "en": "you're welcome", "es": "de nada" },
-    
+
     { "en": "excuse me", "es": "disculpa, con permiso" },
     { "en": "sorry", "es": "lo siento, perdón" },
     { "en": "no problem", "es": "no hay problema" },
-    
+
+    { "en": "could you help me", "es": "¿podrías ayudarme?" },
+    { "en": "help me, please", "es": "ayúdame, por favor" },
+
+    { "en": "one moment, please", "es": "un momento, por favor" },
+    { "en": "wait, please", "es": "espera, por favor" },
+
+    { "en": "don't worry", "es": "no te preocupes" }
+  ]
+},
+
+{
+  "id": "eng_03_1",
+  "nombre": "Expresiones básicas",
+  "vocabulario": [
     { "en": "yes", "es": "sí" },
     { "en": "no", "es": "no" },
     { "en": "maybe", "es": "tal vez, quizás" },
-    
+
     { "en": "of course", "es": "por supuesto" },
     { "en": "sure", "es": "claro, seguro" },
     { "en": "okay", "es": "está bien, ok" },
-    
-    { "en": "I don't understand", "es": "no entiendo" },
+
     { "en": "I understand", "es": "entiendo" },
-    
+    { "en": "I don't understand", "es": "no entiendo" },
+
     { "en": "can you repeat that", "es": "¿puedes repetir eso?" },
-    { "en": "could you help me", "es": "¿podrías ayudarme?" },
-    
-    { "en": "help me, please", "es": "ayúdame, por favor" },
-    { "en": "one moment, please", "es": "un momento, por favor" },
-    { "en": "wait, please", "es": "espera, por favor" },
-    
+
     { "en": "that's okay", "es": "está bien, no pasa nada" },
-    { "en": "don't worry", "es": "no te preocupes" },
     { "en": "it's okay", "es": "está bien" }
+  ]
+},
+
     
-    ]
-    }
+    {
+      "id": "eng_04",
+      "nombre": "Números",
+      "vocabulario": [
+        { "en": "zero", "es": "cero" },
+        { "en": "one", "es": "uno" },
+        { "en": "two", "es": "dos" },
+        { "en": "three", "es": "tres" },
+        { "en": "four", "es": "cuatro" },
+        { "en": "five", "es": "cinco" },
+        { "en": "six", "es": "seis" },
+        { "en": "seven", "es": "siete" },
+        { "en": "eight", "es": "ocho" },
+        { "en": "nine", "es": "nueve" },
+        { "en": "ten", "es": "diez" },
+    
+        { "en": "eleven", "es": "once" },
+        { "en": "twelve", "es": "doce" },
+        { "en": "thirteen", "es": "trece" },
+        { "en": "fourteen", "es": "catorce" },
+        { "en": "fifteen", "es": "quince" },
+        { "en": "sixteen", "es": "dieciséis" },
+        { "en": "seventeen", "es": "diecisiete" },
+        { "en": "eighteen", "es": "dieciocho" },
+        { "en": "nineteen", "es": "diecinueve" },
+        { "en": "twenty", "es": "veinte" },
+    
+        { "en": "thirty", "es": "treinta" },
+        { "en": "forty", "es": "cuarenta" },
+        { "en": "fifty", "es": "cincuenta" },
+        { "en": "sixty", "es": "sesenta" },
+        { "en": "seventy", "es": "setenta" },
+        { "en": "eighty", "es": "ochenta" },
+        { "en": "ninety", "es": "noventa" },
+        { "en": "one hundred", "es": "cien" }
+      ]
+    },
+    {
+      "id": "eng_05",
+      "nombre": "Cantidades",
+      "vocabulario": [
+        { "en": "some", "es": "algunos, algo de" },
+        { "en": "any", "es": "alguno, algo de; ninguno, nada (en oraciones negativas)" },
+        { "en": "many", "es": "muchos" },
+        { "en": "much", "es": "mucho" },
+        { "en": "a lot of", "es": "mucho, muchos" },
+    
+        { "en": "few", "es": "pocos" },
+        { "en": "a few", "es": "unos pocos" },
+        { "en": "little", "es": "poco" },
+        { "en": "a little", "es": "un poco" },
+    
+        { "en": "enough", "es": "suficiente" },
+        { "en": "more", "es": "más" },
+        { "en": "less", "es": "menos" },
+    
+        { "en": "all", "es": "todo, todos" },
+        { "en": "none", "es": "ninguno" },
+        { "en": "every", "es": "cada" },
+        { "en": "each", "es": "cada uno" },
+    
+        { "en": "half", "es": "mitad" },
+        { "en": "quarter", "es": "cuarto" },
+        { "en": "full", "es": "lleno" },
+        { "en": "empty", "es": "vacío" }
+      ]
+    },
+
+  {
+  "id": "eng_06",
+  "nombre": "Fechas",
+  "vocabulario": [
+    { "en": "today", "es": "hoy" },
+    { "en": "tomorrow", "es": "mañana" },
+    { "en": "yesterday", "es": "ayer" },
+
+    { "en": "day", "es": "día" },
+    { "en": "week", "es": "semana" },
+    { "en": "month", "es": "mes" },
+    { "en": "year", "es": "año" },
+
+    { "en": "date", "es": "fecha" },
+    { "en": "calendar", "es": "calendario" },
+
+    { "en": "Monday", "es": "lunes" },
+    { "en": "Tuesday", "es": "martes" },
+    { "en": "Wednesday", "es": "miércoles" },
+    { "en": "Thursday", "es": "jueves" },
+    { "en": "Friday", "es": "viernes" },
+    { "en": "Saturday", "es": "sábado" },
+    { "en": "Sunday", "es": "domingo" },
+
+    { "en": "January", "es": "enero" },
+    { "en": "February", "es": "febrero" },
+    { "en": "March", "es": "marzo" },
+    { "en": "April", "es": "abril" },
+    { "en": "May", "es": "mayo" },
+    { "en": "June", "es": "junio" },
+    { "en": "July", "es": "julio" },
+    { "en": "August", "es": "agosto" },
+    { "en": "September", "es": "septiembre" },
+    { "en": "October", "es": "octubre" },
+    { "en": "November", "es": "noviembre" },
+    { "en": "December", "es": "diciembre" },
+
+    { "en": "birthday", "es": "cumpleaños" }
+  ]
+},
+
+{
+  "id": "eng_07",
+  "nombre": "Tiempo",
+  "vocabulario": [
+    { "en": "time", "es": "tiempo, hora" },
+    { "en": "hour", "es": "hora" },
+    { "en": "minute", "es": "minuto" },
+    { "en": "second", "es": "segundo" },
+
+    { "en": "now", "es": "ahora" },
+    { "en": "later", "es": "más tarde" },
+    { "en": "soon", "es": "pronto" },
+
+    { "en": "early", "es": "temprano" },
+    { "en": "late", "es": "tarde" },
+
+    { "en": "morning", "es": "mañana" },
+    { "en": "afternoon", "es": "tarde" },
+    { "en": "evening", "es": "tarde/noche" },
+    { "en": "night", "es": "noche" },
+
+    { "en": "before", "es": "antes" },
+    { "en": "after", "es": "después" },
+
+    { "en": "o'clock", "es": "en punto" },
+    { "en": "half past", "es": "y media" },
+    { "en": "quarter past", "es": "y cuarto" },
+    { "en": "quarter to", "es": "menos cuarto" }
+  ]
+},
+    {
+      "id": "eng_08",
+      "nombre": "Ingredientes",
+      "vocabulario": [
+        { "en": "water", "es": "agua" },
+        { "en": "milk", "es": "leche" },
+        { "en": "oil", "es": "aceite" },
+        { "en": "olive oil", "es": "aceite de oliva" },
+    
+        { "en": "salt", "es": "sal" },
+        { "en": "pepper", "es": "pimienta" },
+        { "en": "sugar", "es": "azúcar" },
+        { "en": "flour", "es": "harina" },
+    
+        { "en": "rice", "es": "arroz" },
+        { "en": "pasta", "es": "pasta" },
+        { "en": "bread", "es": "pan" },
+    
+        { "en": "egg", "es": "huevo" },
+        { "en": "butter", "es": "mantequilla" },
+        { "en": "cheese", "es": "queso" },
+        { "en": "yogurt", "es": "yogur" },
+    
+        { "en": "chicken", "es": "pollo" },
+        { "en": "beef", "es": "carne de res" },
+        { "en": "pork", "es": "carne de cerdo" },
+        { "en": "fish", "es": "pescado" },
+    
+        { "en": "onion", "es": "cebolla" },
+        { "en": "garlic", "es": "ajo" },
+        { "en": "tomato", "es": "tomate" },
+        { "en": "potato", "es": "papa" },
+    
+        { "en": "carrot", "es": "zanahoria" },
+        { "en": "lettuce", "es": "lechuga" },
+        { "en": "cucumber", "es": "pepino" },
+        { "en": "corn", "es": "maíz" },
+    
+        { "en": "beans", "es": "frijoles" },
+        { "en": "peas", "es": "guisantes, arvejas" },
+    
+        { "en": "apple", "es": "manzana" },
+        { "en": "banana", "es": "banano, plátano" },
+        { "en": "orange", "es": "naranja" },
+        { "en": "lemon", "es": "limón" },
+    
+        { "en": "strawberry", "es": "fresa" },
+        { "en": "grape", "es": "uva" },
+    
+        { "en": "honey", "es": "miel" },
+        { "en": "vinegar", "es": "vinagre" },
+        { "en": "sauce", "es": "salsa" },
+        { "en": "spices", "es": "especias" }
+      ]
+      },
+      {
+      "id": "eng_09",
+      "nombre": "Utensilios",
+      "vocabulario": [
+        { "en": "knife", "es": "cuchillo" },
+        { "en": "fork", "es": "tenedor" },
+        { "en": "spoon", "es": "cuchara" },
+        { "en": "teaspoon", "es": "cucharadita" },
+        { "en": "tablespoon", "es": "cucharada" },
+    
+        { "en": "plate", "es": "plato" },
+        { "en": "bowl", "es": "tazón, bol" },
+        { "en": "cup", "es": "taza" },
+        { "en": "glass", "es": "vaso" },
+        { "en": "mug", "es": "jarro, mug" },
+    
+        { "en": "pot", "es": "olla" },
+        { "en": "pan", "es": "sartén" },
+        { "en": "lid", "es": "tapa" },
+        { "en": "pressure cooker", "es": "olla a presión" },
+    
+        { "en": "cutting board", "es": "tabla de cortar" },
+        { "en": "grater", "es": "rallador" },
+        { "en": "peeler", "es": "pelador" },
+        { "en": "can opener", "es": "abrelatas" },
+    
+        { "en": "whisk", "es": "batidor de mano" },
+        { "en": "spatula", "es": "espátula" },
+        { "en": "ladle", "es": "cucharón" },
+        { "en": "tongs", "es": "pinzas de cocina" },
+    
+        { "en": "strainer", "es": "colador" },
+        { "en": "sieve", "es": "tamiz" },
+        { "en": "funnel", "es": "embudo" },
+    
+        { "en": "measuring cup", "es": "taza medidora" },
+        { "en": "measuring spoon", "es": "cuchara medidora" },
+        { "en": "kitchen scale", "es": "balanza de cocina" },
+    
+        { "en": "oven", "es": "horno" },
+        { "en": "microwave", "es": "microondas" },
+        { "en": "blender", "es": "licuadora" },
+        { "en": "mixer", "es": "batidora" },
+    
+        { "en": "refrigerator", "es": "refrigerador, nevera" },
+        { "en": "freezer", "es": "congelador" },
+    
+        { "en": "napkin", "es": "servilleta" },
+        { "en": "tray", "es": "bandeja" }
+      ]
+      },
+      {
+      "id": "eng_10",
+      "nombre": "Cocinando",
+      "vocabulario": [
+        { "en": "cook", "es": "cocinar" },
+        { "en": "prepare", "es": "preparar" },
+        { "en": "make", "es": "hacer" },
+    
+        { "en": "wash", "es": "lavar" },
+        { "en": "cut", "es": "cortar" },
+        { "en": "chop", "es": "picar" },
+        { "en": "slice", "es": "rebanar, cortar en rodajas" },
+        { "en": "peel", "es": "pelar" },
+        { "en": "grate", "es": "rallar" },
+    
+        { "en": "mix", "es": "mezclar" },
+        { "en": "stir", "es": "revolver" },
+        { "en": "beat", "es": "batir" },
+        { "en": "blend", "es": "licuar, mezclar en licuadora" },
+    
+        { "en": "boil", "es": "hervir" },
+        { "en": "fry", "es": "freír" },
+        { "en": "bake", "es": "hornear" },
+        { "en": "roast", "es": "asar al horno" },
+        { "en": "grill", "es": "asar a la parrilla" },
+    
+        { "en": "add", "es": "agregar, añadir" },
+        { "en": "pour", "es": "verter, servir líquido" },
+        { "en": "season", "es": "sazonar" },
+        { "en": "taste", "es": "probar" },
+    
+        { "en": "serve", "es": "servir" },
+        { "en": "eat", "es": "comer" },
+        { "en": "drink", "es": "beber, tomar" },
+    
+        { "en": "clean", "es": "limpiar" },
+        { "en": "dry", "es": "secar" },
+        { "en": "store", "es": "guardar" }
+      ]
+      },
+
+{
+  "id": "eng_11",
+  "nombre": "Familia",
+  "vocabulario": [
+    { "en": "family", "es": "familia" },
+
+    { "en": "father", "es": "padre" },
+    { "en": "dad", "es": "papá" },
+    { "en": "mother", "es": "madre" },
+    { "en": "mom", "es": "mamá" },
+
+    { "en": "parents", "es": "padres" },
+
+    { "en": "son", "es": "hijo" },
+    { "en": "daughter", "es": "hija" },
+
+    { "en": "brother", "es": "hermano" },
+    { "en": "sister", "es": "hermana" },
+
+    { "en": "husband", "es": "esposo, marido" },
+    { "en": "wife", "es": "esposa" },
+
+    { "en": "grandfather", "es": "abuelo" },
+    { "en": "grandmother", "es": "abuela" },
+    { "en": "grandparents", "es": "abuelos" },
+
+    { "en": "grandson", "es": "nieto" },
+    { "en": "granddaughter", "es": "nieta" },
+
+    { "en": "uncle", "es": "tío" },
+    { "en": "aunt", "es": "tía" },
+
+    { "en": "cousin", "es": "primo, prima" },
+
+    { "en": "nephew", "es": "sobrino" },
+    { "en": "niece", "es": "sobrina" },
+
+    { "en": "relative", "es": "pariente, familiar" },
+
+    { "en": "child", "es": "niño; hijo" },
+    { "en": "children", "es": "niños; hijos" }
+  ]
+},
+
+{
+  "id": "eng_12",
+  "nombre": "Colores",
+  "vocabulario": [
+    { "en": "color", "es": "color" },
+
+    { "en": "red", "es": "rojo" },
+    { "en": "blue", "es": "azul" },
+    { "en": "yellow", "es": "amarillo" },
+    { "en": "green", "es": "verde" },
+
+    { "en": "orange", "es": "naranja" },
+    { "en": "purple", "es": "púrpura, morado, violeta" },
+    { "en": "violet", "es": "violeta" },
+    { "en": "pink", "es": "rosado" },
+    { "en": "brown", "es": "marrón, café" },
+
+    { "en": "black", "es": "negro" },
+    { "en": "white", "es": "blanco" },
+    { "en": "gray", "es": "gris" },
+
+    { "en": "light", "es": "claro" },
+    { "en": "dark", "es": "oscuro" },
+    { "en": "bright", "es": "brillante" },
+
+    { "en": "gold", "es": "dorado" },
+    { "en": "silver", "es": "plateado" }
+  ]
+},
+
+{
+  "id": "eng_13",
+  "nombre": "Casa",
+  "vocabulario": [
+    { "en": "house", "es": "casa" },
+    { "en": "home", "es": "hogar, casa" },
+    { "en": "apartment", "es": "apartamento" },
+
+    { "en": "room", "es": "habitación, cuarto" },
+    { "en": "bedroom", "es": "dormitorio" },
+    { "en": "living room", "es": "sala" },
+    { "en": "kitchen", "es": "cocina" },
+    { "en": "bathroom", "es": "baño" },
+    { "en": "dining room", "es": "comedor" },
+
+    { "en": "door", "es": "puerta" },
+    { "en": "window", "es": "ventana" },
+    { "en": "wall", "es": "pared" },
+    { "en": "floor", "es": "piso, suelo" },
+    { "en": "roof", "es": "techo" },
+
+    { "en": "table", "es": "mesa" },
+    { "en": "chair", "es": "silla" },
+    { "en": "bed", "es": "cama" },
+    { "en": "sofa", "es": "sofá" },
+
+    { "en": "lamp", "es": "lámpara" },
+    { "en": "television", "es": "televisión" }
+  ]
+},
+{
+  "id": "eng_14",
+  "nombre": "Ropa",
+  "vocabulario": [
+    { "en": "clothes", "es": "ropa" },
+    { "en": "shirt", "es": "camisa" },
+    { "en": "t-shirt", "es": "camiseta" },
+    { "en": "pants", "es": "pantalones" },
+    { "en": "jeans", "es": "jeans, vaqueros" },
+
+    { "en": "shorts", "es": "pantalones cortos" },
+    { "en": "dress", "es": "vestido" },
+    { "en": "skirt", "es": "falda" },
+    { "en": "jacket", "es": "chaqueta" },
+    { "en": "coat", "es": "abrigo" },
+
+    { "en": "sweater", "es": "suéter" },
+    { "en": "hoodie", "es": "sudadera con capucha" },
+    { "en": "shoes", "es": "zapatos" },
+    { "en": "sneakers", "es": "tenis, zapatillas deportivas" },
+    { "en": "boots", "es": "botas" },
+
+    { "en": "socks", "es": "medias, calcetines" },
+    { "en": "hat", "es": "sombrero, gorra" },
+    { "en": "cap", "es": "gorra" },
+    { "en": "belt", "es": "cinturón" },
+    { "en": "gloves", "es": "guantes" },
+
+    { "en": "scarf", "es": "bufanda" },
+    { "en": "underwear", "es": "ropa interior" },
+    { "en": "pajamas", "es": "pijama" },
+    { "en": "uniform", "es": "uniforme" }
+  ]
+},
+{
+  "id": "eng_15",
+  "nombre": "Cuerpo",
+  "vocabulario": [
+    { "en": "body", "es": "cuerpo" },
+    { "en": "head", "es": "cabeza" },
+    { "en": "face", "es": "cara, rostro" },
+    { "en": "hair", "es": "cabello, pelo" },
+
+    { "en": "eye", "es": "ojo" },
+    { "en": "ear", "es": "oreja, oído" },
+    { "en": "nose", "es": "nariz" },
+    { "en": "mouth", "es": "boca" },
+    { "en": "tooth", "es": "diente" },
+    { "en": "teeth", "es": "dientes" },
+
+    { "en": "neck", "es": "cuello" },
+    { "en": "shoulder", "es": "hombro" },
+    { "en": "arm", "es": "brazo" },
+    { "en": "hand", "es": "mano" },
+    { "en": "finger", "es": "dedo de la mano" },
+
+    { "en": "chest", "es": "pecho" },
+    { "en": "back", "es": "espalda" },
+    { "en": "stomach", "es": "estómago, barriga" },
+
+    { "en": "leg", "es": "pierna" },
+    { "en": "knee", "es": "rodilla" },
+    { "en": "foot", "es": "pie" },
+    { "en": "feet", "es": "pies" },
+    { "en": "toe", "es": "dedo del pie" }
+  ]
+},
+{
+  "id": "eng_16",
+  "nombre": "Salud",
+  "vocabulario": [
+    { "en": "health", "es": "salud" },
+    { "en": "healthy", "es": "saludable" },
+    { "en": "sick", "es": "enfermo" },
+
+    { "en": "pain", "es": "dolor" },
+    { "en": "fever", "es": "fiebre" },
+    { "en": "cough", "es": "tos" },
+    { "en": "cold", "es": "resfriado" },
+    { "en": "flu", "es": "gripe" },
+
+    { "en": "doctor", "es": "doctor, médico" },
+    { "en": "nurse", "es": "enfermero, enfermera" },
+    { "en": "hospital", "es": "hospital" },
+    { "en": "clinic", "es": "clínica" },
+
+    { "en": "medicine", "es": "medicina, medicamento" },
+    { "en": "pill", "es": "pastilla" },
+    { "en": "vitamin", "es": "vitamina" },
+
+    { "en": "exercise", "es": "ejercicio" },
+    { "en": "rest", "es": "descanso" },
+    { "en": "sleep", "es": "dormir, sueño" },
+
+    { "en": "hurt", "es": "doler, lastimar" },
+    { "en": "injury", "es": "lesión" },
+
+    { "en": "emergency", "es": "emergencia" },
+    { "en": "ambulance", "es": "ambulancia" }
+  ]
+},
+{
+  "id": "eng_17",
+  "nombre": "Emociones",
+  "vocabulario": [
+    { "en": "happy", "es": "feliz" },
+    { "en": "sad", "es": "triste" },
+    { "en": "angry", "es": "enojado" },
+    { "en": "afraid", "es": "asustado, con miedo" },
+
+    { "en": "tired", "es": "cansado" },
+    { "en": "worried", "es": "preocupado" },
+    { "en": "excited", "es": "emocionado" },
+    { "en": "bored", "es": "aburrido" },
+
+    { "en": "calm", "es": "calmado" },
+    { "en": "nervous", "es": "nervioso" },
+    { "en": "surprised", "es": "sorprendido" },
+    { "en": "confused", "es": "confundido" },
+
+    { "en": "proud", "es": "orgulloso" },
+    { "en": "ashamed", "es": "avergonzado" },
+    { "en": "lonely", "es": "solo, solitario" },
+    { "en": "comfortable", "es": "cómodo" },
+    { "en": "uncomfortable", "es": "incómodo" }
+  ]
+},
+{
+  "id": "eng_18",
+  "nombre": "Lugares",
+  "vocabulario": [
+    { "en": "place", "es": "lugar" },
+    { "en": "city", "es": "ciudad" },
+    { "en": "town", "es": "pueblo" },
+    { "en": "country", "es": "país" },
+
+    { "en": "street", "es": "calle" },
+    { "en": "park", "es": "parque" },
+    { "en": "school", "es": "escuela" },
+    { "en": "university", "es": "universidad" },
+
+    { "en": "hospital", "es": "hospital" },
+    { "en": "bank", "es": "banco" },
+    { "en": "restaurant", "es": "restaurante" },
+    { "en": "store", "es": "tienda" },
+
+    { "en": "supermarket", "es": "supermercado" },
+    { "en": "pharmacy", "es": "farmacia" },
+    { "en": "hotel", "es": "hotel" },
+    { "en": "airport", "es": "aeropuerto" },
+
+    { "en": "bus station", "es": "estación de buses" },
+    { "en": "train station", "es": "estación de tren" },
+    { "en": "beach", "es": "playa" },
+    { "en": "mountain", "es": "montaña" }
+  ]
+},
+{
+  "id": "eng_19",
+  "nombre": "Transporte",
+  "vocabulario": [
+    { "en": "transportation", "es": "transporte" },
+
+    { "en": "car", "es": "carro, automóvil" },
+    { "en": "bus", "es": "autobús, bus" },
+    { "en": "train", "es": "tren" },
+    { "en": "subway", "es": "metro" },
+
+    { "en": "taxi", "es": "taxi" },
+    { "en": "motorcycle", "es": "motocicleta" },
+    { "en": "bicycle", "es": "bicicleta" },
+
+    { "en": "airplane", "es": "avión" },
+    { "en": "boat", "es": "barco, bote" },
+    { "en": "ship", "es": "buque, barco" },
+
+    { "en": "driver", "es": "conductor" },
+    { "en": "passenger", "es": "pasajero" },
+
+    { "en": "ticket", "es": "boleto, tiquete" },
+    { "en": "station", "es": "estación" },
+    { "en": "stop", "es": "parada" },
+
+    { "en": "road", "es": "carretera, camino" },
+    { "en": "traffic", "es": "tráfico" },
+
+    { "en": "trip", "es": "viaje" },
+    { "en": "travel", "es": "viajar, viaje" }
+  ]
+},
+{
+  "id": "eng_20",
+  "nombre": "Compras",
+  "vocabulario": [
+    { "en": "shop", "es": "tienda; comprar" },
+    { "en": "store", "es": "tienda" },
+    { "en": "customer", "es": "cliente" },
+    { "en": "cashier", "es": "cajero" },
+
+    { "en": "buy", "es": "comprar" },
+    { "en": "sell", "es": "vender" },
+
+    { "en": "price", "es": "precio" },
+    { "en": "cost", "es": "costo, costar" },
+    { "en": "cheap", "es": "barato" },
+    { "en": "expensive", "es": "caro" },
+
+    { "en": "money", "es": "dinero" },
+    { "en": "cash", "es": "efectivo" },
+    { "en": "card", "es": "tarjeta" },
+    { "en": "credit card", "es": "tarjeta de crédito" },
+
+    { "en": "receipt", "es": "recibo, factura" },
+    { "en": "change", "es": "cambio, vueltas" },
+
+    { "en": "discount", "es": "descuento" },
+    { "en": "offer", "es": "oferta" },
+    { "en": "sale", "es": "rebaja, liquidación" },
+
+    { "en": "market", "es": "mercado" },
+    { "en": "shopping", "es": "compras" }
+  ]
+},
+{
+  "id": "eng_21",
+  "nombre": "Verbos comunes",
+  "vocabulario": [
+    { "en": "to be", "es": "ser, estar" },
+    { "en": "have", "es": "tener" },
+    { "en": "do", "es": "hacer" },
+    { "en": "make", "es": "hacer, crear" },
+
+    { "en": "go", "es": "ir" },
+    { "en": "come", "es": "venir" },
+    { "en": "get", "es": "obtener, conseguir" },
+
+    { "en": "want", "es": "querer" },
+    { "en": "need", "es": "necesitar" },
+    { "en": "like", "es": "gustar" },
+    { "en": "love", "es": "amar, encantar" },
+
+    { "en": "know", "es": "saber, conocer" },
+    { "en": "think", "es": "pensar" },
+    { "en": "understand", "es": "entender" },
+    { "en": "remember", "es": "recordar" },
+
+    { "en": "see", "es": "ver" },
+    { "en": "look", "es": "mirar, ver" },
+    { "en": "hear", "es": "oír, escuchar" },
+    { "en": "listen", "es": "escuchar" },
+
+    { "en": "say", "es": "decir" },
+    { "en": "speak", "es": "hablar" },
+    { "en": "tell", "es": "decir, contar" },
+
+    { "en": "work", "es": "trabajar" },
+    { "en": "study", "es": "estudiar" },
+    { "en": "live", "es": "vivir" },
+
+    { "en": "use", "es": "usar" },
+    { "en": "find", "es": "encontrar" },
+    { "en": "give", "es": "dar" },
+    { "en": "take", "es": "tomar, llevar" },
+
+    { "en": "open", "es": "abrir" },
+    { "en": "close", "es": "cerrar" },
+    { "en": "start", "es": "empezar, iniciar" },
+    { "en": "finish", "es": "terminar" }
+  ]
+},
+
+{
+  "id": "eng_22",
+  "nombre": "Adjetivos comunes",
+  "vocabulario": [
+    { "en": "good", "es": "bueno" },
+    { "en": "bad", "es": "malo" },
+    { "en": "new", "es": "nuevo" },
+    { "en": "old", "es": "viejo, antiguo" },
+
+    { "en": "big", "es": "grande" },
+    { "en": "small", "es": "pequeño" },
+    { "en": "long", "es": "largo" },
+    { "en": "short", "es": "corto, bajo" },
+
+    { "en": "hot", "es": "caliente" },
+    { "en": "cold", "es": "frío" },
+    { "en": "warm", "es": "tibio, cálido" },
+    { "en": "cool", "es": "fresco" },
+
+    { "en": "easy", "es": "fácil" },
+    { "en": "hard", "es": "difícil, duro" },
+    { "en": "fast", "es": "rápido" },
+    { "en": "slow", "es": "lento" },
+
+    { "en": "clean", "es": "limpio" },
+    { "en": "dirty", "es": "sucio" },
+    { "en": "beautiful", "es": "bonito, hermoso" },
+    { "en": "ugly", "es": "feo" },
+
+    { "en": "happy", "es": "feliz" },
+    { "en": "sad", "es": "triste" },
+    { "en": "young", "es": "joven" },
+    { "en": "rich", "es": "rico" },
+    { "en": "poor", "es": "pobre" }
+  ]
+},
+
+{
+  "id": "eng_23",
+  "nombre": "Preguntas",
+  "vocabulario": [
+    { "en": "what", "es": "qué, cuál" },
+    { "en": "who", "es": "quién" },
+    { "en": "where", "es": "dónde" },
+    { "en": "when", "es": "cuándo" },
+    { "en": "why", "es": "por qué" },
+    { "en": "how", "es": "cómo" },
+
+    { "en": "which", "es": "cuál, cuáles" },
+    { "en": "whose", "es": "de quién" },
+
+    { "en": "how much", "es": "cuánto, cuánta" },
+    { "en": "how many", "es": "cuántos, cuántas" },
+    { "en": "how old", "es": "cuántos años" },
+    { "en": "how long", "es": "cuánto tiempo" },
+    { "en": "how often", "es": "con qué frecuencia" },
+
+    { "en": "what time", "es": "a qué hora" },
+    { "en": "what day", "es": "qué día" },
+    { "en": "what kind of", "es": "qué tipo de" }
+  ]
+},
+
+{
+  "id": "eng_24",
+  "nombre": "Pronombres",
+  "vocabulario": [
+    { "en": "I", "es": "yo" },
+    { "en": "you", "es": "tú, usted, ustedes" },
+    { "en": "he", "es": "él" },
+    { "en": "she", "es": "ella" },
+    { "en": "it", "es": "eso, ello" },
+    { "en": "we", "es": "nosotros" },
+    { "en": "they", "es": "ellos, ellas" },
+
+    { "en": "me", "es": "me, mí" },
+    { "en": "him", "es": "lo, le, él" },
+    { "en": "her", "es": "la, le, ella" },
+    { "en": "us", "es": "nos, nosotros" },
+    { "en": "them", "es": "los, las, les, ellos" }
+  ]
+},
+
+{
+  "id": "eng_25",
+  "nombre": "Posesivos",
+  "vocabulario": [
+    { "en": "my", "es": "mi" },
+    { "en": "your", "es": "tu, su" },
+    { "en": "his", "es": "su (de él)" },
+    { "en": "her", "es": "su (de ella)" },
+    { "en": "its", "es": "su (de eso)" },
+    { "en": "our", "es": "nuestro" },
+    { "en": "their", "es": "su (de ellos)" },
+
+    { "en": "mine", "es": "mío" },
+    { "en": "yours", "es": "tuyo, suyo" },
+    { "en": "his", "es": "suyo (de él)" },
+    { "en": "hers", "es": "suyo (de ella)" },
+    { "en": "ours", "es": "nuestro" },
+    { "en": "theirs", "es": "suyo (de ellos)" }
+  ]
+},
+
+{
+  "id": "eng_26",
+  "nombre": "Preposiciones",
+  "vocabulario": [
+    { "en": "in", "es": "en, dentro de" },
+    { "en": "on", "es": "en, sobre" },
+    { "en": "at", "es": "en, a" },
+
+    { "en": "to", "es": "a, hacia" },
+    { "en": "from", "es": "de, desde" },
+    { "en": "with", "es": "con" },
+    { "en": "without", "es": "sin" },
+
+    { "en": "for", "es": "para, por" },
+    { "en": "of", "es": "de" },
+    { "en": "about", "es": "sobre, acerca de" },
+
+    { "en": "before", "es": "antes de" },
+    { "en": "after", "es": "después de" },
+
+    { "en": "under", "es": "debajo de" },
+    { "en": "over", "es": "encima de, sobre" },
+    { "en": "between", "es": "entre" },
+    { "en": "next to", "es": "al lado de" },
+    { "en": "behind", "es": "detrás de" },
+    { "en": "in front of", "es": "frente a, delante de" },
+
+    { "en": "near", "es": "cerca de" },
+    { "en": "far from", "es": "lejos de" }
+  ]
+}
     
   ]
 }
