@@ -957,6 +957,115 @@
     { "en": "near", "es": "cerca de" },
     { "en": "far from", "es": "lejos de" }
   ]
+},
+
+{
+  "id": "eng_27",
+  "nombre": "Conectores",
+  "vocabulario": [
+    { "en": "and", "es": "y" },
+    { "en": "or", "es": "o" },
+    { "en": "but", "es": "pero" },
+
+    { "en": "because", "es": "porque" },
+    { "en": "so", "es": "así que, por eso" },
+
+    { "en": "then", "es": "entonces, luego" },
+    { "en": "also", "es": "también" },
+
+    { "en": "too", "es": "también" },
+    { "en": "only", "es": "solo, solamente" },
+
+    { "en": "if", "es": "si" },
+    { "en": "when", "es": "cuando" },
+
+    { "en": "first", "es": "primero" },
+    { "en": "next", "es": "después, siguiente" },
+    { "en": "finally", "es": "finalmente" }
+  ]
+},
+
+{
+  "id": "eng_28",
+  "nombre": "Adverbios comunes",
+  "vocabulario": [
+    { "en": "always", "es": "siempre" },
+    { "en": "usually", "es": "usualmente, normalmente" },
+    { "en": "often", "es": "a menudo, con frecuencia" },
+    { "en": "sometimes", "es": "a veces" },
+    { "en": "never", "es": "nunca" },
+
+    { "en": "very", "es": "muy" },
+    { "en": "really", "es": "realmente, de verdad" },
+    { "en": "too", "es": "demasiado, también" },
+
+    { "en": "here", "es": "aquí" },
+    { "en": "there", "es": "allí, allá" },
+
+    { "en": "well", "es": "bien" },
+    { "en": "badly", "es": "mal" },
+
+    { "en": "quickly", "es": "rápidamente" },
+    { "en": "slowly", "es": "lentamente" },
+
+    { "en": "today", "es": "hoy" },
+    { "en": "tomorrow", "es": "mañana" },
+    { "en": "yesterday", "es": "ayer" }
+  ]
+},
+
+{
+  "id": "eng_29",
+  "nombre": "Verbos modales",
+  "vocabulario": [
+    { "en": "can", "es": "poder" },
+    { "en": "could", "es": "podría, podía" },
+    { "en": "may", "es": "poder (permiso o posibilidad)" },
+    { "en": "might", "es": "podría (posibilidad)" },
+
+    { "en": "must", "es": "deber, tener que" },
+    { "en": "should", "es": "debería" },
+
+    { "en": "will", "es": "indica futuro" },
+    { "en": "would", "es": "indica condicional" },
+
+    { "en": "shall", "es": "deber, tener que (formal o enfático)" },
+    { "en": "ought to", "es": "debería" }
+  ]
+},
+
+{
+  "id": "eng_30",
+  "nombre": "Clima",
+  "vocabulario": [
+    { "en": "weather", "es": "clima, tiempo" },
+    { "en": "sun", "es": "sol" },
+    { "en": "rain", "es": "lluvia" },
+    { "en": "wind", "es": "viento" },
+    { "en": "cloud", "es": "nube" },
+    { "en": "snow", "es": "nieve" },
+
+    { "en": "sunny", "es": "soleado" },
+    { "en": "rainy", "es": "lluvioso" },
+    { "en": "windy", "es": "ventoso" },
+    { "en": "cloudy", "es": "nublado" },
+    { "en": "snowy", "es": "nevado" },
+
+    { "en": "hot", "es": "caliente, caluroso" },
+    { "en": "cold", "es": "frío" },
+    { "en": "warm", "es": "cálido, tibio" },
+    { "en": "cool", "es": "fresco" },
+
+    { "en": "storm", "es": "tormenta" },
+    { "en": "thunder", "es": "trueno" },
+    { "en": "lightning", "es": "relámpago" },
+    { "en": "temperature", "es": "temperatura" },
+
+    { "en": "It's sunny", "es": "está soleado" },
+    { "en": "It's raining", "es": "está lloviendo" },
+    { "en": "It's cold", "es": "hace frío" },
+    { "en": "It's hot", "es": "hace calor" }
+  ]
 }
     
   ]
