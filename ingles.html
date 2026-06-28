@@ -1370,15 +1370,21 @@ function verificar(letraForzada){
 
   if(letra === correctaLetra){
     sonidoCorrecto();
-    res.className = "correcto";
-    res.innerText = `Correcto ✔\n${ultimoAudioKey}\n${respuestaCorrecta}`;
+    res.innerHTML = `
+    <div class="correcto">Correcto ✔</div>
+    <div>${ultimoAudioKey}</div>
+    <div>${respuestaCorrecta}</div>
+    `;
     aciertos++;
     racha++;
     if(racha > mejorRacha) mejorRacha = racha;
   }else{
     sonidoIncorrecto();
-    res.className = "incorrecto";
-    res.innerText = `Incorrecto ✘\n${ultimoAudioKey}\n${respuestaCorrecta}`;
+    res.innerHTML = `
+    <div class="incorrecto">Incorrecto ✘</div>
+    <div>${ultimoAudioKey}</div>
+    <div>${respuestaCorrecta}</div>
+    `;
     errores++;
     racha = 0;
   }
@@ -1402,8 +1408,11 @@ function accionSiguiente(){
     yaValidado = true;
   
     const res = $("resultado");
-    res.className = "incorrecto";
-    res.innerText = `Saltado ✘\n${ultimoAudioKey}\n${respuestaCorrecta}`;
+    res.innerHTML = `
+    <div class="incorrecto">Saltado ✘</div>
+    <div>${ultimoAudioKey}</div>
+    <div>${respuestaCorrecta}</div>
+    `;
   
     pintarOpciones(null);
     bloquearOpciones();
