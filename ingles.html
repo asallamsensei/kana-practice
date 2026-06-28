@@ -156,7 +156,6 @@ h1{
 #opcionesTexto{
   margin-top: 10px;
   font-size: 25px;
-  line-height: 1.7;
   text-align: left;
   width: fit-content;
   max-width: min(720px, 100%);
@@ -370,7 +369,6 @@ h1{
     font-size: 40px;
     font-weight: 900;
     letter-spacing: .2px;
-    line-height: 1.25;
   }
 
   #promptSub{
@@ -421,7 +419,6 @@ h1{
   border-radius: 16px;
   padding: 14px 16px;
   font-size: 22px;
-  line-height: 1;
   user-select:none;
   margin-top: 6px;
   box-shadow:
@@ -479,7 +476,6 @@ h1{
 .modal p{
   margin:0 0 16px;
   color: var(--muted);
-  line-height: 1.5;
   font-size: 14px;
 }
   
@@ -537,7 +533,6 @@ h1{
 
   #opcionesTexto{
     font-size: 20px;
-    line-height: 1.6;
     padding: 8px 10px;
   }
 
@@ -887,6 +882,7 @@ let rondaDictado = false;
 
 let correctaLetra = "";
 let respuestaCorrecta = "";
+let respuestaEspanol = "";
 let yaValidado = false;
 
 let opcionesActuales = [];
@@ -1341,6 +1337,7 @@ function siguiente(){
   const poolLocal = b.vocabulario;
 
   const itemCorrecto = pick(poolLocal);
+  respuestaEspanol = itemCorrecto.es;
   respuestaCorrecta = textoRespuesta(itemCorrecto);
 
   const poolOpciones = getPool(poolScope);
@@ -1372,8 +1369,8 @@ function verificar(letraForzada){
     sonidoCorrecto();
     res.innerHTML = `
     <div class="correcto">Correcto ✔</div>
+    <div>${respuestaEspanol}</div>
     <div>${ultimoAudioKey}</div>
-    <div>${respuestaCorrecta}</div>
     `;
     aciertos++;
     racha++;
@@ -1382,8 +1379,8 @@ function verificar(letraForzada){
     sonidoIncorrecto();
     res.innerHTML = `
     <div class="incorrecto">Incorrecto ✘</div>
+    <div>${respuestaEspanol}</div>
     <div>${ultimoAudioKey}</div>
-    <div>${respuestaCorrecta}</div>
     `;
     errores++;
     racha = 0;
@@ -1410,8 +1407,8 @@ function accionSiguiente(){
     const res = $("resultado");
     res.innerHTML = `
     <div class="incorrecto">Saltado ✘</div>
+    <div>${respuestaEspanol}</div>
     <div>${ultimoAudioKey}</div>
-    <div>${respuestaCorrecta}</div>
     `;
   
     pintarOpciones(null);
