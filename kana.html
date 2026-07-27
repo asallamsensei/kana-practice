@@ -609,7 +609,27 @@
           <button id="btn-dictado" class="orden-btn" onclick="toggleDictado()">Dictado 🔊</button>
           <button id="btn-mix" class="orden-btn" onclick="toggleMix()">MIX</button>
         </div>
-      
+
+        <div class="sep"></div>
+        
+        <div class="sub-title">Audio</div>
+        
+        <div class="toggle-row">
+          <button
+            id="btn-audio-mp3"
+            class="modo-btn"
+            onclick="setAudioModo('mp3')">
+            MP3
+          </button>
+        
+          <button
+            id="btn-audio-tts"
+            class="modo-btn"
+            onclick="setAudioModo('tts')">
+            Sintetizador
+          </button>
+        </div>
+        
       </div>
 
 
@@ -657,6 +677,7 @@ fetch("data/kana.json")
     construirPoolActual();
     aplicarVisualScripts();
     aplicarVisualDirecciones();
+    aplicarVisualAudio();
     cargarStatsActual();
     siguienteKana();
 
@@ -682,7 +703,7 @@ let usarJPES = true;
 let usarESJP = true;
 let usarDictado = true;
 let usarMix = true;
-
+let audioModo = "mp3";
 let opcionesActuales = [];
 
 let tipoPreguntaActual = "jp_es";
@@ -952,6 +973,27 @@ function aplicarVisualScripts(){
   if (usarExtra) btnE.classList.add("activo");
 }
 
+function setAudioModo(modo){
+  audioModo = modo;
+  aplicarVisualAudio();
+}
+
+function aplicarVisualAudio(){
+  const btnMP3 = document.getElementById("btn-audio-mp3");
+  const btnTTS = document.getElementById("btn-audio-tts");
+
+  if (!btnMP3 || !btnTTS) return;
+
+  btnMP3.classList.remove("activo");
+  btnTTS.classList.remove("activo");
+
+  if (audioModo === "mp3") {
+    btnMP3.classList.add("activo");
+  } else {
+    btnTTS.classList.add("activo");
+  }
+}
+  
 function aplicarVisualDirecciones(){
   const btnJPES = document.getElementById("btn-jp-es");
   const btnESJP = document.getElementById("btn-es-jp");
@@ -1111,6 +1153,32 @@ function valorRespuesta(item, tipo){
 /* ===============================
    AUDIO (por ROMAJI)
 =============================== */
+
+function reproducirSintetizador(kana){
+  if (!("speechSynthesis" in window)) return;
+
+  window.speechSynthesis.cancel();
+
+  const mensaje = new SpeechSynthesisUtterance(kana);
+
+  mensaje.lang = "ja-JP";
+  mensaje.rate = 0.8;
+  mensaje.pitch = 1;
+  mensaje.volume = 1;
+
+  const voces = window.speechSynthesis.getVoices();
+
+  const vozJaponesa = voces.find(voz =>
+    voz.lang && voz.lang.toLowerCase().startsWith("ja")
+  );
+
+  if (vozJaponesa) {
+    mensaje.voice = vozJaponesa;
+  }
+
+  window.speechSynthesis.speak(mensaje);
+}  
+  
 function romajiParaArchivo(romaji){
   let r = (romaji || "").trim().toLowerCase();
 
@@ -1159,7 +1227,15 @@ function reproducirAudioKana(romaji){
   let i = 0;
 
   const intentar = () => {
-    if (i >= opciones.length) return;
+    if (i >= opciones.length) {
+      const kana = kanaLista[actual]?.[0];
+  
+      if (kana) {
+        reproducirSintetizador(kana);
+      }
+  
+      return;
+    }
 
     const nombre = opciones[i++];
     audioKana.src = baseDir + encodeURIComponent(nombre) + ".mp3";
@@ -1179,8 +1255,18 @@ function reproducirAudioKana(romaji){
 
 function replayAudio(){
   if (!kanaLista.length) return;
-  const r = kanaLista[actual]?.[1];
-  if (r) reproducirAudioKana(r);
+
+  const item = kanaLista[actual];
+  if (!item) return;
+
+  const kana = item[0];
+  const romaji = item[1];
+
+  if (audioModo === "tts") {
+    reproducirSintetizador(kana);
+  } else {
+    reproducirAudioKana(romaji);
+  }
 }
 
 /* ===============================
@@ -1212,7 +1298,7 @@ function siguienteKana(){
   actualizarBotonAudio();
 
   if (esDictadoTipo(tipoPreguntaActual)) {
-    reproducirAudioKana(item[1]);
+    replayAudio();
   }
 }
 
