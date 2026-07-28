@@ -1224,6 +1224,495 @@
           "explicacion": "テレビを見る = ver televisión."
         }
       ]
+    },
+
+    {
+      "nombre": "Preguntas 6",
+      "preguntas": [
+
+        {
+          "id": 101,
+          "titulo": "¿Cómo se dice «los alrededores» en japonés?",
+          "opciones": {
+            "a": "中",
+            "b": "周り",
+            "c": "外国",
+            "d": "向こう"
+          },
+          "correcta": "b",
+          "explicacion": "周り（まわり） significa 'alrededores' o 'entorno'."
+        },
+        {
+          "id": 102,
+          "titulo": "「学校の周りにコンビニがあります。」\n¿Dónde está el konbini?",
+          "opciones": {
+            "a": "Dentro de la escuela",
+            "b": "Frente a la escuela",
+            "c": "Alrededor de la escuela",
+            "d": "Encima de la escuela"
+          },
+          "correcta": "c",
+          "explicacion": "周り significa 'alrededor'. La frase dice: 'Hay un konbini alrededor de la escuela'."
+        },
+        {
+          "id": 103,
+          "titulo": "¿Qué verbo significa «levantar» o «subir algo»?",
+          "opciones": {
+            "a": "下げる",
+            "b": "上げる",
+            "c": "入れる",
+            "d": "止める"
+          },
+          "correcta": "b",
+          "explicacion": "上げる（あげる） significa levantar o subir algo."
+        },
+        {
+          "id": 104,
+          "titulo": "「先生が『手を＿＿＿ください。』と言いました。」\n¿Cuál opción completa mejor la frase?",
+          "opciones": {
+            "a": "食べて",
+            "b": "上げて",
+            "c": "閉めて",
+            "d": "呼んで"
+          },
+          "correcta": "b",
+          "explicacion": "手を上げてください = 'Levanten la mano, por favor'. Es una expresión muy común en clase."
+        },
+        {
+          "id": 105,
+          "titulo": "¿Qué significa 人形?",
+          "opciones": {
+            "a": "Peluche",
+            "b": "Muñeca",
+            "c": "Niño",
+            "d": "Robot"
+          },
+          "correcta": "b",
+          "explicacion": "人形（にんぎょう） significa muñeca o marioneta."
+        },
+        {
+          "id": 106,
+          "titulo": "「ひな祭りでは人形を飾ります。」\n¿Qué se suele decorar durante el Hinamatsuri?",
+          "opciones": {
+            "a": "Flores",
+            "b": "Muñecas",
+            "c": "Cometas",
+            "d": "Faroles"
+          },
+          "correcta": "b",
+          "explicacion": "En el Hinamatsuri (Festival de las Niñas) es tradicional decorar muñecas (ひな人形)."
+        },
+        {
+          "id": 107,
+          "titulo": "¿Cuál es el kanji correcto para «cultura»?",
+          "opciones": {
+            "a": "文学",
+            "b": "文化",
+            "c": "文明",
+            "d": "社会"
+          },
+          "correcta": "b",
+          "explicacion": "文化（ぶんか） significa 'cultura'."
+        },
+        {
+          "id": 108,
+          "titulo": "「日本の文化に興味があります。」\n¿Qué quiere decir la persona?",
+          "opciones": {
+            "a": "Le interesa la cultura japonesa.",
+            "b": "Quiere viajar a Japón.",
+            "c": "Estudia historia japonesa.",
+            "d": "Trabaja en Japón."
+          },
+          "correcta": "a",
+          "explicacion": "文化に興味があります = 'Tengo interés en la cultura'."
+        },
+        {
+          "id": 109,
+          "titulo": "¿Qué kanji se lee 「うで」?",
+          "opciones": {
+            "a": "肩",
+            "b": "手",
+            "c": "腕",
+            "d": "足"
+          },
+          "correcta": "c",
+          "explicacion": "腕（うで） significa brazo."
+        },
+        {
+          "id": 110,
+          "titulo": "「父は料理の腕がいいです。」\nEn esta frase, 腕 significa…",
+          "opciones": {
+            "a": "Brazo",
+            "b": "Fuerza",
+            "c": "Experiencia",
+            "d": "Habilidad"
+          },
+          "correcta": "d",
+          "explicacion": "腕 puede significar 'habilidad' o 'destreza'. 料理の腕がいい = 'Tiene buena mano para cocinar'."
+        },
+        {
+          "id": 111,
+          "titulo": "¿Cómo se dice «costa» en japonés?",
+          "opciones": {
+            "a": "港",
+            "b": "海岸",
+            "c": "海",
+            "d": "島"
+          },
+          "correcta": "b",
+          "explicacion": "海岸（かいがん） significa costa o litoral."
+        },
+        {
+          "id": 112,
+          "titulo": "「夏休みに海岸を散歩しました。」\n¿Dónde paseó la persona?",
+          "opciones": {
+            "a": "Por la montaña",
+            "b": "Por la costa",
+            "c": "Por el bosque",
+            "d": "Por el centro de la ciudad"
+          },
+          "correcta": "b",
+          "explicacion": "海岸を散歩する = pasear por la costa."
+        },
+        {
+          "id": 113,
+          "titulo": "¿Qué significa 産業?",
+          "opciones": {
+            "a": "Comercio",
+            "b": "Industria",
+            "c": "Agricultura",
+            "d": "Tecnología"
+          },
+          "correcta": "b",
+          "explicacion": "産業（さんぎょう） significa industria."
+        },
+        {
+          "id": 114,
+          "titulo": "「この町は自動車産業で有名です。」\n¿Por qué es famosa esta ciudad?",
+          "opciones": {
+            "a": "Por sus playas",
+            "b": "Por la industria automovilística",
+            "c": "Por sus templos",
+            "d": "Por sus universidades"
+          },
+          "correcta": "b",
+          "explicacion": "自動車産業 = industria del automóvil."
+        },
+        {
+          "id": 115,
+          "titulo": "¿Cómo se dice «zoológico» en japonés?",
+          "opciones": {
+            "a": "水族館",
+            "b": "動物園",
+            "c": "公園",
+            "d": "美術館"
+          },
+          "correcta": "b",
+          "explicacion": "動物園（どうぶつえん） significa zoológico."
+        },
+        {
+          "id": 116,
+          "titulo": "「パンダを見るために動物園へ行きました。」\n¿Por qué fue la persona allí?",
+          "opciones": {
+            "a": "Para ver un panda",
+            "b": "Para comprar animales",
+            "c": "Para hacer ejercicio",
+            "d": "Para visitar un museo"
+          },
+          "correcta": "a",
+          "explicacion": "パンダを見るために = para ver un panda."
+        },
+        {
+          "id": 117,
+          "titulo": "¿Qué significa 美術館?",
+          "opciones": {
+            "a": "Museo de historia",
+            "b": "Biblioteca",
+            "c": "Museo de arte",
+            "d": "Teatro"
+          },
+          "correcta": "c",
+          "explicacion": "美術館（びじゅつかん） significa museo de arte."
+        },
+        {
+          "id": 118,
+          "titulo": "「ゴッホの絵を見に美術館へ行きました。」\n¿Qué fue a ver la persona?",
+          "opciones": {
+            "a": "Esculturas",
+            "b": "Pinturas",
+            "c": "Animales",
+            "d": "Películas"
+          },
+          "correcta": "b",
+          "explicacion": "絵 = pintura. ゴッホ = Van Gogh."
+        },
+        {
+          "id": 119,
+          "titulo": "¿Cómo se dice «barco» en japonés?",
+          "opciones": {
+            "a": "飛行機",
+            "b": "船",
+            "c": "電車",
+            "d": "自転車"
+          },
+          "correcta": "b",
+          "explicacion": "船（ふね） significa barco."
+        },
+        {
+          "id": 120,
+          "titulo": "「島まで船で行きます。」\n¿Cómo viajará la persona?",
+          "opciones": {
+            "a": "En tren",
+            "b": "En avión",
+            "c": "En barco",
+            "d": "En autobús"
+          },
+          "correcta": "c",
+          "explicacion": "船で行きます = ir en barco."
+        },
+        {
+          "id": 121,
+          "titulo": "¿Cómo se dice «agua corriente» o «servicio de agua» en japonés?",
+          "opciones": {
+            "a": "水道",
+            "b": "電気",
+            "c": "川",
+            "d": "井戸"
+          },
+          "correcta": "a",
+          "explicacion": "水道（すいどう） significa agua corriente o sistema de suministro de agua."
+        },
+        {
+          "id": 122,
+          "titulo": "「この町は水道がありません。」\n¿Qué problema tiene este lugar?",
+          "opciones": {
+            "a": "No hay electricidad.",
+            "b": "No hay agua corriente.",
+            "c": "No hay carreteras.",
+            "d": "No hay hospitales."
+          },
+          "correcta": "b",
+          "explicacion": "水道がありません = No hay servicio de agua corriente."
+        },
+        {
+          "id": 123,
+          "titulo": "¿Qué significa 飛行場?",
+          "opciones": {
+            "a": "Puerto",
+            "b": "Aeropuerto",
+            "c": "Estación",
+            "d": "Terminal de buses"
+          },
+          "correcta": "b",
+          "explicacion": "飛行場（ひこうじょう） significa aeropuerto."
+        },
+        {
+          "id": 124,
+          "titulo": "「朝六時に飛行場へ行かなければなりません。」\n¿Por qué irá allí tan temprano?",
+          "opciones": {
+            "a": "Va a tomar un avión.",
+            "b": "Va a comprar un coche.",
+            "c": "Va al zoológico.",
+            "d": "Va a una biblioteca."
+          },
+          "correcta": "a",
+          "explicacion": "飛行場 es el lugar desde donde salen y llegan los aviones."
+        },
+        {
+          "id": 125,
+          "titulo": "¿Cómo se dice «uva» en japonés?",
+          "opciones": {
+            "a": "苺",
+            "b": "葡萄",
+            "c": "梨",
+            "d": "桃"
+          },
+          "correcta": "b",
+          "explicacion": "葡萄（ぶどう） significa uva."
+        },
+        {
+          "id": 126,
+          "titulo": "「秋になると葡萄がおいしくなります。」\n¿Qué fruta está de temporada?",
+          "opciones": {
+            "a": "Las manzanas",
+            "b": "Las uvas",
+            "c": "Las naranjas",
+            "d": "Las cerezas"
+          },
+          "correcta": "b",
+          "explicacion": "葡萄 = uvas."
+        },
+        {
+          "id": 127,
+          "titulo": "¿Qué significa 事故?",
+          "opciones": {
+            "a": "Incendio",
+            "b": "Accidente",
+            "c": "Problema",
+            "d": "Enfermedad"
+          },
+          "correcta": "b",
+          "explicacion": "事故（じこ） significa accidente."
+        },
+        {
+          "id": 128,
+          "titulo": "「駅の近くで事故がありました。」\n¿Qué ocurrió cerca de la estación?",
+          "opciones": {
+            "a": "Un festival",
+            "b": "Un accidente",
+            "c": "Una reunión",
+            "d": "Una competencia"
+          },
+          "correcta": "b",
+          "explicacion": "事故がありました = Hubo un accidente."
+        },
+        {
+          "id": 129,
+          "titulo": "¿Qué significa 説明?",
+          "opciones": {
+            "a": "Conversación",
+            "b": "Explicación",
+            "c": "Opinión",
+            "d": "Respuesta"
+          },
+          "correcta": "b",
+          "explicacion": "説明（せつめい） significa explicación."
+        },
+        {
+          "id": 130,
+          "titulo": "「先生の説明はとてもわかりやすかったです。」\n¿Qué quiso decir la persona?",
+          "opciones": {
+            "a": "La explicación del profesor fue fácil de entender.",
+            "b": "El profesor habló muy rápido.",
+            "c": "El profesor llegó tarde.",
+            "d": "La clase fue muy corta."
+          },
+          "correcta": "a",
+          "explicacion": "わかりやすい significa 'fácil de entender'."
+        },
+        {
+          "id": 131,
+          "titulo": "¿Cómo se dice «hijo» (propio) en japonés?",
+          "opciones": {
+            "a": "息子",
+            "b": "兄",
+            "c": "父",
+            "d": "孫"
+          },
+          "correcta": "a",
+          "explicacion": "息子（むすこ） significa 'mi hijo' o 'hijo (propio)'."
+        },
+        {
+          "id": 132,
+          "titulo": "「私の息子は高校生です。」\n¿Qué nos dice la persona?",
+          "opciones": {
+            "a": "Su hermano es estudiante de secundaria.",
+            "b": "Su hijo está en la preparatoria/secundaria superior.",
+            "c": "Su padre es profesor.",
+            "d": "Su sobrino trabaja."
+          },
+          "correcta": "b",
+          "explicacion": "高校生 = estudiante de preparatoria. 息子 = hijo."
+        },
+        {
+          "id": 133,
+          "titulo": "¿Qué significa 生活?",
+          "opciones": {
+            "a": "Trabajo",
+            "b": "Vida cotidiana",
+            "c": "Familia",
+            "d": "Costumbre"
+          },
+          "correcta": "b",
+          "explicacion": "生活（せいかつ） significa vida cotidiana o forma de vida."
+        },
+        {
+          "id": 134,
+          "titulo": "「日本での生活は楽しいです。」\n¿Qué quiere decir la persona?",
+          "opciones": {
+            "a": "Trabajar en Japón es divertido.",
+            "b": "Su vida en Japón es agradable.",
+            "c": "Le gusta viajar a Japón.",
+            "d": "Quiere vivir en otro país."
+          },
+          "correcta": "b",
+          "explicacion": "日本での生活 = la vida en Japón."
+        },
+        {
+          "id": 135,
+          "titulo": "¿Qué significa 注意?",
+          "opciones": {
+            "a": "Promesa",
+            "b": "Cuidado / Atención",
+            "c": "Regla",
+            "d": "Problema"
+          },
+          "correcta": "b",
+          "explicacion": "注意（ちゅうい） significa cuidado, atención o precaución."
+        },
+        {
+          "id": 136,
+          "titulo": "「車に注意してください。」\n¿Qué está pidiendo la persona?",
+          "opciones": {
+            "a": "Que conduzcas más rápido.",
+            "b": "Que tengas cuidado con los coches.",
+            "c": "Que limpies el coche.",
+            "d": "Que compres un coche."
+          },
+          "correcta": "b",
+          "explicacion": "〜に注意してください = 'Tenga cuidado con...'."
+        },
+        {
+          "id": 137,
+          "titulo": "¿Qué significa 女性?",
+          "opciones": {
+            "a": "Niña",
+            "b": "Madre",
+            "c": "Mujer",
+            "d": "Señora mayor"
+          },
+          "correcta": "c",
+          "explicacion": "女性（じょせい） significa mujer."
+        },
+        {
+          "id": 138,
+          "titulo": "「女性専用車両があります。」\n¿Quién puede usar este vagón?",
+          "opciones": {
+            "a": "Solo estudiantes.",
+            "b": "Solo turistas.",
+            "c": "Solo mujeres.",
+            "d": "Solo niños."
+          },
+          "correcta": "c",
+          "explicacion": "女性専用車両 = vagón exclusivo para mujeres."
+        },
+        {
+          "id": 139,
+          "titulo": "¿Qué verbo significa «vivir» (estar vivo)?",
+          "opciones": {
+            "a": "住む",
+            "b": "生きる",
+            "c": "育てる",
+            "d": "働く"
+          },
+          "correcta": "b",
+          "explicacion": "生きる（いきる） significa vivir en el sentido de estar vivo, mientras que 住む significa residir en un lugar."
+        },
+        {
+          "id": 140,
+          "titulo": "「人は水がないと生きることができません。」\n¿Qué significa esta oración?",
+          "opciones": {
+            "a": "Las personas no pueden nadar sin agua.",
+            "b": "Las personas no pueden vivir sin agua.",
+            "c": "Las personas no pueden beber agua.",
+            "d": "Las personas no pueden viajar por agua."
+          },
+          "correcta": "b",
+          "explicacion": "生きることができません = 'no pueden vivir'. Es un uso muy común de este verbo."
+        }
+      ]
     }
+    
+    
   ]
 }
