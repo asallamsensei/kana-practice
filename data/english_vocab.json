@@ -1066,7 +1066,88 @@
     { "en": "It's cold", "es": "hace frío" },
     { "en": "It's hot", "es": "hace calor" }
   ]
+},
+{
+  "id": "eng_31",
+  "nombre": "Phrasal Verbs Básicos",
+  "vocabulario": [
+    { "en": "wake up", "es": "despertarse" },
+    { "en": "get up", "es": "levantarse" },
+
+    { "en": "come in", "es": "entrar" },
+    { "en": "go out", "es": "salir" },
+    { "en": "come back", "es": "volver" },
+    { "en": "go back", "es": "regresar" },
+    { "en": "get in", "es": "entrar (a un carro, taxi, etc.)" },
+    { "en": "get out", "es": "salir (de un carro, taxi, etc.)" },
+
+    { "en": "sit down", "es": "sentarse" },
+    { "en": "stand up", "es": "ponerse de pie" },
+
+    { "en": "turn on", "es": "encender" },
+    { "en": "turn off", "es": "apagar" },
+
+    { "en": "put on", "es": "ponerse (ropa)" },
+    { "en": "take off", "es": "quitarse (ropa)" },
+
+    { "en": "pick up", "es": "recoger; levantar; contestar (el teléfono)" },
+    { "en": "put away", "es": "guardar" },
+    { "en": "throw away", "es": "botar; tirar" },
+
+    { "en": "look for", "es": "buscar" },
+    { "en": "look after", "es": "cuidar" },
+    { "en": "look up", "es": "buscar (información)" },
+    { "en": "find out", "es": "averiguar; descubrir" },
+
+    { "en": "try on", "es": "probarse (ropa)" },
+
+    { "en": "give up", "es": "rendirse; dejar un hábito" },
+    { "en": "keep on", "es": "continuar" },
+    { "en": "go on", "es": "continuar" },
+
+    { "en": "grow up", "es": "crecer" },
+
+    { "en": "run out of", "es": "quedarse sin" },
+
+    { "en": "get along with", "es": "llevarse bien con" },
+
+    { "en": "work out", "es": "hacer ejercicio; resolver; resultar" },
+
+    { "en": "check in", "es": "registrarse (hotel, aeropuerto)" },
+    { "en": "check out", "es": "hacer el check-out; revisar" },
+
+    { "en": "call back", "es": "devolver una llamada" },
+    { "en": "call off", "es": "cancelar" },
+
+    { "en": "hang up", "es": "colgar (el teléfono)" },
+    { "en": "hold on", "es": "esperar un momento" },
+
+    { "en": "show up", "es": "aparecer; presentarse" },
+    { "en": "come on", "es": "vamos; apresúrate" },
+
+    { "en": "set up", "es": "configurar; instalar" },
+    { "en": "clean up", "es": "limpiar; ordenar" },
+
+    { "en": "fill out", "es": "llenar (un formulario)" },
+    { "en": "fill in", "es": "completar (espacios en blanco)" },
+
+    { "en": "write down", "es": "anotar" },
+
+    { "en": "take back", "es": "devolver; retirar lo dicho" },
+
+    { "en": "break down", "es": "averiarse" },
+    { "en": "break up", "es": "terminar una relación" },
+
+    { "en": "take out", "es": "sacar; pedir comida para llevar" },
+
+    { "en": "eat out", "es": "comer fuera" },
+
+    { "en": "come over", "es": "pasar por la casa de alguien" },
+
+    { "en": "drop off", "es": "dejar a alguien o algo" },
+
+    { "en": "end up", "es": "terminar; acabar" }
+  ]
 }
-    
   ]
 }
