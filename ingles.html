@@ -1463,22 +1463,37 @@ function renderChips(){
     chip.className = "chip" + (bloquesActivos.has(i) ? " activo" : "");
     chip.textContent = b.nombre || `Bloque ${i+1}`;
 
-    chip.onclick = ()=>{
-      if(bloquesActivos.has(i)){
-        bloquesActivos.delete(i);
-        chip.classList.remove("activo", "mix-sombra");
+    chip.onclick = () => {
+      const estanTodosActivos =
+        bloquesActivos.size === DATA.bloques.length;
+    
+      if(estanTodosActivos){
+        // Si estaban todos, dejamos solo este
+        bloquesActivos = new Set([i]);
+    
+        [...cont.children].forEach((otroChip, indice) => {
+          otroChip.classList.toggle("activo", indice === i);
+          otroChip.classList.remove("mix-sombra");
+        });
       }else{
-        bloquesActivos.add(i);
-        chip.classList.add("activo");
+        // Toggle normal
+        if(bloquesActivos.has(i)){
+          bloquesActivos.delete(i);
+          chip.classList.remove("activo", "mix-sombra");
+        }else{
+          bloquesActivos.add(i);
+          chip.classList.add("activo");
+        }
       }
-
+    
       $("btnTodo")?.classList.toggle(
         "activo",
         bloquesActivos.size === DATA.bloques.length
       );
-
+    
       yaValidado = false;
       limpiarResultado();
+      cargarStatsActual();
       siguiente();
     };
 
