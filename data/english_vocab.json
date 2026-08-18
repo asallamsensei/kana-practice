@@ -75,45 +75,44 @@
   ]
 },
     
-    {
-    "id": "eng_02",
-    "nombre": "Presentarse",
-    "vocabulario": [
+{
+  "id": "eng_02",
+  "nombre": "Presentarse",
+  "vocabulario": [
     { "en": "my name is", "es": "mi nombre es" },
     { "en": "I am", "es": "yo soy, yo estoy" },
     { "en": "I'm", "es": "contracción de 'I am'" },
-    
+
     { "en": "what is your name", "es": "cómo te llamas" },
     { "en": "what's your name", "es": "cómo te llamas (informal)" },
-    
+
     { "en": "nice to meet you", "es": "mucho gusto" },
     { "en": "where are you from", "es": "de dónde eres" },
     { "en": "I am from", "es": "soy de" },
-    
+
     { "en": "how old are you", "es": "cuántos años tienes" },
     { "en": "I am 25 years old", "es": "tengo 25 años" },
-    
+
     { "en": "what do you do", "es": "a qué te dedicas" },
     { "en": "I work as", "es": "trabajo como" },
     { "en": "student", "es": "estudiante" },
     { "en": "teacher", "es": "profesor" },
     { "en": "engineer", "es": "ingeniero" },
     { "en": "developer", "es": "desarrollador" },
-    
+
     { "en": "I live in", "es": "vivo en" },
     { "en": "I speak", "es": "hablo" },
-    
+
     { "en": "english", "es": "inglés" },
     { "en": "spanish", "es": "español" },
-    
+
     { "en": "this is my friend", "es": "este es mi amigo" },
     { "en": "let me introduce myself", "es": "déjame presentarme" },
-    
+
     { "en": "I'm happy to meet you", "es": "me alegra conocerte" },
     { "en": "it's a pleasure to meet you", "es": "es un placer conocerte" }
-    
-    ]
-    },
+  ]
+},
     
 {
   "id": "eng_03",
@@ -199,38 +198,38 @@
         { "en": "one hundred", "es": "cien" }
       ]
     },
-    {
-      "id": "eng_05",
-      "nombre": "Cantidades",
-      "vocabulario": [
-        { "en": "some", "es": "algunos, algo de" },
-        { "en": "any", "es": "alguno, algo de; ninguno, nada (en oraciones negativas)" },
-        { "en": "many", "es": "muchos" },
-        { "en": "much", "es": "mucho" },
-        { "en": "a lot of", "es": "mucho, muchos" },
-    
-        { "en": "few", "es": "pocos" },
-        { "en": "a few", "es": "unos pocos" },
-        { "en": "little", "es": "poco" },
-        { "en": "a little", "es": "un poco" },
-    
-        { "en": "enough", "es": "suficiente" },
-        { "en": "more", "es": "más" },
-        { "en": "less", "es": "menos" },
-    
-        { "en": "all", "es": "todo, todos" },
-        { "en": "none", "es": "ninguno" },
-        { "en": "every", "es": "cada" },
-        { "en": "each", "es": "cada uno" },
-    
-        { "en": "half", "es": "mitad" },
-        { "en": "quarter", "es": "cuarto" },
-        { "en": "full", "es": "lleno" },
-        { "en": "empty", "es": "vacío" }
-      ]
-    },
+{
+  "id": "eng_05",
+  "nombre": "Cantidades",
+  "vocabulario": [
+    { "en": "some", "es": "algunos, algo de" },
+    { "en": "any", "es": "alguno, algo de; ninguno, nada (en oraciones negativas)" },
+    { "en": "many", "es": "muchos" },
+    { "en": "much", "es": "mucho" },
+    { "en": "a lot of", "es": "mucho, muchos" },
 
-  {
+    { "en": "few", "es": "pocos" },
+    { "en": "a few", "es": "unos pocos" },
+    { "en": "little", "es": "poco" },
+    { "en": "a little", "es": "un poco" },
+
+    { "en": "enough", "es": "suficiente" },
+    { "en": "more", "es": "más" },
+    { "en": "less", "es": "menos" },
+
+    { "en": "all", "es": "todo, todos" },
+    { "en": "none", "es": "ninguno" },
+    { "en": "every", "es": "cada" },
+    { "en": "each", "es": "cada uno" },
+
+    { "en": "half", "es": "mitad" },
+    { "en": "quarter", "es": "cuarto" },
+    { "en": "full", "es": "lleno" },
+    { "en": "empty", "es": "vacío" }
+  ]
+},
+
+{
   "id": "eng_06",
   "nombre": "Fechas",
   "vocabulario": [
@@ -302,151 +301,151 @@
   ]
 },
     {
-      "id": "eng_08",
-      "nombre": "Ingredientes",
-      "vocabulario": [
-        { "en": "water", "es": "agua" },
-        { "en": "milk", "es": "leche" },
-        { "en": "oil", "es": "aceite" },
-        { "en": "olive oil", "es": "aceite de oliva" },
-    
-        { "en": "salt", "es": "sal" },
-        { "en": "pepper", "es": "pimienta" },
-        { "en": "sugar", "es": "azúcar" },
-        { "en": "flour", "es": "harina" },
-    
-        { "en": "rice", "es": "arroz" },
-        { "en": "pasta", "es": "pasta" },
-        { "en": "bread", "es": "pan" },
-    
-        { "en": "egg", "es": "huevo" },
-        { "en": "butter", "es": "mantequilla" },
-        { "en": "cheese", "es": "queso" },
-        { "en": "yogurt", "es": "yogur" },
-    
-        { "en": "chicken", "es": "pollo" },
-        { "en": "beef", "es": "carne de res" },
-        { "en": "pork", "es": "carne de cerdo" },
-        { "en": "fish", "es": "pescado" },
-    
-        { "en": "onion", "es": "cebolla" },
-        { "en": "garlic", "es": "ajo" },
-        { "en": "tomato", "es": "tomate" },
-        { "en": "potato", "es": "papa" },
-    
-        { "en": "carrot", "es": "zanahoria" },
-        { "en": "lettuce", "es": "lechuga" },
-        { "en": "cucumber", "es": "pepino" },
-        { "en": "corn", "es": "maíz" },
-    
-        { "en": "beans", "es": "frijoles" },
-        { "en": "peas", "es": "guisantes, arvejas" },
-    
-        { "en": "apple", "es": "manzana" },
-        { "en": "banana", "es": "banano, plátano" },
-        { "en": "orange", "es": "naranja" },
-        { "en": "lemon", "es": "limón" },
-    
-        { "en": "strawberry", "es": "fresa" },
-        { "en": "grape", "es": "uva" },
-    
-        { "en": "honey", "es": "miel" },
-        { "en": "vinegar", "es": "vinagre" },
-        { "en": "sauce", "es": "salsa" },
-        { "en": "spices", "es": "especias" }
-      ]
-      },
+  "id": "eng_08",
+  "nombre": "Ingredientes",
+  "vocabulario": [
+    { "en": "water", "es": "agua" },
+    { "en": "milk", "es": "leche" },
+    { "en": "oil", "es": "aceite" },
+    { "en": "olive oil", "es": "aceite de oliva" },
+
+    { "en": "salt", "es": "sal" },
+    { "en": "pepper", "es": "pimienta" },
+    { "en": "sugar", "es": "azúcar" },
+    { "en": "flour", "es": "harina" },
+
+    { "en": "rice", "es": "arroz" },
+    { "en": "pasta", "es": "pasta" },
+    { "en": "bread", "es": "pan" },
+
+    { "en": "egg", "es": "huevo" },
+    { "en": "butter", "es": "mantequilla" },
+    { "en": "cheese", "es": "queso" },
+    { "en": "yogurt", "es": "yogur" },
+
+    { "en": "chicken", "es": "pollo" },
+    { "en": "beef", "es": "carne de res" },
+    { "en": "pork", "es": "carne de cerdo" },
+    { "en": "fish", "es": "pescado" },
+
+    { "en": "onion", "es": "cebolla" },
+    { "en": "garlic", "es": "ajo" },
+    { "en": "tomato", "es": "tomate" },
+    { "en": "potato", "es": "papa" },
+
+    { "en": "carrot", "es": "zanahoria" },
+    { "en": "lettuce", "es": "lechuga" },
+    { "en": "cucumber", "es": "pepino" },
+    { "en": "corn", "es": "maíz" },
+
+    { "en": "beans", "es": "frijoles" },
+    { "en": "peas", "es": "guisantes, arvejas" },
+
+    { "en": "apple", "es": "manzana" },
+    { "en": "banana", "es": "banano, plátano" },
+    { "en": "orange", "es": "naranja" },
+    { "en": "lemon", "es": "limón" },
+
+    { "en": "strawberry", "es": "fresa" },
+    { "en": "grape", "es": "uva" },
+
+    { "en": "honey", "es": "miel" },
+    { "en": "vinegar", "es": "vinagre" },
+    { "en": "sauce", "es": "salsa" },
+    { "en": "spices", "es": "especias" }
+  ]
+},
       {
-      "id": "eng_09",
-      "nombre": "Utensilios",
-      "vocabulario": [
-        { "en": "knife", "es": "cuchillo" },
-        { "en": "fork", "es": "tenedor" },
-        { "en": "spoon", "es": "cuchara" },
-        { "en": "teaspoon", "es": "cucharadita" },
-        { "en": "tablespoon", "es": "cucharada" },
-    
-        { "en": "plate", "es": "plato" },
-        { "en": "bowl", "es": "tazón, bol" },
-        { "en": "cup", "es": "taza" },
-        { "en": "glass", "es": "vaso" },
-        { "en": "mug", "es": "jarro, mug" },
-    
-        { "en": "pot", "es": "olla" },
-        { "en": "pan", "es": "sartén" },
-        { "en": "lid", "es": "tapa" },
-        { "en": "pressure cooker", "es": "olla a presión" },
-    
-        { "en": "cutting board", "es": "tabla de cortar" },
-        { "en": "grater", "es": "rallador" },
-        { "en": "peeler", "es": "pelador" },
-        { "en": "can opener", "es": "abrelatas" },
-    
-        { "en": "whisk", "es": "batidor de mano" },
-        { "en": "spatula", "es": "espátula" },
-        { "en": "ladle", "es": "cucharón" },
-        { "en": "tongs", "es": "pinzas de cocina" },
-    
-        { "en": "strainer", "es": "colador" },
-        { "en": "sieve", "es": "tamiz" },
-        { "en": "funnel", "es": "embudo" },
-    
-        { "en": "measuring cup", "es": "taza medidora" },
-        { "en": "measuring spoon", "es": "cuchara medidora" },
-        { "en": "kitchen scale", "es": "balanza de cocina" },
-    
-        { "en": "oven", "es": "horno" },
-        { "en": "microwave", "es": "microondas" },
-        { "en": "blender", "es": "licuadora" },
-        { "en": "mixer", "es": "batidora" },
-    
-        { "en": "refrigerator", "es": "refrigerador, nevera" },
-        { "en": "freezer", "es": "congelador" },
-    
-        { "en": "napkin", "es": "servilleta" },
-        { "en": "tray", "es": "bandeja" }
-      ]
-      },
+  "id": "eng_09",
+  "nombre": "Utensilios",
+  "vocabulario": [
+    { "en": "knife", "es": "cuchillo" },
+    { "en": "fork", "es": "tenedor" },
+    { "en": "spoon", "es": "cuchara" },
+    { "en": "teaspoon", "es": "cucharadita" },
+    { "en": "tablespoon", "es": "cucharada" },
+
+    { "en": "plate", "es": "plato" },
+    { "en": "bowl", "es": "tazón, bol" },
+    { "en": "cup", "es": "taza" },
+    { "en": "glass", "es": "vaso" },
+    { "en": "mug", "es": "jarro, mug" },
+
+    { "en": "pot", "es": "olla" },
+    { "en": "pan", "es": "sartén" },
+    { "en": "lid", "es": "tapa" },
+    { "en": "pressure cooker", "es": "olla a presión" },
+
+    { "en": "cutting board", "es": "tabla de cortar" },
+    { "en": "grater", "es": "rallador" },
+    { "en": "peeler", "es": "pelador" },
+    { "en": "can opener", "es": "abrelatas" },
+
+    { "en": "whisk", "es": "batidor de mano" },
+    { "en": "spatula", "es": "espátula" },
+    { "en": "ladle", "es": "cucharón" },
+    { "en": "tongs", "es": "pinzas de cocina" },
+
+    { "en": "strainer", "es": "colador" },
+    { "en": "sieve", "es": "tamiz" },
+    { "en": "funnel", "es": "embudo" },
+
+    { "en": "measuring cup", "es": "taza medidora" },
+    { "en": "measuring spoon", "es": "cuchara medidora" },
+    { "en": "kitchen scale", "es": "balanza de cocina" },
+
+    { "en": "oven", "es": "horno" },
+    { "en": "microwave", "es": "microondas" },
+    { "en": "blender", "es": "licuadora" },
+    { "en": "mixer", "es": "batidora" },
+
+    { "en": "refrigerator", "es": "refrigerador, nevera" },
+    { "en": "freezer", "es": "congelador" },
+
+    { "en": "napkin", "es": "servilleta" },
+    { "en": "tray", "es": "bandeja" }
+  ]
+},
       {
-      "id": "eng_10",
-      "nombre": "Cocinando",
-      "vocabulario": [
-        { "en": "cook", "es": "cocinar" },
-        { "en": "prepare", "es": "preparar" },
-        { "en": "make", "es": "hacer" },
-    
-        { "en": "wash", "es": "lavar" },
-        { "en": "cut", "es": "cortar" },
-        { "en": "chop", "es": "picar" },
-        { "en": "slice", "es": "rebanar, cortar en rodajas" },
-        { "en": "peel", "es": "pelar" },
-        { "en": "grate", "es": "rallar" },
-    
-        { "en": "mix", "es": "mezclar" },
-        { "en": "stir", "es": "revolver" },
-        { "en": "beat", "es": "batir" },
-        { "en": "blend", "es": "licuar, mezclar en licuadora" },
-    
-        { "en": "boil", "es": "hervir" },
-        { "en": "fry", "es": "freír" },
-        { "en": "bake", "es": "hornear" },
-        { "en": "roast", "es": "asar al horno" },
-        { "en": "grill", "es": "asar a la parrilla" },
-    
-        { "en": "add", "es": "agregar, añadir" },
-        { "en": "pour", "es": "verter, servir líquido" },
-        { "en": "season", "es": "sazonar" },
-        { "en": "taste", "es": "probar" },
-    
-        { "en": "serve", "es": "servir" },
-        { "en": "eat", "es": "comer" },
-        { "en": "drink", "es": "beber, tomar" },
-    
-        { "en": "clean", "es": "limpiar" },
-        { "en": "dry", "es": "secar" },
-        { "en": "store", "es": "guardar" }
-      ]
-      },
+  "id": "eng_10",
+  "nombre": "Cocinando",
+  "vocabulario": [
+    { "en": "to cook", "es": "cocinar" },
+    { "en": "to prepare", "es": "preparar" },
+    { "en": "to make", "es": "hacer" },
+
+    { "en": "to wash", "es": "lavar" },
+    { "en": "to cut", "es": "cortar" },
+    { "en": "to chop", "es": "picar" },
+    { "en": "to slice", "es": "rebanar, cortar en rodajas" },
+    { "en": "to peel", "es": "pelar" },
+    { "en": "to grate", "es": "rallar" },
+
+    { "en": "to mix", "es": "mezclar" },
+    { "en": "to stir", "es": "revolver" },
+    { "en": "to beat", "es": "batir" },
+    { "en": "to blend", "es": "licuar, mezclar en licuadora" },
+
+    { "en": "to boil", "es": "hervir" },
+    { "en": "to fry", "es": "freír" },
+    { "en": "to bake", "es": "hornear" },
+    { "en": "to roast", "es": "asar al horno" },
+    { "en": "to grill", "es": "asar a la parrilla" },
+
+    { "en": "to add", "es": "agregar, añadir" },
+    { "en": "to pour", "es": "verter, servir líquido" },
+    { "en": "to season", "es": "sazonar" },
+    { "en": "to taste", "es": "probar" },
+
+    { "en": "to serve", "es": "servir" },
+    { "en": "to eat", "es": "comer" },
+    { "en": "to drink", "es": "beber, tomar" },
+
+    { "en": "to clean", "es": "limpiar" },
+    { "en": "to dry", "es": "secar" },
+    { "en": "to store", "es": "guardar" }
+  ]
+},
 
 {
   "id": "eng_11",
@@ -644,9 +643,10 @@
 
     { "en": "exercise", "es": "ejercicio" },
     { "en": "rest", "es": "descanso" },
-    { "en": "sleep", "es": "dormir, sueño" },
+    { "en": "sleep", "es": "sueño" },
+    { "en": "to sleep", "es": "dormir" },
 
-    { "en": "hurt", "es": "doler, lastimar" },
+    { "en": "to hurt", "es": "doler, lastimar" },
     { "en": "injury", "es": "lesión" },
 
     { "en": "emergency", "es": "emergencia" },
@@ -739,23 +739,27 @@
     { "en": "traffic", "es": "tráfico" },
 
     { "en": "trip", "es": "viaje" },
-    { "en": "travel", "es": "viajar, viaje" }
+    { "en": "travel", "es": "viaje" },
+    { "en": "to travel", "es": "viajar" }
   ]
 },
 {
   "id": "eng_20",
   "nombre": "Compras",
   "vocabulario": [
-    { "en": "shop", "es": "tienda; comprar" },
+    { "en": "shop", "es": "tienda" },
+    { "en": "to shop", "es": "comprar, ir de compras" },
+
     { "en": "store", "es": "tienda" },
     { "en": "customer", "es": "cliente" },
     { "en": "cashier", "es": "cajero" },
 
-    { "en": "buy", "es": "comprar" },
-    { "en": "sell", "es": "vender" },
+    { "en": "to buy", "es": "comprar" },
+    { "en": "to sell", "es": "vender" },
 
     { "en": "price", "es": "precio" },
-    { "en": "cost", "es": "costo, costar" },
+    { "en": "cost", "es": "costo" },
+    { "en": "to cost", "es": "costar" },
     { "en": "cheap", "es": "barato" },
     { "en": "expensive", "es": "caro" },
 
@@ -780,49 +784,48 @@
   "nombre": "Verbos comunes",
   "vocabulario": [
     { "en": "to be", "es": "ser, estar" },
-    { "en": "have", "es": "tener" },
-    { "en": "do", "es": "hacer" },
-    { "en": "make", "es": "hacer, crear" },
+    { "en": "to have", "es": "tener" },
+    { "en": "to do", "es": "hacer" },
+    { "en": "to make", "es": "hacer, crear" },
 
-    { "en": "go", "es": "ir" },
-    { "en": "come", "es": "venir" },
-    { "en": "get", "es": "obtener, conseguir" },
+    { "en": "to go", "es": "ir" },
+    { "en": "to come", "es": "venir" },
+    { "en": "to get", "es": "obtener, conseguir" },
 
-    { "en": "want", "es": "querer" },
-    { "en": "need", "es": "necesitar" },
-    { "en": "like", "es": "gustar" },
-    { "en": "love", "es": "amar, encantar" },
+    { "en": "to want", "es": "querer" },
+    { "en": "to need", "es": "necesitar" },
+    { "en": "to like", "es": "gustar" },
+    { "en": "to love", "es": "amar, encantar" },
 
-    { "en": "know", "es": "saber, conocer" },
-    { "en": "think", "es": "pensar" },
-    { "en": "understand", "es": "entender" },
-    { "en": "remember", "es": "recordar" },
+    { "en": "to know", "es": "saber, conocer" },
+    { "en": "to think", "es": "pensar" },
+    { "en": "to understand", "es": "entender" },
+    { "en": "to remember", "es": "recordar" },
 
-    { "en": "see", "es": "ver" },
-    { "en": "look", "es": "mirar, ver" },
-    { "en": "hear", "es": "oír, escuchar" },
-    { "en": "listen", "es": "escuchar" },
+    { "en": "to see", "es": "ver" },
+    { "en": "to look", "es": "mirar, ver" },
+    { "en": "to hear", "es": "oír, escuchar" },
+    { "en": "to listen", "es": "escuchar" },
 
-    { "en": "say", "es": "decir" },
-    { "en": "speak", "es": "hablar" },
-    { "en": "tell", "es": "decir, contar" },
+    { "en": "to say", "es": "decir" },
+    { "en": "to speak", "es": "hablar" },
+    { "en": "to tell", "es": "decir, contar" },
 
-    { "en": "work", "es": "trabajar" },
-    { "en": "study", "es": "estudiar" },
-    { "en": "live", "es": "vivir" },
+    { "en": "to work", "es": "trabajar" },
+    { "en": "to study", "es": "estudiar" },
+    { "en": "to live", "es": "vivir" },
 
-    { "en": "use", "es": "usar" },
-    { "en": "find", "es": "encontrar" },
-    { "en": "give", "es": "dar" },
-    { "en": "take", "es": "tomar, llevar" },
+    { "en": "to use", "es": "usar" },
+    { "en": "to find", "es": "encontrar" },
+    { "en": "to give", "es": "dar" },
+    { "en": "to take", "es": "tomar, llevar" },
 
-    { "en": "open", "es": "abrir" },
-    { "en": "close", "es": "cerrar" },
-    { "en": "start", "es": "empezar, iniciar" },
-    { "en": "finish", "es": "terminar" }
+    { "en": "to open", "es": "abrir" },
+    { "en": "to close", "es": "cerrar" },
+    { "en": "to start", "es": "empezar, iniciar" },
+    { "en": "to finish", "es": "terminar" }
   ]
 },
-
 {
   "id": "eng_22",
   "nombre": "Adjetivos comunes",
@@ -958,7 +961,6 @@
     { "en": "far from", "es": "lejos de" }
   ]
 },
-
 {
   "id": "eng_27",
   "nombre": "Conectores",
@@ -984,7 +986,6 @@
     { "en": "finally", "es": "finalmente" }
   ]
 },
-
 {
   "id": "eng_28",
   "nombre": "Adverbios comunes",
@@ -1033,7 +1034,6 @@
     { "en": "ought to", "es": "debería" }
   ]
 },
-
 {
   "id": "eng_30",
   "nombre": "Clima",
@@ -1061,6 +1061,8 @@
     { "en": "lightning", "es": "relámpago" },
     { "en": "temperature", "es": "temperatura" },
 
+    { "en": "to rain", "es": "llover" },
+
     { "en": "It's sunny", "es": "está soleado" },
     { "en": "It's raining", "es": "está lloviendo" },
     { "en": "It's cold", "es": "hace frío" },
@@ -1071,82 +1073,179 @@
   "id": "eng_31",
   "nombre": "Phrasal Verbs Básicos",
   "vocabulario": [
-    { "en": "wake up", "es": "despertarse" },
-    { "en": "get up", "es": "levantarse" },
+    { "en": "to wake up", "es": "despertarse" },
+    { "en": "to get up", "es": "levantarse" },
 
-    { "en": "come in", "es": "entrar" },
-    { "en": "go out", "es": "salir" },
-    { "en": "come back", "es": "volver" },
-    { "en": "go back", "es": "regresar" },
-    { "en": "get in", "es": "entrar (a un carro, taxi, etc.)" },
-    { "en": "get out", "es": "salir (de un carro, taxi, etc.)" },
+    { "en": "to come in", "es": "entrar" },
+    { "en": "to go out", "es": "salir" },
+    { "en": "to come back", "es": "volver" },
+    { "en": "to go back", "es": "regresar" },
+    { "en": "to get in", "es": "entrar (a un carro, taxi, etc.)" },
+    { "en": "to get out", "es": "salir (de un carro, taxi, etc.)" },
 
-    { "en": "sit down", "es": "sentarse" },
-    { "en": "stand up", "es": "ponerse de pie" },
+    { "en": "to sit down", "es": "sentarse" },
+    { "en": "to stand up", "es": "ponerse de pie" },
 
-    { "en": "turn on", "es": "encender" },
-    { "en": "turn off", "es": "apagar" },
+    { "en": "to turn on", "es": "encender" },
+    { "en": "to turn off", "es": "apagar" },
 
-    { "en": "put on", "es": "ponerse (ropa)" },
-    { "en": "take off", "es": "quitarse (ropa)" },
+    { "en": "to put on", "es": "ponerse (ropa)" },
+    { "en": "to take off", "es": "quitarse (ropa)" },
 
-    { "en": "pick up", "es": "recoger; levantar; contestar (el teléfono)" },
-    { "en": "put away", "es": "guardar" },
-    { "en": "throw away", "es": "botar; tirar" },
+    { "en": "to pick up", "es": "recoger; levantar; contestar (el teléfono)" },
+    { "en": "to put away", "es": "guardar" },
+    { "en": "to throw away", "es": "botar; tirar" },
 
-    { "en": "look for", "es": "buscar" },
-    { "en": "look after", "es": "cuidar" },
-    { "en": "look up", "es": "buscar (información)" },
-    { "en": "find out", "es": "averiguar; descubrir" },
+    { "en": "to look for", "es": "buscar" },
+    { "en": "to look after", "es": "cuidar" },
+    { "en": "to look up", "es": "buscar (información)" },
+    { "en": "to find out", "es": "averiguar; descubrir" },
 
-    { "en": "try on", "es": "probarse (ropa)" },
+    { "en": "to try on", "es": "probarse (ropa)" },
 
-    { "en": "give up", "es": "rendirse; dejar un hábito" },
-    { "en": "keep on", "es": "continuar" },
-    { "en": "go on", "es": "continuar" },
+    { "en": "to give up", "es": "rendirse; dejar un hábito" },
+    { "en": "to keep on", "es": "continuar" },
+    { "en": "to go on", "es": "continuar" },
 
-    { "en": "grow up", "es": "crecer" },
+    { "en": "to grow up", "es": "crecer" },
 
-    { "en": "run out of", "es": "quedarse sin" },
+    { "en": "to run out of", "es": "quedarse sin" },
 
-    { "en": "get along with", "es": "llevarse bien con" },
+    { "en": "to get along with", "es": "llevarse bien con" },
 
-    { "en": "work out", "es": "hacer ejercicio; resolver; resultar" },
+    { "en": "to work out", "es": "hacer ejercicio; resolver; resultar" },
 
-    { "en": "check in", "es": "registrarse (hotel, aeropuerto)" },
-    { "en": "check out", "es": "hacer el check-out; revisar" },
+    { "en": "to check in", "es": "registrarse (hotel, aeropuerto)" },
+    { "en": "to check out", "es": "hacer el check-out; revisar" },
 
-    { "en": "call back", "es": "devolver una llamada" },
-    { "en": "call off", "es": "cancelar" },
+    { "en": "to call back", "es": "devolver una llamada" },
+    { "en": "to call off", "es": "cancelar" },
 
-    { "en": "hang up", "es": "colgar (el teléfono)" },
-    { "en": "hold on", "es": "esperar un momento" },
+    { "en": "to hang up", "es": "colgar (el teléfono)" },
+    { "en": "to hold on", "es": "esperar un momento" },
 
-    { "en": "show up", "es": "aparecer; presentarse" },
-    { "en": "come on", "es": "vamos; apresúrate" },
+    { "en": "to show up", "es": "aparecer; presentarse" },
+    { "en": "to come on", "es": "vamos; apresúrate" },
 
-    { "en": "set up", "es": "configurar; instalar" },
-    { "en": "clean up", "es": "limpiar; ordenar" },
+    { "en": "to set up", "es": "configurar; instalar" },
+    { "en": "to clean up", "es": "limpiar; ordenar" },
 
-    { "en": "fill out", "es": "llenar (un formulario)" },
-    { "en": "fill in", "es": "completar (espacios en blanco)" },
+    { "en": "to fill out", "es": "llenar (un formulario)" },
+    { "en": "to fill in", "es": "completar (espacios en blanco)" },
 
-    { "en": "write down", "es": "anotar" },
+    { "en": "to write down", "es": "anotar" },
 
-    { "en": "take back", "es": "devolver; retirar lo dicho" },
+    { "en": "to take back", "es": "devolver; retirar lo dicho" },
 
-    { "en": "break down", "es": "averiarse" },
-    { "en": "break up", "es": "terminar una relación" },
+    { "en": "to break down", "es": "averiarse" },
+    { "en": "to break up", "es": "terminar una relación" },
 
-    { "en": "take out", "es": "sacar; pedir comida para llevar" },
+    { "en": "to take out", "es": "sacar; pedir comida para llevar" },
 
-    { "en": "eat out", "es": "comer fuera" },
+    { "en": "to eat out", "es": "comer fuera" },
 
-    { "en": "come over", "es": "pasar por la casa de alguien" },
+    { "en": "to come over", "es": "pasar por la casa de alguien" },
 
-    { "en": "drop off", "es": "dejar a alguien o algo" },
+    { "en": "to drop off", "es": "dejar a alguien o algo" },
 
-    { "en": "end up", "es": "terminar; acabar" }
+    { "en": "to end up", "es": "terminar; acabar" }
+  ]
+},
+
+{
+  "id": "eng_32",
+  "nombre": "Más verbos",
+  "vocabulario": [
+    { "en": "to meet", "es": "conocer, encontrarse con" },
+    { "en": "to welcome", "es": "dar la bienvenida" },
+    { "en": "to talk", "es": "hablar" },
+    { "en": "to catch", "es": "atrapar, alcanzar" },
+    { "en": "to care", "es": "importar, cuidar" },
+    { "en": "to sleep", "es": "dormir" },
+    { "en": "to let", "es": "dejar, permitir" },
+    { "en": "to introduce", "es": "presentar, introducir" },
+
+    { "en": "to please", "es": "agradar, complacer" },
+    { "en": "to thank", "es": "agradecer" },
+    { "en": "to excuse", "es": "disculpar, excusar" },
+    { "en": "to help", "es": "ayudar" },
+    { "en": "to wait", "es": "esperar" },
+    { "en": "to worry", "es": "preocuparse, preocupar" },
+    { "en": "to repeat", "es": "repetir" },
+
+    { "en": "to cook", "es": "cocinar" },
+    { "en": "to prepare", "es": "preparar" },
+    { "en": "to wash", "es": "lavar" },
+    { "en": "to cut", "es": "cortar" },
+    { "en": "to chop", "es": "picar" },
+    { "en": "to slice", "es": "rebanar, cortar en rodajas" },
+    { "en": "to peel", "es": "pelar" },
+    { "en": "to grate", "es": "rallar" },
+    { "en": "to whisk", "es": "batir" },
+    { "en": "to mix", "es": "mezclar" },
+    { "en": "to stir", "es": "revolver" },
+    { "en": "to beat", "es": "batir" },
+    { "en": "to blend", "es": "licuar, mezclar" },
+
+    { "en": "to boil", "es": "hervir" },
+    { "en": "to fry", "es": "freír" },
+    { "en": "to bake", "es": "hornear" },
+    { "en": "to roast", "es": "asar al horno" },
+    { "en": "to grill", "es": "asar a la parrilla" },
+
+    { "en": "to add", "es": "agregar, añadir" },
+    { "en": "to pour", "es": "verter, servir líquido" },
+    { "en": "to season", "es": "sazonar" },
+    { "en": "to taste", "es": "probar, saborear" },
+    { "en": "to serve", "es": "servir" },
+    { "en": "to eat", "es": "comer" },
+    { "en": "to drink", "es": "beber, tomar" },
+    { "en": "to clean", "es": "limpiar" },
+    { "en": "to dry", "es": "secar" },
+    { "en": "to store", "es": "guardar, almacenar" },
+    { "en": "to empty", "es": "vaciar" },
+
+    { "en": "to water", "es": "regar" },
+    { "en": "to milk", "es": "ordeñar" },
+    { "en": "to oil", "es": "aceitar, lubricar" },
+    { "en": "to salt", "es": "salar" },
+    { "en": "to pepper", "es": "condimentar con pimienta" },
+    { "en": "to butter", "es": "untar con mantequilla" },
+    { "en": "to fish", "es": "pescar" },
+
+    { "en": "to exercise", "es": "hacer ejercicio, ejercitarse" },
+    { "en": "to rest", "es": "descansar" },
+    { "en": "to hurt", "es": "doler, lastimar" },
+
+    { "en": "to dress", "es": "vestirse, vestir" },
+
+    { "en": "to face", "es": "enfrentar, afrontar" },
+    { "en": "to head", "es": "dirigirse hacia, encabezar" },
+    { "en": "to hand", "es": "entregar, pasar" },
+    { "en": "to back", "es": "apoyar, respaldar" },
+
+    { "en": "to place", "es": "colocar, poner" },
+    { "en": "to park", "es": "estacionar, parquear" },
+
+    { "en": "to travel", "es": "viajar" },
+    { "en": "to train", "es": "entrenar, capacitar" },
+    { "en": "to stop", "es": "parar, detenerse, detener" },
+
+    { "en": "to shop", "es": "comprar, ir de compras" },
+    { "en": "to buy", "es": "comprar" },
+    { "en": "to sell", "es": "vender" },
+    { "en": "to cost", "es": "costar" },
+    { "en": "to change", "es": "cambiar" },
+    { "en": "to offer", "es": "ofrecer" },
+
+    { "en": "to color", "es": "colorear" },
+    { "en": "to light", "es": "encender, iluminar" },
+    { "en": "to warm", "es": "calentar" },
+    { "en": "to cool", "es": "enfriar, refrescar" },
+    { "en": "to slow", "es": "reducir la velocidad, ralentizar" },
+
+    { "en": "to rain", "es": "llover" },
+    { "en": "to snow", "es": "nevar" }
   ]
 }
   ]
