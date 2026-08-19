@@ -676,15 +676,6 @@
       overflow-wrap: anywhere;
     }
 
-    .board-message {
-      margin-bottom: 16px;
-
-      color: var(--muted);
-
-      font-size: 12px;
-      text-align: center;
-    }
-
     /* =========================================================
        SETTINGS
        ========================================================= */
@@ -1211,13 +1202,6 @@
           <section class="screen" id="boardScreen">
 
             <div
-              class="board-message"
-              id="boardMessage"
-            >
-              Encuentra cada pareja.
-            </div>
-
-            <div
               class="board"
               id="board"
             ></div>
@@ -1534,7 +1518,6 @@
       comboValue: document.getElementById("comboValue"),
 
       board: document.getElementById("board"),
-      boardMessage: document.getElementById("boardMessage"),
 
       previewGrid: document.getElementById("previewGrid"),
       memoryCountdown: document.getElementById("memoryCountdown"),
@@ -2298,9 +2281,6 @@
       state.gameStartedAt = Date.now();
 
       startGameTimer();
-
-      DOM.boardMessage.textContent =
-        `Encuentra las ${state.currentSettings.pairCount} parejas.`;
 
       showScreen("board");
     }
