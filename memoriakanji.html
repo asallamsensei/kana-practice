@@ -208,7 +208,7 @@
     }
 
     .game-shell {
-      min-height: 700px;
+      min-height: auto;
       overflow: hidden;
     }
 
@@ -276,8 +276,8 @@
        ========================================================= */
 
     .stage {
-      min-height: 620px;
-      padding: 28px;
+      min-height: auto;
+      padding: 20px;
     }
 
     .screen {
@@ -539,24 +539,24 @@
 
     .board {
       --columns: 4;
-
+    
       display: grid;
       grid-template-columns: repeat(var(--columns), minmax(0, 1fr));
-      gap: 10px;
-
-      width: 100%;
+      gap: 8px;
+    
+      width: min(100%, 900px);
       margin: 0 auto;
     }
 
     .memory-card {
       position: relative;
-
+    
       min-width: 0;
-      aspect-ratio: 1 / 0.92;
-
+      height: clamp(82px, 11vh, 120px);
+    
       border: 1px solid rgba(255, 255, 255, 0.08);
       border-radius: 13px;
-
+    
       background:
         linear-gradient(
           145deg,
@@ -564,10 +564,10 @@
           rgba(255, 255, 255, 0.01)
         ),
         var(--card);
-
+    
       cursor: pointer;
       overflow: hidden;
-
+    
       transition:
         transform 120ms ease,
         border-color 140ms ease,
