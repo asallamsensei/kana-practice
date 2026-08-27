@@ -109,15 +109,23 @@
   }
 
 .opbtns .btn.bien{
-  background: #22c55e !important;
-  border-color: #22c55e !important;
-  color: white !important;
+  background: rgba(34,197,94,.08) !important;
+  border-color: rgba(34,197,94,.65) !important;
+  color: #bbf7d0 !important;
+  box-shadow:
+    0 0 6px rgba(34,197,94,.60),
+    0 0 14px rgba(34,197,94,.35),
+    inset 0 0 8px rgba(34,197,94,.12) !important;
 }
 
 .opbtns .btn.mal{
-  background: #ef4444 !important;
-  border-color: #ef4444 !important;
-  color: white !important;
+  background: rgba(239,68,68,.08) !important;
+  border-color: rgba(239,68,68,.65) !important;
+  color: #fecaca !important;
+  box-shadow:
+    0 0 6px rgba(239,68,68,.60),
+    0 0 14px rgba(239,68,68,.35),
+    inset 0 0 8px rgba(239,68,68,.12) !important;
 }
   
   .chips{
@@ -1210,7 +1218,8 @@ function detalleRespuestaHtml(){
   return `
     <div class="detalle-respuesta">
       <span class="jp">${jp}</span>
-      ${romaji ? `<span class="star">★</span><span class="romaji">${romaji}</span>` : ""}
+      <span class="star">★</span>
+      <span class="romaji">${romaji}</span>
       <span class="star">★</span>
       <span class="es">${es}</span>
     </div>
@@ -1261,8 +1270,7 @@ botones.forEach((btn, i) => {
 
     res.className = "incorrecto";
     res.innerHTML = `
-      <div>Incorrecto ✘ (era ${actual.correcta})</div>
-      <div>Respuesta: ${actual.correcta}) ${actual.respuesta}</div>
+      <div>Incorrecto ✘, era la ${actual.correcta}</div>
       ${detalleRespuestaHtml()}
     `;
     errores++;
