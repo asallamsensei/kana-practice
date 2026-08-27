@@ -107,6 +107,18 @@
     color: #86efac;
     letter-spacing: .5px;
   }
+
+.opbtns .btn.bien{
+  background: #22c55e !important;
+  border-color: #22c55e !important;
+  color: white !important;
+}
+
+.opbtns .btn.mal{
+  background: #ef4444 !important;
+  border-color: #ef4444 !important;
+  color: white !important;
+}
   
   .chips{
     display:flex;
@@ -1074,6 +1086,7 @@ function preguntaKanjiMC(b){
    Flujo
 =============================== */
 function siguiente(){
+  document.querySelectorAll(".opbtns button").forEach(btn => btn.classList.remove("bien","mal"));
   if(!yaValidado && actual){
     sonidoIncorrecto();
     errores++;
@@ -1208,6 +1221,18 @@ function verificar(letra = ""){
   const input = String(letra || "").trim().toLowerCase();
   const res = $("resultado");
 
+const botones = document.querySelectorAll(".opbtns button");
+const letras = ["a", "b", "c"];
+
+botones.forEach((btn, i) => {
+  if(letras[i] === actual.correcta){
+    btn.classList.add("bien");   // correcta SIEMPRE verde
+  }
+  else{
+    btn.classList.add("mal");    // incorrectas SIEMPRE rojas
+  }
+});
+        
   if(actual?.extra?.romaji){
     playAudioForRomaji(actual.extra.romaji);
   }
