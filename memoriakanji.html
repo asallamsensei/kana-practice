@@ -1298,6 +1298,19 @@
           </p>
         </div>
 
+        <div class="setting-group">
+          <label class="setting-label" for="contentMode">
+            Contenido
+          </label>
+        
+          <select id="contentMode">
+            <option value="kanji" selected>Kanji</option>
+            <option value="hiragana">Hiragana</option>
+            <option value="katakana">Katakana</option>
+            <option value="Extra">Katakana Extra</option>
+          </select>
+        </div>
+        
         <!-- BOARD SIZE -->
 
         <div class="setting-group">
@@ -1473,6 +1486,7 @@
 
     const CONFIG = {
       dataUrl: "data/maestrodeloskanji/kanji_todos.json",
+      kanaUrl: "data/kana.json",
 
       boards: {
         "4x4": {
@@ -1505,6 +1519,9 @@
        ========================================================= */
 
     const DOM = {
+
+      contentMode: document.getElementById("contentMode"),
+      
       screens: {
         welcome: document.getElementById("welcomeScreen"),
         memory: document.getElementById("memoryScreen"),
@@ -1571,6 +1588,8 @@
        ========================================================= */
 
     const state = {
+      kanaData: null,
+      
       kanjiData: [],
 
       selectedGrades: new Set([1]),
@@ -1825,22 +1844,29 @@
 
     async function loadKanjiData() {
       try {
-        const response = await fetch(CONFIG.dataUrl);
-
-        if (!response.ok) {
+        // Cargar los dos archivos
+        const [kanjiResponse, kanaResponse] = await Promise.all([
+          fetch(CONFIG.dataUrl),
+          fetch(CONFIG.kanaUrl)
+        ]);
+    
+        if (!kanjiResponse.ok) {
           throw new Error(
-            `HTTP ${response.status}`
+            `Error Kanji: HTTP ${kanjiResponse.status}`
           );
         }
-
-        const data = await response.json();
-
-        if (!Array.isArray(data)) {
+    
+        if (!kanaResponse.ok) {
           throw new Error(
-            "El JSON no contiene un arreglo."
+            `Error Kana: HTTP ${kanaResponse.status}`
           );
         }
-
+    
+        // Convertir los dos JSON
+        const data = await kanjiResponse.json();
+        const kana = await kanaResponse.json();
+    
+        // Guardar kanji
         state.kanjiData = data.filter(item => {
           return (
             item &&
@@ -1848,33 +1874,37 @@
             Number.isFinite(Number(item.grado))
           );
         });
-
+    
+        // Guardar kana
+        state.kanaData = kana;
+    
+        // Mostrar estado
         DOM.dataStatus.textContent =
-          `${state.kanjiData.length} kanji cargados`;
-
+          `${state.kanjiData.length} kanji + kana cargados`;
+    
         DOM.dataStatus.classList.remove("error");
         DOM.dataStatus.classList.add("ok");
-
+    
         DOM.prepareButton.disabled = false;
         DOM.welcomePrepareButton.disabled = false;
-
+    
       } catch (error) {
         console.error(
-          "No se pudo cargar el archivo de kanji:",
+          "No se pudieron cargar los datos:",
           error
         );
-
+    
         DOM.dataStatus.textContent =
-          "No se pudo cargar kanji_todos.json";
-
+          "No se pudieron cargar los datos";
+    
         DOM.dataStatus.classList.remove("ok");
         DOM.dataStatus.classList.add("error");
-
+    
         DOM.prepareButton.disabled = true;
         DOM.welcomePrepareButton.disabled = true;
-
+    
         showToast(
-          "Error cargando el archivo JSON."
+          "Error cargando los archivos JSON."
         );
       }
     }
@@ -2020,33 +2050,43 @@
 
 
     function createPairPool(settings) {
-      return state.kanjiData
-        .filter(item => {
-          return settings.grades.includes(
-            Number(item.grado)
-          );
-        })
-        .map((item, index) => {
-          const answer =
-            getPairAnswer(item, settings);
-
+      const mode = DOM.contentMode.value;
+    
+      // KANJI
+      if (mode === "kanji") {
+        return state.kanjiData
+          .filter(item => {
+            return settings.grades.includes(
+              Number(item.grado)
+            );
+          })
+          .map((item, index) => {
+            const answer =
+              getPairAnswer(item, settings);
+    
+            return {
+              id: `${item.kanji}-${item.grado}-${index}`,
+              kanji: sanitizeText(item.kanji),
+              answer,
+              raw: item
+            };
+          })
+          .filter(pair => {
+            return (
+              pair.kanji.length > 0 &&
+              pair.answer.length > 0
+            );
+          });
+      }
+    
+      // KANA
+      return state.kanaData[mode]
+        .map(([kana, romaji], index) => {
           return {
-            id:
-              `${item.kanji}-${item.grado}-${index}`,
-
-            kanji:
-              sanitizeText(item.kanji),
-
-            answer,
-
-            raw: item
+            id: `${mode}-${index}`,
+            kanji: kana,
+            answer: romaji
           };
-        })
-        .filter(pair => {
-          return (
-            pair.kanji.length > 0 &&
-            pair.answer.length > 0
-          );
         });
     }
 
