@@ -333,6 +333,89 @@
       line-height: 1.7;
     }
 
+/* =========================================================
+   CONTENT TOGGLES
+   ========================================================= */
+
+.content-toggles {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+}
+
+.content-toggle {
+  position: relative;
+  cursor: pointer;
+}
+
+.content-toggle input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.content-toggle span {
+  min-height: 42px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid var(--border);
+  border-radius: 10px;
+
+  color: var(--muted);
+  background: var(--panel-2);
+
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+
+  transition:
+    color 160ms ease,
+    border-color 160ms ease,
+    background 160ms ease,
+    box-shadow 160ms ease,
+    transform 120ms ease;
+}
+
+/* HOVER */
+.content-toggle:hover span {
+  color: #fff;
+  border-color: rgba(201, 93, 255, 0.4);
+  transform: translateY(-1px);
+}
+
+/* ACTIVADO */
+.content-toggle input:checked + span {
+  color: #fff;
+
+  border-color: rgba(205, 85, 255, 0.75);
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(227, 75, 75, 0.22),
+      rgba(171, 78, 255, 0.20)
+    );
+
+  box-shadow:
+    0 0 0 1px rgba(205, 85, 255, 0.10),
+    0 0 14px rgba(205, 85, 255, 0.22),
+    inset 0 0 14px rgba(227, 75, 75, 0.08);
+}
+
+/* CLICK */
+.content-toggle:active span {
+  transform: scale(0.97);
+}
+
+/* TECLADO */
+.content-toggle input:focus-visible + span {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+}
+    
     /* =========================================================
        BUTTONS
        ========================================================= */
@@ -1298,33 +1381,48 @@
           </p>
         </div>
 
-        <div class="setting-group">
-          <label class="setting-label">
-            Contenido
-          </label>
-        
-          <div class="content-toggles">
-            <label>
-              <input type="checkbox" id="useKanji" checked>
-              Kanji
-            </label>
-        
-            <label>
-              <input type="checkbox" id="useHiragana">
-              Hiragana
-            </label>
-        
-            <label>
-              <input type="checkbox" id="useKatakana">
-              Katakana
-            </label>
-        
-            <label>
-              <input type="checkbox" id="useExtra">
-              Extra
-            </label>
-          </div>
-        </div>
+<div class="setting-group">
+  <label class="setting-label">
+    Contenido
+  </label>
+
+  <div class="content-toggles">
+
+    <label class="content-toggle">
+      <input
+        type="checkbox"
+        id="useKanji"
+        checked
+      >
+      <span>Kanji</span>
+    </label>
+
+    <label class="content-toggle">
+      <input
+        type="checkbox"
+        id="useHiragana"
+      >
+      <span>Hiragana</span>
+    </label>
+
+    <label class="content-toggle">
+      <input
+        type="checkbox"
+        id="useKatakana"
+      >
+      <span>Katakana</span>
+    </label>
+
+    <label class="content-toggle">
+      <input
+        type="checkbox"
+        id="useExtra"
+      >
+      <span>Extra</span>
+    </label>
+
+  </div>
+</div>
         
         <!-- BOARD SIZE -->
 
