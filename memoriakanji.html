@@ -1303,12 +1303,47 @@
             Contenido
           </label>
         
-          <select id="contentMode">
-            <option value="kanji" selected>Kanji</option>
-            <option value="hiragana">Hiragana</option>
-            <option value="katakana">Katakana</option>
-            <option value="Extra">Katakana Extra</option>
-          </select>
+          <div class="setting-group">
+            <label class="setting-label">
+              Contenido
+            </label>
+          
+            <div class="content-toggles">
+              <label>
+                <input
+                  type="checkbox"
+                  id="useKanji"
+                  checked
+                >
+                Kanji
+              </label>
+          
+              <label>
+                <input
+                  type="checkbox"
+                  id="useHiragana"
+                >
+                Hiragana
+              </label>
+          
+              <label>
+                <input
+                  type="checkbox"
+                  id="useKatakana"
+                >
+                Katakana
+              </label>
+          
+              <label>
+                <input
+                  type="checkbox"
+                  id="useExtra"
+                >
+                Extra
+              </label>
+            </div>
+          </div>
+          
         </div>
         
         <!-- BOARD SIZE -->
@@ -1520,7 +1555,10 @@
 
     const DOM = {
 
-      contentMode: document.getElementById("contentMode"),
+      useKanji: document.getElementById("useKanji"),
+      useHiragana: document.getElementById("useHiragana"),
+      useKatakana: document.getElementById("useKatakana"),
+      useExtra: document.getElementById("useExtra"),
       
       screens: {
         welcome: document.getElementById("welcomeScreen"),
@@ -2049,46 +2087,93 @@
     }
 
 
-    function createPairPool(settings) {
-      const mode = DOM.contentMode.value;
-    
-      // KANJI
-      if (mode === "kanji") {
-        return state.kanjiData
-          .filter(item => {
-            return settings.grades.includes(
-              Number(item.grado)
-            );
-          })
-          .map((item, index) => {
-            const answer =
-              getPairAnswer(item, settings);
-    
-            return {
-              id: `${item.kanji}-${item.grado}-${index}`,
-              kanji: sanitizeText(item.kanji),
-              answer,
-              raw: item
-            };
-          })
-          .filter(pair => {
-            return (
-              pair.kanji.length > 0 &&
-              pair.answer.length > 0
-            );
-          });
-      }
-    
-      // KANA
-      return state.kanaData[mode]
-        .map(([kana, romaji], index) => {
-          return {
-            id: `${mode}-${index}`,
-            kanji: kana,
-            answer: romaji
-          };
+function createPairPool(settings) {
+  const pool = [];
+
+const hasContent =
+  DOM.useKanji.checked ||
+  DOM.useHiragana.checked ||
+  DOM.useKatakana.checked ||
+  DOM.useExtra.checked;
+
+if (!hasContent) {
+  showToast(
+    "Selecciona al menos un tipo de contenido."
+  );
+
+  return [];
+}
+  
+  // KANJI
+  if (DOM.useKanji.checked) {
+    const kanjiPairs = state.kanjiData
+      .filter(item => {
+        return settings.grades.includes(
+          Number(item.grado)
+        );
+      })
+      .map((item, index) => {
+        const answer =
+          getPairAnswer(item, settings);
+
+        return {
+          id: `kanji-${item.kanji}-${item.grado}-${index}`,
+          kanji: sanitizeText(item.kanji),
+          answer,
+          raw: item
+        };
+      })
+      .filter(pair => {
+        return (
+          pair.kanji.length > 0 &&
+          pair.answer.length > 0
+        );
+      });
+
+    pool.push(...kanjiPairs);
+  }
+
+  // HIRAGANA
+  if (DOM.useHiragana.checked) {
+    state.kanaData.hiragana.forEach(
+      ([kana, romaji], index) => {
+        pool.push({
+          id: `hiragana-${index}`,
+          kanji: kana,
+          answer: romaji
         });
-    }
+      }
+    );
+  }
+
+  // KATAKANA
+  if (DOM.useKatakana.checked) {
+    state.kanaData.katakana.forEach(
+      ([kana, romaji], index) => {
+        pool.push({
+          id: `katakana-${index}`,
+          kanji: kana,
+          answer: romaji
+        });
+      }
+    );
+  }
+
+  // EXTRA
+  if (DOM.useExtra.checked) {
+    state.kanaData.Extra.forEach(
+      ([kana, romaji], index) => {
+        pool.push({
+          id: `extra-${index}`,
+          kanji: kana,
+          answer: romaji
+        });
+      }
+    );
+  }
+
+  return pool;
+}
 
 
     function selectPairs(settings) {
