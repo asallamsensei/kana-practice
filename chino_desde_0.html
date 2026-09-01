@@ -406,7 +406,7 @@
   
 }
 
-.jp{
+.zh{
   font-family:
     "Hiragino Kaku Gothic ProN",
     "Hiragino Sans",
@@ -489,8 +489,8 @@
     <div style="grid-column:1 / -1; height:1px; background:rgba(255,255,255,.12); margin:8px 0;"></div>
     
     <div class="switch switch-panel">
-      <button class="btn btn-mode" id="m-jp-es" type="button" onclick="clickJpEs()">ZH → ES</button>
-      <button class="btn btn-mode" id="m-es-jp" type="button" onclick="clickEsJp()">ES → ZH</button>
+      <button class="btn btn-mode" id="m-zh-es" type="button" onclick="clickZhEs()">ZH → ES</button>
+      <button class="btn btn-mode" id="m-es-zh" type="button" onclick="clickEsZh()">ES → ZH</button>
       <button class="btn btn-mode" id="m-dictado" type="button" onclick="setModo('dictado')">Dictado</button>
       <button class="btn btn-mode" id="m-mixto" type="button" onclick="setModo('mixto')">Mix</button>
       
@@ -566,10 +566,10 @@ function precisionPct(){
 }
   
 // ====== MODOS ======
-let modoActual = "mixto";   // "jp-es" | "es-jp" | "dictado" | "mixto"
-let rondaDir = "jp-es";     // "jp-es" | "es-jp"
+let modoActual = "mixto";   // "zh-es" | "es-zh" | "dictado" | "mixto"
+let rondaDir = "zh-es";     // "zh-es" | "es-zh"
 let rondaEsDictado = false; // true/false
-let dictadoDirs = new Set(["jp-es", "es-jp"]);
+let dictadoDirs = new Set(["zh-es", "es-zh"]);
 
 // ====== AUDIO (EXACTO AL JSON) ======
 const AUDIO_BASE = "data/audios/chino/";   // carpeta mp3
@@ -604,7 +604,7 @@ function sonidoIncorrecto(){
 }
   
 audio.preload = "auto";
-let ultimoAudioKey = "";                // romaji actual tal cual del JSON
+let ultimoAudioKey = "";                // pinyin actual tal cual del JSON
 
 let modoAudio = "ia";
 let voces = [];
@@ -649,10 +649,10 @@ function sintetizarChino(texto){
   speechSynthesis.speak(u);
 }
   
-function buildExactAudioSrc(romaji){
-  const key = String(romaji || "").trim();
+function buildExactAudioSrc(pinyin){
+  const key = String(pinyin || "").trim();
   if(!key) return "";
-  // nombre EXACTO al romaji del JSON (solo encode para espacios/acentos)
+  // nombre EXACTO al pinyin del JSON (solo encode para espacios/acentos)
   return AUDIO_BASE + encodeURIComponent(key) + ".mp3";
 }
 
@@ -663,8 +663,8 @@ function detenerAudio(){
   }catch{}
 }
 
-async function playAudio(romaji){
-  const key = String(romaji || "").trim();
+async function playAudio(pinyin){
+  const key = String(pinyin || "").trim();
   ultimoAudioKey = key;
 
   const chino = itemActualCorrecto ? itemActualCorrecto.hanzi : "";
@@ -774,7 +774,7 @@ function actualizarLista(){
 }
   
 function limpiarActivos(){
-  ["m-jp-es","m-es-jp","m-dictado","m-mixto"].forEach(id=>{
+  ["m-zh-es","m-es-zh","m-dictado","m-mixto"].forEach(id=>{
     const el = document.getElementById(id);
     if(!el) return;
     el.classList.remove("activo","mix-activo","mix-sombra");
@@ -784,28 +784,28 @@ function limpiarActivos(){
 function aplicarUI(){
   limpiarActivos();
 
-  const btnJpEs = document.getElementById("m-jp-es");
-  const btnEsJp = document.getElementById("m-es-jp");
+  const btnZhEs = document.getElementById("m-zh-es");
+  const btnEsZh = document.getElementById("m-es-zh");
   const btnDict = document.getElementById("m-dictado");
   const btnMix  = document.getElementById("m-mixto");
 
   if(modoActual === "mixto"){
     btnMix?.classList.add("mix-activo");
-    btnJpEs?.classList.add("mix-sombra");
-    btnEsJp?.classList.add("mix-sombra");
+    btnZhEs?.classList.add("mix-sombra");
+    btnEsZh?.classList.add("mix-sombra");
     btnDict?.classList.add("mix-sombra");
   }
   else if(modoActual === "dictado"){
     btnDict?.classList.add("activo");
 
-    btnJpEs?.classList.toggle("activo", dictadoDirs.has("jp-es"));
-    btnEsJp?.classList.toggle("activo", dictadoDirs.has("es-jp"));
+    btnZhEs?.classList.toggle("activo", dictadoDirs.has("zh-es"));
+    btnEsZh?.classList.toggle("activo", dictadoDirs.has("es-zh"));
   }
-  else if(modoActual === "jp-es"){
-    btnJpEs?.classList.add("activo");
+  else if(modoActual === "zh-es"){
+    btnZhEs?.classList.add("activo");
   }
-  else if(modoActual === "es-jp"){
-    btnEsJp?.classList.add("activo");
+  else if(modoActual === "es-zh"){
+    btnEsZh?.classList.add("activo");
   }
 
 }
@@ -819,19 +819,19 @@ function setModo(nuevoModo){
   if(lista.length) siguiente();
 }
 
-function clickJpEs(){
+function clickZhEs(){
   if(modoActual === "dictado"){
-    toggleDictadoDir("jp-es");
+    toggleDictadoDir("zh-es");
   }else{
-    setModo("jp-es");
+    setModo("zh-es");
   }
 }
 
-function clickEsJp(){
+function clickEsZh(){
   if(modoActual === "dictado"){
-    toggleDictadoDir("es-jp");
+    toggleDictadoDir("es-zh");
   }else{
-    setModo("es-jp");
+    setModo("es-zh");
   }
 }
 
@@ -853,15 +853,15 @@ function toggleDictadoDir(dir){
 
 // ====== TEXTO SEGÚN DIRECCIÓN DE LA RONDA ======
 function textoPregunta(item){
-  return (rondaDir === "jp-es") ? item.hanzi : item.significado;
+  return (rondaDir === "zh-es") ? item.hanzi : item.significado;
 }
 function textoRespuesta(item){
-  return (rondaDir === "jp-es") ? item.significado : item.hanzi;
+  return (rondaDir === "zh-es") ? item.significado : item.hanzi;
 }
 
 function aplicarEstiloPregunta(){
   const el = document.getElementById("promptMain");
-  if(rondaDir === "es-jp") el.classList.add("esPregunta");
+  if(rondaDir === "es-zh") el.classList.add("esPregunta");
   else el.classList.remove("esPregunta");
 }
 
@@ -890,8 +890,8 @@ function renderPrompt(itemCorrecto){
 
     const pregunta = textoPregunta(itemCorrecto);
     
-    if(rondaDir === "jp-es"){
-      promptEl.innerHTML = `<span class="jp">${pregunta}</span>`;
+    if(rondaDir === "zh-es"){
+      promptEl.innerHTML = `<span class="zh">${pregunta}</span>`;
     }else{
       promptEl.textContent = pregunta;
     }
@@ -944,9 +944,9 @@ function pintarOpciones(){
   box.innerHTML = opcionesActuales.map((txt, idx) => {
     const letra = letras[idx];
 
-    const usarJp = (rondaDir === "es-jp");
+    const usarZh = (rondaDir === "es-zh");
 
-    return `<div>${letra}) ${usarJp ? `<span class="jp">${txt}</span>` : txt}</div>`;
+    return `<div>${letra}) ${usarZh ? `<span class="jp">${txt}</span>` : txt}</div>`;
   }).join("");
 
   const botones = {
@@ -982,12 +982,12 @@ function accionSiguiente(){
 
 // ====== GENERAR RONDA ======
 function elegirRonda(){
-  if(modoActual === "jp-es"){
-    return { dir: "jp-es", dictado: false };
+  if(modoActual === "zh-es"){
+    return { dir: "zh-es", dictado: false };
   }
 
-  if(modoActual === "es-jp"){
-    return { dir: "es-jp", dictado: false };
+  if(modoActual === "es-zh"){
+    return { dir: "es-zh", dictado: false };
   }
 
   if(modoActual === "dictado"){
@@ -1001,19 +1001,19 @@ function elegirRonda(){
     primeraRonda = false;
 
     if(Math.random() < 0.5){
-      return { dir: "jp-es", dictado: false };
+      return { dir: "zh-es", dictado: false };
     }
 
-    return { dir: "es-jp", dictado: false };
+    return { dir: "es-zh", dictado: false };
   }
 
   // Mix normal
   const r = Math.random();
 
-  if(r < 0.25) return { dir: "jp-es", dictado: false };
-  if(r < 0.50) return { dir: "es-jp", dictado: false };
-  if(r < 0.75) return { dir: "jp-es", dictado: true };
-  return { dir: "es-jp", dictado: true };
+  if(r < 0.25) return { dir: "zh-es", dictado: false };
+  if(r < 0.50) return { dir: "es-zh", dictado: false };
+  if(r < 0.75) return { dir: "zh-es", dictado: true };
+  return { dir: "es-zh", dictado: true };
 }
 
 function siguiente(){
@@ -1055,12 +1055,12 @@ function siguiente(){
 function renderOpciones(opciones){
   const box = document.getElementById("opcionesTexto");
 
-  const usarJp = (rondaDir === "es-jp");
+  const usarZh = (rondaDir === "es-zh");
 
   box.innerHTML = `
-    a) ${usarJp ? `<span class="jp">${opciones[0]}</span>` : opciones[0]}<br>
-    b) ${usarJp ? `<span class="jp">${opciones[1]}</span>` : opciones[1]}<br>
-    c) ${usarJp ? `<span class="jp">${opciones[2]}</span>` : opciones[2]}
+    a) ${usarZh ? `<span class="jp">${opciones[0]}</span>` : opciones[0]}<br>
+    b) ${usarZh ? `<span class="jp">${opciones[1]}</span>` : opciones[1]}<br>
+    c) ${usarZh ? `<span class="jp">${opciones[2]}</span>` : opciones[2]}
   `;
 }
 
@@ -1097,14 +1097,14 @@ function verificar(letraForzada){
   const zh = itemActualCorrecto.hanzi;
   const pinyin = itemActualCorrecto.pinyin;
   
-  let extraInfo = `${jp} ★ romaji: ${romaji}`;
+  let extraInfo = `${zh} ★ pinyin: ${pinyin}`;
   
   if(rondaEsDictado){
   
-    if(respuestaCorrecta === jp){
-      extraInfo = `${itemActualCorrecto.significado} ★ ${romaji}`;
+    if(respuestaCorrecta === zh){
+      extraInfo = `${itemActualCorrecto.significado} ★ ${pinyin}`;
     }else{
-      extraInfo = `${jp} ★ ${romaji}`;
+      extraInfo = `${zh} ★ ${pinyin}`;
     }
   
   }
@@ -1124,7 +1124,7 @@ function verificar(letraForzada){
     res.innerHTML = esSaltado
       ? `Saltado ✘<span style="color: white;">, era ${correctaLetra}</span>`
       : `Incorrecto ✘<span style="color: white;">, era ${correctaLetra}</span>`;
-      info.innerText = `${jp} ★ ${romajiVisible} ★ ${itemActualCorrecto.significado}`;
+      info.innerText = `${zh} ★ ${pinyin} ★ ${itemActualCorrecto.significado}`;
     errores++;
     racha = 0;
   }
