@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Vocabulario N5 — Asallam Sensei</title>
+<title>Chino desde 0 — Asallam Sensei</title>
 
 <style>
   :root{
@@ -408,11 +408,10 @@
 
 .zh{
   font-family:
-    "Hiragino Kaku Gothic ProN",
-    "Hiragino Sans",
-    "Yu Gothic",
-    "Meiryo",
-    "Noto Sans JP",
+    "Noto Sans SC",
+    "Microsoft YaHei",
+    "PingFang SC",
+    Arial,
     sans-serif;
 }
 
@@ -946,7 +945,7 @@ function pintarOpciones(){
 
     const usarZh = (rondaDir === "es-zh");
 
-    return `<div>${letra}) ${usarZh ? `<span class="jp">${txt}</span>` : txt}</div>`;
+    return `<div>${letra}) ${usarZh ? `<span class="zh">${txt}</span>` : txt}</div>`;
   }).join("");
 
   const botones = {
@@ -1058,9 +1057,9 @@ function renderOpciones(opciones){
   const usarZh = (rondaDir === "es-zh");
 
   box.innerHTML = `
-    a) ${usarZh ? `<span class="jp">${opciones[0]}</span>` : opciones[0]}<br>
-    b) ${usarZh ? `<span class="jp">${opciones[1]}</span>` : opciones[1]}<br>
-    c) ${usarZh ? `<span class="jp">${opciones[2]}</span>` : opciones[2]}
+    a) ${usarZh ? `<span class="zh">${opciones[0]}</span>` : opciones[0]}<br>
+    b) ${usarZh ? `<span class="zh">${opciones[1]}</span>` : opciones[1]}<br>
+    c) ${usarZh ? `<span class="zh">${opciones[2]}</span>` : opciones[2]}
   `;
 }
 
