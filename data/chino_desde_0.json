@@ -1,0 +1,118 @@
+{
+  "curso": "Chino desde 0",
+  "idioma": "zh-CN",
+  "version": 1,
+  "lecciones": [
+    {
+      "leccion": 1,
+      "titulo": "Lección 1",
+      "vocabulario": [
+        {
+          "significado": "persona",
+          "hanzi": "人",
+          "pinyin": "rén"
+        },
+        {
+          "significado": "grande",
+          "hanzi": "大",
+          "pinyin": "dà"
+        },
+        {
+          "significado": "pequeño",
+          "hanzi": "小",
+          "pinyin": "xiǎo"
+        },
+        {
+          "significado": "centro, medio",
+          "hanzi": "中",
+          "pinyin": "zhōng"
+        },
+        {
+          "significado": "país, nación",
+          "hanzi": "国",
+          "pinyin": "guó"
+        },
+        {
+          "significado": "estudiar, aprender",
+          "hanzi": "学",
+          "pinyin": "xué"
+        },
+        {
+          "significado": "nacer, vida",
+          "hanzi": "生",
+          "pinyin": "shēng"
+        },
+        {
+          "significado": "mujer, femenino",
+          "hanzi": "女",
+          "pinyin": "nǚ"
+        },
+        {
+          "significado": "hombre, masculino",
+          "hanzi": "男",
+          "pinyin": "nán"
+        },
+        {
+          "significado": "bueno, bien",
+          "hanzi": "好",
+          "pinyin": "hǎo"
+        },
+        {
+          "significado": "China",
+          "hanzi": "中国",
+          "pinyin": "Zhōngguó"
+        },
+        {
+          "significado": "persona china",
+          "hanzi": "中国人",
+          "pinyin": "Zhōngguórén"
+        },
+        {
+          "significado": "estudiante",
+          "hanzi": "学生",
+          "pinyin": "xuésheng"
+        },
+        {
+          "significado": "universidad",
+          "hanzi": "大学",
+          "pinyin": "dàxué"
+        },
+        {
+          "significado": "estudiante universitario",
+          "hanzi": "大学生",
+          "pinyin": "dàxuéshēng"
+        },
+        {
+          "significado": "mujer",
+          "hanzi": "女人",
+          "pinyin": "nǚrén"
+        },
+        {
+          "significado": "hombre",
+          "hanzi": "男人",
+          "pinyin": "nánrén"
+        },
+        {
+          "significado": "buena persona",
+          "hanzi": "好人",
+          "pinyin": "hǎorén"
+        },
+        {
+          "significado": "estudiante de primaria",
+          "hanzi": "小学生",
+          "pinyin": "xiǎoxuéshēng"
+        },
+        {
+          "significado": "alumna, estudiante mujer",
+          "hanzi": "女学生",
+          "pinyin": "nǚxuéshēng"
+        },
+        {
+          "significado": "caracteres chinos",
+          "hanzi": "汉字",
+          "pinyin": "Hànzì"
+        }
+      ]
+    }
+  ]
+}
