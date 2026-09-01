@@ -1,0 +1,1171 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Vocabulario N5 — Asallam Sensei</title>
+
+<style>
+  :root{
+    --bg: #0b1020;
+    --card: rgba(255,255,255,.08);
+    --card2: rgba(255,255,255,.10);
+    --text: #eef2ff;
+    --muted: rgba(238,242,255,.75);
+    --accent: #7d5cff;
+    --accent2:#22c55e;
+    --danger:#ef4444;
+    --border: rgba(255,255,255,.14);
+
+    /* Dictado rojos */
+    --dictadoRed: #ff3b30;
+    --dictadoRedSoft:#d94a45;
+  }
+
+  body{
+    margin:0;
+    font-family: Arial, sans-serif;
+    background: radial-gradient(1200px 700px at 20% 10%, rgba(125,92,255,.35), transparent 60%),
+                radial-gradient(900px 600px at 90% 20%, rgba(34,197,94,.22), transparent 60%),
+                radial-gradient(900px 600px at 30% 90%, rgba(239,68,68,.18), transparent 55%),
+                var(--bg);
+    color: var(--text);
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    padding:28px 14px 70px;
+  }
+
+  .wrap{ width:min(980px, 100%); }
+
+  header{
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    margin-bottom:16px;
+    align-items:center;
+    text-align:center;
+  }
+
+  h1{
+    margin:0;
+    font-size: 22px;
+    letter-spacing:.2px;
+  }
+
+  .solo{
+    display:flex;
+    justify-content:center;
+  }
+  .solo .card{ width: min(980px, 100%); }
+
+  .card{
+    background: linear-gradient(180deg, var(--card2), var(--card));
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    box-shadow: 0 18px 45px rgba(0,0,0,.35);
+    padding: 16px;
+  }
+
+.panelGrid{
+  display:grid;
+  grid-template-columns: minmax(0, 1fr);
+  row-gap: 6px;
+  column-gap: 12px;
+  justify-items: center;
+  width: 100%;
+}
+
+  .row{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    align-items:center;
+  }
+
+  .btn{
+    border: none;
+    border-radius: 12px;
+    padding: 11px 14px;
+    cursor: pointer;
+    color: white;
+    background: var(--accent);
+    font-weight: bold;
+    transition: .15s;
+  }
+  .btn:hover{ transform: translateY(-1px); filter: brightness(1.06); }
+  .btn:disabled{ opacity:.45; cursor:not-allowed; transform:none; filter:none; }
+
+  .btn-ghost{
+    background: rgba(255,255,255,.08);
+    border: 1px solid var(--border);
+    color: var(--text);
+    font-weight: 600;
+  }
+
+.btn-mode{
+  background: rgba(255,255,255,.08);
+  border: 1px solid var(--border);
+  color: var(--text);
+  font-weight: 700;
+  border-radius: 999px;
+  transition: .15s;
+}
+
+.btn-mode:hover{
+  background: rgba(255,255,255,.12);
+}
+
+.btn-mode.activo{
+  background: rgba(125,92,255,.22);
+  border-color: rgba(125,92,255,.55);
+  color: #efe9ff;
+  box-shadow:
+    0 0 8px rgba(125,92,255,.22),
+    inset 0 0 8px rgba(125,92,255,.08);
+}
+
+.btn-mode.mix-activo{
+  background: rgba(214,40,40,.18);
+  border-color: rgba(214,40,40,.55);
+  color: #fecaca;
+  box-shadow:
+    0 0 8px rgba(214,40,40,.38),
+    0 0 18px rgba(214,40,40,.18),
+    inset 0 0 8px rgba(214,40,40,.08);
+}
+
+.btn-mode.mix-sombra{
+  background: rgba(214,40,40,.12);
+  border-color: rgba(214,40,40,.34);
+  color: #ffd6d6;
+}
+  
+  .big{
+    text-align:center;
+    padding: 20px 10px 10px;
+  }
+
+  #promptMain{
+    font-size: 55px;
+    font-weight: 400;
+    letter-spacing: .5px;
+    margin: 6px 0 8px;
+    word-break: break-word;
+    width: min(920px, 100%);
+  }
+  
+  #promptMain.esPregunta{
+    font-size: 28px;
+    font-weight: 400;
+    letter-spacing: .2px;
+    line-height: 1.25;
+  }
+
+#promptMain.dictado{
+  font-size: 0;
+  margin: 0;
+}
+  
+  #promptSub{
+    color: var(--muted);
+    font-size: 16px;
+    margin: 0 0 2px;
+    min-height: 20px;
+    width: min(920px, 100%);
+  }
+
+#promptSub.oculto{
+  display: none;
+  min-height: 0;
+  margin: 0;
+  font-size: 0;
+}
+  
+  #resultado{
+    margin-top: 4px;
+    font-size: 20px;
+    text-align:center;
+    font-weight: 900;
+    width: min(920px, 100%);
+  }
+
+  .correcto{ color: var(--accent2); }
+  .incorrecto{ color: var(--danger); }
+
+  .stats{
+    margin-top: 4px;
+    text-align:center;
+    color: var(--muted);
+    font-size: 15px;
+    width: min(920px, 100%);
+  }
+
+  .switch{
+    display:grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap:10px;
+    width:min(760px, 100%);
+  }
+  
+  .switch .btn-mode{
+    padding: 10px 14px;
+    border-radius: 999px;
+    font-size: 15px;
+    width:100%;
+  }
+
+  .btnAudioBig{
+    border:none;
+    cursor:pointer;
+    background: rgba(255,255,255,.08);
+    border: 1px solid var(--border);
+    color: var(--text);
+    border-radius: 16px;
+    padding: 12px 14px;
+    font-size: 20px;
+    line-height: 1;
+    user-select:none;
+  }
+  .btnAudioBig:hover{ filter: brightness(1.1); transform: translateY(-1px); }
+  .btnAudioBig:active{ transform: translateY(0px); }
+  .btnAudioBig[disabled]{ opacity:.35; cursor:not-allowed; transform:none; }
+  .btnAudioBig.dictado{
+    font-size: 38px;
+    padding: 22px 26px;
+    border-radius: 20px;
+  
+    box-shadow:
+      0 0 10px rgba(125,92,255,.6),
+      0 0 28px rgba(125,92,255,.35),
+      inset 0 0 12px rgba(125,92,255,.15);
+  }
+
+  
+  #opcionesTexto{
+    margin-top: 10px;
+    font-size: 25px;
+    text-align: left;
+    width: fit-content;
+    max-width: min(720px, 100%);
+    margin-left: auto;
+    margin-right: auto;
+    padding: 10px 14px;
+    border-radius: 14px;
+    border: 1px dashed rgba(255,255,255,.22);
+    background: rgba(0,0,0,.18);
+    word-break: break-word;
+  }
+  
+.actions{
+  display:grid;
+  grid-template-columns: minmax(150px, 210px);
+  justify-content:center;
+  gap:10px;
+  width:min(220px, 100%);
+  margin-top: 6px;
+}
+  .actions .btn, .actions .btn-ghost{
+    width:100%;
+    justify-self:stretch;
+  }
+
+.opcion-btn{
+  min-width: 110px;
+  min-height: 62px;
+  padding: 12px 14px;
+  border-radius: 16px;
+
+  background: rgba(125,92,255,.12);
+  border: 1px solid rgba(125,92,255,.55);
+  color: #efe9ff;
+
+  font-size: 20px;
+  font-weight: 700;
+  text-align: center;
+
+  box-shadow:
+    0 0 6px rgba(125,92,255,.6),
+    0 0 14px rgba(125,92,255,.35),
+    inset 0 0 8px rgba(125,92,255,.15);
+}
+
+.opcion-btn:hover{
+  background: rgba(125,92,255,.22);
+  box-shadow:
+    0 0 10px rgba(125,92,255,.9),
+    0 0 24px rgba(125,92,255,.6);
+}
+
+.opcion-btn.correcta{
+  background: rgba(34,197,94,.18);
+  border-color: rgba(34,197,94,.45);
+  color: #dcfce7;
+  box-shadow:
+    0 0 10px rgba(34,197,94,.35),
+    0 0 22px rgba(34,197,94,.18),
+    inset 0 0 8px rgba(34,197,94,.10);
+}
+
+.opcion-btn.incorrecta{
+  background: rgba(239,68,68,.18);
+  border-color: rgba(239,68,68,.45);
+  color: #fecaca;
+  box-shadow:
+    0 0 10px rgba(239,68,68,.35),
+    0 0 22px rgba(239,68,68,.18),
+    inset 0 0 8px rgba(239,68,68,.10);
+}
+
+.opcion-btn:disabled{
+  opacity: 1;
+  cursor: default;
+}
+
+.opcion-btn:disabled:hover{
+  transform: none;
+  filter: none;
+}
+
+.body-grid{
+  display:grid;
+  grid-template-columns: minmax(0, 1fr) 260px;
+  gap:14px;
+  align-items:start;
+}
+
+.main-area{
+  min-width:0;
+}
+
+.side-panel{
+  position: sticky;
+  top: 16px;
+  padding: 16px;
+}
+
+.panel-title{
+  font-size: 18px;
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 12px;
+  color: #efe9ff;
+  letter-spacing: .3px;
+}
+
+.switch-panel{
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+  
+@media (max-width: 900px){
+
+  .body-grid{
+    grid-template-columns: 1fr;
+  }
+
+  .side-panel{
+    position: static;
+    order: 1;
+    padding: 14px;
+  }
+
+  .panel-title{
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+
+  .switch-panel{
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .switch-panel .btn-mode{
+    font-size: 13px;
+    padding: 8px 10px;
+  }
+
+  .opcion-btn{
+    min-width: 85px;
+    min-height: 48px;
+    font-size: 18px;
+    padding: 8px 10px;
+  }
+
+  #opcionesTexto{
+    font-size: 20px;
+    line-height: 1.6;
+    padding: 8px 10px;
+  }
+
+  #promptMain.esPregunta{
+    font-size: 22px;
+  }
+  
+}
+
+.jp{
+  font-family:
+    "Hiragino Kaku Gothic ProN",
+    "Hiragino Sans",
+    "Yu Gothic",
+    "Meiryo",
+    "Noto Sans JP",
+    sans-serif;
+}
+
+#infoExtra{
+  margin-top: 8px;
+  text-align: center;
+  color: var(--text);
+  font-size: 18px;
+  font-weight: 700;
+}
+  
+</style>
+</head>
+
+<body>
+<div class="wrap">
+
+  <header>
+    <h1>Chino desde 0 ★ Asallam Sensei</h1>
+  </header>
+
+<div class="body-grid">
+
+  <div class="solo main-area">
+    <div class="card big">
+      <div class="panelGrid">
+
+        <div id="promptMain">—</div>
+        <div id="promptSub"></div>
+
+        <div id="opcionesTexto"></div>
+        
+        <div class="row" style="justify-content:center; margin-top: 6px;">
+          <button id="btn-opcion-a" class="btn opcion-btn" type="button" onclick="responder('a')">A</button>
+          <button id="btn-opcion-b" class="btn opcion-btn" type="button" onclick="responder('b')">B</button>
+          <button id="btn-opcion-c" class="btn opcion-btn" type="button" onclick="responder('c')">C</button>
+        </div>
+
+        <div id="resultado"></div>
+        <div id="infoExtra"></div>
+        
+        <div class="actions">
+          <button class="btn" type="button" onclick="accionSiguiente()">Siguiente</button>
+        </div>
+        
+        <div class="stats">
+          <div>
+            Aciertos: <span id="aciertos">0</span> — Errores: <span id="errores">0</span>
+          </div>
+          <div style="margin-top:6px;">
+            Racha: <span id="racha">0</span> — Mejor racha: <span id="mejorRacha">0</span> — Precisión: <span id="precision">0%</span>
+          </div>
+        </div>
+        
+        <div class="row" style="justify-content:center; margin-top: 8px; width:min(760px, 100%);">
+          <button class="btn btn-ghost" type="button" onclick="resetStats()">Reset stats</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <aside class="card side-panel">
+    <div class="panel-title">Modo</div>
+
+    <div style="grid-column:1 / -1; height:1px; background:rgba(255,255,255,.12); margin:8px 0;"></div>
+    
+    <div class="panel-title" style="grid-column:1 / -1; margin:0;">
+      Lecciones
+    </div>
+    
+    <div id="leccionesPanel" style="grid-column:1 / -1; display:grid; grid-template-columns:1fr 1fr; gap:10px;"></div>
+    
+    <div style="grid-column:1 / -1; height:1px; background:rgba(255,255,255,.12); margin:8px 0;"></div>
+    
+    <div class="switch switch-panel">
+      <button class="btn btn-mode" id="m-jp-es" type="button" onclick="clickJpEs()">ZH → ES</button>
+      <button class="btn btn-mode" id="m-es-jp" type="button" onclick="clickEsJp()">ES → ZH</button>
+      <button class="btn btn-mode" id="m-dictado" type="button" onclick="setModo('dictado')">Dictado</button>
+      <button class="btn btn-mode" id="m-mixto" type="button" onclick="setModo('mixto')">Mix</button>
+      
+      <div style="grid-column:1 / -1; height:1px; background:rgba(255,255,255,.12); margin:8px 0;"></div>
+      
+      <button id="audio-ia" class="btn btn-mode activo" type="button" onclick="setAudioMode('ia')">
+        🎤 Audios IA
+      </button>
+      
+      <button id="audio-tts" class="btn btn-mode" type="button" onclick="setAudioMode('tts')">
+        🧠 Sintetizador
+      </button>
+      
+    </div>
+  </aside>
+
+</div>
+
+  
+</div>
+
+<script>
+
+let dataCurso = null;
+let leccionesActivas = new Set([1]);
+  
+let lista = [];
+let actual = 0;
+let primeraRonda = true;
+let aciertos = 0;
+let errores = 0;
+let racha = 0;
+let mejorRacha = 0;
+
+let correctaLetra = "";        // "a"/"b"/"c"
+let respuestaCorrecta = "";    // texto correcto (según dirección de la ronda)
+let yaValidado = false;
+let itemActualCorrecto = null;
+let actualOpcionesTexto = [];
+
+const letras = ["a","b","c"];
+
+const STATS_KEY = "chino_desde_0_stats_v1";
+
+function cargarStats(){
+  try{
+    const s = JSON.parse(localStorage.getItem(STATS_KEY)) || {};
+    aciertos = s.aciertos || 0;
+    errores = s.errores || 0;
+    racha = s.racha || 0;
+    mejorRacha = s.mejorRacha || 0;
+  }catch{
+    aciertos = 0;
+    errores = 0;
+    racha = 0;
+    mejorRacha = 0;
+  }
+}
+
+function guardarStats(){
+  localStorage.setItem(STATS_KEY, JSON.stringify({
+    aciertos,
+    errores,
+    racha,
+    mejorRacha
+  }));
+}
+
+function precisionPct(){
+  const total = aciertos + errores;
+  if(total <= 0) return "0%";
+  return Math.round((aciertos / total) * 100) + "%";
+}
+  
+// ====== MODOS ======
+let modoActual = "mixto";   // "jp-es" | "es-jp" | "dictado" | "mixto"
+let rondaDir = "jp-es";     // "jp-es" | "es-jp"
+let rondaEsDictado = false; // true/false
+let dictadoDirs = new Set(["jp-es", "es-jp"]);
+
+// ====== AUDIO (EXACTO AL JSON) ======
+const AUDIO_BASE = "data/audios/n5/";   // carpeta mp3
+const audio = new Audio();
+
+const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+function playBeep(freq, duration){
+  try{
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+
+    osc.connect(gain);
+    gain.connect(audioCtx.destination);
+
+    osc.frequency.value = freq;
+    osc.type = "sine";
+    gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
+
+    osc.start();
+    osc.stop(audioCtx.currentTime + duration);
+  }catch{}
+}
+
+function sonidoCorrecto(){
+  playBeep(700, 0.08);
+  setTimeout(() => playBeep(900, 0.12), 80);
+}
+
+function sonidoIncorrecto(){
+  playBeep(250, 0.2);
+}
+  
+audio.preload = "auto";
+let ultimoAudioKey = "";                // romaji actual tal cual del JSON
+
+let modoAudio = "ia";
+let voces = [];
+
+function setAudioMode(modo){
+  modoAudio = modo;
+
+  document.getElementById("audio-ia").classList.toggle("activo", modo === "ia");
+  document.getElementById("audio-tts").classList.toggle("activo", modo === "tts");
+}
+
+let vozZh = null;
+
+function cargarVoces(){
+  voces = window.speechSynthesis ? speechSynthesis.getVoices() : [];
+
+  vozZh = voces.find(v => String(v.lang).toLowerCase() === "zh-cn")
+       || voces.find(v => String(v.lang).toLowerCase().startsWith("zh"))
+       || null;
+}
+
+if(window.speechSynthesis){
+  cargarVoces();
+  speechSynthesis.onvoiceschanged = cargarVoces;
+}
+
+function sintetizarChino(texto){
+  const t = String(texto || "").trim();
+  if(!t || !window.speechSynthesis) return;
+
+  try{ speechSynthesis.cancel(); }catch{}
+
+  const u = new SpeechSynthesisUtterance(t);
+
+  u.lang = "zh-CN";
+
+  if(vozZh) u.voice = vozZh;
+
+  u.rate = 0.82;
+  u.pitch = 1;
+
+  speechSynthesis.speak(u);
+}
+  
+function buildExactAudioSrc(romaji){
+  const key = String(romaji || "").trim();
+  if(!key) return "";
+  // nombre EXACTO al romaji del JSON (solo encode para espacios/acentos)
+  return AUDIO_BASE + encodeURIComponent(key) + ".mp3";
+}
+
+function detenerAudio(){
+  try{
+    audio.pause();
+    audio.currentTime = 0;
+  }catch{}
+}
+
+async function playAudio(romaji){
+  const key = String(romaji || "").trim();
+  ultimoAudioKey = key;
+
+  const chino = itemActualCorrecto ? itemActualCorrecto.hanzi : "";
+  
+  if(modoAudio === "tts"){
+    sintetizarChino(chino);
+    return;
+  }
+
+  const src = buildExactAudioSrc(key);
+
+  if(!src){
+    sintetizarChino(chino);
+    return;
+  }
+
+  try{
+    detenerAudio();
+    audio.src = src;
+    audio.load();
+
+    await audio.play();
+  }catch{
+    sintetizarChino(chino);
+  }
+}
+
+function reproducirAudioActual(){
+  if(ultimoAudioKey) playAudio(ultimoAudioKey);
+}
+
+// ====== DATA ======
+fetch("data/chino_desde_0.json")
+  .then(res => res.json())
+  .then(data => {
+    dataCurso = data;
+
+    crearBotonesLecciones();
+    actualizarLista();
+
+    setModo("mixto");
+  })
+  .catch(err => {
+    console.error(err);
+    document.getElementById("promptMain").innerText =
+      "No se pudo cargar data/chino_desde_0.json";
+  });
+
+// ====== UI MODO ======
+
+function crearBotonesLecciones(){
+
+  const panel = document.getElementById("leccionesPanel");
+  panel.innerHTML = "";
+
+  dataCurso.lecciones.forEach(leccion => {
+
+    const btn = document.createElement("button");
+
+    btn.className = "btn btn-mode";
+    btn.textContent = leccion.leccion;
+    btn.dataset.leccion = leccion.leccion;
+
+    if(leccionesActivas.has(leccion.leccion)){
+      btn.classList.add("activo");
+    }
+
+    btn.onclick = () => toggleLeccion(leccion.leccion);
+
+    panel.appendChild(btn);
+  });
+}
+
+function toggleLeccion(numero){
+
+  if(leccionesActivas.has(numero)){
+
+    // Nunca dejar todas apagadas
+    if(leccionesActivas.size === 1) return;
+
+    leccionesActivas.delete(numero);
+
+  }else{
+
+    leccionesActivas.add(numero);
+  }
+
+  crearBotonesLecciones();
+  actualizarLista();
+
+  if(lista.length){
+    siguiente();
+  }
+}
+
+function actualizarLista(){
+
+  lista = dataCurso.lecciones
+    .filter(l => leccionesActivas.has(l.leccion))
+    .flatMap(l => l.vocabulario)
+    .filter(x =>
+      x &&
+      x.hanzi &&
+      x.significado &&
+      x.pinyin
+    );
+}
+  
+function limpiarActivos(){
+  ["m-jp-es","m-es-jp","m-dictado","m-mixto"].forEach(id=>{
+    const el = document.getElementById(id);
+    if(!el) return;
+    el.classList.remove("activo","mix-activo","mix-sombra");
+  });
+}
+
+function aplicarUI(){
+  limpiarActivos();
+
+  const btnJpEs = document.getElementById("m-jp-es");
+  const btnEsJp = document.getElementById("m-es-jp");
+  const btnDict = document.getElementById("m-dictado");
+  const btnMix  = document.getElementById("m-mixto");
+
+  if(modoActual === "mixto"){
+    btnMix?.classList.add("mix-activo");
+    btnJpEs?.classList.add("mix-sombra");
+    btnEsJp?.classList.add("mix-sombra");
+    btnDict?.classList.add("mix-sombra");
+  }
+  else if(modoActual === "dictado"){
+    btnDict?.classList.add("activo");
+
+    btnJpEs?.classList.toggle("activo", dictadoDirs.has("jp-es"));
+    btnEsJp?.classList.toggle("activo", dictadoDirs.has("es-jp"));
+  }
+  else if(modoActual === "jp-es"){
+    btnJpEs?.classList.add("activo");
+  }
+  else if(modoActual === "es-jp"){
+    btnEsJp?.classList.add("activo");
+  }
+
+}
+
+function setModo(nuevoModo){
+  modoActual = nuevoModo;
+  aplicarUI();
+
+  yaValidado = false;
+  limpiarResultado();
+  if(lista.length) siguiente();
+}
+
+function clickJpEs(){
+  if(modoActual === "dictado"){
+    toggleDictadoDir("jp-es");
+  }else{
+    setModo("jp-es");
+  }
+}
+
+function clickEsJp(){
+  if(modoActual === "dictado"){
+    toggleDictadoDir("es-jp");
+  }else{
+    setModo("es-jp");
+  }
+}
+
+function toggleDictadoDir(dir){
+  if(dictadoDirs.has(dir)){
+    if(dictadoDirs.size === 1) return; // nunca dejar 0
+    dictadoDirs.delete(dir);
+  }else{
+    dictadoDirs.add(dir);
+  }
+
+  aplicarUI();
+
+  yaValidado = false;
+  limpiarResultado();
+  if(lista.length && modoActual === "dictado") siguiente();
+}
+
+
+// ====== TEXTO SEGÚN DIRECCIÓN DE LA RONDA ======
+function textoPregunta(item){
+  return (rondaDir === "jp-es") ? item.hanzi : item.significado;
+}
+function textoRespuesta(item){
+  return (rondaDir === "jp-es") ? item.significado : item.hanzi;
+}
+
+function aplicarEstiloPregunta(){
+  const el = document.getElementById("promptMain");
+  if(rondaDir === "es-jp") el.classList.add("esPregunta");
+  else el.classList.remove("esPregunta");
+}
+
+function renderPrompt(itemCorrecto){
+  const promptEl = document.getElementById("promptMain");
+  const subEl = document.getElementById("promptSub");
+
+  aplicarEstiloPregunta();
+
+  ultimoAudioKey = String(itemCorrecto.pinyin || "").trim();
+
+  if(rondaEsDictado){
+  
+    promptEl.classList.add("dictado");
+    subEl.classList.add("oculto");
+    subEl.innerText = "";
+  
+    promptEl.innerHTML = `
+      <button id="promptSpeaker" class="btnAudioBig dictado" type="button" title="Escuchar" onclick="reproducirAudioActual()">🔊</button>
+    `;
+  }
+  else{
+  
+    promptEl.classList.remove("dictado");
+    subEl.classList.remove("oculto");
+
+    const pregunta = textoPregunta(itemCorrecto);
+    
+    if(rondaDir === "jp-es"){
+      promptEl.innerHTML = `<span class="jp">${pregunta}</span>`;
+    }else{
+      promptEl.textContent = pregunta;
+    }
+  
+    subEl.innerHTML = `
+      <button id="promptSpeaker" class="btnAudioBig" type="button" title="Escuchar" onclick="reproducirAudioActual()">🔊</button>
+    `;
+  }
+
+  const speaker = document.getElementById("promptSpeaker");
+  if(speaker) speaker.disabled = false; // ya no verificamos existencia
+}
+
+function limpiarResultado(){
+  const res = document.getElementById("resultado");
+  res.innerText = "";
+  res.className = "";
+
+  document.getElementById("infoExtra").innerText = "";
+}
+  
+function pintarStats(){
+  document.getElementById("aciertos").innerText = aciertos;
+  document.getElementById("errores").innerText = errores;
+  document.getElementById("racha").innerText = racha;
+  document.getElementById("mejorRacha").innerText = mejorRacha;
+  document.getElementById("precision").innerText = precisionPct();
+}
+
+// ====== CONTROL DE OPCIONES ======
+function bloquearOpciones(){
+  document.querySelectorAll(".opcion-btn").forEach(btn => {
+    btn.disabled = true;
+  });
+}
+
+function habilitarOpciones(){
+  document.querySelectorAll(".opcion-btn").forEach(btn => {
+    btn.disabled = false;
+    btn.classList.remove("correcta", "incorrecta");
+  });
+}
+
+function pintarOpciones(){
+  const box = document.getElementById("opcionesTexto");
+
+  const opcionesActuales = actualOpcionesTexto;
+  if(!opcionesActuales || opcionesActuales.length < 3) return;
+
+  box.innerHTML = opcionesActuales.map((txt, idx) => {
+    const letra = letras[idx];
+
+    const usarJp = (rondaDir === "es-jp");
+
+    return `<div>${letra}) ${usarJp ? `<span class="jp">${txt}</span>` : txt}</div>`;
+  }).join("");
+
+  const botones = {
+    a: document.getElementById("btn-opcion-a"),
+    b: document.getElementById("btn-opcion-b"),
+    c: document.getElementById("btn-opcion-c")
+  };
+
+  Object.entries(botones).forEach(([letra, btn]) => {
+
+    if(!btn) return;
+
+    btn.classList.remove("correcta", "incorrecta");
+
+    if(letra === correctaLetra){
+      btn.classList.add("correcta");
+    }else{
+      btn.classList.add("incorrecta");
+    }
+  });
+}
+
+// ====== SIGUIENTE (DOBLE CLICK SI ESTABA SIN CALIFICAR) ======
+function accionSiguiente(){
+
+  if(!yaValidado){
+    verificar("");
+    return;
+  }
+
+  siguiente();
+}
+
+// ====== GENERAR RONDA ======
+function elegirRonda(){
+  if(modoActual === "jp-es"){
+    return { dir: "jp-es", dictado: false };
+  }
+
+  if(modoActual === "es-jp"){
+    return { dir: "es-jp", dictado: false };
+  }
+
+  if(modoActual === "dictado"){
+    const dirs = [...dictadoDirs];
+    const dir = dirs[Math.floor(Math.random() * dirs.length)];
+    return { dir, dictado: true };
+  }
+
+  // Primera ronda en Mix: nunca dictado
+  if(primeraRonda){
+    primeraRonda = false;
+
+    if(Math.random() < 0.5){
+      return { dir: "jp-es", dictado: false };
+    }
+
+    return { dir: "es-jp", dictado: false };
+  }
+
+  // Mix normal
+  const r = Math.random();
+
+  if(r < 0.25) return { dir: "jp-es", dictado: false };
+  if(r < 0.50) return { dir: "es-jp", dictado: false };
+  if(r < 0.75) return { dir: "jp-es", dictado: true };
+  return { dir: "es-jp", dictado: true };
+}
+
+function siguiente(){
+  if(lista.length < 3) return;
+
+  const ronda = elegirRonda();
+  rondaDir = ronda.dir;
+  rondaEsDictado = ronda.dictado;
+
+  actual = Math.floor(Math.random() * lista.length);
+  const itemCorrecto = lista[actual];
+  itemActualCorrecto = itemCorrecto;
+  
+  respuestaCorrecta = textoRespuesta(itemCorrecto);
+
+  let opciones = [respuestaCorrecta];
+  while(opciones.length < 3){
+    const rItem = lista[Math.floor(Math.random() * lista.length)];
+    const r = textoRespuesta(rItem);
+    if(!opciones.includes(r)) opciones.push(r);
+  }
+  
+  opciones = mezclarArray(opciones);
+  correctaLetra = letras[opciones.indexOf(respuestaCorrecta)];
+  actualOpcionesTexto = opciones.slice();
+
+  renderPrompt(itemCorrecto);
+  renderOpciones(opciones);
+  habilitarOpciones();
+
+  limpiarResultado();
+  aplicarUI();
+  yaValidado = false;
+
+  // (como lo tenías) suena al pasar:
+  playAudio(ultimoAudioKey);
+}
+
+function renderOpciones(opciones){
+  const box = document.getElementById("opcionesTexto");
+
+  const usarJp = (rondaDir === "es-jp");
+
+  box.innerHTML = `
+    a) ${usarJp ? `<span class="jp">${opciones[0]}</span>` : opciones[0]}<br>
+    b) ${usarJp ? `<span class="jp">${opciones[1]}</span>` : opciones[1]}<br>
+    c) ${usarJp ? `<span class="jp">${opciones[2]}</span>` : opciones[2]}
+  `;
+}
+
+function mezclarArray(arr){
+  const copia = [...arr];
+  for(let i = copia.length - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * (i + 1));
+    [copia[i], copia[j]] = [copia[j], copia[i]];
+  }
+  return copia;
+}
+  
+function responder(letra){
+  if(yaValidado) return;
+  verificar(letra);
+}
+  
+function verificar(letraForzada){
+  const res = document.getElementById("resultado");
+  const info = document.getElementById("infoExtra");
+
+  const r = (letraForzada || "").toString().toLowerCase().trim();
+  
+  const esSaltado = r === "";
+  
+  if(!esSaltado && !["a","b","c"].includes(r)){
+    res.className = "incorrecto";
+    res.innerText = "Usa solo: a / b / c";
+    return;
+  }
+  
+  const letra = esSaltado ? "" : r;
+
+  const zh = itemActualCorrecto.hanzi;
+  const pinyin = itemActualCorrecto.pinyin;
+  
+  let extraInfo = `${jp} ★ romaji: ${romaji}`;
+  
+  if(rondaEsDictado){
+  
+    if(respuestaCorrecta === jp){
+      extraInfo = `${itemActualCorrecto.significado} ★ ${romaji}`;
+    }else{
+      extraInfo = `${jp} ★ ${romaji}`;
+    }
+  
+  }
+  
+  if(letra === correctaLetra){
+    sonidoCorrecto();
+    res.className = "correcto";
+    res.innerText = "Correcto ✔";
+    info.innerText = `${zh} ★ ${pinyin} ★ ${itemActualCorrecto.significado}`;
+    aciertos++;
+    racha++;
+    if(racha > mejorRacha) mejorRacha = racha;
+  }else{
+    sonidoIncorrecto();
+    res.className = "incorrecto";
+  
+    res.innerHTML = esSaltado
+      ? `Saltado ✘<span style="color: white;">, era ${correctaLetra}</span>`
+      : `Incorrecto ✘<span style="color: white;">, era ${correctaLetra}</span>`;
+      info.innerText = `${jp} ★ ${romajiVisible} ★ ${itemActualCorrecto.significado}`;
+    errores++;
+    racha = 0;
+  }
+
+  pintarStats();
+  guardarStats();
+  yaValidado = true;
+
+  pintarOpciones();
+  bloquearOpciones();
+}
+
+function resetStats(){
+  aciertos = 0;
+  errores = 0;
+  racha = 0;
+  mejorRacha = 0;
+  pintarStats();
+  guardarStats();
+}
+
+document.addEventListener("keydown", (e) => {
+  const k = (e.key || "").toLowerCase();
+
+  if(["a","b","c"].includes(k) && !yaValidado){
+    e.preventDefault();
+    responder(k);
+    return;
+  }
+
+  if(k === "enter"){
+    e.preventDefault();
+    accionSiguiente();
+  }
+  
+});
+  
+cargarStats();
+pintarStats();
+  
+</script>
+
+</body>
+</html>
