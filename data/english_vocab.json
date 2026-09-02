@@ -1247,6 +1247,349 @@
     { "en": "to rain", "es": "llover" },
     { "en": "to snow", "es": "nevar" }
   ]
-}
+},
+    {
+      "id": "eng_33",
+      "title": "Determinantes y demostrativos",
+      "description": "Artículos y determinantes esenciales para señalar, identificar y cuantificar referentes.",
+      "words": [
+        { "en": "the", "es": "el, la, los, las" },
+        { "en": "a", "es": "un, una" },
+        { "en": "an", "es": "un, una (antes de sonido vocálico)" },
+        { "en": "this", "es": "este, esta, esto" },
+        { "en": "that", "es": "ese, esa, eso" },
+        { "en": "these", "es": "estos, estas" },
+        { "en": "those", "es": "esos, esas" },
+        { "en": "another", "es": "otro, otra" },
+        { "en": "both", "es": "ambos, ambas" },
+        { "en": "such", "es": "tal, semejante" }
+      ]
+    },
+    {
+      "id": "eng_34",
+      "title": "Pronombres indefinidos",
+      "description": "Pronombres básicos para hablar de personas, cosas y lugares no identificados.",
+      "words": [
+        { "en": "someone", "es": "alguien" },
+        { "en": "anyone", "es": "cualquiera" },
+        { "en": "everyone", "es": "todo el mundo" },
+        { "en": "no one", "es": "nadie" },
+        { "en": "something", "es": "algo" },
+        { "en": "anything", "es": "cualquier cosa" },
+        { "en": "everything", "es": "todo" },
+        { "en": "nothing", "es": "nada" },
+        { "en": "somewhere", "es": "algún lugar" },
+        { "en": "nowhere", "es": "ningún lugar" }
+      ]
+    },
+    {
+      "id": "eng_35",
+      "title": "Educación",
+      "description": "Objetos y términos esenciales para estudiar y participar en clase.",
+      "words": [
+        { "en": "book", "es": "libro" },
+        { "en": "notebook", "es": "cuaderno" },
+        { "en": "pencil", "es": "lápiz" },
+        { "en": "pen", "es": "bolígrafo" },
+        { "en": "eraser", "es": "borrador" },
+        { "en": "paper", "es": "papel" },
+        { "en": "class", "es": "clase" },
+        { "en": "lesson", "es": "lección" },
+        { "en": "homework", "es": "tarea" },
+        { "en": "exam", "es": "examen" }
+      ]
+    },
+    {
+      "id": "eng_36",
+      "title": "Tecnología",
+      "description": "Dispositivos y conceptos digitales de uso diario.",
+      "words": [
+        { "en": "computer", "es": "computadora" },
+        { "en": "laptop", "es": "computadora portátil" },
+        { "en": "phone", "es": "teléfono" },
+        { "en": "cell phone", "es": "teléfono celular" },
+        { "en": "internet", "es": "internet" },
+        { "en": "website", "es": "sitio web" },
+        { "en": "email", "es": "correo electrónico" },
+        { "en": "password", "es": "contraseña" },
+        { "en": "screen", "es": "pantalla" },
+        { "en": "keyboard", "es": "teclado" }
+      ]
+    },
+    {
+      "id": "eng_37",
+      "title": "Oficina y trabajo",
+      "description": "Vocabulario básico del entorno laboral y la organización del trabajo.",
+      "words": [
+        { "en": "office", "es": "oficina" },
+        { "en": "job", "es": "trabajo" },
+        { "en": "boss", "es": "jefe" },
+        { "en": "coworker", "es": "compañero de trabajo" },
+        { "en": "meeting", "es": "reunión" },
+        { "en": "project", "es": "proyecto" },
+        { "en": "schedule", "es": "horario" },
+        { "en": "break", "es": "descanso breve" },
+        { "en": "company", "es": "empresa" },
+        { "en": "salary", "es": "salario" }
+      ]
+    },
+    {
+      "id": "eng_38",
+      "title": "Comida y bebidas",
+      "description": "Comidas, bebidas y categorías alimentarias muy frecuentes.",
+      "words": [
+        { "en": "food", "es": "comida" },
+        { "en": "breakfast", "es": "desayuno" },
+        { "en": "lunch", "es": "almuerzo" },
+        { "en": "dinner", "es": "cena" },
+        { "en": "coffee", "es": "café" },
+        { "en": "tea", "es": "té" },
+        { "en": "juice", "es": "jugo" },
+        { "en": "fruit", "es": "fruta" },
+        { "en": "vegetable", "es": "verdura" },
+        { "en": "meat", "es": "carne" }
+      ]
+    },
+    {
+      "id": "eng_39",
+      "title": "Hogar y objetos",
+      "description": "Objetos domésticos y espacios cotidianos que faltan en la lista actual.",
+      "words": [
+        { "en": "key", "es": "llave" },
+        { "en": "phone charger", "es": "cargador de teléfono" },
+        { "en": "mirror", "es": "espejo" },
+        { "en": "towel", "es": "toalla" },
+        { "en": "blanket", "es": "manta" },
+        { "en": "pillow", "es": "almohada" },
+        { "en": "closet", "es": "armario" },
+        { "en": "drawer", "es": "cajón" },
+        { "en": "stairs", "es": "escaleras" },
+        { "en": "yard", "es": "patio" }
+      ]
+    },
+    {
+      "id": "eng_40",
+      "title": "Rutina diaria",
+      "description": "Acciones generales de alta utilidad en conversaciones cotidianas.",
+      "words": [
+        { "en": "to arrive", "es": "llegar" },
+        { "en": "to leave", "es": "irse, salir" },
+        { "en": "to walk", "es": "caminar" },
+        { "en": "to run", "es": "correr" },
+        { "en": "to read", "es": "leer" },
+        { "en": "to write", "es": "escribir" },
+        { "en": "to learn", "es": "aprender" },
+        { "en": "to ask", "es": "preguntar" },
+        { "en": "to answer", "es": "responder" },
+        { "en": "to call", "es": "llamar" }
+      ]
+    },
+    {
+      "id": "eng_41",
+      "title": "Direcciones y ubicación",
+      "description": "Palabras para orientarse, indicar posición y dar instrucciones.",
+      "words": [
+        { "en": "left", "es": "izquierda" },
+        { "en": "right", "es": "derecha" },
+        { "en": "straight", "es": "recto" },
+        { "en": "north", "es": "norte" },
+        { "en": "south", "es": "sur" },
+        { "en": "east", "es": "este" },
+        { "en": "west", "es": "oeste" },
+        { "en": "inside", "es": "adentro" },
+        { "en": "outside", "es": "afuera" },
+        { "en": "corner", "es": "esquina" }
+      ]
+    },
+    {
+      "id": "eng_42",
+      "title": "Ciudad y servicios",
+      "description": "Servicios y lugares urbanos comunes no cubiertos aún.",
+      "words": [
+        { "en": "library", "es": "biblioteca" },
+        { "en": "police station", "es": "estación de policía" },
+        { "en": "post office", "es": "oficina de correos" },
+        { "en": "gas station", "es": "gasolinera" },
+        { "en": "bakery", "es": "panadería" },
+        { "en": "cafe", "es": "cafetería" },
+        { "en": "gym", "es": "gimnasio" },
+        { "en": "church", "es": "iglesia" },
+        { "en": "museum", "es": "museo" },
+        { "en": "bridge", "es": "puente" }
+      ]
+    },
+    {
+      "id": "eng_43",
+      "title": "Cuerpo complementario",
+      "description": "Partes del cuerpo frecuentes que amplían el bloque corporal existente.",
+      "words": [
+        { "en": "heart", "es": "corazón" },
+        { "en": "brain", "es": "cerebro" },
+        { "en": "skin", "es": "piel" },
+        { "en": "blood", "es": "sangre" },
+        { "en": "throat", "es": "garganta" },
+        { "en": "wrist", "es": "muñeca" },
+        { "en": "elbow", "es": "codo" },
+        { "en": "ankle", "es": "tobillo" },
+        { "en": "hip", "es": "cadera" },
+        { "en": "waist", "es": "cintura" }
+      ]
+    },
+    {
+      "id": "eng_44",
+      "title": "Salud complementaria",
+      "description": "Síntomas, atención y recuperación para situaciones básicas de salud.",
+      "words": [
+        { "en": "headache", "es": "dolor de cabeza" },
+        { "en": "stomachache", "es": "dolor de estómago" },
+        { "en": "allergy", "es": "alergia" },
+        { "en": "appointment", "es": "cita" },
+        { "en": "dentist", "es": "dentista" },
+        { "en": "prescription", "es": "receta médica" },
+        { "en": "bandage", "es": "vendaje" },
+        { "en": "symptom", "es": "síntoma" },
+        { "en": "treatment", "es": "tratamiento" },
+        { "en": "to recover", "es": "recuperarse" }
+      ]
+    },
+    {
+      "id": "eng_45",
+      "title": "Emociones y personalidad",
+      "description": "Rasgos personales y sociales comunes para describir a las personas.",
+      "words": [
+        { "en": "kind", "es": "amable" },
+        { "en": "friendly", "es": "amistoso" },
+        { "en": "serious", "es": "serio" },
+        { "en": "funny", "es": "gracioso" },
+        { "en": "shy", "es": "tímido" },
+        { "en": "brave", "es": "valiente" },
+        { "en": "honest", "es": "honesto" },
+        { "en": "patient", "es": "paciente" },
+        { "en": "polite", "es": "educado" },
+        { "en": "rude", "es": "grosero" }
+      ]
+    },
+    {
+      "id": "eng_46",
+      "title": "Adjetivos cotidianos",
+      "description": "Adjetivos de alta utilidad para estados, cualidades y comparaciones.",
+      "words": [
+        { "en": "important", "es": "importante" },
+        { "en": "different", "es": "diferente" },
+        { "en": "same", "es": "mismo" },
+        { "en": "possible", "es": "posible" },
+        { "en": "ready", "es": "listo" },
+        { "en": "busy", "es": "ocupado" },
+        { "en": "free", "es": "libre" },
+        { "en": "strong", "es": "fuerte" },
+        { "en": "weak", "es": "débil" },
+        { "en": "safe", "es": "seguro" }
+      ]
+    },
+    {
+      "id": "eng_47",
+      "title": "Verbos comunes II",
+      "description": "Verbos generales muy productivos que complementan los bloques verbales actuales.",
+      "words": [
+        { "en": "to put", "es": "poner" },
+        { "en": "to keep", "es": "mantener, guardar" },
+        { "en": "to bring", "es": "traer" },
+        { "en": "to send", "es": "enviar" },
+        { "en": "to pay", "es": "pagar" },
+        { "en": "to choose", "es": "elegir" },
+        { "en": "to try", "es": "intentar, probar" },
+        { "en": "to move", "es": "moverse, mover" },
+        { "en": "to happen", "es": "pasar, suceder" },
+        { "en": "to become", "es": "convertirse, llegar a ser" }
+      ]
+    },
+    {
+      "id": "eng_48",
+      "title": "Conectores y función",
+      "description": "Conectores y adverbios funcionales para unir ideas y hablar con más fluidez.",
+      "words": [
+        { "en": "although", "es": "aunque" },
+        { "en": "however", "es": "sin embargo" },
+        { "en": "therefore", "es": "por lo tanto" },
+        { "en": "while", "es": "mientras" },
+        { "en": "since", "es": "desde, ya que" },
+        { "en": "until", "es": "hasta" },
+        { "en": "still", "es": "todavía" },
+        { "en": "already", "es": "ya" },
+        { "en": "again", "es": "otra vez" },
+        { "en": "together", "es": "juntos" }
+      ]
+    },
+    {
+      "id": "eng_49",
+      "title": "Tiempo y fechas complementario",
+      "description": "Expresiones de calendario y momentos del día no presentes como entradas exactas.",
+      "words": [
+        { "en": "weekend", "es": "fin de semana" },
+        { "en": "weekday", "es": "día entre semana" },
+        { "en": "daily", "es": "diario" },
+        { "en": "weekly", "es": "semanal" },
+        { "en": "monthly", "es": "mensual" },
+        { "en": "last", "es": "pasado, último" },
+        { "en": "next week", "es": "la próxima semana" },
+        { "en": "tonight", "es": "esta noche" },
+        { "en": "noon", "es": "mediodía" },
+        { "en": "midnight", "es": "medianoche" }
+      ]
+    },
+    {
+      "id": "eng_50",
+      "title": "Naturaleza y clima",
+      "description": "Elementos naturales frecuentes para describir el entorno y el clima.",
+      "words": [
+        { "en": "tree", "es": "árbol" },
+        { "en": "flower", "es": "flor" },
+        { "en": "grass", "es": "césped" },
+        { "en": "river", "es": "río" },
+        { "en": "lake", "es": "lago" },
+        { "en": "sea", "es": "mar" },
+        { "en": "sky", "es": "cielo" },
+        { "en": "forest", "es": "bosque" },
+        { "en": "fog", "es": "niebla" },
+        { "en": "ice", "es": "hielo" }
+      ]
+    },
+    {
+      "id": "eng_51",
+      "title": "Relaciones y personas",
+      "description": "Personas y relaciones sociales básicas fuera del bloque de familia.",
+      "words": [
+        { "en": "person", "es": "persona" },
+        { "en": "people", "es": "gente, personas" },
+        { "en": "friend", "es": "amigo, amiga" },
+        { "en": "neighbor", "es": "vecino, vecina" },
+        { "en": "partner", "es": "pareja" },
+        { "en": "boy", "es": "niño, chico" },
+        { "en": "girl", "es": "niña, chica" },
+        { "en": "man", "es": "hombre" },
+        { "en": "woman", "es": "mujer" },
+        { "en": "baby", "es": "bebé" }
+      ]
+    },
+    {
+      "id": "eng_52",
+      "title": "Comunicación y medios",
+      "description": "Palabras para mensajes, información, lenguaje y conversación.",
+      "words": [
+        { "en": "message", "es": "mensaje" },
+        { "en": "text message", "es": "mensaje de texto" },
+        { "en": "photo", "es": "foto" },
+        { "en": "video", "es": "video" },
+        { "en": "news", "es": "noticias" },
+        { "en": "question", "es": "pregunta" },
+        { "en": "answer", "es": "respuesta" },
+        { "en": "word", "es": "palabra" },
+        { "en": "language", "es": "idioma" },
+        { "en": "conversation", "es": "conversación" }
+      ]
+    }
+
+
+    
   ]
 }
