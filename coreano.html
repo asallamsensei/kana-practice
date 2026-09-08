@@ -1,0 +1,2582 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<title>Coreano — Asallam Sensei</title>
+
+<style>
+:root{
+  --bg:#080d18;
+  --card:rgba(255,255,255,.065);
+  --card2:rgba(255,255,255,.095);
+  --text:#f4f7ff;
+  --muted:rgba(244,247,255,.68);
+  --border:rgba(255,255,255,.13);
+
+  --blue:#2563eb;
+  --blueSoft:rgba(37,99,235,.18);
+
+  --red:#ef4444;
+  --redSoft:rgba(239,68,68,.17);
+
+  --green:#22c55e;
+  --yellow:#facc15;
+
+  --jamo:#38bdf8;
+  --silaba:#f87171;
+  --nota:#fbbf24;
+}
+
+*{
+  box-sizing:border-box;
+}
+
+body{
+  margin:0;
+  min-height:100vh;
+
+  font-family:
+    Arial,
+    "Noto Sans KR",
+    "Malgun Gothic",
+    sans-serif;
+
+  color:var(--text);
+
+  background:
+    radial-gradient(
+      900px 650px at 10% 10%,
+      rgba(37,99,235,.26),
+      transparent 60%
+    ),
+    radial-gradient(
+      900px 650px at 90% 20%,
+      rgba(239,68,68,.20),
+      transparent 60%
+    ),
+    radial-gradient(
+      900px 650px at 50% 100%,
+      rgba(255,255,255,.045),
+      transparent 60%
+    ),
+    var(--bg);
+
+  display:flex;
+  justify-content:center;
+
+  padding:28px 14px 70px;
+}
+
+.wrap{
+  width:min(1040px,100%);
+}
+
+header{
+  display:flex;
+  justify-content:center;
+  text-align:center;
+  margin-bottom:16px;
+}
+
+h1{
+  margin:0;
+  font-size:22px;
+  letter-spacing:.2px;
+}
+
+.body-grid{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) 270px;
+  gap:14px;
+  align-items:start;
+}
+
+.card{
+  background:
+    linear-gradient(
+      180deg,
+      var(--card2),
+      var(--card)
+    );
+
+  border:1px solid var(--border);
+  border-radius:18px;
+
+  box-shadow:
+    0 18px 45px rgba(0,0,0,.35);
+
+  padding:16px;
+}
+
+.main-area{
+  min-width:0;
+}
+
+.big{
+  text-align:center;
+  padding:20px 14px 16px;
+}
+
+.panelGrid{
+  display:grid;
+  grid-template-columns:minmax(0,1fr);
+  justify-items:center;
+  row-gap:7px;
+  width:100%;
+}
+
+#badgeBox{
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:7px;
+
+  min-height:26px;
+}
+
+.badge{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+
+  min-height:24px;
+
+  padding:4px 9px;
+
+  border-radius:999px;
+  border:1px solid var(--border);
+
+  font-size:12px;
+  font-weight:800;
+  letter-spacing:.25px;
+
+  background:rgba(255,255,255,.07);
+  color:var(--text);
+}
+
+.badge-jamo{
+  color:#d9f6ff;
+  border-color:rgba(56,189,248,.48);
+  background:rgba(56,189,248,.13);
+}
+
+.badge-silaba{
+  color:#ffe1e1;
+  border-color:rgba(248,113,113,.48);
+  background:rgba(248,113,113,.13);
+}
+
+.badge-nota{
+  color:#fff4c4;
+  border-color:rgba(251,191,36,.45);
+  background:rgba(251,191,36,.12);
+}
+
+#promptMain{
+  width:min(920px,100%);
+
+  margin:6px 0 4px;
+
+  font-size:62px;
+  font-weight:500;
+  line-height:1.15;
+
+  letter-spacing:.5px;
+  word-break:break-word;
+}
+
+#promptMain.romanizacionPregunta{
+  font-size:34px;
+}
+
+#promptMain.dictado{
+  font-size:0;
+  margin:3px 0;
+}
+
+#promptSub{
+  width:min(920px,100%);
+  min-height:42px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  margin:0;
+
+  color:var(--muted);
+}
+
+#promptSub.oculto{
+  display:none;
+  min-height:0;
+}
+
+.audio-row{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:9px;
+  flex-wrap:wrap;
+}
+
+.btnAudioBig{
+  border:1px solid var(--border);
+  border-radius:16px;
+
+  cursor:pointer;
+
+  background:rgba(255,255,255,.075);
+  color:var(--text);
+
+  padding:11px 14px;
+  font-size:20px;
+  line-height:1;
+
+  transition:.15s;
+}
+
+.btnAudioBig:hover{
+  transform:translateY(-1px);
+  filter:brightness(1.1);
+}
+
+.btnAudioBig:active{
+  transform:translateY(0);
+}
+
+.btnAudioBig.dictado{
+  padding:22px 27px;
+  border-radius:20px;
+  font-size:40px;
+
+  box-shadow:
+    0 0 12px rgba(37,99,235,.35),
+    0 0 28px rgba(239,68,68,.16);
+}
+
+.no-audio{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+
+  padding:7px 11px;
+
+  border-radius:999px;
+  border:1px solid rgba(255,255,255,.12);
+
+  background:rgba(255,255,255,.055);
+
+  color:var(--muted);
+
+  font-size:13px;
+  font-weight:700;
+}
+
+#composicion{
+  width:min(720px,100%);
+  min-height:26px;
+
+  font-size:21px;
+  font-weight:800;
+
+  color:#f8fafc;
+
+  margin-top:1px;
+}
+
+#opcionesTexto{
+  margin-top:8px;
+
+  width:fit-content;
+  max-width:min(720px,100%);
+
+  padding:10px 15px;
+
+  border-radius:14px;
+  border:1px dashed rgba(255,255,255,.20);
+
+  background:rgba(0,0,0,.16);
+
+  font-size:25px;
+  line-height:1.55;
+
+  text-align:left;
+  word-break:break-word;
+}
+
+.row{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  align-items:center;
+}
+
+.btn{
+  border:none;
+  border-radius:12px;
+
+  padding:11px 14px;
+
+  cursor:pointer;
+
+  color:white;
+  background:var(--blue);
+
+  font-weight:800;
+
+  transition:.15s;
+}
+
+.btn:hover{
+  transform:translateY(-1px);
+  filter:brightness(1.07);
+}
+
+.btn:disabled{
+  cursor:default;
+  transform:none;
+  filter:none;
+}
+
+.btn-ghost{
+  background:rgba(255,255,255,.07);
+  border:1px solid var(--border);
+  color:var(--text);
+}
+
+.opcion-btn{
+  min-width:110px;
+  min-height:62px;
+
+  border:1px solid rgba(37,99,235,.5);
+
+  border-radius:16px;
+
+  padding:12px 14px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(37,99,235,.15),
+      rgba(239,68,68,.08)
+    );
+
+  color:#eef4ff;
+
+  font-size:20px;
+  font-weight:800;
+
+  box-shadow:
+    0 0 7px rgba(37,99,235,.25);
+
+  transition:.15s;
+}
+
+.opcion-btn:hover{
+  background:
+    linear-gradient(
+      135deg,
+      rgba(37,99,235,.25),
+      rgba(239,68,68,.13)
+    );
+
+  box-shadow:
+    0 0 13px rgba(37,99,235,.32);
+}
+
+.opcion-btn.correcta{
+  border-color:rgba(34,197,94,.55);
+  background:rgba(34,197,94,.17);
+  color:#dcfce7;
+
+  box-shadow:
+    0 0 13px rgba(34,197,94,.25);
+}
+
+.opcion-btn.incorrecta{
+  border-color:rgba(239,68,68,.50);
+  background:rgba(239,68,68,.16);
+  color:#fee2e2;
+
+  box-shadow:
+    0 0 13px rgba(239,68,68,.22);
+}
+
+.opcion-btn:disabled{
+  opacity:1;
+}
+
+#resultado{
+  width:min(920px,100%);
+
+  margin-top:4px;
+
+  min-height:26px;
+
+  text-align:center;
+
+  font-size:20px;
+  font-weight:900;
+}
+
+.correcto{
+  color:var(--green);
+}
+
+.incorrecto{
+  color:var(--red);
+}
+
+#infoExtra{
+  width:min(920px,100%);
+
+  min-height:26px;
+
+  text-align:center;
+
+  font-size:19px;
+  font-weight:800;
+
+  color:var(--text);
+}
+
+.actions{
+  display:grid;
+  grid-template-columns:minmax(150px,210px);
+
+  justify-content:center;
+
+  gap:10px;
+
+  width:min(220px,100%);
+  margin-top:5px;
+}
+
+.actions .btn{
+  width:100%;
+}
+
+.stats{
+  width:min(920px,100%);
+
+  text-align:center;
+
+  color:var(--muted);
+
+  font-size:15px;
+
+  margin-top:4px;
+}
+
+.side-panel{
+  position:sticky;
+  top:16px;
+
+  padding:16px;
+}
+
+.panel-title{
+  margin-bottom:10px;
+
+  text-align:center;
+
+  font-size:17px;
+  font-weight:900;
+  letter-spacing:.25px;
+}
+
+.switch-panel{
+  width:100%;
+
+  display:grid;
+  grid-template-columns:1fr 1fr;
+
+  gap:9px;
+}
+
+.btn-mode{
+  border-radius:999px;
+
+  border:1px solid var(--border);
+
+  padding:10px 10px;
+
+  background:rgba(255,255,255,.065);
+
+  color:var(--text);
+
+  font-weight:800;
+  font-size:14px;
+
+  transition:.15s;
+}
+
+.btn-mode:hover{
+  background:rgba(255,255,255,.11);
+}
+
+.btn-mode.activo{
+  border-color:rgba(37,99,235,.65);
+
+  background:rgba(37,99,235,.20);
+
+  box-shadow:
+    0 0 9px rgba(37,99,235,.22);
+}
+
+.btn-mode.mix-activo{
+  border-color:rgba(239,68,68,.62);
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(37,99,235,.20),
+      rgba(239,68,68,.18)
+    );
+
+  box-shadow:
+    0 0 10px rgba(239,68,68,.20);
+}
+
+.btn-mode.mix-sombra{
+  border-color:rgba(255,255,255,.17);
+  background:rgba(255,255,255,.08);
+}
+
+.separator{
+  grid-column:1 / -1;
+
+  height:1px;
+
+  background:rgba(255,255,255,.11);
+
+  margin:7px 0;
+}
+
+#unidadesBox{
+  grid-column:1 / -1;
+
+  display:grid;
+  grid-template-columns:1fr 1fr;
+
+  gap:8px;
+
+  width:100%;
+}
+
+.btn-unidad{
+  width:100%;
+
+  border:1px solid var(--border);
+  border-radius:999px;
+
+  padding:9px 10px;
+
+  background:rgba(255,255,255,.06);
+  color:var(--text);
+
+  font-size:13px;
+  font-weight:800;
+
+  cursor:pointer;
+
+  transition:.15s;
+}
+
+.btn-unidad:hover{
+  background:rgba(255,255,255,.11);
+}
+
+.btn-unidad.activo{
+  border-color:rgba(239,68,68,.55);
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(37,99,235,.18),
+      rgba(239,68,68,.17)
+    );
+}
+
+.kr{
+  font-family:
+    "Noto Sans KR",
+    "Malgun Gothic",
+    Arial,
+    sans-serif;
+}
+
+@media(max-width:900px){
+  .body-grid{
+    grid-template-columns:1fr;
+  }
+
+  .side-panel{
+    position:static;
+    order:2;
+  }
+
+  #promptMain{
+    font-size:54px;
+  }
+
+  #promptMain.romanizacionPregunta{
+    font-size:30px;
+  }
+
+  #opcionesTexto{
+    font-size:21px;
+  }
+
+  .opcion-btn{
+    min-width:88px;
+    min-height:50px;
+
+    padding:9px 11px;
+
+    font-size:18px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="wrap">
+
+<header>
+  <h1>Coreano ★ Asallam Sensei</h1>
+</header>
+
+<div class="body-grid">
+
+  <main class="main-area">
+    <div class="card big">
+
+      <div class="panelGrid">
+
+        <div id="badgeBox"></div>
+
+        <div id="promptMain">—</div>
+
+        <div id="promptSub"></div>
+
+        <div id="composicion"></div>
+
+        <div id="opcionesTexto"></div>
+
+        <div
+          class="row"
+          style="justify-content:center; margin-top:6px;"
+        >
+          <button
+            id="btn-opcion-a"
+            class="btn opcion-btn"
+            type="button"
+            onclick="responder('a')"
+          >
+            A
+          </button>
+
+          <button
+            id="btn-opcion-b"
+            class="btn opcion-btn"
+            type="button"
+            onclick="responder('b')"
+          >
+            B
+          </button>
+
+          <button
+            id="btn-opcion-c"
+            class="btn opcion-btn"
+            type="button"
+            onclick="responder('c')"
+          >
+            C
+          </button>
+        </div>
+
+        <div id="resultado"></div>
+
+        <div id="infoExtra"></div>
+
+        <div class="actions">
+          <button
+            class="btn"
+            type="button"
+            onclick="accionSiguiente()"
+          >
+            Siguiente
+          </button>
+        </div>
+
+        <div class="stats">
+          <div>
+            Aciertos:
+            <span id="aciertos">0</span>
+            —
+            Errores:
+            <span id="errores">0</span>
+          </div>
+
+          <div style="margin-top:6px;">
+            Racha:
+            <span id="racha">0</span>
+            —
+            Mejor racha:
+            <span id="mejorRacha">0</span>
+            —
+            Precisión:
+            <span id="precision">0%</span>
+          </div>
+        </div>
+
+        <div
+          class="row"
+          style="
+            justify-content:center;
+            margin-top:8px;
+            width:min(760px,100%);
+          "
+        >
+          <button
+            class="btn btn-ghost"
+            type="button"
+            onclick="resetStats()"
+          >
+            Reset stats
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <aside class="card side-panel">
+
+    <div class="panel-title">
+      Modo
+    </div>
+
+    <div class="switch-panel">
+
+      <button
+        class="btn btn-mode"
+        id="m-kr-rom"
+        type="button"
+        onclick="clickKrRom()"
+      >
+        KR → ROM
+      </button>
+
+      <button
+        class="btn btn-mode"
+        id="m-rom-kr"
+        type="button"
+        onclick="clickRomKr()"
+      >
+        ROM → KR
+      </button>
+
+      <button
+        class="btn btn-mode"
+        id="m-dictado"
+        type="button"
+        onclick="setModo('dictado')"
+      >
+        Dictado
+      </button>
+
+      <button
+        class="btn btn-mode"
+        id="m-mixto"
+        type="button"
+        onclick="setModo('mixto')"
+      >
+        Mix
+      </button>
+
+      <div class="separator"></div>
+
+      <button
+        id="audio-ia"
+        class="btn btn-mode activo"
+        type="button"
+        onclick="setAudioMode('ia')"
+      >
+        🎤 Audios IA
+      </button>
+
+      <button
+        id="audio-tts"
+        class="btn btn-mode"
+        type="button"
+        onclick="setAudioMode('tts')"
+      >
+        🧠 Sintetizador
+      </button>
+
+      <div class="separator"></div>
+
+      <div
+        class="panel-title"
+        style="
+          grid-column:1 / -1;
+          margin:0;
+        "
+      >
+        Unidad
+      </div>
+
+      <div id="unidadesBox"></div>
+
+    </div>
+  </aside>
+
+</div>
+</div>
+
+<script>
+let dataCoreano = null;
+
+let unidades = [];
+let unidadesActivas = new Set();
+
+let lista = [];
+let poolDictado = [];
+
+let colaGeneral = [];
+let colaDictado = [];
+
+let aciertos = 0;
+let errores = 0;
+let racha = 0;
+let mejorRacha = 0;
+
+let correctaLetra = "";
+let respuestaCorrecta = "";
+let yaValidado = false;
+
+let itemActualCorrecto = null;
+let actualOpcionesTexto = [];
+
+let modoActual = "mixto";
+
+let rondaDir = "kr-rom";
+let rondaEsDictado = false;
+
+let dictadoDirs = new Set([
+  "kr-rom",
+  "rom-kr"
+]);
+
+let primeraRonda = true;
+
+const letras = [
+  "a",
+  "b",
+  "c"
+];
+
+const STATS_KEY = "coreano_stats_v1";
+
+const AUDIO_BASE =
+  "data/audios/coreano/";
+
+const audio = new Audio();
+
+audio.preload = "auto";
+
+let modoAudio = "ia";
+
+let voces = [];
+let vozKo = null;
+
+let ultimoAudioItem = null;
+
+const audioCtx =
+  new (
+    window.AudioContext ||
+    window.webkitAudioContext
+  )();
+
+
+
+function fisherYates(arr){
+
+  const copia = [
+    ...arr
+  ];
+
+  for(
+    let i = copia.length - 1;
+    i > 0;
+    i--
+  ){
+
+    const j =
+      Math.floor(
+        Math.random() * (i + 1)
+      );
+
+    [
+      copia[i],
+      copia[j]
+    ] = [
+      copia[j],
+      copia[i]
+    ];
+  }
+
+  return copia;
+}
+
+
+
+function siguienteDeColaGeneral(){
+
+  if(!colaGeneral.length){
+    colaGeneral =
+      fisherYates(lista);
+  }
+
+  return colaGeneral.shift();
+}
+
+
+
+function siguienteDeColaDictado(){
+
+  if(!colaDictado.length){
+    colaDictado =
+      fisherYates(poolDictado);
+  }
+
+  return colaDictado.shift();
+}
+
+
+
+function reconstruirPools(){
+
+  lista = unidades
+    .filter(
+      unidad =>
+        unidadesActivas.has(
+          String(unidad.id)
+        )
+    )
+    .flatMap(
+      unidad =>
+        unidad.items || []
+    )
+    .filter(
+      item =>
+        item &&
+        item.tipo &&
+        item.coreano &&
+        item.romanizacion
+    );
+
+  poolDictado =
+    lista.filter(
+      item =>
+        item.tipo === "silaba" &&
+        item.audio
+    );
+
+  colaGeneral = [];
+  colaDictado = [];
+}
+
+
+
+function cargarStats(){
+
+  try{
+
+    const s =
+      JSON.parse(
+        localStorage.getItem(
+          STATS_KEY
+        )
+      ) || {};
+
+    aciertos =
+      s.aciertos || 0;
+
+    errores =
+      s.errores || 0;
+
+    racha =
+      s.racha || 0;
+
+    mejorRacha =
+      s.mejorRacha || 0;
+
+  }catch{
+
+    aciertos = 0;
+    errores = 0;
+    racha = 0;
+    mejorRacha = 0;
+  }
+}
+
+
+
+function guardarStats(){
+
+  localStorage.setItem(
+    STATS_KEY,
+    JSON.stringify({
+      aciertos,
+      errores,
+      racha,
+      mejorRacha
+    })
+  );
+}
+
+
+
+function precisionPct(){
+
+  const total =
+    aciertos + errores;
+
+  if(total <= 0){
+    return "0%";
+  }
+
+  return (
+    Math.round(
+      (aciertos / total) * 100
+    ) + "%"
+  );
+}
+
+
+
+function pintarStats(){
+
+  document
+    .getElementById("aciertos")
+    .innerText =
+      aciertos;
+
+  document
+    .getElementById("errores")
+    .innerText =
+      errores;
+
+  document
+    .getElementById("racha")
+    .innerText =
+      racha;
+
+  document
+    .getElementById("mejorRacha")
+    .innerText =
+      mejorRacha;
+
+  document
+    .getElementById("precision")
+    .innerText =
+      precisionPct();
+}
+
+
+
+function resetStats(){
+
+  aciertos = 0;
+  errores = 0;
+  racha = 0;
+  mejorRacha = 0;
+
+  pintarStats();
+  guardarStats();
+}
+
+
+
+function playBeep(
+  freq,
+  duration
+){
+
+  try{
+
+    const osc =
+      audioCtx.createOscillator();
+
+    const gain =
+      audioCtx.createGain();
+
+    osc.connect(gain);
+    gain.connect(
+      audioCtx.destination
+    );
+
+    osc.frequency.value =
+      freq;
+
+    osc.type =
+      "sine";
+
+    gain.gain.setValueAtTime(
+      0.1,
+      audioCtx.currentTime
+    );
+
+    osc.start();
+
+    osc.stop(
+      audioCtx.currentTime +
+      duration
+    );
+
+  }catch{}
+}
+
+
+
+function sonidoCorrecto(){
+
+  playBeep(
+    700,
+    0.08
+  );
+
+  setTimeout(
+    () =>
+      playBeep(
+        900,
+        0.12
+      ),
+    80
+  );
+}
+
+
+
+function sonidoIncorrecto(){
+
+  playBeep(
+    250,
+    0.2
+  );
+}
+
+
+
+function cargarVoces(){
+
+  voces =
+    window.speechSynthesis
+      ? speechSynthesis.getVoices()
+      : [];
+
+  vozKo =
+    voces.find(
+      v =>
+        String(v.lang)
+          .toLowerCase() ===
+        "ko-kr"
+    )
+    ||
+    voces.find(
+      v =>
+        String(v.lang)
+          .toLowerCase()
+          .startsWith("ko")
+    )
+    ||
+    null;
+}
+
+
+
+if(window.speechSynthesis){
+
+  cargarVoces();
+
+  speechSynthesis.onvoiceschanged =
+    cargarVoces;
+}
+
+
+
+function sintetizarCoreano(texto){
+
+  const t =
+    String(
+      texto || ""
+    ).trim();
+
+  if(
+    !t ||
+    !window.speechSynthesis
+  ){
+    return;
+  }
+
+  try{
+    speechSynthesis.cancel();
+  }catch{}
+
+  const u =
+    new SpeechSynthesisUtterance(
+      t
+    );
+
+  u.lang =
+    "ko-KR";
+
+  if(vozKo){
+    u.voice = vozKo;
+  }
+
+  u.rate = 0.82;
+  u.pitch = 1;
+
+  speechSynthesis.speak(u);
+}
+
+
+
+function setAudioMode(modo){
+
+  modoAudio = modo;
+
+  document
+    .getElementById("audio-ia")
+    .classList.toggle(
+      "activo",
+      modo === "ia"
+    );
+
+  document
+    .getElementById("audio-tts")
+    .classList.toggle(
+      "activo",
+      modo === "tts"
+    );
+}
+
+
+
+function detenerAudio(){
+
+  try{
+
+    audio.pause();
+    audio.currentTime = 0;
+
+  }catch{}
+}
+
+
+
+function puedeTenerAudio(item){
+
+  return !!(
+    item &&
+    item.tipo === "silaba" &&
+    item.audio
+  );
+}
+
+
+
+function buildAudioSrc(item){
+
+  if(
+    !puedeTenerAudio(item)
+  ){
+    return "";
+  }
+
+  return (
+    AUDIO_BASE +
+    encodeURIComponent(
+      item.audio
+    ) +
+    ".mp3"
+  );
+}
+
+
+
+async function playAudio(item){
+
+  if(
+    !puedeTenerAudio(item)
+  ){
+    return;
+  }
+
+  ultimoAudioItem = item;
+
+  if(
+    modoAudio === "tts"
+  ){
+
+    sintetizarCoreano(
+      item.coreano
+    );
+
+    return;
+  }
+
+  const src =
+    buildAudioSrc(item);
+
+  try{
+
+    detenerAudio();
+
+    audio.src = src;
+    audio.load();
+
+    await audio.play();
+
+  }catch{
+
+    sintetizarCoreano(
+      item.coreano
+    );
+  }
+}
+
+
+
+function reproducirAudioActual(){
+
+  if(ultimoAudioItem){
+    playAudio(
+      ultimoAudioItem
+    );
+  }
+}
+
+
+
+function crearTogglesUnidades(){
+
+  const box =
+    document.getElementById(
+      "unidadesBox"
+    );
+
+  box.innerHTML = "";
+
+  unidades.forEach(
+    unidad => {
+
+      const id =
+        String(unidad.id);
+
+      const btn =
+        document.createElement(
+          "button"
+        );
+
+      btn.type =
+        "button";
+
+      btn.className =
+        "btn-unidad";
+
+      btn.dataset.unidad =
+        id;
+
+      btn.textContent =
+        unidad.nombre ||
+        `Unidad ${id}`;
+
+      btn.onclick =
+        () =>
+          toggleUnidad(id);
+
+      box.appendChild(btn);
+    }
+  );
+
+  pintarUnidades();
+}
+
+
+
+function pintarUnidades(){
+
+  document
+    .querySelectorAll(
+      ".btn-unidad"
+    )
+    .forEach(
+      btn => {
+
+        btn.classList.toggle(
+          "activo",
+          unidadesActivas.has(
+            String(
+              btn.dataset.unidad
+            )
+          )
+        );
+      }
+    );
+}
+
+
+
+function toggleUnidad(id){
+
+  id = String(id);
+
+  if(
+    unidadesActivas.has(id)
+  ){
+
+    if(
+      unidadesActivas.size === 1
+    ){
+      return;
+    }
+
+    unidadesActivas.delete(id);
+
+  }else{
+
+    unidadesActivas.add(id);
+  }
+
+  pintarUnidades();
+
+  reconstruirPools();
+
+  primeraRonda = true;
+
+  yaValidado = false;
+
+  limpiarResultado();
+
+  siguiente();
+}
+
+
+
+function limpiarActivos(){
+
+  [
+    "m-kr-rom",
+    "m-rom-kr",
+    "m-dictado",
+    "m-mixto"
+  ]
+  .forEach(
+    id => {
+
+      const el =
+        document.getElementById(id);
+
+      if(!el){
+        return;
+      }
+
+      el.classList.remove(
+        "activo",
+        "mix-activo",
+        "mix-sombra"
+      );
+    }
+  );
+}
+
+
+
+function aplicarUI(){
+
+  limpiarActivos();
+
+  const btnKrRom =
+    document.getElementById(
+      "m-kr-rom"
+    );
+
+  const btnRomKr =
+    document.getElementById(
+      "m-rom-kr"
+    );
+
+  const btnDict =
+    document.getElementById(
+      "m-dictado"
+    );
+
+  const btnMix =
+    document.getElementById(
+      "m-mixto"
+    );
+
+  if(
+    modoActual === "mixto"
+  ){
+
+    btnMix?.classList.add(
+      "mix-activo"
+    );
+
+    btnKrRom?.classList.add(
+      "mix-sombra"
+    );
+
+    btnRomKr?.classList.add(
+      "mix-sombra"
+    );
+
+    btnDict?.classList.add(
+      "mix-sombra"
+    );
+
+  }else if(
+    modoActual === "dictado"
+  ){
+
+    btnDict?.classList.add(
+      "activo"
+    );
+
+    btnKrRom?.classList.toggle(
+      "activo",
+      dictadoDirs.has(
+        "kr-rom"
+      )
+    );
+
+    btnRomKr?.classList.toggle(
+      "activo",
+      dictadoDirs.has(
+        "rom-kr"
+      )
+    );
+
+  }else if(
+    modoActual === "kr-rom"
+  ){
+
+    btnKrRom?.classList.add(
+      "activo"
+    );
+
+  }else if(
+    modoActual === "rom-kr"
+  ){
+
+    btnRomKr?.classList.add(
+      "activo"
+    );
+  }
+}
+
+
+
+function setModo(nuevoModo){
+
+  modoActual =
+    nuevoModo;
+
+  primeraRonda = true;
+
+  aplicarUI();
+
+  yaValidado = false;
+
+  limpiarResultado();
+
+  if(lista.length){
+    siguiente();
+  }
+}
+
+
+
+function clickKrRom(){
+
+  if(
+    modoActual === "dictado"
+  ){
+
+    toggleDictadoDir(
+      "kr-rom"
+    );
+
+  }else{
+
+    setModo(
+      "kr-rom"
+    );
+  }
+}
+
+
+
+function clickRomKr(){
+
+  if(
+    modoActual === "dictado"
+  ){
+
+    toggleDictadoDir(
+      "rom-kr"
+    );
+
+  }else{
+
+    setModo(
+      "rom-kr"
+    );
+  }
+}
+
+
+
+function toggleDictadoDir(dir){
+
+  if(
+    dictadoDirs.has(dir)
+  ){
+
+    if(
+      dictadoDirs.size === 1
+    ){
+      return;
+    }
+
+    dictadoDirs.delete(dir);
+
+  }else{
+
+    dictadoDirs.add(dir);
+  }
+
+  aplicarUI();
+
+  yaValidado = false;
+
+  limpiarResultado();
+
+  if(
+    lista.length &&
+    modoActual === "dictado"
+  ){
+    siguiente();
+  }
+}
+
+
+
+function textoPregunta(item){
+
+  return (
+    rondaDir === "kr-rom"
+      ? item.coreano
+      : item.romanizacion
+  );
+}
+
+
+
+function textoRespuesta(item){
+
+  return (
+    rondaDir === "kr-rom"
+      ? item.romanizacion
+      : item.coreano
+  );
+}
+
+
+
+function aplicarEstiloPregunta(){
+
+  const el =
+    document.getElementById(
+      "promptMain"
+    );
+
+  el.classList.toggle(
+    "romanizacionPregunta",
+    rondaDir === "rom-kr"
+  );
+}
+
+
+
+function renderBadges(item){
+
+  const box =
+    document.getElementById(
+      "badgeBox"
+    );
+
+  const badges = [];
+
+  if(
+    item.tipo === "jamo"
+  ){
+
+    badges.push({
+      texto:"JAMO",
+      clase:"badge-jamo"
+    });
+
+    badges.push({
+      texto:"No es sílaba",
+      clase:"badge-jamo"
+    });
+
+  }else if(
+    item.tipo === "silaba"
+  ){
+
+    badges.push({
+      texto:"SÍLABA",
+      clase:"badge-silaba"
+    });
+  }
+
+  if(item.nota){
+
+    badges.push({
+      texto:item.nota,
+      clase:"badge-nota"
+    });
+  }
+
+  box.innerHTML =
+    badges
+      .map(
+        badge =>
+          `<span class="badge ${badge.clase}">${badge.texto}</span>`
+      )
+      .join("");
+}
+
+
+
+function renderComposicion(
+  item,
+  mostrar = false
+){
+
+  const box =
+    document.getElementById(
+      "composicion"
+    );
+
+  if(
+    mostrar &&
+    item.tipo === "silaba" &&
+    Array.isArray(
+      item.componentes
+    ) &&
+    item.componentes.length
+  ){
+
+    box.innerHTML =
+      `<span class="kr">${
+        item.componentes.join(
+          " + "
+        )
+      } → ${item.coreano}</span>`;
+
+  }else{
+
+    box.innerHTML = "";
+  }
+}
+
+
+
+function renderPrompt(item){
+
+  const promptEl =
+    document.getElementById(
+      "promptMain"
+    );
+
+  const subEl =
+    document.getElementById(
+      "promptSub"
+    );
+
+  aplicarEstiloPregunta();
+
+  renderBadges(item);
+
+  renderComposicion(
+    item,
+    false
+  );
+
+  ultimoAudioItem =
+    puedeTenerAudio(item)
+      ? item
+      : null;
+
+  if(rondaEsDictado){
+
+    promptEl.classList.add(
+      "dictado"
+    );
+
+    subEl.classList.add(
+      "oculto"
+    );
+
+    subEl.innerHTML = "";
+
+    promptEl.innerHTML = `
+      <button
+        id="promptSpeaker"
+        class="btnAudioBig dictado"
+        type="button"
+        title="Escuchar"
+        onclick="reproducirAudioActual()"
+      >
+        🔊
+      </button>
+    `;
+
+    return;
+  }
+
+  promptEl.classList.remove(
+    "dictado"
+  );
+
+  subEl.classList.remove(
+    "oculto"
+  );
+
+  const pregunta =
+    textoPregunta(item);
+
+  if(
+    rondaDir === "kr-rom"
+  ){
+
+    promptEl.innerHTML =
+      `<span class="kr">${pregunta}</span>`;
+
+  }else{
+
+    promptEl.textContent =
+      pregunta;
+  }
+
+  if(
+    puedeTenerAudio(item)
+  ){
+
+    subEl.innerHTML = `
+      <div class="audio-row">
+        <button
+          id="promptSpeaker"
+          class="btnAudioBig"
+          type="button"
+          title="Escuchar"
+          onclick="reproducirAudioActual()"
+        >
+          🔊
+        </button>
+      </div>
+    `;
+
+  }else{
+
+    subEl.innerHTML = `
+      <div class="audio-row">
+        <span class="no-audio">
+          🔇 Sin audio: no es sílaba
+        </span>
+      </div>
+    `;
+  }
+}
+
+
+
+function limpiarResultado(){
+
+  const res =
+    document.getElementById(
+      "resultado"
+    );
+
+  res.innerText = "";
+  res.className = "";
+
+  document
+    .getElementById(
+      "infoExtra"
+    )
+    .innerText = "";
+
+  renderComposicion(
+    itemActualCorrecto || {},
+    false
+  );
+}
+
+
+
+function bloquearOpciones(){
+
+  document
+    .querySelectorAll(
+      ".opcion-btn"
+    )
+    .forEach(
+      btn => {
+
+        btn.disabled = true;
+      }
+    );
+}
+
+
+
+function habilitarOpciones(){
+
+  document
+    .querySelectorAll(
+      ".opcion-btn"
+    )
+    .forEach(
+      btn => {
+
+        btn.disabled = false;
+
+        btn.classList.remove(
+          "correcta",
+          "incorrecta"
+        );
+      }
+    );
+}
+
+
+
+function renderOpciones(opciones){
+
+  const box =
+    document.getElementById(
+      "opcionesTexto"
+    );
+
+  const usarKr =
+    rondaDir === "rom-kr";
+
+  box.innerHTML =
+    opciones
+      .map(
+        (txt,index) => {
+
+          const letra =
+            letras[index];
+
+          return `
+            ${letra})
+            ${
+              usarKr
+                ? `<span class="kr">${txt}</span>`
+                : txt
+            }
+          `;
+        }
+      )
+      .join("<br>");
+}
+
+
+
+function pintarOpciones(){
+
+  const botones = {
+    a:
+      document.getElementById(
+        "btn-opcion-a"
+      ),
+
+    b:
+      document.getElementById(
+        "btn-opcion-b"
+      ),
+
+    c:
+      document.getElementById(
+        "btn-opcion-c"
+      )
+  };
+
+  Object.entries(
+    botones
+  )
+  .forEach(
+    ([letra,btn]) => {
+
+      if(!btn){
+        return;
+      }
+
+      btn.classList.remove(
+        "correcta",
+        "incorrecta"
+      );
+
+      if(
+        letra ===
+        correctaLetra
+      ){
+
+        btn.classList.add(
+          "correcta"
+        );
+
+      }else{
+
+        btn.classList.add(
+          "incorrecta"
+        );
+      }
+    }
+  );
+}
+
+
+
+function elegirRonda(){
+
+  if(
+    modoActual === "kr-rom"
+  ){
+
+    return {
+      dir:"kr-rom",
+      dictado:false
+    };
+  }
+
+  if(
+    modoActual === "rom-kr"
+  ){
+
+    return {
+      dir:"rom-kr",
+      dictado:false
+    };
+  }
+
+  if(
+    modoActual === "dictado"
+  ){
+
+    const dirs =
+      fisherYates(
+        [...dictadoDirs]
+      );
+
+    return {
+      dir:dirs[0],
+      dictado:true
+    };
+  }
+
+  if(primeraRonda){
+
+    primeraRonda = false;
+
+    const primeras =
+      fisherYates([
+        {
+          dir:"kr-rom",
+          dictado:false
+        },
+        {
+          dir:"rom-kr",
+          dictado:false
+        }
+      ]);
+
+    return primeras[0];
+  }
+
+  const tipos =
+    fisherYates([
+      {
+        dir:"kr-rom",
+        dictado:false
+      },
+      {
+        dir:"rom-kr",
+        dictado:false
+      },
+      {
+        dir:"kr-rom",
+        dictado:true
+      },
+      {
+        dir:"rom-kr",
+        dictado:true
+      }
+    ]);
+
+  return tipos[0];
+}
+
+
+
+function obtenerDistractores(
+  itemCorrecto
+){
+
+  const correcta =
+    textoRespuesta(
+      itemCorrecto
+    );
+
+  const candidatos =
+    lista.filter(
+      item =>
+        item !==
+        itemCorrecto
+    );
+
+  const mezclados =
+    fisherYates(
+      candidatos
+    );
+
+  const encontrados = [];
+
+  for(
+    const item of mezclados
+  ){
+
+    const texto =
+      textoRespuesta(item);
+
+    if(
+      texto === correcta
+    ){
+      continue;
+    }
+
+    if(
+      encontrados.includes(
+        texto
+      )
+    ){
+      continue;
+    }
+
+    encontrados.push(
+      texto
+    );
+
+    if(
+      encontrados.length === 2
+    ){
+      break;
+    }
+  }
+
+  return encontrados;
+}
+
+
+
+function siguiente(){
+
+  if(
+    lista.length < 3
+  ){
+    return;
+  }
+
+  const ronda =
+    elegirRonda();
+
+  rondaDir =
+    ronda.dir;
+
+  rondaEsDictado =
+    ronda.dictado;
+
+  let itemCorrecto = null;
+
+  if(rondaEsDictado){
+
+    if(
+      poolDictado.length < 1
+    ){
+
+      rondaEsDictado =
+        false;
+
+      itemCorrecto =
+        siguienteDeColaGeneral();
+
+    }else{
+
+      itemCorrecto =
+        siguienteDeColaDictado();
+    }
+
+  }else{
+
+    itemCorrecto =
+      siguienteDeColaGeneral();
+  }
+
+  if(!itemCorrecto){
+    return;
+  }
+
+  itemActualCorrecto =
+    itemCorrecto;
+
+  respuestaCorrecta =
+    textoRespuesta(
+      itemCorrecto
+    );
+
+  const distractores =
+    obtenerDistractores(
+      itemCorrecto
+    );
+
+  if(
+    distractores.length < 2
+  ){
+    return;
+  }
+
+  let opciones = [
+    respuestaCorrecta,
+    ...distractores
+  ];
+
+  opciones =
+    fisherYates(
+      opciones
+    );
+
+  correctaLetra =
+    letras[
+      opciones.indexOf(
+        respuestaCorrecta
+      )
+    ];
+
+  actualOpcionesTexto =
+    [...opciones];
+
+  renderPrompt(
+    itemCorrecto
+  );
+
+  renderOpciones(
+    opciones
+  );
+
+  habilitarOpciones();
+
+  limpiarResultado();
+
+  aplicarUI();
+
+  yaValidado = false;
+
+  if(
+    puedeTenerAudio(
+      itemCorrecto
+    )
+  ){
+
+    playAudio(
+      itemCorrecto
+    );
+  }
+}
+
+
+
+function responder(letra){
+
+  if(yaValidado){
+    return;
+  }
+
+  verificar(letra);
+}
+
+
+
+function accionSiguiente(){
+
+  if(!yaValidado){
+
+    verificar("");
+    return;
+  }
+
+  siguiente();
+}
+
+
+
+function verificar(
+  letraForzada
+){
+
+  if(
+    !itemActualCorrecto
+  ){
+    return;
+  }
+
+  const res =
+    document.getElementById(
+      "resultado"
+    );
+
+  const info =
+    document.getElementById(
+      "infoExtra"
+    );
+
+  const r =
+    String(
+      letraForzada || ""
+    )
+    .toLowerCase()
+    .trim();
+
+  const esSaltado =
+    r === "";
+
+  if(
+    !esSaltado &&
+    !letras.includes(r)
+  ){
+
+    res.className =
+      "incorrecto";
+
+    res.innerText =
+      "Usa solo: a / b / c";
+
+    return;
+  }
+
+  const letra =
+    esSaltado
+      ? ""
+      : r;
+
+  if(
+    letra ===
+    correctaLetra
+  ){
+
+    sonidoCorrecto();
+
+    res.className =
+      "correcto";
+
+    res.innerText =
+      "Correcto ✔";
+
+    aciertos++;
+    racha++;
+
+    if(
+      racha >
+      mejorRacha
+    ){
+      mejorRacha =
+        racha;
+    }
+
+  }else{
+
+    sonidoIncorrecto();
+
+    res.className =
+      "incorrecto";
+
+    res.innerHTML =
+      esSaltado
+        ? `Saltado ✘<span style="color:white;">, era ${correctaLetra}</span>`
+        : `Incorrecto ✘<span style="color:white;">, era ${correctaLetra}</span>`;
+
+    errores++;
+    racha = 0;
+  }
+
+  info.innerText =
+    `${itemActualCorrecto.coreano} ★ ${itemActualCorrecto.romanizacion}`;
+
+  renderComposicion(
+    itemActualCorrecto,
+    true
+  );
+
+  pintarStats();
+
+  guardarStats();
+
+  yaValidado = true;
+
+  pintarOpciones();
+
+  bloquearOpciones();
+}
+
+
+
+fetch(
+  "data/coreano.json"
+)
+.then(
+  res => {
+
+    if(!res.ok){
+      throw new Error(
+        `HTTP ${res.status}`
+      );
+    }
+
+    return res.json();
+  }
+)
+.then(
+  data => {
+
+    dataCoreano =
+      data;
+
+    unidades =
+      Array.isArray(
+        data.unidades
+      )
+        ? data.unidades
+        : [];
+
+    unidades =
+      unidades.filter(
+        unidad =>
+          unidad &&
+          Array.isArray(
+            unidad.items
+          )
+      );
+
+    unidades.forEach(
+      unidad => {
+
+        unidadesActivas.add(
+          String(
+            unidad.id
+          )
+        );
+      }
+    );
+
+    crearTogglesUnidades();
+
+    reconstruirPools();
+
+    cargarStats();
+
+    pintarStats();
+
+    setModo(
+      "mixto"
+    );
+  }
+)
+.catch(
+  err => {
+
+    console.error(err);
+
+    document
+      .getElementById(
+        "promptMain"
+      )
+      .innerText =
+        "No se pudo cargar data/coreano.json";
+
+    document
+      .getElementById(
+        "promptSub"
+      )
+      .innerText =
+        "Revisa la ruta y usa GitHub Pages o un servidor local.";
+
+    document
+      .getElementById(
+        "opcionesTexto"
+      )
+      .innerHTML = "";
+  }
+);
+
+
+
+document.addEventListener(
+  "keydown",
+  e => {
+
+    const k =
+      String(
+        e.key || ""
+      )
+      .toLowerCase();
+
+    if(
+      letras.includes(k) &&
+      !yaValidado
+    ){
+
+      e.preventDefault();
+
+      responder(k);
+
+      return;
+    }
+
+    if(
+      k === "enter"
+    ){
+
+      e.preventDefault();
+
+      accionSiguiente();
+    }
+  }
+);
+</script>
+
+</body>
+</html>
