@@ -1,0 +1,161 @@
+{
+  "unidades": [
+    {
+      "id": 1,
+      "nombre": "Unidad 1",
+      "items": [
+        {
+          "tipo": "jamo",
+          "subtipo": "vocal",
+          "coreano": "ㅏ",
+          "romanizacion": "a"
+        },
+        {
+          "tipo": "jamo",
+          "subtipo": "vocal",
+          "coreano": "ㅓ",
+          "romanizacion": "eo"
+        },
+        {
+          "tipo": "jamo",
+          "subtipo": "vocal",
+          "coreano": "ㅗ",
+          "romanizacion": "o"
+        },
+        {
+          "tipo": "jamo",
+          "subtipo": "vocal",
+          "coreano": "ㅜ",
+          "romanizacion": "u"
+        },
+        {
+          "tipo": "jamo",
+          "subtipo": "vocal",
+          "coreano": "ㅡ",
+          "romanizacion": "eu"
+        },
+        {
+          "tipo": "jamo",
+          "subtipo": "vocal",
+          "coreano": "ㅣ",
+          "romanizacion": "i"
+        },
+
+        {
+          "tipo": "jamo",
+          "subtipo": "consonante",
+          "coreano": "ㄱ",
+          "romanizacion": "g / k"
+        },
+        {
+          "tipo": "jamo",
+          "subtipo": "consonante",
+          "coreano": "ㄴ",
+          "romanizacion": "n"
+        },
+        {
+          "tipo": "jamo",
+          "subtipo": "consonante",
+          "coreano": "ㄷ",
+          "romanizacion": "d / t"
+        },
+        {
+          "tipo": "jamo",
+          "subtipo": "consonante",
+          "coreano": "ㄹ",
+          "romanizacion": "r / l"
+        },
+        {
+          "tipo": "jamo",
+          "subtipo": "consonante",
+          "coreano": "ㅁ",
+          "romanizacion": "m"
+        },
+        {
+          "tipo": "jamo",
+          "subtipo": "consonante",
+          "coreano": "ㅂ",
+          "romanizacion": "b / p"
+        },
+        {
+          "tipo": "jamo",
+          "subtipo": "consonante",
+          "coreano": "ㅅ",
+          "romanizacion": "s / t"
+        },
+        {
+          "tipo": "jamo",
+          "subtipo": "consonante",
+          "coreano": "ㅇ",
+          "romanizacion": "— / ng",
+          "nota": "Posición dependiente"
+        },
+        {
+          "tipo": "jamo",
+          "subtipo": "consonante",
+          "coreano": "ㅈ",
+          "romanizacion": "j / t"
+        },
+        {
+          "tipo": "jamo",
+          "subtipo": "consonante",
+          "coreano": "ㅎ",
+          "romanizacion": "h / t"
+        },
+        {
+          "tipo": "jamo",
+          "subtipo": "consonante",
+          "coreano": "ㅊ",
+          "romanizacion": "ch / t"
+        },
+        {
+          "tipo": "jamo",
+          "subtipo": "consonante",
+          "coreano": "ㅋ",
+          "romanizacion": "k"
+        },
+        {
+          "tipo": "jamo",
+          "subtipo": "consonante",
+          "coreano": "ㅌ",
+          "romanizacion": "t"
+        },
+        {
+          "tipo": "jamo",
+          "subtipo": "consonante",
+          "coreano": "ㅍ",
+          "romanizacion": "p"
+        },
+
+        {
+          "tipo": "silaba",
+          "coreano": "가",
+          "romanizacion": "ga",
+          "componentes": ["ㄱ", "ㅏ"],
+          "audio": "u1_001_ga"
+        },
+        {
+          "tipo": "silaba",
+          "coreano": "나",
+          "romanizacion": "na",
+          "componentes": ["ㄴ", "ㅏ"],
+          "audio": "u1_002_na"
+        },
+        {
+          "tipo": "silaba",
+          "coreano": "다",
+          "romanizacion": "da",
+          "componentes": ["ㄷ", "ㅏ"],
+          "audio": "u1_003_da"
+        },
+        {
+          "tipo": "silaba",
+          "coreano": "라",
+          "romanizacion": "ra",
+          "componentes": ["ㄹ", "ㅏ"],
+          "audio": "u1_004_ra"
+        }
+      ]
+    }
+  ]
+}
