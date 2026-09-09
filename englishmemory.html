@@ -1,0 +1,1193 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>English Memory ★ Asallam Sensei</title>
+
+<style>
+:root{
+  --bg:#090d1a;
+  --panel:#10162a;
+  --panel2:#161e36;
+  --card:#1b2543;
+  --card-open:#f7f4ff;
+  --text:#fff;
+  --muted:#aab3cb;
+  --purple:#7d5cff;
+  --purple2:#a78bfa;
+  --green:#22c55e;
+  --red:#ef4444;
+  --gold:#f6c453;
+  --blue:#60a5fa;
+  --border:rgba(255,255,255,.12);
+  --shadow:0 20px 55px rgba(0,0,0,.38);
+  --radius:18px;
+  --small:12px;
+  --font:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+}
+*{box-sizing:border-box}
+html{min-height:100%}
+body{
+  margin:0;
+  min-height:100vh;
+  color:var(--text);
+  font-family:var(--font);
+  background:
+    radial-gradient(1100px 700px at 12% 0%,rgba(125,92,255,.28),transparent 58%),
+    radial-gradient(900px 650px at 100% 15%,rgba(34,197,94,.15),transparent 55%),
+    radial-gradient(850px 650px at 40% 100%,rgba(239,68,68,.10),transparent 55%),
+    var(--bg);
+}
+button,select,input{font:inherit}
+button{border:0}
+button:focus-visible,select:focus-visible,input:focus-visible{
+  outline:2px solid var(--gold);
+  outline-offset:3px;
+}
+button:disabled{opacity:.42;cursor:not-allowed!important;transform:none!important}
+.app{width:min(1500px,100%);min-height:100vh;margin:0 auto;padding:22px}
+
+/* HEADER */
+.topbar{
+  display:flex;align-items:center;justify-content:space-between;gap:18px;
+  margin-bottom:20px;
+}
+.brand{display:flex;align-items:center;gap:14px}
+.brand-mark{
+  width:52px;height:52px;display:grid;place-items:center;border-radius:16px;
+  border:1px solid rgba(125,92,255,.62);
+  background:linear-gradient(145deg,rgba(125,92,255,.34),rgba(34,197,94,.08));
+  box-shadow:0 0 28px rgba(125,92,255,.16),inset 0 0 18px rgba(255,255,255,.04);
+  font-size:24px;font-weight:1000;
+}
+.brand-copy h1{margin:0;font-size:clamp(22px,3vw,32px);letter-spacing:-.035em}
+.brand-copy p{margin:6px 0 0;color:var(--muted);font-size:11px;font-weight:900;letter-spacing:.13em;text-transform:uppercase}
+.student-badge{
+  flex-shrink:0;padding:10px 14px;border:1px solid rgba(125,92,255,.34);border-radius:999px;
+  background:rgba(125,92,255,.08);color:#eeeaff;font-size:12px;font-weight:900;
+}
+
+/* LAYOUT */
+.layout{display:grid;grid-template-columns:minmax(0,1fr) 330px;gap:18px;align-items:start}
+.game-shell,.settings-panel{
+  border:1px solid var(--border);border-radius:var(--radius);
+  background:rgba(16,22,42,.92);box-shadow:var(--shadow);backdrop-filter:blur(10px);
+}
+.game-shell{overflow:hidden}
+.settings-panel{position:sticky;top:18px;padding:18px}
+
+/* HUD */
+.hud{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border-bottom:1px solid var(--border)}
+.hud-item{padding:13px 14px;background:rgba(16,22,42,.98);min-width:0}
+.hud-label{display:block;margin-bottom:3px;color:var(--muted);font-size:9px;font-weight:1000;letter-spacing:.11em;text-transform:uppercase}
+.hud-value{display:block;overflow:hidden;color:#fff;font-size:19px;font-weight:1000;text-overflow:ellipsis;white-space:nowrap}
+.hud-value.combo-active{color:var(--gold);text-shadow:0 0 18px rgba(246,196,83,.25)}
+
+/* SCREENS */
+.stage{padding:20px;min-height:590px}
+.screen{display:none}
+.screen.active{display:block}
+.welcome,.results{min-height:545px;display:grid;place-items:center;text-align:center}
+.welcome-content{width:min(650px,100%)}
+.hero-icon{
+  width:108px;height:108px;margin:0 auto 20px;display:grid;place-items:center;border-radius:30px;
+  background:linear-gradient(145deg,rgba(125,92,255,.22),rgba(34,197,94,.12));
+  border:1px solid rgba(125,92,255,.38);font-size:53px;
+  box-shadow:0 0 50px rgba(125,92,255,.14),inset 0 0 30px rgba(255,255,255,.03)
+}
+.welcome h2{margin:0 0 12px;font-size:clamp(29px,5vw,48px);letter-spacing:-.045em}
+.welcome p{max-width:590px;margin:0 auto 25px;color:var(--muted);font-size:15px;line-height:1.7}
+
+/* BUTTONS */
+.primary,.secondary,.danger,.mode-btn,.chip,.all-btn{
+  cursor:pointer;font-weight:900;transition:transform .12s ease,filter .12s ease,background .15s ease,border-color .15s ease;
+}
+.primary,.secondary,.danger{min-height:44px;padding:11px 17px;border-radius:12px}
+.primary{color:white;background:linear-gradient(135deg,#7d5cff,#6550dc);box-shadow:0 10px 28px rgba(125,92,255,.20)}
+.secondary{color:var(--text);background:rgba(255,255,255,.06);border:1px solid var(--border)}
+.danger{color:#fecaca;background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.22)}
+.primary:hover:not(:disabled),.secondary:hover:not(:disabled),.danger:hover:not(:disabled),.mode-btn:hover,.chip:hover,.all-btn:hover{transform:translateY(-1px);filter:brightness(1.08)}
+.wide{width:100%}
+
+/* PREVIEW */
+.memory-header{display:flex;align-items:center;justify-content:space-between;gap:15px;margin-bottom:18px}
+.memory-title h2{margin:0 0 5px;font-size:23px}
+.memory-title p{margin:0;color:var(--muted);font-size:13px}
+.memory-countdown{
+  min-width:90px;padding:10px 14px;border:1px solid rgba(246,196,83,.30);border-radius:13px;
+  color:var(--gold);background:rgba(246,196,83,.07);text-align:center;
+}
+.memory-countdown strong{display:block;font-size:26px;line-height:1}
+.memory-countdown span{display:block;margin-top:4px;font-size:9px;font-weight:1000;letter-spacing:.1em;text-transform:uppercase}
+.preview-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(175px,1fr));gap:10px}
+.preview-card{
+  min-height:104px;padding:13px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;
+  border:1px solid var(--border);border-radius:14px;background:linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.035));
+  text-align:center;cursor:pointer;
+}
+.preview-card:hover{border-color:rgba(125,92,255,.42)}
+.preview-en{color:#fff;font-size:clamp(20px,2.4vw,30px);font-weight:1000;line-height:1.1;overflow-wrap:anywhere}
+.preview-es{color:#cdd5e9;font-size:13px;font-weight:800;line-height:1.3;overflow-wrap:anywhere}
+.preview-speaker{color:#aaa0ff;font-size:11px;font-weight:1000;letter-spacing:.06em;text-transform:uppercase}
+.memory-ready{min-height:500px;display:none;place-items:center;text-align:center}
+.memory-ready.active{display:grid}
+.ready-symbol{margin-bottom:12px;font-size:70px}
+.memory-ready h2{margin:0 0 8px;font-size:33px}
+.memory-ready p{margin:0 0 22px;color:var(--muted)}
+
+/* BOARD */
+.board{
+  --columns:4;display:grid;grid-template-columns:repeat(var(--columns),minmax(0,1fr));
+  gap:9px;width:min(100%,980px);margin:0 auto;
+}
+.memory-card{
+  position:relative;min-width:0;height:clamp(88px,12vh,126px);padding:0;
+  border:1px solid rgba(255,255,255,.10);border-radius:14px;cursor:pointer;overflow:hidden;
+  background:
+    linear-gradient(145deg,rgba(125,92,255,.16),rgba(34,197,94,.035)),
+    var(--card);
+  box-shadow:inset 0 0 18px rgba(255,255,255,.02);
+  transition:transform .12s ease,border-color .15s ease,box-shadow .15s ease;
+}
+.memory-card:hover:not(.revealed):not(.matched){transform:translateY(-2px);border-color:rgba(167,139,250,.50)}
+.memory-card::before{
+  content:"A★";position:absolute;inset:0;display:grid;place-items:center;
+  color:rgba(255,255,255,.15);font-size:clamp(24px,4vw,42px);font-weight:1000;letter-spacing:-.06em;
+  transition:opacity .12s ease,transform .12s ease;
+}
+.card-content{
+  position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:10px;
+  opacity:0;transform:scale(.96);transition:opacity .12s ease,transform .12s ease;
+  color:#14172a;background:var(--card-open);text-align:center;
+}
+.memory-card[data-card-type="en"] .card-content{
+  background:linear-gradient(145deg,#f3efff,#ebe5ff);
+}
+.memory-card[data-card-type="es"] .card-content{
+  background:linear-gradient(145deg,#effcf4,#e6f8ee);
+}
+.memory-card.revealed .card-content,.memory-card.matched .card-content{opacity:1;transform:scale(1)}
+.memory-card.revealed::before,.memory-card.matched::before{opacity:0;transform:scale(.9)}
+.memory-card.revealed{border-color:rgba(167,139,250,.72);box-shadow:0 0 22px rgba(125,92,255,.13)}
+.memory-card.matched{border-color:rgba(34,197,94,.8);box-shadow:0 0 0 1px rgba(34,197,94,.12),0 0 25px rgba(34,197,94,.13);cursor:default}
+.card-value{max-width:100%;font-size:clamp(12px,1.7vw,21px);font-weight:1000;line-height:1.18;overflow-wrap:anywhere}
+.card-tag{
+  position:absolute;top:7px;left:7px;padding:3px 6px;border-radius:999px;
+  color:rgba(20,23,42,.55);background:rgba(20,23,42,.06);font-size:8px;font-weight:1000;letter-spacing:.08em;
+}
+
+/* SETTINGS */
+.settings-title{margin-bottom:16px}
+.settings-title h2{margin:0 0 4px;font-size:19px}
+.settings-title p{margin:0;color:var(--muted);font-size:11px;line-height:1.5}
+.setting-group{padding:15px 0;border-top:1px solid var(--border)}
+.setting-group:first-of-type{border-top:0;padding-top:0}
+.setting-label{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:9px;color:#e2e8f6;font-size:10px;font-weight:1000;letter-spacing:.09em;text-transform:uppercase}
+.setting-hint{color:var(--muted);font-size:9px;font-weight:700;letter-spacing:0;text-transform:none}
+select{
+  width:100%;min-height:42px;padding:0 11px;border:1px solid var(--border);border-radius:11px;color:var(--text);
+  background:var(--panel2);
+}
+.mode-row{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.mode-btn{
+  min-height:41px;padding:9px 11px;border:1px solid var(--border);border-radius:11px;
+  color:var(--muted);background:var(--panel2);
+}
+.mode-btn.active{
+  color:#dcfce7;background:rgba(34,197,94,.16);border-color:rgba(34,197,94,.55);
+  box-shadow:0 0 18px rgba(34,197,94,.10);
+}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip,.all-btn{
+  min-height:36px;padding:8px 11px;border-radius:999px;border:1px solid var(--border);
+  color:var(--muted);background:rgba(255,255,255,.05);font-size:11px;
+}
+.chip.active{
+  color:#fff;background:rgba(125,92,255,.17);border-color:rgba(125,92,255,.50);
+  box-shadow:0 0 14px rgba(125,92,255,.10)
+}
+.all-btn{width:100%;margin-top:9px;color:#f2efff;border-color:rgba(125,92,255,.28);background:rgba(125,92,255,.08)}
+.all-btn.active{
+  color:#fff;background:linear-gradient(135deg,rgba(125,92,255,.26),rgba(34,197,94,.12));
+  border-color:rgba(125,92,255,.58);box-shadow:0 0 16px rgba(125,92,255,.12);
+}
+.settings-actions{display:grid;gap:8px}
+.data-status{margin-top:11px;color:var(--muted);font-size:10px;line-height:1.45;text-align:center}
+.data-status.ok{color:#86efac}.data-status.error{color:#fca5a5}
+
+/* RESULTS */
+.results-card{
+  width:min(630px,100%);padding:30px;border:1px solid var(--border);border-radius:20px;
+  background:linear-gradient(145deg,rgba(125,92,255,.11),rgba(34,197,94,.045) 48%,rgba(255,255,255,.035));
+  text-align:center;
+}
+.results-symbol{margin-bottom:8px;font-size:66px}
+.results-card h2{margin:0 0 6px;font-size:32px}
+.results-subtitle{margin:0 0 24px;color:var(--muted);font-size:13px}
+.results-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-bottom:23px}
+.result-stat{padding:14px;border:1px solid var(--border);border-radius:13px;background:rgba(0,0,0,.13)}
+.result-stat span{display:block;margin-bottom:4px;color:var(--muted);font-size:8px;font-weight:1000;letter-spacing:.1em;text-transform:uppercase}
+.result-stat strong{display:block;font-size:22px}
+.results-actions{display:flex;justify-content:center;gap:8px;flex-wrap:wrap}
+
+/* MODAL CLAVE */
+.modal-back{
+  position:fixed;inset:0;z-index:9999;padding:16px;display:flex;align-items:center;justify-content:center;
+  background:rgba(4,7,15,.78);backdrop-filter:blur(10px);
+}
+.modal{
+  width:min(560px,100%);padding:20px;border:1px solid var(--border);border-radius:20px;
+  background:linear-gradient(180deg,rgba(26,34,62,.98),rgba(16,22,42,.98));box-shadow:var(--shadow);
+}
+.modal h2{margin:0 0 8px;font-size:21px}.modal p{margin:0 0 16px;color:var(--muted);font-size:14px}
+.modal-row{display:flex;gap:9px;flex-wrap:wrap}
+.modal-row input{
+  flex:1;min-width:210px;padding:13px 15px;border:1px solid rgba(255,255,255,.17);border-radius:13px;
+  color:white;background:rgba(255,255,255,.07);font-weight:800;
+}
+.modal-error{min-height:18px;margin-top:10px;color:#fca5a5;font-size:13px;font-weight:900}
+
+/* TOAST */
+.toast{
+  position:fixed;left:50%;bottom:24px;z-index:10000;max-width:calc(100vw - 30px);padding:11px 15px;
+  border:1px solid var(--border);border-radius:999px;color:#fff;background:rgba(8,11,22,.96);box-shadow:var(--shadow);
+  font-size:12px;font-weight:800;opacity:0;pointer-events:none;transform:translate(-50%,12px);
+  transition:opacity .18s ease,transform .18s ease;
+}
+.toast.visible{opacity:1;transform:translate(-50%,0)}
+
+@media(max-width:980px){
+  .app{padding:11px}.layout{grid-template-columns:1fr}.settings-panel{position:static}.stage{min-height:500px;padding:14px}
+  .student-badge{display:none}.hud{grid-template-columns:repeat(2,1fr)}.preview-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .results-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:620px){
+  .topbar{align-items:flex-start}.brand-mark{width:44px;height:44px;border-radius:13px;font-size:20px}
+  .brand-copy h1{font-size:22px}.board{gap:6px}.memory-card{height:clamp(78px,11vh,105px);border-radius:10px}
+  .card-value{font-size:clamp(10px,3.2vw,16px)}.preview-grid{grid-template-columns:1fr 1fr}.preview-card{min-height:90px;padding:9px}
+  .preview-en{font-size:18px}.preview-es{font-size:11px}.memory-header{align-items:flex-start}.results-card{padding:22px 14px}
+}
+</style>
+</head>
+
+<body>
+<!-- CLAVE -->
+<div id="claveBack" class="modal-back" aria-hidden="false">
+  <div class="modal">
+    <h2>🔒 Código de estudiante</h2>
+    <p>Escribe tu clave para entrar a English Memory.</p>
+    <div class="modal-row">
+      <input id="claveInput" type="text" placeholder="Escribe tu clave..." autocomplete="off" />
+      <button id="claveBtn" class="primary" type="button">Entrar</button>
+    </div>
+    <div id="claveErr" class="modal-error"></div>
+  </div>
+</div>
+
+<main class="app">
+  <header class="topbar">
+    <div class="brand">
+      <div class="brand-mark">A★</div>
+      <div class="brand-copy">
+        <h1>English Memory</h1>
+        <p>Vocabulary Memory Arcade · Asallam Sensei</p>
+      </div>
+    </div>
+    <div id="studentLabel" class="student-badge">👤 Estudiante: —</div>
+  </header>
+
+  <div class="layout">
+    <section class="game-shell">
+      <div class="hud">
+        <div class="hud-item"><span class="hud-label">Puntos</span><strong class="hud-value" id="scoreValue">0</strong></div>
+        <div class="hud-item"><span class="hud-label">Tiempo</span><strong class="hud-value" id="timeValue">00:00</strong></div>
+        <div class="hud-item"><span class="hud-label">Intentos</span><strong class="hud-value" id="attemptsValue">0</strong></div>
+        <div class="hud-item"><span class="hud-label">Combo</span><strong class="hud-value" id="comboValue">x0</strong></div>
+      </div>
+
+      <div class="stage">
+        <section id="welcomeScreen" class="screen active">
+          <div class="welcome">
+            <div class="welcome-content">
+              <div class="hero-icon">🧠</div>
+              <h2>Match. Listen. Remember.</h2>
+              <p>
+                Encuentra cada pareja <strong>English ↔ Español</strong>.
+                Cada vez que voltees una tarjeta escucharás su palabra o frase en inglés.
+              </p>
+              <button id="welcomePrepareButton" class="primary" type="button" disabled>Preparar partida</button>
+            </div>
+          </div>
+        </section>
+
+        <section id="memoryScreen" class="screen">
+          <div id="memorizationContent">
+            <div class="memory-header">
+              <div class="memory-title">
+                <h2>Memoriza las parejas</h2>
+                <p>Toca una pareja si quieres escuchar su inglés antes de empezar.</p>
+              </div>
+              <div class="memory-countdown">
+                <strong id="memoryCountdown">10</strong>
+                <span>segundos</span>
+              </div>
+            </div>
+            <div id="previewGrid" class="preview-grid"></div>
+          </div>
+
+          <div id="memoryReady" class="memory-ready">
+            <div>
+              <div class="ready-symbol">🎧</div>
+              <h2>Ready?</h2>
+              <p>Las parejas ya están ocultas. Escucha y encuentra todas.</p>
+              <button id="startGameButton" class="primary" type="button">Start Game</button>
+            </div>
+          </div>
+        </section>
+
+        <section id="boardScreen" class="screen">
+          <div id="board" class="board"></div>
+        </section>
+
+        <section id="resultsScreen" class="screen">
+          <div class="results">
+            <div class="results-card">
+              <div class="results-symbol">🏆</div>
+              <h2>Partida completada</h2>
+              <p id="resultsSubtitle" class="results-subtitle">Excellent work!</p>
+              <div class="results-grid">
+                <div class="result-stat"><span>Puntuación</span><strong id="finalScore">0</strong></div>
+                <div class="result-stat"><span>Tiempo</span><strong id="finalTime">00:00</strong></div>
+                <div class="result-stat"><span>Intentos</span><strong id="finalAttempts">0</strong></div>
+                <div class="result-stat"><span>Precisión</span><strong id="finalAccuracy">0%</strong></div>
+                <div class="result-stat"><span>Mejor combo</span><strong id="finalCombo">x0</strong></div>
+                <div class="result-stat"><span>Parejas</span><strong id="finalPairs">0</strong></div>
+              </div>
+              <div class="results-actions">
+                <button id="playAgainButton" class="primary" type="button">Jugar otra vez</button>
+                <button id="changeSettingsButton" class="secondary" type="button">Cambiar configuración</button>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <aside class="settings-panel">
+      <div class="settings-title">
+        <h2>Configuración</h2>
+        <p>Elige tamaño, tiempo, audio y bloques de vocabulario.</p>
+      </div>
+
+      <div class="setting-group">
+        <div class="setting-label">Tablero <span class="setting-hint">parejas</span></div>
+        <select id="boardSize">
+          <option value="6">6 parejas · 12 cartas</option>
+          <option value="8" selected>8 parejas · 16 cartas</option>
+          <option value="10">10 parejas · 20 cartas</option>
+          <option value="12">12 parejas · 24 cartas</option>
+        </select>
+      </div>
+
+      <div class="setting-group">
+        <div class="setting-label">Memorización <span class="setting-hint">preview</span></div>
+        <select id="memoryTime">
+          <option value="5">5 segundos</option>
+          <option value="10" selected>10 segundos</option>
+          <option value="15">15 segundos</option>
+          <option value="20">20 segundos</option>
+        </select>
+      </div>
+
+      <div class="setting-group">
+        <div class="setting-label">Audio <span class="setting-hint">al voltear</span></div>
+        <div class="mode-row">
+          <button id="audioMp3" class="mode-btn active" type="button">MP3</button>
+          <button id="audioTts" class="mode-btn" type="button">Sintetizador</button>
+        </div>
+      </div>
+
+      <div class="setting-group">
+        <div class="setting-label">Bloques <span id="blockCountHint" class="setting-hint">cargando…</span></div>
+        <div id="chipsBloques" class="chips"></div>
+        <button id="btnTodo" class="all-btn active" type="button">✓ Todos los bloques</button>
+      </div>
+
+      <div class="setting-group">
+        <div class="settings-actions">
+          <button id="prepareButton" class="primary wide" type="button" disabled>Preparar partida</button>
+          <button id="resetButton" class="danger wide" type="button">Volver al inicio</button>
+        </div>
+        <div id="dataStatus" class="data-status">Cargando data/english_vocab.json…</div>
+      </div>
+    </aside>
+  </div>
+</main>
+
+<div id="toast" class="toast"></div>
+
+<script>
+"use strict";
+
+/* =========================
+   CONFIG
+========================= */
+const JSON_PATH  = "data/english_vocab.json";
+const AUDIO_BASE = "data/audios/english/";
+
+const CONFIG = {
+  boards: {
+    6:  { pairs: 6,  columns: 4 },
+    8:  { pairs: 8,  columns: 4 },
+    10: { pairs: 10, columns: 5 },
+    12: { pairs: 12, columns: 6 }
+  },
+  scoring: {
+    match: 100,
+    comboBonus: 25
+  },
+  mismatchDelay: 760
+};
+
+/* =========================
+   CLAVES -> ESTUDIANTES
+   Conservadas del app de inglés
+========================= */
+const CLAVES = [
+  { clave: "paopao", estudiante: "Paola (México)" },
+  { clave: "procura", estudiante: "Katherine (Colombia)" },
+  { clave: "costeña", estudiante: "Sandra (Colombia)" },
+  { clave: "buenota", estudiante: "Daniela Rayo (Colombia)" },
+  { clave: "osito", estudiante: "Yasmin" },
+  { clave: "autos", estudiante: "Duvan" },
+  { clave: "profe", estudiante: "Sensei" },
+  { clave: "verde", estudiante: "Aura" },
+  { clave: "derecho", estudiante: "Jesús" },
+  { clave: "esperanza", estudiante: "Gina" },
+  { clave: "maestra", estudiante: "Belén" },
+  { clave: "chisme", estudiante: "Marlene" },
+  { clave: "Arnold", estudiante: "Арнольд" }
+];
+
+/* =========================
+   HELPERS
+========================= */
+const $ = id => document.getElementById(id);
+
+function norm(s){
+  return String(s ?? "").trim().toLowerCase().replace(/\s+/g," ");
+}
+function clean(s){ return String(s ?? "").trim(); }
+
+function shuffle(arr){
+  const copy = [...arr];
+  for(let i=copy.length-1;i>0;i--){
+    const j = Math.floor(Math.random()*(i+1));
+    [copy[i],copy[j]] = [copy[j],copy[i]];
+  }
+  return copy;
+}
+
+function ordenarBloquesPorId(bloques){
+  return [...bloques].sort((a,b)=>{
+    const pa = String(a.id || "").replace("eng_","").split("_").map(Number);
+    const pb = String(b.id || "").replace("eng_","").split("_").map(Number);
+    const a0 = pa[0] || 0, b0 = pb[0] || 0;
+    if(a0 !== b0) return a0-b0;
+    return (pa[1] || 0) - (pb[1] || 0);
+  });
+}
+
+function formatTime(seconds){
+  const m = Math.floor(seconds/60);
+  const s = seconds%60;
+  return String(m).padStart(2,"0")+":"+String(s).padStart(2,"0");
+}
+
+let toastTimer = null;
+function showToast(message){
+  $("toast").textContent = message;
+  $("toast").classList.add("visible");
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(()=>$("toast").classList.remove("visible"),2200);
+}
+
+/* =========================
+   LOGIN
+========================= */
+let estudianteActual = null;
+let audioHabilitado = false;
+
+function validarClave(){
+  const key = norm($("claveInput").value);
+  const found = CLAVES.find(x=>norm(x.clave)===key);
+
+  if(!found){
+    $("claveErr").textContent = "Clave incorrecta. Intenta de nuevo.";
+    return;
+  }
+
+  estudianteActual = found.estudiante;
+  $("studentLabel").textContent = "👤 Estudiante: " + estudianteActual;
+  $("claveErr").textContent = "";
+  $("claveBack").style.display = "none";
+  $("claveBack").setAttribute("aria-hidden","true");
+
+  audioHabilitado = true;
+  sound.init();
+}
+
+$("claveBtn").addEventListener("click",validarClave);
+$("claveInput").addEventListener("keydown",e=>{
+  if(e.key==="Enter") validarClave();
+});
+window.addEventListener("DOMContentLoaded",()=>$("claveInput").focus());
+
+/* =========================
+   DATA
+========================= */
+let DATA = { bloques: [] };
+let bloquesActivos = new Set();
+
+function getSelectedVocabulary(){
+  const out = [];
+  [...bloquesActivos].forEach(i=>{
+    const vocab = DATA.bloques[i]?.vocabulario;
+    if(Array.isArray(vocab)) out.push(...vocab);
+  });
+
+  /* Evita parejas duplicadas exactas */
+  const seen = new Set();
+  return out.filter(item=>{
+    const en = clean(item?.en);
+    const es = clean(item?.es);
+    if(!en || !es) return false;
+    const key = norm(en)+"|||"+norm(es);
+    if(seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
+}
+
+function renderChips(){
+  const cont = $("chipsBloques");
+  cont.innerHTML = "";
+
+  DATA.bloques.forEach((b,i)=>{
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "chip" + (bloquesActivos.has(i) ? " active" : "");
+    btn.textContent = b.nombre || `Bloque ${i+1}`;
+
+    btn.addEventListener("click",()=>{
+      const allActive = bloquesActivos.size === DATA.bloques.length;
+
+      /* Regla pedida:
+         Si están todos activos y el usuario toca un bloque,
+         ese bloque queda como única selección.
+      */
+      if(allActive){
+        bloquesActivos = new Set([i]);
+      }else if(bloquesActivos.has(i)){
+        /* Nunca dejar cero: si era el único, lo conservamos */
+        if(bloquesActivos.size === 1){
+          showToast("Debe quedar al menos un bloque seleccionado.");
+          return;
+        }
+        bloquesActivos.delete(i);
+      }else{
+        bloquesActivos.add(i);
+      }
+
+      updateBlockUI();
+    });
+
+    cont.appendChild(btn);
+  });
+
+  updateBlockUI();
+}
+
+function updateBlockUI(){
+  [...$("chipsBloques").children].forEach((btn,i)=>{
+    btn.classList.toggle("active",bloquesActivos.has(i));
+  });
+
+  const all = DATA.bloques.length > 0 && bloquesActivos.size === DATA.bloques.length;
+  $("btnTodo").classList.toggle("active",all);
+
+  const words = getSelectedVocabulary().length;
+  $("blockCountHint").textContent = `${bloquesActivos.size}/${DATA.bloques.length} · ${words} entradas`;
+}
+
+$("btnTodo").addEventListener("click",()=>{
+  bloquesActivos = new Set(DATA.bloques.map((_,i)=>i));
+  updateBlockUI();
+});
+
+/* =========================
+   AUDIO: VOCABULARIO
+========================= */
+const wordAudio = new Audio();
+wordAudio.preload = "auto";
+let audioModo = "mp3"; // mp3 | tts
+let audioPlayToken = 0;
+
+function setAudioMode(mode){
+  audioModo = mode;
+  $("audioMp3").classList.toggle("active",mode==="mp3");
+  $("audioTts").classList.toggle("active",mode==="tts");
+  stopWordAudio();
+}
+
+$("audioMp3").addEventListener("click",()=>setAudioMode("mp3"));
+$("audioTts").addEventListener("click",()=>setAudioMode("tts"));
+
+function buildExactAudioSrc(key){
+  const k = clean(key);
+  if(!k) return "";
+  return AUDIO_BASE + encodeURIComponent(k) + ".mp3";
+}
+
+function stopWordAudio(){
+  audioPlayToken++;
+  try{
+    wordAudio.pause();
+    wordAudio.currentTime = 0;
+  }catch{}
+  if("speechSynthesis" in window) speechSynthesis.cancel();
+}
+
+function hablarIngles(texto){
+  if(!audioHabilitado || !("speechSynthesis" in window)) return;
+  speechSynthesis.cancel();
+  const u = new SpeechSynthesisUtterance(clean(texto));
+  u.lang = "en-US";
+  u.rate = 0.85;
+  u.pitch = 1;
+  speechSynthesis.speak(u);
+}
+
+async function playEnglish(text){
+  const key = clean(text);
+  if(!audioHabilitado || !key) return;
+
+  const token = ++audioPlayToken;
+  try{
+    wordAudio.pause();
+    wordAudio.currentTime = 0;
+  }catch{}
+  if("speechSynthesis" in window) speechSynthesis.cancel();
+
+  if(audioModo === "tts"){
+    hablarIngles(key);
+    return;
+  }
+
+  const src = buildExactAudioSrc(key);
+  if(!src){
+    hablarIngles(key);
+    return;
+  }
+
+  try{
+    wordAudio.src = src;
+    wordAudio.load();
+
+    await new Promise((resolve,reject)=>{
+      const ok = ()=>cleanup(resolve);
+      const bad = ()=>cleanup(reject);
+      const cleanup = cb=>{
+        wordAudio.removeEventListener("canplaythrough",ok);
+        wordAudio.removeEventListener("error",bad);
+        cb();
+      };
+      wordAudio.addEventListener("canplaythrough",ok,{once:true});
+      wordAudio.addEventListener("error",bad,{once:true});
+      setTimeout(()=>cleanup(reject),2500);
+    });
+
+    if(token !== audioPlayToken) return;
+    await wordAudio.play();
+  }catch{
+    if(token === audioPlayToken) hablarIngles(key);
+  }
+}
+
+/* =========================
+   SOUND FX
+========================= */
+class SoundEngine{
+  constructor(){ this.context=null; this.enabled=true; }
+
+  init(){
+    if(this.context){
+      if(this.context.state==="suspended") this.context.resume();
+      return;
+    }
+    const AC = window.AudioContext || window.webkitAudioContext;
+    if(!AC){ this.enabled=false; return; }
+    this.context = new AC();
+  }
+
+  tone({frequency,duration=.1,type="sine",volume=.07,delay=0}){
+    if(!this.enabled || !this.context) return;
+    const now = this.context.currentTime + delay;
+    const osc = this.context.createOscillator();
+    const gain = this.context.createGain();
+    osc.type = type;
+    osc.frequency.setValueAtTime(frequency,now);
+    gain.gain.setValueAtTime(.0001,now);
+    gain.gain.exponentialRampToValueAtTime(Math.max(volume,.0001),now+.012);
+    gain.gain.exponentialRampToValueAtTime(.0001,now+duration);
+    osc.connect(gain);
+    gain.connect(this.context.destination);
+    osc.start(now);
+    osc.stop(now+duration+.03);
+  }
+
+  correct(combo=1){
+    const lift = Math.min(combo-1,5)*22;
+    this.tone({frequency:523+lift,duration:.10,volume:.05});
+    this.tone({frequency:659+lift,duration:.12,volume:.055,delay:.065});
+    this.tone({frequency:784+lift,duration:.16,type:"triangle",volume:.045,delay:.13});
+  }
+
+  wrong(){
+    this.tone({frequency:190,duration:.16,type:"sawtooth",volume:.032});
+    this.tone({frequency:145,duration:.20,type:"triangle",volume:.032,delay:.08});
+  }
+
+  victory(){
+    [523,659,784,1047].forEach((f,i)=>
+      this.tone({frequency:f,duration:.20,type:"triangle",volume:.05,delay:i*.095})
+    );
+  }
+}
+const sound = new SoundEngine();
+
+document.addEventListener("pointerdown",()=>{
+  audioHabilitado = true;
+  sound.init();
+},{once:true});
+document.addEventListener("keydown",()=>{
+  audioHabilitado = true;
+  sound.init();
+},{once:true});
+
+/* =========================
+   GAME STATE
+========================= */
+const state = {
+  selectedPairs:[],
+  cards:[],
+  currentSettings:null,
+  firstCard:null,
+  secondCard:null,
+  inputLocked:false,
+  matches:0,
+  attempts:0,
+  score:0,
+  combo:0,
+  bestCombo:0,
+  elapsedSeconds:0,
+  gameStartedAt:null,
+  gameTimer:null,
+  memoryTimer:null
+};
+
+function getSettings(){
+  const pairs = Number($("boardSize").value);
+  return {
+    pairCount:pairs,
+    columns:CONFIG.boards[pairs]?.columns || 4,
+    memorySeconds:Number($("memoryTime").value)
+  };
+}
+
+function resetScoreState(){
+  state.firstCard = null;
+  state.secondCard = null;
+  state.inputLocked = false;
+  state.matches = 0;
+  state.attempts = 0;
+  state.score = 0;
+  state.combo = 0;
+  state.bestCombo = 0;
+  state.elapsedSeconds = 0;
+  state.gameStartedAt = null;
+  clearInterval(state.gameTimer);
+  state.gameTimer = null;
+  renderHUD();
+}
+
+function renderHUD(){
+  $("scoreValue").textContent = state.score.toLocaleString();
+  $("timeValue").textContent = formatTime(state.elapsedSeconds);
+  $("attemptsValue").textContent = state.attempts;
+  $("comboValue").textContent = `x${state.combo}`;
+  $("comboValue").classList.toggle("combo-active",state.combo>0);
+}
+
+function showScreen(name){
+  const map = {
+    welcome:$("welcomeScreen"),
+    memory:$("memoryScreen"),
+    board:$("boardScreen"),
+    results:$("resultsScreen")
+  };
+  Object.values(map).forEach(x=>x.classList.remove("active"));
+  map[name]?.classList.add("active");
+}
+
+function startGameTimer(){
+  clearInterval(state.gameTimer);
+  state.gameTimer = setInterval(()=>{
+    if(!state.gameStartedAt) return;
+    state.elapsedSeconds = Math.floor((Date.now()-state.gameStartedAt)/1000);
+    renderHUD();
+  },250);
+}
+
+/* =========================
+   PREPARE / PREVIEW
+========================= */
+function buildPairs(){
+  const settings = getSettings();
+  const pool = getSelectedVocabulary();
+
+  if(pool.length < settings.pairCount){
+    showToast(`Necesitas al menos ${settings.pairCount} entradas en los bloques seleccionados.`);
+    return null;
+  }
+
+  const selected = shuffle(pool).slice(0,settings.pairCount).map((item,index)=>({
+    pairId:`pair-${index}-${Date.now()}`,
+    en:clean(item.en),
+    es:clean(item.es)
+  }));
+
+  return selected;
+}
+
+function prepareGame(){
+  if(!estudianteActual){
+    showToast("Primero entra con tu clave.");
+    return;
+  }
+
+  sound.init();
+  stopWordAudio();
+
+  const pairs = buildPairs();
+  if(!pairs) return;
+
+  state.currentSettings = getSettings();
+  state.selectedPairs = pairs;
+  state.cards = [];
+  resetScoreState();
+
+  renderPreview();
+  showScreen("memory");
+  startMemoryCountdown();
+}
+
+function renderPreview(){
+  const grid = $("previewGrid");
+  grid.innerHTML = "";
+
+  state.selectedPairs.forEach(pair=>{
+    const card = document.createElement("button");
+    card.type = "button";
+    card.className = "preview-card";
+    card.innerHTML = `
+      <div class="preview-en"></div>
+      <div class="preview-es"></div>
+      <div class="preview-speaker">🔊 escuchar</div>
+    `;
+    card.querySelector(".preview-en").textContent = pair.en;
+    card.querySelector(".preview-es").textContent = pair.es;
+    card.addEventListener("click",()=>playEnglish(pair.en));
+    grid.appendChild(card);
+  });
+}
+
+function startMemoryCountdown(){
+  clearInterval(state.memoryTimer);
+  $("memorizationContent").style.display = "";
+  $("memoryReady").classList.remove("active");
+
+  let remaining = state.currentSettings.memorySeconds;
+  $("memoryCountdown").textContent = remaining;
+
+  state.memoryTimer = setInterval(()=>{
+    remaining -= 1;
+    $("memoryCountdown").textContent = Math.max(remaining,0);
+
+    if(remaining <= 0){
+      clearInterval(state.memoryTimer);
+      state.memoryTimer = null;
+      stopWordAudio();
+      $("memorizationContent").style.display = "none";
+      $("memoryReady").classList.add("active");
+    }
+  },1000);
+}
+
+/* =========================
+   BOARD
+========================= */
+function createCards(){
+  const cards = [];
+
+  state.selectedPairs.forEach((pair,index)=>{
+    cards.push({
+      cardId:`en-${index}-${Date.now()}`,
+      pairId:pair.pairId,
+      type:"en",
+      value:pair.en,
+      audioKey:pair.en
+    });
+    cards.push({
+      cardId:`es-${index}-${Date.now()}`,
+      pairId:pair.pairId,
+      type:"es",
+      value:pair.es,
+      audioKey:pair.en
+    });
+  });
+
+  state.cards = shuffle(cards);
+}
+
+function renderBoard(){
+  createCards();
+  const board = $("board");
+  board.innerHTML = "";
+  board.style.setProperty("--columns",state.currentSettings.columns);
+
+  state.cards.forEach(cardData=>{
+    const btn = document.createElement("button");
+    btn.type = "button";
+    btn.className = "memory-card";
+    btn.dataset.cardId = cardData.cardId;
+    btn.dataset.pairId = cardData.pairId;
+    btn.dataset.cardType = cardData.type;
+    btn.dataset.audioKey = cardData.audioKey;
+    btn.setAttribute("aria-label","Carta oculta");
+
+    const content = document.createElement("div");
+    content.className = "card-content";
+
+    const tag = document.createElement("span");
+    tag.className = "card-tag";
+    tag.textContent = cardData.type.toUpperCase();
+
+    const value = document.createElement("div");
+    value.className = "card-value";
+    value.textContent = cardData.value;
+
+    content.append(tag,value);
+    btn.appendChild(content);
+    btn.addEventListener("click",()=>handleCardClick(btn));
+    board.appendChild(btn);
+  });
+}
+
+function startGame(){
+  sound.init();
+  stopWordAudio();
+  resetScoreState();
+  renderBoard();
+  state.gameStartedAt = Date.now();
+  startGameTimer();
+  showScreen("board");
+}
+
+function handleCardClick(card){
+  if(
+    state.inputLocked ||
+    card.classList.contains("revealed") ||
+    card.classList.contains("matched")
+  ) return;
+
+  revealCard(card);
+
+  /* Requisito: ambas caras de la pareja reproducen SIEMPRE el inglés */
+  playEnglish(card.dataset.audioKey);
+
+  if(!state.firstCard){
+    state.firstCard = card;
+    return;
+  }
+
+  state.secondCard = card;
+  state.inputLocked = true;
+  state.attempts += 1;
+  evaluatePair();
+}
+
+function revealCard(card){
+  card.classList.add("revealed");
+  card.setAttribute("aria-label",card.textContent.trim());
+}
+
+function hideCard(card){
+  card.classList.remove("revealed");
+  card.setAttribute("aria-label","Carta oculta");
+}
+
+function evaluatePair(){
+  const first = state.firstCard;
+  const second = state.secondCard;
+
+  const samePair = first.dataset.pairId === second.dataset.pairId;
+  const differentTypes = first.dataset.cardType !== second.dataset.cardType;
+
+  if(samePair && differentTypes) handleMatch();
+  else handleMismatch();
+}
+
+function handleMatch(){
+  state.combo += 1;
+  state.bestCombo = Math.max(state.bestCombo,state.combo);
+
+  const comboBonus = Math.max(0,state.combo-1) * CONFIG.scoring.comboBonus;
+  state.score += CONFIG.scoring.match + comboBonus;
+  state.matches += 1;
+
+  state.firstCard.classList.add("matched");
+  state.secondCard.classList.add("matched");
+  state.firstCard.classList.remove("revealed");
+  state.secondCard.classList.remove("revealed");
+
+  /* No repetimos la palabra: solo pitido de correcto */
+  sound.correct(state.combo);
+
+  resetTurn();
+  renderHUD();
+
+  if(state.matches === state.currentSettings.pairCount){
+    setTimeout(finishGame,520);
+  }
+}
+
+function handleMismatch(){
+  state.combo = 0;
+
+  /* Solo pitido de incorrecto */
+  sound.wrong();
+  renderHUD();
+
+  setTimeout(()=>{
+    if(state.firstCard) hideCard(state.firstCard);
+    if(state.secondCard) hideCard(state.secondCard);
+    resetTurn();
+    renderHUD();
+  },CONFIG.mismatchDelay);
+}
+
+function resetTurn(){
+  state.firstCard = null;
+  state.secondCard = null;
+  state.inputLocked = false;
+}
+
+function finishGame(){
+  clearInterval(state.gameTimer);
+  state.gameTimer = null;
+  stopWordAudio();
+
+  if(state.gameStartedAt){
+    state.elapsedSeconds = Math.floor((Date.now()-state.gameStartedAt)/1000);
+  }
+
+  const accuracy = state.attempts > 0
+    ? Math.round((state.matches/state.attempts)*100)
+    : 100;
+
+  $("finalScore").textContent = state.score.toLocaleString();
+  $("finalTime").textContent = formatTime(state.elapsedSeconds);
+  $("finalAttempts").textContent = state.attempts;
+  $("finalAccuracy").textContent = accuracy + "%";
+  $("finalCombo").textContent = "x" + state.bestCombo;
+  $("finalPairs").textContent = state.matches;
+
+  $("resultsSubtitle").textContent =
+    estudianteActual ? `Excellent work, ${estudianteActual}!` : "Excellent work!";
+
+  renderHUD();
+  showScreen("results");
+  sound.victory();
+}
+
+/* =========================
+   ACTIONS
+========================= */
+$("prepareButton").addEventListener("click",prepareGame);
+$("welcomePrepareButton").addEventListener("click",prepareGame);
+$("startGameButton").addEventListener("click",startGame);
+
+$("playAgainButton").addEventListener("click",()=>{
+  /* Nueva selección aleatoria con la misma configuración */
+  prepareGame();
+});
+
+$("changeSettingsButton").addEventListener("click",()=>{
+  clearInterval(state.memoryTimer);
+  clearInterval(state.gameTimer);
+  stopWordAudio();
+  resetScoreState();
+  showScreen("welcome");
+});
+
+$("resetButton").addEventListener("click",()=>{
+  clearInterval(state.memoryTimer);
+  clearInterval(state.gameTimer);
+  stopWordAudio();
+  resetScoreState();
+  state.selectedPairs = [];
+  state.cards = [];
+  showScreen("welcome");
+});
+
+/* =========================
+   LOAD JSON
+========================= */
+fetch(JSON_PATH)
+  .then(r=>{
+    if(!r.ok) throw new Error(`HTTP ${r.status}`);
+    return r.json();
+  })
+  .then(json=>{
+    DATA = (json && Array.isArray(json.bloques))
+      ? {...json,bloques:ordenarBloquesPorId(json.bloques)}
+      : {bloques:[]};
+
+    if(DATA.bloques.length===0){
+      throw new Error("El JSON no contiene bloques.");
+    }
+
+    /* Default: TODOS activos */
+    bloquesActivos = new Set(DATA.bloques.map((_,i)=>i));
+    renderChips();
+    setAudioMode("mp3");
+
+    const total = getSelectedVocabulary().length;
+    $("dataStatus").textContent = `${DATA.bloques.length} bloques · ${total} entradas cargadas`;
+    $("dataStatus").classList.add("ok");
+
+    $("prepareButton").disabled = false;
+    $("welcomePrepareButton").disabled = false;
+  })
+  .catch(err=>{
+    console.error("No se pudo cargar English Vocab:",err);
+    $("dataStatus").textContent = `No se pudo cargar ${JSON_PATH}. Revisa la ruta y GitHub Pages.`;
+    $("dataStatus").classList.add("error");
+    $("blockCountHint").textContent = "error";
+    showToast("Error cargando el JSON de inglés.");
+  });
+</script>
+</body>
+</html>
