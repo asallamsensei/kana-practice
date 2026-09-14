@@ -198,21 +198,28 @@
   #opciones{
     width:min(760px, 100%);
     margin:0 auto;
+    padding:12px 14px;
+  
     display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(160px, 1fr));
     gap:10px;
+  
+    border-radius:14px;
+    border:1px dashed rgba(255,255,255,.22);
+    background:rgba(0,0,0,.18);
   }
 
   .opcionLinea{
-    display:grid;
-    grid-template-columns:42px 1fr;
-    gap:10px;
-    align-items:start;
-    padding:12px 14px;
-    border-radius:14px;
-    border:1px dashed rgba(255,255,255,.20);
-    background:rgba(0,0,0,.16);
+    display:flex;
+    gap:8px;
+    align-items:flex-start;
+  
+    padding:8px 10px;
+    border-radius:10px;
+  
     font-size:19px;
     line-height:1.45;
+    min-width:0;
   }
 
   .opcionLetra{
