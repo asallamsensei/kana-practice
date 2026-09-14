@@ -439,14 +439,6 @@
 
   <!-- ===== QUIZ ===== -->
   <section class="card" id="quiz">
-    <div class="quizTop">
-      <div id="contador">Pregunta 1 / 20</div>
-
-      <div class="topActions">
-        <button class="btnGhost" type="button" onclick="reiniciar()">Reiniciar</button>
-        <button class="btnGhost" type="button" onclick="volverAClave()">Cambiar parte</button>
-      </div>
-    </div>
 
     <div class="progressTrack">
       <div id="progressBar"></div>
@@ -478,6 +470,16 @@
       <span>Precisión: <strong id="precision">0%</strong></span>
     </div>
 
+    <div class="topActions" style="justify-content:center; margin-top:16px;">
+      <button class="btnGhost" type="button" onclick="reiniciar()">
+        Reiniciar
+      </button>
+    
+      <button class="btnGhost" type="button" onclick="volverAClave()">
+        Hacer otro test
+      </button>
+    </div>
+    
     <div class="hint">
       Teclado: A / B / C / D para responder · Enter para saltar o avanzar
     </div>
@@ -760,9 +762,6 @@ function cargarPregunta(){
 
   limpiarFeedback();
   habilitarBotones();
-
-  document.getElementById("contador").textContent =
-    `Pregunta ${idx + 1} / ${preguntas.length}`;
 
   const porcentaje = ((idx + 1) / preguntas.length) * 100;
   document.getElementById("progressBar").style.width =
