@@ -958,10 +958,10 @@
           "id": 79,
           "titulo": "「明日、電車に＿＿＿会社へ行きます。」\n¿Cuál verbo completa mejor?",
           "opciones": {
-            "a": "乗ります",
-            "b": "作ります",
-            "c": "待ちます",
-            "d": "読みます"
+            "a": "乗って",
+            "b": "作って",
+            "c": "待って",
+            "d": "読んで"
           },
           "correcta": "a",
           "explicacion": "電車に乗って会社へ行きます = ir al trabajo tomando el tren."
