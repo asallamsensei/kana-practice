@@ -500,8 +500,8 @@
     <div id="detalleFinal"></div>
 
     <div class="finalActions">
-      <button type="button" onclick="reiniciarDesdeFinal()">Repetir esta parte</button>
-      <button class="btnGhost" type="button" onclick="volverAClave()">Elegir otra parte</button>
+      <button type="button" onclick="reiniciarDesdeFinal()">Repetir este test</button>
+      <button class="btnGhost" type="button" onclick="volverAClave()">Hacer otro test</button>
     </div>
   </section>
 
@@ -513,12 +513,14 @@
    ========================================================= */
 
 const CLAVES = {
-  esperanza: 0,     // Parte 1
-  chorrazo: 1,      // Parte 2
-  aguecuca: 2,      // Parte 3
-  "la bestia": 3,   // Parte 4
-  desguance: 4,     // Parte 5
-  guayaba: 5        // Parte 6
+  esperanza: 0,
+  chorrazo: 1,
+  aguecuca: 2,
+  "la bestia": 3,
+  desguance: 4,
+  guayaba: 5,
+
+  supertest: "TODAS"
 };
 
 const MODO_ALEATORIO = true;
@@ -570,8 +572,13 @@ function validarClave(){
   document.getElementById("final").style.display = "none";
   document.getElementById("quiz").style.display = "block";
 
-  document.getElementById("sub").textContent =
-    `Parte ${seccionElegida + 1}: Vocabulario`;
+  if(seccionElegida === "TODAS"){
+    document.getElementById("sub").textContent =
+      "Super Test — Todas las preguntas";
+  }else{
+    document.getElementById("sub").textContent =
+      `Parte ${seccionElegida + 1}: Vocabulario`;
+  }
 
   iniciar();
 }
@@ -589,7 +596,9 @@ function enterClave(e){
    ========================================================= */
 
 function statsKey(){
-  return `n5_test_stats_parte_${seccionElegida + 1}`;
+  return seccionElegida === "TODAS"
+    ? "n5_test_stats_supertest"
+    : `n5_test_stats_parte_${seccionElegida + 1}`;
 }
 
 function cargarStats(){
@@ -654,16 +663,27 @@ async function iniciar(){
       throw new Error("El JSON no tiene 'secciones' (array).");
     }
 
-    if(
-      !data.secciones[seccionElegida] ||
-      !Array.isArray(data.secciones[seccionElegida].preguntas)
-    ){
-      throw new Error(
-        `La Parte ${seccionElegida + 1} no existe o no tiene preguntas.`
-      );
+    if(seccionElegida === "TODAS"){
+    
+      preguntas = data.secciones.flatMap(seccion => {
+        return Array.isArray(seccion.preguntas)
+          ? seccion.preguntas
+          : [];
+      });
+    
+    }else{
+    
+      if(
+        !data.secciones[seccionElegida] ||
+        !Array.isArray(data.secciones[seccionElegida].preguntas)
+      ){
+        throw new Error(
+          `La Parte ${seccionElegida + 1} no existe o no tiene preguntas.`
+        );
+      }
+    
+      preguntas = data.secciones[seccionElegida].preguntas;
     }
-
-    preguntas = data.secciones[seccionElegida].preguntas;
 
     if(preguntas.length === 0){
       throw new Error("La sección elegida está vacía.");
@@ -1012,8 +1032,13 @@ function mostrarFinal(){
   document.getElementById("notaFinal").textContent =
     `${porcentaje}%`;
 
+  const nombreTest =
+    seccionElegida === "TODAS"
+      ? "Super Test — Todas las partes"
+      : `Parte ${seccionElegida + 1}`;
+  
   document.getElementById("detalleFinal").innerHTML =
-    `Parte ${seccionElegida + 1}<br>` +
+    `${nombreTest}<br>` +
     `Aciertos: <strong>${aciertosSesion}</strong> — ` +
     `Errores: <strong>${erroresSesion}</strong><br>` +
     `Total: <strong>${totalSesion}</strong> preguntas`;
