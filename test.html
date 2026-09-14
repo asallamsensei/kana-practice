@@ -796,16 +796,15 @@ function bloquearBotones(){
   });
 }
 
-function pintarRespuesta(letraElegida){
+function pintarRespuesta(){
   ["a","b","c","d"].forEach(letra => {
     const btn = document.getElementById("btn-" + letra);
+
     btn.classList.remove("correcta", "incorrecta");
 
     if(letra === correcta){
       btn.classList.add("correcta");
-    }
-
-    if(letraElegida && letra === letraElegida && letraElegida !== correcta){
+    }else{
       btn.classList.add("incorrecta");
     }
   });
