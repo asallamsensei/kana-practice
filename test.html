@@ -380,39 +380,50 @@
       sans-serif;
   }
 
-  @media (max-width:640px){
-    body{
-      padding:18px 10px 50px;
-    }
-
-    .card{
-      padding:14px;
-    }
-
-    .respuestaBotones{
-      grid-template-columns:repeat(2, 1fr);
-    }
-
-    .opcionBtn{
-      min-height:54px;
-      font-size:20px;
-    }
-
-    .opcionLinea{
-      font-size:17px;
-      grid-template-columns:35px 1fr;
-      padding:10px 11px;
-    }
-
-    .quizTop{
-      justify-content:center;
-      text-align:center;
-    }
-
-    .topActions{
-      justify-content:center;
-    }
+@media (max-width:640px){
+  body{
+    padding:18px 10px 50px;
   }
+
+  .card{
+    padding:14px;
+  }
+
+  .respuestaBotones{
+    grid-template-columns:repeat(2, 1fr);
+  }
+
+  .opcionBtn{
+    min-height:54px;
+    font-size:20px;
+  }
+
+  /* Opciones A, B, C, D una debajo de otra */
+  #opciones{
+    display:flex;
+    flex-direction:column;
+    gap:0;
+    padding:8px 10px;
+  }
+
+  .opcionLinea{
+    display:flex;
+    gap:8px;
+    align-items:flex-start;
+    font-size:17px;
+    line-height:1.3;
+    padding:2px 0;
+  }
+
+  .quizTop{
+    justify-content:center;
+    text-align:center;
+  }
+
+  .topActions{
+    justify-content:center;
+  }
+}
 </style>
 </head>
 
