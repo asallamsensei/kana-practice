@@ -1,0 +1,754 @@
+{
+  "meta": {
+    "titulo": "English Test — 50 preguntas",
+    "total_preguntas": 50,
+    "audio_base": "data/audios/english/",
+    "nota_audio": "Cuando una pregunta tenga audio, el nombre del MP3 se construye a partir del texto inglés exacto: <en>.mp3.",
+    "mezclar_preguntas": true,
+    "mezclar_opciones": true
+  },
+  "secciones": [
+    {
+      "id": "english_test_01",
+      "nombre": "English — Test general",
+      "preguntas": [
+        {
+          "id": 1,
+          "tipo": "situacion",
+          "titulo": "Llegas a un restaurante y quieres pedir una mesa para dos. ¿Qué dirías?",
+          "opciones": {
+            "a": "Hello, a table for two, please.",
+            "b": "Could you send me the file?",
+            "c": "I don't eat meat.",
+            "d": "See you at the meeting."
+          },
+          "correcta": "a",
+          "explicacion": "\"A table for two, please\" es la frase trabajada para pedir una mesa para dos.",
+          "audio": null
+        },
+        {
+          "id": 2,
+          "tipo": "audio_comprension",
+          "titulo": "🎧 Escucha el audio. ¿Qué saludo oyes?",
+          "opciones": {
+            "a": "Buenas noches (despedida)",
+            "b": "Buenos días",
+            "c": "Buenas tardes",
+            "d": "Hasta luego"
+          },
+          "correcta": "b",
+          "explicacion": "\"Good morning\" significa «buenos días».",
+          "audio": {
+            "en": "good morning",
+            "src": "data/audios/english/good morning.mp3"
+          }
+        },
+        {
+          "id": 3,
+          "tipo": "contexto",
+          "titulo": "Tu compañera habla demasiado rápido en una reunión. ¿Cuál es la petición más adecuada?",
+          "opciones": {
+            "a": "Could you speak a little slower?",
+            "b": "Could we have the bill, please?",
+            "c": "Keep the change.",
+            "d": "I'm allergic to peanuts."
+          },
+          "correcta": "a",
+          "explicacion": "La frase pide cortésmente que la otra persona hable un poco más despacio.",
+          "audio": null
+        },
+        {
+          "id": 4,
+          "tipo": "vocabulario",
+          "titulo": "¿Cuál opción expresa «me encargo de eso»?",
+          "opciones": {
+            "a": "I'll get back to you.",
+            "b": "I'll take care of it.",
+            "c": "Let me check that.",
+            "d": "I completely agree."
+          },
+          "correcta": "b",
+          "explicacion": "\"I'll take care of it\" = «yo me encargo de eso».",
+          "audio": null
+        },
+        {
+          "id": 5,
+          "tipo": "pronunciacion",
+          "titulo": "Para producir el sonido TH de think /θ/, ¿qué descripción es la más adecuada?",
+          "opciones": {
+            "a": "La punta de la lengua sale ligeramente entre los dientes o toca suavemente la zona de los dientes superiores y se deja pasar aire sin bloquearlo.",
+            "b": "La lengua nunca se acerca a los dientes y el sonido se hace como una T española fuerte.",
+            "c": "Se cierran completamente los labios y luego se explota el aire.",
+            "d": "Se pega toda la lengua al paladar como para una R fuerte."
+          },
+          "correcta": "a",
+          "explicacion": "El TH de think es /θ/: la punta de la lengua se coloca ligeramente entre los dientes (o muy cerca de los incisivos superiores) y el aire pasa de forma continua. En /θ/ no vibran las cuerdas vocales; en el TH de this /ð/ sí vibran.",
+          "audio": null
+        },
+        {
+          "id": 6,
+          "tipo": "gramatica",
+          "titulo": "Completa: There are ___ signs in this room. (Hay demasiadas señales.)",
+          "opciones": {
+            "a": "too much",
+            "b": "too many",
+            "c": "a little",
+            "d": "much too"
+          },
+          "correcta": "b",
+          "explicacion": "\"Signs\" es contable y plural, por eso se usa \"too many\".",
+          "audio": null
+        },
+        {
+          "id": 7,
+          "tipo": "audio_comprension",
+          "titulo": "🎧 Escucha el audio. ¿Cuál es su significado?",
+          "opciones": {
+            "a": "Cuídate",
+            "b": "Buena suerte",
+            "c": "Mucho gusto",
+            "d": "No te preocupes"
+          },
+          "correcta": "c",
+          "explicacion": "\"Nice to meet you\" se usa al conocer a alguien: «mucho gusto».",
+          "audio": {
+            "en": "nice to meet you",
+            "src": "data/audios/english/nice to meet you.mp3"
+          }
+        },
+        {
+          "id": 8,
+          "tipo": "lectura",
+          "titulo": "Según el texto del eclipse, ¿qué ocurre durante un solar eclipse?",
+          "opciones": {
+            "a": "The Sun blocks the Moon.",
+            "b": "The Moon blocks the light from the Sun.",
+            "c": "The Earth disappears behind the Sun.",
+            "d": "The Moon produces more light."
+          },
+          "correcta": "b",
+          "explicacion": "El material define un eclipse solar como el momento en que la Luna bloquea la luz del Sol.",
+          "audio": null
+        },
+        {
+          "id": 9,
+          "tipo": "lectura",
+          "titulo": "Según el texto del eclipse, ¿qué se recomienda para mirar el Sol de forma segura?",
+          "opciones": {
+            "a": "Regular sunglasses",
+            "b": "A camera",
+            "c": "Special eclipse glasses",
+            "d": "A mirror"
+          },
+          "correcta": "c",
+          "explicacion": "El texto indica que se deben usar gafas especiales para eclipses que bloquean la mayor parte de la luz.",
+          "audio": null
+        },
+        {
+          "id": 10,
+          "tipo": "vocabulario",
+          "titulo": "En el material de Movies, ¿qué significa \"throw away\"?",
+          "opciones": {
+            "a": "Recoger",
+            "b": "Desechar o tirar",
+            "c": "Regresar",
+            "d": "Acelerar"
+          },
+          "correcta": "b",
+          "explicacion": "\"Throw away\" = desechar, tirar; literalmente contiene la idea de lanzar lejos.",
+          "audio": null
+        },
+        {
+          "id": 11,
+          "tipo": "gramatica",
+          "titulo": "¿De qué forma completa es contracción \"won't\"?",
+          "opciones": {
+            "a": "would not",
+            "b": "was not",
+            "c": "will not",
+            "d": "want not"
+          },
+          "correcta": "c",
+          "explicacion": "\"Won't\" es la contracción irregular de \"will not\".",
+          "audio": null
+        },
+        {
+          "id": 12,
+          "tipo": "situacion",
+          "titulo": "Terminaste de comer y quieres pagar con tarjeta. ¿Qué preguntas?",
+          "opciones": {
+            "a": "Can I pay by card?",
+            "b": "Can I get this without onions?",
+            "c": "Could I have a spoon, please?",
+            "d": "Are you ready to order?"
+          },
+          "correcta": "a",
+          "explicacion": "\"Can I pay by card?\" = «¿Puedo pagar con tarjeta?»",
+          "audio": null
+        },
+        {
+          "id": 13,
+          "tipo": "audio_comprension",
+          "titulo": "🎧 Escucha. ¿Qué está pidiendo la persona?",
+          "opciones": {
+            "a": "Que repitan algo",
+            "b": "Ayuda",
+            "c": "Una contraseña",
+            "d": "Una reunión"
+          },
+          "correcta": "b",
+          "explicacion": "\"Could you help me?\" es una petición cortés de ayuda.",
+          "audio": {
+            "en": "could you help me",
+            "src": "data/audios/english/could you help me.mp3"
+          }
+        },
+        {
+          "id": 14,
+          "tipo": "posesivos",
+          "titulo": "Completa correctamente: This is my book. That book is ___.",
+          "opciones": {
+            "a": "your",
+            "b": "yours",
+            "c": "you",
+            "d": "you're"
+          },
+          "correcta": "b",
+          "explicacion": "\"Yours\" es pronombre posesivo y puede sustituir al sustantivo. \"Your\" necesita acompañar a un sustantivo.",
+          "audio": null
+        },
+        {
+          "id": 15,
+          "tipo": "expresion",
+          "titulo": "En Homewrecker, \"call your bluff\" transmite la idea de…",
+          "opciones": {
+            "a": "Aceptar una mentira sin cuestionarla",
+            "b": "Desafiar a alguien a demostrar que no está fingiendo",
+            "c": "Llamar por teléfono a un amigo",
+            "d": "Cambiar de tema rápidamente"
+          },
+          "correcta": "b",
+          "explicacion": "\"To call someone's bluff\" significa desafiar a alguien a demostrar que su amenaza o afirmación no es fingida.",
+          "audio": null
+        },
+        {
+          "id": 16,
+          "tipo": "expresion",
+          "titulo": "¿Qué significa \"I'm a goner\" en el contexto estudiado?",
+          "opciones": {
+            "a": "Estoy perdido/acabado",
+            "b": "Estoy de viaje",
+            "c": "Soy ganador",
+            "d": "Estoy dormido"
+          },
+          "correcta": "a",
+          "explicacion": "\"I'm a goner\" expresa que alguien está perdido, acabado o condenado.",
+          "audio": null
+        },
+        {
+          "id": 17,
+          "tipo": "audio_comprension",
+          "titulo": "🎧 Escucha el audio. ¿Qué pregunta oyes?",
+          "opciones": {
+            "a": "¿Cuántos años tienes?",
+            "b": "¿De dónde eres?",
+            "c": "¿A qué te dedicas?",
+            "d": "¿Cómo te llamas?"
+          },
+          "correcta": "b",
+          "explicacion": "\"Where are you from?\" pregunta por el lugar de origen.",
+          "audio": {
+            "en": "where are you from",
+            "src": "data/audios/english/where are you from.mp3"
+          }
+        },
+        {
+          "id": 18,
+          "tipo": "pronunciacion",
+          "titulo": "Al hablar inglés natural, ¿qué idea es más correcta sobre las letras y las sílabas comparado con el español?",
+          "opciones": {
+            "a": "Cada letra debe pronunciarse con la misma fuerza y duración.",
+            "b": "Las sílabas no acentuadas suelen reducirse y algunos sonidos se debilitan; no se articula cada letra con la misma claridad o fuerza.",
+            "c": "Las consonantes siempre desaparecen.",
+            "d": "Todas las palabras deben separarse con una pausa."
+          },
+          "correcta": "b",
+          "explicacion": "En inglés el ritmo depende mucho del acento. Las sílabas tónicas destacan y muchas sílabas átonas se reducen. Por eso intentar «marcar» cada letra o sílaba como si todas pesaran igual suele producir una pronunciación poco natural.",
+          "audio": null
+        },
+        {
+          "id": 19,
+          "tipo": "phrasal_verb",
+          "titulo": "¿Cuál opción significa «continuar / pasar al siguiente» en el material The king still has one more move?",
+          "opciones": {
+            "a": "move on",
+            "b": "come back",
+            "c": "call back",
+            "d": "look at"
+          },
+          "correcta": "a",
+          "explicacion": "\"Moved on\" aparece con el sentido de «continuó / pasó al siguiente».",
+          "audio": null
+        },
+        {
+          "id": 20,
+          "tipo": "situacion",
+          "titulo": "En el trabajo no entendiste lo que alguien dijo. ¿Qué frase encaja mejor?",
+          "opciones": {
+            "a": "I didn't catch that.",
+            "b": "Everything tastes great.",
+            "c": "Keep the change.",
+            "d": "I'm in awe."
+          },
+          "correcta": "a",
+          "explicacion": "\"I didn't catch that\" significa que no alcanzaste a entender lo que se dijo.",
+          "audio": null
+        },
+        {
+          "id": 21,
+          "tipo": "audio_comprension",
+          "titulo": "🎧 Escucha. ¿Qué despedida oyes?",
+          "opciones": {
+            "a": "Nos vemos mañana",
+            "b": "Cuídate",
+            "c": "Bienvenido de nuevo",
+            "d": "Buenas tardes"
+          },
+          "correcta": "b",
+          "explicacion": "\"Take care\" se usa como despedida y significa «cuídate».",
+          "audio": {
+            "en": "take care",
+            "src": "data/audios/english/take care.mp3"
+          }
+        },
+        {
+          "id": 22,
+          "tipo": "vocabulario",
+          "titulo": "¿Cuál palabra corresponde a «compañero de trabajo»?",
+          "opciones": {
+            "a": "coworker",
+            "b": "customer",
+            "c": "neighbor",
+            "d": "teacher"
+          },
+          "correcta": "a",
+          "explicacion": "\"Coworker\" = compañero de trabajo.",
+          "audio": null
+        },
+        {
+          "id": 23,
+          "tipo": "contexto",
+          "titulo": "Tu proyecto va retrasado respecto al plan. ¿Qué frase describe la situación?",
+          "opciones": {
+            "a": "We're on schedule.",
+            "b": "We're behind schedule.",
+            "c": "It's crystal clear.",
+            "d": "We're ready to order."
+          },
+          "correcta": "b",
+          "explicacion": "\"We're behind schedule\" = «vamos retrasados».",
+          "audio": null
+        },
+        {
+          "id": 24,
+          "tipo": "pronunciacion",
+          "titulo": "¿Qué es el schwa /ə/ y por qué es tan importante en inglés?",
+          "opciones": {
+            "a": "Es una consonante que solo aparece al final de palabra.",
+            "b": "Es una vocal reducida, normalmente átona y central; distintas letras vocálicas pueden sonar /ə/ según la palabra. Es clave para el ritmo, la reducción de sílabas no acentuadas y la comprensión del inglés natural.",
+            "c": "Es el nombre inglés de la letra A y siempre suena igual.",
+            "d": "Es una regla que obliga a pronunciar todas las vocales como en español."
+          },
+          "correcta": "b",
+          "explicacion": "El schwa /ə/ es el sonido vocálico reducido más común del inglés. Suele aparecer en sílabas sin acento y puede corresponder a distintas letras escritas. No significa que una vocal «pueda sonar de cualquier manera»: la pronunciación depende de cada palabra y de su patrón de acento. Dominarlo ayuda a producir y reconocer el ritmo y las reducciones del habla natural.",
+          "audio": null
+        },
+        {
+          "id": 25,
+          "tipo": "gramatica",
+          "titulo": "¿Cuál oración usa correctamente \"a thousand\"?",
+          "opciones": {
+            "a": "I saw thousand faces.",
+            "b": "I saw a thousand faces.",
+            "c": "I saw a thousands faces.",
+            "d": "I saw thousand of face."
+          },
+          "correcta": "b",
+          "explicacion": "En el material se señala que \"thousand\" normalmente aparece con \"a\" o \"one\": \"a thousand\" / \"one thousand\".",
+          "audio": null
+        },
+        {
+          "id": 26,
+          "tipo": "audio_comprension",
+          "titulo": "🎧 Escucha. ¿Cuál es la traducción más adecuada?",
+          "opciones": {
+            "a": "No entiendo",
+            "b": "Entiendo",
+            "c": "No lo creo",
+            "d": "Estoy de acuerdo"
+          },
+          "correcta": "a",
+          "explicacion": "\"I don't understand\" = «no entiendo».",
+          "audio": {
+            "en": "I don't understand",
+            "src": "data/audios/english/I don't understand.mp3"
+          }
+        },
+        {
+          "id": 27,
+          "tipo": "situacion",
+          "titulo": "Quieres que te traigan la cuenta en un restaurante. ¿Qué opción eliges?",
+          "opciones": {
+            "a": "Could we have the bill, please?",
+            "b": "Could we have some napkins?",
+            "c": "Can I see the menu, please?",
+            "d": "What do you recommend?"
+          },
+          "correcta": "a",
+          "explicacion": "\"Could we have the bill, please?\" = «¿Nos puede traer la cuenta, por favor?»",
+          "audio": null
+        },
+        {
+          "id": 28,
+          "tipo": "expresion",
+          "titulo": "En Stray Cat Woman, si alguien \"calls the shots\", esa persona…",
+          "opciones": {
+            "a": "manda o toma las decisiones",
+            "b": "pierde el control",
+            "c": "habla en voz baja",
+            "d": "pide permiso"
+          },
+          "correcta": "a",
+          "explicacion": "\"You call the shots\" es una expresión idiomática que significa que tú mandas o decides.",
+          "audio": null
+        },
+        {
+          "id": 29,
+          "tipo": "vocabulario_contextual",
+          "titulo": "En Stray Cat Woman, \"sass\" se acerca más a…",
+          "opciones": {
+            "a": "timidez extrema",
+            "b": "descaro o actitud atrevida y segura",
+            "c": "tristeza",
+            "d": "obediencia"
+          },
+          "correcta": "b",
+          "explicacion": "\"Sass\" se refiere a una actitud atrevida, irreverente y segura; en el material se aproxima a «descaro/desparpajo».",
+          "audio": null
+        },
+        {
+          "id": 30,
+          "tipo": "audio_comprension",
+          "titulo": "🎧 Escucha. ¿Qué palabra oyes?",
+          "opciones": {
+            "a": "contraseña",
+            "b": "pantalla",
+            "c": "teclado",
+            "d": "sitio web"
+          },
+          "correcta": "a",
+          "explicacion": "\"Password\" = contraseña.",
+          "audio": {
+            "en": "password",
+            "src": "data/audios/english/password.mp3"
+          }
+        },
+        {
+          "id": 31,
+          "tipo": "lectura",
+          "titulo": "En el texto del eclipse, ¿por qué es peligroso mirar directamente al Sol?",
+          "opciones": {
+            "a": "Because it can damage your eyes.",
+            "b": "Because it makes the eclipse longer.",
+            "c": "Because the Moon becomes invisible.",
+            "d": "Because it changes the weather."
+          },
+          "correcta": "a",
+          "explicacion": "El texto dice que mirar directamente al Sol puede dañar los ojos, incluso durante un eclipse.",
+          "audio": null
+        },
+        {
+          "id": 32,
+          "tipo": "gramatica_contextual",
+          "titulo": "Elige la opción correcta: I ___ be there in five minutes.",
+          "opciones": {
+            "a": "will",
+            "b": "am",
+            "c": "did",
+            "d": "have"
+          },
+          "correcta": "a",
+          "explicacion": "La frase trabajada es \"I'll be there in five minutes\"; \"I'll\" = \"I will\".",
+          "audio": null
+        },
+        {
+          "id": 33,
+          "tipo": "audio_comprension",
+          "titulo": "🎧 Escucha. ¿Qué significa la expresión?",
+          "opciones": {
+            "a": "Tal vez",
+            "b": "Por supuesto",
+            "c": "No hay problema",
+            "d": "Un momento"
+          },
+          "correcta": "b",
+          "explicacion": "\"Of course\" = «por supuesto».",
+          "audio": {
+            "en": "of course",
+            "src": "data/audios/english/of course.mp3"
+          }
+        },
+        {
+          "id": 34,
+          "tipo": "cancion",
+          "titulo": "En Life Goes On, \"I'ma\" es una forma muy informal de…",
+          "opciones": {
+            "a": "I am a",
+            "b": "I'm going to",
+            "c": "I might",
+            "d": "I have"
+          },
+          "correcta": "b",
+          "explicacion": "\"I'ma\" es una reducción muy informal de \"I'm going to\".",
+          "audio": null
+        },
+        {
+          "id": 35,
+          "tipo": "cancion",
+          "titulo": "¿Qué idea expresa \"double-faced\" en el material Life Goes On?",
+          "opciones": {
+            "a": "Una persona hipócrita o falsa",
+            "b": "Una persona muy tímida",
+            "c": "Una persona famosa",
+            "d": "Una persona bilingüe"
+          },
+          "correcta": "a",
+          "explicacion": "\"Double-faced\" transmite la idea de una persona «de dos caras»: hipócrita o falsa.",
+          "audio": null
+        },
+        {
+          "id": 36,
+          "tipo": "vocabulario",
+          "titulo": "¿Cuál es la mejor traducción de \"deadline\" en contexto laboral?",
+          "opciones": {
+            "a": "descanso",
+            "b": "fecha límite",
+            "c": "salario",
+            "d": "reunión"
+          },
+          "correcta": "b",
+          "explicacion": "En la frase \"The deadline is tomorrow\", \"deadline\" es la fecha límite.",
+          "audio": null
+        },
+        {
+          "id": 37,
+          "tipo": "situacion",
+          "titulo": "No comes carne y necesitas avisarlo en un restaurante. ¿Qué dices?",
+          "opciones": {
+            "a": "I don't eat meat.",
+            "b": "Everything tastes great.",
+            "c": "I'll pay in cash.",
+            "d": "Keep the change."
+          },
+          "correcta": "a",
+          "explicacion": "\"I don't eat meat\" = «no como carne».",
+          "audio": null
+        },
+        {
+          "id": 38,
+          "tipo": "audio_comprension",
+          "titulo": "🎧 Escucha. ¿Qué pregunta oyes?",
+          "opciones": {
+            "a": "¿Puedes repetir eso?",
+            "b": "¿Puedes esperar?",
+            "c": "¿Puedes pagar?",
+            "d": "¿Puedes venir?"
+          },
+          "correcta": "a",
+          "explicacion": "\"Can you repeat that?\" = «¿puedes repetir eso?»",
+          "audio": {
+            "en": "can you repeat that",
+            "src": "data/audios/english/can you repeat that.mp3"
+          }
+        },
+        {
+          "id": 39,
+          "tipo": "cancion",
+          "titulo": "En Movies, \"play out our last scene\" presenta la relación como…",
+          "opciones": {
+            "a": "una última escena que se desarrolla hasta el final",
+            "b": "un juego deportivo",
+            "c": "una canción que empieza de nuevo",
+            "d": "una conversación sin final"
+          },
+          "correcta": "a",
+          "explicacion": "\"Play out\" significa representar o desarrollar una situación hasta su final; aquí usa la metáfora de la última escena de una película.",
+          "audio": null
+        },
+        {
+          "id": 40,
+          "tipo": "vocabulario",
+          "titulo": "¿Qué significa \"it's crystal clear\"?",
+          "opciones": {
+            "a": "Está muy frío",
+            "b": "Está clarísimo / es muy evidente",
+            "c": "Está hecho de cristal",
+            "d": "Está vacío"
+          },
+          "correcta": "b",
+          "explicacion": "\"It's crystal clear\" se entiende como «está clarísimo» o «es muy evidente».",
+          "audio": null
+        },
+        {
+          "id": 41,
+          "tipo": "audio_comprension",
+          "titulo": "🎧 Escucha. ¿Qué significa la palabra?",
+          "opciones": {
+            "a": "almuerzo",
+            "b": "desayuno",
+            "c": "cena",
+            "d": "merienda"
+          },
+          "correcta": "b",
+          "explicacion": "\"Breakfast\" = desayuno.",
+          "audio": {
+            "en": "breakfast",
+            "src": "data/audios/english/breakfast.mp3"
+          }
+        },
+        {
+          "id": 42,
+          "tipo": "vocabulario",
+          "titulo": "Elige la pareja correcta.",
+          "opciones": {
+            "a": "pillow = almohada",
+            "b": "drawer = espejo",
+            "c": "towel = escalera",
+            "d": "closet = patio"
+          },
+          "correcta": "a",
+          "explicacion": "\"Pillow\" = almohada. \"Drawer\" = cajón, \"towel\" = toalla y \"closet\" = armario.",
+          "audio": null
+        },
+        {
+          "id": 43,
+          "tipo": "situacion",
+          "titulo": "Tu jefe te pide una actualización, pero primero necesitas revisar algo. ¿Qué frase encaja?",
+          "opciones": {
+            "a": "Let me check that.",
+            "b": "Have a nice evening!",
+            "c": "You call the shots.",
+            "d": "Taste the rain."
+          },
+          "correcta": "a",
+          "explicacion": "\"Let me check that\" = «déjame revisar eso».",
+          "audio": null
+        },
+        {
+          "id": 44,
+          "tipo": "audio_comprension",
+          "titulo": "🎧 Escucha. ¿Qué significa lo que oyes?",
+          "opciones": {
+            "a": "Que tengas un excelente día",
+            "b": "Duerme bien",
+            "c": "Nos vemos pronto",
+            "d": "Buena suerte"
+          },
+          "correcta": "d",
+          "explicacion": "\"Good luck\" = «buena suerte».",
+          "audio": {
+            "en": "good luck",
+            "src": "data/audios/english/good luck.mp3"
+          }
+        },
+        {
+          "id": 45,
+          "tipo": "cancion",
+          "titulo": "En Homewrecker, ¿qué diferencia hay entre \"your\" y \"yours\"?",
+          "opciones": {
+            "a": "\"Your\" acompaña a un sustantivo; \"yours\" puede sustituirlo.",
+            "b": "\"Yours\" acompaña siempre a un sustantivo; \"your\" nunca.",
+            "c": "No hay ninguna diferencia.",
+            "d": "\"Your\" es un verbo y \"yours\" un adjetivo."
+          },
+          "correcta": "a",
+          "explicacion": "\"Your\" es determinante posesivo: \"your own man\". \"Yours\" es pronombre posesivo y sustituye al sustantivo.",
+          "audio": null
+        },
+        {
+          "id": 46,
+          "tipo": "comprension",
+          "titulo": "¿Cuál frase indica que el trabajo va según lo previsto?",
+          "opciones": {
+            "a": "We're behind schedule.",
+            "b": "We're on schedule.",
+            "c": "I'm running late.",
+            "d": "The deadline is tomorrow."
+          },
+          "correcta": "b",
+          "explicacion": "\"We're on schedule\" = «vamos según lo previsto».",
+          "audio": null
+        },
+        {
+          "id": 47,
+          "tipo": "audio_comprension",
+          "titulo": "🎧 Escucha. ¿Cuál traducción corresponde?",
+          "opciones": {
+            "a": "¿Cómo estás?",
+            "b": "¿Cómo te llamas?",
+            "c": "¿A qué te dedicas?",
+            "d": "¿Cuántos años tienes?"
+          },
+          "correcta": "d",
+          "explicacion": "\"How old are you?\" = «¿cuántos años tienes?»",
+          "audio": {
+            "en": "how old are you",
+            "src": "data/audios/english/how old are you.mp3"
+          }
+        },
+        {
+          "id": 48,
+          "tipo": "vocabulario_contextual",
+          "titulo": "En Stray Cat Woman, \"reckless\" puede expresar la idea de…",
+          "opciones": {
+            "a": "prudente y cuidadoso",
+            "b": "osado, temerario o imprudente",
+            "c": "silencioso",
+            "d": "aburrido"
+          },
+          "correcta": "b",
+          "explicacion": "El material señala que \"reckless\" puede significar osado, temerario, imprudente o arriesgado.",
+          "audio": null
+        },
+        {
+          "id": 49,
+          "tipo": "lectura",
+          "titulo": "Completa la idea del texto: Total eclipses are ___ events.",
+          "opciones": {
+            "a": "common",
+            "b": "rare",
+            "c": "daily",
+            "d": "impossible"
+          },
+          "correcta": "b",
+          "explicacion": "El texto dice: \"Total eclipses are rare events\"; \"rare\" = raro/poco frecuente.",
+          "audio": null
+        },
+        {
+          "id": 50,
+          "tipo": "integracion",
+          "titulo": "Estás en una reunión, no entendiste una frase y quieres pedir que la repitan cortésmente. ¿Cuál es la mejor opción de lo estudiado?",
+          "opciones": {
+            "a": "Could you repeat that, please?",
+            "b": "Keep the change.",
+            "c": "Find your own.",
+            "d": "I'll have the chicken, please."
+          },
+          "correcta": "a",
+          "explicacion": "\"Could you repeat that, please?\" es una petición cortés y apropiada para pedir repetición.",
+          "audio": null
+        }
+      ]
+    }
+  ]
+}
