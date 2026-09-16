@@ -52,20 +52,6 @@ header{
   margin:4px auto 16px;
 }
 
-.brand{
-  display:inline-flex;
-  gap:9px;
-  align-items:center;
-  padding:7px 12px;
-  border:1px solid var(--border);
-  background:rgba(255,255,255,.055);
-  border-radius:999px;
-  color:var(--muted);
-  font-size:13px;
-  font-weight:800;
-  letter-spacing:.3px;
-}
-
 h1{
   margin:12px 0 4px;
   font-size:clamp(28px,5vw,44px);
@@ -135,39 +121,14 @@ h1{
 }
   
 .topbar{
-  padding:14px 16px;
-  margin-bottom:12px;
-}
-
-.toprow{
-  display:flex;
-  justify-content:space-between;
-  gap:12px;
-  align-items:center;
-  flex-wrap:wrap;
-}
-
-.counter{
-  font-weight:900;
-  letter-spacing:.2px;
-}
-
-.typePill{
-  color:#e8e2ff;
-  background:rgba(124,92,255,.16);
-  border:1px solid rgba(154,131,255,.35);
-  border-radius:999px;
-  padding:6px 10px;
-  font-size:12px;
-  font-weight:900;
-  text-transform:uppercase;
-  letter-spacing:.65px;
+  padding:8px 12px;
+  margin-bottom:10px;
 }
 
 .progressTrack{
   width:100%;
   height:10px;
-  margin-top:12px;
+  margin-top:0;
   background:rgba(255,255,255,.07);
   border:1px solid rgba(255,255,255,.08);
   border-radius:999px;
@@ -480,9 +441,8 @@ kbd{
 <body>
 <div class="wrap">
   <header>
-    <div class="brand">🎓 ASALLAM SENSEI · ENGLISH</div>
-    <h1>English Super Test</h1>
-    <p class="subtitle">50 preguntas · vocabulario · comprensión · contexto · pronunciación · audio</p>
+    <h1>English Super Test ★ Asallam Sensei</h1>
+    <p class="subtitle" id="nombreEstudiante"></p>
   </header>
 
   <section class="card" id="bloqueClave">
@@ -509,10 +469,6 @@ kbd{
   </section>
   
   <section class="card topbar" id="topbar" style="display:none">
-    <div class="toprow">
-      <div class="counter" id="contador">Cargando test…</div>
-      <div class="typePill" id="tipoPregunta">ENGLISH</div>
-    </div>
     <div class="progressTrack" aria-label="Progreso del test">
       <div id="progressBar"></div>
     </div>
@@ -571,7 +527,8 @@ kbd{
    CONFIG
    ========================================================= */
 const CLAVE_TEST = "chisme";
-
+const ESTUDIANTE = "Marlene";
+  
 const JSON_URL = "data/preguntas_english_test_50.json";
 const AUDIO_BASE = "data/audios/english/";
 const MEZCLAR_PREGUNTAS = true;
@@ -601,8 +558,6 @@ const quiz = $("quiz");
 const final = $("final");
 const enunciado = $("enunciado");
 const opciones = $("opciones");
-const contador = $("contador");
-const tipoPregunta = $("tipoPregunta");
 const progressBar = $("progressBar");
 const feedback = $("feedback");
 const resultado = $("resultado");
@@ -769,10 +724,6 @@ function actualizarStats(){
   $("precision").textContent = precisionPct() + "%";
 }
 
-function normalizarTipo(tipo){
-  return String(tipo || "pregunta").replaceAll("_"," ");
-}
-
 /* =========================================================
    CARGA
    ========================================================= */
@@ -831,9 +782,12 @@ function validarClave(){
   }
 
   error.textContent = "";
-
+  
   document.getElementById("bloqueClave").style.display = "none";
-
+  
+  document.getElementById("nombreEstudiante").textContent =
+    `Estudiante ★ ${ESTUDIANTE} ★`;
+  
   iniciarRonda();
 }
 
@@ -885,8 +839,6 @@ function cargarPregunta(){
 
   preguntaActual = preguntas[idx];
 
-  contador.textContent = `Pregunta ${idx + 1} de ${preguntas.length}`;
-  tipoPregunta.textContent = normalizarTipo(preguntaActual.tipo);
   enunciado.textContent = preguntaActual.titulo || "Pregunta";
 
   const pct = (idx / preguntas.length) * 100;
