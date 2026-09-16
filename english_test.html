@@ -88,6 +88,52 @@ h1{
   -webkit-backdrop-filter:blur(12px);
 }
 
+#bloqueClave{
+  width:min(620px,100%);
+  margin:0 auto;
+  padding:28px 20px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:14px;
+  text-align:center;
+}
+
+.claveTitulo{
+  font-size:24px;
+  font-weight:950;
+}
+
+.claveAyuda{
+  color:var(--muted);
+  font-size:15px;
+}
+
+#claveInput{
+  width:min(340px,100%);
+  font-size:20px;
+  color:var(--text);
+  background:rgba(0,0,0,.22);
+  border:1px solid var(--border);
+  border-radius:14px;
+  padding:13px 15px;
+  text-align:center;
+  outline:none;
+}
+
+#claveInput:focus{
+  border-color:rgba(124,92,255,.85);
+  box-shadow:
+    0 0 0 4px rgba(124,92,255,.16),
+    0 0 24px rgba(124,92,255,.15);
+}
+
+#errorClave{
+  min-height:24px;
+  color:#ff8e8e;
+  font-weight:850;
+}
+  
 .topbar{
   padding:14px 16px;
   margin-bottom:12px;
@@ -439,7 +485,30 @@ kbd{
     <p class="subtitle">50 preguntas · vocabulario · comprensión · contexto · pronunciación · audio</p>
   </header>
 
-  <section class="card topbar" id="topbar">
+  <section class="card" id="bloqueClave">
+    <div class="claveTitulo">🔐 Entrar al test</div>
+  
+    <div class="claveAyuda">
+      Ingresa la clave para comenzar.
+    </div>
+  
+    <input
+      id="claveInput"
+      type="password"
+      placeholder="Clave..."
+      autocomplete="off"
+      autocapitalize="off"
+      spellcheck="false"
+    >
+  
+    <button class="btn" type="button" onclick="validarClave()">
+      Comenzar
+    </button>
+  
+    <div id="errorClave"></div>
+  </section>
+  
+  <section class="card topbar" id="topbar" style="display:none">
     <div class="toprow">
       <div class="counter" id="contador">Cargando test…</div>
       <div class="typePill" id="tipoPregunta">ENGLISH</div>
@@ -449,7 +518,7 @@ kbd{
     </div>
   </section>
 
-  <main class="card quiz" id="quiz">
+  <main class="card quiz" id="quiz" style="display:none">
     <div id="enunciado">Cargando preguntas…</div>
 
     <div class="audioWrap" id="audioWrap">
@@ -501,6 +570,8 @@ kbd{
 /* =========================================================
    CONFIG
    ========================================================= */
+const CLAVE_TEST = "chisme";
+
 const JSON_URL = "data/preguntas_english_test_50.json";
 const AUDIO_BASE = "data/audios/english/";
 const MEZCLAR_PREGUNTAS = true;
@@ -723,7 +794,6 @@ async function cargarJSON(){
       throw new Error("No se encontraron preguntas en el JSON.");
     }
 
-    iniciarRonda();
   }catch(e){
     enunciado.textContent = "No se pudo iniciar el test.";
     opciones.innerHTML = "";
@@ -736,6 +806,44 @@ async function cargarJSON(){
   }
 }
 
+function enfocarClave(){
+  setTimeout(() => {
+    const input = document.getElementById("claveInput");
+    input.focus();
+    input.select();
+  }, 0);
+}
+
+function validarClave(){
+  const input = document.getElementById("claveInput");
+  const error = document.getElementById("errorClave");
+
+  const claveEscrita = input.value.trim().toLowerCase();
+
+  if(claveEscrita !== CLAVE_TEST.toLowerCase()){
+    error.textContent = "Clave incorrecta.";
+    input.value = "";
+
+    sonidoIncorrecto();
+
+    enfocarClave();
+    return;
+  }
+
+  error.textContent = "";
+
+  document.getElementById("bloqueClave").style.display = "none";
+
+  iniciarRonda();
+}
+
+document.getElementById("claveInput").addEventListener("keydown", e => {
+  if(e.key === "Enter"){
+    e.preventDefault();
+    validarClave();
+  }
+});
+  
 function iniciarRonda(){
   detenerAudio();
 
@@ -954,6 +1062,7 @@ document.addEventListener("keydown", e => {
    START
    ========================================================= */
 cargarJSON();
+enfocarClave();
 </script>
 </body>
 </html>
