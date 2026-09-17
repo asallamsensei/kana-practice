@@ -4,13 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Vocabulario Inglés - Español</title>
+<title>Vocabulario Tetris</title>
 
 <style>
-
-/* =========================================================
-   GENERAL
-   ========================================================= */
 
 * {
     box-sizing: border-box;
@@ -24,16 +20,14 @@ body {
 
 body {
     background: #ddd;
-    color: #000;
     font-family: Arial, Helvetica, sans-serif;
+    color: #000;
 }
 
 
-/* =========================================================
-   HOJA TAMAÑO CARTA
-
-   Carta = 8.5 × 11 pulgadas
-   ========================================================= */
+/* =====================================================
+   HOJA CARTA
+   ===================================================== */
 
 .page {
 
@@ -42,9 +36,11 @@ body {
 
     margin: 15px auto;
 
-    padding: 0.25in;
+    padding: 0.20in;
 
     background: white;
+
+    position: relative;
 
     overflow: hidden;
 
@@ -52,91 +48,46 @@ body {
 }
 
 
-/* =========================================================
-   GRID / IMÁN SIMPLE
-   ========================================================= */
+/* =====================================================
+   ÁREA INTERIOR
+   ===================================================== */
 
-.grid {
+.area {
+
+    position: relative;
 
     width: 100%;
     height: 100%;
-
-    display: grid;
-
-    /*
-       Columnas pequeñas para darle libertad
-       al sistema de acomodación.
-    */
-
-    grid-template-columns:
-        repeat(12, 1fr);
-
-    /*
-       Dense = rellenar huecos disponibles.
-    */
-
-    grid-auto-flow: dense;
-
-    grid-auto-rows: min-content;
-
-    gap: 2px;
-
-    align-content: start;
-    align-items: start;
 }
 
 
-/* =========================================================
-   TARJETA
-   ========================================================= */
+/* =====================================================
+   TARJETAS
+   ===================================================== */
 
 .card {
+
+    position: absolute;
+
+    width: max-content;
 
     background: white;
     color: black;
 
-    border: 1px solid #888;
+    border: 1px solid #777;
 
     font-size: 10px;
-    line-height: 1.12;
+    line-height: 1.1;
+
+    white-space: nowrap;
 
     break-inside: avoid;
-    page-break-inside: avoid;
-
-    /*
-       Por defecto ocupa 2 columnas.
-    */
-
-    grid-column: span 2;
 }
 
 
-/* =========================================================
-   TAMAÑOS
-
-   El JS asignará estas clases según longitud.
-   ========================================================= */
-
-.card.small {
-    grid-column: span 2;
-}
-
-.card.medium {
-    grid-column: span 3;
-}
-
-.card.large {
-    grid-column: span 4;
-}
-
-.card.xlarge {
-    grid-column: span 5;
-}
-
-
-/* =========================================================
+/* =====================================================
    INGLÉS
-   ========================================================= */
+   ===================================================== */
 
 .en {
 
@@ -144,27 +95,40 @@ body {
 
     font-weight: bold;
 
-    border-bottom: 1px solid #ccc;
-
-    overflow-wrap: break-word;
+    border-bottom: 1px solid #bbb;
 }
 
 
-/* =========================================================
+/* =====================================================
    ESPAÑOL
-   ========================================================= */
+   ===================================================== */
 
 .es {
 
     padding: 2px 4px;
-
-    overflow-wrap: break-word;
 }
 
 
-/* =========================================================
+/* =====================================================
+   ZONA TEMPORAL DE MEDICIÓN
+   ===================================================== */
+
+#medidor {
+
+    position: absolute;
+
+    left: -100000px;
+    top: 0;
+
+    visibility: hidden;
+
+    width: auto;
+}
+
+
+/* =====================================================
    IMPRESIÓN
-   ========================================================= */
+   ===================================================== */
 
 @page {
 
@@ -188,7 +152,6 @@ body {
         height: 11in;
 
         page-break-after: always;
-        break-after: page;
     }
 
 }
@@ -201,24 +164,40 @@ body {
 
 <div id="documento"></div>
 
+<div id="medidor"></div>
+
 
 <script>
 
-/* =========================================================
+/* =====================================================
    CONFIGURACIÓN
+   ===================================================== */
 
-   Cada página recibe una cantidad aproximada de "peso".
+/*
+   Separación entre tarjetas.
+*/
 
-   Si alguna página se desborda, baja PAGE_CAPACITY.
-   Si queda demasiado vacía, súbelo.
-   ========================================================= */
-
-const PAGE_CAPACITY = 1200;
+const GAP = 2;
 
 
-/* =========================================================
+/*
+   Resolución horizontal del Tetris.
+
+   4 significa que pensamos la página
+   en columnas virtuales de 4 píxeles.
+
+   Más pequeño = más preciso.
+   Más grande = más rápido.
+
+   4 es un buen equilibrio.
+*/
+
+const STEP = 4;
+
+
+/* =====================================================
    ESCAPAR HTML
-   ========================================================= */
+   ===================================================== */
 
 function escapeHTML(text = "") {
 
@@ -232,11 +211,11 @@ function escapeHTML(text = "") {
 }
 
 
-/* =========================================================
+/* =====================================================
    ESPAÑOL
 
-   Cada ; produce salto de línea.
-   ========================================================= */
+   ; = salto de línea
+   ===================================================== */
 
 function formatoEspanol(text = "") {
 
@@ -245,118 +224,22 @@ function formatoEspanol(text = "") {
 }
 
 
-/* =========================================================
-   ANALIZAR TARJETA
+/* =====================================================
+   HTML DE UNA TARJETA
+   ===================================================== */
 
-   No medimos el DOM.
-
-   Solamente analizamos el texto.
-   ========================================================= */
-
-function analizar(item) {
-
-    const en =
-        String(item.en || "").trim();
-
-    const es =
-        String(item.es || "").trim();
-
-    const partes =
-        es.split(";");
-
-
-    const lineaMasLarga =
-        Math.max(
-
-            en.length,
-
-            ...partes.map(
-                x => x.trim().length
-            )
-
-        );
-
-
-    const lineas =
-        1 + partes.length;
-
-
-    /* -----------------------------------------------------
-       ANCHO
-       ----------------------------------------------------- */
-
-    let size;
-
-
-    if (lineaMasLarga <= 11) {
-
-        size = "small";
-
-    }
-
-    else if (lineaMasLarga <= 19) {
-
-        size = "medium";
-
-    }
-
-    else if (lineaMasLarga <= 30) {
-
-        size = "large";
-
-    }
-
-    else {
-
-        size = "xlarge";
-
-    }
-
-
-    /* -----------------------------------------------------
-       PESO VERTICAL APROXIMADO
-       ----------------------------------------------------- */
-
-    const peso =
-
-        18 +
-
-        (lineas * 10) +
-
-        Math.ceil(
-            lineaMasLarga / 18
-        ) * 5;
-
-
-    return {
-
-        item,
-        size,
-        peso,
-        lineaMasLarga,
-        lineas
-
-    };
-
-}
-
-
-/* =========================================================
-   CREAR TARJETA
-   ========================================================= */
-
-function crearCard(obj) {
+function tarjetaHTML(item) {
 
     return `
 
-        <div class="card ${obj.size}">
+        <div class="card">
 
             <div class="en">
-                ${escapeHTML(obj.item.en)}
+                ${escapeHTML(item.en || "")}
             </div>
 
             <div class="es">
-                ${formatoEspanol(obj.item.es)}
+                ${formatoEspanol(item.es || "")}
             </div>
 
         </div>
@@ -366,94 +249,385 @@ function crearCard(obj) {
 }
 
 
-/* =========================================================
-   DISTRIBUIR EN PÁGINAS
+/* =====================================================
+   MEDIR TODAS LAS TARJETAS
 
-   Como NO importa el orden:
+   IMPORTANTE:
 
-   1. Grandes primero.
-   2. Vamos llenando cada hoja.
-   3. Las pequeñas quedan después y CSS Dense
-      puede utilizarlas para rellenar huecos.
-   ========================================================= */
+   Esta es la ÚNICA vez que medimos el DOM.
+   ===================================================== */
 
-function crearPaginas(items) {
+function medir(items) {
 
-    /* -----------------------------------------------------
-       Ordenar de grandes a pequeñas
-       ----------------------------------------------------- */
+    const medidor =
+        document.getElementById("medidor");
+
+
+    /*
+       Crear todas de una sola vez.
+    */
+
+    medidor.innerHTML =
+        items
+            .map(tarjetaHTML)
+            .join("");
+
+
+    const cards =
+        [...medidor.querySelectorAll(".card")];
+
+
+    const resultado =
+        cards.map((card, index) => ({
+
+            item:
+                items[index],
+
+            width:
+                Math.ceil(card.offsetWidth),
+
+            height:
+                Math.ceil(card.offsetHeight)
+
+        }));
+
+
+    /*
+       Ya no necesitamos las tarjetas temporales.
+    */
+
+    medidor.innerHTML = "";
+
+
+    return resultado;
+}
+
+
+/* =====================================================
+   TETRIS / SKYLINE
+
+   Coloca cada tarjeta UNA SOLA VEZ.
+   ===================================================== */
+
+function empacar(items, pageWidth, pageHeight) {
+
+    const paginas = [];
+
+
+    /*
+       Como el orden NO importa,
+       primero ponemos las piezas difíciles.
+
+       Altas primero.
+       En empate, anchas primero.
+    */
 
     items.sort((a, b) => {
 
-        if (b.peso !== a.peso) {
-            return b.peso - a.peso;
+        if (b.height !== a.height) {
+
+            return b.height - a.height;
+
         }
 
-        return (
-            b.lineaMasLarga -
-            a.lineaMasLarga
-        );
+        return b.width - a.width;
 
     });
 
 
-    const paginas = [];
+    /*
+       Mientras queden piezas.
+    */
 
-    let pagina = {
-
-        peso: 0,
-        items: []
-
-    };
+    while (items.length) {
 
 
-    for (const item of items) {
+        /* =============================================
+           NUEVA PÁGINA
+           ============================================= */
+
+        const columnas =
+            Math.ceil(pageWidth / STEP);
 
 
-        /* -------------------------------------------------
-           ¿Cabe aproximadamente?
-           ------------------------------------------------- */
+        /*
+           skyline[x] = altura ocupada en esa columna.
+        */
 
-        if (
-            pagina.items.length > 0 &&
-            pagina.peso + item.peso > PAGE_CAPACITY
-        ) {
-
-            paginas.push(pagina);
+        const skyline =
+            new Array(columnas).fill(0);
 
 
-            pagina = {
+        const colocados = [];
 
-                peso: 0,
-                items: []
+        const pendientes = [];
 
-            };
+
+        /* =============================================
+           PROBAR CADA TARJETA
+           ============================================= */
+
+        for (const item of items) {
+
+
+            /*
+               Número de columnas virtuales que necesita.
+            */
+
+            const span =
+                Math.ceil(
+                    (item.width + GAP) / STEP
+                );
+
+
+            let mejorX = -1;
+
+            let mejorY = Infinity;
+
+
+            /*
+               Buscar de izquierda a derecha.
+            */
+
+            for (
+                let x = 0;
+                x <= columnas - span;
+                x++
+            ) {
+
+
+                /*
+                   La tarjeta tiene que descansar sobre
+                   el punto más alto debajo de ella.
+                */
+
+                let y = 0;
+
+
+                for (
+                    let i = x;
+                    i < x + span;
+                    i++
+                ) {
+
+                    if (skyline[i] > y) {
+
+                        y = skyline[i];
+
+                    }
+
+                }
+
+
+                /*
+                   ¿Cabe verticalmente?
+                */
+
+                if (
+                    y + item.height >
+                    pageHeight
+                ) {
+
+                    continue;
+
+                }
+
+
+                /*
+                   Queremos la posición MÁS ALTA.
+
+                   Si empata:
+                   la más a la izquierda.
+                */
+
+                if (
+                    y < mejorY
+                ) {
+
+                    mejorY = y;
+                    mejorX = x;
+
+                }
+
+
+                /*
+                   No puede existir nada mejor
+                   que y = 0.
+
+                   Así que podemos parar.
+                */
+
+                if (mejorY === 0) {
+
+                    break;
+
+                }
+
+            }
+
+
+            /* =========================================
+               NO CABE EN ESTA PÁGINA
+               ========================================= */
+
+            if (mejorX === -1) {
+
+                pendientes.push(item);
+
+                continue;
+
+            }
+
+
+            /* =========================================
+               COLOCAR
+               ========================================= */
+
+            const realX =
+                mejorX * STEP;
+
+
+            const realY =
+                mejorY;
+
+
+            colocados.push({
+
+                ...item,
+
+                x: realX,
+
+                y: realY
+
+            });
+
+
+            /* =========================================
+               ACTUALIZAR SKYLINE
+               ========================================= */
+
+            const nuevaAltura =
+                realY +
+                item.height +
+                GAP;
+
+
+            for (
+                let i = mejorX;
+                i < mejorX + span;
+                i++
+            ) {
+
+                skyline[i] =
+                    nuevaAltura;
+
+            }
 
         }
 
 
-        pagina.items.push(item);
+        /* =============================================
+           SEGURIDAD
 
-        pagina.peso += item.peso;
+           Evitar bucle infinito si existe una tarjeta
+           más grande que una página.
+           ============================================= */
 
-    }
+        if (!colocados.length) {
+
+            const item =
+                pendientes.shift();
 
 
-    if (pagina.items.length) {
+            colocados.push({
 
-        paginas.push(pagina);
+                ...item,
+
+                x: 0,
+                y: 0
+
+            });
+
+        }
+
+
+        paginas.push(colocados);
+
+
+        items = pendientes;
 
     }
 
 
     return paginas;
-
 }
 
 
-/* =========================================================
+/* =====================================================
+   DIBUJAR PÁGINAS
+   ===================================================== */
+
+function dibujar(paginas) {
+
+    const documento =
+        document.getElementById("documento");
+
+
+    let html = "";
+
+
+    for (const pagina of paginas) {
+
+
+        html += `
+            <section class="page">
+                <div class="area">
+        `;
+
+
+        for (const card of pagina) {
+
+
+            html += `
+
+                <div
+                    class="card"
+                    style="
+                        left:${card.x}px;
+                        top:${card.y}px;
+                    "
+                >
+
+                    <div class="en">
+                        ${escapeHTML(card.item.en || "")}
+                    </div>
+
+                    <div class="es">
+                        ${formatoEspanol(card.item.es || "")}
+                    </div>
+
+                </div>
+
+            `;
+
+        }
+
+
+        html += `
+                </div>
+            </section>
+        `;
+
+    }
+
+
+    documento.innerHTML = html;
+}
+
+
+/* =====================================================
    CARGAR JSON
-   ========================================================= */
+   ===================================================== */
 
 fetch("data/english_vocab.json")
 
@@ -473,12 +647,13 @@ fetch("data/english_vocab.json")
 
 .then(data => {
 
+
+    /* =================================================
+       SACAR TODAS LAS PALABRAS
+       ================================================= */
+
     const vocabulario = [];
 
-
-    /* =====================================================
-       EXTRAER TODO EL VOCABULARIO
-       ===================================================== */
 
     for (const bloque of data.bloques || []) {
 
@@ -487,58 +662,80 @@ fetch("data/english_vocab.json")
             of bloque.vocabulario || []
         ) {
 
-            vocabulario.push(
-                analizar(item)
-            );
+            vocabulario.push(item);
 
         }
 
     }
 
 
-    /* =====================================================
-       CREAR PÁGINAS
-       ===================================================== */
+    /* =================================================
+       MEDIR UNA SOLA VEZ
+       ================================================= */
+
+    const medidas =
+        medir(vocabulario);
+
+
+    /* =================================================
+       OBTENER TAMAÑO REAL DEL ÁREA DE UNA HOJA
+
+       Creamos una página temporal.
+       ================================================= */
+
+    const temp =
+        document.createElement("section");
+
+
+    temp.className = "page";
+
+
+    temp.innerHTML =
+        `<div class="area"></div>`;
+
+
+    document.body.appendChild(temp);
+
+
+    const area =
+        temp.querySelector(".area");
+
+
+    const pageWidth =
+        Math.floor(area.clientWidth);
+
+
+    const pageHeight =
+        Math.floor(area.clientHeight);
+
+
+    temp.remove();
+
+
+    /* =================================================
+       TETRIS
+       ================================================= */
 
     const paginas =
-        crearPaginas(vocabulario);
+        empacar(
+            medidas,
+            pageWidth,
+            pageHeight
+        );
 
 
-    let html = "";
+    /* =================================================
+       MOSTRAR
+       ================================================= */
 
-
-    for (const pagina of paginas) {
-
-        html += `
-
-            <section class="page">
-
-                <div class="grid">
-
-                    ${
-                        pagina.items
-                            .map(crearCard)
-                            .join("")
-                    }
-
-                </div>
-
-            </section>
-
-        `;
-
-    }
-
-
-    document.getElementById(
-        "documento"
-    ).innerHTML = html;
+    dibujar(paginas);
 
 
     console.log(
-        "Tarjetas:",
+        "Palabras:",
         vocabulario.length
     );
+
 
     console.log(
         "Páginas:",
@@ -546,7 +743,6 @@ fetch("data/english_vocab.json")
     );
 
 })
-
 
 .catch(error => {
 
