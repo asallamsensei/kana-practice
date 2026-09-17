@@ -190,6 +190,20 @@ const STEP = 4;
    UTILIDADES
    ===================================================== */
 
+function mezclar(array) {
+
+    for (let i = array.length - 1; i > 0; i--) {
+
+        const j =
+            Math.floor(Math.random() * (i + 1));
+
+        [array[i], array[j]] =
+            [array[j], array[i]];
+    }
+
+    return array;
+}
+    
 function escapeHTML(text = "") {
 
     return String(text)
@@ -381,19 +395,7 @@ function empacar(items, pageWidth, pageHeight) {
        No importa el orden original.
     */
 
-    items.sort((a, b) => {
-
-        const areaA =
-            a.width * a.height;
-
-        const areaB =
-            b.width * b.height;
-
-
-        return areaB - areaA;
-
-    });
-
+    mezclar(items);
 
     while (items.length) {
 
