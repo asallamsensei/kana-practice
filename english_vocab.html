@@ -2,8 +2,9 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Vocabulario compacto</title>
+<title>Vocabulario Inglés - Español</title>
 
 <style>
 
@@ -18,90 +19,107 @@ body {
 }
 
 body {
-    background: white;
-    color: black;
+    background: #fff;
+    color: #000;
     font-family: Arial, Helvetica, sans-serif;
 }
 
 
-/* =========================
-   ÁREA DE TRABAJO
-   ========================= */
-
-.page {
-    padding: 8mm;
-}
-
-
-/* =========================
+/* =========================================
    CONTENEDOR
-   ========================= */
+   ========================================= */
 
 #vocabulario {
-    position: relative;
-    width: 100%;
+
+    display: grid;
+
+    /*
+       Cada columna ocupa lo necesario,
+       pero puede crecer si hay espacio.
+    */
+
+    grid-template-columns:
+        repeat(auto-fill, minmax(110px, max-content));
+
+    /*
+       "dense" intenta rellenar huecos.
+    */
+
+    grid-auto-flow: dense;
+
+    gap: 2px;
+
+    align-items: start;
+
+    padding: 5px;
 }
 
 
-/* =========================
+/* =========================================
    TARJETAS
-   ========================= */
+   ========================================= */
 
 .card {
-    position: absolute;
-
-    display: inline-block;
-    width: max-content;
-
-    border: 1px solid #777;
 
     background: white;
     color: black;
 
-    font-size: 11px;
-    line-height: 1.15;
+    border: 1px solid #999;
 
-    overflow: hidden;
+    font-size: 10px;
+    line-height: 1.12;
+
+    width: max-content;
+    max-width: 100%;
 
     break-inside: avoid;
+    page-break-inside: avoid;
 }
 
 
-/* INGLÉS */
+/* =========================================
+   INGLÉS
+   ========================================= */
 
 .en {
-    padding: 3px 5px;
 
     font-weight: bold;
 
-    white-space: nowrap;
+    padding: 2px 4px;
 
-    border-bottom: 1px solid #bbb;
+    border-bottom: 1px solid #ccc;
+
+    white-space: nowrap;
 }
 
 
-/* ESPAÑOL */
+/* =========================================
+   ESPAÑOL
+   ========================================= */
 
 .es {
-    padding: 3px 5px;
+
+    padding: 2px 4px;
 
     white-space: nowrap;
 }
 
 
-/* =========================
+/* =========================================
    IMPRESIÓN
-   ========================= */
+   ========================================= */
 
 @page {
     size: A4 portrait;
-    margin: 7mm;
+    margin: 6mm;
 }
+
 
 @media print {
 
-    .page {
+    #vocabulario {
         padding: 0;
+        gap: 2px;
     }
 
     .card {
@@ -114,28 +132,19 @@ body {
 </style>
 </head>
 
+
 <body>
 
-
-<div class="page">
-    <div id="vocabulario"></div>
-</div>
+<div id="vocabulario"></div>
 
 
 <script>
 
-/* ==========================================================
-   CONFIGURACIÓN
-   ========================================================== */
-
-const GAP = 3;
-
-
-/* ==========================================================
+/* =========================================
    ESCAPAR HTML
-   ========================================================== */
+   ========================================= */
 
-function escapeHtml(text = "") {
+function escapeHTML(text = "") {
 
     return String(text)
 
@@ -147,294 +156,59 @@ function escapeHtml(text = "") {
 }
 
 
-/* ==========================================================
+/* =========================================
    ESPAÑOL
 
-   Cada ; produce salto de línea.
-   ========================================================== */
+   ; = salto de línea
+   ========================================= */
 
-function spanish(text = "") {
+function formatoEspanol(text = "") {
 
-    return escapeHtml(text)
+    return escapeHTML(text)
         .replace(/;\s*/g, ";<br>");
 }
 
 
-/* ==========================================================
-   CREAR TARJETA
-   ========================================================== */
+/* =========================================
+   ESTIMAR TAMAÑO
 
-function cardHTML(item, index) {
+   NO medimos el DOM.
 
-    return `
-        <div class="card" id="card-${index}">
+   Solamente usamos la longitud del texto.
+   ========================================= */
 
-            <div class="en">
-                ${escapeHtml(item.en || "")}
-            </div>
+function peso(item) {
 
-            <div class="es">
-                ${spanish(item.es || "")}
-            </div>
+    const en =
+        String(item.en || "");
 
-        </div>
-    `;
-}
+    const partes =
+        String(item.es || "")
+            .split(";");
 
 
-/* ==========================================================
-   MOTOR DE COMPACTACIÓN
-   ========================================================== */
+    const lineaMasLarga =
+        Math.max(
+            en.length,
+            ...partes.map(x => x.trim().length)
+        );
 
-function compactar() {
 
-    const container =
-        document.getElementById("vocabulario");
+    const lineas =
+        partes.length + 1;
 
-    let cards =
-        [...container.querySelectorAll(".card")];
 
-
-    if (!cards.length) {
-        return;
-    }
-
-
-    /* ======================================================
-       1. MEDIR TODAS LAS TARJETAS UNA SOLA VEZ
-       ====================================================== */
-
-    const items = cards.map(card => {
-
-        return {
-
-            element: card,
-
-            width:
-                Math.ceil(card.offsetWidth),
-
-            height:
-                Math.ceil(card.offsetHeight)
-
-        };
-
-    });
-
-
-    /* ======================================================
-       2. ORDENAR
-
-       Primero colocamos las tarjetas grandes/difíciles.
-
-       El JSON NO se modifica.
-       Solo cambia la posición visual.
-       ====================================================== */
-
-    items.sort((a, b) => {
-
-        const areaA =
-            a.width * a.height;
-
-        const areaB =
-            b.width * b.height;
-
-        return areaB - areaA;
-
-    });
-
-
-    /* ======================================================
-       3. ANCHO DISPONIBLE
-       ====================================================== */
-
-    const WIDTH =
-        Math.floor(container.clientWidth);
-
-
-    /* ======================================================
-       4. FILAS / ESTANTES
-
-       Cada fila recuerda:
-
-       y       = posición vertical
-       height  = altura de la fila
-       used    = ancho utilizado
-       ====================================================== */
-
-    const rows = [];
-
-
-    /* ======================================================
-       5. COLOCAR TARJETAS
-       ====================================================== */
-
-    items.forEach(item => {
-
-        let bestRow = null;
-        let bestWaste = Infinity;
-
-
-        /* --------------------------------------------------
-           BUSCAR LA FILA DONDE MEJOR ENCAJE
-           -------------------------------------------------- */
-
-        for (const row of rows) {
-
-            const required =
-                row.used === 0
-                    ? item.width
-                    : GAP + item.width;
-
-
-            const remaining =
-                WIDTH - row.used;
-
-
-            if (required <= remaining) {
-
-                const waste =
-                    remaining - required;
-
-
-                /*
-                   Penalizamos también poner una tarjeta
-                   demasiado alta en una fila bajita.
-                */
-
-                const heightDifference =
-                    Math.abs(
-                        row.height - item.height
-                    );
-
-
-                const score =
-                    waste +
-                    heightDifference * 2;
-
-
-                if (score < bestWaste) {
-
-                    bestWaste = score;
-                    bestRow = row;
-
-                }
-
-            }
-
-        }
-
-
-        /* ==================================================
-           SI NO CABE EN NINGUNA FILA
-           CREAR FILA NUEVA
-           ================================================== */
-
-        if (!bestRow) {
-
-            let y = 0;
-
-
-            if (rows.length) {
-
-                const last =
-                    rows[rows.length - 1];
-
-                y =
-                    last.y +
-                    last.height +
-                    GAP;
-
-            }
-
-
-            bestRow = {
-
-                y: y,
-
-                height:
-                    item.height,
-
-                used: 0
-
-            };
-
-
-            rows.push(bestRow);
-
-        }
-
-
-        /* ==================================================
-           POSICIÓN X
-           ================================================== */
-
-        let x =
-            bestRow.used;
-
-
-        if (x > 0) {
-
-            x += GAP;
-
-        }
-
-
-        /* ==================================================
-           COLOCAR
-           ================================================== */
-
-        item.element.style.left =
-            x + "px";
-
-        item.element.style.top =
-            bestRow.y + "px";
-
-
-        /* ==================================================
-           ACTUALIZAR FILA
-           ================================================== */
-
-        bestRow.used =
-            x + item.width;
-
-
-        if (item.height > bestRow.height) {
-
-            bestRow.height =
-                item.height;
-
-        }
-
-    });
-
-
-    /* ======================================================
-       6. ALTURA FINAL
-       ====================================================== */
-
-    let bottom = 0;
-
-
-    rows.forEach(row => {
-
-        bottom =
-            Math.max(
-                bottom,
-                row.y + row.height
-            );
-
-    });
-
-
-    container.style.height =
-        bottom + "px";
+    return (
+        lineaMasLarga * 10 +
+        lineas * 20
+    );
 
 }
 
 
-/* ==========================================================
+/* =========================================
    CARGAR JSON
-   ========================================================== */
+   ========================================= */
 
 fetch("data/english_vocab.json")
 
@@ -443,7 +217,7 @@ fetch("data/english_vocab.json")
     if (!response.ok) {
 
         throw new Error(
-            "No se pudo cargar english_vocab.json"
+            "No se pudo cargar el JSON"
         );
 
     }
@@ -454,49 +228,69 @@ fetch("data/english_vocab.json")
 
 .then(data => {
 
-    const vocab = [];
+    const vocabulario = [];
 
 
-    /* ======================================================
-       EXTRAER TODOS LOS PARES
-       ====================================================== */
+    /* =====================================
+       SACAR TODAS LAS PALABRAS
+       ===================================== */
 
-    data.bloques.forEach(bloque => {
+    for (const bloque of data.bloques) {
 
-        bloque.vocabulario.forEach(item => {
+        for (const item of bloque.vocabulario) {
 
-            vocab.push(item);
+            vocabulario.push(item);
 
-        });
+        }
 
-    });
-
-
-    /* ======================================================
-       CREAR TARJETAS
-       ====================================================== */
-
-    const container =
-        document.getElementById("vocabulario");
+    }
 
 
-    container.innerHTML =
-        vocab
-            .map(cardHTML)
-            .join("");
+    /* =====================================
+       ORDENAR
+
+       Las tarjetas grandes primero.
+
+       Esto ayuda al modo "dense".
+       ===================================== */
+
+    vocabulario.sort(
+        (a, b) => peso(b) - peso(a)
+    );
 
 
-    /* ======================================================
-       ESPERAR AL NAVEGADOR
-       ====================================================== */
+    /* =====================================
+       GENERAR TODO EL HTML DE UNA SOLA VEZ
+       ===================================== */
 
-    requestAnimationFrame(() => {
+    let html = "";
 
-        compactar();
 
-    });
+    for (const item of vocabulario) {
+
+        html += `
+            <div class="card">
+
+                <div class="en">
+                    ${escapeHTML(item.en)}
+                </div>
+
+                <div class="es">
+                    ${formatoEspanol(item.es)}
+                </div>
+
+            </div>
+        `;
+
+    }
+
+
+    document.getElementById(
+        "vocabulario"
+    ).innerHTML = html;
 
 })
+
 
 .catch(error => {
 
@@ -504,36 +298,10 @@ fetch("data/english_vocab.json")
 
     document.getElementById(
         "vocabulario"
-    ).innerHTML =
-
-        "<p>Error cargando el JSON: " +
-        escapeHtml(error.message) +
-        "</p>";
+    ).textContent =
+        "Error: " + error.message;
 
 });
-
-
-/* ==========================================================
-   RECALCULAR AL CAMBIAR TAMAÑO
-   ========================================================== */
-
-let resizeTimer;
-
-
-window.addEventListener(
-    "resize",
-    () => {
-
-        clearTimeout(resizeTimer);
-
-        resizeTimer =
-            setTimeout(
-                compactar,
-                150
-            );
-
-    }
-);
 
 </script>
 
