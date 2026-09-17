@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Vocabulario Inglés - Español</title>
+
+<style>
+
+:root{
+    --gap: 5px;
+    --border: #b8b8b8;
+
+    --english-bg: #e8f1ff;
+    --english-text: #174ea6;
+
+    --spanish-bg: #fff1e8;
+    --spanish-text: #9a3412;
+}
+
+
+/* ==============================
+   GENERAL
+   ============================== */
+
+*{
+    box-sizing: border-box;
+}
+
+html,
+body{
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    background: white;
+    color: #111;
+}
+
+
+/* ==============================
+   PÁGINA
+   ============================== */
+
+.page{
+    width: 100%;
+    padding: 15px;
+}
+
+
+/* ==============================
+   CONTENEDOR MASONRY
+   ============================== */
+
+#vocabulario{
+    position: relative;
+    width: 100%;
+    min-height: 100px;
+}
+
+
+/* ==============================
+   TARJETA
+   ============================== */
+
+.vocab-card{
+    position: absolute;
+
+    width: fit-content;
+    max-width: 100%;
+
+    border: 1px solid var(--border);
+    border-radius: 5px;
+
+    overflow: hidden;
+
+    background: white;
+
+    break-inside: avoid;
+    page-break-inside: avoid;
+}
+
+
+/* ==============================
+   INGLÉS
+   ============================== */
+
+.english{
+    padding: 4px 7px;
+
+    background: var(--english-bg);
+    color: var(--english-text);
+
+    font-size: 13px;
+    font-weight: 700;
+
+    line-height: 1.25;
+
+    white-space: nowrap;
+}
+
+
+/* ==============================
+   ESPAÑOL
+   ============================== */
+
+.spanish{
+    padding: 4px 7px;
+
+    background: var(--spanish-bg);
+    color: var(--spanish-text);
+
+    font-size: 13px;
+
+    line-height: 1.3;
+
+    white-space: nowrap;
+}
+
+
+/* ==============================
+   MENSAJE DE ERROR
+   ============================== */
+
+.error{
+    padding: 20px;
+    color: #b91c1c;
+}
+
+
+/* ==============================
+   IMPRESIÓN
+   ============================== */
+
+@page{
+    size: A4 portrait;
+    margin: 8mm;
+}
+
+@media print{
+
+    body{
+        background: white;
+    }
+
+    .page{
+        padding: 0;
+    }
+
+    .vocab-card{
+        break-inside: avoid;
+        page-break-inside: avoid;
+    }
+}
+
+</style>
+</head>
+
+
+<body>
+
+<div class="page">
+    <div id="vocabulario"></div>
+</div>
+
+
+<script>
+
+/* =========================================================
+   CONFIGURACIÓN
+   ========================================================= */
+
+const GAP = 5;
+
+
+/* =========================================================
+   UTILIDADES
+   ========================================================= */
+
+function escapeHtml(text = ""){
+
+    return String(text)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+}
+
+
+/* =========================================================
+   ESPAÑOL
+
+   Cada ; genera inmediatamente un salto de línea.
+
+   Ejemplo:
+
+   hacer ejercicio; resolver; resultar
+
+   se convierte en:
+
+   hacer ejercicio;
+   resolver;
+   resultar
+   ========================================================= */
+
+function formatoEspanol(text = ""){
+
+    return escapeHtml(text)
+        .replace(/;\s*/g, ";<br>");
+}
+
+
+/* =========================================================
+   CREAR TARJETA
+   ========================================================= */
+
+function crearTarjeta(item, index){
+
+    return `
+        <article
+            class="vocab-card"
+            id="vocab-${index}"
+        >
+
+            <div class="english">
+                ${escapeHtml(item.en || "")}
+            </div>
+
+            <div class="spanish">
+                ${formatoEspanol(item.es || "")}
+            </div>
+
+        </article>
+    `;
+}
+
+
+/* =========================================================
+   DETECTAR COLISIONES
+   ========================================================= */
+
+function collides(a, b){
+
+    return !(
+        a.right + GAP <= b.left ||
+        a.left >= b.right + GAP ||
+        a.bottom + GAP <= b.top ||
+        a.top >= b.bottom + GAP
+    );
+}
+
+
+/* =========================================================
+   MOTOR PRINCIPAL DE COMPACTACIÓN
+   ========================================================= */
+
+function layoutMasonry(){
+
+    const container =
+        document.getElementById("vocabulario");
+
+    const cards =
+        [...container.querySelectorAll(".vocab-card")];
+
+    if(!cards.length){
+        container.style.height = "0px";
+        return;
+    }
+
+
+    /* -----------------------------------------------
+       Limpiar posiciones anteriores
+       ----------------------------------------------- */
+
+    cards.forEach(card => {
+
+        card.style.left = "0px";
+        card.style.top = "0px";
+
+    });
+
+
+    const containerWidth =
+        Math.floor(container.clientWidth);
+
+    const placed = [];
+
+
+    /* -----------------------------------------------
+       Comprobar si una posición está disponible
+       ----------------------------------------------- */
+
+    function canPlace(rect){
+
+        if(rect.left < 0)
+            return false;
+
+        if(rect.right > containerWidth)
+            return false;
+
+        if(rect.top < 0)
+            return false;
+
+        return !placed.some(
+            other => collides(rect, other)
+        );
+    }
+
+
+    /* -----------------------------------------------
+       Puntuación de una posición
+
+       Primero preferimos estar ARRIBA.
+
+       Después preferimos estar hacia la IZQUIERDA.
+
+       Esto intenta llenar la página como un documento.
+       ----------------------------------------------- */
+
+    function score(rect){
+
+        return (
+            rect.top * 10000 +
+            rect.left
+        );
+    }
+
+
+    /* =====================================================
+       COLOCAR TARJETAS
+       ===================================================== */
+
+    cards.forEach((card, index) => {
+
+        const width =
+            Math.ceil(card.offsetWidth);
+
+        const height =
+            Math.ceil(card.offsetHeight);
+
+
+        let best = null;
+        let bestScore = Infinity;
+
+
+        /* -----------------------------------------------
+           Primera tarjeta
+           ----------------------------------------------- */
+
+        if(index === 0){
+
+            best = {
+
+                left: 0,
+                top: 0,
+
+                right: width,
+                bottom: height
+
+            };
+
+        }
+
+
+        /* -----------------------------------------------
+           Siguientes tarjetas
+           ----------------------------------------------- */
+
+        else{
+
+            const candidates = [];
+
+
+            /* ===========================================
+               Crear posiciones candidatas alrededor
+               de TODAS las tarjetas existentes.
+               =========================================== */
+
+            placed.forEach(p => {
+
+
+                /* A LA DERECHA */
+
+                candidates.push({
+
+                    left:
+                        p.right + GAP,
+
+                    top:
+                        p.top,
+
+                    right:
+                        p.right + GAP + width,
+
+                    bottom:
+                        p.top + height
+
+                });
+
+
+                /* A LA IZQUIERDA */
+
+                candidates.push({
+
+                    left:
+                        p.left - width - GAP,
+
+                    top:
+                        p.top,
+
+                    right:
+                        p.left - GAP,
+
+                    bottom:
+                        p.top + height
+
+                });
+
+
+                /* DEBAJO */
+
+                candidates.push({
+
+                    left:
+                        p.left,
+
+                    top:
+                        p.bottom + GAP,
+
+                    right:
+                        p.left + width,
+
+                    bottom:
+                        p.bottom + GAP + height
+
+                });
+
+
+                /* DEBAJO ALINEADA A LA DERECHA */
+
+                candidates.push({
+
+                    left:
+                        p.right - width,
+
+                    top:
+                        p.bottom + GAP,
+
+                    right:
+                        p.right,
+
+                    bottom:
+                        p.bottom + GAP + height
+
+                });
+
+            });
+
+
+            /* -------------------------------------------
+               También probar borde izquierdo
+               en distintas alturas.
+               ------------------------------------------- */
+
+            placed.forEach(p => {
+
+                candidates.push({
+
+                    left: 0,
+
+                    top:
+                        p.bottom + GAP,
+
+                    right:
+                        width,
+
+                    bottom:
+                        p.bottom + GAP + height
+
+                });
+
+            });
+
+
+            /* -------------------------------------------
+               Buscar la mejor posición
+               ------------------------------------------- */
+
+            candidates.forEach(rect => {
+
+                rect.left =
+                    Math.round(rect.left);
+
+                rect.top =
+                    Math.round(rect.top);
+
+                rect.right =
+                    Math.round(rect.right);
+
+                rect.bottom =
+                    Math.round(rect.bottom);
+
+
+                if(!canPlace(rect))
+                    return;
+
+
+                const s = score(rect);
+
+
+                if(s < bestScore){
+
+                    bestScore = s;
+                    best = rect;
+
+                }
+
+            });
+
+        }
+
+
+        /* -----------------------------------------------
+           Si no encontró hueco:
+           colocar debajo de todo.
+           ----------------------------------------------- */
+
+        if(!best){
+
+            const maxBottom =
+                placed.length
+                    ? Math.max(
+                        ...placed.map(p => p.bottom)
+                    )
+                    : 0;
+
+
+            best = {
+
+                left: 0,
+
+                top:
+                    maxBottom + GAP,
+
+                right:
+                    width,
+
+                bottom:
+                    maxBottom + GAP + height
+
+            };
+
+        }
+
+
+        /* -----------------------------------------------
+           Aplicar posición
+           ----------------------------------------------- */
+
+        card.style.left =
+            `${best.left}px`;
+
+        card.style.top =
+            `${best.top}px`;
+
+
+        placed.push(best);
+
+    });
+
+
+    /* =====================================================
+       ALTURA DEL CONTENEDOR
+       ===================================================== */
+
+    const maxBottom =
+        Math.max(
+            ...placed.map(p => p.bottom),
+            0
+        );
+
+
+    container.style.height =
+        `${maxBottom}px`;
+
+
+    /* =====================================================
+       SEGUNDA FASE:
+       COMPACTACIÓN / IMÁN
+       ===================================================== */
+
+    magnetCards();
+
+}
+
+
+/* =========================================================
+   MAGNET CARDS
+
+   Después del primer posicionamiento intenta mover
+   cada tarjeta hacia ARRIBA y hacia la IZQUIERDA
+   sin permitir colisiones.
+
+   Es una segunda pasada de compactación.
+   ========================================================= */
+
+function magnetCards(){
+
+    const container =
+        document.getElementById("vocabulario");
+
+    const cards =
+        [...container.querySelectorAll(".vocab-card")];
+
+    const containerWidth =
+        container.clientWidth;
+
+
+    /* -----------------------------------------------
+       Obtener rectángulo actual
+       ----------------------------------------------- */
+
+    function rectOf(card){
+
+        const left =
+            parseFloat(card.style.left) || 0;
+
+        const top =
+            parseFloat(card.style.top) || 0;
+
+
+        return {
+
+            left,
+            top,
+
+            right:
+                left + card.offsetWidth,
+
+            bottom:
+                top + card.offsetHeight,
+
+            width:
+                card.offsetWidth,
+
+            height:
+                card.offsetHeight
+
+        };
+    }
+
+
+    /* -----------------------------------------------
+       Comprobar movimiento
+       ----------------------------------------------- */
+
+    function canMove(
+        card,
+        newLeft,
+        newTop
+    ){
+
+        const test = {
+
+            left:
+                newLeft,
+
+            top:
+                newTop,
+
+            right:
+                newLeft + card.offsetWidth,
+
+            bottom:
+                newTop + card.offsetHeight
+
+        };
+
+
+        if(test.left < 0)
+            return false;
+
+        if(test.top < 0)
+            return false;
+
+        if(test.right > containerWidth)
+            return false;
+
+
+        return !cards.some(other => {
+
+            if(other === card)
+                return false;
+
+            return collides(
+                test,
+                rectOf(other)
+            );
+
+        });
+
+    }
+
+
+    /* =====================================================
+       VARIAS PASADAS
+
+       Cuantas más pasadas, más oportunidades tiene
+       de compactar.
+       ===================================================== */
+
+    for(let pass = 0; pass < 60; pass++){
+
+
+        cards.forEach(card => {
+
+            let r =
+                rectOf(card);
+
+
+            /* -------------------------------------------
+               INTENTAR SUBIR
+               ------------------------------------------- */
+
+            let newTop =
+                r.top - GAP;
+
+
+            if(
+                newTop >= 0 &&
+                canMove(
+                    card,
+                    r.left,
+                    newTop
+                )
+            ){
+
+                card.style.top =
+                    `${newTop}px`;
+
+            }
+
+
+            /* Recalcular */
+
+            r = rectOf(card);
+
+
+            /* -------------------------------------------
+               INTENTAR IR A LA IZQUIERDA
+               ------------------------------------------- */
+
+            let newLeft =
+                r.left - GAP;
+
+
+            if(
+                newLeft >= 0 &&
+                canMove(
+                    card,
+                    newLeft,
+                    r.top
+                )
+            ){
+
+                card.style.left =
+                    `${newLeft}px`;
+
+            }
+
+        });
+
+    }
+
+
+    /* =====================================================
+       RECALCULAR ALTURA FINAL
+       ===================================================== */
+
+    const rects =
+        cards.map(rectOf);
+
+
+    const maxBottom =
+        Math.max(
+            ...rects.map(r => r.bottom),
+            0
+        );
+
+
+    container.style.height =
+        `${maxBottom}px`;
+
+}
+
+
+/* =========================================================
+   CARGAR JSON
+   ========================================================= */
+
+fetch("data/english_vocab.json")
+
+    .then(response => {
+
+        if(!response.ok){
+
+            throw new Error(
+                "No se pudo cargar data/english_vocab.json"
+            );
+
+        }
+
+        return response.json();
+
+    })
+
+
+    .then(data => {
+
+        const vocabulario = [];
+
+
+        /* -----------------------------------------------
+           Mantener EXACTAMENTE el orden del JSON
+           ----------------------------------------------- */
+
+        if(Array.isArray(data.bloques)){
+
+            data.bloques.forEach(bloque => {
+
+                if(
+                    Array.isArray(
+                        bloque.vocabulario
+                    )
+                ){
+
+                    bloque.vocabulario.forEach(
+                        item => {
+
+                            vocabulario.push(item);
+
+                        }
+                    );
+
+                }
+
+            });
+
+        }
+
+
+        /* -----------------------------------------------
+           Crear HTML
+           ----------------------------------------------- */
+
+        const container =
+            document.getElementById(
+                "vocabulario"
+            );
+
+
+        container.innerHTML =
+            vocabulario
+                .map(
+                    (item, index) =>
+                        crearTarjeta(
+                            item,
+                            index
+                        )
+                )
+                .join("");
+
+
+        /* -----------------------------------------------
+           Esperar a que navegador calcule tamaños
+           ----------------------------------------------- */
+
+        requestAnimationFrame(() => {
+
+            layoutMasonry();
+
+        });
+
+    })
+
+
+    .catch(error => {
+
+        console.error(error);
+
+        document.getElementById(
+            "vocabulario"
+        ).innerHTML = `
+
+            <div class="error">
+
+                No se pudo cargar
+                data/english_vocab.json
+
+                <br><br>
+
+                ${escapeHtml(error.message)}
+
+            </div>
+
+        `;
+
+    });
+
+
+/* =========================================================
+   RECALCULAR SI CAMBIA EL ANCHO DE LA VENTANA
+   ========================================================= */
+
+let resizeTimer;
+
+window.addEventListener(
+    "resize",
+    () => {
+
+        clearTimeout(resizeTimer);
+
+        resizeTimer =
+            setTimeout(
+                layoutMasonry,
+                150
+            );
+
+    }
+);
+
+
+/* =========================================================
+   CUANDO TERMINEN DE CARGAR LAS FUENTES
+   ========================================================= */
+
+if(document.fonts){
+
+    document.fonts.ready.then(() => {
+
+        layoutMasonry();
+
+    });
+
+}
+
+</script>
+
+</body>
+</html>
