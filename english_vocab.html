@@ -20,7 +20,7 @@ body {
 
 body {
     background: #ddd;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: "Comic Neue", Arial, Helvetica, sans-serif;
     color: #000;
 }
 
@@ -70,11 +70,13 @@ body {
 
     border: 1px solid #777;
 
-    font-size: 11px;
+    font-size: 12px;
     line-height: 1.15;
 
     white-space: nowrap;
 
+    text-align: center;
+    
     break-inside: avoid;
     page-break-inside: avoid;
 }
@@ -171,19 +173,6 @@ const GAP = 3;
 */
 
 const STEP = 4;
-
-
-/*
-   Pequeña irregularidad vertical.
-
-   Cada tarjeta puede separarse entre 0 y 4 px
-   adicionales.
-
-   Esto evita que todo se vea demasiado cuadriculado.
-*/
-
-const VERTICAL_RANDOM = 4;
-
 
 /* =====================================================
    UTILIDADES
@@ -592,36 +581,7 @@ function empacar(items, pageWidth, pageHeight) {
                RANDOM VERTICAL
                ================================================= */
 
-            const jitter =
-                Math.floor(
-                    Math.random() *
-                    (VERTICAL_RANDOM + 1)
-                );
-
-
-            /*
-               Solo agregamos irregularidad.
-
-               Nunca movemos hacia arriba porque podría
-               producir colisiones.
-            */
-
-            let realY =
-                mejorY + jitter;
-
-
-            /*
-               Seguridad inferior.
-            */
-
-            if (
-                realY + item.height >
-                pageHeight
-            ) {
-
-                realY = mejorY;
-
-            }
+            const realY = mejorY;
 
 
             const realX =
