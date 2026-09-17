@@ -8,6 +8,10 @@
 
 <style>
 
+/* =========================================================
+   GENERAL
+   ========================================================= */
+
 * {
     box-sizing: border-box;
 }
@@ -19,112 +23,172 @@ body {
 }
 
 body {
-    background: #fff;
+    background: #ddd;
     color: #000;
     font-family: Arial, Helvetica, sans-serif;
 }
 
 
-/* =========================================
-   CONTENEDOR
-   ========================================= */
+/* =========================================================
+   HOJA TAMAÑO CARTA
 
-#vocabulario {
+   Carta = 8.5 × 11 pulgadas
+   ========================================================= */
+
+.page {
+
+    width: 8.5in;
+    height: 11in;
+
+    margin: 15px auto;
+
+    padding: 0.25in;
+
+    background: white;
+
+    overflow: hidden;
+
+    page-break-after: always;
+}
+
+
+/* =========================================================
+   GRID / IMÁN SIMPLE
+   ========================================================= */
+
+.grid {
+
+    width: 100%;
+    height: 100%;
 
     display: grid;
 
     /*
-       Cada columna ocupa lo necesario,
-       pero puede crecer si hay espacio.
+       Columnas pequeñas para darle libertad
+       al sistema de acomodación.
     */
 
     grid-template-columns:
-        repeat(auto-fill, minmax(110px, max-content));
+        repeat(12, 1fr);
 
     /*
-       "dense" intenta rellenar huecos.
+       Dense = rellenar huecos disponibles.
     */
 
     grid-auto-flow: dense;
 
+    grid-auto-rows: min-content;
+
     gap: 2px;
 
+    align-content: start;
     align-items: start;
-
-    padding: 5px;
 }
 
 
-/* =========================================
-   TARJETAS
-   ========================================= */
+/* =========================================================
+   TARJETA
+   ========================================================= */
 
 .card {
 
     background: white;
     color: black;
 
-    border: 1px solid #999;
+    border: 1px solid #888;
 
     font-size: 10px;
     line-height: 1.12;
 
-    width: max-content;
-    max-width: 100%;
-
     break-inside: avoid;
     page-break-inside: avoid;
+
+    /*
+       Por defecto ocupa 2 columnas.
+    */
+
+    grid-column: span 2;
 }
 
 
-/* =========================================
+/* =========================================================
+   TAMAÑOS
+
+   El JS asignará estas clases según longitud.
+   ========================================================= */
+
+.card.small {
+    grid-column: span 2;
+}
+
+.card.medium {
+    grid-column: span 3;
+}
+
+.card.large {
+    grid-column: span 4;
+}
+
+.card.xlarge {
+    grid-column: span 5;
+}
+
+
+/* =========================================================
    INGLÉS
-   ========================================= */
+   ========================================================= */
 
 .en {
 
-    font-weight: bold;
-
     padding: 2px 4px;
+
+    font-weight: bold;
 
     border-bottom: 1px solid #ccc;
 
-    white-space: nowrap;
+    overflow-wrap: break-word;
 }
 
 
-/* =========================================
+/* =========================================================
    ESPAÑOL
-   ========================================= */
+   ========================================================= */
 
 .es {
 
     padding: 2px 4px;
 
-    white-space: nowrap;
+    overflow-wrap: break-word;
 }
 
 
-/* =========================================
+/* =========================================================
    IMPRESIÓN
-   ========================================= */
+   ========================================================= */
 
 @page {
-    size: A4 portrait;
-    margin: 6mm;
+
+    size: Letter portrait;
+    margin: 0;
+
 }
 
 
 @media print {
 
-    #vocabulario {
-        padding: 0;
-        gap: 2px;
+    body {
+        background: white;
     }
 
-    .card {
-        break-inside: avoid;
-        page-break-inside: avoid;
+    .page {
+
+        margin: 0;
+
+        width: 8.5in;
+        height: 11in;
+
+        page-break-after: always;
+        break-after: page;
     }
 
 }
@@ -135,14 +199,26 @@ body {
 
 <body>
 
-<div id="vocabulario"></div>
+<div id="documento"></div>
 
 
 <script>
 
-/* =========================================
+/* =========================================================
+   CONFIGURACIÓN
+
+   Cada página recibe una cantidad aproximada de "peso".
+
+   Si alguna página se desborda, baja PAGE_CAPACITY.
+   Si queda demasiado vacía, súbelo.
+   ========================================================= */
+
+const PAGE_CAPACITY = 1200;
+
+
+/* =========================================================
    ESCAPAR HTML
-   ========================================= */
+   ========================================================= */
 
 function escapeHTML(text = "") {
 
@@ -156,11 +232,11 @@ function escapeHTML(text = "") {
 }
 
 
-/* =========================================
+/* =========================================================
    ESPAÑOL
 
-   ; = salto de línea
-   ========================================= */
+   Cada ; produce salto de línea.
+   ========================================================= */
 
 function formatoEspanol(text = "") {
 
@@ -169,46 +245,215 @@ function formatoEspanol(text = "") {
 }
 
 
-/* =========================================
-   ESTIMAR TAMAÑO
+/* =========================================================
+   ANALIZAR TARJETA
 
-   NO medimos el DOM.
+   No medimos el DOM.
 
-   Solamente usamos la longitud del texto.
-   ========================================= */
+   Solamente analizamos el texto.
+   ========================================================= */
 
-function peso(item) {
+function analizar(item) {
 
     const en =
-        String(item.en || "");
+        String(item.en || "").trim();
+
+    const es =
+        String(item.es || "").trim();
 
     const partes =
-        String(item.es || "")
-            .split(";");
+        es.split(";");
 
 
     const lineaMasLarga =
         Math.max(
+
             en.length,
-            ...partes.map(x => x.trim().length)
+
+            ...partes.map(
+                x => x.trim().length
+            )
+
         );
 
 
     const lineas =
-        partes.length + 1;
+        1 + partes.length;
 
 
-    return (
-        lineaMasLarga * 10 +
-        lineas * 20
-    );
+    /* -----------------------------------------------------
+       ANCHO
+       ----------------------------------------------------- */
+
+    let size;
+
+
+    if (lineaMasLarga <= 11) {
+
+        size = "small";
+
+    }
+
+    else if (lineaMasLarga <= 19) {
+
+        size = "medium";
+
+    }
+
+    else if (lineaMasLarga <= 30) {
+
+        size = "large";
+
+    }
+
+    else {
+
+        size = "xlarge";
+
+    }
+
+
+    /* -----------------------------------------------------
+       PESO VERTICAL APROXIMADO
+       ----------------------------------------------------- */
+
+    const peso =
+
+        18 +
+
+        (lineas * 10) +
+
+        Math.ceil(
+            lineaMasLarga / 18
+        ) * 5;
+
+
+    return {
+
+        item,
+        size,
+        peso,
+        lineaMasLarga,
+        lineas
+
+    };
 
 }
 
 
-/* =========================================
+/* =========================================================
+   CREAR TARJETA
+   ========================================================= */
+
+function crearCard(obj) {
+
+    return `
+
+        <div class="card ${obj.size}">
+
+            <div class="en">
+                ${escapeHTML(obj.item.en)}
+            </div>
+
+            <div class="es">
+                ${formatoEspanol(obj.item.es)}
+            </div>
+
+        </div>
+
+    `;
+
+}
+
+
+/* =========================================================
+   DISTRIBUIR EN PÁGINAS
+
+   Como NO importa el orden:
+
+   1. Grandes primero.
+   2. Vamos llenando cada hoja.
+   3. Las pequeñas quedan después y CSS Dense
+      puede utilizarlas para rellenar huecos.
+   ========================================================= */
+
+function crearPaginas(items) {
+
+    /* -----------------------------------------------------
+       Ordenar de grandes a pequeñas
+       ----------------------------------------------------- */
+
+    items.sort((a, b) => {
+
+        if (b.peso !== a.peso) {
+            return b.peso - a.peso;
+        }
+
+        return (
+            b.lineaMasLarga -
+            a.lineaMasLarga
+        );
+
+    });
+
+
+    const paginas = [];
+
+    let pagina = {
+
+        peso: 0,
+        items: []
+
+    };
+
+
+    for (const item of items) {
+
+
+        /* -------------------------------------------------
+           ¿Cabe aproximadamente?
+           ------------------------------------------------- */
+
+        if (
+            pagina.items.length > 0 &&
+            pagina.peso + item.peso > PAGE_CAPACITY
+        ) {
+
+            paginas.push(pagina);
+
+
+            pagina = {
+
+                peso: 0,
+                items: []
+
+            };
+
+        }
+
+
+        pagina.items.push(item);
+
+        pagina.peso += item.peso;
+
+    }
+
+
+    if (pagina.items.length) {
+
+        paginas.push(pagina);
+
+    }
+
+
+    return paginas;
+
+}
+
+
+/* =========================================================
    CARGAR JSON
-   ========================================= */
+   ========================================================= */
 
 fetch("data/english_vocab.json")
 
@@ -231,63 +476,74 @@ fetch("data/english_vocab.json")
     const vocabulario = [];
 
 
-    /* =====================================
-       SACAR TODAS LAS PALABRAS
-       ===================================== */
+    /* =====================================================
+       EXTRAER TODO EL VOCABULARIO
+       ===================================================== */
 
-    for (const bloque of data.bloques) {
+    for (const bloque of data.bloques || []) {
 
-        for (const item of bloque.vocabulario) {
+        for (
+            const item
+            of bloque.vocabulario || []
+        ) {
 
-            vocabulario.push(item);
+            vocabulario.push(
+                analizar(item)
+            );
 
         }
 
     }
 
 
-    /* =====================================
-       ORDENAR
+    /* =====================================================
+       CREAR PÁGINAS
+       ===================================================== */
 
-       Las tarjetas grandes primero.
+    const paginas =
+        crearPaginas(vocabulario);
 
-       Esto ayuda al modo "dense".
-       ===================================== */
-
-    vocabulario.sort(
-        (a, b) => peso(b) - peso(a)
-    );
-
-
-    /* =====================================
-       GENERAR TODO EL HTML DE UNA SOLA VEZ
-       ===================================== */
 
     let html = "";
 
 
-    for (const item of vocabulario) {
+    for (const pagina of paginas) {
 
         html += `
-            <div class="card">
 
-                <div class="en">
-                    ${escapeHTML(item.en)}
+            <section class="page">
+
+                <div class="grid">
+
+                    ${
+                        pagina.items
+                            .map(crearCard)
+                            .join("")
+                    }
+
                 </div>
 
-                <div class="es">
-                    ${formatoEspanol(item.es)}
-                </div>
+            </section>
 
-            </div>
         `;
 
     }
 
 
     document.getElementById(
-        "vocabulario"
+        "documento"
     ).innerHTML = html;
+
+
+    console.log(
+        "Tarjetas:",
+        vocabulario.length
+    );
+
+    console.log(
+        "Páginas:",
+        paginas.length
+    );
 
 })
 
@@ -296,10 +552,15 @@ fetch("data/english_vocab.json")
 
     console.error(error);
 
+
     document.getElementById(
-        "vocabulario"
-    ).textContent =
-        "Error: " + error.message;
+        "documento"
+    ).innerHTML =
+
+        "<div style='padding:20px'>" +
+        "Error: " +
+        escapeHTML(error.message) +
+        "</div>";
 
 });
 
