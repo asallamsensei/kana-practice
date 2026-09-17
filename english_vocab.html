@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Vocabulario Tetris</title>
+<title>Vocabulario Tetris Centrado</title>
 
 <style>
 
@@ -30,18 +30,15 @@ body {
    ===================================================== */
 
 .page {
-
     width: 8.5in;
     height: 11in;
 
     margin: 15px auto;
-
     padding: 0.20in;
 
     background: white;
 
     position: relative;
-
     overflow: hidden;
 
     page-break-after: always;
@@ -49,13 +46,11 @@ body {
 
 
 /* =====================================================
-   ÁREA INTERIOR
+   ÁREA DE COLOCACIÓN
    ===================================================== */
 
 .area {
-
     position: relative;
-
     width: 100%;
     height: 100%;
 }
@@ -66,7 +61,6 @@ body {
    ===================================================== */
 
 .card {
-
     position: absolute;
 
     width: max-content;
@@ -76,22 +70,20 @@ body {
 
     border: 1px solid #777;
 
-    font-size: 10px;
-    line-height: 1.1;
+    font-size: 11px;
+    line-height: 1.15;
 
     white-space: nowrap;
 
     break-inside: avoid;
+    page-break-inside: avoid;
 }
 
 
-/* =====================================================
-   INGLÉS
-   ===================================================== */
+/* INGLÉS */
 
 .en {
-
-    padding: 2px 4px;
+    padding: 3px 5px;
 
     font-weight: bold;
 
@@ -99,30 +91,24 @@ body {
 }
 
 
-/* =====================================================
-   ESPAÑOL
-   ===================================================== */
+/* ESPAÑOL */
 
 .es {
-
-    padding: 2px 4px;
+    padding: 3px 5px;
 }
 
 
 /* =====================================================
-   ZONA TEMPORAL DE MEDICIÓN
+   MEDIDOR INVISIBLE
    ===================================================== */
 
 #medidor {
-
     position: absolute;
 
     left: -100000px;
     top: 0;
 
     visibility: hidden;
-
-    width: auto;
 }
 
 
@@ -131,10 +117,8 @@ body {
    ===================================================== */
 
 @page {
-
     size: Letter portrait;
     margin: 0;
-
 }
 
 
@@ -145,7 +129,6 @@ body {
     }
 
     .page {
-
         margin: 0;
 
         width: 8.5in;
@@ -173,30 +156,37 @@ body {
    CONFIGURACIÓN
    ===================================================== */
 
+
 /*
-   Separación entre tarjetas.
+   Espacio mínimo entre tarjetas.
 */
 
-const GAP = 2;
+const GAP = 3;
 
 
 /*
-   Resolución horizontal del Tetris.
+   Resolución horizontal.
 
-   4 significa que pensamos la página
-   en columnas virtuales de 4 píxeles.
-
-   Más pequeño = más preciso.
-   Más grande = más rápido.
-
-   4 es un buen equilibrio.
+   4 = buen equilibrio entre precisión y velocidad.
 */
 
 const STEP = 4;
 
 
+/*
+   Pequeña irregularidad vertical.
+
+   Cada tarjeta puede separarse entre 0 y 4 px
+   adicionales.
+
+   Esto evita que todo se vea demasiado cuadriculado.
+*/
+
+const VERTICAL_RANDOM = 4;
+
+
 /* =====================================================
-   ESCAPAR HTML
+   UTILIDADES
    ===================================================== */
 
 function escapeHTML(text = "") {
@@ -214,7 +204,7 @@ function escapeHTML(text = "") {
 /* =====================================================
    ESPAÑOL
 
-   ; = salto de línea
+   Cada ; genera salto de línea.
    ===================================================== */
 
 function formatoEspanol(text = "") {
@@ -225,7 +215,7 @@ function formatoEspanol(text = "") {
 
 
 /* =====================================================
-   HTML DE UNA TARJETA
+   HTML DE TARJETA
    ===================================================== */
 
 function tarjetaHTML(item) {
@@ -250,11 +240,9 @@ function tarjetaHTML(item) {
 
 
 /* =====================================================
-   MEDIR TODAS LAS TARJETAS
+   MEDIR TARJETAS
 
-   IMPORTANTE:
-
-   Esta es la ÚNICA vez que medimos el DOM.
+   Solo se miden UNA VEZ.
    ===================================================== */
 
 function medir(items) {
@@ -262,10 +250,6 @@ function medir(items) {
     const medidor =
         document.getElementById("medidor");
 
-
-    /*
-       Crear todas de una sola vez.
-    */
 
     medidor.innerHTML =
         items
@@ -280,8 +264,7 @@ function medir(items) {
     const resultado =
         cards.map((card, index) => ({
 
-            item:
-                items[index],
+            item: items[index],
 
             width:
                 Math.ceil(card.offsetWidth),
@@ -292,10 +275,6 @@ function medir(items) {
         }));
 
 
-    /*
-       Ya no necesitamos las tarjetas temporales.
-    */
-
     medidor.innerHTML = "";
 
 
@@ -304,9 +283,90 @@ function medir(items) {
 
 
 /* =====================================================
-   TETRIS / SKYLINE
+   CREAR ORDEN DE BÚSQUEDA
 
-   Coloca cada tarjeta UNA SOLA VEZ.
+   Esta es la parte nueva.
+
+   En vez de buscar:
+
+       izquierda → derecha
+
+   buscamos:
+
+                 CENTRO
+              ←         →
+            ←             →
+          ←                 →
+
+   El lado inicial se elige aleatoriamente.
+   ===================================================== */
+
+function posicionesDesdeCentro(maxX) {
+
+    const posiciones = [];
+
+
+    const centro =
+        Math.floor(maxX / 2);
+
+
+    posiciones.push(centro);
+
+
+    /*
+       Elegimos aleatoriamente qué lado probar primero.
+    */
+
+    const izquierdaPrimero =
+        Math.random() < 0.5;
+
+
+    for (
+        let distancia = 1;
+        distancia <= maxX;
+        distancia++
+    ) {
+
+        const izquierda =
+            centro - distancia;
+
+        const derecha =
+            centro + distancia;
+
+
+        if (izquierdaPrimero) {
+
+            if (izquierda >= 0) {
+                posiciones.push(izquierda);
+            }
+
+            if (derecha <= maxX) {
+                posiciones.push(derecha);
+            }
+
+        }
+
+        else {
+
+            if (derecha <= maxX) {
+                posiciones.push(derecha);
+            }
+
+            if (izquierda >= 0) {
+                posiciones.push(izquierda);
+            }
+
+        }
+
+    }
+
+
+    return posiciones;
+}
+
+
+/* =====================================================
+   MOTOR TETRIS CENTRADO
    ===================================================== */
 
 function empacar(items, pageWidth, pageHeight) {
@@ -315,43 +375,39 @@ function empacar(items, pageWidth, pageHeight) {
 
 
     /*
-       Como el orden NO importa,
-       primero ponemos las piezas difíciles.
+       Las piezas difíciles primero.
 
-       Altas primero.
-       En empate, anchas primero.
+       No importa el orden original.
     */
 
     items.sort((a, b) => {
 
-        if (b.height !== a.height) {
+        const areaA =
+            a.width * a.height;
 
-            return b.height - a.height;
+        const areaB =
+            b.width * b.height;
 
-        }
 
-        return b.width - a.width;
+        return areaB - areaA;
 
     });
 
 
-    /*
-       Mientras queden piezas.
-    */
-
     while (items.length) {
 
 
-        /* =============================================
+        /* =================================================
            NUEVA PÁGINA
-           ============================================= */
+           ================================================= */
 
         const columnas =
             Math.ceil(pageWidth / STEP);
 
 
         /*
-           skyline[x] = altura ocupada en esa columna.
+           Cada posición horizontal guarda
+           la altura ocupada.
         */
 
         const skyline =
@@ -359,20 +415,15 @@ function empacar(items, pageWidth, pageHeight) {
 
 
         const colocados = [];
-
         const pendientes = [];
 
 
-        /* =============================================
-           PROBAR CADA TARJETA
-           ============================================= */
+        /* =================================================
+           CADA TARJETA
+           ================================================= */
 
         for (const item of items) {
 
-
-            /*
-               Número de columnas virtuales que necesita.
-            */
 
             const span =
                 Math.ceil(
@@ -380,29 +431,58 @@ function empacar(items, pageWidth, pageHeight) {
                 );
 
 
-            let mejorX = -1;
-
-            let mejorY = Infinity;
+            const maxX =
+                columnas - span;
 
 
             /*
-               Buscar de izquierda a derecha.
+               Tarjeta demasiado ancha.
             */
 
-            for (
-                let x = 0;
-                x <= columnas - span;
-                x++
-            ) {
+            if (maxX < 0) {
+
+                pendientes.push(item);
+                continue;
+
+            }
 
 
-                /*
-                   La tarjeta tiene que descansar sobre
-                   el punto más alto debajo de ella.
-                */
+            /*
+               Generamos posiciones:
+
+               centro
+               izquierda/derecha
+               más izquierda/más derecha
+               ...
+            */
+
+            const posiciones =
+                posicionesDesdeCentro(maxX);
+
+
+            let mejorX = -1;
+            let mejorY = Infinity;
+            let mejorDistanciaCentro = Infinity;
+
+
+            const centroPagina =
+                pageWidth / 2;
+
+
+            /* =================================================
+               BUSCAR POSICIÓN
+               ================================================= */
+
+            for (const x of posiciones) {
+
 
                 let y = 0;
 
+
+                /*
+                   Encontrar la parte más alta del suelo
+                   debajo de la tarjeta.
+                */
 
                 for (
                     let i = x;
@@ -434,30 +514,59 @@ function empacar(items, pageWidth, pageHeight) {
 
 
                 /*
-                   Queremos la posición MÁS ALTA.
+                   Centro real que tendría la tarjeta.
+                */
 
-                   Si empata:
-                   la más a la izquierda.
+                const centroTarjeta =
+                    (x * STEP) +
+                    (item.width / 2);
+
+
+                const distanciaCentro =
+                    Math.abs(
+                        centroTarjeta -
+                        centroPagina
+                    );
+
+
+                /*
+                   PRIORIDAD:
+
+                   1. quedar lo más arriba posible
+                   2. si empata, quedar más cerca del centro
                 */
 
                 if (
-                    y < mejorY
+                    y < mejorY ||
+                    (
+                        y === mejorY &&
+                        distanciaCentro <
+                        mejorDistanciaCentro
+                    )
                 ) {
 
-                    mejorY = y;
                     mejorX = x;
+
+                    mejorY = y;
+
+                    mejorDistanciaCentro =
+                        distanciaCentro;
 
                 }
 
 
                 /*
-                   No puede existir nada mejor
-                   que y = 0.
+                   Si encontramos el suelo superior,
+                   no necesitamos explorar toda la página.
 
-                   Así que podemos parar.
+                   Seguimos unas pocas posiciones para
+                   mantener la preferencia central.
                 */
 
-                if (mejorY === 0) {
+                if (
+                    mejorY === 0 &&
+                    distanciaCentro < STEP * 2
+                ) {
 
                     break;
 
@@ -466,9 +575,9 @@ function empacar(items, pageWidth, pageHeight) {
             }
 
 
-            /* =========================================
-               NO CABE EN ESTA PÁGINA
-               ========================================= */
+            /* =================================================
+               NO CABE
+               ================================================= */
 
             if (mejorX === -1) {
 
@@ -479,32 +588,63 @@ function empacar(items, pageWidth, pageHeight) {
             }
 
 
-            /* =========================================
-               COLOCAR
-               ========================================= */
+            /* =================================================
+               RANDOM VERTICAL
+               ================================================= */
+
+            const jitter =
+                Math.floor(
+                    Math.random() *
+                    (VERTICAL_RANDOM + 1)
+                );
+
+
+            /*
+               Solo agregamos irregularidad.
+
+               Nunca movemos hacia arriba porque podría
+               producir colisiones.
+            */
+
+            let realY =
+                mejorY + jitter;
+
+
+            /*
+               Seguridad inferior.
+            */
+
+            if (
+                realY + item.height >
+                pageHeight
+            ) {
+
+                realY = mejorY;
+
+            }
+
 
             const realX =
                 mejorX * STEP;
 
 
-            const realY =
-                mejorY;
-
+            /* =================================================
+               GUARDAR
+               ================================================= */
 
             colocados.push({
 
                 ...item,
 
                 x: realX,
-
                 y: realY
 
             });
 
 
-            /* =========================================
+            /* =================================================
                ACTUALIZAR SKYLINE
-               ========================================= */
+               ================================================= */
 
             const nuevaAltura =
                 realY +
@@ -526,12 +666,9 @@ function empacar(items, pageWidth, pageHeight) {
         }
 
 
-        /* =============================================
+        /* =================================================
            SEGURIDAD
-
-           Evitar bucle infinito si existe una tarjeta
-           más grande que una página.
-           ============================================= */
+           ================================================= */
 
         if (!colocados.length) {
 
@@ -543,7 +680,12 @@ function empacar(items, pageWidth, pageHeight) {
 
                 ...item,
 
-                x: 0,
+                x:
+                    Math.max(
+                        0,
+                        (pageWidth - item.width) / 2
+                    ),
+
                 y: 0
 
             });
@@ -552,7 +694,6 @@ function empacar(items, pageWidth, pageHeight) {
 
 
         paginas.push(colocados);
-
 
         items = pendientes;
 
@@ -564,7 +705,7 @@ function empacar(items, pageWidth, pageHeight) {
 
 
 /* =====================================================
-   DIBUJAR PÁGINAS
+   DIBUJAR
    ===================================================== */
 
 function dibujar(paginas) {
@@ -580,8 +721,11 @@ function dibujar(paginas) {
 
 
         html += `
+
             <section class="page">
+
                 <div class="area">
+
         `;
 
 
@@ -614,8 +758,11 @@ function dibujar(paginas) {
 
 
         html += `
+
                 </div>
+
             </section>
+
         `;
 
     }
@@ -641,6 +788,7 @@ fetch("data/english_vocab.json")
 
     }
 
+
     return response.json();
 
 })
@@ -649,7 +797,7 @@ fetch("data/english_vocab.json")
 
 
     /* =================================================
-       SACAR TODAS LAS PALABRAS
+       EXTRAER VOCABULARIO
        ================================================= */
 
     const vocabulario = [];
@@ -670,7 +818,7 @@ fetch("data/english_vocab.json")
 
 
     /* =================================================
-       MEDIR UNA SOLA VEZ
+       MEDIR UNA VEZ
        ================================================= */
 
     const medidas =
@@ -678,9 +826,7 @@ fetch("data/english_vocab.json")
 
 
     /* =================================================
-       OBTENER TAMAÑO REAL DEL ÁREA DE UNA HOJA
-
-       Creamos una página temporal.
+       MEDIR ÁREA REAL DE CARTA
        ================================================= */
 
     const temp =
@@ -713,7 +859,7 @@ fetch("data/english_vocab.json")
 
 
     /* =================================================
-       TETRIS
+       EMPACAR
        ================================================= */
 
     const paginas =
