@@ -107,6 +107,92 @@
     .loading { opacity:.65; pointer-events:none }
     .errorbox { margin:auto; max-width:700px; border:1px solid rgba(239,68,68,.5); background:rgba(239,68,68,.12); padding:18px; border-radius:16px; line-height:1.55 }
 
+.study-progress {
+  margin-bottom: 15px;
+}
+
+.study-progress-info {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 7px;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.study-progress-track {
+  height: 9px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(255,255,255,.09);
+}
+
+#studyProgressBar {
+  width: 0%;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(
+    90deg,
+    var(--violet),
+    var(--blue),
+    var(--green)
+  );
+  box-shadow: 0 0 14px rgba(56,189,248,.45);
+  transition: width .25s ease;
+}
+
+.study-results {
+  margin: auto;
+  padding: 35px 10px;
+  text-align: center;
+}
+
+.study-results[hidden] {
+  display: none;
+}
+
+.results-icon {
+  font-size: 60px;
+}
+
+.study-results h2 {
+  margin: 10px 0 24px;
+  font-size: clamp(28px, 5vw, 44px);
+}
+
+.results-numbers {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  width: min(600px, 100%);
+  margin: 0 auto 25px;
+}
+
+.results-numbers div {
+  padding: 18px 10px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: rgba(0,0,0,.16);
+}
+
+.results-numbers strong {
+  display: block;
+  font-size: 32px;
+}
+
+.results-numbers span {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+@media (max-width: 520px) {
+  .results-numbers {
+    grid-template-columns: 1fr;
+  }
+}
+    
 .student-name {
   width: fit-content;
   margin: 12px auto 0;
@@ -146,6 +232,18 @@
 
     <div class="layout">
       <section class="card main" aria-live="polite">
+
+<div class="study-progress">
+  <div class="study-progress-info">
+    <span>Progreso del estudio</span>
+    <strong id="studyProgressText">0 / 100</strong>
+  </div>
+
+  <div class="study-progress-track">
+    <div id="studyProgressBar"></div>
+  </div>
+</div>
+        
         <div class="topline">
           <div class="badges">
             <span class="badge" id="storyBadge">Cargando…</span>
@@ -156,6 +254,7 @@
         </div>
 
         <div class="quiz" id="quiz">
+  
           <div class="question" id="question">読み込み中…</div>
           <div class="instruction" id="instruction">Cargando vocabulario</div>
           <button class="btn speaker" id="speaker" type="button" title="Escuchar audio" aria-label="Escuchar audio">🔊</button>
@@ -165,6 +264,34 @@
             <button class="btn primary" id="nextBtn" type="button">Siguiente →</button>
           </div>
         </div>
+
+<div id="studyResults" class="study-results" hidden>
+  <div class="results-icon">🏆</div>
+
+  <h2>¡Estudio terminado!</h2>
+
+  <div class="results-numbers">
+    <div>
+      <strong id="studyCorrectResult">0</strong>
+      <span>Aciertos</span>
+    </div>
+
+    <div>
+      <strong id="studyWrongResult">0</strong>
+      <span>Errores</span>
+    </div>
+
+    <div>
+      <strong id="studyAccuracyResult">0%</strong>
+      <span>Precisión</span>
+    </div>
+  </div>
+
+  <button class="btn primary" id="newStudyBtn" type="button">
+    ¡Hacer otras 100!
+  </button>
+</div>
+        
       </section>
 
       <aside class="card side">
@@ -242,7 +369,8 @@ const CLAVES_ESTUDIANTES = {
       storyId:STORY_CATALOG[0].id, data:null, all:[], pool:[], categories:new Set(),
       mode:"mix", roundMode:"jp_es", audioMode:"mp3", current:null,
       choices:[], correctIndex:-1, answered:false, lastId:null, audio:null,
-      stats:{correct:0,wrong:0,streak:0,best:0}
+      stats:{correct:0,wrong:0,streak:0,best:0},
+      study:{correct:0,wrong:0,target:100}
     };
 
     const $ = id => document.getElementById(id);
@@ -309,6 +437,58 @@ function autenticarEstudiante() {
       $("progressBar").style.width=`${accuracy}%`;
     }
 
+function studyTotal() {
+  return state.study.correct + state.study.wrong;
+}
+
+function updateStudyProgress() {
+  const total = studyTotal();
+  const percentage = Math.min(
+    100,
+    Math.round((total / state.study.target) * 100)
+  );
+
+  $("studyProgressText").textContent =
+    `${total} / ${state.study.target}`;
+
+  $("studyProgressBar").style.width =
+    `${percentage}%`;
+}
+
+function showStudyResults() {
+  const total = studyTotal();
+
+  const accuracy = total
+    ? Math.round((state.study.correct / total) * 100)
+    : 0;
+
+  $("studyCorrectResult").textContent =
+    state.study.correct;
+
+  $("studyWrongResult").textContent =
+    state.study.wrong;
+
+  $("studyAccuracyResult").textContent =
+    `${accuracy}%`;
+
+  $("quiz").hidden = true;
+  $("studyResults").hidden = false;
+}
+
+function startNewStudy() {
+  state.study = {
+    correct: 0,
+    wrong: 0,
+    target: 100
+  };
+
+  $("studyResults").hidden = true;
+  $("quiz").hidden = false;
+
+  updateStudyProgress();
+  nextQuestion();
+}
+    
     function beep(type){
       try{
         const Ctx=window.AudioContext||window.webkitAudioContext,ctx=new Ctx();
@@ -450,25 +630,80 @@ function autenticarEstudiante() {
       document.querySelectorAll(".answer").forEach((b,i)=>{
         b.disabled=true; b.classList.add(i===state.correctIndex?"correct":"wrong");
       });
-      if(ok){state.stats.correct++;state.stats.streak++;state.stats.best=Math.max(state.stats.best,state.stats.streak);beep("ok")}
-      else{state.stats.wrong++;state.stats.streak=0;beep("no")}
+
+if(ok){
+  state.stats.correct++;
+  state.stats.streak++;
+  state.stats.best=Math.max(
+    state.stats.best,
+    state.stats.streak
+  );
+
+  state.study.correct++;
+
+  beep("ok");
+}else{
+  state.stats.wrong++;
+  state.stats.streak=0;
+
+  state.study.wrong++;
+
+  beep("no");
+}
+
+updateStudyProgress();
+      
       saveStats();
       const word=renderFurigana(state.current),result=ok?"¡Correcto! ✓":"Incorrecto ✕";
       $("feedback").className=`feedback ${ok?"ok":"no"}`;
       $("feedback").innerHTML=`${result}<span class="detail">${word} · ${escapeHtml(state.current.reading)} · ${escapeHtml(state.current.romaji||"")} — ${escapeHtml(state.current.spanish)}</span>`;
       $("feedback").classList.toggle("furigana-off",!$("furiganaToggle").checked);
-      $("nextBtn").textContent="Siguiente →"; playCurrent();
+      $("nextBtn").textContent="Siguiente →";
+      
+if (studyTotal() >= state.study.target) {
+  $("nextBtn").textContent = "Ver resultados 🏆";
+}
+      
+      playCurrent();
     }
-    function skipOrNext(){
-      if(!state.answered){state.stats.wrong++;state.stats.streak=0;saveStats();beep("no")} nextQuestion();
+
+function skipOrNext() {
+  if (state.answered) {
+    if (studyTotal() >= state.study.target) {
+      showStudyResults();
+    } else {
+      nextQuestion();
     }
+
+    return;
+  }
+
+  // Las preguntas saltadas cuentan como error
+  state.stats.wrong++;
+  state.stats.streak = 0;
+  state.study.wrong++;
+
+  saveStats();
+  updateStudyProgress();
+  beep("no");
+
+  if (studyTotal() >= state.study.target) {
+    showStudyResults();
+  } else {
+    nextQuestion();
+  }
+}
+
+    
     function resetStats(){
       const store=readStatsStore(); delete store[statsKey()]; localStorage.setItem(STORAGE_KEY,JSON.stringify(store));
       state.stats={correct:0,wrong:0,streak:0,best:0}; paintStats(); nextQuestion();
     }
 
     document.querySelectorAll("[data-mode]").forEach(b=>b.onclick=()=>setMode(b.dataset.mode));
-    $("speaker").onclick=playCurrent; $("nextBtn").onclick=skipOrNext; $("resetBtn").onclick=resetStats;
+    $("speaker").onclick=playCurrent; $("nextBtn").onclick=skipOrNext;
+    $("resetBtn").onclick=resetStats;
+    $("newStudyBtn").onclick = startNewStudy;
     $("audioMp3").onclick=()=>setAudioMode("mp3"); $("audioTts").onclick=()=>setAudioMode("tts");
     $("furiganaToggle").onchange=()=>{
       const hidden=!$("furiganaToggle").checked;
@@ -496,7 +731,7 @@ if (estudianteGuardado) {
 } else {
   autenticarEstudiante();
 }
-    
+    updateStudyProgress();
     buildStoryButtons(); loadStory(state.storyId);
   </script>
 </body>
