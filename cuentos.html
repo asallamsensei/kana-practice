@@ -106,6 +106,27 @@
     .note { color:var(--muted); font-size:12px; line-height:1.45; margin-top:9px }
     .loading { opacity:.65; pointer-events:none }
     .errorbox { margin:auto; max-width:700px; border:1px solid rgba(239,68,68,.5); background:rgba(239,68,68,.12); padding:18px; border-radius:16px; line-height:1.55 }
+
+.student-name {
+  width: fit-content;
+  margin: 12px auto 0;
+  padding: 8px 20px;
+  border: 1px solid rgba(250, 204, 21, 0.65);
+  border-radius: 999px;
+  color: #fff4ad;
+  background: rgba(250, 204, 21, 0.10);
+  font-size: 16px;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  box-shadow:
+    0 0 12px rgba(250, 204, 21, 0.35),
+    0 0 28px rgba(250, 204, 21, 0.15),
+    inset 0 0 10px rgba(250, 204, 21, 0.10);
+  text-shadow:
+    0 0 8px rgba(250, 204, 21, 0.65),
+    0 0 16px rgba(250, 204, 21, 0.30);
+}
+    
     @media (max-width:900px) { .layout{grid-template-columns:1fr}.side{position:static}.main{min-height:560px} }
     @media (max-width:620px) {
       body{padding:18px 10px 44px}.answers{grid-template-columns:1fr}.answer{min-height:74px}.stats-grid{grid-template-columns:repeat(2,1fr)}.stat:last-child{grid-column:1/-1}.two{grid-template-columns:1fr}.main{min-height:0}.quiz{padding-top:24px}
@@ -118,6 +139,7 @@
     <header>
       <h1>物語で日本語</h1>
       <p class="subtitle">Aprende japonés con vocabulario de cuentos</p>
+      <div id="studentName" class="student-name">☆ Estudiante ☆</div>
     </header>
 
     <nav class="story-strip" id="storyStrip" aria-label="Seleccionar cuento"></nav>
@@ -195,6 +217,15 @@
   <script>
     "use strict";
 
+const CLAVES_ESTUDIANTES = {
+  "dogtora": "Laura",
+  "profe": "Sensei",
+  "paopao": "Paola",
+
+  // Añade más así:
+  // "clave": "Nombre del estudiante"
+};
+    
     // Añade aquí una línea por cada nuevo cuento. El resto se crea automáticamente.
     const STORY_CATALOG = [
       { id:"kin_no_ono_gin_no_ono", file:"data/cuentos/kin_no_ono_gin_no_ono.json", shortTitle:"金の斧・銀の斧" }
@@ -215,6 +246,36 @@
     };
 
     const $ = id => document.getElementById(id);
+
+function autenticarEstudiante() {
+  while (true) {
+    let clave = prompt("Ingresa tu clave de estudiante:");
+
+    if (clave === null) {
+      alert("Necesitas una clave para entrar.");
+      continue;
+    }
+
+    clave = clave.trim().toLowerCase();
+
+    if (CLAVES_ESTUDIANTES[clave]) {
+      const nombre = CLAVES_ESTUDIANTES[clave];
+
+      $("studentName").textContent =
+        `☆ Estudiante: ${nombre} ☆`;
+
+      sessionStorage.setItem(
+        "estudiante_cuentos",
+        nombre
+      );
+
+      return;
+    }
+
+    alert("Clave incorrecta");
+  }
+}
+    
     const escapeHtml = value => String(value ?? "").replace(/[&<>"']/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]));
     const shuffle = list => {
       const a=[...list];
@@ -425,6 +486,17 @@
 
     state.audioMode=localStorage.getItem("asallam_audio_mode")==="tts"?"tts":"mp3";
     $("audioMp3").classList.toggle("active",state.audioMode==="mp3"); $("audioTts").classList.toggle("active",state.audioMode==="tts");
+
+const estudianteGuardado =
+  sessionStorage.getItem("estudiante_cuentos");
+
+if (estudianteGuardado) {
+  $("studentName").textContent =
+    `☆ Estudiante: ${estudianteGuardado} ☆`;
+} else {
+  autenticarEstudiante();
+}
+    
     buildStoryButtons(); loadStory(state.storyId);
   </script>
 </body>
