@@ -31,7 +31,7 @@
     "ttsFallback": true
   },
   "audio": {
-    "basePath": "data/audios/kin_no_ono_gin_no_ono/",
+    "basePath": "data/cuentos/audios/",
     "fileNaming": "romaji",
     "extension": ".mp3"
   },
