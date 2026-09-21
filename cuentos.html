@@ -600,7 +600,7 @@ function startNewStudy() {
       if(distractors.length<2)return;
       state.choices=shuffle([correct,...distractors]); state.correctIndex=state.choices.indexOf(correct);
       renderQuestion(); renderAnswers();
-      $("feedback").className="feedback"; $("feedback").textContent=""; $("nextBtn").textContent="Saltar / siguiente →";
+      $("feedback").className="feedback"; $("feedback").textContent=""; $("nextBtn").textContent="Siguiente →";
       if(state.roundMode==="dictation")setTimeout(playCurrent,180);
     }
     function renderQuestion(){
@@ -668,6 +668,7 @@ if (studyTotal() >= state.study.target) {
     }
 
 function skipOrNext() {
+  // Segundo clic: avanzar a la siguiente pregunta
   if (state.answered) {
     if (studyTotal() >= state.study.target) {
       showStudyResults();
@@ -678,7 +679,21 @@ function skipOrNext() {
     return;
   }
 
-  // Las preguntas saltadas cuentan como error
+  // Primer clic: revisar y mostrar la respuesta
+  state.answered = true;
+
+  // Pintar la correcta en verde y las demás en rojo
+  document.querySelectorAll(".answer").forEach((boton, i) => {
+    boton.disabled = true;
+
+    boton.classList.add(
+      i === state.correctIndex
+        ? "correct"
+        : "wrong"
+    );
+  });
+
+  // Saltar cuenta como error
   state.stats.wrong++;
   state.stats.streak = 0;
   state.study.wrong++;
@@ -687,11 +702,34 @@ function skipOrNext() {
   updateStudyProgress();
   beep("no");
 
+  // Mostrar información de la respuesta
+  const word = renderFurigana(state.current);
+
+  $("feedback").className = "feedback no";
+
+  $("feedback").innerHTML = `
+    Saltado ✕
+    <span class="detail">
+      ${word} ·
+      ${escapeHtml(state.current.reading)} ·
+      ${escapeHtml(state.current.romaji || "")}
+      — ${escapeHtml(state.current.spanish)}
+    </span>
+  `;
+
+  $("feedback").classList.toggle(
+    "furigana-off",
+    !$("furiganaToggle").checked
+  );
+
+  // Cambiar el botón para el segundo clic
   if (studyTotal() >= state.study.target) {
-    showStudyResults();
+    $("nextBtn").textContent = "Ver resultados 🏆";
   } else {
-    nextQuestion();
+    $("nextBtn").textContent = "Siguiente →";
   }
+
+  playCurrent();
 }
 
     
