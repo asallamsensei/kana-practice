@@ -192,6 +192,8 @@
     grid-template-columns: 1fr;
   }
 }
+
+
     
 .student-name {
   width: fit-content;
@@ -218,6 +220,54 @@
       body{padding:18px 10px 44px}.answers{grid-template-columns:1fr}.answer{min-height:74px}.stats-grid{grid-template-columns:repeat(2,1fr)}.stat:last-child{grid-column:1/-1}.two{grid-template-columns:1fr}.main{min-height:0}.quiz{padding-top:24px}
     }
     @media (prefers-reduced-motion:reduce) { *{scroll-behavior:auto!important;transition:none!important} }
+
+.inline-stats {
+  width: min(760px, 100%);
+  margin: 18px auto 0;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+}
+
+.inline-stats .stats-grid {
+  grid-template-columns: repeat(5, 1fr);
+}
+
+.inline-stats .stat {
+  padding: 8px 4px;
+  background: rgba(0, 0, 0, .12);
+}
+
+.inline-stats .stat strong {
+  font-size: 21px;
+}
+
+.inline-stats .progress {
+  margin-top: 10px;
+}
+
+@media (max-width: 620px) {
+  .inline-stats .stats-grid {
+    grid-template-columns: repeat(5, 1fr);
+    gap: 5px;
+  }
+
+  .inline-stats .stat {
+    padding: 7px 2px;
+  }
+
+  .inline-stats .stat strong {
+    font-size: 17px;
+  }
+
+  .inline-stats .stat span {
+    font-size: 8px;
+  }
+
+  .inline-stats .stat:last-child {
+    grid-column: auto;
+  }
+}
+  
   </style>
 </head>
 <body>
@@ -263,8 +313,44 @@
           <div class="actions">
             <button class="btn primary" id="nextBtn" type="button">Siguiente →</button>
           </div>
+
+<div class="inline-stats" aria-label="Estadísticas">
+  <div class="stats-grid">
+    <div class="stat">
+      <strong id="correctStat">0</strong>
+      <span>Aciertos</span>
+    </div>
+
+    <div class="stat">
+      <strong id="wrongStat">0</strong>
+      <span>Errores</span>
+    </div>
+
+    <div class="stat">
+      <strong id="accuracyStat">0%</strong>
+      <span>Precisión</span>
+    </div>
+
+    <div class="stat">
+      <strong id="streakStat">0</strong>
+      <span>Racha</span>
+    </div>
+
+    <div class="stat">
+      <strong id="bestStat">0</strong>
+      <span>Mejor racha</span>
+    </div>
+  </div>
+
+  <div class="progress" aria-hidden="true">
+    <div id="progressBar"></div>
+  </div>
+</div>
+          
         </div>
 
+
+        
 <div id="studyResults" class="study-results" hidden>
   <div class="results-icon">🏆</div>
 
@@ -329,16 +415,6 @@
       </aside>
     </div>
 
-    <section class="card stats-card" aria-label="Estadísticas">
-      <div class="stats-grid">
-        <div class="stat"><strong id="correctStat">0</strong><span>Aciertos</span></div>
-        <div class="stat"><strong id="wrongStat">0</strong><span>Errores</span></div>
-        <div class="stat"><strong id="accuracyStat">0%</strong><span>Precisión</span></div>
-        <div class="stat"><strong id="streakStat">0</strong><span>Racha</span></div>
-        <div class="stat"><strong id="bestStat">0</strong><span>Mejor racha</span></div>
-      </div>
-      <div class="progress" aria-hidden="true"><div id="progressBar"></div></div>
-    </section>
   </main>
 
   <script>
