@@ -71,8 +71,88 @@
     .badges { display:flex; gap:7px; flex-wrap:wrap }
     .badge { padding:6px 10px; border:1px solid var(--line); border-radius:999px; color:var(--muted); background:rgba(0,0,0,.15); font-size:12px; font-weight:850 }
     
-    .furigana-toggle { display:flex; align-items:center; gap:8px; color:var(--muted); font-size:13px; font-weight:800; cursor:pointer }
-    .furigana-toggle input { accent-color:var(--violet); width:17px; height:17px }
+/* Información del cuento */
+
+.side .story-strip {
+  display:grid;
+  gap:8px;
+  padding:0;
+  overflow:visible;
+}
+
+.side .story-btn {
+  width:100%;
+}
+
+.story-info {
+  margin-top:10px;
+}
+
+/* Interruptor Furigana */
+
+.toggle-row {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  margin-top:12px;
+  padding:10px 12px;
+  border:1px solid var(--line);
+  border-radius:14px;
+  background:rgba(255,255,255,.05);
+  color:var(--text);
+  font-size:13px;
+  font-weight:750;
+  cursor:pointer;
+}
+
+.toggle-row input {
+  position:absolute;
+  opacity:0;
+  pointer-events:none;
+}
+
+.toggle-slider {
+  position:relative;
+  flex:0 0 auto;
+  width:42px;
+  height:24px;
+  border-radius:999px;
+  background:rgba(255,255,255,.14);
+  border:1px solid var(--line);
+  transition:
+    background .2s,
+    border-color .2s,
+    box-shadow .2s;
+}
+
+.toggle-slider::after {
+  content:"";
+  position:absolute;
+  top:3px;
+  left:3px;
+  width:16px;
+  height:16px;
+  border-radius:50%;
+  background:#dbe4ff;
+  transition:transform .2s;
+}
+
+.toggle-row input:checked + .toggle-slider {
+  background:linear-gradient(135deg,var(--violet),var(--blue));
+  border-color:rgba(139,92,246,.8);
+  box-shadow:0 0 14px rgba(139,92,246,.25);
+}
+
+.toggle-row input:checked + .toggle-slider::after {
+  transform:translateX(18px);
+}
+
+.toggle-row input:focus-visible + .toggle-slider {
+  outline:3px solid rgba(56,189,248,.4);
+  outline-offset:2px;
+}
+
     
 .quiz {
   flex:1;
@@ -379,8 +459,10 @@
       </section>
 
       <aside class="card side">
+      
+        <!-- Sección de cuentos -->
         <div class="section">
-          <div class="section-title">Modo de estudio</div>
+          <div class="section-title">Cuentos</div>
       
           <nav
             class="story-strip"
@@ -388,18 +470,15 @@
             aria-label="Seleccionar cuento">
           </nav>
       
-          <div class="badges">
+          <div class="badges story-info">
             <span class="badge" id="storyBadge">Cargando…</span>
             <span class="badge" id="poolBadge">0 palabras</span>
           </div>
+        </div>
       
-          <label class="furigana-toggle">
-            <input
-              type="checkbox"
-              id="furiganaToggle"
-              checked>
-            Furigana
-          </label>
+        <!-- Sección de modos -->
+        <div class="section">
+          <div class="section-title">Modo de estudio</div>
       
           <div class="stack" id="modeButtons">
             <button class="btn pill mode-btn" data-mode="jp_es">
@@ -418,6 +497,17 @@
               ✨ Mixto
             </button>
           </div>
+      
+          <label class="toggle-row">
+            <span>Furigana</span>
+      
+            <input
+              type="checkbox"
+              id="furiganaToggle"
+              checked>
+      
+            <span class="toggle-slider" aria-hidden="true"></span>
+          </label>
         </div>
 
         <div class="section">
