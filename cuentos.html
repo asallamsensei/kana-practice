@@ -36,7 +36,14 @@
       background:linear-gradient(180deg,rgba(255,255,255,.09),var(--card));
       box-shadow:var(--shadow); backdrop-filter:blur(15px);
     }
-    .main { padding:clamp(17px,3vw,30px); min-height:590px; display:flex; flex-direction:column }
+
+    .main {
+      padding:0 clamp(17px,3vw,30px) clamp(17px,3vw,30px);
+      min-height:590px;
+      display:flex;
+      flex-direction:column;
+    }
+    
     .side { padding:17px; position:sticky; top:14px }
     .section + .section { border-top:1px solid var(--line); margin-top:15px; padding-top:15px }
     .section-title { color:var(--muted); font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:.1em; margin-bottom:9px }
