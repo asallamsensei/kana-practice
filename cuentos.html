@@ -153,7 +153,6 @@
   outline-offset:2px;
 }
 
-    
 .quiz {
   flex:1;
   display:flex;
@@ -161,6 +160,10 @@
   justify-content:flex-start;
   text-align:center;
   padding:8px 0 4px;
+}
+
+.quiz[hidden] {
+  display:none !important;
 }
     
     .question { margin:8px auto 4px; max-width:830px; font-size:clamp(31px,6.5vw,66px); font-weight:700; line-height:1.18; letter-spacing:-.025em; word-break:break-word }
