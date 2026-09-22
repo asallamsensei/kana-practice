@@ -195,8 +195,8 @@
     .stat { text-align:center; padding:10px 5px; border:1px solid var(--line); background:rgba(0,0,0,.14); border-radius:14px }
     .stat strong { display:block; font-size:clamp(19px,3vw,27px) }
     .stat span { color:var(--muted); font-size:11px; font-weight:750; text-transform:uppercase; letter-spacing:.06em }
-    .progress { height:8px; overflow:hidden; border-radius:99px; background:rgba(255,255,255,.08); margin-top:12px }
-    .progress > div { height:100%; width:0; border-radius:inherit; background:linear-gradient(90deg,var(--violet),var(--blue),var(--green)); transition:width .25s }
+    
+    
 
     .note { color:var(--muted); font-size:12px; line-height:1.45; margin-top:9px }
     .loading { opacity:.65; pointer-events:none }
@@ -336,9 +336,6 @@
   font-size: 21px;
 }
 
-.inline-stats .progress {
-  margin-top: 10px;
-}
 
 @media (max-width: 620px) {
   .inline-stats .stats-grid {
@@ -420,9 +417,7 @@
     </div>
   </div>
 
-  <div class="progress" aria-hidden="true">
-    <div id="progressBar"></div>
-  </div>
+
 </div>
           
         </div>
@@ -516,7 +511,7 @@
             <button class="btn pill audio-btn active" id="audioMp3" type="button">🎙️ MP3</button>
             <button class="btn pill audio-btn" id="audioTts" type="button">🗣️ Sintetizador</button>
           </div>
-          <div class="note">Si un MP3 no existe, se usa automáticamente la voz japonesa del dispositivo.</div>
+          
         </div>
 
 
@@ -621,7 +616,7 @@ function autenticarEstudiante() {
       const s=state.stats,total=s.correct+s.wrong,accuracy=total?Math.round(s.correct/total*100):0;
       $("correctStat").textContent=s.correct; $("wrongStat").textContent=s.wrong;
       $("accuracyStat").textContent=`${accuracy}%`; $("streakStat").textContent=s.streak; $("bestStat").textContent=s.best;
-      $("progressBar").style.width=`${accuracy}%`;
+      
     }
 
 function studyTotal() {
