@@ -60,7 +60,7 @@
     .btn:disabled { opacity:.48; cursor:not-allowed }
     .pill { border-radius:999px; white-space:nowrap }
     .story-btn { min-width:max-content; border-color:rgba(139,92,246,.4) }
-    .story-btn.active,.mode-btn.active,.filter-btn.active {
+    .story-btn.active,.mode-btn.active {
       border-color:rgba(139,92,246,.8); background:linear-gradient(135deg,rgba(139,92,246,.38),rgba(56,189,248,.23));
       box-shadow:0 0 18px rgba(139,92,246,.24),inset 0 0 14px rgba(139,92,246,.08);
     }
@@ -117,8 +117,7 @@
     .stat span { color:var(--muted); font-size:11px; font-weight:750; text-transform:uppercase; letter-spacing:.06em }
     .progress { height:8px; overflow:hidden; border-radius:99px; background:rgba(255,255,255,.08); margin-top:12px }
     .progress > div { height:100%; width:0; border-radius:inherit; background:linear-gradient(90deg,var(--violet),var(--blue),var(--green)); transition:width .25s }
-    .filters { display:flex; gap:7px; flex-wrap:wrap }
-    .filter-btn { font-size:12px; padding:8px 10px }
+
     .note { color:var(--muted); font-size:12px; line-height:1.45; margin-top:9px }
     .loading { opacity:.65; pointer-events:none }
     .errorbox { margin:auto; max-width:700px; border:1px solid rgba(239,68,68,.5); background:rgba(239,68,68,.12); padding:18px; border-radius:16px; line-height:1.55 }
@@ -430,10 +429,7 @@
           <div class="note">Si un MP3 no existe, se usa automáticamente la voz japonesa del dispositivo.</div>
         </div>
 
-        <div class="section">
-          <div class="section-title">Categorías</div>
-          <div class="filters" id="categoryFilters"></div>
-        </div>
+
 
         <div class="section">
           <div class="section-title">Sesión</div>
@@ -467,7 +463,7 @@ const CLAVES_ESTUDIANTES = {
 
     const STORAGE_KEY = "asallam_cuentos_vocab_stats_v1";
     const state = {
-      storyId:STORY_CATALOG[0].id, data:null, all:[], pool:[], categories:new Set(),
+      storyId:STORY_CATALOG[0].id, data:null, all:[], pool:[],
       mode:"mix", roundMode:"jp_es", audioMode:"mp3", current:null,
       choices:[], correctIndex:-1, answered:false, lastId:null, audio:null,
       stats:{correct:0,wrong:0,streak:0,best:0},
@@ -644,7 +640,10 @@ function startNewStudy() {
         if(!response.ok)throw new Error(`HTTP ${response.status}`);
         const data=await response.json();
         if(!Array.isArray(data.vocabulary)||data.vocabulary.length<3)throw new Error("El JSON necesita al menos 3 palabras.");
-        state.data=data; state.all=data.vocabulary.filter(validItem); state.categories=new Set((data.categories||[]).map(c=>c.id));
+
+        state.data = data;
+        state.all = data.vocabulary.filter(validItem);
+        
         if(state.all.length<3)throw new Error("No hay suficientes entradas válidas.");
         
         $("storyBadge").textContent =
@@ -653,7 +652,6 @@ function startNewStudy() {
         document.title =
           `${data.story?.title?.spanish || entry.shortTitle} · Asallam Sensei`;
         
-        buildCategoryFilters();
         updatePool();
         loadStats();
         nextQuestion();
@@ -663,26 +661,9 @@ function startNewStudy() {
     }
     function validItem(x){ return x&&x.id&&x.japanese&&x.spanish&&x.reading }
 
-    function buildCategoryFilters(){
-      const categories=state.data.categories||[];
-      $("categoryFilters").innerHTML=`<button class="btn pill filter-btn active" data-category="all">Todas</button>`+
-        categories.map(c=>`<button class="btn pill filter-btn active" data-category="${escapeHtml(c.id)}">${escapeHtml(c.label)}</button>`).join("");
-      document.querySelectorAll("[data-category]").forEach(btn=>btn.onclick=()=>toggleCategory(btn.dataset.category));
-    }
-    function toggleCategory(id){
-      const allIds=(state.data.categories||[]).map(c=>c.id);
-      if(id==="all") state.categories=state.categories.size===allIds.length?new Set():new Set(allIds);
-      else state.categories.has(id)?state.categories.delete(id):state.categories.add(id);
-      if(state.categories.size===0&&id!=="all")state.categories.add(id);
-      document.querySelectorAll("[data-category]").forEach(btn=>{
-        btn.classList.toggle("active",btn.dataset.category==="all"?state.categories.size===allIds.length:state.categories.has(btn.dataset.category));
-      });
-      updatePool(); nextQuestion();
-    }
     function updatePool(){
-      state.pool=state.all.filter(x=>state.categories.has(x.category));
-      if(state.pool.length<3)state.pool=[...state.all];
-      $("poolBadge").textContent=`${state.pool.length} palabras`;
+      state.pool = [...state.all];
+      $("poolBadge").textContent = `${state.pool.length} palabras`;
     }
 
     function setMode(mode){
