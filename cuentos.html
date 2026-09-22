@@ -1041,6 +1041,14 @@ function selectMatch(index, button) {
   ) return;
 
   const card = state.match.cards[index];
+  
+  /* Reproducir la palabra cuando se pulsa
+     un botón japonés */
+  if (card.type === "jp") {
+    state.current = card.item;
+    playCurrent();
+  }
+  
   button.classList.add("selected");
 
   if (!state.match.first) {
@@ -1096,7 +1104,7 @@ function selectMatch(index, button) {
         } else {
           renderMatchRound();
         }
-      }, 650);
+      }, 300);
     }
 
     return;
