@@ -180,11 +180,92 @@
       border:1px solid rgba(139,92,246,.43); background:rgba(139,92,246,.1); border-radius:18px;
       color:var(--text); font-size:clamp(18px,2.2vw,25px); font-weight:750; cursor:pointer; transition:.16s;
     }
+
+   
     .answer:hover:not(:disabled) { transform:translateY(-3px); border-color:rgba(139,92,246,.85); box-shadow:0 12px 26px rgba(0,0,0,.24),0 0 18px rgba(139,92,246,.14) }
     
     .answer.correct { border-color:#4ade80; background:rgba(34,197,94,.27); box-shadow:0 0 22px rgba(34,197,94,.3); color:#dcfce7 }
     .answer.wrong { border-color:#f87171; background:rgba(239,68,68,.24); box-shadow:0 0 16px rgba(239,68,68,.18); color:#fee2e2 }
     .answer:disabled { cursor:default }
+
+  .activity-btn.active {
+  border-color:rgba(56,189,248,.8);
+  background:linear-gradient(
+    135deg,
+    rgba(56,189,248,.32),
+    rgba(139,92,246,.28)
+  );
+  box-shadow:0 0 18px rgba(56,189,248,.2);
+}
+
+.match-game {
+  flex:1;
+  padding:18px 0 4px;
+  text-align:center;
+}
+
+.match-game[hidden] {
+  display:none;
+}
+
+.match-board {
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:12px;
+  width:min(850px,100%);
+  margin:0 auto;
+}
+
+.match-card {
+  min-height:105px;
+  padding:14px 12px;
+  border:1px solid rgba(139,92,246,.43);
+  border-radius:18px;
+  color:var(--text);
+  background:rgba(139,92,246,.1);
+  font-size:clamp(18px,2.2vw,25px);
+  font-weight:750;
+  cursor:pointer;
+  transition:.16s;
+}
+
+.match-card:hover:not(:disabled) {
+  transform:translateY(-3px);
+  border-color:rgba(139,92,246,.85);
+}
+
+.match-card.selected {
+  border-color:var(--blue);
+  background:rgba(56,189,248,.2);
+  box-shadow:0 0 18px rgba(56,189,248,.25);
+}
+
+.match-card.correct {
+  border-color:#4ade80;
+  background:rgba(34,197,94,.27);
+  color:#dcfce7;
+}
+
+.match-card.wrong {
+  border-color:#f87171;
+  background:rgba(239,68,68,.24);
+  color:#fee2e2;
+}
+
+.match-card:disabled {
+  cursor:default;
+}
+
+@media (max-width:620px) {
+  .match-board {
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+
+  .match-card {
+    min-height:82px;
+  }
+}
+    
     .feedback { min-height:61px; margin:15px 0 0; font-size:19px; font-weight:750; line-height:1.45 }
     .feedback.ok { color:#86efac }.feedback.no { color:#fca5a5 }
     .detail { display:block; color:var(--text); font-size:15px; font-weight:650; margin-top:3px }
@@ -380,7 +461,7 @@
 </div>
 
         <div class="quiz" id="quiz">
-  
+          
           <div class="question" id="question">読み込み中…</div>
           <button class="btn speaker" id="speaker" type="button" title="Escuchar audio" aria-label="Escuchar audio">🔊</button>
           <div class="answers" id="answers"></div>
@@ -422,7 +503,10 @@
           
         </div>
 
-
+<div class="match-game" id="matchGame" hidden>
+  <div class="match-board" id="matchBoard"></div>
+  <div class="feedback" id="matchFeedback"></div>
+</div>
         
 <div id="studyResults" class="study-results" hidden>
   <div class="results-icon">🏆</div>
@@ -454,7 +538,28 @@
       </section>
 
       <aside class="card side">
-      
+
+        <div class="section">
+          <div class="section-title">Actividad</div>
+        
+          <div class="stack two" id="activityButtons">
+            <button
+              class="btn pill activity-btn active"
+              data-activity="quiz"
+              type="button">
+              Quiz
+            </button>
+        
+            <button
+              class="btn pill activity-btn"
+              data-activity="match"
+              type="button">
+              Emparejar
+            </button>
+          </div>
+        </div>
+
+        
         <!-- Sección de cuentos -->
         <div class="section">
           <div class="section-title">Cuentos</div>
@@ -472,7 +577,7 @@
         </div>
       
         <!-- Sección de modos -->
-        <div class="section">
+        <div class="section" id="quizOptions">
           <div class="section-title">Modo de estudio</div>
       
           <div class="stack" id="modeButtons">
@@ -505,7 +610,7 @@
           </label>
         </div>
 
-        <div class="section">
+        <div class="section" id="quizAudio">
           <div class="section-title">Audio</div>
           <div class="stack two">
             <button class="btn pill audio-btn active" id="audioMp3" type="button">🎙️ MP3</button>
@@ -547,13 +652,45 @@ const CLAVES_ESTUDIANTES = {
     ];
 
     const STORAGE_KEY = "asallam_cuentos_vocab_stats_v1";
-    const state = {
-      storyId:STORY_CATALOG[0].id, data:null, all:[], pool:[],
-      mode:"mix", roundMode:"jp_es", audioMode:"mp3", current:null,
-      choices:[], correctIndex:-1, answered:false, lastId:null, audio:null,
-      stats:{correct:0,wrong:0,streak:0,best:0},
-      study:{correct:0,wrong:0,target:100}
-    };
+const state = {
+  storyId:STORY_CATALOG[0].id,
+  data:null,
+  all:[],
+  pool:[],
+
+  activity:"quiz",
+
+  mode:"mix",
+  roundMode:"jp_es",
+  audioMode:"mp3",
+  current:null,
+  choices:[],
+  correctIndex:-1,
+  answered:false,
+  lastId:null,
+  audio:null,
+
+  stats:{
+    correct:0,
+    wrong:0,
+    streak:0,
+    best:0
+  },
+
+  study:{
+    correct:0,
+    wrong:0,
+    target:100
+  },
+
+  match:{
+    cards:[],
+    first:null,
+    locked:false,
+    matched:0,
+    rounds:0
+  }
+};
 
     const $ = id => document.getElementById(id);
 
@@ -601,7 +738,14 @@ function autenticarEstudiante() {
         : escapeHtml(s.text)).join("");
     }
 
-    function statsKey(){ return `${state.storyId}__${state.mode}` }
+function statsKey() {
+  if (state.activity === "match") {
+    return `${state.storyId}__match`;
+  }
+
+  return `${state.storyId}__quiz__${state.mode}`;
+}
+    
     function readStatsStore(){ try{return JSON.parse(localStorage.getItem(STORAGE_KEY))||{}}catch{return{}} }
     function loadStats(){
       const saved=readStatsStore()[statsKey()]||{};
@@ -623,8 +767,14 @@ function studyTotal() {
   return state.study.correct + state.study.wrong;
 }
 
+function progressTotal() {
+  return state.activity === "match"
+    ? state.match.rounds
+    : studyTotal();
+}
+    
 function updateStudyProgress() {
-  const total = studyTotal();
+  const total = progressTotal();
   const percentage = Math.min(
     100,
     Math.round((total / state.study.target) * 100)
@@ -651,21 +801,26 @@ function showStudyResults() {
     `${accuracy}%`;
 
   $("quiz").hidden = true;
+  $("matchGame").hidden = true;
   $("studyResults").hidden = false;
 }
 
 function startNewStudy() {
   state.study = {
-    correct: 0,
-    wrong: 0,
-    target: 100
+    correct:0,
+    wrong:0,
+    target:100
   };
 
+  state.match.first = null;
+  state.match.locked = false;
+  state.match.matched = 0;
+  state.match.rounds = 0;
+
   $("studyResults").hidden = true;
-  $("quiz").hidden = false;
 
   updateStudyProgress();
-  nextQuestion();
+  showCurrentActivity();
 }
     
     function beep(type){
@@ -739,7 +894,7 @@ function startNewStudy() {
         
         updatePool();
         loadStats();
-        nextQuestion();
+        showCurrentActivity();
       }catch(error){
         $("quiz").innerHTML=`<div class="errorbox"><strong>No pude cargar el cuento.</strong><br>${escapeHtml(error.message)}<br><br>Abre estos archivos desde un servidor web y conserva el HTML junto al JSON.</div>`;
       }finally{$("app").classList.remove("loading")}
@@ -762,6 +917,216 @@ function startNewStudy() {
     function chooseRoundMode(){ return state.mode==="mix"?pick(["jp_es","es_jp","dictation"]):state.mode }
     function answerText(item,mode){ return mode==="es_jp"?item.japanese:item.spanish }
 
+function setActivity(activity) {
+  if (!["quiz", "match"].includes(activity)) return;
+
+  state.activity = activity;
+
+  document
+    .querySelectorAll("[data-activity]")
+    .forEach(button => {
+      button.classList.toggle(
+        "active",
+        button.dataset.activity === activity
+      );
+    });
+
+  $("quizOptions").hidden = activity === "match";
+  $("quizAudio").hidden = activity === "match";
+  $("studyResults").hidden = true;
+
+  state.study = {
+    correct:0,
+    wrong:0,
+    target:100
+  };
+
+  state.match = {
+    cards:[],
+    first:null,
+    locked:false,
+    matched:0,
+    rounds:0
+  };
+
+  loadStats();
+  updateStudyProgress();
+  showCurrentActivity();
+}
+
+function showCurrentActivity() {
+  const matching = state.activity === "match";
+
+  $("quiz").hidden = matching;
+  $("matchGame").hidden = !matching;
+
+  if (matching) {
+    renderMatchRound();
+  } else {
+    nextQuestion();
+  }
+}
+
+function renderMatchRound() {
+  if (state.pool.length < 3) return;
+
+  state.match.first = null;
+  state.match.locked = false;
+  state.match.matched = 0;
+
+  const words = shuffle(state.pool).slice(0, 3);
+
+  state.match.cards = shuffle(
+    words.flatMap((item, pair) => [
+      {
+        pair,
+        type:"jp",
+        item
+      },
+      {
+        pair,
+        type:"es",
+        item
+      }
+    ])
+  );
+
+  $("matchBoard").innerHTML =
+    state.match.cards.map((card, index) => {
+      const content = card.type === "jp"
+        ? renderFurigana(card.item)
+        : escapeHtml(card.item.spanish);
+
+      return `
+        <button
+          class="match-card"
+          data-match-index="${index}"
+          type="button">
+          ${content}
+        </button>
+      `;
+    }).join("");
+
+  $("matchFeedback").textContent = "";
+
+  $("matchBoard").classList.toggle(
+    "furigana-off",
+    !$("furiganaToggle").checked
+  );
+
+  document
+    .querySelectorAll("[data-match-index]")
+    .forEach(button => {
+      button.onclick = () => {
+        selectMatch(
+          Number(button.dataset.matchIndex),
+          button
+        );
+      };
+    });
+}
+
+function selectMatch(index, button) {
+  if (
+    state.match.locked ||
+    button.disabled
+  ) return;
+
+  if (
+    state.match.first &&
+    state.match.first.button === button
+  ) return;
+
+  const card = state.match.cards[index];
+  button.classList.add("selected");
+
+  if (!state.match.first) {
+    state.match.first = {
+      card,
+      button
+    };
+
+    return;
+  }
+
+  const first = state.match.first;
+
+  const correct =
+    first.card.pair === card.pair &&
+    first.card.type !== card.type;
+
+  if (correct) {
+    first.button.disabled = true;
+    button.disabled = true;
+
+    first.button.classList.remove("selected");
+    button.classList.remove("selected");
+
+    first.button.classList.add("correct");
+    button.classList.add("correct");
+
+    state.match.first = null;
+    state.match.matched++;
+
+    state.stats.correct++;
+    state.stats.streak++;
+    state.stats.best = Math.max(
+      state.stats.best,
+      state.stats.streak
+    );
+
+    state.study.correct++;
+
+    saveStats();
+    beep("ok");
+
+    if (state.match.matched === 3) {
+      state.match.rounds++;
+      updateStudyProgress();
+
+      setTimeout(() => {
+        if (
+          progressTotal() >=
+          state.study.target
+        ) {
+          showStudyResults();
+        } else {
+          renderMatchRound();
+        }
+      }, 650);
+    }
+
+    return;
+  }
+
+  state.match.locked = true;
+
+  first.button.classList.add("wrong");
+  button.classList.add("wrong");
+
+  state.stats.wrong++;
+  state.stats.streak = 0;
+  state.study.wrong++;
+
+  saveStats();
+  beep("no");
+
+  setTimeout(() => {
+    first.button.classList.remove(
+      "selected",
+      "wrong"
+    );
+
+    button.classList.remove(
+      "selected",
+      "wrong"
+    );
+
+    state.match.first = null;
+    state.match.locked = false;
+  }, 650);
+}
+    
     function nextQuestion(){
       if(!state.pool.length)return;
       stopAudio(); state.answered=false; state.roundMode=chooseRoundMode();
@@ -845,7 +1210,7 @@ updateStudyProgress();
       $("feedback").classList.toggle("furigana-off",!$("furiganaToggle").checked);
       $("nextBtn").textContent="Siguiente →";
       
-if (studyTotal() >= state.study.target) {
+if (progressTotal() >= state.study.target) {
   $("nextBtn").textContent = "Ver resultados 🏆";
 }
       
@@ -855,7 +1220,7 @@ if (studyTotal() >= state.study.target) {
 function skipOrNext() {
   // Segundo clic: avanzar a la siguiente pregunta
   if (state.answered) {
-    if (studyTotal() >= state.study.target) {
+    if (progressTotal() >= state.study.target) {
       showStudyResults();
     } else {
       nextQuestion();
@@ -906,7 +1271,7 @@ function skipOrNext() {
   );
 
   // Cambiar el botón para el segundo clic
-  if (studyTotal() >= state.study.target) {
+  if (progressTotal() >= state.study.target) {
     $("nextBtn").textContent = "Ver resultados 🏆";
   } else {
     $("nextBtn").textContent = "Siguiente →";
@@ -916,29 +1281,108 @@ function skipOrNext() {
 }
 
     
-    function resetStats(){
-      const store=readStatsStore(); delete store[statsKey()]; localStorage.setItem(STORAGE_KEY,JSON.stringify(store));
-      state.stats={correct:0,wrong:0,streak:0,best:0}; paintStats(); nextQuestion();
-    }
+function resetStats() {
+  const store = readStatsStore();
 
+  delete store[statsKey()];
+
+  localStorage.setItem(
+    STORAGE_KEY,
+    JSON.stringify(store)
+  );
+
+  state.stats = {
+    correct:0,
+    wrong:0,
+    streak:0,
+    best:0
+  };
+
+  paintStats();
+
+  if (state.activity === "match") {
+    renderMatchRound();
+  } else {
+    nextQuestion();
+  }
+}
+
+    document
+      .querySelectorAll("[data-activity]")
+      .forEach(button => {
+        button.onclick = () => {
+          setActivity(button.dataset.activity);
+        };
+      });
+    
     document.querySelectorAll("[data-mode]").forEach(b=>b.onclick=()=>setMode(b.dataset.mode));
     $("speaker").onclick=playCurrent; $("nextBtn").onclick=skipOrNext;
     $("resetBtn").onclick=resetStats;
     $("newStudyBtn").onclick = startNewStudy;
     $("audioMp3").onclick=()=>setAudioMode("mp3"); $("audioTts").onclick=()=>setAudioMode("tts");
-    $("furiganaToggle").onchange=()=>{
-      const hidden=!$("furiganaToggle").checked;
-      $("question").classList.toggle("furigana-off",hidden);
-      $("answers").classList.toggle("furigana-off",hidden);
-      $("feedback").classList.toggle("furigana-off",hidden);
-    };
-    document.addEventListener("keydown",event=>{
-      if(event.target.matches("input,textarea,select"))return;
-      const key=event.key.toLowerCase();
-      if(["a","b","c"].includes(key)){event.preventDefault();answer(["a","b","c"].indexOf(key))}
-      else if(event.key==="Enter"){event.preventDefault();skipOrNext()}
-      else if(event.code==="Space"){event.preventDefault();playCurrent()}
-    });
+
+$("furiganaToggle").onchange = () => {
+  const hidden =
+    !$("furiganaToggle").checked;
+
+  $("question").classList.toggle(
+    "furigana-off",
+    hidden
+  );
+
+  $("answers").classList.toggle(
+    "furigana-off",
+    hidden
+  );
+
+  $("feedback").classList.toggle(
+    "furigana-off",
+    hidden
+  );
+
+  $("matchBoard").classList.toggle(
+    "furigana-off",
+    hidden
+  );
+};
+    
+document.addEventListener(
+  "keydown",
+  event => {
+    if (
+      event.target.matches(
+        "input,textarea,select"
+      )
+    ) {
+      return;
+    }
+
+    // Los siguientes atajos pertenecen
+    // únicamente al Quiz.
+    if (state.activity !== "quiz") {
+      return;
+    }
+
+    const key =
+      event.key.toLowerCase();
+
+    if (["a","b","c"].includes(key)) {
+      event.preventDefault();
+
+      answer(
+        ["a","b","c"].indexOf(key)
+      );
+    }
+    else if (event.key === "Enter") {
+      event.preventDefault();
+      skipOrNext();
+    }
+    else if (event.code === "Space") {
+      event.preventDefault();
+      playCurrent();
+    }
+  }
+);
 
     state.audioMode=localStorage.getItem("asallam_audio_mode")==="tts"?"tts":"mp3";
     $("audioMp3").classList.toggle("active",state.audioMode==="mp3"); $("audioTts").classList.toggle("active",state.audioMode==="tts");
