@@ -274,7 +274,6 @@
   <main class="app" id="app">
     <header>
       <h1>物語で日本語</h1>
-      <p class="subtitle">Aprende japonés con vocabulario de cuentos</p>
       <div id="studentName" class="student-name">☆ Estudiante ☆</div>
     </header>
 
@@ -284,10 +283,6 @@
       <section class="card main" aria-live="polite">
 
 <div class="study-progress">
-  <div class="study-progress-info">
-    <span>Progreso del estudio</span>
-    <strong id="studyProgressText">0 / 100</strong>
-  </div>
 
   <div class="study-progress-track">
     <div id="studyProgressBar"></div>
@@ -295,11 +290,7 @@
 </div>
         
         <div class="topline">
-          <div class="badges">
-            <span class="badge" id="storyBadge">Cargando…</span>
-            <span class="badge mode" id="modeBadge">Mixto</span>
-            <span class="badge" id="poolBadge">0 palabras</span>
-          </div>
+
           <label class="furigana-toggle"><input type="checkbox" id="furiganaToggle" checked> Furigana</label>
         </div>
 
@@ -524,9 +515,6 @@ function updateStudyProgress() {
     Math.round((total / state.study.target) * 100)
   );
 
-  $("studyProgressText").textContent =
-    `${total} / ${state.study.target}`;
-
   $("studyProgressBar").style.width =
     `${percentage}%`;
 }
@@ -624,7 +612,6 @@ function startNewStudy() {
         if(!Array.isArray(data.vocabulary)||data.vocabulary.length<3)throw new Error("El JSON necesita al menos 3 palabras.");
         state.data=data; state.all=data.vocabulary.filter(validItem); state.categories=new Set((data.categories||[]).map(c=>c.id));
         if(state.all.length<3)throw new Error("No hay suficientes entradas válidas.");
-        $("storyBadge").textContent=data.story?.title?.spanish||entry.shortTitle;
         document.title=`${data.story?.title?.spanish||entry.shortTitle} · Asallam Sensei`;
         buildCategoryFilters(); updatePool(); loadStats(); nextQuestion();
       }catch(error){
@@ -657,7 +644,7 @@ function startNewStudy() {
 
     function setMode(mode){
       state.mode=mode; document.querySelectorAll("[data-mode]").forEach(b=>b.classList.toggle("active",b.dataset.mode===mode));
-      $("modeBadge").textContent=MODE_LABELS[mode]; loadStats(); nextQuestion();
+      loadStats(); nextQuestion();
     }
     function setAudioMode(mode){
       state.audioMode=mode; $("audioMp3").classList.toggle("active",mode==="mp3"); $("audioTts").classList.toggle("active",mode==="tts");
@@ -690,7 +677,6 @@ function startNewStudy() {
         q.textContent=""; $("instruction").textContent="Escucha y elige el significado"; speaker.hidden=false; speaker.className="btn speaker dictation";
       }
       q.classList.toggle("furigana-off",!$("furiganaToggle").checked);
-      $("modeBadge").textContent=MODE_LABELS[mode];
     }
     function renderAnswers(){
       $("answers").innerHTML=state.choices.map((text,i)=>{
