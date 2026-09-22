@@ -980,6 +980,12 @@ function renderMatchRound() {
 
   const words = shuffle(state.pool).slice(0, 3);
 
+  words.forEach(item => {
+    const audio = new Audio(audioUrl(item));
+    audio.preload = "auto";
+    audio.load();
+  });
+  
   state.match.cards = shuffle(
     words.flatMap((item, pair) => [
       {
