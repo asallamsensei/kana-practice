@@ -774,7 +774,7 @@ updateStudyProgress();
       saveStats();
       const word=renderFurigana(state.current),result=ok?"¡Correcto! ✓":"Incorrecto ✕";
       $("feedback").className=`feedback ${ok?"ok":"no"}`;
-      $("feedback").innerHTML=`${result}<span class="detail">${word} · ${escapeHtml(state.current.reading)} · ${escapeHtml(state.current.romaji||"")} — ${escapeHtml(state.current.spanish)}</span>`;
+      $("feedback").innerHTML = `${result}<span class="detail">${word} · ${escapeHtml(state.current.romaji || "")} — ${escapeHtml(state.current.spanish)}</span>`;
       $("feedback").classList.toggle("furigana-off",!$("furiganaToggle").checked);
       $("nextBtn").textContent="Siguiente →";
       
@@ -829,7 +829,6 @@ function skipOrNext() {
     Saltado ✕
     <span class="detail">
       ${word} ·
-      ${escapeHtml(state.current.reading)} ·
       ${escapeHtml(state.current.romaji || "")}
       — ${escapeHtml(state.current.spanish)}
     </span>
