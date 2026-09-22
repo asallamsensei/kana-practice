@@ -812,7 +812,7 @@ function startNewStudy() {
   state.study = {
     correct:0,
     wrong:0,
-    target:100
+    target:state.activity === "match" ? 34 : 100
   };
 
   state.match.first = null;
@@ -941,7 +941,7 @@ function setActivity(activity) {
   state.study = {
     correct:0,
     wrong:0,
-    target:100
+    target:activity === "match" ? 34 : 100
   };
 
   state.match = {
