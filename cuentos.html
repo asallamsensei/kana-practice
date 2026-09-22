@@ -28,7 +28,7 @@
     .app { width:min(1180px,100%); margin:auto }
     header { text-align:center; margin-bottom:18px }
     h1 { margin:0; font-size:clamp(27px,5vw,44px); letter-spacing:-.04em }
-    .subtitle { margin:8px 0 0; color:var(--muted); font-weight:700 }
+    
     .story-strip { display:flex; gap:10px; overflow-x:auto; padding:6px 3px 14px; scrollbar-width:thin }
     .layout { display:grid; grid-template-columns:minmax(0,1fr) 320px; gap:16px; align-items:start }
     .card {
@@ -60,10 +60,10 @@
     .mode-btn.mix.active { border-color:rgba(34,197,94,.7); background:linear-gradient(135deg,rgba(34,197,94,.34),rgba(139,92,246,.34)); box-shadow:0 0 20px rgba(34,197,94,.18) }
     .audio-btn.active { border-color:rgba(34,197,94,.68); color:#c8ffd9; box-shadow:0 0 16px rgba(34,197,94,.18); background:rgba(34,197,94,.14) }
     .danger { border-color:rgba(239,68,68,.38); color:#fecaca }
-    .topline { display:flex; justify-content:space-between; align-items:center; gap:10px; flex-wrap:wrap }
+    
     .badges { display:flex; gap:7px; flex-wrap:wrap }
     .badge { padding:6px 10px; border:1px solid var(--line); border-radius:999px; color:var(--muted); background:rgba(0,0,0,.15); font-size:12px; font-weight:850 }
-    .badge.mode { color:#ddd6fe; border-color:rgba(139,92,246,.42); background:rgba(139,92,246,.12) }
+    
     .furigana-toggle { display:flex; align-items:center; gap:8px; color:var(--muted); font-size:13px; font-weight:800; cursor:pointer }
     .furigana-toggle input { accent-color:var(--violet); width:17px; height:17px }
     .quiz { flex:1; display:flex; flex-direction:column; justify-content:center; text-align:center; padding:18px 0 4px }
@@ -71,7 +71,7 @@
     .question.es { font-size:clamp(24px,4.5vw,43px) }
     ruby rt { font-size:.42em; color:#b9c7f7; font-weight:750; letter-spacing:0 }
     .furigana-off rt { display:none }
-    .instruction { min-height:24px; margin:5px 0 7px; color:var(--muted); font-weight:750 }
+    
     .speaker {
       width:78px; height:68px; margin:8px auto; font-size:30px; border-radius:20px;
       border-color:rgba(56,189,248,.54); background:rgba(56,189,248,.11);
@@ -277,8 +277,6 @@
       <div id="studentName" class="student-name">☆ Estudiante ☆</div>
     </header>
 
-    <nav class="story-strip" id="storyStrip" aria-label="Seleccionar cuento"></nav>
-
     <div class="layout">
       <section class="card main" aria-live="polite">
 
@@ -288,16 +286,10 @@
     <div id="studyProgressBar"></div>
   </div>
 </div>
-        
-        <div class="topline">
-
-          <label class="furigana-toggle"><input type="checkbox" id="furiganaToggle" checked> Furigana</label>
-        </div>
 
         <div class="quiz" id="quiz">
   
           <div class="question" id="question">読み込み中…</div>
-          <div class="instruction" id="instruction">Cargando vocabulario</div>
           <button class="btn speaker" id="speaker" type="button" title="Escuchar audio" aria-label="Escuchar audio">🔊</button>
           <div class="answers" id="answers"></div>
           <div class="feedback" id="feedback"></div>
@@ -374,17 +366,42 @@
       <aside class="card side">
         <div class="section">
           <div class="section-title">Modo de estudio</div>
-        
+      
+          <nav
+            class="story-strip"
+            id="storyStrip"
+            aria-label="Seleccionar cuento">
+          </nav>
+      
           <div class="badges">
             <span class="badge" id="storyBadge">Cargando…</span>
             <span class="badge" id="poolBadge">0 palabras</span>
           </div>
-        
+      
+          <label class="furigana-toggle">
+            <input
+              type="checkbox"
+              id="furiganaToggle"
+              checked>
+            Furigana
+          </label>
+      
           <div class="stack" id="modeButtons">
-            <button class="btn pill mode-btn" data-mode="jp_es">日本語 → Español</button>
-            <button class="btn pill mode-btn" data-mode="es_jp">Español → 日本語</button>
-            <button class="btn pill mode-btn" data-mode="dictation">🎧 Dictado → Español</button>
-            <button class="btn pill mode-btn mix active" data-mode="mix">✨ Mixto</button>
+            <button class="btn pill mode-btn" data-mode="jp_es">
+              日本語 → Español
+            </button>
+      
+            <button class="btn pill mode-btn" data-mode="es_jp">
+              Español → 日本語
+            </button>
+      
+            <button class="btn pill mode-btn" data-mode="dictation">
+              🎧 Dictado → Español
+            </button>
+      
+            <button class="btn pill mode-btn mix active" data-mode="mix">
+              ✨ Mixto
+            </button>
           </div>
         </div>
 
@@ -433,10 +450,7 @@ const CLAVES_ESTUDIANTES = {
     ];
 
     const LETTERS = ["A","B","C"];
-    const MODE_LABELS = {
-      jp_es:"日本語 → Español", es_jp:"Español → 日本語",
-      dictation:"🎧 Dictado", mix:"✨ Mixto"
-    };
+
     const STORAGE_KEY = "asallam_cuentos_vocab_stats_v1";
     const state = {
       storyId:STORY_CATALOG[0].id, data:null, all:[], pool:[], categories:new Set(),
@@ -681,18 +695,31 @@ function startNewStudy() {
       $("feedback").className="feedback"; $("feedback").textContent=""; $("nextBtn").textContent="Siguiente →";
       if(state.roundMode==="dictation")setTimeout(playCurrent,180);
     }
+
     function renderQuestion(){
       const q=$("question"),speaker=$("speaker"),mode=state.roundMode;
       q.className="question";
+    
       if(mode==="jp_es"){
-        q.innerHTML=renderFurigana(state.current); $("instruction").textContent="Elige el significado en español"; speaker.hidden=false; speaker.className="btn speaker";
+        q.innerHTML=renderFurigana(state.current);
+        speaker.hidden=false;
+        speaker.className="btn speaker";
       }else if(mode==="es_jp"){
-        q.textContent=state.current.spanish; q.classList.add("es"); $("instruction").textContent="Elige la palabra japonesa"; speaker.hidden=true;
+        q.textContent=state.current.spanish;
+        q.classList.add("es");
+        speaker.hidden=true;
       }else{
-        q.textContent=""; $("instruction").textContent="Escucha y elige el significado"; speaker.hidden=false; speaker.className="btn speaker dictation";
+        q.textContent="";
+        speaker.hidden=false;
+        speaker.className="btn speaker dictation";
       }
-      q.classList.toggle("furigana-off",!$("furiganaToggle").checked);
+    
+      q.classList.toggle(
+        "furigana-off",
+        !$("furiganaToggle").checked
+      );
     }
+    
     function renderAnswers(){
       $("answers").innerHTML=state.choices.map((text,i)=>{
         const visual=state.roundMode==="es_jp"?renderFurigana(state.pool.find(x=>x.japanese===text)||{japanese:text,reading:"",furigana:[{text}]}):escapeHtml(text);
