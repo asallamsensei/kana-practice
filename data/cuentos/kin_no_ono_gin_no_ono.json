@@ -52,9 +52,6 @@
       "romaji": "mukashimukashi",
       "spanish": "érase una vez",
       "partOfSpeech": "expresión",
-      "pages": [
-        1
-      ],
       "audio": "mukashimukashi.mp3"
     },
     {
@@ -69,9 +66,6 @@
       "romaji": "aru_tokoro",
       "spanish": "cierto lugar",
       "partOfSpeech": "expresión",
-      "pages": [
-        1
-      ],
       "audio": "aru_tokoro.mp3"
     },
     {
@@ -87,18 +81,6 @@
       "romaji": "otoko",
       "spanish": "hombre",
       "partOfSpeech": "sustantivo",
-      "pages": [
-        1,
-        2,
-        3,
-        4,
-        5,
-        6,
-        8,
-        9,
-        10,
-        11
-      ],
       "audio": "otoko.mp3"
     },
     {
@@ -114,9 +96,6 @@
       "romaji": "mainichi",
       "spanish": "todos los días",
       "partOfSpeech": "adverbio",
-      "pages": [
-        1
-      ],
       "audio": "mainichi.mp3"
     },
     {
@@ -132,18 +111,6 @@
       "romaji": "ono",
       "spanish": "hacha",
       "partOfSpeech": "sustantivo",
-      "pages": [
-        1,
-        3,
-        4,
-        5,
-        6,
-        7,
-        9,
-        10,
-        11,
-        12
-      ],
       "audio": "ono.mp3"
     },
     {
@@ -159,9 +126,6 @@
       "romaji": "ki",
       "spanish": "árbol; madera",
       "partOfSpeech": "sustantivo",
-      "pages": [
-        1
-      ],
       "audio": "ki.mp3"
     },
     {
@@ -180,9 +144,6 @@
       "romaji": "kiru",
       "spanish": "cortar",
       "partOfSpeech": "verbo",
-      "pages": [
-        1
-      ],
       "audio": "kiru.mp3"
     },
     {
@@ -201,9 +162,6 @@
       "romaji": "aru_hi",
       "spanish": "un día",
       "partOfSpeech": "expresión",
-      "pages": [
-        1
-      ],
       "audio": "aru_hi.mp3"
     },
     {
@@ -219,15 +177,6 @@
       "romaji": "ike",
       "spanish": "estanque",
       "partOfSpeech": "sustantivo",
-      "pages": [
-        1,
-        2,
-        3,
-        8,
-        9,
-        10,
-        12
-      ],
       "audio": "ike.mp3"
     },
     {
@@ -246,11 +195,6 @@
       "romaji": "ochiru",
       "spanish": "caerse",
       "partOfSpeech": "verbo",
-      "pages": [
-        1,
-        3,
-        10
-      ],
       "audio": "ochiru.mp3"
     },
     {
@@ -269,9 +213,6 @@
       "romaji": "naku",
       "spanish": "llorar",
       "partOfSpeech": "verbo",
-      "pages": [
-        2
-      ],
       "audio": "naku.mp3"
     },
     {
@@ -287,10 +228,6 @@
       "romaji": "naka",
       "spanish": "interior; dentro",
       "partOfSpeech": "sustantivo",
-      "pages": [
-        2,
-        12
-      ],
       "audio": "naka.mp3"
     },
     {
@@ -309,18 +246,6 @@
       "romaji": "megami_sama",
       "spanish": "diosa",
       "partOfSpeech": "sustantivo",
-      "pages": [
-        2,
-        3,
-        5,
-        6,
-        7,
-        8,
-        9,
-        10,
-        11,
-        12
-      ],
       "audio": "megami_sama.mp3"
     },
     {
@@ -339,11 +264,6 @@
       "romaji": "dete_kuru",
       "spanish": "salir; aparecer",
       "partOfSpeech": "verbo",
-      "pages": [
-        2,
-        9,
-        13
-      ],
       "audio": "dete_kuru.mp3"
     },
     {
@@ -362,14 +282,6 @@
       "romaji": "kiku",
       "spanish": "preguntar; escuchar",
       "partOfSpeech": "verbo",
-      "pages": [
-        2,
-        3,
-        5,
-        6,
-        9,
-        11
-      ],
       "audio": "kiku.mp3"
     },
     {
@@ -384,10 +296,6 @@
       "romaji": "dou_shita_no_desu_ka",
       "spanish": "¿qué ocurrió?; ¿qué pasa?",
       "partOfSpeech": "expresión",
-      "pages": [
-        3,
-        9
-      ],
       "audio": "dou_shita_no_desu_ka.mp3"
     },
     {
@@ -406,16 +314,6 @@
       "romaji": "iu",
       "spanish": "decir",
       "partOfSpeech": "verbo",
-      "pages": [
-        3,
-        4,
-        5,
-        6,
-        7,
-        10,
-        11,
-        12
-      ],
       "audio": "iu.mp3"
     },
     {
@@ -430,14 +328,6 @@
       "romaji": "anata",
       "spanish": "tú; usted",
       "partOfSpeech": "pronombre",
-      "pages": [
-        4,
-        5,
-        6,
-        7,
-        11,
-        12
-      ],
       "audio": "anata.mp3"
     },
     {
@@ -453,12 +343,6 @@
       "romaji": "kin",
       "spanish": "oro",
       "partOfSpeech": "sustantivo",
-      "pages": [
-        4,
-        7,
-        11,
-        12
-      ],
       "audio": "kin.mp3"
     },
     {
@@ -474,11 +358,6 @@
       "romaji": "watashi",
       "spanish": "yo",
       "partOfSpeech": "pronombre",
-      "pages": [
-        4,
-        5,
-        11
-      ],
       "audio": "watashi.mp3"
     },
     {
@@ -493,10 +372,6 @@
       "romaji": "iie",
       "spanish": "no",
       "partOfSpeech": "interjección",
-      "pages": [
-        4,
-        5
-      ],
       "audio": "iie.mp3"
     },
     {
@@ -512,10 +387,6 @@
       "romaji": "gin",
       "spanish": "plata",
       "partOfSpeech": "sustantivo",
-      "pages": [
-        5,
-        7
-      ],
       "audio": "gin.mp3"
     },
     {
@@ -530,10 +401,6 @@
       "romaji": "mata",
       "spanish": "otra vez",
       "partOfSpeech": "adverbio",
-      "pages": [
-        5,
-        6
-      ],
       "audio": "mata.mp3"
     },
     {
@@ -552,9 +419,6 @@
       "romaji": "furui",
       "spanish": "viejo; antiguo",
       "partOfSpeech": "adjetivo-i",
-      "pages": [
-        6
-      ],
       "audio": "furui.mp3"
     },
     {
@@ -569,10 +433,6 @@
       "romaji": "hai",
       "spanish": "sí",
       "partOfSpeech": "interjección",
-      "pages": [
-        6,
-        11
-      ],
       "audio": "hai.mp3"
     },
     {
@@ -587,10 +447,6 @@
       "romaji": "sore_desu",
       "spanish": "es ese; esa es",
       "partOfSpeech": "expresión",
-      "pages": [
-        6,
-        11
-      ],
       "audio": "sore_desu.mp3"
     },
     {
@@ -606,9 +462,6 @@
       "romaji": "hontou",
       "spanish": "verdad; verdadero",
       "partOfSpeech": "sustantivo/adjetivo-na",
-      "pages": [
-        7
-      ],
       "audio": "hontou.mp3"
     },
     {
@@ -624,10 +477,6 @@
       "romaji": "shoujiki",
       "spanish": "honesto; sinceridad",
       "partOfSpeech": "sustantivo/adjetivo-na",
-      "pages": [
-        7,
-        12
-      ],
       "audio": "shoujiki.mp3"
     },
     {
@@ -642,9 +491,6 @@
       "romaji": "dakara",
       "spanish": "por eso; así que",
       "partOfSpeech": "conjunción",
-      "pages": [
-        7
-      ],
       "audio": "dakara.mp3"
     },
     {
@@ -659,9 +505,6 @@
       "romaji": "ageru",
       "spanish": "dar",
       "partOfSpeech": "verbo",
-      "pages": [
-        7
-      ],
       "audio": "ageru.mp3"
     },
     {
@@ -677,9 +520,6 @@
       "romaji": "sanbon",
       "spanish": "tres objetos largos",
       "partOfSpeech": "contador",
-      "pages": [
-        8
-      ],
       "audio": "sanbon.mp3"
     },
     {
@@ -694,9 +534,6 @@
       "romaji": "morau",
       "spanish": "recibir",
       "partOfSpeech": "verbo",
-      "pages": [
-        8
-      ],
       "audio": "morau.mp3"
     },
     {
@@ -711,9 +548,6 @@
       "romaji": "arigatou_gozaimasu",
       "spanish": "muchas gracias",
       "partOfSpeech": "expresión",
-      "pages": [
-        8
-      ],
       "audio": "arigatou_gozaimasu.mp3"
     },
     {
@@ -729,9 +563,6 @@
       "romaji": "ie",
       "spanish": "casa",
       "partOfSpeech": "sustantivo",
-      "pages": [
-        8
-      ],
       "audio": "ie.mp3"
     },
     {
@@ -750,9 +581,6 @@
       "romaji": "kaeru",
       "spanish": "volver; regresar",
       "partOfSpeech": "verbo",
-      "pages": [
-        8
-      ],
       "audio": "kaeru.mp3"
     },
     {
@@ -768,10 +596,6 @@
       "romaji": "tonari",
       "spanish": "al lado; vecino",
       "partOfSpeech": "sustantivo",
-      "pages": [
-        8,
-        9
-      ],
       "audio": "tonari.mp3"
     },
     {
@@ -787,9 +611,6 @@
       "romaji": "hanashi",
       "spanish": "historia; relato",
       "partOfSpeech": "sustantivo",
-      "pages": [
-        8
-      ],
       "audio": "hanashi.mp3"
     },
     {
@@ -808,9 +629,6 @@
       "romaji": "iku",
       "spanish": "ir",
       "partOfSpeech": "verbo",
-      "pages": [
-        9
-      ],
       "audio": "iku.mp3"
     },
     {
@@ -829,9 +647,6 @@
       "romaji": "nageru",
       "spanish": "lanzar; arrojar",
       "partOfSpeech": "verbo",
-      "pages": [
-        9
-      ],
       "audio": "nageru.mp3"
     },
     {
@@ -850,9 +665,6 @@
       "romaji": "matsu",
       "spanish": "esperar",
       "partOfSpeech": "verbo",
-      "pages": [
-        9
-      ],
       "audio": "matsu.mp3"
     },
     {
@@ -867,11 +679,6 @@
       "romaji": "ja_arimasen",
       "spanish": "no es",
       "partOfSpeech": "expresión gramatical",
-      "pages": [
-        4,
-        5,
-        12
-      ],
       "audio": "ja_arimasen.mp3"
     },
     {
@@ -890,9 +697,6 @@
       "romaji": "hairu",
       "spanish": "entrar",
       "partOfSpeech": "verbo",
-      "pages": [
-        12
-      ],
       "audio": "hairu.mp3"
     },
     {
@@ -907,9 +711,6 @@
       "romaji": "mou",
       "spanish": "ya; más",
       "partOfSpeech": "adverbio",
-      "pages": [
-        13
-      ],
       "audio": "mou.mp3"
     },
     {
@@ -924,12 +725,6 @@
       "romaji": "soshite",
       "spanish": "y entonces; además",
       "partOfSpeech": "conjunción",
-      "pages": [
-        3,
-        8,
-        9,
-        13
-      ],
       "audio": "soshite.mp3"
     }
   ],
