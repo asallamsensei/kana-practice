@@ -374,6 +374,12 @@
       <aside class="card side">
         <div class="section">
           <div class="section-title">Modo de estudio</div>
+        
+          <div class="badges">
+            <span class="badge" id="storyBadge">Cargando…</span>
+            <span class="badge" id="poolBadge">0 palabras</span>
+          </div>
+        
           <div class="stack" id="modeButtons">
             <button class="btn pill mode-btn" data-mode="jp_es">日本語 → Español</button>
             <button class="btn pill mode-btn" data-mode="es_jp">Español → 日本語</button>
@@ -612,8 +618,17 @@ function startNewStudy() {
         if(!Array.isArray(data.vocabulary)||data.vocabulary.length<3)throw new Error("El JSON necesita al menos 3 palabras.");
         state.data=data; state.all=data.vocabulary.filter(validItem); state.categories=new Set((data.categories||[]).map(c=>c.id));
         if(state.all.length<3)throw new Error("No hay suficientes entradas válidas.");
-        document.title=`${data.story?.title?.spanish||entry.shortTitle} · Asallam Sensei`;
-        buildCategoryFilters(); updatePool(); loadStats(); nextQuestion();
+        
+        $("storyBadge").textContent =
+          data.story?.title?.spanish || entry.shortTitle;
+        
+        document.title =
+          `${data.story?.title?.spanish || entry.shortTitle} · Asallam Sensei`;
+        
+        buildCategoryFilters();
+        updatePool();
+        loadStats();
+        nextQuestion();
       }catch(error){
         $("quiz").innerHTML=`<div class="errorbox"><strong>No pude cargar el cuento.</strong><br>${escapeHtml(error.message)}<br><br>Abre estos archivos desde un servidor web y conserva el HTML junto al JSON.</div>`;
       }finally{$("app").classList.remove("loading")}
