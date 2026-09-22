@@ -38,7 +38,7 @@
     }
 
     .main {
-      padding:0 clamp(17px,3vw,30px) clamp(17px,3vw,30px);
+      padding:10px clamp(17px,3vw,30px) clamp(17px,3vw,30px);
       min-height:590px;
       display:flex;
       flex-direction:column;
@@ -73,7 +73,16 @@
     
     .furigana-toggle { display:flex; align-items:center; gap:8px; color:var(--muted); font-size:13px; font-weight:800; cursor:pointer }
     .furigana-toggle input { accent-color:var(--violet); width:17px; height:17px }
-    .quiz { flex:1; display:flex; flex-direction:column; justify-content:center; text-align:center; padding:18px 0 4px }
+    
+.quiz {
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-start;
+  text-align:center;
+  padding:8px 0 4px;
+}
+    
     .question { margin:8px auto 4px; max-width:830px; font-size:clamp(31px,6.5vw,66px); font-weight:700; line-height:1.18; letter-spacing:-.025em; word-break:break-word }
     .question.es { font-size:clamp(24px,4.5vw,43px) }
     ruby rt { font-size:.42em; color:#b9c7f7; font-weight:700; letter-spacing:0 }
@@ -280,7 +289,7 @@
 <body>
   <main class="app" id="app">
     <header>
-      <h1>物語で日本語</h1>
+      <h1>物語で日本語 ☆ Asallam Sensei</h1>
       <div id="studentName" class="student-name">☆ Estudiante ☆</div>
     </header>
 
