@@ -546,17 +546,10 @@
           <div class="section-title">Actividad</div>
         
           <div class="stack two" id="activityButtons">
-            <button
-              class="btn pill activity-btn active"
-              data-activity="quiz"
-              type="button">
+            <button class="btn pill activity-btn" data-activity="quiz" type="button">
               Quiz
             </button>
-        
-            <button
-              class="btn pill activity-btn"
-              data-activity="match"
-              type="button">
+            <button class="btn pill activity-btn active" data-activity="match" type="button">
               Emparejar
             </button>
           </div>
@@ -662,7 +655,7 @@ const state = {
   all:[],
   pool:[],
 
-  activity:"quiz",
+  activity:"match",
 
   mode:"mix",
   roundMode:"jp_es",
@@ -684,7 +677,7 @@ const state = {
   study:{
     correct:0,
     wrong:0,
-    target:100
+    target:34
   },
 
   match:{
