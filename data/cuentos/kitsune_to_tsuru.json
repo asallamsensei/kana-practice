@@ -1,0 +1,537 @@
+{
+  "schemaVersion": "1.0.0",
+  "story": {
+    "id": "kitsune_to_tsuru",
+    "title": {
+      "japanese": "キツネとツル",
+      "reading": "きつねとつる",
+      "spanish": "El zorro y la grulla"
+    },
+    "slug": "kitsune-to-tsuru",
+    "language": "ja",
+    "translationLanguage": "es",
+    "level": "principiante",
+    "source": {
+      "work": "イソップ物語より",
+      "publisher": "NPO多言語多読",
+      "illustrator": "髙橋智子",
+      "publicationDate": "2024-12-31",
+      "website": "https://tadoku.org",
+      "license": "CC BY-NC-ND 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-nc-nd/4.0/"
+    }
+  },
+  "features": {
+    "vocabulary": true,
+    "sentences": false,
+    "readingComprehension": false,
+    "furiganaDefault": true,
+    "audioModes": [
+      "mp3",
+      "tts"
+    ],
+    "defaultAudioMode": "mp3",
+    "ttsFallback": true
+  },
+  "audio": {
+    "basePath": "data/cuentos/audios/",
+    "fileNaming": "romaji",
+    "extension": ".mp3"
+  },
+  "vocabulary": [
+    {
+      "id": "v001",
+      "japanese": "ある日",
+      "reading": "あるひ",
+      "furigana": [
+        {
+          "text": "ある"
+        },
+        {
+          "text": "日",
+          "reading": "ひ"
+        }
+      ],
+      "romaji": "aru_hi",
+      "spanish": "un día",
+      "partOfSpeech": "expresión",
+      "audio": "aru_hi.mp3"
+    },
+    {
+      "id": "v002",
+      "japanese": "キツネ",
+      "reading": "きつね",
+      "furigana": [
+        {
+          "text": "キツネ"
+        }
+      ],
+      "romaji": "kitsune",
+      "spanish": "zorro",
+      "partOfSpeech": "sustantivo",
+      "audio": "kitsune.mp3"
+    },
+    {
+      "id": "v003",
+      "japanese": "ツル",
+      "reading": "つる",
+      "furigana": [
+        {
+          "text": "ツル"
+        }
+      ],
+      "romaji": "tsuru",
+      "spanish": "grulla",
+      "partOfSpeech": "sustantivo",
+      "audio": "tsuru.mp3"
+    },
+    {
+      "id": "v004",
+      "japanese": "言う",
+      "reading": "いう",
+      "furigana": [
+        {
+          "text": "言",
+          "reading": "い"
+        },
+        {
+          "text": "う"
+        }
+      ],
+      "romaji": "iu",
+      "spanish": "decir",
+      "partOfSpeech": "verbo",
+      "audio": "iu.mp3"
+    },
+    {
+      "id": "v005",
+      "japanese": "今日",
+      "reading": "きょう",
+      "furigana": [
+        {
+          "text": "今日",
+          "reading": "きょう"
+        }
+      ],
+      "romaji": "kyou",
+      "spanish": "hoy",
+      "partOfSpeech": "sustantivo/adverbio",
+      "audio": "kyou.mp3"
+    },
+    {
+      "id": "v006",
+      "japanese": "ぼく",
+      "reading": "ぼく",
+      "furigana": [
+        {
+          "text": "ぼく"
+        }
+      ],
+      "romaji": "boku",
+      "spanish": "yo (uso informal, habitualmente masculino)",
+      "partOfSpeech": "pronombre",
+      "audio": "boku.mp3"
+    },
+    {
+      "id": "v007",
+      "japanese": "家",
+      "reading": "いえ",
+      "furigana": [
+        {
+          "text": "家",
+          "reading": "いえ"
+        }
+      ],
+      "romaji": "ie",
+      "spanish": "casa",
+      "partOfSpeech": "sustantivo",
+      "audio": "ie.mp3"
+    },
+    {
+      "id": "v008",
+      "japanese": "いっしょに",
+      "reading": "いっしょに",
+      "furigana": [
+        {
+          "text": "いっしょに"
+        }
+      ],
+      "romaji": "issho_ni",
+      "spanish": "juntos",
+      "partOfSpeech": "adverbio",
+      "audio": "issho_ni.mp3"
+    },
+    {
+      "id": "v009",
+      "japanese": "ご飯",
+      "reading": "ごはん",
+      "furigana": [
+        {
+          "text": "ご飯",
+          "reading": "ごはん"
+        }
+      ],
+      "romaji": "gohan",
+      "spanish": "comida; arroz cocido",
+      "partOfSpeech": "sustantivo",
+      "audio": "gohan.mp3"
+    },
+    {
+      "id": "v010",
+      "japanese": "食べる",
+      "reading": "たべる",
+      "furigana": [
+        {
+          "text": "食",
+          "reading": "た"
+        },
+        {
+          "text": "べる"
+        }
+      ],
+      "romaji": "taberu",
+      "spanish": "comer",
+      "partOfSpeech": "verbo",
+      "audio": "taberu.mp3"
+    },
+    {
+      "id": "v011",
+      "japanese": "食べませんか",
+      "reading": "たべませんか",
+      "furigana": [
+        {
+          "text": "食",
+          "reading": "た"
+        },
+        {
+          "text": "べませんか"
+        }
+      ],
+      "romaji": "tabemasen_ka",
+      "spanish": "¿quieres comer?; ¿comemos?",
+      "partOfSpeech": "expresión",
+      "audio": "tabemasen_ka.mp3"
+    },
+    {
+      "id": "v012",
+      "japanese": "来る",
+      "reading": "くる",
+      "furigana": [
+        {
+          "text": "来",
+          "reading": "く"
+        },
+        {
+          "text": "る"
+        }
+      ],
+      "romaji": "kuru",
+      "spanish": "venir",
+      "partOfSpeech": "verbo",
+      "audio": "kuru.mp3"
+    },
+    {
+      "id": "v013",
+      "japanese": "テーブル",
+      "reading": "てーぶる",
+      "furigana": [
+        {
+          "text": "テーブル"
+        }
+      ],
+      "romaji": "teeburu",
+      "spanish": "mesa",
+      "partOfSpeech": "sustantivo",
+      "audio": "teeburu.mp3"
+    },
+    {
+      "id": "v014",
+      "japanese": "上",
+      "reading": "うえ",
+      "furigana": [
+        {
+          "text": "上",
+          "reading": "うえ"
+        }
+      ],
+      "romaji": "ue",
+      "spanish": "encima; parte superior",
+      "partOfSpeech": "sustantivo",
+      "audio": "ue.mp3"
+    },
+    {
+      "id": "v015",
+      "japanese": "お皿",
+      "reading": "おさら",
+      "furigana": [
+        {
+          "text": "お"
+        },
+        {
+          "text": "皿",
+          "reading": "さら"
+        }
+      ],
+      "romaji": "osara",
+      "spanish": "plato",
+      "partOfSpeech": "sustantivo",
+      "audio": "osara.mp3"
+    },
+    {
+      "id": "v016",
+      "japanese": "ある",
+      "reading": "ある",
+      "furigana": [
+        {
+          "text": "ある"
+        }
+      ],
+      "romaji": "aru",
+      "spanish": "haber; estar (objeto inanimado)",
+      "partOfSpeech": "verbo",
+      "audio": "aru.mp3"
+    },
+    {
+      "id": "v017",
+      "japanese": "さあ",
+      "reading": "さあ",
+      "furigana": [
+        {
+          "text": "さあ"
+        }
+      ],
+      "romaji": "saa",
+      "spanish": "vamos; adelante",
+      "partOfSpeech": "interjección",
+      "audio": "saa.mp3"
+    },
+    {
+      "id": "v018",
+      "japanese": "食べましょう",
+      "reading": "たべましょう",
+      "furigana": [
+        {
+          "text": "食",
+          "reading": "た"
+        },
+        {
+          "text": "べましょう"
+        }
+      ],
+      "romaji": "tabemashou",
+      "spanish": "comamos",
+      "partOfSpeech": "expresión",
+      "audio": "tabemashou.mp3"
+    },
+    {
+      "id": "v019",
+      "japanese": "スープ",
+      "reading": "すーぷ",
+      "furigana": [
+        {
+          "text": "スープ"
+        }
+      ],
+      "romaji": "suupu",
+      "spanish": "sopa",
+      "partOfSpeech": "sustantivo",
+      "audio": "suupu.mp3"
+    },
+    {
+      "id": "v020",
+      "japanese": "飲む",
+      "reading": "のむ",
+      "furigana": [
+        {
+          "text": "飲",
+          "reading": "の"
+        },
+        {
+          "text": "む"
+        }
+      ],
+      "romaji": "nomu",
+      "spanish": "beber; tomar",
+      "partOfSpeech": "verbo",
+      "audio": "nomu.mp3"
+    },
+    {
+      "id": "v021",
+      "japanese": "おいしい",
+      "reading": "おいしい",
+      "furigana": [
+        {
+          "text": "おいしい"
+        }
+      ],
+      "romaji": "oishii",
+      "spanish": "delicioso; rico",
+      "partOfSpeech": "adjetivo-i",
+      "audio": "oishii.mp3"
+    },
+    {
+      "id": "v022",
+      "japanese": "笑う",
+      "reading": "わらう",
+      "furigana": [
+        {
+          "text": "笑",
+          "reading": "わら"
+        },
+        {
+          "text": "う"
+        }
+      ],
+      "romaji": "warau",
+      "spanish": "reír; sonreír",
+      "partOfSpeech": "verbo",
+      "audio": "warau.mp3"
+    },
+    {
+      "id": "v023",
+      "japanese": "困る",
+      "reading": "こまる",
+      "furigana": [
+        {
+          "text": "困",
+          "reading": "こま"
+        },
+        {
+          "text": "る"
+        }
+      ],
+      "romaji": "komaru",
+      "spanish": "estar en apuros; no saber qué hacer",
+      "partOfSpeech": "verbo",
+      "audio": "komaru.mp3"
+    },
+    {
+      "id": "v024",
+      "japanese": "次の日",
+      "reading": "つぎのひ",
+      "furigana": [
+        {
+          "text": "次",
+          "reading": "つぎ"
+        },
+        {
+          "text": "の"
+        },
+        {
+          "text": "日",
+          "reading": "ひ"
+        }
+      ],
+      "romaji": "tsugi_no_hi",
+      "spanish": "al día siguiente",
+      "partOfSpeech": "expresión",
+      "audio": "tsugi_no_hi.mp3"
+    },
+    {
+      "id": "v025",
+      "japanese": "昨日",
+      "reading": "きのう",
+      "furigana": [
+        {
+          "text": "昨日",
+          "reading": "きのう"
+        }
+      ],
+      "romaji": "kinou",
+      "spanish": "ayer",
+      "partOfSpeech": "sustantivo/adverbio",
+      "audio": "kinou.mp3"
+    },
+    {
+      "id": "v026",
+      "japanese": "ありがとう",
+      "reading": "ありがとう",
+      "furigana": [
+        {
+          "text": "ありがとう"
+        }
+      ],
+      "romaji": "arigatou",
+      "spanish": "gracias",
+      "partOfSpeech": "expresión",
+      "audio": "arigatou.mp3"
+    },
+    {
+      "id": "v027",
+      "japanese": "私",
+      "reading": "わたし",
+      "furigana": [
+        {
+          "text": "私",
+          "reading": "わたし"
+        }
+      ],
+      "romaji": "watashi",
+      "spanish": "yo",
+      "partOfSpeech": "pronombre",
+      "audio": "watashi.mp3"
+    },
+    {
+      "id": "v028",
+      "japanese": "壺",
+      "reading": "つぼ",
+      "furigana": [
+        {
+          "text": "壺",
+          "reading": "つぼ"
+        }
+      ],
+      "romaji": "tsubo",
+      "spanish": "vasija; jarra",
+      "partOfSpeech": "sustantivo",
+      "audio": "tsubo.mp3"
+    },
+    {
+      "id": "v029",
+      "japanese": "中",
+      "reading": "なか",
+      "furigana": [
+        {
+          "text": "中",
+          "reading": "なか"
+        }
+      ],
+      "romaji": "naka",
+      "spanish": "interior; dentro",
+      "partOfSpeech": "sustantivo",
+      "audio": "naka.mp3"
+    },
+    {
+      "id": "v030",
+      "japanese": "肉",
+      "reading": "にく",
+      "furigana": [
+        {
+          "text": "肉",
+          "reading": "にく"
+        }
+      ],
+      "romaji": "niku",
+      "spanish": "carne",
+      "partOfSpeech": "sustantivo",
+      "audio": "niku.mp3"
+    },
+    {
+      "id": "v031",
+      "japanese": "ああ",
+      "reading": "ああ",
+      "furigana": [
+        {
+          "text": "ああ"
+        }
+      ],
+      "romaji": "aa",
+      "spanish": "ah",
+      "partOfSpeech": "interjección",
+      "audio": "aa.mp3"
+    }
+  ],
+  "sentences": [],
+  "readingComprehension": [],
+  "extensions": {}
+}
