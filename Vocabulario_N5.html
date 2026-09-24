@@ -491,13 +491,6 @@
   transition: width .25s ease;
 }
 
-#textoProgresoEmparejar {
-  margin-top: 8px;
-  text-align: center;
-  color: var(--muted);
-  font-size: 13px;
-}
-
 .estadisticas-emparejar {
   display: grid;
   grid-template-columns: repeat(5, minmax(0, 1fr));
@@ -553,12 +546,10 @@
     <div class="progreso-pista">
       <div id="barraEmparejar"></div>
     </div>
-    <div id="textoProgresoEmparejar">0 / 34 tableros</div>
   </div>
 
   <div id="juegoEmparejar">
     <div id="tableroEmparejar" class="tablero-emparejar"></div>
-    <div id="mensajeEmparejar" class="mensaje-emparejar"></div>
   </div>
 
   <div id="resultadoEmparejar" hidden>
@@ -1243,9 +1234,6 @@ function actualizarPanelEmparejar(){
   document.getElementById("rachaEmparejar").textContent = racha;
   document.getElementById("mejorRachaEmparejar").textContent = mejorRacha;
 
-  document.getElementById("textoProgresoEmparejar").textContent =
-    `${tablerosCompletados} / ${META_EMPEJAR} tableros`;
-
   document.getElementById("barraEmparejar").style.width =
     `${Math.min(100, tablerosCompletados / META_EMPEJAR * 100)}%`;
 }
@@ -1321,12 +1309,6 @@ function iniciarRondaEmparejar(){
     if(palabras.length === 3) break;
   }
 
-  const mensaje = document.getElementById("mensajeEmparejar");
-  if(palabras.length < 3){
-    mensaje.textContent = "Se necesitan tres palabras y traducciones distintas.";
-    return;
-  }
-
   tarjetasEmparejar = mezclarArray(
     palabras.flatMap((item, pareja) => [
       { pareja, tipo: "jp", item },
@@ -1395,9 +1377,6 @@ function seleccionarPareja(indice, boton){
 if(parejasEncontradas === 3){
   tablerosCompletados++;
   actualizarPanelEmparejar();
-
-  document.getElementById("mensajeEmparejar").textContent =
-    "¡Tres parejas completas!";
 
   temporizadorEmparejar = setTimeout(() => {
     temporizadorEmparejar = null;
