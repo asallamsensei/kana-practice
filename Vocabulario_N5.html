@@ -470,6 +470,69 @@
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
+
+.progreso-emparejar {
+  width: min(850px, 100%);
+  margin: 0 auto 20px;
+}
+
+.progreso-pista {
+  height: 9px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(255,255,255,.09);
+}
+
+#barraEmparejar {
+  width: 0%;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #7d5cff, #38bdf8, #22c55e);
+  transition: width .25s ease;
+}
+
+#textoProgresoEmparejar {
+  margin-top: 8px;
+  text-align: center;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.estadisticas-emparejar {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 8px;
+  width: min(850px, 100%);
+  margin: 18px auto 0;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+  text-align: center;
+}
+
+.estadisticas-emparejar > div {
+  padding: 10px 5px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: rgba(0,0,0,.12);
+}
+
+.estadisticas-emparejar strong {
+  display: block;
+  margin-top: 5px;
+  font-size: 20px;
+}
+
+#resultadoEmparejar {
+  text-align: center;
+  padding: 24px 0;
+}
+
+@media (max-width: 620px) {
+  .estadisticas-emparejar {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
   
 </style>
 </head>
@@ -486,8 +549,33 @@
   <div class="solo main-area">
 
 <div class="card big" id="vistaEmparejar" hidden>
-  <div id="tableroEmparejar" class="tablero-emparejar"></div>
-  <div id="mensajeEmparejar" class="mensaje-emparejar"></div>
+  <div class="progreso-emparejar">
+    <div class="progreso-pista">
+      <div id="barraEmparejar"></div>
+    </div>
+    <div id="textoProgresoEmparejar">0 / 34 tableros</div>
+  </div>
+
+  <div id="juegoEmparejar">
+    <div id="tableroEmparejar" class="tablero-emparejar"></div>
+    <div id="mensajeEmparejar" class="mensaje-emparejar"></div>
+  </div>
+
+  <div id="resultadoEmparejar" hidden>
+    <h2>¡Estudio terminado! 🏆</h2>
+    <p id="resumenEmparejar"></p>
+    <button class="btn" type="button" onclick="reiniciarEmparejar()">
+      ¡Hacer otras 34!
+    </button>
+  </div>
+
+  <div class="estadisticas-emparejar">
+    <div>Aciertos: <strong id="aciertosEmparejar">0</strong></div>
+    <div>Errores: <strong id="erroresEmparejar">0</strong></div>
+    <div>Precisión: <strong id="precisionEmparejar">0%</strong></div>
+    <div>Racha: <strong id="rachaEmparejar">0</strong></div>
+    <div>Mejor racha: <strong id="mejorRachaEmparejar">0</strong></div>
+  </div>
 </div>
     
     <div class="card big" id="vistaQuiz">
@@ -1138,6 +1226,55 @@ let emparejarBloqueado = false;
 let parejasEncontradas = 0;
 let temporizadorEmparejar = null;
 
+const META_EMPEJAR = 34;
+let tablerosCompletados = 0;
+let aciertosSesion = 0;
+let erroresSesion = 0;
+
+function actualizarPanelEmparejar(){
+  const total = aciertosSesion + erroresSesion;
+  const precision = total
+    ? Math.round(aciertosSesion / total * 100)
+    : 0;
+
+  document.getElementById("aciertosEmparejar").textContent = aciertosSesion;
+  document.getElementById("erroresEmparejar").textContent = erroresSesion;
+  document.getElementById("precisionEmparejar").textContent = `${precision}%`;
+  document.getElementById("rachaEmparejar").textContent = racha;
+  document.getElementById("mejorRachaEmparejar").textContent = mejorRacha;
+
+  document.getElementById("textoProgresoEmparejar").textContent =
+    `${tablerosCompletados} / ${META_EMPEJAR} tableros`;
+
+  document.getElementById("barraEmparejar").style.width =
+    `${Math.min(100, tablerosCompletados / META_EMPEJAR * 100)}%`;
+}
+
+function terminarEmparejar(){
+  document.getElementById("juegoEmparejar").hidden = true;
+  document.getElementById("resultadoEmparejar").hidden = false;
+
+  const total = aciertosSesion + erroresSesion;
+  const precision = total
+    ? Math.round(aciertosSesion / total * 100)
+    : 0;
+
+  document.getElementById("resumenEmparejar").textContent =
+    `${aciertosSesion} aciertos · ${erroresSesion} errores · ${precision}% de precisión`;
+}
+
+function reiniciarEmparejar(){
+  clearTimeout(temporizadorEmparejar);
+  temporizadorEmparejar = null;
+  tablerosCompletados = 0;
+  aciertosSesion = 0;
+  erroresSesion = 0;
+  document.getElementById("resultadoEmparejar").hidden = true;
+  document.getElementById("juegoEmparejar").hidden = false;
+  actualizarPanelEmparejar();
+  iniciarRondaEmparejar();
+}
+  
 function setActividad(actividad){
   if(actividad !== "quiz" && actividad !== "emparejar") return;
 
@@ -1157,7 +1294,7 @@ function setActividad(actividad){
   document.getElementById("vistaEmparejar").hidden = actividad !== "emparejar";
 
   if(actividad === "emparejar"){
-    iniciarRondaEmparejar();
+    reiniciarEmparejar();
   }else if(lista.length){
     siguiente();
   }
@@ -1199,7 +1336,6 @@ function iniciarRondaEmparejar(){
 
   const tablero = document.getElementById("tableroEmparejar");
   tablero.replaceChildren();
-  mensaje.textContent = "Une cada palabra japonesa con su significado.";
 
   tarjetasEmparejar.forEach((tarjeta, indice) => {
     const boton = document.createElement("button");
@@ -1249,16 +1385,31 @@ function seleccionarPareja(indice, boton){
 
     sonidoCorrecto();
     aciertos++;
+    aciertosSesion++;
     racha++;
     mejorRacha = Math.max(mejorRacha, racha);
     pintarStats();
     guardarStats();
+    actualizarPanelEmparejar();
 
-    if(parejasEncontradas === 3){
-      document.getElementById("mensajeEmparejar").textContent =
-        "¡Tres parejas completas!";
-      temporizadorEmparejar = setTimeout(iniciarRondaEmparejar, 650);
+if(parejasEncontradas === 3){
+  tablerosCompletados++;
+  actualizarPanelEmparejar();
+
+  document.getElementById("mensajeEmparejar").textContent =
+    "¡Tres parejas completas!";
+
+  temporizadorEmparejar = setTimeout(() => {
+    temporizadorEmparejar = null;
+    if(actividadActual !== "emparejar") return;
+
+    if(tablerosCompletados >= META_EMPEJAR){
+      terminarEmparejar();
+    }else{
+      iniciarRondaEmparejar();
     }
+  }, 650);
+}
     return;
   }
 
@@ -1268,9 +1419,11 @@ function seleccionarPareja(indice, boton){
 
   sonidoIncorrecto();
   errores++;
+  erroresSesion++;
   racha = 0;
   pintarStats();
   guardarStats();
+  actualizarPanelEmparejar();
 
   temporizadorEmparejar = setTimeout(() => {
     primera.boton.classList.remove("seleccionada", "incorrecta");
