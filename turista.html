@@ -5,6 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Turista en Japón — Asallam Sensei</title>
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+  
 <style>
   :root{
     --bg: #0b1020;
@@ -401,6 +405,104 @@
       padding: 11px 15px;
     }
   }
+
+[hidden] { display: none !important; }
+
+#prompt.jp,
+#opciones.jp,
+.tarjeta-emparejar[lang="ja"] {
+  font-family: "Noto Sans JP", "Yu Gothic", "Hiragino Sans", Meiryo, sans-serif;
+}
+
+.progreso-pista {
+  height: 9px;
+  margin-bottom: 22px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: rgba(255,255,255,.09);
+}
+
+#barraEmparejar {
+  width: 0%;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #7d5cff, #38bdf8, #22c55e);
+  transition: width .25s ease;
+}
+
+.tablero-emparejar {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.tarjeta-emparejar {
+  min-height: 105px;
+  padding: 14px 12px;
+  border: 1px solid rgba(125,92,255,.55);
+  border-radius: 18px;
+  background: rgba(125,92,255,.12);
+  color: var(--text);
+  font-size: clamp(18px, 2.2vw, 25px);
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.tarjeta-emparejar.seleccionada {
+  border-color: #38bdf8;
+  background: rgba(56,189,248,.22);
+}
+
+.tarjeta-emparejar.correcta {
+  border-color: #4ade80;
+  background: rgba(34,197,94,.27);
+}
+
+.tarjeta-emparejar.incorrecta {
+  border-color: #f87171;
+  background: rgba(239,68,68,.24);
+}
+
+.tarjeta-emparejar:disabled {
+  cursor: default;
+}
+
+.estadisticas-emparejar {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+}
+
+.estadisticas-emparejar > div {
+  padding: 10px 5px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: rgba(0,0,0,.12);
+}
+
+.estadisticas-emparejar strong {
+  display: block;
+  margin-top: 5px;
+  font-size: 20px;
+}
+
+#resultadoEmparejar {
+  padding: 24px 0;
+}
+
+@media (max-width: 620px) {
+  .tablero-emparejar {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .estadisticas-emparejar {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+  
 </style>
   
 </head>
@@ -409,7 +511,7 @@
 <h1>Turista en Japón ★ Asallam Sensei</h1>
 
 <div class="layout">
-  <div class="panel">
+  <div class="panel" id="vistaQuiz">
     <div id="badgeKanji" class="badge-kanji" style="display:none;">KANJI</div>
     <div id="prompt">…</div>
 
@@ -445,9 +547,45 @@
     </div>
   </div>
 
+<div class="panel" id="vistaEmparejar" hidden>
+  <div class="progreso-pista">
+    <div id="barraEmparejar"></div>
+  </div>
+
+  <div id="juegoEmparejar">
+    <div id="tableroEmparejar" class="tablero-emparejar"></div>
+  </div>
+
+  <div id="resultadoEmparejar" hidden>
+    <h2>¡Estudio terminado! 🏆</h2>
+    <p id="resumenEmparejar"></p>
+    <button class="btn" type="button" onclick="reiniciarEmparejar()">
+      ¡Hacer otras 34!
+    </button>
+  </div>
+
+  <div class="estadisticas-emparejar">
+    <div>Aciertos: <strong id="aciertosEmparejar">0</strong></div>
+    <div>Errores: <strong id="erroresEmparejar">0</strong></div>
+    <div>Precisión: <strong id="precisionEmparejar">0%</strong></div>
+    <div>Racha: <strong id="rachaEmparejar">0</strong></div>
+    <div>Mejor racha: <strong id="mejorRachaEmparejar">0</strong></div>
+  </div>
+</div>
+  
   <div class="sidebar panel-side">
 
-    <div class="side-section">
+<div class="side-section">
+  <div class="side-title">Actividad</div>
+  <div class="bar side-bar">
+    <button class="btn activo" id="actividad-quiz"
+            type="button" onclick="setActividad('quiz')">Quiz</button>
+    <button class="btn" id="actividad-emparejar"
+            type="button" onclick="setActividad('emparejar')">Emparejar</button>
+  </div>
+</div>
+    
+    <div class="side-section" id="modosQuiz">
       <div class="side-title">Modo</div>
       <div class="bar side-bar" id="modosBar">
         <button class="btn" id="btn-jp_es" onclick="setModo('jp_es')">Japonés → Español</button>
@@ -575,7 +713,7 @@ function resetStatsTodo(){
    UI HELPERS
 =============================== */
 function $(id){ return document.getElementById(id); }
-
+if(actividadActual !== "quiz") return;
 document.addEventListener("keydown", (e) => {
   const k = e.key.toLowerCase();
 
@@ -720,7 +858,13 @@ function toggleTodos(){
   actualizarPoolDesdeSeleccion();
   cargarStatsActual();
   pintarBotonesActivos();
-  siguiente();
+
+  if(actividadActual === "emparejar"){
+    reiniciarEmparejar();
+  }else{
+    siguiente();
+  }
+  
 }
 
 function toggleTema(k){
@@ -737,7 +881,13 @@ function toggleTema(k){
 
   actualizarPoolDesdeSeleccion();
   pintarBotonesActivos();
-  siguiente();
+
+  if(actividadActual === "emparejar"){
+    reiniciarEmparejar();
+  }else{
+    siguiente();
+  }
+  
 }
 
 function cargarBloque(k){
@@ -974,6 +1124,216 @@ async function siguienteDesdeBoton(){
   siguiente();
 }
 
+const META_EMPAREJAR = 34;
+
+let actividadActual = "quiz";
+let tarjetasEmparejar = [];
+let primeraTarjeta = null;
+let emparejarBloqueado = false;
+let parejasEncontradas = 0;
+let tablerosCompletados = 0;
+let aciertosSesion = 0;
+let erroresSesion = 0;
+let rachaSesion = 0;
+let mejorRachaSesion = 0;
+let temporizadorEmparejar = null;
+
+function actualizarPanelEmparejar(){
+  const total = aciertosSesion + erroresSesion;
+  const precision = total
+    ? Math.round(aciertosSesion / total * 100)
+    : 0;
+
+  $("aciertosEmparejar").textContent = aciertosSesion;
+  $("erroresEmparejar").textContent = erroresSesion;
+  $("precisionEmparejar").textContent = `${precision}%`;
+  $("rachaEmparejar").textContent = rachaSesion;
+  $("mejorRachaEmparejar").textContent = mejorRachaSesion;
+
+  $("barraEmparejar").style.width =
+    `${Math.min(100, tablerosCompletados / META_EMPAREJAR * 100)}%`;
+}
+
+function setActividad(actividad){
+  if(actividad !== "quiz" && actividad !== "emparejar") return;
+
+  clearTimeout(temporizadorEmparejar);
+  temporizadorEmparejar = null;
+  audio.pause();
+  audio.currentTime = 0;
+
+  actividadActual = actividad;
+
+  $("actividad-quiz").classList.toggle("activo", actividad === "quiz");
+  $("actividad-emparejar").classList.toggle("activo", actividad === "emparejar");
+  $("vistaQuiz").hidden = actividad !== "quiz";
+  $("vistaEmparejar").hidden = actividad !== "emparejar";
+  $("modosQuiz").hidden = actividad === "emparejar";
+
+  if(actividad === "emparejar"){
+    reiniciarEmparejar();
+  }else if(pool.length >= 3){
+    siguiente();
+  }
+}
+
+function reiniciarEmparejar(){
+  clearTimeout(temporizadorEmparejar);
+  temporizadorEmparejar = null;
+
+  tablerosCompletados = 0;
+  aciertosSesion = 0;
+  erroresSesion = 0;
+  rachaSesion = 0;
+  mejorRachaSesion = 0;
+
+  $("resultadoEmparejar").hidden = true;
+  $("juegoEmparejar").hidden = false;
+
+  actualizarPanelEmparejar();
+  iniciarRondaEmparejar();
+}
+
+function iniciarRondaEmparejar(){
+  if(actividadActual !== "emparejar") return;
+
+  primeraTarjeta = null;
+  emparejarBloqueado = false;
+  parejasEncontradas = 0;
+
+  const palabras = [];
+  const japonesUsados = new Set();
+  const espanolUsados = new Set();
+
+  for(const item of mezclar(pool)){
+    if(japonesUsados.has(item.japones) ||
+       espanolUsados.has(item.espanol)) continue;
+
+    palabras.push(item);
+    japonesUsados.add(item.japones);
+    espanolUsados.add(item.espanol);
+    if(palabras.length === 3) break;
+  }
+
+  const tablero = $("tableroEmparejar");
+  tablero.replaceChildren();
+
+  if(palabras.length < 3) return;
+
+  tarjetasEmparejar = mezclar(
+    palabras.flatMap((item, pareja) => [
+      { pareja, tipo: "jp", item },
+      { pareja, tipo: "es", item }
+    ])
+  );
+
+  tarjetasEmparejar.forEach((tarjeta, indice) => {
+    const boton = document.createElement("button");
+    boton.type = "button";
+    boton.className = "tarjeta-emparejar";
+
+    if(tarjeta.tipo === "jp") boton.lang = "ja";
+
+    boton.textContent = tarjeta.tipo === "jp"
+      ? tarjeta.item.japones
+      : tarjeta.item.espanol;
+
+    boton.onclick = () => seleccionarPareja(indice, boton);
+    tablero.appendChild(boton);
+  });
+}
+
+function seleccionarPareja(indice, boton){
+  if(emparejarBloqueado || boton.disabled) return;
+  if(primeraTarjeta?.boton === boton) return;
+
+  const tarjeta = tarjetasEmparejar[indice];
+
+  if(tarjeta.tipo === "jp" &&
+     !itemEsDeKanji(tarjeta.item) &&
+     tarjeta.item.romaji){
+    playAudioForRomaji(tarjeta.item.romaji);
+  }
+
+  boton.classList.add("seleccionada");
+
+  if(!primeraTarjeta){
+    primeraTarjeta = { tarjeta, boton };
+    return;
+  }
+
+  const primera = primeraTarjeta;
+  const esPareja =
+    primera.tarjeta.pareja === tarjeta.pareja &&
+    primera.tarjeta.tipo !== tarjeta.tipo;
+
+  if(esPareja){
+    primera.boton.disabled = true;
+    boton.disabled = true;
+
+    primera.boton.classList.remove("seleccionada");
+    boton.classList.remove("seleccionada");
+    primera.boton.classList.add("correcta");
+    boton.classList.add("correcta");
+
+    primeraTarjeta = null;
+    parejasEncontradas++;
+
+    sonidoCorrecto();
+    aciertosSesion++;
+    rachaSesion++;
+    mejorRachaSesion = Math.max(mejorRachaSesion, rachaSesion);
+    actualizarPanelEmparejar();
+
+    if(parejasEncontradas === 3){
+      tablerosCompletados++;
+      actualizarPanelEmparejar();
+
+      temporizadorEmparejar = setTimeout(() => {
+        temporizadorEmparejar = null;
+        if(actividadActual !== "emparejar") return;
+
+        if(tablerosCompletados >= META_EMPAREJAR){
+          terminarEmparejar();
+        }else{
+          iniciarRondaEmparejar();
+        }
+      }, 650);
+    }
+    return;
+  }
+
+  emparejarBloqueado = true;
+  primera.boton.classList.add("incorrecta");
+  boton.classList.add("incorrecta");
+
+  sonidoIncorrecto();
+  erroresSesion++;
+  rachaSesion = 0;
+  actualizarPanelEmparejar();
+
+  temporizadorEmparejar = setTimeout(() => {
+    primera.boton.classList.remove("seleccionada", "incorrecta");
+    boton.classList.remove("seleccionada", "incorrecta");
+    primeraTarjeta = null;
+    emparejarBloqueado = false;
+    temporizadorEmparejar = null;
+  }, 650);
+}
+
+function terminarEmparejar(){
+  $("juegoEmparejar").hidden = true;
+  $("resultadoEmparejar").hidden = false;
+
+  const total = aciertosSesion + erroresSesion;
+  const precision = total
+    ? Math.round(aciertosSesion / total * 100)
+    : 0;
+
+  $("resumenEmparejar").textContent =
+    `${aciertosSesion} aciertos · ${erroresSesion} errores · ${precision}% de precisión`;
+}
+  
 </script>
 
 </body>
