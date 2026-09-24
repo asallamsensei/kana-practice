@@ -5,6 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Vocabulario N5 — Asallam Sensei</title>
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+  
 <style>
   :root{
     --bg: #0b1020;
@@ -406,14 +410,9 @@
   
 }
 
-.jp{
-  font-family:
-    "Hiragino Kaku Gothic ProN",
-    "Hiragino Sans",
-    "Yu Gothic",
-    "Meiryo",
-    "Noto Sans JP",
-    sans-serif;
+.jp,
+.tarjeta-emparejar[lang="ja"] {
+  font-family: "Noto Sans JP", "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif;
 }
 
 #infoExtra{
@@ -954,7 +953,7 @@ function renderPrompt(itemCorrecto){
     const pregunta = textoPregunta(itemCorrecto);
     
     if(rondaDir === "jp-es"){
-      promptEl.innerHTML = `<span class="jp">${pregunta}</span>`;
+      promptEl.innerHTML = `<span class="jp" lang="ja">${pregunta}</span>`;
     }else{
       promptEl.textContent = pregunta;
     }
@@ -1009,7 +1008,7 @@ function pintarOpciones(){
 
     const usarJp = (rondaDir === "es-jp");
 
-    return `<div>${letra}) ${usarJp ? `<span class="jp">${txt}</span>` : txt}</div>`;
+    return `<div>${letra}) ${usarJp ? `<span class="jp" lang="ja">${txt}</span>` : txt}</div>`;
   }).join("");
 
   const botones = {
@@ -1121,9 +1120,9 @@ function renderOpciones(opciones){
   const usarJp = (rondaDir === "es-jp");
 
   box.innerHTML = `
-    a) ${usarJp ? `<span class="jp">${opciones[0]}</span>` : opciones[0]}<br>
-    b) ${usarJp ? `<span class="jp">${opciones[1]}</span>` : opciones[1]}<br>
-    c) ${usarJp ? `<span class="jp">${opciones[2]}</span>` : opciones[2]}
+    a) ${usarJp ? `<span class="jp" lang="ja">${opciones[0]}</span>` : opciones[0]}<br>
+    b) ${usarJp ? `<span class="jp" lang="ja">${opciones[1]}</span>` : opciones[1]}<br>
+    c) ${usarJp ? `<span class="jp" lang="ja">${opciones[2]}</span>` : opciones[2]}
   `;
 }
 
@@ -1323,6 +1322,7 @@ function iniciarRondaEmparejar(){
     const boton = document.createElement("button");
     boton.type = "button";
     boton.className = "tarjeta-emparejar";
+    if(tarjeta.tipo === "jp") boton.lang = "ja";
     boton.textContent = tarjeta.tipo === "jp"
       ? tarjeta.item.kanji
       : tarjeta.item.significado;
