@@ -713,8 +713,9 @@ function resetStatsTodo(){
    UI HELPERS
 =============================== */
 function $(id){ return document.getElementById(id); }
-if(actividadActual !== "quiz") return;
+
 document.addEventListener("keydown", (e) => {
+  if(actividadActual !== "quiz") return;
   const k = e.key.toLowerCase();
 
   if(k === "a" || k === "b" || k === "c"){
