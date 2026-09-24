@@ -423,6 +423,53 @@
   font-size: 18px;
   font-weight: 700;
 }
+
+[hidden] { display: none !important; }
+
+.tablero-emparejar {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.tarjeta-emparejar {
+  min-height: 105px;
+  padding: 14px 12px;
+  border: 1px solid rgba(125, 92, 255, .55);
+  border-radius: 18px;
+  background: rgba(125, 92, 255, .12);
+  color: var(--text);
+  font: inherit;
+  font-size: clamp(18px, 2.2vw, 25px);
+  cursor: pointer;
+}
+
+.tarjeta-emparejar.seleccionada {
+  border-color: #38bdf8;
+  background: rgba(56, 189, 248, .22);
+}
+
+.tarjeta-emparejar.correcta {
+  border-color: #4ade80;
+  background: rgba(34, 197, 94, .27);
+}
+
+.tarjeta-emparejar.incorrecta {
+  border-color: #f87171;
+  background: rgba(239, 68, 68, .24);
+}
+
+.mensaje-emparejar {
+  min-height: 28px;
+  margin-top: 16px;
+  text-align: center;
+}
+
+@media (max-width: 620px) {
+  .tablero-emparejar {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
   
 </style>
 </head>
@@ -437,7 +484,13 @@
 <div class="body-grid">
 
   <div class="solo main-area">
-    <div class="card big">
+
+<div class="card big" id="vistaEmparejar" hidden>
+  <div id="tableroEmparejar" class="tablero-emparejar"></div>
+  <div id="mensajeEmparejar" class="mensaje-emparejar"></div>
+</div>
+    
+    <div class="card big" id="vistaQuiz">
       <div class="panelGrid">
 
         <div id="promptMain">—</div>
@@ -476,6 +529,16 @@
   </div>
 
   <aside class="card side-panel">
+
+<div class="panel-title">Actividad</div>
+<div class="switch switch-panel" style="margin-bottom:16px">
+  <button id="actividad-quiz" class="btn btn-mode activo"
+          type="button" onclick="setActividad('quiz')">Quiz</button>
+  <button id="actividad-emparejar" class="btn btn-mode"
+          type="button" onclick="setActividad('emparejar')">Emparejar</button>
+</div>
+
+    
     <div class="panel-title">Modo</div>
 
     <div class="switch switch-panel">
@@ -1068,7 +1131,158 @@ function resetStats(){
   guardarStats();
 }
 
+let actividadActual = "quiz";
+let tarjetasEmparejar = [];
+let primeraTarjeta = null;
+let emparejarBloqueado = false;
+let parejasEncontradas = 0;
+let temporizadorEmparejar = null;
+
+function setActividad(actividad){
+  if(actividad !== "quiz" && actividad !== "emparejar") return;
+
+  clearTimeout(temporizadorEmparejar);
+  temporizadorEmparejar = null;
+  detenerAudio();
+  if(window.speechSynthesis) speechSynthesis.cancel();
+
+  actividadActual = actividad;
+
+  document.getElementById("actividad-quiz")
+    .classList.toggle("activo", actividad === "quiz");
+  document.getElementById("actividad-emparejar")
+    .classList.toggle("activo", actividad === "emparejar");
+
+  document.getElementById("vistaQuiz").hidden = actividad !== "quiz";
+  document.getElementById("vistaEmparejar").hidden = actividad !== "emparejar";
+
+  if(actividad === "emparejar"){
+    iniciarRondaEmparejar();
+  }else if(lista.length){
+    siguiente();
+  }
+}
+
+function iniciarRondaEmparejar(){
+  if(actividadActual !== "emparejar" || lista.length < 3) return;
+
+  primeraTarjeta = null;
+  emparejarBloqueado = false;
+  parejasEncontradas = 0;
+
+  // Evita mostrar dos tarjetas con la misma palabra o traducción.
+  const palabras = [];
+  const usadosJp = new Set();
+  const usadosEs = new Set();
+
+  for(const item of mezclarArray(lista)){
+    if(usadosJp.has(item.kanji) || usadosEs.has(item.significado)) continue;
+
+    palabras.push(item);
+    usadosJp.add(item.kanji);
+    usadosEs.add(item.significado);
+    if(palabras.length === 3) break;
+  }
+
+  const mensaje = document.getElementById("mensajeEmparejar");
+  if(palabras.length < 3){
+    mensaje.textContent = "Se necesitan tres palabras y traducciones distintas.";
+    return;
+  }
+
+  tarjetasEmparejar = mezclarArray(
+    palabras.flatMap((item, pareja) => [
+      { pareja, tipo: "jp", item },
+      { pareja, tipo: "es", item }
+    ])
+  );
+
+  const tablero = document.getElementById("tableroEmparejar");
+  tablero.replaceChildren();
+  mensaje.textContent = "Une cada palabra japonesa con su significado.";
+
+  tarjetasEmparejar.forEach((tarjeta, indice) => {
+    const boton = document.createElement("button");
+    boton.type = "button";
+    boton.className = "tarjeta-emparejar";
+    boton.textContent = tarjeta.tipo === "jp"
+      ? tarjeta.item.kanji
+      : tarjeta.item.significado;
+    boton.addEventListener("click", () => seleccionarPareja(indice, boton));
+    tablero.appendChild(boton);
+  });
+}
+
+function seleccionarPareja(indice, boton){
+  if(emparejarBloqueado || boton.disabled) return;
+  if(primeraTarjeta?.boton === boton) return;
+
+  const tarjeta = tarjetasEmparejar[indice];
+
+  if(tarjeta.tipo === "jp"){
+    // playAudio usa itemActualCorrecto para pronunciar con el
+    // sintetizador si está elegido o si falla el MP3.
+    itemActualCorrecto = tarjeta.item;
+    playAudio(tarjeta.item.romaji);
+  }
+
+  boton.classList.add("seleccionada");
+
+  if(!primeraTarjeta){
+    primeraTarjeta = { tarjeta, boton };
+    return;
+  }
+
+  const primera = primeraTarjeta;
+  const esPareja = primera.tarjeta.pareja === tarjeta.pareja
+    && primera.tarjeta.tipo !== tarjeta.tipo;
+
+  if(esPareja){
+    primera.boton.disabled = true;
+    boton.disabled = true;
+    primera.boton.classList.remove("seleccionada");
+    boton.classList.remove("seleccionada");
+    primera.boton.classList.add("correcta");
+    boton.classList.add("correcta");
+    primeraTarjeta = null;
+    parejasEncontradas++;
+
+    sonidoCorrecto();
+    aciertos++;
+    racha++;
+    mejorRacha = Math.max(mejorRacha, racha);
+    pintarStats();
+    guardarStats();
+
+    if(parejasEncontradas === 3){
+      document.getElementById("mensajeEmparejar").textContent =
+        "¡Tres parejas completas!";
+      temporizadorEmparejar = setTimeout(iniciarRondaEmparejar, 650);
+    }
+    return;
+  }
+
+  emparejarBloqueado = true;
+  primera.boton.classList.add("incorrecta");
+  boton.classList.add("incorrecta");
+
+  sonidoIncorrecto();
+  errores++;
+  racha = 0;
+  pintarStats();
+  guardarStats();
+
+  temporizadorEmparejar = setTimeout(() => {
+    primera.boton.classList.remove("seleccionada", "incorrecta");
+    boton.classList.remove("seleccionada", "incorrecta");
+    primeraTarjeta = null;
+    emparejarBloqueado = false;
+    temporizadorEmparejar = null;
+  }, 650);
+}
+  
 document.addEventListener("keydown", (e) => {
+  if(actividadActual !== "quiz") return;
   const k = (e.key || "").toLowerCase();
 
   if(["a","b","c"].includes(k) && !yaValidado){
