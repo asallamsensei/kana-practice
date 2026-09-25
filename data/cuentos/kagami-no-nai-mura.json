@@ -1,0 +1,1404 @@
+{
+  "schemaVersion": "1.0.0",
+  "story": {
+    "id": "kagami_no_nai_mura",
+    "title": {
+      "japanese": "鏡のない村",
+      "reading": "かがみのないむら",
+      "spanish": "El pueblo sin espejos"
+    },
+    "slug": "kagami-no-nai-mura",
+    "language": "ja",
+    "translationLanguage": "es",
+    "level": "principiante",
+    "source": {
+      "work": "鏡のない村",
+      "publisher": "NPO多言語多読",
+      "author": "作田奈苗",
+      "website": "https://tadoku.org",
+      "license": "CC BY-NC-ND 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-nc-nd/4.0/"
+    }
+  },
+  "features": {
+    "vocabulary": true,
+    "sentences": false,
+    "readingComprehension": false,
+    "furiganaDefault": true,
+    "audioModes": [
+      "mp3",
+      "tts"
+    ],
+    "defaultAudioMode": "mp3",
+    "ttsFallback": true
+  },
+  "audio": {
+    "basePath": "data/cuentos/audios/",
+    "fileNaming": "romaji",
+    "extension": ".mp3"
+  },
+  "vocabulary": [
+    {
+      "id": "v001",
+      "japanese": "昔々",
+      "reading": "むかしむかし",
+      "furigana": [
+        {
+          "text": "昔々",
+          "reading": "むかしむかし"
+        }
+      ],
+      "romaji": "mukashimukashi",
+      "spanish": "érase una vez",
+      "partOfSpeech": "expresión",
+      "audio": "mukashimukashi.mp3"
+    },
+    {
+      "id": "v002",
+      "japanese": "話",
+      "reading": "はなし",
+      "furigana": [
+        {
+          "text": "話",
+          "reading": "はなし"
+        }
+      ],
+      "romaji": "hanashi",
+      "spanish": "historia; relato",
+      "partOfSpeech": "sustantivo",
+      "audio": "hanashi.mp3"
+    },
+    {
+      "id": "v003",
+      "japanese": "越後",
+      "reading": "えちご",
+      "furigana": [
+        {
+          "text": "越後",
+          "reading": "えちご"
+        }
+      ],
+      "romaji": "echigo",
+      "spanish": "Echigo (antiguo nombre de la actual prefectura de Niigata)",
+      "partOfSpeech": "nombre propio",
+      "audio": "echigo.mp3"
+    },
+    {
+      "id": "v004",
+      "japanese": "新潟県",
+      "reading": "にいがたけん",
+      "furigana": [
+        {
+          "text": "新潟",
+          "reading": "にいがた"
+        },
+        {
+          "text": "県",
+          "reading": "けん"
+        }
+      ],
+      "romaji": "niigata_ken",
+      "spanish": "prefectura de Niigata",
+      "partOfSpeech": "nombre propio",
+      "audio": "niigata_ken.mp3"
+    },
+    {
+      "id": "v005",
+      "japanese": "村",
+      "reading": "むら",
+      "furigana": [
+        {
+          "text": "村",
+          "reading": "むら"
+        }
+      ],
+      "romaji": "mura",
+      "spanish": "pueblo; aldea",
+      "partOfSpeech": "sustantivo",
+      "audio": "mura.mp3"
+    },
+    {
+      "id": "v006",
+      "japanese": "男",
+      "reading": "おとこ",
+      "furigana": [
+        {
+          "text": "男",
+          "reading": "おとこ"
+        }
+      ],
+      "romaji": "otoko",
+      "spanish": "hombre",
+      "partOfSpeech": "sustantivo",
+      "audio": "otoko.mp3"
+    },
+    {
+      "id": "v007",
+      "japanese": "住む",
+      "reading": "すむ",
+      "furigana": [
+        {
+          "text": "住",
+          "reading": "す"
+        },
+        {
+          "text": "む"
+        }
+      ],
+      "romaji": "sumu",
+      "spanish": "vivir; residir",
+      "partOfSpeech": "verbo",
+      "audio": "sumu.mp3"
+    },
+    {
+      "id": "v008",
+      "japanese": "お父さん",
+      "reading": "おとうさん",
+      "furigana": [
+        {
+          "text": "お"
+        },
+        {
+          "text": "父",
+          "reading": "とう"
+        },
+        {
+          "text": "さん"
+        }
+      ],
+      "romaji": "otousan",
+      "spanish": "padre; papá",
+      "partOfSpeech": "sustantivo",
+      "audio": "otousan.mp3"
+    },
+    {
+      "id": "v009",
+      "japanese": "暮らす",
+      "reading": "くらす",
+      "furigana": [
+        {
+          "text": "暮",
+          "reading": "く"
+        },
+        {
+          "text": "らす"
+        }
+      ],
+      "romaji": "kurasu",
+      "spanish": "vivir; llevar la vida",
+      "partOfSpeech": "verbo",
+      "audio": "kurasu.mp3"
+    },
+    {
+      "id": "v010",
+      "japanese": "ある日",
+      "reading": "あるひ",
+      "furigana": [
+        {
+          "text": "ある"
+        },
+        {
+          "text": "日",
+          "reading": "ひ"
+        }
+      ],
+      "romaji": "aru_hi",
+      "spanish": "un día",
+      "partOfSpeech": "expresión",
+      "audio": "aru_hi.mp3"
+    },
+    {
+      "id": "v011",
+      "japanese": "病気",
+      "reading": "びょうき",
+      "furigana": [
+        {
+          "text": "病気",
+          "reading": "びょうき"
+        }
+      ],
+      "romaji": "byouki",
+      "spanish": "enfermedad; estar enfermo",
+      "partOfSpeech": "sustantivo",
+      "audio": "byouki.mp3"
+    },
+    {
+      "id": "v012",
+      "japanese": "一生懸命",
+      "reading": "いっしょうけんめい",
+      "furigana": [
+        {
+          "text": "一生懸命",
+          "reading": "いっしょうけんめい"
+        }
+      ],
+      "romaji": "isshoukenmei",
+      "spanish": "con todas las fuerzas; con mucho empeño",
+      "partOfSpeech": "adverbio/adjetivo-na",
+      "audio": "isshoukenmei.mp3"
+    },
+    {
+      "id": "v013",
+      "japanese": "世話をする",
+      "reading": "せわをする",
+      "furigana": [
+        {
+          "text": "世話",
+          "reading": "せわ"
+        },
+        {
+          "text": "をする"
+        }
+      ],
+      "romaji": "sewa_o_suru",
+      "spanish": "cuidar; atender",
+      "partOfSpeech": "expresión verbal",
+      "audio": "sewa_o_suru.mp3"
+    },
+    {
+      "id": "v014",
+      "japanese": "死ぬ",
+      "reading": "しぬ",
+      "furigana": [
+        {
+          "text": "死",
+          "reading": "し"
+        },
+        {
+          "text": "ぬ"
+        }
+      ],
+      "romaji": "shinu",
+      "spanish": "morir",
+      "partOfSpeech": "verbo",
+      "audio": "shinu.mp3"
+    },
+    {
+      "id": "v015",
+      "japanese": "毎日",
+      "reading": "まいにち",
+      "furigana": [
+        {
+          "text": "毎日",
+          "reading": "まいにち"
+        }
+      ],
+      "romaji": "mainichi",
+      "spanish": "todos los días",
+      "partOfSpeech": "sustantivo/adverbio",
+      "audio": "mainichi.mp3"
+    },
+    {
+      "id": "v016",
+      "japanese": "墓参り",
+      "reading": "はかまいり",
+      "furigana": [
+        {
+          "text": "墓参",
+          "reading": "はかまい"
+        },
+        {
+          "text": "り"
+        }
+      ],
+      "romaji": "hakamairi",
+      "spanish": "visita a una tumba",
+      "partOfSpeech": "sustantivo",
+      "audio": "hakamairi.mp3"
+    },
+    {
+      "id": "v017",
+      "japanese": "水",
+      "reading": "みず",
+      "furigana": [
+        {
+          "text": "水",
+          "reading": "みず"
+        }
+      ],
+      "romaji": "mizu",
+      "spanish": "agua",
+      "partOfSpeech": "sustantivo",
+      "audio": "mizu.mp3"
+    },
+    {
+      "id": "v018",
+      "japanese": "食べ物",
+      "reading": "たべもの",
+      "furigana": [
+        {
+          "text": "食",
+          "reading": "た"
+        },
+        {
+          "text": "べ"
+        },
+        {
+          "text": "物",
+          "reading": "もの"
+        }
+      ],
+      "romaji": "tabemono",
+      "spanish": "comida; alimento",
+      "partOfSpeech": "sustantivo",
+      "audio": "tabemono.mp3"
+    },
+    {
+      "id": "v019",
+      "japanese": "持つ",
+      "reading": "もつ",
+      "furigana": [
+        {
+          "text": "持",
+          "reading": "も"
+        },
+        {
+          "text": "つ"
+        }
+      ],
+      "romaji": "motsu",
+      "spanish": "llevar; sostener; tener",
+      "partOfSpeech": "verbo",
+      "audio": "motsu.mp3"
+    },
+    {
+      "id": "v020",
+      "japanese": "お墓",
+      "reading": "おはか",
+      "furigana": [
+        {
+          "text": "お"
+        },
+        {
+          "text": "墓",
+          "reading": "はか"
+        }
+      ],
+      "romaji": "ohaka",
+      "spanish": "tumba",
+      "partOfSpeech": "sustantivo",
+      "audio": "ohaka.mp3"
+    },
+    {
+      "id": "v021",
+      "japanese": "行く",
+      "reading": "いく",
+      "furigana": [
+        {
+          "text": "行",
+          "reading": "い"
+        },
+        {
+          "text": "く"
+        }
+      ],
+      "romaji": "iku",
+      "spanish": "ir",
+      "partOfSpeech": "verbo",
+      "audio": "iku.mp3"
+    },
+    {
+      "id": "v022",
+      "japanese": "結婚する",
+      "reading": "けっこんする",
+      "furigana": [
+        {
+          "text": "結婚",
+          "reading": "けっこん"
+        },
+        {
+          "text": "する"
+        }
+      ],
+      "romaji": "kekkon_suru",
+      "spanish": "casarse",
+      "partOfSpeech": "verbo",
+      "audio": "kekkon_suru.mp3"
+    },
+    {
+      "id": "v023",
+      "japanese": "十八年間",
+      "reading": "じゅうはちねんかん",
+      "furigana": [
+        {
+          "text": "十八",
+          "reading": "じゅうはち"
+        },
+        {
+          "text": "年間",
+          "reading": "ねんかん"
+        }
+      ],
+      "romaji": "juuhachi_nenkan",
+      "spanish": "durante dieciocho años",
+      "partOfSpeech": "expresión temporal",
+      "audio": "juuhachi_nenkan.mp3"
+    },
+    {
+      "id": "v024",
+      "japanese": "一日も",
+      "reading": "いちにちも",
+      "furigana": [
+        {
+          "text": "一日",
+          "reading": "いちにち"
+        },
+        {
+          "text": "も"
+        }
+      ],
+      "romaji": "ichinichi_mo",
+      "spanish": "ni un solo día",
+      "partOfSpeech": "expresión",
+      "audio": "ichinichi_mo.mp3"
+    },
+    {
+      "id": "v025",
+      "japanese": "休む",
+      "reading": "やすむ",
+      "furigana": [
+        {
+          "text": "休",
+          "reading": "やす"
+        },
+        {
+          "text": "む"
+        }
+      ],
+      "romaji": "yasumu",
+      "spanish": "descansar; faltar; tomarse un día libre",
+      "partOfSpeech": "verbo",
+      "audio": "yasumu.mp3"
+    },
+    {
+      "id": "v026",
+      "japanese": "本当",
+      "reading": "ほんとう",
+      "furigana": [
+        {
+          "text": "本当",
+          "reading": "ほんとう"
+        }
+      ],
+      "romaji": "hontou",
+      "spanish": "verdad; realmente",
+      "partOfSpeech": "sustantivo/adverbio",
+      "audio": "hontou.mp3"
+    },
+    {
+      "id": "v027",
+      "japanese": "りっぱ",
+      "reading": "りっぱ",
+      "furigana": [
+        {
+          "text": "りっぱ"
+        }
+      ],
+      "romaji": "rippa",
+      "spanish": "admirable; ejemplar; magnífico",
+      "partOfSpeech": "adjetivo-na",
+      "audio": "rippa.mp3"
+    },
+    {
+      "id": "v028",
+      "japanese": "殿様",
+      "reading": "とのさま",
+      "furigana": [
+        {
+          "text": "殿様",
+          "reading": "とのさま"
+        }
+      ],
+      "romaji": "tonosama",
+      "spanish": "señor feudal; señor",
+      "partOfSpeech": "sustantivo",
+      "audio": "tonosama.mp3"
+    },
+    {
+      "id": "v029",
+      "japanese": "お城",
+      "reading": "おしろ",
+      "furigana": [
+        {
+          "text": "お"
+        },
+        {
+          "text": "城",
+          "reading": "しろ"
+        }
+      ],
+      "romaji": "oshiro",
+      "spanish": "castillo",
+      "partOfSpeech": "sustantivo",
+      "audio": "oshiro.mp3"
+    },
+    {
+      "id": "v030",
+      "japanese": "呼ぶ",
+      "reading": "よぶ",
+      "furigana": [
+        {
+          "text": "呼",
+          "reading": "よ"
+        },
+        {
+          "text": "ぶ"
+        }
+      ],
+      "romaji": "yobu",
+      "spanish": "llamar; mandar llamar",
+      "partOfSpeech": "verbo",
+      "audio": "yobu.mp3"
+    },
+    {
+      "id": "v031",
+      "japanese": "息子",
+      "reading": "むすこ",
+      "furigana": [
+        {
+          "text": "息子",
+          "reading": "むすこ"
+        }
+      ],
+      "romaji": "musuko",
+      "spanish": "hijo",
+      "partOfSpeech": "sustantivo",
+      "audio": "musuko.mp3"
+    },
+    {
+      "id": "v032",
+      "japanese": "だけ",
+      "reading": "だけ",
+      "furigana": [
+        {
+          "text": "だけ"
+        }
+      ],
+      "romaji": "dake",
+      "spanish": "solamente; nada más",
+      "partOfSpeech": "partícula",
+      "audio": "dake.mp3"
+    },
+    {
+      "id": "v033",
+      "japanese": "何も",
+      "reading": "なにも",
+      "furigana": [
+        {
+          "text": "何",
+          "reading": "なに"
+        },
+        {
+          "text": "も"
+        }
+      ],
+      "romaji": "nani_mo",
+      "spanish": "nada (con verbo negativo)",
+      "partOfSpeech": "pronombre/expresión",
+      "audio": "nani_mo.mp3"
+    },
+    {
+      "id": "v034",
+      "japanese": "ほしい",
+      "reading": "ほしい",
+      "furigana": [
+        {
+          "text": "ほしい"
+        }
+      ],
+      "romaji": "hoshii",
+      "spanish": "querer; desear (algo)",
+      "partOfSpeech": "adjetivo-i",
+      "audio": "hoshii.mp3"
+    },
+    {
+      "id": "v035",
+      "japanese": "お願い",
+      "reading": "おねがい",
+      "furigana": [
+        {
+          "text": "お"
+        },
+        {
+          "text": "願",
+          "reading": "ねが"
+        },
+        {
+          "text": "い"
+        }
+      ],
+      "romaji": "onegai",
+      "spanish": "petición; favor",
+      "partOfSpeech": "sustantivo",
+      "audio": "onegai.mp3"
+    },
+    {
+      "id": "v036",
+      "japanese": "会う",
+      "reading": "あう",
+      "furigana": [
+        {
+          "text": "会",
+          "reading": "あ"
+        },
+        {
+          "text": "う"
+        }
+      ],
+      "romaji": "au",
+      "spanish": "encontrarse con; ver a alguien",
+      "partOfSpeech": "verbo",
+      "audio": "au.mp3"
+    },
+    {
+      "id": "v037",
+      "japanese": "困る",
+      "reading": "こまる",
+      "furigana": [
+        {
+          "text": "困",
+          "reading": "こま"
+        },
+        {
+          "text": "る"
+        }
+      ],
+      "romaji": "komaru",
+      "spanish": "estar en apuros; no saber qué hacer",
+      "partOfSpeech": "verbo",
+      "audio": "komaru.mp3"
+    },
+    {
+      "id": "v038",
+      "japanese": "小さな声",
+      "reading": "ちいさなこえ",
+      "furigana": [
+        {
+          "text": "小",
+          "reading": "ちい"
+        },
+        {
+          "text": "さな"
+        },
+        {
+          "text": "声",
+          "reading": "こえ"
+        }
+      ],
+      "romaji": "chiisana_koe",
+      "spanish": "voz baja; voz suave",
+      "partOfSpeech": "expresión",
+      "audio": "chiisana_koe.mp3"
+    },
+    {
+      "id": "v039",
+      "japanese": "家来",
+      "reading": "けらい",
+      "furigana": [
+        {
+          "text": "家来",
+          "reading": "けらい"
+        }
+      ],
+      "romaji": "kerai",
+      "spanish": "sirviente; vasallo",
+      "partOfSpeech": "sustantivo",
+      "audio": "kerai.mp3"
+    },
+    {
+      "id": "v040",
+      "japanese": "父親",
+      "reading": "ちちおや",
+      "furigana": [
+        {
+          "text": "父親",
+          "reading": "ちちおや"
+        }
+      ],
+      "romaji": "chichioya",
+      "spanish": "padre",
+      "partOfSpeech": "sustantivo",
+      "audio": "chichioya.mp3"
+    },
+    {
+      "id": "v041",
+      "japanese": "似る",
+      "reading": "にる",
+      "furigana": [
+        {
+          "text": "似",
+          "reading": "に"
+        },
+        {
+          "text": "る"
+        }
+      ],
+      "romaji": "niru",
+      "spanish": "parecerse",
+      "partOfSpeech": "verbo",
+      "audio": "niru.mp3"
+    },
+    {
+      "id": "v042",
+      "japanese": "鏡",
+      "reading": "かがみ",
+      "furigana": [
+        {
+          "text": "鏡",
+          "reading": "かがみ"
+        }
+      ],
+      "romaji": "kagami",
+      "spanish": "espejo",
+      "partOfSpeech": "sustantivo",
+      "audio": "kagami.mp3"
+    },
+    {
+      "id": "v043",
+      "japanese": "箱",
+      "reading": "はこ",
+      "furigana": [
+        {
+          "text": "箱",
+          "reading": "はこ"
+        }
+      ],
+      "romaji": "hako",
+      "spanish": "caja",
+      "partOfSpeech": "sustantivo",
+      "audio": "hako.mp3"
+    },
+    {
+      "id": "v044",
+      "japanese": "中",
+      "reading": "なか",
+      "furigana": [
+        {
+          "text": "中",
+          "reading": "なか"
+        }
+      ],
+      "romaji": "naka",
+      "spanish": "interior; dentro",
+      "partOfSpeech": "sustantivo",
+      "audio": "naka.mp3"
+    },
+    {
+      "id": "v045",
+      "japanese": "見る",
+      "reading": "みる",
+      "furigana": [
+        {
+          "text": "見",
+          "reading": "み"
+        },
+        {
+          "text": "る"
+        }
+      ],
+      "romaji": "miru",
+      "spanish": "ver; mirar",
+      "partOfSpeech": "verbo",
+      "audio": "miru.mp3"
+    },
+    {
+      "id": "v046",
+      "japanese": "自分",
+      "reading": "じぶん",
+      "furigana": [
+        {
+          "text": "自分",
+          "reading": "じぶん"
+        }
+      ],
+      "romaji": "jibun",
+      "spanish": "uno mismo; sí mismo",
+      "partOfSpeech": "pronombre/sustantivo",
+      "audio": "jibun.mp3"
+    },
+    {
+      "id": "v047",
+      "japanese": "顔",
+      "reading": "かお",
+      "furigana": [
+        {
+          "text": "顔",
+          "reading": "かお"
+        }
+      ],
+      "romaji": "kao",
+      "spanish": "cara; rostro",
+      "partOfSpeech": "sustantivo",
+      "audio": "kao.mp3"
+    },
+    {
+      "id": "v048",
+      "japanese": "うれしい",
+      "reading": "うれしい",
+      "furigana": [
+        {
+          "text": "うれしい"
+        }
+      ],
+      "romaji": "ureshii",
+      "spanish": "feliz; contento",
+      "partOfSpeech": "adjetivo-i",
+      "audio": "ureshii.mp3"
+    },
+    {
+      "id": "v049",
+      "japanese": "泣く",
+      "reading": "なく",
+      "furigana": [
+        {
+          "text": "泣",
+          "reading": "な"
+        },
+        {
+          "text": "く"
+        }
+      ],
+      "romaji": "naku",
+      "spanish": "llorar",
+      "partOfSpeech": "verbo",
+      "audio": "naku.mp3"
+    },
+    {
+      "id": "v050",
+      "japanese": "若い",
+      "reading": "わかい",
+      "furigana": [
+        {
+          "text": "若",
+          "reading": "わか"
+        },
+        {
+          "text": "い"
+        }
+      ],
+      "romaji": "wakai",
+      "spanish": "joven",
+      "partOfSpeech": "adjetivo-i",
+      "audio": "wakai.mp3"
+    },
+    {
+      "id": "v051",
+      "japanese": "大切",
+      "reading": "たいせつ",
+      "furigana": [
+        {
+          "text": "大切",
+          "reading": "たいせつ"
+        }
+      ],
+      "romaji": "taisetsu",
+      "spanish": "importante; valioso; preciado",
+      "partOfSpeech": "adjetivo-na",
+      "audio": "taisetsu.mp3"
+    },
+    {
+      "id": "v052",
+      "japanese": "見せる",
+      "reading": "みせる",
+      "furigana": [
+        {
+          "text": "見",
+          "reading": "み"
+        },
+        {
+          "text": "せる"
+        }
+      ],
+      "romaji": "miseru",
+      "spanish": "mostrar; enseñar",
+      "partOfSpeech": "verbo",
+      "audio": "miseru.mp3"
+    },
+    {
+      "id": "v053",
+      "japanese": "もらう",
+      "reading": "もらう",
+      "furigana": [
+        {
+          "text": "もらう"
+        }
+      ],
+      "romaji": "morau",
+      "spanish": "recibir",
+      "partOfSpeech": "verbo",
+      "audio": "morau.mp3"
+    },
+    {
+      "id": "v054",
+      "japanese": "喜ぶ",
+      "reading": "よろこぶ",
+      "furigana": [
+        {
+          "text": "喜",
+          "reading": "よろこ"
+        },
+        {
+          "text": "ぶ"
+        }
+      ],
+      "romaji": "yorokobu",
+      "spanish": "alegrarse; estar contento",
+      "partOfSpeech": "verbo",
+      "audio": "yorokobu.mp3"
+    },
+    {
+      "id": "v055",
+      "japanese": "家",
+      "reading": "いえ",
+      "furigana": [
+        {
+          "text": "家",
+          "reading": "いえ"
+        }
+      ],
+      "romaji": "ie",
+      "spanish": "casa",
+      "partOfSpeech": "sustantivo",
+      "audio": "ie.mp3"
+    },
+    {
+      "id": "v056",
+      "japanese": "帰る",
+      "reading": "かえる",
+      "furigana": [
+        {
+          "text": "帰",
+          "reading": "かえ"
+        },
+        {
+          "text": "る"
+        }
+      ],
+      "romaji": "kaeru",
+      "spanish": "volver; regresar",
+      "partOfSpeech": "verbo",
+      "audio": "kaeru.mp3"
+    },
+    {
+      "id": "v057",
+      "japanese": "納屋",
+      "reading": "なや",
+      "furigana": [
+        {
+          "text": "納屋",
+          "reading": "なや"
+        }
+      ],
+      "romaji": "naya",
+      "spanish": "cobertizo; granero; almacén",
+      "partOfSpeech": "sustantivo",
+      "audio": "naya.mp3"
+    },
+    {
+      "id": "v058",
+      "japanese": "毎朝",
+      "reading": "まいあさ",
+      "furigana": [
+        {
+          "text": "毎朝",
+          "reading": "まいあさ"
+        }
+      ],
+      "romaji": "maiasa",
+      "spanish": "cada mañana",
+      "partOfSpeech": "sustantivo/adverbio",
+      "audio": "maiasa.mp3"
+    },
+    {
+      "id": "v059",
+      "japanese": "毎晩",
+      "reading": "まいばん",
+      "furigana": [
+        {
+          "text": "毎晩",
+          "reading": "まいばん"
+        }
+      ],
+      "romaji": "maiban",
+      "spanish": "cada noche",
+      "partOfSpeech": "sustantivo/adverbio",
+      "audio": "maiban.mp3"
+    },
+    {
+      "id": "v060",
+      "japanese": "奥さん",
+      "reading": "おくさん",
+      "furigana": [
+        {
+          "text": "奥",
+          "reading": "おく"
+        },
+        {
+          "text": "さん"
+        }
+      ],
+      "romaji": "okusan",
+      "spanish": "esposa; señora",
+      "partOfSpeech": "sustantivo",
+      "audio": "okusan.mp3"
+    },
+    {
+      "id": "v061",
+      "japanese": "心配する",
+      "reading": "しんぱいする",
+      "furigana": [
+        {
+          "text": "心配",
+          "reading": "しんぱい"
+        },
+        {
+          "text": "する"
+        }
+      ],
+      "romaji": "shinpai_suru",
+      "spanish": "preocuparse",
+      "partOfSpeech": "verbo",
+      "audio": "shinpai_suru.mp3"
+    },
+    {
+      "id": "v062",
+      "japanese": "畑",
+      "reading": "はたけ",
+      "furigana": [
+        {
+          "text": "畑",
+          "reading": "はたけ"
+        }
+      ],
+      "romaji": "hatake",
+      "spanish": "campo de cultivo; huerto",
+      "partOfSpeech": "sustantivo",
+      "audio": "hatake.mp3"
+    },
+    {
+      "id": "v063",
+      "japanese": "後",
+      "reading": "あと",
+      "furigana": [
+        {
+          "text": "後",
+          "reading": "あと"
+        }
+      ],
+      "romaji": "ato",
+      "spanish": "después; después de; detrás",
+      "partOfSpeech": "sustantivo",
+      "audio": "ato.mp3"
+    },
+    {
+      "id": "v064",
+      "japanese": "入る",
+      "reading": "はいる",
+      "furigana": [
+        {
+          "text": "入",
+          "reading": "はい"
+        },
+        {
+          "text": "る"
+        }
+      ],
+      "romaji": "hairu",
+      "spanish": "entrar",
+      "partOfSpeech": "verbo",
+      "audio": "hairu.mp3"
+    },
+    {
+      "id": "v065",
+      "japanese": "開ける",
+      "reading": "あける",
+      "furigana": [
+        {
+          "text": "開",
+          "reading": "あ"
+        },
+        {
+          "text": "ける"
+        }
+      ],
+      "romaji": "akeru",
+      "spanish": "abrir",
+      "partOfSpeech": "verbo",
+      "audio": "akeru.mp3"
+    },
+    {
+      "id": "v066",
+      "japanese": "女",
+      "reading": "おんな",
+      "furigana": [
+        {
+          "text": "女",
+          "reading": "おんな"
+        }
+      ],
+      "romaji": "onna",
+      "spanish": "mujer",
+      "partOfSpeech": "sustantivo",
+      "audio": "onna.mp3"
+    },
+    {
+      "id": "v067",
+      "japanese": "びっくりする",
+      "reading": "びっくりする",
+      "furigana": [
+        {
+          "text": "びっくりする"
+        }
+      ],
+      "romaji": "bikkuri_suru",
+      "spanish": "sorprenderse; asustarse",
+      "partOfSpeech": "verbo",
+      "audio": "bikkuri_suru.mp3"
+    },
+    {
+      "id": "v068",
+      "japanese": "来る",
+      "reading": "くる",
+      "furigana": [
+        {
+          "text": "来",
+          "reading": "く"
+        },
+        {
+          "text": "る"
+        }
+      ],
+      "romaji": "kuru",
+      "spanish": "venir",
+      "partOfSpeech": "verbo",
+      "audio": "kuru.mp3"
+    },
+    {
+      "id": "v069",
+      "japanese": "おなかがすく",
+      "reading": "おなかがすく",
+      "furigana": [
+        {
+          "text": "おなかがすく"
+        }
+      ],
+      "romaji": "onaka_ga_suku",
+      "spanish": "tener hambre",
+      "partOfSpeech": "expresión verbal",
+      "audio": "onaka_ga_suku.mp3"
+    },
+    {
+      "id": "v070",
+      "japanese": "ごはん",
+      "reading": "ごはん",
+      "furigana": [
+        {
+          "text": "ごはん"
+        }
+      ],
+      "romaji": "gohan",
+      "spanish": "comida; arroz cocido",
+      "partOfSpeech": "sustantivo",
+      "audio": "gohan.mp3"
+    },
+    {
+      "id": "v071",
+      "japanese": "まだ",
+      "reading": "まだ",
+      "furigana": [
+        {
+          "text": "まだ"
+        }
+      ],
+      "romaji": "mada",
+      "spanish": "todavía; aún",
+      "partOfSpeech": "adverbio",
+      "audio": "mada.mp3"
+    },
+    {
+      "id": "v072",
+      "japanese": "叩く",
+      "reading": "たたく",
+      "furigana": [
+        {
+          "text": "叩",
+          "reading": "たた"
+        },
+        {
+          "text": "く"
+        }
+      ],
+      "romaji": "tataku",
+      "spanish": "golpear; pegar",
+      "partOfSpeech": "verbo",
+      "audio": "tataku.mp3"
+    },
+    {
+      "id": "v073",
+      "japanese": "痛い",
+      "reading": "いたい",
+      "furigana": [
+        {
+          "text": "痛",
+          "reading": "いた"
+        },
+        {
+          "text": "い"
+        }
+      ],
+      "romaji": "itai",
+      "spanish": "doler; doloroso",
+      "partOfSpeech": "adjetivo-i",
+      "audio": "itai.mp3"
+    },
+    {
+      "id": "v074",
+      "japanese": "ばか",
+      "reading": "ばか",
+      "furigana": [
+        {
+          "text": "ばか"
+        }
+      ],
+      "romaji": "baka",
+      "spanish": "tonto; idiota",
+      "partOfSpeech": "sustantivo/adjetivo-na",
+      "audio": "baka.mp3"
+    },
+    {
+      "id": "v075",
+      "japanese": "隣",
+      "reading": "となり",
+      "furigana": [
+        {
+          "text": "隣",
+          "reading": "となり"
+        }
+      ],
+      "romaji": "tonari",
+      "spanish": "al lado; vecino",
+      "partOfSpeech": "sustantivo",
+      "audio": "tonari.mp3"
+    },
+    {
+      "id": "v076",
+      "japanese": "寺",
+      "reading": "てら",
+      "furigana": [
+        {
+          "text": "寺",
+          "reading": "てら"
+        }
+      ],
+      "romaji": "tera",
+      "spanish": "templo budista",
+      "partOfSpeech": "sustantivo",
+      "audio": "tera.mp3"
+    },
+    {
+      "id": "v077",
+      "japanese": "尼さん",
+      "reading": "あまさん",
+      "furigana": [
+        {
+          "text": "尼",
+          "reading": "あま"
+        },
+        {
+          "text": "さん"
+        }
+      ],
+      "romaji": "ama_san",
+      "spanish": "monja budista",
+      "partOfSpeech": "sustantivo",
+      "audio": "ama_san.mp3"
+    },
+    {
+      "id": "v078",
+      "japanese": "お坊さん",
+      "reading": "おぼうさん",
+      "furigana": [
+        {
+          "text": "お"
+        },
+        {
+          "text": "坊",
+          "reading": "ぼう"
+        },
+        {
+          "text": "さん"
+        }
+      ],
+      "romaji": "obousan",
+      "spanish": "monje budista",
+      "partOfSpeech": "sustantivo",
+      "audio": "obousan.mp3"
+    },
+    {
+      "id": "v079",
+      "japanese": "二人",
+      "reading": "ふたり",
+      "furigana": [
+        {
+          "text": "二人",
+          "reading": "ふたり"
+        }
+      ],
+      "romaji": "futari",
+      "spanish": "dos personas",
+      "partOfSpeech": "contador/sustantivo",
+      "audio": "futari.mp3"
+    },
+    {
+      "id": "v080",
+      "japanese": "声",
+      "reading": "こえ",
+      "furigana": [
+        {
+          "text": "声",
+          "reading": "こえ"
+        }
+      ],
+      "romaji": "koe",
+      "spanish": "voz",
+      "partOfSpeech": "sustantivo",
+      "audio": "koe.mp3"
+    },
+    {
+      "id": "v081",
+      "japanese": "喧嘩",
+      "reading": "けんか",
+      "furigana": [
+        {
+          "text": "喧嘩",
+          "reading": "けんか"
+        }
+      ],
+      "romaji": "kenka",
+      "spanish": "pelea; discusión",
+      "partOfSpeech": "sustantivo",
+      "audio": "kenka.mp3"
+    },
+    {
+      "id": "v082",
+      "japanese": "終わる",
+      "reading": "おわる",
+      "furigana": [
+        {
+          "text": "終",
+          "reading": "お"
+        },
+        {
+          "text": "わる"
+        }
+      ],
+      "romaji": "owaru",
+      "spanish": "terminar; acabarse",
+      "partOfSpeech": "verbo",
+      "audio": "owaru.mp3"
+    }
+  ],
+  "sentences": [],
+  "readingComprehension": [],
+  "extensions": {}
+}
