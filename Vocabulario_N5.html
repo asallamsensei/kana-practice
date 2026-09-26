@@ -619,6 +619,16 @@
     
     <div class="panel-title">Modo</div>
 
+    <div class="switch switch-panel" style="margin-bottom:16px">
+      <button id="nivel-n5" class="btn btn-mode activo"
+              type="button" aria-pressed="true"
+              onclick="toggleNivel('N5')">N5</button>
+    
+      <button id="nivel-n4" class="btn btn-mode"
+              type="button" aria-pressed="false"
+              onclick="toggleNivel('N4')">N4</button>
+    </div>
+    
     <div class="switch switch-panel">
       <button class="btn btn-mode" id="m-jp-es" type="button" onclick="clickJpEs()">JP → ES</button>
       <button class="btn btn-mode" id="m-es-jp" type="button" onclick="clickEsJp()">ES → JP</button>
@@ -775,8 +785,12 @@ function sintetizarJapones(texto){
 function buildExactAudioSrc(romaji){
   const key = String(romaji || "").trim();
   if(!key) return "";
-  // nombre EXACTO al romaji del JSON (solo encode para espacios/acentos)
-  return AUDIO_BASE + encodeURIComponent(key) + ".mp3";
+
+  const base = itemActualCorrecto?.nivel === "N4"
+    ? "audios/n4/"
+    : AUDIO_BASE;
+
+  return base + encodeURIComponent(key) + ".mp3";
 }
 
 function detenerAudio(){
@@ -820,19 +834,109 @@ function reproducirAudioActual(){
 }
 
 // ====== DATA ======
-fetch("data/Vocabulario_N5.json")
-  .then(res => res.json())
-  .then(data => {
-    lista = (data || []).filter(x => x && x.kanji && x.significado && x.romaji);
-    setModo("mixto");
-  })
-  .catch(err=>{
-    console.error(err);
-    document.getElementById("promptMain").innerText = "No se pudo cargar data/Vocabulario_N5.json";
-    document.getElementById("promptSub").innerText = "Revisa la ruta y usa servidor (GitHub Pages / Live Server).";
-    document.getElementById("opcionesTexto").innerHTML = "";
-  });
 
+// ====== DATA ======
+const rutasNivel = {
+  N5: "data/Vocabulario_N5.json",
+  N4: "data/vocabulario_N4.json"
+};
+
+const datosNivel = {};
+let nivelesActivos = new Set(["N5"]);
+let cargandoNivel = false;
+
+function pintarNiveles(){
+  for(const nivel of ["N5", "N4"]){
+    const boton = document.getElementById(`nivel-${nivel.toLowerCase()}`);
+    const activo = nivelesActivos.has(nivel);
+
+    boton.classList.toggle("activo", activo);
+    boton.setAttribute("aria-pressed", String(activo));
+    boton.disabled = cargandoNivel;
+  }
+}
+
+async function cargarNiveles(seleccion){
+  if(cargandoNivel) return;
+  cargandoNivel = true;
+  pintarNiveles();
+
+  try{
+    const grupos = await Promise.all(
+      [...seleccion].map(async nivel => {
+        if(!datosNivel[nivel]){
+          const res = await fetch(rutasNivel[nivel]);
+          if(!res.ok) throw new Error(`No se pudo cargar ${rutasNivel[nivel]}`);
+
+          const data = await res.json();
+          if(!Array.isArray(data)){
+            throw new Error(`El JSON de ${nivel} debe ser una lista.`);
+          }
+
+          const palabras = data
+            .filter(x => x && x.kanji && x.significado && x.romaji)
+            .map(x => ({ ...x, nivel }));
+
+          if(
+            new Set(palabras.map(x => x.kanji)).size < 3 ||
+            new Set(palabras.map(x => x.significado)).size < 3
+          ){
+            throw new Error(`Faltan palabras distintas en ${nivel}.`);
+          }
+
+          datosNivel[nivel] = palabras;
+        }
+
+        return datosNivel[nivel];
+      })
+    );
+
+    detenerAudio();
+    if(window.speechSynthesis) speechSynthesis.cancel();
+    clearTimeout(temporizadorEmparejar);
+    temporizadorEmparejar = null;
+
+    nivelesActivos = new Set(seleccion);
+    lista = grupos.flat();
+    primeraRonda = true;
+    itemActualCorrecto = null;
+    ultimoAudioKey = "";
+    yaValidado = false;
+    limpiarResultado();
+
+    if(actividadActual === "emparejar"){
+      reiniciarEmparejar();
+    }else{
+      siguiente();
+    }
+  }catch(error){
+    console.error(error);
+    alert(error.message);
+  }finally{
+    cargandoNivel = false;
+    pintarNiveles();
+  }
+}
+
+function toggleNivel(nivel){
+  if(cargandoNivel) return;
+
+  const seleccion = new Set(nivelesActivos);
+
+  if(seleccion.has(nivel)){
+    if(seleccion.size === 1){
+      if(!lista.length) cargarNiveles(seleccion);
+      return;
+    }
+    seleccion.delete(nivel);
+  }else{
+    seleccion.add(nivel);
+  }
+
+  cargarNiveles(seleccion);
+}
+
+  
 // ====== UI MODO ======
 
 function limpiarActivos(){
@@ -1141,6 +1245,7 @@ function responder(letra){
 }
   
 function verificar(letraForzada){
+  if(!itemActualCorrecto || yaValidado) return;
   const res = document.getElementById("resultado");
   const info = document.getElementById("infoExtra");
 
@@ -1432,6 +1537,8 @@ document.addEventListener("keydown", (e) => {
   
 cargarStats();
 pintarStats();
+aplicarUI();
+cargarNiveles(nivelesActivos);
   
 </script>
 
