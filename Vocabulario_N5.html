@@ -709,7 +709,10 @@ let rondaEsDictado = false; // true/false
 let dictadoDirs = new Set(["jp-es", "es-jp"]);
 
 // ====== AUDIO (EXACTO AL JSON) ======
-const AUDIO_BASE = "data/audios/n5/";   // carpeta mp3
+const AUDIO_BASES = {
+  N5: "data/audios/n5/",
+  N4: "data/audios/n4/"
+};
 const audio = new Audio();
 
 const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
@@ -786,9 +789,10 @@ function buildExactAudioSrc(romaji){
   const key = String(romaji || "").trim();
   if(!key) return "";
 
-  const base = itemActualCorrecto?.nivel === "N4"
-    ? "audios/n4/"
-    : AUDIO_BASE;
+  const nivel = itemActualCorrecto?.nivel || "N5";
+  const base = AUDIO_BASES[nivel];
+
+  if(!base) return "";
 
   return base + encodeURIComponent(key) + ".mp3";
 }
