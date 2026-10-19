@@ -996,8 +996,12 @@
     $("sound-effects").checked = state.prefs.effects;
     $("auto-audio").checked = state.prefs.autoAudio;
     $("audio-source").value = state.prefs.audioSource;
-    $("speech-rate").value = state.prefs.rate;
-    $("rate-value").textContent = state.prefs.rate.toFixed(2) + "×";
+    const mp3SpeedLocked = state.prefs.audioSource === "mp3";
+    $("speech-rate").disabled = mp3SpeedLocked;
+    $("speech-rate").value = mp3SpeedLocked ? 1 : state.prefs.rate;
+    $("rate-value").textContent = mp3SpeedLocked
+      ? "Original"
+      : state.prefs.rate.toFixed(2) + "×";
     $("data-label").textContent = (state.custom ? "Tu lista" : state.remote ? "Lista del sitio" : "Lista incluida")
       + " · " + state.data.hiragana.length + " hiragana y " + state.data.katakana.length + " katakana.";
     $("restore-data").hidden = !state.custom;
@@ -1557,7 +1561,6 @@
       const clip = new Audio(source);
       sound.clip = clip;
       clip.preload = "auto";
-      clip.playbackRate = state.prefs.rate;
       function fail(error) {
         if (token !== sound.token || fallingBack) { settle(false); return; }
         fallingBack = true;
