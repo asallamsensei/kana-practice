@@ -1,1449 +1,1901 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" data-theme="dark">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Repaso de Kana — Asallam Sensei</title>
-
-<style>
-  :root{
-    --bg: #0b1020;
-    --card: rgba(255,255,255,.08);
-    --card2: rgba(255,255,255,.10);
-    --text: #eef2ff;
-    --muted: rgba(238,242,255,.75);
-    --accent: #7d5cff;
-    --accent2:#22c55e;
-    --danger:#ef4444;
-    --border: rgba(255,255,255,.14);
-    --soft: rgba(255,255,255,.06);
-  }
-
-  *{ box-sizing: border-box; }
-
-  body{
-    margin:0;
-    font-family: Arial, sans-serif;
-    background:
-      radial-gradient(1200px 700px at 20% 10%, rgba(125,92,255,.35), transparent 60%),
-      radial-gradient(900px 600px at 90% 20%, rgba(34,197,94,.18), transparent 60%),
-      radial-gradient(900px 600px at 30% 90%, rgba(239,68,68,.14), transparent 55%),
-      var(--bg);
-    color: var(--text);
-    min-height:100vh;
-    display:flex;
-    justify-content:center;
-    padding: 16px 12px 42px;
-  }
-
-  .wrap{
-    width:min(920px, 100%);
-  }
-
-  h1{
-    margin: 8px 0 14px;
-    text-align:center;
-    font-size: clamp(22px, 4.4vw, 30px);
-    line-height: 1.15;
-    letter-spacing: .2px;
-  }
-
-  .card{
-    background: linear-gradient(180deg, var(--card2), var(--card));
-    border: 1px solid var(--border);
-    border-radius: 22px;
-    box-shadow: 0 20px 50px rgba(0,0,0,.35);
-    padding: 16px;
-  }
-
-.top-grid{
-  display:grid;
-  grid-template-columns: minmax(0, 1fr) 280px;
-  gap: 14px;
-  align-items: start;
-}
-
-
-  .panel{
-    background: rgba(255,255,255,.04);
-    border: 1px solid rgba(255,255,255,.08);
-    border-radius: 18px;
-    padding: 14px;
-  }
-
-  .row{
-    display:flex;
-    gap:10px;
-    flex-wrap:wrap;
-    align-items:center;
-    justify-content:center;
-  }
-
-  .row-left{
-    display:flex;
-    gap:10px;
-    flex-wrap:wrap;
-    align-items:center;
-    justify-content:flex-start;
-  }
-
-  .chips{
-    display:flex;
-    gap:10px;
-    flex-wrap:wrap;
-    justify-content:center;
-    align-items:center;
-  }
-
-  button{
-    border:none;
-    border-radius: 12px;
-    padding: 11px 14px;
-    cursor:pointer;
-    color:white;
-    background: var(--accent);
-    font-weight: 700;
-    font-size: 15px;
-  }
-
-  button:hover{
-    transform: translateY(-1px);
-    filter: brightness(1.06);
-  }
-
-  .modo-btn,
-  .orden-btn,
-  .reset-btn,
-  .ghost-btn{
-    background: rgba(255,255,255,.08);
-    border: 1px solid var(--border);
-    color: var(--text);
-  }
-
-  .modo-btn.activo{
-    background: var(--accent);
-    border-color: transparent;
-    color: white;
-  }
-
-  .orden-btn{
-    opacity: .62;
-  }
-
-  .orden-btn.activo{
-    opacity: 1;
-    background: rgba(125,92,255,.22);
-    border-color: rgba(125,92,255,.55);
-    color: #efe9ff;
-  }
-
-  #btn-principiante{
-    opacity: .55;
-  }
-
-  #btn-principiante.activo{
-    opacity: 1;
-    background: rgba(239,68,68,.18);
-    border-color: rgba(239,68,68,.5);
-    color: #fecaca;
-  }
-
-  .reset-btn:hover,
-  .ghost-btn:hover,
-  .modo-btn:hover,
-  .orden-btn:hover{
-    background: rgba(255,255,255,.12);
-  }
-
-  .main-play{
-    text-align:center;
-    padding: 14px 10px 10px;
-  }
-
-#kanaBox{
-  min-height: 140px;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  border-radius: 18px;
-  border: 1px solid rgba(255,255,255,.10);
-  background: rgba(0,0,0,.16);
-  padding: 14px 10px;
-}
-
-
-#kana{
-  font-size: clamp(50px, 10vw, 60px);
-  line-height: 1.05;
-  font-weight: 300;
-  user-select: none;
-  margin: 0;
-  text-align:center;
-  letter-spacing: .5px;
-  cursor: pointer;
-}
-
-
-  #kana.dictado{
-    font-size: clamp(48px, 12vw, 68px);
-  }
-
-  .audio-row{
-    margin-top: 12px;
-  }
-
-  #btnReplay{
-    display:none;
-  }
-
-  #btnReplay.visible{
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
-  }
-
-  #btnReplay.big-sound{
-    font-size: 28px;
-    padding: 16px 20px;
-    border-radius: 16px;
-    background: rgba(255,255,255,.08);
-    border: 1px solid var(--border);
-    color: var(--text);
-  }
-
-  #respuesta{
-    margin-top: 14px;
-    font-size: clamp(20px, 4.2vw, 30px);
-    min-height: 40px;
-    text-align:center;
-    font-weight: 500;
-    white-space: pre-line;
-    line-height: 1.28;
-  }
-
-  .correcto{ color: var(--accent2); }
-  .incorrecto{ color: var(--danger); }
-
-  .input-wrap{
-    margin-top: 14px;
-    display:flex;
-    justify-content:center;
-  }
-
-  #kana:empty{
-    display: none;
-  }
-
-  #nota-teclado{
-    display:none;
-    font-size: 13px;
-    color: var(--muted);
-    margin-top: 8px;
-    text-align:center;
-    line-height: 1.35;
-  }
-
-  #acciones{
-    margin-top: 14px;
-    display:flex;
-    gap:10px;
-    justify-content:center;
-    flex-wrap:wrap;
-  }
-
-  .accion-btn{
-    min-width: 150px;
-  }
-
-  .opcion-btn:disabled{
-    opacity: 1;
-    cursor: default;
-  }
-  
-  .opcion-btn:disabled:hover{
-    transform: none;
-    filter: none;
-  }
-  
-  #estadisticas{
-    margin-top: 14px;
-    text-align:center;
-    color: var(--muted);
-    font-size: 15px;
-    line-height: 1.5;
-  }
-
-  .sep{
-    height:1px;
-    background: rgba(255,255,255,.10);
-    margin: 14px 0;
-  }
-
-  .hint{
-    color: rgba(238,242,255,.72);
-    font-size: 13px;
-    line-height: 1.35;
-    text-align:center;
-  }
-
-  code.kbd{
-    background: rgba(255,255,255,.08);
-    border: 1px solid rgba(255,255,255,.14);
-    padding: 2px 7px;
-    border-radius: 8px;
-    font-weight: 700;
-    color: var(--text);
-  }
-
-  @media (max-width: 900px){
-    body{
-      padding: 10px 10px 28px;
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#10121b">
+  <meta name="description" content="Practica hiragana y katakana con quiz, escritura, dictado y parejas. Un entrenador de japonés de Asallam Sensei.">
+  <title>Hiragana y Katakana · Asallam Sensei</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg:#10121b; --surface:#191c29; --raised:#222635; --hover:#292e40;
+      --text:#f5f3ed; --muted:#acb1c6; --subtle:#7e869e; --border:#34394c;
+      --accent:#c3b4ff; --accent-bg:#39304f; --mint:#a4e3ce; --mint-bg:#233e38;
+      --danger:#ffb4b4; --danger-bg:#432c35; --gold:#f2ce88; --shadow:0 20px 60px #00000024;
+      --radius:22px; --jp:"Noto Sans JP","Hiragino Sans","Yu Gothic",Meiryo,sans-serif;
     }
-
-    .card{
-      padding: 12px;
-      border-radius: 18px;
+    :root[data-theme="light"] {
+      color-scheme: light;
+      --bg:#f3f2ef; --surface:#ffffff; --raised:#f3f3f8; --hover:#eaeaf2;
+      --text:#232638; --muted:#5c6376; --subtle:#68718b; --border:#d9dce6;
+      --accent:#6748af; --accent-bg:#eee7fa; --mint:#216750; --mint-bg:#e4f3eb;
+      --danger:#a52841; --danger-bg:#fce8ed; --gold:#936218; --shadow:0 20px 60px #37325109;
     }
-
-    .panel{
-      padding: 12px;
-      border-radius: 16px;
+    * { box-sizing:border-box; }
+    [hidden] { display:none !important; }
+    body { margin:0; background:var(--bg); color:var(--text); font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; line-height:1.5; -webkit-font-smoothing:antialiased; }
+    body::before { content:""; position:fixed; inset:0; z-index:-1; pointer-events:none; background:radial-gradient(ellipse at 80% 0%,#9c86eb0b,transparent 55%); }
+    button,input,select { font:inherit; }
+    button,a,input,select,summary { -webkit-tap-highlight-color:transparent; }
+    button { cursor:pointer; }
+    button:disabled { cursor:not-allowed; opacity:.48; }
+    a { color:inherit; text-decoration:none; }
+    a:hover { text-decoration:underline; text-underline-offset:4px; }
+    button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible { outline:3px solid var(--accent); outline-offset:4px; }
+    h1,h2,h3,p { margin:0; }
+    h1 { font-size:clamp(29px,3.5vw,46px); letter-spacing:-1.6px; line-height:1.14; font-weight:720; }
+    h2 { font-size:21px; letter-spacing:-.45px; }
+    h3 { font-size:15px; }
+    .jp { font-family:var(--jp); font-weight:400; }
+    .sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
+    .skip-link { position:fixed; top:-70px; left:16px; z-index:100; padding:12px 18px; background:var(--surface); border:2px solid var(--accent); border-radius:10px; }
+    .skip-link:focus { top:12px; }
+    .container { width:min(1180px,100% - 48px); margin-inline:auto; }
+    .topbar { display:flex; align-items:center; justify-content:space-between; gap:20px; padding:24px 0; border-bottom:1px solid var(--border); }
+    .brand { display:flex; align-items:center; gap:12px; flex-shrink:0; }
+    .brand:hover { text-decoration:none; }
+    .brand-mark { display:grid; place-items:center; width:43px; height:43px; border-radius:13px; color:var(--bg); background:var(--accent); font:27px var(--jp); }
+    .brand-name { display:block; font-size:13px; font-weight:750; letter-spacing:1.1px; }
+    .brand-sub { display:block; font-size:12px; color:var(--muted); margin-top:2px; }
+    .topnav { display:flex; align-items:center; gap:9px; }
+    .nav-link,.icon-button { display:inline-flex; justify-content:center; align-items:center; gap:7px; min-height:42px; border:1px solid transparent; border-radius:10px; padding:8px 11px; color:var(--muted); background:transparent; font-size:13px; font-weight:600; }
+    .nav-link:hover,.icon-button:hover { background:var(--raised); color:var(--text); text-decoration:none; }
+    .donate-nav { color:var(--text); border-color:var(--border); }
+    .icon { width:19px; height:19px; flex-shrink:0; fill:none; stroke:currentColor; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; }
+    .hero { padding:34px 0 27px; display:flex; justify-content:space-between; align-items:flex-end; gap:24px; }
+    .eyebrow { display:flex; align-items:center; gap:7px; font-size:10px; text-transform:uppercase; letter-spacing:2px; font-weight:750; color:var(--accent); margin-bottom:12px; }
+    .eyebrow::before { content:""; width:6px; height:6px; border-radius:50%; background:var(--accent); }
+    .hero-copy { color:var(--muted); font-size:14px; margin-top:12px; max-width:550px; }
+    .hero-aside { color:var(--subtle); font-size:12px; text-align:right; padding-bottom:4px; }
+    .hero-aside strong { display:block; font-size:23px; color:var(--text); font-weight:600; margin-bottom:2px; letter-spacing:-.6px; }
+    .notice { display:flex; gap:12px; align-items:center; justify-content:space-between; border:1px solid var(--border); background:var(--raised); border-radius:14px; margin:0 0 18px; padding:12px 16px; font-size:13px; color:var(--text); }
+    .notice.error { background:var(--danger-bg); border-color:var(--danger); }
+    .notice button { background:none; border:0; color:inherit; padding:6px; min-width:32px; font-size:20px; }
+    .workspace { display:grid; grid-template-columns:minmax(0,1fr) 284px; align-items:start; gap:22px; }
+    .main-column { min-width:0; }
+    .scope-row { display:flex; align-items:center; justify-content:space-between; gap:14px; margin-bottom:17px; }
+    .segmented { display:flex; gap:4px; padding:4px; border:1px solid var(--border); background:var(--surface); border-radius:13px; }
+    .segment { border:0; border-radius:9px; background:transparent; color:var(--muted); padding:8px 13px; min-height:39px; font-size:13px; font-weight:650; }
+    .segment:hover { color:var(--text); background:var(--raised); }
+    .segment[aria-pressed="true"] { background:var(--accent-bg); color:var(--accent); }
+    .scope-count { font-size:12px; color:var(--muted); }
+    .activity-tabs { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:6px; padding:6px; background:var(--surface); border:1px solid var(--border); border-radius:16px; margin-bottom:16px; }
+    .activity-tab { display:flex; align-items:center; justify-content:center; gap:8px; padding:12px 8px; border:0; border-radius:10px; background:transparent; color:var(--muted); font-size:13px; font-weight:650; min-height:46px; }
+    .activity-tab:hover { background:var(--raised); color:var(--text); }
+    .activity-tab[aria-pressed="true"] { background:var(--accent-bg); color:var(--accent); }
+    .exercise-card { position:relative; background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:25px 28px 20px; box-shadow:var(--shadow); overflow:hidden; }
+    .exercise-top { display:flex; justify-content:space-between; align-items:center; gap:10px; }
+    .badge { font-size:10px; font-weight:750; text-transform:uppercase; letter-spacing:1.3px; color:var(--accent); background:var(--accent-bg); border-radius:6px; padding:5px 9px; }
+    .round-count { color:var(--muted); font-size:12px; font-variant-numeric:tabular-nums; }
+    .progress-track { height:4px; background:var(--raised); border-radius:4px; margin-top:17px; overflow:hidden; }
+    .progress-fill { height:100%; width:0%; background:var(--mint); border-radius:inherit; transition:width .24s ease; }
+    .question-area { text-align:center; padding:25px 0 21px; }
+    .question-label { color:var(--muted); font-size:13px; }
+    .prompt { min-height:160px; display:flex; align-items:center; justify-content:center; font-size:clamp(76px,10vw,110px); line-height:1.4; margin:5px 0; letter-spacing:4px; }
+    .prompt.romaji { font-family:inherit; font-size:clamp(54px,7vw,74px); font-weight:550; letter-spacing:-2px; }
+    .prompt.multi { font-size:clamp(66px,9vw,94px); }
+    .prompt.listen { min-height:160px; font-size:40px; letter-spacing:0; }
+    .listen-prompt { display:flex; flex-direction:column; align-items:center; gap:14px; }
+    .listen-prompt .sound-waves { display:flex; gap:6px; align-items:center; justify-content:center; height:55px; }
+    .sound-waves i { display:block; width:6px; border-radius:4px; background:var(--accent); height:20px; }
+    .sound-waves i:nth-child(2),.sound-waves i:nth-child(6) { height:32px; }
+    .sound-waves i:nth-child(3),.sound-waves i:nth-child(5) { height:43px; }
+    .sound-waves i:nth-child(4) { height:55px; }
+    .listen-prompt span { font-size:15px; color:var(--muted); letter-spacing:0; font-family:inherit; }
+    .listen-button { display:inline-flex; align-items:center; gap:7px; padding:7px 12px; min-height:36px; font-size:12px; font-weight:600; border:1px solid var(--border); border-radius:999px; color:var(--muted); background:transparent; }
+    .listen-button:hover { background:var(--raised); color:var(--text); }
+    .listen-button.playing { color:var(--mint); border-color:var(--mint); }
+    .options { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; }
+    .option-button { position:relative; display:flex; align-items:center; justify-content:center; min-height:67px; padding:12px 35px; border:1px solid var(--border); border-radius:13px; color:var(--text); background:var(--raised); font-size:24px; transition:background .15s,border-color .15s,transform .15s; }
+    .option-button:hover:not(:disabled) { border-color:var(--accent); background:var(--accent-bg); transform:translateY(-1px); }
+    .option-button .key { position:absolute; top:50%; left:13px; transform:translateY(-50%); color:var(--subtle); font-family:inherit; font-size:10px; border:1px solid var(--border); border-radius:5px; width:20px; height:22px; display:grid; place-items:center; }
+    .option-button .answer-mark { position:absolute; right:14px; font-size:17px; }
+    .option-button:disabled { opacity:1; cursor:default; }
+    .option-button.is-correct { background:var(--mint-bg); border-color:var(--mint); color:var(--mint); }
+    .option-button.is-wrong { background:var(--danger-bg); border-color:var(--danger); color:var(--danger); }
+    .option-button.is-muted { opacity:.48; }
+    .answer-form { display:flex; align-items:stretch; gap:10px; }
+    .answer-input { min-width:0; width:100%; padding:14px 17px; background:var(--raised); color:var(--text); border:1px solid var(--border); border-radius:12px; font-size:23px; text-align:center; }
+    .answer-input::placeholder { color:var(--subtle); font-size:16px; }
+    .button { display:inline-flex; align-items:center; justify-content:center; gap:8px; min-height:43px; border-radius:11px; padding:10px 16px; border:1px solid var(--border); background:var(--raised); color:var(--text); font-size:13px; font-weight:650; }
+    .button:hover:not(:disabled) { background:var(--hover); text-decoration:none; }
+    .button.primary { color:var(--bg); border-color:var(--mint); background:var(--mint); }
+    .button.primary:hover:not(:disabled) { filter:brightness(.95); }
+    .button.small { font-size:12px; min-height:36px; padding:7px 11px; }
+    .button.ghost { background:transparent; color:var(--muted); border-color:transparent; }
+    .button.danger { color:var(--danger); }
+    .feedback { min-height:67px; display:flex; flex-direction:column; justify-content:center; align-items:center; gap:3px; text-align:center; padding:12px 0 8px; }
+    .feedback-title { font-size:15px; font-weight:700; }
+    .feedback-title.correct { color:var(--mint); }
+    .feedback-title.wrong { color:var(--danger); }
+    .feedback-detail { font-size:13px; color:var(--muted); }
+    .feedback-tip { font-size:12px; color:var(--muted); margin-top:3px; max-width:540px; }
+    .exercise-actions { display:flex; align-items:center; justify-content:space-between; gap:10px; padding-top:13px; border-top:1px solid var(--border); }
+    .keyboard-hint { text-align:center; font-size:11px; color:var(--subtle); margin:14px 0 0; }
+    kbd { font:inherit; border:1px solid var(--border); border-radius:4px; padding:1px 4px; white-space:nowrap; }
+    .session-stats { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:8px; margin-top:15px; }
+    .stat { padding:13px 8px; background:var(--surface); border:1px solid var(--border); border-radius:13px; text-align:center; min-width:0; }
+    .stat-label { font-size:10px; text-transform:uppercase; letter-spacing:1px; color:var(--muted); }
+    .stat strong { display:block; font-weight:600; font-size:22px; letter-spacing:-.5px; margin-top:2px; font-variant-numeric:tabular-nums; }
+    .stat:first-child strong { color:var(--mint); }
+    .session-caption { margin:10px 2px 0; font-size:11px; color:var(--subtle); display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap; }
+    .session-caption .button { min-height:30px; padding:4px 8px; font-size:11px; }
+    .settings { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:22px 20px; }
+    .settings-heading { display:flex; align-items:center; justify-content:space-between; font-size:14px; font-weight:700; margin-bottom:22px; }
+    .settings-heading .icon { color:var(--muted); }
+    .setting-group + .setting-group { margin-top:20px; }
+    .setting-label { display:block; font-size:11px; font-weight:650; color:var(--muted); margin-bottom:8px; }
+    .mode-grid { display:grid; grid-template-columns:1fr 1fr; gap:7px; }
+    .mode-button { min-height:43px; padding:9px 5px; border:1px solid var(--border); border-radius:9px; color:var(--muted); background:var(--raised); font-size:11px; font-weight:650; }
+    .mode-button[aria-pressed="true"] { border-color:var(--accent); color:var(--accent); background:var(--accent-bg); }
+    .mode-button:hover:not(:disabled) { color:var(--text); }
+    .setting-help { margin-top:8px; color:var(--subtle); font-size:11px; line-height:1.65; }
+    select { width:100%; min-height:41px; border:1px solid var(--border); border-radius:9px; background:var(--raised); color:var(--text); padding:8px 10px; font-size:12px; }
+    .check-row { display:flex; align-items:center; justify-content:space-between; gap:12px; font-size:12px; color:var(--text); cursor:pointer; min-height:34px; }
+    .check-row + .check-row { margin-top:8px; }
+    input[type="checkbox"] { width:17px; height:17px; accent-color:var(--accent); flex-shrink:0; cursor:pointer; }
+    input[type="range"] { width:100%; accent-color:var(--accent); margin:6px 0 0; }
+    .settings-rule { height:1px; background:var(--border); border:0; margin:20px 0; }
+    .settings details + details { margin-top:12px; }
+    details summary { cursor:pointer; font-size:12px; font-weight:600; color:var(--muted); padding:3px 0; }
+    details[open] summary { margin-bottom:14px; color:var(--text); }
+    .data-actions { display:flex; flex-wrap:wrap; gap:7px; margin-top:10px; }
+    .data-actions .button { font-size:11px; padding-inline:9px; }
+    .lifetime-row { display:flex; align-items:center; justify-content:space-between; gap:10px; font-size:12px; color:var(--muted); margin:8px 0; }
+    .lifetime-row strong { color:var(--text); font-weight:650; }
+    .review-count { display:inline-block; color:var(--accent); font-weight:650; }
+    .match-intro { display:flex; justify-content:space-between; align-items:center; gap:12px; margin:24px 0 19px; }
+    .match-intro p { font-size:12px; color:var(--muted); margin-top:5px; }
+    .match-board { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:10px; }
+    .match-tile { min-height:106px; border:1px solid var(--border); border-radius:13px; color:var(--text); background:var(--raised); position:relative; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:9px; padding:12px 6px; }
+    .match-tile .tile-content { font-size:25px; line-height:1.5; }
+    .match-tile[data-kind="kana"] .tile-content { font-size:33px; }
+    .match-tile .tile-kind { font-size:9px; color:var(--subtle); letter-spacing:.7px; text-transform:uppercase; }
+    .match-tile:hover:not(:disabled) { border-color:var(--accent); }
+    .match-tile.is-selected { border-color:var(--accent); color:var(--accent); background:var(--accent-bg); box-shadow:inset 0 0 0 1px var(--accent); }
+    .match-tile.is-wrong { border-color:var(--danger); background:var(--danger-bg); }
+    .match-tile.is-matched { border-color:var(--mint); background:var(--mint-bg); color:var(--mint); opacity:.7; cursor:default; }
+    .match-tile.is-matched::after { content:"✓"; position:absolute; top:6px; right:9px; font-size:12px; }
+    .match-message { font-size:13px; color:var(--muted); text-align:center; min-height:51px; padding-top:17px; }
+    .match-actions { display:flex; align-items:center; justify-content:space-between; gap:8px; padding-top:12px; border-top:1px solid var(--border); }
+    .explore-top { display:flex; justify-content:space-between; align-items:flex-start; gap:15px; margin-bottom:19px; }
+    .explore-top p { color:var(--muted); font-size:12px; margin-top:6px; }
+    .search-input { width:100%; border:1px solid var(--border); border-radius:11px; background:var(--raised); color:var(--text); padding:12px 14px; font-size:14px; }
+    .explore-grid { display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:9px; margin-top:18px; }
+    .kana-tile { border:1px solid var(--border); border-radius:11px; background:var(--raised); color:var(--text); min-height:92px; padding:10px 4px; display:flex; flex-direction:column; justify-content:center; align-items:center; gap:3px; position:relative; }
+    .kana-tile .jp { font-size:29px; }
+    .kana-tile .tile-romaji { color:var(--muted); font-size:12px; }
+    .kana-tile:hover { border-color:var(--accent); background:var(--accent-bg); }
+    .kana-tile.needs-review::after { content:""; width:5px; height:5px; border-radius:50%; background:var(--gold); position:absolute; top:8px; right:8px; }
+    .explore-count { font-size:11px; color:var(--subtle); margin-top:13px; }
+    .summary { padding:38px 0 24px; text-align:center; }
+    .summary-seal { width:67px; height:67px; border-radius:50%; background:var(--mint-bg); color:var(--mint); display:grid; place-items:center; margin:0 auto 20px; font-size:28px; }
+    .summary h2 { font-size:26px; }
+    .summary > p { color:var(--muted); font-size:14px; margin-top:9px; }
+    .summary-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px; margin:28px 0; }
+    .summary-grid div { background:var(--raised); border-radius:12px; padding:16px 8px; font-size:11px; color:var(--muted); }
+    .summary-grid strong { display:block; font-size:25px; margin-bottom:3px; color:var(--text); font-weight:600; }
+    .summary-actions { display:flex; flex-wrap:wrap; justify-content:center; gap:10px; }
+    .empty-state { padding:55px 10px; text-align:center; }
+    .empty-state .empty-icon { font:52px var(--jp); color:var(--accent); margin-bottom:20px; }
+    .empty-state p { color:var(--muted); font-size:14px; max-width:440px; margin:12px auto 20px; }
+    .support-section { display:flex; align-items:center; justify-content:space-between; gap:24px; padding:24px 28px; border:1px solid var(--border); background:var(--surface); border-radius:18px; margin:30px 0 0; }
+    .support-copy { display:flex; align-items:center; gap:17px; }
+    .support-symbol { width:44px; height:44px; border-radius:12px; display:grid; place-items:center; background:var(--accent-bg); color:var(--accent); flex-shrink:0; }
+    .support-copy h2 { font-size:16px; letter-spacing:-.2px; }
+    .support-copy p { color:var(--muted); font-size:12px; margin-top:5px; }
+    .support-section .button { white-space:nowrap; color:var(--accent); border-color:var(--accent); background:transparent; }
+    footer { padding:23px 0 30px; display:flex; align-items:center; justify-content:space-between; gap:15px; color:var(--subtle); font-size:11px; }
+    footer a { color:var(--muted); }
+    dialog { width:min(440px,calc(100% - 36px)); border:1px solid var(--border); border-radius:18px; padding:25px; background:var(--surface); color:var(--text); box-shadow:var(--shadow); }
+    dialog::backdrop { background:#070914b3; }
+    dialog p { font-size:13px; color:var(--muted); margin:12px 0 23px; }
+    dialog .dialog-actions { display:flex; justify-content:flex-end; gap:9px; }
+    @media (max-width:920px) {
+      .workspace { grid-template-columns:minmax(0,1fr) 250px; gap:16px; }
+      .settings { padding:20px 16px; }
+      .exercise-card { padding:23px 20px 18px; }
+      .match-board { grid-template-columns:repeat(3,minmax(0,1fr)); }
+      .activity-tab { gap:5px; font-size:12px; }
+      .activity-tab .icon { width:16px; }
+      .scope-count { display:none; }
     }
-
-    h1{
-      margin-top: 4px;
-      margin-bottom: 10px;
-      font-size: 20px;
+    @media (max-width:740px) {
+      .container { width:calc(100% - 28px); }
+      .topbar { gap:10px; padding:17px 0; }
+      .brand-mark { width:37px; height:37px; font-size:24px; border-radius:11px; }
+      .brand { gap:9px; }
+      .brand-name { font-size:10px; letter-spacing:.7px; }
+      .brand-sub { font-size:10px; }
+      .topnav { gap:1px; }
+      .nav-link { padding:8px; font-size:11px; min-height:38px; }
+      .icon-button { padding:8px; min-height:38px; }
+      .home-label { display:none; }
+      .hero { padding:26px 0 23px; gap:8px; }
+      h1 { letter-spacing:-1px; }
+      .hero-copy { font-size:12px; max-width:290px; }
+      .hero-aside { font-size:10px; min-width:61px; }
+      .hero-aside strong { font-size:20px; }
+      .eyebrow { font-size:9px; letter-spacing:1.3px; }
+      .workspace { grid-template-columns:1fr; }
+      .scope-row { margin-bottom:13px; }
+      .segmented { width:100%; }
+      .segment { flex:1; padding:7px 5px; font-size:12px; }
+      .activity-tabs { gap:4px; padding:5px; border-radius:14px; margin-bottom:13px; }
+      .activity-tab { flex-direction:column; gap:4px; padding:9px 2px; min-height:59px; font-size:11px; }
+      .activity-tab .icon { width:18px; }
+      .exercise-card { padding:20px 16px 17px; border-radius:18px; }
+      .question-area { padding:19px 0 18px; }
+      .prompt { min-height:143px; }
+      .option-button { min-height:61px; font-size:22px; }
+      .settings { padding:21px; }
+      .settings-heading { margin-bottom:16px; }
+      .mode-grid { grid-template-columns:repeat(4,minmax(0,1fr)); }
+      .setting-group + .setting-group { margin-top:17px; }
+      .keyboard-hint { display:none; }
+      .match-board { grid-template-columns:repeat(4,minmax(0,1fr)); gap:8px; }
+      .match-tile { min-height:91px; }
+      .match-tile .tile-content { font-size:21px; }
+      .match-tile[data-kind="kana"] .tile-content { font-size:28px; }
+      .match-intro { margin-top:21px; }
+      .support-section { padding:20px; margin-top:22px; }
+      .support-copy { gap:12px; }
+      .support-symbol { display:none; }
+      .support-copy h2 { font-size:14px; }
+      .support-copy p { font-size:11px; }
+      .support-section .button { padding:9px 12px; font-size:12px; }
+      footer { align-items:flex-start; }
     }
-
-    #kanaBox{
-      min-height: 180px;
-      padding: 16px 10px;
+    @media (max-width:390px) {
+      .container { width:calc(100% - 20px); }
+      .brand-sub { display:none; }
+      .hero-aside { display:none; }
+      .match-board { grid-template-columns:repeat(2,minmax(0,1fr)); }
+      .match-tile { min-height:91px; }
+      .explore-grid { grid-template-columns:repeat(4,minmax(0,1fr)); }
+      .stat-label { font-size:9px; letter-spacing:.3px; }
+      .option-button { padding-inline:28px; }
+      .answer-form { flex-wrap:wrap; }
+      .answer-form .button { width:100%; }
+      .support-section { flex-direction:column; align-items:flex-start; gap:14px; }
     }
-
-    #respuesta{
-      font-size: 22px;
-      min-height: 34px;
+    @media (prefers-reduced-motion:reduce) {
+      *,*::before,*::after { animation:none !important; transition:none !important; scroll-behavior:auto !important; }
     }
-
-    #estadisticas{
-      font-size: 14px;
+    @media print {
+      .topnav,.settings,.activity-tabs,.support-section,.keyboard-hint { display:none; }
+      .workspace { display:block; }
+      body { background:white; color:black; }
     }
-
-    .accion-btn{
-      min-width: 132px;
-      flex: 1 1 140px;
-    }
-
-    .modo-btn,
-    .orden-btn,
-    .reset-btn,
-    button{
-      font-size: 14px;
-      padding: 10px 12px;
-    }
-  }
-
-.opciones-wrap{
-  margin-top: 16px;
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 145px));
-  justify-content: center;
-  gap: 10px;
-}
-
-
-
-.opcion-btn{
-  width:100%;
-  min-height: 62px;
-  padding:12px 14px;
-  border-radius:16px;
-
-  background: rgba(125,92,255,.12);
-  border:1px solid rgba(125,92,255,.55);
-  color:#efe9ff;
-
-  font-size:22px;
-  font-weight:700;
-  text-align:center;
-
-  box-shadow:
-    0 0 6px rgba(125,92,255,.6),
-    0 0 14px rgba(125,92,255,.35),
-    inset 0 0 8px rgba(125,92,255,.15);
-}
-
-
-.opcion-btn:hover{
-  background: rgba(125,92,255,.22);
-  box-shadow:
-    0 0 10px rgba(125,92,255,.9),
-    0 0 24px rgba(125,92,255,.6);
-}
-
-
-.opcion-btn.correcta{
-  background: rgba(34,197,94,.18);
-  border-color: rgba(34,197,94,.45);
-}
-
-.opcion-btn.incorrecta{
-  background: rgba(239,68,68,.18);
-  border-color: rgba(239,68,68,.45);
-}
-
-.btn-mostrar{
-  background: rgba(239,68,68,.15);
-  border: 1px solid rgba(239,68,68,.4);
-  color: var(--danger);
-}
-
-.btn-mostrar:hover{
-  background: rgba(239,68,68,.26);
-}
-
-.side-panel{
-  position: sticky;
-  top: 16px;
-}
-
-.side-panel .chips{
-  justify-content: stretch;
-  flex-direction: column;
-  align-items: stretch;
-}
-
-.side-panel button{
-  width: 100%;
-}
-
-.panel-title{
-  font-size: 18px;
-  font-weight: 800;
-  text-align: center;
-  margin-bottom: 12px;
-  color: #efe9ff;
-  letter-spacing: .3px;
-}
-
-.toggle-row{
-  display:grid;
-  grid-template-columns: 1fr 1fr;
-  gap:10px;
-}
-
-.sub-title{
-  font-size: 13px;
-  font-weight: 700;
-  color: var(--muted);
-  margin-bottom: 8px;
-  text-align: center;
-  letter-spacing: .3px;
-  text-transform: uppercase;
-}
-
-.modo-btn.dual-activo{
-  background: rgba(214,40,40,.18);
-  border-color: rgba(214,40,40,.48);
-  color: #fecaca;
-  box-shadow:
-    0 0 8px rgba(214,40,40,.18),
-    inset 0 0 8px rgba(214,40,40,.08);
-}
-
-.orden-btn.activo,
-.modo-btn.activo{
-  opacity: 1;
-  background: rgba(125,92,255,.22);
-  border-color: rgba(125,92,255,.55);
-  color: #efe9ff;
-}
-
-#btn-extra.activo{
-  background: rgba(34,197,94,.18);
-  border-color: rgba(34,197,94,.45);
-  color: #dcfce7;
-}
-
-#btn-mix.activo{
-  opacity: 1;
-  background: rgba(214,40,40,.18);
-  border-color: rgba(214,40,40,.55);
-  color: #fecaca;
-  box-shadow:
-    0 0 8px rgba(214,40,40,.38),
-    0 0 18px rgba(214,40,40,.18),
-    inset 0 0 8px rgba(214,40,40,.08);
-}
-  
-@media (max-width: 900px){
-  .top-grid{
-    grid-template-columns: 1fr;
-  }
-
-  .side-panel{
-    position: static;
-  }
-
-  .side-panel .chips{
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .side-panel button{
-    width: auto;
-  }
-
-  .opciones-wrap{
-    grid-template-columns: 1fr;
-  }
-
-  .opcion-btn{
-    font-size: 18px;
-    min-height: 56px;
-  }
-
-  #kana{
-    font-size: clamp(52px, 16vw, 74px);
-  }
-
-  #kana.dictado{
-    font-size: clamp(30px, 8vw, 42px);
-  }
-}
-
-@media (max-width: 900px){
-  .toggle-row{
-    grid-template-columns: 1fr 1fr;
-  }
-}
-
-
-  
-</style>
+  </style>
 </head>
 <body>
-
-<div class="wrap">
-  <h1>Kana ★ Asallam Sensei</h1>
-
-  <div class="card">
-
-    <div class="top-grid">
-
-      <div class="panel main-play">
-        <div id="kanaBox">
-          <div id="kana" onclick="replayAudio()">あ</div>
-
-          <div class="audio-row">
-            <button id="btnReplay" class="ghost-btn" type="button" onclick="replayAudio()">🔊</button>
-          </div>
-        </div>
-
-        <div id="respuesta"></div>
-
-        <div id="opciones" class="opciones-wrap">
-        
-        <button id="btn-opcion-a" class="opcion-btn" onclick="responderOpcion(0)">
-          <span id="texto-opcion-a">...</span>
-        </button>
-        
-        <button id="btn-opcion-b" class="opcion-btn" onclick="responderOpcion(1)">
-          <span id="texto-opcion-b">...</span>
-        </button>
-        
-        <button id="btn-opcion-c" class="opcion-btn" onclick="responderOpcion(2)">
-          <span id="texto-opcion-c">...</span>
-        </button>
-        
-        </div>
-
-        <div id="acciones">
-          <button class="accion-btn" onclick="siguienteDesdeBoton()">Siguiente</button>
-        </div>
-
-        <div id="estadisticas">
-          <div>
-            Aciertos: <span id="aciertos">0</span> —
-            Errores: <span id="errores">0</span>
-          </div>
-          <div>
-            Racha: <span id="racha">0</span> —
-            Mejor racha: <span id="mejorRacha">0</span> —
-            Precisión: <span id="precision">0%</span>
-          </div>
-        </div>
-
-        <div style="margin-top:14px;" class="row">
-          <button class="reset-btn" onclick="resetStatsModo()">Reset stats</button>
-        </div>
+  <a class="skip-link" href="#practice">Saltar a la práctica</a>
+  <svg aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden">
+    <symbol id="i-home" viewBox="0 0 24 24"><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-8H9v8H4a1 1 0 0 1-1-1Z"/></symbol>
+    <symbol id="i-heart" viewBox="0 0 24 24"><path d="M20.5 4.8a5.5 5.5 0 0 0-7.8 0l-.7.7-.7-.7a5.5 5.5 0 0 0-7.8 7.8L12 21l8.5-8.4a5.5 5.5 0 0 0 0-7.8Z"/></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></symbol>
+    <symbol id="i-quiz" viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="3"/><path d="m8 12 2 2 5-5M8 17h8"/></symbol>
+    <symbol id="i-pen" viewBox="0 0 24 24"><path d="m15 4 5 5M4 20l5-1L20 8a2.2 2.2 0 0 0-5-5L4 14Z"/></symbol>
+    <symbol id="i-match" viewBox="0 0 24 24"><rect x="3" y="4" width="7" height="13" rx="2"/><rect x="14" y="7" width="7" height="13" rx="2"/><path d="m5 10 1 1 2-2m8 4 1 1 2-2"/></symbol>
+    <symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></symbol>
+    <symbol id="i-audio" viewBox="0 0 24 24"><path d="M11 4 6 8H3v8h3l5 4V4Zm4 4a6 6 0 0 1 0 8m3-11a10 10 0 0 1 0 14"/></symbol>
+    <symbol id="i-sliders" viewBox="0 0 24 24"><path d="M4 7h7m4 0h5M4 17h3m4 0h9"/><circle cx="13" cy="7" r="2"/><circle cx="9" cy="17" r="2"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h16m-6-6 6 6-6 6"/></symbol>
+  </svg>
+  <div class="container">
+    <header class="topbar">
+      <a class="brand" href="https://asallamsensei.com/" aria-label="Asallam Sensei, ir al inicio">
+        <span class="brand-mark jp" lang="ja" aria-hidden="true">あ</span>
+        <span><span class="brand-name">ASALLAM SENSEI</span><span class="brand-sub">Japonés, paso a paso</span></span>
+      </a>
+      <nav class="topnav" aria-label="Navegación principal">
+        <button id="theme-toggle" class="icon-button" type="button" aria-label="Cambiar a tema claro" title="Cambiar tema"><svg class="icon" aria-hidden="true"><use href="#i-sun"/></svg></button>
+        <a class="nav-link" href="https://asallamsensei.com/" aria-label="Volver al inicio"><svg class="icon" aria-hidden="true"><use href="#i-home"/></svg><span class="home-label">Inicio</span></a>
+        <a class="nav-link donate-nav" href="https://paypal.me/asallamsensei" target="_blank" rel="noopener noreferrer" aria-label="Donar por PayPal, abre en otra pestaña"><svg class="icon" aria-hidden="true"><use href="#i-heart"/></svg>Donar</a>
+      </nav>
+    </header>
+    <section class="hero" aria-labelledby="page-title">
+      <div>
+        <p class="eyebrow">Tu práctica de japonés</p>
+        <h1 id="page-title">Un kana a la vez.</h1>
+        <p class="hero-copy">Reconoce, escribe y conecta. Haz de hiragana y katakana algo familiar.</p>
       </div>
-      
-      <div class="panel side-panel">
-      
-        <div class="panel-title">Modos</div>
-      
-        <div class="sub-title">Escritura</div>
-        <div class="toggle-row">
-          <button id="btn-hiragana" class="modo-btn" onclick="toggleScript('hiragana')">Hiragana</button>
-          <button id="btn-katakana" class="modo-btn" onclick="toggleScript('katakana')">Katakana</button>
+      <div class="hero-aside"><strong id="total-kana">234</strong>kana y combinaciones</div>
+    </section>
+    <div id="notice" class="notice" role="status" aria-live="polite" hidden><span id="notice-text"></span><button id="dismiss-notice" type="button" aria-label="Cerrar aviso">×</button></div>
+    <noscript><p class="notice">Activa JavaScript para practicar con el entrenador de kana.</p></noscript>
+    <main id="practice" class="workspace" tabindex="-1">
+      <div class="main-column">
+        <div class="scope-row">
+          <div class="segmented" role="group" aria-label="Escritura que quieres practicar">
+            <button class="segment" type="button" data-scope="hiragana" aria-pressed="true">Hiragana <span class="jp" lang="ja">あ</span></button>
+            <button class="segment" type="button" data-scope="katakana" aria-pressed="false">Katakana <span class="jp" lang="ja">ア</span></button>
+            <button class="segment" type="button" data-scope="mixed" aria-pressed="false">Ambos</button>
+          </div>
+          <span id="scope-count" class="scope-count">104 en tu selección</span>
         </div>
-      
-        <div class="toggle-row" style="margin-top:10px;">
-          <button id="btn-extra" class="modo-btn" onclick="toggleExtra()">Extra</button>
-          <button id="btn-principiante" class="modo-btn" onclick="togglePrincipiante()">Principiante</button>
+        <div class="activity-tabs" role="group" aria-label="Actividad">
+          <button class="activity-tab" type="button" data-activity="quiz" aria-pressed="true"><svg class="icon" aria-hidden="true"><use href="#i-quiz"/></svg>Quiz</button>
+          <button class="activity-tab" type="button" data-activity="write" aria-pressed="false"><svg class="icon" aria-hidden="true"><use href="#i-pen"/></svg>Escribir</button>
+          <button class="activity-tab" type="button" data-activity="match" aria-pressed="false"><svg class="icon" aria-hidden="true"><use href="#i-match"/></svg>Emparejar</button>
+          <button class="activity-tab" type="button" data-activity="explore" aria-pressed="false"><svg class="icon" aria-hidden="true"><use href="#i-grid"/></svg>Explorar</button>
         </div>
-      
-        <div class="sep"></div>
-      
-        <div class="sub-title">Tipo de pregunta</div>
-        <div class="toggle-row">
-          <button id="btn-jp-es" class="orden-btn" onclick="toggleDireccion('jp_es')">Kana → Romaji</button>
-          <button id="btn-es-jp" class="orden-btn" onclick="toggleDireccion('es_jp')">Romaji → Kana</button>
-        </div>
-      
-        <div class="toggle-row" style="margin-top:10px;">
-          <button id="btn-dictado" class="orden-btn" onclick="toggleDictado()">Dictado 🔊</button>
-          <button id="btn-mix" class="orden-btn" onclick="toggleMix()">MIX</button>
-        </div>
-
-        <div class="sep"></div>
-        
-        <div class="sub-title">Audio</div>
-        
-        <div class="toggle-row">
-          <button
-            id="btn-audio-mp3"
-            class="modo-btn"
-            onclick="setAudioModo('mp3')">
-            MP3
-          </button>
-        
-          <button
-            id="btn-audio-tts"
-            class="modo-btn"
-            onclick="setAudioModo('tts')">
-            Sintetizador
-          </button>
-        </div>
-        
+        <section class="exercise-card" aria-label="Zona de práctica">
+          <div id="exercise-header">
+            <div class="exercise-top"><span id="exercise-badge" class="badge">Hiragana</span><span id="round-count" class="round-count">Pregunta 1 de 20</span></div>
+            <div id="session-progress" class="progress-track" role="progressbar" aria-label="Progreso de la sesión" aria-valuemin="0" aria-valuemax="20" aria-valuenow="0"><div id="progress-fill" class="progress-fill"></div></div>
+          </div>
+          <div id="quiz-view">
+            <div class="question-area">
+              <p id="question-label" class="question-label">¿Cómo se lee este kana?</p>
+              <div id="prompt" class="prompt jp" lang="ja" aria-live="polite" aria-atomic="true">あ</div>
+              <button id="listen-question" class="listen-button" type="button"><svg class="icon" aria-hidden="true"><use href="#i-audio"/></svg><span>Escuchar</span></button>
+            </div>
+            <div id="answer-options" class="options" role="group" aria-label="Elige una respuesta"></div>
+            <form id="answer-form" class="answer-form" hidden>
+              <label for="typed-answer" class="sr-only">Escribe la lectura en romaji</label>
+              <input id="typed-answer" class="answer-input" type="text" placeholder="Escribe el romaji…" autocomplete="off" autocapitalize="none" spellcheck="false" maxlength="32" enterkeyhint="done" inputmode="text" aria-describedby="feedback-detail">
+              <button id="submit-answer" class="button primary" type="submit">Comprobar</button>
+            </form>
+            <div class="feedback" role="status" aria-live="polite" aria-atomic="true">
+              <p id="feedback-title" class="feedback-title"></p><p id="feedback-detail" class="feedback-detail"></p><p id="feedback-tip" class="feedback-tip"></p>
+            </div>
+            <div class="exercise-actions">
+              <button id="skip-question" class="button ghost" type="button">No lo sé</button>
+              <button id="next-question" class="button primary" type="button" disabled>Siguiente <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></button>
+            </div>
+          </div>
+          <div id="match-view" hidden>
+            <div class="match-intro"><div><h2>Encuentra su pareja.</h2><p id="match-instructions">Une cada kana con su romaji.</p></div></div>
+            <div id="match-board" class="match-board" role="group" aria-label="Tarjetas para emparejar"></div>
+            <p id="match-message" class="match-message" role="status" aria-live="polite">Elige un kana y su lectura.</p>
+            <div class="match-actions"><button id="match-finish" class="button ghost" type="button">Terminar sesión</button><span id="board-counter" class="round-count">Tablero 1</span></div>
+          </div>
+          <div id="explore-view" hidden>
+            <div class="explore-top"><div><h2>Tu colección de kana.</h2><p>Mira la lectura y toca una tarjeta para escucharla.</p></div><span class="badge">Consulta</span></div>
+            <label for="search-kana" class="sr-only">Buscar kana o romaji</label>
+            <input id="search-kana" class="search-input" type="search" placeholder="Busca «きょ», «kyo», «shi»…" autocomplete="off">
+            <div id="explore-grid" class="explore-grid"></div>
+            <p id="explore-count" class="explore-count"></p>
+            <p class="setting-help">El punto dorado señala una lectura pendiente de repaso.</p>
+          </div>
+          <div id="summary-view" class="summary" hidden>
+            <div class="summary-seal" aria-hidden="true">✓</div>
+            <h2 id="summary-title" tabindex="-1">Sesión completada.</h2>
+            <p id="summary-copy"></p>
+            <div class="summary-grid"><div><strong id="summary-correct">0</strong>Aciertos</div><div><strong id="summary-accuracy">0%</strong>Precisión</div><div><strong id="summary-best">0</strong>Mejor racha</div></div>
+            <div class="summary-actions"><button id="repeat-session" class="button primary" type="button">Seguir practicando</button><button id="review-session" class="button" type="button">Repasar mis fallos</button></div>
+          </div>
+          <div id="empty-view" class="empty-state" hidden>
+            <div class="empty-icon jp" lang="ja" aria-hidden="true">よし</div><h2 id="empty-title">Todo al día.</h2><p id="empty-copy">No tienes lecturas pendientes de repaso en esta selección.</p><button id="exit-review" class="button primary" type="button">Practicar toda la selección</button>
+          </div>
+        </section>
+        <p id="keyboard-hint" class="keyboard-hint"><kbd>1</kbd>–<kbd>4</kbd> o <kbd>A</kbd>–<kbd>D</kbd> para responder · <kbd>Enter</kbd> para continuar · <kbd>R</kbd> para escuchar</p>
+        <section id="session-stats" class="session-stats" aria-label="Estadísticas de esta sesión">
+          <div class="stat"><span class="stat-label">Aciertos</span><strong id="stat-correct">0</strong></div>
+          <div class="stat"><span class="stat-label">Errores</span><strong id="stat-wrong">0</strong></div>
+          <div class="stat"><span class="stat-label">Precisión</span><strong id="stat-accuracy">—</strong></div>
+          <div class="stat"><span class="stat-label">Racha</span><strong id="stat-streak">0</strong></div>
+        </section>
+        <div id="session-caption" class="session-caption"><span id="session-detail">Esta sesión · 0 sin responder</span><button id="end-session" type="button" class="button ghost small">Terminar sesión</button><span id="session-time">00:00</span></div>
       </div>
-
-
-    </div>
+      <aside class="settings" aria-label="Ajustes de la práctica">
+        <div class="settings-heading"><span>A tu ritmo</span><svg class="icon" aria-hidden="true"><use href="#i-sliders"/></svg></div>
+        <div id="mode-settings" class="setting-group">
+          <span class="setting-label">Tipo de pregunta</span>
+          <div class="mode-grid" role="group" aria-label="Tipo de pregunta">
+            <button class="mode-button" type="button" data-mode="kana-romaji" aria-pressed="true">Kana → romaji</button>
+            <button class="mode-button" type="button" data-mode="romaji-kana" aria-pressed="false">Romaji → kana</button>
+            <button class="mode-button" type="button" data-mode="listen" aria-pressed="false">Dictado</button>
+            <button class="mode-button" type="button" data-mode="mix" aria-pressed="false">Mixto</button>
+          </div>
+          <p id="mode-help" class="setting-help">Reconoce el kana y elige su lectura.</p>
+        </div>
+        <div id="length-settings" class="setting-group">
+          <label class="setting-label" for="session-length" id="length-label">Preguntas por sesión</label>
+          <select id="session-length"><option value="10">10 · Un repaso rápido</option><option value="20" selected>20 · A tu ritmo</option><option value="40">40 · Un poco más</option><option value="0">Sin límite</option></select>
+        </div>
+        <div id="match-settings" class="setting-group" hidden>
+          <label class="setting-label" for="match-count">Parejas por tablero</label>
+          <select id="match-count"><option value="3">3 parejas</option><option value="4" selected>4 parejas</option><option value="6">6 parejas</option></select>
+          <p class="setting-help">Cada tablero usa lecturas diferentes para que las parejas sean claras.</p>
+        </div>
+        <div class="setting-group">
+          <label class="check-row" for="review-only"><span>Repasar fallos <span id="review-count" class="review-count">0</span></span><input id="review-only" type="checkbox"></label>
+          <p class="setting-help">Una respuesta correcta retira ese kana de tus pendientes.</p>
+        </div>
+        <hr class="settings-rule">
+        <details id="audio-settings">
+          <summary>Sonido y pronunciación</summary>
+          <label class="check-row" for="sound-effects"><span>Efectos al responder</span><input id="sound-effects" type="checkbox"></label>
+          <label class="check-row" for="auto-audio"><span>Audio tras responder</span><input id="auto-audio" type="checkbox"></label>
+          <div class="setting-group"><label class="setting-label" for="audio-source">Pronunciación</label><select id="audio-source"><option value="tts">Voz japonesa del dispositivo</option><option value="mp3" id="mp3-option" hidden>Audios propios</option></select></div>
+          <div class="setting-group"><label class="setting-label" for="speech-rate">Velocidad <span id="rate-value">0.85×</span></label><input id="speech-rate" type="range" min="0.5" max="1.1" step="0.05" value="0.85"></div>
+          <p id="audio-status" class="setting-help" role="status">Buscando voz japonesa…</p>
+        </details>
+        <details id="progress-settings">
+          <summary>Mi progreso</summary>
+          <div class="lifetime-row"><span>Respuestas correctas</span><strong id="total-correct">0</strong></div>
+          <div class="lifetime-row"><span>Mejor racha</span><strong id="total-best">0</strong></div>
+          <div class="lifetime-row"><span>Kana practicados</span><strong id="total-seen">0</strong></div>
+          <p id="storage-status" class="setting-help">Tu progreso se guarda en este navegador.</p>
+          <button id="reset-progress" class="button ghost small danger" type="button">Borrar mi progreso</button>
+        </details>
+        <details id="data-settings">
+          <summary>Mi lista de kana</summary>
+          <p id="data-label" class="setting-help">Lista incluida · 104 hiragana y 130 katakana.</p>
+          <div class="data-actions">
+            <button id="import-button" class="button small" type="button">Cargar JSON</button>
+            <button id="export-json" class="button small" type="button">Descargar lista</button>
+            <button id="restore-data" class="button ghost small" type="button" hidden>Restaurar lista incluida</button>
+          </div>
+          <input id="import-json" class="sr-only" type="file" accept=".json,application/json" aria-label="Cargar una lista JSON de hiragana y katakana" tabindex="-1">
+          <p class="setting-help">Usa las listas «hiragana» y «katakana», con pares de kana y romaji.</p>
+        </details>
+        <details>
+          <summary>Pequeñas pistas</summary>
+          <p class="setting-help">Escribe el romaji de la tabla. Se aceptan algunas variantes, como «si» para «shi» y «hu» para «fu».</p>
+          <p class="setting-help"><span lang="ja" class="jp">を・ヲ</span> se muestran como «wo»; también aceptamos «o», su lectura habitual. En dictado evitamos opciones que puedan sonar igual y aceptamos «o» o «wo» para ese grupo de sonidos.</p>
+          <p class="setting-help">La precisión incluye los «No lo sé». La voz sintetizada es una ayuda y puede variar entre dispositivos.</p>
+        </details>
+      </aside>
+    </main>
+    <section class="support-section" aria-labelledby="support-title">
+      <div class="support-copy"><div class="support-symbol"><svg class="icon" aria-hidden="true"><use href="#i-heart"/></svg></div><div><h2 id="support-title">¿Te está ayudando a aprender?</h2><p>Tu apoyo ayuda a seguir creando recursos gratuitos de japonés.</p></div></div>
+      <a class="button" href="https://paypal.me/asallamsensei" target="_blank" rel="noopener noreferrer" aria-label="Apoyar a Asallam Sensei por PayPal, abre en otra pestaña">Apoyar por PayPal <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+    </section>
+    <footer><span>Hecho para aprender, un paso a la vez.<br>Asallam Sensei · Hiragana y katakana</span><a href="https://asallamsensei.com/">Volver al inicio ↗</a></footer>
   </div>
-</div>
+  <dialog id="reset-dialog" aria-labelledby="reset-title">
+    <h2 id="reset-title">¿Borrar tu progreso?</h2><p>Se borrarán las estadísticas y los fallos guardados de este entrenador. Tu lista de kana y tus ajustes se conservarán.</p>
+    <div class="dialog-actions"><button id="cancel-reset" class="button" type="button">Conservar</button><button id="confirm-reset" class="button danger" type="button">Borrar progreso</button></div>
+  </dialog>
+  <!-- Lista revisada: 104 hiragana + 130 katakana. Se puede reemplazar por otro JSON del mismo esquema. -->
+  <script id="kana-data" type="application/json">
+{"hiragana":[["あ","a"],["い","i"],["う","u"],["え","e"],["お","o"],["か","ka"],["き","ki"],["く","ku"],["け","ke"],["こ","ko"],["が","ga"],["ぎ","gi"],["ぐ","gu"],["げ","ge"],["ご","go"],["さ","sa"],["し","shi"],["す","su"],["せ","se"],["そ","so"],["ざ","za"],["じ","ji"],["ず","zu"],["ぜ","ze"],["ぞ","zo"],["た","ta"],["ち","chi"],["つ","tsu"],["て","te"],["と","to"],["だ","da"],["ぢ","ji"],["づ","zu"],["で","de"],["ど","do"],["な","na"],["に","ni"],["ぬ","nu"],["ね","ne"],["の","no"],["は","ha"],["ひ","hi"],["ふ","fu"],["へ","he"],["ほ","ho"],["ば","ba"],["び","bi"],["ぶ","bu"],["べ","be"],["ぼ","bo"],["ぱ","pa"],["ぴ","pi"],["ぷ","pu"],["ぺ","pe"],["ぽ","po"],["ま","ma"],["み","mi"],["む","mu"],["め","me"],["も","mo"],["や","ya"],["ゆ","yu"],["よ","yo"],["ら","ra"],["り","ri"],["る","ru"],["れ","re"],["ろ","ro"],["わ","wa"],["を","wo"],["ん","n"],["きゃ","kya"],["きゅ","kyu"],["きょ","kyo"],["ぎゃ","gya"],["ぎゅ","gyu"],["ぎょ","gyo"],["しゃ","sha"],["しゅ","shu"],["しょ","sho"],["じゃ","ja"],["じゅ","ju"],["じょ","jo"],["ちゃ","cha"],["ちゅ","chu"],["ちょ","cho"],["にゃ","nya"],["にゅ","nyu"],["にょ","nyo"],["ひゃ","hya"],["ひゅ","hyu"],["ひょ","hyo"],["びゃ","bya"],["びゅ","byu"],["びょ","byo"],["ぴゃ","pya"],["ぴゅ","pyu"],["ぴょ","pyo"],["みゃ","mya"],["みゅ","myu"],["みょ","myo"],["りゃ","rya"],["りゅ","ryu"],["りょ","ryo"]],"katakana":[["ア","a"],["イ","i"],["ウ","u"],["エ","e"],["オ","o"],["カ","ka"],["キ","ki"],["ク","ku"],["ケ","ke"],["コ","ko"],["ガ","ga"],["ギ","gi"],["グ","gu"],["ゲ","ge"],["ゴ","go"],["サ","sa"],["シ","shi"],["ス","su"],["セ","se"],["ソ","so"],["ザ","za"],["ジ","ji"],["ズ","zu"],["ゼ","ze"],["ゾ","zo"],["タ","ta"],["チ","chi"],["ツ","tsu"],["テ","te"],["ト","to"],["ダ","da"],["ヂ","ji"],["ヅ","zu"],["デ","de"],["ド","do"],["ナ","na"],["ニ","ni"],["ヌ","nu"],["ネ","ne"],["ノ","no"],["ハ","ha"],["ヒ","hi"],["フ","fu"],["ヘ","he"],["ホ","ho"],["バ","ba"],["ビ","bi"],["ブ","bu"],["ベ","be"],["ボ","bo"],["パ","pa"],["ピ","pi"],["プ","pu"],["ペ","pe"],["ポ","po"],["マ","ma"],["ミ","mi"],["ム","mu"],["メ","me"],["モ","mo"],["ヤ","ya"],["ユ","yu"],["ヨ","yo"],["ラ","ra"],["リ","ri"],["ル","ru"],["レ","re"],["ロ","ro"],["ワ","wa"],["ヲ","wo"],["ン","n"],["キャ","kya"],["キュ","kyu"],["キョ","kyo"],["ギャ","gya"],["ギュ","gyu"],["ギョ","gyo"],["シャ","sha"],["シュ","shu"],["ショ","sho"],["ジャ","ja"],["ジュ","ju"],["ジョ","jo"],["チャ","cha"],["チュ","chu"],["チョ","cho"],["ニャ","nya"],["ニュ","nyu"],["ニョ","nyo"],["ヒャ","hya"],["ヒュ","hyu"],["ヒョ","hyo"],["ビャ","bya"],["ビュ","byu"],["ビョ","byo"],["ピャ","pya"],["ピュ","pyu"],["ピョ","pyo"],["ミャ","mya"],["ミュ","myu"],["ミョ","myo"],["リャ","rya"],["リュ","ryu"],["リョ","ryo"],["ファ","fa"],["フィ","fi"],["フェ","fe"],["フォ","fo"],["フュ","fyu"],["ティ","ti"],["トゥ","tu"],["ディ","di"],["ドゥ","du"],["デュ","dyu"],["チェ","che"],["シェ","she"],["ジェ","je"],["イェ","ye"],["ウィ","wi"],["ウェ","we"],["ウォ","wo"],["ヴァ","va"],["ヴィ","vi"],["ヴ","vu"],["ヴェ","ve"],["ヴォ","vo"],["ツァ","tsa"],["ツェ","tse"],["ツォ","tso"],["クォ","kwo"]]}
+  </script>
+  <script>
+/* Motor independiente de la interfaz. No necesita librerías ni conexión. */
+(function (root, factory) {
+  "use strict";
+  const api = factory();
+  if (typeof module === "object" && module.exports) module.exports = api;
+  if (root) root.KanaCore = api;
+})(typeof globalThis !== "undefined" ? globalThis : this, function () {
+  "use strict";
 
-<script>
-/* ===============================
-   DATA
-=============================== */
-let hiragana = [];
-let katakana = [];
-let extra = [];
-let hiraganaBase = [];
-let katakanaBase = [];
+  const SCRIPTS = ["hiragana", "katakana"];
+  const MAX_ITEMS_PER_SCRIPT = 1000;
+  const SCRIPT_PATTERN = {
+    hiragana: /^[\u3041-\u3096\u309D\u309E]+$/u,
+    katakana: /^[\u30A1-\u30FA\u30FD\u30FE]+$/u
+  };
 
-let filtroPrincipiante = false;
-
-const GOJUON = [
-  "a","i","u","e","o",
-  "ka","ki","ku","ke","ko",
-  "sa","shi","su","se","so",
-  "ta","chi","tsu","te","to",
-  "na","ni","nu","ne","no",
-  "ha","hi","fu","he","ho",
-  "ma","mi","mu","me","mo",
-  "ya","yu","yo",
-  "ra","ri","ru","re","ro",
-  "wa","wo","n"
-];
-
-// Cargar JSON
-fetch("data/kana.json")
-  .then(res => res.json())
-  .then(data => {
-    hiraganaBase = data.hiragana;
-    katakanaBase = data.katakana;
-    extra = data.Extra;
-
-    hiragana = hiraganaBase;
-    katakana = katakanaBase;
-
-    aplicarFiltroPrincipiante();
-    construirPoolActual();
-    aplicarVisualScripts();
-    aplicarVisualDirecciones();
-    aplicarVisualAudio();
-    cargarStatsActual();
-    siguienteKana();
-
+  /* Las alternativas se asignan al kana, nunca al romaji solamente.
+     En esta lista integrada reservamos ti/tu/di/du para ティ/トゥ/ディ/ドゥ.
+     Por eso チ, ツ, ヂ y ヅ no aceptan esas alternativas de otros sistemas. */
+  const KANA_ALIASES = Object.freeze({
+    "し": ["shi", "si"], "ち": ["chi"],
+    "つ": ["tsu"], "ふ": ["fu", "hu"],
+    "じ": ["ji", "zi"], "ぢ": ["ji", "zi"],
+    "ず": ["zu"], "づ": ["zu"],
+    "しゃ": ["sha", "sya"], "しゅ": ["shu", "syu"], "しょ": ["sho", "syo"],
+    "ちゃ": ["cha"], "ちゅ": ["chu"], "ちょ": ["cho"],
+    "じゃ": ["ja", "jya", "zya"], "じゅ": ["ju", "jyu", "zyu"],
+    "じょ": ["jo", "jyo", "zyo"], "を": ["wo", "o"]
   });
 
-/* ===============================
-   ESTADO
-=============================== */
-let actual = 0;
-let kanaLista = [];
-
-let yaValidado = false;
-let aciertos = 0;
-let errores = 0;
-let racha = 0;
-let mejorRacha = 0;
-
-let usarHiragana = true;
-let usarKatakana = false;
-let usarExtra = false;
-
-let usarJPES = true;
-let usarESJP = true;
-let usarDictado = true;
-let usarMix = true;
-let audioModo = "mp3";
-let opcionesActuales = [];
-
-let tipoPreguntaActual = "jp_es";
-let romajiCorrectoActual = "";
-
-  
-/* ===============================
-   STATS (localStorage)
-=============================== */
-const STATS_KEY = "kanaStats_v2";
-
-function cargarStats(){
-  try { return JSON.parse(localStorage.getItem(STATS_KEY)) || {}; }
-  catch { return {}; }
-}
-
-function guardarStats(stats){
-  localStorage.setItem(STATS_KEY, JSON.stringify(stats));
-}
-
-function statsKeyActual(){
-  const scripts =
-    (usarHiragana ? "H" : "") +
-    (usarKatakana ? "K" : "") +
-    (usarExtra ? "X" : "");
-
-  const tipos =
-    (usarJPES ? "J" : "") +
-    (usarESJP ? "R" : "") +
-    (usarDictado ? "D" : "") +
-    (usarMix ? "M" : "");
-
-  return scripts + "__" + tipos;
-}
-
-function cargarStatsActual(){
-  const key = statsKeyActual();
-  const stats = cargarStats();
-
-  if (!stats[key]) {
-    stats[key] = {
-      aciertos: 0,
-      errores: 0,
-      racha: 0,
-      mejorRacha: 0
-    };
-    guardarStats(stats);
+  function normalizeAnswer(value) {
+    return String(value == null ? "" : value)
+      .normalize("NFKC").toLowerCase().replace(/\s+/gu, "");
   }
 
-  aciertos = stats[key].aciertos || 0;
-  errores = stats[key].errores || 0;
-  racha = stats[key].racha || 0;
-  mejorRacha = stats[key].mejorRacha || 0;
+  function asHiragana(kana) {
+    return Array.from(String(kana || ""), character => {
+      const code = character.codePointAt(0);
+      return code >= 0x30A1 && code <= 0x30F6
+        ? String.fromCodePoint(code - 0x60) : character;
+    }).join("");
+  }
 
-  actualizarEstadisticas();
-}
-
-function marcarOpcionesResultado(){
-  const btns = document.querySelectorAll(".opcion-btn");
-
-  btns.forEach((btn, i) => {
-    if (opcionesActuales[i][1] === romajiCorrectoActual) {
-      btn.classList.add("correcta");
-    } else {
-      btn.classList.add("incorrecta");
+  function validateData(raw) {
+    if (!raw || typeof raw !== "object" || Array.isArray(raw)) {
+      throw new Error('El JSON debe ser un objeto con las listas "hiragana" y "katakana".');
     }
-  });
-}
-  
-function setBotonesOpcionesHabilitados(estado){
-  document.querySelectorAll(".opcion-btn").forEach(btn => {
-    btn.disabled = !estado;
-  });
-}
-  
-function limpiarEstadoBotones(){
-  document.querySelectorAll(".opcion-btn").forEach(btn => {
-    btn.classList.remove("correcta", "incorrecta");
-  });
-}
-  
-function generarOpciones(){
-  if (!kanaLista.length) return;
+    const keys = Object.keys(raw);
+    if (keys.length !== 2 || SCRIPTS.some(script => !Object.prototype.hasOwnProperty.call(raw, script))) {
+      throw new Error('Usa solamente las claves "hiragana" y "katakana". Integra las combinaciones dentro de katakana.');
+    }
+    const data = { hiragana: [], katakana: [] };
+    const items = [];
+    const warnings = [];
 
-  const correcta = kanaLista[actual];
-  const correctaValor = valorRespuesta(correcta, tipoPreguntaActual);
-
-  romajiCorrectoActual = correcta[1];
-  
-  const pool = kanaLista.filter(item => {
-    return valorRespuesta(item, tipoPreguntaActual) !== correctaValor;
-  });
-
-  const distractores = mezclarArray(pool).slice(0, 2);
-
-  opcionesActuales = mezclarArray([correcta, ...distractores]);
-  
-
-  const textos = opcionesActuales.map(item => valorRespuesta(item, tipoPreguntaActual));
-
-  document.getElementById("texto-opcion-a").innerText = textos[0] || "";
-  document.getElementById("texto-opcion-b").innerText = textos[1] || "";
-  document.getElementById("texto-opcion-c").innerText = textos[2] || "";
-
-  limpiarEstadoBotones();
-}
-  
-function mezclarArray(arr){
-  const copia = [...arr];
-  for (let i = copia.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [copia[i], copia[j]] = [copia[j], copia[i]];
+    for (const script of SCRIPTS) {
+      const pairs = raw[script];
+      if (!Array.isArray(pairs)) throw new Error(`La sección ${script} debe ser una lista de pares [kana, romaji].`);
+      if (pairs.length > MAX_ITEMS_PER_SCRIPT) throw new Error(`La sección ${script} supera el límite de ${MAX_ITEMS_PER_SCRIPT} entradas.`);
+      const seen = new Map();
+      pairs.forEach((pair, index) => {
+        const location = `${script}, entrada ${index + 1}`;
+        if (!Array.isArray(pair) || pair.length !== 2 || pair.some(value => typeof value !== "string")) {
+          throw new Error(`Revisa ${location}: debe contener exactamente dos textos [kana, romaji].`);
+        }
+        const kana = pair[0].normalize("NFKC").trim();
+        const romaji = pair[1].normalize("NFKC").trim().toLowerCase();
+        if (!kana || Array.from(kana).length > 8 || !SCRIPT_PATTERN[script].test(kana)) {
+          throw new Error(`Revisa ${location}: el kana debe pertenecer a ${script} y tener entre 1 y 8 caracteres.`);
+        }
+        if (!/^[a-z]{1,16}$/.test(romaji)) {
+          throw new Error(`Revisa ${location}: usa un romaji de 1 a 16 letras, sin espacios ni símbolos.`);
+        }
+        if (seen.has(kana)) {
+          if (seen.get(kana) !== romaji) throw new Error(`El kana ${kana} tiene dos lecturas distintas en ${script}. Corrige ese conflicto antes de importar.`);
+          warnings.push(`Duplicado omitido en ${script}: ${kana}.`);
+          return;
+        }
+        seen.set(kana, romaji);
+        data[script].push([kana, romaji]);
+        items.push({ id: `${script}:${kana}`, script, kana, romaji });
+      });
+    }
+    if (!items.length) throw new Error("Añade al menos un kana para empezar a practicar.");
+    return { data, items, warnings };
   }
-  return copia;
-}
-  
-function guardarStatsActual(){
-  const key = statsKeyActual();
-  const stats = cargarStats();
 
-  if (!stats[key]) {
-    stats[key] = {
-      aciertos: 0,
-      errores: 0,
-      racha: 0,
-      mejorRacha: 0
+  function acceptedAnswers(item) {
+    if (!item) return [];
+    const alternatives = KANA_ALIASES[asHiragana(item.kana)] || [];
+    return Array.from(new Set([normalizeAnswer(item.romaji), ...alternatives].filter(Boolean)));
+  }
+
+  function isAnswerCorrect(item, answer) {
+    const normalized = normalizeAnswer(answer);
+    return !!normalized && acceptedAnswers(item).includes(normalized);
+  }
+
+  /* Clave conservadora para dictado. Evita pedir al oído que distinga
+     ジ/ヂ, ズ/ヅ o オ/ヲ/ウォ. Las series V/B y TI/CHI permanecen distintas:
+     su pronunciación depende de la voz y no corresponde fusionarlas todas. */
+  function soundKey(item) {
+    if (!item) return "";
+    const kana = asHiragana(item.kana);
+    if (kana === "を" || kana === "うぉ" || kana === "お") return "o";
+    const alternatives = KANA_ALIASES[kana];
+    return alternatives ? alternatives[0] : normalizeAnswer(item.romaji);
+  }
+
+  function shuffle(values, rng = Math.random) {
+    const result = Array.from(values || []);
+    for (let index = result.length - 1; index > 0; index--) {
+      const draw = Number(rng());
+      const normalized = Number.isFinite(draw) ? Math.max(0, Math.min(0.9999999999999999, draw)) : 0;
+      const other = Math.floor(normalized * (index + 1));
+      [result[index], result[other]] = [result[other], result[index]];
+    }
+    return result;
+  }
+
+  function overlapsReading(first, second, auditory) {
+    const secondAnswers = new Set(acceptedAnswers(second));
+    if (acceptedAnswers(first).some(answer => secondAnswers.has(answer))) return true;
+    return auditory && soundKey(first) === soundKey(second);
+  }
+
+  function uniqueByReading(items, { auditory = false } = {}) {
+    const selected = [];
+    const usedKana = new Set();
+    const usedAnswers = new Set();
+    const usedSounds = new Set();
+    for (const item of items || []) {
+      if (!item) continue;
+      const answers = acceptedAnswers(item);
+      const sound = auditory ? soundKey(item) : "";
+      if (usedKana.has(item.kana) || answers.some(answer => usedAnswers.has(answer)) ||
+          (auditory && usedSounds.has(sound))) continue;
+      selected.push(item);
+      usedKana.add(item.kana);
+      answers.forEach(answer => usedAnswers.add(answer));
+      if (auditory) usedSounds.add(sound);
+    }
+    return selected;
+  }
+
+  function boundedCount(value, fallback, maximum) {
+    const number = Number(value);
+    return Number.isFinite(number) ? Math.max(1, Math.min(maximum, Math.floor(number))) : fallback;
+  }
+
+  function buildOptions(item, pool, {
+    direction = "kana-romaji", count = 4, auditory = false, rng = Math.random
+  } = {}) {
+    if (!item) return [];
+    if (direction !== "kana-romaji" && direction !== "romaji-kana") throw new Error("La dirección de la pregunta no es válida.");
+    const wanted = boundedCount(count, 4, 8);
+    const chosen = [item];
+    const reverse = direction === "romaji-kana";
+    for (const candidate of shuffle(pool || [], rng)) {
+      if (chosen.length >= wanted) break;
+      if (!candidate || (reverse && candidate.script !== item.script)) continue;
+      if (chosen.some(other => other.kana === candidate.kana || overlapsReading(other, candidate, auditory))) continue;
+      chosen.push(candidate);
+    }
+    return shuffle(chosen.map((candidate, index) => ({
+      label: reverse ? candidate.kana : candidate.romaji,
+      item: candidate,
+      isCorrect: index === 0
+    })), rng);
+  }
+
+  function samplePairs(pool, count = 4, rng = Math.random) {
+    return uniqueByReading(shuffle(pool || [], rng)).slice(0, boundedCount(count, 4, 12));
+  }
+
+  function createDeck(items, rng = Math.random) {
+    let source = Array.from(items || []);
+    let queue = [];
+    let cursor = 0;
+    let previousId = null;
+    const identity = item => item && (item.id || `${item.script || ""}:${item.kana || ""}`);
+
+    function refill() {
+      queue = shuffle(source, rng);
+      cursor = 0;
+      if (queue.length > 1 && identity(queue[0]) === previousId) {
+        const differentIndex = queue.findIndex(item => identity(item) !== previousId);
+        if (differentIndex > 0) [queue[0], queue[differentIndex]] = [queue[differentIndex], queue[0]];
+      }
+    }
+    refill();
+    return {
+      next() {
+        if (!source.length) return null;
+        if (cursor >= queue.length) refill();
+        const item = queue[cursor++];
+        previousId = identity(item);
+        return item;
+      },
+      reset(newItems) {
+        if (newItems !== undefined) source = Array.from(newItems || []);
+        previousId = null;
+        refill();
+      },
+      remaining() { return Math.max(0, queue.length - cursor); }
     };
   }
 
-  stats[key].aciertos = aciertos;
-  stats[key].errores = errores;
-  stats[key].racha = racha;
-  stats[key].mejorRacha = mejorRacha;
-
-  guardarStats(stats);
-}
-
-function precisionPct(){
-  const total = aciertos + errores;
-  if (total <= 0) return "0%";
-  return Math.round((aciertos / total) * 100) + "%";
-}
-
-/* ===============================
-   UI HELPERS
-=============================== */
-function limpiarUI(){
-  document.getElementById("respuesta").innerText = "";
-  document.getElementById("respuesta").className = "";
-  yaValidado = false;
-  limpiarEstadoBotones();
-  setBotonesOpcionesHabilitados(true);
-}
-
-const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-
-function playBeep(freq, duration){
-  try{
-    const osc = audioCtx.createOscillator();
-    const gain = audioCtx.createGain();
-
-    osc.connect(gain);
-    gain.connect(audioCtx.destination);
-
-    osc.frequency.value = freq;
-    osc.type = "sine";
-    gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
-
-    osc.start();
-    osc.stop(audioCtx.currentTime + duration);
-  }catch{}
-}
-
-function sonidoCorrecto(){
-  playBeep(700, 0.08);
-  setTimeout(() => playBeep(900, 0.12), 80);
-}
-
-function sonidoIncorrecto(){
-  playBeep(250, 0.2);
-}
-  
-function actualizarBotonAudio(){
-  const btn = document.getElementById("btnReplay");
-  const kanaEl = document.getElementById("kana");
-  const box = document.getElementById("kanaBox");
-
-  if (!btn || !kanaEl || !box) return;
-
-  btn.classList.remove("visible", "big-sound");
-  kanaEl.classList.remove("dictado");
-  box.classList.remove("dictado-only");
-
-  // 🔊 Siempre visible
-  btn.classList.add("visible");
-
-  // Solo agrandarlo en dictado
-  if (esDictadoTipo(tipoPreguntaActual)) {
-    btn.classList.add("big-sound");
-    kanaEl.classList.add("dictado");
-    box.classList.add("dictado-only");
-  }
-}
-
-
-/* ===============================
-   FILTRO PRINCIPIANTE
-=============================== */
-function aplicarFiltroPrincipiante(){
-  if (!filtroPrincipiante) {
-    hiragana = hiraganaBase;
-    katakana = katakanaBase;
-    return;
-  }
-
-  hiragana = hiraganaBase.filter(k => GOJUON.includes(k[1]));
-  katakana = katakanaBase.filter(k => GOJUON.includes(k[1]));
-}
-
-function togglePrincipiante(){
-  filtroPrincipiante = !filtroPrincipiante;
-  const btn = document.getElementById("btn-principiante");
-
-  if (filtroPrincipiante) {
-    usarExtra = false;
-    btn.classList.add("activo");
-  } else {
-    btn.classList.remove("activo");
-  }
-
-  aplicarFiltroPrincipiante();
-  asegurarAlMenosUnScript();
-  construirPoolActual();
-  aplicarVisualScripts();
-  cargarStatsActual();
-  limpiarUI();
-  siguienteKana();
-}
-
-function construirPoolActual(){
-  let pool = [];
-
-  if (usarHiragana) pool = pool.concat(hiragana);
-  if (usarKatakana) pool = pool.concat(katakana);
-  if (usarExtra) pool = pool.concat(extra);
-
-  kanaLista = pool;
-}
-
-function aplicarVisualScripts(){
-  const btnH = document.getElementById("btn-hiragana");
-  const btnK = document.getElementById("btn-katakana");
-  const btnE = document.getElementById("btn-extra");
-
-  [btnH, btnK, btnE].forEach(btn => {
-    btn.classList.remove("activo", "dual-activo");
+  return Object.freeze({
+    validateData, normalizeAnswer, acceptedAnswers, isAnswerCorrect, soundKey,
+    shuffle, uniqueByReading, buildOptions, samplePairs, createDeck
   });
+});
 
-  if (usarHiragana && usarKatakana) {
-    btnH.classList.add("dual-activo");
-    btnK.classList.add("dual-activo");
-  } else {
-    if (usarHiragana) btnH.classList.add("activo");
-    if (usarKatakana) btnK.classList.add("activo");
-  }
+  </script>
+  <script>
+/*
+ * ENTRENADOR DE KANA · ASALLAM SENSEI
+ * Reemplazo completo y autónomo. No requiere paquetes ni un proceso de compilación.
+ *
+ * CONFIGURACIÓN OPCIONAL:
+ * - dataUrl: "" usa el JSON incorporado. Puedes indicar "data/kana.json".
+ *   El formato es { "hiragana": [["あ","a"]], "katakana": [["ア","a"]] }.
+ * - audioBase: "" usa la voz japonesa del dispositivo. Si tienes MP3, indica
+ *   por ejemplo "data/audios/kana/"; los nombres deben ser a.mp3, shi.mp3, etc.
+ * - audioByScript: true añade hiragana/ o katakana/ a audioBase.
+ *
+ * Los MP3 no se incluyen. Nunca se reproducen sonidos antes de una interacción.
+ * Las estadísticas usan claves propias y no modifican las del entrenador N5.
+ */
+(function () {
+  "use strict";
 
-  if (usarExtra) btnE.classList.add("activo");
-}
-
-function setAudioModo(modo){
-  audioModo = modo;
-  aplicarVisualAudio();
-}
-
-function aplicarVisualAudio(){
-  const btnMP3 = document.getElementById("btn-audio-mp3");
-  const btnTTS = document.getElementById("btn-audio-tts");
-
-  if (!btnMP3 || !btnTTS) return;
-
-  btnMP3.classList.remove("activo");
-  btnTTS.classList.remove("activo");
-
-  if (audioModo === "mp3") {
-    btnMP3.classList.add("activo");
-  } else {
-    btnTTS.classList.add("activo");
-  }
-}
-  
-function aplicarVisualDirecciones(){
-  const btnJPES = document.getElementById("btn-jp-es");
-  const btnESJP = document.getElementById("btn-es-jp");
-  const btnDictado = document.getElementById("btn-dictado");
-  const btnMix = document.getElementById("btn-mix");
-
-  [btnJPES, btnESJP, btnDictado, btnMix].forEach(btn => {
-    btn.classList.remove("activo");
+  const CONFIG = Object.freeze({
+    dataUrl: "",
+    audioBase: "",
+    audioByScript: false,
+    optionCount: 4,
+    maxImportBytes: 262144,
+    networkTimeoutMs: 8000
   });
+  const Core = window.KanaCore;
+  const $ = function (id) { return document.getElementById(id); };
+  const all = function (selector) { return Array.from(document.querySelectorAll(selector)); };
+  const KEYS = {
+    prefs: "asallam_kana_preferences_v2",
+    progress: "asallam_kana_progress_v2",
+    custom: "asallam_kana_custom_data_v2"
+  };
+  const DEFAULT_PREFS = {
+    scope: "hiragana", activity: "quiz", mode: "kana-romaji", length: 20,
+    pairs: 4, review: false, effects: false, autoAudio: false,
+    audioSource: "tts", rate: 0.85, theme: "dark"
+  };
+  let storageAvailable = true;
+  let state;
+  let loadVersion = 0;
+  let importedFileVersion = 0;
+  let heartbeat = null;
+  let pendingStorageNotice = false;
 
-  if (usarJPES) btnJPES.classList.add("activo");
-  if (usarESJP) btnESJP.classList.add("activo");
-  if (usarDictado) btnDictado.classList.add("activo");
-  if (usarMix) btnMix.classList.add("activo");
-}
-
-function syncMixDesdeToggles(){
-  usarMix = usarJPES && usarESJP && usarDictado;
-}
-
-function asegurarAlMenosUnScript(){
-  if (!usarHiragana && !usarKatakana && !usarExtra) {
-    usarHiragana = true;
+  function readStorage(key) {
+    try {
+      const raw = localStorage.getItem(key);
+      return raw ? JSON.parse(raw) : null;
+    } catch (error) {
+      if (!(error instanceof SyntaxError)) storageAvailable = false;
+      return null;
+    }
   }
-}
-  
-function toggleScript(script){
-  if (script === "hiragana") {
-    usarHiragana = !usarHiragana;
-  }
-
-  if (script === "katakana") {
-    usarKatakana = !usarKatakana;
-  }
-
-  asegurarAlMenosUnScript();
-
-  construirPoolActual();
-  aplicarVisualScripts();
-  cargarStatsActual();
-  limpiarUI();
-  siguienteKana();
-}
-
-function toggleExtra(){
-  usarExtra = !usarExtra;
-
-  if (usarExtra) {
-    filtroPrincipiante = false;
-    document.getElementById("btn-principiante").classList.remove("activo");
-    aplicarFiltroPrincipiante();
-  }
-
-  asegurarAlMenosUnScript();
-
-  construirPoolActual();
-  aplicarVisualScripts();
-  cargarStatsActual();
-  limpiarUI();
-  siguienteKana();
-}
-
-function toggleDireccion(dir){
-  if (dir === "jp_es") {
-    if (usarJPES && !usarESJP && !usarDictado) return;
-    usarJPES = !usarJPES;
-  }
-
-  if (dir === "es_jp") {
-    if (usarESJP && !usarJPES && !usarDictado) return;
-    usarESJP = !usarESJP;
-  }
-
-  syncMixDesdeToggles();
-
-  aplicarVisualDirecciones();
-  cargarStatsActual();
-  limpiarUI();
-  siguienteKana();
-}
-
-function toggleDictado(){
-  if (usarDictado && !usarJPES && !usarESJP) return;
-
-  usarDictado = !usarDictado;
-
-  syncMixDesdeToggles();
-
-  aplicarVisualDirecciones();
-  cargarStatsActual();
-  limpiarUI();
-  siguienteKana();
-}
-
-  
-function toggleMix(){
-  usarMix = !usarMix;
-
-  if (usarMix) {
-    usarJPES = true;
-    usarESJP = true;
-    usarDictado = true;
-  }
-
-  aplicarVisualDirecciones();
-  cargarStatsActual();
-  limpiarUI();
-  siguienteKana();
-}
-
-function tiposDisponibles(){
-  const tipos = [];
-
-  if (usarJPES) tipos.push("jp_es");
-  if (usarESJP) tipos.push("es_jp");
-
-  if (usarDictado && usarJPES) tipos.push("dictado_jp_es");
-  if (usarDictado && usarESJP) tipos.push("dictado_es_jp");
-
-  return tipos.length ? tipos : ["jp_es"];
-}
-
-function elegirTipoPregunta(){
-  const tipos = tiposDisponibles();
-  return tipos[Math.floor(Math.random() * tipos.length)];
-}
-
-function esDictadoTipo(tipo){
-  return tipo === "dictado_jp_es" || tipo === "dictado_es_jp";
-}
-
-function valorPregunta(item, tipo){
-  const kana = item[0];
-  const romaji = item[1];
-
-  if (tipo === "jp_es") return kana;
-  if (tipo === "es_jp") return romaji;
-  if (tipo === "dictado_jp_es") return "";
-  if (tipo === "dictado_es_jp") return "";
-
-  return kana;
-}
-
-function valorRespuesta(item, tipo){
-  const kana = item[0];
-  const romaji = item[1];
-
-  if (tipo === "jp_es") return romaji;
-  if (tipo === "es_jp") return kana;
-  if (tipo === "dictado_jp_es") return romaji;
-  if (tipo === "dictado_es_jp") return kana;
-
-  return romaji;
-}
-
-  
-/* ===============================
-   AUDIO (por ROMAJI)
-=============================== */
-
-function reproducirSintetizador(kana){
-  if (!("speechSynthesis" in window)) return;
-
-  window.speechSynthesis.cancel();
-
-  const mensaje = new SpeechSynthesisUtterance(kana);
-
-  mensaje.lang = "ja-JP";
-  mensaje.rate = 0.8;
-  mensaje.pitch = 1;
-  mensaje.volume = 1;
-
-  const voces = window.speechSynthesis.getVoices();
-
-  const vozJaponesa = voces.find(voz =>
-    voz.lang && voz.lang.toLowerCase().startsWith("ja")
-  );
-
-  if (vozJaponesa) {
-    mensaje.voice = vozJaponesa;
-  }
-
-  window.speechSynthesis.speak(mensaje);
-}  
-  
-function romajiParaArchivo(romaji){
-  let r = (romaji || "").trim().toLowerCase();
-
-  r = r
-    .replace(/ā/g,"aa")
-    .replace(/ī/g,"ii")
-    .replace(/ū/g,"uu")
-    .replace(/ē/g,"ee")
-    .replace(/ō/g,"ou");
-
-  r = r.replace(/\s+/g,"").replace(/[’']/g,"").replace(/-/g,"");
-  return r;
-}
-
-function romajiAlternativasAudio(romaji){
-  const base = romajiParaArchivo(romaji);
-  const set = new Set([base]);
-
-  if (base.includes("ou")) set.add(base.replace(/ou/g,"oo"));
-  if (base.includes("fu")) set.add(base.replace(/fu/g,"hu"));
-  if (base.includes("shi")) set.add(base.replace(/shi/g,"si"));
-  if (base.includes("chi")) set.add(base.replace(/chi/g,"ti"));
-  if (base.includes("tsu")) set.add(base.replace(/tsu/g,"tu"));
-  if (base === "wo") set.add("o");
-
-  return Array.from(set);
-}
-
-let audioKana = new Audio();
-audioKana.preload = "auto";
-
-function reproducirAudioKana(romaji){
-  const opciones = romajiAlternativasAudio(romaji);
-  if (!opciones.length) return;
-
-  audioKana.pause();
-  audioKana.currentTime = 0;
-
-  const itemActual = kanaLista[actual];
-  const esExtraActual = extra.includes(itemActual);
-
-  const baseDir = esExtraActual
-    ? "data/audios/kana/extra/"
-    : "data/audios/";
-
-  let i = 0;
-
-  const intentar = () => {
-    if (i >= opciones.length) {
-      const kana = kanaLista[actual]?.[0];
-  
-      if (kana) {
-        reproducirSintetizador(kana);
+  function writeStorage(key, value) {
+    try {
+      localStorage.setItem(key, JSON.stringify(value));
+      return true;
+    } catch (error) {
+      storageAvailable = false;
+      updateStorageStatus();
+      if (!pendingStorageNotice) {
+        pendingStorageNotice = true;
+        showNotice("Puedes seguir practicando, pero este navegador no permite guardar los cambios de esta sesión.");
       }
-  
+      return false;
+    }
+  }
+  function removeStorage(key) {
+    try { localStorage.removeItem(key); return true; }
+    catch (error) { storageAvailable = false; updateStorageStatus(); return false; }
+  }
+  function safeNumber(value) {
+    return typeof value === "number" && Number.isFinite(value) && value >= 0
+      ? Math.min(Math.floor(value), 100000000) : 0;
+  }
+  function blankStats() { return { correct: 0, wrong: 0, skipped: 0, streak: 0, best: 0 }; }
+  function cleanStats(value) {
+    const output = blankStats();
+    if (value && typeof value === "object") {
+      Object.keys(output).forEach(function (key) { output[key] = safeNumber(value[key]); });
+      output.best = Math.max(output.best, output.streak);
+    }
+    return output;
+  }
+  function cleanProgress(value) {
+    const output = { version: 2, byActivity: {}, byItem: Object.create(null) };
+    ["quiz", "write", "match"].forEach(function (kind) {
+      output.byActivity[kind] = cleanStats(value && value.byActivity && value.byActivity[kind]);
+      output.byActivity[kind].streak = 0;
+    });
+    if (value && value.byItem && typeof value.byItem === "object") {
+      Object.keys(value.byItem).slice(0, 4000).forEach(function (id) {
+        if (!/^(hiragana|katakana):[\u3041-\u3096\u30a1-\u30fa]+$/u.test(id)) return;
+        const item = value.byItem[id];
+        if (!item || typeof item !== "object") return;
+        output.byItem[id] = {
+          correct: safeNumber(item.correct), wrong: safeNumber(item.wrong),
+          skipped: safeNumber(item.skipped), pending: item.pending === true,
+          seen: item.seen === true
+        };
+      });
+    }
+    return output;
+  }
+  function cleanPrefs(value) {
+    const prefs = Object.assign({}, DEFAULT_PREFS);
+    if (!value || typeof value !== "object") return prefs;
+    const choices = {
+      scope: ["hiragana", "katakana", "mixed"],
+      activity: ["quiz", "write", "match", "explore"],
+      mode: ["kana-romaji", "romaji-kana", "listen", "mix"],
+      length: [0, 10, 20, 40], pairs: [3, 4, 6],
+      theme: ["dark", "light"], audioSource: ["tts", "mp3"]
+    };
+    Object.keys(choices).forEach(function (key) {
+      if (choices[key].includes(value[key])) prefs[key] = value[key];
+    });
+    ["review", "effects", "autoAudio"].forEach(function (key) {
+      if (typeof value[key] === "boolean") prefs[key] = value[key];
+    });
+    if (typeof value.rate === "number" && Number.isFinite(value.rate)) {
+      prefs.rate = Math.min(1.1, Math.max(0.5, value.rate));
+    }
+    if (!CONFIG.audioBase) prefs.audioSource = "tts";
+    if (prefs.activity === "write" && prefs.mode === "romaji-kana") prefs.mode = "kana-romaji";
+    return prefs;
+  }
+  function savePreferences() { writeStorage(KEYS.prefs, state.prefs); }
+  function saveProgress() { writeStorage(KEYS.progress, state.progress); }
+  function showNotice(message, error) {
+    $("notice-text").textContent = message;
+    $("notice").classList.toggle("error", !!error);
+    $("notice").hidden = false;
+  }
+  function hideNotice() { $("notice").hidden = true; }
+  function updateStorageStatus() {
+    $("storage-status").textContent = storageAvailable
+      ? "Tu progreso se guarda en este navegador."
+      : "El guardado no está disponible. Puedes practicar durante esta sesión.";
+  }
+  function labelForScript(script) { return script === "hiragana" ? "hiragana" : "katakana"; }
+  function titleForScope() {
+    return state.prefs.scope === "mixed" ? "Hiragana + katakana"
+      : state.prefs.scope === "hiragana" ? "Hiragana" : "Katakana";
+  }
+  function scopeItems() {
+    return state.items.filter(function (item) {
+      return state.prefs.scope === "mixed" || item.script === state.prefs.scope;
+    });
+  }
+  function pendingItem(item) {
+    return !!(state.progress.byItem[item.id] && state.progress.byItem[item.id].pending);
+  }
+  function practiceItems() {
+    return scopeItems().filter(function (item) { return !state.prefs.review || pendingItem(item); });
+  }
+  function pendingCount() { return scopeItems().filter(pendingItem).length; }
+  function newSession() {
+    return Object.assign(blankStats(), {
+      answered: 0, pairs: 0, boards: 0, elapsed: 0, lastTick: Date.now(), ended: false
+    });
+  }
+  function cancelScheduled() {
+    state.epoch += 1;
+    state.timers.forEach(function (timer) { clearTimeout(timer); });
+    state.timers.clear();
+    state.locked = false;
+    state.selected = null;
+    stopAudio();
+  }
+  function later(fn, delay) {
+    const epoch = state.epoch;
+    const handle = setTimeout(function () {
+      state.timers.delete(handle);
+      if (epoch === state.epoch) fn();
+    }, delay);
+    state.timers.add(handle);
+    return handle;
+  }
+  function updateElapsed() {
+    const now = Date.now();
+    if (state.session && !state.session.ended && state.prefs.activity !== "explore" && !document.hidden) {
+      state.session.elapsed += Math.max(0, now - state.session.lastTick);
+    }
+    if (state.session) state.session.lastTick = now;
+  }
+  function formatTime(milliseconds) {
+    const seconds = Math.floor(milliseconds / 1000);
+    const minutes = Math.floor(seconds / 60);
+    return String(minutes).padStart(2, "0") + ":" + String(seconds % 60).padStart(2, "0");
+  }
+  function accuracy(stats) {
+    const attempts = stats.correct + stats.wrong + stats.skipped;
+    return attempts ? Math.round(stats.correct * 100 / attempts) + "%" : "—";
+  }
+  function renderStats() {
+    const session = state.session;
+    $("stat-correct").textContent = session.correct;
+    $("stat-wrong").textContent = session.wrong;
+    $("stat-accuracy").textContent = accuracy(session);
+    $("stat-streak").textContent = session.streak;
+    $("session-detail").textContent = "Esta sesión · " + session.skipped + " sin responder";
+    $("session-time").textContent = formatTime(session.elapsed);
+    $("review-count").textContent = pendingCount();
+    let totalCorrect = 0;
+    let best = 0;
+    Object.keys(state.progress.byActivity).forEach(function (key) {
+      totalCorrect += state.progress.byActivity[key].correct;
+      best = Math.max(best, state.progress.byActivity[key].best);
+    });
+    $("total-correct").textContent = totalCorrect;
+    $("total-best").textContent = best;
+    $("total-seen").textContent = state.items.filter(function (item) {
+      return state.progress.byItem[item.id] && state.progress.byItem[item.id].seen;
+    }).length;
+    updateProgress();
+  }
+  function updateProgress() {
+    const isMatch = state.prefs.activity === "match";
+    const done = isMatch ? state.session.pairs : state.session.answered;
+    const target = state.prefs.length;
+    const currentAnswered = !!(state.current && state.current.answered);
+    const shown = state.view === "summary" ? done : isMatch ? done
+      : Math.min(done + (currentAnswered ? 0 : 1), target || Infinity);
+    $("exercise-badge").textContent = titleForScope() + (state.prefs.review ? " · Repaso" : "");
+    $("round-count").textContent = isMatch
+      ? done + (target ? " / " + target : "") + " parejas"
+      : "Pregunta " + shown + (target ? " de " + target : " · sin límite");
+    const progress = $("session-progress");
+    progress.setAttribute("aria-valuemax", String(target || Math.max(1, done)));
+    progress.setAttribute("aria-valuenow", String(Math.min(done, target || Math.max(1, done))));
+    progress.setAttribute("aria-valuetext", done + (target ? " de " + target : "") + (isMatch ? " parejas" : " preguntas"));
+    $("progress-fill").style.width = target ? Math.min(100, done / target * 100) + "%" : "0%";
+    progress.hidden = target === 0;
+  }
+  function ensureItemRecord(item) {
+    if (!state.progress.byItem[item.id]) {
+      state.progress.byItem[item.id] = { correct: 0, wrong: 0, skipped: 0, pending: false, seen: false };
+    }
+    return state.progress.byItem[item.id];
+  }
+  function incrementStats(stats, outcome) {
+    stats[outcome] += 1;
+    if (outcome === "correct") {
+      stats.streak += 1;
+      stats.best = Math.max(stats.best, stats.streak);
+    } else {
+      stats.streak = 0;
+    }
+  }
+  function recordAnswer(item, outcome) {
+    updateElapsed();
+    incrementStats(state.session, outcome);
+    incrementStats(state.progress.byActivity[state.prefs.activity], outcome);
+    const record = ensureItemRecord(item);
+    record[outcome] += 1;
+    record.seen = true;
+    record.pending = outcome !== "correct";
+    saveProgress();
+    renderStats();
+  }
+  function setView(view) {
+    state.view = view;
+    ["quiz", "match", "explore", "summary", "empty"].forEach(function (key) {
+      $(key + "-view").hidden = view !== key;
+    });
+    $("exercise-header").hidden = view === "explore" || view === "empty";
+    $("session-stats").hidden = state.prefs.activity === "explore";
+    $("session-caption").hidden = state.prefs.activity === "explore";
+    $("end-session").hidden = view !== "quiz";
+    $("keyboard-hint").hidden = view !== "quiz";
+  }
+  function renderControls() {
+    all("[data-scope]").forEach(function (button) {
+      const scope = button.dataset.scope;
+      button.setAttribute("aria-pressed", String(scope === state.prefs.scope));
+      button.disabled = scope !== "mixed" && state.data[scope].length === 0;
+    });
+    all("[data-activity]").forEach(function (button) {
+      button.setAttribute("aria-pressed", String(button.dataset.activity === state.prefs.activity));
+    });
+    all("[data-mode]").forEach(function (button) {
+      const mode = button.dataset.mode;
+      button.setAttribute("aria-pressed", String(mode === state.prefs.mode));
+      button.disabled = (mode === "romaji-kana" && state.prefs.activity === "write")
+        || (mode === "listen" && !audioAvailable());
+      button.title = mode === "listen" && !audioAvailable()
+        ? "Necesitas una voz japonesa o audios propios para el dictado."
+        : mode === "romaji-kana" && state.prefs.activity === "write"
+          ? "En Escribir, la respuesta se introduce en romaji." : "";
+    });
+    $("scope-count").textContent = practiceItems().length + " en tu selección";
+    $("total-kana").textContent = state.items.length;
+    $("mode-settings").hidden = !["quiz", "write"].includes(state.prefs.activity);
+    $("length-settings").hidden = state.prefs.activity === "explore";
+    $("match-settings").hidden = state.prefs.activity !== "match";
+    $("length-label").textContent = state.prefs.activity === "match" ? "Parejas por sesión" : "Preguntas por sesión";
+    $("session-length").value = String(state.prefs.length);
+    $("match-count").value = String(state.prefs.pairs);
+    $("review-only").checked = state.prefs.review;
+    $("sound-effects").checked = state.prefs.effects;
+    $("auto-audio").checked = state.prefs.autoAudio;
+    $("audio-source").value = state.prefs.audioSource;
+    $("speech-rate").value = state.prefs.rate;
+    $("rate-value").textContent = state.prefs.rate.toFixed(2) + "×";
+    $("data-label").textContent = (state.custom ? "Tu lista" : state.remote ? "Lista del sitio" : "Lista incluida")
+      + " · " + state.data.hiragana.length + " hiragana y " + state.data.katakana.length + " katakana.";
+    $("restore-data").hidden = !state.custom;
+    $("theme-toggle").setAttribute("aria-label", "Cambiar a tema " + (state.prefs.theme === "dark" ? "claro" : "oscuro"));
+    document.documentElement.dataset.theme = state.prefs.theme;
+    const help = {
+      "kana-romaji": state.prefs.activity === "write" ? "Escribe la lectura del kana en romaji." : "Reconoce el kana y elige su lectura.",
+      "romaji-kana": "Lee el romaji y encuentra el kana de la escritura indicada.",
+      listen: state.prefs.activity === "write" ? "Escucha y escribe la lectura en romaji." : "Escucha y elige el kana de la escritura indicada.",
+      mix: "Alterna las preguntas visuales y, cuando hay voz japonesa, el dictado."
+    };
+    $("mode-help").textContent = help[state.prefs.mode];
+    $("keyboard-hint").innerHTML = state.prefs.activity === "write"
+      ? "<kbd>Enter</kbd> para comprobar y continuar"
+      : "<kbd>1</kbd>–<kbd>4</kbd> o <kbd>A</kbd>–<kbd>D</kbd> para responder · <kbd>Enter</kbd> para continuar · <kbd>R</kbd> para escuchar";
+    renderStats();
+  }
+  function startSession(options) {
+    const focus = options && options.focus;
+    cancelScheduled();
+    state.session = newSession();
+    state.current = null;
+    state.deck = null;
+    state.deckSignature = "";
+    state.matchQueue = [];
+    state.matchTiles = [];
+    state.progress.byActivity[state.prefs.activity]
+      && (state.progress.byActivity[state.prefs.activity].streak = 0);
+    if (!scopeItems().length) {
+      state.prefs.scope = state.data.hiragana.length ? "hiragana" : "katakana";
+    }
+    if (state.prefs.mode === "listen" && !audioAvailable()) state.prefs.mode = "kana-romaji";
+    if (state.prefs.activity === "write" && state.prefs.mode === "romaji-kana") state.prefs.mode = "kana-romaji";
+    renderControls();
+    if (state.prefs.activity === "explore") {
+      state.session.ended = true;
+      renderExplore();
+    } else if (!practiceItems().length) {
+      showEmpty();
+    } else if (state.prefs.activity === "match") {
+      nextBoard();
+    } else {
+      nextQuestion(!!focus);
+    }
+  }
+  function showEmpty() {
+    cancelScheduled();
+    state.session.ended = true;
+    $("empty-title").textContent = state.prefs.review ? "Todo al día." : "No hay kana en esta selección.";
+    $("empty-copy").textContent = state.prefs.review
+      ? "No tienes lecturas pendientes de repaso aquí. Puedes seguir practicando con toda la selección."
+      : "Elige otra escritura o carga una lista que contenga kana.";
+    setView("empty");
+    renderStats();
+  }
+  function chooseMode() {
+    if (state.prefs.mode !== "mix") return state.prefs.mode;
+    const choices = state.prefs.activity === "write" ? ["kana-romaji"] : ["kana-romaji", "romaji-kana"];
+    if (audioAvailable()) choices.push("listen");
+    return choices[Math.floor(Math.random() * choices.length)];
+  }
+  function nextQuestion(focus) {
+    cancelScheduled();
+    if (state.prefs.length && state.session.answered >= state.prefs.length) {
+      finishSession("goal"); return;
+    }
+    const pool = practiceItems();
+    if (!pool.length) {
+      if (state.session.answered) finishSession("review");
+      else showEmpty();
       return;
     }
-
-    const nombre = opciones[i++];
-    audioKana.src = baseDir + encodeURIComponent(nombre) + ".mp3";
-
-    audioKana.onerror = () => intentar();
-    audioKana.oncanplaythrough = () => {
-      audioKana.onerror = null;
-      audioKana.oncanplaythrough = null;
-      audioKana.play().catch(() => {});
+    const signature = pool.map(function (item) { return item.id; }).join("|");
+    if (!state.deck || state.deckSignature !== signature) {
+      state.deck = Core.createDeck(pool);
+      state.deckSignature = signature;
+    }
+    const item = state.deck.next();
+    if (!item) { showEmpty(); return; }
+    const mode = chooseMode();
+    const auditory = mode === "listen";
+    const direction = mode === "romaji-kana" || auditory ? "romaji-kana" : "kana-romaji";
+    state.current = {
+      item: item, mode: mode, auditory: auditory, direction: direction,
+      answered: false, heard: false, options: []
     };
+    const question = state.current;
+    if (state.prefs.activity === "quiz") {
+      question.options = Core.buildOptions(item, scopeItems(), {
+        direction: direction, auditory: auditory, count: CONFIG.optionCount
+      });
+    }
+    setView("quiz");
+    const prompt = $("prompt");
+    prompt.replaceChildren();
+    prompt.className = "prompt";
+    prompt.removeAttribute("lang");
+    if (auditory) {
+      prompt.classList.add("listen");
+      const wrap = document.createElement("div");
+      wrap.className = "listen-prompt";
+      const bars = document.createElement("div");
+      bars.className = "sound-waves";
+      bars.setAttribute("aria-hidden", "true");
+      for (let i = 0; i < 7; i += 1) bars.appendChild(document.createElement("i"));
+      const caption = document.createElement("span");
+      caption.textContent = "Escucha el sonido";
+      wrap.append(bars, caption);
+      prompt.appendChild(wrap);
+      $("question-label").textContent = state.prefs.activity === "write"
+        ? "Escucha y escribe el romaji."
+        : "Escucha y elige el " + labelForScript(item.script) + " correcto.";
+    } else if (direction === "romaji-kana" && state.prefs.activity === "quiz") {
+      prompt.textContent = item.romaji;
+      prompt.classList.add("romaji");
+      $("question-label").textContent = "¿Cuál es su forma en " + labelForScript(item.script) + "?";
+    } else {
+      prompt.textContent = item.kana;
+      prompt.classList.add("jp");
+      if (Array.from(item.kana).length > 1) prompt.classList.add("multi");
+      prompt.lang = "ja";
+      $("question-label").textContent = state.prefs.activity === "write"
+        ? "Escribe la lectura de este " + labelForScript(item.script) + "."
+        : "¿Cómo se lee este " + labelForScript(item.script) + "?";
+    }
+    $("answer-options").hidden = state.prefs.activity !== "quiz";
+    $("answer-form").hidden = state.prefs.activity !== "write";
+    $("typed-answer").value = "";
+    $("typed-answer").disabled = auditory;
+    $("submit-answer").disabled = auditory;
+    $("typed-answer").removeAttribute("aria-invalid");
+    $("feedback-title").textContent = "";
+    $("feedback-title").className = "feedback-title";
+    $("feedback-detail").textContent = "";
+    $("feedback-tip").textContent = auditory ? "Pulsa Escuchar si el audio no empieza." : "";
+    $("next-question").disabled = true;
+    $("next-question").textContent = "Siguiente →";
+    $("skip-question").disabled = auditory;
+    $("listen-question").disabled = !audioAvailable();
+    $("listen-question").querySelector("span").textContent = auditory ? "Escuchar de nuevo" : "Escuchar";
+    renderOptions();
+    renderStats();
+    if (auditory) playCurrent();
+    else if (focus && state.prefs.activity === "write") $("typed-answer").focus({ preventScroll: true });
+    else if (focus) {
+      const button = $("answer-options").querySelector("button");
+      if (button) button.focus({ preventScroll: true });
+    }
+  }
+  function renderOptions() {
+    const question = state.current;
+    const box = $("answer-options");
+    box.replaceChildren();
+    if (!question || state.prefs.activity !== "quiz") return;
+    question.options.forEach(function (option, index) {
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = "option-button";
+      button.dataset.index = String(index);
+      button.disabled = question.auditory && !question.heard;
+      const key = document.createElement("span");
+      key.className = "key";
+      key.textContent = String(index + 1);
+      key.setAttribute("aria-hidden", "true");
+      const text = document.createElement("span");
+      text.className = "option-label";
+      text.textContent = option.label;
+      if (question.direction === "romaji-kana") {
+        text.classList.add("jp"); text.lang = "ja";
+      }
+      button.append(key, text);
+      button.addEventListener("click", function () { answerOption(index); });
+      box.appendChild(button);
+    });
+  }
+  function explanationFor(item) {
+    if (item.kana === "を" || item.kana === "ヲ") return "En la tabla: wo. Su lectura habitual es o; aceptamos ambas al escribir.";
+    if (["じ", "ぢ", "ジ", "ヂ"].includes(item.kana)) return "じ・ぢ y ジ・ヂ comparten la lectura ji en esta lista.";
+    if (["ず", "づ", "ズ", "ヅ"].includes(item.kana)) return "ず・づ y ズ・ヅ comparten la lectura zu en esta lista.";
+    if (Array.from(item.kana).length > 1) return "Fíjate en el kana pequeño: la combinación se practica como una sola lectura.";
+    return "";
+  }
+  function finishQuestion(outcome, selectedIndex, typed) {
+    const question = state.current;
+    if (!question || question.answered || state.view !== "quiz") return;
+    if (question.auditory && !question.heard) return;
+    question.answered = true;
+    state.session.answered += 1;
+    recordAnswer(question.item, outcome);
+    $("typed-answer").disabled = true;
+    $("submit-answer").disabled = true;
+    $("skip-question").disabled = true;
+    const buttons = all("#answer-options .option-button");
+    buttons.forEach(function (button, index) {
+      const option = question.options[index];
+      button.disabled = true;
+      if (option.isCorrect) {
+        button.classList.add("is-correct");
+        const mark = document.createElement("span");
+        mark.className = "answer-mark"; mark.textContent = "✓"; mark.setAttribute("aria-hidden", "true");
+        button.appendChild(mark);
+      } else if (index === selectedIndex) {
+        button.classList.add("is-wrong");
+        const mark = document.createElement("span");
+        mark.className = "answer-mark"; mark.textContent = "×"; mark.setAttribute("aria-hidden", "true");
+        button.appendChild(mark);
+      } else button.classList.add("is-muted");
+    });
+    $("feedback-title").textContent = outcome === "correct" ? "¡Correcto!" : outcome === "skipped" ? "Vamos a repasarlo." : "Casi. Mira la lectura.";
+    $("feedback-title").className = "feedback-title " + (outcome === "correct" ? "correct" : "wrong");
+    $("feedback-detail").textContent = question.item.kana + "  ·  " + question.item.romaji
+      + (outcome === "wrong" && typed ? "  ·  Escribiste: " + typed : "");
+    $("feedback-tip").textContent = explanationFor(question.item);
+    $("next-question").disabled = false;
+    $("next-question").textContent = state.prefs.length && state.session.answered >= state.prefs.length
+      ? "Ver resultado →" : "Siguiente →";
+    playEffect(outcome === "correct");
+    if (state.prefs.autoAudio) {
+      const id = question.item.id;
+      later(function () {
+        if (state.current && state.current.item.id === id && state.current.answered) playCurrent();
+      }, state.prefs.effects ? 180 : 0);
+    }
+    if (state.prefs.activity === "write") $("next-question").focus({ preventScroll: true });
+  }
+  function answerOption(index) {
+    const question = state.current;
+    if (!question || question.answered || !question.options[index]) return;
+    finishQuestion(question.options[index].isCorrect ? "correct" : "wrong", index);
+  }
+  function answerWritten(event) {
+    if (event) event.preventDefault();
+    const question = state.current;
+    if (!question || question.answered || state.prefs.activity !== "write" || state.view !== "quiz") return;
+    const typed = $("typed-answer").value.trim();
+    if (!typed) {
+      $("feedback-title").textContent = "Escribe una respuesta o pulsa «No lo sé».";
+      $("feedback-title").className = "feedback-title";
+      $("typed-answer").focus();
+      return;
+    }
+    const normal = Core.normalizeAnswer(typed);
+    const auditoryO = question.auditory && Core.soundKey(question.item) === "o"
+      && ["o", "wo"].includes(normal);
+    const correct = Core.isAnswerCorrect(question.item, typed) || auditoryO;
+    $("typed-answer").setAttribute("aria-invalid", String(!correct));
+    finishQuestion(correct ? "correct" : "wrong", null, typed);
+  }
+  function nextAction(focus) {
+    if (state.view !== "quiz" || !state.current || !state.current.answered) return;
+    nextQuestion(!!focus);
+  }
+  function selectBoardItems(count) {
+    const pool = practiceItems();
+    const validIds = new Set(pool.map(function (item) { return item.id; }));
+    state.matchQueue = state.matchQueue.filter(function (item) { return validIds.has(item.id); });
+    if (!state.matchQueue.length) state.matchQueue = Core.shuffle(pool);
+    const unique = Core.uniqueByReading(state.matchQueue);
+    const selected = unique.slice(0, count);
+    const chosenIds = new Set(selected.map(function (item) { return item.id; }));
+    state.matchQueue = state.matchQueue.filter(function (item) { return !chosenIds.has(item.id); });
+    return selected;
+  }
+  function nextBoard() {
+    cancelScheduled();
+    state.current = null;
+    if (state.prefs.length && state.session.pairs >= state.prefs.length) {
+      finishSession("goal"); return;
+    }
+    if (!practiceItems().length) {
+      if (state.session.pairs) finishSession("review");
+      else showEmpty();
+      return;
+    }
+    const remaining = state.prefs.length ? state.prefs.length - state.session.pairs : state.prefs.pairs;
+    const items = selectBoardItems(Math.min(state.prefs.pairs, remaining));
+    if (!items.length) { showEmpty(); return; }
+    state.session.boards += 1;
+    state.boardMatched = 0;
+    state.boardSize = items.length;
+    state.selected = null;
+    state.locked = false;
+    const cards = [];
+    items.forEach(function (item) {
+      cards.push({ kind: "kana", item: item, matched: false });
+      cards.push({ kind: "romaji", item: item, matched: false });
+    });
+    state.matchTiles = Core.shuffle(cards);
+    const board = $("match-board");
+    board.replaceChildren();
+    state.matchTiles.forEach(function (card, index) {
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = "match-tile";
+      button.dataset.kind = card.kind;
+      button.dataset.pair = card.item.id;
+      button.dataset.index = String(index);
+      button.setAttribute("aria-pressed", "false");
+      const content = document.createElement("span");
+      content.className = "tile-content";
+      content.textContent = card.kind === "kana" ? card.item.kana : card.item.romaji;
+      if (card.kind === "kana") { content.classList.add("jp"); content.lang = "ja"; }
+      const kind = document.createElement("span");
+      kind.className = "tile-kind";
+      kind.textContent = card.kind === "kana" ? labelForScript(card.item.script) : "romaji";
+      button.append(content, kind);
+      button.addEventListener("click", function () { selectMatch(index); });
+      card.button = button;
+      board.appendChild(button);
+    });
+    $("match-instructions").textContent = "Une " + items.length + (items.length === 1 ? " kana con su lectura." : " kana con sus lecturas.");
+    $("match-message").textContent = "Elige un kana y su lectura. Puedes empezar por cualquiera.";
+    $("board-counter").textContent = "Tablero " + state.session.boards;
+    setView("match");
+    renderStats();
+  }
+  function clearSelectedCard() {
+    if (!state.selected) return;
+    state.selected.button.classList.remove("is-selected");
+    state.selected.button.setAttribute("aria-pressed", "false");
+    state.selected = null;
+  }
+  function selectMatch(index) {
+    if (state.view !== "match" || state.locked) return;
+    const card = state.matchTiles[index];
+    if (!card || card.matched) return;
+    if (state.selected === card) { clearSelectedCard(); return; }
+    if (state.selected && state.selected.kind === card.kind) clearSelectedCard();
+    card.button.classList.add("is-selected");
+    card.button.setAttribute("aria-pressed", "true");
+    if (!state.selected) {
+      state.selected = card;
+      $("match-message").textContent = card.kind === "kana" ? "Ahora busca su romaji." : "Ahora busca su kana.";
+      return;
+    }
+    const first = state.selected;
+    const kanaCard = first.kind === "kana" ? first : card;
+    const romajiCard = first.kind === "romaji" ? first : card;
+    state.selected = null;
+    [first, card].forEach(function (entry) { entry.button.setAttribute("aria-pressed", "false"); });
+    if (first.item.id === card.item.id) {
+      [first, card].forEach(function (entry) {
+        entry.matched = true;
+        entry.button.classList.remove("is-selected");
+        entry.button.classList.add("is-matched");
+        entry.button.disabled = true;
+        entry.button.setAttribute("aria-label", (entry.kind === "kana" ? entry.item.kana : entry.item.romaji) + ", pareja encontrada");
+      });
+      state.boardMatched += 1;
+      state.session.pairs += 1;
+      recordAnswer(kanaCard.item, "correct");
+      $("match-message").textContent = "¡Pareja encontrada! " + kanaCard.item.kana + " · " + kanaCard.item.romaji;
+      playEffect(true);
+      if (state.prefs.autoAudio) playItem(kanaCard.item);
+      if (state.boardMatched === state.boardSize) {
+        state.locked = true;
+        later(nextBoard, 750);
+      } else {
+        const next = state.matchTiles.find(function (entry) { return !entry.matched; });
+        if (next) next.button.focus({ preventScroll: true });
+      }
+    } else {
+      state.locked = true;
+      [first, card].forEach(function (entry) { entry.button.classList.add("is-wrong"); });
+      ensureItemRecord(romajiCard.item).pending = true;
+      recordAnswer(kanaCard.item, "wrong");
+      $("match-message").textContent = "Estas dos no forman pareja. Inténtalo otra vez.";
+      playEffect(false);
+      later(function () {
+        [first, card].forEach(function (entry) { entry.button.classList.remove("is-wrong", "is-selected"); });
+        state.locked = false;
+        $("match-message").textContent = "Elige un kana y su lectura.";
+      }, 600);
+    }
+  }
+  function renderExplore() {
+    setView("explore");
+    const query = Core.normalizeAnswer($("search-kana").value);
+    const entries = practiceItems().filter(function (item) {
+      return !query || Core.normalizeAnswer(item.kana).includes(query)
+        || Core.acceptedAnswers(item).some(function (answer) { return answer.includes(query); });
+    });
+    const grid = $("explore-grid");
+    grid.replaceChildren();
+    const fragment = document.createDocumentFragment();
+    entries.forEach(function (item) {
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = "kana-tile" + (pendingItem(item) ? " needs-review" : "");
+      button.setAttribute("aria-label", item.kana + ", " + item.romaji + ", " + labelForScript(item.script)
+        + (pendingItem(item) ? ". Pendiente de repaso" : "") + ". Escuchar");
+      const kana = document.createElement("span");
+      kana.className = "jp"; kana.lang = "ja"; kana.textContent = item.kana;
+      const romaji = document.createElement("span");
+      romaji.className = "tile-romaji"; romaji.textContent = item.romaji;
+      button.append(kana, romaji);
+      button.addEventListener("click", function () {
+        if (audioAvailable()) playItem(item);
+        else showNotice(item.kana + " · " + item.romaji + ". No hay una voz japonesa disponible en este dispositivo.");
+      });
+      fragment.appendChild(button);
+    });
+    grid.appendChild(fragment);
+    $("explore-count").textContent = entries.length
+      ? entries.length + " resultados · " + titleForScope()
+      : "No hay resultados. Prueba con otro kana o romaji.";
+    renderStats();
+  }
+  function finishSession(reason) {
+    updateElapsed();
+    cancelScheduled();
+    state.session.ended = true;
+    state.current = null;
+    $("summary-title").textContent = reason === "review" ? "Repaso completado." : reason === "manual" ? "Buen trabajo por hoy." : "Sesión completada.";
+    const count = state.prefs.activity === "match" ? state.session.pairs : state.session.answered;
+    const unit = state.prefs.activity === "match" ? " parejas" : " preguntas";
+    $("summary-copy").textContent = count + unit + " · " + formatTime(state.session.elapsed)
+      + (state.session.skipped ? " · " + state.session.skipped + " sin responder" : "");
+    $("summary-correct").textContent = state.session.correct;
+    $("summary-accuracy").textContent = accuracy(state.session);
+    $("summary-best").textContent = state.session.best;
+    $("review-session").hidden = pendingCount() === 0;
+    setView("summary");
+    renderStats();
+    $("summary-title").focus({ preventScroll: true });
+  }
 
-    audioKana.load();
+  // AUDIO: voz japonesa verificada, MP3 opcionales y callbacks cancelables.
+  const sound = {
+    voice: null, clip: null, utterance: null, context: null, token: 0,
+    pending: null, watchdog: null, failedClips: new Set()
   };
-
-  intentar();
-}
-
-function replayAudio(){
-  if (!kanaLista.length) return;
-
-  const item = kanaLista[actual];
-  if (!item) return;
-
-  const kana = item[0];
-  const romaji = item[1];
-
-  if (audioModo === "tts") {
-    reproducirSintetizador(kana);
-  } else {
-    reproducirAudioKana(romaji);
+  function japaneseVoice() {
+    try {
+      if (!window.speechSynthesis || !window.SpeechSynthesisUtterance) return null;
+      const voices = speechSynthesis.getVoices();
+      return voices.find(function (voice) { return /^ja-jp$/i.test(voice.lang); })
+        || voices.find(function (voice) { return /^ja(?:-|$)/i.test(voice.lang); }) || null;
+    } catch (error) { return null; }
   }
-}
-
-/* ===============================
-   JUEGO
-=============================== */
-function siguienteKana(){
-  if (!kanaLista.length) return;
-
-  actual = Math.floor(Math.random() * kanaLista.length);
-  tipoPreguntaActual = elegirTipoPregunta();
-
-  const item = kanaLista[actual];
-  const kanaEl = document.getElementById("kana");
-
-  const textoPregunta = valorPregunta(item, tipoPreguntaActual);
-
-  if (esDictadoTipo(tipoPreguntaActual)) {
-    kanaEl.innerText = "";
-  } else {
-    kanaEl.innerText = textoPregunta;
+  function audioAvailable() {
+    return !!(state && state.prefs.audioSource === "mp3" && CONFIG.audioBase) || !!sound.voice;
+  }
+  function refreshVoice() {
+    sound.voice = japaneseVoice();
+    if (!state) return;
+    updateAudioUI();
+    renderControls();
+  }
+  function updateAudioUI() {
+    const mp3 = state.prefs.audioSource === "mp3" && CONFIG.audioBase;
+    $("mp3-option").hidden = !CONFIG.audioBase;
+    $("audio-status").textContent = mp3
+      ? "Se usarán tus MP3. Si un archivo falla, se intenta la voz japonesa disponible."
+      : sound.voice ? "Voz japonesa disponible. La pronunciación puede variar entre dispositivos."
+        : "No hay una voz japonesa disponible. Puedes seguir con las actividades visuales.";
+    $("listen-question").disabled = !audioAvailable();
+  }
+  function stopAudio() {
+    sound.token += 1;
+    if (sound.watchdog) { clearTimeout(sound.watchdog); sound.watchdog = null; }
+    if (sound.pending) { const settle = sound.pending; sound.pending = null; settle(false); }
+    if (sound.clip) {
+      sound.clip.onended = null; sound.clip.onerror = null;
+      try { sound.clip.pause(); } catch (error) { /* La práctica no depende del audio. */ }
+      sound.clip = null;
+    }
+    if (sound.utterance) {
+      sound.utterance.onstart = null; sound.utterance.onend = null; sound.utterance.onerror = null;
+      sound.utterance = null;
+    }
+    try { if (window.speechSynthesis) speechSynthesis.cancel(); } catch (error) { /* Sin voz. */ }
+    $("listen-question").classList.remove("playing");
+  }
+  function spokenText(item) {
+    if (item.kana === "を") return "お";
+    if (item.kana === "ヲ") return "オ";
+    if (item.kana === "は") return "ハ";
+    if (item.kana === "へ") return "ヘ";
+    return item.kana;
+  }
+  function speechPlayback(item, token) {
+    sound.voice = japaneseVoice() || sound.voice;
+    if (!sound.voice || !window.speechSynthesis || !window.SpeechSynthesisUtterance) {
+      showNotice("No hay una voz japonesa disponible. Puedes practicar sin audio o elegir audios propios.");
+      return Promise.resolve(false);
+    }
+    return new Promise(function (resolve) {
+      let settled = false;
+      let ownWatchdog = null;
+      function settle(ok) {
+        if (settled) return;
+        settled = true;
+        if (sound.pending === settle) sound.pending = null;
+        if (ownWatchdog) {
+          clearTimeout(ownWatchdog);
+          if (sound.watchdog === ownWatchdog) sound.watchdog = null;
+          ownWatchdog = null;
+        }
+        resolve(ok);
+      }
+      sound.pending = settle;
+      const utterance = new SpeechSynthesisUtterance(spokenText(item));
+      sound.utterance = utterance;
+      utterance.lang = "ja-JP";
+      utterance.voice = sound.voice;
+      utterance.rate = state.prefs.rate;
+      utterance.pitch = 1;
+      utterance.volume = 1;
+      utterance.onstart = function () {
+        if (token !== sound.token) { settle(false); return; }
+        $("listen-question").classList.add("playing");
+        settle(true);
+      };
+      utterance.onend = function () {
+        if (token === sound.token) $("listen-question").classList.remove("playing");
+        settle(token === sound.token);
+      };
+      utterance.onerror = function (event) {
+        settle(false);
+        if (token !== sound.token || ["canceled", "interrupted"].includes(event.error)) return;
+        $("listen-question").classList.remove("playing");
+        showNotice("No se pudo reproducir la voz. Pulsa Escuchar para intentarlo de nuevo.");
+      };
+      ownWatchdog = setTimeout(function () {
+        settle(false);
+        if (token === sound.token) showNotice("El audio no ha empezado. Pulsa Escuchar o cambia a una pregunta visual.");
+      }, 5000);
+      sound.watchdog = ownWatchdog;
+      try { speechSynthesis.speak(utterance); }
+      catch (error) { settle(false); showNotice("Este navegador no pudo iniciar la voz japonesa."); }
+    });
+  }
+  function mp3Source(item) {
+    const base = CONFIG.audioBase.replace(/\/?$/, "/");
+    return base + (CONFIG.audioByScript ? item.script + "/" : "") + encodeURIComponent(item.romaji) + ".mp3";
+  }
+  function mp3Playback(item, token) {
+    const source = mp3Source(item);
+    if (sound.failedClips.has(source) || typeof Audio !== "function") return speechPlayback(item, token);
+    return new Promise(function (resolve) {
+      let settled = false;
+      let fallingBack = false;
+      let ownWatchdog = null;
+      function settle(ok) {
+        if (settled) return;
+        settled = true;
+        if (sound.pending === settle) sound.pending = null;
+        if (ownWatchdog) {
+          clearTimeout(ownWatchdog);
+          if (sound.watchdog === ownWatchdog) sound.watchdog = null;
+          ownWatchdog = null;
+        }
+        resolve(ok);
+      }
+      sound.pending = settle;
+      const clip = new Audio(source);
+      sound.clip = clip;
+      clip.preload = "auto";
+      clip.playbackRate = state.prefs.rate;
+      function fail(error) {
+        if (token !== sound.token || fallingBack) { settle(false); return; }
+        fallingBack = true;
+        if (error && error.name === "NotAllowedError") {
+          settle(false);
+          showNotice("Tu navegador pide un toque para activar el audio. Pulsa Escuchar.");
+          return;
+        }
+        sound.failedClips.add(source);
+        if (ownWatchdog) {
+          clearTimeout(ownWatchdog);
+          if (sound.watchdog === ownWatchdog) sound.watchdog = null;
+          ownWatchdog = null;
+        }
+        if (sound.pending === settle) sound.pending = null;
+        clip.onended = null; clip.onerror = null;
+        try { clip.pause(); } catch (ignored) { /* Se pasa al sintetizador. */ }
+        speechPlayback(item, token).then(settle);
+      }
+      clip.onended = function () {
+        if (token === sound.token) $("listen-question").classList.remove("playing");
+      };
+      clip.onerror = function () { fail(new Error("MP3 no disponible")); };
+      ownWatchdog = setTimeout(function () { fail(new Error("Tiempo de espera del MP3")); }, 6500);
+      sound.watchdog = ownWatchdog;
+      try {
+        const playing = clip.play();
+        Promise.resolve(playing).then(function () {
+          if (token !== sound.token) { settle(false); return; }
+          if (fallingBack) return;
+          $("listen-question").classList.add("playing");
+          settle(true);
+        }).catch(fail);
+      } catch (error) { fail(error); }
+    });
+  }
+  function playItem(item) {
+    stopAudio();
+    if (!item) return Promise.resolve(false);
+    const token = sound.token;
+    if (state.prefs.audioSource === "mp3" && CONFIG.audioBase) return mp3Playback(item, token);
+    return speechPlayback(item, token);
+  }
+  function playCurrent() {
+    const question = state.current;
+    if (!question || state.view !== "quiz") return;
+    playItem(question.item).then(function (started) {
+      if (!started || state.current !== question || state.view !== "quiz" || question.answered) return;
+      question.heard = true;
+      if (question.auditory) {
+        all("#answer-options button").forEach(function (button) { button.disabled = false; });
+        $("typed-answer").disabled = false;
+        $("submit-answer").disabled = false;
+        $("skip-question").disabled = false;
+        $("feedback-tip").textContent = "Puedes volver a escuchar tantas veces como necesites.";
+      }
+    });
+  }
+  function playEffect(correct) {
+    if (!state.prefs.effects) return;
+    try {
+      const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+      if (!AudioContextClass) return;
+      if (!sound.context) sound.context = new AudioContextClass();
+      const context = sound.context;
+      if (context.state === "suspended") {
+        const resuming = context.resume();
+        if (resuming && resuming.catch) resuming.catch(function () {});
+      }
+      const oscillator = context.createOscillator();
+      const gain = context.createGain();
+      oscillator.connect(gain);
+      gain.connect(context.destination);
+      const now = context.currentTime;
+      oscillator.type = "sine";
+      oscillator.frequency.setValueAtTime(correct ? 660 : 220, now);
+      oscillator.frequency.setValueAtTime(correct ? 880 : 180, now + 0.07);
+      gain.gain.setValueAtTime(0.035, now);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.17);
+      oscillator.start(now);
+      oscillator.stop(now + 0.18);
+      oscillator.onended = function () { oscillator.disconnect(); gain.disconnect(); };
+    } catch (error) { /* Los efectos nunca bloquean la respuesta. */ }
   }
 
-  document.getElementById("respuesta").innerText = "";
-  document.getElementById("respuesta").className = "";
-  yaValidado = false;
-
-  generarOpciones();
-  setBotonesOpcionesHabilitados(true);
-  actualizarBotonAudio();
-
-  if (esDictadoTipo(tipoPreguntaActual)) {
-    replayAudio();
+  // CARGA DE DATOS: se valida antes de sustituir una lista que funciona.
+  function applyData(validated, source) {
+    loadVersion += 1;
+    state.data = validated.data;
+    state.items = validated.items;
+    state.custom = source === "custom";
+    state.remote = source === "remote";
+    if (!state.custom) {
+      state.baseData = validated.data;
+      state.baseSource = source;
+    }
+    startSession();
+    if (validated.warnings.length) showNotice(validated.warnings.join(" "));
   }
-}
-
-
-function responderOpcion(indice){
-  if (yaValidado) return;
-
-  const correcta = kanaLista[actual];
-  const fichaCorrecta = correcta[0] + " - " + correcta[1];
-
-if (opcionesActuales[indice][1] === romajiCorrectoActual) {
-  sonidoCorrecto();
-
-  document.getElementById("respuesta").innerText =
-    "Correcto ✔\n" + fichaCorrecta;
-  document.getElementById("respuesta").className = "correcto";
-
-  aciertos++;
-  racha++;
-  if (racha > mejorRacha) mejorRacha = racha;
-} else {
-  sonidoIncorrecto();
-
-  document.getElementById("respuesta").innerText =
-    "Incorrecto ✘\nera: " + fichaCorrecta;
-  document.getElementById("respuesta").className = "incorrecto";
-
-  errores++;
-  racha = 0;
-}
-
-  // 🔹 AQUÍ pintas todos los botones
-  marcarOpcionesResultado();
-  
-  actualizarEstadisticas();
-  guardarStatsActual();
-
-  yaValidado = true;
-  setBotonesOpcionesHabilitados(false);
-}
-
-
-function aplicarNotaTeclado(){
-  return;
-}
-
-function actualizarEstadisticas(){
-  document.getElementById("aciertos").innerText = aciertos;
-  document.getElementById("errores").innerText = errores;
-  document.getElementById("racha").innerText = racha;
-  document.getElementById("mejorRacha").innerText = mejorRacha;
-  document.getElementById("precision").innerText = precisionPct();
-}
-
-/* ===============================
-   BOTONES ACCIONES
-=============================== */
-function siguienteDesdeBoton(){
-  if (!yaValidado) {
-    sonidoIncorrecto();
-    errores++;
-    racha = 0;
-
-    const correcta = kanaLista[actual];
-    const correcto = valorRespuesta(correcta, tipoPreguntaActual);
-    const fichaCorrecta = correcta[0] + " - " + correcta[1];
-    
-    document.getElementById("respuesta").innerText = "Incorrecto ✘\nera: " + fichaCorrecta;
-    document.getElementById("respuesta").className = "incorrecto";
-
-    marcarOpcionesResultado();
-    
-    actualizarEstadisticas();
-    guardarStatsActual();
-
-    yaValidado = true;
-    setBotonesOpcionesHabilitados(false);
-    return;
+  async function loadExternalData() {
+    if (!CONFIG.dataUrl || state.custom) return;
+    const version = ++loadVersion;
+    const controller = typeof AbortController !== "undefined" ? new AbortController() : null;
+    let timeout;
+    try {
+      const request = fetch(CONFIG.dataUrl, controller ? { signal: controller.signal, cache: "no-cache" } : { cache: "no-cache" });
+      const response = await Promise.race([
+        request,
+        new Promise(function (_, reject) {
+          timeout = setTimeout(function () {
+            if (controller) controller.abort();
+            reject(new Error("La carga tardó demasiado."));
+          }, CONFIG.networkTimeoutMs);
+        })
+      ]);
+      if (!response.ok) throw new Error("HTTP " + response.status);
+      const raw = await response.json();
+      const validated = Core.validateData(raw);
+      if (version !== loadVersion) return;
+      applyData(validated, "remote");
+      showNotice("La lista del sitio está lista para practicar.");
+    } catch (error) {
+      if (version !== loadVersion) return;
+      showNotice("No se pudo cargar la lista externa. Sigue disponible la lista incorporada de 234 entradas.", true);
+    } finally {
+      clearTimeout(timeout);
+    }
   }
-
-  siguienteKana();
-}
-
-
-
-function resetStatsModo(){
-  const key = statsKeyActual();
-  const stats = cargarStats();
-
-  stats[key] = {
-    aciertos: 0,
-    errores: 0,
-    racha: 0,
-    mejorRacha: 0
-  };
-
-  guardarStats(stats);
-
-  aciertos = 0;
-  errores = 0;
-  racha = 0;
-  mejorRacha = 0;
-
-  actualizarEstadisticas();
-}
-
-/* ===============================
-   ATAJOS DE TECLADO
-=============================== */
-document.addEventListener("keydown", (event) => {
-  const tag = (document.activeElement?.tagName || "").toLowerCase();
-  const enCampo = tag === "input" || tag === "textarea";
-
-  if (enCampo) return;
-
-  const key = event.key.toLowerCase();
-
-  if (key === "a") {
-    event.preventDefault();
-    if (!yaValidado) responderOpcion(0);
-    else siguienteKana();
-    return;
+  function readFile(file) {
+    if (typeof file.text === "function") return file.text();
+    return new Promise(function (resolve, reject) {
+      const reader = new FileReader();
+      reader.onload = function () { resolve(String(reader.result)); };
+      reader.onerror = function () { reject(new Error("No se pudo leer el archivo.")); };
+      reader.readAsText(file, "UTF-8");
+    });
   }
-
-  if (key === "b") {
-    event.preventDefault();
-    if (!yaValidado) responderOpcion(1);
-    else siguienteKana();
-    return;
+  async function importFile(event) {
+    const input = event.target;
+    const file = input.files && input.files[0];
+    if (!file) return;
+    const version = ++importedFileVersion;
+    try {
+      if (file.size > CONFIG.maxImportBytes) throw new Error("La lista supera el límite de 256 KB.");
+      const text = await readFile(file);
+      if (version !== importedFileVersion) return;
+      let raw;
+      try { raw = JSON.parse(text.replace(/^\uFEFF/, "")); }
+      catch (error) { throw new Error("El JSON no es válido. Revisa las comas, las comillas y las dos listas."); }
+      const validated = Core.validateData(raw);
+      applyData(validated, "custom");
+      const saved = writeStorage(KEYS.custom, validated.data);
+      showNotice("Lista cargada: " + validated.items.length + " entradas."
+        + (validated.warnings.length ? " " + validated.warnings.join(" ") : "")
+        + (!saved ? " Se usará durante esta sesión; no se pudo guardar en el navegador." : ""));
+    } catch (error) {
+      showNotice(error.message || "No se pudo cargar la lista. Tu selección anterior sigue disponible.", true);
+    } finally {
+      input.value = "";
+    }
   }
-
-  if (key === "c") {
-    event.preventDefault();
-    if (!yaValidado) responderOpcion(2);
-    else siguienteKana();
-    return;
+  function downloadData() {
+    try {
+      const blob = new Blob([JSON.stringify(state.data, null, 2) + "\n"], { type: "application/json;charset=utf-8" });
+      const url = URL.createObjectURL(blob);
+      const anchor = document.createElement("a");
+      anchor.href = url; anchor.download = "kana-hiragana-katakana.json";
+      document.body.appendChild(anchor); anchor.click(); anchor.remove();
+      setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
+    } catch (error) {
+      showNotice("Este navegador no pudo descargar la lista.", true);
+    }
   }
-
-  if (key === "enter") {
-    event.preventDefault();
-    siguienteDesdeBoton();
+  function resetProgress() {
+    state.progress = cleanProgress(null);
+    state.prefs.review = false;
+    saveProgress();
+    savePreferences();
+    startSession();
+    const dialog = $("reset-dialog");
+    if (dialog.open && typeof dialog.close === "function") dialog.close();
+    showNotice("Tu progreso se ha reiniciado. La lista y los ajustes se conservaron.");
+    $("reset-progress").focus({ preventScroll: true });
   }
-});
-  
-</script>
+  function bindEvents() {
+    $("dismiss-notice").addEventListener("click", hideNotice);
+    all("[data-scope]").forEach(function (button) {
+      button.addEventListener("click", function () {
+        if (state.prefs.scope === button.dataset.scope) return;
+        state.prefs.scope = button.dataset.scope; savePreferences(); startSession();
+      });
+    });
+    all("[data-activity]").forEach(function (button) {
+      button.addEventListener("click", function () {
+        if (state.prefs.activity === button.dataset.activity) return;
+        state.prefs.activity = button.dataset.activity;
+        if (state.prefs.activity === "write" && state.prefs.mode === "romaji-kana") state.prefs.mode = "kana-romaji";
+        savePreferences(); startSession();
+      });
+    });
+    all("[data-mode]").forEach(function (button) {
+      button.addEventListener("click", function () {
+        if (button.disabled || state.prefs.mode === button.dataset.mode) return;
+        state.prefs.mode = button.dataset.mode; savePreferences(); startSession();
+      });
+    });
+    $("session-length").addEventListener("change", function () {
+      const value = Number(this.value);
+      if (![0, 10, 20, 40].includes(value)) return;
+      state.prefs.length = value; savePreferences(); startSession();
+    });
+    $("match-count").addEventListener("change", function () {
+      const value = Number(this.value);
+      if (![3, 4, 6].includes(value)) return;
+      state.prefs.pairs = value; savePreferences(); startSession();
+    });
+    $("review-only").addEventListener("change", function () {
+      state.prefs.review = this.checked; savePreferences(); startSession();
+    });
+    $("sound-effects").addEventListener("change", function () { state.prefs.effects = this.checked; savePreferences(); });
+    $("auto-audio").addEventListener("change", function () { state.prefs.autoAudio = this.checked; savePreferences(); });
+    $("audio-source").addEventListener("change", function () {
+      state.prefs.audioSource = this.value === "mp3" && CONFIG.audioBase ? "mp3" : "tts";
+      sound.failedClips.clear(); stopAudio(); savePreferences(); refreshVoice();
+      if (state.current && state.current.auditory && !state.current.answered) playCurrent();
+    });
+    $("speech-rate").addEventListener("input", function () {
+      state.prefs.rate = Math.min(1.1, Math.max(0.5, Number(this.value) || 0.85));
+      $("rate-value").textContent = state.prefs.rate.toFixed(2) + "×"; savePreferences();
+    });
+    $("theme-toggle").addEventListener("click", function () {
+      state.prefs.theme = state.prefs.theme === "dark" ? "light" : "dark";
+      savePreferences(); renderControls();
+    });
+    $("listen-question").addEventListener("click", playCurrent);
+    $("answer-form").addEventListener("submit", answerWritten);
+    $("skip-question").addEventListener("click", function () { finishQuestion("skipped"); });
+    $("next-question").addEventListener("click", function () { nextAction(state.prefs.activity === "write"); });
+    $("end-session").addEventListener("click", function () { finishSession("manual"); });
+    $("match-finish").addEventListener("click", function () { finishSession("manual"); });
+    $("repeat-session").addEventListener("click", function () { startSession({ focus: true }); });
+    $("review-session").addEventListener("click", function () {
+      state.prefs.review = true; savePreferences(); startSession({ focus: true });
+    });
+    $("exit-review").addEventListener("click", function () {
+      state.prefs.review = false; savePreferences(); startSession({ focus: true });
+    });
+    $("search-kana").addEventListener("input", function () { if (state.prefs.activity === "explore") renderExplore(); });
+    $("import-button").addEventListener("click", function () { $("import-json").click(); });
+    $("import-json").addEventListener("change", importFile);
+    $("export-json").addEventListener("click", downloadData);
+    $("restore-data").addEventListener("click", function () {
+      importedFileVersion += 1;
+      const removed = removeStorage(KEYS.custom);
+      applyData(Core.validateData(state.baseData), state.baseSource);
+      showNotice("Se ha restaurado la lista del sitio."
+        + (!removed ? " No se pudo borrar la selección guardada del navegador." : ""));
+      if (CONFIG.dataUrl && state.baseSource === "builtin") loadExternalData();
+    });
+    $("reset-progress").addEventListener("click", function () {
+      if (typeof $("reset-dialog").showModal === "function") $("reset-dialog").showModal();
+      else if (window.confirm("¿Borrar solo el progreso de este entrenador de kana?")) resetProgress();
+    });
+    $("cancel-reset").addEventListener("click", function () { $("reset-dialog").close(); });
+    $("confirm-reset").addEventListener("click", resetProgress);
+    document.addEventListener("keydown", function (event) {
+      if (event.ctrlKey || event.metaKey || event.altKey || event.isComposing || event.repeat || $("reset-dialog").open) return;
+      const target = event.target;
+      if (target && (target.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(target.tagName))) return;
+      const key = (event.key || "").toLowerCase();
+      if (key === "enter") {
+        if (target && typeof target.closest === "function" && target.closest("button,a,summary")
+          && !(target.classList.contains("option-button") && target.disabled)) return;
+        if (state.view === "quiz" && state.current && state.current.answered) {
+          event.preventDefault(); nextAction(true);
+        }
+        return;
+      }
+      if (state.view !== "quiz") return;
+      if (key === "r") { event.preventDefault(); if (audioAvailable()) playCurrent(); return; }
+      if (state.prefs.activity !== "quiz") return;
+      const keys = ["1", "2", "3", "4"];
+      const letters = ["a", "b", "c", "d"];
+      const index = keys.includes(key) ? keys.indexOf(key) : letters.indexOf(key);
+      if (index >= 0) { event.preventDefault(); answerOption(index); }
+    });
+    document.addEventListener("visibilitychange", function () {
+      if (state.session) state.session.lastTick = Date.now();
+      if (document.hidden) stopAudio();
+    });
+    window.addEventListener("pagehide", function () {
+      cancelScheduled();
+      if (heartbeat) clearInterval(heartbeat);
+    });
+    window.addEventListener("pageshow", function (event) {
+      if (event.persisted) {
+        if (heartbeat) clearInterval(heartbeat);
+        heartbeat = setInterval(tick, 1000);
+        state.session.lastTick = Date.now();
+        if (state.prefs.activity === "match" && state.view === "match") nextBoard();
+      }
+    });
+    if (window.speechSynthesis) {
+      if (typeof speechSynthesis.addEventListener === "function") speechSynthesis.addEventListener("voiceschanged", refreshVoice);
+      else speechSynthesis.onvoiceschanged = refreshVoice;
+    }
+  }
+  function tick() {
+    if (!state) return;
+    updateElapsed();
+    $("session-time").textContent = formatTime(state.session.elapsed);
+  }
+  function init() {
+    try {
+      const builtIn = Core.validateData(JSON.parse($("kana-data").textContent));
+      const prefs = cleanPrefs(readStorage(KEYS.prefs));
+      const storedData = readStorage(KEYS.custom);
+      let validated = builtIn;
+      let custom = false;
+      if (storedData) {
+        try { validated = Core.validateData(storedData); custom = true; }
+        catch (error) { removeStorage(KEYS.custom); }
+      }
+      state = {
+        prefs: prefs, progress: cleanProgress(readStorage(KEYS.progress)),
+        data: validated.data, items: validated.items, baseData: builtIn.data, baseSource: "builtin",
+        custom: custom, remote: false, session: newSession(), current: null,
+        deck: null, deckSignature: "", matchQueue: [], matchTiles: [],
+        selected: null, locked: false, boardMatched: 0, boardSize: 0,
+        epoch: 0, timers: new Set(), view: "quiz"
+      };
+      sound.voice = japaneseVoice();
+      bindEvents();
+      updateStorageStatus();
+      updateAudioUI();
+      startSession();
+      heartbeat = setInterval(tick, 1000);
+      if (!storageAvailable) showNotice("El guardado no está disponible en este navegador. Puedes practicar durante esta sesión.");
+      loadExternalData();
+    } catch (error) {
+      showNotice("No se pudo iniciar el entrenador. Revisa el JSON incorporado: " + error.message, true);
+      $("practice").hidden = true;
+    }
+  }
+  init();
+}());
 
+  </script>
 </body>
 </html>
