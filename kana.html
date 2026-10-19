@@ -421,7 +421,7 @@
           <summary>Sonido y pronunciación</summary>
           <label class="check-row" for="sound-effects"><span>Efectos al responder</span><input id="sound-effects" type="checkbox"></label>
           <label class="check-row" for="auto-audio"><span>Audio tras responder</span><input id="auto-audio" type="checkbox"></label>
-          <div class="setting-group"><label class="setting-label" for="audio-source">Pronunciación</label><select id="audio-source"><option value="tts">Voz japonesa del dispositivo</option><option value="mp3" id="mp3-option" hidden>Audios propios</option></select></div>
+          <div class="setting-group"><label class="setting-label" for="audio-source">Pronunciación</label><select id="audio-source"><option value="mp3" id="mp3-option" selected>Audios MP3 (predeterminado)</option><option value="tts">Sintetizador (voz japonesa)</option></select></div>
           <div class="setting-group"><label class="setting-label" for="speech-rate">Velocidad <span id="rate-value">0.85×</span></label><input id="speech-rate" type="range" min="0.5" max="1.1" step="0.05" value="0.85"></div>
           <p id="audio-status" class="setting-help" role="status">Buscando voz japonesa…</p>
         </details>
@@ -690,11 +690,12 @@
  * CONFIGURACIÓN OPCIONAL:
  * - dataUrl: "" usa el JSON incorporado. Puedes indicar "data/kana.json".
  *   El formato es { "hiragana": [["あ","a"]], "katakana": [["ア","a"]] }.
- * - audioBase: "" usa la voz japonesa del dispositivo. Si tienes MP3, indica
- *   por ejemplo "data/audios/kana/"; los nombres deben ser a.mp3, shi.mp3, etc.
+ * - audioBase: apunta a los MP3 originales de Asallam Sensei; los nombres
+ *   corresponden al romaji del JSON: a.mp3, shi.mp3, etc. "" deja solo TTS.
  * - audioByScript: true añade hiragana/ o katakana/ a audioBase.
  *
- * Los MP3 no se incluyen. Nunca se reproducen sonidos antes de una interacción.
+ * Los MP3 se cargan del sitio original. Si falta uno, se usa la voz japonesa.
+ * Nunca se reproducen sonidos antes de una interacción.
  * Las estadísticas usan claves propias y no modifican las del entrenador N5.
  */
 (function () {
@@ -702,7 +703,7 @@
 
   const CONFIG = Object.freeze({
     dataUrl: "",
-    audioBase: "",
+    audioBase: "https://asallamsensei.com/data/audios/",
     audioByScript: false,
     optionCount: 4,
     maxImportBytes: 262144,
@@ -719,7 +720,7 @@
   const DEFAULT_PREFS = {
     scope: "hiragana", activity: "quiz", mode: "kana-romaji", length: 20,
     pairs: 4, review: false, effects: false, autoAudio: false,
-    audioSource: "tts", rate: 0.85, theme: "dark"
+    audioSource: "mp3", audioSourceVersion: 1, rate: 0.85, theme: "dark"
   };
   let storageAvailable = true;
   let state;
@@ -790,7 +791,10 @@
   }
   function cleanPrefs(value) {
     const prefs = Object.assign({}, DEFAULT_PREFS);
-    if (!value || typeof value !== "object") return prefs;
+    if (!value || typeof value !== "object") {
+      if (!CONFIG.audioBase) prefs.audioSource = "tts";
+      return prefs;
+    }
     const choices = {
       scope: ["hiragana", "katakana", "mixed"],
       activity: ["quiz", "write", "match", "explore"],
@@ -801,6 +805,11 @@
     Object.keys(choices).forEach(function (key) {
       if (choices[key].includes(value[key])) prefs[key] = value[key];
     });
+    // La edición anterior forzaba TTS al no tener ruta MP3. Restaurar MP3 una
+    // vez; después se respeta la fuente que el usuario elija en esta edición.
+    if (value.audioSourceVersion !== DEFAULT_PREFS.audioSourceVersion) {
+      prefs.audioSource = DEFAULT_PREFS.audioSource;
+    }
     ["review", "effects", "autoAudio"].forEach(function (key) {
       if (typeof value[key] === "boolean") prefs[key] = value[key];
     });
@@ -1416,7 +1425,7 @@
     $("summary-title").focus({ preventScroll: true });
   }
 
-  // AUDIO: voz japonesa verificada, MP3 opcionales y callbacks cancelables.
+  // AUDIO: MP3 originales por defecto, respaldo TTS y callbacks cancelables.
   const sound = {
     voice: null, clip: null, utterance: null, context: null, token: 0,
     pending: null, watchdog: null, failedClips: new Set()
@@ -1442,7 +1451,7 @@
     const mp3 = state.prefs.audioSource === "mp3" && CONFIG.audioBase;
     $("mp3-option").hidden = !CONFIG.audioBase;
     $("audio-status").textContent = mp3
-      ? "Se usarán tus MP3. Si un archivo falla, se intenta la voz japonesa disponible."
+      ? "Se usan los MP3 de Asallam Sensei. Si falta un archivo o falla la carga, se usa el sintetizador japonés disponible."
       : sound.voice ? "Voz japonesa disponible. La pronunciación puede variar entre dispositivos."
         : "No hay una voz japonesa disponible. Puedes seguir con las actividades visuales.";
     $("listen-question").disabled = !audioAvailable();
