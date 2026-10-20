@@ -1005,7 +1005,10 @@ SOFTWARE.
   'use strict';
   // Acceso sencillo para un HTML estático; no sustituye autenticación de servidor.
   // Para añadir alumnos, agrega pares [clave, nombre] a esta lista.
-  const students = new Map([['calvo', 'Freddy']]);
+  const students = new Map([
+    ['calvo', 'Freddy'],
+    ['helado', 'Gina']
+  ]);
   const form = document.getElementById('student-access-form');
   const password = document.getElementById('student-password');
   const error = document.getElementById('access-error');
