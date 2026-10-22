@@ -64,6 +64,7 @@
     .segment[data-scope="mixed"] { grid-column:1 / -1; }
     .segment:hover { color:var(--text); background:var(--raised); }
     .segment[aria-pressed="true"] { background:var(--accent-bg); color:var(--text); }
+    .segment.is-mixed { background:var(--danger-bg); box-shadow:inset 0 0 0 1px var(--danger); }
     .scope-count { font-size:14px; color:var(--text); }
     .activity-tabs { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:6px; padding:6px; background:var(--surface); border:1px solid var(--border); border-radius:16px; margin-bottom:16px; }
     .activity-tab { display:flex; align-items:center; justify-content:center; gap:8px; padding:12px 8px; border:0; border-radius:10px; background:transparent; color:var(--text); font-size:15px; font-weight:650; min-height:46px; }
@@ -80,20 +81,12 @@
     .prompt { min-height:160px; display:flex; align-items:center; justify-content:center; font-size:clamp(90px,11.8vw,130px); line-height:1.4; margin:5px 0; letter-spacing:4px; }
     .prompt.romaji { font-family:inherit; font-size:clamp(64px,8.26vw,87px); font-weight:550; letter-spacing:-2px; }
     .prompt.multi { font-size:clamp(78px,10.62vw,111px); }
-    .prompt.listen { min-height:160px; font-size:47px; letter-spacing:0; }
-    .listen-prompt { display:flex; flex-direction:column; align-items:center; gap:14px; }
-    .listen-prompt .sound-waves { display:flex; gap:6px; align-items:center; justify-content:center; height:55px; }
-    .sound-waves i { display:block; width:6px; border-radius:4px; background:var(--accent); height:20px; }
-    .sound-waves i:nth-child(2),.sound-waves i:nth-child(6) { height:32px; }
-    .sound-waves i:nth-child(3),.sound-waves i:nth-child(5) { height:43px; }
-    .sound-waves i:nth-child(4) { height:55px; }
     .listen-button { display:inline-flex; align-items:center; gap:7px; padding:7px 12px; min-height:36px; font-size:14px; font-weight:600; border:1px solid var(--border); border-radius:999px; color:var(--text); background:transparent; }
     .listen-button:hover { background:var(--raised); color:var(--text); }
     .listen-button.playing { color:var(--text); border-color:var(--mint); }
     .options { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; }
     .option-button { position:relative; display:flex; align-items:center; justify-content:center; min-height:67px; padding:12px 35px; border:1px solid var(--border); border-radius:13px; color:var(--text); background:var(--raised); font-size:28px; transition:background .15s,border-color .15s,transform .15s; }
     .option-button:hover:not(:disabled) { border-color:var(--accent); background:var(--accent-bg); transform:translateY(-1px); }
-    .option-button .key { position:absolute; top:50%; left:13px; transform:translateY(-50%); color:var(--text); font-family:inherit; font-size:14px; border:1px solid var(--border); border-radius:5px; width:20px; height:22px; display:grid; place-items:center; }
     .option-button .answer-mark { position:absolute; right:14px; font-size:20px; }
     .option-button:disabled { opacity:1; cursor:default; }
     .option-button.is-correct { background:var(--mint-bg); border-color:var(--mint); color:var(--text); }
@@ -136,7 +129,6 @@
     input[type="range"] { width:100%; accent-color:var(--accent); margin:6px 0 0; }
     .more-options { border-top:1px solid var(--border); margin-top:20px; padding-top:16px; }
     .more-options > summary { font-size:15px; font-weight:700; }
-    .more-options > .setting-group { margin-bottom:18px; }
     .settings details + details { margin-top:12px; }
     details summary { cursor:pointer; font-size:14px; font-weight:600; color:var(--text); padding:3px 0; }
     details[open] > summary { margin-bottom:14px; color:var(--text); }
@@ -150,7 +142,6 @@
     .match-tile { min-height:106px; border:1px solid var(--border); border-radius:13px; color:var(--text); background:var(--raised); position:relative; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:9px; padding:12px 6px; }
     .match-tile .tile-content { font-size:30px; line-height:1.5; }
     .match-tile[data-kind="kana"] .tile-content { font-size:39px; }
-    .match-tile .tile-kind { font-size:14px; color:var(--text); letter-spacing:.7px; text-transform:uppercase; }
     .match-tile:hover:not(:disabled) { border-color:var(--accent); }
     .match-tile.is-selected { border-color:var(--accent); color:var(--text); background:var(--accent-bg); box-shadow:inset 0 0 0 1px var(--accent); }
     .match-tile.is-wrong { border-color:var(--danger); background:var(--danger-bg); }
@@ -273,7 +264,6 @@
     <symbol id="i-pen" viewBox="0 0 24 24"><path d="m15 4 5 5M4 20l5-1L20 8a2.2 2.2 0 0 0-5-5L4 14Z"/></symbol>
     <symbol id="i-match" viewBox="0 0 24 24"><rect x="3" y="4" width="7" height="13" rx="2"/><rect x="14" y="7" width="7" height="13" rx="2"/><path d="m5 10 1 1 2-2m8 4 1 1 2-2"/></symbol>
     <symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></symbol>
-    <symbol id="i-audio" viewBox="0 0 24 24"><path d="M11 4 6 8H3v8h3l5 4V4Zm4 4a6 6 0 0 1 0 8m3-11a10 10 0 0 1 0 14"/></symbol>
     <symbol id="i-sliders" viewBox="0 0 24 24"><path d="M4 7h7m4 0h5M4 17h3m4 0h9"/><circle cx="13" cy="7" r="2"/><circle cx="9" cy="17" r="2"/></symbol>
     <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h16m-6-6 6 6-6 6"/></symbol>
   </svg>
@@ -313,7 +303,7 @@
             <div class="question-area">
               <p id="question-label" class="question-label">Elige la lectura</p>
               <div id="prompt" class="prompt jp" lang="ja" aria-live="polite" aria-atomic="true">あ</div>
-              <button id="listen-question" class="listen-button" type="button"><svg class="icon" aria-hidden="true"><use href="#i-audio"/></svg><span>Escuchar</span></button>
+              <button id="listen-question" class="listen-button" type="button" hidden><span>Escuchar</span></button>
             </div>
             <div id="answer-options" class="options" role="group" aria-label="Elige una respuesta"></div>
             <form id="answer-form" class="answer-form" hidden>
@@ -348,7 +338,7 @@
             <h2 id="summary-title" tabindex="-1">Sesión completada.</h2>
             <p id="summary-copy"></p>
             <div class="summary-grid"><div><strong id="summary-correct">0</strong>Aciertos</div><div><strong id="summary-accuracy">0%</strong>Precisión</div><div><strong id="summary-best">0</strong>Mejor racha</div></div>
-            <div class="summary-actions"><button id="repeat-session" class="button primary" type="button">Seguir practicando</button><button id="review-session" class="button" type="button">Repasar mis fallos</button></div>
+            <div class="summary-actions"><button id="review-session" class="button primary" type="button">Repasar mis fallos</button><button id="repeat-session" class="button" type="button">Seguir practicando</button></div>
           </div>
           <div id="empty-view" class="empty-state" hidden>
             <div class="empty-icon jp" lang="ja" aria-hidden="true">よし</div><h2 id="empty-title">Todo al día.</h2><p id="empty-copy">No tienes lecturas pendientes de repaso en esta selección.</p><button id="exit-review" class="button primary" type="button">Practicar toda la selección</button>
@@ -389,12 +379,11 @@
           <label class="setting-label" for="match-count">Parejas por tablero</label>
           <select id="match-count"><option value="3">3 parejas</option><option value="4" selected>4 parejas</option><option value="6">6 parejas</option></select>
         </div>
+        <div class="setting-group">
+          <label class="check-row" for="review-only"><span>Repasar fallos <span id="review-count" class="review-count">0</span></span><input id="review-only" type="checkbox"></label>
+        </div>
         <details id="more-options" class="more-options">
           <summary>Más opciones</summary>
-          <div class="setting-group">
-            <label class="check-row" for="review-only"><span>Repasar fallos <span id="review-count" class="review-count">0</span></span><input id="review-only" type="checkbox"></label>
-            <p class="setting-help">Una respuesta correcta retira ese kana de tus pendientes.</p>
-          </div>
           <details id="audio-settings">
             <summary>Sonido y pronunciación</summary>
             <label class="check-row" for="sound-effects"><span>Efectos al responder</span><input id="sound-effects" type="checkbox"></label>
@@ -832,6 +821,7 @@
     return scopeItems().filter(function (item) { return !state.prefs.review || pendingItem(item); });
   }
   function pendingCount() { return scopeItems().filter(pendingItem).length; }
+  function sessionLimit() { return state.prefs.review ? 0 : state.prefs.length; }
   function newSession() {
     return Object.assign(blankStats(), {
       answered: 0, pairs: 0, boards: 0, elapsed: 0, lastTick: Date.now(), ended: false
@@ -895,12 +885,12 @@
   function updateProgress() {
     const isMatch = state.prefs.activity === "match";
     const done = isMatch ? state.session.pairs : state.session.answered;
-    const target = state.prefs.length;
+    const target = sessionLimit();
     const currentAnswered = !!(state.current && state.current.answered);
     const shown = state.view === "summary" ? done : isMatch ? done
       : Math.min(done + (currentAnswered ? 0 : 1), target || Infinity);
     $("exercise-badge").textContent = titleForScope() + (state.prefs.review ? " · Repaso" : "");
-    $("round-count").textContent = isMatch
+    $("round-count").textContent = state.prefs.review ? pendingCount() + " pendientes" : isMatch
       ? done + (target ? " / " + target : "") + " parejas"
       : "Pregunta " + shown + (target ? " de " + target : " · sin límite");
     const progress = $("session-progress");
@@ -951,6 +941,7 @@
     all("[data-scope]").forEach(function (button) {
       const scope = button.dataset.scope;
       button.setAttribute("aria-pressed", String(scope === state.prefs.scope));
+      button.classList.toggle("is-mixed", state.prefs.scope === "mixed");
       button.disabled = scope !== "mixed" && state.data[scope].length === 0;
     });
     all("[data-activity]").forEach(function (button) {
@@ -968,7 +959,7 @@
     });
     $("scope-count").textContent = practiceItems().length + " en tu selección";
     $("mode-settings").hidden = !["quiz", "write"].includes(state.prefs.activity);
-    $("length-settings").hidden = state.prefs.activity === "explore";
+    $("length-settings").hidden = state.prefs.activity === "explore" || state.prefs.review;
     $("match-settings").hidden = state.prefs.activity !== "match";
     $("length-label").textContent = state.prefs.activity === "match" ? "Parejas por sesión" : "Preguntas por sesión";
     $("session-length").value = String(state.prefs.length);
@@ -1046,7 +1037,7 @@
   }
   function nextQuestion(focus) {
     cancelScheduled();
-    if (state.prefs.length && state.session.answered >= state.prefs.length) {
+    if (sessionLimit() && state.session.answered >= sessionLimit()) {
       finishSession("goal"); return;
     }
     const pool = practiceItems();
@@ -1080,19 +1071,9 @@
     prompt.replaceChildren();
     prompt.className = "prompt";
     prompt.removeAttribute("lang");
+    prompt.hidden = auditory;
+    $("listen-question").hidden = !auditory;
     if (auditory) {
-      prompt.classList.add("listen");
-      const wrap = document.createElement("div");
-      wrap.className = "listen-prompt";
-      const bars = document.createElement("div");
-      bars.className = "sound-waves";
-      bars.setAttribute("aria-hidden", "true");
-      for (let i = 0; i < 7; i += 1) bars.appendChild(document.createElement("i"));
-      const caption = document.createElement("span");
-      caption.className = "sr-only";
-      caption.textContent = "Audio del kana";
-      wrap.append(bars, caption);
-      prompt.appendChild(wrap);
       $("question-label").textContent = "Escucha y responde";
     } else if (direction === "romaji-kana" && state.prefs.activity === "quiz") {
       prompt.textContent = item.romaji;
@@ -1110,6 +1091,7 @@
     $("answer-options").hidden = state.prefs.activity !== "quiz";
     $("answer-form").hidden = state.prefs.activity !== "write";
     $("typed-answer").value = "";
+    $("typed-answer").readOnly = false;
     $("typed-answer").disabled = auditory;
     $("submit-answer").disabled = auditory;
     $("typed-answer").removeAttribute("aria-invalid");
@@ -1124,7 +1106,7 @@
     renderOptions();
     renderStats();
     if (auditory) playCurrent();
-    else if (focus && state.prefs.activity === "write") $("typed-answer").focus({ preventScroll: true });
+    else if (state.prefs.activity === "write") $("typed-answer").focus({ preventScroll: true });
     else if (focus) {
       const button = $("answer-options").querySelector("button");
       if (button) button.focus({ preventScroll: true });
@@ -1141,17 +1123,13 @@
       button.className = "option-button";
       button.dataset.index = String(index);
       button.disabled = question.auditory && !question.heard;
-      const key = document.createElement("span");
-      key.className = "key";
-      key.textContent = String(index + 1);
-      key.setAttribute("aria-hidden", "true");
       const text = document.createElement("span");
       text.className = "option-label";
       text.textContent = option.label;
       if (question.direction === "romaji-kana") {
         text.classList.add("jp"); text.lang = "ja";
       }
-      button.append(key, text);
+      button.appendChild(text);
       button.addEventListener("click", function () { answerOption(index); });
       box.appendChild(button);
     });
@@ -1170,7 +1148,7 @@
     question.answered = true;
     state.session.answered += 1;
     recordAnswer(question.item, outcome);
-    $("typed-answer").disabled = true;
+    $("typed-answer").readOnly = true;
     $("submit-answer").disabled = true;
     $("skip-question").disabled = true;
     const buttons = all("#answer-options .option-button");
@@ -1194,15 +1172,15 @@
       + (outcome === "wrong" && typed ? "  ·  Escribiste: " + typed : "");
     $("feedback-tip").textContent = explanationFor(question.item);
     $("next-question").disabled = false;
-    $("next-question").textContent = state.prefs.length && state.session.answered >= state.prefs.length
-      ? "Ver resultado →" : "Siguiente →";
+    $("next-question").textContent = (sessionLimit() && state.session.answered >= sessionLimit())
+      || (state.prefs.review && pendingCount() === 0) ? "Ver resultado →" : "Siguiente →";
     playEffect(outcome === "correct");
     if (state.prefs.autoAudio) {
       later(function () {
         if (!document.hidden && state.prefs.autoAudio && state.current === question) playCurrent();
       }, state.prefs.effects ? 180 : 0);
     }
-    if (state.prefs.activity === "write") $("next-question").focus({ preventScroll: true });
+    if (state.prefs.activity === "write") $("typed-answer").focus({ preventScroll: true });
   }
   function answerOption(index) {
     const question = state.current;
@@ -1244,7 +1222,7 @@
   function nextBoard() {
     cancelScheduled();
     state.current = null;
-    if (state.prefs.length && state.session.pairs >= state.prefs.length) {
+    if (sessionLimit() && state.session.pairs >= sessionLimit()) {
       finishSession("goal"); return;
     }
     if (!practiceItems().length) {
@@ -1252,7 +1230,7 @@
       else showEmpty();
       return;
     }
-    const remaining = state.prefs.length ? state.prefs.length - state.session.pairs : state.prefs.pairs;
+    const remaining = sessionLimit() ? sessionLimit() - state.session.pairs : state.prefs.pairs;
     const items = selectBoardItems(Math.min(state.prefs.pairs, remaining));
     if (!items.length) { showEmpty(); return; }
     state.session.boards += 1;
@@ -1280,10 +1258,9 @@
       content.className = "tile-content";
       content.textContent = card.kind === "kana" ? card.item.kana : card.item.romaji;
       if (card.kind === "kana") { content.classList.add("jp"); content.lang = "ja"; }
-      const kind = document.createElement("span");
-      kind.className = "tile-kind";
-      kind.textContent = card.kind === "kana" ? labelForScript(card.item.script) : "romaji";
-      button.append(content, kind);
+      button.setAttribute("aria-label", content.textContent + ", "
+        + (card.kind === "kana" ? labelForScript(card.item.script) : "romaji"));
+      button.appendChild(content);
       button.addEventListener("click", function () { selectMatch(index); });
       card.button = button;
       board.appendChild(button);
@@ -1399,7 +1376,10 @@
     $("summary-correct").textContent = state.session.correct;
     $("summary-accuracy").textContent = accuracy(state.session);
     $("summary-best").textContent = state.session.best;
-    $("review-session").hidden = pendingCount() === 0;
+    const pending = pendingCount();
+    $("review-session").hidden = pending === 0;
+    $("review-session").textContent = "Repasar fallos (" + pending + ")";
+    $("repeat-session").classList.toggle("primary", pending === 0);
     setView("summary");
     renderStats();
     $("summary-title").focus({ preventScroll: true });
@@ -1593,6 +1573,7 @@
         $("submit-answer").disabled = false;
         $("skip-question").disabled = false;
         $("feedback-tip").textContent = "";
+        if (state.prefs.activity === "write") $("typed-answer").focus({ preventScroll: true });
       }
     });
   }
@@ -1778,7 +1759,9 @@
     $("next-question").addEventListener("click", function () { nextAction(state.prefs.activity === "write"); });
     $("end-session").addEventListener("click", function () { finishSession("manual"); });
     $("match-finish").addEventListener("click", function () { finishSession("manual"); });
-    $("repeat-session").addEventListener("click", function () { startSession({ focus: true }); });
+    $("repeat-session").addEventListener("click", function () {
+      state.prefs.review = false; savePreferences(); startSession({ focus: true });
+    });
     $("review-session").addEventListener("click", function () {
       state.prefs.review = true; savePreferences(); startSession({ focus: true });
     });
@@ -1806,8 +1789,12 @@
     document.addEventListener("keydown", function (event) {
       if (event.ctrlKey || event.metaKey || event.altKey || event.isComposing || event.repeat || $("reset-dialog").open) return;
       const target = event.target;
-      if (target && (target.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(target.tagName))) return;
       const key = (event.key || "").toLowerCase();
+      if (key === "enter" && target === $("typed-answer") && state.prefs.activity === "write"
+        && state.view === "quiz" && state.current && state.current.answered) {
+        event.preventDefault(); nextAction(true); return;
+      }
+      if (target && (target.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(target.tagName))) return;
       if (key === "enter") {
         if (target && typeof target.closest === "function" && target.closest("button,a,summary")
           && !(target.classList.contains("option-button") && target.disabled)) return;
