@@ -53,9 +53,11 @@
     .donate-nav { color:var(--text); border-color:var(--border); }
     .icon { width:19px; height:19px; flex-shrink:0; fill:none; stroke:currentColor; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; }
     .hero { padding:34px 0 27px; display:flex; justify-content:space-between; align-items:flex-end; gap:24px; }
-    .notice { display:flex; gap:12px; align-items:center; justify-content:space-between; border:1px solid var(--border); background:var(--raised); border-radius:14px; margin:0 0 18px; padding:12px 16px; font-size:15px; color:var(--text); }
+    .notice { position:relative; overflow:hidden; display:flex; gap:12px; align-items:center; justify-content:space-between; border:1px solid var(--border); background:var(--raised); border-radius:14px; margin:0 0 18px; padding:12px 16px; font-size:15px; color:var(--text); }
     .notice.error { background:var(--danger-bg); border-color:var(--danger); }
     .notice button { background:none; border:0; color:inherit; padding:6px; min-width:32px; font-size:24px; }
+    .notice-timer { position:absolute; bottom:0; left:0; width:100%; height:3px; background:var(--accent); transform:scaleX(0); transform-origin:left; pointer-events:none; }
+    @keyframes notice-countdown { from { transform:scaleX(0); } to { transform:scaleX(1); } }
     .workspace { display:grid; grid-template-columns:minmax(0,1fr) 284px; align-items:start; gap:22px; }
     .main-column { min-width:0; }
     .scope-row { display:flex; flex-direction:column; align-items:stretch; gap:10px; }
@@ -81,7 +83,7 @@
     .prompt { min-height:160px; display:flex; align-items:center; justify-content:center; font-size:clamp(90px,11.8vw,130px); line-height:1.4; margin:5px 0; letter-spacing:4px; }
     .prompt.romaji { font-family:inherit; font-size:clamp(64px,8.26vw,87px); font-weight:550; letter-spacing:-2px; }
     .prompt.multi { font-size:clamp(78px,10.62vw,111px); }
-    .listen-button { display:inline-flex; align-items:center; gap:7px; padding:7px 12px; min-height:36px; font-size:14px; font-weight:600; border:1px solid var(--border); border-radius:999px; color:var(--text); background:transparent; }
+    .listen-button { display:inline-flex; align-items:center; gap:7px; margin-top:18px; padding:7px 12px; min-height:36px; font-size:14px; font-weight:600; border:1px solid var(--border); border-radius:999px; color:var(--text); background:transparent; }
     .listen-button:hover { background:var(--raised); color:var(--text); }
     .listen-button.playing { color:var(--text); border-color:var(--mint); }
     .options { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; }
@@ -121,6 +123,7 @@
     .mode-grid { display:grid; grid-template-columns:1fr 1fr; gap:7px; }
     .mode-button { min-height:43px; padding:9px 5px; border:1px solid var(--border); border-radius:9px; color:var(--text); background:var(--raised); font-size:14px; font-weight:650; }
     .mode-button[aria-pressed="true"] { border-color:var(--accent); color:var(--text); background:var(--accent-bg); }
+    .mode-button.is-mixed { border-color:var(--danger); background:var(--danger-bg); }
     .setting-help { margin-top:8px; color:var(--text); font-size:14px; line-height:1.65; }
     select { width:100%; min-height:41px; border:1px solid var(--border); border-radius:9px; background:var(--raised); color:var(--text); padding:8px 10px; font-size:14px; }
     .check-row { display:flex; align-items:center; justify-content:space-between; gap:12px; font-size:14px; color:var(--text); cursor:pointer; min-height:34px; }
@@ -284,7 +287,7 @@
         <h1 id="page-title">Kana: Hiragana &amp; Katakana</h1>
       </div>
     </section>
-    <div id="notice" class="notice" role="status" aria-live="polite" hidden><span id="notice-text"></span><button id="dismiss-notice" type="button" aria-label="Cerrar aviso">×</button></div>
+    <div id="notice" class="notice" role="status" aria-live="polite" hidden><span id="notice-text"></span><button id="dismiss-notice" type="button" aria-label="Cerrar aviso">×</button><span id="notice-timer" class="notice-timer" aria-hidden="true" hidden></span></div>
     <noscript><p class="notice">Activa JavaScript para practicar con el entrenador de kana.</p></noscript>
     <main id="practice" class="workspace" tabindex="-1">
       <div class="main-column">
@@ -303,7 +306,7 @@
             <div class="question-area">
               <p id="question-label" class="question-label">Elige la lectura</p>
               <div id="prompt" class="prompt jp" lang="ja" aria-live="polite" aria-atomic="true">あ</div>
-              <button id="listen-question" class="listen-button" type="button" hidden><span>Escuchar</span></button>
+              <button id="listen-question" class="listen-button" type="button" hidden><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M11 4 6 8H3v8h3l5 4V4Zm4 4a6 6 0 0 1 0 8m3-11a10 10 0 0 1 0 14"/></svg><span>Escuchar</span></button>
             </div>
             <div id="answer-options" class="options" role="group" aria-label="Elige una respuesta"></div>
             <form id="answer-form" class="answer-form" hidden>
@@ -365,10 +368,10 @@
         <div id="mode-settings" class="setting-group">
           <span class="setting-label">Tipo de pregunta</span>
           <div class="mode-grid" role="group" aria-label="Tipo de pregunta">
-            <button class="mode-button" type="button" data-mode="kana-romaji" aria-pressed="true">Kana → romaji</button>
-            <button class="mode-button" type="button" data-mode="romaji-kana" aria-pressed="false">Romaji → kana</button>
-            <button class="mode-button" type="button" data-mode="listen" aria-pressed="false">Dictado</button>
-            <button class="mode-button" type="button" data-mode="mix" aria-pressed="false">Mixto</button>
+            <button class="mode-button is-mixed" type="button" data-mode="kana-romaji" aria-pressed="true">Kana → romaji</button>
+            <button class="mode-button is-mixed" type="button" data-mode="romaji-kana" aria-pressed="true">Romaji → kana</button>
+            <button class="mode-button is-mixed" type="button" data-mode="listen" aria-pressed="true">Dictado</button>
+            <button class="mode-button is-mixed" type="button" data-mode="mix" aria-pressed="true">Mixto</button>
           </div>
         </div>
         <div id="length-settings" class="setting-group">
@@ -688,8 +691,9 @@
     progress: "asallam_kana_progress_v2",
     custom: "asallam_kana_custom_data_v2"
   };
+  const QUESTION_MODES = Object.freeze(["kana-romaji", "romaji-kana", "listen"]);
   const DEFAULT_PREFS = {
-    scope: "hiragana", activity: "quiz", mode: "kana-romaji", length: 20,
+    scope: "hiragana", activity: "quiz", modes: QUESTION_MODES, length: 20,
     pairs: 4, review: false, effects: false, autoAudio: false,
     audioSource: "mp3", audioSourceVersion: 1, rate: 0.85, theme: "dark"
   };
@@ -699,6 +703,7 @@
   let importedFileVersion = 0;
   let heartbeat = null;
   let pendingStorageNotice = false;
+  let noticeTimer = null;
 
   function readStorage(key) {
     try {
@@ -761,7 +766,7 @@
     return output;
   }
   function cleanPrefs(value) {
-    const prefs = Object.assign({}, DEFAULT_PREFS);
+    const prefs = Object.assign({}, DEFAULT_PREFS, { modes: QUESTION_MODES.slice() });
     if (!value || typeof value !== "object") {
       if (!CONFIG.audioBase) prefs.audioSource = "tts";
       return prefs;
@@ -769,13 +774,17 @@
     const choices = {
       scope: ["hiragana", "katakana", "mixed"],
       activity: ["quiz", "write", "match", "explore"],
-      mode: ["kana-romaji", "romaji-kana", "listen", "mix"],
       length: [0, 10, 20, 40], pairs: [3, 4, 6],
       theme: ["dark", "light"], audioSource: ["tts", "mp3"]
     };
     Object.keys(choices).forEach(function (key) {
       if (choices[key].includes(value[key])) prefs[key] = value[key];
     });
+    // Las preferencias antiguas sin selección múltiple empiezan en Mixto.
+    if (Array.isArray(value.modes)) {
+      const selected = QUESTION_MODES.filter(function (mode) { return value.modes.includes(mode); });
+      if (selected.length) prefs.modes = selected;
+    }
     // La edición anterior forzaba TTS al no tener ruta MP3. Restaurar MP3 una
     // vez; después se respeta la fuente que el usuario elija en esta edición.
     if (value.audioSourceVersion !== DEFAULT_PREFS.audioSourceVersion) {
@@ -788,17 +797,29 @@
       prefs.rate = Math.min(1.1, Math.max(0.5, value.rate));
     }
     if (!CONFIG.audioBase) prefs.audioSource = "tts";
-    if (prefs.activity === "write" && prefs.mode === "romaji-kana") prefs.mode = "kana-romaji";
     return prefs;
   }
   function savePreferences() { writeStorage(KEYS.prefs, state.prefs); }
   function saveProgress() { writeStorage(KEYS.progress, state.progress); }
-  function showNotice(message, error) {
+  function showNotice(message, error, duration = 0) {
+    hideNotice();
     $("notice-text").textContent = message;
     $("notice").classList.toggle("error", !!error);
     $("notice").hidden = false;
+    if (duration > 0) {
+      const bar = $("notice-timer");
+      bar.hidden = false;
+      void bar.offsetWidth;
+      bar.style.animation = "notice-countdown " + duration + "ms linear forwards";
+      noticeTimer = setTimeout(hideNotice, duration);
+    }
   }
-  function hideNotice() { $("notice").hidden = true; }
+  function hideNotice() {
+    if (noticeTimer !== null) { clearTimeout(noticeTimer); noticeTimer = null; }
+    $("notice").hidden = true;
+    $("notice-timer").hidden = true;
+    $("notice-timer").style.animation = "none";
+  }
   function updateStorageStatus() {
     $("storage-status").textContent = storageAvailable
       ? "Tu progreso se guarda en este navegador."
@@ -937,21 +958,41 @@
     $("end-session").hidden = view !== "quiz";
     $("keyboard-hint").hidden = view !== "quiz";
   }
+  function toggleChoices(selected, choice, available, combined) {
+    if (choice === combined) return selected.length > 1 ? [available[0]] : available.slice();
+    if (!available.includes(choice)) return selected;
+    if (selected.includes(choice)) return selected.length > 1 ? selected.filter(function (value) { return value !== choice; }) : selected;
+    return available.filter(function (value) { return selected.includes(value) || value === choice; });
+  }
+  function availableModes() {
+    return QUESTION_MODES.filter(function (mode) {
+      return !(mode === "romaji-kana" && state.prefs.activity === "write") && !(mode === "listen" && !audioAvailable());
+    });
+  }
+  function activeModes() {
+    const available = availableModes();
+    const selected = available.filter(function (mode) { return state.prefs.modes.includes(mode); });
+    return selected.length ? selected : [available[0]];
+  }
   function renderControls() {
     all("[data-scope]").forEach(function (button) {
       const scope = button.dataset.scope;
-      button.setAttribute("aria-pressed", String(scope === state.prefs.scope));
+      button.setAttribute("aria-pressed", String(scope === state.prefs.scope || state.prefs.scope === "mixed"));
       button.classList.toggle("is-mixed", state.prefs.scope === "mixed");
       button.disabled = scope !== "mixed" && state.data[scope].length === 0;
     });
     all("[data-activity]").forEach(function (button) {
       button.setAttribute("aria-pressed", String(button.dataset.activity === state.prefs.activity));
     });
+    const modes = activeModes();
+    const available = availableModes();
+    const mixed = modes.length > 1;
     all("[data-mode]").forEach(function (button) {
       const mode = button.dataset.mode;
-      button.setAttribute("aria-pressed", String(mode === state.prefs.mode));
-      button.disabled = (mode === "romaji-kana" && state.prefs.activity === "write")
-        || (mode === "listen" && !audioAvailable());
+      const selected = mode === "mix" ? mixed : modes.includes(mode);
+      button.setAttribute("aria-pressed", String(selected));
+      button.classList.toggle("is-mixed", mixed && selected);
+      button.disabled = mode === "mix" ? available.length < 2 : !available.includes(mode);
       button.title = mode === "listen" && !audioAvailable()
         ? "Necesitas una voz japonesa o audios propios para el dictado."
         : mode === "romaji-kana" && state.prefs.activity === "write"
@@ -983,9 +1024,9 @@
       "kana-romaji": state.prefs.activity === "write" ? "Escribe la lectura del kana en romaji." : "Reconoce el kana y elige su lectura.",
       "romaji-kana": "Lee el romaji y encuentra el kana de la escritura indicada.",
       listen: state.prefs.activity === "write" ? "Escucha y escribe la lectura en romaji." : "Escucha y elige el kana de la escritura indicada.",
-      mix: "Alterna las preguntas visuales y, cuando hay voz japonesa, el dictado."
+      mix: "Alterna los tipos de pregunta seleccionados."
     };
-    $("mode-help").textContent = help[state.prefs.mode];
+    $("mode-help").textContent = help[mixed ? "mix" : modes[0]];
     $("keyboard-hint").innerHTML = state.prefs.activity === "write"
       ? "<kbd>Enter</kbd> para comprobar y continuar"
       : "<kbd>1</kbd>–<kbd>4</kbd> o <kbd>A</kbd>–<kbd>D</kbd> para responder · <kbd>Enter</kbd> para continuar · <kbd>R</kbd> para escuchar";
@@ -1005,8 +1046,6 @@
     if (!scopeItems().length) {
       state.prefs.scope = state.data.hiragana.length ? "hiragana" : "katakana";
     }
-    if (state.prefs.mode === "listen" && !audioAvailable()) state.prefs.mode = "kana-romaji";
-    if (state.prefs.activity === "write" && state.prefs.mode === "romaji-kana") state.prefs.mode = "kana-romaji";
     renderControls();
     if (state.prefs.activity === "explore") {
       state.session.ended = true;
@@ -1030,9 +1069,7 @@
     renderStats();
   }
   function chooseMode() {
-    if (state.prefs.mode !== "mix") return state.prefs.mode;
-    const choices = state.prefs.activity === "write" ? ["kana-romaji"] : ["kana-romaji", "romaji-kana"];
-    if (audioAvailable()) choices.push("listen");
+    const choices = activeModes();
     return choices[Math.floor(Math.random() * choices.length)];
   }
   function nextQuestion(focus) {
@@ -1521,7 +1558,7 @@
         fallingBack = true;
         if (error && error.name === "NotAllowedError") {
           settle(false);
-          showNotice("Tu navegador pide un toque para activar el audio. Pulsa Escuchar.");
+          showNotice("Tu navegador pide un toque para activar el audio. Pulsa Escuchar.", false, 6000);
           return;
         }
         sound.failedClips.add(source);
@@ -1707,22 +1744,29 @@
     $("dismiss-notice").addEventListener("click", hideNotice);
     all("[data-scope]").forEach(function (button) {
       button.addEventListener("click", function () {
-        if (state.prefs.scope === button.dataset.scope) return;
-        state.prefs.scope = button.dataset.scope; savePreferences(); startSession();
+        if (button.disabled) return;
+        const available = ["hiragana", "katakana"].filter(function (scope) { return state.data[scope].length > 0; });
+        const selected = available.filter(function (scope) { return state.prefs.scope === "mixed" || state.prefs.scope === scope; });
+        const next = toggleChoices(selected, button.dataset.scope, available, "mixed");
+        const scope = next.length > 1 ? "mixed" : next[0];
+        if (scope === state.prefs.scope) return;
+        state.prefs.scope = scope; savePreferences(); startSession();
       });
     });
     all("[data-activity]").forEach(function (button) {
       button.addEventListener("click", function () {
         if (state.prefs.activity === button.dataset.activity) return;
         state.prefs.activity = button.dataset.activity;
-        if (state.prefs.activity === "write" && state.prefs.mode === "romaji-kana") state.prefs.mode = "kana-romaji";
         savePreferences(); startSession();
       });
     });
     all("[data-mode]").forEach(function (button) {
       button.addEventListener("click", function () {
-        if (button.disabled || state.prefs.mode === button.dataset.mode) return;
-        state.prefs.mode = button.dataset.mode; savePreferences(); startSession();
+        if (button.disabled) return;
+        const selected = activeModes();
+        const next = toggleChoices(selected, button.dataset.mode, availableModes(), "mix");
+        if (next.join("|") === selected.join("|")) return;
+        state.prefs.modes = next; savePreferences(); startSession();
       });
     });
     $("session-length").addEventListener("change", function () {
