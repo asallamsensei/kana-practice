@@ -660,7 +660,12 @@ if (typeof document !== 'undefined') (function() {
   function increment(s,outcome){s[outcome]++;s.streak=outcome==='correct'?s.streak+1:0;s.best=Math.max(s.best,s.streak);}
   function record(item,outcome){
     increment(state.session.stats,outcome);increment(state.progress.total,outcome);increment(state.progress.byActivity[state.prefs.activity],outcome);
-    const p=state.progress.byItem[item.id]||{correct:0,wrong:0,pending:false};p[outcome==='correct'?'correct':'wrong']++;p.pending=outcome!=='correct';state.progress.byItem[item.id]=p;
+    const p=state.progress.byItem[item.id]||{correct:0,wrong:0,pending:false};
+    p[outcome==='correct'?'correct':'wrong']++;
+    // Completar una pareja no borra los fallos de esta sesión normal: se conservan para el repaso.
+    const keepForReview=state.prefs.activity==='match'&&!state.prefs.review&&state.session.mistakes.has(item.id);
+    p.pending=outcome!=='correct'||keepForReview;
+    state.progress.byItem[item.id]=p;
     if(outcome!=='correct')state.session.mistakes.add(item.id);
     save(KEYS.progress,state.progress);renderStats();
   }
