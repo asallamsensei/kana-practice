@@ -1,0 +1,1106 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#10121b">
+  <meta name="description" content="Practica vocabulario JLPT N5 a N1 con quiz, escritura, dictado y parejas. Un entrenador de japonés de Asallam Sensei.">
+  <title>Vocabulario JLPT · Asallam Sensei</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg:#10121b; --surface:#191c29; --raised:#222635; --hover:#292e40;
+      --text:#ffffff; --border:#34394c;
+      --accent:#c3b4ff; --accent-bg:#39304f; --mint:#a4e3ce; --mint-bg:#233e38;
+      --danger:#ffb4b4; --danger-bg:#432c35; --gold:#f2ce88; --shadow:0 20px 60px #00000024;
+      --radius:22px; --jp:"Noto Sans JP","Hiragino Sans","Yu Gothic",Meiryo,sans-serif;
+    }
+    :root[data-theme="light"] {
+      color-scheme: light;
+      --bg:#f3f2ef; --surface:#ffffff; --raised:#f3f3f8; --hover:#eaeaf2;
+      --text:#000000; --border:#d9dce6;
+      --accent:#6748af; --accent-bg:#eee7fa; --mint:#216750; --mint-bg:#e4f3eb;
+      --danger:#a52841; --danger-bg:#fce8ed; --gold:#936218; --shadow:0 20px 60px #37325109;
+    }
+    * { box-sizing:border-box; }
+    [hidden] { display:none !important; }
+    body { margin:0; font-size:19px; background:var(--bg); color:var(--text); font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; line-height:1.5; -webkit-font-smoothing:antialiased; }
+    body::before { content:""; position:fixed; inset:0; z-index:-1; pointer-events:none; background:radial-gradient(ellipse at 80% 0%,#9c86eb0b,transparent 55%); }
+    button,input,select { font:inherit; }
+    button,a,input,select,summary { -webkit-tap-highlight-color:transparent; }
+    button { cursor:pointer; }
+    button:disabled { cursor:not-allowed; opacity:1; border-style:dashed; }
+    a { color:inherit; text-decoration:none; }
+    a:hover { text-decoration:underline; text-underline-offset:4px; }
+    button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible { outline:3px solid var(--accent); outline-offset:4px; }
+    h1,h2,p { margin:0; }
+    h1 { font-size:clamp(34px,4.13vw,54px); letter-spacing:-1.6px; line-height:1.14; font-weight:720; }
+    h2 { font-size:25px; letter-spacing:-.45px; }
+    .jp { font-family:var(--jp); font-weight:400; }
+    .sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
+    .skip-link { position:fixed; top:-70px; left:16px; z-index:100; padding:12px 18px; background:var(--surface); border:2px solid var(--accent); border-radius:10px; }
+    .skip-link:focus { top:12px; }
+    .container { width:min(1180px,100% - 48px); margin-inline:auto; }
+    .topbar { display:flex; align-items:center; justify-content:space-between; gap:20px; padding:24px 0; border-bottom:1px solid var(--border); }
+    .brand { display:flex; align-items:center; gap:12px; flex-shrink:0; }
+    .brand:hover { text-decoration:none; }
+    .brand-mark { display:grid; place-items:center; width:43px; height:43px; border-radius:13px; color:var(--text); background:var(--accent-bg); font:32px var(--jp); }
+    .brand-name { display:block; font-size:15px; font-weight:750; letter-spacing:1.1px; }
+    .brand-sub { display:block; font-size:14px; color:var(--text); margin-top:2px; }
+    .topnav { display:flex; align-items:center; gap:9px; }
+    .nav-link,.icon-button { display:inline-flex; justify-content:center; align-items:center; gap:7px; min-height:42px; border:1px solid transparent; border-radius:10px; padding:8px 11px; color:var(--text); background:transparent; font-size:15px; font-weight:600; }
+    .nav-link:hover,.icon-button:hover { background:var(--raised); color:var(--text); text-decoration:none; }
+    .donate-nav { color:var(--text); border-color:var(--border); }
+    .icon { width:19px; height:19px; flex-shrink:0; fill:none; stroke:currentColor; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; }
+    .hero { padding:34px 0 27px; display:flex; justify-content:space-between; align-items:flex-end; gap:24px; }
+    .notice { position:relative; overflow:hidden; display:flex; gap:12px; align-items:center; justify-content:space-between; border:1px solid var(--border); background:var(--raised); border-radius:14px; margin:0 0 18px; padding:12px 16px; font-size:15px; color:var(--text); }
+    .notice.error { background:var(--danger-bg); border-color:var(--danger); }
+    .notice button { background:none; border:0; color:inherit; padding:6px; min-width:32px; font-size:24px; }
+    .notice-timer { position:absolute; bottom:0; left:0; width:100%; height:3px; background:var(--accent); transform:scaleX(0); transform-origin:left; pointer-events:none; }
+    @keyframes notice-countdown { from { transform:scaleX(0); } to { transform:scaleX(1); } }
+    .workspace { display:grid; grid-template-columns:minmax(0,1fr) 284px; align-items:start; gap:22px; }
+    .main-column { min-width:0; }
+    .scope-row { display:flex; flex-direction:column; align-items:stretch; gap:10px; }
+    .segmented { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:4px; padding:4px; border:1px solid var(--border); background:var(--surface); border-radius:13px; }
+    .segment { border:0; border-radius:9px; background:transparent; color:var(--text); padding:8px 5px; min-height:39px; font-size:15px; font-weight:650; }
+    .segment[data-scope="mixed"] { grid-column:1 / -1; }
+    .segment:hover { color:var(--text); background:var(--raised); }
+    .segment[aria-pressed="true"] { background:var(--accent-bg); color:var(--text); }
+    .segment.is-mixed { background:var(--danger-bg); box-shadow:inset 0 0 0 1px var(--danger); }
+    .scope-count { font-size:14px; color:var(--text); }
+    .activity-tabs { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:6px; padding:6px; background:var(--surface); border:1px solid var(--border); border-radius:16px; margin-bottom:16px; }
+    .activity-tab { display:flex; align-items:center; justify-content:center; gap:8px; padding:12px 8px; border:0; border-radius:10px; background:transparent; color:var(--text); font-size:15px; font-weight:650; min-height:46px; }
+    .activity-tab:hover { background:var(--raised); color:var(--text); }
+    .activity-tab[aria-pressed="true"] { background:var(--accent-bg); color:var(--text); }
+    .exercise-card { position:relative; background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:25px 28px 20px; box-shadow:var(--shadow); overflow:hidden; }
+    .exercise-top { display:flex; justify-content:space-between; align-items:center; gap:10px; }
+    .badge { font-size:14px; font-weight:750; text-transform:uppercase; letter-spacing:1.3px; color:var(--text); background:var(--accent-bg); border-radius:6px; padding:5px 9px; }
+    .round-count { color:var(--text); font-size:14px; font-variant-numeric:tabular-nums; }
+    .progress-track { height:4px; background:var(--raised); border-radius:4px; margin-top:17px; overflow:hidden; }
+    .progress-fill { height:100%; width:0%; background:var(--mint); border-radius:inherit; transition:width .24s ease; }
+    .question-area { text-align:center; padding:25px 0 21px; }
+    .question-label { color:var(--text); font-size:15px; }
+    .prompt { min-height:160px; display:flex; align-items:center; justify-content:center; font-size:clamp(90px,11.8vw,130px); line-height:1.4; margin:5px 0; letter-spacing:4px; }
+    .prompt.romaji { font-family:inherit; font-size:clamp(64px,8.26vw,87px); font-weight:550; letter-spacing:-2px; }
+    .prompt.multi { font-size:clamp(78px,10.62vw,111px); }
+    .listen-button { display:inline-flex; align-items:center; gap:7px; margin-top:18px; padding:7px 12px; min-height:36px; font-size:14px; font-weight:600; border:1px solid var(--border); border-radius:999px; color:var(--text); background:transparent; }
+    .listen-button:hover { background:var(--raised); color:var(--text); }
+    .listen-button.playing { color:var(--text); border-color:var(--mint); }
+    .options { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; }
+    .option-button { position:relative; display:flex; align-items:center; justify-content:center; min-height:67px; padding:12px 35px; border:1px solid var(--border); border-radius:13px; color:var(--text); background:var(--raised); font-size:28px; transition:background .15s,border-color .15s,transform .15s; }
+    .option-button:hover:not(:disabled) { border-color:var(--accent); background:var(--accent-bg); transform:translateY(-1px); }
+    .option-button .answer-mark { position:absolute; right:14px; font-size:20px; }
+    .option-button:disabled { opacity:1; cursor:default; }
+    .option-button.is-correct { background:var(--mint-bg); border-color:var(--mint); color:var(--text); }
+    .option-button.is-wrong { background:var(--danger-bg); border-color:var(--danger); color:var(--text); }
+    .answer-form { display:flex; align-items:stretch; gap:10px; }
+    .answer-input { min-width:0; width:100%; padding:14px 17px; background:var(--raised); color:var(--text); border:1px solid var(--border); border-radius:12px; font-size:27px; text-align:center; }
+    input::placeholder { color:var(--text); opacity:1; }
+    .answer-input::placeholder { color:var(--text); font-size:19px; }
+    .button { display:inline-flex; align-items:center; justify-content:center; gap:8px; min-height:43px; border-radius:11px; padding:10px 16px; border:1px solid var(--border); background:var(--raised); color:var(--text); font-size:15px; font-weight:650; }
+    .button:hover:not(:disabled) { background:var(--hover); text-decoration:none; }
+    .button.primary { color:var(--text); border-color:var(--mint); background:var(--mint-bg); }
+    .button.primary:hover:not(:disabled) { background:var(--raised); }
+    .button.small { font-size:14px; min-height:36px; padding:7px 11px; }
+    .button.ghost { background:transparent; color:var(--text); border-color:transparent; }
+    .feedback { min-height:67px; display:flex; flex-direction:column; justify-content:center; align-items:center; gap:3px; text-align:center; padding:12px 0 8px; }
+    .feedback-title { font-size:18px; font-weight:700; }
+    .feedback-detail { font-size:15px; color:var(--text); }
+    .feedback-tip { font-size:14px; color:var(--text); margin-top:3px; max-width:540px; }
+    .exercise-actions { display:flex; align-items:center; justify-content:space-between; gap:10px; padding-top:13px; border-top:1px solid var(--border); }
+    .keyboard-hint { text-align:left; font-size:14px; color:var(--text); margin:14px 0 0; }
+    kbd { font:inherit; border:1px solid var(--border); border-radius:4px; padding:1px 4px; white-space:nowrap; }
+    .session-stats { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:8px; margin-top:15px; }
+    .stat { padding:13px 8px; background:var(--surface); border:1px solid var(--border); border-radius:13px; text-align:center; min-width:0; }
+    .stat-label { font-size:14px; text-transform:uppercase; letter-spacing:1px; color:var(--text); }
+    .stat strong { display:block; font-weight:600; font-size:26px; letter-spacing:-.5px; margin-top:2px; font-variant-numeric:tabular-nums; }
+    .session-caption { margin:10px 2px 0; font-size:14px; color:var(--text); display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap; }
+    .session-caption .button { min-height:30px; padding:4px 8px; font-size:14px; }
+    .settings { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:22px 20px; }
+    .settings-heading { display:flex; align-items:center; justify-content:space-between; font-size:17px; font-weight:700; margin-bottom:22px; }
+    .setting-group + .setting-group { margin-top:20px; }
+    .setting-label { display:block; font-size:14px; font-weight:650; color:var(--text); margin-bottom:8px; }
+    .mode-grid { display:grid; grid-template-columns:1fr 1fr; gap:7px; }
+    .mode-button { min-height:43px; padding:9px 5px; border:1px solid var(--border); border-radius:9px; color:var(--text); background:var(--raised); font-size:14px; font-weight:650; }
+    .mode-button[aria-pressed="true"] { border-color:var(--accent); color:var(--text); background:var(--accent-bg); }
+    .mode-button.is-mixed { border-color:var(--danger); background:var(--danger-bg); }
+    .setting-help { margin-top:8px; color:var(--text); font-size:14px; line-height:1.65; }
+    select { width:100%; min-height:41px; border:1px solid var(--border); border-radius:9px; background:var(--raised); color:var(--text); padding:8px 10px; font-size:14px; }
+    .check-row { display:flex; align-items:center; justify-content:space-between; gap:12px; font-size:14px; color:var(--text); cursor:pointer; min-height:34px; }
+    .check-row + .check-row { margin-top:8px; }
+    input[type="checkbox"] { width:17px; height:17px; accent-color:var(--accent); flex-shrink:0; cursor:pointer; }
+    input[type="range"] { width:100%; accent-color:var(--accent); margin:6px 0 0; }
+    .more-options { border-top:1px solid var(--border); margin-top:20px; padding-top:16px; }
+    .more-options > summary { font-size:15px; font-weight:700; }
+    .settings details + details { margin-top:12px; }
+    details summary { cursor:pointer; font-size:14px; font-weight:600; color:var(--text); padding:3px 0; }
+    details[open] > summary { margin-bottom:14px; color:var(--text); }
+    .data-actions { display:flex; flex-wrap:wrap; gap:7px; margin-top:10px; }
+    .data-actions .button { font-size:14px; padding-inline:9px; }
+    .lifetime-row { display:flex; align-items:center; justify-content:space-between; gap:10px; font-size:14px; color:var(--text); margin:8px 0; }
+    .lifetime-row strong { color:var(--text); font-weight:650; }
+    .review-count { display:inline-block; color:var(--text); font-weight:650; }
+    .match-intro { display:flex; justify-content:space-between; align-items:center; gap:12px; margin:24px 0 19px; }
+    .match-board { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:10px; }
+    .match-tile { min-height:106px; border:1px solid var(--border); border-radius:13px; color:var(--text); background:var(--raised); position:relative; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:9px; padding:12px 6px; }
+    .match-tile .tile-content { font-size:30px; line-height:1.5; }
+    .match-tile[data-kind="kana"] .tile-content { font-size:39px; }
+    .match-tile:hover:not(:disabled) { border-color:var(--accent); }
+    .match-tile.is-selected { border-color:var(--accent); color:var(--text); background:var(--accent-bg); box-shadow:inset 0 0 0 1px var(--accent); }
+    .match-tile.is-wrong { border-color:var(--danger); background:var(--danger-bg); }
+    .match-tile.is-matched { border-color:var(--mint); background:var(--mint-bg); color:var(--text); opacity:1; cursor:default; }
+    .match-tile.is-matched::after { content:"✓"; position:absolute; top:6px; right:9px; font-size:14px; }
+    .match-message { font-size:15px; color:var(--text); text-align:center; min-height:51px; padding-top:17px; }
+    .match-actions { display:flex; align-items:center; justify-content:space-between; gap:8px; padding-top:12px; border-top:1px solid var(--border); }
+    .explore-top { display:flex; justify-content:space-between; align-items:flex-start; gap:15px; margin-bottom:19px; }
+    .explore-top p { color:var(--text); font-size:14px; margin-top:6px; }
+    .search-input { width:100%; border:1px solid var(--border); border-radius:11px; background:var(--raised); color:var(--text); padding:12px 14px; font-size:17px; }
+    .explore-grid { display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:9px; margin-top:18px; }
+    .kana-tile { border:1px solid var(--border); border-radius:11px; background:var(--raised); color:var(--text); min-height:92px; padding:10px 4px; display:flex; flex-direction:column; justify-content:center; align-items:center; gap:3px; position:relative; }
+    .kana-tile .jp { font-size:34px; }
+    .kana-tile .tile-romaji { color:var(--text); font-size:14px; }
+    .kana-tile:hover { border-color:var(--accent); background:var(--accent-bg); }
+    .kana-tile.needs-review::after { content:""; width:5px; height:5px; border-radius:50%; background:var(--gold); position:absolute; top:8px; right:8px; }
+    .explore-count { font-size:14px; color:var(--text); margin-top:13px; }
+    .summary { padding:38px 0 24px; text-align:center; }
+    .summary-seal { width:67px; height:67px; border-radius:50%; background:var(--mint-bg); color:var(--text); display:grid; place-items:center; margin:0 auto 20px; font-size:33px; }
+    .summary h2 { font-size:31px; }
+    .summary > p { color:var(--text); font-size:17px; margin-top:9px; }
+    .summary-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px; margin:28px 0; }
+    .summary-grid div { background:var(--raised); border-radius:12px; padding:16px 8px; font-size:14px; color:var(--text); }
+    .summary-grid strong { display:block; font-size:30px; margin-bottom:3px; color:var(--text); font-weight:600; }
+    .summary-actions { display:flex; flex-wrap:wrap; justify-content:center; gap:10px; }
+    .empty-state { padding:55px 10px; text-align:center; }
+    .empty-state .empty-icon { font:61px var(--jp); color:var(--text); margin-bottom:20px; }
+    .empty-state p { color:var(--text); font-size:17px; max-width:440px; margin:12px auto 20px; }
+    .support-section { display:flex; align-items:center; justify-content:space-between; gap:24px; padding:24px 28px; border:1px solid var(--border); background:var(--surface); border-radius:18px; margin:30px 0 0; }
+    .support-copy { display:flex; align-items:center; gap:17px; }
+    .support-symbol { width:44px; height:44px; border-radius:12px; display:grid; place-items:center; background:var(--accent-bg); color:var(--text); flex-shrink:0; }
+    .support-copy h2 { font-size:19px; letter-spacing:-.2px; }
+    .support-copy p { color:var(--text); font-size:14px; margin-top:5px; }
+    .support-section .button { white-space:nowrap; color:var(--text); border-color:var(--accent); background:transparent; }
+    footer { padding:23px 0 30px; display:flex; align-items:center; justify-content:space-between; gap:15px; color:var(--text); font-size:14px; }
+    footer a { color:var(--text); }
+    dialog { width:min(440px,calc(100% - 36px)); border:1px solid var(--border); border-radius:18px; padding:25px; background:var(--surface); color:var(--text); box-shadow:var(--shadow); }
+    dialog::backdrop { background:#070914b3; }
+    dialog p { font-size:15px; color:var(--text); margin:12px 0 23px; }
+    dialog .dialog-actions { display:flex; justify-content:flex-end; gap:9px; }
+    @media (max-width:920px) {
+      .workspace { grid-template-columns:minmax(0,1fr) 250px; gap:16px; }
+      .settings { padding:20px 16px; }
+      .exercise-card { padding:23px 20px 18px; }
+      .match-board { grid-template-columns:repeat(3,minmax(0,1fr)); }
+      .activity-tab { flex-direction:column; gap:5px; font-size:14px; }
+      .activity-tab .icon { width:16px; }
+    }
+    @media (max-width:740px) {
+      .container { width:calc(100% - 28px); }
+      .topbar { gap:10px; padding:17px 0; }
+      .brand-mark { width:37px; height:37px; font-size:28px; border-radius:11px; }
+      .brand { gap:9px; }
+      .brand-name { font-size:14px; letter-spacing:.7px; }
+      .brand-sub { font-size:14px; }
+      .topnav { gap:1px; }
+      .nav-link { padding:8px; font-size:14px; min-height:38px; }
+      .icon-button { padding:8px; min-height:38px; }
+      .home-label { display:none; }
+      .hero { padding:26px 0 23px; gap:8px; }
+      h1 { letter-spacing:-1px; }
+      .workspace { grid-template-columns:1fr; }
+      .segmented { width:100%; }
+      .segment { padding:7px 5px; font-size:14px; }
+      .activity-tabs { gap:4px; padding:5px; border-radius:14px; margin-bottom:13px; }
+      .activity-tab { flex-direction:column; gap:4px; padding:9px 2px; min-height:59px; font-size:14px; }
+      .activity-tab .icon { width:18px; }
+      .exercise-card { padding:20px 16px 17px; border-radius:18px; }
+      .question-area { padding:19px 0 18px; }
+      .prompt { min-height:143px; }
+      .option-button { min-height:61px; font-size:26px; }
+      .settings { padding:21px; }
+      .settings-heading { margin-bottom:16px; }
+      .mode-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+      .setting-group + .setting-group { margin-top:17px; }
+      .match-board { grid-template-columns:repeat(4,minmax(0,1fr)); gap:8px; }
+      .match-tile { min-height:91px; }
+      .match-tile .tile-content { font-size:25px; }
+      .match-tile[data-kind="kana"] .tile-content { font-size:33px; }
+      .match-intro { margin-top:21px; }
+      .support-section { padding:20px; margin-top:22px; }
+      .support-copy { gap:12px; }
+      .support-symbol { display:none; }
+      .support-copy h2 { font-size:17px; }
+      .support-copy p { font-size:14px; }
+      .support-section .button { padding:9px 12px; font-size:14px; }
+      footer { align-items:flex-start; }
+    }
+    @media (max-width:390px) {
+      .container { width:calc(100% - 20px); }
+      .topbar { flex-wrap:wrap; }
+      .brand-sub { display:none; }
+      .session-stats { grid-template-columns:repeat(2,minmax(0,1fr)); }
+      .match-board { grid-template-columns:repeat(2,minmax(0,1fr)); }
+      .match-tile { min-height:91px; }
+      .explore-grid { grid-template-columns:repeat(4,minmax(0,1fr)); }
+      .stat-label { font-size:14px; letter-spacing:.3px; }
+      .option-button { padding-inline:28px; }
+      .answer-form { flex-wrap:wrap; }
+      .answer-form .button { width:100%; }
+      .support-section { flex-direction:column; align-items:flex-start; gap:14px; }
+    }
+    @media (prefers-reduced-motion:reduce) {
+      *,*::before,*::after { animation:none !important; transition:none !important; scroll-behavior:auto !important; }
+    }
+    @media print {
+      .topnav,.settings,.activity-tabs,.support-section,.keyboard-hint { display:none; }
+      .workspace { display:block; }
+      body { background:white; color:black; }
+    }
+
+    /* Ajustes de vocabulario sobre el diseño original de kana. */
+    .levels { grid-template-columns:repeat(3,minmax(0,1fr)); }
+    .segment:disabled { opacity:.48; }
+    .segment.is-mixed { background:var(--accent-bg); box-shadow:inset 0 0 0 1px var(--accent); }
+    .all-modes { grid-column:1 / -1; }
+    .prompt,.prompt.multi { font-size:clamp(36px,6.3vw,70px); letter-spacing:0; line-height:1.9; min-height:160px; overflow-wrap:anywhere; }
+    .prompt.spanish { font-family:inherit; font-size:clamp(27px,4.2vw,46px); line-height:1.35; }
+    .prompt.audio-prompt { font-family:inherit; font-size:30px; letter-spacing:0; }
+    ruby { ruby-position:over; ruby-align:center; }
+    rt { font-size:.38em; font-weight:400; letter-spacing:.04em; line-height:1.3; }
+    .option-button { min-height:88px; font-size:22px; line-height:1.7; padding:15px 28px; overflow-wrap:anywhere; }
+    .option-button.jp { font-size:28px; }
+    .option-key { position:absolute; left:10px; top:7px; font:12px system-ui; }
+    .match-board { grid-template-columns:repeat(4,minmax(0,1fr)); }
+    .match-tile .tile-content { font-size:19px; overflow-wrap:anywhere; line-height:1.8; }
+    .match-tile[data-kind="jp"] .tile-content { font-size:25px; }
+    .match-tile { min-height:120px; padding:14px 9px; }
+    .explore-grid { grid-template-columns:repeat(3,minmax(0,1fr)); }
+    .vocab-tile { min-height:145px; padding:18px 10px 12px; gap:8px; }
+    .vocab-tile .jp { font-size:28px; line-height:1.9; overflow-wrap:anywhere; }
+    .tile-meaning { font-size:15px; overflow-wrap:anywhere; }
+    .tile-level { font-size:11px; align-self:flex-start; background:var(--accent-bg); border-radius:4px; padding:2px 5px; }
+    #explore-more { display:flex; margin:18px auto 0; }
+    #feedback-detail { line-height:2; overflow-wrap:anywhere; }
+    #feedback-detail .jp { font-size:24px; }
+    .word-reveal { display:block; }
+    .notice { align-items:flex-start; }
+    @media(max-width:920px) { .match-board { grid-template-columns:repeat(3,minmax(0,1fr)); } .explore-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+    @media(max-width:740px) { .prompt,.prompt.multi { font-size:clamp(32px,8vw,54px); min-height:140px; } .match-board { grid-template-columns:repeat(3,minmax(0,1fr)); } .levels { grid-template-columns:repeat(5,minmax(0,1fr)); } }
+    @media(max-width:430px) { .match-board { grid-template-columns:repeat(2,minmax(0,1fr)); } .option-button { font-size:18px; padding:16px 22px; } .option-button.jp { font-size:23px; } .answer-form { flex-wrap:wrap; } .answer-form .button { width:100%; } .explore-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#practice">Saltar a la práctica</a>
+  <svg aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden">
+    <symbol id="i-home" viewBox="0 0 24 24"><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-8H9v8H4a1 1 0 0 1-1-1Z"/></symbol>
+    <symbol id="i-heart" viewBox="0 0 24 24"><path d="M20.5 4.8a5.5 5.5 0 0 0-7.8 0l-.7.7-.7-.7a5.5 5.5 0 0 0-7.8 7.8L12 21l8.5-8.4a5.5 5.5 0 0 0 0-7.8Z"/></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></symbol>
+    <symbol id="i-quiz" viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="3"/><path d="m8 12 2 2 5-5M8 17h8"/></symbol>
+    <symbol id="i-pen" viewBox="0 0 24 24"><path d="m15 4 5 5M4 20l5-1L20 8a2.2 2.2 0 0 0-5-5L4 14Z"/></symbol>
+    <symbol id="i-match" viewBox="0 0 24 24"><rect x="3" y="4" width="7" height="13" rx="2"/><rect x="14" y="7" width="7" height="13" rx="2"/><path d="m5 10 1 1 2-2m8 4 1 1 2-2"/></symbol>
+    <symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></symbol>
+    <symbol id="i-sliders" viewBox="0 0 24 24"><path d="M4 7h7m4 0h5M4 17h3m4 0h9"/><circle cx="13" cy="7" r="2"/><circle cx="9" cy="17" r="2"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h16m-6-6 6 6-6 6"/></symbol>
+  </svg>
+  <div class="container">
+    <header class="topbar">
+      <a class="brand" href="https://asallamsensei.com/" aria-label="Asallam Sensei, ir al inicio">
+        <span class="brand-mark jp" lang="ja" aria-hidden="true">あ</span>
+        <span><span class="brand-name">ASALLAM SENSEI</span><span class="brand-sub">Japonés, paso a paso</span></span>
+      </a>
+      <nav class="topnav" aria-label="Navegación principal">
+        <button id="theme-toggle" class="icon-button" type="button" aria-label="Cambiar a tema claro" title="Cambiar tema"><svg class="icon" aria-hidden="true"><use href="#i-sun"/></svg></button>
+        <a class="nav-link" href="https://asallamsensei.com/" aria-label="Volver al inicio"><svg class="icon" aria-hidden="true"><use href="#i-home"/></svg><span class="home-label">Inicio</span></a>
+        <a class="nav-link donate-nav" href="https://paypal.me/asallamsensei" target="_blank" rel="noopener noreferrer" aria-label="Donar por PayPal, abre en otra pestaña"><svg class="icon" aria-hidden="true"><use href="#i-heart"/></svg>Donar</a>
+      </nav>
+    </header>
+    <section class="hero" aria-labelledby="page-title">
+      <div>
+        <h1 id="page-title">Vocabulario JLPT</h1>
+      </div>
+    </section>
+    <div id="notice" class="notice" role="status" aria-live="polite" hidden><span id="notice-text"></span><button id="dismiss-notice" type="button" aria-label="Cerrar aviso">×</button><span id="notice-timer" class="notice-timer" aria-hidden="true" hidden></span></div>
+    <noscript><p class="notice">Activa JavaScript para practicar con el entrenador de vocabulario.</p></noscript>
+    <main id="practice" class="workspace" tabindex="-1">
+      <div class="main-column">
+        <div class="activity-tabs" role="group" aria-label="Actividad">
+          <button class="activity-tab" type="button" data-activity="quiz" aria-pressed="true"><svg class="icon" aria-hidden="true"><use href="#i-quiz"/></svg>Quiz</button>
+          <button class="activity-tab" type="button" data-activity="write" aria-pressed="false"><svg class="icon" aria-hidden="true"><use href="#i-pen"/></svg>Escribir</button>
+          <button class="activity-tab" type="button" data-activity="match" aria-pressed="false"><svg class="icon" aria-hidden="true"><use href="#i-match"/></svg>Emparejar</button>
+          <button class="activity-tab" type="button" data-activity="explore" aria-pressed="false"><svg class="icon" aria-hidden="true"><use href="#i-grid"/></svg>Explorar</button>
+        </div>
+        <section class="exercise-card" aria-label="Zona de práctica">
+          <div id="exercise-header">
+            <div class="exercise-top"><span id="exercise-badge" class="badge">JLPT</span><span id="round-count" class="round-count">Pregunta 1 de 20</span></div>
+            <div id="session-progress" class="progress-track" role="progressbar" aria-label="Progreso de la sesión" aria-valuemin="0" aria-valuemax="20" aria-valuenow="0"><div id="progress-fill" class="progress-fill"></div></div>
+          </div>
+          <div id="quiz-view">
+            <div class="question-area">
+              <p id="question-label" class="question-label">Preparando tu vocabulario…</p>
+              <div id="prompt" class="prompt jp" lang="ja" aria-live="polite" aria-atomic="true">…</div>
+              <button id="listen-question" class="listen-button" type="button" hidden><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M11 4 6 8H3v8h3l5 4V4Zm4 4a6 6 0 0 1 0 8m3-11a10 10 0 0 1 0 14"/></svg><span>Escuchar</span></button>
+            </div>
+            <div id="answer-options" class="options" role="group" aria-label="Elige una respuesta"></div>
+            <form id="answer-form" class="answer-form" hidden>
+              <label for="typed-answer" class="sr-only">Escribe tu respuesta</label>
+              <input id="typed-answer" class="answer-input" type="text" placeholder="Romaji…" autocomplete="off" autocapitalize="none" spellcheck="false" maxlength="240" enterkeyhint="done" inputmode="text" aria-describedby="feedback-detail">
+              <button id="submit-answer" class="button primary" type="submit">Comprobar</button>
+            </form>
+            <div class="feedback" role="status" aria-live="polite" aria-atomic="true">
+              <p id="feedback-title" class="feedback-title"></p><p id="feedback-detail" class="feedback-detail"></p><p id="feedback-tip" class="feedback-tip"></p>
+            </div>
+            <div class="exercise-actions">
+              <button id="skip-question" class="button ghost" type="button">No lo sé</button>
+              <button id="next-question" class="button primary" type="button" disabled>Siguiente <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></button>
+            </div>
+          </div>
+          <div id="match-view" hidden>
+            <div class="match-intro"><div><h2>Une las parejas</h2><p id="match-instructions" class="sr-only">Une cada palabra japonesa con su significado.</p></div></div>
+            <div id="match-board" class="match-board" role="group" aria-label="Tarjetas para emparejar"></div>
+            <p id="match-message" class="match-message" role="status" aria-live="polite"></p>
+            <div class="match-actions"><button id="match-finish" class="button ghost" type="button">Terminar sesión</button><span id="board-counter" class="round-count">Tablero 1</span></div>
+          </div>
+          <div id="explore-view" hidden>
+            <div class="explore-top"><div><h2>Tu vocabulario</h2><p>Toca para escuchar.</p></div><span class="badge">Consulta</span></div>
+            <label for="search-kana" class="sr-only">Buscar palabra, lectura o significado</label>
+            <input id="search-kana" class="search-input" type="search" placeholder="Busca «食べる», «taberu», «comer»…" autocomplete="off">
+            <div id="explore-grid" class="explore-grid"></div>
+            <button id="explore-more" class="button small" type="button" hidden>Mostrar más</button><p id="explore-count" class="explore-count"></p>
+            <p class="setting-help">Punto dorado: pendiente de repaso.</p>
+          </div>
+          <div id="summary-view" class="summary" hidden>
+            <div class="summary-seal" aria-hidden="true">✓</div>
+            <h2 id="summary-title" tabindex="-1">Sesión completada.</h2>
+            <p id="summary-copy"></p>
+            <div class="summary-grid"><div><strong id="summary-correct">0</strong>Aciertos</div><div><strong id="summary-accuracy">0%</strong>Precisión</div><div><strong id="summary-best">0</strong>Mejor racha</div></div>
+            <div class="summary-actions"><button id="review-session" class="button primary" type="button">Repasar mis fallos</button><button id="repeat-session" class="button" type="button">Seguir practicando</button></div>
+          </div>
+          <div id="empty-view" class="empty-state" hidden>
+            <div class="empty-icon jp" lang="ja" aria-hidden="true">よし</div><h2 id="empty-title">Todo al día.</h2><p id="empty-copy">No tienes palabras pendientes de repaso en esta selección.</p><button id="empty-import" class="button primary" type="button" hidden>Cargar mis listas JSON</button><button id="exit-review" class="button primary" type="button">Practicar toda la selección</button>
+          </div>
+        </section>
+        <section id="session-stats" class="session-stats" aria-label="Estadísticas de esta sesión">
+          <div class="stat"><span class="stat-label">Aciertos</span><strong id="stat-correct">0</strong></div>
+          <div class="stat"><span class="stat-label">Errores</span><strong id="stat-wrong">0</strong></div>
+          <div class="stat"><span class="stat-label">Precisión</span><strong id="stat-accuracy">—</strong></div>
+          <div class="stat"><span class="stat-label">Racha</span><strong id="stat-streak">0</strong></div>
+        </section>
+        <div id="session-caption" class="session-caption"><span id="session-detail">Esta sesión · 0 sin responder</span><button id="end-session" type="button" class="button ghost small">Terminar sesión</button><span id="session-time">00:00</span></div>
+      </div>
+      <aside class="settings" aria-label="Ajustes de la práctica">
+        <div class="settings-heading"><span>A tu ritmo</span><svg class="icon" aria-hidden="true"><use href="#i-sliders"/></svg></div>
+        <div class="setting-group scope-row">
+          <span class="setting-label">Niveles · puedes combinarlos</span><div id="level-buttons" class="segmented levels" role="group" aria-label="Niveles JLPT">
+          </div>
+          <span id="scope-count" class="scope-count">Buscando tus listas…</span>
+        </div>
+        <div id="mode-settings" class="setting-group">
+          <span class="setting-label">Tipo de pregunta</span>
+          <div class="mode-grid" role="group" aria-label="Tipos de pregunta combinables">
+            <button class="mode-button" type="button" data-mode="jp-es" aria-pressed="true">JP → ES</button>
+            <button class="mode-button" type="button" data-mode="es-jp" aria-pressed="true">ES → JP</button>
+            <button class="mode-button" type="button" data-mode="reading" aria-pressed="true">Lectura</button>
+            <button class="mode-button" type="button" data-mode="listen" aria-pressed="true">Dictado</button>
+            <button class="mode-button all-modes" type="button" data-mode="mix" aria-pressed="true">Mixto</button>
+          </div>
+          <p id="mode-caption" class="setting-help">Combina los tipos de pregunta que quieras.</p>
+        </div>
+        <div id="length-settings" class="setting-group">
+          <label class="setting-label" for="session-length" id="length-label">Preguntas por sesión</label>
+          <select id="session-length"><option value="10">10 · Un repaso rápido</option><option value="20" selected>20 · A tu ritmo</option><option value="40">40 · Un poco más</option><option value="0">Sin límite</option></select>
+        </div>
+        <div id="match-settings" class="setting-group" hidden>
+          <label class="setting-label" for="match-count">Parejas por tablero</label>
+          <select id="match-count"><option value="3">3 parejas</option><option value="4" selected>4 parejas</option><option value="6">6 parejas</option></select>
+        </div>
+        <div class="setting-group">
+          <label class="check-row" for="review-only"><span>Repasar fallos <span id="review-count" class="review-count">0</span></span><input id="review-only" type="checkbox"></label>
+        </div>
+        <div class="setting-group">
+          <label class="check-row" for="show-furigana"><span>Mostrar furigana</span><input id="show-furigana" type="checkbox" checked></label>
+        </div>
+        <details id="more-options" class="more-options">
+          <summary>Más opciones</summary>
+          <details>
+            <summary>Escritura y dictado</summary>
+            <label class="setting-label" for="write-format">Respuesta japonesa</label>
+            <select id="write-format"><option value="any">Libre · kanji, kana o romaji</option><option value="kana">Kana</option><option value="kanji">Escritura original (kanji si lleva)</option><option value="romaji">Romaji</option></select>
+            <div class="setting-group"><label class="setting-label" for="reading-format">Ejercicios de lectura</label><select id="reading-format"><option value="mixed">Kana y romaji</option><option value="kana">Kana</option><option value="romaji">Romaji</option></select></div>
+            <div class="setting-group"><label class="setting-label" for="dictation-target">Después de escuchar</label><select id="dictation-target"><option value="mixed">Japonés y significado</option><option value="jp">Responder en japonés</option><option value="es">Responder en español</option></select></div>
+            <p class="setting-help">En Lectura se oculta el furigana hasta responder. Al escribir en español se aceptan las traducciones y variantes incluidas en tu lista, sin exigir tildes ni mayúsculas.</p>
+          </details>
+          <details id="audio-settings">
+            <summary>Sonido y pronunciación</summary>
+            <label class="check-row" for="sound-effects"><span>Efectos al responder</span><input id="sound-effects" type="checkbox"></label>
+            <label class="check-row" for="auto-audio"><span>Audio tras responder</span><input id="auto-audio" type="checkbox" checked></label>
+            <div class="setting-group"><label class="setting-label" for="audio-source">Pronunciación</label><select id="audio-source"><option value="mp3" selected>Audios MP3 (originales)</option><option value="tts">Sintetizador japonés</option></select></div>
+            <div class="setting-group"><label class="setting-label" for="speech-rate">Velocidad <span id="rate-value">Original</span></label><input id="speech-rate" type="range" min="0.5" max="1.1" step="0.05" value="0.85" disabled></div>
+            <p id="audio-status" class="setting-help" role="status"></p>
+          </details>
+          <details id="progress-settings">
+            <summary>Mi progreso</summary>
+            <div class="lifetime-row"><span>Respuestas correctas</span><strong id="total-correct">0</strong></div>
+            <div class="lifetime-row"><span>Mejor racha</span><strong id="total-best">0</strong></div>
+            <div class="lifetime-row"><span>Palabras practicadas</span><strong id="total-seen">0</strong></div>
+            <p id="storage-status" class="setting-help">Tu progreso se guarda en este navegador.</p>
+            <button id="reset-progress" class="button ghost small" type="button">Borrar mi progreso</button>
+          </details>
+          <details id="data-settings">
+            <summary>Mis listas de vocabulario</summary>
+            <p id="data-label" class="setting-help">Buscando las listas del sitio…</p>
+            <label class="setting-label" for="import-level">Nivel al cargar una lista sin nivel</label>
+            <select id="import-level"><option>N5</option><option>N4</option><option>N3</option><option>N2</option><option>N1</option></select>
+            <div class="data-actions">
+              <button id="import-button" class="button small" type="button">Cargar JSON</button>
+              <button id="export-json" class="button small" type="button">Descargar listas</button>
+              <button id="restore-data" class="button ghost small" type="button" hidden>Usar listas del sitio</button>
+              <button id="retry-data" class="button ghost small" type="button">Buscar nuevos niveles</button>
+              <button id="download-example" class="button ghost small" type="button">Ejemplo de JSON</button>
+            </div>
+            <input id="import-json" class="sr-only" type="file" accept=".json,application/json" multiple aria-label="Cargar listas JSON de vocabulario" tabindex="-1">
+            <p class="setting-help">Puedes cargar varios archivos. El nivel se toma del JSON o del nombre del archivo; si no aparece, se usa el selector de arriba. Las listas cargadas sustituyen ese nivel solo en este navegador.</p>
+            <p id="reading-status" class="setting-help"></p>
+          </details>
+          <details>
+            <summary>Pequeñas pistas</summary>
+            <p id="mode-help" class="setting-help">Combina JP → ES, ES → JP, Lectura y Dictado.</p>
+            <p class="setting-help">«No lo sé» revela la respuesta y la añade al repaso. Los fallos pendientes se repiten hasta acertarlos.</p>
+            <p id="keyboard-hint" class="keyboard-hint"><kbd>1</kbd>–<kbd>4</kbd> o <kbd>A</kbd>–<kbd>D</kbd> para responder · <kbd>Enter</kbd> para continuar · <kbd>R</kbd> para escuchar</p>
+            <p class="setting-help">En dictado, si dos palabras suenan igual, se aceptan sus respuestas válidas. La precisión incluye los «No lo sé».</p>
+          </details>
+        </details>
+      </aside>
+    </main>
+    <section class="support-section" aria-labelledby="support-title">
+      <div class="support-copy"><div class="support-symbol"><svg class="icon" aria-hidden="true"><use href="#i-heart"/></svg></div><div><h2 id="support-title">¿Te está ayudando a aprender?</h2><p>Tu apoyo ayuda a seguir creando recursos gratuitos de japonés.</p></div></div>
+      <a class="button" href="https://paypal.me/asallamsensei" target="_blank" rel="noopener noreferrer" aria-label="Apoyar a Asallam Sensei por PayPal, abre en otra pestaña">Apoyar por PayPal <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+    </section>
+    <footer><span>Hecho para aprender, un paso a la vez.<br>Asallam Sensei · Vocabulario JLPT</span><a href="https://asallamsensei.com/">Volver al inicio ↗</a></footer>
+  </div>
+  <dialog id="reset-dialog" aria-labelledby="reset-title">
+    <h2 id="reset-title">¿Borrar tu progreso?</h2><p>Se borrarán las estadísticas y los fallos guardados de este entrenador. Tus listas de vocabulario y tus ajustes se conservarán.</p>
+    <div class="dialog-actions"><button id="cancel-reset" class="button" type="button">Conservar</button><button id="confirm-reset" class="button" type="button">Borrar progreso</button></div>
+  </dialog>
+
+<script>
+/* Vocabulario JLPT · Asallam Sensei
+ * Archivo único, sin librerías externas. Conserva las rutas originales.
+ * Para añadir niveles: data/vocabulario_N3.json, ...N2.json, ...N1.json.
+ * También se admite Vocabulario_Nx.json. Audios: data/audios/nx/<romaji exacto>.mp3.
+ * Ejemplo: {"kanji":"食べる","kana":"たべる","romaji":"taberu","significado":"comer"}
+ * La lectura kana (o hiragana/lectura/furigana) permite furigana fiable.
+ * Nunca se infiere la ortografía de una lectura a partir del romaji.
+ */
+(function(root, factory) {
+  const core = factory();
+  if (typeof module === 'object' && module.exports) module.exports = core;
+  else root.VocabCore = core;
+})(typeof globalThis !== 'undefined' ? globalThis : this, function() {
+  'use strict';
+  const LEVELS = ['N5','N4','N3','N2','N1'];
+  const ROMA = {"あ": "a", "い": "i", "う": "u", "え": "e", "お": "o", "か": "ka", "き": "ki", "く": "ku", "け": "ke", "こ": "ko", "が": "ga", "ぎ": "gi", "ぐ": "gu", "げ": "ge", "ご": "go", "さ": "sa", "し": "shi", "す": "su", "せ": "se", "そ": "so", "ざ": "za", "じ": "ji", "ず": "zu", "ぜ": "ze", "ぞ": "zo", "た": "ta", "ち": "chi", "つ": "tsu", "て": "te", "と": "to", "だ": "da", "ぢ": "ji", "づ": "zu", "で": "de", "ど": "do", "な": "na", "に": "ni", "ぬ": "nu", "ね": "ne", "の": "no", "は": "ha", "ひ": "hi", "ふ": "fu", "へ": "he", "ほ": "ho", "ば": "ba", "び": "bi", "ぶ": "bu", "べ": "be", "ぼ": "bo", "ぱ": "pa", "ぴ": "pi", "ぷ": "pu", "ぺ": "pe", "ぽ": "po", "ま": "ma", "み": "mi", "む": "mu", "め": "me", "も": "mo", "や": "ya", "ゆ": "yu", "よ": "yo", "ら": "ra", "り": "ri", "る": "ru", "れ": "re", "ろ": "ro", "わ": "wa", "を": "wo", "ん": "n", "きゃ": "kya", "きゅ": "kyu", "きょ": "kyo", "ぎゃ": "gya", "ぎゅ": "gyu", "ぎょ": "gyo", "しゃ": "sha", "しゅ": "shu", "しょ": "sho", "じゃ": "ja", "じゅ": "ju", "じょ": "jo", "ちゃ": "cha", "ちゅ": "chu", "ちょ": "cho", "にゃ": "nya", "にゅ": "nyu", "にょ": "nyo", "ひゃ": "hya", "ひゅ": "hyu", "ひょ": "hyo", "びゃ": "bya", "びゅ": "byu", "びょ": "byo", "ぴゃ": "pya", "ぴゅ": "pyu", "ぴょ": "pyo", "みゃ": "mya", "みゅ": "myu", "みょ": "myo", "りゃ": "rya", "りゅ": "ryu", "りょ": "ryo", "ふぁ": "fa", "ふぃ": "fi", "ふぇ": "fe", "ふぉ": "fo", "ふゅ": "fyu", "てぃ": "ti", "とぅ": "tu", "でぃ": "di", "どぅ": "du", "でゅ": "dyu", "ちぇ": "che", "しぇ": "she", "じぇ": "je", "いぇ": "ye", "うぃ": "wi", "うぇ": "we", "うぉ": "wo", "ゔぁ": "va", "ゔぃ": "vi", "ゔ": "vu", "ゔぇ": "ve", "ゔぉ": "vo", "つぁ": "tsa", "つぇ": "tse", "つぉ": "tso", "くぉ": "kwo", "ぢゃ": "ja", "ぢゅ": "ju", "ぢょ": "jo"};
+  const text = value => typeof value === 'string' ? value.trim() : '';
+  function hira(s) { return String(s || '').normalize('NFKC').replace(/[ァ-ヶ]/g, c => String.fromCharCode(c.charCodeAt(0)-96)); }
+  function japanese(s) { return hira(s).replace(/[\s・･]/g, ''); }
+  function spanish(s) {
+    return String(s || '').normalize('NFKC').toLowerCase().replace(/[áéíóúü]/g, c => ({á:'a',é:'e',í:'i',ó:'o',ú:'u',ü:'u'})[c])
+      .replace(/[¿?¡!.]/g,'').replace(/\s+/g,' ').trim();
+  }
+  function roman(s) {
+    return String(s || '').normalize('NFKC').toLowerCase().replace(/[āīūēōâîûêô]/g,c => ({ā:'aa',ī:'ii',ū:'uu',ē:'ee',ō:'ou',â:'aa',î:'ii',û:'uu',ê:'ee',ô:'ou'})[c])
+      .replace(/’/g,"'").replace(/[\s・-]/g,'');
+  }
+  function toRomaji(value) {
+    const s = hira(value); let out = '', doubled = false;
+    for (let i=0; i<s.length; i++) {
+      if (s[i] === 'っ') { doubled = true; continue; }
+      if (s[i] === 'ー') { const vowel = out.match(/[aeiou](?!.*[aeiou])/); if (!vowel) return ''; out += vowel[0]; continue; }
+      const two = s.slice(i,i+2), part = ROMA[two] || ROMA[s[i]];
+      if (!part) return '';
+      if (doubled) { out += part.startsWith('ch') ? 't' : part[0]; doubled = false; }
+      out += part;
+      if (ROMA[two]) i++;
+      if (part === 'n' && /[あいうえおやゆよ]/.test(s[i+1] || '')) out += "'";
+    }
+    return doubled ? '' : out;
+  }
+  function strings(v) { return (Array.isArray(v) ? v : [v]).filter(x => typeof x === 'string' && x.trim()).map(x=>x.trim()); }
+  function level(v, fallback) {
+    const s = String(v || fallback || '').toUpperCase().replace(/^JLPT\s*/, '');
+    const candidate = /^[1-5]$/.test(s) ? 'N'+s : s;
+    if (!LEVELS.includes(candidate)) throw Error('Nivel no válido: usa N5, N4, N3, N2 o N1.');
+    return candidate;
+  }
+  function validate(raw, fallback='N5') {
+    const buckets = {};
+    function append(rows, groupLevel) {
+      if (!Array.isArray(rows)) throw Error('Cada nivel debe contener una lista de palabras.');
+      if (rows.length > 25000) throw Error('La lista supera las 25.000 entradas por nivel.');
+      for (const row of rows) {
+        if (!row || typeof row !== 'object' || Array.isArray(row)) throw Error('Cada palabra debe ser un objeto JSON.');
+        const lev = level(row.nivel || row.level, groupLevel);
+        const word = text(row.kanji) || text(row.palabra) || text(row.japones) || text(row.word);
+        const meanings = [...strings(row.significado), ...strings(row.significados), ...strings(row.meaning)];
+        if (!word || !meanings.length) throw Error('Cada palabra necesita «kanji» y «significado».');
+        if (word.length > 150 || meanings.some(x=>x.length>500)) throw Error('Hay una palabra o traducción demasiado larga.');
+        const candidate = text(row.kana) || text(row.hiragana) || text(row.lectura) || text(row.reading) || text(row.furigana);
+        const kana = candidate && /^[ぁ-ゖァ-ヶー\s・]+$/.test(candidate) ? candidate : /^[ぁ-ゖァ-ヶー]+$/.test(word) ? word : '';
+        const romaji = text(row.romaji) || toRomaji(kana);
+        const es = [...meanings, ...strings(row.variantes_es), ...strings(row.sinonimos), ...strings(row.respuestas_es)]
+          .flatMap(x=>[x, ...x.split(/\s*[,;/]\s*/)]).filter(Boolean);
+        const item = {
+          id: lev + ':' + word + ':' + (kana || romaji) + ':' + meanings[0],
+          nivel:lev, kanji:word, kana, romaji, significado:meanings.join('; '),
+          es:[...new Set(es)], jp:[...new Set([word, kana, ...strings(row.variantes_jp)].filter(Boolean))],
+          romans:[...new Set([romaji, toRomaji(kana), ...strings(row.variantes_romaji)].filter(Boolean))]
+        };
+        (buckets[lev] ||= []).push(item);
+      }
+    }
+    if (Array.isArray(raw)) append(raw, fallback);
+    else if (raw && typeof raw === 'object') {
+      const nested = raw.niveles || raw;
+      const keys = LEVELS.filter(k=>Object.prototype.hasOwnProperty.call(nested,k));
+      if (keys.length) for (const key of keys) append(nested[key],key);
+      else append(raw.palabras || raw.vocabulario || raw.data, level(raw.nivel || raw.level, fallback));
+    } else throw Error('El archivo no contiene una lista JSON válida.');
+    let count = 0;
+    for (const lev of Object.keys(buckets)) {
+      buckets[lev] = [...new Map(buckets[lev].map(i=>[i.id,i])).values()]; count += buckets[lev].length;
+    }
+    if (!count) throw Error('La lista está vacía.');
+    return buckets;
+  }
+  function accepted(item, answer, target, format='any') {
+    if (!String(answer).trim()) return false;
+    if (target==='es') return item.es.some(s=>spanish(s)===spanish(answer));
+    if (target==='romaji' || format==='romaji') return item.romans.some(s=>roman(s)===roman(answer));
+    if (target==='kana' || format==='kana') return !!item.kana && /^[ぁ-ゖァ-ヶー\s・]+$/.test(String(answer).normalize('NFKC')) && japanese(answer)===japanese(item.kana);
+    if (format==='kanji') return item.jp.filter(s=>s!==item.kana || s===item.kanji).some(s=>s.normalize('NFKC')===String(answer).trim().normalize('NFKC'));
+    return item.jp.some(s=>japanese(s)===japanese(answer)) || item.romans.some(s=>roman(s)===roman(answer));
+  }
+  function soundKey(item) { return roman(toRomaji(item.kana) || item.romaji).replace(/ou|oo/g,'ō').replace(/ei|ee/g,'ē') || japanese(item.kana || item.kanji); }
+  function shuffle(items) { const a=[...items]; for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]];}return a; }
+  function display(item,target) { return target==='es'?item.significado:target==='romaji'?item.romaji:target==='kana'?item.kana:item.kanji; }
+  function exportData(groups) {
+    return Object.fromEntries(LEVELS.filter(l=>groups[l]?.length).map(l=>[l,groups[l].map(i=>({kanji:i.kanji,kana:i.kana,romaji:i.romaji,significado:i.significado,nivel:l,variantes_es:i.es,variantes_jp:i.jp,variantes_romaji:i.romans}))]));
+  }
+  return {LEVELS,hira,japanese,spanish,roman,toRomaji,validate,accepted,soundKey,shuffle,display,exportData};
+});
+
+if (typeof document !== 'undefined') (function() {
+  'use strict';
+  const Core = window.VocabCore, $ = id=>document.getElementById(id), all = s=>[...document.querySelectorAll(s)];
+  const CONFIG = {
+    levels: Core.LEVELS,
+    paths: {N5:['data/Vocabulario_N5.json','data/vocabulario_N5.json'],N4:['data/vocabulario_N4.json','data/Vocabulario_N4.json'],N3:['data/vocabulario_N3.json','data/Vocabulario_N3.json'],N2:['data/vocabulario_N2.json','data/Vocabulario_N2.json'],N1:['data/vocabulario_N1.json','data/Vocabulario_N1.json']},
+    timeout:7000, maxBytes:8*1024*1024
+  };
+  const KEYS = {prefs:'asallam_vocab_preferences_v3', progress:'asallam_vocab_progress_v3', custom:'asallam_vocab_custom_v3', cache:'asallam_vocab_cache_v3'};
+  const MODES = ['jp-es','es-jp','reading','listen'];
+  const DEFAULTS = {activity:'quiz',levels:['N5'],modes:MODES,length:20,pairs:4,review:false,furigana:true,effects:false,autoAudio:true,audioSource:'mp3',rate:.85,theme:'dark',writeFormat:'any',readingFormat:'mixed',dictationTarget:'mixed'};
+  let storageOK=true;
+  function read(key) { try { return JSON.parse(localStorage.getItem(key)); } catch { return null; } }
+  function save(key,value) { try { localStorage.setItem(key,JSON.stringify(value)); return true; } catch { storageOK=false; $('storage-status').textContent='No se pudo guardar en este navegador. El progreso se conserva solo mientras la página siga abierta.';return false; } }
+  function preferences(value) {
+    const p = {...DEFAULTS,levels:[...DEFAULTS.levels],modes:[...MODES]};
+    if (!value || typeof value!=='object') return p;
+    const choices={activity:['quiz','write','match','explore'],length:[0,10,20,40],pairs:[3,4,6],audioSource:['mp3','tts'],theme:['light','dark'],writeFormat:['any','kana','kanji','romaji'],readingFormat:['mixed','kana','romaji'],dictationTarget:['mixed','jp','es']};
+    for(const key in choices) if(choices[key].includes(value[key])) p[key]=value[key];
+    for(const key of ['review','furigana','effects','autoAudio']) if(typeof value[key]==='boolean')p[key]=value[key];
+    if(Array.isArray(value.levels)){const a=CONFIG.levels.filter(l=>value.levels.includes(l));if(a.length)p.levels=a;}
+    if(Array.isArray(value.modes)){const a=MODES.filter(m=>value.modes.includes(m));if(a.length)p.modes=a;}
+    if(Number.isFinite(value.rate))p.rate=Math.max(.5,Math.min(1.1,value.rate));
+    return p;
+  }
+  const blank=()=>({correct:0,wrong:0,skipped:0,streak:0,best:0});
+  const number = v=>Number.isFinite(v)&&v>=0?Math.floor(v):0;
+  function statsClean(v) { const s=blank();for(const k in s)s[k]=number(v?.[k]);return s; }
+  function progressClean(v) {
+    const p={total:statsClean(v?.total),byActivity:{},byItem:Object.create(null),legacy:statsClean(v?.legacy)};
+    for(const a of ['quiz','write','match'])p.byActivity[a]=statsClean(v?.byActivity?.[a]);
+    if(v?.byItem && typeof v.byItem==='object')for(const [id,x] of Object.entries(v.byItem).slice(0,100000)){if(x && typeof x==='object')p.byItem[id]={correct:number(x.correct),wrong:number(x.wrong),pending:x.pending===true};}
+    return p;
+  }
+  const priorProgress=read(KEYS.progress);
+  const state = {prefs:preferences(read(KEYS.prefs)),progress:progressClean(priorProgress),remote:{},custom:{},groups:{},items:[],current:null,view:'empty',session:null,deck:[],previous:'',modeDeck:[],tiles:[],selected:null,board:0,lock:false,timers:new Set(),generation:0,loading:false,query:'',exploreLimit:60};
+  const sound = {token:0,voice:null,clip:null,utterance:null,pending:null,watchdog:null,context:null,failedClips:new Set()};
+  if(!priorProgress){const old=read('n5_vocab_stats_v1');if(old){state.progress.legacy={correct:number(old.aciertos),wrong:number(old.errores),skipped:0,streak:0,best:number(old.mejorRacha)};save(KEYS.progress,state.progress);}}
+  function safeGroups(raw){try{return Core.validate(raw);}catch{return {};}}
+  state.custom=safeGroups(read(KEYS.custom));state.remote=safeGroups(read(KEYS.cache));
+  function notice(message,error=false){$('notice-text').textContent=message;$('notice').hidden=false;$('notice').classList.toggle('error',error);}
+  function showNotice(message,error=false){notice(message,error);}
+  function persist(){save(KEYS.prefs,state.prefs);}
+  function timer(fn,ms){const g=state.generation;const id=setTimeout(()=>{state.timers.delete(id);if(g===state.generation)fn();},ms);state.timers.add(id);return id;}
+  function cancel(){state.generation++;for(const id of state.timers)clearTimeout(id);state.timers.clear();state.lock=false;stopAudio();}
+  function scope(){return state.items.filter(i=>state.prefs.levels.includes(i.nivel));}
+  function pending(i){return state.progress.byItem[i.id]?.pending===true;}
+  function pool(){return scope().filter(i=>!state.prefs.review||pending(i));}
+  function mergeGroups(){state.groups={...state.remote,...state.custom};state.items=CONFIG.levels.flatMap(l=>state.groups[l]||[]);const selected=state.prefs.levels.filter(l=>state.groups[l]?.length);state.prefs.levels=selected.length?selected:[CONFIG.levels.find(l=>state.groups[l]?.length)||'N5'];}
+  function total(s){return s.correct+s.wrong+s.skipped;}
+  function accuracy(s){return total(s)?Math.round(s.correct/total(s)*100)+'%':'—';}
+  function increment(s,outcome){s[outcome]++;s.streak=outcome==='correct'?s.streak+1:0;s.best=Math.max(s.best,s.streak);}
+  function record(item,outcome){
+    increment(state.session.stats,outcome);increment(state.progress.total,outcome);increment(state.progress.byActivity[state.prefs.activity],outcome);
+    const p=state.progress.byItem[item.id]||{correct:0,wrong:0,pending:false};p[outcome==='correct'?'correct':'wrong']++;p.pending=outcome!=='correct';state.progress.byItem[item.id]=p;
+    if(outcome!=='correct')state.session.mistakes.add(item.id);
+    save(KEYS.progress,state.progress);renderStats();
+  }
+  function renderStats(){
+    const s=state.session?.stats||blank();
+    for(const [key,v] of Object.entries({correct:s.correct,wrong:s.wrong+s.skipped,accuracy:accuracy(s),streak:s.streak}))$('stat-'+key).textContent=v;
+    const historical=state.progress.total,legacy=state.progress.legacy;
+    $('total-correct').textContent=historical.correct+legacy.correct;$('total-best').textContent=Math.max(historical.best,legacy.best);
+    $('total-seen').textContent=state.items.filter(i=>state.progress.byItem[i.id]).length;
+    $('review-count').textContent=scope().filter(pending).length;
+    const done=state.session?.completed||0,limit=state.prefs.review?0:state.prefs.length;
+    $('round-count').textContent=state.prefs.activity==='explore'?'Consulta':state.prefs.review?scope().filter(pending).length+' pendientes':(state.prefs.activity==='match'?'Parejas ':'Pregunta ')+(state.prefs.activity==='match'?done:Math.min(done+1,limit||Infinity))+(limit?' de '+limit:' · sin límite');
+    $('session-detail').textContent=done+' '+(state.prefs.activity==='match'?'parejas resueltas':'respondidas')+' · '+s.skipped+' sin responder';
+    const maximum=state.prefs.review?state.session?.initialPending||1:limit;
+    const value=state.prefs.review?Math.max(0,maximum-scope().filter(pending).length):done;
+    $('session-progress').hidden=!maximum;
+    $('session-progress').setAttribute('aria-valuemax',String(maximum||1));$('session-progress').setAttribute('aria-valuenow',String(Math.min(value,maximum||1)));
+    $('progress-fill').style.width=(maximum?Math.min(100,value/maximum*100):0)+'%';
+    $('review-session').disabled=!scope().some(pending);
+  }
+  function eligible(item,mode){
+    if(mode==='reading')return state.prefs.readingFormat==='kana'?!!item.kana:state.prefs.readingFormat==='romaji'?!!item.romaji:!!(item.kana||item.romaji);
+    if(state.prefs.activity==='write' && (mode==='es-jp'||mode==='listen'&&state.prefs.dictationTarget!=='es')){
+      if(state.prefs.writeFormat==='kana')return !!item.kana;
+      if(state.prefs.writeFormat==='romaji')return !!item.romaji;
+    }
+    return true;
+  }
+  function availableModes(){return MODES.filter(m=>(m!=='listen'||state.prefs.audioSource==='mp3'||japaneseVoice())&&pool().some(i=>eligible(i,m)));}
+  function activeModes(){const av=availableModes(),sel=state.prefs.modes.filter(m=>av.includes(m));return sel.length?sel:av.slice(0,1);}
+  function renderControls(){
+    document.documentElement.dataset.theme=state.prefs.theme;
+    document.querySelector('meta[name="theme-color"]').content=state.prefs.theme==='dark'?'#10121b':'#f3f2ef';
+    $('theme-toggle').setAttribute('aria-label','Cambiar a tema '+(state.prefs.theme==='dark'?'claro':'oscuro'));
+    const levels=$('level-buttons');levels.replaceChildren();
+    for(const level of CONFIG.levels){const b=document.createElement('button');b.type='button';b.className='segment';b.textContent=level;b.dataset.level=level;const exists=!!state.groups[level]?.length;b.disabled=!exists;b.title=exists?state.groups[level].length+' palabras':'Todavía no hay una lista de '+level;b.setAttribute('aria-pressed',String(state.prefs.levels.includes(level)&&exists));b.addEventListener('click',()=>toggleLevel(level));levels.append(b);}
+    $('scope-count').textContent=scope().length+' palabras · '+state.prefs.levels.join(' + ');
+    all('[data-activity]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.activity===state.prefs.activity)));
+    const modes=activeModes(),av=availableModes();
+    all('[data-mode]').forEach(b=>{const m=b.dataset.mode,on=m==='mix'?modes.length>1:modes.includes(m);b.setAttribute('aria-pressed',String(on));b.classList.toggle('is-mixed',on&&modes.length>1);b.disabled=m==='mix'?av.length<2:!av.includes(m);});
+    $('mode-settings').hidden=!['quiz','write'].includes(state.prefs.activity);
+    $('mode-caption').textContent=modes.length>1?modes.length+' tipos combinados. Toca uno para añadirlo o quitarlo.':'Toca otro tipo para combinarlo.';
+    $('length-settings').hidden=state.prefs.activity==='explore'||state.prefs.review;
+    $('length-label').textContent=state.prefs.activity==='match'?'Parejas por sesión':'Preguntas por sesión';
+    $('match-settings').hidden=state.prefs.activity!=='match';
+    const fields={'session-length':'length','match-count':'pairs','review-only':'review','show-furigana':'furigana','sound-effects':'effects','auto-audio':'autoAudio','audio-source':'audioSource','write-format':'writeFormat','reading-format':'readingFormat','dictation-target':'dictationTarget'};
+    for(const [id,key] of Object.entries(fields)){const el=$(id);if(el.type==='checkbox')el.checked=state.prefs[key];else el.value=String(state.prefs[key]);}
+    const mp3=state.prefs.audioSource==='mp3';$('speech-rate').disabled=mp3;$('speech-rate').value=mp3?1:state.prefs.rate;$('rate-value').textContent=mp3?'Original':state.prefs.rate.toFixed(2)+'×';
+    $('audio-status').textContent=mp3?'Los MP3 se reproducen a velocidad original. Si falta uno, se intenta usar una voz japonesa.':japaneseVoice()?'Voz japonesa disponible.':'No se detecta una voz japonesa; puedes volver a los MP3.';
+    $('data-label').textContent=CONFIG.levels.filter(l=>state.groups[l]?.length).map(l=>l+': '+state.groups[l].length+(state.custom[l]?' (cargado)':'')).join(' · ')||'Todavía no hay listas disponibles.';
+    const missing=scope().filter(i=>/[一-龯々]/.test(i.kanji)&&!i.kana).length;
+    $('reading-status').textContent=missing?missing+' palabras no incluyen lectura en kana. Añádela al JSON para mostrar su furigana.':'Las lecturas disponibles se muestran como furigana.';
+    $('restore-data').hidden=!Object.keys(state.custom).length;$('retry-data').disabled=state.loading;$('export-json').disabled=!state.items.length;
+    $('keyboard-hint').textContent=state.prefs.activity==='write'?'Enter para comprobar y continuar. El teclado japonés es compatible.':'1–4 o A–D para responder · Enter para continuar · R para escuchar';
+    renderStats();
+  }
+  function view(name){state.view=name;for(const n of ['quiz','match','explore','summary','empty'])$(n+'-view').hidden=n!==name;$('exercise-header').hidden=['explore','summary','empty'].includes(name);$('session-stats').hidden=['explore','empty'].includes(name);$('session-caption').hidden=['explore','empty'].includes(name);$('end-session').hidden=!['quiz','match'].includes(name);}
+  function empty(message,needsData=false){view('empty');$('empty-title').textContent=needsData?'Tu vocabulario, listo para cargar.':'Todo al día.';$('empty-copy').textContent=message;$('empty-import').hidden=!needsData;$('exit-review').hidden=needsData;}
+  function start(){
+    cancel();state.current=null;state.deck=[];state.modeDeck=[];state.tiles=[];state.selected=null;state.board=0;
+    state.session={stats:blank(),completed:0,started:Date.now(),elapsed:0,ended:false,mistakes:new Set(),initialPending:scope().filter(pending).length};
+    renderControls();
+    if(!scope().length){empty(state.loading?'Buscando tus listas de vocabulario…':'Carga tus archivos JSON para empezar. Si abres este HTML como archivo local, puedes importarlos desde aquí.',true);return;}
+    if(!pool().length){empty('No tienes palabras pendientes de repaso en esta selección.');return;}
+    if(state.prefs.activity==='explore'){view('explore');state.exploreLimit=60;renderExplore();}
+    else if(state.prefs.activity==='match')nextBoard();else nextQuestion();
+  }
+  function toggleLevel(level){const selected=state.prefs.levels;if(selected.includes(level)){if(selected.length===1)return;state.prefs.levels=selected.filter(l=>l!==level);}else state.prefs.levels=CONFIG.levels.filter(l=>selected.includes(l)||l===level);persist();start();}
+  function done(){return state.prefs.review?!pool().length:state.prefs.length>0&&state.session.completed>=state.prefs.length;}
+  function takeItem(){
+    const valid=pool().filter(i=>activeModes().some(m=>eligible(i,m))),ids=new Set(valid.map(i=>i.id));
+    state.deck=state.deck.filter(i=>ids.has(i.id));
+    if(!state.deck.length)state.deck=Core.shuffle(valid);
+    if(state.deck.length>1 && state.deck[0].id===state.previous)state.deck.push(state.deck.shift());
+    const item=state.deck.shift();if(item)state.previous=item.id;return item;
+  }
+  function chooseMode(item){const available=activeModes().filter(m=>eligible(item,m));state.modeDeck=state.modeDeck.filter(m=>available.includes(m));if(!state.modeDeck.length)state.modeDeck=Core.shuffle(available);return state.modeDeck.shift();}
+  function targetFor(mode,item){
+    if(mode==='jp-es')return 'es';if(mode==='es-jp')return 'jp';
+    if(mode==='reading'){let f=state.prefs.readingFormat;if(f==='mixed')f=item.kana&&item.romaji?(Math.random()<.5?'kana':'romaji'):item.kana?'kana':'romaji';return f;}
+    return state.prefs.dictationTarget==='mixed'?(Math.random()<.5?'jp':'es'):state.prefs.dictationTarget;
+  }
+  function equivalents(item,auditory,target){return auditory?scope().filter(i=>Core.soundKey(i)===Core.soundKey(item)):target==='jp'?scope().filter(i=>Core.spanish(i.significado)===Core.spanish(item.significado)):scope().filter(i=>i.kanji===item.kanji);}
+  function optionsFor(question){
+    const chosen=[question.item],values=new Set([Core.display(question.item,question.target)]);
+    for(const item of Core.shuffle(scope())){
+      const label=Core.display(item,question.target);if(!label||values.has(label)||question.valid.some(v=>v.id===item.id))continue;
+      // No distractor can be another valid answer, synonym or homophone.
+      if(chosen.some(v=>question.target==='es'?v.es.some(s=>item.es.some(t=>Core.spanish(s)===Core.spanish(t))):Core.accepted(v,label,question.target)))continue;
+      chosen.push(item);values.add(label);if(chosen.length===4)break;
+    }
+    return Core.shuffle(chosen);
+  }
+  function japaneseNode(item,furigana=true){
+    const span=document.createElement('span');span.className='jp';span.lang='ja';
+    if(furigana&&state.prefs.furigana&&item.kana&&/[一-龯々]/.test(item.kanji)){
+      // Whole-word ruby retains the supplied reading, including irregular readings.
+      const ruby=document.createElement('ruby');ruby.append(document.createTextNode(item.kanji));const rt=document.createElement('rt');rt.textContent=item.kana;ruby.append(rt);span.append(ruby);
+    }else span.textContent=item.kanji;
+    return span;
+  }
+  function nextQuestion(){
+    stopAudio();if(done()){finish();return;}
+    const item=takeItem();if(!item){empty('No hay palabras compatibles con estos ajustes. Cambia el formato de escritura o carga sus lecturas.');$('empty-title').textContent='Ajusta la práctica.';return;}
+    const mode=chooseMode(item),target=targetFor(mode,item),auditory=mode==='listen';
+    state.current={item,mode,target,auditory,heard:false,answered:false,valid:equivalents(item,auditory,target),options:[]};
+    if(state.prefs.activity==='quiz')state.current.options=optionsFor(state.current);
+    view('quiz');renderQuestion();renderStats();
+    if(auditory)playCurrent();
+    else if(state.prefs.activity==='write')$('typed-answer').focus({preventScroll:true});
+  }
+  function renderQuestion(preserveInput=false){
+    const q=state.current;if(!q)return;
+    $('exercise-badge').textContent=q.item.nivel+' · '+({reading:'Lectura',listen:'Dictado','jp-es':'JP → ES','es-jp':'ES → JP'})[q.mode];
+    const prompt=$('prompt');prompt.replaceChildren();prompt.className='prompt';prompt.removeAttribute('lang');
+    const write=state.prefs.activity==='write';
+    const format=q.target==='jp'&&write?state.prefs.writeFormat:q.target;
+    const response={es:'el significado en español',jp:'la palabra japonesa',romaji:'la lectura en romaji',kana:'la lectura en kana',kanji:'la escritura original',any:'la palabra en kanji, kana o romaji'}[format];
+    $('question-label').textContent=(write?'Escribe ':'Elige ')+response;
+    if(q.auditory&&!q.answered){prompt.classList.add('audio-prompt');prompt.textContent='Escucha la palabra';}
+    else if(q.mode==='es-jp'&&!q.answered){prompt.classList.add('spanish');prompt.textContent=q.item.significado;}
+    else prompt.append(japaneseNode(q.item,q.mode!=='reading'||q.answered));
+    $('listen-question').hidden=false;$('listen-question').disabled=false;
+    $('answer-options').hidden=write;$('answer-form').hidden=!write;
+    $('answer-options').replaceChildren();
+    q.options.forEach((item,index)=>{
+      const b=document.createElement('button');b.type='button';b.className='option-button'+(['jp','kana'].includes(q.target)?' jp':'');b.dataset.index=index;
+      const key=document.createElement('span');key.className='option-key';key.textContent=String.fromCharCode(65+index);key.setAttribute('aria-hidden','true');b.append(key);
+      if(q.target==='jp')b.append(japaneseNode(item));else b.append(document.createTextNode(Core.display(item,q.target)));
+      b.disabled=q.answered||q.auditory&&!q.heard;
+      if(q.answered){const correct=q.valid.some(v=>v.id===item.id);b.classList.toggle('is-correct',correct);b.classList.toggle('is-wrong',q.selected===index&&!correct);if(correct){const mark=document.createElement('span');mark.className='answer-mark';mark.textContent='✓';b.append(mark);}}
+      b.addEventListener('click',()=>answerOption(index));$('answer-options').append(b);
+    });
+    const input=$('typed-answer');if(!q.answered&&!preserveInput)input.value='';input.disabled=q.answered||q.auditory&&!q.heard;
+    input.placeholder=({es:'Significado en español…',romaji:'Romaji…',kana:'かな…',kanji:'日本語…',jp:'Kanji, kana o romaji…',any:'Kanji, kana o romaji…'})[format];
+    input.setAttribute('aria-label','Escribe '+response);input.lang=['kana','kanji'].includes(format)?'ja':'es';
+    $('submit-answer').disabled=input.disabled;$('skip-question').disabled=q.answered;$('next-question').disabled=!q.answered;
+    if(!q.answered){$('feedback-title').textContent='';$('feedback-detail').replaceChildren();$('feedback-tip').textContent=q.auditory?'Pulsa Escuchar si el audio no empieza. También puedes usar «No lo sé» para revelar la palabra.':'';}
+  }
+  function reveal(){
+    const q=state.current,detail=$('feedback-detail');detail.replaceChildren();
+    const word=document.createElement('span');word.className='word-reveal';word.append(japaneseNode(q.item));detail.append(word);
+    const rest=document.createElement('span');rest.textContent=[q.item.romaji,q.item.significado].filter(Boolean).join(' · ');detail.append(rest);
+    $('feedback-title').textContent=q.outcome==='correct'?'¡Correcto!':q.outcome==='skipped'?'Vamos a repasarla.':'La respuesta es…';
+    $('feedback-tip').textContent=q.outcome==='correct'?'':q.target==='es'?'Puedes escribir una de las traducciones de la lista. Las variantes adicionales se pueden añadir al JSON.':'Esta palabra queda pendiente de repaso.';
+  }
+  function respond(outcome,selected){
+    const q=state.current;if(!q||q.answered)return;
+    q.answered=true;q.outcome=outcome;q.selected=selected;state.session.completed++;record(q.item,outcome);renderQuestion();reveal();playEffect(outcome==='correct');
+    if(state.prefs.autoAudio)playItem(q.item);$('next-question').focus({preventScroll:true});
+  }
+  function answerOption(index){const q=state.current;if(!q||q.answered||q.auditory&&!q.heard)return;const item=q.options[index];if(!item)return;respond(q.valid.some(v=>v.id===item.id)?'correct':'wrong',index);}
+  let composing=false;
+  function answerWritten(e){e?.preventDefault();const q=state.current;if(composing||e?.isComposing||!q||q.answered||q.auditory&&!q.heard)return;const answer=$('typed-answer').value;if(!answer.trim()){$('feedback-tip').textContent='Escribe una respuesta o pulsa «No lo sé».';return;}const correct=q.valid.some(i=>Core.accepted(i,answer,q.target,q.target==='jp'?state.prefs.writeFormat:'any'));respond(correct?'correct':'wrong');}
+  function finish(){cancel();state.session.ended=true;state.session.elapsed=Date.now()-state.session.started;view('summary');const s=state.session.stats;$('summary-title').textContent=state.prefs.review&&!pool().length?'¡Todos los fallos resueltos!':'Sesión completada.';$('summary-copy').textContent=state.session.completed+' '+(state.prefs.activity==='match'?'parejas':'preguntas')+' · '+state.session.mistakes.size+' palabras para reforzar · '+formatTime(state.session.elapsed);$('summary-correct').textContent=s.correct;$('summary-accuracy').textContent=accuracy(s);$('summary-best').textContent=s.best;renderStats();$('summary-title').focus({preventScroll:true});}
+  function formatTime(ms){const sec=Math.floor(ms/1000);return String(Math.floor(sec/60)).padStart(2,'0')+':'+String(sec%60).padStart(2,'0');}
+
+  function nextBoard(){
+    stopAudio();if(done()){finish();return;}
+    state.selected=null;state.lock=false;state.board++;
+    const remain=state.prefs.review||!state.prefs.length?Infinity:state.prefs.length-state.session.completed;
+    const selected=[],jp=new Set(),es=new Set(),p=pool(),ids=new Set(p.map(i=>i.id));
+    state.deck=state.deck.filter(i=>ids.has(i.id));if(!state.deck.length)state.deck=Core.shuffle(p);
+    const candidates=[...state.deck,...Core.shuffle(p.filter(i=>!state.deck.some(x=>x.id===i.id)))];
+    for(const i of candidates){if(jp.has(i.kanji)||i.es.some(x=>es.has(Core.spanish(x))))continue;selected.push(i);jp.add(i.kanji);i.es.forEach(x=>es.add(Core.spanish(x)));if(selected.length>=Math.min(state.prefs.pairs,remain))break;}
+    const chosen=new Set(selected.map(i=>i.id));state.deck=state.deck.filter(i=>!chosen.has(i.id));
+    if(!selected.length){empty('No hay parejas disponibles en esta selección.');return;}
+    state.tiles=Core.shuffle(selected.flatMap(i=>[{item:i,kind:'jp',matched:false},{item:i,kind:'es',matched:false}]));
+    view('match');$('exercise-badge').textContent=state.prefs.levels.join(' + ');$('board-counter').textContent='Tablero '+state.board;
+    $('match-message').textContent='Une cada palabra con su significado.';renderBoard();renderStats();
+  }
+  function renderBoard(){
+    const board=$('match-board');board.replaceChildren();
+    state.tiles.forEach((tile,index)=>{const b=document.createElement('button');b.type='button';b.className='match-tile';b.dataset.kind=tile.kind;b.setAttribute('aria-pressed',String(state.selected===index));b.classList.toggle('is-selected',state.selected===index);b.classList.toggle('is-matched',tile.matched);b.disabled=tile.matched||state.lock;const c=document.createElement('span');c.className='tile-content';if(tile.kind==='jp')c.append(japaneseNode(tile.item));else c.textContent=tile.item.significado;b.append(c);b.addEventListener('click',()=>selectMatch(index));tile.button=b;board.append(b);});
+  }
+  function selectMatch(index){
+    const tile=state.tiles[index];if(!tile||tile.matched||state.lock)return;
+    if(state.selected===index){state.selected=null;renderBoard();return;}
+    if(tile.kind==='jp')playItem(tile.item);
+    if(state.selected===null){state.selected=index;renderBoard();return;}
+    const first=state.tiles[state.selected];
+    if(first.kind===tile.kind){state.selected=index;renderBoard();return;}
+    state.selected=null;
+    if(first.item.id===tile.item.id){first.matched=tile.matched=true;state.session.completed++;record(tile.item,'correct');playEffect(true);if(state.prefs.autoAudio)playItem(tile.item);$('match-message').textContent='¡Pareja encontrada! '+tile.item.kanji+' · '+tile.item.significado;renderBoard();if(state.tiles.every(t=>t.matched)){state.lock=true;timer(nextBoard,850);}}
+    else {record(first.item,'wrong');const p=state.progress.byItem[tile.item.id]||{correct:0,wrong:0,pending:false};p.pending=true;state.progress.byItem[tile.item.id]=p;state.session.mistakes.add(tile.item.id);save(KEYS.progress,state.progress);state.lock=true;renderBoard();first.button.classList.add('is-wrong');tile.button.classList.add('is-wrong');$('match-message').textContent='Todavía no. Intenta otra pareja.';playEffect(false);timer(()=>{state.lock=false;renderBoard();},700);}
+    renderStats();
+  }
+  function renderExplore(){
+    const q=Core.spanish(state.query),kana=Core.japanese(state.query),roman=Core.roman(state.query);
+    const found=pool().filter(i=>!q||Core.spanish(i.significado).includes(q)||Core.japanese(i.kanji).includes(kana)||!!i.kana&&Core.japanese(i.kana).includes(kana)||!!i.romaji&&Core.roman(i.romaji).includes(roman));
+    const grid=$('explore-grid');grid.replaceChildren();
+    for(const item of found.slice(0,state.exploreLimit)){const b=document.createElement('button');b.type='button';b.className='kana-tile vocab-tile';b.classList.toggle('needs-review',pending(item));const lev=document.createElement('span');lev.className='tile-level';lev.textContent=item.nivel;const r=document.createElement('span');r.className='tile-romaji';r.textContent=item.romaji;const meaning=document.createElement('span');meaning.className='tile-meaning';meaning.textContent=item.significado;b.append(lev,japaneseNode(item),r,meaning);b.title='Escuchar '+item.kanji;b.addEventListener('click',()=>playItem(item));grid.append(b);}
+    $('explore-count').textContent=Math.min(state.exploreLimit,found.length)+' de '+found.length+' palabras';$('explore-more').hidden=state.exploreLimit>=found.length;
+  }
+
+  /* Audio: MP3 original + voz japonesa. La cancelación evita sonidos de rondas anteriores. */
+    function japaneseVoice() {
+    try {
+      if (!window.speechSynthesis || !window.SpeechSynthesisUtterance) return null;
+      const voices = speechSynthesis.getVoices();
+      return voices.find(function (voice) { return /^ja-jp$/i.test(voice.lang); })
+        || voices.find(function (voice) { return /^ja(?:-|$)/i.test(voice.lang); }) || null;
+    } catch (error) { return null; }
+  }
+  function stopAudio() {
+    sound.token += 1;
+    if (sound.watchdog) { clearTimeout(sound.watchdog); sound.watchdog = null; }
+    if (sound.pending) { const settle = sound.pending; sound.pending = null; settle(false); }
+    if (sound.clip) {
+      sound.clip.onended = null; sound.clip.onerror = null;
+      try { sound.clip.pause(); } catch (error) { /* La práctica no depende del audio. */ }
+    }
+    if (sound.utterance) {
+      sound.utterance.onstart = null; sound.utterance.onend = null; sound.utterance.onerror = null;
+      sound.utterance = null;
+    }
+    try { if (window.speechSynthesis) speechSynthesis.cancel(); } catch (error) { /* Sin voz. */ }
+    $("listen-question").classList.remove("playing");
+  }
+  function spokenText(item) { return item.kana || item.kanji; }
+  function speechPlayback(item, token) {
+    sound.voice = japaneseVoice() || sound.voice;
+    if (!sound.voice || !window.speechSynthesis || !window.SpeechSynthesisUtterance) {
+      showNotice("No hay una voz japonesa disponible. Puedes practicar sin audio o elegir audios propios.");
+      return Promise.resolve(false);
+    }
+    return new Promise(function (resolve) {
+      let settled = false;
+      let ownWatchdog = null;
+      function settle(ok) {
+        if (settled) return;
+        settled = true;
+        if (sound.pending === settle) sound.pending = null;
+        if (ownWatchdog) {
+          clearTimeout(ownWatchdog);
+          if (sound.watchdog === ownWatchdog) sound.watchdog = null;
+          ownWatchdog = null;
+        }
+        resolve(ok);
+      }
+      sound.pending = settle;
+      const utterance = new SpeechSynthesisUtterance(spokenText(item));
+      sound.utterance = utterance;
+      utterance.lang = "ja-JP";
+      utterance.voice = sound.voice;
+      utterance.rate = state.prefs.rate;
+      utterance.pitch = 1;
+      utterance.volume = 1;
+      utterance.onstart = function () {
+        if (token !== sound.token) { settle(false); return; }
+        $("listen-question").classList.add("playing");
+        settle(true);
+      };
+      utterance.onend = function () {
+        if (token === sound.token) $("listen-question").classList.remove("playing");
+        settle(token === sound.token);
+      };
+      utterance.onerror = function (event) {
+        settle(false);
+        if (token !== sound.token || ["canceled", "interrupted"].includes(event.error)) return;
+        $("listen-question").classList.remove("playing");
+        showNotice("No se pudo reproducir la voz. Pulsa Escuchar para intentarlo de nuevo.");
+      };
+      ownWatchdog = setTimeout(function () {
+        settle(false);
+        if (token === sound.token) showNotice("El audio no ha empezado. Pulsa Escuchar o cambia a una pregunta visual.");
+      }, 5000);
+      sound.watchdog = ownWatchdog;
+      try { speechSynthesis.speak(utterance); }
+      catch (error) { settle(false); showNotice("Este navegador no pudo iniciar la voz japonesa."); }
+    });
+  }
+  function mp3Source(item) {
+    return item.romaji ? 'data/audios/' + item.nivel.toLowerCase() + '/' + encodeURIComponent(item.romaji) + '.mp3' : '';
+  }
+  function mp3Playback(item, token) {
+    const source = mp3Source(item);
+    if (!source || sound.failedClips.has(source) || typeof Audio !== "function") return speechPlayback(item, token);
+    return new Promise(function (resolve) {
+      let settled = false;
+      let fallingBack = false;
+      let ownWatchdog = null;
+      function settle(ok) {
+        if (settled) return;
+        settled = true;
+        if (sound.pending === settle) sound.pending = null;
+        if (ownWatchdog) {
+          clearTimeout(ownWatchdog);
+          if (sound.watchdog === ownWatchdog) sound.watchdog = null;
+          ownWatchdog = null;
+        }
+        resolve(ok);
+      }
+      sound.pending = settle;
+      const clip = sound.clip || (sound.clip = new Audio());
+      clip.preload = "auto";
+      clip.playbackRate = 1;
+      function fail(error) {
+        if (token !== sound.token) { settle(false); return; }
+        if (fallingBack) return;
+        fallingBack = true;
+        if (error && error.name === "NotAllowedError") {
+          settle(false);
+          showNotice("Tu navegador pide un toque para activar el audio. Pulsa Escuchar.", false, 6000);
+          return;
+        }
+        sound.failedClips.add(source);
+        if (ownWatchdog) {
+          clearTimeout(ownWatchdog);
+          if (sound.watchdog === ownWatchdog) sound.watchdog = null;
+          ownWatchdog = null;
+        }
+        if (sound.pending === settle) sound.pending = null;
+        clip.onended = null; clip.onerror = null;
+        try { clip.pause(); } catch (ignored) { /* Se pasa al sintetizador. */ }
+        speechPlayback(item, token).then(settle);
+      }
+      clip.onended = function () {
+        if (token === sound.token && clip.ended) $("listen-question").classList.remove("playing");
+      };
+      clip.onerror = function () { if (clip.error) fail(clip.error); };
+      ownWatchdog = setTimeout(function () { fail(new Error("Tiempo de espera del MP3")); }, 6500);
+      sound.watchdog = ownWatchdog;
+      try {
+        if (clip.getAttribute("src") !== source) clip.src = source;
+        else clip.currentTime = 0;
+        const playing = clip.play();
+        Promise.resolve(playing).then(function () {
+          if (token !== sound.token) { settle(false); return; }
+          if (fallingBack) return;
+          $("listen-question").classList.add("playing");
+          settle(true);
+        }).catch(fail);
+      } catch (error) { fail(error); }
+    });
+  }
+  function playItem(item) {
+    stopAudio();
+    if (!item) return Promise.resolve(false);
+    const token = sound.token;
+    if (state.prefs.audioSource === "mp3") return mp3Playback(item, token);
+    return speechPlayback(item, token);
+  }
+  function playCurrent() {
+    const question = state.current;
+    if (!question || state.view !== "quiz") return;
+    playItem(question.item).then(function (started) {
+      if (!started || state.current !== question || state.view !== "quiz" || question.answered) return;
+      question.heard = true;
+      if (question.auditory) {
+        all("#answer-options button").forEach(function (button) { button.disabled = false; });
+        $("typed-answer").disabled = false;
+        $("submit-answer").disabled = false;
+        $("skip-question").disabled = false;
+        $("feedback-tip").textContent = "";
+        if (state.prefs.activity === "write") $("typed-answer").focus({ preventScroll: true });
+      }
+    });
+  }
+  function playEffect(correct) {
+    if (!state.prefs.effects) return;
+    try {
+      const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+      if (!AudioContextClass) return;
+      if (!sound.context) sound.context = new AudioContextClass();
+      const context = sound.context;
+      if (context.state === "suspended") {
+        const resuming = context.resume();
+        if (resuming && resuming.catch) resuming.catch(function () {});
+      }
+      const oscillator = context.createOscillator();
+      const gain = context.createGain();
+      oscillator.connect(gain);
+      gain.connect(context.destination);
+      const now = context.currentTime;
+      oscillator.type = "sine";
+      oscillator.frequency.setValueAtTime(correct ? 660 : 220, now);
+      oscillator.frequency.setValueAtTime(correct ? 880 : 180, now + 0.07);
+      gain.gain.setValueAtTime(0.035, now);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.17);
+      oscillator.start(now);
+      oscillator.stop(now + 0.18);
+      oscillator.onended = function () { oscillator.disconnect(); gain.disconnect(); };
+    } catch (error) { /* Los efectos nunca bloquean la respuesta. */ }
+  }
+
+
+
+  async function fetchLevel(lev){
+    let lastError;
+    for(const path of CONFIG.paths[lev]){
+      const controller=new AbortController(),id=setTimeout(()=>controller.abort(),CONFIG.timeout);
+      try{const res=await fetch(path,{signal:controller.signal,cache:'no-cache'});if(!res.ok)throw Error('HTTP '+res.status);const body=await res.text();if(body.length>CONFIG.maxBytes)throw Error('Archivo demasiado grande');const groups=Core.validate(JSON.parse(body),lev);if(!groups[lev]?.length)throw Error('El archivo no contiene '+lev);return groups[lev];}catch(e){lastError=e;}finally{clearTimeout(id);}
+    }
+    throw lastError;
+  }
+  async function loadRemote(){
+    if(state.loading)return;state.loading=true;renderControls();
+    // Los archivos locales se importan con el selector: file:// no permite fetch relativo de forma fiable.
+    if(location.protocol==='file:'){state.loading=false;mergeGroups();start();return;}
+    const results=await Promise.allSettled(CONFIG.levels.map(fetchLevel));
+    results.forEach((r,index)=>{if(r.status==='fulfilled')state.remote[CONFIG.levels[index]]=r.value;});
+    state.loading=false;save(KEYS.cache,Core.exportData(state.remote));mergeGroups();persist();
+    // No interrumpir una sesión que comenzó con una lista guardada o recién importada.
+    if(!state.session||state.view==='empty')start();else renderControls();
+    if(!state.items.length)notice('No se pudieron cargar las listas del sitio. Puedes importar tus JSON con «Cargar mis listas JSON».',true);
+  }
+  async function importFiles(event){
+    const files=[...event.target.files];event.target.value='';if(!files.length)return;
+    const staged={};
+    try{
+      for(const file of files){if(file.size>CONFIG.maxBytes)throw Error(file.name+': el máximo es 8 MB.');const nameLevel=file.name.match(/N[1-5]/i)?.[0]?.toUpperCase();const groups=Core.validate(JSON.parse(await file.text()),nameLevel||$('import-level').value);for(const l in groups){if(staged[l])throw Error('Hay dos listas para '+l+'. Carga una por nivel para evitar reemplazos accidentales.');staged[l]=groups[l];}}
+      state.custom={...state.custom,...staged};const saved=save(KEYS.custom,Core.exportData(state.custom));mergeGroups();state.prefs.levels=CONFIG.levels.filter(l=>staged[l]);state.prefs.review=false;persist();start();notice(Object.values(staged).reduce((n,a)=>n+a.length,0)+' palabras cargadas. '+(saved?'Tus listas se conservarán en este navegador.':'No pudieron guardarse; estarán disponibles hasta cerrar la página.'));
+    }catch(e){notice('No se cambió ninguna lista. '+(e instanceof SyntaxError?'El archivo no es un JSON válido.':e.message),true);}
+  }
+  function download(value,name){const blob=new Blob([JSON.stringify(value,null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=name;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);}
+  function bind(){
+    $('dismiss-notice').addEventListener('click',()=>$('notice').hidden=true);
+    all('[data-activity]').forEach(b=>b.addEventListener('click',()=>{state.prefs.activity=b.dataset.activity;persist();start();}));
+    all('[data-mode]').forEach(b=>b.addEventListener('click',()=>{const m=b.dataset.mode;let list=activeModes();if(m==='mix')list=availableModes();else if(list.includes(m)){if(list.length===1)return;list=list.filter(x=>x!==m);}else list=MODES.filter(x=>x===m||list.includes(x));state.prefs.modes=list;persist();start();}));
+    const restarts={'session-length':['length',Number],'match-count':['pairs',Number],'write-format':['writeFormat',String],'reading-format':['readingFormat',String],'dictation-target':['dictationTarget',String]};
+    for(const [id,[key,convert]] of Object.entries(restarts))$(id).addEventListener('change',e=>{state.prefs[key]=convert(e.target.value);persist();start();});
+    $('review-only').addEventListener('change',e=>{state.prefs.review=e.target.checked;persist();start();});
+    $('show-furigana').addEventListener('change',e=>{state.prefs.furigana=e.target.checked;persist();if(state.view==='quiz'){renderQuestion(true);if(state.current?.answered)reveal();}else if(state.view==='match')renderBoard();else if(state.view==='explore')renderExplore();});
+    for(const [id,key] of [['sound-effects','effects'],['auto-audio','autoAudio']])$(id).addEventListener('change',e=>{state.prefs[key]=e.target.checked;persist();});
+    $('audio-source').addEventListener('change',e=>{stopAudio();state.prefs.audioSource=e.target.value;persist();renderControls();if(state.view==='quiz'&&state.current?.auditory&&!state.current.answered&&!availableModes().includes('listen'))nextQuestion();});
+    $('speech-rate').addEventListener('input',e=>{state.prefs.rate=Number(e.target.value);persist();$('rate-value').textContent=state.prefs.rate.toFixed(2)+'×';});
+    $('theme-toggle').addEventListener('click',()=>{state.prefs.theme=state.prefs.theme==='dark'?'light':'dark';persist();renderControls();});
+    $('listen-question').addEventListener('click',playCurrent);$('answer-form').addEventListener('submit',answerWritten);
+    $('skip-question').addEventListener('click',()=>respond('skipped'));$('next-question').addEventListener('click',()=>{if(state.current?.answered)nextQuestion();});
+    $('end-session').addEventListener('click',finish);$('match-finish').addEventListener('click',finish);
+    $('repeat-session').addEventListener('click',start);$('review-session').addEventListener('click',()=>{state.prefs.review=true;persist();start();});
+    $('exit-review').addEventListener('click',()=>{state.prefs.review=false;state.prefs.modes=[...MODES];state.prefs.writeFormat='any';persist();start();});
+    $('search-kana').addEventListener('input',e=>{state.query=e.target.value;state.exploreLimit=60;renderExplore();});$('explore-more').addEventListener('click',()=>{state.exploreLimit+=60;renderExplore();});
+    for(const id of ['import-button','empty-import'])$(id).addEventListener('click',()=>$('import-json').click());
+    $('import-json').addEventListener('change',importFiles);$('retry-data').addEventListener('click',loadRemote);
+    $('export-json').addEventListener('click',()=>download(Core.exportData(state.groups),'Vocabulario_JLPT.json'));
+    $('download-example').addEventListener('click',()=>download({N5:[{kanji:'食べる',kana:'たべる',romaji:'taberu',significado:'comer',variantes_es:['comer']}],N4:[{kanji:'約束',kana:'やくそく',romaji:'yakusoku',significado:'promesa; cita'}]},'Ejemplo_vocabulario_JLPT.json'));
+    $('restore-data').addEventListener('click',()=>{state.custom={};save(KEYS.custom,{});mergeGroups();start();loadRemote();});
+    $('reset-progress').addEventListener('click',()=>$('reset-dialog').showModal());$('cancel-reset').addEventListener('click',()=>$('reset-dialog').close());
+    $('confirm-reset').addEventListener('click',()=>{state.progress=progressClean(null);save(KEYS.progress,state.progress);$('reset-dialog').close();state.prefs.review=false;persist();start();});
+    document.addEventListener('keydown',e=>{
+      if(e.isComposing||e.keyCode===229||e.ctrlKey||e.metaKey||e.altKey||$('reset-dialog').open)return;
+      const tag=e.target.tagName;if(['INPUT','TEXTAREA','SELECT'].includes(tag)||e.target.isContentEditable)return;
+      if(e.key==='Enter'&&tag==='BUTTON')return;
+      if(state.view!=='quiz')return;const k=e.key.toLowerCase();
+      if(k==='r'){e.preventDefault();playCurrent();return;}
+      if(k==='enter'&&state.current?.answered){e.preventDefault();nextQuestion();return;}
+      if(state.prefs.activity==='quiz'){const index=/^[1-4]$/.test(k)?Number(k)-1:['a','b','c','d'].indexOf(k);if(index>=0){e.preventDefault();answerOption(index);}}
+    });
+    $('typed-answer').addEventListener('compositionstart',()=>{composing=true;});$('typed-answer').addEventListener('compositionend',()=>{composing=false;});
+    $('typed-answer').addEventListener('keydown',e=>{if(e.isComposing||e.keyCode===229){if(e.key==='Enter'){e.preventDefault();e.stopPropagation();}}});
+    document.addEventListener('visibilitychange',()=>{if(document.hidden)stopAudio();});window.addEventListener('pagehide',()=>{stopAudio();save(KEYS.progress,state.progress);});
+    if(window.speechSynthesis)speechSynthesis.addEventListener('voiceschanged',()=>{sound.voice=japaneseVoice();renderControls();});
+  }
+  bind();mergeGroups();sound.voice=japaneseVoice();start();loadRemote();
+  setInterval(()=>{const s=state.session;if(s)$('session-time').textContent=formatTime(s.ended?s.elapsed:Date.now()-s.started);},1000);
+})();
+
+</script>
+</body>
+</html>
