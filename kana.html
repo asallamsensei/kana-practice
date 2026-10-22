@@ -390,8 +390,8 @@
           <summary>Más opciones</summary>
           <details id="audio-settings">
             <summary>Sonido y pronunciación</summary>
-            <label class="check-row" for="sound-effects"><span>Efectos al responder</span><input id="sound-effects" type="checkbox"></label>
-            <label class="check-row" for="auto-audio"><span>Audio tras responder</span><input id="auto-audio" type="checkbox"></label>
+            <label class="check-row" for="sound-effects"><span>Efectos al responder</span><input id="sound-effects" type="checkbox" checked></label>
+            <label class="check-row" for="auto-audio"><span>Audio tras responder</span><input id="auto-audio" type="checkbox" checked></label>
             <div class="setting-group"><label class="setting-label" for="audio-source">Pronunciación</label><select id="audio-source"><option value="mp3" id="mp3-option" selected>Audios MP3 (predeterminado)</option><option value="tts">Sintetizador (voz japonesa)</option></select></div>
             <div class="setting-group"><label class="setting-label" for="speech-rate">Velocidad <span id="rate-value">0.85×</span></label><input id="speech-rate" type="range" min="0.5" max="1.1" step="0.05" value="0.85"></div>
             <p id="audio-status" class="setting-help" role="status">Buscando voz japonesa…</p>
@@ -695,7 +695,7 @@
   const QUESTION_MODES = Object.freeze(["kana-romaji", "romaji-kana", "listen"]);
   const DEFAULT_PREFS = {
     scope: "hiragana", activity: "quiz", modes: QUESTION_MODES, length: 20,
-    pairs: 4, review: false, effects: false, autoAudio: false,
+    pairs: 4, review: false, effects: true, autoAudio: true,
     audioSource: "mp3", audioSourceVersion: 1, rate: 0.85, theme: "dark"
   };
   let storageAvailable = true;
