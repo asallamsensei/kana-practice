@@ -89,6 +89,7 @@
     .options { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; }
     .option-button { position:relative; display:flex; align-items:center; justify-content:center; min-height:67px; padding:12px 35px; border:1px solid var(--border); border-radius:13px; color:var(--text); background:var(--raised); font-size:28px; transition:background .15s,border-color .15s,transform .15s; }
     .option-button:hover:not(:disabled) { border-color:var(--accent); background:var(--accent-bg); transform:translateY(-1px); }
+    .option-key { position:absolute; left:10px; top:7px; font:12px system-ui; }
     .option-button .answer-mark { position:absolute; right:14px; font-size:20px; }
     .option-button:disabled { opacity:1; cursor:default; }
     .option-button.is-correct { background:var(--mint-bg); border-color:var(--mint); color:var(--text); }
@@ -1166,6 +1167,11 @@
       if (question.direction === "romaji-kana") {
         text.classList.add("jp"); text.lang = "ja";
       }
+      const key = document.createElement("span");
+      key.className = "option-key";
+      key.textContent = String.fromCharCode(65 + index);
+      key.setAttribute("aria-hidden", "true");
+      button.appendChild(key);
       button.appendChild(text);
       button.addEventListener("click", function () { answerOption(index); });
       box.appendChild(button);
