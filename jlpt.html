@@ -627,8 +627,27 @@ if (typeof document !== 'undefined') (function() {
   if(!priorProgress){const old=read('n5_vocab_stats_v1');if(old){state.progress.legacy={correct:number(old.aciertos),wrong:number(old.errores),skipped:0,streak:0,best:number(old.mejorRacha)};save(KEYS.progress,state.progress);}}
   function safeGroups(raw){try{return Core.validate(raw);}catch{return {};}}
   state.custom=safeGroups(read(KEYS.custom));state.remote=safeGroups(read(KEYS.cache));
-  function notice(message,error=false){$('notice-text').textContent=message;$('notice').hidden=false;$('notice').classList.toggle('error',error);}
-  function showNotice(message,error=false){notice(message,error);}
+  let noticeTimer = null;
+  function hideNotice() {
+    if (noticeTimer !== null) { clearTimeout(noticeTimer); noticeTimer = null; }
+    $('notice').hidden = true;
+    $('notice-timer').hidden = true;
+    $('notice-timer').style.animation = 'none';
+  }
+  function notice(message, error = false, duration = 0) {
+    hideNotice();
+    $('notice-text').textContent = message;
+    $('notice').hidden = false;
+    $('notice').classList.toggle('error', error);
+    if (duration > 0) {
+      const bar = $('notice-timer');
+      bar.hidden = false;
+      void bar.offsetWidth;
+      bar.style.animation = 'notice-countdown ' + duration + 'ms linear forwards';
+      noticeTimer = setTimeout(hideNotice, duration);
+    }
+  }
+  function showNotice(message, error = false, duration = 0) { notice(message, error, duration); }
   function persist(){save(KEYS.prefs,state.prefs);}
   function timer(fn,ms){const g=state.generation;const id=setTimeout(()=>{state.timers.delete(id);if(g===state.generation)fn();},ms);state.timers.add(id);return id;}
   function cancel(){state.generation++;for(const id of state.timers)clearTimeout(id);state.timers.clear();state.lock=false;stopAudio();}
@@ -756,12 +775,12 @@ if (typeof document !== 'undefined') (function() {
   function renderQuestion(preserveInput=false){
     const q=state.current;if(!q)return;
     $('exercise-badge').textContent=q.item.nivel+' · '+({reading:'Lectura',listen:'Dictado','jp-es':'JP → ES','es-jp':'ES → JP'})[q.mode];
-    const prompt=$('prompt');prompt.replaceChildren();prompt.className='prompt';prompt.removeAttribute('lang');
+    const prompt=$('prompt');prompt.replaceChildren();prompt.className='prompt';prompt.removeAttribute('lang');prompt.hidden=false;
     const write=state.prefs.activity==='write';
     const format=q.target==='jp'&&write?state.prefs.writeFormat:q.target;
     const response={es:'el significado en español',jp:'la palabra japonesa',romaji:'la lectura en romaji',kana:'la lectura en kana',kanji:'la escritura original',any:'la palabra en kanji, kana o romaji'}[format];
     $('question-label').textContent=(write?'Escribe ':'Elige ')+response;
-    if(q.auditory&&!q.answered){prompt.classList.add('audio-prompt');prompt.textContent='Escucha la palabra';}
+    if(q.auditory&&!q.answered){prompt.hidden=true;}
     else if(q.mode==='es-jp'&&!q.answered){prompt.classList.add('spanish');prompt.textContent=q.item.significado;}
     else prompt.append(japaneseNode(q.item,q.mode!=='reading'||q.answered));
     $('listen-question').hidden=false;$('listen-question').disabled=false;
@@ -1059,7 +1078,7 @@ if (typeof document !== 'undefined') (function() {
   }
   function download(value,name){const blob=new Blob([JSON.stringify(value,null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=name;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);}
   function bind(){
-    $('dismiss-notice').addEventListener('click',()=>$('notice').hidden=true);
+    $('dismiss-notice').addEventListener('click',hideNotice);
     all('[data-activity]').forEach(b=>b.addEventListener('click',()=>{state.prefs.activity=b.dataset.activity;persist();start();}));
     all('[data-mode]').forEach(b=>b.addEventListener('click',()=>{const m=b.dataset.mode;let list=activeModes();if(m==='mix')list=availableModes();else if(list.includes(m)){if(list.length===1)return;list=list.filter(x=>x!==m);}else list=MODES.filter(x=>x===m||list.includes(x));state.prefs.modes=list;persist();start();}));
     const restarts={'session-length':['length',Number],'match-count':['pairs',Number],'write-format':['writeFormat',String],'reading-format':['readingFormat',String],'dictation-target':['dictationTarget',String]};
