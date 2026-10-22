@@ -66,7 +66,7 @@
     .segment[data-scope="mixed"] { grid-column:1 / -1; }
     .segment:hover { color:var(--text); background:var(--raised); }
     .segment[aria-pressed="true"] { background:var(--accent-bg); color:var(--text); }
-    .segment.is-mixed { background:var(--danger-bg); box-shadow:inset 0 0 0 1px var(--danger); }
+    .segment.is-mixed { background:var(--accent-bg); box-shadow:inset 0 0 0 1px var(--accent); }
     .scope-count { font-size:14px; color:var(--text); }
     .activity-tabs { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:6px; padding:6px; background:var(--surface); border:1px solid var(--border); border-radius:16px; margin-bottom:16px; }
     .activity-tab { display:flex; align-items:center; justify-content:center; gap:8px; padding:12px 8px; border:0; border-radius:10px; background:transparent; color:var(--text); font-size:15px; font-weight:650; min-height:46px; }
@@ -124,7 +124,7 @@
     .mode-grid { display:grid; grid-template-columns:1fr 1fr; gap:7px; }
     .mode-button { min-height:43px; padding:9px 5px; border:1px solid var(--border); border-radius:9px; color:var(--text); background:var(--raised); font-size:14px; font-weight:650; }
     .mode-button[aria-pressed="true"] { border-color:var(--accent); color:var(--text); background:var(--accent-bg); }
-    .mode-button.is-mixed { border-color:var(--danger); background:var(--danger-bg); }
+    .mode-button.is-mixed { border-color:var(--accent); background:var(--accent-bg); }
     .setting-help { margin-top:8px; color:var(--text); font-size:14px; line-height:1.65; }
     select { width:100%; min-height:41px; border:1px solid var(--border); border-radius:9px; background:var(--raised); color:var(--text); padding:8px 10px; font-size:14px; }
     .check-row { display:flex; align-items:center; justify-content:space-between; gap:12px; font-size:14px; color:var(--text); cursor:pointer; min-height:34px; }
@@ -1135,10 +1135,10 @@
     $("typed-answer").removeAttribute("aria-invalid");
     $("feedback-title").textContent = "";
     $("feedback-detail").textContent = "";
-    $("feedback-tip").textContent = "";
+    $("feedback-tip").textContent = auditory ? "Pulsa Escuchar si el audio no empieza. También puedes usar «No lo sé» para revelar la respuesta." : "";
     $("next-question").disabled = true;
     $("next-question").textContent = "Siguiente →";
-    $("skip-question").disabled = auditory;
+    $("skip-question").disabled = false;
     $("listen-question").disabled = !audioAvailable();
     $("listen-question").querySelector("span").textContent = auditory ? "Escuchar de nuevo" : "Escuchar";
     renderOptions();
@@ -1187,10 +1187,12 @@
   function finishQuestion(outcome, selectedIndex, typed) {
     const question = state.current;
     if (!question || question.answered || state.view !== "quiz") return;
-    if (question.auditory && !question.heard) return;
+    const unheard = question.auditory && !question.heard;
+    if (unheard && outcome !== "skipped") return;
     question.answered = true;
     state.session.answered += 1;
-    recordAnswer(question.item, outcome);
+    if (!unheard) recordAnswer(question.item, outcome);
+    else renderStats();
     $("typed-answer").readOnly = true;
     $("submit-answer").disabled = true;
     $("skip-question").disabled = true;
@@ -1210,15 +1212,15 @@
         button.appendChild(mark);
       }
     });
-    $("feedback-title").textContent = outcome === "correct" ? "¡Correcto!" : outcome === "skipped" ? "Vamos a repasarlo." : "Casi. Mira la lectura.";
+    $("feedback-title").textContent = unheard ? "Respuesta revelada." : outcome === "correct" ? "¡Correcto!" : outcome === "skipped" ? "Vamos a repasarlo." : "Casi. Mira la lectura.";
     $("feedback-detail").textContent = question.item.kana + "  ·  " + question.item.romaji
       + (outcome === "wrong" && typed ? "  ·  Escribiste: " + typed : "");
-    $("feedback-tip").textContent = explanationFor(question.item);
+    $("feedback-tip").textContent = unheard ? "Sin audio: esta pregunta no afecta a tu precisión ni al repaso." : explanationFor(question.item);
     $("next-question").disabled = false;
     $("next-question").textContent = (sessionLimit() && state.session.answered >= sessionLimit())
       || (state.prefs.review && pendingCount() === 0) ? "Ver resultado →" : "Siguiente →";
-    playEffect(outcome === "correct");
-    if (state.prefs.autoAudio) {
+    if (!unheard) playEffect(outcome === "correct");
+    if (state.prefs.autoAudio && !unheard) {
       later(function () {
         if (!document.hidden && state.prefs.autoAudio && state.current === question) playCurrent();
       }, state.prefs.effects ? 180 : 0);
