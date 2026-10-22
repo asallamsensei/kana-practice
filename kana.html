@@ -10,7 +10,7 @@
     :root {
       color-scheme: dark;
       --bg:#10121b; --surface:#191c29; --raised:#222635; --hover:#292e40;
-      --text:#ffffff; --muted:#ffffff; --subtle:#ffffff; --border:#34394c;
+      --text:#ffffff; --border:#34394c;
       --accent:#c3b4ff; --accent-bg:#39304f; --mint:#a4e3ce; --mint-bg:#233e38;
       --danger:#ffb4b4; --danger-bg:#432c35; --gold:#f2ce88; --shadow:0 20px 60px #00000024;
       --radius:22px; --jp:"Noto Sans JP","Hiragino Sans","Yu Gothic",Meiryo,sans-serif;
@@ -18,7 +18,7 @@
     :root[data-theme="light"] {
       color-scheme: light;
       --bg:#f3f2ef; --surface:#ffffff; --raised:#f3f3f8; --hover:#eaeaf2;
-      --text:#000000; --muted:#000000; --subtle:#000000; --border:#d9dce6;
+      --text:#000000; --border:#d9dce6;
       --accent:#6748af; --accent-bg:#eee7fa; --mint:#216750; --mint-bg:#e4f3eb;
       --danger:#a52841; --danger-bg:#fce8ed; --gold:#936218; --shadow:0 20px 60px #37325109;
     }
@@ -33,10 +33,9 @@
     a { color:inherit; text-decoration:none; }
     a:hover { text-decoration:underline; text-underline-offset:4px; }
     button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible { outline:3px solid var(--accent); outline-offset:4px; }
-    h1,h2,h3,p { margin:0; }
+    h1,h2,p { margin:0; }
     h1 { font-size:clamp(34px,4.13vw,54px); letter-spacing:-1.6px; line-height:1.14; font-weight:720; }
     h2 { font-size:25px; letter-spacing:-.45px; }
-    h3 { font-size:18px; }
     .jp { font-family:var(--jp); font-weight:400; }
     .sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
     .skip-link { position:fixed; top:-70px; left:16px; z-index:100; padding:12px 18px; background:var(--surface); border:2px solid var(--accent); border-radius:10px; }
@@ -65,8 +64,6 @@
     .segment[data-scope="mixed"] { grid-column:1 / -1; }
     .segment:hover { color:var(--text); background:var(--raised); }
     .segment[aria-pressed="true"] { background:var(--accent-bg); color:var(--text); }
-    .kana-total { display:flex; align-items:center; gap:10px; font-size:15px; }
-    .kana-total strong { font-size:28px; font-weight:600; letter-spacing:-.6px; }
     .scope-count { font-size:14px; color:var(--text); }
     .activity-tabs { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:6px; padding:6px; background:var(--surface); border:1px solid var(--border); border-radius:16px; margin-bottom:16px; }
     .activity-tab { display:flex; align-items:center; justify-content:center; gap:8px; padding:12px 8px; border:0; border-radius:10px; background:transparent; color:var(--text); font-size:15px; font-weight:650; min-height:46px; }
@@ -90,7 +87,6 @@
     .sound-waves i:nth-child(2),.sound-waves i:nth-child(6) { height:32px; }
     .sound-waves i:nth-child(3),.sound-waves i:nth-child(5) { height:43px; }
     .sound-waves i:nth-child(4) { height:55px; }
-    .listen-prompt span { font-size:18px; color:var(--text); letter-spacing:0; font-family:inherit; }
     .listen-button { display:inline-flex; align-items:center; gap:7px; padding:7px 12px; min-height:36px; font-size:14px; font-weight:600; border:1px solid var(--border); border-radius:999px; color:var(--text); background:transparent; }
     .listen-button:hover { background:var(--raised); color:var(--text); }
     .listen-button.playing { color:var(--text); border-color:var(--mint); }
@@ -102,7 +98,6 @@
     .option-button:disabled { opacity:1; cursor:default; }
     .option-button.is-correct { background:var(--mint-bg); border-color:var(--mint); color:var(--text); }
     .option-button.is-wrong { background:var(--danger-bg); border-color:var(--danger); color:var(--text); }
-    .option-button.is-muted { opacity:1; }
     .answer-form { display:flex; align-items:stretch; gap:10px; }
     .answer-input { min-width:0; width:100%; padding:14px 17px; background:var(--raised); color:var(--text); border:1px solid var(--border); border-radius:12px; font-size:27px; text-align:center; }
     input::placeholder { color:var(--text); opacity:1; }
@@ -113,11 +108,8 @@
     .button.primary:hover:not(:disabled) { background:var(--raised); }
     .button.small { font-size:14px; min-height:36px; padding:7px 11px; }
     .button.ghost { background:transparent; color:var(--text); border-color:transparent; }
-    .button.danger { color:var(--text); }
     .feedback { min-height:67px; display:flex; flex-direction:column; justify-content:center; align-items:center; gap:3px; text-align:center; padding:12px 0 8px; }
     .feedback-title { font-size:18px; font-weight:700; }
-    .feedback-title.correct { color:var(--text); }
-    .feedback-title.wrong { color:var(--text); }
     .feedback-detail { font-size:15px; color:var(--text); }
     .feedback-tip { font-size:14px; color:var(--text); margin-top:3px; max-width:540px; }
     .exercise-actions { display:flex; align-items:center; justify-content:space-between; gap:10px; padding-top:13px; border-top:1px solid var(--border); }
@@ -127,18 +119,15 @@
     .stat { padding:13px 8px; background:var(--surface); border:1px solid var(--border); border-radius:13px; text-align:center; min-width:0; }
     .stat-label { font-size:14px; text-transform:uppercase; letter-spacing:1px; color:var(--text); }
     .stat strong { display:block; font-weight:600; font-size:26px; letter-spacing:-.5px; margin-top:2px; font-variant-numeric:tabular-nums; }
-    .stat:first-child strong { color:var(--text); }
     .session-caption { margin:10px 2px 0; font-size:14px; color:var(--text); display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap; }
     .session-caption .button { min-height:30px; padding:4px 8px; font-size:14px; }
     .settings { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:22px 20px; }
     .settings-heading { display:flex; align-items:center; justify-content:space-between; font-size:17px; font-weight:700; margin-bottom:22px; }
-    .settings-heading .icon { color:var(--text); }
     .setting-group + .setting-group { margin-top:20px; }
     .setting-label { display:block; font-size:14px; font-weight:650; color:var(--text); margin-bottom:8px; }
     .mode-grid { display:grid; grid-template-columns:1fr 1fr; gap:7px; }
     .mode-button { min-height:43px; padding:9px 5px; border:1px solid var(--border); border-radius:9px; color:var(--text); background:var(--raised); font-size:14px; font-weight:650; }
     .mode-button[aria-pressed="true"] { border-color:var(--accent); color:var(--text); background:var(--accent-bg); }
-    .mode-button:hover:not(:disabled) { color:var(--text); }
     .setting-help { margin-top:8px; color:var(--text); font-size:14px; line-height:1.65; }
     select { width:100%; min-height:41px; border:1px solid var(--border); border-radius:9px; background:var(--raised); color:var(--text); padding:8px 10px; font-size:14px; }
     .check-row { display:flex; align-items:center; justify-content:space-between; gap:12px; font-size:14px; color:var(--text); cursor:pointer; min-height:34px; }
@@ -157,7 +146,6 @@
     .lifetime-row strong { color:var(--text); font-weight:650; }
     .review-count { display:inline-block; color:var(--text); font-weight:650; }
     .match-intro { display:flex; justify-content:space-between; align-items:center; gap:12px; margin:24px 0 19px; }
-    .match-intro p { font-size:14px; color:var(--text); margin-top:5px; }
     .match-board { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:10px; }
     .match-tile { min-height:106px; border:1px solid var(--border); border-radius:13px; color:var(--text); background:var(--raised); position:relative; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:9px; padding:12px 6px; }
     .match-tile .tile-content { font-size:30px; line-height:1.5; }
@@ -226,7 +214,7 @@
       h1 { letter-spacing:-1px; }
       .workspace { grid-template-columns:1fr; }
       .segmented { width:100%; }
-      .segment { flex:1; padding:7px 5px; font-size:14px; }
+      .segment { padding:7px 5px; font-size:14px; }
       .activity-tabs { gap:4px; padding:5px; border-radius:14px; margin-bottom:13px; }
       .activity-tab { flex-direction:column; gap:4px; padding:9px 2px; min-height:59px; font-size:14px; }
       .activity-tab .icon { width:18px; }
@@ -377,7 +365,6 @@
       <aside class="settings" aria-label="Ajustes de la práctica">
         <div class="settings-heading"><span>A tu ritmo</span><svg class="icon" aria-hidden="true"><use href="#i-sliders"/></svg></div>
         <div class="setting-group scope-row">
-          <div class="kana-total"><strong id="total-kana">234</strong><span>kana y combinaciones</span></div>
           <div class="segmented" role="group" aria-label="Escritura que quieres practicar">
             <button class="segment" type="button" data-scope="hiragana" aria-pressed="true">Hiragana <span class="jp" lang="ja">あ</span></button>
             <button class="segment" type="button" data-scope="katakana" aria-pressed="false">Katakana <span class="jp" lang="ja">ア</span></button>
@@ -422,7 +409,7 @@
             <div class="lifetime-row"><span>Mejor racha</span><strong id="total-best">0</strong></div>
             <div class="lifetime-row"><span>Kana practicados</span><strong id="total-seen">0</strong></div>
             <p id="storage-status" class="setting-help">Tu progreso se guarda en este navegador.</p>
-            <button id="reset-progress" class="button ghost small danger" type="button">Borrar mi progreso</button>
+            <button id="reset-progress" class="button ghost small" type="button">Borrar mi progreso</button>
           </details>
           <details id="data-settings">
             <summary>Mi lista de kana</summary>
@@ -455,7 +442,7 @@
   </div>
   <dialog id="reset-dialog" aria-labelledby="reset-title">
     <h2 id="reset-title">¿Borrar tu progreso?</h2><p>Se borrarán las estadísticas y los fallos guardados de este entrenador. Tu lista de kana y tus ajustes se conservarán.</p>
-    <div class="dialog-actions"><button id="cancel-reset" class="button" type="button">Conservar</button><button id="confirm-reset" class="button danger" type="button">Borrar progreso</button></div>
+    <div class="dialog-actions"><button id="cancel-reset" class="button" type="button">Conservar</button><button id="confirm-reset" class="button" type="button">Borrar progreso</button></div>
   </dialog>
   <!-- Lista revisada: 104 hiragana + 130 katakana. Se puede reemplazar por otro JSON del mismo esquema. -->
   <script id="kana-data" type="application/json">
@@ -680,7 +667,7 @@
   <script>
 /*
  * ENTRENADOR DE KANA · ASALLAM SENSEI
- * Reemplazo completo y autónomo. No requiere paquetes ni un proceso de compilación.
+ * Archivo autónomo. No requiere paquetes ni un proceso de compilación.
  *
  * CONFIGURACIÓN OPCIONAL:
  * - dataUrl: "" usa el JSON incorporado. Puedes indicar "data/kana.json".
@@ -980,7 +967,6 @@
           ? "En Escribir, la respuesta se introduce en romaji." : "";
     });
     $("scope-count").textContent = practiceItems().length + " en tu selección";
-    $("total-kana").textContent = state.items.length;
     $("mode-settings").hidden = !["quiz", "write"].includes(state.prefs.activity);
     $("length-settings").hidden = state.prefs.activity === "explore";
     $("match-settings").hidden = state.prefs.activity !== "match";
@@ -1128,7 +1114,6 @@
     $("submit-answer").disabled = auditory;
     $("typed-answer").removeAttribute("aria-invalid");
     $("feedback-title").textContent = "";
-    $("feedback-title").className = "feedback-title";
     $("feedback-detail").textContent = "";
     $("feedback-tip").textContent = "";
     $("next-question").disabled = true;
@@ -1202,10 +1187,9 @@
         const mark = document.createElement("span");
         mark.className = "answer-mark"; mark.textContent = "×"; mark.setAttribute("aria-hidden", "true");
         button.appendChild(mark);
-      } else button.classList.add("is-muted");
+      }
     });
     $("feedback-title").textContent = outcome === "correct" ? "¡Correcto!" : outcome === "skipped" ? "Vamos a repasarlo." : "Casi. Mira la lectura.";
-    $("feedback-title").className = "feedback-title " + (outcome === "correct" ? "correct" : "wrong");
     $("feedback-detail").textContent = question.item.kana + "  ·  " + question.item.romaji
       + (outcome === "wrong" && typed ? "  ·  Escribiste: " + typed : "");
     $("feedback-tip").textContent = explanationFor(question.item);
@@ -1214,9 +1198,8 @@
       ? "Ver resultado →" : "Siguiente →";
     playEffect(outcome === "correct");
     if (state.prefs.autoAudio) {
-      const id = question.item.id;
       later(function () {
-        if (state.current && state.current.item.id === id && state.current.answered) playCurrent();
+        if (!document.hidden && state.prefs.autoAudio && state.current === question) playCurrent();
       }, state.prefs.effects ? 180 : 0);
     }
     if (state.prefs.activity === "write") $("next-question").focus({ preventScroll: true });
@@ -1233,7 +1216,6 @@
     const typed = $("typed-answer").value.trim();
     if (!typed) {
       $("feedback-title").textContent = "Escribe una respuesta o pulsa «No lo sé».";
-      $("feedback-title").className = "feedback-title";
       $("typed-answer").focus();
       return;
     }
@@ -1423,7 +1405,7 @@
     $("summary-title").focus({ preventScroll: true });
   }
 
-  // AUDIO: MP3 originales por defecto, respaldo TTS y callbacks cancelables.
+  // AUDIO: un reproductor MP3 reutilizable, sin filtros; respaldo TTS y callbacks cancelables.
   const sound = {
     voice: null, clip: null, utterance: null, context: null, token: 0,
     pending: null, watchdog: null, failedClips: new Set()
@@ -1461,7 +1443,6 @@
     if (sound.clip) {
       sound.clip.onended = null; sound.clip.onerror = null;
       try { sound.clip.pause(); } catch (error) { /* La práctica no depende del audio. */ }
-      sound.clip = null;
     }
     if (sound.utterance) {
       sound.utterance.onstart = null; sound.utterance.onend = null; sound.utterance.onerror = null;
@@ -1552,11 +1533,11 @@
         resolve(ok);
       }
       sound.pending = settle;
-      const clip = new Audio(source);
-      sound.clip = clip;
+      const clip = sound.clip || (sound.clip = new Audio());
       clip.preload = "auto";
       function fail(error) {
-        if (token !== sound.token || fallingBack) { settle(false); return; }
+        if (token !== sound.token) { settle(false); return; }
+        if (fallingBack) return;
         fallingBack = true;
         if (error && error.name === "NotAllowedError") {
           settle(false);
@@ -1575,12 +1556,14 @@
         speechPlayback(item, token).then(settle);
       }
       clip.onended = function () {
-        if (token === sound.token) $("listen-question").classList.remove("playing");
+        if (token === sound.token && clip.ended) $("listen-question").classList.remove("playing");
       };
-      clip.onerror = function () { fail(new Error("MP3 no disponible")); };
+      clip.onerror = function () { if (clip.error) fail(clip.error); };
       ownWatchdog = setTimeout(function () { fail(new Error("Tiempo de espera del MP3")); }, 6500);
       sound.watchdog = ownWatchdog;
       try {
+        if (clip.getAttribute("src") !== source) clip.src = source;
+        else clip.currentTime = 0;
         const playing = clip.play();
         Promise.resolve(playing).then(function () {
           if (token !== sound.token) { settle(false); return; }
