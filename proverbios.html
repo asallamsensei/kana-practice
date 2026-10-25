@@ -1051,10 +1051,7 @@ SOFTWARE.
 })();
 </script>
 <script>
-document.getElementById('print-free-habit').addEventListener('click', () => {
-  const habito = prompt('¿Qué hábito quieres practicar? Déjalo vacío para escribirlo a mano.');
-  if (habito === null) return;
-
+document.getElementById('print-free-habit').addEventListener('click', async function () {
   const hoy = new Date();
   const actual = `${hoy.getFullYear()}-${String(hoy.getMonth() + 1).padStart(2, '0')}`;
   const respuesta = prompt('Mes del calendario (AAAA-MM):', actual);
@@ -1066,74 +1063,83 @@ document.getElementById('print-free-habit').addEventListener('click', () => {
     return;
   }
 
-  const [anio, numeroMes] = mes.split('-').map(Number);
-  const inicio = (new Date(anio, numeroMes - 1, 1).getDay() + 6) % 7;
-  const total = new Date(anio, numeroMes, 0).getDate();
+  this.disabled = true;
 
-  const casillas = Array.from({ length: 42 }, (_, i) => {
-    const dia = i - inicio + 1;
-    return `<div>${dia > 0 && dia <= total ? dia : ''}</div>`;
-  }).join('');
-
-  const ventana = window.open('', '_blank');
-  if (!ventana) {
-    alert('Permite las ventanas emergentes para abrir la hoja.');
-    return;
-  }
-
-  const doc = ventana.document;
-  doc.open();
-  doc.write(`<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="utf-8">
-  <title>Hoja de hábitos · Asallam Sensei</title>
-  <style>
-    @page { size: letter; margin: 18mm; }
-    body { font-family: Arial, sans-serif; color: #111; margin: 0; }
-    h1 { color: #a81421; font-size: 28px; }
-    #habito { font-size: 21px; overflow-wrap: anywhere; }
-    #mes { text-transform: capitalize; margin: 25px 0 15px; }
-    .calendario { display: grid; grid-template-columns: repeat(7, 1fr); }
-    .calendario b { text-align: center; padding: 8px 0; }
-    .calendario div {
-      border: 1px solid #999;
-      height: 22mm;
-      padding: 7px;
-      box-sizing: border-box;
+  try {
+    // Utiliza la biblioteca PDF que ya contiene tu HTML.
+    if (!window.PDFLib) {
+      const script = document.createElement('script');
+      script.textContent = document.getElementById('pdf-lib-code').textContent;
+      document.head.append(script);
+      script.remove();
     }
-    footer { margin-top: 25px; font-size: 13px; }
-  </style>
-</head>
-<body>
-  <p>Asallam Sensei</p>
-  <h1>Mi hoja de hábitos</h1>
-  <p>Hábito que quiero practicar:</p>
-  <h2 id="habito"></h2>
-  <h3 id="mes"></h3>
-  <div class="calendario">
-    <b>Lun</b><b>Mar</b><b>Mié</b><b>Jue</b><b>Vie</b><b>Sáb</b><b>Dom</b>
-    ${casillas}
-  </div>
-  <footer>Marca cada día que practiques tu hábito.</footer>
-</body>
-</html>`);
 
-  doc.getElementById('habito').textContent =
-    habito.trim() || '________________________________';
+    const { PDFDocument, StandardFonts, rgb } = window.PDFLib;
+    const pdf = await PDFDocument.create();
+    const pagina = pdf.addPage([612, 792]);
+    const fuente = await pdf.embedFont(StandardFonts.Helvetica);
 
-  doc.getElementById('mes').textContent =
-    new Date(anio, numeroMes - 1, 1).toLocaleDateString('es', {
-      month: 'long',
-      year: 'numeric'
+    const texto = (contenido, x, y, size = 14) =>
+      pagina.drawText(contenido, { x, y, size, font: fuente });
+
+    texto('Asallam Sensei', 54, 742, 12);
+    pagina.drawText('Mi hoja de hábitos', {
+      x: 54, y: 700, size: 26, font: fuente,
+      color: rgb(0.66, 0.08, 0.13)
     });
 
-  ventana.addEventListener('load', () => {
-    ventana.focus();
-    ventana.print();
-  }, { once: true });
+    texto('Hábito:', 54, 650, 18);
+    pagina.drawLine({
+      start: { x: 118, y: 647 },
+      end: { x: 558, y: 647 },
+      thickness: 1
+    });
 
-  doc.close();
+    const [anio, numeroMes] = mes.split('-').map(Number);
+    const fecha = new Date(anio, numeroMes - 1, 1);
+    const nombreMes = fecha.toLocaleDateString('es', {
+      month: 'long', year: 'numeric'
+    });
+
+    texto('Mes: ' + nombreMes, 54, 610, 17);
+
+    const inicio = (fecha.getDay() + 6) % 7;
+    const total = new Date(anio, numeroMes, 0).getDate();
+
+    ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'].forEach((dia, i) => {
+      texto(dia, 54 + i * 72 + 23, 575, 12);
+    });
+
+    for (let i = 0; i < 42; i++) {
+      const x = 54 + (i % 7) * 72;
+      const y = 558 - Math.floor(i / 7) * 60;
+
+      pagina.drawRectangle({
+        x, y: y - 60, width: 72, height: 60,
+        borderWidth: 0.6, borderColor: rgb(0.6, 0.6, 0.6)
+      });
+
+      const dia = i - inicio + 1;
+      if (dia > 0 && dia <= total) texto(String(dia), x + 8, y - 18, 12);
+    }
+
+    texto('Marca cada día que practiques tu hábito.', 54, 165, 12);
+
+    const blob = new Blob([await pdf.save()], { type: 'application/pdf' });
+    const url = URL.createObjectURL(blob);
+    const enlace = document.createElement('a');
+    enlace.href = url;
+    enlace.download = `Hoja_de_habitos_${mes}.pdf`;
+    document.body.append(enlace);
+    enlace.click();
+    enlace.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 60000);
+  } catch (error) {
+    console.error(error);
+    alert('No se pudo generar el PDF. Inténtalo de nuevo.');
+  } finally {
+    this.disabled = false;
+  }
 });
 </script>
 </body></html>
