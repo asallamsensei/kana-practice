@@ -308,8 +308,13 @@ const normalize=s=>s.normalize('NFKC').replace(/[\s。！？!?.,、]/g,'').trim(
 const DATA_URL = new URL("data/Oraciones_N5_Bloque_01.json", document.baseURI);
 let data, sentenceMap,lexemeMap,mode='quiz',queue=[],index=0,answered=false,score=0,attempts=0,shownOptions=[],missed=new Set(),stored={},limit=12,reviewOnly=false,current=null;
 let ready=false, loadAttempt=0, sessions={}, lastFeedback=null, selection={kind:'mixto',word:'',length:'20'};
-let prefs={theme:'dark',furigana:false,romaji:false,autoAudio:false,length:'20',speed:'0.85'};
-try{Object.assign(prefs,JSON.parse(localStorage.getItem('asallam-oraciones-settings')||'{}'))}catch(e){}
+let prefs={theme:'dark',furigana:false,romaji:true,autoAudio:true,length:'20',speed:'0.85',revealDefaultsVersion:1};
+try{
+ const saved=JSON.parse(localStorage.getItem('asallam-oraciones-settings')||'{}');
+ Object.assign(prefs,saved);
+ // Apply the new reveal defaults once; later choices, including opt-outs, are retained.
+ if(saved.revealDefaultsVersion!==1){prefs.romaji=true;prefs.autoAudio=true;prefs.revealDefaultsVersion=1;}
+}catch(e){}
 function storageKey(){return 'asallam-oraciones:'+data.metadata.id+':'+data.metadata.version}
 function save(){try{localStorage.setItem(storageKey(),JSON.stringify({fallos:[...missed],historial:stored}));localStorage.setItem('asallam-oraciones-settings',JSON.stringify(prefs));$('storageStatus').textContent=''}catch(e){$('storageStatus').textContent='El navegador no permite guardar el progreso. Puedes exportarlo.'}}
 function notify(msg,error=false){$('notice').hidden=false;$('notice').classList.toggle('error',error);$('notice').textContent=msg}
@@ -376,7 +381,7 @@ function renderFeedback(){stopAudio();
  if(!lastFeedback||!current)return;
  const s=sentenceMap.get(current.oracion_id),correct=current.respuestas_aceptadas[0],ok=lastFeedback.ok,wasOpen=$('feedback').querySelector('details')?.open;
  $('feedback').className='feedback '+(ok?'success':'failure');
- $('feedback').innerHTML=`<div class="feedback-title">${ok?'✓ Correcto':'Vamos a repasarlo'}</div>${!ok?`<p>Respuesta: <strong>${esc(correct)}</strong></p>`:''}<p>${esc(s.espanol)}</p><details class="feedback-extra" ${wasOpen?'open':''}><summary>Ver explicación</summary><p class="answer-jp jp" lang="ja">${japanese(s,current,false,current.tipo!=='lectura')}</p><p class="reading" lang="ja">${esc(s.lectura)}</p>${prefs.romaji?`<p class="reading romaji-reading">${esc(s.romaji)}</p>`:''}<p class="explain">${esc(s.explicacion)}</p><div id="answerTokens"></div></details>`;
+ $('feedback').innerHTML=`<div class="feedback-title">${ok?'✓ Correcto':'Vamos a repasarlo'}</div>${!ok?`<p>Respuesta: <strong>${esc(correct)}</strong></p>`:''}${prefs.romaji?`<p class="reading romaji-reading">${esc(s.romaji)}</p>`:''}<p>${esc(s.espanol)}</p><details class="feedback-extra" ${wasOpen?'open':''}><summary>Ver explicación</summary><p class="answer-jp jp" lang="ja">${japanese(s,current,false,current.tipo!=='lectura')}</p><p class="reading" lang="ja">${esc(s.lectura)}</p><p class="explain">${esc(s.explicacion)}</p><div id="answerTokens"></div></details>`;
  details(s,$('answerTokens'));
 }
 function acceptedAnswers(q){
@@ -531,6 +536,7 @@ document.addEventListener('visibilitychange',()=>{if(document.hidden)stopAudio()
 $('retryLoad').onclick=loadData;loadData();
 
 </script></body></html>
+
 
 
 
