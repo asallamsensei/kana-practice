@@ -156,7 +156,7 @@ THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     <noscript><p>Activa JavaScript en tu navegador para introducir tu clave.</p></noscript>
   </form>
 </section><a class="skip-link" href="#book">Saltar al libro</a><noscript><div class="noscript">Puedes leer e imprimir el libro completo. Activa JavaScript para navegar por páginas, escuchar y guardar tus respuestas.</div></noscript>
-<header class="topbar screen-only"><a class="brand" href="#portada"><img class="brand-logo" src="data/proverbios/logo.png" alt="Logo de Asallam Sensei" width="36" height="36" onerror="this.style.visibility='hidden'"><span>Asallam Sensei<span class="brand-sub"><br>Proverbios para la vida</span></span></a><button id="open-menu">Índice</button><button id="open-habits">Mis hábitos</button><button id="open-print">Descargar PDF</button></header>
+<header class="topbar screen-only"><a class="brand" href="#portada"><img class="brand-logo" src="data/proverbios/logo.png" alt="Logo de Asallam Sensei" width="36" height="36" onerror="this.style.visibility='hidden'"><span>Asallam Sensei<span class="brand-sub"><br>Proverbios para la vida</span></span></a><button id="open-menu">Índice</button><button id="open-habits">Mis hábitos</button><button id="print-free-habit" type="button">Imprimir hoja de hábitos</button><button id="open-print">Descargar PDF</button></header>
 <main class="book" id="book" tabindex="-1"><section class="sheet cover" id="portada" data-page="1" data-unit="0" data-units="0" data-kind="cover" style="--accent:#a81421" aria-label="Página 1: Portada"><div class="page-content">
 <div class="cover-top"><span class="eyebrow">Un libro para aprender y practicar</span></div>
 <h1>Desapendéjate</h1><p class="subtitle">con la sabiduría de<br>los proverbios japoneses</p>
@@ -1049,4 +1049,91 @@ SOFTWARE.
     }, 4500);
   });
 })();
-</script></body></html>
+</script>
+<script>
+document.getElementById('print-free-habit').addEventListener('click', () => {
+  const habito = prompt('¿Qué hábito quieres practicar? Déjalo vacío para escribirlo a mano.');
+  if (habito === null) return;
+
+  const hoy = new Date();
+  const actual = `${hoy.getFullYear()}-${String(hoy.getMonth() + 1).padStart(2, '0')}`;
+  const respuesta = prompt('Mes del calendario (AAAA-MM):', actual);
+  if (respuesta === null) return;
+
+  const mes = respuesta.trim();
+  if (!/^(20\d{2}|2100)-(0[1-9]|1[0-2])$/.test(mes)) {
+    alert('Escribe un mes válido, por ejemplo: 2026-10.');
+    return;
+  }
+
+  const [anio, numeroMes] = mes.split('-').map(Number);
+  const inicio = (new Date(anio, numeroMes - 1, 1).getDay() + 6) % 7;
+  const total = new Date(anio, numeroMes, 0).getDate();
+
+  const casillas = Array.from({ length: 42 }, (_, i) => {
+    const dia = i - inicio + 1;
+    return `<div>${dia > 0 && dia <= total ? dia : ''}</div>`;
+  }).join('');
+
+  const ventana = window.open('', '_blank');
+  if (!ventana) {
+    alert('Permite las ventanas emergentes para abrir la hoja.');
+    return;
+  }
+
+  const doc = ventana.document;
+  doc.open();
+  doc.write(`<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <title>Hoja de hábitos · Asallam Sensei</title>
+  <style>
+    @page { size: letter; margin: 18mm; }
+    body { font-family: Arial, sans-serif; color: #111; margin: 0; }
+    h1 { color: #a81421; font-size: 28px; }
+    #habito { font-size: 21px; overflow-wrap: anywhere; }
+    #mes { text-transform: capitalize; margin: 25px 0 15px; }
+    .calendario { display: grid; grid-template-columns: repeat(7, 1fr); }
+    .calendario b { text-align: center; padding: 8px 0; }
+    .calendario div {
+      border: 1px solid #999;
+      height: 22mm;
+      padding: 7px;
+      box-sizing: border-box;
+    }
+    footer { margin-top: 25px; font-size: 13px; }
+  </style>
+</head>
+<body>
+  <p>Asallam Sensei</p>
+  <h1>Mi hoja de hábitos</h1>
+  <p>Hábito que quiero practicar:</p>
+  <h2 id="habito"></h2>
+  <h3 id="mes"></h3>
+  <div class="calendario">
+    <b>Lun</b><b>Mar</b><b>Mié</b><b>Jue</b><b>Vie</b><b>Sáb</b><b>Dom</b>
+    ${casillas}
+  </div>
+  <footer>Marca cada día que practiques tu hábito.</footer>
+</body>
+</html>`);
+
+  doc.getElementById('habito').textContent =
+    habito.trim() || '________________________________';
+
+  doc.getElementById('mes').textContent =
+    new Date(anio, numeroMes - 1, 1).toLocaleDateString('es', {
+      month: 'long',
+      year: 'numeric'
+    });
+
+  ventana.addEventListener('load', () => {
+    ventana.focus();
+    ventana.print();
+  }, { once: true });
+
+  doc.close();
+});
+</script>
+</body></html>
