@@ -1052,6 +1052,11 @@ SOFTWARE.
 </script>
 <script>
 document.getElementById('print-free-habit').addEventListener('click', async function () {
+  const habito = prompt(
+    '¿Qué hábito quieres practicar?\nDéjalo vacío para escribirlo a mano.'
+  );
+  if (habito === null) return;
+ 
   const hoy = new Date();
   const actual = `${hoy.getFullYear()}-${String(hoy.getMonth() + 1).padStart(2, '0')}`;
   const respuesta = prompt('Mes del calendario (AAAA-MM):', actual);
@@ -1087,13 +1092,26 @@ document.getElementById('print-free-habit').addEventListener('click', async func
       x: 54, y: 700, size: 26, font: fuente,
       color: rgb(0.66, 0.08, 0.13)
     });
-
+    
     texto('Hábito:', 54, 650, 18);
-    pagina.drawLine({
-      start: { x: 118, y: 647 },
-      end: { x: 558, y: 647 },
-      thickness: 1
-    });
+    
+    const nombreHabito = habito.trim();
+    
+    if (nombreHabito) {
+      // Ajusta el tamaño para que el hábito quepa en la línea.
+      const tamano = Math.min(
+        16,
+        440 / fuente.widthOfTextAtSize(nombreHabito, 1)
+      );
+    
+      texto(nombreHabito, 118, 650, tamano);
+    } else {
+      pagina.drawLine({
+        start: { x: 118, y: 647 },
+        end: { x: 558, y: 647 },
+        thickness: 1
+      });
+    }
 
     const [anio, numeroMes] = mes.split('-').map(Number);
     const fecha = new Date(anio, numeroMes - 1, 1);
@@ -1110,7 +1128,9 @@ document.getElementById('print-free-habit').addEventListener('click', async func
       texto(dia, 54 + i * 72 + 23, 575, 12);
     });
 
-    for (let i = 0; i < 42; i++) {
+    const filas = Math.ceil((inicio + total) / 7);
+      for (let i = 0; i < filas * 7; i++) {
+       
       const x = 54 + (i % 7) * 72;
       const y = 558 - Math.floor(i / 7) * 60;
 
