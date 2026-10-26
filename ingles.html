@@ -564,40 +564,25 @@ h1{
   border-radius: 22px;
 }
   
+
+:root{color-scheme:dark;--bg:#10121b;--surface:#191c29;--raised:#222635;--text:#fff;--muted:#d1d2dc;--border:#34394c;--accent:#c3b4ff;--accent-bg:#39304f;--mint:#a4e3ce;--mint-bg:#233e38;--danger:#ffb4b4;--danger-bg:#432c35;--card:var(--surface);--card2:var(--surface);--panel:var(--surface);--panel2:var(--raised);--purple:var(--accent);--purple2:var(--accent);--green:var(--mint);--red:var(--danger);--shadow:0 20px 60px #00000024}
+:root[data-theme="light"]{color-scheme:light;--bg:#f3f2ef;--surface:#fff;--raised:#f3f3f8;--text:#171722;--muted:#505064;--border:#d9dce6;--accent:#6748af;--accent-bg:#eee7fa;--mint:#216750;--mint-bg:#e4f3eb;--danger:#a52841;--danger-bg:#fce8ed;--shadow:0 20px 60px #37325109}
+*{box-sizing:border-box}body{background:var(--bg);font:18px/1.5 Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--text);padding:0;display:block}.wrap,.app{width:min(1180px,calc(100% - 40px));margin:auto;padding:0 0 32px;min-height:0}a{color:inherit}.site-nav{display:flex;gap:8px;align-items:center;flex-wrap:wrap;padding:22px 0;border-bottom:1px solid var(--border);margin-bottom:24px}.site-nav a,.site-nav button{border:1px solid var(--border);border-radius:10px;padding:8px 12px;background:var(--surface);color:var(--text);font-size:14px;text-decoration:none;min-height:42px}.site-nav a[aria-current]{background:var(--accent-bg);border-color:var(--accent)}.site-nav .brand-link{border:0;background:none;font-weight:750;margin-right:auto;padding-left:0}.site-nav a:hover,.site-nav button:hover{background:var(--accent-bg)}.page-heading,header{display:block;text-align:left;align-items:start;margin:0 0 24px;padding:0}.page-heading h1,h1{font-size:clamp(30px,5vw,46px);letter-spacing:-1px;text-shadow:none;margin:0;font-weight:720}.page-heading p,.subtitle{font-size:16px;color:var(--muted);margin:8px 0 0}.eyebrow{font-size:12px;letter-spacing:1.3px;text-transform:uppercase;color:var(--accent);font-weight:750}.card,.game-shell,.settings-panel{background:var(--surface);border:1px solid var(--border);box-shadow:var(--shadow);backdrop-filter:none;border-radius:22px}.grid,.layout{grid-template-columns:minmax(0,1fr) 284px;gap:22px}.btn,button,select{font-family:inherit}.btn,.mode-btn,.all-btn,.secondary,.primary,.danger,select{color:var(--text);background:var(--raised);border:1px solid var(--border);border-radius:10px;box-shadow:none;text-shadow:none;font-weight:650}.btn:hover,button:hover{transform:none;box-shadow:none}.btn-next,.primary{background:var(--mint-bg);border-color:var(--mint);color:var(--text)}.btn-mode.activo,.btn-mode.activo.mix-sombra,.chip.activo,.chip.activo.mix-sombra,.mode-btn.active,.all-btn.active{color:var(--text);background:var(--accent-bg);border-color:var(--accent);box-shadow:none}.chip,.pill{color:var(--text);background:var(--raised);box-shadow:none;border-color:var(--border);font-size:14px;font-weight:600}.pill{padding:0;background:none;border:none}.chips{gap:7px;max-height:280px;overflow:auto}.chip{padding:8px 11px}.settings-title h2,.settings h2{font-size:19px;margin:0 0 14px}.settings-title p,.setting-hint,.data-status{font-size:13px;color:var(--muted)}details.settings-disclosure>summary,details.more-options>summary{cursor:pointer;font-size:16px;font-weight:700;padding:12px 0}details.more-options{border-top:1px solid var(--border);margin-top:20px}.storage-note{font-size:13px;color:var(--muted);margin:14px 0 0}.storage-note a{text-decoration:underline}.site-footer{font-size:14px;color:var(--muted);margin-top:25px;display:flex;gap:16px;justify-content:space-between;flex-wrap:wrap}.site-footer a{color:var(--accent)}button:focus-visible,a:focus-visible,summary:focus-visible,select:focus-visible{outline:3px solid var(--accent);outline-offset:3px}.sr-only{position:absolute;width:1px;height:1px;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}.skip-link{position:fixed;top:-60px;left:10px;background:var(--surface);padding:10px;z-index:100}.skip-link:focus{top:10px}button:disabled{opacity:.65;cursor:not-allowed}.notice-error{color:var(--danger)}
+@media(max-width:760px){.wrap,.app{width:calc(100% - 28px)}.site-nav{gap:5px;padding:16px 0}.site-nav .brand-link{flex:1 0 100%}.site-nav a,.site-nav button{font-size:13px;padding:7px 9px}.grid,.layout{display:flex;flex-direction:column;gap:16px}.card,.game-shell,.settings-panel{width:100%;padding:18px}.settings-panel{order:-1}.grid>.settings{order:-1}.site-nav button{margin-left:auto}.page-heading{margin-bottom:18px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+
+#promptMain{font-size:clamp(34px,6vw,64px);color:var(--text);text-shadow:none;min-height:100px}#promptMain.esPregunta{font-size:clamp(28px,5vw,48px)}#promptSub{font-size:16px;color:var(--muted)}#opcionesTexto{font-size:20px}.card.big{padding:28px}.stats{font-size:14px;background:none;border-top:1px solid var(--border);padding-top:15px;color:var(--muted)}.opcion-btn{min-width:70px;min-height:52px;font-size:22px}.opcion-btn.correcto,.opcion-btn.correcta{background:var(--mint-bg);color:var(--text);border-color:var(--mint)}.opcion-btn.incorrecto,.opcion-btn.incorrecta{background:var(--danger-bg);color:var(--text);border-color:var(--danger)}#resultado{min-height:70px;font-size:18px}.correcto{color:var(--mint)}.incorrecto{color:var(--danger)}.switch{gap:7px}.btnAudioDictado{font-size:30px;background:var(--accent-bg)}.actions{gap:8px}.btn-ghost{font-size:13px;background:transparent}.settings>.settings-disclosure{margin:0}
 </style>
 </head>
 
 <body>
 
-<!-- Modal de clave -->
-<div id="claveBack" class="modalBack" aria-hidden="false">
-  <div class="modal">
-    <h2>🔒 Código de estudiante</h2>
-    <p>Escribe tu clave para iniciar.</p>
-
-    <div class="modalRow">
-      <input id="claveInput" type="text" placeholder="Escribe tu clave..." autocomplete="off" />
-      <button class="btn" type="button" onclick="validarClave()">Entrar</button>
-    </div>
-
-    <div id="claveErr" class="modalErr"></div>
-  </div>
-</div>
-
 <div class="wrap">
-  <header>
-    <h1>English Vocab ★ Asallam Sensei</h1>
-
-    <div class="studentLine">
-      <span class="studentBadge">
-        👤 <span id="studentLabel">Estudiante: —</span>
-      </span>
-    </div>
-  </header>
+<a class="skip-link" href="#practice">Ir a la práctica</a><nav class="site-nav" aria-label="Navegación principal"><a class="brand-link" href="index.html">ASALLAM SENSEI</a><a href="index.html">Inicio</a><a href="japones.html">Japonés</a><a href="ingles.html" aria-current="page">Vocabulario</a><a href="englishmemory.html">Memory</a><a href="progreso.html">Progreso</a><a href="https://paypal.me/asallamsensei" target="_blank" rel="noopener noreferrer">Donar</a><button id="themeToggle" type="button">Tema claro</button></nav><header class="page-heading"><span class="eyebrow">Inglés con Asallam Sensei</span><h1>Vocabulario en práctica</h1><p>Escucha, reconoce y recuerda. Elige tu ritmo.</p></header>
 
   <div class="grid">
 
-    <div class="card big">
+    <main class="card big" id="practice" tabindex="-1">
       <div id="promptMain">—</div>
       <div id="promptSub"></div>
 
@@ -632,13 +617,13 @@ h1{
 
       <div class="actions" style="margin-top:14px;">
         <button class="btn btn-ghost" type="button" onclick="resetStats()">
-          Reset stats
+          Reiniciar estadísticas de esta selección
         </button>
       </div>
       
-    </div>
+    </main>
 
-    <div class="card">
+    <aside class="card settings"><details class="settings-disclosure"><summary>A tu ritmo</summary>
     
       <div class="row" style="justify-content:flex-start;">
         <span class="pill">Modos</span>
@@ -680,9 +665,9 @@ h1{
         <button class="btn btn-mode" id="pool-glob" type="button" onclick="setPoolScope('global')">Global</button>
       </div>
 
-    </div>
+    </details><p class="storage-note">El avance se guarda aquí. <a href="progreso.html">Ver y exportar progreso</a>.</p><p id="storageNotice" class="storage-note" role="status"></p></aside>
 
-  </div>
+  </div><footer class="site-footer"><span>Asallam Sensei · Práctica libre de inglés</span><a href="index.html#ingles">Inglés con canciones · Conoce el curso</a></footer>
 </div>
 
 <script>
@@ -695,29 +680,7 @@ const AUDIO_BASE = "data/audios/english/";
 
 
   
-/* ===============================
-   CLAVES -> ESTUDIANTES
-   (agrega más aquí)
-=============================== */
-const CLAVES = [
-  { clave: "paopao", estudiante: "Paola (México)" },
-  { clave: "procura", estudiante: "Katherine (Colombia)" },
-  { clave: "costeña", estudiante: "Sandra (Colombia)" },  
-  { clave: "buenota", estudiante: "Daniela Rayo (Colombia)" },
-  { clave: "osito", estudiante: "Yasmin" },
-  { clave: "autos", estudiante: "Duvan" },
-  { clave: "profe", estudiante: "Sensei" },
-  { clave: "verde", estudiante: "Aura" },
-  { clave: "derecho", estudiante: "Jesús" },  
-  { clave: "esperanza", estudiante: "Gina" },
-  { clave: "maestra", estudiante: "Belén" },
-  { clave: "chisme", estudiante: "Marlene" },
-  { clave: "Arnold", estudiante: "Арнольд" },
-  { clave: "ingeniera", estudiante: "Аna" },
-  { clave: "ganar", estudiante: "Isabel" },
-];
-
-let estudianteActual = null;
+const estudianteActual = "publico";
 
 /* ===============================
    HELPERS
@@ -759,40 +722,6 @@ function ordenarBloquesPorId(bloques){
 }
   
 /* ===============================
-   MODAL CLAVE
-=============================== */
-function validarClave(){
-  const raw = $("claveInput").value;
-  const key = norm(raw);
-
-  const found = CLAVES.find(x => norm(x.clave) === key);
-  if(!found){
-    $("claveErr").textContent = "Clave incorrecta. Intenta de nuevo.";
-    return;
-  }
-
-  estudianteActual = found.estudiante;
-  $("studentLabel").textContent = "Estudiante: " + estudianteActual;
-
-  $("claveBack").style.display = "none";
-  $("claveBack").setAttribute("aria-hidden", "true");
-
-  audioHabilitado = true;
-  cargarStatsActual();
-  // solo suena al entrar si NO es ES→EN (y no dictado)
-  if(!(rondaDir === "es-en" && !rondaDictado)){
-    playAudio(ultimoAudioKey);
-  }
-}
-document.addEventListener("DOMContentLoaded", ()=>{
-  $("claveInput").focus();   // ← Agrega esta línea
-
-  $("claveInput").addEventListener("keydown", (e)=>{
-    if(e.key === "Enter") validarClave();
-  });
-});
-
-/* ===============================
    DATA (bloques)
 =============================== */
 let DATA = { bloques: [] };
@@ -824,7 +753,7 @@ function statsKeyActual(){
 
 function cargarStats(){
   try{
-    return JSON.parse(localStorage.getItem(STATS_KEY)) || {};
+    const value=JSON.parse(localStorage.getItem(STATS_KEY)); return value && typeof value==="object" && !Array.isArray(value) ? value : {};
   }catch{
     return {};
   }
@@ -841,7 +770,7 @@ function guardarStats(){
     mejorRacha
   };
 
-  localStorage.setItem(STATS_KEY, JSON.stringify(stats));
+  try{ localStorage.setItem(STATS_KEY, JSON.stringify(stats)); }catch{ $("storageNotice").textContent="No se pudo guardar el avance. Exporta una copia desde Progreso cuando esté disponible."; }
 }
 
 function cargarStatsActual(){
@@ -923,14 +852,14 @@ function setAudioModo(modo){
   }
 
   detenerAudio();
-  speechSynthesis.cancel();
+  if("speechSynthesis" in window) speechSynthesis.cancel();
 }
 
 function hablarIngles(texto){
   if(!audioHabilitado) return;
   if(!("speechSynthesis" in window)) return;
 
-  speechSynthesis.cancel();
+  if("speechSynthesis" in window) speechSynthesis.cancel();
 
   const voz = new SpeechSynthesisUtterance(texto);
   voz.lang = "en-US";
@@ -941,7 +870,7 @@ function hablarIngles(texto){
 }
   
 const audio = new Audio();
-audio.preload = "auto";
+audio.preload = "none";
 let ultimoAudioKey = "";
 
 // autoplay policy: solo tras interacción
@@ -955,54 +884,30 @@ function buildExactAudioSrc(key){
   if(!k) return "";
   return AUDIO_BASE + encodeURIComponent(k) + ".mp3";
 }
-function detenerAudio(){
-  try{ audio.pause(); audio.currentTime = 0; }catch{}
-}
+let audioRequest=0,audioCleanup=null;
+function detenerAudio(){audioRequest++;if(audioCleanup){audioCleanup();audioCleanup=null}try{audio.pause();audio.currentTime=0}catch{}if('speechSynthesis' in window)speechSynthesis.cancel();}
 
 async function playAudio(key){
-  ultimoAudioKey = String(key || "").trim();
-  if(!audioHabilitado) return;
-  if(!ultimoAudioKey) return;
-
-  detenerAudio();
-  speechSynthesis.cancel();
-
-  // Si está en Sintetizador, siempre sintetiza
-  if(audioModo === "tts"){
-    hablarIngles(ultimoAudioKey);
-    return;
-  }
-
-  // Si está en MP3, intenta MP3 primero
-  const src = buildExactAudioSrc(ultimoAudioKey);
-  if(!src){
-    hablarIngles(ultimoAudioKey);
-    return;
-  }
-
-  try{
-    audio.src = src;
-    audio.load();
-
-    await new Promise((resolve, reject)=>{
-      audio.oncanplaythrough = resolve;
-      audio.onerror = reject;
-    });
-
-    await audio.play();
-
-  }catch{
-    // Si no existe el MP3 o falla, usa sintetizador
-    hablarIngles(ultimoAudioKey);
-  }
+  ultimoAudioKey=String(key||'').trim();if(!audioHabilitado||!ultimoAudioKey)return;
+  const text=ultimoAudioKey;detenerAudio();const request=audioRequest;
+  if(audioModo==='tts'){hablarIngles(text);return}
+  try{await new Promise((resolve,reject)=>{let settled=false;let timer;
+    const clean=()=>{clearTimeout(timer);audio.oncanplaythrough=null;audio.onerror=null};
+    const finish=(fn,value)=>{if(settled)return;settled=true;clean();audioCleanup=null;fn(value)};
+    audioCleanup=()=>finish(resolve,false);
+    audio.oncanplaythrough=()=>finish(resolve,true);audio.onerror=()=>finish(reject,new Error('audio'));
+    timer=setTimeout(()=>finish(reject,new Error('timeout')),5000);
+    audio.src=buildExactAudioSrc(text);audio.load();
+  });if(request!==audioRequest)return;await audio.play();}
+  catch(err){if(request!==audioRequest)return;if(err?.name==='NotAllowedError'){$('storageNotice').textContent='Toca el botón de audio para escuchar.';return}hablarIngles(text)}
 }
-  
 function reproducirAudioActual(){
   if(ultimoAudioKey) playAudio(ultimoAudioKey);
 }
 
 
 function resetStats(){
+  if(!confirm("¿Reiniciar solo las estadísticas de esta selección? Los otros avances se conservan.")) return;
   aciertos = 0;
   errores = 0;
   racha = 0;
@@ -1334,6 +1239,7 @@ function getActivosValidos(){
 function siguiente(){
   const activos = getActivosValidos();
   if(activos.length === 0){
+    correctaLetra=""; ultimoAudioKey=""; detenerAudio();
     $("promptMain").innerText = (DATA.bloques.length ? "Selecciona un bloque con ≥ 3 palabras" : "No hay data");
     $("promptSub").innerText = "";
     $("opcionesTexto").innerHTML = "";
@@ -1374,6 +1280,7 @@ function siguiente(){
 =============================== */
 
 function verificar(letraForzada){
+  if(yaValidado || !correctaLetra) return;
   const res = $("resultado");
   const letra = String(letraForzada || "").toLowerCase().trim();
 
@@ -1408,6 +1315,7 @@ function verificar(letraForzada){
 }
   
 function accionSiguiente(){
+  if(!correctaLetra) return;
   if(!yaValidado){
     sonidoIncorrecto();
     errores++;
@@ -1432,9 +1340,11 @@ function accionSiguiente(){
   siguiente();
 }
 
-const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+const audioCtx = AudioContextClass ? new AudioContextClass() : null;
 
 function playBeep(freq, duration){
+  if(!audioCtx) return;
   try{
     const osc = audioCtx.createOscillator();
     const gain = audioCtx.createGain();
@@ -1468,7 +1378,8 @@ function renderChips(){
   cont.innerHTML = "";
 
   DATA.bloques.forEach((b, i)=>{
-    const chip = document.createElement("div");
+    const chip = document.createElement("button");
+    chip.type = "button";
     chip.className = "chip" + (bloquesActivos.has(i) ? " activo" : "");
     chip.textContent = b.nombre || `Bloque ${i+1}`;
 
@@ -1511,7 +1422,7 @@ function renderChips(){
 }
 
 fetch(JSON_PATH)
-  .then(r=>r.json())
+  .then(r=>{if(!r.ok) throw Error("HTTP "+r.status); return r.json()})
   .then(json=>{
     DATA = (json && json.bloques)
       ? { ...json, bloques: ordenarBloquesPorId(json.bloques) }
@@ -1544,7 +1455,7 @@ fetch(JSON_PATH)
 document.addEventListener("keydown", (event) => {
   if(!estudianteActual) return;
   const tag = (document.activeElement?.tagName || "").toLowerCase();
-  const enCampo = tag === "input" || tag === "textarea";
+  const enCampo = ["input","textarea","select","button","a","summary"].includes(tag) || event.ctrlKey || event.metaKey || event.altKey;
 
   if (enCampo) return;
 
@@ -1577,7 +1488,11 @@ document.addEventListener("keydown", (event) => {
   }
 });
   
+
+(function(){let mode='dark';try{mode=localStorage.getItem('asallam_english_theme')||'dark'}catch{}function apply(){document.documentElement.dataset.theme=mode;document.getElementById('themeToggle').textContent=mode==='dark'?'Tema claro':'Tema oscuro'}apply();document.getElementById('themeToggle').onclick=()=>{mode=mode==='dark'?'light':'dark';apply();try{localStorage.setItem('asallam_english_theme',mode)}catch{}}})();
+
 </script>
 
 </body>
 </html>
+

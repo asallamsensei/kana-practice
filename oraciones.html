@@ -296,7 +296,8 @@
 .answer-input.is-correct{border-color:var(--mint);background:var(--mint-bg)}
 .answer-input.is-wrong{border-color:var(--danger);background:var(--danger-bg)}
 .feedback:empty{padding:0;min-height:0}
-</style></head><body><a class="skip-link" href="#main">Ir a la práctica</a><div class="container"><header class="topbar"><a class="brand" href="https://asallamsensei.com/" aria-label="Asallam Sensei, inicio"><span class="brand-mark jp" lang="ja">文</span><div><span class="brand-name">ASALLAM SENSEI</span><span class="brand-sub">Japonés en contexto</span></div></a><nav class="topnav" aria-label="Navegación"><a class="nav-link" href="https://asallamsensei.com/">Inicio</a><button class="icon-button" id="theme" title="Cambiar tema">☀ Tema claro</button></nav></header>
+.topbar{flex-wrap:wrap}.topnav{flex-wrap:wrap}.topnav .nav-link{white-space:nowrap}@media(max-width:600px){.topbar{align-items:flex-start}.topnav{width:100%;gap:3px}.topnav .nav-link{padding:8px 9px;min-height:42px}.topnav .icon-button{margin-left:auto}}
+</style></head><body><a class="skip-link" href="#main">Ir a la práctica</a><div class="container"><header class="topbar"><a class="brand" href="https://asallamsensei.com/" aria-label="Asallam Sensei, inicio"><span class="brand-mark jp" lang="ja">文</span><div><span class="brand-name">ASALLAM SENSEI</span><span class="brand-sub">Japonés en contexto</span></div></a><nav class="topnav" aria-label="Navegación"><a class="nav-link" href="index.html">Inicio</a><a class="nav-link" href="japones.html">Japonés</a><a class="nav-link" href="progreso.html">Progreso</a><a class="nav-link donate-nav" href="https://paypal.me/asallamsensei" target="_blank" rel="noopener noreferrer">♡ Donar</a><button class="icon-button" id="theme" title="Cambiar tema">☀ Tema claro</button></nav></header>
 <section class="hero"><div><p class="eyebrow">Vocabulario N5 · Bloque 01</p><h1>Oraciones en contexto</h1><p>Comprende, completa y descubre el japonés de cada oración.</p></div><div class="hero-count" id="heroCount"></div></section>
 <section id="loadStatus" class="notice" role="status"><span id="loadMessage">Cargando el bloque de oraciones…</span><button class="button small" id="retryLoad" hidden>Reintentar</button></section><div id="notice" class="notice" role="status" hidden></div>
 <div class="workspace" id="workspace" hidden><main class="main-column" id="main" tabindex="-1"><button class="button mobile-settings" id="openSettings" aria-controls="settingsPanel" aria-expanded="false">A tu ritmo · Ajustes</button><nav class="activity-tabs" aria-label="Actividad"><button class="activity-tab" data-mode="quiz" aria-pressed="true">Practicar</button><button class="activity-tab" data-mode="write" aria-pressed="false">Escribir</button><button class="activity-tab" data-mode="explore" aria-pressed="false">Explorar</button></nav>
@@ -547,6 +548,7 @@ document.addEventListener('visibilitychange',()=>{if(document.hidden)stopAudio()
 $('retryLoad').onclick=loadData;loadData();
 
 </script></body></html>
+
 
 
 

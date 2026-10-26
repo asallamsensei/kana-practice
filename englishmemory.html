@@ -268,37 +268,23 @@ select{
   .card-value{font-size:clamp(10px,3.2vw,16px)}.preview-grid{grid-template-columns:1fr 1fr}.preview-card{min-height:90px;padding:9px}
   .preview-en{font-size:18px}.preview-es{font-size:11px}.memory-header{align-items:flex-start}.results-card{padding:22px 14px}
 }
+
+:root{color-scheme:dark;--bg:#10121b;--surface:#191c29;--raised:#222635;--text:#fff;--muted:#d1d2dc;--border:#34394c;--accent:#c3b4ff;--accent-bg:#39304f;--mint:#a4e3ce;--mint-bg:#233e38;--danger:#ffb4b4;--danger-bg:#432c35;--card:var(--surface);--card2:var(--surface);--panel:var(--surface);--panel2:var(--raised);--purple:var(--accent);--purple2:var(--accent);--green:var(--mint);--red:var(--danger);--shadow:0 20px 60px #00000024}
+:root[data-theme="light"]{color-scheme:light;--bg:#f3f2ef;--surface:#fff;--raised:#f3f3f8;--text:#171722;--muted:#505064;--border:#d9dce6;--accent:#6748af;--accent-bg:#eee7fa;--mint:#216750;--mint-bg:#e4f3eb;--danger:#a52841;--danger-bg:#fce8ed;--shadow:0 20px 60px #37325109}
+*{box-sizing:border-box}body{background:var(--bg);font:18px/1.5 Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--text);padding:0;display:block}.wrap,.app{width:min(1180px,calc(100% - 40px));margin:auto;padding:0 0 32px;min-height:0}a{color:inherit}.site-nav{display:flex;gap:8px;align-items:center;flex-wrap:wrap;padding:22px 0;border-bottom:1px solid var(--border);margin-bottom:24px}.site-nav a,.site-nav button{border:1px solid var(--border);border-radius:10px;padding:8px 12px;background:var(--surface);color:var(--text);font-size:14px;text-decoration:none;min-height:42px}.site-nav a[aria-current]{background:var(--accent-bg);border-color:var(--accent)}.site-nav .brand-link{border:0;background:none;font-weight:750;margin-right:auto;padding-left:0}.site-nav a:hover,.site-nav button:hover{background:var(--accent-bg)}.page-heading,header{display:block;text-align:left;align-items:start;margin:0 0 24px;padding:0}.page-heading h1,h1{font-size:clamp(30px,5vw,46px);letter-spacing:-1px;text-shadow:none;margin:0;font-weight:720}.page-heading p,.subtitle{font-size:16px;color:var(--muted);margin:8px 0 0}.eyebrow{font-size:12px;letter-spacing:1.3px;text-transform:uppercase;color:var(--accent);font-weight:750}.card,.game-shell,.settings-panel{background:var(--surface);border:1px solid var(--border);box-shadow:var(--shadow);backdrop-filter:none;border-radius:22px}.grid,.layout{grid-template-columns:minmax(0,1fr) 284px;gap:22px}.btn,button,select{font-family:inherit}.btn,.mode-btn,.all-btn,.secondary,.primary,.danger,select{color:var(--text);background:var(--raised);border:1px solid var(--border);border-radius:10px;box-shadow:none;text-shadow:none;font-weight:650}.btn:hover,button:hover{transform:none;box-shadow:none}.btn-next,.primary{background:var(--mint-bg);border-color:var(--mint);color:var(--text)}.btn-mode.activo,.btn-mode.activo.mix-sombra,.chip.activo,.chip.activo.mix-sombra,.mode-btn.active,.all-btn.active{color:var(--text);background:var(--accent-bg);border-color:var(--accent);box-shadow:none}.chip,.pill{color:var(--text);background:var(--raised);box-shadow:none;border-color:var(--border);font-size:14px;font-weight:600}.pill{padding:0;background:none;border:none}.chips{gap:7px;max-height:280px;overflow:auto}.chip{padding:8px 11px}.settings-title h2,.settings h2{font-size:19px;margin:0 0 14px}.settings-title p,.setting-hint,.data-status{font-size:13px;color:var(--muted)}details.settings-disclosure>summary,details.more-options>summary{cursor:pointer;font-size:16px;font-weight:700;padding:12px 0}details.more-options{border-top:1px solid var(--border);margin-top:20px}.storage-note{font-size:13px;color:var(--muted);margin:14px 0 0}.storage-note a{text-decoration:underline}.site-footer{font-size:14px;color:var(--muted);margin-top:25px;display:flex;gap:16px;justify-content:space-between;flex-wrap:wrap}.site-footer a{color:var(--accent)}button:focus-visible,a:focus-visible,summary:focus-visible,select:focus-visible{outline:3px solid var(--accent);outline-offset:3px}.sr-only{position:absolute;width:1px;height:1px;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}.skip-link{position:fixed;top:-60px;left:10px;background:var(--surface);padding:10px;z-index:100}.skip-link:focus{top:10px}button:disabled{opacity:.65;cursor:not-allowed}.notice-error{color:var(--danger)}
+@media(max-width:760px){.wrap,.app{width:calc(100% - 28px)}.site-nav{gap:5px;padding:16px 0}.site-nav .brand-link{flex:1 0 100%}.site-nav a,.site-nav button{font-size:13px;padding:7px 9px}.grid,.layout{display:flex;flex-direction:column;gap:16px}.card,.game-shell,.settings-panel{width:100%;padding:18px}.settings-panel{order:-1}.grid>.settings{order:-1}.site-nav button{margin-left:auto}.page-heading{margin-bottom:18px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+
+.hud{background:var(--raised);border-bottom:1px solid var(--border)}.hud-item{background:none;border:0}.hud-label{color:var(--muted)}.hud-value{color:var(--text);text-shadow:none}.stage{background:none}.welcome,.results-card,.memory-ready{background:var(--surface)}.welcome h2{font-size:32px;letter-spacing:-.6px}.welcome p{color:var(--muted);font-size:17px}.hero-icon,.ready-symbol,.results-symbol{font-size:36px;filter:none}.settings-panel{padding:20px}.preview-card,.result-stat{background:var(--raised);border:1px solid var(--border);box-shadow:none;color:var(--text)}.preview-en,.preview-es{color:var(--text)}.memory-card{background:var(--raised);border-color:var(--border);box-shadow:none}.memory-card.revealed{background:var(--accent-bg);border-color:var(--accent);color:var(--text)}.memory-card.matched{background:var(--mint-bg);border-color:var(--mint);color:var(--text)}.memory-card.revealed .card-value,.memory-card.matched .card-value,.memory-card.revealed .card-tag,.memory-card.matched .card-tag{color:var(--text)}.toast{background:var(--surface);color:var(--text);border-color:var(--accent)}.memory-countdown{background:var(--accent-bg);color:var(--text);box-shadow:none}.board{gap:10px}.card-value{overflow-wrap:anywhere;font-size:clamp(15px,2.3vw,22px)}.memory-card{min-height:100px}.primary,.secondary,.danger{min-height:43px}.mode-row{gap:7px}.chip.active{background:var(--accent-bg);color:var(--text);border-color:var(--accent)}.settings-title{display:none}@media(max-width:600px){.board{grid-template-columns:repeat(3,minmax(0,1fr))!important}.memory-card{min-height:100px}.hud{gap:3px;padding:10px}.hud-value{font-size:22px}.preview-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.stage{padding:14px}.hud-label{font-size:11px}}
 </style>
 </head>
 
 <body>
-<!-- CLAVE -->
-<div id="claveBack" class="modal-back" aria-hidden="false">
-  <div class="modal">
-    <h2>🔒 Código de estudiante</h2>
-    <p>Escribe tu clave para entrar a English Memory.</p>
-    <div class="modal-row">
-      <input id="claveInput" type="text" placeholder="Escribe tu clave..." autocomplete="off" />
-      <button id="claveBtn" class="primary" type="button">Entrar</button>
-    </div>
-    <div id="claveErr" class="modal-error"></div>
-  </div>
-</div>
-
 <main class="app">
-  <header class="topbar">
-    <div class="brand">
-      <div class="brand-mark">A★</div>
-      <div class="brand-copy">
-        <h1>English Memory</h1>
-        <p>Vocabulary Memory Arcade · Asallam Sensei</p>
-      </div>
-    </div>
-    <div id="studentLabel" class="student-badge">👤 Estudiante: —</div>
-  </header>
+<a class="skip-link" href="#practice">Ir a la práctica</a><nav class="site-nav" aria-label="Navegación principal"><a class="brand-link" href="index.html">ASALLAM SENSEI</a><a href="index.html">Inicio</a><a href="japones.html">Japonés</a><a href="ingles.html">Vocabulario</a><a href="englishmemory.html" aria-current="page">Memory</a><a href="progreso.html">Progreso</a><a href="https://paypal.me/asallamsensei" target="_blank" rel="noopener noreferrer">Donar</a><button id="themeToggle" type="button">Tema claro</button></nav><header class="page-heading"><span class="eyebrow">Inglés con Asallam Sensei</span><h1>Memoria de vocabulario</h1><p>Une el inglés con su significado. Escucha cada pareja.</p></header>
 
   <div class="layout">
-    <section class="game-shell">
+    <section class="game-shell" id="practice" tabindex="-1">
       <div class="hud">
         <div class="hud-item"><span class="hud-label">Puntos</span><strong class="hud-value" id="scoreValue">0</strong></div>
         <div class="hud-item"><span class="hud-label">Tiempo</span><strong class="hud-value" id="timeValue">00:00</strong></div>
@@ -374,7 +360,7 @@ select{
       </div>
     </section>
 
-    <aside class="settings-panel">
+    <aside class="settings-panel"><details class="settings-disclosure"><summary>A tu ritmo</summary>
       <div class="settings-title">
         <h2>Configuración</h2>
         <p>Elige tamaño, tiempo, audio y bloques de vocabulario.</p>
@@ -421,9 +407,9 @@ select{
         </div>
         <div id="dataStatus" class="data-status">Cargando data/english_vocab.json…</div>
       </div>
-    </aside>
+    </details><p class="storage-note">Tus nuevas partidas se guardan en este navegador. <a href="progreso.html">Ver progreso</a>.</p><p id="storageNotice" class="storage-note" role="status"></p></aside>
   </div>
-</main>
+<footer class="site-footer"><span>Asallam Sensei · Práctica libre de inglés</span><a href="index.html#ingles">Inglés con canciones · Conoce el curso</a></footer></main>
 
 <div id="toast" class="toast"></div>
 
@@ -450,25 +436,7 @@ const CONFIG = {
   mismatchDelay: 760
 };
 
-/* =========================
-   CLAVES -> ESTUDIANTES
-   Conservadas del app de inglés
-========================= */
-const CLAVES = [
-  { clave: "paopao", estudiante: "Paola (México)" },
-  { clave: "procura", estudiante: "Katherine (Colombia)" },
-  { clave: "costeña", estudiante: "Sandra (Colombia)" },
-  { clave: "buenota", estudiante: "Daniela Rayo (Colombia)" },
-  { clave: "osito", estudiante: "Yasmin" },
-  { clave: "autos", estudiante: "Duvan" },
-  { clave: "profe", estudiante: "Sensei" },
-  { clave: "verde", estudiante: "Aura" },
-  { clave: "derecho", estudiante: "Jesús" },
-  { clave: "esperanza", estudiante: "Gina" },
-  { clave: "maestra", estudiante: "Belén" },
-  { clave: "chisme", estudiante: "Marlene" },
-  { clave: "Arnold", estudiante: "Арнольд" }
-];
+
 
 /* =========================
    HELPERS
@@ -513,37 +481,10 @@ function showToast(message){
   toastTimer = setTimeout(()=>$("toast").classList.remove("visible"),2200);
 }
 
-/* =========================
-   LOGIN
-========================= */
-let estudianteActual = null;
+/* Práctica abierta: el audio se habilita con el primer gesto. */
 let audioHabilitado = false;
-
-function validarClave(){
-  const key = norm($("claveInput").value);
-  const found = CLAVES.find(x=>norm(x.clave)===key);
-
-  if(!found){
-    $("claveErr").textContent = "Clave incorrecta. Intenta de nuevo.";
-    return;
-  }
-
-  estudianteActual = found.estudiante;
-  $("studentLabel").textContent = "👤 Estudiante: " + estudianteActual;
-  $("claveErr").textContent = "";
-  $("claveBack").style.display = "none";
-  $("claveBack").setAttribute("aria-hidden","true");
-
-  audioHabilitado = true;
-  sound.init();
-}
-
-$("claveBtn").addEventListener("click",validarClave);
-$("claveInput").addEventListener("keydown",e=>{
-  if(e.key==="Enter") validarClave();
-});
-window.addEventListener("DOMContentLoaded",()=>$("claveInput").focus());
-
+document.addEventListener('pointerdown',()=>audioHabilitado=true,{once:true});
+document.addEventListener('keydown',()=>audioHabilitado=true,{once:true});
 /* =========================
    DATA
 ========================= */
@@ -630,9 +571,10 @@ $("btnTodo").addEventListener("click",()=>{
    AUDIO: VOCABULARIO
 ========================= */
 const wordAudio = new Audio();
-wordAudio.preload = "auto";
+wordAudio.preload = "none";
 let audioModo = "mp3"; // mp3 | tts
 let audioPlayToken = 0;
+let cancelAudioWait=null;
 
 function setAudioMode(mode){
   audioModo = mode;
@@ -652,6 +594,7 @@ function buildExactAudioSrc(key){
 
 function stopWordAudio(){
   audioPlayToken++;
+  if(cancelAudioWait){cancelAudioWait();cancelAudioWait=null}
   try{
     wordAudio.pause();
     wordAudio.currentTime = 0;
@@ -670,49 +613,17 @@ function hablarIngles(texto){
 }
 
 async function playEnglish(text){
-  const key = clean(text);
-  if(!audioHabilitado || !key) return;
-
-  const token = ++audioPlayToken;
-  try{
-    wordAudio.pause();
-    wordAudio.currentTime = 0;
-  }catch{}
-  if("speechSynthesis" in window) speechSynthesis.cancel();
-
-  if(audioModo === "tts"){
-    hablarIngles(key);
-    return;
-  }
-
-  const src = buildExactAudioSrc(key);
-  if(!src){
-    hablarIngles(key);
-    return;
-  }
-
-  try{
-    wordAudio.src = src;
-    wordAudio.load();
-
-    await new Promise((resolve,reject)=>{
-      const ok = ()=>cleanup(resolve);
-      const bad = ()=>cleanup(reject);
-      const cleanup = cb=>{
-        wordAudio.removeEventListener("canplaythrough",ok);
-        wordAudio.removeEventListener("error",bad);
-        cb();
-      };
-      wordAudio.addEventListener("canplaythrough",ok,{once:true});
-      wordAudio.addEventListener("error",bad,{once:true});
-      setTimeout(()=>cleanup(reject),2500);
-    });
-
-    if(token !== audioPlayToken) return;
-    await wordAudio.play();
-  }catch{
-    if(token === audioPlayToken) hablarIngles(key);
-  }
+  const key=clean(text);if(!audioHabilitado||!key)return;
+  stopWordAudio();const token=audioPlayToken;
+  if(audioModo==='tts'){hablarIngles(key);return}
+  try{await new Promise((resolve,reject)=>{let settled=false,timer;
+    const clean=()=>{clearTimeout(timer);wordAudio.oncanplaythrough=null;wordAudio.onerror=null};
+    const finish=(fn,value)=>{if(settled)return;settled=true;clean();cancelAudioWait=null;fn(value)};
+    cancelAudioWait=()=>finish(resolve,false);
+    wordAudio.oncanplaythrough=()=>finish(resolve,true);wordAudio.onerror=()=>finish(reject,new Error('audio'));
+    timer=setTimeout(()=>finish(reject,new Error('timeout')),5000);wordAudio.src=buildExactAudioSrc(key);wordAudio.load();
+  });if(token!==audioPlayToken)return;await wordAudio.play()}
+  catch(err){if(token!==audioPlayToken)return;if(err?.name==='NotAllowedError'){showToast('Toca una tarjeta para escuchar.');return}hablarIngles(key)}
 }
 
 /* =========================
@@ -797,6 +708,20 @@ const state = {
   memoryTimer:null
 };
 
+
+const MEMORY_KEY='asallam_english_memory_progress_v1';
+let turnGeneration=0,mismatchTimeout=null,finishTimeout=null,memoryFinished=false;
+let recordDelta={matches:0,attempts:0,seconds:0};
+function cancelPendingTurns(){turnGeneration++;clearTimeout(mismatchTimeout);clearTimeout(finishTimeout);clearInterval(state.memoryTimer);clearInterval(state.gameTimer);state.gameStartedAt=null;memoryFinished=false;}
+function memoryProgress(){
+  const empty=()=>({version:1,total:{games:0,completed:0,matches:0,attempts:0,bestScore:0,bestCombo:0,seconds:0},current:null});
+  try{const p=JSON.parse(localStorage.getItem(MEMORY_KEY)||'null');if(p&&p.version===1&&p.total&&Object.keys(empty().total).every(k=>Number.isSafeInteger(p.total[k])&&p.total[k]>=0))return p}catch{}return empty();
+}
+function saveMemory(p){try{localStorage.setItem(MEMORY_KEY,JSON.stringify(p));$('storageNotice').textContent=''}catch{$('storageNotice').textContent='No se pudo guardar el avance en este navegador.'}}
+function beginMemoryRecord(){memoryFinished=false;recordDelta={matches:0,attempts:0,seconds:0};const p=memoryProgress();p.total.games++;p.current={startedAt:state.gameStartedAt,pairs:state.currentSettings.pairCount,matches:0,attempts:0,score:0,bestCombo:0,elapsedSeconds:0,completed:false};saveMemory(p);}
+function checkpointMemory(completed=false){if(!state.gameStartedAt)return;const p=memoryProgress();if(!p.current||p.current.startedAt!==state.gameStartedAt||p.current.completed)return;state.elapsedSeconds=Math.max(0,Math.floor((Date.now()-state.gameStartedAt)/1000));for(const [field,value] of Object.entries({matches:state.matches,attempts:state.attempts,seconds:state.elapsedSeconds})){p.total[field]+=Math.max(0,value-recordDelta[field]);recordDelta[field]=value;}p.total.bestScore=Math.max(p.total.bestScore,state.score);p.total.bestCombo=Math.max(p.total.bestCombo,state.bestCombo);if(completed)p.total.completed++;p.current={startedAt:state.gameStartedAt,pairs:state.currentSettings.pairCount,matches:state.matches,attempts:state.attempts,score:state.score,bestCombo:state.bestCombo,elapsedSeconds:state.elapsedSeconds,completed};saveMemory(p);}
+window.addEventListener('pagehide',()=>{checkpointMemory();stopWordAudio()});
+
 function getSettings(){
   const pairs = Number($("boardSize").value);
   return {
@@ -847,7 +772,8 @@ function startGameTimer(){
     if(!state.gameStartedAt) return;
     state.elapsedSeconds = Math.floor((Date.now()-state.gameStartedAt)/1000);
     renderHUD();
-  },250);
+    checkpointMemory();
+  },1000);
 }
 
 /* =========================
@@ -872,10 +798,9 @@ function buildPairs(){
 }
 
 function prepareGame(){
-  if(!estudianteActual){
-    showToast("Primero entra con tu clave.");
-    return;
-  }
+  audioHabilitado=true;
+  checkpointMemory();
+  cancelPendingTurns();
 
   sound.init();
   stopWordAudio();
@@ -996,11 +921,14 @@ function renderBoard(){
 }
 
 function startGame(){
+  if(!state.selectedPairs.length || state.gameStartedAt) return;
+  audioHabilitado=true;
   sound.init();
   stopWordAudio();
   resetScoreState();
   renderBoard();
   state.gameStartedAt = Date.now();
+  beginMemoryRecord();
   startGameTimer();
   showScreen("board");
 }
@@ -1026,6 +954,7 @@ function handleCardClick(card){
   state.inputLocked = true;
   state.attempts += 1;
   evaluatePair();
+  checkpointMemory();
 }
 
 function revealCard(card){
@@ -1069,7 +998,8 @@ function handleMatch(){
   renderHUD();
 
   if(state.matches === state.currentSettings.pairCount){
-    setTimeout(finishGame,520);
+    const generation=turnGeneration;
+    finishTimeout=setTimeout(()=>{if(generation===turnGeneration) finishGame()},520);
   }
 }
 
@@ -1080,7 +1010,9 @@ function handleMismatch(){
   sound.wrong();
   renderHUD();
 
-  setTimeout(()=>{
+  const generation=turnGeneration;
+  mismatchTimeout=setTimeout(()=>{
+    if(generation!==turnGeneration) return;
     if(state.firstCard) hideCard(state.firstCard);
     if(state.secondCard) hideCard(state.secondCard);
     resetTurn();
@@ -1095,6 +1027,8 @@ function resetTurn(){
 }
 
 function finishGame(){
+  if(!state.gameStartedAt || memoryFinished) return;
+  memoryFinished=true;
   clearInterval(state.gameTimer);
   state.gameTimer = null;
   stopWordAudio();
@@ -1102,6 +1036,8 @@ function finishGame(){
   if(state.gameStartedAt){
     state.elapsedSeconds = Math.floor((Date.now()-state.gameStartedAt)/1000);
   }
+
+  checkpointMemory(true);
 
   const accuracy = state.attempts > 0
     ? Math.round((state.matches/state.attempts)*100)
@@ -1115,7 +1051,7 @@ function finishGame(){
   $("finalPairs").textContent = state.matches;
 
   $("resultsSubtitle").textContent =
-    estudianteActual ? `Excellent work, ${estudianteActual}!` : "Excellent work!";
+    "Cada pareja cuenta. ¡Buen trabajo!";
 
   renderHUD();
   showScreen("results");
@@ -1135,6 +1071,7 @@ $("playAgainButton").addEventListener("click",()=>{
 });
 
 $("changeSettingsButton").addEventListener("click",()=>{
+  checkpointMemory(); cancelPendingTurns();
   clearInterval(state.memoryTimer);
   clearInterval(state.gameTimer);
   stopWordAudio();
@@ -1143,6 +1080,7 @@ $("changeSettingsButton").addEventListener("click",()=>{
 });
 
 $("resetButton").addEventListener("click",()=>{
+  checkpointMemory(); cancelPendingTurns();
   clearInterval(state.memoryTimer);
   clearInterval(state.gameTimer);
   stopWordAudio();
@@ -1188,6 +1126,10 @@ fetch(JSON_PATH)
     $("blockCountHint").textContent = "error";
     showToast("Error cargando el JSON de inglés.");
   });
+
+(function(){let mode='dark';try{mode=localStorage.getItem('asallam_english_theme')||'dark'}catch{}function apply(){document.documentElement.dataset.theme=mode;document.getElementById('themeToggle').textContent=mode==='dark'?'Tema claro':'Tema oscuro'}apply();document.getElementById('themeToggle').onclick=()=>{mode=mode==='dark'?'light':'dark';apply();try{localStorage.setItem('asallam_english_theme',mode)}catch{}}})();
+
 </script>
 </body>
 </html>
+
