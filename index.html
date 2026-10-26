@@ -39,6 +39,9 @@ dialog{width:min(520px,calc(100% - 30px));max-height:85svh;overflow:auto;border:
 .path{flex-direction:column;align-items:flex-start;justify-content:flex-start;gap:10px;padding:17px 13px;min-height:150px}
 .path-title{font-size:18px}.path-subtitle{font-size:13px}
 }
+
+/* Let the background characters show gently through cards on mobile only. */
+@media(max-width:760px){.profile-card,.path{--glass:rgba(22,23,44,.82)}:root[data-theme="light"] .profile-card,:root[data-theme="light"] .path{--glass:rgba(255,250,255,.84)}}
 </style>
 </head>
 <body>
