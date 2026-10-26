@@ -94,6 +94,8 @@
     .option-button:disabled { opacity:1; cursor:default; }
     .option-button.is-correct { background:var(--mint-bg); border-color:var(--mint); color:var(--text); }
     .option-button.is-wrong { background:var(--danger-bg); border-color:var(--danger); color:var(--text); }
+    .answer-input.is-correct { border-color:var(--mint); background:var(--mint-bg); }
+    .answer-input.is-wrong { border-color:var(--danger); background:var(--danger-bg); }
     .answer-form { display:flex; align-items:stretch; gap:10px; }
     .answer-input { min-width:0; width:100%; padding:14px 17px; background:var(--raised); color:var(--text); border:1px solid var(--border); border-radius:12px; font-size:27px; text-align:center; }
     input::placeholder { color:var(--text); opacity:1; }
@@ -1130,6 +1132,7 @@
     $("typed-answer").disabled = auditory;
     $("submit-answer").disabled = auditory;
     $("typed-answer").removeAttribute("aria-invalid");
+    $("typed-answer").classList.remove("is-correct", "is-wrong");
     $("feedback-title").textContent = "";
     $("feedback-detail").textContent = "";
     $("feedback-tip").textContent = auditory ? "Pulsa Escuchar si el audio no empieza. También puedes usar «No lo sé» para revelar la respuesta." : "";
@@ -1191,6 +1194,8 @@
     if (!unheard) recordAnswer(question.item, outcome);
     else renderStats();
     $("typed-answer").readOnly = true;
+    $("typed-answer").classList.toggle("is-correct", outcome === "correct");
+    $("typed-answer").classList.toggle("is-wrong", outcome === "wrong");
     $("submit-answer").disabled = true;
     $("skip-question").disabled = true;
     const buttons = all("#answer-options .option-button");
@@ -1202,7 +1207,7 @@
         const mark = document.createElement("span");
         mark.className = "answer-mark"; mark.textContent = "✓"; mark.setAttribute("aria-hidden", "true");
         button.appendChild(mark);
-      } else if (index === selectedIndex) {
+      } else {
         button.classList.add("is-wrong");
         const mark = document.createElement("span");
         mark.className = "answer-mark"; mark.textContent = "×"; mark.setAttribute("aria-hidden", "true");

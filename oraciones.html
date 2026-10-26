@@ -381,7 +381,7 @@ function details(s,container){
  });
 }
 function answer(ok,given='',choice=-1){if(answered||!current)return;answered=true;attempts++;if(ok){score++;missed.delete(current.id)}else missed.add(current.id);stored[current.id]={aciertos:(stored[current.id]?.aciertos||0)+(ok?1:0),intentos:(stored[current.id]?.intentos||0)+1,ultima:Date.now()};save();const s=sentenceMap.get(current.oracion_id),correct=current.respuestas_aceptadas[0];lastFeedback={ok,given,choice};renderFeedback();
- $('options').querySelectorAll('button').forEach((b,i)=>{b.disabled=true;if(shownOptions[i].correcta)b.classList.add('is-correct');else if(i===choice)b.classList.add('is-wrong')});$('answerInput').disabled=true;$('check').disabled=true;$('next').disabled=false;$('skip').disabled=true;$('listen').hidden=false;$('next').textContent=index===queue.length-1?'Ver resultado →':'Siguiente →';updateStats();if(prefs.autoAudio)playSentence(s);
+ $('options').querySelectorAll('button').forEach((b,i)=>{b.disabled=true;if(shownOptions[i].correcta)b.classList.add('is-correct');else b.classList.add('is-wrong')});$('answerInput').disabled=true;$('check').disabled=true;$('next').disabled=false;$('skip').disabled=true;$('listen').hidden=false;$('next').textContent=index===queue.length-1?'Ver resultado →':'Siguiente →';updateStats();if(prefs.autoAudio)playSentence(s);
 }
 function renderFeedback(){stopAudio();
  if(!lastFeedback||!current)return;
@@ -450,7 +450,7 @@ function restoreSession(x){
  queue=x.queue;index=x.index;score=x.score;attempts=x.attempts;reviewOnly=x.reviewOnly;selection={...x.selection};$('word').value=selection.word;$('kind').value=selection.kind;$('length').value=selection.length;
  renderQuestion(x.shownOptions);
  if(x.answered&&current){answered=true;shownOptions=x.shownOptions;lastFeedback=x.lastFeedback;
-  if(mode==='quiz'){$('options').innerHTML=shownOptions.map((o,i)=>`<button disabled class="option-button ${current.tipo==='completar'?'jp-option':''} ${o.correcta?'is-correct':i===lastFeedback.choice?'is-wrong':''}"><span class="key">${i+1}</span><span>${esc(o.texto)}</span></button>`).join('');}
+  if(mode==='quiz'){$('options').innerHTML=shownOptions.map((o,i)=>`<button disabled class="option-button ${current.tipo==='completar'?'jp-option':''} ${o.correcta?'is-correct':'is-wrong'}"><span class="key">${i+1}</span><span>${esc(o.texto)}</span></button>`).join('');}
   $('answerInput').value=x.input;$('answerInput').disabled=true;$('check').disabled=true;$('skip').disabled=true;$('next').disabled=false;$('next').textContent=index===queue.length-1?'Ver resultado →':'Siguiente →';$('listen').hidden=false;renderFeedback();if(x.detailOpen)$('feedback').querySelector('details').open=true;
  }else if(current&&mode==='write')$('answerInput').value=x.input;
  updateStats();

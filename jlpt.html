@@ -93,6 +93,8 @@
     .option-button:disabled { opacity:1; cursor:default; }
     .option-button.is-correct { background:var(--mint-bg); border-color:var(--mint); color:var(--text); }
     .option-button.is-wrong { background:var(--danger-bg); border-color:var(--danger); color:var(--text); }
+    .answer-input.is-correct { border-color:var(--mint); background:var(--mint-bg); }
+    .answer-input.is-wrong { border-color:var(--danger); background:var(--danger-bg); }
     .answer-form { display:flex; align-items:stretch; gap:10px; }
     .answer-input { min-width:0; width:100%; padding:14px 17px; background:var(--raised); color:var(--text); border:1px solid var(--border); border-radius:12px; font-size:27px; text-align:center; }
     input::placeholder { color:var(--text); opacity:1; }
@@ -793,10 +795,10 @@ if (typeof document !== 'undefined') (function() {
       const key=document.createElement('span');key.className='option-key';key.textContent=String.fromCharCode(65+index);key.setAttribute('aria-hidden','true');b.append(key);
       if(q.target==='jp')b.append(japaneseNode(item));else b.append(document.createTextNode(Core.display(item,q.target)));
       b.disabled=q.answered||q.auditory&&!q.heard;
-      if(q.answered){const correct=q.valid.some(v=>v.id===item.id);b.classList.toggle('is-correct',correct);b.classList.toggle('is-wrong',q.selected===index&&!correct);if(correct){const mark=document.createElement('span');mark.className='answer-mark';mark.textContent='✓';b.append(mark);}}
+      if(q.answered){const correct=q.valid.some(v=>v.id===item.id);b.classList.toggle('is-correct',correct);b.classList.toggle('is-wrong',!correct);const mark=document.createElement('span');mark.className='answer-mark';mark.textContent=correct?'✓':'×';mark.setAttribute('aria-hidden','true');b.append(mark);}
       b.addEventListener('click',()=>answerOption(index));$('answer-options').append(b);
     });
-    const input=$('typed-answer');if(!q.answered&&!preserveInput)input.value='';input.disabled=q.answered||q.auditory&&!q.heard;
+    const input=$('typed-answer');if(!q.answered&&!preserveInput)input.value='';input.disabled=q.answered||q.auditory&&!q.heard;input.classList.toggle('is-correct',q.answered&&q.outcome==='correct');input.classList.toggle('is-wrong',q.answered&&q.outcome==='wrong');input.setAttribute('aria-invalid',String(q.answered&&q.outcome==='wrong'));
     input.placeholder=({es:'Significado en español…',romaji:'Romaji…',kana:'かな…',kanji:'日本語…',jp:'Kanji, kana o romaji…',any:'Kanji, kana o romaji…'})[format];
     input.setAttribute('aria-label','Escribe '+response);input.lang=['kana','kanji'].includes(format)?'ja':'es';
     $('submit-answer').disabled=input.disabled;$('skip-question').disabled=q.answered;$('next-question').disabled=!q.answered;
