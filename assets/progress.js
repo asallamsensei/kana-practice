@@ -38,7 +38,7 @@ if(v.version!==2||!obj(v.total)||!obj(v.byActivity)||!obj(v.byItem)||Object.keys
 counts(v.total);mapping(v.byActivity,counts);mapping(v.byItem,x=>{counts(x);numericFields(x,['seen']);if(own(x,'pending')&&typeof x.pending!=='boolean')throw Error('Pendiente de inglés inválido.');});
 }
 else if(key==='asallam_anime_progress_v2'){
-const modes=['jp_es','es_jp','dict_es','dict_jp','kanji_mc'];
+const modes=['jp_es','es_jp','dict_es','dict_jp','kanji_mc','match'];
 if(v.version!==2||!obj(v.total)||!obj(v.byItem)||!obj(v.byBlock)||!obj(v.byMode)||!obj(v.legacy)||Object.keys(v.byMode).some(k=>!modes.includes(k))||Object.keys(v.byBlock).length>1000||Object.keys(v.byItem).length>50000)throw Error('Progreso de canciones y series incompatible.');
 const requiredCounts=x=>{counts(x);for(const field of ['correct','wrong','skipped'])if(!own(x,field))throw Error('Contador de canciones y series ausente: '+field);};
 requiredCounts(v.total);for(const field of ['streak','best'])if(!own(v.total,field))throw Error('Contador total de canciones y series ausente.');
@@ -48,8 +48,9 @@ for(const key of Object.keys(v.byItem))if(!key.trim()||key.length>3000||!(/^(voc
 for(const key of Object.keys(v.byBlock))if(!/^\d+$/.test(key))throw Error('Identificador de obra inválido.');
 }
 else if(key==='asallam_anime_preferences_v2'){
-const fields=['version','activity','mode','blocks','pool','audio','sessionSize','autoAudio','romaji','theme','exploreType'];if(v.version!==2||Object.keys(v).some(k=>!fields.includes(k)))throw Error('Ajustes de canciones y series incompatibles.');
-const choices={activity:['quiz','explore'],mode:['mix','jp_es','es_jp','dict_es','dict_jp','kanji_mc'],pool:['seleccion','global'],audio:['ia','tts'],sessionSize:[0,10,20,40]};for(const [field,values]of Object.entries(choices))if(!own(v,field)||!values.includes(v[field]))throw Error('Ajuste de canciones y series inválido: '+field);
+const fields=['version','activity','mode','blocks','pool','audio','sessionSize','matchBoards','autoAudio','romaji','theme','exploreType'];if(v.version!==2||Object.keys(v).some(k=>!fields.includes(k)))throw Error('Ajustes de canciones y series incompatibles.');
+const choices={activity:['quiz','match','explore'],mode:['mix','jp_es','es_jp','dict_es','dict_jp','kanji_mc'],pool:['seleccion','global'],audio:['ia','tts'],sessionSize:[0,10,20,40]};for(const [field,values]of Object.entries(choices))if(!own(v,field)||!values.includes(v[field]))throw Error('Ajuste de canciones y series inválido: '+field);
+if(own(v,'matchBoards')&&![5,10,20].includes(v.matchBoards))throw Error('Número de tableros de canciones y series inválido.');
 for(const field of ['autoAudio','romaji'])if(own(v,field)&&typeof v[field]!=='boolean')throw Error('Ajuste booleano de canciones y series inválido.');
 if(own(v,'theme')&&!['dark','light'].includes(v.theme)||own(v,'exploreType')&&!['all','vocab','kanji'].includes(v.exploreType))throw Error('Ajuste de aspecto o exploración inválido.');
 if(!Array.isArray(v.blocks)||!v.blocks.length||v.blocks.length>1000||new Set(v.blocks).size!==v.blocks.length||v.blocks.some(x=>typeof x!=='string'||!/^\d+$/.test(x)))throw Error('Debe seleccionarse al menos una obra válida.');
@@ -88,6 +89,7 @@ function previewImport(data,s){s=storage(s);const before=Object.create(null),con
 function restore(preview,s,replace){s=storage(s);const keys=Object.keys(preview.data.entries).filter(k=>replace||preview.before[k]===null);for(const k of Object.keys(preview.before))if(s.getItem(k)!==preview.before[k])throw Error('El progreso cambió en otra pestaña. Vuelve a seleccionar la copia para revisar los cambios.');const changed=[];try{for(const k of keys){if(s.getItem(k)===preview.data.entries[k])continue;s.setItem(k,preview.data.entries[k]);changed.push(k);}}catch(e){let failures=[];for(const k of changed.reverse()){try{if(preview.before[k]===null)s.removeItem(k);else s.setItem(k,preview.before[k]);}catch{failures.push(k);}}throw Error(failures.length?'No se pudo completar ni revertir todo. Conserva la copia previa y libera espacio antes de restaurarla.':'No se pudo guardar la copia. Se revirtieron los cambios realizados; puede faltar espacio.');}return changed.length;}
 const api={getSummary,makeBackup,parseBackup,previewImport,restore,allowed,validateValue,MAX_BYTES};root.AsallamProgress=api;if(typeof module!=='undefined'&&module.exports)module.exports=api;
 })(typeof window!=='undefined'?window:globalThis);
+
 
 
 
