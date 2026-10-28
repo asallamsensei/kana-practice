@@ -4,7 +4,18 @@ const KEYS={progress:'asallam_anime_progress_v2',prefs:'asallam_anime_preference
 const $=id=>document.getElementById(id),count=()=>({correct:0,wrong:0,skipped:0,streak:0,best:0}),int=x=>Number.isSafeInteger(x)&&x>=0?x:0;
 const defaults={version:2,activity:'quiz',mode:'mix',blocks:[],pool:'seleccion',audio:'ia',sessionSize:20,autoAudio:true,romaji:true,theme:'dark',exploreType:'all'};
 const state={items:[],blocks:[],pool:[],prefs:{...defaults},progress:null,storageBlocked:false,ready:false,quiz:null,session:count(),answered:0,finished:false,generation:0,loadToken:0,exploreQuery:'',blockQuery:'',audioQueue:[],activeAudio:null,lastId:''};
-function notice(t){$('notice-text').textContent=t;$('notice').hidden=!t;}
+let noticeTimer=null,noticeVersion=0;
+function notice(t,duration=0){
+ if(noticeTimer!==null){clearTimeout(noticeTimer);noticeTimer=null;}
+ const version=++noticeVersion,bar=$('notice-timer');
+ $('notice-text').textContent=t;$('notice').hidden=!t;
+ bar.hidden=true;bar.style.animation='none';
+ if(t&&duration>0){
+  bar.hidden=false;void bar.offsetWidth;
+  bar.style.animation='notice-countdown '+duration+'ms linear forwards';
+  noticeTimer=setTimeout(()=>{if(version===noticeVersion)notice('');},duration);
+ }
+}
 function raw(k){try{return localStorage.getItem(k);}catch{notice('El navegador no permite acceder al avance. Puedes practicar sin guardarlo.');return null;}}
 function persist(k,v){try{localStorage.setItem(k,JSON.stringify(v));return true;}catch{notice('No se pudo guardar. Exporta tu avance desde Progreso antes de cerrar.');return false;}}
 function emptyProgress(){return {version:2,total:count(),byItem:{},byBlock:{},byMode:{},legacy:{correct:0,wrong:0,best:0}};}
@@ -29,7 +40,7 @@ function pruneQueued(){const pending=state.audioQueue.splice(0);for(const r of p
 function markRequest(r,on){if(r.button){r.button.classList.toggle('playing',on);r.button.setAttribute('aria-pressed',String(on));}}
 function settleAudio(r,ok){if(r.done)return;r.done=true;clearTimeout(r.timer);markRequest(r,false);if(state.activeAudio===r)state.activeAudio=null;r.resolve(ok);if(state.generation===r.generation)audioStatus(ok?'':'Audio no disponible. Puedes mostrar la respuesta sin penalización.');pumpAudio();}
 function startSpeech(r){if(r.done)return;if(!window.speechSynthesis||!window.SpeechSynthesisUtterance){settleAudio(r,false);return;}try{const u=new SpeechSynthesisUtterance(r.item.jp);r.media=u;u.lang='ja-JP';u.rate=.82;const voice=(window.speechSynthesis.getVoices?.()||[]).find(x=>/^ja/i.test(x.lang));if(voice)u.voice=voice;u.onstart=()=>{r.started=true;clearTimeout(r.timer);markRequest(r,true);};u.onend=()=>settleAudio(r,true);u.onerror=()=>settleAudio(r,false);window.speechSynthesis.speak(u);}catch{settleAudio(r,false);}}
-function pumpAudio(){if(state.activeAudio)return;const r=state.audioQueue.shift();if(!r)return;state.activeAudio=r;markRequest(r,true);if(state.generation===r.generation)audioStatus('Escuchando…');r.timer=setTimeout(()=>{if(!r.done&&state.generation===r.generation)audioStatus('El audio tarda en responder. Puedes mostrar la respuesta sin penalización.');},10000);const src=r.audioMode==='tts'?null:audioPath(r.item);if(!src){startSpeech(r);return;}try{const a=new Audio();r.media=a;a.preload='none';a.src=src;let failed=false;const fail=err=>{if(failed||r.done)return;failed=true;a.onended=null;a.onerror=null;a.onplaying=null;if(err?.name==='NotAllowedError'){settleAudio(r,false);notice('El navegador bloqueó el audio. Toca Escuchar para activarlo.');return;}startSpeech(r);};a.onplaying=()=>{if(r.done)return;r.started=true;clearTimeout(r.timer);};a.onended=()=>settleAudio(r,true);a.onerror=()=>fail();const p=a.play();if(p&&p.catch)p.catch(fail);}catch{startSpeech(r);}}
+function pumpAudio(){if(state.activeAudio)return;const r=state.audioQueue.shift();if(!r)return;state.activeAudio=r;markRequest(r,true);if(state.generation===r.generation)audioStatus('Escuchando…');r.timer=setTimeout(()=>{if(!r.done&&state.generation===r.generation)audioStatus('El audio tarda en responder. Puedes mostrar la respuesta sin penalización.');},10000);const src=r.audioMode==='tts'?null:audioPath(r.item);if(!src){startSpeech(r);return;}try{const a=new Audio();r.media=a;a.preload='none';a.src=src;let failed=false;const fail=err=>{if(failed||r.done)return;failed=true;a.onended=null;a.onerror=null;a.onplaying=null;if(err?.name==='NotAllowedError'){settleAudio(r,false);notice('El navegador bloqueó el audio. Toca Escuchar para activarlo.',6000);return;}startSpeech(r);};a.onplaying=()=>{if(r.done)return;r.started=true;clearTimeout(r.timer);};a.onended=()=>settleAudio(r,true);a.onerror=()=>fail();const p=a.play();if(p&&p.catch)p.catch(fail);}catch{startSpeech(r);}}
 function playItem(item,button){if(!item)return Promise.resolve(false);const capture={...item};return new Promise(resolve=>{state.audioQueue.push({item:capture,button:button||null,generation:state.generation,audioMode:state.prefs.audio,resolve,done:false,started:false});pumpAudio();});}
 function playQuestion(q){if(!q)return;const generation=state.generation;q.audioState='pending';playItem(q.item,$('listen')).then(ok=>{if(state.quiz!==q||generation!==state.generation)return;q.audioState=ok?'heard':'failed';if(ok)audioStatus('Audio escuchado.');});}
 function bump(c,key){c[key]=int(c[key])+1;c.streak=key==='correct'?int(c.streak)+1:0;c.best=Math.max(int(c.best),c.streak);}
