@@ -45,7 +45,7 @@ for(const key of [...Object.keys(v.byBlock),...Object.keys(v.byItem)])if(!key.tr
 }
 else if(key==='asallam_turista_preferences_v2'){
 const fields=['activity','mode','selected','length','boards','autoAudio','effects','romaji','theme'];if(Object.keys(v).some(k=>!fields.includes(k)))throw Error('Ajuste de Turista desconocido.');
-const choices={activity:['quiz','match'],mode:['jp_es','es_jp','mix'],length:[0,10,20,40],boards:[0,5,10,20],theme:['dark','light']};for(const [field,values]of Object.entries(choices))if(own(v,field)&&!values.includes(v[field]))throw Error('Ajuste de Turista inválido: '+field);
+const choices={activity:['quiz','match','explore'],mode:['jp_es','es_jp','mix'],length:[0,10,20,40],boards:[0,5,10,20],theme:['dark','light']};for(const [field,values]of Object.entries(choices))if(own(v,field)&&!values.includes(v[field]))throw Error('Ajuste de Turista inválido: '+field);
 for(const field of ['autoAudio','effects','romaji'])if(own(v,field)&&typeof v[field]!=='boolean')throw Error('Ajuste booleano de Turista inválido.');
 if(own(v,'selected')&&(!Array.isArray(v.selected)||!v.selected.length||v.selected.length>200||new Set(v.selected).size!==v.selected.length||v.selected.some(x=>typeof x!=='string'||!x.trim()||x.length>200||['__proto__','prototype','constructor'].includes(x))))throw Error('Selección de bloques de Turista inválida.');
 }
