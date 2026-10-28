@@ -1,0 +1,311 @@
+{
+  "version": 1,
+  "source": "data/anime_vocab.json",
+  "maestro": "data/maestrodeloskanji/kanji_todos.json",
+  "note": "Kanji presentes en los bloques de canciones y series pero ausentes de la lista maestra. Los significados conservan literalmente los del material original; no constituyen una revisión lexicográfica. Las lecturas onyomi y kunyomi permanecen vacías porque no se proporcionan en esa fuente. No se han inferido a partir de palabras ni inventado.",
+  "kanji": [
+    {
+      "kanji": "叩",
+      "significado_es": "golpear; atacar",
+      "onyomi": "",
+      "kunyomi": "",
+      "lecturas_disponibles": false,
+      "fuentes": [
+        "KILL THE FIGHT (MATO LA PELEA)"
+      ],
+      "significados_originales": [
+        "golpear; atacar"
+      ]
+    },
+    {
+      "kanji": "只",
+      "significado_es": "solo, simplemente; nada más que",
+      "onyomi": "",
+      "kunyomi": "",
+      "lecturas_disponibles": false,
+      "fuentes": [
+        "参上!!ギニュー特戦隊!! (Sanjou!! Ginyuu Tokusentai!!)"
+      ],
+      "significados_originales": [
+        "solo, simplemente; nada más que"
+      ]
+    },
+    {
+      "kanji": "噂",
+      "significado_es": "rumor, chisme",
+      "onyomi": "",
+      "kunyomi": "",
+      "lecturas_disponibles": false,
+      "fuentes": [
+        "ブリキノダンス (Buriki no Dansu) – Danza de Hojalata"
+      ],
+      "significados_originales": [
+        "rumor, chisme"
+      ]
+    },
+    {
+      "kanji": "嬉",
+      "significado_es": "feliz; contento",
+      "onyomi": "",
+      "kunyomi": "",
+      "lecturas_disponibles": false,
+      "fuentes": [
+        "あんたなんて。 (parte 2)"
+      ],
+      "significados_originales": [
+        "feliz; contento"
+      ]
+    },
+    {
+      "kanji": "巫",
+      "significado_es": "chamán, médium, sacerdotisa",
+      "onyomi": "",
+      "kunyomi": "",
+      "lecturas_disponibles": false,
+      "fuentes": [
+        "Anime: 超神姫ダンガイザー3 (Chōshinki Dangaizā Surī) – Súper diosas princesas Dangaizer 3"
+      ],
+      "significados_originales": [
+        "chamán, médium, sacerdotisa"
+      ]
+    },
+    {
+      "kanji": "廻",
+      "significado_es": "girar, circular",
+      "onyomi": "",
+      "kunyomi": "",
+      "lecturas_disponibles": false,
+      "fuentes": [
+        "呪術廻戦 (Jujutsu Kaisen) – Guerra Cíclica de Técnicas Malditas"
+      ],
+      "significados_originales": [
+        "girar, circular"
+      ]
+    },
+    {
+      "kanji": "慧",
+      "significado_es": "sabiduría",
+      "onyomi": "",
+      "kunyomi": "",
+      "lecturas_disponibles": false,
+      "fuentes": [
+        "Hensuki"
+      ],
+      "significados_originales": [
+        "sabiduría"
+      ]
+    },
+    {
+      "kanji": "憐",
+      "significado_es": "compadecerse, tener piedad",
+      "onyomi": "",
+      "kunyomi": "",
+      "lecturas_disponibles": false,
+      "fuentes": [
+        "ブリキノダンス (Buriki no Dansu) – Danza de Hojalata"
+      ],
+      "significados_originales": [
+        "compadecerse, tener piedad"
+      ]
+    },
+    {
+      "kanji": "掴",
+      "significado_es": "agarrar, atrapar",
+      "onyomi": "",
+      "kunyomi": "",
+      "lecturas_disponibles": false,
+      "fuentes": [
+        "『デジタルモンスター』 (Dejitaru Monsutā) – Monstruos Digitales"
+      ],
+      "significados_originales": [
+        "agarrar, atrapar"
+      ]
+    },
+    {
+      "kanji": "昏",
+      "significado_es": "oscuro; anochecer; oscurecerse, perder el conocimiento",
+      "onyomi": "",
+      "kunyomi": "",
+      "lecturas_disponibles": false,
+      "fuentes": [
+        "黄昏のBAY CITY",
+        "ブリキノダンス (Buriki no Dansu) – Danza de Hojalata"
+      ],
+      "significados_originales": [
+        "oscuro; anochecer",
+        "oscurecerse, perder el conocimiento"
+      ]
+    },
+    {
+      "kanji": "溜",
+      "significado_es": "acumular, almacenar",
+      "onyomi": "",
+      "kunyomi": "",
+      "lecturas_disponibles": false,
+      "fuentes": [
+        "Second Flight (Segundo vuelo)"
+      ],
+      "significados_originales": [
+        "acumular, almacenar"
+      ]
+    },
+    {
+      "kanji": "爛",
+      "significado_es": "brillante; radiante",
+      "onyomi": "",
+      "kunyomi": "",
+      "lecturas_disponibles": false,
+      "fuentes": [
+        "あんたなんて。 (parte 2)"
+      ],
+      "significados_originales": [
+        "brillante; radiante"
+      ]
+    },
+    {
+      "kanji": "眩",
+      "significado_es": "deslumbrar, brillo intenso",
+      "onyomi": "",
+      "kunyomi": "",
+      "lecturas_disponibles": false,
+      "fuentes": [
+        "『デジタルモンスター』 (Dejitaru Monsutā) – Monstruos Digitales"
+      ],
+      "significados_originales": [
+        "deslumbrar, brillo intenso"
+      ]
+    },
+    {
+      "kanji": "禰",
+      "significado_es": "kanji usado principalmente en nombres propios",
+      "onyomi": "",
+      "kunyomi": "",
+      "lecturas_disponibles": false,
+      "fuentes": [
+        "『鬼滅の刃』 (Kimetsu no Yaiba) – La hoja de espada que extermina demonios"
+      ],
+      "significados_originales": [
+        "kanji usado principalmente en nombres propios"
+      ]
+    },
+    {
+      "kanji": "簪",
+      "significado_es": "kanzashi, adorno tradicional para el cabello",
+      "onyomi": "",
+      "kunyomi": "",
+      "lecturas_disponibles": false,
+      "fuentes": [
+        "呪術廻戦 (Jujutsu Kaisen) – Guerra Cíclica de Técnicas Malditas"
+      ],
+      "significados_originales": [
+        "kanzashi, adorno tradicional para el cabello"
+      ]
+    },
+    {
+      "kanji": "絆",
+      "significado_es": "lazo, vínculo afectivo",
+      "onyomi": "",
+      "kunyomi": "",
+      "lecturas_disponibles": false,
+      "fuentes": [
+        "『鬼滅の刃』 (Kimetsu no Yaiba) – La hoja de espada que extermina demonios"
+      ],
+      "significados_originales": [
+        "lazo, vínculo afectivo"
+      ]
+    },
+    {
+      "kanji": "罠",
+      "significado_es": "trampa",
+      "onyomi": "",
+      "kunyomi": "",
+      "lecturas_disponibles": false,
+      "fuentes": [
+        "HUNTER×HUNTER – Capítulo de las serpientes"
+      ],
+      "significados_originales": [
+        "trampa"
+      ]
+    },
+    {
+      "kanji": "茜",
+      "significado_es": "rojo carmesí; rojo profundo",
+      "onyomi": "",
+      "kunyomi": "",
+      "lecturas_disponibles": false,
+      "fuentes": [
+        "あんたなんて。 (parte 2)"
+      ],
+      "significados_originales": [
+        "rojo carmesí; rojo profundo"
+      ]
+    },
+    {
+      "kanji": "訶",
+      "significado_es": "admirable, grandioso (uso principalmente fonético en compuestos budistas)",
+      "onyomi": "",
+      "kunyomi": "",
+      "lecturas_disponibles": false,
+      "fuentes": [
+        "『ドラゴンボール』 (Doragon Bōru) – DRAGON BALL"
+      ],
+      "significados_originales": [
+        "admirable, grandioso (uso principalmente fonético en compuestos budistas)"
+      ]
+    },
+    {
+      "kanji": "逢",
+      "significado_es": "encontrarse (encuentro significativo); encontrarse (emocional, fortuito)",
+      "onyomi": "",
+      "kunyomi": "",
+      "lecturas_disponibles": false,
+      "fuentes": [
+        "プラスティック・ラブ (Plastic Love)",
+        "不思議CALL ME (fushigi CALL ME)"
+      ],
+      "significados_originales": [
+        "encontrarse (encuentro significativo)",
+        "encontrarse (emocional, fortuito)"
+      ]
+    },
+    {
+      "kanji": "酊",
+      "significado_es": "intoxicación, embriaguez",
+      "onyomi": "",
+      "kunyomi": "",
+      "lecturas_disponibles": false,
+      "fuentes": [
+        "ブリキノダンス (Buriki no Dansu) – Danza de Hojalata"
+      ],
+      "significados_originales": [
+        "intoxicación, embriaguez"
+      ]
+    },
+    {
+      "kanji": "酩",
+      "significado_es": "embriaguez",
+      "onyomi": "",
+      "kunyomi": "",
+      "lecturas_disponibles": false,
+      "fuentes": [
+        "ブリキノダンス (Buriki no Dansu) – Danza de Hojalata"
+      ],
+      "significados_originales": [
+        "embriaguez"
+      ]
+    },
+    {
+      "kanji": "龍",
+      "significado_es": "dragón",
+      "onyomi": "",
+      "kunyomi": "",
+      "lecturas_disponibles": false,
+      "fuentes": [
+        "聖闘士星矢 (SAINT SEIYA) – El guerrero santo Seiya"
+      ],
+      "significados_originales": [
+        "dragón"
+      ]
+    }
+  ]
+}
