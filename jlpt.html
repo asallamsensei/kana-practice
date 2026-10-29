@@ -172,6 +172,10 @@
     .summary-grid div { background:var(--raised); border-radius:12px; padding:16px 8px; font-size:14px; color:var(--text); }
     .summary-grid strong { display:block; font-size:30px; margin-bottom:3px; color:var(--text); font-weight:600; }
     .summary-actions { display:flex; flex-wrap:wrap; justify-content:center; gap:10px; }
+    .summary-proof { margin:0 0 22px; padding:18px; border:1px solid var(--mint); border-radius:12px; background:var(--mint-bg); }
+    .summary-proof code { display:block; margin:10px 0; font-size:clamp(16px,3.5vw,21px); font-weight:700; overflow-wrap:anywhere; user-select:all; }
+    .summary-proof .button { margin-top:12px; }
+    #summary-code-help { margin:0 0 20px; }
     .empty-state { padding:55px 10px; text-align:center; }
     .empty-state .empty-icon { font:61px var(--jp); color:var(--text); margin-bottom:20px; }
     .empty-state p { color:var(--text); font-size:17px; max-width:440px; margin:12px auto 20px; }
@@ -371,6 +375,13 @@
             <h2 id="summary-title" tabindex="-1">Sesión completada.</h2>
             <p id="summary-copy"></p>
             <div class="summary-grid"><div><strong id="summary-correct">0</strong>Aciertos</div><div><strong id="summary-accuracy">0%</strong>Precisión</div><div><strong id="summary-best">0</strong>Mejor racha</div></div>
+            <div id="summary-proof" class="summary-proof" hidden>
+              <p><strong>Código de este repaso</strong></p>
+              <code id="summary-code" aria-label="Código del repaso completado"></code>
+              <p id="summary-code-context" class="setting-help"></p>
+              <button id="copy-review-code" class="button small" type="button">Copiar código</button>
+            </div>
+            <p id="summary-code-help" class="setting-help" hidden></p>
             <div class="summary-actions"><button id="review-session" class="button primary" type="button">Repasar mis fallos</button><button id="repeat-session" class="button" type="button">Seguir practicando</button></div>
           </div>
           <div id="empty-view" class="empty-state" hidden>
@@ -725,7 +736,8 @@ if (typeof document !== 'undefined') (function() {
   function empty(message,needsData=false){view('empty');$('empty-title').textContent=needsData?'Tu vocabulario, listo para cargar.':'Todo al día.';$('empty-copy').textContent=message;$('empty-import').hidden=!needsData;$('exit-review').hidden=needsData;}
   function start(){
     cancel();state.current=null;state.deck=[];state.modeDeck=[];state.tiles=[];state.selected=null;state.board=0;
-    state.session={stats:blank(),completed:0,started:Date.now(),elapsed:0,ended:false,mistakes:new Set(),initialPending:scope().filter(pending).length};
+    state.session={stats:blank(),completed:0,started:Date.now(),elapsed:0,ended:false,mistakes:new Set(),initialPending:scope().filter(pending).length,reviewCode:null};
+    $('summary-proof').hidden=true;$('summary-code').textContent='';
     renderControls();
     if(!scope().length){empty(state.loading?'Buscando tus listas de vocabulario…':'Carga tus archivos JSON para empezar. Si abres este HTML como archivo local, puedes importarlos desde aquí.',true);return;}
     if(!pool().length){empty('No tienes palabras pendientes de repaso en esta selección.');return;}
@@ -819,7 +831,37 @@ if (typeof document !== 'undefined') (function() {
   function answerOption(index){const q=state.current;if(!q||q.answered||q.auditory&&!q.heard)return;const item=q.options[index];if(!item)return;respond(q.valid.some(v=>v.id===item.id)?'correct':'wrong',index);}
   let composing=false;
   function answerWritten(e){e?.preventDefault();const q=state.current;if(composing||e?.isComposing||!q||q.answered||q.auditory&&!q.heard)return;const answer=$('typed-answer').value;if(!answer.trim()){$('feedback-tip').textContent='Escribe una respuesta o pulsa «No lo sé».';return;}const correct=q.valid.some(i=>Core.accepted(i,answer,q.target,q.target==='jp'?state.prefs.writeFormat:'any'));respond(correct?'correct':'wrong');}
-  function finish(){cancel();state.session.ended=true;state.session.elapsed=Date.now()-state.session.started;view('summary');const s=state.session.stats;$('summary-title').textContent=state.prefs.review&&!pool().length?'¡Todos los fallos resueltos!':'Sesión completada.';$('summary-copy').textContent=state.session.completed+' '+(state.prefs.activity==='match'?'parejas':'preguntas')+' · '+state.session.mistakes.size+' palabras para reforzar · '+formatTime(state.session.elapsed);$('summary-correct').textContent=s.correct;$('summary-accuracy').textContent=accuracy(s);$('summary-best').textContent=s.best;renderStats();$('summary-title').focus({preventScroll:true});}
+  // Un identificador por sesión completada; no se regenera al mostrar el resultado.
+  function createReviewCode(){
+    const parts=crypto.getRandomValues(new Uint32Array(3));
+    return 'REP-'+Array.from(parts,n=>n.toString(16).toUpperCase().padStart(8,'0')).join('-');
+  }
+  async function copyReviewCode(){
+    const code=state.session?.reviewCode;if(!code||state.view!=='summary')return;
+    try{await navigator.clipboard.writeText(code);notice('Código copiado.',false,3000);}
+    catch{
+      const range=document.createRange(),selection=window.getSelection();
+      range.selectNodeContents($('summary-code'));selection.removeAllRanges();selection.addRange(range);
+      notice('El código está seleccionado. Cópialo con Ctrl+C, Cmd+C o la opción Copiar de tu móvil.',false,6000);
+    }
+  }
+  function finish(){
+    const session=state.session;if(!session||session.ended)return;
+    cancel();session.ended=true;session.finishedAt=Date.now();session.elapsed=session.finishedAt-session.started;
+    const complete=session.completed>0&&done(),unlimited=!state.prefs.review&&state.prefs.length===0;
+    if(complete)session.reviewCode=createReviewCode();
+    view('summary');const s=session.stats;
+    $('summary-title').textContent=complete?(state.prefs.review?'¡Todos los fallos resueltos!':'Sesión completada.'):unlimited?'Sesión finalizada.':'Sesión sin completar.';
+    $('summary-copy').textContent=session.completed+' '+(state.prefs.activity==='match'?'parejas':'preguntas')+' · '+session.mistakes.size+' palabras para reforzar · '+formatTime(session.elapsed);
+    $('summary-correct').textContent=s.correct;$('summary-accuracy').textContent=accuracy(s);$('summary-best').textContent=s.best;
+    $('summary-proof').hidden=!complete;$('summary-code').textContent=session.reviewCode||'';
+    const activity={quiz:'Quiz',write:'Escritura',match:'Emparejar'}[state.prefs.activity];
+    const date=new Date(session.finishedAt).toLocaleString('es-CO',{timeZone:'America/Bogota',dateStyle:'short',timeStyle:'medium'});
+    $('summary-code-context').textContent=state.prefs.levels.join(' + ')+' · '+activity+(state.prefs.review?' · Repaso de fallos':'')+' · '+s.skipped+' sin responder · '+date+' (hora de Colombia)';
+    $('summary-code-help').hidden=complete;
+    $('summary-code-help').textContent=unlimited?'El modo sin límite no tiene un objetivo final. Para obtener un código de repaso completo, elige 10, 20 o 40 preguntas o parejas.':'Este repaso quedó incompleto y no genera código. Completa el objetivo de la sesión para obtenerlo.';
+    renderStats();$('summary-title').focus({preventScroll:true});
+  }
   function formatTime(ms){const sec=Math.floor(ms/1000);return String(Math.floor(sec/60)).padStart(2,'0')+':'+String(sec%60).padStart(2,'0');}
 
   function nextBoard(){
@@ -1096,6 +1138,7 @@ if (typeof document !== 'undefined') (function() {
     $('listen-question').addEventListener('click',playCurrent);$('answer-form').addEventListener('submit',answerWritten);
     $('skip-question').addEventListener('click',()=>respond('skipped'));$('next-question').addEventListener('click',()=>{if(state.current?.answered)nextQuestion();});
     $('end-session').addEventListener('click',finish);$('match-finish').addEventListener('click',finish);
+    $('copy-review-code').addEventListener('click',copyReviewCode);
     $('repeat-session').addEventListener('click',start);$('review-session').addEventListener('click',()=>{state.prefs.review=true;persist();start();});
     $('exit-review').addEventListener('click',()=>{state.prefs.review=false;state.prefs.modes=[...MODES];state.prefs.writeFormat='any';persist();start();});
     $('search-kana').addEventListener('input',e=>{state.query=e.target.value;state.exploreLimit=60;renderExplore();});$('explore-more').addEventListener('click',()=>{state.exploreLimit+=60;renderExplore();});
