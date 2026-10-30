@@ -79,7 +79,8 @@
     .progress-track { height:4px; background:var(--raised); border-radius:4px; margin-top:17px; overflow:hidden; }
     .progress-fill { height:100%; width:0%; background:var(--mint); border-radius:inherit; transition:width .24s ease; }
     .question-area { text-align:center; padding:25px 0 21px; }
-    .question-label { color:var(--text); font-size:15px; }
+    .translation-hint { background:var(--raised); border-radius:11px; padding:12px 16px; font-size:17px; margin:0 0 14px; overflow-wrap:anywhere; }
+    .romaji-card { background:var(--accent-bg); border:1px solid var(--accent); color:var(--text); }
     .prompt { min-height:160px; display:flex; align-items:center; justify-content:center; font-size:clamp(90px,11.8vw,130px); line-height:1.4; margin:5px 0; letter-spacing:4px; }
     .prompt.romaji { font-family:inherit; font-size:clamp(64px,8.26vw,87px); font-weight:550; letter-spacing:-2px; }
     .prompt.multi { font-size:clamp(78px,10.62vw,111px); }
@@ -105,11 +106,9 @@
     .button.primary:hover:not(:disabled) { background:var(--raised); }
     .button.small { font-size:14px; min-height:36px; padding:7px 11px; }
     .button.ghost { background:transparent; color:var(--text); border-color:transparent; }
-    .feedback { min-height:67px; display:flex; flex-direction:column; justify-content:center; align-items:center; gap:3px; text-align:center; padding:12px 0 8px; }
-    .feedback-title { font-size:18px; font-weight:700; }
-    .feedback-detail { font-size:15px; color:var(--text); }
-    .feedback-tip { font-size:14px; color:var(--text); margin-top:3px; max-width:540px; }
-    .exercise-actions { display:flex; align-items:center; justify-content:space-between; gap:10px; padding-top:13px; border-top:1px solid var(--border); }
+    .feedback-tip { font-size:14px; color:var(--text); margin-top:12px; text-align:center; }
+    .feedback-tip:empty { display:none; }
+    .exercise-actions { display:flex; align-items:center; justify-content:space-between; gap:10px; margin-top:16px; padding-top:13px; border-top:1px solid var(--border); }
     .keyboard-hint { text-align:left; font-size:14px; color:var(--text); margin:14px 0 0; }
     kbd { font:inherit; border:1px solid var(--border); border-radius:4px; padding:1px 4px; white-space:nowrap; }
     .session-stats { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:8px; margin-top:15px; }
@@ -285,8 +284,6 @@
     .tile-meaning { font-size:15px; overflow-wrap:anywhere; }
     .tile-level { font-size:11px; align-self:flex-start; background:var(--accent-bg); border-radius:4px; padding:2px 5px; }
     #explore-more { display:flex; margin:18px auto 0; }
-    #feedback-detail { line-height:2; overflow-wrap:anywhere; }
-    #feedback-detail .jp { font-size:24px; }
     .word-reveal { display:block; }
     .notice { align-items:flex-start; }
     @media(max-width:920px) { .match-board { grid-template-columns:repeat(3,minmax(0,1fr)); } .explore-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } }
@@ -338,19 +335,20 @@
           </div>
           <div id="quiz-view">
             <div class="question-area">
-              <p id="question-label" class="question-label">Preparando tu vocabulario…</p>
-              <div id="prompt" class="prompt jp" lang="ja" aria-live="polite" aria-atomic="true">…</div>
+              <p id="question-label" class="sr-only"></p>
+              <div id="prompt" class="prompt jp" lang="ja" aria-live="polite" aria-atomic="true" aria-describedby="question-label">…</div>
+              <div id="romaji-card" class="translation-hint romaji-card" hidden></div>
+              <div id="meaning-card" class="translation-hint" lang="es" hidden></div>
               <button id="listen-question" class="listen-button" type="button" hidden><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M11 4 6 8H3v8h3l5 4V4Zm4 4a6 6 0 0 1 0 8m3-11a10 10 0 0 1 0 14"/></svg><span>Escuchar</span></button>
             </div>
             <div id="answer-options" class="options" role="group" aria-label="Elige una respuesta"></div>
             <form id="answer-form" class="answer-form" hidden>
               <label for="typed-answer" class="sr-only">Escribe tu respuesta</label>
-              <input id="typed-answer" class="answer-input" type="text" placeholder="Romaji…" autocomplete="off" autocapitalize="none" spellcheck="false" maxlength="240" enterkeyhint="done" inputmode="text" aria-describedby="feedback-detail">
+              <input id="typed-answer" class="answer-input" type="text" placeholder="Romaji…" autocomplete="off" autocapitalize="none" spellcheck="false" maxlength="240" enterkeyhint="done" inputmode="text" aria-describedby="feedback-tip">
               <button id="submit-answer" class="button primary" type="submit">Comprobar</button>
             </form>
-            <div class="feedback" role="status" aria-live="polite" aria-atomic="true">
-              <p id="feedback-title" class="feedback-title"></p><p id="feedback-detail" class="feedback-detail"></p><p id="feedback-tip" class="feedback-tip"></p>
-            </div>
+            <p id="answer-status" class="sr-only" role="status" aria-live="polite" aria-atomic="true"></p>
+            <p id="feedback-tip" class="feedback-tip" role="status"></p>
             <div class="exercise-actions">
               <button id="skip-question" class="button ghost" type="button">No lo sé</button>
               <button id="next-question" class="button primary" type="button" disabled>Siguiente <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></button>
@@ -376,10 +374,10 @@
             <p id="summary-copy"></p>
             <div class="summary-grid"><div><strong id="summary-correct">0</strong>Aciertos</div><div><strong id="summary-accuracy">0%</strong>Precisión</div><div><strong id="summary-best">0</strong>Mejor racha</div></div>
             <div id="summary-proof" class="summary-proof" hidden>
-              <p><strong>Código de este repaso</strong></p>
-              <code id="summary-code" aria-label="Código del repaso completado"></code>
+              <p><strong>Huella de esta barajada</strong></p>
+              <code id="summary-code" aria-label="Huella de la barajada completada"></code>
               <p id="summary-code-context" class="setting-help"></p>
-              <button id="copy-review-code" class="button small" type="button">Copiar código</button>
+              <button id="copy-review-code" class="button small" type="button">Copiar huella</button>
             </div>
             <p id="summary-code-help" class="setting-help" hidden></p>
             <div class="summary-actions"><button id="review-session" class="button primary" type="button">Repasar mis fallos</button><button id="repeat-session" class="button" type="button">Seguir practicando</button></div>
@@ -736,7 +734,7 @@ if (typeof document !== 'undefined') (function() {
   function empty(message,needsData=false){view('empty');$('empty-title').textContent=needsData?'Tu vocabulario, listo para cargar.':'Todo al día.';$('empty-copy').textContent=message;$('empty-import').hidden=!needsData;$('exit-review').hidden=needsData;}
   function start(){
     cancel();state.current=null;state.deck=[];state.modeDeck=[];state.tiles=[];state.selected=null;state.board=0;
-    state.session={stats:blank(),completed:0,started:Date.now(),elapsed:0,ended:false,mistakes:new Set(),initialPending:scope().filter(pending).length,reviewCode:null};
+    state.session={stats:blank(),completed:0,started:Date.now(),elapsed:0,ended:false,mistakes:new Set(),initialPending:scope().filter(pending).length,reviewCode:null,shuffleTrace:[]};
     $('summary-proof').hidden=true;$('summary-code').textContent='';
     renderControls();
     if(!scope().length){empty(state.loading?'Buscando tus listas de vocabulario…':'Carga tus archivos JSON para empezar. Si abres este HTML como archivo local, puedes importarlos desde aquí.',true);return;}
@@ -784,6 +782,7 @@ if (typeof document !== 'undefined') (function() {
     const mode=chooseMode(item),target=targetFor(mode,item),auditory=mode==='listen';
     state.current={item,mode,target,auditory,heard:false,answered:false,valid:equivalents(item,auditory,target),options:[]};
     if(state.prefs.activity==='quiz')state.current.options=optionsFor(state.current);
+    state.current.shuffleSignature=['question',state.prefs.activity,shuffleItem(item),mode,target,state.prefs.activity==='write'&&target==='jp'?state.prefs.writeFormat:null,state.current.options.map(shuffleItem)];
     view('quiz');renderQuestion();renderStats();
     if(auditory)playCurrent();
     else if(state.prefs.activity==='write')$('typed-answer').focus({preventScroll:true});
@@ -799,6 +798,8 @@ if (typeof document !== 'undefined') (function() {
     if(q.auditory&&!q.answered){prompt.hidden=true;}
     else if(q.mode==='es-jp'&&!q.answered){prompt.classList.add('spanish');prompt.textContent=q.item.significado;}
     else prompt.append(japaneseNode(q.item,q.mode!=='reading'||q.answered));
+    $('romaji-card').textContent=q.answered?q.item.romaji:'';$('romaji-card').hidden=!q.answered||!q.item.romaji;
+    $('meaning-card').textContent=q.answered?q.item.significado:'';$('meaning-card').hidden=!q.answered;
     $('listen-question').hidden=false;$('listen-question').disabled=false;
     $('answer-options').hidden=write;$('answer-form').hidden=!write;
     $('answer-options').replaceChildren();
@@ -814,42 +815,93 @@ if (typeof document !== 'undefined') (function() {
     input.placeholder=({es:'Significado en español…',romaji:'Romaji…',kana:'かな…',kanji:'日本語…',jp:'Kanji, kana o romaji…',any:'Kanji, kana o romaji…'})[format];
     input.setAttribute('aria-label','Escribe '+response);input.lang=['kana','kanji'].includes(format)?'ja':'es';
     $('submit-answer').disabled=input.disabled;$('skip-question').disabled=q.answered;$('next-question').disabled=!q.answered;
-    if(!q.answered){$('feedback-title').textContent='';$('feedback-detail').replaceChildren();$('feedback-tip').textContent=q.auditory?'Pulsa Escuchar si el audio no empieza. También puedes usar «No lo sé» para revelar la palabra.':'';}
+    if(!q.answered){$('answer-status').textContent='';$('feedback-tip').textContent='';}
   }
   function reveal(){
-    const q=state.current,detail=$('feedback-detail');detail.replaceChildren();
-    const word=document.createElement('span');word.className='word-reveal';word.append(japaneseNode(q.item));detail.append(word);
-    const rest=document.createElement('span');rest.textContent=[q.item.romaji,q.item.significado].filter(Boolean).join(' · ');detail.append(rest);
-    $('feedback-title').textContent=q.outcome==='correct'?'¡Correcto!':q.outcome==='skipped'?'Vamos a repasarla.':'La respuesta es…';
-    $('feedback-tip').textContent=q.outcome==='correct'?'':q.target==='es'?'Puedes escribir una de las traducciones de la lista. Las variantes adicionales se pueden añadir al JSON.':'Esta palabra queda pendiente de repaso.';
+    const q=state.current;
+    $('answer-status').textContent=(q.outcome==='correct'?'Respuesta correcta. ':q.outcome==='skipped'?'Respuesta revelada. ':'Respuesta incorrecta. ')+q.item.kanji+' · '+[q.item.romaji,q.item.significado].filter(Boolean).join(' · ');
+    $('feedback-tip').textContent='';
   }
   function respond(outcome,selected){
     const q=state.current;if(!q||q.answered)return;
+    state.session.shuffleTrace.push(q.shuffleSignature);
     q.answered=true;q.outcome=outcome;q.selected=selected;state.session.completed++;record(q.item,outcome);renderQuestion();reveal();playEffect(outcome==='correct');
     if(state.prefs.autoAudio)playItem(q.item);$('next-question').focus({preventScroll:true});
   }
   function answerOption(index){const q=state.current;if(!q||q.answered||q.auditory&&!q.heard)return;const item=q.options[index];if(!item)return;respond(q.valid.some(v=>v.id===item.id)?'correct':'wrong',index);}
   let composing=false;
   function answerWritten(e){e?.preventDefault();const q=state.current;if(composing||e?.isComposing||!q||q.answered||q.auditory&&!q.heard)return;const answer=$('typed-answer').value;if(!answer.trim()){$('feedback-tip').textContent='Escribe una respuesta o pulsa «No lo sé».';return;}const correct=q.valid.some(i=>Core.accepted(i,answer,q.target,q.target==='jp'?state.prefs.writeFormat:'any'));respond(correct?'correct':'wrong');}
-  // Un identificador por sesión completada; no se regenera al mostrar el resultado.
-  function createReviewCode(){
-    const parts=crypto.getRandomValues(new Uint32Array(3));
-    return 'REP-'+Array.from(parts,n=>n.toString(16).toUpperCase().padStart(8,'0')).join('-');
+  // SHA-256 de texto UTF-8; funciona también sin Web Crypto ni contexto HTTPS.
+  function sha256Hex(text) {
+    const constants = new Uint32Array([
+      0x428a2f98,0x71374491,0xb5c0fbcf,0xe9b5dba5,0x3956c25b,0x59f111f1,0x923f82a4,0xab1c5ed5,
+      0xd807aa98,0x12835b01,0x243185be,0x550c7dc3,0x72be5d74,0x80deb1fe,0x9bdc06a7,0xc19bf174,
+      0xe49b69c1,0xefbe4786,0x0fc19dc6,0x240ca1cc,0x2de92c6f,0x4a7484aa,0x5cb0a9dc,0x76f988da,
+      0x983e5152,0xa831c66d,0xb00327c8,0xbf597fc7,0xc6e00bf3,0xd5a79147,0x06ca6351,0x14292967,
+      0x27b70a85,0x2e1b2138,0x4d2c6dfc,0x53380d13,0x650a7354,0x766a0abb,0x81c2c92e,0x92722c85,
+      0xa2bfe8a1,0xa81a664b,0xc24b8b70,0xc76c51a3,0xd192e819,0xd6990624,0xf40e3585,0x106aa070,
+      0x19a4c116,0x1e376c08,0x2748774c,0x34b0bcb5,0x391c0cb3,0x4ed8aa4a,0x5b9cca4f,0x682e6ff3,
+      0x748f82ee,0x78a5636f,0x84c87814,0x8cc70208,0x90befffa,0xa4506ceb,0xbef9a3f7,0xc67178f2
+    ]);
+    const hash = new Uint32Array([
+      0x6a09e667,0xbb67ae85,0x3c6ef372,0xa54ff53a,0x510e527f,0x9b05688c,0x1f83d9ab,0x5be0cd19
+    ]);
+    const bytes = new TextEncoder().encode(text);
+    const padded = new Uint8Array(Math.ceil((bytes.length + 9) / 64) * 64);
+    padded.set(bytes); padded[bytes.length] = 0x80;
+    const data = new DataView(padded.buffer);
+    // Longitud en bits como entero de 64 bits, en orden de bytes de red.
+    data.setUint32(padded.length - 8, Math.floor(bytes.length / 0x20000000), false);
+    data.setUint32(padded.length - 4, (bytes.length * 8) >>> 0, false);
+    const words = new Uint32Array(64);
+    const rotate = (value, bits) => (value >>> bits) | (value << (32 - bits));
+    for (let offset = 0; offset < padded.length; offset += 64) {
+      for (let i = 0; i < 16; i++) words[i] = data.getUint32(offset + i * 4, false);
+      for (let i = 16; i < 64; i++) {
+        const x = words[i - 15], y = words[i - 2];
+        const s0 = rotate(x, 7) ^ rotate(x, 18) ^ (x >>> 3);
+        const s1 = rotate(y, 17) ^ rotate(y, 19) ^ (y >>> 10);
+        words[i] = (words[i - 16] + s0 + words[i - 7] + s1) >>> 0;
+      }
+      let [a,b,c,d,e,f,g,h] = hash;
+      for (let i = 0; i < 64; i++) {
+        const s1 = rotate(e, 6) ^ rotate(e, 11) ^ rotate(e, 25);
+        const choose = (e & f) ^ (~e & g);
+        const t1 = (h + s1 + choose + constants[i] + words[i]) >>> 0;
+        const s0 = rotate(a, 2) ^ rotate(a, 13) ^ rotate(a, 22);
+        const majority = (a & b) ^ (a & c) ^ (b & c);
+        const t2 = (s0 + majority) >>> 0;
+        h = g; g = f; f = e; e = (d + t1) >>> 0;
+        d = c; c = b; b = a; a = (t1 + t2) >>> 0;
+      }
+      const block = [a,b,c,d,e,f,g,h];
+      for (let i = 0; i < 8; i++) hash[i] = (hash[i] + block[i]) >>> 0;
+    }
+    return Array.from(hash, value => value.toString(16).padStart(8, '0')).join('');
+  }
+  function shuffleItem(item){return [item.nivel,item.kanji,item.kana,item.romaji,item.significado];}
+  // La misma secuencia, con sus tipos y opciones, produce la misma huella.
+  function createReviewCode(session){
+    const trace=session.shuffleTrace;
+    const levels=new Set(trace.flatMap(step=>step[0]==='question'?[step[2][0]]:step[1].map(tile=>tile[0][0])));
+    const activity=trace[0][0]==='board'?'P':trace[0][1]==='write'?'E':'Q';
+    const digest=sha256Hex(JSON.stringify(['asallam-vocab-shuffle-v1',trace]));
+    return 'BAR1-'+Core.LEVELS.filter(level=>levels.has(level)).join('+')+'-'+activity+session.completed+'-'+digest.slice(0,24).toUpperCase().match(/.{8}/g).join('-');
   }
   async function copyReviewCode(){
     const code=state.session?.reviewCode;if(!code||state.view!=='summary')return;
-    try{await navigator.clipboard.writeText(code);notice('Código copiado.',false,3000);}
+    try{await navigator.clipboard.writeText(code);notice('Huella copiada.',false,3000);}
     catch{
       const range=document.createRange(),selection=window.getSelection();
       range.selectNodeContents($('summary-code'));selection.removeAllRanges();selection.addRange(range);
-      notice('El código está seleccionado. Cópialo con Ctrl+C, Cmd+C o la opción Copiar de tu móvil.',false,6000);
+      notice('La huella está seleccionada. Cópiala con Ctrl+C, Cmd+C o la opción Copiar de tu móvil.',false,6000);
     }
   }
   function finish(){
     const session=state.session;if(!session||session.ended)return;
     cancel();session.ended=true;session.finishedAt=Date.now();session.elapsed=session.finishedAt-session.started;
     const complete=session.completed>0&&done(),unlimited=!state.prefs.review&&state.prefs.length===0;
-    if(complete)session.reviewCode=createReviewCode();
+    if(complete)session.reviewCode=createReviewCode(session);
     view('summary');const s=session.stats;
     $('summary-title').textContent=complete?(state.prefs.review?'¡Todos los fallos resueltos!':'Sesión completada.'):unlimited?'Sesión finalizada.':'Sesión sin completar.';
     $('summary-copy').textContent=session.completed+' '+(state.prefs.activity==='match'?'parejas':'preguntas')+' · '+session.mistakes.size+' palabras para reforzar · '+formatTime(session.elapsed);
@@ -859,7 +911,7 @@ if (typeof document !== 'undefined') (function() {
     const date=new Date(session.finishedAt).toLocaleString('es-CO',{timeZone:'America/Bogota',dateStyle:'short',timeStyle:'medium'});
     $('summary-code-context').textContent=state.prefs.levels.join(' + ')+' · '+activity+(state.prefs.review?' · Repaso de fallos':'')+' · '+s.skipped+' sin responder · '+date+' (hora de Colombia)';
     $('summary-code-help').hidden=complete;
-    $('summary-code-help').textContent=unlimited?'El modo sin límite no tiene un objetivo final. Para obtener un código de repaso completo, elige 10, 20 o 40 preguntas o parejas.':'Este repaso quedó incompleto y no genera código. Completa el objetivo de la sesión para obtenerlo.';
+    $('summary-code-help').textContent=unlimited?'El modo sin límite no tiene un objetivo final. Para obtener la huella del repaso, elige 10, 20 o 40 preguntas o parejas.':'Este repaso quedó incompleto y no genera huella. Completa el objetivo de la sesión para obtenerla.';
     renderStats();$('summary-title').focus({preventScroll:true});
   }
   function formatTime(ms){const sec=Math.floor(ms/1000);return String(Math.floor(sec/60)).padStart(2,'0')+':'+String(sec%60).padStart(2,'0');}
@@ -875,6 +927,7 @@ if (typeof document !== 'undefined') (function() {
     const chosen=new Set(selected.map(i=>i.id));state.deck=state.deck.filter(i=>!chosen.has(i.id));
     if(!selected.length){empty('No hay parejas disponibles en esta selección.');return;}
     state.tiles=Core.shuffle(selected.flatMap(i=>[{item:i,kind:'jp',matched:false},{item:i,kind:'es',matched:false}]));
+    state.session.shuffleTrace.push(['board',state.tiles.map(tile=>[shuffleItem(tile.item),tile.kind])]);
     view('match');$('exercise-badge').textContent=state.prefs.levels.join(' + ');$('board-counter').textContent='Tablero '+state.board;
     $('match-message').textContent='Une cada palabra con su significado.';renderBoard();renderStats();
   }
