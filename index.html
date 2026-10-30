@@ -60,6 +60,12 @@ dialog{width:min(520px,calc(100% - 30px));max-height:85svh;overflow:auto;border:
 }
 @media(max-width:430px){.intro h1{font-size:23px}}
 @media(max-width:370px){.intro h1{font-size:21px}}
+
+/* Additional languages follow the four existing entries. */
+.path.path-chinese{--card-accent:var(--gold);--card-tint:#e5b45230}
+.path.path-korean{--card-accent:var(--pink);--card-tint:#e67eaf30}
+.path.path-portuguese{--card-accent:#8abaff;--card-tint:#619bed30;grid-column:1/-1}
+:root[data-theme="light"] .path.path-portuguese{--card-accent:#3067ad}
 </style>
 </head>
 <body>
@@ -82,6 +88,9 @@ dialog{width:min(520px,calc(100% - 30px));max-height:85svh;overflow:auto;border:
 <a class="path honor-card path-japanese" href="japones.html"><span class="path-symbol" lang="ja" aria-hidden="true">あ</span><span><span class="path-title">Japonés</span><span class="path-subtitle">Herramientas para aprender y repasar</span></span><span class="path-arrow" aria-hidden="true">↗</span><img class="mobile-character mobile-nezuko" aria-hidden="true" data-decor="data/pictures/chibi-nezuko.png" alt="" width="1254" height="1254" decoding="async" fetchpriority="low"></a>
 <a class="path honor-card" href="herramientas-ingles.html"><span class="path-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 18V5l12-2v13M9 8l12-2"/><ellipse cx="6" cy="18" rx="3" ry="2"/><ellipse cx="18" cy="16" rx="3" ry="2"/></svg></span><span><span class="path-title">Inglés</span><span class="path-subtitle">Herramientas para aprender y repasar</span></span><span class="path-arrow" aria-hidden="true">↗</span></a>
 <a class="path honor-card" href="#asesorias" data-panel="asesorias"><span class="path-symbol" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m2 8 10-5 10 5-10 5L2 8Zm4 2v6c4 3 8 3 12 0v-6m4-2v8"/></svg></span><span><span class="path-title">Asesorías Académicas</span><span class="path-subtitle">TESIS · APA · materias universitarias</span></span><span class="path-arrow" aria-hidden="true">↗</span></a>
+<a class="path honor-card path-chinese" href="chino.html"><span class="path-symbol" lang="zh" aria-hidden="true">中</span><span><span class="path-title">Chino</span><span class="path-subtitle">Herramientas para aprender y repasar</span></span><span class="path-arrow" aria-hidden="true">↗</span></a>
+<a class="path honor-card path-korean" href="coreano.html"><span class="path-symbol" lang="ko" aria-hidden="true">한</span><span><span class="path-title">Coreano</span><span class="path-subtitle">Herramientas para aprender y repasar</span></span><span class="path-arrow" aria-hidden="true">↗</span></a>
+<a class="path honor-card path-portuguese" href="portugues.html"><span class="path-symbol" lang="pt" aria-hidden="true">ã</span><span><span class="path-title">Portugués</span><span class="path-subtitle">Herramientas para aprender y repasar</span></span><span class="path-arrow" aria-hidden="true">↗</span></a>
 </nav>
 </main>
 <footer><span>© Asallam Sensei</span><span class="footer-dot" aria-hidden="true">·</span><a href="salon-honor.html">Salón de Honor</a><span class="footer-dot" aria-hidden="true">·</span><a href="#ingles" data-panel="ingles">Curso de inglés</a></footer>
@@ -101,3 +110,4 @@ links.forEach(a=>a.addEventListener('click',e=>{e.preventDefault();opener=a;if(l
 })();
 </script>
 </body></html>
+
