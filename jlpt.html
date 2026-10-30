@@ -265,7 +265,6 @@
     .levels { grid-template-columns:repeat(3,minmax(0,1fr)); }
     .segment:disabled { opacity:.48; }
     .segment.is-mixed { background:var(--accent-bg); box-shadow:inset 0 0 0 1px var(--accent); }
-    .all-modes { grid-column:1 / -1; }
     .prompt,.prompt.multi { font-size:clamp(36px,6.3vw,70px); letter-spacing:0; line-height:1.9; min-height:160px; overflow-wrap:anywhere; }
     .prompt.spanish { font-family:inherit; font-size:clamp(27px,4.2vw,46px); line-height:1.35; }
     .prompt.audio-prompt { font-family:inherit; font-size:30px; letter-spacing:0; }
@@ -282,6 +281,9 @@
     .vocab-tile { min-height:145px; padding:18px 10px 12px; gap:8px; }
     .vocab-tile .jp { font-size:28px; line-height:1.9; overflow-wrap:anywhere; }
     .tile-meaning { font-size:15px; overflow-wrap:anywhere; }
+    .word-history { display:block; width:100%; margin-top:8px; padding-top:8px; border-top:1px solid var(--border); text-align:left; font-size:13px; line-height:1.5; }
+    .word-history span { display:block; }
+    .word-history-total { font-weight:700; }
     .tile-level { font-size:11px; align-self:flex-start; background:var(--accent-bg); border-radius:4px; padding:2px 5px; }
     #explore-more { display:flex; margin:18px auto 0; }
     .word-reveal { display:block; }
@@ -412,9 +414,8 @@
           <div class="mode-grid" role="group" aria-label="Tipos de pregunta combinables">
             <button class="mode-button" type="button" data-mode="jp-es" aria-pressed="true">JP → ES</button>
             <button class="mode-button" type="button" data-mode="es-jp" aria-pressed="true">ES → JP</button>
-            <button class="mode-button" type="button" data-mode="reading" aria-pressed="true">Lectura</button>
             <button class="mode-button" type="button" data-mode="listen" aria-pressed="true">Dictado</button>
-            <button class="mode-button all-modes" type="button" data-mode="mix" aria-pressed="true">Mixto</button>
+            <button class="mode-button" type="button" data-mode="mix" aria-pressed="true">Mixto</button>
           </div>
           <p id="mode-caption" class="setting-help">Combina los tipos de pregunta que quieras.</p>
         </div>
@@ -438,9 +439,8 @@
             <summary>Escritura y dictado</summary>
             <label class="setting-label" for="write-format">Respuesta japonesa</label>
             <select id="write-format"><option value="any">Libre · kanji, kana o romaji</option><option value="kana">Kana</option><option value="kanji">Escritura original (kanji si lleva)</option><option value="romaji">Romaji</option></select>
-            <div class="setting-group"><label class="setting-label" for="reading-format">Ejercicios de lectura</label><select id="reading-format"><option value="mixed">Kana y romaji</option><option value="kana">Kana</option><option value="romaji">Romaji</option></select></div>
             <div class="setting-group"><label class="setting-label" for="dictation-target">Después de escuchar</label><select id="dictation-target"><option value="mixed">Japonés y significado</option><option value="jp">Responder en japonés</option><option value="es">Responder en español</option></select></div>
-            <p class="setting-help">En Lectura se oculta el furigana hasta responder. Al escribir en español se aceptan las traducciones y variantes incluidas en tu lista, sin exigir tildes ni mayúsculas.</p>
+            <p class="setting-help">Al escribir en español se aceptan las traducciones y variantes incluidas en tu lista, sin exigir tildes ni mayúsculas.</p>
           </details>
           <details id="audio-settings">
             <summary>Sonido y pronunciación</summary>
@@ -476,7 +476,7 @@
           </details>
           <details>
             <summary>Pequeñas pistas</summary>
-            <p id="mode-help" class="setting-help">Combina JP → ES, ES → JP, Lectura y Dictado.</p>
+            <p id="mode-help" class="setting-help">Combina JP → ES, ES → JP y Dictado.</p>
             <p class="setting-help">«No lo sé» revela la respuesta y la añade al repaso. Los fallos pendientes se repiten hasta acertarlos.</p>
             <p id="keyboard-hint" class="keyboard-hint"><kbd>1</kbd>–<kbd>4</kbd> o <kbd>A</kbd>–<kbd>D</kbd> para responder · <kbd>Enter</kbd> para continuar · <kbd>R</kbd> para escuchar</p>
             <p class="setting-help">En dictado, si dos palabras suenan igual, se aceptan sus respuestas válidas. La precisión incluye los «No lo sé».</p>
@@ -609,16 +609,18 @@ if (typeof document !== 'undefined') (function() {
     paths: {N5:['data/Vocabulario_N5.json','data/vocabulario_N5.json'],N4:['data/vocabulario_N4.json','data/Vocabulario_N4.json'],N3:['data/vocabulario_N3.json','data/Vocabulario_N3.json'],N2:['data/vocabulario_N2.json','data/Vocabulario_N2.json'],N1:['data/vocabulario_N1.json','data/Vocabulario_N1.json']},
     timeout:7000, maxBytes:8*1024*1024
   };
-  const KEYS = {prefs:'asallam_vocab_preferences_v3', progress:'asallam_vocab_progress_v3', custom:'asallam_vocab_custom_v3', cache:'asallam_vocab_cache_v3'};
-  const MODES = ['jp-es','es-jp','reading','listen'];
-  const DEFAULTS = {activity:'quiz',levels:['N5'],modes:MODES,length:20,pairs:4,review:false,furigana:true,effects:false,autoAudio:true,audioSource:'mp3',rate:.85,theme:'dark',writeFormat:'any',readingFormat:'mixed',dictationTarget:'mixed'};
+  // Esta versión inicia su propio progreso, sin incorporar registros anteriores.
+  const KEYS = {prefs:'asallam_vocab_preferences_v3', progress:'asallam_vocab_progress_v4', custom:'asallam_vocab_custom_v3', cache:'asallam_vocab_cache_v3'};
+  const MODES = ['jp-es','es-jp','listen'];
+  const PRACTICE_MODES = {'quiz:jp-es':'Quiz · JP → ES','quiz:es-jp':'Quiz · ES → JP','quiz:listen':'Quiz · Dictado','write:jp-es':'Escritura · JP → ES','write:es-jp':'Escritura · ES → JP','write:listen':'Escritura · Dictado',match:'Emparejar'};
+  const DEFAULTS = {activity:'quiz',levels:['N5'],modes:MODES,length:20,pairs:4,review:false,furigana:true,effects:false,autoAudio:true,audioSource:'mp3',rate:.85,theme:'dark',writeFormat:'any',dictationTarget:'mixed'};
   let storageOK=true;
   function read(key) { try { return JSON.parse(localStorage.getItem(key)); } catch { return null; } }
   function save(key,value) { try { localStorage.setItem(key,JSON.stringify(value)); return true; } catch { storageOK=false; $('storage-status').textContent='No se pudo guardar en este navegador. El progreso se conserva solo mientras la página siga abierta.';return false; } }
   function preferences(value) {
     const p = {...DEFAULTS,levels:[...DEFAULTS.levels],modes:[...MODES]};
     if (!value || typeof value!=='object') return p;
-    const choices={activity:['quiz','write','match','explore'],length:[0,10,20,40],pairs:[3,4,6],audioSource:['mp3','tts'],theme:['light','dark'],writeFormat:['any','kana','kanji','romaji'],readingFormat:['mixed','kana','romaji'],dictationTarget:['mixed','jp','es']};
+    const choices={activity:['quiz','write','match','explore'],length:[0,10,20,40],pairs:[3,4,6],audioSource:['mp3','tts'],theme:['light','dark'],writeFormat:['any','kana','kanji','romaji'],dictationTarget:['mixed','jp','es']};
     for(const key in choices) if(choices[key].includes(value[key])) p[key]=value[key];
     for(const key of ['review','furigana','effects','autoAudio']) if(typeof value[key]==='boolean')p[key]=value[key];
     if(Array.isArray(value.levels)){const a=CONFIG.levels.filter(l=>value.levels.includes(l));if(a.length)p.levels=a;}
@@ -629,16 +631,24 @@ if (typeof document !== 'undefined') (function() {
   const blank=()=>({correct:0,wrong:0,skipped:0,streak:0,best:0});
   const number = v=>Number.isFinite(v)&&v>=0?Math.floor(v):0;
   function statsClean(v) { const s=blank();for(const k in s)s[k]=number(v?.[k]);return s; }
+  function itemProgressClean(v){
+    const byMode=Object.create(null);
+    for(const mode of Object.keys(PRACTICE_MODES)){
+      const row=v?.history?.byMode?.[mode],count=number(row?.count);
+      if(count)byMode[mode]={count,skipped:Math.min(count,number(row?.skipped))};
+    }
+    return {correct:number(v?.correct),wrong:number(v?.wrong),pending:v?.pending===true,history:{byMode}};
+  }
   function progressClean(v) {
-    const p={total:statsClean(v?.total),byActivity:{},byItem:Object.create(null),legacy:statsClean(v?.legacy)};
+    const p={total:statsClean(v?.total),byActivity:{},byItem:Object.create(null)};
     for(const a of ['quiz','write','match'])p.byActivity[a]=statsClean(v?.byActivity?.[a]);
-    if(v?.byItem && typeof v.byItem==='object')for(const [id,x] of Object.entries(v.byItem).slice(0,100000)){if(x && typeof x==='object')p.byItem[id]={correct:number(x.correct),wrong:number(x.wrong),pending:x.pending===true};}
+    if(v?.byItem && typeof v.byItem==='object')for(const [id,x] of Object.entries(v.byItem).slice(0,100000)){if(x && typeof x==='object')p.byItem[id]=itemProgressClean(x);}
     return p;
   }
   const priorProgress=read(KEYS.progress);
   const state = {prefs:preferences(read(KEYS.prefs)),progress:progressClean(priorProgress),remote:{},custom:{},groups:{},items:[],current:null,view:'empty',session:null,deck:[],previous:'',modeDeck:[],tiles:[],selected:null,board:0,lock:false,timers:new Set(),generation:0,loading:false,query:'',exploreLimit:60};
   const sound = {token:0,voice:null,clip:null,utterance:null,pending:null,watchdog:null,context:null,failedClips:new Set()};
-  if(!priorProgress){const old=read('n5_vocab_stats_v1');if(old){state.progress.legacy={correct:number(old.aciertos),wrong:number(old.errores),skipped:0,streak:0,best:number(old.mejorRacha)};save(KEYS.progress,state.progress);}}
+  if(!priorProgress){state.prefs.review=false;save(KEYS.prefs,state.prefs);}
   function safeGroups(raw){try{return Core.validate(raw);}catch{return {};}}
   state.custom=safeGroups(read(KEYS.custom));state.remote=safeGroups(read(KEYS.cache));
   let noticeTimer = null;
@@ -674,8 +684,14 @@ if (typeof document !== 'undefined') (function() {
   function increment(s,outcome){s[outcome]++;s.streak=outcome==='correct'?s.streak+1:0;s.best=Math.max(s.best,s.streak);}
   function record(item,outcome){
     increment(state.session.stats,outcome);increment(state.progress.total,outcome);increment(state.progress.byActivity[state.prefs.activity],outcome);
-    const p=state.progress.byItem[item.id]||{correct:0,wrong:0,pending:false};
+    const p=state.progress.byItem[item.id]||itemProgressClean(null);
     p[outcome==='correct'?'correct':'wrong']++;
+    // Una respuesta cuenta una vez; en Emparejar, solo cuenta la pareja resuelta.
+    if(state.prefs.activity!=='match'||outcome==='correct'){
+      const mode=state.prefs.activity==='match'?'match':state.prefs.activity+':'+state.current.mode;
+      const row=p.history.byMode[mode]||(p.history.byMode[mode]={count:0,skipped:0});
+      row.count++;if(outcome==='skipped')row.skipped++;
+    }
     // Completar una pareja no borra los fallos de esta sesión normal: se conservan para el repaso.
     const keepForReview=state.prefs.activity==='match'&&!state.prefs.review&&state.session.mistakes.has(item.id);
     p.pending=outcome!=='correct'||keepForReview;
@@ -686,8 +702,8 @@ if (typeof document !== 'undefined') (function() {
   function renderStats(){
     const s=state.session?.stats||blank();
     for(const [key,v] of Object.entries({correct:s.correct,wrong:s.wrong+s.skipped,accuracy:accuracy(s),streak:s.streak}))$('stat-'+key).textContent=v;
-    const historical=state.progress.total,legacy=state.progress.legacy;
-    $('total-correct').textContent=historical.correct+legacy.correct;$('total-best').textContent=Math.max(historical.best,legacy.best);
+    const historical=state.progress.total;
+    $('total-correct').textContent=historical.correct;$('total-best').textContent=historical.best;
     $('total-seen').textContent=state.items.filter(i=>state.progress.byItem[i.id]).length;
     $('review-count').textContent=scope().filter(pending).length;
     const done=state.session?.completed||0,limit=state.prefs.review?0:state.prefs.length;
@@ -700,17 +716,7 @@ if (typeof document !== 'undefined') (function() {
     $('progress-fill').style.width=(maximum?Math.min(100,value/maximum*100):0)+'%';
     $('review-session').disabled=!scope().some(pending);
   }
-  // Una lectura debe aportar algo distinto de lo que ya muestra el enunciado.
-  function readingTargets(item){
-    const shown=Core.roman(Core.japanese(item.kanji));
-    return ['kana','romaji'].filter(target=>{
-      if(state.prefs.readingFormat!=='mixed'&&state.prefs.readingFormat!==target)return false;
-      const reading=Core.roman(Core.japanese(item[target]));
-      return !!reading&&reading!==shown;
-    });
-  }
   function eligible(item,mode){
-    if(mode==='reading')return readingTargets(item).length>0;
     if(state.prefs.activity==='write' && (mode==='es-jp'||mode==='listen'&&state.prefs.dictationTarget!=='es')){
       if(state.prefs.writeFormat==='kana')return !!item.kana;
       if(state.prefs.writeFormat==='romaji')return !!item.romaji;
@@ -734,7 +740,7 @@ if (typeof document !== 'undefined') (function() {
     $('length-settings').hidden=state.prefs.activity==='explore'||state.prefs.review;
     $('length-label').textContent=state.prefs.activity==='match'?'Parejas por sesión':'Preguntas por sesión';
     $('match-settings').hidden=state.prefs.activity!=='match';
-    const fields={'session-length':'length','match-count':'pairs','review-only':'review','show-furigana':'furigana','sound-effects':'effects','auto-audio':'autoAudio','audio-source':'audioSource','write-format':'writeFormat','reading-format':'readingFormat','dictation-target':'dictationTarget'};
+    const fields={'session-length':'length','match-count':'pairs','review-only':'review','show-furigana':'furigana','sound-effects':'effects','auto-audio':'autoAudio','audio-source':'audioSource','write-format':'writeFormat','dictation-target':'dictationTarget'};
     for(const [id,key] of Object.entries(fields)){const el=$(id);if(el.type==='checkbox')el.checked=state.prefs[key];else el.value=String(state.prefs[key]);}
     const mp3=state.prefs.audioSource==='mp3';$('speech-rate').disabled=mp3;$('speech-rate').value=mp3?1:state.prefs.rate;$('rate-value').textContent=mp3?'Original':state.prefs.rate.toFixed(2)+'×';
     $('audio-status').textContent=mp3?'Los MP3 se reproducen a velocidad original. Si falta uno, se intenta usar una voz japonesa.':japaneseVoice()?'Voz japonesa disponible.':'No se detecta una voz japonesa; puedes volver a los MP3.';
@@ -767,9 +773,8 @@ if (typeof document !== 'undefined') (function() {
     const item=state.deck.shift();if(item)state.previous=item.id;return item;
   }
   function chooseMode(item){const available=activeModes().filter(m=>eligible(item,m));state.modeDeck=state.modeDeck.filter(m=>available.includes(m));if(!state.modeDeck.length)state.modeDeck=Core.shuffle(available);return state.modeDeck.shift();}
-  function targetFor(mode,item){
+  function targetFor(mode){
     if(mode==='jp-es')return 'es';if(mode==='es-jp')return 'jp';
-    if(mode==='reading'){const targets=readingTargets(item);return targets.length>1?targets[Math.floor(Math.random()*targets.length)]:targets[0];}
     return state.prefs.dictationTarget==='mixed'?(Math.random()<.5?'jp':'es'):state.prefs.dictationTarget;
   }
   function equivalents(item,auditory,target){return auditory?scope().filter(i=>Core.soundKey(i)===Core.soundKey(item)):target==='jp'?scope().filter(i=>Core.spanish(i.significado)===Core.spanish(item.significado)):scope().filter(i=>i.kanji===item.kanji);}
@@ -794,7 +799,7 @@ if (typeof document !== 'undefined') (function() {
   function nextQuestion(){
     stopAudio();if(done()){finish();return;}
     const item=takeItem();if(!item){empty('No hay palabras compatibles con estos ajustes. Cambia el formato de escritura o carga sus lecturas.');$('empty-title').textContent='Ajusta la práctica.';return;}
-    const mode=chooseMode(item),target=targetFor(mode,item),auditory=mode==='listen';
+    const mode=chooseMode(item),target=targetFor(mode),auditory=mode==='listen';
     state.current={item,mode,target,auditory,heard:false,answered:false,valid:equivalents(item,auditory,target),options:[]};
     if(state.prefs.activity==='quiz')state.current.options=optionsFor(state.current);
     state.current.shuffleSignature=['question',state.prefs.activity,shuffleItem(item),mode,target,state.prefs.activity==='write'&&target==='jp'?state.prefs.writeFormat:null,state.current.options.map(shuffleItem)];
@@ -804,7 +809,7 @@ if (typeof document !== 'undefined') (function() {
   }
   function renderQuestion(preserveInput=false){
     const q=state.current;if(!q)return;
-    $('exercise-badge').textContent=q.item.nivel+' · '+({reading:'Lectura',listen:'Dictado','jp-es':'JP → ES','es-jp':'ES → JP'})[q.mode];
+    $('exercise-badge').textContent=q.item.nivel+' · '+({listen:'Dictado','jp-es':'JP → ES','es-jp':'ES → JP'})[q.mode];
     const prompt=$('prompt');prompt.replaceChildren();prompt.className='prompt';prompt.removeAttribute('lang');prompt.hidden=false;
     const write=state.prefs.activity==='write';
     const format=q.target==='jp'&&write?state.prefs.writeFormat:q.target;
@@ -812,7 +817,7 @@ if (typeof document !== 'undefined') (function() {
     $('question-label').textContent=(write?'Escribe ':'Elige ')+response;
     if(q.auditory&&!q.answered){prompt.hidden=true;}
     else if(q.mode==='es-jp'&&!q.answered){prompt.classList.add('spanish');prompt.textContent=q.item.significado;}
-    else prompt.append(japaneseNode(q.item,q.mode!=='reading'||q.answered));
+    else prompt.append(japaneseNode(q.item));
     $('romaji-card').textContent=q.answered?q.item.romaji:'';$('romaji-card').hidden=!q.answered||!q.item.romaji;
     $('meaning-card').textContent=q.answered?q.item.significado:'';$('meaning-card').hidden=!q.answered;
     $('listen-question').hidden=false;$('listen-question').disabled=false;
@@ -959,14 +964,25 @@ if (typeof document !== 'undefined') (function() {
     if(first.kind===tile.kind){state.selected=index;renderBoard();return;}
     state.selected=null;
     if(first.item.id===tile.item.id){first.matched=tile.matched=true;state.session.completed++;record(tile.item,'correct');playEffect(true);if(state.prefs.autoAudio)playItem(tile.item);$('match-message').textContent='¡Pareja encontrada! '+tile.item.kanji+' · '+tile.item.significado;renderBoard();if(state.tiles.every(t=>t.matched)){state.lock=true;timer(nextBoard,850);}}
-    else {record(first.item,'wrong');const p=state.progress.byItem[tile.item.id]||{correct:0,wrong:0,pending:false};p.pending=true;state.progress.byItem[tile.item.id]=p;state.session.mistakes.add(tile.item.id);save(KEYS.progress,state.progress);state.lock=true;renderBoard();first.button.classList.add('is-wrong');tile.button.classList.add('is-wrong');$('match-message').textContent='Todavía no. Intenta otra pareja.';playEffect(false);timer(()=>{state.lock=false;renderBoard();},700);}
+    else {record(first.item,'wrong');const p=state.progress.byItem[tile.item.id]||itemProgressClean(null);p.pending=true;state.progress.byItem[tile.item.id]=p;state.session.mistakes.add(tile.item.id);save(KEYS.progress,state.progress);state.lock=true;renderBoard();first.button.classList.add('is-wrong');tile.button.classList.add('is-wrong');$('match-message').textContent='Todavía no. Intenta otra pareja.';playEffect(false);timer(()=>{state.lock=false;renderBoard();},700);}
     renderStats();
+  }
+  function wordHistoryNode(item){
+    const history=document.createElement('span');history.className='word-history';
+    const byMode=state.progress.byItem[item.id]?.history.byMode||{};
+    const count=Object.values(byMode).reduce((sum,row)=>sum+row.count,0);
+    const title=document.createElement('span');title.className='word-history-total';title.textContent='Repasos registrados: '+count;history.append(title);
+    for(const [mode,label] of Object.entries(PRACTICE_MODES)){
+      const row=byMode[mode];if(!row?.count)continue;
+      const line=document.createElement('span');line.textContent=label+': '+row.count+(row.skipped?' · '+row.skipped+' sin responder':'');history.append(line);
+    }
+    return history;
   }
   function renderExplore(){
     const q=Core.spanish(state.query),kana=Core.japanese(state.query),roman=Core.roman(state.query);
     const found=pool().filter(i=>!q||Core.spanish(i.significado).includes(q)||Core.japanese(i.kanji).includes(kana)||!!i.kana&&Core.japanese(i.kana).includes(kana)||!!i.romaji&&Core.roman(i.romaji).includes(roman));
     const grid=$('explore-grid');grid.replaceChildren();
-    for(const item of found.slice(0,state.exploreLimit)){const b=document.createElement('button');b.type='button';b.className='kana-tile vocab-tile';b.classList.toggle('needs-review',pending(item));const lev=document.createElement('span');lev.className='tile-level';lev.textContent=item.nivel;const r=document.createElement('span');r.className='tile-romaji';r.textContent=item.romaji;const meaning=document.createElement('span');meaning.className='tile-meaning';meaning.textContent=item.significado;b.append(lev,japaneseNode(item),r,meaning);b.title='Escuchar '+item.kanji;b.addEventListener('click',()=>playItem(item));grid.append(b);}
+    for(const item of found.slice(0,state.exploreLimit)){const b=document.createElement('button');b.type='button';b.className='kana-tile vocab-tile';b.classList.toggle('needs-review',pending(item));const lev=document.createElement('span');lev.className='tile-level';lev.textContent=item.nivel;const r=document.createElement('span');r.className='tile-romaji';r.textContent=item.romaji;const meaning=document.createElement('span');meaning.className='tile-meaning';meaning.textContent=item.significado;b.append(lev,japaneseNode(item),r,meaning,wordHistoryNode(item));b.title='Escuchar '+item.kanji;b.addEventListener('click',()=>playItem(item));grid.append(b);}
     $('explore-count').textContent=Math.min(state.exploreLimit,found.length)+' de '+found.length+' palabras';$('explore-more').hidden=state.exploreLimit>=found.length;
   }
 
@@ -1195,7 +1211,7 @@ if (typeof document !== 'undefined') (function() {
     $('dismiss-notice').addEventListener('click',hideNotice);
     all('[data-activity]').forEach(b=>b.addEventListener('click',()=>{state.prefs.activity=b.dataset.activity;persist();start();}));
     all('[data-mode]').forEach(b=>b.addEventListener('click',()=>{const m=b.dataset.mode;let list=activeModes();if(m==='mix')list=list.length>1?[availableModes()[0]]:availableModes();else if(list.includes(m)){if(list.length===1)return;list=list.filter(x=>x!==m);}else list=MODES.filter(x=>x===m||list.includes(x));state.prefs.modes=list;persist();start();}));
-    const restarts={'session-length':['length',Number],'match-count':['pairs',Number],'write-format':['writeFormat',String],'reading-format':['readingFormat',String],'dictation-target':['dictationTarget',String]};
+    const restarts={'session-length':['length',Number],'match-count':['pairs',Number],'write-format':['writeFormat',String],'dictation-target':['dictationTarget',String]};
     for(const [id,[key,convert]] of Object.entries(restarts))$(id).addEventListener('change',e=>{state.prefs[key]=convert(e.target.value);persist();start();});
     $('review-only').addEventListener('change',e=>{state.prefs.review=e.target.checked;persist();start();});
     $('show-furigana').addEventListener('change',e=>{state.prefs.furigana=e.target.checked;persist();if(state.view==='quiz'){renderQuestion(true);if(state.current?.answered)reveal();}else if(state.view==='match')renderBoard();else if(state.view==='explore')renderExplore();});
