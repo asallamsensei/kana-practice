@@ -700,8 +700,17 @@ if (typeof document !== 'undefined') (function() {
     $('progress-fill').style.width=(maximum?Math.min(100,value/maximum*100):0)+'%';
     $('review-session').disabled=!scope().some(pending);
   }
+  // Una lectura debe aportar algo distinto de lo que ya muestra el enunciado.
+  function readingTargets(item){
+    const shown=Core.roman(Core.japanese(item.kanji));
+    return ['kana','romaji'].filter(target=>{
+      if(state.prefs.readingFormat!=='mixed'&&state.prefs.readingFormat!==target)return false;
+      const reading=Core.roman(Core.japanese(item[target]));
+      return !!reading&&reading!==shown;
+    });
+  }
   function eligible(item,mode){
-    if(mode==='reading')return state.prefs.readingFormat==='kana'?!!item.kana:state.prefs.readingFormat==='romaji'?!!item.romaji:!!(item.kana||item.romaji);
+    if(mode==='reading')return readingTargets(item).length>0;
     if(state.prefs.activity==='write' && (mode==='es-jp'||mode==='listen'&&state.prefs.dictationTarget!=='es')){
       if(state.prefs.writeFormat==='kana')return !!item.kana;
       if(state.prefs.writeFormat==='romaji')return !!item.romaji;
@@ -760,7 +769,7 @@ if (typeof document !== 'undefined') (function() {
   function chooseMode(item){const available=activeModes().filter(m=>eligible(item,m));state.modeDeck=state.modeDeck.filter(m=>available.includes(m));if(!state.modeDeck.length)state.modeDeck=Core.shuffle(available);return state.modeDeck.shift();}
   function targetFor(mode,item){
     if(mode==='jp-es')return 'es';if(mode==='es-jp')return 'jp';
-    if(mode==='reading'){let f=state.prefs.readingFormat;if(f==='mixed')f=item.kana&&item.romaji?(Math.random()<.5?'kana':'romaji'):item.kana?'kana':'romaji';return f;}
+    if(mode==='reading'){const targets=readingTargets(item);return targets.length>1?targets[Math.floor(Math.random()*targets.length)]:targets[0];}
     return state.prefs.dictationTarget==='mixed'?(Math.random()<.5?'jp':'es'):state.prefs.dictationTarget;
   }
   function equivalents(item,auditory,target){return auditory?scope().filter(i=>Core.soundKey(i)===Core.soundKey(item)):target==='jp'?scope().filter(i=>Core.spanish(i.significado)===Core.spanish(item.significado)):scope().filter(i=>i.kanji===item.kanji);}
