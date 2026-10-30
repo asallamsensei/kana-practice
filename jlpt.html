@@ -545,6 +545,9 @@
     do{previous=s;s=s.replace(/\([^()]*\)|\[[^\[\]]*\]/g,' ');}while(s!==previous);
     return s.replace(/\s+/g,' ').trim();
   }
+  function defaultSpanish(meanings) {
+    return meanings.flatMap(s=>withoutNotes(s).split(/\s*[,;/]\s*/)).map(withoutNotes).filter(Boolean);
+  }
   function cleanRomans(values) {
     return values.flatMap(s=>s.split(/\s+-\s+|\s*[;/]\s*/)).map(s=>s.replace(/_\d+$/,'').trim()).filter(Boolean);
   }
@@ -572,7 +575,7 @@
         const romaji = text(row.romaji) || toRomaji(kana);
         // Las variantes explícitas son respuestas enteras, no fragmentos de la explicación.
         const explicitES=[...strings(row.variantes_es),...strings(row.sinonimos),...strings(row.respuestas_es)];
-        const es=(explicitES.length?explicitES:meanings.flatMap(s=>withoutNotes(s).split(/\s*[,;/]\s*/))).map(withoutNotes).filter(Boolean);
+        const es=explicitES.length?explicitES.map(withoutNotes).filter(Boolean):defaultSpanish(meanings);
         const jp=[...new Set([word,kana,...strings(row.variantes_jp)].filter(Boolean))];
         const romanVariants=cleanRomans(strings(row.variantes_romaji));
         const preferredRomans=romanVariants.length?romanVariants:cleanRomans([romaji]);
@@ -616,7 +619,15 @@
   function shuffle(items) { const a=[...items]; for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]];}return a; }
   function display(item,target) { return target==='es'?item.significado:target==='romaji'?romajiLabel(item):target==='kana'?item.kana:item.kanji; }
   function exportData(groups) {
-    return Object.fromEntries(LEVELS.filter(l=>groups[l]?.length).map(l=>[l,groups[l].map(i=>({kanji:i.kanji,kana:i.kana,romaji:i.romaji,significado:i.significado,nivel:l,variantes_es:i.es,variantes_jp:i.jp,variantes_romaji:i.romanVariants}))]));
+    return Object.fromEntries(LEVELS.filter(l=>groups[l]?.length).map(l=>[l,groups[l].map(i=>{
+      const row={kanji:i.kanji,kana:i.kana,romaji:i.romaji,significado:i.significado,nivel:l};
+      const automatic=new Set(defaultSpanish([i.significado]).map(spanish)),explicit=new Set(i.es.map(spanish));
+      if(automatic.size!==explicit.size||[...explicit].some(s=>!automatic.has(s)))row.variantes_es=i.es;
+      const extraJP=i.jp.filter(s=>s!==i.kanji&&s!==i.kana);
+      if(extraJP.length)row.variantes_jp=extraJP;
+      if(i.romanVariants.length)row.variantes_romaji=i.romanVariants;
+      return row;
+    })]));
   }
   return {LEVELS,hira,japanese,spanish,roman,toRomaji,romajiLabel,validate,accepted,soundKey,shuffle,display,exportData};
 });
@@ -1277,7 +1288,7 @@ if (typeof document !== 'undefined') (function() {
     for(const id of ['import-button','empty-import'])$(id).addEventListener('click',()=>$('import-json').click());
     $('import-json').addEventListener('change',importFiles);$('retry-data').addEventListener('click',loadRemote);
     $('export-json').addEventListener('click',()=>download(Core.exportData(state.groups),'Vocabulario_JLPT.json'));
-    $('download-example').addEventListener('click',()=>download({N5:[{kanji:'食べる',kana:'たべる',romaji:'taberu',significado:'comer',variantes_es:['comer']}],N4:[{kanji:'約束',kana:'やくそく',romaji:'yakusoku',significado:'promesa; cita'}]},'Ejemplo_vocabulario_JLPT.json'));
+    $('download-example').addEventListener('click',()=>download({N5:[{kanji:'食べる',kana:'たべる',romaji:'taberu',significado:'comer'}],N4:[{kanji:'約束',kana:'やくそく',romaji:'yakusoku',significado:'promesa; cita'}]},'Ejemplo_vocabulario_JLPT.json'));
     $('restore-data').addEventListener('click',()=>{state.custom={};save(KEYS.custom,{});mergeGroups();start();loadRemote();});
     $('reset-progress').addEventListener('click',()=>$('reset-dialog').showModal());$('cancel-reset').addEventListener('click',()=>$('reset-dialog').close());
     $('confirm-reset').addEventListener('click',()=>{state.progress=progressClean(null);save(KEYS.progress,state.progress);$('reset-dialog').close();state.prefs.review=false;persist();start();});
