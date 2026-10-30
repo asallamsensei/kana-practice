@@ -500,6 +500,7 @@
  * Archivo único, sin librerías externas. Conserva las rutas originales.
  * Para añadir niveles: data/vocabulario_N3.json, ...N2.json, ...N1.json.
  * También se admite Vocabulario_Nx.json. Audios: data/audios/nx/<romaji exacto>.mp3.
+ * variantes_es contiene respuestas completas; variantes_romaji define lecturas válidas y visibles.
  * Ejemplo: {"kanji":"食べる","kana":"たべる","romaji":"taberu","significado":"comer"}
  * La lectura kana (o hiragana/lectura/furigana) permite furigana fiable.
  * Nunca se infiere la ortografía de una lectura a partir del romaji.
@@ -517,12 +518,13 @@
   function japanese(s) { return hira(s).replace(/[\s・･]/g, ''); }
   function spanish(s) {
     return String(s || '').normalize('NFKC').toLowerCase().replace(/[áéíóúü]/g, c => ({á:'a',é:'e',í:'i',ó:'o',ú:'u',ü:'u'})[c])
-      .replace(/[¿?¡!.]/g,'').replace(/\s+/g,' ').trim();
+      .replace(/[¿?¡!.,;:]/g,' ').replace(/\s+/g,' ').trim();
   }
   function roman(s) {
-    return String(s || '').normalize('NFKC').toLowerCase().replace(/[āīūēōâîûêô]/g,c => ({ā:'aa',ī:'ii',ū:'uu',ē:'ee',ō:'ou',â:'aa',î:'ii',û:'uu',ê:'ee',ô:'ou'})[c])
+    return String(s || '').normalize('NFKC').toLowerCase().replace(/[âîûêô]/g,c => ({â:'ā',î:'ī',û:'ū',ê:'ē',ô:'ō'})[c])
       .replace(/’/g,"'").replace(/[\s・-]/g,'');
   }
+  function longRoman(s) { return roman(s).replace(/aa/g,'ā').replace(/ii/g,'ī').replace(/uu/g,'ū').replace(/ee|ei/g,'ē').replace(/oo|ou/g,'ō'); }
   function toRomaji(value) {
     const s = hira(value); let out = '', doubled = false;
     for (let i=0; i<s.length; i++) {
@@ -538,6 +540,15 @@
     return doubled ? '' : out;
   }
   function strings(v) { return (Array.isArray(v) ? v : [v]).filter(x => typeof x === 'string' && x.trim()).map(x=>x.trim()); }
+  function withoutNotes(value) {
+    let s=String(value||'').normalize('NFKC'),previous;
+    do{previous=s;s=s.replace(/\([^()]*\)|\[[^\[\]]*\]/g,' ');}while(s!==previous);
+    return s.replace(/\s+/g,' ').trim();
+  }
+  function cleanRomans(values) {
+    return values.flatMap(s=>s.split(/\s+-\s+|\s*[;/]\s*/)).map(s=>s.replace(/_\d+$/,'').trim()).filter(Boolean);
+  }
+  function romajiLabel(item) { return (item.romanLabels||[]).join(' / '); }
   function level(v, fallback) {
     const s = String(v || fallback || '').toUpperCase().replace(/^JLPT\s*/, '');
     const candidate = /^[1-5]$/.test(s) ? 'N'+s : s;
@@ -559,13 +570,20 @@
         const candidate = text(row.kana) || text(row.hiragana) || text(row.lectura) || text(row.reading) || text(row.furigana);
         const kana = candidate && /^[ぁ-ゖァ-ヶー\s・]+$/.test(candidate) ? candidate : /^[ぁ-ゖァ-ヶー]+$/.test(word) ? word : '';
         const romaji = text(row.romaji) || toRomaji(kana);
-        const es = [...meanings, ...strings(row.variantes_es), ...strings(row.sinonimos), ...strings(row.respuestas_es)]
-          .flatMap(x=>[x, ...x.split(/\s*[,;/]\s*/)]).filter(Boolean);
+        // Las variantes explícitas son respuestas enteras, no fragmentos de la explicación.
+        const explicitES=[...strings(row.variantes_es),...strings(row.sinonimos),...strings(row.respuestas_es)];
+        const es=(explicitES.length?explicitES:meanings.flatMap(s=>withoutNotes(s).split(/\s*[,;/]\s*/))).map(withoutNotes).filter(Boolean);
+        const jp=[...new Set([word,kana,...strings(row.variantes_jp)].filter(Boolean))];
+        const romanVariants=cleanRomans(strings(row.variantes_romaji));
+        const preferredRomans=romanVariants.length?romanVariants:cleanRomans([romaji]);
+        const labelKeys=new Set();
+        const romanLabels=preferredRomans.filter(s=>{const key=longRoman(s);if(labelKeys.has(key))return false;labelKeys.add(key);return true;});
+        const kanaRomans=jp.filter(s=>/^[ぁ-ゖァ-ヶー\s・]+$/.test(s)).map(toRomaji).filter(Boolean);
         const item = {
           id: lev + ':' + word + ':' + (kana || romaji) + ':' + meanings[0],
           nivel:lev, kanji:word, kana, romaji, significado:meanings.join('; '),
-          es:[...new Set(es)], jp:[...new Set([word, kana, ...strings(row.variantes_jp)].filter(Boolean))],
-          romans:[...new Set([romaji, toRomaji(kana), ...strings(row.variantes_romaji)].filter(Boolean))]
+          es:[...new Set(es)],jp,romanVariants,romanLabels,
+          romans:[...new Set([...preferredRomans,...kanaRomans])]
         };
         (buckets[lev] ||= []).push(item);
       }
@@ -586,19 +604,21 @@
   }
   function accepted(item, answer, target, format='any') {
     if (!String(answer).trim()) return false;
-    if (target==='es') return item.es.some(s=>spanish(s)===spanish(answer));
-    if (target==='romaji' || format==='romaji') return item.romans.some(s=>roman(s)===roman(answer));
-    if (target==='kana' || format==='kana') return !!item.kana && /^[ぁ-ゖァ-ヶー\s・]+$/.test(String(answer).normalize('NFKC')) && japanese(answer)===japanese(item.kana);
-    if (format==='kanji') return item.jp.filter(s=>s!==item.kana || s===item.kanji).some(s=>s.normalize('NFKC')===String(answer).trim().normalize('NFKC'));
-    return item.jp.some(s=>japanese(s)===japanese(answer)) || item.romans.some(s=>roman(s)===roman(answer));
+    if (target==='es') return item.es.some(s=>spanish(s)===spanish(withoutNotes(answer)));
+    const romanAnswer=()=>item.romans.some(s=>roman(answer)===roman(s)||roman(answer)===longRoman(s));
+    if (target==='romaji' || format==='romaji') return romanAnswer();
+    const kanaOnly=s=>/^[ぁ-ゖァ-ヶー\s・]+$/.test(String(s).normalize('NFKC'));
+    if (target==='kana' || format==='kana') return kanaOnly(answer)&&item.jp.filter(kanaOnly).some(s=>japanese(s)===japanese(answer));
+    if (format==='kanji') return item.jp.filter(s=>s===item.kanji||!kanaOnly(s)).some(s=>s.normalize('NFKC')===String(answer).trim().normalize('NFKC'));
+    return item.jp.some(s=>japanese(s)===japanese(answer)) || romanAnswer();
   }
   function soundKey(item) { return roman(toRomaji(item.kana) || item.romaji).replace(/ou|oo/g,'ō').replace(/ei|ee/g,'ē') || japanese(item.kana || item.kanji); }
   function shuffle(items) { const a=[...items]; for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]];}return a; }
-  function display(item,target) { return target==='es'?item.significado:target==='romaji'?item.romaji:target==='kana'?item.kana:item.kanji; }
+  function display(item,target) { return target==='es'?item.significado:target==='romaji'?romajiLabel(item):target==='kana'?item.kana:item.kanji; }
   function exportData(groups) {
-    return Object.fromEntries(LEVELS.filter(l=>groups[l]?.length).map(l=>[l,groups[l].map(i=>({kanji:i.kanji,kana:i.kana,romaji:i.romaji,significado:i.significado,nivel:l,variantes_es:i.es,variantes_jp:i.jp,variantes_romaji:i.romans}))]));
+    return Object.fromEntries(LEVELS.filter(l=>groups[l]?.length).map(l=>[l,groups[l].map(i=>({kanji:i.kanji,kana:i.kana,romaji:i.romaji,significado:i.significado,nivel:l,variantes_es:i.es,variantes_jp:i.jp,variantes_romaji:i.romanVariants}))]));
   }
-  return {LEVELS,hira,japanese,spanish,roman,toRomaji,validate,accepted,soundKey,shuffle,display,exportData};
+  return {LEVELS,hira,japanese,spanish,roman,toRomaji,romajiLabel,validate,accepted,soundKey,shuffle,display,exportData};
 });
 
 if (typeof document !== 'undefined') (function() {
@@ -676,15 +696,43 @@ if (typeof document !== 'undefined') (function() {
   function timer(fn,ms){const g=state.generation;const id=setTimeout(()=>{state.timers.delete(id);if(g===state.generation)fn();},ms);state.timers.add(id);return id;}
   function cancel(){state.generation++;for(const id of state.timers)clearTimeout(id);state.timers.clear();state.lock=false;stopAudio();}
   function scope(){return state.items.filter(i=>state.prefs.levels.includes(i.nivel));}
-  function pending(i){return state.progress.byItem[i.id]?.pending===true;}
+  // El nombre del audio y la palabra identifican el historial, sin depender de su traducción.
+  function wordKey(item){return 'word-v1:'+JSON.stringify([item.nivel,item.kanji,Core.roman(item.romaji||Core.toRomaji(item.kana))]);}
+  function migrateWordHistory(){
+    const aliases=new Map(),normalize=s=>Core.roman(Core.japanese(s));
+    for(const item of state.items){
+      const readings=[item.kana,item.romaji,Core.toRomaji(item.kana),...item.romans,...item.jp.filter(s=>/^[ぁ-ゖァ-ヶー\s・]+$/.test(s))];
+      for(const reading of readings.filter(Boolean)){
+        const alias=JSON.stringify([item.nivel,item.kanji,normalize(reading)]);
+        if(!aliases.has(alias))aliases.set(alias,new Set());aliases.get(alias).add(wordKey(item));
+      }
+    }
+    let changed=false;
+    // Solo se reorganiza el progreso de v4 ya cargado; no se leen versiones anteriores.
+    for(const [oldKey,old] of Object.entries(state.progress.byItem)){
+      if(oldKey.startsWith('word-v1:'))continue;
+      const parts=oldKey.split(':');if(parts.length<4)continue;
+      const matches=aliases.get(JSON.stringify([parts[0],parts[1],normalize(parts[2])]));
+      if(matches?.size!==1)continue;
+      const key=[...matches][0],target=state.progress.byItem[key]||itemProgressClean(null);
+      target.correct+=old.correct;target.wrong+=old.wrong;target.pending=target.pending||old.pending;
+      for(const [mode,row] of Object.entries(old.history.byMode)){
+        const saved=target.history.byMode[mode]||(target.history.byMode[mode]={count:0,skipped:0});
+        saved.count+=row.count;saved.skipped+=row.skipped;
+      }
+      state.progress.byItem[key]=target;delete state.progress.byItem[oldKey];changed=true;
+    }
+    if(changed)save(KEYS.progress,state.progress);
+  }
+  function pending(i){return state.progress.byItem[wordKey(i)]?.pending===true;}
   function pool(){return scope().filter(i=>!state.prefs.review||pending(i));}
-  function mergeGroups(){state.groups={...state.remote,...state.custom};state.items=CONFIG.levels.flatMap(l=>state.groups[l]||[]);const selected=state.prefs.levels.filter(l=>state.groups[l]?.length);state.prefs.levels=selected.length?selected:[CONFIG.levels.find(l=>state.groups[l]?.length)||'N5'];}
+  function mergeGroups(){state.groups={...state.remote,...state.custom};state.items=CONFIG.levels.flatMap(l=>state.groups[l]||[]);migrateWordHistory();const selected=state.prefs.levels.filter(l=>state.groups[l]?.length);state.prefs.levels=selected.length?selected:[CONFIG.levels.find(l=>state.groups[l]?.length)||'N5'];}
   function total(s){return s.correct+s.wrong+s.skipped;}
   function accuracy(s){return total(s)?Math.round(s.correct/total(s)*100)+'%':'—';}
   function increment(s,outcome){s[outcome]++;s.streak=outcome==='correct'?s.streak+1:0;s.best=Math.max(s.best,s.streak);}
   function record(item,outcome){
     increment(state.session.stats,outcome);increment(state.progress.total,outcome);increment(state.progress.byActivity[state.prefs.activity],outcome);
-    const p=state.progress.byItem[item.id]||itemProgressClean(null);
+    const key=wordKey(item),p=state.progress.byItem[key]||itemProgressClean(null);
     p[outcome==='correct'?'correct':'wrong']++;
     // Una respuesta cuenta una vez; en Emparejar, solo cuenta la pareja resuelta.
     if(state.prefs.activity!=='match'||outcome==='correct'){
@@ -695,7 +743,7 @@ if (typeof document !== 'undefined') (function() {
     // Completar una pareja no borra los fallos de esta sesión normal: se conservan para el repaso.
     const keepForReview=state.prefs.activity==='match'&&!state.prefs.review&&state.session.mistakes.has(item.id);
     p.pending=outcome!=='correct'||keepForReview;
-    state.progress.byItem[item.id]=p;
+    state.progress.byItem[key]=p;
     if(outcome!=='correct')state.session.mistakes.add(item.id);
     save(KEYS.progress,state.progress);renderStats();
   }
@@ -704,7 +752,7 @@ if (typeof document !== 'undefined') (function() {
     for(const [key,v] of Object.entries({correct:s.correct,wrong:s.wrong+s.skipped,accuracy:accuracy(s),streak:s.streak}))$('stat-'+key).textContent=v;
     const historical=state.progress.total;
     $('total-correct').textContent=historical.correct;$('total-best').textContent=historical.best;
-    $('total-seen').textContent=state.items.filter(i=>state.progress.byItem[i.id]).length;
+    $('total-seen').textContent=new Set(state.items.filter(i=>state.progress.byItem[wordKey(i)]).map(wordKey)).size;
     $('review-count').textContent=scope().filter(pending).length;
     const done=state.session?.completed||0,limit=state.prefs.review?0:state.prefs.length;
     $('round-count').textContent=state.prefs.activity==='explore'?'Consulta':state.prefs.review?scope().filter(pending).length+' pendientes':(state.prefs.activity==='match'?'Parejas ':'Pregunta ')+(state.prefs.activity==='match'?done:Math.min(done+1,limit||Infinity))+(limit?' de '+limit:' · sin límite');
@@ -718,8 +766,8 @@ if (typeof document !== 'undefined') (function() {
   }
   function eligible(item,mode){
     if(state.prefs.activity==='write' && (mode==='es-jp'||mode==='listen'&&state.prefs.dictationTarget!=='es')){
-      if(state.prefs.writeFormat==='kana')return !!item.kana;
-      if(state.prefs.writeFormat==='romaji')return !!item.romaji;
+      if(state.prefs.writeFormat==='kana')return item.jp.some(s=>/^[ぁ-ゖァ-ヶー\s・]+$/.test(s));
+      if(state.prefs.writeFormat==='romaji')return item.romans.length>0;
     }
     return true;
   }
@@ -818,7 +866,7 @@ if (typeof document !== 'undefined') (function() {
     if(q.auditory&&!q.answered){prompt.hidden=true;}
     else if(q.mode==='es-jp'&&!q.answered){prompt.classList.add('spanish');prompt.textContent=q.item.significado;}
     else prompt.append(japaneseNode(q.item));
-    $('romaji-card').textContent=q.answered?q.item.romaji:'';$('romaji-card').hidden=!q.answered||!q.item.romaji;
+    const romaji=Core.romajiLabel(q.item);$('romaji-card').textContent=q.answered?romaji:'';$('romaji-card').hidden=!q.answered||!romaji;
     $('meaning-card').textContent=q.answered?q.item.significado:'';$('meaning-card').hidden=!q.answered;
     $('listen-question').hidden=false;$('listen-question').disabled=false;
     $('answer-options').hidden=write;$('answer-form').hidden=!write;
@@ -839,7 +887,7 @@ if (typeof document !== 'undefined') (function() {
   }
   function reveal(){
     const q=state.current;
-    $('answer-status').textContent=(q.outcome==='correct'?'Respuesta correcta. ':q.outcome==='skipped'?'Respuesta revelada. ':'Respuesta incorrecta. ')+q.item.kanji+' · '+[q.item.romaji,q.item.significado].filter(Boolean).join(' · ');
+    $('answer-status').textContent=(q.outcome==='correct'?'Respuesta correcta. ':q.outcome==='skipped'?'Respuesta revelada. ':'Respuesta incorrecta. ')+q.item.kanji+' · '+[Core.romajiLabel(q.item),q.item.significado].filter(Boolean).join(' · ');
     $('feedback-tip').textContent='';
   }
   function respond(outcome,selected){
@@ -964,12 +1012,12 @@ if (typeof document !== 'undefined') (function() {
     if(first.kind===tile.kind){state.selected=index;renderBoard();return;}
     state.selected=null;
     if(first.item.id===tile.item.id){first.matched=tile.matched=true;state.session.completed++;record(tile.item,'correct');playEffect(true);if(state.prefs.autoAudio)playItem(tile.item);$('match-message').textContent='¡Pareja encontrada! '+tile.item.kanji+' · '+tile.item.significado;renderBoard();if(state.tiles.every(t=>t.matched)){state.lock=true;timer(nextBoard,850);}}
-    else {record(first.item,'wrong');const p=state.progress.byItem[tile.item.id]||itemProgressClean(null);p.pending=true;state.progress.byItem[tile.item.id]=p;state.session.mistakes.add(tile.item.id);save(KEYS.progress,state.progress);state.lock=true;renderBoard();first.button.classList.add('is-wrong');tile.button.classList.add('is-wrong');$('match-message').textContent='Todavía no. Intenta otra pareja.';playEffect(false);timer(()=>{state.lock=false;renderBoard();},700);}
+    else {record(first.item,'wrong');const key=wordKey(tile.item),p=state.progress.byItem[key]||itemProgressClean(null);p.pending=true;state.progress.byItem[key]=p;state.session.mistakes.add(tile.item.id);save(KEYS.progress,state.progress);state.lock=true;renderBoard();first.button.classList.add('is-wrong');tile.button.classList.add('is-wrong');$('match-message').textContent='Todavía no. Intenta otra pareja.';playEffect(false);timer(()=>{state.lock=false;renderBoard();},700);}
     renderStats();
   }
   function wordHistoryNode(item){
     const history=document.createElement('span');history.className='word-history';
-    const byMode=state.progress.byItem[item.id]?.history.byMode||{};
+    const byMode=state.progress.byItem[wordKey(item)]?.history.byMode||{};
     const count=Object.values(byMode).reduce((sum,row)=>sum+row.count,0);
     const title=document.createElement('span');title.className='word-history-total';title.textContent='Repasos registrados: '+count;history.append(title);
     for(const [mode,label] of Object.entries(PRACTICE_MODES)){
@@ -980,9 +1028,9 @@ if (typeof document !== 'undefined') (function() {
   }
   function renderExplore(){
     const q=Core.spanish(state.query),kana=Core.japanese(state.query),roman=Core.roman(state.query);
-    const found=pool().filter(i=>!q||Core.spanish(i.significado).includes(q)||Core.japanese(i.kanji).includes(kana)||!!i.kana&&Core.japanese(i.kana).includes(kana)||!!i.romaji&&Core.roman(i.romaji).includes(roman));
+    const found=pool().filter(i=>!q||Core.spanish(i.significado).includes(q)||i.jp.some(s=>Core.japanese(s).includes(kana))||i.romans.some(s=>Core.roman(s).includes(roman)));
     const grid=$('explore-grid');grid.replaceChildren();
-    for(const item of found.slice(0,state.exploreLimit)){const b=document.createElement('button');b.type='button';b.className='kana-tile vocab-tile';b.classList.toggle('needs-review',pending(item));const lev=document.createElement('span');lev.className='tile-level';lev.textContent=item.nivel;const r=document.createElement('span');r.className='tile-romaji';r.textContent=item.romaji;const meaning=document.createElement('span');meaning.className='tile-meaning';meaning.textContent=item.significado;b.append(lev,japaneseNode(item),r,meaning,wordHistoryNode(item));b.title='Escuchar '+item.kanji;b.addEventListener('click',()=>playItem(item));grid.append(b);}
+    for(const item of found.slice(0,state.exploreLimit)){const b=document.createElement('button');b.type='button';b.className='kana-tile vocab-tile';b.classList.toggle('needs-review',pending(item));const lev=document.createElement('span');lev.className='tile-level';lev.textContent=item.nivel;const r=document.createElement('span');r.className='tile-romaji';r.textContent=Core.romajiLabel(item);const meaning=document.createElement('span');meaning.className='tile-meaning';meaning.textContent=item.significado;b.append(lev,japaneseNode(item),r,meaning,wordHistoryNode(item));b.title='Escuchar '+item.kanji;b.addEventListener('click',()=>playItem(item));grid.append(b);}
     $('explore-count').textContent=Math.min(state.exploreLimit,found.length)+' de '+found.length+' palabras';$('explore-more').hidden=state.exploreLimit>=found.length;
   }
 
