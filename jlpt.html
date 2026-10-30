@@ -297,6 +297,7 @@
     .prompt,.prompt.multi { min-height:0; margin:0; }
     .listen-button { margin-top:0; }
     .prompt.spanish { padding:10px 0; }
+    .question-label { display:block; font-size:15px; color:var(--text); margin:0 0 8px; text-align:center; }
     #prompt[hidden] ~ #listen-question { margin-top:10px; }
 </style>
 </head>
@@ -874,6 +875,8 @@ if (typeof document !== 'undefined') (function() {
     const format=q.target==='jp'&&write?state.prefs.writeFormat:q.target;
     const response={es:'el significado en español',jp:'la palabra japonesa',romaji:'la lectura en romaji',kana:'la lectura en kana',kanji:'la escritura original',any:'la palabra en kanji, kana o romaji'}[format];
     $('question-label').textContent=(write?'Escribe ':'Elige ')+response;
+    $('question-label').className=write?'question-label':'sr-only';
+    $('question-label').hidden=!write;
     if(q.auditory&&!q.answered){prompt.hidden=true;}
     else if(q.mode==='es-jp'&&!q.answered){prompt.classList.add('spanish');prompt.textContent=q.item.significado;}
     else prompt.append(japaneseNode(q.item));
