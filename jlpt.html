@@ -290,6 +290,10 @@
     @media(max-width:740px) { .prompt,.prompt.multi { font-size:clamp(32px,8vw,54px); min-height:140px; } .match-board { grid-template-columns:repeat(3,minmax(0,1fr)); } .levels { grid-template-columns:repeat(5,minmax(0,1fr)); } }
     @media(max-width:430px) { .match-board { grid-template-columns:repeat(2,minmax(0,1fr)); } .option-button { font-size:18px; padding:16px 22px; } .option-button.jp { font-size:23px; } .answer-form { flex-wrap:wrap; } .answer-form .button { width:100%; } .explore-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } }
   .topbar{flex-wrap:wrap}.topnav{flex-wrap:wrap}.topnav .nav-link{white-space:nowrap}@media(max-width:600px){.topbar{align-items:flex-start}.topnav{width:100%;gap:3px}.topnav .nav-link{padding:8px 9px;min-height:42px}.topnav .icon-button{margin-left:auto}}
+    /* Solo espacio añadido alrededor del enunciado; se conserva la tipografía. */
+    .question-area { padding-top:0; }
+    .prompt,.prompt.multi { min-height:0; margin:0; }
+    .listen-button { margin-top:0; }
 </style>
 </head>
 <body>
