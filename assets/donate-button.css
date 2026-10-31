@@ -1,0 +1,55 @@
+/* Shared Donar control, matching index.html. Scoped to donation links only. */
+html body a.asallam-donate {
+  --donate-line: rgba(210,196,255,.2);
+  --donate-text: #f8f5ff;
+  --donate-accent: #b7a1ff;
+  --donate-focus: #d4bdff;
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  min-height: 42px;
+  width: auto;
+  padding: 9px 13px;
+  border: 1px solid var(--donate-line);
+  border-radius: 11px;
+  background: transparent;
+  box-shadow: none;
+  color: var(--donate-text);
+  font-family: Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  font-size: 13px;
+  font-weight: 650;
+  line-height: 1.5;
+  letter-spacing: normal;
+  text-decoration: none;
+  white-space: nowrap;
+  flex-shrink: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+html[data-theme="light"] body a.asallam-donate {
+  --donate-line: rgba(93,66,128,.22);
+  --donate-text: #30243f;
+  --donate-accent: #7352bf;
+  --donate-focus: #7352bf;
+}
+html body a.asallam-donate:hover {
+  color: var(--donate-text);
+  background: #b59aef14;
+  border-color: var(--donate-accent);
+  text-decoration: none;
+}
+html body a.asallam-donate:focus-visible {
+  outline: 3px solid var(--donate-focus);
+  outline-offset: 5px;
+}
+html body a.asallam-donate > svg {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  flex-shrink: 0;
+}
