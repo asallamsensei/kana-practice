@@ -1,5 +1,5 @@
 /* Shared Donar control, matching index.html. Scoped to donation links only. */
-html body a.asallam-donate {
+html body a.asallam-donate[href] {
   --donate-line: rgba(210,196,255,.2);
   --donate-text: #f8f5ff;
   --donate-accent: #b7a1ff;
@@ -27,23 +27,23 @@ html body a.asallam-donate {
   flex-shrink: 0;
   -webkit-tap-highlight-color: transparent;
 }
-html[data-theme="light"] body a.asallam-donate {
+html[data-theme="light"] body a.asallam-donate[href] {
   --donate-line: rgba(93,66,128,.22);
   --donate-text: #30243f;
   --donate-accent: #7352bf;
   --donate-focus: #7352bf;
 }
-html body a.asallam-donate:hover {
+html body a.asallam-donate[href]:hover {
   color: var(--donate-text);
   background: #b59aef14;
   border-color: var(--donate-accent);
   text-decoration: none;
 }
-html body a.asallam-donate:focus-visible {
+html body a.asallam-donate[href]:focus-visible {
   outline: 3px solid var(--donate-focus);
   outline-offset: 5px;
 }
-html body a.asallam-donate > svg {
+html body a.asallam-donate[href] > svg {
   width: 20px;
   height: 20px;
   fill: none;
