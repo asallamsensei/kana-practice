@@ -1,6 +1,6 @@
 /* One local, per-item review ledger. Reading/Explorar never records practice. */
 (function(root){'use strict';
-const APPS=['kana','jlpt','kanji','oraciones','ingles','turista','anime'];
+const APPS=['kana','jlpt','kanji','oraciones','ingles','turista','anime','oraciones_ingles'];
 const PREFIX='asallam_reviews_v1_',VERSION=1,MAX_ITEMS=50000;
 const obj=v=>v!==null&&typeof v==='object'&&!Array.isArray(v), own=(o,k)=>Object.prototype.hasOwnProperty.call(o,k), bad=k=>k==='prototype'||Object.prototype.hasOwnProperty.call(Object.prototype,k);
 const count=v=>Number.isSafeInteger(v)&&v>=0, safeId=v=>typeof v==='string'&&v.length>0&&v.length<=3000&&!bad(v);
@@ -31,3 +31,4 @@ function clearItems(app,ids){return attempt(()=>{if(!Array.isArray(ids)||ids.som
 const api={APPS,PREFIX,key,validate,record,registerCatalog,render,summary,clear,clearItems,snapshot:(app,s)=>clone(read(app,s)),replace:(app,data)=>{validate(app,data);return write(app,clone(data));}};
 root.AsallamReviews=api;if(typeof module!=='undefined'&&module.exports)module.exports=api;
 })(typeof window!=='undefined'?window:globalThis);
+

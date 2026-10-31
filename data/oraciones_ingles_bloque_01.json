@@ -1,0 +1,1588 @@
+{
+  "version": 1,
+  "id": "oraciones_ingles_bloque_01",
+  "title": "Presentarse y conocer a otras personas",
+  "description": "24 oraciones iniciales conectadas con 12 palabras y expresiones del bloque Presentarse.",
+  "language": "en",
+  "translationLanguage": "es",
+  "source": {
+    "repository": "asallamsensei/kana-practice",
+    "ref": "364cc84fe062ac13edc79f046dfb0f7eb2fff3cb",
+    "path": "data/english_vocab.json",
+    "url": "https://github.com/asallamsensei/kana-practice/blob/364cc84fe062ac13edc79f046dfb0f7eb2fff3cb/data/english_vocab.json",
+    "note": "Las oraciones y preguntas son originales de este borrador; las referencias de vocabulario conservan los identificadores del catálogo existente. No se atribuyen archivos MP3 no verificados."
+  },
+  "words": [
+    {
+      "id": "my_name_is",
+      "en": "my name is",
+      "es": "mi nombre es",
+      "block": "eng_02",
+      "blockName": "Presentarse",
+      "vocabId": "eng_02%7Cmy%20name%20is%7Cmi%20nombre%20es",
+      "contextMeaning": "mi nombre es",
+      "audio": "data/audios/english/my name is.mp3"
+    },
+    {
+      "id": "i_am",
+      "en": "I am",
+      "es": "yo soy, yo estoy",
+      "block": "eng_02",
+      "blockName": "Presentarse",
+      "vocabId": "eng_02%7CI%20am%7Cyo%20soy%2C%20yo%20estoy",
+      "contextMeaning": "soy / estoy",
+      "audio": "data/audios/english/I am.mp3"
+    },
+    {
+      "id": "nice_to_meet_you",
+      "en": "nice to meet you",
+      "es": "mucho gusto",
+      "block": "eng_02",
+      "blockName": "Presentarse",
+      "vocabId": "eng_02%7Cnice%20to%20meet%20you%7Cmucho%20gusto",
+      "contextMeaning": "mucho gusto",
+      "audio": "data/audios/english/nice to meet you.mp3"
+    },
+    {
+      "id": "i_am_from",
+      "en": "I am from",
+      "es": "soy de",
+      "block": "eng_02",
+      "blockName": "Presentarse",
+      "vocabId": "eng_02%7CI%20am%20from%7Csoy%20de",
+      "contextMeaning": "soy de",
+      "audio": "data/audios/english/I am from.mp3"
+    },
+    {
+      "id": "student",
+      "en": "student",
+      "es": "estudiante",
+      "block": "eng_02",
+      "blockName": "Presentarse",
+      "vocabId": "eng_02%7Cstudent%7Cestudiante",
+      "contextMeaning": "estudiante",
+      "audio": "data/audios/english/student.mp3"
+    },
+    {
+      "id": "teacher",
+      "en": "teacher",
+      "es": "profesor",
+      "block": "eng_02",
+      "blockName": "Presentarse",
+      "vocabId": "eng_02%7Cteacher%7Cprofesor",
+      "contextMeaning": "profesor / profesora",
+      "audio": "data/audios/english/teacher.mp3"
+    },
+    {
+      "id": "i_live_in",
+      "en": "I live in",
+      "es": "vivo en",
+      "block": "eng_02",
+      "blockName": "Presentarse",
+      "vocabId": "eng_02%7CI%20live%20in%7Cvivo%20en",
+      "contextMeaning": "vivo en",
+      "audio": "data/audios/english/I live in.mp3"
+    },
+    {
+      "id": "i_speak",
+      "en": "I speak",
+      "es": "hablo",
+      "block": "eng_02",
+      "blockName": "Presentarse",
+      "vocabId": "eng_02%7CI%20speak%7Chablo",
+      "contextMeaning": "hablo",
+      "audio": "data/audios/english/I speak.mp3"
+    },
+    {
+      "id": "english",
+      "en": "english",
+      "es": "inglés",
+      "block": "eng_02",
+      "blockName": "Presentarse",
+      "vocabId": "eng_02%7Cenglish%7Cingl%C3%A9s",
+      "contextMeaning": "inglés",
+      "audio": "data/audios/english/english.mp3"
+    },
+    {
+      "id": "spanish",
+      "en": "spanish",
+      "es": "español",
+      "block": "eng_02",
+      "blockName": "Presentarse",
+      "vocabId": "eng_02%7Cspanish%7Cespa%C3%B1ol",
+      "contextMeaning": "español",
+      "audio": "data/audios/english/spanish.mp3"
+    },
+    {
+      "id": "this_is_my_friend",
+      "en": "this is my friend",
+      "es": "este es mi amigo",
+      "block": "eng_02",
+      "blockName": "Presentarse",
+      "vocabId": "eng_02%7Cthis%20is%20my%20friend%7Ceste%20es%20mi%20amigo",
+      "contextMeaning": "este es mi amigo / esta es mi amiga",
+      "audio": "data/audios/english/this is my friend.mp3"
+    },
+    {
+      "id": "where_are_you_from",
+      "en": "where are you from",
+      "es": "de dónde eres",
+      "block": "eng_02",
+      "blockName": "Presentarse",
+      "vocabId": "eng_02%7Cwhere%20are%20you%20from%7Cde%20d%C3%B3nde%20eres",
+      "contextMeaning": "de dónde eres",
+      "audio": "data/audios/english/where are you from.mp3"
+    }
+  ],
+  "sentences": [
+    {
+      "id": "en01_my_name_is_01",
+      "en": "My name is Ana.",
+      "es": "Mi nombre es Ana.",
+      "targetWordId": "my_name_is",
+      "target": "My name is",
+      "wordIds": [
+        "my_name_is"
+      ],
+      "questions": [
+        {
+          "id": "en01_my_name_is_01_meaning",
+          "purpose": "sentence_meaning",
+          "prompt": "¿Qué significa esta oración?",
+          "answer": "Mi nombre es Ana.",
+          "choices": [
+            "Mi nombre es Ana.",
+            "Es un gusto conocerte.",
+            "El profesor está en la escuela.",
+            "Este libro está en inglés."
+          ],
+          "accepted": [
+            "Mi nombre es Ana."
+          ]
+        },
+        {
+          "id": "en01_my_name_is_01_word",
+          "purpose": "context_word",
+          "prompt": "En esta oración, ¿qué significa «My name is»?",
+          "answer": "mi nombre es",
+          "choices": [
+            "mi nombre es",
+            "hablo",
+            "vivo en",
+            "soy de"
+          ],
+          "accepted": [
+            "mi nombre es"
+          ],
+          "wordId": "my_name_is"
+        },
+        {
+          "id": "en01_my_name_is_01_complete",
+          "purpose": "complete",
+          "prompt": "___ Ana.",
+          "answer": "My name is",
+          "choices": [
+            "My name is",
+            "I live in",
+            "I am from",
+            "I speak"
+          ],
+          "accepted": [
+            "My name is"
+          ],
+          "wordId": "my_name_is",
+          "hint": "Mi nombre es Ana."
+        }
+      ]
+    },
+    {
+      "id": "en01_my_name_is_02",
+      "en": "My name is Daniel.",
+      "es": "Mi nombre es Daniel.",
+      "targetWordId": "my_name_is",
+      "target": "My name is",
+      "wordIds": [
+        "my_name_is"
+      ],
+      "questions": [
+        {
+          "id": "en01_my_name_is_02_meaning",
+          "purpose": "sentence_meaning",
+          "prompt": "¿Qué significa esta oración?",
+          "answer": "Mi nombre es Daniel.",
+          "choices": [
+            "Mi nombre es Daniel.",
+            "Soy de Colombia.",
+            "Vivo en un pueblo pequeño.",
+            "Ella habla español."
+          ],
+          "accepted": [
+            "Mi nombre es Daniel."
+          ]
+        },
+        {
+          "id": "en01_my_name_is_02_word",
+          "purpose": "context_word",
+          "prompt": "En esta oración, ¿qué significa «My name is»?",
+          "answer": "mi nombre es",
+          "choices": [
+            "mi nombre es",
+            "hablo",
+            "vivo en",
+            "soy de"
+          ],
+          "accepted": [
+            "mi nombre es"
+          ],
+          "wordId": "my_name_is"
+        },
+        {
+          "id": "en01_my_name_is_02_complete",
+          "purpose": "complete",
+          "prompt": "___ Daniel.",
+          "answer": "My name is",
+          "choices": [
+            "My name is",
+            "I live in",
+            "I am from",
+            "I speak"
+          ],
+          "accepted": [
+            "My name is"
+          ],
+          "wordId": "my_name_is",
+          "hint": "Mi nombre es Daniel."
+        }
+      ]
+    },
+    {
+      "id": "en01_i_am_01",
+      "en": "I am a student.",
+      "es": "Soy estudiante.",
+      "targetWordId": "i_am",
+      "target": "I am",
+      "wordIds": [
+        "i_am",
+        "student"
+      ],
+      "questions": [
+        {
+          "id": "en01_i_am_01_meaning",
+          "purpose": "sentence_meaning",
+          "prompt": "¿Qué significa esta oración?",
+          "answer": "Soy estudiante.",
+          "choices": [
+            "Soy estudiante.",
+            "Soy de Canadá.",
+            "Vivo en Bogotá.",
+            "Esta canción está en español."
+          ],
+          "accepted": [
+            "Soy estudiante."
+          ]
+        },
+        {
+          "id": "en01_i_am_01_word",
+          "purpose": "context_word",
+          "prompt": "En esta oración, ¿qué significa «I am»?",
+          "answer": "soy",
+          "choices": [
+            "soy",
+            "mi nombre es",
+            "mucho gusto",
+            "soy de"
+          ],
+          "accepted": [
+            "soy"
+          ],
+          "wordId": "i_am"
+        },
+        {
+          "id": "en01_i_am_01_complete",
+          "purpose": "complete",
+          "prompt": "___ a student.",
+          "answer": "I am",
+          "choices": [
+            "I am",
+            "my name is",
+            "nice to meet you",
+            "I am from"
+          ],
+          "accepted": [
+            "I am",
+            "I'm"
+          ],
+          "wordId": "i_am",
+          "hint": "Soy estudiante."
+        }
+      ]
+    },
+    {
+      "id": "en01_i_am_02",
+      "en": "I am happy today.",
+      "es": "Estoy feliz hoy.",
+      "targetWordId": "i_am",
+      "target": "I am",
+      "wordIds": [
+        "i_am"
+      ],
+      "questions": [
+        {
+          "id": "en01_i_am_02_meaning",
+          "purpose": "sentence_meaning",
+          "prompt": "¿Qué significa esta oración?",
+          "answer": "Estoy feliz hoy.",
+          "choices": [
+            "Estoy feliz hoy.",
+            "Ella es estudiante.",
+            "Hablo inglés en el trabajo.",
+            "Esta es mi amiga Ana."
+          ],
+          "accepted": [
+            "Estoy feliz hoy."
+          ]
+        },
+        {
+          "id": "en01_i_am_02_word",
+          "purpose": "context_word",
+          "prompt": "En esta oración, ¿qué significa «I am»?",
+          "answer": "estoy",
+          "choices": [
+            "estoy",
+            "mi nombre es",
+            "mucho gusto",
+            "soy de"
+          ],
+          "accepted": [
+            "estoy"
+          ],
+          "wordId": "i_am"
+        },
+        {
+          "id": "en01_i_am_02_complete",
+          "purpose": "complete",
+          "prompt": "___ happy today.",
+          "answer": "I am",
+          "choices": [
+            "I am",
+            "my name is",
+            "nice to meet you",
+            "I am from"
+          ],
+          "accepted": [
+            "I am",
+            "I'm"
+          ],
+          "wordId": "i_am",
+          "hint": "Estoy feliz hoy."
+        }
+      ]
+    },
+    {
+      "id": "en01_nice_to_meet_you_01",
+      "en": "Nice to meet you, Ana.",
+      "es": "Mucho gusto, Ana.",
+      "targetWordId": "nice_to_meet_you",
+      "target": "Nice to meet you",
+      "wordIds": [
+        "nice_to_meet_you"
+      ],
+      "questions": [
+        {
+          "id": "en01_nice_to_meet_you_01_meaning",
+          "purpose": "sentence_meaning",
+          "prompt": "¿Qué significa esta oración?",
+          "answer": "Mucho gusto, Ana.",
+          "choices": [
+            "Mucho gusto, Ana.",
+            "El estudiante está en clase.",
+            "Hablo español en casa.",
+            "Este es mi amigo David."
+          ],
+          "accepted": [
+            "Mucho gusto, Ana."
+          ]
+        },
+        {
+          "id": "en01_nice_to_meet_you_01_word",
+          "purpose": "context_word",
+          "prompt": "En esta oración, ¿qué significa «Nice to meet you»?",
+          "answer": "mucho gusto",
+          "choices": [
+            "mucho gusto",
+            "mi nombre es",
+            "soy / estoy",
+            "soy de"
+          ],
+          "accepted": [
+            "mucho gusto"
+          ],
+          "wordId": "nice_to_meet_you"
+        },
+        {
+          "id": "en01_nice_to_meet_you_01_complete",
+          "purpose": "complete",
+          "prompt": "___, Ana.",
+          "answer": "Nice to meet you",
+          "choices": [
+            "Nice to meet you",
+            "my name is",
+            "I am",
+            "I am from"
+          ],
+          "accepted": [
+            "Nice to meet you"
+          ],
+          "wordId": "nice_to_meet_you",
+          "hint": "Mucho gusto, Ana."
+        }
+      ]
+    },
+    {
+      "id": "en01_nice_to_meet_you_02",
+      "en": "It is nice to meet you.",
+      "es": "Es un gusto conocerte.",
+      "targetWordId": "nice_to_meet_you",
+      "target": "nice to meet you",
+      "wordIds": [
+        "nice_to_meet_you"
+      ],
+      "questions": [
+        {
+          "id": "en01_nice_to_meet_you_02_meaning",
+          "purpose": "sentence_meaning",
+          "prompt": "¿Qué significa esta oración?",
+          "answer": "Es un gusto conocerte.",
+          "choices": [
+            "Es un gusto conocerte.",
+            "Él es profesor.",
+            "Estudiamos inglés todos los días.",
+            "¿De dónde eres, Ana?"
+          ],
+          "accepted": [
+            "Es un gusto conocerte."
+          ]
+        },
+        {
+          "id": "en01_nice_to_meet_you_02_word",
+          "purpose": "context_word",
+          "prompt": "En esta oración, ¿qué significa «nice to meet you»?",
+          "answer": "un gusto conocerte",
+          "choices": [
+            "un gusto conocerte",
+            "mi nombre es",
+            "soy / estoy",
+            "soy de"
+          ],
+          "accepted": [
+            "un gusto conocerte"
+          ],
+          "wordId": "nice_to_meet_you"
+        },
+        {
+          "id": "en01_nice_to_meet_you_02_complete",
+          "purpose": "complete",
+          "prompt": "It is ___.",
+          "answer": "nice to meet you",
+          "choices": [
+            "nice to meet you",
+            "my name is",
+            "I am",
+            "I am from"
+          ],
+          "accepted": [
+            "nice to meet you"
+          ],
+          "wordId": "nice_to_meet_you",
+          "hint": "Es un gusto conocerte."
+        }
+      ]
+    },
+    {
+      "id": "en01_i_am_from_01",
+      "en": "I am from Colombia.",
+      "es": "Soy de Colombia.",
+      "targetWordId": "i_am_from",
+      "target": "I am from",
+      "wordIds": [
+        "i_am_from",
+        "i_am"
+      ],
+      "questions": [
+        {
+          "id": "en01_i_am_from_01_meaning",
+          "purpose": "sentence_meaning",
+          "prompt": "¿Qué significa esta oración?",
+          "answer": "Soy de Colombia.",
+          "choices": [
+            "Soy de Colombia.",
+            "El profesor está en la escuela.",
+            "Este libro está en inglés.",
+            "¿De dónde eres, David?"
+          ],
+          "accepted": [
+            "Soy de Colombia."
+          ]
+        },
+        {
+          "id": "en01_i_am_from_01_word",
+          "purpose": "context_word",
+          "prompt": "En esta oración, ¿qué significa «I am from»?",
+          "answer": "soy de",
+          "choices": [
+            "soy de",
+            "mi nombre es",
+            "soy / estoy",
+            "mucho gusto"
+          ],
+          "accepted": [
+            "soy de"
+          ],
+          "wordId": "i_am_from"
+        },
+        {
+          "id": "en01_i_am_from_01_complete",
+          "purpose": "complete",
+          "prompt": "___ Colombia.",
+          "answer": "I am from",
+          "choices": [
+            "I am from",
+            "my name is",
+            "I am",
+            "nice to meet you"
+          ],
+          "accepted": [
+            "I am from",
+            "I'm from"
+          ],
+          "wordId": "i_am_from",
+          "hint": "Soy de Colombia."
+        }
+      ]
+    },
+    {
+      "id": "en01_i_am_from_02",
+      "en": "I am from Canada.",
+      "es": "Soy de Canadá.",
+      "targetWordId": "i_am_from",
+      "target": "I am from",
+      "wordIds": [
+        "i_am_from",
+        "i_am"
+      ],
+      "questions": [
+        {
+          "id": "en01_i_am_from_02_meaning",
+          "purpose": "sentence_meaning",
+          "prompt": "¿Qué significa esta oración?",
+          "answer": "Soy de Canadá.",
+          "choices": [
+            "Soy de Canadá.",
+            "Vivo en un pueblo pequeño.",
+            "Ella habla español.",
+            "Mi nombre es Ana."
+          ],
+          "accepted": [
+            "Soy de Canadá."
+          ]
+        },
+        {
+          "id": "en01_i_am_from_02_word",
+          "purpose": "context_word",
+          "prompt": "En esta oración, ¿qué significa «I am from»?",
+          "answer": "soy de",
+          "choices": [
+            "soy de",
+            "mi nombre es",
+            "soy / estoy",
+            "mucho gusto"
+          ],
+          "accepted": [
+            "soy de"
+          ],
+          "wordId": "i_am_from"
+        },
+        {
+          "id": "en01_i_am_from_02_complete",
+          "purpose": "complete",
+          "prompt": "___ Canada.",
+          "answer": "I am from",
+          "choices": [
+            "I am from",
+            "my name is",
+            "I am",
+            "nice to meet you"
+          ],
+          "accepted": [
+            "I am from",
+            "I'm from"
+          ],
+          "wordId": "i_am_from",
+          "hint": "Soy de Canadá."
+        }
+      ]
+    },
+    {
+      "id": "en01_student_01",
+      "en": "She is a student.",
+      "es": "Ella es estudiante.",
+      "targetWordId": "student",
+      "target": "student",
+      "wordIds": [
+        "student"
+      ],
+      "questions": [
+        {
+          "id": "en01_student_01_meaning",
+          "purpose": "sentence_meaning",
+          "prompt": "¿Qué significa esta oración?",
+          "answer": "Ella es estudiante.",
+          "choices": [
+            "Ella es estudiante.",
+            "Vivo en Bogotá.",
+            "Esta canción está en español.",
+            "Mi nombre es Daniel."
+          ],
+          "accepted": [
+            "Ella es estudiante."
+          ]
+        },
+        {
+          "id": "en01_student_01_word",
+          "purpose": "context_word",
+          "prompt": "En esta oración, ¿qué significa «student»?",
+          "answer": "estudiante",
+          "choices": [
+            "estudiante",
+            "mi nombre es",
+            "soy / estoy",
+            "mucho gusto"
+          ],
+          "accepted": [
+            "estudiante"
+          ],
+          "wordId": "student"
+        },
+        {
+          "id": "en01_student_01_complete",
+          "purpose": "complete",
+          "prompt": "She is a ___.",
+          "answer": "student",
+          "choices": [
+            "student",
+            "teacher",
+            "doctor",
+            "engineer"
+          ],
+          "accepted": [
+            "student"
+          ],
+          "wordId": "student",
+          "hint": "Ella es estudiante."
+        }
+      ]
+    },
+    {
+      "id": "en01_student_02",
+      "en": "The student is in class.",
+      "es": "El estudiante está en clase.",
+      "targetWordId": "student",
+      "target": "student",
+      "wordIds": [
+        "student"
+      ],
+      "questions": [
+        {
+          "id": "en01_student_02_meaning",
+          "purpose": "sentence_meaning",
+          "prompt": "¿Qué significa esta oración?",
+          "answer": "El estudiante está en clase.",
+          "choices": [
+            "El estudiante está en clase.",
+            "Hablo inglés en el trabajo.",
+            "Esta es mi amiga Ana.",
+            "Soy estudiante."
+          ],
+          "accepted": [
+            "El estudiante está en clase."
+          ]
+        },
+        {
+          "id": "en01_student_02_word",
+          "purpose": "context_word",
+          "prompt": "En esta oración, ¿qué significa «student»?",
+          "answer": "estudiante",
+          "choices": [
+            "estudiante",
+            "mi nombre es",
+            "soy / estoy",
+            "mucho gusto"
+          ],
+          "accepted": [
+            "estudiante"
+          ],
+          "wordId": "student"
+        },
+        {
+          "id": "en01_student_02_complete",
+          "purpose": "complete",
+          "prompt": "The ___ is in class.",
+          "answer": "student",
+          "choices": [
+            "student",
+            "teacher",
+            "doctor",
+            "engineer"
+          ],
+          "accepted": [
+            "student"
+          ],
+          "wordId": "student",
+          "hint": "El estudiante está en clase."
+        }
+      ]
+    },
+    {
+      "id": "en01_teacher_01",
+      "en": "He is a teacher.",
+      "es": "Él es profesor.",
+      "targetWordId": "teacher",
+      "target": "teacher",
+      "wordIds": [
+        "teacher"
+      ],
+      "questions": [
+        {
+          "id": "en01_teacher_01_meaning",
+          "purpose": "sentence_meaning",
+          "prompt": "¿Qué significa esta oración?",
+          "answer": "Él es profesor.",
+          "choices": [
+            "Él es profesor.",
+            "Hablo español en casa.",
+            "Este es mi amigo David.",
+            "Estoy feliz hoy."
+          ],
+          "accepted": [
+            "Él es profesor."
+          ]
+        },
+        {
+          "id": "en01_teacher_01_word",
+          "purpose": "context_word",
+          "prompt": "En esta oración, ¿qué significa «teacher»?",
+          "answer": "profesor",
+          "choices": [
+            "profesor",
+            "mi nombre es",
+            "soy / estoy",
+            "mucho gusto"
+          ],
+          "accepted": [
+            "profesor"
+          ],
+          "wordId": "teacher"
+        },
+        {
+          "id": "en01_teacher_01_complete",
+          "purpose": "complete",
+          "prompt": "He is a ___.",
+          "answer": "teacher",
+          "choices": [
+            "teacher",
+            "student",
+            "doctor",
+            "engineer"
+          ],
+          "accepted": [
+            "teacher"
+          ],
+          "wordId": "teacher",
+          "hint": "Él es profesor."
+        }
+      ]
+    },
+    {
+      "id": "en01_teacher_02",
+      "en": "The teacher is at school.",
+      "es": "El profesor está en la escuela.",
+      "targetWordId": "teacher",
+      "target": "teacher",
+      "wordIds": [
+        "teacher"
+      ],
+      "questions": [
+        {
+          "id": "en01_teacher_02_meaning",
+          "purpose": "sentence_meaning",
+          "prompt": "¿Qué significa esta oración?",
+          "answer": "El profesor está en la escuela.",
+          "choices": [
+            "El profesor está en la escuela.",
+            "Estudiamos inglés todos los días.",
+            "¿De dónde eres, Ana?",
+            "Mucho gusto, Ana."
+          ],
+          "accepted": [
+            "El profesor está en la escuela."
+          ]
+        },
+        {
+          "id": "en01_teacher_02_word",
+          "purpose": "context_word",
+          "prompt": "En esta oración, ¿qué significa «teacher»?",
+          "answer": "profesor",
+          "choices": [
+            "profesor",
+            "mi nombre es",
+            "soy / estoy",
+            "mucho gusto"
+          ],
+          "accepted": [
+            "profesor"
+          ],
+          "wordId": "teacher"
+        },
+        {
+          "id": "en01_teacher_02_complete",
+          "purpose": "complete",
+          "prompt": "The ___ is at school.",
+          "answer": "teacher",
+          "choices": [
+            "teacher",
+            "student",
+            "doctor",
+            "engineer"
+          ],
+          "accepted": [
+            "teacher"
+          ],
+          "wordId": "teacher",
+          "hint": "El profesor está en la escuela."
+        }
+      ]
+    },
+    {
+      "id": "en01_i_live_in_01",
+      "en": "I live in a small town.",
+      "es": "Vivo en un pueblo pequeño.",
+      "targetWordId": "i_live_in",
+      "target": "I live in",
+      "wordIds": [
+        "i_live_in"
+      ],
+      "questions": [
+        {
+          "id": "en01_i_live_in_01_meaning",
+          "purpose": "sentence_meaning",
+          "prompt": "¿Qué significa esta oración?",
+          "answer": "Vivo en un pueblo pequeño.",
+          "choices": [
+            "Vivo en un pueblo pequeño.",
+            "Este libro está en inglés.",
+            "¿De dónde eres, David?",
+            "Es un gusto conocerte."
+          ],
+          "accepted": [
+            "Vivo en un pueblo pequeño."
+          ]
+        },
+        {
+          "id": "en01_i_live_in_01_word",
+          "purpose": "context_word",
+          "prompt": "En esta oración, ¿qué significa «I live in»?",
+          "answer": "vivo en",
+          "choices": [
+            "vivo en",
+            "mi nombre es",
+            "soy / estoy",
+            "mucho gusto"
+          ],
+          "accepted": [
+            "vivo en"
+          ],
+          "wordId": "i_live_in"
+        },
+        {
+          "id": "en01_i_live_in_01_complete",
+          "purpose": "complete",
+          "prompt": "___ a small town.",
+          "answer": "I live in",
+          "choices": [
+            "I live in",
+            "my name is",
+            "I am",
+            "nice to meet you"
+          ],
+          "accepted": [
+            "I live in"
+          ],
+          "wordId": "i_live_in",
+          "hint": "Vivo en un pueblo pequeño."
+        }
+      ]
+    },
+    {
+      "id": "en01_i_live_in_02",
+      "en": "I live in Bogotá.",
+      "es": "Vivo en Bogotá.",
+      "targetWordId": "i_live_in",
+      "target": "I live in",
+      "wordIds": [
+        "i_live_in"
+      ],
+      "questions": [
+        {
+          "id": "en01_i_live_in_02_meaning",
+          "purpose": "sentence_meaning",
+          "prompt": "¿Qué significa esta oración?",
+          "answer": "Vivo en Bogotá.",
+          "choices": [
+            "Vivo en Bogotá.",
+            "Ella habla español.",
+            "Mi nombre es Ana.",
+            "Soy de Colombia."
+          ],
+          "accepted": [
+            "Vivo en Bogotá."
+          ]
+        },
+        {
+          "id": "en01_i_live_in_02_word",
+          "purpose": "context_word",
+          "prompt": "En esta oración, ¿qué significa «I live in»?",
+          "answer": "vivo en",
+          "choices": [
+            "vivo en",
+            "mi nombre es",
+            "soy / estoy",
+            "mucho gusto"
+          ],
+          "accepted": [
+            "vivo en"
+          ],
+          "wordId": "i_live_in"
+        },
+        {
+          "id": "en01_i_live_in_02_complete",
+          "purpose": "complete",
+          "prompt": "___ Bogotá.",
+          "answer": "I live in",
+          "choices": [
+            "I live in",
+            "my name is",
+            "I am",
+            "nice to meet you"
+          ],
+          "accepted": [
+            "I live in"
+          ],
+          "wordId": "i_live_in",
+          "hint": "Vivo en Bogotá."
+        }
+      ]
+    },
+    {
+      "id": "en01_i_speak_01",
+      "en": "I speak English at work.",
+      "es": "Hablo inglés en el trabajo.",
+      "targetWordId": "i_speak",
+      "target": "I speak",
+      "wordIds": [
+        "i_speak",
+        "english"
+      ],
+      "questions": [
+        {
+          "id": "en01_i_speak_01_meaning",
+          "purpose": "sentence_meaning",
+          "prompt": "¿Qué significa esta oración?",
+          "answer": "Hablo inglés en el trabajo.",
+          "choices": [
+            "Hablo inglés en el trabajo.",
+            "Esta canción está en español.",
+            "Mi nombre es Daniel.",
+            "Soy de Canadá."
+          ],
+          "accepted": [
+            "Hablo inglés en el trabajo."
+          ]
+        },
+        {
+          "id": "en01_i_speak_01_word",
+          "purpose": "context_word",
+          "prompt": "En esta oración, ¿qué significa «I speak»?",
+          "answer": "hablo",
+          "choices": [
+            "hablo",
+            "mi nombre es",
+            "soy / estoy",
+            "mucho gusto"
+          ],
+          "accepted": [
+            "hablo"
+          ],
+          "wordId": "i_speak"
+        },
+        {
+          "id": "en01_i_speak_01_complete",
+          "purpose": "complete",
+          "prompt": "___ English at work.",
+          "answer": "I speak",
+          "choices": [
+            "I speak",
+            "my name is",
+            "I am",
+            "nice to meet you"
+          ],
+          "accepted": [
+            "I speak"
+          ],
+          "wordId": "i_speak",
+          "hint": "Hablo inglés en el trabajo."
+        }
+      ]
+    },
+    {
+      "id": "en01_i_speak_02",
+      "en": "I speak Spanish at home.",
+      "es": "Hablo español en casa.",
+      "targetWordId": "i_speak",
+      "target": "I speak",
+      "wordIds": [
+        "i_speak",
+        "spanish"
+      ],
+      "questions": [
+        {
+          "id": "en01_i_speak_02_meaning",
+          "purpose": "sentence_meaning",
+          "prompt": "¿Qué significa esta oración?",
+          "answer": "Hablo español en casa.",
+          "choices": [
+            "Hablo español en casa.",
+            "Esta es mi amiga Ana.",
+            "Soy estudiante.",
+            "Ella es estudiante."
+          ],
+          "accepted": [
+            "Hablo español en casa."
+          ]
+        },
+        {
+          "id": "en01_i_speak_02_word",
+          "purpose": "context_word",
+          "prompt": "En esta oración, ¿qué significa «I speak»?",
+          "answer": "hablo",
+          "choices": [
+            "hablo",
+            "mi nombre es",
+            "soy / estoy",
+            "mucho gusto"
+          ],
+          "accepted": [
+            "hablo"
+          ],
+          "wordId": "i_speak"
+        },
+        {
+          "id": "en01_i_speak_02_complete",
+          "purpose": "complete",
+          "prompt": "___ Spanish at home.",
+          "answer": "I speak",
+          "choices": [
+            "I speak",
+            "my name is",
+            "I am",
+            "nice to meet you"
+          ],
+          "accepted": [
+            "I speak"
+          ],
+          "wordId": "i_speak",
+          "hint": "Hablo español en casa."
+        }
+      ]
+    },
+    {
+      "id": "en01_english_01",
+      "en": "We study English every day.",
+      "es": "Estudiamos inglés todos los días.",
+      "targetWordId": "english",
+      "target": "English",
+      "wordIds": [
+        "english"
+      ],
+      "questions": [
+        {
+          "id": "en01_english_01_meaning",
+          "purpose": "sentence_meaning",
+          "prompt": "¿Qué significa esta oración?",
+          "answer": "Estudiamos inglés todos los días.",
+          "choices": [
+            "Estudiamos inglés todos los días.",
+            "Este es mi amigo David.",
+            "Estoy feliz hoy.",
+            "El estudiante está en clase."
+          ],
+          "accepted": [
+            "Estudiamos inglés todos los días."
+          ]
+        },
+        {
+          "id": "en01_english_01_word",
+          "purpose": "context_word",
+          "prompt": "En esta oración, ¿qué significa «English»?",
+          "answer": "inglés",
+          "choices": [
+            "inglés",
+            "mi nombre es",
+            "soy / estoy",
+            "mucho gusto"
+          ],
+          "accepted": [
+            "inglés"
+          ],
+          "wordId": "english"
+        },
+        {
+          "id": "en01_english_01_complete",
+          "purpose": "complete",
+          "prompt": "We study ___ every day.",
+          "answer": "English",
+          "choices": [
+            "English",
+            "Spanish",
+            "French",
+            "German"
+          ],
+          "accepted": [
+            "English"
+          ],
+          "wordId": "english",
+          "hint": "Estudiamos inglés todos los días."
+        }
+      ]
+    },
+    {
+      "id": "en01_english_02",
+      "en": "This book is in English.",
+      "es": "Este libro está en inglés.",
+      "targetWordId": "english",
+      "target": "English",
+      "wordIds": [
+        "english"
+      ],
+      "questions": [
+        {
+          "id": "en01_english_02_meaning",
+          "purpose": "sentence_meaning",
+          "prompt": "¿Qué significa esta oración?",
+          "answer": "Este libro está en inglés.",
+          "choices": [
+            "Este libro está en inglés.",
+            "¿De dónde eres, Ana?",
+            "Mucho gusto, Ana.",
+            "Él es profesor."
+          ],
+          "accepted": [
+            "Este libro está en inglés."
+          ]
+        },
+        {
+          "id": "en01_english_02_word",
+          "purpose": "context_word",
+          "prompt": "En esta oración, ¿qué significa «English»?",
+          "answer": "inglés",
+          "choices": [
+            "inglés",
+            "mi nombre es",
+            "soy / estoy",
+            "mucho gusto"
+          ],
+          "accepted": [
+            "inglés"
+          ],
+          "wordId": "english"
+        },
+        {
+          "id": "en01_english_02_complete",
+          "purpose": "complete",
+          "prompt": "This book is in ___.",
+          "answer": "English",
+          "choices": [
+            "English",
+            "Spanish",
+            "French",
+            "German"
+          ],
+          "accepted": [
+            "English"
+          ],
+          "wordId": "english",
+          "hint": "Este libro está en inglés."
+        }
+      ]
+    },
+    {
+      "id": "en01_spanish_01",
+      "en": "She speaks Spanish.",
+      "es": "Ella habla español.",
+      "targetWordId": "spanish",
+      "target": "Spanish",
+      "wordIds": [
+        "spanish"
+      ],
+      "questions": [
+        {
+          "id": "en01_spanish_01_meaning",
+          "purpose": "sentence_meaning",
+          "prompt": "¿Qué significa esta oración?",
+          "answer": "Ella habla español.",
+          "choices": [
+            "Ella habla español.",
+            "¿De dónde eres, David?",
+            "Es un gusto conocerte.",
+            "El profesor está en la escuela."
+          ],
+          "accepted": [
+            "Ella habla español."
+          ]
+        },
+        {
+          "id": "en01_spanish_01_word",
+          "purpose": "context_word",
+          "prompt": "En esta oración, ¿qué significa «Spanish»?",
+          "answer": "español",
+          "choices": [
+            "español",
+            "mi nombre es",
+            "soy / estoy",
+            "mucho gusto"
+          ],
+          "accepted": [
+            "español"
+          ],
+          "wordId": "spanish"
+        },
+        {
+          "id": "en01_spanish_01_complete",
+          "purpose": "complete",
+          "prompt": "She speaks ___.",
+          "answer": "Spanish",
+          "choices": [
+            "Spanish",
+            "English",
+            "French",
+            "German"
+          ],
+          "accepted": [
+            "Spanish"
+          ],
+          "wordId": "spanish",
+          "hint": "Ella habla español."
+        }
+      ]
+    },
+    {
+      "id": "en01_spanish_02",
+      "en": "This song is in Spanish.",
+      "es": "Esta canción está en español.",
+      "targetWordId": "spanish",
+      "target": "Spanish",
+      "wordIds": [
+        "spanish"
+      ],
+      "questions": [
+        {
+          "id": "en01_spanish_02_meaning",
+          "purpose": "sentence_meaning",
+          "prompt": "¿Qué significa esta oración?",
+          "answer": "Esta canción está en español.",
+          "choices": [
+            "Esta canción está en español.",
+            "Mi nombre es Ana.",
+            "Soy de Colombia.",
+            "Vivo en un pueblo pequeño."
+          ],
+          "accepted": [
+            "Esta canción está en español."
+          ]
+        },
+        {
+          "id": "en01_spanish_02_word",
+          "purpose": "context_word",
+          "prompt": "En esta oración, ¿qué significa «Spanish»?",
+          "answer": "español",
+          "choices": [
+            "español",
+            "mi nombre es",
+            "soy / estoy",
+            "mucho gusto"
+          ],
+          "accepted": [
+            "español"
+          ],
+          "wordId": "spanish"
+        },
+        {
+          "id": "en01_spanish_02_complete",
+          "purpose": "complete",
+          "prompt": "This song is in ___.",
+          "answer": "Spanish",
+          "choices": [
+            "Spanish",
+            "English",
+            "French",
+            "German"
+          ],
+          "accepted": [
+            "Spanish"
+          ],
+          "wordId": "spanish",
+          "hint": "Esta canción está en español."
+        }
+      ]
+    },
+    {
+      "id": "en01_this_is_my_friend_01",
+      "en": "This is my friend Ana.",
+      "es": "Esta es mi amiga Ana.",
+      "targetWordId": "this_is_my_friend",
+      "target": "This is my friend",
+      "wordIds": [
+        "this_is_my_friend"
+      ],
+      "questions": [
+        {
+          "id": "en01_this_is_my_friend_01_meaning",
+          "purpose": "sentence_meaning",
+          "prompt": "¿Qué significa esta oración?",
+          "answer": "Esta es mi amiga Ana.",
+          "choices": [
+            "Esta es mi amiga Ana.",
+            "Mi nombre es Daniel.",
+            "Soy de Canadá.",
+            "Vivo en Bogotá."
+          ],
+          "accepted": [
+            "Esta es mi amiga Ana."
+          ]
+        },
+        {
+          "id": "en01_this_is_my_friend_01_word",
+          "purpose": "context_word",
+          "prompt": "En esta oración, ¿qué significa «This is my friend»?",
+          "answer": "esta es mi amiga",
+          "choices": [
+            "esta es mi amiga",
+            "mi nombre es",
+            "soy / estoy",
+            "mucho gusto"
+          ],
+          "accepted": [
+            "esta es mi amiga"
+          ],
+          "wordId": "this_is_my_friend"
+        },
+        {
+          "id": "en01_this_is_my_friend_01_complete",
+          "purpose": "complete",
+          "prompt": "___ Ana.",
+          "answer": "This is my friend",
+          "choices": [
+            "This is my friend",
+            "my name is",
+            "I am",
+            "nice to meet you"
+          ],
+          "accepted": [
+            "This is my friend"
+          ],
+          "wordId": "this_is_my_friend",
+          "hint": "Esta es mi amiga Ana."
+        }
+      ]
+    },
+    {
+      "id": "en01_this_is_my_friend_02",
+      "en": "This is my friend David.",
+      "es": "Este es mi amigo David.",
+      "targetWordId": "this_is_my_friend",
+      "target": "This is my friend",
+      "wordIds": [
+        "this_is_my_friend"
+      ],
+      "questions": [
+        {
+          "id": "en01_this_is_my_friend_02_meaning",
+          "purpose": "sentence_meaning",
+          "prompt": "¿Qué significa esta oración?",
+          "answer": "Este es mi amigo David.",
+          "choices": [
+            "Este es mi amigo David.",
+            "Soy estudiante.",
+            "Ella es estudiante.",
+            "Hablo inglés en el trabajo."
+          ],
+          "accepted": [
+            "Este es mi amigo David."
+          ]
+        },
+        {
+          "id": "en01_this_is_my_friend_02_word",
+          "purpose": "context_word",
+          "prompt": "En esta oración, ¿qué significa «This is my friend»?",
+          "answer": "este es mi amigo",
+          "choices": [
+            "este es mi amigo",
+            "mi nombre es",
+            "soy / estoy",
+            "mucho gusto"
+          ],
+          "accepted": [
+            "este es mi amigo"
+          ],
+          "wordId": "this_is_my_friend"
+        },
+        {
+          "id": "en01_this_is_my_friend_02_complete",
+          "purpose": "complete",
+          "prompt": "___ David.",
+          "answer": "This is my friend",
+          "choices": [
+            "This is my friend",
+            "my name is",
+            "I am",
+            "nice to meet you"
+          ],
+          "accepted": [
+            "This is my friend"
+          ],
+          "wordId": "this_is_my_friend",
+          "hint": "Este es mi amigo David."
+        }
+      ]
+    },
+    {
+      "id": "en01_where_are_you_from_01",
+      "en": "Where are you from, Ana?",
+      "es": "¿De dónde eres, Ana?",
+      "targetWordId": "where_are_you_from",
+      "target": "Where are you from",
+      "wordIds": [
+        "where_are_you_from"
+      ],
+      "questions": [
+        {
+          "id": "en01_where_are_you_from_01_meaning",
+          "purpose": "sentence_meaning",
+          "prompt": "¿Qué significa esta oración?",
+          "answer": "¿De dónde eres, Ana?",
+          "choices": [
+            "¿De dónde eres, Ana?",
+            "Estoy feliz hoy.",
+            "El estudiante está en clase.",
+            "Hablo español en casa."
+          ],
+          "accepted": [
+            "¿De dónde eres, Ana?"
+          ]
+        },
+        {
+          "id": "en01_where_are_you_from_01_word",
+          "purpose": "context_word",
+          "prompt": "En esta oración, ¿qué significa «Where are you from»?",
+          "answer": "de dónde eres",
+          "choices": [
+            "de dónde eres",
+            "mi nombre es",
+            "soy / estoy",
+            "mucho gusto"
+          ],
+          "accepted": [
+            "de dónde eres"
+          ],
+          "wordId": "where_are_you_from"
+        },
+        {
+          "id": "en01_where_are_you_from_01_complete",
+          "purpose": "complete",
+          "prompt": "___, Ana?",
+          "answer": "Where are you from",
+          "choices": [
+            "Where are you from",
+            "my name is",
+            "I am",
+            "nice to meet you"
+          ],
+          "accepted": [
+            "Where are you from"
+          ],
+          "wordId": "where_are_you_from",
+          "hint": "¿De dónde eres, Ana?"
+        }
+      ]
+    },
+    {
+      "id": "en01_where_are_you_from_02",
+      "en": "Where are you from, David?",
+      "es": "¿De dónde eres, David?",
+      "targetWordId": "where_are_you_from",
+      "target": "Where are you from",
+      "wordIds": [
+        "where_are_you_from"
+      ],
+      "questions": [
+        {
+          "id": "en01_where_are_you_from_02_meaning",
+          "purpose": "sentence_meaning",
+          "prompt": "¿Qué significa esta oración?",
+          "answer": "¿De dónde eres, David?",
+          "choices": [
+            "¿De dónde eres, David?",
+            "Mucho gusto, Ana.",
+            "Él es profesor.",
+            "Estudiamos inglés todos los días."
+          ],
+          "accepted": [
+            "¿De dónde eres, David?"
+          ]
+        },
+        {
+          "id": "en01_where_are_you_from_02_word",
+          "purpose": "context_word",
+          "prompt": "En esta oración, ¿qué significa «Where are you from»?",
+          "answer": "de dónde eres",
+          "choices": [
+            "de dónde eres",
+            "mi nombre es",
+            "soy / estoy",
+            "mucho gusto"
+          ],
+          "accepted": [
+            "de dónde eres"
+          ],
+          "wordId": "where_are_you_from"
+        },
+        {
+          "id": "en01_where_are_you_from_02_complete",
+          "purpose": "complete",
+          "prompt": "___, David?",
+          "answer": "Where are you from",
+          "choices": [
+            "Where are you from",
+            "my name is",
+            "I am",
+            "nice to meet you"
+          ],
+          "accepted": [
+            "Where are you from"
+          ],
+          "wordId": "where_are_you_from",
+          "hint": "¿De dónde eres, David?"
+        }
+      ]
+    }
+  ]
+}
