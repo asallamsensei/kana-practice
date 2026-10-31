@@ -1,7 +1,7 @@
 /* Local-only progress adapters. Reading never changes learning-app records. */
 (function(root){'use strict';
 const FORMAT='asallam-study-backup', VERSION=1, MAX_BYTES=16*1024*1024;
-const KEYS=['asallam_oraciones_ingles_preferences_v1','asallam_kana_progress_v2','asallam_kana_preferences_v2','asallam_kana_custom_data_v2','asallam_vocab_progress_v3','asallam_vocab_progress_v4','asallam_vocab_preferences_v3','asallam_vocab_custom_v3','n5_vocab_stats_v1','asallam_kanji_trainer_progress_v1','asallam_kanji_trainer_preferences_v1','asallam-oraciones-settings','englishVocabStats_v1','asallam_english_progress_v2','asallam_english_preferences_v2','asallam_english_custom_data_v2','asallam_english_memory_progress_v1','asallam_ecosystem_theme','asallam_english_theme','saludosQuizStats_v1','asallam_turista_progress_v2','asallam_turista_preferences_v2','animeVocabStats_global_v1','asallam_anime_progress_v2','asallam_anime_preferences_v2'];
+const KEYS=['asallam_journey_n5_v1','asallam_daily_n5_prefs_v1','asallam_oraciones_ingles_preferences_v1','asallam_kana_progress_v2','asallam_kana_preferences_v2','asallam_kana_custom_data_v2','asallam_vocab_progress_v3','asallam_vocab_progress_v4','asallam_vocab_preferences_v3','asallam_vocab_custom_v3','n5_vocab_stats_v1','asallam_kanji_trainer_progress_v1','asallam_kanji_trainer_preferences_v1','asallam-oraciones-settings','englishVocabStats_v1','asallam_english_progress_v2','asallam_english_preferences_v2','asallam_english_custom_data_v2','asallam_english_memory_progress_v1','asallam_ecosystem_theme','asallam_english_theme','saludosQuizStats_v1','asallam_turista_progress_v2','asallam_turista_preferences_v2','animeVocabStats_global_v1','asallam_anime_progress_v2','asallam_anime_preferences_v2'];
 const reviewAPI=()=>root.AsallamReviews;
 const own=(o,k)=>Object.prototype.hasOwnProperty.call(o,k), obj=v=>v!==null&&typeof v==='object'&&!Array.isArray(v), n=v=>Number.isSafeInteger(v)&&v>=0?v:0;
 function allowed(k){return /^asallam_reviews_v1_(kana|jlpt|kanji|oraciones|ingles|turista|anime|oraciones_ingles)$/.test(k)||KEYS.includes(k)||/^asallam-oraciones:[a-zA-Z0-9_-]+:\d+\.\d+\.\d+$/.test(k);}
@@ -21,6 +21,8 @@ function countValid(v){return Number.isSafeInteger(v)&&v>=0;}
 function numericFields(v,fields){if(!obj(v))throw Error('Registro de estadísticas inválido.');for(const k of fields){if(own(v,k)&&(!Number.isSafeInteger(v[k])||v[k]<0))throw Error('Contador inválido: '+k);}}
 function mapping(v,fn){if(!obj(v))throw Error('Mapa de progreso inválido.');for(const x of Object.values(v))fn(x);}
 function validateValue(key,v){scan(v);if(key.endsWith('_theme')){if(!['light','dark'].includes(v))throw Error('Tema inválido.');return true;}if(!obj(v))throw Error('Cada registro debe ser un objeto JSON.');const counts=x=>numericFields(x,['correct','wrong','skipped','streak','best']);
+if(key==='asallam_journey_n5_v1'){if(!root.AsallamJourney)throw Error('No se pudo cargar el validador de ruta.');root.AsallamJourney.validate(v);return true;}
+if(key==='asallam_daily_n5_prefs_v1'){if(!root.AsallamJourney)throw Error('No se pudo cargar el validador diario.');root.AsallamJourney.validatePrefs(v);return true;}
 if(key.startsWith('asallam_reviews_v1_')){if(!reviewAPI())throw Error('No se pudo cargar el validador de repasos.');reviewAPI().validate(key.slice('asallam_reviews_v1_'.length),v);return true;}
 if(key==='asallam_oraciones_ingles_preferences_v1'){
 const fields=['version','activity','length','purpose','reviewOnly','autoAudio','rate'];if(v.version!==1||Object.keys(v).some(k=>!fields.includes(k))||fields.some(k=>!own(v,k)))throw Error('Ajustes de Sentences incompatibles.');
@@ -91,6 +93,7 @@ function previewImport(data,s){s=storage(s);const before=Object.create(null),con
 function restore(preview,s,replace){s=storage(s);const keys=Object.keys(preview.data.entries).filter(k=>replace||preview.before[k]===null);for(const k of Object.keys(preview.before))if(s.getItem(k)!==preview.before[k])throw Error('El progreso cambió en otra pestaña. Vuelve a seleccionar la copia para revisar los cambios.');const changed=[];try{for(const k of keys){if(s.getItem(k)===preview.data.entries[k])continue;s.setItem(k,preview.data.entries[k]);changed.push(k);}}catch(e){let failures=[];for(const k of changed.reverse()){try{if(preview.before[k]===null)s.removeItem(k);else s.setItem(k,preview.before[k]);}catch{failures.push(k);}}throw Error(failures.length?'No se pudo completar ni revertir todo. Conserva la copia previa y libera espacio antes de restaurarla.':'No se pudo guardar la copia. Se revirtieron los cambios realizados; puede faltar espacio.');}return changed.length;}
 const api={getSummary,makeBackup,parseBackup,previewImport,restore,allowed,validateValue,MAX_BYTES};root.AsallamProgress=api;if(typeof module!=='undefined'&&module.exports)module.exports=api;
 })(typeof window!=='undefined'?window:globalThis);
+
 
 
 

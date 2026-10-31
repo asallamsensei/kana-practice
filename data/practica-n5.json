@@ -1,0 +1,6744 @@
+{
+  "version": 1,
+  "sourceCommit": "262886c8150aceba1eaed764a60256721ff19cf2",
+  "scope": "Selección pedagógica para bases N5; no es un temario oficial exhaustivo ni certifica dominio.",
+  "items": [
+    {
+      "key": "kana:hiragana:あ",
+      "app": "kana",
+      "id": "hiragana:あ",
+      "nativeId": "hiragana:あ",
+      "jp": "あ",
+      "es": "a",
+      "reading": "あ",
+      "romaji": "a",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "01",
+        "03",
+        "07",
+        "10",
+        "17",
+        "47"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "a"
+      ]
+    },
+    {
+      "key": "kana:hiragana:い",
+      "app": "kana",
+      "id": "hiragana:い",
+      "nativeId": "hiragana:い",
+      "jp": "い",
+      "es": "i",
+      "reading": "い",
+      "romaji": "i",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "01",
+        "03",
+        "07",
+        "10",
+        "17",
+        "47"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "i"
+      ]
+    },
+    {
+      "key": "kana:hiragana:う",
+      "app": "kana",
+      "id": "hiragana:う",
+      "nativeId": "hiragana:う",
+      "jp": "う",
+      "es": "u",
+      "reading": "う",
+      "romaji": "u",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "01",
+        "03",
+        "07",
+        "10",
+        "17",
+        "47"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "u"
+      ]
+    },
+    {
+      "key": "kana:hiragana:え",
+      "app": "kana",
+      "id": "hiragana:え",
+      "nativeId": "hiragana:え",
+      "jp": "え",
+      "es": "e",
+      "reading": "え",
+      "romaji": "e",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "01",
+        "03",
+        "07",
+        "10",
+        "17",
+        "47"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "e"
+      ]
+    },
+    {
+      "key": "kana:hiragana:お",
+      "app": "kana",
+      "id": "hiragana:お",
+      "nativeId": "hiragana:お",
+      "jp": "お",
+      "es": "o",
+      "reading": "お",
+      "romaji": "o",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "01",
+        "03",
+        "07",
+        "10",
+        "17",
+        "47"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "o"
+      ]
+    },
+    {
+      "key": "kana:hiragana:か",
+      "app": "kana",
+      "id": "hiragana:か",
+      "nativeId": "hiragana:か",
+      "jp": "か",
+      "es": "ka",
+      "reading": "か",
+      "romaji": "ka",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "02",
+        "07",
+        "10",
+        "17",
+        "47"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "ka"
+      ]
+    },
+    {
+      "key": "kana:hiragana:き",
+      "app": "kana",
+      "id": "hiragana:き",
+      "nativeId": "hiragana:き",
+      "jp": "き",
+      "es": "ki",
+      "reading": "き",
+      "romaji": "ki",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "02",
+        "07",
+        "10",
+        "17",
+        "47"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "ki"
+      ]
+    },
+    {
+      "key": "kana:hiragana:く",
+      "app": "kana",
+      "id": "hiragana:く",
+      "nativeId": "hiragana:く",
+      "jp": "く",
+      "es": "ku",
+      "reading": "く",
+      "romaji": "ku",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "02",
+        "07",
+        "10",
+        "17",
+        "47"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "ku"
+      ]
+    },
+    {
+      "key": "kana:hiragana:け",
+      "app": "kana",
+      "id": "hiragana:け",
+      "nativeId": "hiragana:け",
+      "jp": "け",
+      "es": "ke",
+      "reading": "け",
+      "romaji": "ke",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "02",
+        "07",
+        "10",
+        "17",
+        "47"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "ke"
+      ]
+    },
+    {
+      "key": "kana:hiragana:こ",
+      "app": "kana",
+      "id": "hiragana:こ",
+      "nativeId": "hiragana:こ",
+      "jp": "こ",
+      "es": "ko",
+      "reading": "こ",
+      "romaji": "ko",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "02",
+        "07",
+        "10",
+        "17",
+        "47"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "ko"
+      ]
+    },
+    {
+      "key": "kana:hiragana:が",
+      "app": "kana",
+      "id": "hiragana:が",
+      "nativeId": "hiragana:が",
+      "jp": "が",
+      "es": "ga",
+      "reading": "が",
+      "romaji": "ga",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "08"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "ga"
+      ]
+    },
+    {
+      "key": "kana:hiragana:ぎ",
+      "app": "kana",
+      "id": "hiragana:ぎ",
+      "nativeId": "hiragana:ぎ",
+      "jp": "ぎ",
+      "es": "gi",
+      "reading": "ぎ",
+      "romaji": "gi",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "08"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "gi"
+      ]
+    },
+    {
+      "key": "kana:hiragana:ぐ",
+      "app": "kana",
+      "id": "hiragana:ぐ",
+      "nativeId": "hiragana:ぐ",
+      "jp": "ぐ",
+      "es": "gu",
+      "reading": "ぐ",
+      "romaji": "gu",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "08"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "gu"
+      ]
+    },
+    {
+      "key": "kana:hiragana:げ",
+      "app": "kana",
+      "id": "hiragana:げ",
+      "nativeId": "hiragana:げ",
+      "jp": "げ",
+      "es": "ge",
+      "reading": "げ",
+      "romaji": "ge",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "08"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "ge"
+      ]
+    },
+    {
+      "key": "kana:hiragana:ご",
+      "app": "kana",
+      "id": "hiragana:ご",
+      "nativeId": "hiragana:ご",
+      "jp": "ご",
+      "es": "go",
+      "reading": "ご",
+      "romaji": "go",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "08"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "go"
+      ]
+    },
+    {
+      "key": "kana:hiragana:さ",
+      "app": "kana",
+      "id": "hiragana:さ",
+      "nativeId": "hiragana:さ",
+      "jp": "さ",
+      "es": "sa",
+      "reading": "さ",
+      "romaji": "sa",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "02",
+        "07",
+        "10",
+        "17",
+        "47"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "sa"
+      ]
+    },
+    {
+      "key": "kana:hiragana:し",
+      "app": "kana",
+      "id": "hiragana:し",
+      "nativeId": "hiragana:し",
+      "jp": "し",
+      "es": "shi",
+      "reading": "し",
+      "romaji": "shi",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "02",
+        "07",
+        "10",
+        "17",
+        "47"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "shi",
+        "si"
+      ]
+    },
+    {
+      "key": "kana:hiragana:す",
+      "app": "kana",
+      "id": "hiragana:す",
+      "nativeId": "hiragana:す",
+      "jp": "す",
+      "es": "su",
+      "reading": "す",
+      "romaji": "su",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "02",
+        "07",
+        "10",
+        "17",
+        "47"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "su"
+      ]
+    },
+    {
+      "key": "kana:hiragana:せ",
+      "app": "kana",
+      "id": "hiragana:せ",
+      "nativeId": "hiragana:せ",
+      "jp": "せ",
+      "es": "se",
+      "reading": "せ",
+      "romaji": "se",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "02",
+        "07",
+        "10",
+        "17",
+        "47"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "se"
+      ]
+    },
+    {
+      "key": "kana:hiragana:そ",
+      "app": "kana",
+      "id": "hiragana:そ",
+      "nativeId": "hiragana:そ",
+      "jp": "そ",
+      "es": "so",
+      "reading": "そ",
+      "romaji": "so",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "02",
+        "07",
+        "10",
+        "17",
+        "47"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "so"
+      ]
+    },
+    {
+      "key": "kana:hiragana:ざ",
+      "app": "kana",
+      "id": "hiragana:ざ",
+      "nativeId": "hiragana:ざ",
+      "jp": "ざ",
+      "es": "za",
+      "reading": "ざ",
+      "romaji": "za",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "08"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "za"
+      ]
+    },
+    {
+      "key": "kana:hiragana:じ",
+      "app": "kana",
+      "id": "hiragana:じ",
+      "nativeId": "hiragana:じ",
+      "jp": "じ",
+      "es": "ji",
+      "reading": "じ",
+      "romaji": "ji",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "08"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "ji",
+        "zi"
+      ]
+    },
+    {
+      "key": "kana:hiragana:ず",
+      "app": "kana",
+      "id": "hiragana:ず",
+      "nativeId": "hiragana:ず",
+      "jp": "ず",
+      "es": "zu",
+      "reading": "ず",
+      "romaji": "zu",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "08"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "zu"
+      ]
+    },
+    {
+      "key": "kana:hiragana:ぜ",
+      "app": "kana",
+      "id": "hiragana:ぜ",
+      "nativeId": "hiragana:ぜ",
+      "jp": "ぜ",
+      "es": "ze",
+      "reading": "ぜ",
+      "romaji": "ze",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "08"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "ze"
+      ]
+    },
+    {
+      "key": "kana:hiragana:ぞ",
+      "app": "kana",
+      "id": "hiragana:ぞ",
+      "nativeId": "hiragana:ぞ",
+      "jp": "ぞ",
+      "es": "zo",
+      "reading": "ぞ",
+      "romaji": "zo",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "08"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "zo"
+      ]
+    },
+    {
+      "key": "kana:hiragana:た",
+      "app": "kana",
+      "id": "hiragana:た",
+      "nativeId": "hiragana:た",
+      "jp": "た",
+      "es": "ta",
+      "reading": "た",
+      "romaji": "ta",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "04",
+        "07",
+        "10",
+        "17",
+        "47"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "ta"
+      ]
+    },
+    {
+      "key": "kana:hiragana:ち",
+      "app": "kana",
+      "id": "hiragana:ち",
+      "nativeId": "hiragana:ち",
+      "jp": "ち",
+      "es": "chi",
+      "reading": "ち",
+      "romaji": "chi",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "04",
+        "07",
+        "10",
+        "17",
+        "47"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "chi"
+      ]
+    },
+    {
+      "key": "kana:hiragana:つ",
+      "app": "kana",
+      "id": "hiragana:つ",
+      "nativeId": "hiragana:つ",
+      "jp": "つ",
+      "es": "tsu",
+      "reading": "つ",
+      "romaji": "tsu",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "04",
+        "07",
+        "10",
+        "17",
+        "47"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "tsu"
+      ]
+    },
+    {
+      "key": "kana:hiragana:て",
+      "app": "kana",
+      "id": "hiragana:て",
+      "nativeId": "hiragana:て",
+      "jp": "て",
+      "es": "te",
+      "reading": "て",
+      "romaji": "te",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "04",
+        "07",
+        "10",
+        "17",
+        "47"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "te"
+      ]
+    },
+    {
+      "key": "kana:hiragana:と",
+      "app": "kana",
+      "id": "hiragana:と",
+      "nativeId": "hiragana:と",
+      "jp": "と",
+      "es": "to",
+      "reading": "と",
+      "romaji": "to",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "04",
+        "07",
+        "10",
+        "17",
+        "47"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "to"
+      ]
+    },
+    {
+      "key": "kana:hiragana:だ",
+      "app": "kana",
+      "id": "hiragana:だ",
+      "nativeId": "hiragana:だ",
+      "jp": "だ",
+      "es": "da",
+      "reading": "だ",
+      "romaji": "da",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "08"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "da"
+      ]
+    },
+    {
+      "key": "kana:hiragana:で",
+      "app": "kana",
+      "id": "hiragana:で",
+      "nativeId": "hiragana:で",
+      "jp": "で",
+      "es": "de",
+      "reading": "で",
+      "romaji": "de",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "08"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "de"
+      ]
+    },
+    {
+      "key": "kana:hiragana:ど",
+      "app": "kana",
+      "id": "hiragana:ど",
+      "nativeId": "hiragana:ど",
+      "jp": "ど",
+      "es": "do",
+      "reading": "ど",
+      "romaji": "do",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "08"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "do"
+      ]
+    },
+    {
+      "key": "kana:hiragana:な",
+      "app": "kana",
+      "id": "hiragana:な",
+      "nativeId": "hiragana:な",
+      "jp": "な",
+      "es": "na",
+      "reading": "な",
+      "romaji": "na",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "04",
+        "07",
+        "10",
+        "17",
+        "47"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "na"
+      ]
+    },
+    {
+      "key": "kana:hiragana:に",
+      "app": "kana",
+      "id": "hiragana:に",
+      "nativeId": "hiragana:に",
+      "jp": "に",
+      "es": "ni",
+      "reading": "に",
+      "romaji": "ni",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "04",
+        "07",
+        "10",
+        "17",
+        "47"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "ni"
+      ]
+    },
+    {
+      "key": "kana:hiragana:ぬ",
+      "app": "kana",
+      "id": "hiragana:ぬ",
+      "nativeId": "hiragana:ぬ",
+      "jp": "ぬ",
+      "es": "nu",
+      "reading": "ぬ",
+      "romaji": "nu",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "04",
+        "07",
+        "10",
+        "17",
+        "47"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "nu"
+      ]
+    },
+    {
+      "key": "kana:hiragana:ね",
+      "app": "kana",
+      "id": "hiragana:ね",
+      "nativeId": "hiragana:ね",
+      "jp": "ね",
+      "es": "ne",
+      "reading": "ね",
+      "romaji": "ne",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "04",
+        "07",
+        "10",
+        "17",
+        "47"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "ne"
+      ]
+    },
+    {
+      "key": "kana:hiragana:の",
+      "app": "kana",
+      "id": "hiragana:の",
+      "nativeId": "hiragana:の",
+      "jp": "の",
+      "es": "no",
+      "reading": "の",
+      "romaji": "no",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "04",
+        "07",
+        "10",
+        "17",
+        "47"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "no"
+      ]
+    },
+    {
+      "key": "kana:hiragana:は",
+      "app": "kana",
+      "id": "hiragana:は",
+      "nativeId": "hiragana:は",
+      "jp": "は",
+      "es": "ha",
+      "reading": "は",
+      "romaji": "ha",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "05",
+        "07",
+        "10",
+        "17",
+        "47"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "ha"
+      ]
+    },
+    {
+      "key": "kana:hiragana:ひ",
+      "app": "kana",
+      "id": "hiragana:ひ",
+      "nativeId": "hiragana:ひ",
+      "jp": "ひ",
+      "es": "hi",
+      "reading": "ひ",
+      "romaji": "hi",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "05",
+        "07",
+        "10",
+        "17",
+        "47"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "hi"
+      ]
+    },
+    {
+      "key": "kana:hiragana:ふ",
+      "app": "kana",
+      "id": "hiragana:ふ",
+      "nativeId": "hiragana:ふ",
+      "jp": "ふ",
+      "es": "fu",
+      "reading": "ふ",
+      "romaji": "fu",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "05",
+        "07",
+        "10",
+        "17",
+        "47"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "fu",
+        "hu"
+      ]
+    },
+    {
+      "key": "kana:hiragana:へ",
+      "app": "kana",
+      "id": "hiragana:へ",
+      "nativeId": "hiragana:へ",
+      "jp": "へ",
+      "es": "he",
+      "reading": "へ",
+      "romaji": "he",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "05",
+        "07",
+        "10",
+        "17",
+        "47"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "he"
+      ]
+    },
+    {
+      "key": "kana:hiragana:ほ",
+      "app": "kana",
+      "id": "hiragana:ほ",
+      "nativeId": "hiragana:ほ",
+      "jp": "ほ",
+      "es": "ho",
+      "reading": "ほ",
+      "romaji": "ho",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "05",
+        "07",
+        "10",
+        "17",
+        "47"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "ho"
+      ]
+    },
+    {
+      "key": "kana:hiragana:ば",
+      "app": "kana",
+      "id": "hiragana:ば",
+      "nativeId": "hiragana:ば",
+      "jp": "ば",
+      "es": "ba",
+      "reading": "ば",
+      "romaji": "ba",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "08"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "ba"
+      ]
+    },
+    {
+      "key": "kana:hiragana:び",
+      "app": "kana",
+      "id": "hiragana:び",
+      "nativeId": "hiragana:び",
+      "jp": "び",
+      "es": "bi",
+      "reading": "び",
+      "romaji": "bi",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "08"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "bi"
+      ]
+    },
+    {
+      "key": "kana:hiragana:ぶ",
+      "app": "kana",
+      "id": "hiragana:ぶ",
+      "nativeId": "hiragana:ぶ",
+      "jp": "ぶ",
+      "es": "bu",
+      "reading": "ぶ",
+      "romaji": "bu",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "08"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "bu"
+      ]
+    },
+    {
+      "key": "kana:hiragana:べ",
+      "app": "kana",
+      "id": "hiragana:べ",
+      "nativeId": "hiragana:べ",
+      "jp": "べ",
+      "es": "be",
+      "reading": "べ",
+      "romaji": "be",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "08"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "be"
+      ]
+    },
+    {
+      "key": "kana:hiragana:ぼ",
+      "app": "kana",
+      "id": "hiragana:ぼ",
+      "nativeId": "hiragana:ぼ",
+      "jp": "ぼ",
+      "es": "bo",
+      "reading": "ぼ",
+      "romaji": "bo",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "08"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "bo"
+      ]
+    },
+    {
+      "key": "kana:hiragana:ぱ",
+      "app": "kana",
+      "id": "hiragana:ぱ",
+      "nativeId": "hiragana:ぱ",
+      "jp": "ぱ",
+      "es": "pa",
+      "reading": "ぱ",
+      "romaji": "pa",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "08"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "pa"
+      ]
+    },
+    {
+      "key": "kana:hiragana:ぴ",
+      "app": "kana",
+      "id": "hiragana:ぴ",
+      "nativeId": "hiragana:ぴ",
+      "jp": "ぴ",
+      "es": "pi",
+      "reading": "ぴ",
+      "romaji": "pi",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "08"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "pi"
+      ]
+    },
+    {
+      "key": "kana:hiragana:ぷ",
+      "app": "kana",
+      "id": "hiragana:ぷ",
+      "nativeId": "hiragana:ぷ",
+      "jp": "ぷ",
+      "es": "pu",
+      "reading": "ぷ",
+      "romaji": "pu",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "08"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "pu"
+      ]
+    },
+    {
+      "key": "kana:hiragana:ぺ",
+      "app": "kana",
+      "id": "hiragana:ぺ",
+      "nativeId": "hiragana:ぺ",
+      "jp": "ぺ",
+      "es": "pe",
+      "reading": "ぺ",
+      "romaji": "pe",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "08"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "pe"
+      ]
+    },
+    {
+      "key": "kana:hiragana:ぽ",
+      "app": "kana",
+      "id": "hiragana:ぽ",
+      "nativeId": "hiragana:ぽ",
+      "jp": "ぽ",
+      "es": "po",
+      "reading": "ぽ",
+      "romaji": "po",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "08"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "po"
+      ]
+    },
+    {
+      "key": "kana:hiragana:ま",
+      "app": "kana",
+      "id": "hiragana:ま",
+      "nativeId": "hiragana:ま",
+      "jp": "ま",
+      "es": "ma",
+      "reading": "ま",
+      "romaji": "ma",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "05",
+        "07",
+        "10",
+        "17",
+        "47"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "ma"
+      ]
+    },
+    {
+      "key": "kana:hiragana:み",
+      "app": "kana",
+      "id": "hiragana:み",
+      "nativeId": "hiragana:み",
+      "jp": "み",
+      "es": "mi",
+      "reading": "み",
+      "romaji": "mi",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "05",
+        "07",
+        "10",
+        "17",
+        "47"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "mi"
+      ]
+    },
+    {
+      "key": "kana:hiragana:む",
+      "app": "kana",
+      "id": "hiragana:む",
+      "nativeId": "hiragana:む",
+      "jp": "む",
+      "es": "mu",
+      "reading": "む",
+      "romaji": "mu",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "05",
+        "07",
+        "10",
+        "17",
+        "47"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "mu"
+      ]
+    },
+    {
+      "key": "kana:hiragana:め",
+      "app": "kana",
+      "id": "hiragana:め",
+      "nativeId": "hiragana:め",
+      "jp": "め",
+      "es": "me",
+      "reading": "め",
+      "romaji": "me",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "05",
+        "07",
+        "10",
+        "17",
+        "47"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "me"
+      ]
+    },
+    {
+      "key": "kana:hiragana:も",
+      "app": "kana",
+      "id": "hiragana:も",
+      "nativeId": "hiragana:も",
+      "jp": "も",
+      "es": "mo",
+      "reading": "も",
+      "romaji": "mo",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "05",
+        "07",
+        "10",
+        "17",
+        "47"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "mo"
+      ]
+    },
+    {
+      "key": "kana:hiragana:や",
+      "app": "kana",
+      "id": "hiragana:や",
+      "nativeId": "hiragana:や",
+      "jp": "や",
+      "es": "ya",
+      "reading": "や",
+      "romaji": "ya",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "06",
+        "07",
+        "10",
+        "17",
+        "47"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "ya"
+      ]
+    },
+    {
+      "key": "kana:hiragana:ゆ",
+      "app": "kana",
+      "id": "hiragana:ゆ",
+      "nativeId": "hiragana:ゆ",
+      "jp": "ゆ",
+      "es": "yu",
+      "reading": "ゆ",
+      "romaji": "yu",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "06",
+        "07",
+        "10",
+        "17",
+        "47"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "yu"
+      ]
+    },
+    {
+      "key": "kana:hiragana:よ",
+      "app": "kana",
+      "id": "hiragana:よ",
+      "nativeId": "hiragana:よ",
+      "jp": "よ",
+      "es": "yo",
+      "reading": "よ",
+      "romaji": "yo",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "06",
+        "07",
+        "10",
+        "17",
+        "47"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "yo"
+      ]
+    },
+    {
+      "key": "kana:hiragana:ら",
+      "app": "kana",
+      "id": "hiragana:ら",
+      "nativeId": "hiragana:ら",
+      "jp": "ら",
+      "es": "ra",
+      "reading": "ら",
+      "romaji": "ra",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "06",
+        "07",
+        "10",
+        "17",
+        "47"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "ra"
+      ]
+    },
+    {
+      "key": "kana:hiragana:り",
+      "app": "kana",
+      "id": "hiragana:り",
+      "nativeId": "hiragana:り",
+      "jp": "り",
+      "es": "ri",
+      "reading": "り",
+      "romaji": "ri",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "06",
+        "07",
+        "10",
+        "17",
+        "47"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "ri"
+      ]
+    },
+    {
+      "key": "kana:hiragana:る",
+      "app": "kana",
+      "id": "hiragana:る",
+      "nativeId": "hiragana:る",
+      "jp": "る",
+      "es": "ru",
+      "reading": "る",
+      "romaji": "ru",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "06",
+        "07",
+        "10",
+        "17",
+        "47"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "ru"
+      ]
+    },
+    {
+      "key": "kana:hiragana:れ",
+      "app": "kana",
+      "id": "hiragana:れ",
+      "nativeId": "hiragana:れ",
+      "jp": "れ",
+      "es": "re",
+      "reading": "れ",
+      "romaji": "re",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "06",
+        "07",
+        "10",
+        "17",
+        "47"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "re"
+      ]
+    },
+    {
+      "key": "kana:hiragana:ろ",
+      "app": "kana",
+      "id": "hiragana:ろ",
+      "nativeId": "hiragana:ろ",
+      "jp": "ろ",
+      "es": "ro",
+      "reading": "ろ",
+      "romaji": "ro",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "06",
+        "07",
+        "10",
+        "17",
+        "47"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "ro"
+      ]
+    },
+    {
+      "key": "kana:hiragana:わ",
+      "app": "kana",
+      "id": "hiragana:わ",
+      "nativeId": "hiragana:わ",
+      "jp": "わ",
+      "es": "wa",
+      "reading": "わ",
+      "romaji": "wa",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "06",
+        "07",
+        "10",
+        "17",
+        "47"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "wa"
+      ]
+    },
+    {
+      "key": "kana:hiragana:を",
+      "app": "kana",
+      "id": "hiragana:を",
+      "nativeId": "hiragana:を",
+      "jp": "を",
+      "es": "wo",
+      "reading": "を",
+      "romaji": "wo",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "06",
+        "07",
+        "10",
+        "17",
+        "47"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "wo",
+        "o"
+      ]
+    },
+    {
+      "key": "kana:hiragana:ん",
+      "app": "kana",
+      "id": "hiragana:ん",
+      "nativeId": "hiragana:ん",
+      "jp": "ん",
+      "es": "n",
+      "reading": "ん",
+      "romaji": "n",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "06",
+        "07",
+        "10",
+        "17",
+        "47"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "n"
+      ]
+    },
+    {
+      "key": "kana:hiragana:きゃ",
+      "app": "kana",
+      "id": "hiragana:きゃ",
+      "nativeId": "hiragana:きゃ",
+      "jp": "きゃ",
+      "es": "kya",
+      "reading": "きゃ",
+      "romaji": "kya",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "09"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "kya"
+      ]
+    },
+    {
+      "key": "kana:hiragana:きゅ",
+      "app": "kana",
+      "id": "hiragana:きゅ",
+      "nativeId": "hiragana:きゅ",
+      "jp": "きゅ",
+      "es": "kyu",
+      "reading": "きゅ",
+      "romaji": "kyu",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "09"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "kyu"
+      ]
+    },
+    {
+      "key": "kana:hiragana:きょ",
+      "app": "kana",
+      "id": "hiragana:きょ",
+      "nativeId": "hiragana:きょ",
+      "jp": "きょ",
+      "es": "kyo",
+      "reading": "きょ",
+      "romaji": "kyo",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "09"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "kyo"
+      ]
+    },
+    {
+      "key": "kana:hiragana:しゃ",
+      "app": "kana",
+      "id": "hiragana:しゃ",
+      "nativeId": "hiragana:しゃ",
+      "jp": "しゃ",
+      "es": "sha",
+      "reading": "しゃ",
+      "romaji": "sha",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "09"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "sha",
+        "sya"
+      ]
+    },
+    {
+      "key": "kana:hiragana:しゅ",
+      "app": "kana",
+      "id": "hiragana:しゅ",
+      "nativeId": "hiragana:しゅ",
+      "jp": "しゅ",
+      "es": "shu",
+      "reading": "しゅ",
+      "romaji": "shu",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "09"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "shu",
+        "syu"
+      ]
+    },
+    {
+      "key": "kana:hiragana:しょ",
+      "app": "kana",
+      "id": "hiragana:しょ",
+      "nativeId": "hiragana:しょ",
+      "jp": "しょ",
+      "es": "sho",
+      "reading": "しょ",
+      "romaji": "sho",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "09"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "sho",
+        "syo"
+      ]
+    },
+    {
+      "key": "kana:hiragana:ちゃ",
+      "app": "kana",
+      "id": "hiragana:ちゃ",
+      "nativeId": "hiragana:ちゃ",
+      "jp": "ちゃ",
+      "es": "cha",
+      "reading": "ちゃ",
+      "romaji": "cha",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "09"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "cha"
+      ]
+    },
+    {
+      "key": "kana:hiragana:ちゅ",
+      "app": "kana",
+      "id": "hiragana:ちゅ",
+      "nativeId": "hiragana:ちゅ",
+      "jp": "ちゅ",
+      "es": "chu",
+      "reading": "ちゅ",
+      "romaji": "chu",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "09"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "chu"
+      ]
+    },
+    {
+      "key": "kana:hiragana:ちょ",
+      "app": "kana",
+      "id": "hiragana:ちょ",
+      "nativeId": "hiragana:ちょ",
+      "jp": "ちょ",
+      "es": "cho",
+      "reading": "ちょ",
+      "romaji": "cho",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "09"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "cho"
+      ]
+    },
+    {
+      "key": "kana:hiragana:りゃ",
+      "app": "kana",
+      "id": "hiragana:りゃ",
+      "nativeId": "hiragana:りゃ",
+      "jp": "りゃ",
+      "es": "rya",
+      "reading": "りゃ",
+      "romaji": "rya",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "09"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "rya"
+      ]
+    },
+    {
+      "key": "kana:hiragana:りゅ",
+      "app": "kana",
+      "id": "hiragana:りゅ",
+      "nativeId": "hiragana:りゅ",
+      "jp": "りゅ",
+      "es": "ryu",
+      "reading": "りゅ",
+      "romaji": "ryu",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "09"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "ryu"
+      ]
+    },
+    {
+      "key": "kana:hiragana:りょ",
+      "app": "kana",
+      "id": "hiragana:りょ",
+      "nativeId": "hiragana:りょ",
+      "jp": "りょ",
+      "es": "ryo",
+      "reading": "りょ",
+      "romaji": "ryo",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "09"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "ryo"
+      ]
+    },
+    {
+      "key": "kana:katakana:ア",
+      "app": "kana",
+      "id": "katakana:ア",
+      "nativeId": "katakana:ア",
+      "jp": "ア",
+      "es": "a",
+      "reading": "ア",
+      "romaji": "a",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "11",
+        "13",
+        "17",
+        "47"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "a"
+      ]
+    },
+    {
+      "key": "kana:katakana:イ",
+      "app": "kana",
+      "id": "katakana:イ",
+      "nativeId": "katakana:イ",
+      "jp": "イ",
+      "es": "i",
+      "reading": "イ",
+      "romaji": "i",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "11",
+        "13",
+        "17",
+        "47"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "i"
+      ]
+    },
+    {
+      "key": "kana:katakana:ウ",
+      "app": "kana",
+      "id": "katakana:ウ",
+      "nativeId": "katakana:ウ",
+      "jp": "ウ",
+      "es": "u",
+      "reading": "ウ",
+      "romaji": "u",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "11",
+        "13",
+        "17",
+        "47"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "u"
+      ]
+    },
+    {
+      "key": "kana:katakana:エ",
+      "app": "kana",
+      "id": "katakana:エ",
+      "nativeId": "katakana:エ",
+      "jp": "エ",
+      "es": "e",
+      "reading": "エ",
+      "romaji": "e",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "11",
+        "13",
+        "17",
+        "47"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "e"
+      ]
+    },
+    {
+      "key": "kana:katakana:オ",
+      "app": "kana",
+      "id": "katakana:オ",
+      "nativeId": "katakana:オ",
+      "jp": "オ",
+      "es": "o",
+      "reading": "オ",
+      "romaji": "o",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "11",
+        "13",
+        "17",
+        "47"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "o"
+      ]
+    },
+    {
+      "key": "kana:katakana:カ",
+      "app": "kana",
+      "id": "katakana:カ",
+      "nativeId": "katakana:カ",
+      "jp": "カ",
+      "es": "ka",
+      "reading": "カ",
+      "romaji": "ka",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "11",
+        "13",
+        "17",
+        "47"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "ka"
+      ]
+    },
+    {
+      "key": "kana:katakana:キ",
+      "app": "kana",
+      "id": "katakana:キ",
+      "nativeId": "katakana:キ",
+      "jp": "キ",
+      "es": "ki",
+      "reading": "キ",
+      "romaji": "ki",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "11",
+        "13",
+        "17",
+        "47"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "ki"
+      ]
+    },
+    {
+      "key": "kana:katakana:ク",
+      "app": "kana",
+      "id": "katakana:ク",
+      "nativeId": "katakana:ク",
+      "jp": "ク",
+      "es": "ku",
+      "reading": "ク",
+      "romaji": "ku",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "11",
+        "13",
+        "17",
+        "47"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "ku"
+      ]
+    },
+    {
+      "key": "kana:katakana:ケ",
+      "app": "kana",
+      "id": "katakana:ケ",
+      "nativeId": "katakana:ケ",
+      "jp": "ケ",
+      "es": "ke",
+      "reading": "ケ",
+      "romaji": "ke",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "11",
+        "13",
+        "17",
+        "47"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "ke"
+      ]
+    },
+    {
+      "key": "kana:katakana:コ",
+      "app": "kana",
+      "id": "katakana:コ",
+      "nativeId": "katakana:コ",
+      "jp": "コ",
+      "es": "ko",
+      "reading": "コ",
+      "romaji": "ko",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "11",
+        "13",
+        "17",
+        "47"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "ko"
+      ]
+    },
+    {
+      "key": "kana:katakana:ガ",
+      "app": "kana",
+      "id": "katakana:ガ",
+      "nativeId": "katakana:ガ",
+      "jp": "ガ",
+      "es": "ga",
+      "reading": "ガ",
+      "romaji": "ga",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "15"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "ga"
+      ]
+    },
+    {
+      "key": "kana:katakana:ギ",
+      "app": "kana",
+      "id": "katakana:ギ",
+      "nativeId": "katakana:ギ",
+      "jp": "ギ",
+      "es": "gi",
+      "reading": "ギ",
+      "romaji": "gi",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "15"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "gi"
+      ]
+    },
+    {
+      "key": "kana:katakana:グ",
+      "app": "kana",
+      "id": "katakana:グ",
+      "nativeId": "katakana:グ",
+      "jp": "グ",
+      "es": "gu",
+      "reading": "グ",
+      "romaji": "gu",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "15"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "gu"
+      ]
+    },
+    {
+      "key": "kana:katakana:ゲ",
+      "app": "kana",
+      "id": "katakana:ゲ",
+      "nativeId": "katakana:ゲ",
+      "jp": "ゲ",
+      "es": "ge",
+      "reading": "ゲ",
+      "romaji": "ge",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "15"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "ge"
+      ]
+    },
+    {
+      "key": "kana:katakana:ゴ",
+      "app": "kana",
+      "id": "katakana:ゴ",
+      "nativeId": "katakana:ゴ",
+      "jp": "ゴ",
+      "es": "go",
+      "reading": "ゴ",
+      "romaji": "go",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "15"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "go"
+      ]
+    },
+    {
+      "key": "kana:katakana:サ",
+      "app": "kana",
+      "id": "katakana:サ",
+      "nativeId": "katakana:サ",
+      "jp": "サ",
+      "es": "sa",
+      "reading": "サ",
+      "romaji": "sa",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "11",
+        "13",
+        "17",
+        "47"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "sa"
+      ]
+    },
+    {
+      "key": "kana:katakana:シ",
+      "app": "kana",
+      "id": "katakana:シ",
+      "nativeId": "katakana:シ",
+      "jp": "シ",
+      "es": "shi",
+      "reading": "シ",
+      "romaji": "shi",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "11",
+        "13",
+        "17",
+        "47"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "shi",
+        "si"
+      ]
+    },
+    {
+      "key": "kana:katakana:ス",
+      "app": "kana",
+      "id": "katakana:ス",
+      "nativeId": "katakana:ス",
+      "jp": "ス",
+      "es": "su",
+      "reading": "ス",
+      "romaji": "su",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "11",
+        "13",
+        "17",
+        "47"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "su"
+      ]
+    },
+    {
+      "key": "kana:katakana:セ",
+      "app": "kana",
+      "id": "katakana:セ",
+      "nativeId": "katakana:セ",
+      "jp": "セ",
+      "es": "se",
+      "reading": "セ",
+      "romaji": "se",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "11",
+        "13",
+        "17",
+        "47"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "se"
+      ]
+    },
+    {
+      "key": "kana:katakana:ソ",
+      "app": "kana",
+      "id": "katakana:ソ",
+      "nativeId": "katakana:ソ",
+      "jp": "ソ",
+      "es": "so",
+      "reading": "ソ",
+      "romaji": "so",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "11",
+        "13",
+        "17",
+        "47"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "so"
+      ]
+    },
+    {
+      "key": "kana:katakana:ザ",
+      "app": "kana",
+      "id": "katakana:ザ",
+      "nativeId": "katakana:ザ",
+      "jp": "ザ",
+      "es": "za",
+      "reading": "ザ",
+      "romaji": "za",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "15"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "za"
+      ]
+    },
+    {
+      "key": "kana:katakana:ジ",
+      "app": "kana",
+      "id": "katakana:ジ",
+      "nativeId": "katakana:ジ",
+      "jp": "ジ",
+      "es": "ji",
+      "reading": "ジ",
+      "romaji": "ji",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "15"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "ji",
+        "zi"
+      ]
+    },
+    {
+      "key": "kana:katakana:ズ",
+      "app": "kana",
+      "id": "katakana:ズ",
+      "nativeId": "katakana:ズ",
+      "jp": "ズ",
+      "es": "zu",
+      "reading": "ズ",
+      "romaji": "zu",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "15"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "zu"
+      ]
+    },
+    {
+      "key": "kana:katakana:ゼ",
+      "app": "kana",
+      "id": "katakana:ゼ",
+      "nativeId": "katakana:ゼ",
+      "jp": "ゼ",
+      "es": "ze",
+      "reading": "ゼ",
+      "romaji": "ze",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "15"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "ze"
+      ]
+    },
+    {
+      "key": "kana:katakana:ゾ",
+      "app": "kana",
+      "id": "katakana:ゾ",
+      "nativeId": "katakana:ゾ",
+      "jp": "ゾ",
+      "es": "zo",
+      "reading": "ゾ",
+      "romaji": "zo",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "15"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "zo"
+      ]
+    },
+    {
+      "key": "kana:katakana:タ",
+      "app": "kana",
+      "id": "katakana:タ",
+      "nativeId": "katakana:タ",
+      "jp": "タ",
+      "es": "ta",
+      "reading": "タ",
+      "romaji": "ta",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "12",
+        "17",
+        "47"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "ta"
+      ]
+    },
+    {
+      "key": "kana:katakana:チ",
+      "app": "kana",
+      "id": "katakana:チ",
+      "nativeId": "katakana:チ",
+      "jp": "チ",
+      "es": "chi",
+      "reading": "チ",
+      "romaji": "chi",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "12",
+        "17",
+        "47"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "chi"
+      ]
+    },
+    {
+      "key": "kana:katakana:ツ",
+      "app": "kana",
+      "id": "katakana:ツ",
+      "nativeId": "katakana:ツ",
+      "jp": "ツ",
+      "es": "tsu",
+      "reading": "ツ",
+      "romaji": "tsu",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "12",
+        "17",
+        "47"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "tsu"
+      ]
+    },
+    {
+      "key": "kana:katakana:テ",
+      "app": "kana",
+      "id": "katakana:テ",
+      "nativeId": "katakana:テ",
+      "jp": "テ",
+      "es": "te",
+      "reading": "テ",
+      "romaji": "te",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "12",
+        "17",
+        "47"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "te"
+      ]
+    },
+    {
+      "key": "kana:katakana:ト",
+      "app": "kana",
+      "id": "katakana:ト",
+      "nativeId": "katakana:ト",
+      "jp": "ト",
+      "es": "to",
+      "reading": "ト",
+      "romaji": "to",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "12",
+        "17",
+        "47"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "to"
+      ]
+    },
+    {
+      "key": "kana:katakana:ダ",
+      "app": "kana",
+      "id": "katakana:ダ",
+      "nativeId": "katakana:ダ",
+      "jp": "ダ",
+      "es": "da",
+      "reading": "ダ",
+      "romaji": "da",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "15"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "da"
+      ]
+    },
+    {
+      "key": "kana:katakana:デ",
+      "app": "kana",
+      "id": "katakana:デ",
+      "nativeId": "katakana:デ",
+      "jp": "デ",
+      "es": "de",
+      "reading": "デ",
+      "romaji": "de",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "15"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "de"
+      ]
+    },
+    {
+      "key": "kana:katakana:ド",
+      "app": "kana",
+      "id": "katakana:ド",
+      "nativeId": "katakana:ド",
+      "jp": "ド",
+      "es": "do",
+      "reading": "ド",
+      "romaji": "do",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "15"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "do"
+      ]
+    },
+    {
+      "key": "kana:katakana:ナ",
+      "app": "kana",
+      "id": "katakana:ナ",
+      "nativeId": "katakana:ナ",
+      "jp": "ナ",
+      "es": "na",
+      "reading": "ナ",
+      "romaji": "na",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "12",
+        "17",
+        "47"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "na"
+      ]
+    },
+    {
+      "key": "kana:katakana:ニ",
+      "app": "kana",
+      "id": "katakana:ニ",
+      "nativeId": "katakana:ニ",
+      "jp": "ニ",
+      "es": "ni",
+      "reading": "ニ",
+      "romaji": "ni",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "12",
+        "17",
+        "47"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "ni"
+      ]
+    },
+    {
+      "key": "kana:katakana:ヌ",
+      "app": "kana",
+      "id": "katakana:ヌ",
+      "nativeId": "katakana:ヌ",
+      "jp": "ヌ",
+      "es": "nu",
+      "reading": "ヌ",
+      "romaji": "nu",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "12",
+        "17",
+        "47"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "nu"
+      ]
+    },
+    {
+      "key": "kana:katakana:ネ",
+      "app": "kana",
+      "id": "katakana:ネ",
+      "nativeId": "katakana:ネ",
+      "jp": "ネ",
+      "es": "ne",
+      "reading": "ネ",
+      "romaji": "ne",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "12",
+        "17",
+        "47"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "ne"
+      ]
+    },
+    {
+      "key": "kana:katakana:ノ",
+      "app": "kana",
+      "id": "katakana:ノ",
+      "nativeId": "katakana:ノ",
+      "jp": "ノ",
+      "es": "no",
+      "reading": "ノ",
+      "romaji": "no",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "12",
+        "17",
+        "47"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "no"
+      ]
+    },
+    {
+      "key": "kana:katakana:ハ",
+      "app": "kana",
+      "id": "katakana:ハ",
+      "nativeId": "katakana:ハ",
+      "jp": "ハ",
+      "es": "ha",
+      "reading": "ハ",
+      "romaji": "ha",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "14",
+        "17",
+        "47"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "ha"
+      ]
+    },
+    {
+      "key": "kana:katakana:ヒ",
+      "app": "kana",
+      "id": "katakana:ヒ",
+      "nativeId": "katakana:ヒ",
+      "jp": "ヒ",
+      "es": "hi",
+      "reading": "ヒ",
+      "romaji": "hi",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "14",
+        "17",
+        "47"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "hi"
+      ]
+    },
+    {
+      "key": "kana:katakana:フ",
+      "app": "kana",
+      "id": "katakana:フ",
+      "nativeId": "katakana:フ",
+      "jp": "フ",
+      "es": "fu",
+      "reading": "フ",
+      "romaji": "fu",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "14",
+        "17",
+        "47"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "fu",
+        "hu"
+      ]
+    },
+    {
+      "key": "kana:katakana:ヘ",
+      "app": "kana",
+      "id": "katakana:ヘ",
+      "nativeId": "katakana:ヘ",
+      "jp": "ヘ",
+      "es": "he",
+      "reading": "ヘ",
+      "romaji": "he",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "14",
+        "17",
+        "47"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "he"
+      ]
+    },
+    {
+      "key": "kana:katakana:ホ",
+      "app": "kana",
+      "id": "katakana:ホ",
+      "nativeId": "katakana:ホ",
+      "jp": "ホ",
+      "es": "ho",
+      "reading": "ホ",
+      "romaji": "ho",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "14",
+        "17",
+        "47"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "ho"
+      ]
+    },
+    {
+      "key": "kana:katakana:バ",
+      "app": "kana",
+      "id": "katakana:バ",
+      "nativeId": "katakana:バ",
+      "jp": "バ",
+      "es": "ba",
+      "reading": "バ",
+      "romaji": "ba",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "15"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "ba"
+      ]
+    },
+    {
+      "key": "kana:katakana:ビ",
+      "app": "kana",
+      "id": "katakana:ビ",
+      "nativeId": "katakana:ビ",
+      "jp": "ビ",
+      "es": "bi",
+      "reading": "ビ",
+      "romaji": "bi",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "15"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "bi"
+      ]
+    },
+    {
+      "key": "kana:katakana:ブ",
+      "app": "kana",
+      "id": "katakana:ブ",
+      "nativeId": "katakana:ブ",
+      "jp": "ブ",
+      "es": "bu",
+      "reading": "ブ",
+      "romaji": "bu",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "15"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "bu"
+      ]
+    },
+    {
+      "key": "kana:katakana:ベ",
+      "app": "kana",
+      "id": "katakana:ベ",
+      "nativeId": "katakana:ベ",
+      "jp": "ベ",
+      "es": "be",
+      "reading": "ベ",
+      "romaji": "be",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "15"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "be"
+      ]
+    },
+    {
+      "key": "kana:katakana:ボ",
+      "app": "kana",
+      "id": "katakana:ボ",
+      "nativeId": "katakana:ボ",
+      "jp": "ボ",
+      "es": "bo",
+      "reading": "ボ",
+      "romaji": "bo",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "15"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "bo"
+      ]
+    },
+    {
+      "key": "kana:katakana:パ",
+      "app": "kana",
+      "id": "katakana:パ",
+      "nativeId": "katakana:パ",
+      "jp": "パ",
+      "es": "pa",
+      "reading": "パ",
+      "romaji": "pa",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "15"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "pa"
+      ]
+    },
+    {
+      "key": "kana:katakana:ピ",
+      "app": "kana",
+      "id": "katakana:ピ",
+      "nativeId": "katakana:ピ",
+      "jp": "ピ",
+      "es": "pi",
+      "reading": "ピ",
+      "romaji": "pi",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "15"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "pi"
+      ]
+    },
+    {
+      "key": "kana:katakana:プ",
+      "app": "kana",
+      "id": "katakana:プ",
+      "nativeId": "katakana:プ",
+      "jp": "プ",
+      "es": "pu",
+      "reading": "プ",
+      "romaji": "pu",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "15"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "pu"
+      ]
+    },
+    {
+      "key": "kana:katakana:ペ",
+      "app": "kana",
+      "id": "katakana:ペ",
+      "nativeId": "katakana:ペ",
+      "jp": "ペ",
+      "es": "pe",
+      "reading": "ペ",
+      "romaji": "pe",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "15"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "pe"
+      ]
+    },
+    {
+      "key": "kana:katakana:ポ",
+      "app": "kana",
+      "id": "katakana:ポ",
+      "nativeId": "katakana:ポ",
+      "jp": "ポ",
+      "es": "po",
+      "reading": "ポ",
+      "romaji": "po",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "15"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "po"
+      ]
+    },
+    {
+      "key": "kana:katakana:マ",
+      "app": "kana",
+      "id": "katakana:マ",
+      "nativeId": "katakana:マ",
+      "jp": "マ",
+      "es": "ma",
+      "reading": "マ",
+      "romaji": "ma",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "14",
+        "17",
+        "47"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "ma"
+      ]
+    },
+    {
+      "key": "kana:katakana:ミ",
+      "app": "kana",
+      "id": "katakana:ミ",
+      "nativeId": "katakana:ミ",
+      "jp": "ミ",
+      "es": "mi",
+      "reading": "ミ",
+      "romaji": "mi",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "14",
+        "17",
+        "47"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "mi"
+      ]
+    },
+    {
+      "key": "kana:katakana:ム",
+      "app": "kana",
+      "id": "katakana:ム",
+      "nativeId": "katakana:ム",
+      "jp": "ム",
+      "es": "mu",
+      "reading": "ム",
+      "romaji": "mu",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "14",
+        "17",
+        "47"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "mu"
+      ]
+    },
+    {
+      "key": "kana:katakana:メ",
+      "app": "kana",
+      "id": "katakana:メ",
+      "nativeId": "katakana:メ",
+      "jp": "メ",
+      "es": "me",
+      "reading": "メ",
+      "romaji": "me",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "14",
+        "17",
+        "47"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "me"
+      ]
+    },
+    {
+      "key": "kana:katakana:モ",
+      "app": "kana",
+      "id": "katakana:モ",
+      "nativeId": "katakana:モ",
+      "jp": "モ",
+      "es": "mo",
+      "reading": "モ",
+      "romaji": "mo",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "14",
+        "17",
+        "47"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "mo"
+      ]
+    },
+    {
+      "key": "kana:katakana:ヤ",
+      "app": "kana",
+      "id": "katakana:ヤ",
+      "nativeId": "katakana:ヤ",
+      "jp": "ヤ",
+      "es": "ya",
+      "reading": "ヤ",
+      "romaji": "ya",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "14",
+        "17",
+        "47"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "ya"
+      ]
+    },
+    {
+      "key": "kana:katakana:ユ",
+      "app": "kana",
+      "id": "katakana:ユ",
+      "nativeId": "katakana:ユ",
+      "jp": "ユ",
+      "es": "yu",
+      "reading": "ユ",
+      "romaji": "yu",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "14",
+        "17",
+        "47"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "yu"
+      ]
+    },
+    {
+      "key": "kana:katakana:ヨ",
+      "app": "kana",
+      "id": "katakana:ヨ",
+      "nativeId": "katakana:ヨ",
+      "jp": "ヨ",
+      "es": "yo",
+      "reading": "ヨ",
+      "romaji": "yo",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "14",
+        "17",
+        "47"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "yo"
+      ]
+    },
+    {
+      "key": "kana:katakana:ラ",
+      "app": "kana",
+      "id": "katakana:ラ",
+      "nativeId": "katakana:ラ",
+      "jp": "ラ",
+      "es": "ra",
+      "reading": "ラ",
+      "romaji": "ra",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "14",
+        "17",
+        "47"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "ra"
+      ]
+    },
+    {
+      "key": "kana:katakana:リ",
+      "app": "kana",
+      "id": "katakana:リ",
+      "nativeId": "katakana:リ",
+      "jp": "リ",
+      "es": "ri",
+      "reading": "リ",
+      "romaji": "ri",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "14",
+        "17",
+        "47"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "ri"
+      ]
+    },
+    {
+      "key": "kana:katakana:ル",
+      "app": "kana",
+      "id": "katakana:ル",
+      "nativeId": "katakana:ル",
+      "jp": "ル",
+      "es": "ru",
+      "reading": "ル",
+      "romaji": "ru",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "14",
+        "17",
+        "47"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "ru"
+      ]
+    },
+    {
+      "key": "kana:katakana:レ",
+      "app": "kana",
+      "id": "katakana:レ",
+      "nativeId": "katakana:レ",
+      "jp": "レ",
+      "es": "re",
+      "reading": "レ",
+      "romaji": "re",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "14",
+        "17",
+        "47"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "re"
+      ]
+    },
+    {
+      "key": "kana:katakana:ロ",
+      "app": "kana",
+      "id": "katakana:ロ",
+      "nativeId": "katakana:ロ",
+      "jp": "ロ",
+      "es": "ro",
+      "reading": "ロ",
+      "romaji": "ro",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "14",
+        "17",
+        "47"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "ro"
+      ]
+    },
+    {
+      "key": "kana:katakana:ワ",
+      "app": "kana",
+      "id": "katakana:ワ",
+      "nativeId": "katakana:ワ",
+      "jp": "ワ",
+      "es": "wa",
+      "reading": "ワ",
+      "romaji": "wa",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "14",
+        "17",
+        "47"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "wa"
+      ]
+    },
+    {
+      "key": "kana:katakana:ヲ",
+      "app": "kana",
+      "id": "katakana:ヲ",
+      "nativeId": "katakana:ヲ",
+      "jp": "ヲ",
+      "es": "wo",
+      "reading": "ヲ",
+      "romaji": "wo",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "14",
+        "17",
+        "47"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "wo",
+        "o"
+      ]
+    },
+    {
+      "key": "kana:katakana:ン",
+      "app": "kana",
+      "id": "katakana:ン",
+      "nativeId": "katakana:ン",
+      "jp": "ン",
+      "es": "n",
+      "reading": "ン",
+      "romaji": "n",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "14",
+        "17",
+        "47"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "n"
+      ]
+    },
+    {
+      "key": "kana:katakana:キャ",
+      "app": "kana",
+      "id": "katakana:キャ",
+      "nativeId": "katakana:キャ",
+      "jp": "キャ",
+      "es": "kya",
+      "reading": "キャ",
+      "romaji": "kya",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "16"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "kya"
+      ]
+    },
+    {
+      "key": "kana:katakana:キュ",
+      "app": "kana",
+      "id": "katakana:キュ",
+      "nativeId": "katakana:キュ",
+      "jp": "キュ",
+      "es": "kyu",
+      "reading": "キュ",
+      "romaji": "kyu",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "16"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "kyu"
+      ]
+    },
+    {
+      "key": "kana:katakana:キョ",
+      "app": "kana",
+      "id": "katakana:キョ",
+      "nativeId": "katakana:キョ",
+      "jp": "キョ",
+      "es": "kyo",
+      "reading": "キョ",
+      "romaji": "kyo",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "16"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "kyo"
+      ]
+    },
+    {
+      "key": "kana:katakana:シャ",
+      "app": "kana",
+      "id": "katakana:シャ",
+      "nativeId": "katakana:シャ",
+      "jp": "シャ",
+      "es": "sha",
+      "reading": "シャ",
+      "romaji": "sha",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "16"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "sha",
+        "sya"
+      ]
+    },
+    {
+      "key": "kana:katakana:シュ",
+      "app": "kana",
+      "id": "katakana:シュ",
+      "nativeId": "katakana:シュ",
+      "jp": "シュ",
+      "es": "shu",
+      "reading": "シュ",
+      "romaji": "shu",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "16"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "shu",
+        "syu"
+      ]
+    },
+    {
+      "key": "kana:katakana:ショ",
+      "app": "kana",
+      "id": "katakana:ショ",
+      "nativeId": "katakana:ショ",
+      "jp": "ショ",
+      "es": "sho",
+      "reading": "ショ",
+      "romaji": "sho",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "16"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "sho",
+        "syo"
+      ]
+    },
+    {
+      "key": "kana:katakana:チャ",
+      "app": "kana",
+      "id": "katakana:チャ",
+      "nativeId": "katakana:チャ",
+      "jp": "チャ",
+      "es": "cha",
+      "reading": "チャ",
+      "romaji": "cha",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "16"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "cha"
+      ]
+    },
+    {
+      "key": "kana:katakana:チュ",
+      "app": "kana",
+      "id": "katakana:チュ",
+      "nativeId": "katakana:チュ",
+      "jp": "チュ",
+      "es": "chu",
+      "reading": "チュ",
+      "romaji": "chu",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "16"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "chu"
+      ]
+    },
+    {
+      "key": "kana:katakana:チョ",
+      "app": "kana",
+      "id": "katakana:チョ",
+      "nativeId": "katakana:チョ",
+      "jp": "チョ",
+      "es": "cho",
+      "reading": "チョ",
+      "romaji": "cho",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "16"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "cho"
+      ]
+    },
+    {
+      "key": "kana:katakana:リャ",
+      "app": "kana",
+      "id": "katakana:リャ",
+      "nativeId": "katakana:リャ",
+      "jp": "リャ",
+      "es": "rya",
+      "reading": "リャ",
+      "romaji": "rya",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "16"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "rya"
+      ]
+    },
+    {
+      "key": "kana:katakana:リュ",
+      "app": "kana",
+      "id": "katakana:リュ",
+      "nativeId": "katakana:リュ",
+      "jp": "リュ",
+      "es": "ryu",
+      "reading": "リュ",
+      "romaji": "ryu",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "16"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "ryu"
+      ]
+    },
+    {
+      "key": "kana:katakana:リョ",
+      "app": "kana",
+      "id": "katakana:リョ",
+      "nativeId": "katakana:リョ",
+      "jp": "リョ",
+      "es": "ryo",
+      "reading": "リョ",
+      "romaji": "ryo",
+      "family": "kana",
+      "purpose": "Kana → romaji",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "16"
+      ],
+      "writePurpose": "Kana → romaji",
+      "acceptedReading": [
+        "ryo"
+      ]
+    },
+    {
+      "key": "jlpt:word-v1:[\"N5\",\"私\",\"watashi\"]",
+      "app": "jlpt",
+      "id": "word-v1:[\"N5\",\"私\",\"watashi\"]",
+      "nativeId": "word-v1:[\"N5\",\"私\",\"watashi\"]",
+      "jp": "私",
+      "es": "yo",
+      "reading": "わたし",
+      "romaji": "watashi",
+      "family": "vocabulary",
+      "purpose": "Japonés → significado",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "18",
+        "24",
+        "46"
+      ],
+      "source": "data/Vocabulario_N5.json"
+    },
+    {
+      "key": "jlpt:word-v1:[\"N5\",\"あなた\",\"anata\"]",
+      "app": "jlpt",
+      "id": "word-v1:[\"N5\",\"あなた\",\"anata\"]",
+      "nativeId": "word-v1:[\"N5\",\"あなた\",\"anata\"]",
+      "jp": "あなた",
+      "es": "tú, usted; cariño (la esposa al esposo)",
+      "reading": "あなた",
+      "romaji": "anata",
+      "family": "vocabulary",
+      "purpose": "Japonés → significado",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "18",
+        "24",
+        "46"
+      ],
+      "source": "data/Vocabulario_N5.json"
+    },
+    {
+      "key": "jlpt:word-v1:[\"N5\",\"先生\",\"sensei\"]",
+      "app": "jlpt",
+      "id": "word-v1:[\"N5\",\"先生\",\"sensei\"]",
+      "nativeId": "word-v1:[\"N5\",\"先生\",\"sensei\"]",
+      "jp": "先生",
+      "es": "profesor, maestro (también título de respeto)",
+      "reading": "せんせい",
+      "romaji": "sensei",
+      "family": "vocabulary",
+      "purpose": "Japonés → significado",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "18",
+        "24",
+        "46"
+      ],
+      "source": "data/Vocabulario_N5.json"
+    },
+    {
+      "key": "jlpt:word-v1:[\"N5\",\"学生\",\"gakusei\"]",
+      "app": "jlpt",
+      "id": "word-v1:[\"N5\",\"学生\",\"gakusei\"]",
+      "nativeId": "word-v1:[\"N5\",\"学生\",\"gakusei\"]",
+      "jp": "学生",
+      "es": "estudiante",
+      "reading": "がくせい",
+      "romaji": "gakusei",
+      "family": "vocabulary",
+      "purpose": "Japonés → significado",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "18",
+        "24",
+        "46"
+      ],
+      "source": "data/Vocabulario_N5.json"
+    },
+    {
+      "key": "jlpt:word-v1:[\"N5\",\"友達\",\"tomodachi\"]",
+      "app": "jlpt",
+      "id": "word-v1:[\"N5\",\"友達\",\"tomodachi\"]",
+      "nativeId": "word-v1:[\"N5\",\"友達\",\"tomodachi\"]",
+      "jp": "友達",
+      "es": "amigo",
+      "reading": "ともだち",
+      "romaji": "tomodachi",
+      "family": "vocabulary",
+      "purpose": "Japonés → significado",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "18",
+        "24",
+        "46"
+      ],
+      "source": "data/Vocabulario_N5.json"
+    },
+    {
+      "key": "jlpt:word-v1:[\"N5\",\"人\",\"hito\"]",
+      "app": "jlpt",
+      "id": "word-v1:[\"N5\",\"人\",\"hito\"]",
+      "nativeId": "word-v1:[\"N5\",\"人\",\"hito\"]",
+      "jp": "人",
+      "es": "persona",
+      "reading": "ひと",
+      "romaji": "hito",
+      "family": "vocabulary",
+      "purpose": "Japonés → significado",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "18",
+        "24",
+        "46"
+      ],
+      "source": "data/Vocabulario_N5.json"
+    },
+    {
+      "key": "jlpt:word-v1:[\"N5\",\"学校\",\"gakkou\"]",
+      "app": "jlpt",
+      "id": "word-v1:[\"N5\",\"学校\",\"gakkou\"]",
+      "nativeId": "word-v1:[\"N5\",\"学校\",\"gakkou\"]",
+      "jp": "学校",
+      "es": "escuela",
+      "reading": "がっこう",
+      "romaji": "gakkou",
+      "family": "vocabulary",
+      "purpose": "Japonés → significado",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "21",
+        "39",
+        "46"
+      ],
+      "source": "data/Vocabulario_N5.json"
+    },
+    {
+      "key": "jlpt:word-v1:[\"N5\",\"本\",\"hon\"]",
+      "app": "jlpt",
+      "id": "word-v1:[\"N5\",\"本\",\"hon\"]",
+      "nativeId": "word-v1:[\"N5\",\"本\",\"hon\"]",
+      "jp": "本",
+      "es": "libro",
+      "reading": "ほん",
+      "romaji": "hon",
+      "family": "vocabulary",
+      "purpose": "Japonés → significado",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "21",
+        "46"
+      ],
+      "source": "data/Vocabulario_N5.json"
+    },
+    {
+      "key": "jlpt:word-v1:[\"N5\",\"水\",\"mizu\"]",
+      "app": "jlpt",
+      "id": "word-v1:[\"N5\",\"水\",\"mizu\"]",
+      "nativeId": "word-v1:[\"N5\",\"水\",\"mizu\"]",
+      "jp": "水",
+      "es": "agua",
+      "reading": "みず",
+      "romaji": "mizu",
+      "family": "vocabulary",
+      "purpose": "Japonés → significado",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "21",
+        "36",
+        "46"
+      ],
+      "source": "data/Vocabulario_N5.json"
+    },
+    {
+      "key": "jlpt:word-v1:[\"N5\",\"お茶\",\"ocha\"]",
+      "app": "jlpt",
+      "id": "word-v1:[\"N5\",\"お茶\",\"ocha\"]",
+      "nativeId": "word-v1:[\"N5\",\"お茶\",\"ocha\"]",
+      "jp": "お茶",
+      "es": "té (suele ser té verde)",
+      "reading": "おちゃ",
+      "romaji": "ocha",
+      "family": "vocabulary",
+      "purpose": "Japonés → significado",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "21",
+        "36",
+        "46"
+      ],
+      "source": "data/Vocabulario_N5.json"
+    },
+    {
+      "key": "jlpt:word-v1:[\"N5\",\"猫\",\"neko\"]",
+      "app": "jlpt",
+      "id": "word-v1:[\"N5\",\"猫\",\"neko\"]",
+      "nativeId": "word-v1:[\"N5\",\"猫\",\"neko\"]",
+      "jp": "猫",
+      "es": "gato",
+      "reading": "ねこ",
+      "romaji": "neko",
+      "family": "vocabulary",
+      "purpose": "Japonés → significado",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "21",
+        "46"
+      ],
+      "source": "data/Vocabulario_N5.json"
+    },
+    {
+      "key": "jlpt:word-v1:[\"N5\",\"犬\",\"inu\"]",
+      "app": "jlpt",
+      "id": "word-v1:[\"N5\",\"犬\",\"inu\"]",
+      "nativeId": "word-v1:[\"N5\",\"犬\",\"inu\"]",
+      "jp": "犬",
+      "es": "perro",
+      "reading": "いぬ",
+      "romaji": "inu",
+      "family": "vocabulary",
+      "purpose": "Japonés → significado",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "21",
+        "46"
+      ],
+      "source": "data/Vocabulario_N5.json"
+    },
+    {
+      "key": "jlpt:word-v1:[\"N5\",\"これ\",\"kore\"]",
+      "app": "jlpt",
+      "id": "word-v1:[\"N5\",\"これ\",\"kore\"]",
+      "nativeId": "word-v1:[\"N5\",\"これ\",\"kore\"]",
+      "jp": "これ",
+      "es": "esto (cerca del hablante)",
+      "reading": "これ",
+      "romaji": "kore",
+      "family": "vocabulary",
+      "purpose": "Japonés → significado",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "22",
+        "44",
+        "46"
+      ],
+      "source": "data/Vocabulario_N5.json"
+    },
+    {
+      "key": "jlpt:word-v1:[\"N5\",\"それ\",\"sore\"]",
+      "app": "jlpt",
+      "id": "word-v1:[\"N5\",\"それ\",\"sore\"]",
+      "nativeId": "word-v1:[\"N5\",\"それ\",\"sore\"]",
+      "jp": "それ",
+      "es": "eso (cerca del oyente)",
+      "reading": "それ",
+      "romaji": "sore",
+      "family": "vocabulary",
+      "purpose": "Japonés → significado",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "22",
+        "44",
+        "46"
+      ],
+      "source": "data/Vocabulario_N5.json"
+    },
+    {
+      "key": "jlpt:word-v1:[\"N5\",\"あれ\",\"are\"]",
+      "app": "jlpt",
+      "id": "word-v1:[\"N5\",\"あれ\",\"are\"]",
+      "nativeId": "word-v1:[\"N5\",\"あれ\",\"are\"]",
+      "jp": "あれ",
+      "es": "eso, aquello (lejos del hablante y del oyente)",
+      "reading": "あれ",
+      "romaji": "are",
+      "family": "vocabulary",
+      "purpose": "Japonés → significado",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "22",
+        "46"
+      ],
+      "source": "data/Vocabulario_N5.json"
+    },
+    {
+      "key": "jlpt:word-v1:[\"N5\",\"ここ\",\"koko\"]",
+      "app": "jlpt",
+      "id": "word-v1:[\"N5\",\"ここ\",\"koko\"]",
+      "nativeId": "word-v1:[\"N5\",\"ここ\",\"koko\"]",
+      "jp": "ここ",
+      "es": "aquí, este lugar (cerca del hablante)",
+      "reading": "ここ",
+      "romaji": "koko",
+      "family": "vocabulary",
+      "purpose": "Japonés → significado",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "22",
+        "44",
+        "46"
+      ],
+      "source": "data/Vocabulario_N5.json"
+    },
+    {
+      "key": "jlpt:word-v1:[\"N5\",\"そこ\",\"soko\"]",
+      "app": "jlpt",
+      "id": "word-v1:[\"N5\",\"そこ\",\"soko\"]",
+      "nativeId": "word-v1:[\"N5\",\"そこ\",\"soko\"]",
+      "jp": "そこ",
+      "es": "ahí, ese lugar (cerca del oyente)",
+      "reading": "そこ",
+      "romaji": "soko",
+      "family": "vocabulary",
+      "purpose": "Japonés → significado",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "22",
+        "44",
+        "46"
+      ],
+      "source": "data/Vocabulario_N5.json"
+    },
+    {
+      "key": "jlpt:word-v1:[\"N5\",\"どこ\",\"doko\"]",
+      "app": "jlpt",
+      "id": "word-v1:[\"N5\",\"どこ\",\"doko\"]",
+      "nativeId": "word-v1:[\"N5\",\"どこ\",\"doko\"]",
+      "jp": "どこ",
+      "es": "¿dónde?",
+      "reading": "どこ",
+      "romaji": "doko",
+      "family": "vocabulary",
+      "purpose": "Japonés → significado",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "22",
+        "44",
+        "46"
+      ],
+      "source": "data/Vocabulario_N5.json"
+    },
+    {
+      "key": "jlpt:word-v1:[\"N5\",\"行く\",\"iku\"]",
+      "app": "jlpt",
+      "id": "word-v1:[\"N5\",\"行く\",\"iku\"]",
+      "nativeId": "word-v1:[\"N5\",\"行く\",\"iku\"]",
+      "jp": "行く",
+      "es": "ir",
+      "reading": "いく",
+      "romaji": "iku",
+      "family": "vocabulary",
+      "purpose": "Japonés → significado",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "25",
+        "46"
+      ],
+      "source": "data/Vocabulario_N5.json"
+    },
+    {
+      "key": "jlpt:word-v1:[\"N5\",\"来る\",\"kuru\"]",
+      "app": "jlpt",
+      "id": "word-v1:[\"N5\",\"来る\",\"kuru\"]",
+      "nativeId": "word-v1:[\"N5\",\"来る\",\"kuru\"]",
+      "jp": "来る",
+      "es": "venir (verbo irregular)",
+      "reading": "くる",
+      "romaji": "kuru",
+      "family": "vocabulary",
+      "purpose": "Japonés → significado",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "25",
+        "46"
+      ],
+      "source": "data/Vocabulario_N5.json"
+    },
+    {
+      "key": "jlpt:word-v1:[\"N5\",\"見る\",\"miru\"]",
+      "app": "jlpt",
+      "id": "word-v1:[\"N5\",\"見る\",\"miru\"]",
+      "nativeId": "word-v1:[\"N5\",\"見る\",\"miru\"]",
+      "jp": "見る",
+      "es": "ver, mirar",
+      "reading": "みる",
+      "romaji": "miru",
+      "family": "vocabulary",
+      "purpose": "Japonés → significado",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "25",
+        "46"
+      ],
+      "source": "data/Vocabulario_N5.json"
+    },
+    {
+      "key": "jlpt:word-v1:[\"N5\",\"聞く\",\"kiku\"]",
+      "app": "jlpt",
+      "id": "word-v1:[\"N5\",\"聞く\",\"kiku\"]",
+      "nativeId": "word-v1:[\"N5\",\"聞く\",\"kiku\"]",
+      "jp": "聞く",
+      "es": "escuchar, preguntar",
+      "reading": "きく",
+      "romaji": "kiku",
+      "family": "vocabulary",
+      "purpose": "Japonés → significado",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "25",
+        "46"
+      ],
+      "source": "data/Vocabulario_N5.json"
+    },
+    {
+      "key": "jlpt:word-v1:[\"N5\",\"読む\",\"yomu\"]",
+      "app": "jlpt",
+      "id": "word-v1:[\"N5\",\"読む\",\"yomu\"]",
+      "nativeId": "word-v1:[\"N5\",\"読む\",\"yomu\"]",
+      "jp": "読む",
+      "es": "leer",
+      "reading": "よむ",
+      "romaji": "yomu",
+      "family": "vocabulary",
+      "purpose": "Japonés → significado",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "25",
+        "46"
+      ],
+      "source": "data/Vocabulario_N5.json"
+    },
+    {
+      "key": "jlpt:word-v1:[\"N5\",\"書く\",\"kaku\"]",
+      "app": "jlpt",
+      "id": "word-v1:[\"N5\",\"書く\",\"kaku\"]",
+      "nativeId": "word-v1:[\"N5\",\"書く\",\"kaku\"]",
+      "jp": "書く",
+      "es": "escribir (transitivo)",
+      "reading": "かく",
+      "romaji": "kaku",
+      "family": "vocabulary",
+      "purpose": "Japonés → significado",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "25",
+        "46"
+      ],
+      "source": "data/Vocabulario_N5.json"
+    },
+    {
+      "key": "jlpt:word-v1:[\"N5\",\"朝\",\"asa\"]",
+      "app": "jlpt",
+      "id": "word-v1:[\"N5\",\"朝\",\"asa\"]",
+      "nativeId": "word-v1:[\"N5\",\"朝\",\"asa\"]",
+      "jp": "朝",
+      "es": "mañana (parte del día)",
+      "reading": "あさ",
+      "romaji": "asa",
+      "family": "vocabulary",
+      "purpose": "Japonés → significado",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "27",
+        "46"
+      ],
+      "source": "data/Vocabulario_N5.json"
+    },
+    {
+      "key": "jlpt:word-v1:[\"N5\",\"昼\",\"hiru\"]",
+      "app": "jlpt",
+      "id": "word-v1:[\"N5\",\"昼\",\"hiru\"]",
+      "nativeId": "word-v1:[\"N5\",\"昼\",\"hiru\"]",
+      "jp": "昼",
+      "es": "mediodía, parte diurna del día",
+      "reading": "ひる",
+      "romaji": "hiru",
+      "family": "vocabulary",
+      "purpose": "Japonés → significado",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "27",
+        "46"
+      ],
+      "source": "data/Vocabulario_N5.json"
+    },
+    {
+      "key": "jlpt:word-v1:[\"N5\",\"夜\",\"yoru\"]",
+      "app": "jlpt",
+      "id": "word-v1:[\"N5\",\"夜\",\"yoru\"]",
+      "nativeId": "word-v1:[\"N5\",\"夜\",\"yoru\"]",
+      "jp": "夜",
+      "es": "noche",
+      "reading": "よる",
+      "romaji": "yoru",
+      "family": "vocabulary",
+      "purpose": "Japonés → significado",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "27",
+        "46"
+      ],
+      "source": "data/Vocabulario_N5.json"
+    },
+    {
+      "key": "jlpt:word-v1:[\"N5\",\"今日\",\"kyou\"]",
+      "app": "jlpt",
+      "id": "word-v1:[\"N5\",\"今日\",\"kyou\"]",
+      "nativeId": "word-v1:[\"N5\",\"今日\",\"kyou\"]",
+      "jp": "今日",
+      "es": "hoy",
+      "reading": "きょう",
+      "romaji": "kyou",
+      "family": "vocabulary",
+      "purpose": "Japonés → significado",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "27",
+        "46"
+      ],
+      "source": "data/Vocabulario_N5.json"
+    },
+    {
+      "key": "jlpt:word-v1:[\"N5\",\"明日\",\"ashita\"]",
+      "app": "jlpt",
+      "id": "word-v1:[\"N5\",\"明日\",\"ashita\"]",
+      "nativeId": "word-v1:[\"N5\",\"明日\",\"ashita\"]",
+      "jp": "明日",
+      "es": "mañana (el día siguiente)",
+      "reading": "あした",
+      "romaji": "ashita",
+      "family": "vocabulary",
+      "purpose": "Japonés → significado",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "27",
+        "46"
+      ],
+      "source": "data/Vocabulario_N5.json"
+    },
+    {
+      "key": "jlpt:word-v1:[\"N5\",\"昨日\",\"kinou\"]",
+      "app": "jlpt",
+      "id": "word-v1:[\"N5\",\"昨日\",\"kinou\"]",
+      "nativeId": "word-v1:[\"N5\",\"昨日\",\"kinou\"]",
+      "jp": "昨日",
+      "es": "ayer (el día anterior)",
+      "reading": "きのう",
+      "romaji": "kinou",
+      "family": "vocabulary",
+      "purpose": "Japonés → significado",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "27",
+        "46"
+      ],
+      "source": "data/Vocabulario_N5.json"
+    },
+    {
+      "key": "jlpt:word-v1:[\"N5\",\"大きい\",\"oukii\"]",
+      "app": "jlpt",
+      "id": "word-v1:[\"N5\",\"大きい\",\"oukii\"]",
+      "nativeId": "word-v1:[\"N5\",\"大きい\",\"oukii\"]",
+      "jp": "大きい",
+      "es": "grande",
+      "reading": "おおきい",
+      "romaji": "oukii",
+      "family": "vocabulary",
+      "purpose": "Japonés → significado",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "30",
+        "46"
+      ],
+      "source": "data/Vocabulario_N5.json"
+    },
+    {
+      "key": "jlpt:word-v1:[\"N5\",\"小さい\",\"chiisai\"]",
+      "app": "jlpt",
+      "id": "word-v1:[\"N5\",\"小さい\",\"chiisai\"]",
+      "nativeId": "word-v1:[\"N5\",\"小さい\",\"chiisai\"]",
+      "jp": "小さい",
+      "es": "pequeño (adjetivo -i)",
+      "reading": "ちいさい",
+      "romaji": "chiisai",
+      "family": "vocabulary",
+      "purpose": "Japonés → significado",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "30",
+        "46"
+      ],
+      "source": "data/Vocabulario_N5.json"
+    },
+    {
+      "key": "jlpt:word-v1:[\"N5\",\"新しい\",\"atarashii\"]",
+      "app": "jlpt",
+      "id": "word-v1:[\"N5\",\"新しい\",\"atarashii\"]",
+      "nativeId": "word-v1:[\"N5\",\"新しい\",\"atarashii\"]",
+      "jp": "新しい",
+      "es": "nuevo",
+      "reading": "あたらしい",
+      "romaji": "atarashii",
+      "family": "vocabulary",
+      "purpose": "Japonés → significado",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "30",
+        "46"
+      ],
+      "source": "data/Vocabulario_N5.json"
+    },
+    {
+      "key": "jlpt:word-v1:[\"N5\",\"古い\",\"furui\"]",
+      "app": "jlpt",
+      "id": "word-v1:[\"N5\",\"古い\",\"furui\"]",
+      "nativeId": "word-v1:[\"N5\",\"古い\",\"furui\"]",
+      "jp": "古い",
+      "es": "viejo, antiguo (cosas — no personas)",
+      "reading": "ふるい",
+      "romaji": "furui",
+      "family": "vocabulary",
+      "purpose": "Japonés → significado",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "30",
+        "46"
+      ],
+      "source": "data/Vocabulario_N5.json"
+    },
+    {
+      "key": "jlpt:word-v1:[\"N5\",\"高い\",\"takai\"]",
+      "app": "jlpt",
+      "id": "word-v1:[\"N5\",\"高い\",\"takai\"]",
+      "nativeId": "word-v1:[\"N5\",\"高い\",\"takai\"]",
+      "jp": "高い",
+      "es": "alto, caro",
+      "reading": "たかい",
+      "romaji": "takai",
+      "family": "vocabulary",
+      "purpose": "Japonés → significado",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "30",
+        "46"
+      ],
+      "source": "data/Vocabulario_N5.json"
+    },
+    {
+      "key": "jlpt:word-v1:[\"N5\",\"安い\",\"yasui\"]",
+      "app": "jlpt",
+      "id": "word-v1:[\"N5\",\"安い\",\"yasui\"]",
+      "nativeId": "word-v1:[\"N5\",\"安い\",\"yasui\"]",
+      "jp": "安い",
+      "es": "barato, económico",
+      "reading": "やすい",
+      "romaji": "yasui",
+      "family": "vocabulary",
+      "purpose": "Japonés → significado",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "30",
+        "46"
+      ],
+      "source": "data/Vocabulario_N5.json"
+    },
+    {
+      "key": "jlpt:word-v1:[\"N5\",\"家\",\"ie\"]",
+      "app": "jlpt",
+      "id": "word-v1:[\"N5\",\"家\",\"ie\"]",
+      "nativeId": "word-v1:[\"N5\",\"家\",\"ie\"]",
+      "jp": "家",
+      "es": "casa (lugar físico)",
+      "reading": "いえ",
+      "romaji": "ie",
+      "family": "vocabulary",
+      "purpose": "Japonés → significado",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "31",
+        "39",
+        "46"
+      ],
+      "source": "data/Vocabulario_N5.json"
+    },
+    {
+      "key": "jlpt:word-v1:[\"N5\",\"部屋\",\"heya\"]",
+      "app": "jlpt",
+      "id": "word-v1:[\"N5\",\"部屋\",\"heya\"]",
+      "nativeId": "word-v1:[\"N5\",\"部屋\",\"heya\"]",
+      "jp": "部屋",
+      "es": "habitación",
+      "reading": "へや",
+      "romaji": "heya",
+      "family": "vocabulary",
+      "purpose": "Japonés → significado",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "31",
+        "46"
+      ],
+      "source": "data/Vocabulario_N5.json"
+    },
+    {
+      "key": "jlpt:word-v1:[\"N5\",\"駅\",\"eki\"]",
+      "app": "jlpt",
+      "id": "word-v1:[\"N5\",\"駅\",\"eki\"]",
+      "nativeId": "word-v1:[\"N5\",\"駅\",\"eki\"]",
+      "jp": "駅",
+      "es": "estación (de tren o metro)",
+      "reading": "えき",
+      "romaji": "eki",
+      "family": "vocabulary",
+      "purpose": "Japonés → significado",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "31",
+        "39",
+        "46"
+      ],
+      "source": "data/Vocabulario_N5.json"
+    },
+    {
+      "key": "jlpt:word-v1:[\"N5\",\"店\",\"mise\"]",
+      "app": "jlpt",
+      "id": "word-v1:[\"N5\",\"店\",\"mise\"]",
+      "nativeId": "word-v1:[\"N5\",\"店\",\"mise\"]",
+      "jp": "店",
+      "es": "tienda, negocio (lugar físico)",
+      "reading": "みせ",
+      "romaji": "mise",
+      "family": "vocabulary",
+      "purpose": "Japonés → significado",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "31",
+        "46"
+      ],
+      "source": "data/Vocabulario_N5.json"
+    },
+    {
+      "key": "jlpt:word-v1:[\"N5\",\"病院\",\"byouin\"]",
+      "app": "jlpt",
+      "id": "word-v1:[\"N5\",\"病院\",\"byouin\"]",
+      "nativeId": "word-v1:[\"N5\",\"病院\",\"byouin\"]",
+      "jp": "病院",
+      "es": "hospital",
+      "reading": "びょういん",
+      "romaji": "byouin",
+      "family": "vocabulary",
+      "purpose": "Japonés → significado",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "31",
+        "46"
+      ],
+      "source": "data/Vocabulario_N5.json"
+    },
+    {
+      "key": "jlpt:word-v1:[\"N5\",\"銀行\",\"ginkou\"]",
+      "app": "jlpt",
+      "id": "word-v1:[\"N5\",\"銀行\",\"ginkou\"]",
+      "nativeId": "word-v1:[\"N5\",\"銀行\",\"ginkou\"]",
+      "jp": "銀行",
+      "es": "banco (institución financiera)",
+      "reading": "ぎんこう",
+      "romaji": "ginkou",
+      "family": "vocabulary",
+      "purpose": "Japonés → significado",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "31",
+        "46"
+      ],
+      "source": "data/Vocabulario_N5.json"
+    },
+    {
+      "key": "jlpt:word-v1:[\"N5\",\"月曜日\",\"getsuyoubi\"]",
+      "app": "jlpt",
+      "id": "word-v1:[\"N5\",\"月曜日\",\"getsuyoubi\"]",
+      "nativeId": "word-v1:[\"N5\",\"月曜日\",\"getsuyoubi\"]",
+      "jp": "月曜日",
+      "es": "lunes (día de la luna)",
+      "reading": "げつようび",
+      "romaji": "getsuyoubi",
+      "family": "vocabulary",
+      "purpose": "Japonés → significado",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "34",
+        "46"
+      ],
+      "source": "data/Vocabulario_N5.json"
+    },
+    {
+      "key": "jlpt:word-v1:[\"N5\",\"火曜日\",\"kayoubi\"]",
+      "app": "jlpt",
+      "id": "word-v1:[\"N5\",\"火曜日\",\"kayoubi\"]",
+      "nativeId": "word-v1:[\"N5\",\"火曜日\",\"kayoubi\"]",
+      "jp": "火曜日",
+      "es": "martes (día del fuego)",
+      "reading": "かようび",
+      "romaji": "kayoubi",
+      "family": "vocabulary",
+      "purpose": "Japonés → significado",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "34",
+        "46"
+      ],
+      "source": "data/Vocabulario_N5.json"
+    },
+    {
+      "key": "jlpt:word-v1:[\"N5\",\"水曜日\",\"suiyoubi\"]",
+      "app": "jlpt",
+      "id": "word-v1:[\"N5\",\"水曜日\",\"suiyoubi\"]",
+      "nativeId": "word-v1:[\"N5\",\"水曜日\",\"suiyoubi\"]",
+      "jp": "水曜日",
+      "es": "miércoles (día del agua)",
+      "reading": "すいようび",
+      "romaji": "suiyoubi",
+      "family": "vocabulary",
+      "purpose": "Japonés → significado",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "34",
+        "46"
+      ],
+      "source": "data/Vocabulario_N5.json"
+    },
+    {
+      "key": "jlpt:word-v1:[\"N5\",\"木曜日\",\"mokuyoubi\"]",
+      "app": "jlpt",
+      "id": "word-v1:[\"N5\",\"木曜日\",\"mokuyoubi\"]",
+      "nativeId": "word-v1:[\"N5\",\"木曜日\",\"mokuyoubi\"]",
+      "jp": "木曜日",
+      "es": "jueves (día de la madera)",
+      "reading": "もくようび",
+      "romaji": "mokuyoubi",
+      "family": "vocabulary",
+      "purpose": "Japonés → significado",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "34",
+        "46"
+      ],
+      "source": "data/Vocabulario_N5.json"
+    },
+    {
+      "key": "jlpt:word-v1:[\"N5\",\"金曜日\",\"kinyoubi\"]",
+      "app": "jlpt",
+      "id": "word-v1:[\"N5\",\"金曜日\",\"kinyoubi\"]",
+      "nativeId": "word-v1:[\"N5\",\"金曜日\",\"kinyoubi\"]",
+      "jp": "金曜日",
+      "es": "viernes (día del metal)",
+      "reading": "きんようび",
+      "romaji": "kinyoubi",
+      "family": "vocabulary",
+      "purpose": "Japonés → significado",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "34",
+        "46"
+      ],
+      "source": "data/Vocabulario_N5.json"
+    },
+    {
+      "key": "jlpt:word-v1:[\"N5\",\"土曜日\",\"doyoubi\"]",
+      "app": "jlpt",
+      "id": "word-v1:[\"N5\",\"土曜日\",\"doyoubi\"]",
+      "nativeId": "word-v1:[\"N5\",\"土曜日\",\"doyoubi\"]",
+      "jp": "土曜日",
+      "es": "sábado (día de la tierra)",
+      "reading": "どようび",
+      "romaji": "doyoubi",
+      "family": "vocabulary",
+      "purpose": "Japonés → significado",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "34",
+        "46"
+      ],
+      "source": "data/Vocabulario_N5.json"
+    },
+    {
+      "key": "jlpt:word-v1:[\"N5\",\"日曜日\",\"nichiyoubi\"]",
+      "app": "jlpt",
+      "id": "word-v1:[\"N5\",\"日曜日\",\"nichiyoubi\"]",
+      "nativeId": "word-v1:[\"N5\",\"日曜日\",\"nichiyoubi\"]",
+      "jp": "日曜日",
+      "es": "domingo (día del sol)",
+      "reading": "にちようび",
+      "romaji": "nichiyoubi",
+      "family": "vocabulary",
+      "purpose": "Japonés → significado",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "34",
+        "46"
+      ],
+      "source": "data/Vocabulario_N5.json"
+    },
+    {
+      "key": "jlpt:word-v1:[\"N5\",\"食べる\",\"taberu\"]",
+      "app": "jlpt",
+      "id": "word-v1:[\"N5\",\"食べる\",\"taberu\"]",
+      "nativeId": "word-v1:[\"N5\",\"食べる\",\"taberu\"]",
+      "jp": "食べる",
+      "es": "comer (transitivo)",
+      "reading": "たべる",
+      "romaji": "taberu",
+      "family": "vocabulary",
+      "purpose": "Japonés → significado",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "36",
+        "46"
+      ],
+      "source": "data/Vocabulario_N5.json"
+    },
+    {
+      "key": "jlpt:word-v1:[\"N5\",\"飲む\",\"nomu\"]",
+      "app": "jlpt",
+      "id": "word-v1:[\"N5\",\"飲む\",\"nomu\"]",
+      "nativeId": "word-v1:[\"N5\",\"飲む\",\"nomu\"]",
+      "jp": "飲む",
+      "es": "beber, tomar (líquidos)",
+      "reading": "のむ",
+      "romaji": "nomu",
+      "family": "vocabulary",
+      "purpose": "Japonés → significado",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "36",
+        "46"
+      ],
+      "source": "data/Vocabulario_N5.json"
+    },
+    {
+      "key": "jlpt:word-v1:[\"N5\",\"魚\",\"sakana\"]",
+      "app": "jlpt",
+      "id": "word-v1:[\"N5\",\"魚\",\"sakana\"]",
+      "nativeId": "word-v1:[\"N5\",\"魚\",\"sakana\"]",
+      "jp": "魚",
+      "es": "pez, pescado",
+      "reading": "さかな",
+      "romaji": "sakana",
+      "family": "vocabulary",
+      "purpose": "Japonés → significado",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "36",
+        "46"
+      ],
+      "source": "data/Vocabulario_N5.json"
+    },
+    {
+      "key": "jlpt:word-v1:[\"N5\",\"ご飯\",\"gohan\"]",
+      "app": "jlpt",
+      "id": "word-v1:[\"N5\",\"ご飯\",\"gohan\"]",
+      "nativeId": "word-v1:[\"N5\",\"ご飯\",\"gohan\"]",
+      "jp": "ご飯",
+      "es": "arroz (cocido); comida (en general)",
+      "reading": "ごはん",
+      "romaji": "gohan",
+      "family": "vocabulary",
+      "purpose": "Japonés → significado",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "36",
+        "46"
+      ],
+      "source": "data/Vocabulario_N5.json"
+    },
+    {
+      "key": "jlpt:word-v1:[\"N5\",\"会社\",\"kaisha\"]",
+      "app": "jlpt",
+      "id": "word-v1:[\"N5\",\"会社\",\"kaisha\"]",
+      "nativeId": "word-v1:[\"N5\",\"会社\",\"kaisha\"]",
+      "jp": "会社",
+      "es": "compañía, empresa",
+      "reading": "かいしゃ",
+      "romaji": "kaisha",
+      "family": "vocabulary",
+      "purpose": "Japonés → significado",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "39",
+        "46"
+      ],
+      "source": "data/Vocabulario_N5.json"
+    },
+    {
+      "key": "jlpt:word-v1:[\"N5\",\"車\",\"kuruma\"]",
+      "app": "jlpt",
+      "id": "word-v1:[\"N5\",\"車\",\"kuruma\"]",
+      "nativeId": "word-v1:[\"N5\",\"車\",\"kuruma\"]",
+      "jp": "車",
+      "es": "carro, coche (uso habitual)",
+      "reading": "くるま",
+      "romaji": "kuruma",
+      "family": "vocabulary",
+      "purpose": "Japonés → significado",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "39",
+        "46"
+      ],
+      "source": "data/Vocabulario_N5.json"
+    },
+    {
+      "key": "jlpt:word-v1:[\"N5\",\"電車\",\"densha\"]",
+      "app": "jlpt",
+      "id": "word-v1:[\"N5\",\"電車\",\"densha\"]",
+      "nativeId": "word-v1:[\"N5\",\"電車\",\"densha\"]",
+      "jp": "電車",
+      "es": "tren (eléctrico)",
+      "reading": "でんしゃ",
+      "romaji": "densha",
+      "family": "vocabulary",
+      "purpose": "Japonés → significado",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "39",
+        "46"
+      ],
+      "source": "data/Vocabulario_N5.json"
+    },
+    {
+      "key": "jlpt:word-v1:[\"N5\",\"何\",\"nani\"]",
+      "app": "jlpt",
+      "id": "word-v1:[\"N5\",\"何\",\"nani\"]",
+      "nativeId": "word-v1:[\"N5\",\"何\",\"nani\"]",
+      "jp": "何",
+      "es": "¿qué?",
+      "reading": "なに",
+      "romaji": "nani",
+      "family": "vocabulary",
+      "purpose": "Japonés → significado",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "44",
+        "46"
+      ],
+      "source": "data/Vocabulario_N5.json"
+    },
+    {
+      "key": "kanji:一",
+      "app": "kanji",
+      "id": "一",
+      "nativeId": "一",
+      "jp": "一",
+      "es": "1",
+      "reading": "ひと",
+      "romaji": "",
+      "family": "kanji",
+      "purpose": "Kanji → significado",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "19",
+        "20",
+        "50"
+      ],
+      "source": "kanji.html#kanji-data",
+      "acceptedReading": [
+        "ひと",
+        "ひとつ"
+      ],
+      "writePurpose": "Lectura kun"
+    },
+    {
+      "key": "kanji:二",
+      "app": "kanji",
+      "id": "二",
+      "nativeId": "二",
+      "jp": "二",
+      "es": "2",
+      "reading": "ふた",
+      "romaji": "",
+      "family": "kanji",
+      "purpose": "Kanji → significado",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "19",
+        "20",
+        "50"
+      ],
+      "source": "kanji.html#kanji-data",
+      "acceptedReading": [
+        "ふた",
+        "ふたつ",
+        "ふたたび"
+      ],
+      "writePurpose": "Lectura kun"
+    },
+    {
+      "key": "kanji:三",
+      "app": "kanji",
+      "id": "三",
+      "nativeId": "三",
+      "jp": "三",
+      "es": "3",
+      "reading": "み",
+      "romaji": "",
+      "family": "kanji",
+      "purpose": "Kanji → significado",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "19",
+        "20",
+        "50"
+      ],
+      "source": "kanji.html#kanji-data",
+      "acceptedReading": [
+        "み",
+        "みつ",
+        "みっつ"
+      ],
+      "writePurpose": "Lectura kun"
+    },
+    {
+      "key": "kanji:四",
+      "app": "kanji",
+      "id": "四",
+      "nativeId": "四",
+      "jp": "四",
+      "es": "4",
+      "reading": "よ",
+      "romaji": "",
+      "family": "kanji",
+      "purpose": "Kanji → significado",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "19",
+        "20",
+        "50"
+      ],
+      "source": "kanji.html#kanji-data",
+      "acceptedReading": [
+        "よ",
+        "よつ",
+        "よっつ",
+        "よん"
+      ],
+      "writePurpose": "Lectura kun"
+    },
+    {
+      "key": "kanji:五",
+      "app": "kanji",
+      "id": "五",
+      "nativeId": "五",
+      "jp": "五",
+      "es": "5",
+      "reading": "いつ",
+      "romaji": "",
+      "family": "kanji",
+      "purpose": "Kanji → significado",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "19",
+        "20",
+        "50"
+      ],
+      "source": "kanji.html#kanji-data",
+      "acceptedReading": [
+        "いつ",
+        "いつつ"
+      ],
+      "writePurpose": "Lectura kun"
+    },
+    {
+      "key": "kanji:六",
+      "app": "kanji",
+      "id": "六",
+      "nativeId": "六",
+      "jp": "六",
+      "es": "6",
+      "reading": "む",
+      "romaji": "",
+      "family": "kanji",
+      "purpose": "Kanji → significado",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "19",
+        "20",
+        "50"
+      ],
+      "source": "kanji.html#kanji-data",
+      "acceptedReading": [
+        "む",
+        "むつ",
+        "むっつ",
+        "むい"
+      ],
+      "writePurpose": "Lectura kun"
+    },
+    {
+      "key": "kanji:七",
+      "app": "kanji",
+      "id": "七",
+      "nativeId": "七",
+      "jp": "七",
+      "es": "7",
+      "reading": "なな",
+      "romaji": "",
+      "family": "kanji",
+      "purpose": "Kanji → significado",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "19",
+        "20",
+        "50"
+      ],
+      "source": "kanji.html#kanji-data",
+      "acceptedReading": [
+        "なな",
+        "ななつ",
+        "なの"
+      ],
+      "writePurpose": "Lectura kun"
+    },
+    {
+      "key": "kanji:八",
+      "app": "kanji",
+      "id": "八",
+      "nativeId": "八",
+      "jp": "八",
+      "es": "8",
+      "reading": "や",
+      "romaji": "",
+      "family": "kanji",
+      "purpose": "Kanji → significado",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "19",
+        "20",
+        "50"
+      ],
+      "source": "kanji.html#kanji-data",
+      "acceptedReading": [
+        "や",
+        "やつ",
+        "やっつ",
+        "よう"
+      ],
+      "writePurpose": "Lectura kun"
+    },
+    {
+      "key": "kanji:九",
+      "app": "kanji",
+      "id": "九",
+      "nativeId": "九",
+      "jp": "九",
+      "es": "9",
+      "reading": "ここの",
+      "romaji": "",
+      "family": "kanji",
+      "purpose": "Kanji → significado",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "19",
+        "20",
+        "50"
+      ],
+      "source": "kanji.html#kanji-data",
+      "acceptedReading": [
+        "ここの",
+        "ここのつ"
+      ],
+      "writePurpose": "Lectura kun"
+    },
+    {
+      "key": "kanji:十",
+      "app": "kanji",
+      "id": "十",
+      "nativeId": "十",
+      "jp": "十",
+      "es": "10",
+      "reading": "とお",
+      "romaji": "",
+      "family": "kanji",
+      "purpose": "Kanji → significado",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "19",
+        "20",
+        "50"
+      ],
+      "source": "kanji.html#kanji-data",
+      "acceptedReading": [
+        "とお",
+        "と",
+        "そ"
+      ],
+      "writePurpose": "Lectura kun"
+    },
+    {
+      "key": "kanji:日",
+      "app": "kanji",
+      "id": "日",
+      "nativeId": "日",
+      "jp": "日",
+      "es": "día, sol",
+      "reading": "ひ",
+      "romaji": "",
+      "family": "kanji",
+      "purpose": "Kanji → significado",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "26",
+        "29",
+        "50"
+      ],
+      "source": "kanji.html#kanji-data",
+      "acceptedReading": [
+        "ひ",
+        "び",
+        "か"
+      ],
+      "writePurpose": "Lectura kun"
+    },
+    {
+      "key": "kanji:月",
+      "app": "kanji",
+      "id": "月",
+      "nativeId": "月",
+      "jp": "月",
+      "es": "luna, mes",
+      "reading": "つき",
+      "romaji": "",
+      "family": "kanji",
+      "purpose": "Kanji → significado",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "26",
+        "29",
+        "50"
+      ],
+      "source": "kanji.html#kanji-data",
+      "acceptedReading": [
+        "つき"
+      ],
+      "writePurpose": "Lectura kun"
+    },
+    {
+      "key": "kanji:火",
+      "app": "kanji",
+      "id": "火",
+      "nativeId": "火",
+      "jp": "火",
+      "es": "fuego",
+      "reading": "ひ",
+      "romaji": "",
+      "family": "kanji",
+      "purpose": "Kanji → significado",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "26",
+        "29",
+        "50"
+      ],
+      "source": "kanji.html#kanji-data",
+      "acceptedReading": [
+        "ひ",
+        "び",
+        "ほ"
+      ],
+      "writePurpose": "Lectura kun"
+    },
+    {
+      "key": "kanji:水",
+      "app": "kanji",
+      "id": "水",
+      "nativeId": "水",
+      "jp": "水",
+      "es": "agua",
+      "reading": "みず",
+      "romaji": "",
+      "family": "kanji",
+      "purpose": "Kanji → significado",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "26",
+        "29",
+        "50"
+      ],
+      "source": "kanji.html#kanji-data",
+      "acceptedReading": [
+        "みず",
+        "みず"
+      ],
+      "writePurpose": "Lectura kun"
+    },
+    {
+      "key": "kanji:木",
+      "app": "kanji",
+      "id": "木",
+      "nativeId": "木",
+      "jp": "木",
+      "es": "árbol, madera",
+      "reading": "き",
+      "romaji": "",
+      "family": "kanji",
+      "purpose": "Kanji → significado",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "26",
+        "29",
+        "50"
+      ],
+      "source": "kanji.html#kanji-data",
+      "acceptedReading": [
+        "き",
+        "こ"
+      ],
+      "writePurpose": "Lectura kun"
+    },
+    {
+      "key": "kanji:金",
+      "app": "kanji",
+      "id": "金",
+      "nativeId": "金",
+      "jp": "金",
+      "es": "oro, metal, dinero",
+      "reading": "かね",
+      "romaji": "",
+      "family": "kanji",
+      "purpose": "Kanji → significado",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "26",
+        "29",
+        "50"
+      ],
+      "source": "kanji.html#kanji-data",
+      "acceptedReading": [
+        "かね",
+        "かな",
+        "がね"
+      ],
+      "writePurpose": "Lectura kun"
+    },
+    {
+      "key": "kanji:土",
+      "app": "kanji",
+      "id": "土",
+      "nativeId": "土",
+      "jp": "土",
+      "es": "tierra, suelo",
+      "reading": "つち",
+      "romaji": "",
+      "family": "kanji",
+      "purpose": "Kanji → significado",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "26",
+        "29",
+        "50"
+      ],
+      "source": "kanji.html#kanji-data",
+      "acceptedReading": [
+        "つち"
+      ],
+      "writePurpose": "Lectura kun"
+    },
+    {
+      "key": "kanji:山",
+      "app": "kanji",
+      "id": "山",
+      "nativeId": "山",
+      "jp": "山",
+      "es": "montaña",
+      "reading": "やま",
+      "romaji": "",
+      "family": "kanji",
+      "purpose": "Kanji → significado",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "26",
+        "29",
+        "50"
+      ],
+      "source": "kanji.html#kanji-data",
+      "acceptedReading": [
+        "やま"
+      ],
+      "writePurpose": "Lectura kun"
+    },
+    {
+      "key": "kanji:川",
+      "app": "kanji",
+      "id": "川",
+      "nativeId": "川",
+      "jp": "川",
+      "es": "río",
+      "reading": "かわ",
+      "romaji": "",
+      "family": "kanji",
+      "purpose": "Kanji → significado",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "26",
+        "29",
+        "50"
+      ],
+      "source": "kanji.html#kanji-data",
+      "acceptedReading": [
+        "かわ"
+      ],
+      "writePurpose": "Lectura kun"
+    },
+    {
+      "key": "kanji:上",
+      "app": "kanji",
+      "id": "上",
+      "nativeId": "上",
+      "jp": "上",
+      "es": "arriba",
+      "reading": "うえ",
+      "romaji": "",
+      "family": "kanji",
+      "purpose": "Kanji → significado",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "35",
+        "50"
+      ],
+      "source": "kanji.html#kanji-data",
+      "acceptedReading": [
+        "うえ",
+        "うえ",
+        "うわ",
+        "かみ",
+        "あげる",
+        "あげる",
+        "あがる",
+        "あがる",
+        "あがり",
+        "あがり",
+        "のぼる",
+        "のぼり",
+        "のぼせる",
+        "のぼす",
+        "たてまつる"
+      ],
+      "writePurpose": "Lectura kun"
+    },
+    {
+      "key": "kanji:下",
+      "app": "kanji",
+      "id": "下",
+      "nativeId": "下",
+      "jp": "下",
+      "es": "abajo",
+      "reading": "した",
+      "romaji": "",
+      "family": "kanji",
+      "purpose": "Kanji → significado",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "35",
+        "50"
+      ],
+      "source": "kanji.html#kanji-data",
+      "acceptedReading": [
+        "した",
+        "しも",
+        "もと",
+        "さげる",
+        "さがる",
+        "くだる",
+        "くだり",
+        "くだす",
+        "くだす",
+        "くださる",
+        "おろす",
+        "おりる"
+      ],
+      "writePurpose": "Lectura kun"
+    },
+    {
+      "key": "kanji:中",
+      "app": "kanji",
+      "id": "中",
+      "nativeId": "中",
+      "jp": "中",
+      "es": "medio, centro, dentro",
+      "reading": "なか",
+      "romaji": "",
+      "family": "kanji",
+      "purpose": "Kanji → significado",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "35",
+        "50"
+      ],
+      "source": "kanji.html#kanji-data",
+      "acceptedReading": [
+        "なか",
+        "うち",
+        "あたる"
+      ],
+      "writePurpose": "Lectura kun"
+    },
+    {
+      "key": "kanji:左",
+      "app": "kanji",
+      "id": "左",
+      "nativeId": "左",
+      "jp": "左",
+      "es": "izquierda",
+      "reading": "ひだり",
+      "romaji": "",
+      "family": "kanji",
+      "purpose": "Kanji → significado",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "35",
+        "50"
+      ],
+      "source": "kanji.html#kanji-data",
+      "acceptedReading": [
+        "ひだり"
+      ],
+      "writePurpose": "Lectura kun"
+    },
+    {
+      "key": "kanji:右",
+      "app": "kanji",
+      "id": "右",
+      "nativeId": "右",
+      "jp": "右",
+      "es": "derecha",
+      "reading": "みぎ",
+      "romaji": "",
+      "family": "kanji",
+      "purpose": "Kanji → significado",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "35",
+        "50"
+      ],
+      "source": "kanji.html#kanji-data",
+      "acceptedReading": [
+        "みぎ"
+      ],
+      "writePurpose": "Lectura kun"
+    },
+    {
+      "key": "kanji:大",
+      "app": "kanji",
+      "id": "大",
+      "nativeId": "大",
+      "jp": "大",
+      "es": "grande, gran",
+      "reading": "おお",
+      "romaji": "",
+      "family": "kanji",
+      "purpose": "Kanji → significado",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "35",
+        "50"
+      ],
+      "source": "kanji.html#kanji-data",
+      "acceptedReading": [
+        "おお",
+        "おおきい",
+        "おおいに"
+      ],
+      "writePurpose": "Lectura kun"
+    },
+    {
+      "key": "kanji:小",
+      "app": "kanji",
+      "id": "小",
+      "nativeId": "小",
+      "jp": "小",
+      "es": "pequeño",
+      "reading": "ちいさい",
+      "romaji": "",
+      "family": "kanji",
+      "purpose": "Kanji → significado",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "35",
+        "50"
+      ],
+      "source": "kanji.html#kanji-data",
+      "acceptedReading": [
+        "ちいさい",
+        "こ",
+        "お",
+        "さ"
+      ],
+      "writePurpose": "Lectura kun"
+    },
+    {
+      "key": "kanji:行",
+      "app": "kanji",
+      "id": "行",
+      "nativeId": "行",
+      "jp": "行",
+      "es": "ir, realizar, línea",
+      "reading": "いく",
+      "romaji": "",
+      "family": "kanji",
+      "purpose": "Kanji → significado",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "41",
+        "50"
+      ],
+      "source": "kanji.html#kanji-data",
+      "acceptedReading": [
+        "いく",
+        "ゆく",
+        "ゆき",
+        "ゆき",
+        "いき",
+        "いき",
+        "おこなう",
+        "おこなう"
+      ],
+      "writePurpose": "Lectura kun"
+    },
+    {
+      "key": "kanji:来",
+      "app": "kanji",
+      "id": "来",
+      "nativeId": "来",
+      "jp": "来",
+      "es": "venir, llegar, próximo",
+      "reading": "くる",
+      "romaji": "",
+      "family": "kanji",
+      "purpose": "Kanji → significado",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "41",
+        "50"
+      ],
+      "source": "kanji.html#kanji-data",
+      "acceptedReading": [
+        "くる",
+        "きたる",
+        "きたす",
+        "きたす",
+        "きたる",
+        "き",
+        "こ"
+      ],
+      "writePurpose": "Lectura kun"
+    },
+    {
+      "key": "kanji:見",
+      "app": "kanji",
+      "id": "見",
+      "nativeId": "見",
+      "jp": "見",
+      "es": "ver",
+      "reading": "みる",
+      "romaji": "",
+      "family": "kanji",
+      "purpose": "Kanji → significado",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "41",
+        "50"
+      ],
+      "source": "kanji.html#kanji-data",
+      "acceptedReading": [
+        "みる",
+        "みえる",
+        "みせる"
+      ],
+      "writePurpose": "Lectura kun"
+    },
+    {
+      "key": "kanji:聞",
+      "app": "kanji",
+      "id": "聞",
+      "nativeId": "聞",
+      "jp": "聞",
+      "es": "oír, escuchar, preguntar",
+      "reading": "きく",
+      "romaji": "",
+      "family": "kanji",
+      "purpose": "Kanji → significado",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "41",
+        "50"
+      ],
+      "source": "kanji.html#kanji-data",
+      "acceptedReading": [
+        "きく",
+        "きこえる"
+      ],
+      "writePurpose": "Lectura kun"
+    },
+    {
+      "key": "kanji:食",
+      "app": "kanji",
+      "id": "食",
+      "nativeId": "食",
+      "jp": "食",
+      "es": "comer, comida",
+      "reading": "くう",
+      "romaji": "",
+      "family": "kanji",
+      "purpose": "Kanji → significado",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "41",
+        "50"
+      ],
+      "source": "kanji.html#kanji-data",
+      "acceptedReading": [
+        "くう",
+        "くらう",
+        "たべる",
+        "はむ"
+      ],
+      "writePurpose": "Lectura kun"
+    },
+    {
+      "key": "kanji:飲",
+      "app": "kanji",
+      "id": "飲",
+      "nativeId": "飲",
+      "jp": "飲",
+      "es": "beber",
+      "reading": "のむ",
+      "romaji": "",
+      "family": "kanji",
+      "purpose": "Kanji → significado",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "41",
+        "50"
+      ],
+      "source": "kanji.html#kanji-data",
+      "acceptedReading": [
+        "のむ",
+        "のみ"
+      ],
+      "writePurpose": "Lectura kun"
+    },
+    {
+      "key": "kanji:読",
+      "app": "kanji",
+      "id": "読",
+      "nativeId": "読",
+      "jp": "読",
+      "es": "leer",
+      "reading": "よむ",
+      "romaji": "",
+      "family": "kanji",
+      "purpose": "Kanji → significado",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "41",
+        "50"
+      ],
+      "source": "kanji.html#kanji-data",
+      "acceptedReading": [
+        "よむ",
+        "よみ"
+      ],
+      "writePurpose": "Lectura kun"
+    },
+    {
+      "key": "kanji:書",
+      "app": "kanji",
+      "id": "書",
+      "nativeId": "書",
+      "jp": "書",
+      "es": "escribir",
+      "reading": "かく",
+      "romaji": "",
+      "family": "kanji",
+      "purpose": "Kanji → significado",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "41",
+        "50"
+      ],
+      "source": "kanji.html#kanji-data",
+      "acceptedReading": [
+        "かく",
+        "がき",
+        "がき"
+      ],
+      "writePurpose": "Lectura kun"
+    },
+    {
+      "key": "anime:kanji:人",
+      "app": "anime",
+      "id": "kanji:人",
+      "nativeId": "kanji:人",
+      "jp": "人",
+      "es": "persona, contador de personas",
+      "reading": "ひと",
+      "romaji": "",
+      "family": "kanji",
+      "purpose": "Kanji → significado",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "42"
+      ],
+      "source": "kanji.html#kanji-data"
+    },
+    {
+      "key": "anime:kanji:女",
+      "app": "anime",
+      "id": "kanji:女",
+      "nativeId": "kanji:女",
+      "jp": "女",
+      "es": "mujer",
+      "reading": "おんな",
+      "romaji": "",
+      "family": "kanji",
+      "purpose": "Kanji → significado",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "42"
+      ],
+      "source": "kanji.html#kanji-data"
+    },
+    {
+      "key": "anime:kanji:子",
+      "app": "anime",
+      "id": "kanji:子",
+      "nativeId": "kanji:子",
+      "jp": "子",
+      "es": "niño, hijo",
+      "reading": "こ",
+      "romaji": "",
+      "family": "kanji",
+      "purpose": "Kanji → significado",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "42"
+      ],
+      "source": "kanji.html#kanji-data"
+    },
+    {
+      "key": "anime:kanji:大",
+      "app": "anime",
+      "id": "kanji:大",
+      "nativeId": "kanji:大",
+      "jp": "大",
+      "es": "grande, gran",
+      "reading": "おお",
+      "romaji": "",
+      "family": "kanji",
+      "purpose": "Kanji → significado",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "42"
+      ],
+      "source": "kanji.html#kanji-data"
+    },
+    {
+      "key": "anime:kanji:小",
+      "app": "anime",
+      "id": "kanji:小",
+      "nativeId": "kanji:小",
+      "jp": "小",
+      "es": "pequeño",
+      "reading": "ちいさい",
+      "romaji": "",
+      "family": "kanji",
+      "purpose": "Kanji → significado",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "42"
+      ],
+      "source": "kanji.html#kanji-data"
+    },
+    {
+      "key": "anime:kanji:上",
+      "app": "anime",
+      "id": "kanji:上",
+      "nativeId": "kanji:上",
+      "jp": "上",
+      "es": "arriba",
+      "reading": "うえ",
+      "romaji": "",
+      "family": "kanji",
+      "purpose": "Kanji → significado",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "42"
+      ],
+      "source": "kanji.html#kanji-data"
+    },
+    {
+      "key": "anime:kanji:下",
+      "app": "anime",
+      "id": "kanji:下",
+      "nativeId": "kanji:下",
+      "jp": "下",
+      "es": "abajo",
+      "reading": "した",
+      "romaji": "",
+      "family": "kanji",
+      "purpose": "Kanji → significado",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "42"
+      ],
+      "source": "kanji.html#kanji-data"
+    },
+    {
+      "key": "anime:kanji:中",
+      "app": "anime",
+      "id": "kanji:中",
+      "nativeId": "kanji:中",
+      "jp": "中",
+      "es": "medio, centro, dentro",
+      "reading": "なか",
+      "romaji": "",
+      "family": "kanji",
+      "purpose": "Kanji → significado",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "42"
+      ],
+      "source": "kanji.html#kanji-data"
+    },
+    {
+      "key": "anime:kanji:日",
+      "app": "anime",
+      "id": "kanji:日",
+      "nativeId": "kanji:日",
+      "jp": "日",
+      "es": "día, sol",
+      "reading": "ひ",
+      "romaji": "",
+      "family": "kanji",
+      "purpose": "Kanji → significado",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "43"
+      ],
+      "source": "kanji.html#kanji-data"
+    },
+    {
+      "key": "anime:kanji:水",
+      "app": "anime",
+      "id": "kanji:水",
+      "nativeId": "kanji:水",
+      "jp": "水",
+      "es": "agua",
+      "reading": "みず",
+      "romaji": "",
+      "family": "kanji",
+      "purpose": "Kanji → significado",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "43"
+      ],
+      "source": "kanji.html#kanji-data"
+    },
+    {
+      "key": "anime:kanji:火",
+      "app": "anime",
+      "id": "kanji:火",
+      "nativeId": "kanji:火",
+      "jp": "火",
+      "es": "fuego",
+      "reading": "ひ",
+      "romaji": "",
+      "family": "kanji",
+      "purpose": "Kanji → significado",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "43"
+      ],
+      "source": "kanji.html#kanji-data"
+    },
+    {
+      "key": "anime:kanji:金",
+      "app": "anime",
+      "id": "kanji:金",
+      "nativeId": "kanji:金",
+      "jp": "金",
+      "es": "oro, metal, dinero",
+      "reading": "かね",
+      "romaji": "",
+      "family": "kanji",
+      "purpose": "Kanji → significado",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "43"
+      ],
+      "source": "kanji.html#kanji-data"
+    },
+    {
+      "key": "anime:kanji:車",
+      "app": "anime",
+      "id": "kanji:車",
+      "nativeId": "kanji:車",
+      "jp": "車",
+      "es": "carro",
+      "reading": "くるま",
+      "romaji": "",
+      "family": "kanji",
+      "purpose": "Kanji → significado",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "43"
+      ],
+      "source": "kanji.html#kanji-data"
+    },
+    {
+      "key": "anime:kanji:電",
+      "app": "anime",
+      "id": "kanji:電",
+      "nativeId": "kanji:電",
+      "jp": "電",
+      "es": "electricidad",
+      "reading": "",
+      "romaji": "",
+      "family": "kanji",
+      "purpose": "Kanji → significado",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "43"
+      ],
+      "source": "kanji.html#kanji-data"
+    },
+    {
+      "key": "anime:kanji:行",
+      "app": "anime",
+      "id": "kanji:行",
+      "nativeId": "kanji:行",
+      "jp": "行",
+      "es": "ir, realizar, línea",
+      "reading": "いく",
+      "romaji": "",
+      "family": "kanji",
+      "purpose": "Kanji → significado",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "43"
+      ],
+      "source": "kanji.html#kanji-data"
+    },
+    {
+      "key": "anime:kanji:見",
+      "app": "anime",
+      "id": "kanji:見",
+      "nativeId": "kanji:見",
+      "jp": "見",
+      "es": "ver",
+      "reading": "みる",
+      "romaji": "",
+      "family": "kanji",
+      "purpose": "Kanji → significado",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "43"
+      ],
+      "source": "kanji.html#kanji-data"
+    },
+    {
+      "key": "oraciones:[\"asallam-n5-bloque-01\",\"n5b01-s001\"]",
+      "app": "oraciones",
+      "id": "[\"asallam-n5-bloque-01\",\"n5b01-s001\"]",
+      "nativeId": "[\"asallam-n5-bloque-01\",\"n5b01-s001\"]",
+      "jp": "学校へ行きます。",
+      "es": "Voy a la escuela.",
+      "reading": "がっこうへいきます。",
+      "romaji": "gakkou e ikimasu.",
+      "family": "sentence",
+      "purpose": "Significado de la oración",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "23",
+        "38",
+        "48"
+      ],
+      "source": "data/Oraciones_N5_Bloque_01.json",
+      "quizChoices": [
+        "Voy a la escuela.",
+        "No tengo tiempo.",
+        "Bebo agua.",
+        "Estoy enfermo."
+      ],
+      "writePurpose": "Completar una palabra",
+      "writePrompt": "___へ行きます。",
+      "writeAnswer": "学校",
+      "writeAccepted": [
+        "学校",
+        "がっこう",
+        "gakkou"
+      ],
+      "writeHint": "Voy a la escuela."
+    },
+    {
+      "key": "oraciones:[\"asallam-n5-bloque-01\",\"n5b01-s002\"]",
+      "app": "oraciones",
+      "id": "[\"asallam-n5-bloque-01\",\"n5b01-s002\"]",
+      "nativeId": "[\"asallam-n5-bloque-01\",\"n5b01-s002\"]",
+      "jp": "学校はここです。",
+      "es": "La escuela está aquí.",
+      "reading": "がっこうはここです。",
+      "romaji": "gakkou wa koko desu.",
+      "family": "sentence",
+      "purpose": "Significado de la oración",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "23",
+        "38",
+        "48"
+      ],
+      "source": "data/Oraciones_N5_Bloque_01.json",
+      "quizChoices": [
+        "La escuela está aquí.",
+        "Juego en el río.",
+        "Hay un río grande.",
+        "Compré una flor roja."
+      ],
+      "writePurpose": "Completar una palabra",
+      "writePrompt": "___はここです。",
+      "writeAnswer": "学校",
+      "writeAccepted": [
+        "学校",
+        "がっこう",
+        "gakkou"
+      ],
+      "writeHint": "La escuela está aquí."
+    },
+    {
+      "key": "oraciones:[\"asallam-n5-bloque-01\",\"n5b01-s006\"]",
+      "app": "oraciones",
+      "id": "[\"asallam-n5-bloque-01\",\"n5b01-s006\"]",
+      "nativeId": "[\"asallam-n5-bloque-01\",\"n5b01-s006\"]",
+      "jp": "これは私の手です。",
+      "es": "Esta es mi mano.",
+      "reading": "これはわたしのてです。",
+      "romaji": "kore wa watashi no te desu.",
+      "family": "sentence",
+      "purpose": "Significado de la oración",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "23",
+        "38",
+        "48"
+      ],
+      "source": "data/Oraciones_N5_Bloque_01.json",
+      "quizChoices": [
+        "Esta es mi mano.",
+        "Tengo trabajo.",
+        "No tengo gafas.",
+        "Entiendo inglés."
+      ],
+      "writePurpose": "Completar una palabra",
+      "writePrompt": "これは私の___です。",
+      "writeAnswer": "手",
+      "writeAccepted": [
+        "手",
+        "て",
+        "te"
+      ],
+      "writeHint": "Esta es mi mano."
+    },
+    {
+      "key": "oraciones:[\"asallam-n5-bloque-01\",\"n5b01-s025\"]",
+      "app": "oraciones",
+      "id": "[\"asallam-n5-bloque-01\",\"n5b01-s025\"]",
+      "nativeId": "[\"asallam-n5-bloque-01\",\"n5b01-s025\"]",
+      "jp": "子供がいます。",
+      "es": "Hay un niño.",
+      "reading": "こどもがいます。",
+      "romaji": "kodomo ga imasu.",
+      "family": "sentence",
+      "purpose": "Significado de la oración",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "23",
+        "38",
+        "48"
+      ],
+      "source": "data/Oraciones_N5_Bloque_01.json",
+      "quizChoices": [
+        "Hay un niño.",
+        "Voy al trabajo.",
+        "Hay un carro rojo.",
+        "El niño está bien."
+      ],
+      "writePurpose": "Completar una palabra",
+      "writePrompt": "___がいます。",
+      "writeAnswer": "子供",
+      "writeAccepted": [
+        "子供",
+        "子ども",
+        "こども",
+        "kodomo"
+      ],
+      "writeHint": "Hay un niño."
+    },
+    {
+      "key": "oraciones:[\"asallam-n5-bloque-01\",\"n5b01-s027\"]",
+      "app": "oraciones",
+      "id": "[\"asallam-n5-bloque-01\",\"n5b01-s027\"]",
+      "nativeId": "[\"asallam-n5-bloque-01\",\"n5b01-s027\"]",
+      "jp": "時間があります。",
+      "es": "Tengo tiempo.",
+      "reading": "じかんがあります。",
+      "romaji": "jikan ga arimasu.",
+      "family": "sentence",
+      "purpose": "Significado de la oración",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "23",
+        "38",
+        "48"
+      ],
+      "source": "data/Oraciones_N5_Bloque_01.json",
+      "quizChoices": [
+        "Tengo tiempo.",
+        "Estudio inglés.",
+        "Hay un problema.",
+        "Mañana lloverá."
+      ],
+      "writePurpose": "Completar una palabra",
+      "writePrompt": "___があります。",
+      "writeAnswer": "時間",
+      "writeAccepted": [
+        "時間",
+        "じかん",
+        "jikan"
+      ],
+      "writeHint": "Tengo tiempo."
+    },
+    {
+      "key": "oraciones:[\"asallam-n5-bloque-01\",\"n5b01-s028\"]",
+      "app": "oraciones",
+      "id": "[\"asallam-n5-bloque-01\",\"n5b01-s028\"]",
+      "nativeId": "[\"asallam-n5-bloque-01\",\"n5b01-s028\"]",
+      "jp": "時間がありません。",
+      "es": "No tengo tiempo.",
+      "reading": "じかんがありません。",
+      "romaji": "jikan ga arimasen.",
+      "family": "sentence",
+      "purpose": "Significado de la oración",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "23",
+        "38",
+        "48"
+      ],
+      "source": "data/Oraciones_N5_Bloque_01.json",
+      "quizChoices": [
+        "No tengo tiempo.",
+        "Escribo una carta.",
+        "¿Hay agua?",
+        "Aquella persona es profesor."
+      ],
+      "writePurpose": "Completar una palabra",
+      "writePrompt": "___がありません。",
+      "writeAnswer": "時間",
+      "writeAccepted": [
+        "時間",
+        "じかん",
+        "jikan"
+      ],
+      "writeHint": "No tengo tiempo."
+    },
+    {
+      "key": "oraciones:[\"asallam-n5-bloque-01\",\"n5b01-s003\"]",
+      "app": "oraciones",
+      "id": "[\"asallam-n5-bloque-01\",\"n5b01-s003\"]",
+      "nativeId": "[\"asallam-n5-bloque-01\",\"n5b01-s003\"]",
+      "jp": "川で遊びます。",
+      "es": "Juego en el río.",
+      "reading": "かわであそびます。",
+      "romaji": "kawa de asobimasu.",
+      "family": "sentence",
+      "purpose": "Significado de la oración",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "28",
+        "48"
+      ],
+      "source": "data/Oraciones_N5_Bloque_01.json",
+      "quizChoices": [
+        "Juego en el río.",
+        "Bebo agua.",
+        "Estoy enfermo.",
+        "Voy a la empresa."
+      ],
+      "writePurpose": "Completar una palabra",
+      "writePrompt": "___で遊びます。",
+      "writeAnswer": "川",
+      "writeAccepted": [
+        "川",
+        "かわ",
+        "kawa"
+      ],
+      "writeHint": "Juego en el río."
+    },
+    {
+      "key": "oraciones:[\"asallam-n5-bloque-01\",\"n5b01-s017\"]",
+      "app": "oraciones",
+      "id": "[\"asallam-n5-bloque-01\",\"n5b01-s017\"]",
+      "nativeId": "[\"asallam-n5-bloque-01\",\"n5b01-s017\"]",
+      "jp": "仕事があります。",
+      "es": "Tengo trabajo.",
+      "reading": "しごとがあります。",
+      "romaji": "shigoto ga arimasu.",
+      "family": "sentence",
+      "purpose": "Significado de la oración",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "28",
+        "48"
+      ],
+      "source": "data/Oraciones_N5_Bloque_01.json",
+      "quizChoices": [
+        "Tengo trabajo.",
+        "Hay un río grande.",
+        "Compré una flor roja.",
+        "Voy a la escuela."
+      ],
+      "writePurpose": "Completar una palabra",
+      "writePrompt": "___があります。",
+      "writeAnswer": "仕事",
+      "writeAccepted": [
+        "仕事",
+        "しごと",
+        "shigoto"
+      ],
+      "writeHint": "Tengo trabajo."
+    },
+    {
+      "key": "oraciones:[\"asallam-n5-bloque-01\",\"n5b01-s018\"]",
+      "app": "oraciones",
+      "id": "[\"asallam-n5-bloque-01\",\"n5b01-s018\"]",
+      "nativeId": "[\"asallam-n5-bloque-01\",\"n5b01-s018\"]",
+      "jp": "仕事に行きます。",
+      "es": "Voy al trabajo.",
+      "reading": "しごとにいきます。",
+      "romaji": "shigoto ni ikimasu.",
+      "family": "sentence",
+      "purpose": "Significado de la oración",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "28",
+        "48"
+      ],
+      "source": "data/Oraciones_N5_Bloque_01.json",
+      "quizChoices": [
+        "Voy al trabajo.",
+        "No tengo gafas.",
+        "Entiendo inglés.",
+        "La escuela está aquí."
+      ],
+      "writePurpose": "Completar una palabra",
+      "writePrompt": "___に行きます。",
+      "writeAnswer": "仕事",
+      "writeAccepted": [
+        "仕事",
+        "しごと",
+        "shigoto"
+      ],
+      "writeHint": "Voy al trabajo."
+    },
+    {
+      "key": "oraciones:[\"asallam-n5-bloque-01\",\"n5b01-s019\"]",
+      "app": "oraciones",
+      "id": "[\"asallam-n5-bloque-01\",\"n5b01-s019\"]",
+      "nativeId": "[\"asallam-n5-bloque-01\",\"n5b01-s019\"]",
+      "jp": "英語を勉強します。",
+      "es": "Estudio inglés.",
+      "reading": "えいごをべんきょうします。",
+      "romaji": "eigo o benkyoushimasu.",
+      "family": "sentence",
+      "purpose": "Significado de la oración",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "28",
+        "48"
+      ],
+      "source": "data/Oraciones_N5_Bloque_01.json",
+      "quizChoices": [
+        "Estudio inglés.",
+        "Hay un carro rojo.",
+        "El niño está bien.",
+        "Esta es mi mano."
+      ],
+      "writePurpose": "Completar una palabra",
+      "writePrompt": "___を勉強します。",
+      "writeAnswer": "英語",
+      "writeAccepted": [
+        "英語",
+        "えいご",
+        "eigo"
+      ],
+      "writeHint": "Estudio inglés."
+    },
+    {
+      "key": "oraciones:[\"asallam-n5-bloque-01\",\"n5b01-s035\"]",
+      "app": "oraciones",
+      "id": "[\"asallam-n5-bloque-01\",\"n5b01-s035\"]",
+      "nativeId": "[\"asallam-n5-bloque-01\",\"n5b01-s035\"]",
+      "jp": "手紙を書きます。",
+      "es": "Escribo una carta.",
+      "reading": "てがみをかきます。",
+      "romaji": "tegami o kakimasu.",
+      "family": "sentence",
+      "purpose": "Significado de la oración",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "28",
+        "48"
+      ],
+      "source": "data/Oraciones_N5_Bloque_01.json",
+      "quizChoices": [
+        "Escribo una carta.",
+        "Hay un problema.",
+        "Mañana lloverá.",
+        "Hay un niño."
+      ],
+      "writePurpose": "Completar una palabra",
+      "writePrompt": "___を書きます。",
+      "writeAnswer": "手紙",
+      "writeAccepted": [
+        "手紙",
+        "てがみ",
+        "tegami"
+      ],
+      "writeHint": "Escribo una carta."
+    },
+    {
+      "key": "oraciones:[\"asallam-n5-bloque-01\",\"n5b01-s039\"]",
+      "app": "oraciones",
+      "id": "[\"asallam-n5-bloque-01\",\"n5b01-s039\"]",
+      "nativeId": "[\"asallam-n5-bloque-01\",\"n5b01-s039\"]",
+      "jp": "水を飲みます。",
+      "es": "Bebo agua.",
+      "reading": "みずをのみます。",
+      "romaji": "mizu o nomimasu.",
+      "family": "sentence",
+      "purpose": "Significado de la oración",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "28",
+        "48"
+      ],
+      "source": "data/Oraciones_N5_Bloque_01.json",
+      "quizChoices": [
+        "Bebo agua.",
+        "¿Hay agua?",
+        "Aquella persona es profesor.",
+        "Tengo tiempo."
+      ],
+      "writePurpose": "Completar una palabra",
+      "writePrompt": "___を飲みます。",
+      "writeAnswer": "水",
+      "writeAccepted": [
+        "水",
+        "みず",
+        "mizu"
+      ],
+      "writeHint": "Bebo agua."
+    },
+    {
+      "key": "oraciones:[\"asallam-n5-bloque-01\",\"n5b01-s004\"]",
+      "app": "oraciones",
+      "id": "[\"asallam-n5-bloque-01\",\"n5b01-s004\"]",
+      "nativeId": "[\"asallam-n5-bloque-01\",\"n5b01-s004\"]",
+      "jp": "大きい川があります。",
+      "es": "Hay un río grande.",
+      "reading": "おおきいかわがあります。",
+      "romaji": "ookii kawa ga arimasu.",
+      "family": "sentence",
+      "purpose": "Significado de la oración",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "37",
+        "48"
+      ],
+      "source": "data/Oraciones_N5_Bloque_01.json",
+      "quizChoices": [
+        "Hay un río grande.",
+        "Estoy enfermo.",
+        "Voy a la empresa.",
+        "No tengo tiempo."
+      ],
+      "writePurpose": "Completar una palabra",
+      "writePrompt": "大きい___があります。",
+      "writeAnswer": "川",
+      "writeAccepted": [
+        "川",
+        "かわ",
+        "kawa"
+      ],
+      "writeHint": "Hay un río grande."
+    },
+    {
+      "key": "oraciones:[\"asallam-n5-bloque-01\",\"n5b01-s010\"]",
+      "app": "oraciones",
+      "id": "[\"asallam-n5-bloque-01\",\"n5b01-s010\"]",
+      "nativeId": "[\"asallam-n5-bloque-01\",\"n5b01-s010\"]",
+      "jp": "眼鏡がありません。",
+      "es": "No tengo gafas.",
+      "reading": "めがねがありません。",
+      "romaji": "megane ga arimasen.",
+      "family": "sentence",
+      "purpose": "Significado de la oración",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "37",
+        "48"
+      ],
+      "source": "data/Oraciones_N5_Bloque_01.json",
+      "quizChoices": [
+        "No tengo gafas.",
+        "Compré una flor roja.",
+        "Voy a la escuela.",
+        "Juego en el río."
+      ],
+      "writePurpose": "Completar una palabra",
+      "writePrompt": "___がありません。",
+      "writeAnswer": "眼鏡",
+      "writeAccepted": [
+        "眼鏡",
+        "メガネ",
+        "めがね",
+        "megane"
+      ],
+      "writeHint": "No tengo gafas."
+    },
+    {
+      "key": "oraciones:[\"asallam-n5-bloque-01\",\"n5b01-s015\"]",
+      "app": "oraciones",
+      "id": "[\"asallam-n5-bloque-01\",\"n5b01-s015\"]",
+      "nativeId": "[\"asallam-n5-bloque-01\",\"n5b01-s015\"]",
+      "jp": "赤い車があります。",
+      "es": "Hay un carro rojo.",
+      "reading": "あかいくるまがあります。",
+      "romaji": "akai kuruma ga arimasu.",
+      "family": "sentence",
+      "purpose": "Significado de la oración",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "37",
+        "48"
+      ],
+      "source": "data/Oraciones_N5_Bloque_01.json",
+      "quizChoices": [
+        "Hay un carro rojo.",
+        "Entiendo inglés.",
+        "La escuela está aquí.",
+        "Tengo trabajo."
+      ],
+      "writePurpose": "Completar una palabra",
+      "writePrompt": "___車があります。",
+      "writeAnswer": "赤い",
+      "writeAccepted": [
+        "赤い",
+        "あかい",
+        "akai"
+      ],
+      "writeHint": "Hay un carro rojo."
+    },
+    {
+      "key": "oraciones:[\"asallam-n5-bloque-01\",\"n5b01-s021\"]",
+      "app": "oraciones",
+      "id": "[\"asallam-n5-bloque-01\",\"n5b01-s021\"]",
+      "nativeId": "[\"asallam-n5-bloque-01\",\"n5b01-s021\"]",
+      "jp": "問題があります。",
+      "es": "Hay un problema.",
+      "reading": "もんだいがあります。",
+      "romaji": "mondai ga arimasu.",
+      "family": "sentence",
+      "purpose": "Significado de la oración",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "37",
+        "48"
+      ],
+      "source": "data/Oraciones_N5_Bloque_01.json",
+      "quizChoices": [
+        "Hay un problema.",
+        "El niño está bien.",
+        "Esta es mi mano.",
+        "Voy al trabajo."
+      ],
+      "writePurpose": "Completar una palabra",
+      "writePrompt": "___があります。",
+      "writeAnswer": "問題",
+      "writeAccepted": [
+        "問題",
+        "もんだい",
+        "mondai"
+      ],
+      "writeHint": "Hay un problema."
+    },
+    {
+      "key": "oraciones:[\"asallam-n5-bloque-01\",\"n5b01-s040\"]",
+      "app": "oraciones",
+      "id": "[\"asallam-n5-bloque-01\",\"n5b01-s040\"]",
+      "nativeId": "[\"asallam-n5-bloque-01\",\"n5b01-s040\"]",
+      "jp": "水がありますか。",
+      "es": "¿Hay agua?",
+      "reading": "みずがありますか。",
+      "romaji": "mizu ga arimasu ka.",
+      "family": "sentence",
+      "purpose": "Significado de la oración",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "37",
+        "48"
+      ],
+      "source": "data/Oraciones_N5_Bloque_01.json",
+      "quizChoices": [
+        "¿Hay agua?",
+        "Mañana lloverá.",
+        "Hay un niño.",
+        "Estudio inglés."
+      ],
+      "writePurpose": "Completar una palabra",
+      "writePrompt": "___がありますか。",
+      "writeAnswer": "水",
+      "writeAccepted": [
+        "水",
+        "みず",
+        "mizu"
+      ],
+      "writeHint": "¿Hay agua?"
+    },
+    {
+      "key": "oraciones:[\"asallam-n5-bloque-01\",\"n5b01-s041\"]",
+      "app": "oraciones",
+      "id": "[\"asallam-n5-bloque-01\",\"n5b01-s041\"]",
+      "nativeId": "[\"asallam-n5-bloque-01\",\"n5b01-s041\"]",
+      "jp": "病気です。",
+      "es": "Estoy enfermo.",
+      "reading": "びょうきです。",
+      "romaji": "byouki desu.",
+      "family": "sentence",
+      "purpose": "Significado de la oración",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "37",
+        "48"
+      ],
+      "source": "data/Oraciones_N5_Bloque_01.json",
+      "quizChoices": [
+        "Estoy enfermo.",
+        "Aquella persona es profesor.",
+        "Tengo tiempo.",
+        "Escribo una carta."
+      ],
+      "writePurpose": "Completar una palabra",
+      "writePrompt": "___です。",
+      "writeAnswer": "病気",
+      "writeAccepted": [
+        "病気",
+        "びょうき",
+        "byouki"
+      ],
+      "writeHint": "Estoy enfermo."
+    },
+    {
+      "key": "oraciones:[\"asallam-n5-bloque-01\",\"n5b01-s016\"]",
+      "app": "oraciones",
+      "id": "[\"asallam-n5-bloque-01\",\"n5b01-s016\"]",
+      "nativeId": "[\"asallam-n5-bloque-01\",\"n5b01-s016\"]",
+      "jp": "赤い花を買いました。",
+      "es": "Compré una flor roja.",
+      "reading": "あかいはなをかいました。",
+      "romaji": "akai hana o kaimashita.",
+      "family": "sentence",
+      "purpose": "Significado de la oración",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "45",
+        "48"
+      ],
+      "source": "data/Oraciones_N5_Bloque_01.json",
+      "quizChoices": [
+        "Compré una flor roja.",
+        "Voy a la empresa.",
+        "No tengo tiempo.",
+        "Bebo agua."
+      ],
+      "writePurpose": "Completar una palabra",
+      "writePrompt": "___花を買いました。",
+      "writeAnswer": "赤い",
+      "writeAccepted": [
+        "赤い",
+        "あかい",
+        "akai"
+      ],
+      "writeHint": "Compré una flor roja."
+    },
+    {
+      "key": "oraciones:[\"asallam-n5-bloque-01\",\"n5b01-s020\"]",
+      "app": "oraciones",
+      "id": "[\"asallam-n5-bloque-01\",\"n5b01-s020\"]",
+      "nativeId": "[\"asallam-n5-bloque-01\",\"n5b01-s020\"]",
+      "jp": "英語が分かります。",
+      "es": "Entiendo inglés.",
+      "reading": "えいごがわかります。",
+      "romaji": "eigo ga wakarimasu.",
+      "family": "sentence",
+      "purpose": "Significado de la oración",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "45",
+        "48"
+      ],
+      "source": "data/Oraciones_N5_Bloque_01.json",
+      "quizChoices": [
+        "Entiendo inglés.",
+        "Voy a la escuela.",
+        "Juego en el río.",
+        "Hay un río grande."
+      ],
+      "writePurpose": "Completar una palabra",
+      "writePrompt": "___が分かります。",
+      "writeAnswer": "英語",
+      "writeAccepted": [
+        "英語",
+        "えいご",
+        "eigo"
+      ],
+      "writeHint": "Entiendo inglés."
+    },
+    {
+      "key": "oraciones:[\"asallam-n5-bloque-01\",\"n5b01-s026\"]",
+      "app": "oraciones",
+      "id": "[\"asallam-n5-bloque-01\",\"n5b01-s026\"]",
+      "nativeId": "[\"asallam-n5-bloque-01\",\"n5b01-s026\"]",
+      "jp": "子供は元気です。",
+      "es": "El niño está bien.",
+      "reading": "こどもはげんきです。",
+      "romaji": "kodomo wa genki desu.",
+      "family": "sentence",
+      "purpose": "Significado de la oración",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "45",
+        "48"
+      ],
+      "source": "data/Oraciones_N5_Bloque_01.json",
+      "quizChoices": [
+        "El niño está bien.",
+        "La escuela está aquí.",
+        "Tengo trabajo.",
+        "No tengo gafas."
+      ],
+      "writePurpose": "Completar una palabra",
+      "writePrompt": "___は元気です。",
+      "writeAnswer": "子供",
+      "writeAccepted": [
+        "子供",
+        "子ども",
+        "こども",
+        "kodomo"
+      ],
+      "writeHint": "El niño está bien."
+    },
+    {
+      "key": "oraciones:[\"asallam-n5-bloque-01\",\"n5b01-s030\"]",
+      "app": "oraciones",
+      "id": "[\"asallam-n5-bloque-01\",\"n5b01-s030\"]",
+      "nativeId": "[\"asallam-n5-bloque-01\",\"n5b01-s030\"]",
+      "jp": "明日は雨です。",
+      "es": "Mañana lloverá.",
+      "reading": "あしたはあめです。",
+      "romaji": "ashita wa ame desu.",
+      "family": "sentence",
+      "purpose": "Significado de la oración",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "45",
+        "48"
+      ],
+      "source": "data/Oraciones_N5_Bloque_01.json",
+      "quizChoices": [
+        "Mañana lloverá.",
+        "Esta es mi mano.",
+        "Voy al trabajo.",
+        "Hay un carro rojo."
+      ],
+      "writePurpose": "Completar una palabra",
+      "writePrompt": "明日は___です。",
+      "writeAnswer": "雨",
+      "writeAccepted": [
+        "雨",
+        "あめ",
+        "ame"
+      ],
+      "writeHint": "Mañana lloverá."
+    },
+    {
+      "key": "oraciones:[\"asallam-n5-bloque-01\",\"n5b01-s032\"]",
+      "app": "oraciones",
+      "id": "[\"asallam-n5-bloque-01\",\"n5b01-s032\"]",
+      "nativeId": "[\"asallam-n5-bloque-01\",\"n5b01-s032\"]",
+      "jp": "あの人は先生です。",
+      "es": "Aquella persona es profesor.",
+      "reading": "あのひとはせんせいです。",
+      "romaji": "ano hito wa sensei desu.",
+      "family": "sentence",
+      "purpose": "Significado de la oración",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "45",
+        "48"
+      ],
+      "source": "data/Oraciones_N5_Bloque_01.json",
+      "quizChoices": [
+        "Aquella persona es profesor.",
+        "Hay un niño.",
+        "Estudio inglés.",
+        "Hay un problema."
+      ],
+      "writePurpose": "Completar una palabra",
+      "writePrompt": "あの人は___です。",
+      "writeAnswer": "先生",
+      "writeAccepted": [
+        "先生",
+        "せんせい",
+        "sensei"
+      ],
+      "writeHint": "Aquella persona es profesor."
+    },
+    {
+      "key": "oraciones:[\"asallam-n5-bloque-01\",\"n5b01-s043\"]",
+      "app": "oraciones",
+      "id": "[\"asallam-n5-bloque-01\",\"n5b01-s043\"]",
+      "nativeId": "[\"asallam-n5-bloque-01\",\"n5b01-s043\"]",
+      "jp": "会社に行きます。",
+      "es": "Voy a la empresa.",
+      "reading": "かいしゃにいきます。",
+      "romaji": "kaisha ni ikimasu.",
+      "family": "sentence",
+      "purpose": "Significado de la oración",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "45",
+        "48"
+      ],
+      "source": "data/Oraciones_N5_Bloque_01.json",
+      "quizChoices": [
+        "Voy a la empresa.",
+        "Tengo tiempo.",
+        "Escribo una carta.",
+        "¿Hay agua?"
+      ],
+      "writePurpose": "Completar una palabra",
+      "writePrompt": "___に行きます。",
+      "writeAnswer": "会社",
+      "writeAccepted": [
+        "会社",
+        "かいしゃ",
+        "kaisha"
+      ],
+      "writeHint": "Voy a la empresa."
+    },
+    {
+      "key": "turista:[\"Saludos y Despedidas\",\"こんにちは\",\"hola (desde media mañana hasta antes del anochecer)\"]",
+      "app": "turista",
+      "id": "[\"Saludos y Despedidas\",\"こんにちは\",\"hola (desde media mañana hasta antes del anochecer)\"]",
+      "nativeId": "[\"Saludos y Despedidas\",\"こんにちは\",\"hola (desde media mañana hasta antes del anochecer)\"]",
+      "jp": "こんにちは",
+      "es": "hola (desde media mañana hasta antes del anochecer)",
+      "reading": "",
+      "romaji": "konnichiwa",
+      "family": "vocabulary",
+      "purpose": "Japonés → significado",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "32",
+        "33",
+        "49"
+      ],
+      "source": "data/turista.json"
+    },
+    {
+      "key": "turista:[\"Saludos y Despedidas\",\"こんばんは\",\"buenas noches (saludo)\"]",
+      "app": "turista",
+      "id": "[\"Saludos y Despedidas\",\"こんばんは\",\"buenas noches (saludo)\"]",
+      "nativeId": "[\"Saludos y Despedidas\",\"こんばんは\",\"buenas noches (saludo)\"]",
+      "jp": "こんばんは",
+      "es": "buenas noches (saludo)",
+      "reading": "",
+      "romaji": "konbanwa",
+      "family": "vocabulary",
+      "purpose": "Japonés → significado",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "32",
+        "33",
+        "49"
+      ],
+      "source": "data/turista.json"
+    },
+    {
+      "key": "turista:[\"Saludos y Despedidas\",\"おはようございます\",\"buenos días (formal)\"]",
+      "app": "turista",
+      "id": "[\"Saludos y Despedidas\",\"おはようございます\",\"buenos días (formal)\"]",
+      "nativeId": "[\"Saludos y Despedidas\",\"おはようございます\",\"buenos días (formal)\"]",
+      "jp": "おはようございます",
+      "es": "buenos días (formal)",
+      "reading": "",
+      "romaji": "ohayou gozaimasu",
+      "family": "vocabulary",
+      "purpose": "Japonés → significado",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "32",
+        "33",
+        "49"
+      ],
+      "source": "data/turista.json"
+    },
+    {
+      "key": "turista:[\"Saludos y Despedidas\",\"おやすみなさい\",\"buenas noches (antes de dormir, formal)\"]",
+      "app": "turista",
+      "id": "[\"Saludos y Despedidas\",\"おやすみなさい\",\"buenas noches (antes de dormir, formal)\"]",
+      "nativeId": "[\"Saludos y Despedidas\",\"おやすみなさい\",\"buenas noches (antes de dormir, formal)\"]",
+      "jp": "おやすみなさい",
+      "es": "buenas noches (antes de dormir, formal)",
+      "reading": "",
+      "romaji": "oyasuminasai",
+      "family": "vocabulary",
+      "purpose": "Japonés → significado",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "32",
+        "33",
+        "49"
+      ],
+      "source": "data/turista.json"
+    },
+    {
+      "key": "turista:[\"Saludos y Despedidas\",\"さようなら\",\"adiós (matiz de 'definitivo')\"]",
+      "app": "turista",
+      "id": "[\"Saludos y Despedidas\",\"さようなら\",\"adiós (matiz de 'definitivo')\"]",
+      "nativeId": "[\"Saludos y Despedidas\",\"さようなら\",\"adiós (matiz de 'definitivo')\"]",
+      "jp": "さようなら",
+      "es": "adiós (matiz de 'definitivo')",
+      "reading": "",
+      "romaji": "sayounara",
+      "family": "vocabulary",
+      "purpose": "Japonés → significado",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "32",
+        "33",
+        "49"
+      ],
+      "source": "data/turista.json"
+    },
+    {
+      "key": "turista:[\"Saludos y Despedidas\",\"元気です\",\"estoy bien (formal)\"]",
+      "app": "turista",
+      "id": "[\"Saludos y Despedidas\",\"元気です\",\"estoy bien (formal)\"]",
+      "nativeId": "[\"Saludos y Despedidas\",\"元気です\",\"estoy bien (formal)\"]",
+      "jp": "元気です",
+      "es": "estoy bien (formal)",
+      "reading": "",
+      "romaji": "genki desu",
+      "family": "vocabulary",
+      "purpose": "Japonés → significado",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "32",
+        "33",
+        "49"
+      ],
+      "source": "data/turista.json"
+    },
+    {
+      "key": "turista:[\"Expresiones de Gratitud\",\"ありがとう\",\"gracias (informal)\"]",
+      "app": "turista",
+      "id": "[\"Expresiones de Gratitud\",\"ありがとう\",\"gracias (informal)\"]",
+      "nativeId": "[\"Expresiones de Gratitud\",\"ありがとう\",\"gracias (informal)\"]",
+      "jp": "ありがとう",
+      "es": "gracias (informal)",
+      "reading": "",
+      "romaji": "arigatou",
+      "family": "vocabulary",
+      "purpose": "Japonés → significado",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "40",
+        "49"
+      ],
+      "source": "data/turista.json"
+    },
+    {
+      "key": "turista:[\"Expresiones de Gratitud\",\"ありがとうございます\",\"muchas gracias (formal)\"]",
+      "app": "turista",
+      "id": "[\"Expresiones de Gratitud\",\"ありがとうございます\",\"muchas gracias (formal)\"]",
+      "nativeId": "[\"Expresiones de Gratitud\",\"ありがとうございます\",\"muchas gracias (formal)\"]",
+      "jp": "ありがとうございます",
+      "es": "muchas gracias (formal)",
+      "reading": "",
+      "romaji": "arigatou gozaimasu",
+      "family": "vocabulary",
+      "purpose": "Japonés → significado",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "40",
+        "49"
+      ],
+      "source": "data/turista.json"
+    },
+    {
+      "key": "turista:[\"Expresiones de Gratitud\",\"どういたしまして\",\"de nada (formal)\"]",
+      "app": "turista",
+      "id": "[\"Expresiones de Gratitud\",\"どういたしまして\",\"de nada (formal)\"]",
+      "nativeId": "[\"Expresiones de Gratitud\",\"どういたしまして\",\"de nada (formal)\"]",
+      "jp": "どういたしまして",
+      "es": "de nada (formal)",
+      "reading": "",
+      "romaji": "dou itashimashite",
+      "family": "vocabulary",
+      "purpose": "Japonés → significado",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "40",
+        "49"
+      ],
+      "source": "data/turista.json"
+    },
+    {
+      "key": "turista:[\"Frases Útiles\",\"わかりません\",\"no entiendo\"]",
+      "app": "turista",
+      "id": "[\"Frases Útiles\",\"わかりません\",\"no entiendo\"]",
+      "nativeId": "[\"Frases Útiles\",\"わかりません\",\"no entiendo\"]",
+      "jp": "わかりません",
+      "es": "no entiendo",
+      "reading": "",
+      "romaji": "wakarimasen",
+      "family": "vocabulary",
+      "purpose": "Japonés → significado",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "40",
+        "49"
+      ],
+      "source": "data/turista.json"
+    },
+    {
+      "key": "turista:[\"Frases Útiles\",\"ゆっくりお願いします\",\"despacio, por favor\"]",
+      "app": "turista",
+      "id": "[\"Frases Útiles\",\"ゆっくりお願いします\",\"despacio, por favor\"]",
+      "nativeId": "[\"Frases Útiles\",\"ゆっくりお願いします\",\"despacio, por favor\"]",
+      "jp": "ゆっくりお願いします",
+      "es": "despacio, por favor",
+      "reading": "",
+      "romaji": "yukkuri onegaishimasu",
+      "family": "vocabulary",
+      "purpose": "Japonés → significado",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "40",
+        "49"
+      ],
+      "source": "data/turista.json"
+    },
+    {
+      "key": "turista:[\"Frases Útiles\",\"できません\",\"no puedo\"]",
+      "app": "turista",
+      "id": "[\"Frases Útiles\",\"できません\",\"no puedo\"]",
+      "nativeId": "[\"Frases Útiles\",\"できません\",\"no puedo\"]",
+      "jp": "できません",
+      "es": "no puedo",
+      "reading": "",
+      "romaji": "dekimasen",
+      "family": "vocabulary",
+      "purpose": "Japonés → significado",
+      "matchPurpose": "Emparejar",
+      "stepIds": [
+        "40",
+        "49"
+      ],
+      "source": "data/turista.json"
+    }
+  ]
+}

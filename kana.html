@@ -440,7 +440,9 @@
   <script id="kana-data" type="application/json">
 {"hiragana":[["あ","a"],["い","i"],["う","u"],["え","e"],["お","o"],["か","ka"],["き","ki"],["く","ku"],["け","ke"],["こ","ko"],["が","ga"],["ぎ","gi"],["ぐ","gu"],["げ","ge"],["ご","go"],["さ","sa"],["し","shi"],["す","su"],["せ","se"],["そ","so"],["ざ","za"],["じ","ji"],["ず","zu"],["ぜ","ze"],["ぞ","zo"],["た","ta"],["ち","chi"],["つ","tsu"],["て","te"],["と","to"],["だ","da"],["ぢ","ji"],["づ","zu"],["で","de"],["ど","do"],["な","na"],["に","ni"],["ぬ","nu"],["ね","ne"],["の","no"],["は","ha"],["ひ","hi"],["ふ","fu"],["へ","he"],["ほ","ho"],["ば","ba"],["び","bi"],["ぶ","bu"],["べ","be"],["ぼ","bo"],["ぱ","pa"],["ぴ","pi"],["ぷ","pu"],["ぺ","pe"],["ぽ","po"],["ま","ma"],["み","mi"],["む","mu"],["め","me"],["も","mo"],["や","ya"],["ゆ","yu"],["よ","yo"],["ら","ra"],["り","ri"],["る","ru"],["れ","re"],["ろ","ro"],["わ","wa"],["を","wo"],["ん","n"],["きゃ","kya"],["きゅ","kyu"],["きょ","kyo"],["ぎゃ","gya"],["ぎゅ","gyu"],["ぎょ","gyo"],["しゃ","sha"],["しゅ","shu"],["しょ","sho"],["じゃ","ja"],["じゅ","ju"],["じょ","jo"],["ちゃ","cha"],["ちゅ","chu"],["ちょ","cho"],["にゃ","nya"],["にゅ","nyu"],["にょ","nyo"],["ひゃ","hya"],["ひゅ","hyu"],["ひょ","hyo"],["びゃ","bya"],["びゅ","byu"],["びょ","byo"],["ぴゃ","pya"],["ぴゅ","pyu"],["ぴょ","pyo"],["みゃ","mya"],["みゅ","myu"],["みょ","myo"],["りゃ","rya"],["りゅ","ryu"],["りょ","ryo"]],"katakana":[["ア","a"],["イ","i"],["ウ","u"],["エ","e"],["オ","o"],["カ","ka"],["キ","ki"],["ク","ku"],["ケ","ke"],["コ","ko"],["ガ","ga"],["ギ","gi"],["グ","gu"],["ゲ","ge"],["ゴ","go"],["サ","sa"],["シ","shi"],["ス","su"],["セ","se"],["ソ","so"],["ザ","za"],["ジ","ji"],["ズ","zu"],["ゼ","ze"],["ゾ","zo"],["タ","ta"],["チ","chi"],["ツ","tsu"],["テ","te"],["ト","to"],["ダ","da"],["ヂ","ji"],["ヅ","zu"],["デ","de"],["ド","do"],["ナ","na"],["ニ","ni"],["ヌ","nu"],["ネ","ne"],["ノ","no"],["ハ","ha"],["ヒ","hi"],["フ","fu"],["ヘ","he"],["ホ","ho"],["バ","ba"],["ビ","bi"],["ブ","bu"],["ベ","be"],["ボ","bo"],["パ","pa"],["ピ","pi"],["プ","pu"],["ペ","pe"],["ポ","po"],["マ","ma"],["ミ","mi"],["ム","mu"],["メ","me"],["モ","mo"],["ヤ","ya"],["ユ","yu"],["ヨ","yo"],["ラ","ra"],["リ","ri"],["ル","ru"],["レ","re"],["ロ","ro"],["ワ","wa"],["ヲ","wo"],["ン","n"],["キャ","kya"],["キュ","kyu"],["キョ","kyo"],["ギャ","gya"],["ギュ","gyu"],["ギョ","gyo"],["シャ","sha"],["シュ","shu"],["ショ","sho"],["ジャ","ja"],["ジュ","ju"],["ジョ","jo"],["チャ","cha"],["チュ","chu"],["チョ","cho"],["ニャ","nya"],["ニュ","nyu"],["ニョ","nyo"],["ヒャ","hya"],["ヒュ","hyu"],["ヒョ","hyo"],["ビャ","bya"],["ビュ","byu"],["ビョ","byo"],["ピャ","pya"],["ピュ","pyu"],["ピョ","pyo"],["ミャ","mya"],["ミュ","myu"],["ミョ","myo"],["リャ","rya"],["リュ","ryu"],["リョ","ryo"],["ファ","fa"],["フィ","fi"],["フェ","fe"],["フォ","fo"],["フュ","fyu"],["ティ","ti"],["トゥ","tu"],["ディ","di"],["ドゥ","du"],["デュ","dyu"],["チェ","che"],["シェ","she"],["ジェ","je"],["イェ","ye"],["ウィ","wi"],["ウェ","we"],["ウォ","wo"],["ヴァ","va"],["ヴィ","vi"],["ヴ","vu"],["ヴェ","ve"],["ヴォ","vo"],["ツァ","tsa"],["ツェ","tse"],["ツォ","tso"],["クォ","kwo"]]}
   </script>
-  <script src="assets/review-history.js?v=20261030"></script>
+  <script>window.AsallamJourneyHooks={create:()=>({active:false,done:false,matches:()=>true,count(){},lock(){},checkCatalog(){},fail(e){const p=document.createElement('p');p.textContent=e.message;(document.querySelector('main')||document.body).prepend(p);},async init(){const q=new URLSearchParams(location.search);if(!q.has('ruta')&&!q.has('paso'))return true;this.fail(Error('No se pudo cargar la ruta. Recarga la página o vuelve a ruta-n5.html.'));return false;}})};</script>
+<script src="assets/journey-n5.js?v=20261031"></script><script src="assets/journey-app-hooks.js?v=20261031"></script>
+<script src="assets/review-history.js?v=20261030"></script>
   <script>
 /* Motor independiente de la interfaz. No necesita librerías ni conexión. */
 (function (root, factory) {
@@ -700,6 +702,7 @@
   };
   let storageAvailable = true;
   let state;
+  const guided=window.AsallamJourneyHooks.create("kana");
   let loadVersion = 0;
   let importedFileVersion = 0;
   let heartbeat = null;
@@ -800,7 +803,7 @@
     if (!CONFIG.audioBase) prefs.audioSource = "tts";
     return prefs;
   }
-  function savePreferences() { writeStorage(KEYS.prefs, state.prefs); }
+  function savePreferences() { if(guided.active)return; writeStorage(KEYS.prefs, state.prefs); }
   function saveProgress() { writeStorage(KEYS.progress, state.progress); }
   function showNotice(message, error, duration = 0) {
     hideNotice();
@@ -833,7 +836,7 @@
   }
   function scopeItems() {
     return state.items.filter(function (item) {
-      return state.prefs.scope === "mixed" || item.script === state.prefs.scope;
+      return guided.matches(item.id) && (state.prefs.scope === "mixed" || item.script === state.prefs.scope);
     });
   }
   function pendingItem(item) {
@@ -938,7 +941,7 @@
     return question.mode === "romaji-kana" ? "Romaji → kana" : "Kana → romaji";
   }
   function recordAnswer(item, outcome) {
-    window.AsallamReviews?.record("kana", item.id, reviewPurpose(), outcome);
+    const reviewSaved=window.AsallamReviews?.record("kana", item.id, reviewPurpose(), outcome);if(reviewSaved)guided.count(outcome,state.prefs.activity === "match");
     updateElapsed();
     incrementStats(state.session, outcome);
     incrementStats(state.progress.byActivity[state.prefs.activity], outcome);
@@ -1036,6 +1039,7 @@
   }
   function startSession(options) {
     const focus = options && options.focus;
+    if(guided.active){state.prefs.activity=guided.step.activity;state.prefs.modes=[guided.step.mode];state.prefs.scope="mixed";state.prefs.length=0;state.prefs.review=false;state.prefs.pairs=3;}
     cancelScheduled();
     state.session = newSession();
     state.current = null;
@@ -1076,7 +1080,7 @@
   }
   function nextQuestion(focus) {
     cancelScheduled();
-    if (sessionLimit() && state.session.answered >= sessionLimit()) {
+    if (guided.done || (sessionLimit() && state.session.answered >= sessionLimit())) {
       finishSession("goal"); return;
     }
     const pool = practiceItems();
@@ -1271,7 +1275,7 @@
   function nextBoard() {
     cancelScheduled();
     state.current = null;
-    if (sessionLimit() && state.session.pairs >= sessionLimit()) {
+    if (guided.done || (sessionLimit() && state.session.pairs >= sessionLimit())) {
       finishSession("goal"); return;
     }
     if (!practiceItems().length) {
@@ -1327,6 +1331,7 @@
     state.selected = null;
   }
   function selectMatch(index) {
+    if(guided.done){finishSession("goal");return;}
     if (state.view !== "match" || state.locked) return;
     const card = state.matchTiles[index];
     if (!card || card.matched) return;
@@ -1421,7 +1426,7 @@
     cancelScheduled();
     state.session.ended = true;
     state.current = null;
-    $("summary-title").textContent = reason === "review" ? "Repaso completado." : reason === "manual" ? "Buen trabajo por hoy." : "Sesión completada.";
+    $("summary-title").textContent = guided.active?(guided.done?"Actividad de la ruta completada.":"Actividad sin completar; puedes continuar desde el mapa."):(reason === "review" ? "Repaso completado." : reason === "manual" ? "Buen trabajo por hoy." : "Sesión completada.");
     const count = state.prefs.activity === "match" ? state.session.pairs : state.session.answered;
     const unit = state.prefs.activity === "match" ? " parejas" : " preguntas";
     $("summary-copy").textContent = count + unit + " · " + formatTime(state.session.elapsed)
@@ -1900,11 +1905,12 @@
     updateElapsed();
     $("session-time").textContent = formatTime(state.session.elapsed);
   }
-  function init() {
+  async function init() {
+    if(!await guided.init())return;
     try {
       const builtIn = Core.validateData(JSON.parse($("kana-data").textContent));
       const prefs = cleanPrefs(readStorage(KEYS.prefs));
-      const storedData = readStorage(KEYS.custom);
+      const storedData = guided.active ? null : readStorage(KEYS.custom);
       let validated = builtIn;
       let custom = false;
       if (storedData) {
@@ -1920,6 +1926,7 @@
         epoch: 0, timers: new Set(), view: "quiz"
       };
       window.AsallamReviews?.registerCatalog("kana", state.items.map(item => item.id));
+      guided.checkCatalog(state.items.map(item=>item.id));
       sound.voice = japaneseVoice();
       bindEvents();
       updateStorageStatus();
@@ -1927,7 +1934,8 @@
       startSession();
       heartbeat = setInterval(tick, 1000);
       if (!storageAvailable) showNotice("El guardado no está disponible en este navegador. Puedes practicar durante esta sesión.");
-      loadExternalData();
+      if(!guided.active)loadExternalData();
+      guided.lock();
     } catch (error) {
       showNotice("No se pudo iniciar el entrenador. Revisa el JSON incorporado: " + error.message, true);
       $("practice").hidden = true;
@@ -1939,5 +1947,6 @@
   </script>
 </body>
 </html>
+
 
 

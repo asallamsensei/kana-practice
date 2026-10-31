@@ -496,6 +496,8 @@
     <div class="dialog-actions"><button id="cancel-reset" class="button" type="button">Conservar</button><button id="confirm-reset" class="button" type="button">Borrar progreso</button></div>
   </dialog>
 
+<script>window.AsallamJourneyHooks={create:()=>({active:false,done:false,matches:()=>true,count(){},lock(){},checkCatalog(){},fail(e){const p=document.createElement('p');p.textContent=e.message;(document.querySelector('main')||document.body).prepend(p);},async init(){const q=new URLSearchParams(location.search);if(!q.has('ruta')&&!q.has('paso'))return true;this.fail(Error('No se pudo cargar la ruta. Recarga la página o vuelve a ruta-n5.html.'));return false;}})};</script>
+<script src="assets/journey-n5.js?v=20261031"></script><script src="assets/journey-app-hooks.js?v=20261031"></script>
 <script src="assets/review-history.js?v=20261030"></script>
 <script>
 /* Vocabulario JLPT · Asallam Sensei
@@ -647,6 +649,7 @@ if (typeof document !== 'undefined') (function() {
   const MODES = ['jp-es','es-jp','listen'];
   const PRACTICE_MODES = {'quiz:jp-es':'Quiz · JP → ES','quiz:es-jp':'Quiz · ES → JP','quiz:listen':'Quiz · Dictado','write:jp-es':'Escritura · JP → ES','write:es-jp':'Escritura · ES → JP','write:listen':'Escritura · Dictado',match:'Emparejar'};
   const DEFAULTS = {activity:'quiz',levels:['N5'],modes:MODES,length:20,pairs:4,review:false,furigana:true,effects:false,autoAudio:true,audioSource:'mp3',rate:.85,theme:'dark',writeFormat:'any',dictationTarget:'mixed'};
+  const guided=window.AsallamJourneyHooks.create("jlpt");
   let storageOK=true;
   function read(key) { try { return JSON.parse(localStorage.getItem(key)); } catch { return null; } }
   function save(key,value) { try { localStorage.setItem(key,JSON.stringify(value)); return true; } catch { storageOK=false; $('storage-status').textContent='No se pudo guardar en este navegador. El progreso se conserva solo mientras la página siga abierta.';return false; } }
@@ -705,10 +708,10 @@ if (typeof document !== 'undefined') (function() {
     }
   }
   function showNotice(message, error = false, duration = 0) { notice(message, error, duration); }
-  function persist(){save(KEYS.prefs,state.prefs);}
+  function persist(){if(!guided.active)save(KEYS.prefs,state.prefs);}
   function timer(fn,ms){const g=state.generation;const id=setTimeout(()=>{state.timers.delete(id);if(g===state.generation)fn();},ms);state.timers.add(id);return id;}
   function cancel(){state.generation++;for(const id of state.timers)clearTimeout(id);state.timers.clear();state.lock=false;}
-  function scope(){return state.items.filter(i=>state.prefs.levels.includes(i.nivel));}
+  function scope(){return state.items.filter(i=>guided.matches(wordKey(i))&&state.prefs.levels.includes(i.nivel));}
   // El nombre del audio y la palabra identifican el historial, sin depender de su traducción.
   function wordKey(item){return 'word-v1:'+JSON.stringify([item.nivel,item.kanji,Core.roman(item.romaji||Core.toRomaji(item.kana))]);}
   function migrateWordHistory(){
@@ -751,8 +754,8 @@ if (typeof document !== 'undefined') (function() {
   }
   function record(item,outcome,reviewItem=item){
     // An unheard dictation reveal is not an attempted review.
-    if(state.prefs.activity==='match'||!state.current?.auditory||state.current.heard)
-      window.AsallamReviews?.record('jlpt',wordKey(reviewItem),reviewPurpose(),outcome);
+    if(state.prefs.activity==='match'||!state.current?.auditory||state.current.heard){
+      const reviewSaved=window.AsallamReviews?.record('jlpt',wordKey(reviewItem),reviewPurpose(),outcome);if(reviewSaved)guided.count(outcome,state.prefs.activity==='match');}
     increment(state.session.stats,outcome);increment(state.progress.total,outcome);increment(state.progress.byActivity[state.prefs.activity],outcome);
     const key=wordKey(item),p=state.progress.byItem[key]||itemProgressClean(null);
     p[outcome==='correct'?'correct':'wrong']++;
@@ -824,6 +827,7 @@ if (typeof document !== 'undefined') (function() {
   function view(name){state.view=name;for(const n of ['quiz','match','explore','summary','empty'])$(n+'-view').hidden=n!==name;$('exercise-header').hidden=['explore','summary','empty'].includes(name);$('session-stats').hidden=['explore','empty'].includes(name);$('session-caption').hidden=['explore','empty'].includes(name);$('end-session').hidden=!['quiz','match'].includes(name);}
   function empty(message,needsData=false){view('empty');$('empty-title').textContent=needsData?'Tu vocabulario, listo para cargar.':'Todo al día.';$('empty-copy').textContent=message;$('empty-import').hidden=!needsData;$('exit-review').hidden=needsData;}
   function start(){
+    if(guided.active){state.prefs.activity=guided.step.activity;state.prefs.modes=[guided.step.mode];state.prefs.levels=["N5"];state.prefs.length=0;state.prefs.review=false;state.prefs.dictationTarget=guided.step.target||"jp";state.prefs.pairs=3;}
     cancel();state.current=null;state.deck=[];state.modeDeck=[];state.tiles=[];state.selected=null;state.board=0;
     state.session={stats:blank(),completed:0,started:Date.now(),elapsed:0,ended:false,mistakes:new Set(),initialPending:scope().filter(pending).length,reviewCode:null,shuffleTrace:[]};
     $('summary-proof').hidden=true;$('summary-code').textContent='';
@@ -834,7 +838,7 @@ if (typeof document !== 'undefined') (function() {
     else if(state.prefs.activity==='match')nextBoard();else nextQuestion();
   }
   function toggleLevel(level){const selected=state.prefs.levels;if(selected.includes(level)){if(selected.length===1)return;state.prefs.levels=selected.filter(l=>l!==level);}else state.prefs.levels=CONFIG.levels.filter(l=>selected.includes(l)||l===level);persist();start();}
-  function done(){return state.prefs.review?!pool().length:state.prefs.length>0&&state.session.completed>=state.prefs.length;}
+  function done(){if(guided.active)return guided.done;return state.prefs.review?!pool().length:state.prefs.length>0&&state.session.completed>=state.prefs.length;}
   function takeItem(){
     const valid=pool().filter(i=>activeModes().some(m=>eligible(i,m))),ids=new Set(valid.map(i=>i.id));
     state.deck=state.deck.filter(i=>ids.has(i.id));
@@ -997,7 +1001,7 @@ if (typeof document !== 'undefined') (function() {
     const complete=session.completed>0&&done(),unlimited=!state.prefs.review&&state.prefs.length===0;
     if(complete)session.reviewCode=createReviewCode(session);
     view('summary');const s=session.stats;
-    $('summary-title').textContent=complete?(state.prefs.review?'¡Todos los fallos resueltos!':'Sesión completada.'):unlimited?'Sesión finalizada.':'Sesión sin completar.';
+    $('summary-title').textContent=guided.active?(guided.done?"Actividad de la ruta completada.":"Actividad sin completar; puedes continuar desde el mapa."):(complete?(state.prefs.review?'¡Todos los fallos resueltos!':'Sesión completada.'):unlimited?'Sesión finalizada.':'Sesión sin completar.');
     $('summary-copy').textContent=session.completed+' '+(state.prefs.activity==='match'?'parejas':'preguntas')+' · '+session.mistakes.size+' palabras para reforzar · '+formatTime(session.elapsed);
     $('summary-correct').textContent=s.correct;$('summary-accuracy').textContent=accuracy(s);$('summary-best').textContent=s.best;
     $('summary-proof').hidden=!complete;$('summary-code').textContent=session.reviewCode||'';
@@ -1005,7 +1009,7 @@ if (typeof document !== 'undefined') (function() {
     const date=new Date(session.finishedAt).toLocaleString('es-CO',{timeZone:'America/Bogota',dateStyle:'short',timeStyle:'medium'});
     $('summary-code-context').textContent=state.prefs.levels.join(' + ')+' · '+activity+(state.prefs.review?' · Repaso de fallos':'')+' · '+s.skipped+' sin responder · '+date+' (hora de Colombia)';
     $('summary-code-help').hidden=complete;
-    $('summary-code-help').textContent=unlimited?'El modo sin límite no tiene un objetivo final. Para obtener la huella del repaso, elige 10, 20 o 40 preguntas o parejas.':'Este repaso quedó incompleto y no genera huella. Completa el objetivo de la sesión para obtenerla.';
+    $('summary-code-help').textContent=guided.active?'Completa las respuestas indicadas en la ruta; saltar no cuenta.':unlimited?'El modo sin límite no tiene un objetivo final. Para obtener la huella del repaso, elige 10, 20 o 40 preguntas o parejas.':'Este repaso quedó incompleto y no genera huella. Completa el objetivo de la sesión para obtenerla.';
     renderStats();$('summary-title').focus({preventScroll:true});
   }
   function formatTime(ms){const sec=Math.floor(ms/1000);return String(Math.floor(sec/60)).padStart(2,'0')+':'+String(sec%60).padStart(2,'0');}
@@ -1029,7 +1033,7 @@ if (typeof document !== 'undefined') (function() {
     const board=$('match-board');board.replaceChildren();
     state.tiles.forEach((tile,index)=>{const b=document.createElement('button');b.type='button';b.className='match-tile';b.dataset.kind=tile.kind;b.setAttribute('aria-pressed',String(state.selected===index));b.classList.toggle('is-selected',state.selected===index);b.classList.toggle('is-matched',tile.matched);b.disabled=tile.matched||state.lock;const c=document.createElement('span');c.className='tile-content';if(tile.kind==='jp')c.append(japaneseNode(tile.item));else c.textContent=tile.item.significado;b.append(c);b.addEventListener('click',()=>selectMatch(index));tile.button=b;board.append(b);});
   }
-  function selectMatch(index){
+  function selectMatch(index){if(guided.done){finish();return;}
     const tile=state.tiles[index];if(!tile||tile.matched||state.lock)return;
     if(state.selected===index){state.selected=null;renderBoard();return;}
     if(tile.kind==='jp')playItem(tile.item);
@@ -1345,12 +1349,13 @@ if (typeof document !== 'undefined') (function() {
     window.addEventListener('pagehide',()=>{stopAudio();save(KEYS.progress,state.progress);});
     if(window.speechSynthesis)speechSynthesis.addEventListener('voiceschanged',()=>{sound.voice=japaneseVoice();renderControls();});
   }
-  bind();mergeGroups();sound.voice=japaneseVoice();start();loadRemote();
+  (async()=>{if(!await guided.init())return;try{bind();if(guided.active){state.custom={};state.remote={N5:await fetchLevel("N5")};mergeGroups();guided.checkCatalog(state.items.map(wordKey));sound.voice=japaneseVoice();start();guided.lock();}else{mergeGroups();sound.voice=japaneseVoice();start();loadRemote();}}catch(e){guided.fail(e);}})();
   setInterval(()=>{const s=state.session;if(s)$('session-time').textContent=formatTime(s.ended?s.elapsed:Date.now()-s.started);},1000);
 })();
 
 </script>
 </body>
 </html>
+
 
 
