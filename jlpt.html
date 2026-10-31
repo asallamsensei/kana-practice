@@ -496,8 +496,8 @@
     <div class="dialog-actions"><button id="cancel-reset" class="button" type="button">Conservar</button><button id="confirm-reset" class="button" type="button">Borrar progreso</button></div>
   </dialog>
 
-<script>window.AsallamJourneyHooks={create:()=>({active:false,done:false,matches:()=>true,count(){},lock(){},checkCatalog(){},fail(e){const p=document.createElement('p');p.textContent=e.message;(document.querySelector('main')||document.body).prepend(p);},async init(){const q=new URLSearchParams(location.search);if(!q.has('ruta')&&!q.has('paso'))return true;this.fail(Error('No se pudo cargar la ruta. Recarga la página o vuelve a ruta-n5.html.'));return false;}})};</script>
-<script src="assets/journey-n5.js?v=20261031"></script><script src="assets/journey-app-hooks.js?v=20261031"></script>
+<script>window.AsallamJourneyHooks={create:()=>({active:false,done:false,matches:()=>true,count(){},paint(){},lock(){},checkCatalog(){},fail(e){const p=document.createElement('p');p.textContent=e.message;(document.querySelector('main')||document.body).prepend(p);},async init(){const q=new URLSearchParams(location.search);if(!q.has('ruta')&&!q.has('paso'))return true;this.fail(Error('No se pudo cargar la ruta. Recarga la página o vuelve a ruta-n5.html.'));return false;}})};</script>
+<script src="assets/journey-n5.js?v=20261031"></script><script src="assets/journey-app-hooks.js?v=20261031b"></script>
 <script src="assets/review-history.js?v=20261030"></script>
 <script>
 /* Vocabulario JLPT · Asallam Sensei
@@ -787,7 +787,7 @@ if (typeof document !== 'undefined') (function() {
     $('session-progress').hidden=!maximum;
     $('session-progress').setAttribute('aria-valuemax',String(maximum||1));$('session-progress').setAttribute('aria-valuenow',String(Math.min(value,maximum||1)));
     $('progress-fill').style.width=(maximum?Math.min(100,value/maximum*100):0)+'%';
-    $('review-session').disabled=!scope().some(pending);
+    $('review-session').disabled=!scope().some(pending);guided.paint();
   }
   function eligible(item,mode){
     if(state.prefs.activity==='write' && (mode==='es-jp'||mode==='listen'&&state.prefs.dictationTarget!=='es')){
