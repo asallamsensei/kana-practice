@@ -398,7 +398,7 @@
           <details id="progress-settings">
             <summary>Mi progreso</summary>
             <div class="lifetime-row"><span>Respuestas correctas</span><strong id="total-correct">0</strong></div>
-            <div class="lifetime-row"><span>Mejor racha</span><strong id="total-best">0</strong></div>
+            <div class="lifetime-row"><span>Respuestas incorrectas</span><strong id="total-best">0</strong></div>
             <div class="lifetime-row"><span>Kana practicados</span><strong id="total-seen">0</strong></div>
             <p id="storage-status" class="setting-help">Tu progreso se guarda en este navegador.</p>
             <button id="reset-progress" class="button ghost small" type="button">Borrar mi progreso</button>
@@ -440,6 +440,7 @@
   <script id="kana-data" type="application/json">
 {"hiragana":[["あ","a"],["い","i"],["う","u"],["え","e"],["お","o"],["か","ka"],["き","ki"],["く","ku"],["け","ke"],["こ","ko"],["が","ga"],["ぎ","gi"],["ぐ","gu"],["げ","ge"],["ご","go"],["さ","sa"],["し","shi"],["す","su"],["せ","se"],["そ","so"],["ざ","za"],["じ","ji"],["ず","zu"],["ぜ","ze"],["ぞ","zo"],["た","ta"],["ち","chi"],["つ","tsu"],["て","te"],["と","to"],["だ","da"],["ぢ","ji"],["づ","zu"],["で","de"],["ど","do"],["な","na"],["に","ni"],["ぬ","nu"],["ね","ne"],["の","no"],["は","ha"],["ひ","hi"],["ふ","fu"],["へ","he"],["ほ","ho"],["ば","ba"],["び","bi"],["ぶ","bu"],["べ","be"],["ぼ","bo"],["ぱ","pa"],["ぴ","pi"],["ぷ","pu"],["ぺ","pe"],["ぽ","po"],["ま","ma"],["み","mi"],["む","mu"],["め","me"],["も","mo"],["や","ya"],["ゆ","yu"],["よ","yo"],["ら","ra"],["り","ri"],["る","ru"],["れ","re"],["ろ","ro"],["わ","wa"],["を","wo"],["ん","n"],["きゃ","kya"],["きゅ","kyu"],["きょ","kyo"],["ぎゃ","gya"],["ぎゅ","gyu"],["ぎょ","gyo"],["しゃ","sha"],["しゅ","shu"],["しょ","sho"],["じゃ","ja"],["じゅ","ju"],["じょ","jo"],["ちゃ","cha"],["ちゅ","chu"],["ちょ","cho"],["にゃ","nya"],["にゅ","nyu"],["にょ","nyo"],["ひゃ","hya"],["ひゅ","hyu"],["ひょ","hyo"],["びゃ","bya"],["びゅ","byu"],["びょ","byo"],["ぴゃ","pya"],["ぴゅ","pyu"],["ぴょ","pyo"],["みゃ","mya"],["みゅ","myu"],["みょ","myo"],["りゃ","rya"],["りゅ","ryu"],["りょ","ryo"]],"katakana":[["ア","a"],["イ","i"],["ウ","u"],["エ","e"],["オ","o"],["カ","ka"],["キ","ki"],["ク","ku"],["ケ","ke"],["コ","ko"],["ガ","ga"],["ギ","gi"],["グ","gu"],["ゲ","ge"],["ゴ","go"],["サ","sa"],["シ","shi"],["ス","su"],["セ","se"],["ソ","so"],["ザ","za"],["ジ","ji"],["ズ","zu"],["ゼ","ze"],["ゾ","zo"],["タ","ta"],["チ","chi"],["ツ","tsu"],["テ","te"],["ト","to"],["ダ","da"],["ヂ","ji"],["ヅ","zu"],["デ","de"],["ド","do"],["ナ","na"],["ニ","ni"],["ヌ","nu"],["ネ","ne"],["ノ","no"],["ハ","ha"],["ヒ","hi"],["フ","fu"],["ヘ","he"],["ホ","ho"],["バ","ba"],["ビ","bi"],["ブ","bu"],["ベ","be"],["ボ","bo"],["パ","pa"],["ピ","pi"],["プ","pu"],["ペ","pe"],["ポ","po"],["マ","ma"],["ミ","mi"],["ム","mu"],["メ","me"],["モ","mo"],["ヤ","ya"],["ユ","yu"],["ヨ","yo"],["ラ","ra"],["リ","ri"],["ル","ru"],["レ","re"],["ロ","ro"],["ワ","wa"],["ヲ","wo"],["ン","n"],["キャ","kya"],["キュ","kyu"],["キョ","kyo"],["ギャ","gya"],["ギュ","gyu"],["ギョ","gyo"],["シャ","sha"],["シュ","shu"],["ショ","sho"],["ジャ","ja"],["ジュ","ju"],["ジョ","jo"],["チャ","cha"],["チュ","chu"],["チョ","cho"],["ニャ","nya"],["ニュ","nyu"],["ニョ","nyo"],["ヒャ","hya"],["ヒュ","hyu"],["ヒョ","hyo"],["ビャ","bya"],["ビュ","byu"],["ビョ","byo"],["ピャ","pya"],["ピュ","pyu"],["ピョ","pyo"],["ミャ","mya"],["ミュ","myu"],["ミョ","myo"],["リャ","rya"],["リュ","ryu"],["リョ","ryo"],["ファ","fa"],["フィ","fi"],["フェ","fe"],["フォ","fo"],["フュ","fyu"],["ティ","ti"],["トゥ","tu"],["ディ","di"],["ドゥ","du"],["デュ","dyu"],["チェ","che"],["シェ","she"],["ジェ","je"],["イェ","ye"],["ウィ","wi"],["ウェ","we"],["ウォ","wo"],["ヴァ","va"],["ヴィ","vi"],["ヴ","vu"],["ヴェ","ve"],["ヴォ","vo"],["ツァ","tsa"],["ツェ","tse"],["ツォ","tso"],["クォ","kwo"]]}
   </script>
+  <script src="assets/review-history.js?v=20261030"></script>
   <script>
 /* Motor independiente de la interfaz. No necesita librerías ni conexión. */
 (function (root, factory) {
@@ -890,17 +891,11 @@
     $("session-detail").textContent = "Esta sesión · " + session.skipped + " sin responder";
     $("session-time").textContent = formatTime(session.elapsed);
     $("review-count").textContent = pendingCount();
-    let totalCorrect = 0;
-    let best = 0;
-    Object.keys(state.progress.byActivity).forEach(function (key) {
-      totalCorrect += state.progress.byActivity[key].correct;
-      best = Math.max(best, state.progress.byActivity[key].best);
-    });
-    $("total-correct").textContent = totalCorrect;
-    $("total-best").textContent = best;
-    $("total-seen").textContent = state.items.filter(function (item) {
-      return state.progress.byItem[item.id] && state.progress.byItem[item.id].seen;
-    }).length;
+    let historical = null;
+    try { historical = window.AsallamReviews?.summary("kana"); } catch (_) { /* No inventar totales si el registro no se puede leer. */ }
+    $("total-correct").textContent = historical?.correct ?? "—";
+    $("total-best").textContent = historical?.wrong ?? "—";
+    $("total-seen").textContent = historical?.seen ?? "—";
     updateProgress();
   }
   function updateProgress() {
@@ -936,7 +931,14 @@
       stats.streak = 0;
     }
   }
+  function reviewPurpose() {
+    if (state.prefs.activity === "match") return "Emparejar";
+    const question = state.current;
+    if (question.auditory) return state.prefs.activity === "write" ? "Audio → romaji" : "Audio → kana";
+    return question.mode === "romaji-kana" ? "Romaji → kana" : "Kana → romaji";
+  }
   function recordAnswer(item, outcome) {
+    window.AsallamReviews?.record("kana", item.id, reviewPurpose(), outcome);
     updateElapsed();
     incrementStats(state.session, outcome);
     incrementStats(state.progress.byActivity[state.prefs.activity], outcome);
@@ -1398,6 +1400,10 @@
       const romaji = document.createElement("span");
       romaji.className = "tile-romaji"; romaji.textContent = item.romaji;
       button.append(kana, romaji);
+      const history = document.createElement("span");
+      history.className = "review-history";
+      history.innerHTML = window.AsallamReviews?.render("kana", item.id) || "Repasos registrados: no disponible";
+      button.append(history);
       button.addEventListener("click", function () {
         if (audioAvailable()) playItem(item);
         else showNotice(item.kana + " · " + item.romaji + ". No hay una voz japonesa disponible en este dispositivo.");
@@ -1656,6 +1662,7 @@
     loadVersion += 1;
     state.data = validated.data;
     state.items = validated.items;
+    window.AsallamReviews?.registerCatalog("kana", state.items.map(item => item.id));
     state.custom = source === "custom";
     state.remote = source === "remote";
     if (!state.custom) {
@@ -1740,6 +1747,8 @@
     }
   }
   function resetProgress() {
+    window.AsallamReviews?.clear("kana");
+    window.AsallamReviews?.registerCatalog("kana", state.items.map(item => item.id));
     state.progress = cleanProgress(null);
     state.prefs.review = false;
     saveProgress();
@@ -1910,6 +1919,7 @@
         selected: null, locked: false, boardMatched: 0, boardSize: 0,
         epoch: 0, timers: new Set(), view: "quiz"
       };
+      window.AsallamReviews?.registerCatalog("kana", state.items.map(item => item.id));
       sound.voice = japaneseVoice();
       bindEvents();
       updateStorageStatus();
@@ -1929,4 +1939,5 @@
   </script>
 </body>
 </html>
+
 

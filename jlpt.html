@@ -454,7 +454,7 @@
           <details id="progress-settings">
             <summary>Mi progreso</summary>
             <div class="lifetime-row"><span>Respuestas correctas</span><strong id="total-correct">0</strong></div>
-            <div class="lifetime-row"><span>Mejor racha</span><strong id="total-best">0</strong></div>
+            <div class="lifetime-row"><span>Respuestas incorrectas</span><strong id="total-best">0</strong></div>
             <div class="lifetime-row"><span>Palabras practicadas</span><strong id="total-seen">0</strong></div>
             <p id="storage-status" class="setting-help">Tu progreso se guarda en este navegador.</p>
             <button id="reset-progress" class="button ghost small" type="button">Borrar mi progreso</button>
@@ -496,6 +496,7 @@
     <div class="dialog-actions"><button id="cancel-reset" class="button" type="button">Conservar</button><button id="confirm-reset" class="button" type="button">Borrar progreso</button></div>
   </dialog>
 
+<script src="assets/review-history.js?v=20261030"></script>
 <script>
 /* Vocabulario JLPT · Asallam Sensei
  * Archivo único, sin librerías externas. Conserva las rutas originales.
@@ -738,11 +739,20 @@ if (typeof document !== 'undefined') (function() {
   }
   function pending(i){return state.progress.byItem[wordKey(i)]?.pending===true;}
   function pool(){return scope().filter(i=>!state.prefs.review||pending(i));}
-  function mergeGroups(){state.groups={...state.remote,...state.custom};state.items=CONFIG.levels.flatMap(l=>state.groups[l]||[]);migrateWordHistory();const selected=state.prefs.levels.filter(l=>state.groups[l]?.length);state.prefs.levels=selected.length?selected:[CONFIG.levels.find(l=>state.groups[l]?.length)||'N5'];}
+  function mergeGroups(){state.groups={...state.remote,...state.custom};state.items=CONFIG.levels.flatMap(l=>state.groups[l]||[]);migrateWordHistory();window.AsallamReviews?.registerCatalog("jlpt",state.items.map(wordKey));const selected=state.prefs.levels.filter(l=>state.groups[l]?.length);state.prefs.levels=selected.length?selected:[CONFIG.levels.find(l=>state.groups[l]?.length)||'N5'];}
   function total(s){return s.correct+s.wrong+s.skipped;}
   function accuracy(s){return total(s)?Math.round(s.correct/total(s)*100)+'%':'—';}
   function increment(s,outcome){s[outcome]++;s.streak=outcome==='correct'?s.streak+1:0;s.best=Math.max(s.best,s.streak);}
-  function record(item,outcome){
+  function reviewPurpose(){
+    if(state.prefs.activity==='match')return 'Emparejar';
+    const q=state.current;
+    if(q.auditory)return q.target==='es'?'Audio → significado':'Audio → japonés';
+    return q.mode==='jp-es'?'Japonés → significado':'Español → japonés';
+  }
+  function record(item,outcome,reviewItem=item){
+    // An unheard dictation reveal is not an attempted review.
+    if(state.prefs.activity==='match'||!state.current?.auditory||state.current.heard)
+      window.AsallamReviews?.record('jlpt',wordKey(reviewItem),reviewPurpose(),outcome);
     increment(state.session.stats,outcome);increment(state.progress.total,outcome);increment(state.progress.byActivity[state.prefs.activity],outcome);
     const key=wordKey(item),p=state.progress.byItem[key]||itemProgressClean(null);
     p[outcome==='correct'?'correct':'wrong']++;
@@ -762,9 +772,9 @@ if (typeof document !== 'undefined') (function() {
   function renderStats(){
     const s=state.session?.stats||blank();
     for(const [key,v] of Object.entries({correct:s.correct,wrong:s.wrong+s.skipped,accuracy:accuracy(s),streak:s.streak}))$('stat-'+key).textContent=v;
-    const historical=state.progress.total;
-    $('total-correct').textContent=historical.correct;$('total-best').textContent=historical.best;
-    $('total-seen').textContent=new Set(state.items.filter(i=>state.progress.byItem[wordKey(i)]).map(wordKey)).size;
+    let historical=null;try{historical=window.AsallamReviews?.summary('jlpt');}catch(_){/* No inventar totales si no se puede leer el registro. */}
+    $('total-correct').textContent=historical?.correct??'—';$('total-best').textContent=historical?.wrong??'—';
+    $('total-seen').textContent=historical?.seen??'—';
     $('review-count').textContent=scope().filter(pending).length;
     const done=state.session?.completed||0,limit=state.prefs.review?0:state.prefs.length;
     $('round-count').textContent=state.prefs.activity==='explore'?'Consulta':state.prefs.review?scope().filter(pending).length+' pendientes':(state.prefs.activity==='match'?'Parejas ':'Pregunta ')+(state.prefs.activity==='match'?done:Math.min(done+1,limit||Infinity))+(limit?' de '+limit:' · sin límite');
@@ -1028,18 +1038,12 @@ if (typeof document !== 'undefined') (function() {
     if(first.kind===tile.kind){state.selected=index;renderBoard();return;}
     state.selected=null;
     if(first.item.id===tile.item.id){first.matched=tile.matched=true;state.session.completed++;record(tile.item,'correct');playEffect(true);if(state.prefs.autoAudio)playItem(tile.item);$('match-message').textContent='¡Pareja encontrada! '+tile.item.kanji+' · '+tile.item.significado;renderBoard();if(state.tiles.every(t=>t.matched)){state.lock=true;timer(nextBoard,850);}}
-    else {record(first.item,'wrong');const key=wordKey(tile.item),p=state.progress.byItem[key]||itemProgressClean(null);p.pending=true;state.progress.byItem[key]=p;state.session.mistakes.add(tile.item.id);save(KEYS.progress,state.progress);state.lock=true;renderBoard();first.button.classList.add('is-wrong');tile.button.classList.add('is-wrong');$('match-message').textContent='Todavía no. Intenta otra pareja.';playEffect(false);timer(()=>{state.lock=false;renderBoard();},700);}
+    else {record(first.item,'wrong',first.kind==='jp'?first.item:tile.item);const key=wordKey(tile.item),p=state.progress.byItem[key]||itemProgressClean(null);p.pending=true;state.progress.byItem[key]=p;state.session.mistakes.add(tile.item.id);save(KEYS.progress,state.progress);state.lock=true;renderBoard();first.button.classList.add('is-wrong');tile.button.classList.add('is-wrong');$('match-message').textContent='Todavía no. Intenta otra pareja.';playEffect(false);timer(()=>{state.lock=false;renderBoard();},700);}
     renderStats();
   }
   function wordHistoryNode(item){
     const history=document.createElement('span');history.className='word-history';
-    const byMode=state.progress.byItem[wordKey(item)]?.history.byMode||{};
-    const count=Object.values(byMode).reduce((sum,row)=>sum+row.count,0);
-    const title=document.createElement('span');title.className='word-history-total';title.textContent='Repasos registrados: '+count;history.append(title);
-    for(const [mode,label] of Object.entries(PRACTICE_MODES)){
-      const row=byMode[mode];if(!row?.count)continue;
-      const line=document.createElement('span');line.textContent=label+': '+row.count+(row.skipped?' · '+row.skipped+' sin responder':'');history.append(line);
-    }
+    history.innerHTML=window.AsallamReviews?.render('jlpt',wordKey(item))||'Repasos registrados: no disponible';
     return history;
   }
   function renderExplore(){
@@ -1326,7 +1330,7 @@ if (typeof document !== 'undefined') (function() {
     $('download-example').addEventListener('click',()=>download({N5:[{kanji:'食べる',kana:'たべる',romaji:'taberu',significado:'comer'}],N4:[{kanji:'約束',kana:'やくそく',romaji:'yakusoku',significado:'promesa; cita'}]},'Ejemplo_vocabulario_JLPT.json'));
     $('restore-data').addEventListener('click',()=>{state.custom={};save(KEYS.custom,{});mergeGroups();start();loadRemote();});
     $('reset-progress').addEventListener('click',()=>$('reset-dialog').showModal());$('cancel-reset').addEventListener('click',()=>$('reset-dialog').close());
-    $('confirm-reset').addEventListener('click',()=>{state.progress=progressClean(null);save(KEYS.progress,state.progress);$('reset-dialog').close();state.prefs.review=false;persist();start();});
+    $('confirm-reset').addEventListener('click',()=>{window.AsallamReviews?.clear('jlpt');window.AsallamReviews?.registerCatalog('jlpt',state.items.map(wordKey));state.progress=progressClean(null);save(KEYS.progress,state.progress);$('reset-dialog').close();state.prefs.review=false;persist();start();});
     document.addEventListener('keydown',e=>{
       if(e.isComposing||e.keyCode===229||e.ctrlKey||e.metaKey||e.altKey||$('reset-dialog').open)return;
       const tag=e.target.tagName;if(['INPUT','TEXTAREA','SELECT'].includes(tag)||e.target.isContentEditable)return;
@@ -1348,4 +1352,5 @@ if (typeof document !== 'undefined') (function() {
 </script>
 </body>
 </html>
+
 
