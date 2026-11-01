@@ -1,0 +1,8 @@
+.activity-tabs {grid-template-columns:repeat(3,minmax(0,1fr));}
+.language-match-board {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:20px 0;}
+.language-match-tile {min-width:0;min-height:90px;padding:14px 10px;border:1px solid var(--border);border-radius:13px;background:var(--raised);color:var(--text);font-size:22px;overflow-wrap:anywhere;white-space:normal;}
+.language-match-tile.is-selected {border-color:var(--accent);background:var(--accent-bg);outline:2px solid var(--accent);}
+.language-match-tile.is-matched {border-color:var(--mint);background:var(--mint-bg);}
+.language-match-tile.is-matched::after {content:' ✓';}
+.language-match-tile.is-wrong {border-color:var(--danger);background:var(--danger-bg);}
+@media(max-width:480px){.language-match-tile{font-size:18px;min-height:84px;padding:12px 8px;}.activity-tab{padding-inline:4px;}}
