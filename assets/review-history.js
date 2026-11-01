@@ -1,6 +1,6 @@
 /* One local, per-item review ledger. Reading/Explorar never records practice. */
 (function(root){'use strict';
-const APPS=['kana','jlpt','kanji','oraciones','ingles','turista','anime','oraciones_ingles','chino','portugues'];
+const APPS=['kana','jlpt','kanji','oraciones','ingles','turista','anime','oraciones_ingles','chino','portugues','coreano'];
 const PREFIX='asallam_reviews_v1_',VERSION=1,MAX_ITEMS=50000;
 const obj=v=>v!==null&&typeof v==='object'&&!Array.isArray(v), own=(o,k)=>Object.prototype.hasOwnProperty.call(o,k), bad=k=>k==='prototype'||Object.prototype.hasOwnProperty.call(Object.prototype,k);
 const count=v=>Number.isSafeInteger(v)&&v>=0, safeId=v=>typeof v==='string'&&v.length>0&&v.length<=3000&&!bad(v);
