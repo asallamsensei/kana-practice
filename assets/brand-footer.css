@@ -1,0 +1,6 @@
+/* Shared brand footer; page themes and surrounding content stay unchanged. */
+footer.asallam-footer{display:flex;justify-content:center;align-items:center;gap:12px;flex-wrap:wrap;text-align:center;margin:29px auto 0;padding:0 0 28px;font-size:11px;color:var(--muted,var(--text));}
+footer.asallam-footer .footer-star{opacity:.5;}
+footer.asallam-footer a{color:inherit;}
+footer.asallam-footer a:hover{color:var(--violet,var(--accent,currentColor));}
+.asallam-footer-note{margin:20px 0 0;text-align:center;font-size:12px;color:var(--muted,var(--text));}
