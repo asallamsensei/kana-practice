@@ -301,6 +301,7 @@ button.reading-chip:hover { background:var(--accent-bg); border-color:var(--acce
 @media(max-width:430px) { .match-board { grid-template-columns:repeat(2,minmax(0,1fr)); } .option-button { font-size:18px; padding:16px 26px; } .option-button.jp { font-size:38px; } .explore-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } .answer-form { flex-wrap:wrap; } .answer-form .button { width:100%; } }
 .topbar{flex-wrap:wrap}.topnav{flex-wrap:wrap}.topnav .nav-link{white-space:nowrap}@media(max-width:600px){.topbar{align-items:flex-start}.topnav{width:100%;gap:3px}.topnav .nav-link{padding:8px 9px;min-height:42px}.topnav .icon-button{margin-left:auto}}
 </style><link rel="stylesheet" href="assets/donate-button.css?v=20261031b">
+<link rel="stylesheet" href="assets/brand-footer.css?v=20261101">
 </head><body>
 <a class="skip-link" href="#practice">Saltar a la práctica</a>
   <svg aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden">
@@ -370,7 +371,7 @@ button.reading-chip:hover { background:var(--accent-bg); border-color:var(--acce
       <div class="support-copy"><div class="support-symbol"><svg class="icon" aria-hidden="true"><use href="#i-heart"/></svg></div><div><h2 id="support-title">¿Te está ayudando a aprender?</h2><p>Tu apoyo ayuda a seguir creando recursos gratuitos de japonés.</p></div></div>
       <a class="button" href="https://paypal.me/asallamsensei" target="_blank" rel="noopener noreferrer" aria-label="Apoyar a Asallam Sensei por PayPal, abre en otra pestaña">Apoyar por PayPal <svg class="icon" aria-hidden="true"><use href="#i-arrow"/></svg></a>
     </section>
-    <footer><span>Hecho para aprender, un paso a la vez.<br>Asallam Sensei · Kanji</span><a href="https://asallamsensei.com/">Volver al inicio ↗</a></footer>
+    <footer class="asallam-footer"><span>© Asallam Sensei</span><span class="footer-star" aria-hidden="true">☆</span><a href="salon-honor.html">Salón de Honor 🏆</a></footer>
 </div>
 <dialog id="reset-dialog" aria-labelledby="reset-title"><h2 id="reset-title">¿Borrar tu progreso?</h2><p>Se borrarán las estadísticas y los fallos de este nuevo entrenador de kanji. Tus ajustes y los datos de Kana, JLPT y los antiguos entrenadores no se tocarán.</p><div class="dialog-actions"><button id="cancel-reset" class="button" type="button">Conservar</button><button id="confirm-reset" class="button" type="button">Borrar progreso</button></div></dialog>
 <dialog id="detail-dialog" aria-labelledby="detail-title"><div class="detail-top"><div><h2 id="detail-title" class="sr-only">Ficha de kanji</h2><div id="detail-kanji" class="detail-kanji jp" lang="ja"></div></div><button id="close-detail" class="dialog-close" type="button" aria-label="Cerrar ficha">×</button></div><div id="detail-meaning"></div><span id="detail-grade" class="badge"></span><div id="detail-readings"></div><div id="detail-story"></div><div id="detail-history"></div><p class="setting-help">Las lecturas cambian según la palabra. Elige una para escucharla si hay una voz japonesa disponible.</p></dialog>
