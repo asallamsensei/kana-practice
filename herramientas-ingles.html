@@ -16,6 +16,7 @@
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}.honor-card:hover{transform:none}}
 .path-sentences{--card-accent:var(--pink);--card-tint:#e67eaf30}.path-progress{grid-column:1/-1}</style>
 <link rel="stylesheet" href="assets/donate-button.css?v=20261031b">
+<link rel="stylesheet" href="assets/brand-footer.css?v=20261101">
 </head>
 <body>
 <a class="skip" href="#main">Saltar al contenido</a>
@@ -33,7 +34,7 @@
 </nav>
 <div class="secondary-links"><a href="https://wa.me/573217876009?text=Hola%2C%20quiero%20informaci%C3%B3n%20de%20Ingl%C3%A9s%20con%20canciones." target="_blank" rel="noopener noreferrer">Consultar el curso de inglés</a></div>
 </main>
-<footer><a href="salon-honor.html">Salón de Honor</a><span class="footer-dot" aria-hidden="true">·</span><span>Asallam Sensei</span></footer>
+<footer class="asallam-footer"><span>© Asallam Sensei</span><span class="footer-star" aria-hidden="true">☆</span><a href="salon-honor.html">Salón de Honor 🏆</a></footer>
 </div>
 <script>
 (()=>{'use strict';const root=document.documentElement,button=document.getElementById('theme');function paint(){const light=root.dataset.theme==='light',label=light?'Cambiar a tema oscuro':'Cambiar a tema claro';button.setAttribute('aria-label',label);button.title=label;button.setAttribute('aria-pressed',String(light));document.querySelector('meta[name="theme-color"]').content=light?'#f6f2fb':'#090b19'}function readTheme(){try{root.dataset.theme=localStorage.getItem('asallam_ecosystem_theme')==='light'?'light':'dark'}catch(e){}paint()}paint();button.addEventListener('click',()=>{root.dataset.theme=root.dataset.theme==='light'?'dark':'light';paint();try{localStorage.setItem('asallam_ecosystem_theme',root.dataset.theme)}catch(e){}});window.addEventListener('pageshow',readTheme);window.addEventListener('storage',event=>{if(event.key==='asallam_ecosystem_theme'||event.key===null)readTheme()})})();
