@@ -81,10 +81,12 @@ requiredCounts(v.total);requiredCounts(v.legacy);if(v.legacy.skipped!==0)throw E
 for(const key of [...Object.keys(v.byBlock),...Object.keys(v.byItem)])if(!key.trim()||key.length>1000)throw Error('Identificador de Turista inválido.');
 }
 else if(key==='asallam_turista_preferences_v2'){
-const fields=['activity','mode','selected','length','boards','autoAudio','effects','romaji','theme'];if(Object.keys(v).some(k=>!fields.includes(k)))throw Error('Ajuste de Turista desconocido.');
+const fields=['activity','mode','selected','length','boards','autoAudio','effects','romaji','theme','groups','catalogVersion'];if(Object.keys(v).some(k=>!fields.includes(k)))throw Error('Ajuste de Turista desconocido.');
 const choices={activity:['quiz','match','explore'],mode:['jp_es','es_jp','mix'],length:[0,10,20,40],boards:[0,5,10,20],theme:['dark','light']};for(const [field,values]of Object.entries(choices))if(own(v,field)&&!values.includes(v[field]))throw Error('Ajuste de Turista inválido: '+field);
 for(const field of ['autoAudio','effects','romaji'])if(own(v,field)&&typeof v[field]!=='boolean')throw Error('Ajuste booleano de Turista inválido.');
-if(own(v,'selected')&&(!Array.isArray(v.selected)||!v.selected.length||v.selected.length>200||new Set(v.selected).size!==v.selected.length||v.selected.some(x=>typeof x!=='string'||!x.trim()||x.length>200||['__proto__','prototype','constructor'].includes(x))))throw Error('Selección de bloques de Turista inválida.');
+if(own(v,'catalogVersion')&&v.catalogVersion!==1)throw Error('Versión de catálogo inválida.');
+if(own(v,'groups')&&(!Array.isArray(v.groups)||new Set(v.groups).size!==v.groups.length||v.groups.some(g=>!['fundamentos','conversacion'].includes(g))))throw Error('Grupos de Turista inválidos.');
+if(own(v,'selected')&&(!Array.isArray(v.selected)||v.selected.length>200||new Set(v.selected).size!==v.selected.length||v.selected.some(x=>typeof x!=='string'||!x.trim()||x.length>200||['__proto__','prototype','constructor'].includes(x))))throw Error('Selección de bloques de Turista inválida.');
 }
 else if(key==='asallam_english_preferences_v2'){
 for(const value of Object.values(v)){if(!['string','number','boolean'].includes(typeof value)&&(!Array.isArray(value)||value.some(x=>!['string','number','boolean'].includes(typeof x))))throw Error('Ajustes de inglés incompatibles.');}
@@ -107,6 +109,7 @@ function previewImport(data,s){s=storage(s);const before=Object.create(null),con
 function restore(preview,s,replace){s=storage(s);const keys=Object.keys(preview.data.entries).filter(k=>replace||preview.before[k]===null);for(const k of Object.keys(preview.before))if(s.getItem(k)!==preview.before[k])throw Error('El progreso cambió en otra pestaña. Vuelve a seleccionar la copia para revisar los cambios.');const changed=[];try{for(const k of keys){if(s.getItem(k)===preview.data.entries[k])continue;s.setItem(k,preview.data.entries[k]);changed.push(k);}}catch(e){let failures=[];for(const k of changed.reverse()){try{if(preview.before[k]===null)s.removeItem(k);else s.setItem(k,preview.before[k]);}catch{failures.push(k);}}throw Error(failures.length?'No se pudo completar ni revertir todo. Conserva la copia previa y libera espacio antes de restaurarla.':'No se pudo guardar la copia. Se revirtieron los cambios realizados; puede faltar espacio.');}return changed.length;}
 const api={getSummary,makeBackup,parseBackup,previewImport,restore,allowed,validateValue,MAX_BYTES};root.AsallamProgress=api;if(typeof module!=='undefined'&&module.exports)module.exports=api;
 })(typeof window!=='undefined'?window:globalThis);
+
 
 
 
