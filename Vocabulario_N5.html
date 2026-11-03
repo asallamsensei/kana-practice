@@ -653,7 +653,7 @@
   
 </div>
 
-<script src="assets/match-music.js?v=20261103"></script>
+<script src="assets/match-music.js?v=answer-victory-20261103"></script>
 <script>
 let lista = [];
 let actual = 0;
@@ -716,6 +716,7 @@ const AUDIO_BASES = {
 };
 const audio = new Audio();
 const pairMusic = window.MatchMusic?.create({ isBusy: () => !audio.paused && !audio.ended });
+document.addEventListener("change", () => pairMusic?.cancel(), true);
 
 const AudioContextClass = window.AudioContext || window.webkitAudioContext;
 const audioCtx = AudioContextClass ? new AudioContextClass() : null;
@@ -739,8 +740,7 @@ function playBeep(freq, duration){
 }
 
 function sonidoCorrecto(){
-  playBeep(700, 0.08);
-  setTimeout(() => playBeep(900, 0.12), 80);
+  pairMusic?.correct();
 }
 
 function sonidoIncorrecto(){
@@ -755,6 +755,7 @@ let voces = [];
 let vozJa = null;
 
 function setAudioMode(modo){
+  pairMusic?.cancel();
   modoAudio = modo;
 
   document.getElementById("audio-ia").classList.toggle("activo", modo === "ia");
@@ -927,6 +928,7 @@ async function cargarNiveles(seleccion){
 }
 
 function toggleNivel(nivel){
+  pairMusic?.cancel();
   if(cargandoNivel) return;
 
   const seleccion = new Set(nivelesActivos);
@@ -985,6 +987,7 @@ function aplicarUI(){
 }
 
 function setModo(nuevoModo){
+  pairMusic?.cancel();
   modoActual = nuevoModo;
   aplicarUI();
 
@@ -1010,6 +1013,7 @@ function clickEsJp(){
 }
 
 function toggleDictadoDir(dir){
+  pairMusic?.cancel();
   if(dictadoDirs.has(dir)){
     if(dictadoDirs.size === 1) return; // nunca dejar 0
     dictadoDirs.delete(dir);
@@ -1191,6 +1195,7 @@ function elegirRonda(){
 }
 
 function siguiente(){
+  pairMusic?.cancel();
   if(lista.length < 3) return;
 
   const ronda = elegirRonda();
@@ -1314,6 +1319,7 @@ const romajiVisible = romaji.replace(/_\d+$/, "");
 }
 
 function resetStats(){
+  pairMusic?.cancel();
   aciertos = 0;
   errores = 0;
   racha = 0;

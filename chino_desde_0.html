@@ -511,7 +511,11 @@
   
 </div>
 
+<script src="assets/match-music.js?v=answer-victory-20261103"></script>
 <script>
+const answerMusic = window.MatchMusic?.create({ isBusy: () => !audio.paused && !audio.ended });
+document.addEventListener("change", () => answerMusic?.cancel(), true);
+
 
 let dataCurso = null;
 let leccionesActivas = new Set([1]);
@@ -594,8 +598,7 @@ function playBeep(freq, duration){
 }
 
 function sonidoCorrecto(){
-  playBeep(700, 0.08);
-  setTimeout(() => playBeep(900, 0.12), 80);
+  answerMusic?.correct();
 }
 
 function sonidoIncorrecto(){
@@ -609,6 +612,7 @@ let modoAudio = "ia";
 let voces = [];
 
 function setAudioMode(modo){
+  answerMusic?.cancel();
   modoAudio = modo;
 
   document.getElementById("audio-ia").classList.toggle("activo", modo === "ia");
@@ -738,6 +742,7 @@ function crearBotonesLecciones(){
 }
 
 function toggleLeccion(numero){
+  answerMusic?.cancel();
 
   if(leccionesActivas.has(numero)){
 
@@ -810,6 +815,7 @@ function aplicarUI(){
 }
 
 function setModo(nuevoModo){
+  answerMusic?.cancel();
   modoActual = nuevoModo;
   aplicarUI();
 
@@ -835,6 +841,7 @@ function clickEsZh(){
 }
 
 function toggleDictadoDir(dir){
+  answerMusic?.cancel();
   if(dictadoDirs.has(dir)){
     if(dictadoDirs.size === 1) return; // nunca dejar 0
     dictadoDirs.delete(dir);
@@ -1016,6 +1023,7 @@ function elegirRonda(){
 }
 
 function siguiente(){
+  answerMusic?.cancel();
   if(lista.length < 3) return;
 
   const ronda = elegirRonda();
@@ -1078,6 +1086,7 @@ function responder(letra){
 }
   
 function verificar(letraForzada){
+  if(yaValidado || !itemActualCorrecto) return;
   const res = document.getElementById("resultado");
   const info = document.getElementById("infoExtra");
 
@@ -1137,6 +1146,7 @@ function verificar(letraForzada){
 }
 
 function resetStats(){
+  answerMusic?.cancel();
   aciertos = 0;
   errores = 0;
   racha = 0;

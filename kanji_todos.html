@@ -480,7 +480,11 @@
   </div>
 </div>
 
+<script src="assets/match-music.js?v=answer-victory-20261103"></script>
 <script>
+const answerMusic = window.MatchMusic?.create();
+document.addEventListener("change", () => answerMusic?.cancel(), true);
+
 /* =========================================================
    DATA + ESTADO
 ========================================================= */
@@ -525,6 +529,7 @@ function guardarStats(){
 }
 
 function resetStats(){
+  answerMusic?.cancel();
   aciertos = 0;
   errores = 0;
   racha = 0;
@@ -566,8 +571,7 @@ function playBeep(freq, duration){
 }
 
 function sonidoCorrecto(){
-  playBeep(700, 0.08);
-  setTimeout(() => playBeep(900, 0.12), 80);
+  answerMusic?.correct();
 }
 
 function sonidoIncorrecto(){
@@ -662,6 +666,7 @@ function construirChipsGrados(){
     chip.textContent = String(g);
 
     chip.onclick = () => {
+      answerMusic?.cancel();
       const todosActivos = gradosDisponibles.every(x => gradosSeleccionados.has(x));
 
       // si estaban todos activos y tocas uno => dejar solo ese (igual que tu lógica anterior)
@@ -704,6 +709,7 @@ function syncChipsGrados(){
 
 /* Botones Todo / Ninguna */
 function seleccionarTodo(){
+  answerMusic?.cancel();
   gradosSeleccionados = new Set(gradosDisponibles);
   syncChipsGrados();
   aplicarFiltro();
@@ -713,6 +719,7 @@ function seleccionarTodo(){
 }
 
 function seleccionarNinguna(){
+  answerMusic?.cancel();
   gradosSeleccionados.clear();
   syncChipsGrados();
   aplicarFiltro();
@@ -727,6 +734,7 @@ function seleccionarNinguna(){
    MODO + POOL
 ========================================================= */
 function setModo(modo){
+  answerMusic?.cancel();
   modoActual = modo;
 
   document.body.classList.toggle("modo-es-kanji", modo === "es_kanji");
@@ -743,6 +751,7 @@ function setModo(modo){
 }
 
 function setPoolScope(scope){
+  answerMusic?.cancel();
   poolScope = scope;
 
   $("pool-sel")?.classList.toggle("activo", poolScope === "seleccion");
@@ -866,6 +875,7 @@ function preguntaESKanji(){
    FLUJO
 ========================================================= */
 function siguiente(){
+  answerMusic?.cancel();
 
 $("historiaBox").style.display = "none";
 $("historiaBox").innerText = "";
@@ -955,6 +965,7 @@ function responder(letra){
 }
 
 function verificar(input){
+  if(yaValidado || !actual) return;
   input = (input || "").trim().toLowerCase();
   const res = $("resultado");
 

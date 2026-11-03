@@ -1,4 +1,4 @@
-/* Shared, optional musical feedback for matching boards. No learning data is stored here. */
+/* Shared, optional musical feedback for answers and matching boards. No learning data is stored here. */
 (function (root) {
   'use strict';
   if (root.MatchMusic) return;
@@ -23,7 +23,7 @@
   function speaking() {
     try {
       if (root.speechSynthesis && (root.speechSynthesis.speaking || root.speechSynthesis.pending)) return true;
-      return !!(root.document && Array.from(root.document.querySelectorAll('audio,video')).some(function (media) {
+      return !!(root.document && Array.from(root.document.querySelectorAll('audio:not([data-match-music-background]),video:not([data-match-music-background])')).some(function (media) {
         return !media.paused && !media.ended;
       }));
     } catch (_) { return false; }
@@ -49,23 +49,25 @@
   }
   function play(job) {
     const now = context.currentTime + 0.015;
-    tone(NOTES[job.index % NOTES.length] * Math.pow(2, Math.floor(job.index / NOTES.length)), now, 0.23, 0.13);
+    if (!job.answer) tone(NOTES[job.index % NOTES.length] * Math.pow(2, Math.floor(job.index / NOTES.length)), now, 0.23, 0.23);
     let duration = 0.29;
-    if (job.complete) {
-      // A separate rising flourish followed by a major chord. Maximum summed gain: .33.
+    if (job.complete || job.answer) {
+      const offset = job.answer ? -0.30 : 0;
+      // A separate rising flourish followed by a major chord. Chord gain: .33; the brief preceding tail keeps the total below .4.
       [523.2511,659.2551,783.9909].forEach(function (frequency, index) {
-        tone(frequency, now + 0.30 + index * 0.11, 0.18, 0.18);
+        tone(frequency, now + offset + 0.30 + index * 0.11, 0.18, 0.18);
       });
       [523.2511,659.2551,783.9909].forEach(function (frequency) {
-        tone(frequency, now + 0.67, 0.55, 0.11);
+        tone(frequency, now + offset + 0.67, 0.55, 0.11);
       });
-      duration = 1.27;
+      duration = 1.27 + offset;
     }
     busyUntil = context.currentTime + duration;
     schedulePump(duration * 1000 + 30);
   }
   function pump() {
-    queue = queue.filter(function (job) { return allowed(job) && Date.now() - job.created < 15000; });
+    // Sentence audio can be long; keep earned answer feedback through it, with a bounded expiry.
+    queue = queue.filter(function (job) { return allowed(job) && Date.now() - job.created < (job.answer ? 120000 : 15000); });
     if (!queue.length) return;
     if (!context || context.state === 'closed') { queue = []; return; }
     if (context.state !== 'running') { schedulePump(120); return; }
@@ -95,7 +97,7 @@
     button = root.document.createElement('button');
     button.type = 'button'; button.id = 'matchingMusicToggle';
     button.style.cssText = 'font:inherit;font-size:13px;color:inherit;background:transparent;border:1px solid currentColor;border-radius:10px;padding:9px 13px;min-height:40px;cursor:pointer';
-    button.setAttribute('aria-label', 'Activar o silenciar la música de Emparejar');
+    button.setAttribute('aria-label', 'Activar o silenciar la música de aciertos y parejas');
     button.addEventListener('click', function () { const effective = enabled; setEnabled(!effective); });
     holder.appendChild(button);
     const footer = root.document.querySelector('footer');
@@ -104,11 +106,24 @@
   }
   function create(options) {
     options = options || {};
-    const board = {isBusy:typeof options.isBusy === 'function' ? options.isBusy : function () { return false; },generation:0, index:0, finished:false};
+    const board = {isBusy:typeof options.isBusy === 'function' ? options.isBusy : function () { return false; },generation:0, index:0, finished:false, answered:new Set()};
     updateButton();
     return {
       cancel: function () { queue = queue.filter(function (job) { return job.board !== board; }); },
-      reset: function (settings) { queue.forEach(function (job) { if (job.board === board) job.keepCompletion = !!(settings && settings.keepCompletion); }); board.generation++; board.index = 0; board.finished = false; queue = queue.filter(function (job) { return job.board !== board || job.keepCompletion; }); },
+      reset: function (settings) { queue.forEach(function (job) { if (job.board === board) job.keepCompletion = !!(settings && settings.keepCompletion); }); board.generation++; board.index = 0; board.finished = false; board.answered.clear(); queue = queue.filter(function (job) { return job.board !== board || job.keepCompletion; }); },
+      correct: function (token) {
+        // Callers guard answered questions; optional stable tokens also reject duplicate events.
+        if (token !== undefined && token !== null) {
+          if (board.answered.has(token)) return;
+          board.answered.add(token);
+          if (board.answered.size > 512) board.answered.delete(board.answered.values().next().value);
+        }
+        const job = {board:board,generation:board.generation,answer:true,created:Date.now()};
+        if (!allowed(job)) return;
+        contextForGesture();
+        queue.push(job);
+        schedulePump(35);
+      },
       match: function (result) {
         if (board.finished) return;
         const index = board.index++;
@@ -130,5 +145,6 @@
     root.document.addEventListener('keydown', function (event) { if (event.key === 'Enter' || event.key === ' ') contextForGesture(); }, true);
     if (root.document.readyState === 'loading') root.document.addEventListener('DOMContentLoaded', installControl); else installControl();
   }
+  root.addEventListener && root.addEventListener('pagehide', function () { queue = []; });
   root.addEventListener && root.addEventListener('storage', function (event) { if (event.key === KEY) { enabled = event.newValue !== 'off'; if (!enabled) queue = []; updateButton(); } });
 })(window);

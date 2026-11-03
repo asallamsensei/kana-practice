@@ -88,7 +88,11 @@
     Errores: <span id="errores">0</span>
 </div>
 
+<script src="assets/match-music.js?v=answer-victory-20261103"></script>
 <script>
+const answerMusic = window.MatchMusic?.create();
+document.addEventListener("change", () => answerMusic?.cancel(), true);
+
 // ===============================
 // HANGUL — SÍLABAS BÁSICAS (V1)
 // Agrupadas por vocal
@@ -138,6 +142,7 @@ let aciertos = 0;
 let errores = 0;
 
 function siguiente() {
+  answerMusic?.cancel();
     actual = Math.floor(Math.random() * hangul.length);
     document.getElementById("hangul").innerText = hangul[actual][0];
     document.getElementById("respuesta").innerText = "";
@@ -152,10 +157,12 @@ function mostrarRomanizacion() {
 }
 
 function verificar() {
+  if(yaValidado) return;
     const usuario = document.getElementById("respuestaUsuario").value.trim().toLowerCase();
     const correcto = hangul[actual][1];
 
     if (usuario === correcto) {
+        answerMusic?.correct();
         document.getElementById("respuesta").innerText = "Correcto ✔ (" + correcto + ")";
         document.getElementById("respuesta").className = "correcto";
         aciertos++;

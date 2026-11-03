@@ -939,7 +939,7 @@
   
 </div>
 
-<audio id="bgMusic" preload="auto"></audio>
+<audio id="bgMusic" data-match-music-background preload="auto"></audio>
 
 <audio id="sfxExplosion" preload="auto">
   <source src="data/velocidad/bum_suelo.mp3" type="audio/mpeg">
@@ -949,7 +949,11 @@
   <source src="data/velocidad/bum_asteroide.mp3" type="audio/mpeg">
 </audio>
   
+<script src="assets/match-music.js?v=answer-victory-20261103"></script>
 <script>
+const answerMusic = window.MatchMusic?.create();
+document.addEventListener("change", () => answerMusic?.cancel(), true);
+
 (() => {
   // ---------- Helpers ----------
   const $ = (id) => document.getElementById(id);
@@ -2164,7 +2168,7 @@ function submitAnswer() {
 
   // Destruye el meteoro
   killMeteor(m, "hit");
-  playHit();
+  answerMusic?.correct(m);
   
   // Aquí utilizamos `burstPixelFX` para las partículas (lluvia de pixels)
   if (m.isBonus) {
@@ -2237,6 +2241,7 @@ function nextLevel() {
 
   // ---------- Controles ----------
   function start(){
+  answerMusic?.cancel();
     state.target = targetForLevel(state.level);
     state.baseSpeed = FIXED.baseSpeed;
     state.spawnEveryMs = FIXED.spawnStartMs;
@@ -2261,6 +2266,7 @@ function nextLevel() {
   }
 
   function resetAll(){
+  answerMusic?.cancel();
     for(const m of state.meteors.values()){
       try { m.el.remove(); } catch {}
     }
@@ -2297,6 +2303,7 @@ function nextLevel() {
   }
 
   function gameOver(){
+    answerMusic?.cancel();
     state.running = false;
   
     // 🧹 BORRAR METEOROS INMEDIATAMENTE

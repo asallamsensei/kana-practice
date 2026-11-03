@@ -357,7 +357,11 @@ img{
 
 </div>
 
+<script src="assets/match-music.js?v=answer-victory-20261103"></script>
 <script>
+const answerMusic = window.MatchMusic?.create({ isBusy: () => Boolean(currentAudio && !currentAudio.paused && !currentAudio.ended) });
+document.addEventListener("change", () => answerMusic?.cancel(), true);
+
 const JSON_PATH = "data/arcoiris/super_json.json";
 const AUDIO_PATH = "data/arcoiris/audios/";
 const WORD_AUDIO_PATH = "data/arcoiris/audios/palabras/";
@@ -382,8 +386,7 @@ function playBeep(freq, duration){
 }
 
 function sonidoCorrecto(){
-  playBeep(700, 0.08);
-  setTimeout(() => playBeep(900, 0.12), 80);
+  answerMusic?.correct();
 }
 
 function sonidoIncorrecto(){
@@ -393,6 +396,7 @@ function sonidoIncorrecto(){
 let DATA;
 let currentPage = 1;
 let currentAudio = null;
+let answeredQuizIndex = -1;
   
 const EXTRA_IMAGES = [
   "img_extra_01",
@@ -434,12 +438,14 @@ async function loadJSON(){
 loadJSON();
 
 function backMenu(){
+  answerMusic?.cancel();
   document.getElementById("reading").classList.add("hidden");
   document.getElementById("quiz").classList.add("hidden");
   document.getElementById("menu").classList.remove("hidden");
 }
 
 function startReading(){
+  answerMusic?.cancel();
   document.getElementById("menu").classList.add("hidden");
   document.getElementById("reading").classList.remove("hidden");
   renderPage();
@@ -516,6 +522,8 @@ function playManagedAudio(src){
 }
   
 function startQuiz(){
+  answeredQuizIndex = -1;
+  answerMusic?.cancel();
   document.getElementById("menu").classList.add("hidden");
   document.getElementById("quiz").classList.remove("hidden");
   generateQuiz();
@@ -828,6 +836,8 @@ function findLineAudio(line){
 }
 
 function answerWithFeedback(q, opt){
+  if(answeredQuizIndex === currentQuestionIndex) return;
+  answeredQuizIndex = currentQuestionIndex;
   const fb = document.getElementById("quizFeedback");
   fb.style.display = "block";
 
@@ -855,6 +865,7 @@ function answerWithFeedback(q, opt){
   nextBtn.textContent = "Siguiente ▶";
   nextBtn.style.marginTop = "12px";
   nextBtn.onclick = () => {
+    answerMusic?.cancel();
     currentQuestionIndex++;
     showQuestion();
   };
@@ -863,7 +874,10 @@ function answerWithFeedback(q, opt){
 }
  
 function answer(q,opt){
+  if(answeredQuizIndex === currentQuestionIndex) return;
+  answeredQuizIndex = currentQuestionIndex;
   if(opt===q.correct){
+    answerMusic?.correct();
     score[q.type]++;
   }else{
     score.wrong++;

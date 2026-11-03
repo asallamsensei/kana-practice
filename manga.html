@@ -506,7 +506,12 @@
     </aside>
   </div>
 
-  <script>
+  <script src="assets/match-music.js?v=answer-victory-20261103"></script>
+<script>
+let answerRound = 0;
+const answerMusic = window.MatchMusic?.create({ isBusy: () => !audio.paused && !audio.ended });
+document.addEventListener("change", () => answerMusic?.cancel(), true);
+
     /* ==============================
        CONFIG
     ============================== */
@@ -558,8 +563,7 @@ function playBeep(freq, duration){
 }
 
 function sonidoCorrecto(){
-  playBeep(700, 0.08);
-  setTimeout(() => playBeep(900, 0.12), 80);
+  answerMusic?.correct();
 }
 
 function sonidoIncorrecto(){
@@ -603,6 +607,7 @@ function sonidoIncorrecto(){
     }
 
     function reiniciarStats(){
+  answerMusic?.cancel();
       const all = loadStatsObj();
       delete all[statsKey()];
       saveStatsObj(all);
@@ -877,6 +882,8 @@ function sonidoIncorrecto(){
     }
 
     function generarPregunta(){
+  answerRound++;
+  answerMusic?.cancel();
       construirPool();
 
       if (poolActual.length < 3){
@@ -968,8 +975,10 @@ function sonidoIncorrecto(){
     async function responder(key){
       if (!actualItem || yaRespondido) return;
       yaRespondido = true;
+      const round = answerRound;
 
       await reproducirAudioSiCorresponde();
+      if(round !== answerRound) return;
 
       const correctaTexto = opcionesActuales.find(x => x.key === correctaClave)?.text || "";
       const escogidaTexto = opcionesActuales.find(x => x.key === key)?.text || "";

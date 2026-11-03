@@ -483,7 +483,11 @@
     <div class="footer">Un solo archivo HTML. Ábrelo en tu navegador y listo.</div>
   </div>
 
-  <script>
+  <script src="assets/match-music.js?v=answer-victory-20261103"></script>
+<script>
+const answerMusic = window.MatchMusic?.create();
+document.addEventListener("change", () => answerMusic?.cancel(), true);
+
     const vocabulary = [
       {
         word: "猫",
@@ -781,6 +785,7 @@
       });
 
       if (isCorrect) {
+        answerMusic?.correct();
         clickedBtn.classList.add('correct');
         state.correct++;
         state.money += REWARD_PER_CORRECT;
@@ -818,6 +823,7 @@
     }
 
     function nextQuestion() {
+  answerMusic?.cancel();
       if (!state.started || state.patientLeft) return;
       if (!state.locked) return;
 
@@ -859,6 +865,7 @@
     }
 
     function startGame() {
+  answerMusic?.cancel();
       state.questions = shuffle(vocabulary);
       state.current = 0;
       state.started = true;

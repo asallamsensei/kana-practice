@@ -327,7 +327,11 @@
 
 </div>
 
+<script src="assets/match-music.js?v=answer-victory-20261103"></script>
 <script>
+const answerMusic = window.MatchMusic?.create({ isBusy: () => !audioVocab.paused && !audioVocab.ended });
+document.addEventListener("change", () => answerMusic?.cancel(), true);
+
 let DATA = { bloques: [] };
 
 let bloqueIdx = 0;
@@ -489,6 +493,7 @@ function setStatsScope(scope){
 }
 
 function setModo(modo){
+  answerMusic?.cancel();
   modoActual = modo;
 
   ["jp-es","romaji","es-jp","kanji","mix"].forEach(x=>{
@@ -521,6 +526,7 @@ function modoNombre(m){
 }
 
 function cambiarBloque(){
+  answerMusic?.cancel();
   bloqueIdx = Number($("selectBloque").value) || 0;
   yaValidado = false;
   limpiarResultado();
@@ -629,6 +635,7 @@ function preguntaKanjiMC(b){
 
 // ====== Flujo del juego ======
 function siguiente(){
+  answerMusic?.cancel();
   const b = DATA.bloques[bloqueIdx];
   if(!b) return;
 
@@ -675,6 +682,7 @@ function siguiente(){
 }
 
 function verificar(){
+  if(yaValidado || !actual) return;
   const input = $("respuestaUsuario").value.trim();
   const res = $("resultado");
 
@@ -691,6 +699,7 @@ function verificar(){
   if(actual.tipo === "kanji_mc"){
     const r = input.toLowerCase();
     if(r === actual.correcta){
+      answerMusic?.correct();
       res.className = "correcto";
       res.innerText = "Correcto ✔";
       aciertos++;
@@ -725,6 +734,7 @@ function verificar(){
   }
 
   if(ok){
+    answerMusic?.correct();
     res.className = "correcto";
     res.innerText = "Correcto ✔";
     aciertos++;
@@ -752,6 +762,7 @@ function manejarEnter(event){
 }
 
 function resetStats(){
+  answerMusic?.cancel();
   aciertos = 0;
   errores = 0;
   pintarStats();

@@ -498,7 +498,7 @@
     <div class="dialog-actions"><button id="cancel-reset" class="button" type="button">Conservar</button><button id="confirm-reset" class="button" type="button">Borrar progreso</button></div>
   </dialog>
 
-<script src="assets/match-music.js?v=20261103"></script>
+<script src="assets/match-music.js?v=answer-victory-20261103"></script>
 <script>window.AsallamJourneyHooks={create:()=>({active:false,done:false,matches:()=>true,count(){},paint(){},lock(){},checkCatalog(){},fail(e){const p=document.createElement('p');p.textContent=e.message;(document.querySelector('main')||document.body).prepend(p);},async init(){const q=new URLSearchParams(location.search);if(!q.has('ruta')&&!q.has('paso'))return true;this.fail(Error('No se pudo cargar la ruta. Recarga la página o vuelve a ruta-n5.html.'));return false;}})};</script>
 <script src="assets/journey-n5.js?v=20261031"></script><script src="assets/journey-app-hooks.js?v=20261031b"></script>
 <script src="assets/review-history.js?v=20261030"></script>
@@ -924,9 +924,9 @@ if (typeof document !== 'undefined') (function() {
     $('feedback-tip').textContent='';
   }
   function respond(outcome,selected){
-    const q=state.current;if(!q||q.answered)return;
+    const q=state.current;if(!q||q.answered||state.view!=='quiz')return;
     state.session.shuffleTrace.push(q.shuffleSignature);
-    q.answered=true;q.outcome=outcome;q.selected=selected;state.session.completed++;record(q.item,outcome);renderQuestion();reveal();playEffect(outcome==='correct');
+    q.answered=true;q.outcome=outcome;q.selected=selected;state.session.completed++;record(q.item,outcome);renderQuestion();reveal();if(outcome==='correct')matchMusic?.correct(q);else playEffect(false);
     if(state.prefs.autoAudio)playItem(q.item);$('next-question').focus({preventScroll:true});
   }
   function answerOption(index){const q=state.current;if(!q||q.answered||q.auditory&&!q.heard)return;const item=q.options[index];if(!item)return;respond(q.valid.some(v=>v.id===item.id)?'correct':'wrong',index);}
@@ -998,7 +998,7 @@ if (typeof document !== 'undefined') (function() {
       notice('La huella está seleccionada. Cópiala con Ctrl+C, Cmd+C o la opción Copiar de tu móvil.',false,6000);
     }
   }
-  function finish(){if(!state.tiles?.length || !state.tiles.every(t=>t.matched))matchMusic?.cancel();
+  function finish(manual=false){if(manual || state.prefs.activity==='match'&&(!state.tiles?.length || !state.tiles.every(t=>t.matched)))matchMusic?.cancel();
     const session=state.session;if(!session||session.ended)return;
     cancel();session.ended=true;session.finishedAt=Date.now();session.elapsed=session.finishedAt-session.started;
     const complete=session.completed>0&&done(),unlimited=!state.prefs.review&&state.prefs.length===0;
@@ -1017,7 +1017,7 @@ if (typeof document !== 'undefined') (function() {
   }
   function formatTime(ms){const sec=Math.floor(ms/1000);return String(Math.floor(sec/60)).padStart(2,'0')+':'+String(sec%60).padStart(2,'0');}
 
-  const matchMusic = window.MatchMusic?.create({isEnabled: () => state.prefs.effects, onEnabledChange: value => {state.prefs.effects=value; $("sound-effects").checked=value; persist();}, isBusy: () => !!sound.audioBusy});
+  const matchMusic = window.MatchMusic?.create({isBusy: () => !!sound.audioBusy || !!sound.pending || !!sound.clip && !sound.clip.paused && !sound.clip.ended});
   function nextBoard(){
     if(done()){finish();return;}
     state.selected=null;state.lock=false;state.board++;
@@ -1321,13 +1321,13 @@ if (typeof document !== 'undefined') (function() {
     const restarts={'session-length':['length',Number],'match-count':['pairs',Number],'write-format':['writeFormat',String],'dictation-target':['dictationTarget',String]};
     for(const [id,[key,convert]] of Object.entries(restarts))$(id).addEventListener('change',e=>{state.prefs[key]=convert(e.target.value);persist();start();});
     $('review-only').addEventListener('change',e=>{state.prefs.review=e.target.checked;persist();start();});
-    $('show-furigana').addEventListener('change',e=>{state.prefs.furigana=e.target.checked;persist();if(state.view==='quiz'){renderQuestion(true);if(state.current?.answered)reveal();}else if(state.view==='match')renderBoard();else if(state.view==='explore')renderExplore();});
-    for(const [id,key] of [['sound-effects','effects'],['auto-audio','autoAudio']])$(id).addEventListener('change',e=>{state.prefs[key]=e.target.checked;persist();});
-    $('audio-source').addEventListener('change',e=>{stopAudio();state.prefs.audioSource=e.target.value;persist();renderControls();if(state.view==='quiz'&&state.current?.auditory&&!state.current.answered&&!availableModes().includes('listen'))nextQuestion();});
-    $('speech-rate').addEventListener('input',e=>{state.prefs.rate=Number(e.target.value);persist();$('rate-value').textContent=state.prefs.rate.toFixed(2)+'×';});
+    $('show-furigana').addEventListener('change',e=>{matchMusic?.cancel();state.prefs.furigana=e.target.checked;persist();if(state.view==='quiz'){renderQuestion(true);if(state.current?.answered)reveal();}else if(state.view==='match')renderBoard();else if(state.view==='explore')renderExplore();});
+    for(const [id,key] of [['sound-effects','effects'],['auto-audio','autoAudio']])$(id).addEventListener('change',e=>{matchMusic?.cancel();state.prefs[key]=e.target.checked;persist();});
+    $('audio-source').addEventListener('change',e=>{matchMusic?.cancel();stopAudio();state.prefs.audioSource=e.target.value;persist();renderControls();if(state.view==='quiz'&&state.current?.auditory&&!state.current.answered&&!availableModes().includes('listen'))nextQuestion();});
+    $('speech-rate').addEventListener('input',e=>{matchMusic?.cancel();state.prefs.rate=Number(e.target.value);persist();$('rate-value').textContent=state.prefs.rate.toFixed(2)+'×';});
     $('theme-toggle').addEventListener('click',()=>{state.prefs.theme=state.prefs.theme==='dark'?'light':'dark';persist();renderControls();});
     $('listen-question').addEventListener('click',playCurrent);$('answer-form').addEventListener('submit',answerWritten);
-    $('skip-question').addEventListener('click',()=>respond('skipped'));$('next-question').addEventListener('click',()=>{if(state.current?.answered)nextQuestion();});
+    $('skip-question').addEventListener('click',()=>respond('skipped'));$('next-question').addEventListener('click',()=>{if(state.current?.answered){matchMusic?.cancel();nextQuestion();}});
     $('end-session').addEventListener('click',finish);$('match-finish').addEventListener('click',finish);
     $('copy-review-code').addEventListener('click',copyReviewCode);
     $('repeat-session').addEventListener('click',start);$('review-session').addEventListener('click',()=>{state.prefs.review=true;persist();start();});
@@ -1346,7 +1346,7 @@ if (typeof document !== 'undefined') (function() {
       if(e.key==='Enter'&&tag==='BUTTON')return;
       if(state.view!=='quiz')return;const k=e.key.toLowerCase();
       if(k==='r'){e.preventDefault();playCurrent();return;}
-      if(k==='enter'&&state.current?.answered){e.preventDefault();nextQuestion();return;}
+      if(k==='enter'&&state.current?.answered){e.preventDefault();matchMusic?.cancel();nextQuestion();return;}
       if(state.prefs.activity==='quiz'){const index=/^[1-4]$/.test(k)?Number(k)-1:['a','b','c','d'].indexOf(k);if(index>=0){e.preventDefault();answerOption(index);}}
     });
     $('typed-answer').addEventListener('compositionstart',()=>{composing=true;});$('typed-answer').addEventListener('compositionend',()=>{composing=false;});

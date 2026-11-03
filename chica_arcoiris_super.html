@@ -531,7 +531,12 @@
     </div>
   </div>
 
+<script src="assets/match-music.js?v=answer-victory-20261103"></script>
 <script>
+const answerReadingAudio = new Set();
+const answerMusic = window.MatchMusic?.create({ isBusy: () => Array.from(answerReadingAudio).some(audio => !audio.paused && !audio.ended) });
+document.addEventListener("change", () => answerMusic?.cancel(), true);
+
 /* ===========================
    CONFIG (paths)
 =========================== */
@@ -880,6 +885,7 @@ function buildCloze(text, target){
 }
 
 function genQuestion(){
+  answerMusic?.cancel();
   if(!DATA) return;
 
   const pool = buildPool();
@@ -1244,6 +1250,9 @@ function checkAnswer(inputValue, fromMCQ=false){
     return;
   }
 
+  if(Q.answerLocked) return;
+  Q.answerLocked = true;
+
   // Special: order_lines
   if(Q.type === "order_lines"){
     const user = normalizeAnswer(inputValue || answerInput.value);
@@ -1259,6 +1268,7 @@ function checkAnswer(inputValue, fromMCQ=false){
     }
 
     if(ok){
+      answerMusic?.correct();
       progress.ok++; progress.streak++;
       markMastered(Q.key);
       feedback.className = "feedback ok";
@@ -1286,6 +1296,7 @@ function checkAnswer(inputValue, fromMCQ=false){
   }
 
   if(ok){
+    answerMusic?.correct();
     progress.ok++;
     progress.streak++;
     // mastery: after seen >= 2 and correct
@@ -1305,6 +1316,7 @@ function checkAnswer(inputValue, fromMCQ=false){
 }
 
 function revealAnswer(){
+  answerMusic?.cancel();
   const Q = currentQuestion;
   if(!Q){
     feedback.className = "feedback bad";
@@ -1312,10 +1324,12 @@ function revealAnswer(){
     return;
   }
   feedback.className = "feedback";
+  Q.answerLocked = true;
   feedback.textContent = "Respuesta:\n" + (Q.reveal || Q.answer || "—");
 }
 
 function skipQuestion(){
+  answerMusic?.cancel();
   if(!currentQuestion){
     feedback.className = "feedback bad";
     feedback.textContent = "No hay pregunta activa.";
@@ -1334,6 +1348,7 @@ function skipQuestion(){
    MODES
 =========================== */
 function setMode(mode){
+  answerMusic?.cancel();
   currentMode = mode;
   modeLabel.textContent = mode === "quiz" ? "Quiz" : (mode === "read" ? "Lectura" : "Búsqueda");
 
@@ -1380,10 +1395,11 @@ async function renderReadPage(pageId){
 
       const ok = await new Promise(resolve => {
         const a = new Audio();
+        answerReadingAudio.add(a);
         a.src = src;
-        a.onended = () => resolve(true);
-        a.onerror = () => resolve(false);
-        a.play().then(()=>{}).catch(()=>resolve(false));
+        a.onended = () => { answerReadingAudio.delete(a); resolve(true); };
+        a.onerror = () => { answerReadingAudio.delete(a); resolve(false); };
+        a.play().then(()=>{}).catch(()=>{ answerReadingAudio.delete(a); resolve(false); });
         // fail-safe timeout
         setTimeout(()=>resolve(false), 12000);
       });
@@ -1522,6 +1538,7 @@ function wireUI(){
 
   btnReset.onclick = () => {
     if(!confirm("¿Seguro? Se borrarán estadísticas/progreso local.")) return;
+    answerMusic?.cancel();
     localStorage.removeItem(LS_KEY);
     progress = { ok:0, bad:0, skip:0, streak:0, seen:{}, mastered:{} };
     renderStats();

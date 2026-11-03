@@ -125,7 +125,11 @@
   </div>
 </div>
 
+<script src="assets/match-music.js?v=answer-victory-20261103"></script>
 <script>
+const answerMusic = window.MatchMusic?.create();
+document.addEventListener("change", () => answerMusic?.cancel(), true);
+
 let verbos = [];
 let formasDisponibles = [];      // lista global de formas (para generar distractores)
 let preguntaActual = null;       // { verbo, formaTexto, jp, polaridad, meta }
@@ -232,6 +236,7 @@ function renderBotones(opciones){
 }
 
 function siguiente(){
+  answerMusic?.cancel();
   preguntaActual = construirPregunta();
   yaRespondido = false;
   limpiarUI();
@@ -249,6 +254,7 @@ function responder(opcionElegida){
   const det = document.getElementById("detalle");
 
   if(opcionElegida === preguntaActual.forma){
+    answerMusic?.correct();
     res.textContent = "Correcto ✔";
     res.className = "correcto";
     aciertos++;
@@ -288,6 +294,7 @@ function mostrarRespuesta(){
 }
 
 function reiniciar(){
+  answerMusic?.cancel();
   aciertos = 0;
   errores = 0;
   document.getElementById("aciertos").textContent = "0";

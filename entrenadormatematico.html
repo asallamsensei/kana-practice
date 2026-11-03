@@ -525,7 +525,12 @@ table {
     </div>
   </div>
   
-  <script>
+  <script src="assets/match-music.js?v=answer-victory-20261103"></script>
+<script>
+const celebratedAnswers = new WeakSet();
+const answerMusic = window.MatchMusic?.create();
+document.addEventListener("change", () => answerMusic?.cancel(), true);
+
     let ejercicios = [];
     let progreso = {
       sesiones: 0,
@@ -854,6 +859,7 @@ table {
     }
 
     function generarEjercicios() {
+  answerMusic?.cancel();
       guardarRespuestasActuales();
       const { cantidad, nivel, maxBase } = obtenerParametros();
 
@@ -881,6 +887,7 @@ table {
     }
 
     function generarFracciones() {
+  answerMusic?.cancel();
       guardarRespuestasActuales();
       const { cantidad, nivel, maxBase } = obtenerParametros();
 
@@ -912,6 +919,7 @@ table {
 
       let aciertos = 0;
       let total = 0;
+      let newCorrectAnswer = false;
 
       ejercicios.forEach((item) => {
         total++;
@@ -932,6 +940,10 @@ table {
           if (Math.abs(okUsuario.valor - okCorrecta.valor) < 0.000001) {
             item.resultadoHtml = `<span class="status-pill status-correct">Correcto</span>`;
             item.observacion = "Bien";
+            if(!celebratedAnswers.has(item)){
+              celebratedAnswers.add(item);
+              newCorrectAnswer = true;
+            }
             aciertos++;
           } else {
             item.resultadoHtml = `<span class="status-pill status-incorrect">Incorrecto</span>`;
@@ -942,6 +954,8 @@ table {
           item.observacion = "Escribe número o fracción (ej: 3/4)";
         }
       });
+
+      if(newCorrectAnswer) answerMusic?.correct();
 
       progreso.sesiones += 1;
       progreso.aciertosTotales += aciertos;
@@ -958,6 +972,7 @@ table {
     }
 
     function limpiarTodo() {
+  answerMusic?.cancel();
       const confirmar = confirm("¿Quieres borrar todo el progreso acumulado?");
       if (!confirmar) return;
     

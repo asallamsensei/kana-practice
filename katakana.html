@@ -469,7 +469,11 @@
   </div>
 </div>
 
+<script src="assets/match-music.js?v=answer-victory-20261103"></script>
 <script>
+const answerMusic = window.MatchMusic?.create({ isBusy: () => !audio.paused && !audio.ended });
+document.addEventListener("change", () => answerMusic?.cancel(), true);
+
 /* ===============================
    CONFIG
 =============================== */
@@ -632,6 +636,7 @@ function aplicarUI(){
 }
 
 function setModoBase(nuevoBase){
+  answerMusic?.cancel();
   modoBase = nuevoBase;
 
   // si entras a mix, no tocamos dictadoOn (queda guardado para cuando vuelvas)
@@ -642,6 +647,7 @@ function setModoBase(nuevoBase){
 }
 
 function toggleDictado(){
+  answerMusic?.cancel();
   // en mix, el dictado es random, así que el toggle no hace nada (lo ignoramos)
   if(modoBase === "mix") return;
 
@@ -656,6 +662,7 @@ function toggleDictado(){
    POOL scope UI
 =============================== */
 function setPoolScope(scope){
+  answerMusic?.cancel();
   poolScope = scope;
   $("pool-sel")?.classList.toggle("activo", poolScope === "seleccion");
   $("pool-glob")?.classList.toggle("activo", poolScope === "global");
@@ -668,6 +675,7 @@ function setPoolScope(scope){
    Selección de bloques (chips)
 =============================== */
 function seleccionarTodo(){
+  answerMusic?.cancel();
   bloquesActivos = new Set(DATA.bloques.map((_, i)=>i));
   [...$("chipsBloques").children].forEach(ch=>ch.classList.add("activo"));
   $("btnTodo")?.classList.add("activo");
@@ -677,6 +685,7 @@ function seleccionarTodo(){
 }
 
 function seleccionarNinguna(){
+  answerMusic?.cancel();
   bloquesActivos.clear();
   [...$("chipsBloques").children].forEach(ch=>ch.classList.remove("activo"));
   $("btnTodo")?.classList.remove("activo");
@@ -838,6 +847,7 @@ function getActivosValidos(){
 }
 
 function siguiente(){
+  answerMusic?.cancel();
   const activos = getActivosValidos();
   if(activos.length === 0){
     $("promptMain").innerText = (DATA.bloques.length ? "Selecciona un bloque con ≥ 3 palabras" : "No hay data");
@@ -884,6 +894,7 @@ function responder(letra){
 }
 
 function verificar(letraForzada){
+  if(yaValidado || !itemCorrectoActual) return;
   const res = $("resultado");
   const letra = (letraForzada || "").toString().toLowerCase().trim();
 
@@ -894,6 +905,7 @@ function verificar(letraForzada){
   const extra = parRevision(itemCorrectoActual);
   
   if(letra === correctaLetra){
+    answerMusic?.correct();
     res.className = "correcto";
     res.innerText = `Correcto ✔\n${extra}`;
   
@@ -958,6 +970,7 @@ function renderChips(){
     chip.textContent = b.nombre || `Bloque ${i+1}`;
 
     chip.onclick = ()=>{
+      answerMusic?.cancel();
       $("btnTodo")?.classList.remove("activo");
 
       if(bloquesActivos.has(i)) bloquesActivos.delete(i);

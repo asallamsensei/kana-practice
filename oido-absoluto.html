@@ -989,7 +989,17 @@
     </section>
   </div>
 
+<script src="assets/match-music.js?v=answer-victory-20261103"></script>
 <script>
+let answerToneUntil = 0;
+let answerTonePendingUntil = 0;
+const answerMusic = window.MatchMusic?.create({ isBusy: () => Date.now() < answerTonePendingUntil || Boolean(audioCtx && audioCtx.state === "running" && audioCtx.currentTime < answerToneUntil) });
+document.addEventListener("change", () => answerMusic?.cancel(), true);
+document.addEventListener("click", event => {
+  if(event.target.closest("#btnNextQuiz,#btnNextKeyboard,#btnNextMemory,#btnNotationLetter,#btnNotationSolfege,#btnResetProgress,.module-btn")) answerMusic?.cancel();
+}, true);
+
+
 /* =========================
    CONFIGURACIÓN MODULAR
 ========================= */
@@ -1106,6 +1116,7 @@ function playTone(freq, duration = 1.0, type = "sine"){
   ensureAudio();
 
   const now = audioCtx.currentTime;
+  answerToneUntil = Math.max(answerToneUntil, now + duration + 0.02);
   const osc = audioCtx.createOscillator();
   const gain = audioCtx.createGain();
 
@@ -1507,6 +1518,7 @@ function registerResult(noteId, isCorrect){
   state.stats.perNote[noteId].attempts += 1;
 
   if(isCorrect){
+    answerMusic?.correct();
     state.stats.correct += 1;
     state.stats.perNote[noteId].correct += 1;
     state.stats.streak += 1;
@@ -1638,6 +1650,7 @@ function drawQuizNote(){
   const activeNotes = getActiveNotes();
   const note = state.currentQuizNote;
   const options = shuffle(activeNotes);
+  let answered = false;
 
   moduleContent.innerHTML = `
     <section class="exercise-card center">
@@ -1663,6 +1676,8 @@ function drawQuizNote(){
     btn.textContent = getDisplayName(opt);
 
     btn.addEventListener("click", () => {
+      if(answered) return;
+      answered = true;
       const ok = opt.id === note.id;
       registerResult(note.id, ok);
 
@@ -1691,6 +1706,7 @@ function drawQuizNote(){
     drawQuizNote();
   });
 
+  answerTonePendingUntil = Date.now() + 150;
   setTimeout(() => playTone(note.freq, 1.0, "sine"), 120);
 }
 
@@ -1799,6 +1815,7 @@ function drawKeyboardExercise(){
     drawKeyboardExercise();
   });
 
+  answerTonePendingUntil = Date.now() + 150;
   setTimeout(() => {
     playTone(note.freq, 1.0, "sine");
   }, 120);
@@ -1853,6 +1870,7 @@ function drawMemoryRound(){
   `;
 
   const feedback = document.getElementById("memoryFeedback");
+  let answered = false;
 
   document.getElementById("btnPlayBase").addEventListener("click", () => {
     playTone(base.freq, 1.0, "sine");
@@ -1865,6 +1883,8 @@ function drawMemoryRound(){
 
 
 document.getElementById("btnSame").addEventListener("click", () => {
+  if(answered) return;
+  answered = true;
   const ok = probe.id === base.id;
 
   registerResult(base.id, ok);
@@ -1884,6 +1904,8 @@ document.getElementById("btnSame").addEventListener("click", () => {
 });
 
 document.getElementById("btnDifferent").addEventListener("click", () => {
+  if(answered) return;
+  answered = true;
   const ok = probe.id !== base.id;
 
   registerResult(base.id, ok);
@@ -1907,6 +1929,7 @@ document.getElementById("btnDifferent").addEventListener("click", () => {
     drawMemoryRound();
   });
   
+  answerTonePendingUntil = Date.now() + 150;
   setTimeout(() => playTone(base.freq, 1.0, "sine"), 120);
 }
 
