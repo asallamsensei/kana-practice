@@ -2,10 +2,11 @@
 (function (root) {
   'use strict';
   if (root.MatchMusic) return;
+  // Music has its own preference: unrelated legacy quiz effects must not mute it.
+  // Only an explicit music-button choice of 'off' disables music across pages.
   const KEY = 'sensei_matching_music_v1';
   const NOTES = [261.6256,293.6648,329.6276,349.2282,391.9954,440,493.8833];
   let enabled = true, context = null, queue = [], timer = null, busyUntil = 0, button = null;
-  const boards = [];
   try { enabled = root.localStorage.getItem(KEY) !== 'off'; } catch (_) {}
   function contextForGesture() {
     try {
@@ -28,7 +29,7 @@
     } catch (_) { return false; }
   }
   function allowed(job) {
-    try { return enabled && (job.board.generation === job.generation || job.keepCompletion) && job.board.isEnabled(); }
+    try { return enabled && (job.board.generation === job.generation || job.keepCompletion); }
     catch (_) { return false; }
   }
   function schedulePump(delay) {
@@ -76,13 +77,12 @@
   }
   function updateButton() {
     if (!button) return;
-    const effective = enabled && (!boards.length || boards.some(function (board) { try { return board.isEnabled(); } catch (_) { return false; } }));
+    const effective = enabled;
     button.textContent = effective ? '♫ Música: activada' : '♫ Música: silenciada';
     button.setAttribute('aria-pressed', String(effective));
   }
   function setEnabled(value) {
     enabled = !!value;
-    boards.forEach(function (board) { try { if (board.onEnabledChange) board.onEnabledChange(enabled); } catch (_) {} });
     if (!enabled) queue = []; // Never cut off a note that has already started.
     try { root.localStorage.setItem(KEY, enabled ? 'on' : 'off'); } catch (_) {}
     updateButton();
@@ -96,7 +96,7 @@
     button.type = 'button'; button.id = 'matchingMusicToggle';
     button.style.cssText = 'font:inherit;font-size:13px;color:inherit;background:transparent;border:1px solid currentColor;border-radius:10px;padding:9px 13px;min-height:40px;cursor:pointer';
     button.setAttribute('aria-label', 'Activar o silenciar la música de Emparejar');
-    button.addEventListener('click', function () { const effective = enabled && (!boards.length || boards.some(function (board) { try { return board.isEnabled(); } catch (_) { return false; } })); setEnabled(!effective); });
+    button.addEventListener('click', function () { const effective = enabled; setEnabled(!effective); });
     holder.appendChild(button);
     const footer = root.document.querySelector('footer');
     if (footer && footer.parentNode) footer.parentNode.insertBefore(holder, footer); else root.document.body.appendChild(holder);
@@ -104,8 +104,8 @@
   }
   function create(options) {
     options = options || {};
-    const board = {isBusy:typeof options.isBusy === 'function' ? options.isBusy : function () { return false; },onEnabledChange:options.onEnabledChange,generation:0, index:0, finished:false, isEnabled:typeof options.isEnabled === 'function' ? options.isEnabled : function () { return true; }};
-    boards.push(board); updateButton();
+    const board = {isBusy:typeof options.isBusy === 'function' ? options.isBusy : function () { return false; },generation:0, index:0, finished:false};
+    updateButton();
     return {
       cancel: function () { queue = queue.filter(function (job) { return job.board !== board; }); },
       reset: function (settings) { queue.forEach(function (job) { if (job.board === board) job.keepCompletion = !!(settings && settings.keepCompletion); }); board.generation++; board.index = 0; board.finished = false; queue = queue.filter(function (job) { return job.board !== board || job.keepCompletion; }); },
