@@ -28,7 +28,7 @@ function normalizeEasy(data){
    const jp=text(r.japones),es=text(r.espanol_literal),romaji=text(r.romaji),natural=text(r.espanol_natural),id='easy_japanese:'+r.id;
    if(!jp||!es||!romaji)throw Error('Entrada de Conversación incompleta.');
    if(idJp.has(id)&&idJp.get(id)!==jpKey(jp))throw Error('Identificador de Conversación ambiguo.');idJp.set(id,jpKey(jp));
-   items.push({id,block,blockLabel:label,group:'conversacion',source:'easy_japanese',jp,es,natural,romaji,reading:romaji,readingKana:text(r.lectura_kana),isKanji:false,audioType:'tts',audio:null,lesson:lesson.numero,sourceUrl:text(r.fuente)});
+   items.push({id,block,blockLabel:label,group:'conversacion',source:'easy_japanese',jp,es,natural,romaji,reading:romaji,readingKana:text(r.lectura_kana),isKanji:false,audioType:'tts',audio:null,lesson:lesson.numero,sourceUrl:text(r.fuente),wordType:text(r.tipo),baseForm:text(r.forma_base),baseId:text(r.id_base),usageNote:text(r.nota_uso),forms:Array.isArray(r.formas_en_skit)?r.formas_en_skit.filter(x=>typeof x==='string'):[]});
   }if(items.length>before)blocks.push({id:block,label,group:'conversacion',defaultEnabled:lesson.activada_por_defecto!==false});
  }
  if(!items.length)throw Error('Conversación no contiene palabras.');return {items,rows:items,blocks};
@@ -38,7 +38,7 @@ function buildCatalog(legacy,easy){
  return {rows,items:rows,blocks,groups:[{id:'fundamentos',label:'Fundamentos',blocks:a.blocks.slice()},{id:'conversacion',label:'Conversación',blocks:b.blocks.map(b=>b.id)}],allIds,allIDs:allIds,ids:allIds};
 }
 function meanings(item){return unique([item.es,item.natural,...(item.acceptedMeanings||[]),...(item.acceptedEs||[])]);}
-function semanticKeys(item){return new Set(meanings(item).map(esKey).filter(Boolean));}
+function semanticKeys(item){const units=meanings(item).flatMap(value=>{let s=value,p;do{p=s;s=s.replace(/\([^()]*\)/g,' ');}while(s!==p);return [value,...s.split(';')];});return new Set(units.map(esKey).filter(Boolean));}
 function conflicts(a,b){if(jpKey(a.jp)===jpKey(b.jp))return true;const x=semanticKeys(a),y=semanticKeys(b);return [...x].some(k=>y.has(k));}
 function selectedPool(rows,selected,options={}){
  const blocks=new Set(selected||[]),allowed=options.allowedIds?new Set(options.allowedIds):null,groups=new Map();
@@ -54,6 +54,7 @@ function aggregateById(rows){
  const byId=new Map();for(const row of rows){if(!byId.has(row.id))byId.set(row.id,[]);byId.get(row.id).push(row);}
  return [...byId.values()].map(variants=>{const primary=variants[0],acceptedMeanings=unique(variants.flatMap(r=>[r.es,r.natural]));return {...primary,variants:variants.slice(),sourceIds:[primary.id],blocks:unique(variants.map(r=>r.block)),labels:unique(variants.map(r=>r.blockLabel||r.block)),acceptedMeanings,acceptedEs:acceptedMeanings,acceptedJp:unique(variants.map(r=>r.jp)),readings:unique(variants.map(r=>r.reading)),romajiVariants:unique(variants.map(r=>r.romaji)),naturalVariants:unique(variants.map(r=>r.natural))};});
 }
+function speechText(item){if(item.wordType==='partícula'&&['は','へ','を'].includes(item.jp))return {'は':'わ','へ':'え','を':'お'}[item.jp];return item.jp.replace(/[～〜]/g,'').trim();}
 function choicesConflict(a,b,mode){return conflicts(a,b);}
 function validAnswers(item,field,pool=[]){
  if(field==='es')return meanings(item);
@@ -61,6 +62,7 @@ function validAnswers(item,field,pool=[]){
  return unique([item[field]]);
 }
 function distractors(item,pool,field){const valid=new Set(validAnswers(item,field,pool).map(field==='jp'?jpKey:esKey));return pool.filter(x=>!conflicts(item,x)&&!valid.has((field==='jp'?jpKey:esKey)(x[field])));}
-const api={normalizeData,normalizeLegacy:normalizeData,normalizeEasy,buildCatalog,selectedPool,selectPool:selectedPool,jpKey,esKey,meanings,semanticKeys,conflicts,choicesConflict,aggregateById,validAnswers,distractors,legacyAudio};
+const api={speechText,normalizeData,normalizeLegacy:normalizeData,normalizeEasy,buildCatalog,selectedPool,selectPool:selectedPool,jpKey,esKey,meanings,semanticKeys,conflicts,choicesConflict,aggregateById,validAnswers,distractors,legacyAudio};
 root.AsallamTuristaCatalog=api;if(typeof module!=='undefined'&&module.exports)module.exports=api;
 })(typeof window!=='undefined'?window:globalThis);
+

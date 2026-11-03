@@ -1,7 +1,8 @@
 /* One local, per-item review ledger. Reading/Explorar never records practice. */
 (function(root){'use strict';
-const APPS=['kana','jlpt','kanji','oraciones','ingles','turista','anime','oraciones_ingles','chino','portugues','coreano'];
+const APPS=['kana','jlpt','kanji','oraciones','ingles','turista','anime','oraciones_ingles','chino','portugues','coreano','vocabulario_extra'];
 const PREFIX='asallam_reviews_v1_',VERSION=1,MAX_ITEMS=50000;
+const EXTRA='vocabulario_extra',easyId=id=>id.startsWith('easy_japanese:'),virtualSnapshots=new WeakSet();
 const obj=v=>v!==null&&typeof v==='object'&&!Array.isArray(v), own=(o,k)=>Object.prototype.hasOwnProperty.call(o,k), bad=k=>k==='prototype'||Object.prototype.hasOwnProperty.call(Object.prototype,k);
 const count=v=>Number.isSafeInteger(v)&&v>=0, safeId=v=>typeof v==='string'&&v.length>0&&v.length<=3000&&!bad(v);
 const blank=()=>({version:VERSION,items:{},catalogs:{}});
@@ -15,21 +16,62 @@ for(const [id,item]of Object.entries(v.items)){if(!safeId(id)||!obj(item)||!obj(
 }
 if(Object.keys(v.catalogs).length>200)throw Error('Demasiados catálogos.');for(const [scope,ids]of Object.entries(v.catalogs)){if(!safeId(scope)||!Array.isArray(ids)||ids.length>MAX_ITEMS||ids.some(id=>!safeId(id))||new Set(ids).size!==ids.length)throw Error('Catálogo inválido.');}if(new Set(Object.values(v.catalogs).flat()).size>MAX_ITEMS)throw Error('Catálogo combinado demasiado grande.');return true;}
 function read(app,s){const raw=(s||root.localStorage).getItem(key(app));if(raw===null)return blank();const v=JSON.parse(raw);validate(app,v);return v;}
-function write(app,v,s){validate(app,v);(s||root.localStorage).setItem(key(app),JSON.stringify(v));try{root.dispatchEvent?.(new Event('asallam-reviews-change'));}catch{}return true;}
+// Compatibility is a read-only view. Native writes must never persist the virtual sum.
+function view(app,s,native){
+ const v=native||read(app,s);
+ if(app==='turista'){
+  for(const id of Object.keys(v.items))if(easyId(id))delete v.items[id];
+  for(const scope of Object.keys(v.catalogs))v.catalogs[scope]=v.catalogs[scope].filter(id=>!easyId(id));
+ }else if(app===EXTRA){
+  const previous=read('turista',s);
+  for(const [id,item]of Object.entries(previous.items)){
+   if(!easyId(id))continue;
+   const target=v.items[id]||(v.items[id]={purposes:{}});
+   for(const [purpose,row]of Object.entries(item.purposes)){
+    const dest=target.purposes[purpose]||(target.purposes[purpose]={correct:0,wrong:0,skipped:0});
+    for(const field of ['correct','wrong','skipped']){const sum=dest[field]+row[field];if(!Number.isSafeInteger(sum))throw Error('Historial combinado demasiado grande.');dest[field]=sum;}
+   }
+  }
+  // Native catalogs decide which old IDs remain active. Retired records stay stored.
+  validate(app,v);
+ }
+ return v;
+}
+function checkCompatibility(app){if(app===EXTRA)read('turista');}
+function commitRecords(records){
+ const s=root.localStorage,before=records.map(([app,v])=>{validate(app,v);return [key(app),s.getItem(key(app)),JSON.stringify(v)];}),changed=[];
+ try{for(const [k,raw,next]of before){if(s.getItem(k)!==raw)throw Error('El historial cambió en otra pestaña.');if(raw===next)continue;s.setItem(k,next);changed.push([k,raw]);}}
+ catch(error){let failed=false;for(const [k,raw]of changed.reverse())try{if(raw===null)s.removeItem(k);else s.setItem(k,raw);}catch{failed=true;}throw Error(failed?'No se pudo completar ni revertir el restablecimiento. Conserva una copia del avance.':'No se pudo restablecer el historial; se revirtieron los cambios.');}
+ try{root.dispatchEvent?.(new Event('asallam-reviews-change'));}catch{}return true;
+}
+function write(app,v,s){validate(app,v);if(app===EXTRA)view(app,s,clone(v));(s||root.localStorage).setItem(key(app),JSON.stringify(v));try{root.dispatchEvent?.(new Event('asallam-reviews-change'));}catch{}return true;}
 function warning(){try{if(!root.document||root.document.getElementById('review-save-warning'))return;const e=root.document.createElement('p');e.id='review-save-warning';e.setAttribute('role','alert');e.textContent='No se pudo guardar el historial de repasos. Conserva una copia de tu avance y revisa el almacenamiento del navegador.';e.style.cssText='padding:12px;border:1px solid currentColor;border-radius:10px;margin:12px;';root.document.body?.prepend(e);}catch{}}
 function attempt(fn){try{return fn();}catch{warning();return false;}}
-function registerCatalog(app,ids,scope='default'){return attempt(()=>{if(!safeId(scope)||!Array.isArray(ids)||ids.some(id=>!safeId(id)))throw Error('Catálogo inválido.');const all=[...new Set(ids)].sort();if(all.length>MAX_ITEMS)throw Error('Catálogo demasiado grande.');const v=read(app);if(JSON.stringify(v.catalogs[scope])===JSON.stringify(all))return true;v.catalogs[scope]=all;return write(app,v);});}
-function record(app,id,purpose,outcome){return attempt(()=>{if(!safeId(id)||!safeId(purpose)||purpose.length>120||!['correct','wrong','skipped'].includes(outcome))throw Error('Repaso inválido.');const v=read(app),item=v.items[id]||(v.items[id]={purposes:{}}),row=item.purposes[purpose]||(item.purposes[purpose]={correct:0,wrong:0,skipped:0});if(row[outcome]>=Number.MAX_SAFE_INTEGER)throw Error('Contador demasiado grande.');row[outcome]++;return write(app,v);});}
+function registerCatalog(app,ids,scope='default'){return attempt(()=>{if(!safeId(scope)||!Array.isArray(ids)||ids.some(id=>!safeId(id)))throw Error('Catálogo inválido.');const all=[...new Set(ids)].sort();if(all.length>MAX_ITEMS)throw Error('Catálogo demasiado grande.');checkCompatibility(app);const v=read(app);if(JSON.stringify(v.catalogs[scope])===JSON.stringify(all))return true;v.catalogs[scope]=all;return write(app,v);});}
+function record(app,id,purpose,outcome){return attempt(()=>{if(!safeId(id)||!safeId(purpose)||purpose.length>120||!['correct','wrong','skipped'].includes(outcome))throw Error('Repaso inválido.');checkCompatibility(app);const v=read(app),item=v.items[id]||(v.items[id]={purposes:{}}),row=item.purposes[purpose]||(item.purposes[purpose]={correct:0,wrong:0,skipped:0});if(row[outcome]>=Number.MAX_SAFE_INTEGER)throw Error('Contador demasiado grande.');row[outcome]++;return write(app,v);});}
 function totals(item){const out={correct:0,wrong:0,skipped:0};for(const p of Object.values(item?.purposes||{}))for(const k of Object.keys(out))out[k]+=p[k];out.reviews=out.correct+out.wrong;out.practiced=out.reviews>0;return out;}
-function summary(app,s){const v=read(app,s),ids=new Set(Object.values(v.catalogs).flat()),hasCatalog=Object.keys(v.catalogs).length>0,out={correct:0,wrong:0,skipped:0,reviews:0,seen:0,total:hasCatalog?ids.size:null,available:true};for(const [id,item]of Object.entries(v.items)){if(hasCatalog&&!ids.has(id))continue;const t=totals(item);for(const k of ['correct','wrong','skipped','reviews'])out[k]+=t[k];if(t.practiced)out.seen++;}out.percent=out.total?Math.floor(out.seen/out.total*10000)/100:null;return out;}
+function summary(app,s){const v=view(app,s),ids=new Set(Object.values(v.catalogs).flat()),hasCatalog=Object.keys(v.catalogs).length>0,out={correct:0,wrong:0,skipped:0,reviews:0,seen:0,total:hasCatalog?ids.size:null,available:true};if(app===EXTRA&&!hasCatalog){out.catalogPending=true;out.percent=null;return out;}for(const [id,item]of Object.entries(v.items)){if(hasCatalog&&!ids.has(id))continue;const t=totals(item);for(const k of ['correct','wrong','skipped','reviews'])out[k]+=t[k];if(t.practiced)out.seen++;}out.percent=out.total?Math.floor(out.seen/out.total*10000)/100:null;return out;}
 function escape(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
-function render(app,id){try{const item=read(app).items[id],t=totals(item);let html='<span class="review-history" style="display:block;margin-top:8px;font-size:12px;line-height:1.5;white-space:normal"><span style="display:block;font-weight:700">Repasos registrados: '+t.reviews+'</span>';for(const [purpose,row]of Object.entries(item?.purposes||{}).sort(([a],[b])=>a.localeCompare(b,'es'))){html+='<span style="display:block">'+escape(purpose)+': '+row.correct+' aciertos · '+row.wrong+' errores'+(row.skipped?' · '+row.skipped+' sin responder':'')+'</span>';}
+function render(app,id){try{const item=view(app).items[id],t=totals(item);let html='<span class="review-history" style="display:block;margin-top:8px;font-size:12px;line-height:1.5;white-space:normal"><span style="display:block;font-weight:700">Repasos registrados: '+t.reviews+'</span>';for(const [purpose,row]of Object.entries(item?.purposes||{}).sort(([a],[b])=>a.localeCompare(b,'es'))){html+='<span style="display:block">'+escape(purpose)+': '+row.correct+' aciertos · '+row.wrong+' errores'+(row.skipped?' · '+row.skipped+' sin responder':'')+'</span>';}
 if(!t.reviews&&!t.skipped)html+='<span style="display:block">Sin respuestas registradas desde esta actualización.</span>';
 return html+'</span>';}catch{return '<span class="review-history" style="display:block">Historial de repasos no disponible; los datos guardados no se han modificado.</span>';}}
-function clear(app){return attempt(()=>{const v=read(app);v.items={};return write(app,v);});}
-function clearItems(app,ids){return attempt(()=>{if(!Array.isArray(ids)||ids.some(id=>!safeId(id)))throw Error('Elementos inválidos.');const v=read(app);for(const id of ids)delete v.items[id];return write(app,v);});}
-const api={APPS,PREFIX,key,validate,record,registerCatalog,render,summary,clear,clearItems,snapshot:(app,s)=>clone(read(app,s)),replace:(app,data)=>{validate(app,data);return write(app,clone(data));}};
+function clear(app){return clearSelected(app,null);}
+function clearItems(app,ids){if(!Array.isArray(ids)||ids.some(id=>!safeId(id)))return attempt(()=>{throw Error('Elementos inválidos.');});return clearSelected(app,new Set(ids));}
+function clearSelected(app,ids){return attempt(()=>{
+ const v=read(app),remove=id=>(!ids||ids.has(id));
+ if(app===EXTRA){
+  const previous=read('turista');
+  for(const id of Object.keys(v.items))if(remove(id))delete v.items[id];
+  for(const id of Object.keys(previous.items))if(easyId(id)&&remove(id))delete previous.items[id];
+  return commitRecords([[app,v],['turista',previous]]);
+ }
+ for(const id of Object.keys(v.items))if(remove(id)&&(app!=='turista'||!easyId(id)))delete v.items[id];
+ return write(app,v);
+});}
+function snapshot(app,s){try{const result=clone(view(app,s));if(app===EXTRA||app==='turista')virtualSnapshots.add(result);return result;}catch(e){warning();throw e;}}
+const api={APPS,PREFIX,key,validate,record,registerCatalog,render,summary,clear,clearItems,snapshot,snapshotRaw:(app,s)=>clone(read(app,s)),replace:(app,data)=>{if(virtualSnapshots.has(data))throw Error('Usa el historial nativo, no una vista combinada, para reemplazar datos.');validate(app,data);checkCompatibility(app);const next=clone(data);if(app==='turista'){const previous=read(app);for(const [id,item]of Object.entries(previous.items))if(easyId(id)&&!own(next.items,id))next.items[id]=item;}return write(app,next);}};
 root.AsallamReviews=api;if(typeof module!=='undefined'&&module.exports)module.exports=api;
 })(typeof window!=='undefined'?window:globalThis);
+
 
 

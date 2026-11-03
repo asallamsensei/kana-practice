@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark" data-app="vocabulario_extra"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#10121b"><meta name="description" content="Practica el vocabulario extra de 48 lecciones, con audio, quiz, parejas y exploración."><title>Vocabulario extra · Asallam Sensei</title><style>
+    :root {
+      color-scheme: dark;
+      --bg:#10121b; --surface:#191c29; --raised:#222635; --hover:#292e40;
+      --text:#ffffff; --border:#34394c;
+      --accent:#c3b4ff; --accent-bg:#39304f; --mint:#a4e3ce; --mint-bg:#233e38;
+      --danger:#ffb4b4; --danger-bg:#432c35; --gold:#f2ce88; --shadow:0 20px 60px #00000024;
+      --radius:22px; --jp:"Noto Sans JP","Hiragino Sans","Yu Gothic",Meiryo,sans-serif;
+    }
+    :root[data-theme="light"] {
+      color-scheme: light;
+      --bg:#f3f2ef; --surface:#ffffff; --raised:#f3f3f8; --hover:#eaeaf2;
+      --text:#000000; --border:#d9dce6;
+      --accent:#6748af; --accent-bg:#eee7fa; --mint:#216750; --mint-bg:#e4f3eb;
+      --danger:#a52841; --danger-bg:#fce8ed; --gold:#936218; --shadow:0 20px 60px #37325109;
+    }
+    * { box-sizing:border-box; }
+    [hidden] { display:none !important; }
+    body { margin:0; font-size:19px; background:var(--bg); color:var(--text); font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; line-height:1.5; -webkit-font-smoothing:antialiased; }
+    body::before { content:""; position:fixed; inset:0; z-index:-1; pointer-events:none; background:radial-gradient(ellipse at 80% 0%,#9c86eb0b,transparent 55%); }
+    button,input,select { font:inherit; }
+    button,a,input,select,summary { -webkit-tap-highlight-color:transparent; }
+    button { cursor:pointer; }
+    button:disabled { cursor:not-allowed; opacity:1; border-style:dashed; }
+    a { color:inherit; text-decoration:none; }
+    a:hover { text-decoration:underline; text-underline-offset:4px; }
+    button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible { outline:3px solid var(--accent); outline-offset:4px; }
+    h1,h2,p { margin:0; }
+    h1 { font-size:clamp(34px,4.13vw,54px); letter-spacing:-1.6px; line-height:1.14; font-weight:720; }
+    h2 { font-size:25px; letter-spacing:-.45px; }
+    .jp { font-family:var(--jp); font-weight:400; }
+    .sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
+    .skip-link { position:fixed; top:-70px; left:16px; z-index:100; padding:12px 18px; background:var(--surface); border:2px solid var(--accent); border-radius:10px; }
+    .skip-link:focus { top:12px; }
+    .container { width:min(1180px,100% - 48px); margin-inline:auto; }
+    .topbar { display:flex; align-items:center; justify-content:space-between; gap:20px; padding:24px 0; border-bottom:1px solid var(--border); }
+    .brand { display:flex; align-items:center; gap:12px; flex-shrink:0; }
+    .brand:hover { text-decoration:none; }
+    .brand-mark { display:grid; place-items:center; width:43px; height:43px; border-radius:13px; color:var(--text); background:var(--accent-bg); font:32px var(--jp); }
+    .brand-name { display:block; font-size:15px; font-weight:750; letter-spacing:1.1px; }
+    .brand-sub { display:block; font-size:14px; color:var(--text); margin-top:2px; }
+    .topnav { display:flex; align-items:center; gap:9px; }
+    .nav-link,.icon-button { display:inline-flex; justify-content:center; align-items:center; gap:7px; min-height:42px; border:1px solid transparent; border-radius:10px; padding:8px 11px; color:var(--text); background:transparent; font-size:15px; font-weight:600; }
+    .nav-link:hover,.icon-button:hover { background:var(--raised); color:var(--text); text-decoration:none; }
+    .donate-nav { color:var(--text); border-color:var(--border); }
+    .icon { width:19px; height:19px; flex-shrink:0; fill:none; stroke:currentColor; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; }
+    .hero { padding:34px 0 27px; display:flex; justify-content:space-between; align-items:flex-end; gap:24px; }
+    .notice { position:relative; overflow:hidden; display:flex; gap:12px; align-items:center; justify-content:space-between; border:1px solid var(--border); background:var(--raised); border-radius:14px; margin:0 0 18px; padding:12px 16px; font-size:15px; color:var(--text); }
+    .notice.error { background:var(--danger-bg); border-color:var(--danger); }
+    .notice button { background:none; border:0; color:inherit; padding:6px; min-width:32px; font-size:24px; }
+    .notice-timer { position:absolute; bottom:0; left:0; width:100%; height:3px; background:var(--accent); transform:scaleX(0); transform-origin:left; pointer-events:none; }
+    @keyframes notice-countdown { from { transform:scaleX(0); } to { transform:scaleX(1); } }
+    .workspace { display:grid; grid-template-columns:minmax(0,1fr) 284px; align-items:start; gap:22px; }
+    .main-column { min-width:0; }
+    .scope-row { display:flex; flex-direction:column; align-items:stretch; gap:10px; }
+    .segmented { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:4px; padding:4px; border:1px solid var(--border); background:var(--surface); border-radius:13px; }
+    .segment { border:0; border-radius:9px; background:transparent; color:var(--text); padding:8px 5px; min-height:39px; font-size:15px; font-weight:650; }
+    .segment[data-scope="mixed"] { grid-column:1 / -1; }
+    .segment:hover { color:var(--text); background:var(--raised); }
+    .segment[aria-pressed="true"] { background:var(--accent-bg); color:var(--text); }
+    .segment.is-mixed { background:var(--accent-bg); box-shadow:inset 0 0 0 1px var(--accent); }
+    .scope-count { font-size:14px; color:var(--text); }
+    .activity-tabs { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:6px; padding:6px; background:var(--surface); border:1px solid var(--border); border-radius:16px; margin-bottom:16px; }
+    .activity-tab { display:flex; align-items:center; justify-content:center; gap:8px; padding:12px 8px; border:0; border-radius:10px; background:transparent; color:var(--text); font-size:15px; font-weight:650; min-height:46px; }
+    .activity-tab:hover { background:var(--raised); color:var(--text); }
+    .activity-tab[aria-pressed="true"] { background:var(--accent-bg); color:var(--text); }
+    .exercise-card { position:relative; background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:25px 28px 20px; box-shadow:var(--shadow); overflow:hidden; }
+    .exercise-top { display:flex; justify-content:space-between; align-items:center; gap:10px; }
+    .badge { font-size:14px; font-weight:750; text-transform:uppercase; letter-spacing:1.3px; color:var(--text); background:var(--accent-bg); border-radius:6px; padding:5px 9px; }
+    .round-count { color:var(--text); font-size:14px; font-variant-numeric:tabular-nums; }
+    .progress-track { height:4px; background:var(--raised); border-radius:4px; margin-top:17px; overflow:hidden; }
+    .progress-fill { height:100%; width:0%; background:var(--mint); border-radius:inherit; transition:width .24s ease; }
+    .question-area { text-align:center; padding:25px 0 21px; }
+    .question-label { color:var(--text); font-size:15px; }
+    .prompt { min-height:160px; display:flex; align-items:center; justify-content:center; font-size:clamp(90px,11.8vw,130px); line-height:1.4; margin:5px 0; letter-spacing:4px; }
+    .prompt.romaji { font-family:inherit; font-size:clamp(64px,8.26vw,87px); font-weight:550; letter-spacing:-2px; }
+    .prompt.multi { font-size:clamp(78px,10.62vw,111px); }
+    .listen-button { display:inline-flex; align-items:center; gap:7px; margin-top:18px; padding:7px 12px; min-height:36px; font-size:14px; font-weight:600; border:1px solid var(--border); border-radius:999px; color:var(--text); background:transparent; }
+    .listen-button:hover { background:var(--raised); color:var(--text); }
+    .listen-button.playing { color:var(--text); border-color:var(--mint); }
+    .options { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; }
+    .option-button { position:relative; display:flex; align-items:center; justify-content:center; min-height:67px; padding:12px 35px; border:1px solid var(--border); border-radius:13px; color:var(--text); background:var(--raised); font-size:28px; transition:background .15s,border-color .15s,transform .15s; }
+    .option-button:hover:not(:disabled) { border-color:var(--accent); background:var(--accent-bg); transform:translateY(-1px); }
+    .option-key { position:absolute; left:10px; top:7px; font:12px system-ui; }
+    .option-button .answer-mark { position:absolute; right:14px; font-size:20px; }
+    .option-button:disabled { opacity:1; cursor:default; }
+    .option-button.is-correct { background:var(--mint-bg); border-color:var(--mint); color:var(--text); }
+    .option-button.is-wrong { background:var(--danger-bg); border-color:var(--danger); color:var(--text); }
+    .answer-input.is-correct { border-color:var(--mint); background:var(--mint-bg); }
+    .answer-input.is-wrong { border-color:var(--danger); background:var(--danger-bg); }
+    .answer-form { display:flex; align-items:stretch; gap:10px; }
+    .answer-input { min-width:0; width:100%; padding:14px 17px; background:var(--raised); color:var(--text); border:1px solid var(--border); border-radius:12px; font-size:27px; text-align:center; }
+    input::placeholder { color:var(--text); opacity:1; }
+    .answer-input::placeholder { color:var(--text); font-size:19px; }
+    .button { display:inline-flex; align-items:center; justify-content:center; gap:8px; min-height:43px; border-radius:11px; padding:10px 16px; border:1px solid var(--border); background:var(--raised); color:var(--text); font-size:15px; font-weight:650; }
+    .button:hover:not(:disabled) { background:var(--hover); text-decoration:none; }
+    .button.primary { color:var(--text); border-color:var(--mint); background:var(--mint-bg); }
+    .button.primary:hover:not(:disabled) { background:var(--raised); }
+    .button.small { font-size:14px; min-height:36px; padding:7px 11px; }
+    .button.ghost { background:transparent; color:var(--text); border-color:transparent; }
+    .feedback { min-height:67px; display:flex; flex-direction:column; justify-content:center; align-items:center; gap:3px; text-align:center; padding:12px 0 8px; }
+    .feedback-title { font-size:18px; font-weight:700; }
+    .feedback-detail { font-size:15px; color:var(--text); }
+    .feedback-tip { font-size:14px; color:var(--text); margin-top:3px; max-width:540px; }
+    .exercise-actions { display:flex; align-items:center; justify-content:space-between; gap:10px; padding-top:13px; border-top:1px solid var(--border); }
+    .keyboard-hint { text-align:left; font-size:14px; color:var(--text); margin:14px 0 0; }
+    kbd { font:inherit; border:1px solid var(--border); border-radius:4px; padding:1px 4px; white-space:nowrap; }
+    .session-stats { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:8px; margin-top:15px; }
+    .stat { padding:13px 8px; background:var(--surface); border:1px solid var(--border); border-radius:13px; text-align:center; min-width:0; }
+    .stat-label { font-size:14px; text-transform:uppercase; letter-spacing:1px; color:var(--text); }
+    .stat strong { display:block; font-weight:600; font-size:26px; letter-spacing:-.5px; margin-top:2px; font-variant-numeric:tabular-nums; }
+    .session-caption { margin:10px 2px 0; font-size:14px; color:var(--text); display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap; }
+    .session-caption .button { min-height:30px; padding:4px 8px; font-size:14px; }
+    .settings { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:22px 20px; }
+    .settings-heading { display:flex; align-items:center; justify-content:space-between; font-size:17px; font-weight:700; margin-bottom:22px; }
+    .setting-group + .setting-group { margin-top:20px; }
+    .setting-label { display:block; font-size:14px; font-weight:650; color:var(--text); margin-bottom:8px; }
+    .mode-grid { display:grid; grid-template-columns:1fr 1fr; gap:7px; }
+    .mode-button { min-height:43px; padding:9px 5px; border:1px solid var(--border); border-radius:9px; color:var(--text); background:var(--raised); font-size:14px; font-weight:650; }
+    .mode-button[aria-pressed="true"] { border-color:var(--accent); color:var(--text); background:var(--accent-bg); }
+    .mode-button.is-mixed { border-color:var(--accent); background:var(--accent-bg); }
+    .setting-help { margin-top:8px; color:var(--text); font-size:14px; line-height:1.65; }
+    select { width:100%; min-height:41px; border:1px solid var(--border); border-radius:9px; background:var(--raised); color:var(--text); padding:8px 10px; font-size:14px; }
+    .check-row { display:flex; align-items:center; justify-content:space-between; gap:12px; font-size:14px; color:var(--text); cursor:pointer; min-height:34px; }
+    .check-row + .check-row { margin-top:8px; }
+    input[type="checkbox"] { width:17px; height:17px; accent-color:var(--accent); flex-shrink:0; cursor:pointer; }
+    input[type="range"] { width:100%; accent-color:var(--accent); margin:6px 0 0; }
+    .more-options { border-top:1px solid var(--border); margin-top:20px; padding-top:16px; }
+    .more-options > summary { font-size:15px; font-weight:700; }
+    .settings details + details { margin-top:12px; }
+    details summary { cursor:pointer; font-size:14px; font-weight:600; color:var(--text); padding:3px 0; }
+    details[open] > summary { margin-bottom:14px; color:var(--text); }
+    .data-actions { display:flex; flex-wrap:wrap; gap:7px; margin-top:10px; }
+    .data-actions .button { font-size:14px; padding-inline:9px; }
+    .lifetime-row { display:flex; align-items:center; justify-content:space-between; gap:10px; font-size:14px; color:var(--text); margin:8px 0; }
+    .lifetime-row strong { color:var(--text); font-weight:650; }
+    .review-count { display:inline-block; color:var(--text); font-weight:650; }
+    .match-intro { display:flex; justify-content:space-between; align-items:center; gap:12px; margin:24px 0 19px; }
+    .match-board { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:10px; }
+    .match-tile { min-height:106px; border:1px solid var(--border); border-radius:13px; color:var(--text); background:var(--raised); position:relative; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:9px; padding:12px 6px; }
+    .match-tile .tile-content { font-size:30px; line-height:1.5; }
+    .match-tile[data-kind="kana"] .tile-content { font-size:39px; }
+    .match-tile:hover:not(:disabled) { border-color:var(--accent); }
+    .match-tile.is-selected { border-color:var(--accent); color:var(--text); background:var(--accent-bg); box-shadow:inset 0 0 0 1px var(--accent); }
+    .match-tile.is-wrong { border-color:var(--danger); background:var(--danger-bg); }
+    .match-tile.is-matched { border-color:var(--mint); background:var(--mint-bg); color:var(--text); opacity:1; cursor:default; }
+    .match-tile.is-matched::after { content:"✓"; position:absolute; top:6px; right:9px; font-size:14px; }
+    .match-message { font-size:15px; color:var(--text); text-align:center; min-height:51px; padding-top:17px; }
+    .match-actions { display:flex; align-items:center; justify-content:space-between; gap:8px; padding-top:12px; border-top:1px solid var(--border); }
+    .explore-top { display:flex; justify-content:space-between; align-items:flex-start; gap:15px; margin-bottom:19px; }
+    .explore-top p { color:var(--text); font-size:14px; margin-top:6px; }
+    .search-input { width:100%; border:1px solid var(--border); border-radius:11px; background:var(--raised); color:var(--text); padding:12px 14px; font-size:17px; }
+    .explore-grid { display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:9px; margin-top:18px; }
+    .kana-tile { border:1px solid var(--border); border-radius:11px; background:var(--raised); color:var(--text); min-height:92px; padding:10px 4px; display:flex; flex-direction:column; justify-content:center; align-items:center; gap:3px; position:relative; }
+    .kana-tile .jp { font-size:34px; }
+    .kana-tile .tile-romaji { color:var(--text); font-size:14px; }
+    .kana-tile:hover { border-color:var(--accent); background:var(--accent-bg); }
+    .kana-tile.needs-review::after { content:""; width:5px; height:5px; border-radius:50%; background:var(--gold); position:absolute; top:8px; right:8px; }
+    .explore-count { font-size:14px; color:var(--text); margin-top:13px; }
+    .summary { padding:38px 0 24px; text-align:center; }
+    .summary-seal { width:67px; height:67px; border-radius:50%; background:var(--mint-bg); color:var(--text); display:grid; place-items:center; margin:0 auto 20px; font-size:33px; }
+    .summary h2 { font-size:31px; }
+    .summary > p { color:var(--text); font-size:17px; margin-top:9px; }
+    .summary-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px; margin:28px 0; }
+    .summary-grid div { background:var(--raised); border-radius:12px; padding:16px 8px; font-size:14px; color:var(--text); }
+    .summary-grid strong { display:block; font-size:30px; margin-bottom:3px; color:var(--text); font-weight:600; }
+    .summary-actions { display:flex; flex-wrap:wrap; justify-content:center; gap:10px; }
+    .empty-state { padding:55px 10px; text-align:center; }
+    .empty-state .empty-icon { font:61px var(--jp); color:var(--text); margin-bottom:20px; }
+    .empty-state p { color:var(--text); font-size:17px; max-width:440px; margin:12px auto 20px; }
+    .support-section { display:flex; align-items:center; justify-content:space-between; gap:24px; padding:24px 28px; border:1px solid var(--border); background:var(--surface); border-radius:18px; margin:30px 0 0; }
+    .support-copy { display:flex; align-items:center; gap:17px; }
+    .support-symbol { width:44px; height:44px; border-radius:12px; display:grid; place-items:center; background:var(--accent-bg); color:var(--text); flex-shrink:0; }
+    .support-copy h2 { font-size:19px; letter-spacing:-.2px; }
+    .support-copy p { color:var(--text); font-size:14px; margin-top:5px; }
+    .support-section .button { white-space:nowrap; color:var(--text); border-color:var(--accent); background:transparent; }
+    footer { padding:23px 0 30px; display:flex; align-items:center; justify-content:space-between; gap:15px; color:var(--text); font-size:14px; }
+    footer a { color:var(--text); }
+    dialog { width:min(440px,calc(100% - 36px)); border:1px solid var(--border); border-radius:18px; padding:25px; background:var(--surface); color:var(--text); box-shadow:var(--shadow); }
+    dialog::backdrop { background:#070914b3; }
+    dialog p { font-size:15px; color:var(--text); margin:12px 0 23px; }
+    dialog .dialog-actions { display:flex; justify-content:flex-end; gap:9px; }
+    @media (max-width:920px) {
+      .workspace { grid-template-columns:minmax(0,1fr) 250px; gap:16px; }
+      .settings { padding:20px 16px; }
+      .exercise-card { padding:23px 20px 18px; }
+      .match-board { grid-template-columns:repeat(3,minmax(0,1fr)); }
+      .activity-tab { flex-direction:column; gap:5px; font-size:14px; }
+      .activity-tab .icon { width:16px; }
+    }
+    @media (max-width:740px) {
+      .container { width:calc(100% - 28px); }
+      .topbar { gap:10px; padding:17px 0; }
+      .brand-mark { width:37px; height:37px; font-size:28px; border-radius:11px; }
+      .brand { gap:9px; }
+      .brand-name { font-size:14px; letter-spacing:.7px; }
+      .brand-sub { font-size:14px; }
+      .topnav { gap:1px; }
+      .nav-link { padding:8px; font-size:14px; min-height:38px; }
+      .icon-button { padding:8px; min-height:38px; }
+      .home-label { display:none; }
+      .hero { padding:26px 0 23px; gap:8px; }
+      h1 { letter-spacing:-1px; }
+      .workspace { grid-template-columns:1fr; }
+      .segmented { width:100%; }
+      .segment { padding:7px 5px; font-size:14px; }
+      .activity-tabs { gap:4px; padding:5px; border-radius:14px; margin-bottom:13px; }
+      .activity-tab { flex-direction:column; gap:4px; padding:9px 2px; min-height:59px; font-size:14px; }
+      .activity-tab .icon { width:18px; }
+      .exercise-card { padding:20px 16px 17px; border-radius:18px; }
+      .question-area { padding:19px 0 18px; }
+      .prompt { min-height:143px; }
+      .option-button { min-height:61px; font-size:26px; }
+      .settings { padding:21px; }
+      .settings-heading { margin-bottom:16px; }
+      .mode-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+      .setting-group + .setting-group { margin-top:17px; }
+      .match-board { grid-template-columns:repeat(4,minmax(0,1fr)); gap:8px; }
+      .match-tile { min-height:91px; }
+      .match-tile .tile-content { font-size:25px; }
+      .match-tile[data-kind="kana"] .tile-content { font-size:33px; }
+      .match-intro { margin-top:21px; }
+      .support-section { padding:20px; margin-top:22px; }
+      .support-copy { gap:12px; }
+      .support-symbol { display:none; }
+      .support-copy h2 { font-size:17px; }
+      .support-copy p { font-size:14px; }
+      .support-section .button { padding:9px 12px; font-size:14px; }
+      footer { align-items:flex-start; }
+    }
+    @media (max-width:390px) {
+      .container { width:calc(100% - 20px); }
+      .topbar { flex-wrap:wrap; }
+      .brand-sub { display:none; }
+      .session-stats { grid-template-columns:repeat(2,minmax(0,1fr)); }
+      .match-board { grid-template-columns:repeat(2,minmax(0,1fr)); }
+      .match-tile { min-height:91px; }
+      .explore-grid { grid-template-columns:repeat(4,minmax(0,1fr)); }
+      .stat-label { font-size:14px; letter-spacing:.3px; }
+      .option-button { padding-inline:28px; }
+      .answer-form { flex-wrap:wrap; }
+      .answer-form .button { width:100%; }
+      .support-section { flex-direction:column; align-items:flex-start; gap:14px; }
+    }
+    @media (prefers-reduced-motion:reduce) {
+      *,*::before,*::after { animation:none !important; transition:none !important; scroll-behavior:auto !important; }
+    }
+    @media print {
+      .topnav,.settings,.activity-tabs,.support-section,.keyboard-hint { display:none; }
+      .workspace { display:block; }
+      body { background:white; color:black; }
+    }
+  .topbar{flex-wrap:wrap}.topnav{flex-wrap:wrap}.topnav .nav-link{white-space:nowrap}@media(max-width:600px){.topbar{align-items:flex-start}.topnav{width:100%;gap:3px}.topnav .nav-link{padding:8px 9px;min-height:42px}.topnav .icon-button{margin-left:auto}}
+
+.activity-tabs{grid-template-columns:repeat(3,minmax(0,1fr))}.prompt,.prompt.multi{min-height:100px;font-size:clamp(30px,4.5vw,54px);letter-spacing:0;overflow-wrap:anywhere}.prompt.spanish{font-family:inherit;font-size:clamp(25px,3.6vw,38px)}.options{grid-template-columns:1fr}.option-button{font-size:clamp(20px,2.6vw,27px);text-align:left;justify-content:flex-start;overflow-wrap:anywhere;line-height:1.45}.option-key{top:50%;transform:translateY(-50%)}.question-area{padding-top:20px}.reveal{border:1px solid var(--border);background:var(--raised);padding:11px 14px;border-radius:12px;margin:10px 0;overflow-wrap:anywhere;font-size:19px}.reveal.romaji{background:var(--accent-bg)}.reveal.japanese{font-size:26px}.match-board{grid-template-columns:repeat(3,minmax(0,1fr))}.match-tile{font-size:20px;padding:13px 10px;min-height:125px;overflow-wrap:anywhere}.match-tile.jp{font-size:26px}.block-list{display:grid;gap:6px;max-height:350px;overflow:auto}.block-choice{display:flex;align-items:center;gap:9px;min-height:42px;padding:7px 8px;font-size:15px;border:1px solid var(--border);border-radius:10px;background:var(--raised);cursor:pointer}.block-choice input{margin:0}.block-choice:has(input:checked){background:var(--accent-bg);border-color:var(--accent)}.block-choice span{min-width:0;overflow-wrap:anywhere}.settings summary{font-size:17px;font-weight:700}.settings > summary{display:none}.mode-grid{grid-template-columns:1fr 1fr}.mode-grid button:last-child{grid-column:1/-1}.summary-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:20px 0}.summary-grid strong{display:block;font-size:28px}.summary-actions{display:flex;justify-content:center;gap:10px;flex-wrap:wrap}.notice{position:relative}.notice .button{white-space:nowrap}.small-note{font-size:14px;line-height:1.6;margin-top:10px}.block-selection{margin-top:14px}.block-selection summary{font-size:15px}.settings-heading{margin-bottom:16px}.hero{padding:28px 0 22px}.session-stats .stat-label{letter-spacing:.5px}.topbar{flex-wrap:wrap}.topnav{flex-wrap:wrap;justify-content:flex-end}.no-wrap{white-space:nowrap}
+@media(max-width:900px){.workspace{grid-template-columns:1fr}.settings{grid-row:1;padding:13px 16px}.settings>summary{display:block}.settings:not([open])>*:not(summary){display:none}.settings[open]>summary{margin-bottom:18px}.main-column{grid-row:2}.settings-heading{display:none}.block-list{grid-template-columns:1fr 1fr;max-height:none}.brand-sub{display:none}.topbar{gap:12px}.topnav{gap:3px}.topnav a,.topnav button{font-size:14px;padding:7px 8px}.hero h1{font-size:32px}.exercise-card{padding:20px 16px}.match-board{grid-template-columns:repeat(2,minmax(0,1fr))}.match-tile{min-height:100px;font-size:18px}.match-tile.jp{font-size:23px}.session-stats{grid-template-columns:repeat(2,minmax(0,1fr))}.container{width:calc(100% - 28px)}.brand-name{font-size:13px}.keyboard-hint{display:none}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
+
+.tourist-explore-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:16px}.tourist-explore-card{min-width:0;display:flex;flex-direction:column;gap:8px;padding:16px;border:1px solid var(--border);border-radius:14px;background:var(--raised);overflow-wrap:anywhere}.tourist-explore-card h3{font-size:25px;line-height:1.55;margin:0}.tourist-explore-card p{margin:0}.tourist-explore-card .reading{color:var(--text);font-size:15px}.tourist-explore-card .translation{font-size:17px;line-height:1.5}.tourist-explore-card .topic{font-size:12px;color:var(--muted)}.tourist-explore-card .button{align-self:flex-start;margin-top:auto;min-height:44px}.tourist-explore-card .button[aria-pressed="true"]{background:var(--accent-bg)}#explore-search{width:100%;min-width:0}#explore-view[hidden]{display:none}@media(max-width:600px){.tourist-explore-grid{grid-template-columns:1fr}.tourist-explore-card{padding:14px}.activity-tab{font-size:14px}}
+.source-group{border:1px solid var(--border);border-radius:12px;padding:12px}.source-label{font-size:17px}.source-details summary{font-size:14px}.group-actions{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}.lesson-list{display:grid;gap:6px;max-height:330px;overflow:auto;margin-top:10px}.block-list{max-height:380px;grid-template-columns:1fr}.reveal,.translation{white-space:pre-line}@media(max-width:900px){.lesson-list{grid-template-columns:repeat(2,minmax(0,1fr));max-height:380px}}@media(max-width:430px){.lesson-list{grid-template-columns:1fr}}
+</style><link rel="stylesheet" href="assets/donate-button.css?v=20261031b">
+<link rel="stylesheet" href="assets/brand-footer.css?v=20261101">
+</head>
+<body><a class="skip-link" href="#practice">Saltar a la práctica</a><svg aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden"><symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></symbol><symbol id="i-quiz" viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="3"/><path d="m8 12 2 2 5-5M8 17h8"/></symbol><symbol id="i-match" viewBox="0 0 24 24"><rect x="3" y="4" width="7" height="13" rx="2"/><rect x="14" y="7" width="7" height="13" rx="2"/><path d="m5 10 1 1 2-2m8 4 1 1 2-2"/></symbol><symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></symbol></svg>
+<div class="container"><header class="topbar"><a class="brand" href="index.html" aria-label="Asallam Sensei, ir al inicio"><span class="brand-mark jp" lang="ja" aria-hidden="true">あ</span><span><span class="brand-name">ASALLAM SENSEI</span><span class="brand-sub">Japonés para tu viaje</span></span></a><nav class="topnav" aria-label="Navegación principal"><a class="nav-link" href="index.html">Inicio</a><a class="nav-link" href="japones.html">Japonés</a><a class="nav-link" href="progreso.html">Progreso</a><a class="nav-link donate-nav asallam-donate" href="https://paypal.me/asallamsensei" target="_blank" rel="noopener noreferrer"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg>Donar</a><button class="icon-button" id="theme-toggle" type="button" aria-label="Cambiar a tema claro" title="Cambiar tema"><svg class="icon" aria-hidden="true"><use href="#i-sun"/></svg></button></nav></header>
+<section class="hero"><h1>Vocabulario extra</h1></section>
+<div id="notice" class="notice" role="status" aria-live="polite" hidden><span id="notice-text"></span><button id="dismiss-notice" type="button" aria-label="Cerrar aviso">×</button></div>
+<div id="load-status" class="notice" role="status"><span id="load-text">Preparando tus palabras…</span><button class="button small" id="retry-load" hidden>Reintentar</button></div><noscript><p>Activa JavaScript para practicar.</p></noscript>
+<main id="practice" class="workspace" tabindex="-1" hidden><div class="main-column">
+<div class="activity-tabs" role="group" aria-label="Actividad"><button class="activity-tab" id="activity-quiz" data-activity="quiz" aria-pressed="true" type="button"><svg class="icon" aria-hidden="true"><use href="#i-quiz"/></svg>Quiz</button><button class="activity-tab" id="activity-match" data-activity="match" aria-pressed="false" type="button"><svg class="icon" aria-hidden="true"><use href="#i-match"/></svg>Emparejar</button><button class="activity-tab" id="activity-explore" data-activity="explore" aria-pressed="false" type="button"><svg class="icon" aria-hidden="true"><use href="#i-grid"/></svg>Explorar</button></div>
+<section class="exercise-card" aria-label="Zona de práctica"><div class="exercise-top"><span id="exercise-badge" class="badge">Viaje</span><span id="round-count" class="round-count"></span></div><div id="session-progress" class="progress-track" role="progressbar" aria-label="Avance de esta sesión" aria-valuemin="0" aria-valuemax="20" aria-valuenow="0"><div id="progress-fill" class="progress-fill"></div></div>
+<p id="empty-selection" class="small-note" role="status" hidden>Selecciona al menos una lección para practicar.</p><div id="quiz-view"><div class="question-area"><p id="question-label" class="sr-only"></p><div id="prompt" class="prompt jp" aria-live="polite" aria-atomic="true"></div><div id="reveal-jp" class="reveal japanese jp" lang="ja" hidden></div><div id="reveal-romaji" class="reveal romaji" hidden></div><div id="reveal-es" class="reveal" hidden></div><button id="listen" class="listen-button" type="button" aria-label="Escuchar en japonés">♫ Escuchar</button></div><div id="answer-options" class="options" role="group" aria-label="Elige una respuesta"></div><p id="answer-status" class="sr-only" role="status" aria-live="polite"></p><div class="exercise-actions"><button id="skip" class="button ghost" type="button">No lo sé</button><button id="next" class="button primary" type="button" disabled>Siguiente →</button></div><p class="keyboard-hint"><kbd>A</kbd>–<kbd>C</kbd> o <kbd>1</kbd>–<kbd>3</kbd> elegir · <kbd>Enter</kbd> continuar</p></div>
+<div id="match-view" hidden><div class="match-intro"><h2>Une las parejas</h2><span id="pair-count" class="round-count"></span></div><div id="match-board" class="match-board" role="group" aria-label="Empareja japonés con español"></div><p id="match-message" class="match-message" role="status" aria-live="polite"></p><div class="match-actions"><button id="match-next" class="button primary" type="button" hidden>Otro tablero →</button><button id="match-finish" class="button ghost" type="button">Terminar sesión</button></div></div>
+<section id="explore-view" aria-label="Explorar palabras y frases" hidden><div class="explore-top"><h2>Explorar</h2></div><label class="sr-only" for="explore-search">Buscar en japonés, lectura o español</label><input id="explore-search" type="search" class="search-input" placeholder="Buscar japonés, lectura o español…" autocomplete="off"><p id="explore-count" class="explore-count" role="status" aria-live="polite"></p><div id="explore-list" class="tourist-explore-grid"></div></section>
+<div id="summary-view" class="summary" hidden><div class="summary-seal" aria-hidden="true">✓</div><h2 id="summary-title" tabindex="-1">Sesión completada</h2><p id="summary-copy" class="small-note"></p><div class="summary-grid"><div><strong id="summary-correct">0</strong>Aciertos</div><div><strong id="summary-accuracy">—</strong>Precisión</div><div><strong id="summary-best">0</strong>Mejor racha</div></div><div class="summary-actions"><button class="button primary" id="restart" type="button">Seguir practicando</button><a href="progreso.html" class="button">Ver mi progreso</a></div></div>
+</section><section id="session-stats" class="session-stats" aria-label="Estadísticas de esta sesión"><div class="stat"><span class="stat-label">Aciertos</span><strong id="stat-correct">0</strong></div><div class="stat"><span class="stat-label">Errores</span><strong id="stat-wrong">0</strong></div><div class="stat"><span class="stat-label">Precisión</span><strong id="stat-accuracy">—</strong></div><div class="stat"><span class="stat-label">Racha</span><strong id="stat-streak">0</strong></div></section><div id="session-caption" class="session-caption"><span id="session-detail"></span><button id="end-session" class="button ghost small" type="button">Terminar sesión</button></div></div>
+<details id="settings" class="settings" open><summary>A tu ritmo · Ajustes</summary><div class="settings-heading">A tu ritmo</div><p id="scope-count" class="scope-count"></p><details class="block-selection" open><summary>Lecciones · puedes combinarlas</summary><div id="block-list" class="block-list" role="group" aria-label="Lecciones para practicar"></div><button id="all-blocks" class="button small" type="button">Todos</button><button id="no-blocks" class="button small" type="button">Ninguno</button></details>
+<div class="setting-group" id="mode-settings"><span class="setting-label">Tipo de pregunta</span><div class="mode-grid" role="group" aria-label="Tipo de pregunta"><button class="mode-button" data-mode="jp_es" type="button" aria-pressed="false">JP → ES</button><button class="mode-button" data-mode="es_jp" type="button" aria-pressed="false">ES → JP</button><button class="mode-button" data-mode="mix" type="button" aria-pressed="true">Mixto</button></div></div>
+<div class="setting-group" id="length-settings"><label class="setting-label" for="session-length">Preguntas por sesión</label><select id="session-length"><option value="10">10 · Repaso rápido</option><option value="20" selected>20 · A tu ritmo</option><option value="40">40 · Un poco más</option><option value="0">Sin límite</option></select></div>
+<div class="setting-group" id="board-settings" hidden><label class="setting-label" for="board-length">Tableros por sesión</label><select id="board-length"><option value="5">5 · 15 parejas</option><option value="10">10 · 30 parejas</option><option value="20">20 · 60 parejas</option><option value="0">Sin límite</option></select></div>
+<details class="more-options"><summary>Más opciones</summary><label class="check-row"><span>Audio tras responder</span><input id="auto-audio" type="checkbox" checked></label><label class="check-row"><span>Mostrar romaji al responder</span><input id="show-romaji" type="checkbox" checked></label><label class="check-row"><span>Efectos de acierto y error</span><input id="sound-effects" type="checkbox"></label><p class="small-note">Pronunciación japonesa del dispositivo. Los espacios ～ de los patrones no se pronuncian.</p><details><summary>Mi historial</summary><p id="history-summary" class="small-note"></p><p id="legacy-summary" class="small-note"></p><p class="small-note">Los registros de palabras que ya no estén en este archivo se conservan, pero no entran en el repaso actual.</p><p class="small-note">Tus nuevas respuestas se guardan por tema y dirección. Las parejas también cuentan; una pareja equivocada se registra una sola vez en la palabra japonesa elegida.</p><a class="button small" href="progreso.html">Importar o exportar avance</a><button id="reset-progress" class="button ghost small" type="button">Borrar progreso de Vocabulario extra</button></details></details>
+</details></main><footer class="asallam-footer"><span>© Asallam Sensei</span><span class="footer-star" aria-hidden="true">☆</span><a href="salon-honor.html">Salón de Honor 🏆</a></footer></div><script>window.AsallamJourneyHooks={create:()=>({active:false,done:false,matches:()=>true,count(){},paint(){},lock(){},checkCatalog(){},fail(e){const p=document.createElement('p');p.textContent=e.message;(document.querySelector('main')||document.body).prepend(p);},async init(){const q=new URLSearchParams(location.search);if(!q.has('ruta')&&!q.has('paso'))return true;this.fail(Error('No se pudo cargar la ruta. Recarga la página o vuelve a ruta-n5.html.'));return false;}})};</script>
+<script src="assets/journey-n5.js?v=20261031"></script><script src="assets/journey-app-hooks.js?v=20261031b"></script>
+<script src="assets/review-history.js?v=turista-extra-20261103"></script><script src="assets/progress.js?v=turista-extra-20261103"></script><script src="assets/turista-catalog.js?v=turista-extra-20261103"></script><script src="assets/turista.js?v=turista-extra-20261103"></script></body></html>
+
+
+
