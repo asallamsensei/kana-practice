@@ -415,6 +415,7 @@ select{
 
 <div id="toast" class="toast"></div>
 
+<script src="assets/match-music.js?v=20261103"></script>
 <script>
 "use strict";
 
@@ -679,6 +680,7 @@ class SoundEngine{
   }
 }
 const sound = new SoundEngine();
+const matchMusic = window.MatchMusic?.create({isEnabled: () => sound.enabled, onEnabledChange: value => {sound.enabled=value;}, isBusy: () => !wordAudio.paused && !wordAudio.ended});
 
 document.addEventListener("pointerdown",()=>{
   audioHabilitado = true;
@@ -714,7 +716,7 @@ const state = {
 const MEMORY_KEY='asallam_english_memory_progress_v1';
 let turnGeneration=0,mismatchTimeout=null,finishTimeout=null,memoryFinished=false;
 let recordDelta={matches:0,attempts:0,seconds:0};
-function cancelPendingTurns(){turnGeneration++;clearTimeout(mismatchTimeout);clearTimeout(finishTimeout);clearInterval(state.memoryTimer);clearInterval(state.gameTimer);state.gameStartedAt=null;memoryFinished=false;}
+function cancelPendingTurns(){matchMusic?.cancel();turnGeneration++;clearTimeout(mismatchTimeout);clearTimeout(finishTimeout);clearInterval(state.memoryTimer);clearInterval(state.gameTimer);state.gameStartedAt=null;memoryFinished=false;}
 function memoryProgress(){
   const empty=()=>({version:1,total:{games:0,completed:0,matches:0,attempts:0,bestScore:0,bestCombo:0,seconds:0},current:null});
   try{const p=JSON.parse(localStorage.getItem(MEMORY_KEY)||'null');if(p&&p.version===1&&p.total&&Object.keys(empty().total).every(k=>Number.isSafeInteger(p.total[k])&&p.total[k]>=0))return p}catch{}return empty();
@@ -924,6 +926,7 @@ function renderBoard(){
 
 function startGame(){
   if(!state.selectedPairs.length || state.gameStartedAt) return;
+  matchMusic?.reset();
   audioHabilitado=true;
   sound.init();
   stopWordAudio();
@@ -993,8 +996,8 @@ function handleMatch(){
   state.firstCard.classList.remove("revealed");
   state.secondCard.classList.remove("revealed");
 
-  /* No repetimos la palabra: solo pitido de correcto */
-  sound.correct(state.combo);
+  // Cada pareja avanza una nota; el último acierto incluye el cierre musical.
+  matchMusic?.match({complete:state.matches === state.currentSettings.pairCount});
 
   resetTurn();
   renderHUD();
@@ -1057,7 +1060,7 @@ function finishGame(){
 
   renderHUD();
   showScreen("results");
-  sound.victory();
+  // El cierre musical ya se programó con la última pareja.
 }
 
 /* =========================

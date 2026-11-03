@@ -1593,7 +1593,8 @@
   ></div>
 
 
-  <script>
+  <script src="assets/match-music.js?v=20261103"></script>
+<script>
     "use strict";
 
     /* =========================================================
@@ -1781,6 +1782,7 @@
 
 
     function showScreen(screenName) {
+      if (screenName === "welcome" || screenName === "settings") pairMusic?.cancel();
       Object.values(DOM.screens).forEach(screen => {
         screen.classList.remove("active");
       });
@@ -1839,7 +1841,7 @@
         volume = 0.08,
         delay = 0
       }) {
-        if (!this.enabled || !this.context) {
+        if (!this.enabled || !this.context || window.MatchMusic?.isEnabled() === false) {
           return;
         }
 
@@ -1955,6 +1957,10 @@
 
 
     const sound = new SoundEngine();
+    const pairMusic = window.MatchMusic?.create({
+      isEnabled: () => sound.enabled,
+      onEnabledChange: enabled => { sound.enabled = enabled; }
+    });
 
 
     /* =========================================================
@@ -2493,6 +2499,7 @@ if (!hasContent) {
 
 
     function handleCardClick(card) {
+      if (!DOM.board.contains(card)) return;
       if (
         state.inputLocked ||
         card.classList.contains("revealed") ||
@@ -2591,7 +2598,7 @@ if (!hasContent) {
       state.firstCard.classList.remove("revealed");
       state.secondCard.classList.remove("revealed");
 
-      sound.correct(state.combo);
+      pairMusic?.match({ complete: state.matches === state.currentSettings.pairCount });
 
       resetTurn();
       renderHUD();
@@ -2638,6 +2645,7 @@ if (!hasContent) {
        ========================================================= */
 
     function resetScoreState() {
+      pairMusic?.reset();
       state.firstCard = null;
       state.secondCard = null;
 
@@ -2749,7 +2757,7 @@ if (!hasContent) {
 
       showScreen("results");
 
-      sound.victory();
+      // Completion fanfare is scheduled once with the final matched pair.
     }
 
 

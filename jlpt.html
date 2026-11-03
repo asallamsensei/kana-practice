@@ -498,6 +498,7 @@
     <div class="dialog-actions"><button id="cancel-reset" class="button" type="button">Conservar</button><button id="confirm-reset" class="button" type="button">Borrar progreso</button></div>
   </dialog>
 
+<script src="assets/match-music.js?v=20261103"></script>
 <script>window.AsallamJourneyHooks={create:()=>({active:false,done:false,matches:()=>true,count(){},paint(){},lock(){},checkCatalog(){},fail(e){const p=document.createElement('p');p.textContent=e.message;(document.querySelector('main')||document.body).prepend(p);},async init(){const q=new URLSearchParams(location.search);if(!q.has('ruta')&&!q.has('paso'))return true;this.fail(Error('No se pudo cargar la ruta. Recarga la página o vuelve a ruta-n5.html.'));return false;}})};</script>
 <script src="assets/journey-n5.js?v=20261031"></script><script src="assets/journey-app-hooks.js?v=20261031b"></script>
 <script src="assets/review-history.js?v=20261030"></script>
@@ -828,7 +829,7 @@ if (typeof document !== 'undefined') (function() {
   }
   function view(name){state.view=name;for(const n of ['quiz','match','explore','summary','empty'])$(n+'-view').hidden=n!==name;$('exercise-header').hidden=['explore','summary','empty'].includes(name);$('session-stats').hidden=['explore','empty'].includes(name);$('session-caption').hidden=['explore','empty'].includes(name);$('end-session').hidden=!['quiz','match'].includes(name);}
   function empty(message,needsData=false){view('empty');$('empty-title').textContent=needsData?'Tu vocabulario, listo para cargar.':'Todo al día.';$('empty-copy').textContent=message;$('empty-import').hidden=!needsData;$('exit-review').hidden=needsData;}
-  function start(){
+  function start(){matchMusic?.cancel();
     if(guided.active){state.prefs.activity=guided.step.activity;state.prefs.modes=[guided.step.mode];state.prefs.levels=["N5"];state.prefs.length=0;state.prefs.review=false;state.prefs.dictationTarget=guided.step.target||"jp";state.prefs.pairs=3;}
     cancel();state.current=null;state.deck=[];state.modeDeck=[];state.tiles=[];state.selected=null;state.board=0;
     state.session={stats:blank(),completed:0,started:Date.now(),elapsed:0,ended:false,mistakes:new Set(),initialPending:scope().filter(pending).length,reviewCode:null,shuffleTrace:[]};
@@ -997,7 +998,7 @@ if (typeof document !== 'undefined') (function() {
       notice('La huella está seleccionada. Cópiala con Ctrl+C, Cmd+C o la opción Copiar de tu móvil.',false,6000);
     }
   }
-  function finish(){
+  function finish(){if(!state.tiles?.length || !state.tiles.every(t=>t.matched))matchMusic?.cancel();
     const session=state.session;if(!session||session.ended)return;
     cancel();session.ended=true;session.finishedAt=Date.now();session.elapsed=session.finishedAt-session.started;
     const complete=session.completed>0&&done(),unlimited=!state.prefs.review&&state.prefs.length===0;
@@ -1016,6 +1017,7 @@ if (typeof document !== 'undefined') (function() {
   }
   function formatTime(ms){const sec=Math.floor(ms/1000);return String(Math.floor(sec/60)).padStart(2,'0')+':'+String(sec%60).padStart(2,'0');}
 
+  const matchMusic = window.MatchMusic?.create({isEnabled: () => state.prefs.effects, onEnabledChange: value => {state.prefs.effects=value; $("sound-effects").checked=value; persist();}, isBusy: () => !!sound.audioBusy});
   function nextBoard(){
     if(done()){finish();return;}
     state.selected=null;state.lock=false;state.board++;
@@ -1026,6 +1028,7 @@ if (typeof document !== 'undefined') (function() {
     for(const i of candidates){if(jp.has(i.kanji)||i.es.some(x=>es.has(Core.spanish(x))))continue;selected.push(i);jp.add(i.kanji);i.es.forEach(x=>es.add(Core.spanish(x)));if(selected.length>=Math.min(state.prefs.pairs,remain))break;}
     const chosen=new Set(selected.map(i=>i.id));state.deck=state.deck.filter(i=>!chosen.has(i.id));
     if(!selected.length){empty('No hay parejas disponibles en esta selección.');return;}
+    matchMusic?.reset({keepCompletion: !!state.tiles?.length && state.tiles.every(t=>t.matched)});
     state.tiles=Core.shuffle(selected.flatMap(i=>[{item:i,kind:'jp',matched:false},{item:i,kind:'es',matched:false}]));
     state.session.shuffleTrace.push(['board',state.tiles.map(tile=>[shuffleItem(tile.item),tile.kind])]);
     view('match');$('exercise-badge').textContent=state.prefs.levels.join(' + ');$('board-counter').textContent='Tablero '+state.board;
@@ -1043,7 +1046,7 @@ if (typeof document !== 'undefined') (function() {
     const first=state.tiles[state.selected];
     if(first.kind===tile.kind){state.selected=index;renderBoard();return;}
     state.selected=null;
-    if(first.item.id===tile.item.id){first.matched=tile.matched=true;state.session.completed++;record(tile.item,'correct');playEffect(true);if(state.prefs.autoAudio)playItem(tile.item);$('match-message').textContent='¡Pareja encontrada! '+tile.item.kanji+' · '+tile.item.significado;renderBoard();if(state.tiles.every(t=>t.matched)){state.lock=true;timer(nextBoard,850);}}
+    if(first.item.id===tile.item.id){first.matched=tile.matched=true;state.session.completed++;record(tile.item,'correct');matchMusic?.match({complete:state.tiles.every(t=>t.matched)});if(state.prefs.autoAudio)playItem(tile.item);$('match-message').textContent='¡Pareja encontrada! '+tile.item.kanji+' · '+tile.item.significado;renderBoard();if(state.tiles.every(t=>t.matched)){state.lock=true;timer(nextBoard,850);}}
     else {record(first.item,'wrong',first.kind==='jp'?first.item:tile.item);const key=wordKey(tile.item),p=state.progress.byItem[key]||itemProgressClean(null);p.pending=true;state.progress.byItem[key]=p;state.session.mistakes.add(tile.item.id);save(KEYS.progress,state.progress);state.lock=true;renderBoard();first.button.classList.add('is-wrong');tile.button.classList.add('is-wrong');$('match-message').textContent='Todavía no. Intenta otra pareja.';playEffect(false);timer(()=>{state.lock=false;renderBoard();},700);}
     renderStats();
   }

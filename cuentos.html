@@ -629,7 +629,8 @@
 
   </main>
 
-  <script>
+  <script src="assets/match-music.js?v=20261103"></script>
+<script>
     "use strict";
 
 const CLAVES_ESTUDIANTES = {
@@ -694,6 +695,7 @@ const state = {
   }
 };
 
+const pairMusic = window.MatchMusic?.create({ isBusy: () => Boolean(state.audio && !state.audio.paused && !state.audio.ended) });
     const $ = id => document.getElementById(id);
 
 function autenticarEstudiante() {
@@ -826,6 +828,7 @@ function startNewStudy() {
 }
     
     function beep(type){
+      if (window.MatchMusic?.isEnabled() === false) return;
       try{
         const Ctx=window.AudioContext||window.webkitAudioContext,ctx=new Ctx();
         const tones=type==="ok"?[[660,0],[880,.1]]:[[220,0],[155,.12]];
@@ -920,6 +923,7 @@ function startNewStudy() {
     function answerText(item,mode){ return mode==="es_jp"?item.japanese:item.spanish }
 
 function setActivity(activity) {
+  pairMusic?.cancel();
   if (!["quiz", "match"].includes(activity)) return;
 
   state.activity = activity;
@@ -969,7 +973,8 @@ function showCurrentActivity() {
   }
 }
 
-function renderMatchRound() {
+function renderMatchRound(keepCompletion = false) {
+  pairMusic?.reset({ keepCompletion });
   if (state.pool.length < 3) return;
 
   state.match.first = null;
@@ -1035,6 +1040,7 @@ function renderMatchRound() {
 }
 
 function selectMatch(index, button) {
+  if (state.activity !== "match" || !$("matchBoard").contains(button)) return;
   if (
     state.match.locked ||
     button.disabled
@@ -1094,7 +1100,7 @@ function selectMatch(index, button) {
     state.study.correct++;
 
     saveStats();
-    beep("ok");
+    pairMusic?.match({ complete: state.match.matched === state.match.cards.length / 2 });
 
     if (state.match.matched === 3) {
       state.match.rounds++;
@@ -1107,7 +1113,7 @@ function selectMatch(index, button) {
         ) {
           showStudyResults();
         } else {
-          renderMatchRound();
+          renderMatchRound(true);
         }
       }, 650);
     }

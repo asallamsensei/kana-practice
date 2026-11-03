@@ -653,6 +653,7 @@
   
 </div>
 
+<script src="assets/match-music.js?v=20261103"></script>
 <script>
 let lista = [];
 let actual = 0;
@@ -714,10 +715,13 @@ const AUDIO_BASES = {
   N4: "data/audios/n4/"
 };
 const audio = new Audio();
+const pairMusic = window.MatchMusic?.create({ isBusy: () => !audio.paused && !audio.ended });
 
-const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+const audioCtx = AudioContextClass ? new AudioContextClass() : null;
 
 function playBeep(freq, duration){
+  if (!audioCtx || window.MatchMusic?.isEnabled() === false) return;
   try{
     const osc = audioCtx.createOscillator();
     const gain = audioCtx.createGain();
@@ -1372,6 +1376,7 @@ function reiniciarEmparejar(){
 }
   
 function setActividad(actividad){
+  pairMusic?.cancel();
   if(actividad !== "quiz" && actividad !== "emparejar") return;
 
   clearTimeout(temporizadorEmparejar);
@@ -1396,7 +1401,8 @@ function setActividad(actividad){
   }
 }
 
-function iniciarRondaEmparejar(){
+function iniciarRondaEmparejar(keepCompletion = false){
+  pairMusic?.reset({ keepCompletion });
   if(actividadActual !== "emparejar" || lista.length < 3) return;
 
   primeraTarjeta = null;
@@ -1441,6 +1447,7 @@ function iniciarRondaEmparejar(){
 }
 
 function seleccionarPareja(indice, boton){
+  if (actividadActual !== "emparejar" || !document.getElementById("tableroEmparejar").contains(boton)) return;
   if(emparejarBloqueado || boton.disabled) return;
   if(primeraTarjeta?.boton === boton) return;
 
@@ -1474,7 +1481,7 @@ function seleccionarPareja(indice, boton){
     primeraTarjeta = null;
     parejasEncontradas++;
 
-    sonidoCorrecto();
+    pairMusic?.match({ complete: parejasEncontradas === tarjetasEmparejar.length / 2 });
     aciertos++;
     aciertosSesion++;
     racha++;
@@ -1494,7 +1501,7 @@ if(parejasEncontradas === 3){
     if(tablerosCompletados >= META_EMPEJAR){
       terminarEmparejar();
     }else{
-      iniciarRondaEmparejar();
+      iniciarRondaEmparejar(true);
     }
   }, 650);
 }
