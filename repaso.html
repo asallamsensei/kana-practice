@@ -109,7 +109,7 @@
     if (timer !== null) return;
     timer = root.setTimeout(function () { timer = null; pump(); }, delay);
   }
-  function tone(frequency, when, duration, gain) {
+  function tone(frequency, when, duration, gain, onended) {
     const oscillator = context.createOscillator(), envelope = context.createGain();
     oscillator.type = 'sine';
     oscillator.frequency.setValueAtTime(frequency, when);
@@ -117,12 +117,13 @@
     envelope.gain.linearRampToValueAtTime(gain, when + 0.012);
     envelope.gain.exponentialRampToValueAtTime(0.0001, when + duration);
     oscillator.connect(envelope); envelope.connect(context.destination);
-    oscillator.onended = function () { try { oscillator.disconnect(); envelope.disconnect(); } catch (_) {} };
+    oscillator.onended = function () { try { oscillator.disconnect(); envelope.disconnect(); } catch (_) {} if (onended) onended(); };
     oscillator.start(when); oscillator.stop(when + duration + 0.025);
   }
   function play(job) {
     const now = context.currentTime + 0.015;
-    if (!job.answer) tone(NOTES[job.index % NOTES.length] * Math.pow(2, Math.floor(job.index / NOTES.length)), now, 0.23, 0.23);
+    const completed = function () { if (job.after) job.after(); pump(); };
+    if (!job.answer) tone(NOTES[job.index % NOTES.length] * Math.pow(2, Math.floor(job.index / NOTES.length)), now, 0.23, 0.23, job.complete ? null : completed);
     let duration = 0.29;
     if (job.complete || job.answer) {
       const offset = job.answer ? -0.30 : 0;
@@ -130,13 +131,13 @@
       [523.2511,659.2551,783.9909].forEach(function (frequency, index) {
         tone(frequency, now + offset + 0.30 + index * 0.11, 0.18, 0.18);
       });
-      [523.2511,659.2551,783.9909].forEach(function (frequency) {
-        tone(frequency, now + offset + 0.67, 0.55, 0.11);
+      [523.2511,659.2551,783.9909].forEach(function (frequency, index) {
+        tone(frequency, now + offset + 0.67, 0.55, 0.11, index === 2 ? completed : null);
       });
       duration = 1.27 + offset;
     }
     busyUntil = context.currentTime + duration;
-    root.setTimeout(function () { if (job.after) job.after(); pump(); }, duration * 1000 + 30);
+    schedulePump(duration * 1000);
   }
   function pump() {
     // Sentence audio can be long; keep earned answer feedback through it, with a bounded expiry.
@@ -229,18 +230,18 @@
 (function(root){'use strict';
 function shuffle(list,random=Math.random){const a=[...list];for(let i=a.length-1;i>0;i--){const j=Math.floor(random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
 function selectPairs(items,conflicts,count=3,random=Math.random){const selected=[];for(const item of shuffle(items,random)){if(!selected.some(x=>x.id===item.id||conflicts(x,item)))selected.push(item);if(selected.length===count)break;}return selected;}
-function create(config){const {host,ledger,app}=config,doc=host.ownerDocument||root.document;let active=false,first=null,locked=false,timer=null,generation=0,tiles=[],pairs=[],round=0,correct=0,wrong=0,finished=false;
+function create(config){const {host,ledger,app}=config,doc=host.ownerDocument||root.document;let active=false,first=null,locked=false,timer=null,generation=0,tiles=[],pairs=[],round=0,correct=0,wrong=0,finished=false,pendingPairs=[];
 function sessionLength(){const value=Number(typeof config.sessionLength==='function'?config.sessionLength():config.sessionLength);return Number.isSafeInteger(value)&&value>0?value:0;}
 const music=root.MatchMusic?.create({isBusy:()=>Boolean(config.audioBusy?.()||root.speechSynthesis?.speaking||root.speechSynthesis?.pending)});
 const make=(tag,text,cls)=>{const el=doc.createElement(tag);if(text!==undefined)el.textContent=text;if(cls)el.className=cls;return el;};
 const intro=make('p','Une cada elemento con su pareja. Puedes cambiar la selección en el mismo lado. Una pareja incorrecta cuenta como error del primer elemento elegido.','setting-help');
 const counter=make('p','','setting-help'),board=make('div',undefined,'language-match-board'),feedback=make('div','','feedback'),controls=make('div',undefined,'controls'),next=make('button','Otro tablero →','primary'),finish=make('button','Terminar sesión'),restart=make('button','Nueva sesión','primary');counter.hidden=config.showCounter===false;feedback.setAttribute('role','status');board.setAttribute('aria-label','Emparejar');controls.append(finish,restart);host.append(intro,counter,board,feedback,controls);
-function cancel(){generation++;if(timer!==null)root.clearTimeout(timer);timer=null;locked=false;first=null;for(const tile of tiles){tile.button.classList.remove('is-selected','is-wrong');tile.button.setAttribute('aria-pressed','false');}}
+function cancel(){generation++;pendingPairs=[];if(timer!==null)root.clearTimeout(timer);timer=null;locked=false;first=null;for(const tile of tiles){tile.button.classList.remove('is-selected','is-wrong');tile.button.setAttribute('aria-pressed','false');}}
 function stats(){const length=sessionLength();counter.textContent=`${round} tableros completados · ${correct}${length?' / '+length:''} parejas acertadas · ${wrong} errores`;config.changed();}
 function show(){next.hidden=finished||!pairs.length||tiles.some(x=>!x.matched);finish.hidden=finished;restart.hidden=!finished;}
 function finishSession(complete=false){cancel();if(!complete)music?.cancel?.();finished=true;board.replaceChildren();feedback.textContent=(complete?'Sesión completada: '+correct+' parejas acertadas · '+wrong+' errores.':'Sesión terminada. Las parejas sin responder no se registran.');stats();show();}
 function newBoard(){cancel();music?.reset({keepCompletion:true});const length=sessionLength();if(length&&correct>=length){finishSession(true);return;}finished=false;const pool=config.items();pairs=selectPairs(pool,config.conflicts,length?Math.min(3,length-correct):3);tiles=[];board.replaceChildren();feedback.textContent=pairs.length?(config.initialFeedback??'Elige una tarjeta y su pareja.'):'No hay elementos compatibles en esta selección.';const columns=[shuffle(pairs),shuffle(pairs)];for(let row=0;row<pairs.length;row++)for(let side=0;side<2;side++){const item=columns[side][row],button=make('button',config.labels(item)[side],'language-match-tile');button.type='button';button.lang=config.langs[side];button.setAttribute('aria-pressed','false');button.setAttribute('aria-label',config.sideNames[side]+': '+config.labels(item)[side]);const tile={item,side,button,matched:false};button.onclick=()=>pick(tile);tiles.push(tile);board.append(button);}stats();show();}
-function pick(tile){if(!active||finished||locked||!tiles.includes(tile)||tile.matched||tile===first)return;if(first&&first.side===tile.side){first.button.classList.remove('is-selected');first.button.setAttribute('aria-pressed','false');first=null;}tile.button.classList.add('is-selected');tile.button.setAttribute('aria-pressed','true');if(!first){first=tile;return;}const previous=first;first=null;if(previous.item.id===tile.item.id){for(const t of [previous,tile]){t.matched=true;t.button.disabled=true;t.button.classList.remove('is-selected');t.button.classList.add('is-matched');t.button.setAttribute('aria-pressed','false');}correct++;const matchedItem=tile.item;const speakPair=()=>config.speak?.(matchedItem);if(music)music.match({complete:tiles.every(x=>x.matched),after:speakPair});else speakPair();ledger.record(app,tile.item.id,'Emparejar','correct');feedback.textContent='✓ '+config.labels(tile.item).join(' · ');if(tiles.every(x=>x.matched)){round++;feedback.textContent+=' · Tablero completo.';}if(sessionLength()&&correct>=sessionLength()){finishSession(true);return;}stats();show();if(tiles.every(x=>x.matched)){const epoch=generation;timer=root.setTimeout(()=>{timer=null;if(epoch===generation&&active&&!finished)newBoard();},1000);}return;}wrong++;ledger.record(app,previous.item.id,'Emparejar','wrong');stats();feedback.textContent='✕ No son pareja. Inténtalo otra vez.';locked=true;for(const t of [previous,tile])t.button.classList.add('is-wrong');const epoch=generation;timer=root.setTimeout(()=>{if(epoch!==generation||!active)return;for(const t of [previous,tile]){t.button.classList.remove('is-selected','is-wrong');t.button.setAttribute('aria-pressed','false');}locked=false;timer=null;},650);}
+function pick(tile){if(!active||finished||locked||!tiles.includes(tile)||tile.matched||tile===first)return;if(first&&first.side===tile.side){first.button.classList.remove('is-selected');first.button.setAttribute('aria-pressed','false');first=null;}tile.button.classList.add('is-selected');tile.button.setAttribute('aria-pressed','true');if(!first){first=tile;return;}const previous=first;first=null;if(previous.item.id===tile.item.id){for(const t of [previous,tile]){t.matched=true;t.button.disabled=true;t.button.classList.remove('is-selected');t.button.classList.add('is-matched');t.button.setAttribute('aria-pressed','false');}correct++;const matchedItem=tile.item,matchEpoch=generation;let resolvePair;const spoken=new Promise(resolve=>{resolvePair=resolve;});pendingPairs.push(spoken);const speakPair=()=>{if(matchEpoch!==generation||!active){resolvePair();return;}Promise.resolve(config.speak?.(matchedItem)).then(resolvePair,resolvePair);};if(music)music.match({complete:tiles.every(x=>x.matched),after:speakPair});else speakPair();ledger.record(app,tile.item.id,'Emparejar','correct');feedback.textContent='✓ '+config.labels(tile.item).join(' · ');if(tiles.every(x=>x.matched)){round++;feedback.textContent+=' · Tablero completo.';}stats();show();if(tiles.every(x=>x.matched)){const epoch=generation;const audioFinished=Promise.all(pendingPairs);const delayFinished=new Promise(resolve=>{timer=root.setTimeout(()=>{timer=null;resolve();},1000);});Promise.all([audioFinished,delayFinished]).then(()=>{if(epoch!==generation||!active||finished)return;if(sessionLength()&&correct>=sessionLength())finishSession(true);else newBoard();});}return;}wrong++;ledger.record(app,previous.item.id,'Emparejar','wrong');stats();feedback.textContent='✕ No son pareja. Inténtalo otra vez.';locked=true;for(const t of [previous,tile])t.button.classList.add('is-wrong');const epoch=generation;timer=root.setTimeout(()=>{if(epoch!==generation||!active)return;for(const t of [previous,tile]){t.button.classList.remove('is-selected','is-wrong');t.button.setAttribute('aria-pressed','false');}locked=false;timer=null;},650);}
 function activate(){active=true;if(!tiles.length)newBoard();else {stats();show();}}
 function deactivate(){active=false;cancel();music?.cancel?.();}
 function reset(){cancel();music?.reset();tiles=[];pairs=[];round=correct=wrong=0;finished=false;if(active)newBoard();}
@@ -289,13 +290,13 @@ function pool(){return model.items.filter(item=>groups.has(item.group));}
 function canSpeak(item){return Boolean(item?.speechText&&item.lang&&window.speechSynthesis&&window.SpeechSynthesisUtterance);}
 function playable(item){return Boolean(item&&((item.audioUrl&&window.Audio)||canSpeak(item)));}
 function clearPending(){audioQueue=audioQueue.filter(request=>!request.automatic);}
-function queueAudio(item,automatic=false){if(!playable(item))return;if(audioQueue.length>=5){if(!automatic)notify('Espera a que termine el audio pendiente.');return;}audioQueue.push({item,automatic,generation,rate,epoch:audioEpoch});pumpAudio();}
+function queueAudio(item,automatic=false){if(!playable(item))return Promise.resolve();if(audioQueue.length>=5){if(!automatic)notify('Espera a que termine el audio pendiente.');return Promise.resolve();}return new Promise(resolve=>{audioQueue.push({item,automatic,generation,rate,epoch:audioEpoch,resolve});pumpAudio();});}
 function pumpAudio(){
  if(audioBusy)return;
  while(audioQueue.length){
   const request=audioQueue.shift();
   const stale=()=>request.epoch!==audioEpoch||(request.automatic&&!request.started&&(request.generation!==generation||activity!=='quiz'||!autoAudio));
-  if(stale())continue;
+  if(stale()){request.resolve?.();continue;}
   audioBusy=true;
   let ended=false,usingSpeech=false,media=null,mediaTimer=null,voiceTimer=null,voiceReady=null;
   const releaseMedia=()=>{
@@ -306,7 +307,7 @@ function pumpAudio(){
   const cleanup=()=>{releaseMedia();releaseVoices();};
   cleanupAudio=cleanup;
   const done=failed=>{
-   if(ended)return;ended=true;cleanup();
+   if(ended)return;ended=true;cleanup();request.resolve?.();
    if(request.epoch!==audioEpoch)return;
    audioBusy=false;activeSpeech=null;cleanupAudio=null;
    if(failed)notify('No se pudo reproducir el audio ni la voz de respaldo. Puedes continuar con las preguntas de texto.');
