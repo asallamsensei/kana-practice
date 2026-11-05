@@ -1,6 +1,6 @@
 /* One local, per-item review ledger. Reading/Explorar never records practice. */
 (function(root){'use strict';
-const APPS=['kana','jlpt','kanji','oraciones','ingles','turista','anime','oraciones_ingles','chino','portugues','coreano','vocabulario_extra'];
+const APPS=['kana','jlpt','kanji','oraciones','ingles','turista','anime','oraciones_ingles','chino','portugues','coreano','vocabulario_extra','repaso'];
 const PREFIX='asallam_reviews_v1_',VERSION=1,MAX_ITEMS=50000;
 const EXTRA='vocabulario_extra',easyId=id=>id.startsWith('easy_japanese:'),virtualSnapshots=new WeakSet();
 const obj=v=>v!==null&&typeof v==='object'&&!Array.isArray(v), own=(o,k)=>Object.prototype.hasOwnProperty.call(o,k), bad=k=>k==='prototype'||Object.prototype.hasOwnProperty.call(Object.prototype,k);

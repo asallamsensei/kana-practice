@@ -1,0 +1,400 @@
+{
+  "metadatos": {
+    "imagenes_recibidas": 7,
+    "imagenes_unicas": 6,
+    "tablas": 9,
+    "entradas": 33,
+    "duplicados_omitidos": [
+      {
+        "archivo": "2150b630-e4cb-4279-b6f1-f2e41d930031.png",
+        "duplicado_de": "image(20261105-151444).png"
+      }
+    ],
+    "incertidumbres_tipograficas": [
+      {
+        "ficha": 4,
+        "tabla": 1,
+        "columna": 4,
+        "campo": "japones",
+        "detalle": "La imagen muestra Tシャツ con separación visual tras T. No permite distinguir entre una T de ancho completo y un espacio tipográfico. Se transcriben los caracteres visibles como Tシャツ, sin añadir un espacio supuesto."
+      }
+    ]
+  },
+  "fichas": [
+    {
+      "numero": 1,
+      "archivo_origen": "image(20261105-151443).png",
+      "encabezado": "☆ asallamsensei.com ☆",
+      "anime": "Anime: 『ドラゴンボール超』",
+      "tablas": [
+        {
+          "columnas": [
+            {
+              "japones": "三倍",
+              "furigana": [
+                {
+                  "texto_base": "三倍",
+                  "lectura": "さんばい"
+                }
+              ],
+              "romaji": "sanbai",
+              "espanol": "tres veces,\ntriple"
+            },
+            {
+              "japones": "四倍",
+              "furigana": [
+                {
+                  "texto_base": "四倍",
+                  "lectura": "よんばい"
+                }
+              ],
+              "romaji": "yonbai",
+              "espanol": "cuatro veces,\ncuádruple"
+            },
+            {
+              "japones": "いや",
+              "furigana": [],
+              "romaji": "iya",
+              "espanol": "no"
+            },
+            {
+              "japones": "十倍だ!",
+              "furigana": [
+                {
+                  "texto_base": "十倍",
+                  "lectura": "じゅうばい"
+                }
+              ],
+              "romaji": "jūbai da!",
+              "espanol": "¡Es por diez!"
+            },
+            {
+              "japones": "界王拳",
+              "furigana": [
+                {
+                  "texto_base": "界王拳",
+                  "lectura": "かいおうけん"
+                }
+              ],
+              "romaji": "kaiōken",
+              "espanol": "Puño del Rey\nde los Mundos"
+            }
+          ]
+        }
+      ],
+      "notas": [
+        "倍 (bai) es un sufijo contador que significa\n“aumentado X veces” o “multiplicado por X”."
+      ]
+    },
+    {
+      "numero": 2,
+      "archivo_origen": "image(20261105-151444).png",
+      "encabezado": "☆ asallamsensei.com ☆",
+      "anime": "Anime: 『ラブはギャルから始まる運命』",
+      "tablas": [
+        {
+          "columnas": [
+            {
+              "japones": "授業",
+              "furigana": [
+                {
+                  "texto_base": "授業",
+                  "lectura": "じゅぎょう"
+                }
+              ],
+              "romaji": "jugyō",
+              "espanol": "clase"
+            },
+            {
+              "japones": "は",
+              "furigana": [],
+              "romaji": "wa",
+              "espanol": "indica el tema\n«en cuanto a la clase...»"
+            },
+            {
+              "japones": "もう",
+              "furigana": [],
+              "romaji": "mō",
+              "espanol": "ya"
+            },
+            {
+              "japones": "始まってます",
+              "furigana": [
+                {
+                  "texto_base": "始",
+                  "lectura": "はじ"
+                }
+              ],
+              "romaji": "hajimattemasu",
+              "espanol": "ha empezado"
+            },
+            {
+              "japones": "うるせーな",
+              "furigana": [],
+              "romaji": "urusē na",
+              "espanol": "¡qué fastidio!\n¡cállate!"
+            }
+          ]
+        }
+      ],
+      "notas": [
+        "始まってます (hajimattemasu) es una forma abreviada, habitual al\nhablar, de 始まっています (hajimatte imasu)."
+      ]
+    },
+    {
+      "numero": 3,
+      "archivo_origen": "image(20261105-151446).png",
+      "encabezado": "☆ asallamsensei.com ☆",
+      "anime": "Anime: 『ビー・バップ・ハイスクール』 (BE-BOP-HIGHSCHOOL)",
+      "tablas": [
+        {
+          "columnas": [
+            {
+              "japones": "チカちゃん",
+              "furigana": [],
+              "romaji": "Chika-chan",
+              "espanol": "Chika (forma\ncariñosa)"
+            },
+            {
+              "japones": "もしかして",
+              "furigana": [],
+              "romaji": "moshikashite",
+              "espanol": "acaso,\n¿será que...?"
+            },
+            {
+              "japones": "スケベ",
+              "furigana": [],
+              "romaji": "sukebe",
+              "espanol": "pervertida"
+            }
+          ]
+        },
+        {
+          "columnas": [
+            {
+              "japones": "相当",
+              "furigana": [],
+              "romaji": "sōtō",
+              "espanol": "bastante"
+            },
+            {
+              "japones": "うん",
+              "furigana": [],
+              "romaji": "un",
+              "espanol": "sí\n(informal)"
+            },
+            {
+              "japones": "あんた",
+              "furigana": [],
+              "romaji": "anta",
+              "espanol": "tú (informal,\na veces brusco)"
+            },
+            {
+              "japones": "バカ",
+              "furigana": [],
+              "romaji": "baka",
+              "espanol": "tonto,\nidiota"
+            },
+            {
+              "japones": "ええ",
+              "furigana": [],
+              "romaji": "ee",
+              "espanol": "sí,\nclaro"
+            }
+          ]
+        }
+      ],
+      "notas": [
+        "Trata de entender el diálogo con ayuda de este vocabulario."
+      ]
+    },
+    {
+      "numero": 4,
+      "archivo_origen": "image(20261105-151447).png",
+      "encabezado": "☆ asallamsensei.com ☆",
+      "anime": "Anime: 『負けヒロインが多すぎる!』",
+      "tablas": [
+        {
+          "columnas": [
+            {
+              "japones": "ねえ",
+              "furigana": [],
+              "romaji": "nee",
+              "espanol": "oye"
+            },
+            {
+              "japones": "温水くん",
+              "furigana": [
+                {
+                  "texto_base": "温水",
+                  "lectura": "ぬくみず"
+                }
+              ],
+              "romaji": "Nukumizu-kun",
+              "espanol": "Nukumizu-kun"
+            },
+            {
+              "japones": "その",
+              "furigana": [],
+              "romaji": "sono",
+              "espanol": "esa"
+            },
+            {
+              "japones": "Tシャツ",
+              "furigana": [],
+              "romaji": "tīshatsu",
+              "espanol": "camiseta"
+            },
+            {
+              "japones": "って",
+              "furigana": [],
+              "romaji": "tte",
+              "espanol": "(marca el tema)"
+            }
+          ]
+        },
+        {
+          "columnas": [
+            {
+              "japones": "あたし",
+              "furigana": [],
+              "romaji": "atashi",
+              "espanol": "yo (forma femenina)"
+            },
+            {
+              "japones": "の",
+              "furigana": [],
+              "romaji": "no",
+              "espanol": "de"
+            },
+            {
+              "japones": "あたしの",
+              "furigana": [],
+              "romaji": "atashi no",
+              "espanol": "mía"
+            },
+            {
+              "japones": "だけど",
+              "furigana": [],
+              "romaji": "dakedo",
+              "espanol": "(suaviza la afirmación)"
+            }
+          ]
+        }
+      ],
+      "notas": [
+        "って (tte) marca el tema como は (wa), pero es más conversacional.",
+        "だけど (dakedo) usualmente significa «pero»."
+      ]
+    },
+    {
+      "numero": 5,
+      "archivo_origen": "image(20261105-151448).png",
+      "encabezado": "☆ asallamsensei.com ☆",
+      "anime": "Anime: 『カナン様はあくまでチョロい』",
+      "tablas": [
+        {
+          "columnas": [
+            {
+              "japones": "誰",
+              "furigana": [
+                {
+                  "texto_base": "誰",
+                  "lectura": "だれ"
+                }
+              ],
+              "romaji": "dare",
+              "espanol": "¿quién?"
+            },
+            {
+              "japones": "誰か",
+              "furigana": [
+                {
+                  "texto_base": "誰",
+                  "lectura": "だれ"
+                }
+              ],
+              "romaji": "dareka",
+              "espanol": "alguien"
+            },
+            {
+              "japones": "助けて!",
+              "furigana": [
+                {
+                  "texto_base": "助",
+                  "lectura": "たす"
+                }
+              ],
+              "romaji": "tasukete!",
+              "espanol": "¡ayuda!"
+            }
+          ]
+        },
+        {
+          "columnas": [
+            {
+              "japones": "誰か助けて!",
+              "furigana": [
+                {
+                  "texto_base": "誰",
+                  "lectura": "だれ"
+                },
+                {
+                  "texto_base": "助",
+                  "lectura": "たす"
+                }
+              ],
+              "romaji": "dareka tasukete!",
+              "espanol": "¡Que alguien me ayude!"
+            }
+          ]
+        }
+      ],
+      "notas": [
+        "La u en tasukete sufre ensordecimiento vocálico."
+      ]
+    },
+    {
+      "numero": 6,
+      "archivo_origen": "image(20261105-151449).png",
+      "encabezado": "☆ asallamsensei.com ☆",
+      "anime": "Anime: 『エル・チャボ・デル・オチョ』",
+      "tablas": [
+        {
+          "columnas": [
+            {
+              "japones": "知らない",
+              "furigana": [
+                {
+                  "texto_base": "知",
+                  "lectura": "し"
+                }
+              ],
+              "romaji": "shiranai",
+              "espanol": "no sé"
+            },
+            {
+              "japones": "不合格",
+              "furigana": [
+                {
+                  "texto_base": "不",
+                  "lectura": "ふ"
+                },
+                {
+                  "texto_base": "合格",
+                  "lectura": "ごうかく"
+                }
+              ],
+              "romaji": "fugōkaku",
+              "espanol": "reprobado"
+            }
+          ]
+        }
+      ],
+      "notas": [
+        "ドン・ラモン (don Ramon)= Don Ramón.",
+        "ゴディネス (Godinesu) = Godínez."
+      ]
+    }
+  ]
+}

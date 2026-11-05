@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#10121b">
+<meta name="description" content="Repasa a tu ritmo con quiz, parejas y exploración.">
+<title>Repaso · Asallam Sensei</title>
+<link rel="stylesheet" href="assets/coreano.css?v=20261101ko">
+<link rel="stylesheet" href="assets/donate-button.css?v=20261031b">
+<link rel="stylesheet" href="assets/language-matching.css?v=20261101match">
+<link rel="stylesheet" href="assets/brand-footer.css?v=20261101">
+<style>
+.activity-tabs{grid-template-columns:repeat(3,minmax(0,1fr))}.hero p{font-size:16px;margin-top:12px;max-width:700px}.prompt{font-size:clamp(28px,5vw,48px);min-height:130px}.options{grid-template-columns:repeat(2,minmax(0,1fr))}.options button{height:100%;min-height:80px}.option-letter{align-self:flex-start}.option-label{flex:1}.options button.is-correct{border-color:var(--mint)!important;background:var(--mint-bg)!important}.options button.is-wrong{border-color:var(--danger)!important;background:var(--danger-bg)!important}.settings fieldset{border:0;margin:0;padding:0;min-width:0}.settings fieldset:disabled{opacity:.65}.setting-group .check-row{display:flex}.empty-state{padding:40px 12px}.empty-symbol{font-size:42px;margin-bottom:15px}.empty-state p{max-width:420px}.feedback:empty{display:none}.word-card h3{font-size:24px}.word-card .card-detail{font-size:14px}.session-stats{grid-template-columns:repeat(3,minmax(0,1fr))}.stat strong{font-size:25px}.progress-track{margin-bottom:10px}.notice{align-items:center}.notice span{flex:1}.notice button{flex:none}.session-caption{font-size:13px}.keyboard-hint{line-height:1.8}.language-match-tile{overflow-wrap:anywhere;white-space:normal}.loading-state{padding:38px 10px;text-align:center}.group-empty{padding:20px}.setting-label{margin-top:10px}.button:disabled{opacity:.55}.explore-top{display:block}.explore-top h2{font-size:21px}.word-card{background:var(--raised)}.option-label,.word-card p,.reference-note,.reference-header{white-space:pre-line}.reference-note{margin:10px 0;font-size:16px}.reference-header{font-size:14px;margin-bottom:12px}.source-notes{margin-top:18px}.source-notes h2{font-size:21px;margin-bottom:15px}.source-notes details+details{margin-top:14px}.chips .chip{overflow-wrap:anywhere;text-align:left}#summary{padding:25px 0 10px}#summaryText{margin-top:12px}#summary .controls{justify-content:center}.stats-note{font-size:13px;margin-top:10px}#catalogIntro{overflow-wrap:anywhere}@media(max-width:600px){.options{grid-template-columns:1fr}.hero{padding-bottom:22px}.options button{min-height:68px}.option-label{font-size:18px}.session-stats{gap:6px}.stat{padding:10px 5px}.stat-label{font-size:11px}.stat strong{font-size:23px}}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Ir a la práctica</a>
+<div class="container">
+<header class="topbar">
+  <a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true">↻</span><span><span class="brand-name">ASALLAM SENSEI</span><span class="brand-sub">Un poco cada día</span></span></a>
+  <nav class="topnav" aria-label="Navegación">
+    <a class="nav-link" href="index.html">Inicio</a><a class="nav-link" href="progreso.html">Mi progreso</a>
+    <a class="nav-link donate-nav asallam-donate" href="https://paypal.me/asallamsensei" target="_blank" rel="noopener noreferrer"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg>Donar</a>
+    <button type="button" id="theme" class="icon-button" aria-label="Activar tema claro" title="Cambiar tema">☀</button>
+  </nav>
+</header>
+<section class="hero"><div><h1 id="pageTitle">Repaso a tu ritmo</h1><p id="catalogIntro">Practica, conecta ideas y vuelve a lo que necesitas.</p></div></section>
+<div id="notice" class="notice" role="status" hidden><span id="noticeText"></span><button type="button" id="closeNotice" aria-label="Cerrar aviso">×</button></div>
+<main id="main" class="workspace">
+<div class="main-column">
+  <div class="activity-tabs" role="group" aria-label="Actividad">
+    <button type="button" id="quizTab" class="activity-tab" aria-pressed="true">Quiz</button>
+    <button type="button" id="matchTab" class="activity-tab" aria-pressed="false">Emparejar</button>
+    <button type="button" id="exploreTab" class="activity-tab" aria-pressed="false">Explorar</button>
+  </div>
+  <section class="exercise-card" aria-label="Práctica">
+    <div class="exercise-top"><span id="badge" class="badge">Quiz</span><span id="roundCount" class="round-count"></span></div>
+    <div class="progress-track" id="progressTrack" role="progressbar" aria-label="Avance del quiz" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" hidden><div id="bar" class="progress-fill"></div></div>
+    <div id="empty" class="empty-state"><div class="empty-symbol" aria-hidden="true">↻</div><h2>Tu próximo repaso</h2><p>No hay entradas en este catálogo. Revisa el archivo de contenido para practicar con Quiz, Emparejar y Explorar.</p></div>
+    <div id="loading" class="loading-state" role="status" hidden>Cargando el repaso…</div>
+    <div id="loadError" class="empty-state" role="alert" hidden><h2>No se pudo cargar el contenido</h2><p id="loadErrorText"></p><button type="button" id="retry" class="button">Reintentar</button></div>
+    <div id="practice" hidden>
+      <div class="question-area"><p id="questionLabel" class="question-label"></p><div id="prompt" class="prompt"></div><button type="button" id="listen" class="listen-button" hidden>🔊 Escuchar</button></div>
+      <div id="options" class="options" role="group" aria-label="Respuestas"></div>
+      <div id="feedback" class="feedback" role="status" hidden></div>
+      <div class="controls"><button type="button" id="skip">No lo sé</button><button type="button" id="next" class="primary" disabled>Siguiente →</button></div>
+    </div>
+    <div id="noQuestion" class="group-empty" role="status" hidden><h2>Faltan opciones para este quiz</h2><p class="setting-help">Selecciona más bloques o cambia de dirección. También puedes repasar estas entradas en Explorar.</p></div>
+    <div id="matching" hidden></div>
+    <div id="exploring" hidden><div class="explore-top"><h2>Explora el contenido</h2><p>Abrir o escuchar una entrada no cuenta como respuesta.</p></div><label for="search" class="setting-label">Buscar</label><input id="search" type="search" autocomplete="off" placeholder="Busca una palabra o una idea"><p id="exploreCount" class="setting-help"></p><div id="wordGrid" class="explore-grid"></div><button type="button" id="more" class="plain-button" hidden>Ver más</button></div>
+    <div id="summary" class="summary" hidden><div class="summary-seal" aria-hidden="true">✓</div><h2>Tu sesión</h2><p id="summaryText"></p><div class="controls"><button type="button" id="repeat" class="primary">Otra sesión</button><button type="button" id="reviewSession">Repasar errores</button></div></div>
+    <div class="controls"><button type="button" id="finish" hidden>Terminar sesión</button></div>
+    <p id="keyboardHint" class="keyboard-hint" hidden><kbd>1–4</kbd> / <kbd>A–D</kbd>: responder · <kbd>Enter</kbd>: continuar · <kbd>R</kbd>: escuchar</p>
+  </section>
+  <section id="sessionStats" aria-label="Resultados de esta visita" hidden><div class="session-stats"><div class="stat"><span class="stat-label">Aciertos</span><strong id="correctCount">0</strong></div><div class="stat"><span class="stat-label">Errores</span><strong id="wrongCount">0</strong></div><div class="stat"><span class="stat-label">Sin responder</span><strong id="skippedCount">0</strong></div></div><p id="statsNote" class="stats-note">Resultados de esta visita. «No lo sé» se cuenta aparte de los errores.</p><p id="historySummary" class="stats-note" role="status"></p></section>
+  <section id="sourceNotes" class="settings source-notes" hidden><h2>Notas de las fichas</h2><div id="referenceList"></div></section>
+</div>
+<aside class="settings"><h2 class="settings-heading">A tu ritmo</h2>
+<fieldset id="dataSettings" disabled><legend class="sr-only">Opciones del repaso</legend>
+  <div class="setting-group"><label for="direction" class="setting-label">Dirección del quiz</label><select id="direction"><option value="mixed">Mix · ambas direcciones</option><option value="forward">Pregunta → respuesta</option><option value="reverse">Respuesta → pregunta</option></select>
+  <label for="length" class="setting-label">Duración del quiz</label><select id="length"><option value="10">10 respuestas</option><option value="20">20 respuestas</option><option value="40">40 respuestas</option><option value="0">Sin límite</option></select><p class="setting-help">Emparejar usa tableros de hasta 3 parejas. Puedes terminar cada sesión cuando quieras.</p></div>
+  <div class="setting-group" id="groupSettings"><span class="setting-label">Contenido</span><p id="poolCount" class="setting-help">Pendiente de contenido</p><div id="groups" class="chips" role="group" aria-label="Bloques de repaso"></div><p class="setting-help">Cambiar los bloques inicia otra pregunta o tablero. Las tarjetas sin responder no cuentan como errores.</p></div>
+  <details id="moreOptions"><summary>Más opciones</summary><div class="setting-group" id="audioSettings" hidden><label for="rate" class="setting-label">Velocidad de audio</label><select id="rate"><option value="0.7">Lenta · 0,7×</option><option value="0.85">Tranquila · 0,85×</option><option value="1" selected>Normal · 1×</option></select><label class="check-row"><span>Audio al mostrar la pregunta</span><input type="checkbox" id="autoAudio"></label><p class="setting-help">La lectura usa la voz japonesa del dispositivo, cuando está disponible. No son grabaciones originales.</p></div><div class="setting-group"><span class="setting-label">Tus resultados</span><p class="setting-help" id="storageHelp">El historial se guarda en este navegador y aparece en Mi progreso. Explorar o escuchar no registra respuestas. Puedes exportar o restaurar una copia desde Mi progreso.</p><a class="button small" href="progreso.html">Mi progreso · importar/exportar</a><button type="button" class="button small" id="resetVisit">Reiniciar esta visita</button></div></details>
+</fieldset></aside>
+</main>
+<footer class="setting-help asallam-footer"><span>© Asallam Sensei</span><span class="footer-star" aria-hidden="true">☆</span><a href="salon-honor.html">Salón de Honor 🏆</a></footer>
+</div>
+<script src="assets/review-history.js?v=repaso-20261105"></script>
+<script src="assets/repaso-fichas.js?v=20261105"></script>
+<script src="assets/match-music.js?v=answer-victory-20261103"></script>
+<script src="assets/language-matching.js?v=matching-music-20261103"></script>
+<script>
+/*
+ * Repaso: práctica basada en las fichas transcritas; sin datos de ejemplo.
+ * Estos campos pertenecen al modelo interno de la interfaz, no al futuro JSON.
+ * La adaptación del archivo de origen está separada de la interfaz:
+ *   Repaso.setData(jsonReal, adaptadorDelJson);
+ * El adaptador devuelve { items, sideNames?, languages?, title?, description? }.
+ * Cada item interno tiene { id, front, back, group?, detail?, audioUrl?, speechText?, lang? }.
+ * references conserva las notas literales, agrupadas por ficha.
+ * El JSON original se conserva íntegro; su adaptador vive en assets/repaso-fichas.js.
+ * El historial usa AsallamReviews bajo su propia clave: repaso. No migra datos ajenos.
+ */
+(() => {
+'use strict';
+const SOURCE = 'data/fichas_anime_transcripcion.json';
+const adaptData = window.RepasoFichas?.adapt;
+const $ = id => document.getElementById(id);
+const text = (tag, value, className) => { const el = document.createElement(tag); el.textContent = value; if (className) el.className = className; return el; };
+const normalized = value => String(value).normalize('NFC').trim().replace(/\s+/g, ' ');
+const searchText = value => normalized(value).normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLocaleLowerCase('es');
+const shuffle = values => { const result = [...values]; for(let i=result.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[result[i],result[j]]=[result[j],result[i]];} return result; };
+const blankSession = () => ({correct:0,wrong:0,skipped:0,errors:new Set()});
+let model = {items:[],sideNames:['Pregunta','Respuesta'],languages:['','']}, groups = new Set(), activity = 'quiz', phase = 'empty';
+let current = null, answered = false, summaryOpen = false, quiz = blankSession(), visit = blankSession(), reviewIds = null, pageSize = 24, generation = 0;
+let direction = 'mixed', length = 10, rate = 1, autoAudio = false, fetchVersion = 0;
+let lastSource = SOURCE, lastAdapter = adaptData;
+let audioBusy = false, audioQueue = [], activeMedia = null, activeSpeech = null, audioEpoch = 0;
+const reviews = window.AsallamReviews;
+const music = window.MatchMusic?.create({isBusy:()=>audioBusy});
+const ledger = {record(_app,id,purpose,outcome){visit[outcome]++;if(outcome==='wrong')visit.errors.add(id);if(!reviews?.record('repaso',id,purpose,outcome))notify('No se pudo guardar esta respuesta en el historial. Los datos anteriores no se han modificado.');updateStats();}};
+const matcher = window.AsallamLanguageMatching?.create({host:$('matching'),ledger,app:'repaso',items:()=>pool(),labels:item=>[item.front,item.back],langs:model.languages,sideNames:model.sideNames,conflicts:(a,b)=>normalized(a.front)===normalized(b.front)||normalized(a.back)===normalized(b.back),audioBusy:()=>audioBusy,changed:()=>updateStats()});
+function notify(message){$('noticeText').textContent=message;$('notice').hidden=false;}
+$('closeNotice').onclick=()=>{$('notice').hidden=true;};
+function theme(value){document.documentElement.dataset.theme=value;$('theme').textContent=value==='light'?'☾':'☀';$('theme').setAttribute('aria-label',value==='light'?'Activar tema oscuro':'Activar tema claro');document.querySelector('meta[name="theme-color"]').content=value==='light'?'#f3f2ef':'#10121b';}
+try{theme(localStorage.getItem('asallam_ecosystem_theme')==='light'?'light':'dark');}catch{theme('dark');}
+$('theme').onclick=()=>{const value=document.documentElement.dataset.theme==='light'?'dark':'light';theme(value);try{localStorage.setItem('asallam_ecosystem_theme',value);}catch{notify('El tema se ha cambiado, pero no se pudo guardar en este navegador.');}};
+function pool(){return model.items.filter(item=>groups.has(item.group));}
+function playable(item){return Boolean(item&&(item.audioUrl||(item.speechText&&item.lang&&window.speechSynthesis&&window.SpeechSynthesisUtterance)));}
+function clearPending(){audioQueue=audioQueue.filter(request=>!request.automatic);}
+function queueAudio(item,automatic=false){if(!playable(item))return;if(audioQueue.length>=5){if(!automatic)notify('Espera a que termine el audio pendiente.');return;}audioQueue.push({item,automatic,generation,rate,epoch:audioEpoch});pumpAudio();}
+function pumpAudio(){
+ if(audioBusy)return;
+ while(audioQueue.length){const request=audioQueue.shift();if(request.automatic&&(request.generation!==generation||activity!=='quiz'||!autoAudio))continue;
+ audioBusy=true;let ended=false;const done=failed=>{if(ended)return;ended=true;if(request.epoch!==audioEpoch)return;audioBusy=false;activeMedia=null;activeSpeech=null;if(failed)notify('No se pudo reproducir el audio. Puedes continuar con las preguntas de texto.');pumpAudio();};
+ if(request.item.audioUrl){const media=new Audio(request.item.audioUrl);activeMedia=media;media.playbackRate=request.rate;media.onended=()=>done(false);media.onerror=()=>done(true);try{media.play()?.catch(()=>done(true));}catch{done(true);}}
+ else {
+  const speak=()=>{if(ended)return;if(request.epoch!==audioEpoch){done(false);return;}if(request.automatic&&(request.generation!==generation||activity!=='quiz'||!autoAudio)){done(false);return;}
+   const language=request.item.lang.toLowerCase(),voices=speechSynthesis.getVoices(),voice=voices.find(value=>value.lang.toLowerCase()===language)||voices.find(value=>value.lang.toLowerCase().split('-')[0]===language.split('-')[0]);
+   if(!voice){notify('No hay una voz disponible para este idioma en el dispositivo. Puedes continuar con el texto.');done(false);return;}
+   const utterance=new SpeechSynthesisUtterance(request.item.speechText);activeSpeech=utterance;utterance.voice=voice;utterance.lang=voice.lang;utterance.rate=request.rate;utterance.onend=()=>done(false);utterance.onerror=()=>done(true);try{speechSynthesis.speak(utterance);}catch{done(true);}
+  };
+  if(speechSynthesis.getVoices().length)speak();else {let timer;const ready=()=>{clearTimeout(timer);speechSynthesis.removeEventListener?.('voiceschanged',ready);speak();};speechSynthesis.addEventListener?.('voiceschanged',ready,{once:true});timer=setTimeout(ready,800);}
+ }
+ return;
+ }
+}
+function validate(raw,adapter){
+ if(typeof adapter!=='function')throw Error('Falta adaptar el JSON a este repaso.');
+ const source=adapter(raw);
+ if(!source||!Array.isArray(source.items)||source.items.length>50000)throw Error('El contenido del repaso no es válido.');
+ const ids=new Set(); const items=source.items.map((item,index)=>{
+  if(!item||typeof item.id!=='string'||!item.id.trim()||item.id.length>1000||ids.has(item.id))throw Error('Cada entrada debe tener un identificador único y estable.');
+  if(['front','back'].some(key=>typeof item[key]!=='string'||!item[key].trim()||item[key].length>10000))throw Error('Hay una entrada sin pregunta o respuesta válida.');
+  ids.add(item.id);const result={id:item.id,front:item.front.trim(),back:item.back.trim(),group:typeof item.group==='string'&&item.group.trim()?item.group.trim():'Todo el contenido',detail:typeof item.detail==='string'?item.detail.slice(0,20000):'',lang:typeof item.lang==='string'?item.lang:'',speechText:typeof item.speechText==='string'?item.speechText:''};
+  if(item.audioUrl){if(typeof item.audioUrl!=='string')throw Error('La ruta de audio no es válida.');const url=new URL(item.audioUrl,document.baseURI);if(!['http:','https:'].includes(url.protocol)||url.origin!==location.origin||url.username||url.password)throw Error('El audio debe usar una ruta segura del mismo sitio.');result.audioUrl=url.href;}
+  return result;
+ });
+ const pair=(values,defaults)=>Array.isArray(values)&&values.length===2&&values.every(value=>typeof value==='string')?[...values]:defaults;
+ const references=(source.references||[]).map(reference=>{if(!reference||typeof reference.group!=='string'||typeof reference.title!=='string'||!Array.isArray(reference.paragraphs)||reference.paragraphs.some(value=>typeof value!=='string'))throw Error('Las notas del contenido no son válidas.');return {group:reference.group,title:reference.title,header:typeof reference.header==='string'?reference.header:'',paragraphs:[...reference.paragraphs]};});
+ return {items,references,title:typeof source.title==='string'?source.title:'Repaso a tu ritmo',description:typeof source.description==='string'?source.description:'Practica, conecta ideas y vuelve a lo que necesitas.',sideNames:pair(source.sideNames,['Pregunta','Respuesta']),languages:pair(source.languages,['',''])};
+}
+function setData(raw,adapter){
+ const ready=validate(raw,adapter);fetchVersion++;generation++;clearPending();music?.reset();matcher?.deactivate();
+ // The matching component retains these arrays, so update their contents without replacing them.
+ model.sideNames.splice(0,2,...ready.sideNames);model.languages.splice(0,2,...ready.languages);
+ model={...ready,sideNames:model.sideNames,languages:model.languages};groups=new Set(model.items.map(item=>item.group));quiz=blankSession();visit=blankSession();reviewIds=null;current=null;summaryOpen=false;
+ phase=model.items.length?'ready':'empty';if(model.items.length&&!reviews?.registerCatalog('repaso',model.items.map(item=>item.id)))notify('No se pudo actualizar el catálogo del historial. Puedes practicar, pero revisa el almacenamiento antes de cerrar.');$('pageTitle').textContent=model.title;$('catalogIntro').textContent=model.description;$('audioSettings').hidden=!model.items.some(playable);
+ $('direction').options[1].textContent=model.sideNames.join(' → ');$('direction').options[2].textContent=[...model.sideNames].reverse().join(' → ');
+ renderGroups();matcher?.reset();nextQuestion();if(activity==='match')matcher?.activate();if(activity==='explore')explore();render();return model.items.length;
+}
+async function load(source=lastSource,adapter=lastAdapter){
+ lastSource=source;lastAdapter=adapter;
+ if(!source){fetchVersion++;generation++;clearPending();matcher?.deactivate();music?.cancel();phase='empty';render();return;}
+ const version=++fetchVersion;phase='loading';matcher?.deactivate();generation++;clearPending();music?.cancel();render();
+ try{const url=new URL(source,document.baseURI);if(!['http:','https:'].includes(url.protocol)||url.origin!==location.origin)throw Error('La ruta del catálogo debe pertenecer a este sitio.');const response=await fetch(url.href,{credentials:'same-origin'});if(!response.ok)throw Error('No se pudo descargar el catálogo (HTTP '+response.status+').');const raw=await response.json();if(version!==fetchVersion)return;setData(raw,adapter);}
+ catch(error){if(version!==fetchVersion)return;phase='error';$('loadErrorText').textContent=error instanceof SyntaxError?'El archivo no contiene un JSON válido.':error.message||'No se pudo cargar el contenido.';render();}
+}
+function total(){return quiz.correct+quiz.wrong+quiz.skipped;}
+function updateStats(){
+ try{const saved=reviews.summary('repaso');$('historySummary').textContent='Historial guardado: '+saved.seen+' / '+(saved.total??model.items.length)+' entradas practicadas · '+saved.reviews+' repasos · '+saved.correct+' aciertos · '+saved.wrong+' errores · '+saved.skipped+' sin responder.';}catch{$('historySummary').textContent='Historial no disponible. Los datos anteriores no se han modificado.';}
+ $('correctCount').textContent=visit.correct;$('wrongCount').textContent=visit.wrong;$('skippedCount').textContent=visit.skipped;
+ const progress=length?Math.min(100,100*total()/length):0;$('bar').style.width=progress+'%';$('progressTrack').setAttribute('aria-valuenow',String(progress));$('roundCount').textContent=phase==='ready'&&activity==='quiz'?total()+(length?' / '+length:'')+' respuestas':'';
+}
+function render(){
+ const ready=phase==='ready';$('empty').hidden=phase!=='empty';$('loading').hidden=phase!=='loading';$('loadError').hidden=phase!=='error';$('dataSettings').disabled=!ready;
+ $('practice').hidden=!ready||activity!=='quiz'||summaryOpen||!current;$('noQuestion').hidden=!ready||activity!=='quiz'||summaryOpen||!!current;
+ $('matching').hidden=!ready||activity!=='match';$('exploring').hidden=!ready||activity!=='explore';$('summary').hidden=!ready||activity!=='quiz'||!summaryOpen;
+ $('finish').hidden=!ready||activity!=='quiz'||summaryOpen;$('keyboardHint').hidden=!ready||activity!=='quiz'||summaryOpen||!current;$('progressTrack').hidden=!ready||activity!=='quiz'||!length;$('sessionStats').hidden=!ready;$('sourceNotes').hidden=!ready||!(model.references||[]).some(reference=>groups.has(reference.group));
+ $('badge').textContent=activity==='match'?'Emparejar':activity==='explore'?'Explorar':reviewIds?'Repaso de errores':'Quiz';
+ for(const mode of ['quiz','match','explore'])$(mode+'Tab').setAttribute('aria-pressed',String(mode===activity));updateStats();
+}
+function makeQuestion(selected,eligible,reverse){
+ const [question,answer]=reverse?['back','front']:['front','back'];
+ const acceptedByPrompt=new Map(), answerLabels=new Map();
+ for(const item of selected){const prompt=normalized(item[question]),value=normalized(item[answer]);if(!acceptedByPrompt.has(prompt))acceptedByPrompt.set(prompt,new Set());acceptedByPrompt.get(prompt).add(value);if(!answerLabels.has(value))answerLabels.set(value,item[answer]);}
+ const candidates=eligible.filter(item=>acceptedByPrompt.get(normalized(item[question])).size<answerLabels.size);
+ if(!candidates.length)return null;
+ const item=candidates[Math.floor(Math.random()*candidates.length)],accepted=acceptedByPrompt.get(normalized(item[question]));
+ const distractors=[...answerLabels].filter(([key])=>!accepted.has(key)).map(([,value])=>value);
+ return {item,reverse,options:shuffle([item[answer],...shuffle(distractors).slice(0,3)])};
+}
+function nextQuestion(){
+ generation++;clearPending();music?.cancel();current=null;answered=false;
+ if(phase!=='ready'){render();return;}if(length&&total()>=length){finishQuiz();return;}
+ const selected=pool(),eligible=reviewIds?selected.filter(item=>reviewIds.has(item.id)):selected;
+ const directions=direction==='mixed'?shuffle([false,true]):[direction==='reverse'];
+ for(const reverse of directions){current=makeQuestion(selected,eligible,reverse);if(current)break;}
+ if(!current){render();return;}
+ current.token={};summaryOpen=false;
+ const question=current;const front=question.reverse?question.item.back:question.item.front;
+ $('prompt').textContent=front;$('prompt').lang=model.languages[question.reverse?1:0];$('questionLabel').textContent='Elige '+model.sideNames[question.reverse?0:1].toLocaleLowerCase('es')+'.';
+ // In reverse mode the front-side audio would reveal the answer; expose it only after responding.
+ $('listen').hidden=question.reverse||!playable(question.item);$('feedback').hidden=true;$('feedback').replaceChildren();$('skip').disabled=false;$('next').disabled=true;$('options').replaceChildren();
+ question.options.forEach((value,index)=>{const button=text('button','', 'option-button');button.type='button';button.lang=model.languages[question.reverse?0:1];button.append(text('span','ABCD'[index],'option-letter'),text('span',value,'option-label'));button.onclick=()=>{if(current===question)respond(value);};$('options').append(button);});
+ render();if(autoAudio&&!question.reverse&&activity==='quiz')queueAudio(question.item,true);
+}
+function respond(value){
+ if(phase!=='ready'||activity!=='quiz'||summaryOpen||!current||answered)return;answered=true;
+ const correct=current.reverse?current.item.front:current.item.back;const outcome=value===null?'skipped':normalized(value)===normalized(correct)?'correct':'wrong';quiz[outcome]++;if(outcome==='wrong')quiz.errors.add(current.item.id);ledger.record('repaso',current.item.id,current.reverse?'Español → japonés':'Japonés → español',outcome);
+ if(outcome==='correct')music?.correct(current.token);
+ [...$('options').children].forEach((button,index)=>{button.disabled=true;const match=normalized(current.options[index])===normalized(correct);if(match)button.classList.add('is-correct');else if(current.options[index]===value)button.classList.add('is-wrong');if(match||current.options[index]===value)button.append(text('span',match?'✓':'✕','option-mark'));});
+ $('feedback').textContent=(outcome==='correct'?'✓ ¡Correcto!':outcome==='wrong'?'✕ Esta vez no.':'Sin responder · no cuenta como error.')+'\n'+current.item.front+' · '+current.item.back+(current.item.detail?'\n'+current.item.detail:'');$('feedback').append(historyElement(current.item.id));$('feedback').hidden=false;$('skip').disabled=true;$('next').disabled=false;$('listen').hidden=!playable(current.item);updateStats();
+}
+function finishQuiz(){generation++;clearPending();music?.cancel();summaryOpen=true;$('summaryText').textContent=quiz.correct+' aciertos · '+quiz.wrong+' errores · '+quiz.skipped+' sin responder. Las preguntas sin responder al salir no se registran.';$('reviewSession').disabled=!quiz.errors.size;render();}
+function startQuiz(ids=null){matcher?.deactivate();music?.reset();quiz=blankSession();reviewIds=ids;summaryOpen=false;activity='quiz';nextQuestion();}
+function renderGroups(){
+ const values=[...new Set(model.items.map(item=>item.group))];$('groups').replaceChildren();
+ for(const group of values){const button=text('button',group,'chip');button.type='button';button.setAttribute('aria-pressed',String(groups.has(group)));button.onclick=()=>{if(groups.has(group)){if(groups.size===1){notify('Mantén al menos un bloque seleccionado.');return;}groups.delete(group);}else groups.add(group);filterChanged();};$('groups').append(button);}
+ if(values.length>1){const all=text('button','Todos','chip');all.type='button';all.setAttribute('aria-pressed',String(groups.size===values.length));all.onclick=()=>{groups=new Set(values);filterChanged();};$('groups').append(all);}
+ $('poolCount').textContent=model.items.length?pool().length+' de '+model.items.length+' entradas':'Pendiente de contenido';
+ renderReferences();
+}
+function renderReferences(){
+ const references=(model.references||[]).filter(reference=>groups.has(reference.group));$('referenceList').replaceChildren();$('sourceNotes').hidden=!references.length;
+ for(const reference of references){const section=text('details','');section.append(text('summary',reference.title));if(reference.header)section.append(text('p',reference.header,'reference-header'));for(const paragraph of reference.paragraphs)section.append(text('p',paragraph,'reference-note'));$('referenceList').append(section);}
+}
+function filterChanged(){renderGroups();reviewIds=null;summaryOpen=false;matcher?.reset();nextQuestion();if(activity==='explore')explore();}
+function historyElement(id){const element=text('div','','item-history');if(reviews)element.innerHTML=reviews.render('repaso',id);else element.textContent='Historial no disponible.';return element;}
+function explore(){
+ if(phase!=='ready')return;const query=searchText($('search').value);const found=pool().filter(item=>searchText([item.front,item.back,item.group,item.detail].join(' ')).includes(query));$('exploreCount').textContent=found.length+' entradas';$('wordGrid').replaceChildren();
+ if(!found.length)$('wordGrid').append(text('p','No hay coincidencias. Prueba otra búsqueda.','setting-help'));
+ for(const item of found.slice(0,pageSize)){const card=text('article','','word-card');const front=text('h3',item.front);front.lang=model.languages[0];const back=text('p',item.back);back.lang=model.languages[1];card.append(front,back);if(item.detail)card.append(text('p',item.detail,'card-detail'));card.append(text('p',item.group,'card-detail'));if(playable(item)){const button=text('button','🔊 Escuchar','listen-button');button.type='button';button.setAttribute('aria-label','Escuchar '+item.front);button.onclick=()=>queueAudio(item);card.append(button);}card.append(historyElement(item.id));$('wordGrid').append(card);}
+ $('more').hidden=found.length<=pageSize;
+}
+function switchActivity(mode){
+ if(mode==='match'&&!matcher){notify('No se pudo cargar Emparejar. Recarga la página para intentarlo de nuevo.');return;}
+ generation++;clearPending();music?.cancel();matcher?.deactivate();activity=mode;if(phase==='ready'){if(mode==='match')matcher?.activate();else if(mode==='explore')explore();}render();
+}
+for(const mode of ['quiz','match','explore'])$(mode+'Tab').onclick=()=>switchActivity(mode);
+$('direction').onchange=()=>{direction=$('direction').value;if(phase==='ready'&&!summaryOpen)nextQuestion();};
+$('length').onchange=()=>{length=Number($('length').value);if(phase==='ready'&&!summaryOpen&&length&&total()>=length)finishQuiz();else render();};
+$('rate').onchange=()=>{rate=Number($('rate').value);};$('autoAudio').onchange=()=>{autoAudio=$('autoAudio').checked;if(!autoAudio)clearPending();};
+$('search').oninput=()=>{pageSize=24;explore();};$('more').onclick=()=>{pageSize+=24;explore();};$('listen').onclick=()=>{if(current&&(!current.reverse||answered))queueAudio(current.item);};
+$('skip').onclick=()=>respond(null);$('next').onclick=()=>{if(answered)nextQuestion();};$('finish').onclick=finishQuiz;$('repeat').onclick=()=>startQuiz();$('reviewSession').onclick=()=>startQuiz(new Set(quiz.errors));$('retry').onclick=()=>load();
+$('resetVisit').onclick=()=>{if(!confirm('¿Reiniciar los resultados de esta visita? No se modifica el progreso de otras páginas.'))return;visit=blankSession();quiz=blankSession();reviewIds=null;summaryOpen=false;matcher?.reset();nextQuestion();};
+window.addEventListener('keydown',event=>{if(event.altKey||event.ctrlKey||event.metaKey||event.repeat||event.target?.isContentEditable||/INPUT|SELECT|TEXTAREA|BUTTON|A|SUMMARY/.test(event.target?.tagName||'')||phase!=='ready'||activity!=='quiz'||summaryOpen||!current)return;const key=event.key.toLowerCase();const index=/^[1-4]$/.test(key)?Number(key)-1:/^[a-d]$/.test(key)?'abcd'.indexOf(key):-1;if(index>=0&&!answered&&current.options[index]!==undefined){event.preventDefault();respond(current.options[index]);}else if(key==='enter'&&answered){event.preventDefault();nextQuestion();}else if(key==='r'&&(!current.reverse||answered)){event.preventDefault();queueAudio(current.item);}});
+window.addEventListener('pagehide',()=>{generation++;audioEpoch++;audioQueue=[];music?.cancel();matcher?.deactivate();if(activeMedia)activeMedia.pause();if(activeSpeech)window.speechSynthesis?.cancel();activeMedia=null;activeSpeech=null;audioBusy=false;});
+window.addEventListener('pageshow',event=>{if(event.persisted&&phase==='ready'&&activity==='match')matcher?.activate();});
+window.addEventListener('storage',event=>{if(event.key===null||event.key==='asallam_reviews_v1_repaso'){updateStats();if(activity==='explore'&&phase==='ready')explore();}});
+window.Repaso=Object.freeze({setData,load});render();if(SOURCE)load();
+})();
+</script>
+</body>
+</html>
