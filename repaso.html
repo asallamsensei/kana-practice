@@ -12,6 +12,7 @@
 <link rel="stylesheet" href="assets/brand-footer.css?v=20261101">
 <style>
 .activity-tabs{grid-template-columns:repeat(3,minmax(0,1fr))}.hero p{font-size:16px;margin-top:12px;max-width:700px}.prompt{font-size:clamp(28px,5vw,48px);min-height:130px}.options{grid-template-columns:repeat(2,minmax(0,1fr))}.options button{height:100%;min-height:80px}.option-letter{align-self:flex-start}.option-label{flex:1}.options button.is-correct{border-color:var(--mint)!important;background:var(--mint-bg)!important}.options button.is-wrong{border-color:var(--danger)!important;background:var(--danger-bg)!important}.settings fieldset{border:0;margin:0;padding:0;min-width:0}.settings fieldset:disabled{opacity:.65}.setting-group .check-row{display:flex}.empty-state{padding:40px 12px}.empty-symbol{font-size:42px;margin-bottom:15px}.empty-state p{max-width:420px}.feedback:empty{display:none}.word-card h3{font-size:24px}.word-card .card-detail{font-size:14px}.session-stats{grid-template-columns:repeat(3,minmax(0,1fr))}.stat strong{font-size:25px}.progress-track{margin-bottom:10px}.notice{align-items:center}.notice span{flex:1}.notice button{flex:none}.session-caption{font-size:13px}.keyboard-hint{line-height:1.8}.language-match-tile{overflow-wrap:anywhere;white-space:normal}.loading-state{padding:38px 10px;text-align:center}.group-empty{padding:20px}.setting-label{margin-top:10px}.button:disabled{opacity:.55}.explore-top{display:block}.explore-top h2{font-size:21px}.word-card{background:var(--raised)}.option-label,.word-card p,.reference-note,.reference-header{white-space:pre-line}.reference-note{margin:10px 0;font-size:16px}.reference-header{font-size:14px;margin-bottom:12px}.source-notes{margin-top:18px}.source-notes h2{font-size:21px;margin-bottom:15px}.source-notes details+details{margin-top:14px}.chips .chip{overflow-wrap:anywhere;text-align:left}#summary{padding:25px 0 10px}#summaryText{margin-top:12px}#summary .controls{justify-content:center}.stats-note{font-size:13px;margin-top:10px}#catalogIntro{overflow-wrap:anywhere}@media(max-width:600px){.options{grid-template-columns:1fr}.hero{padding-bottom:22px}.options button{min-height:68px}.option-label{font-size:18px}.session-stats{gap:6px}.stat{padding:10px 5px}.stat-label{font-size:11px}.stat strong{font-size:23px}}
+#matching > p.setting-help:first-child{display:none}
 </style>
 </head>
 <body>
@@ -35,7 +36,7 @@
     <button type="button" id="exploreTab" class="activity-tab" aria-pressed="false">Explorar</button>
   </div>
   <section class="exercise-card" aria-label="Práctica">
-    <div class="exercise-top"><span id="badge" class="badge">Quiz</span><span id="roundCount" class="round-count"></span></div>
+    <div id="exerciseTop" class="exercise-top"><span id="badge" class="badge">Quiz</span><span id="roundCount" class="round-count"></span></div>
     <div class="progress-track" id="progressTrack" role="progressbar" aria-label="Avance del quiz" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" hidden><div id="bar" class="progress-fill"></div></div>
     <div id="empty" class="empty-state"><div class="empty-symbol" aria-hidden="true">↻</div><h2>Tu próximo repaso</h2><p>No hay entradas en este catálogo. Revisa el archivo de contenido para practicar con Quiz, Emparejar y Explorar.</p></div>
     <div id="loading" class="loading-state" role="status" hidden>Cargando el repaso…</div>
@@ -168,6 +169,7 @@ function render(){
  $('practice').hidden=!ready||activity!=='quiz'||summaryOpen||!current;$('noQuestion').hidden=!ready||activity!=='quiz'||summaryOpen||!!current;
  $('matching').hidden=!ready||activity!=='match';$('exploring').hidden=!ready||activity!=='explore';$('summary').hidden=!ready||activity!=='quiz'||!summaryOpen;
  $('finish').hidden=!ready||activity!=='quiz'||summaryOpen;$('keyboardHint').hidden=!ready||activity!=='quiz'||summaryOpen||!current;$('progressTrack').hidden=!ready||activity!=='quiz'||!length;$('sessionStats').hidden=!ready;$('sourceNotes').hidden=!ready||!(model.references||[]).some(reference=>groups.has(reference.group));
+ $('exerciseTop').hidden=activity==='match';
  $('badge').textContent=activity==='match'?'Emparejar':activity==='explore'?'Explorar':reviewIds?'Repaso de errores':'Quiz';
  for(const mode of ['quiz','match','explore'])$(mode+'Tab').setAttribute('aria-pressed',String(mode===activity));updateStats();
 }
