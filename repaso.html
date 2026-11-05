@@ -123,9 +123,9 @@
   function play(job) {
     const now = context.currentTime + 0.015;
     const completed = function () { if (job.after) job.after(); pump(); };
-    if (!job.answer) tone(NOTES[job.index % NOTES.length] * Math.pow(2, Math.floor(job.index / NOTES.length)), now, 0.23, 0.23, job.complete ? null : completed);
+    if (!job.answer) tone(NOTES[job.index % NOTES.length] * Math.pow(2, Math.floor(job.index / NOTES.length)), now, 0.23, 0.23, completed);
     let duration = 0.29;
-    if (job.complete || job.answer) {
+    if (job.answer) {
       const offset = job.answer ? -0.30 : 0;
       // A separate rising flourish followed by a major chord. Chord gain: .33; the brief preceding tail keeps the total below .4.
       [523.2511,659.2551,783.9909].forEach(function (frequency, index) {
