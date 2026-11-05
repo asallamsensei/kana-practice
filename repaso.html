@@ -31,12 +31,12 @@
 <main id="main" class="workspace">
 <div class="main-column">
   <div class="activity-tabs" role="group" aria-label="Actividad">
-    <button type="button" id="quizTab" class="activity-tab" aria-pressed="true">Quiz</button>
-    <button type="button" id="matchTab" class="activity-tab" aria-pressed="false">Emparejar</button>
+    <button type="button" id="quizTab" class="activity-tab" aria-pressed="false">Quiz</button>
+    <button type="button" id="matchTab" class="activity-tab" aria-pressed="true">Emparejar</button>
     <button type="button" id="exploreTab" class="activity-tab" aria-pressed="false">Explorar</button>
   </div>
   <section class="exercise-card" aria-label="Práctica">
-    <div id="exerciseTop" class="exercise-top"><span id="badge" class="badge">Quiz</span><span id="roundCount" class="round-count"></span></div>
+    <div id="exerciseTop" class="exercise-top" hidden><span id="badge" class="badge">Emparejar</span><span id="roundCount" class="round-count"></span></div>
     <div class="progress-track" id="progressTrack" role="progressbar" aria-label="Avance del quiz" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" hidden><div id="bar" class="progress-fill"></div></div>
     <div id="empty" class="empty-state"><div class="empty-symbol" aria-hidden="true">↻</div><h2>Tu próximo repaso</h2><p>No hay entradas en este catálogo. Revisa el archivo de contenido para practicar con Quiz, Emparejar y Explorar.</p></div>
     <div id="loading" class="loading-state" role="status" hidden>Cargando el repaso…</div>
@@ -59,8 +59,9 @@
 </div>
 <aside class="settings"><h2 class="settings-heading">A tu ritmo</h2>
 <fieldset id="dataSettings" disabled><legend class="sr-only">Opciones del repaso</legend>
-  <div class="setting-group"><label for="direction" class="setting-label">Dirección del quiz</label><select id="direction"><option value="mixed">Mix · ambas direcciones</option><option value="forward">Pregunta → respuesta</option><option value="reverse">Respuesta → pregunta</option></select>
-  <label for="length" class="setting-label">Duración del quiz</label><select id="length"><option value="10">10 respuestas</option><option value="20">20 respuestas</option><option value="40">40 respuestas</option><option value="0">Sin límite</option></select><p class="setting-help">Emparejar usa tableros de hasta 3 parejas. Puedes terminar cada sesión cuando quieras.</p></div>
+  <div class="setting-group" id="quizSettings" hidden><label for="direction" class="setting-label">Dirección del quiz</label><select id="direction"><option value="mixed">Mix · ambas direcciones</option><option value="forward">Pregunta → respuesta</option><option value="reverse">Respuesta → pregunta</option></select>
+  <label for="length" class="setting-label">Duración del quiz</label><select id="length"><option value="10">10 respuestas</option><option value="20">20 respuestas</option><option value="40">40 respuestas</option><option value="0">Sin límite</option></select></div>
+  <div class="setting-group" id="matchSettings"><label for="matchLength" class="setting-label">Duración de Emparejar</label><select id="matchLength"><option value="12">12 parejas</option><option value="21">21 parejas</option><option value="39" selected>39 parejas</option><option value="0">Sin límite</option></select><p class="setting-help">La barra avanza con cada pareja acertada. Los errores se cuentan aparte. Cada tablero tiene hasta 3 parejas; las entradas pueden repetirse para completar la sesión. Cambiar la duración inicia una sesión nueva.</p></div>
   <div class="setting-group" id="groupSettings"><span class="setting-label">Contenido</span><p id="poolCount" class="setting-help">Pendiente de contenido</p><div id="groups" class="chips" role="group" aria-label="Bloques de repaso"></div><p class="setting-help">Cambiar los bloques inicia otra pregunta o tablero. Las tarjetas sin responder no cuentan como errores.</p></div>
   <details id="moreOptions"><summary>Más opciones</summary><div class="setting-group" id="audioSettings" hidden><label for="rate" class="setting-label">Velocidad de audio</label><select id="rate"><option value="0.7">Lenta · 0,7×</option><option value="0.85">Tranquila · 0,85×</option><option value="1" selected>Normal · 1×</option></select><label class="check-row"><span>Audio al mostrar la pregunta</span><input type="checkbox" id="autoAudio"></label><p class="setting-help">Primero se reproduce el archivo de audio. Si falta o no se puede reproducir, se usa la voz japonesa del dispositivo, cuando está disponible.</p></div><div class="setting-group"><span class="setting-label">Tus resultados</span><p class="setting-help" id="storageHelp">El historial se guarda en este navegador y aparece en Mi progreso. Explorar o escuchar no registra respuestas. Puedes exportar o restaurar una copia desde Mi progreso.</p><a class="button small" href="progreso.html">Mi progreso · importar/exportar</a><button type="button" class="button small" id="resetVisit">Reiniciar esta visita</button></div></details>
 </fieldset></aside>
@@ -70,7 +71,7 @@
 <script src="assets/review-history.js?v=repaso-20261105"></script>
 <script src="assets/repaso-fichas.js?v=20261105-audio"></script>
 <script src="assets/match-music.js?v=answer-victory-20261103"></script>
-<script src="assets/language-matching.js?v=matching-music-20261103"></script>
+<script src="assets/language-matching.js?v=matching-length-20261105"></script>
 <script>
 /*
  * Repaso: práctica basada en las fichas transcritas; sin datos de ejemplo.
@@ -93,15 +94,15 @@ const normalized = value => String(value).normalize('NFC').trim().replace(/\s+/g
 const searchText = value => normalized(value).normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLocaleLowerCase('es');
 const shuffle = values => { const result = [...values]; for(let i=result.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[result[i],result[j]]=[result[j],result[i]];} return result; };
 const blankSession = () => ({correct:0,wrong:0,skipped:0,errors:new Set()});
-let model = {items:[],sideNames:['Pregunta','Respuesta'],languages:['','']}, groups = new Set(), activity = 'quiz', phase = 'empty';
+let model = {items:[],sideNames:['Pregunta','Respuesta'],languages:['','']}, groups = new Set(), activity = 'match', phase = 'empty';
 let current = null, answered = false, summaryOpen = false, quiz = blankSession(), visit = blankSession(), reviewIds = null, pageSize = 24, generation = 0;
-let direction = 'mixed', length = 10, rate = 1, autoAudio = false, fetchVersion = 0;
+let direction = 'mixed', length = 10, matchLength = 39, rate = 1, autoAudio = false, fetchVersion = 0;
 let lastSource = SOURCE, lastAdapter = adaptData;
 let audioBusy = false, audioQueue = [], activeMedia = null, activeSpeech = null, audioEpoch = 0, cleanupAudio = null;
 const reviews = window.AsallamReviews;
 const music = window.MatchMusic?.create({isBusy:()=>audioBusy});
 const ledger = {record(_app,id,purpose,outcome){visit[outcome]++;if(outcome==='wrong')visit.errors.add(id);if(!reviews?.record('repaso',id,purpose,outcome))notify('No se pudo guardar esta respuesta en el historial. Los datos anteriores no se han modificado.');updateStats();}};
-const matcher = window.AsallamLanguageMatching?.create({host:$('matching'),ledger,app:'repaso',items:()=>pool(),labels:item=>[item.front,item.back],langs:model.languages,sideNames:model.sideNames,conflicts:(a,b)=>normalized(a.front)===normalized(b.front)||normalized(a.back)===normalized(b.back),audioBusy:()=>audioBusy,changed:()=>updateStats()});
+const matcher = window.AsallamLanguageMatching?.create({host:$('matching'),ledger,app:'repaso',sessionLength:()=>matchLength,items:()=>pool(),labels:item=>[item.front,item.back],langs:model.languages,sideNames:model.sideNames,conflicts:(a,b)=>normalized(a.front)===normalized(b.front)||normalized(a.back)===normalized(b.back),audioBusy:()=>audioBusy,changed:()=>updateStats()});
 function notify(message){$('noticeText').textContent=message;$('notice').hidden=false;}
 $('closeNotice').onclick=()=>{$('notice').hidden=true;};
 function theme(value){document.documentElement.dataset.theme=value;$('theme').textContent=value==='light'?'☾':'☀';$('theme').setAttribute('aria-label',value==='light'?'Activar tema oscuro':'Activar tema claro');document.querySelector('meta[name="theme-color"]').content=value==='light'?'#f3f2ef':'#10121b';}
@@ -208,14 +209,15 @@ function total(){return quiz.correct+quiz.wrong+quiz.skipped;}
 function updateStats(){
  try{const saved=reviews.summary('repaso');$('historySummary').textContent='Historial guardado: '+saved.seen+' / '+(saved.total??model.items.length)+' entradas practicadas · '+saved.reviews+' repasos · '+saved.correct+' aciertos · '+saved.wrong+' errores · '+saved.skipped+' sin responder.';}catch{$('historySummary').textContent='Historial no disponible. Los datos anteriores no se han modificado.';}
  $('correctCount').textContent=visit.correct;$('wrongCount').textContent=visit.wrong;$('skippedCount').textContent=visit.skipped;
- const progress=length?Math.min(100,100*total()/length):0;$('bar').style.width=progress+'%';$('progressTrack').setAttribute('aria-valuenow',String(progress));$('roundCount').textContent=phase==='ready'&&activity==='quiz'?total()+(length?' / '+length:'')+' respuestas':'';
+ const matching=activity==='match',done=matching?(matcher?.getState().correct||0):total(),target=matching?matchLength:length;
+ const progress=target?Math.min(100,100*done/target):0;$('bar').style.width=progress+'%';$('progressTrack').setAttribute('aria-valuenow',String(progress));$('progressTrack').setAttribute('aria-label',matching?'Avance de Emparejar':'Avance del quiz');$('progressTrack').setAttribute('aria-valuetext',done+(target?' de '+target:'')+(matching?' parejas acertadas':' respuestas'));$('roundCount').textContent=phase==='ready'&&activity==='quiz'?total()+(length?' / '+length:'')+' respuestas':'';
 }
 function render(){
  const ready=phase==='ready';$('empty').hidden=phase!=='empty';$('loading').hidden=phase!=='loading';$('loadError').hidden=phase!=='error';$('dataSettings').disabled=!ready;
  $('practice').hidden=!ready||activity!=='quiz'||summaryOpen||!current;$('noQuestion').hidden=!ready||activity!=='quiz'||summaryOpen||!!current;
  $('matching').hidden=!ready||activity!=='match';$('exploring').hidden=!ready||activity!=='explore';$('summary').hidden=!ready||activity!=='quiz'||!summaryOpen;
- $('finish').hidden=!ready||activity!=='quiz'||summaryOpen;$('keyboardHint').hidden=!ready||activity!=='quiz'||summaryOpen||!current;$('progressTrack').hidden=!ready||activity!=='quiz'||!length;$('sessionStats').hidden=!ready;$('sourceNotes').hidden=!ready||!(model.references||[]).some(reference=>groups.has(reference.group));
- $('exerciseTop').hidden=activity==='match';
+ $('finish').hidden=!ready||activity!=='quiz'||summaryOpen;$('keyboardHint').hidden=!ready||activity!=='quiz'||summaryOpen||!current;$('progressTrack').hidden=!ready||activity==='explore'||!(activity==='match'?matchLength:length);$('sessionStats').hidden=!ready;$('sourceNotes').hidden=!ready||!(model.references||[]).some(reference=>groups.has(reference.group));
+ $('exerciseTop').hidden=activity==='match';$('quizSettings').hidden=activity!=='quiz';$('matchSettings').hidden=activity!=='match';
  $('badge').textContent=activity==='match'?'Emparejar':activity==='explore'?'Explorar':reviewIds?'Repaso de errores':'Quiz';
  for(const mode of ['quiz','match','explore'])$(mode+'Tab').setAttribute('aria-pressed',String(mode===activity));updateStats();
 }
@@ -279,6 +281,7 @@ function switchActivity(mode){
 for(const mode of ['quiz','match','explore'])$(mode+'Tab').onclick=()=>switchActivity(mode);
 $('direction').onchange=()=>{direction=$('direction').value;if(phase==='ready'&&!summaryOpen)nextQuestion();};
 $('length').onchange=()=>{length=Number($('length').value);if(phase==='ready'&&!summaryOpen&&length&&total()>=length)finishQuiz();else render();};
+$('matchLength').onchange=()=>{const value=Number($('matchLength').value);if(![0,12,21,39].includes(value))return;matchLength=value;matcher?.reset();render();};
 $('rate').onchange=()=>{rate=Number($('rate').value);};$('autoAudio').onchange=()=>{autoAudio=$('autoAudio').checked;if(!autoAudio)clearPending();};
 $('search').oninput=()=>{pageSize=24;explore();};$('more').onclick=()=>{pageSize+=24;explore();};$('listen').onclick=()=>{if(current&&(!current.reverse||answered))queueAudio(current.item);};
 $('skip').onclick=()=>respond(null);$('next').onclick=()=>{if(answered)nextQuestion();};$('finish').onclick=finishQuiz;$('repeat').onclick=()=>startQuiz();$('reviewSession').onclick=()=>startQuiz(new Set(quiz.errors));$('retry').onclick=()=>load();
