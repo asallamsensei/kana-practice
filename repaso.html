@@ -62,13 +62,13 @@
   <div class="setting-group"><label for="direction" class="setting-label">Dirección del quiz</label><select id="direction"><option value="mixed">Mix · ambas direcciones</option><option value="forward">Pregunta → respuesta</option><option value="reverse">Respuesta → pregunta</option></select>
   <label for="length" class="setting-label">Duración del quiz</label><select id="length"><option value="10">10 respuestas</option><option value="20">20 respuestas</option><option value="40">40 respuestas</option><option value="0">Sin límite</option></select><p class="setting-help">Emparejar usa tableros de hasta 3 parejas. Puedes terminar cada sesión cuando quieras.</p></div>
   <div class="setting-group" id="groupSettings"><span class="setting-label">Contenido</span><p id="poolCount" class="setting-help">Pendiente de contenido</p><div id="groups" class="chips" role="group" aria-label="Bloques de repaso"></div><p class="setting-help">Cambiar los bloques inicia otra pregunta o tablero. Las tarjetas sin responder no cuentan como errores.</p></div>
-  <details id="moreOptions"><summary>Más opciones</summary><div class="setting-group" id="audioSettings" hidden><label for="rate" class="setting-label">Velocidad de audio</label><select id="rate"><option value="0.7">Lenta · 0,7×</option><option value="0.85">Tranquila · 0,85×</option><option value="1" selected>Normal · 1×</option></select><label class="check-row"><span>Audio al mostrar la pregunta</span><input type="checkbox" id="autoAudio"></label><p class="setting-help">La lectura usa la voz japonesa del dispositivo, cuando está disponible. No son grabaciones originales.</p></div><div class="setting-group"><span class="setting-label">Tus resultados</span><p class="setting-help" id="storageHelp">El historial se guarda en este navegador y aparece en Mi progreso. Explorar o escuchar no registra respuestas. Puedes exportar o restaurar una copia desde Mi progreso.</p><a class="button small" href="progreso.html">Mi progreso · importar/exportar</a><button type="button" class="button small" id="resetVisit">Reiniciar esta visita</button></div></details>
+  <details id="moreOptions"><summary>Más opciones</summary><div class="setting-group" id="audioSettings" hidden><label for="rate" class="setting-label">Velocidad de audio</label><select id="rate"><option value="0.7">Lenta · 0,7×</option><option value="0.85">Tranquila · 0,85×</option><option value="1" selected>Normal · 1×</option></select><label class="check-row"><span>Audio al mostrar la pregunta</span><input type="checkbox" id="autoAudio"></label><p class="setting-help">Primero se reproduce el archivo de audio. Si falta o no se puede reproducir, se usa la voz japonesa del dispositivo, cuando está disponible.</p></div><div class="setting-group"><span class="setting-label">Tus resultados</span><p class="setting-help" id="storageHelp">El historial se guarda en este navegador y aparece en Mi progreso. Explorar o escuchar no registra respuestas. Puedes exportar o restaurar una copia desde Mi progreso.</p><a class="button small" href="progreso.html">Mi progreso · importar/exportar</a><button type="button" class="button small" id="resetVisit">Reiniciar esta visita</button></div></details>
 </fieldset></aside>
 </main>
 <footer class="setting-help asallam-footer"><span>© Asallam Sensei</span><span class="footer-star" aria-hidden="true">☆</span><a href="salon-honor.html">Salón de Honor 🏆</a></footer>
 </div>
 <script src="assets/review-history.js?v=repaso-20261105"></script>
-<script src="assets/repaso-fichas.js?v=20261105"></script>
+<script src="assets/repaso-fichas.js?v=20261105-audio"></script>
 <script src="assets/match-music.js?v=answer-victory-20261103"></script>
 <script src="assets/language-matching.js?v=matching-music-20261103"></script>
 <script>
@@ -97,7 +97,7 @@ let model = {items:[],sideNames:['Pregunta','Respuesta'],languages:['','']}, gro
 let current = null, answered = false, summaryOpen = false, quiz = blankSession(), visit = blankSession(), reviewIds = null, pageSize = 24, generation = 0;
 let direction = 'mixed', length = 10, rate = 1, autoAudio = false, fetchVersion = 0;
 let lastSource = SOURCE, lastAdapter = adaptData;
-let audioBusy = false, audioQueue = [], activeMedia = null, activeSpeech = null, audioEpoch = 0;
+let audioBusy = false, audioQueue = [], activeMedia = null, activeSpeech = null, audioEpoch = 0, cleanupAudio = null;
 const reviews = window.AsallamReviews;
 const music = window.MatchMusic?.create({isBusy:()=>audioBusy});
 const ledger = {record(_app,id,purpose,outcome){visit[outcome]++;if(outcome==='wrong')visit.errors.add(id);if(!reviews?.record('repaso',id,purpose,outcome))notify('No se pudo guardar esta respuesta en el historial. Los datos anteriores no se han modificado.');updateStats();}};
@@ -108,23 +108,69 @@ function theme(value){document.documentElement.dataset.theme=value;$('theme').te
 try{theme(localStorage.getItem('asallam_ecosystem_theme')==='light'?'light':'dark');}catch{theme('dark');}
 $('theme').onclick=()=>{const value=document.documentElement.dataset.theme==='light'?'dark':'light';theme(value);try{localStorage.setItem('asallam_ecosystem_theme',value);}catch{notify('El tema se ha cambiado, pero no se pudo guardar en este navegador.');}};
 function pool(){return model.items.filter(item=>groups.has(item.group));}
-function playable(item){return Boolean(item&&(item.audioUrl||(item.speechText&&item.lang&&window.speechSynthesis&&window.SpeechSynthesisUtterance)));}
+function canSpeak(item){return Boolean(item?.speechText&&item.lang&&window.speechSynthesis&&window.SpeechSynthesisUtterance);}
+function playable(item){return Boolean(item&&((item.audioUrl&&window.Audio)||canSpeak(item)));}
 function clearPending(){audioQueue=audioQueue.filter(request=>!request.automatic);}
 function queueAudio(item,automatic=false){if(!playable(item))return;if(audioQueue.length>=5){if(!automatic)notify('Espera a que termine el audio pendiente.');return;}audioQueue.push({item,automatic,generation,rate,epoch:audioEpoch});pumpAudio();}
 function pumpAudio(){
  if(audioBusy)return;
- while(audioQueue.length){const request=audioQueue.shift();if(request.automatic&&(request.generation!==generation||activity!=='quiz'||!autoAudio))continue;
- audioBusy=true;let ended=false;const done=failed=>{if(ended)return;ended=true;if(request.epoch!==audioEpoch)return;audioBusy=false;activeMedia=null;activeSpeech=null;if(failed)notify('No se pudo reproducir el audio. Puedes continuar con las preguntas de texto.');pumpAudio();};
- if(request.item.audioUrl){const media=new Audio(request.item.audioUrl);activeMedia=media;media.playbackRate=request.rate;media.onended=()=>done(false);media.onerror=()=>done(true);try{media.play()?.catch(()=>done(true));}catch{done(true);}}
- else {
-  const speak=()=>{if(ended)return;if(request.epoch!==audioEpoch){done(false);return;}if(request.automatic&&(request.generation!==generation||activity!=='quiz'||!autoAudio)){done(false);return;}
-   const language=request.item.lang.toLowerCase(),voices=speechSynthesis.getVoices(),voice=voices.find(value=>value.lang.toLowerCase()===language)||voices.find(value=>value.lang.toLowerCase().split('-')[0]===language.split('-')[0]);
-   if(!voice){notify('No hay una voz disponible para este idioma en el dispositivo. Puedes continuar con el texto.');done(false);return;}
-   const utterance=new SpeechSynthesisUtterance(request.item.speechText);activeSpeech=utterance;utterance.voice=voice;utterance.lang=voice.lang;utterance.rate=request.rate;utterance.onend=()=>done(false);utterance.onerror=()=>done(true);try{speechSynthesis.speak(utterance);}catch{done(true);}
+ while(audioQueue.length){
+  const request=audioQueue.shift();
+  const stale=()=>request.epoch!==audioEpoch||(request.automatic&&!request.started&&(request.generation!==generation||activity!=='quiz'||!autoAudio));
+  if(stale())continue;
+  audioBusy=true;
+  let ended=false,usingSpeech=false,media=null,mediaTimer=null,voiceTimer=null,voiceReady=null;
+  const releaseMedia=()=>{
+   clearTimeout(mediaTimer);mediaTimer=null;
+   if(media){media.onended=media.onerror=media.onplaying=media.onwaiting=media.onstalled=null;try{media.pause();}catch{}if(activeMedia===media)activeMedia=null;media=null;}
   };
-  if(speechSynthesis.getVoices().length)speak();else {let timer;const ready=()=>{clearTimeout(timer);speechSynthesis.removeEventListener?.('voiceschanged',ready);speak();};speechSynthesis.addEventListener?.('voiceschanged',ready,{once:true});timer=setTimeout(ready,800);}
- }
- return;
+  const releaseVoices=()=>{clearTimeout(voiceTimer);voiceTimer=null;if(voiceReady)window.speechSynthesis?.removeEventListener?.('voiceschanged',voiceReady);voiceReady=null;};
+  const cleanup=()=>{releaseMedia();releaseVoices();};
+  cleanupAudio=cleanup;
+  const done=failed=>{
+   if(ended)return;ended=true;cleanup();
+   if(request.epoch!==audioEpoch)return;
+   audioBusy=false;activeSpeech=null;cleanupAudio=null;
+   if(failed)notify('No se pudo reproducir el audio ni la voz de respaldo. Puedes continuar con las preguntas de texto.');
+   pumpAudio();
+  };
+  const fallback=()=>{
+   if(ended||usingSpeech)return;
+   usingSpeech=true;releaseMedia();
+   if(stale()){done(false);return;}
+   if(!canSpeak(request.item)){done(true);return;}
+   const synth=window.speechSynthesis;
+   const speak=()=>{
+    if(ended)return;
+    if(stale()){done(false);return;}
+    try{
+     const language=request.item.lang.toLowerCase(),voices=synth.getVoices(),voice=voices.find(value=>value.lang.toLowerCase()===language)||voices.find(value=>value.lang.toLowerCase().split('-')[0]===language.split('-')[0]);
+     if(!voice){notify('No hay una voz disponible para este idioma en el dispositivo. Puedes continuar con el texto.');done(false);return;}
+     const utterance=new SpeechSynthesisUtterance(request.item.speechText);activeSpeech=utterance;utterance.voice=voice;utterance.lang=voice.lang;utterance.rate=request.rate;
+     utterance.onstart=()=>{if(stale()){synth.cancel();done(false);return;}request.started=true;};utterance.onend=()=>done(false);utterance.onerror=()=>done(true);synth.speak(utterance);
+    }catch{done(true);}
+   };
+   try{
+    if(synth.getVoices().length)speak();
+    else{
+     let ready=false;
+     voiceReady=()=>{if(ready)return;ready=true;releaseVoices();speak();};
+     synth.addEventListener?.('voiceschanged',voiceReady,{once:true});voiceTimer=setTimeout(voiceReady,800);
+    }
+   }catch{done(true);}
+  };
+  if(request.item.audioUrl&&window.Audio){
+   try{
+    media=new Audio(request.item.audioUrl);activeMedia=media;media.preload='auto';media.playbackRate=request.rate;
+    // Give slow or stalled downloads a way to reach the speech fallback without cutting off playing audio.
+    const waitForMedia=()=>{clearTimeout(mediaTimer);mediaTimer=setTimeout(fallback,10000);};
+    media.onended=()=>{if(!usingSpeech)done(false);};media.onerror=fallback;
+    media.onplaying=()=>{if(ended||usingSpeech)return;if(stale()){done(false);return;}request.started=true;clearTimeout(mediaTimer);mediaTimer=null;};
+    media.onwaiting=()=>{if(!ended&&!usingSpeech)waitForMedia();};
+    waitForMedia();const playing=media.play();if(playing&&typeof playing.catch==='function')playing.catch(fallback);
+   }catch{fallback();}
+  }else fallback();
+  return;
  }
 }
 function validate(raw,adapter){
@@ -238,7 +284,7 @@ $('search').oninput=()=>{pageSize=24;explore();};$('more').onclick=()=>{pageSize
 $('skip').onclick=()=>respond(null);$('next').onclick=()=>{if(answered)nextQuestion();};$('finish').onclick=finishQuiz;$('repeat').onclick=()=>startQuiz();$('reviewSession').onclick=()=>startQuiz(new Set(quiz.errors));$('retry').onclick=()=>load();
 $('resetVisit').onclick=()=>{if(!confirm('¿Reiniciar los resultados de esta visita? No se modifica el progreso de otras páginas.'))return;visit=blankSession();quiz=blankSession();reviewIds=null;summaryOpen=false;matcher?.reset();nextQuestion();};
 window.addEventListener('keydown',event=>{if(event.altKey||event.ctrlKey||event.metaKey||event.repeat||event.target?.isContentEditable||/INPUT|SELECT|TEXTAREA|BUTTON|A|SUMMARY/.test(event.target?.tagName||'')||phase!=='ready'||activity!=='quiz'||summaryOpen||!current)return;const key=event.key.toLowerCase();const index=/^[1-4]$/.test(key)?Number(key)-1:/^[a-d]$/.test(key)?'abcd'.indexOf(key):-1;if(index>=0&&!answered&&current.options[index]!==undefined){event.preventDefault();respond(current.options[index]);}else if(key==='enter'&&answered){event.preventDefault();nextQuestion();}else if(key==='r'&&(!current.reverse||answered)){event.preventDefault();queueAudio(current.item);}});
-window.addEventListener('pagehide',()=>{generation++;audioEpoch++;audioQueue=[];music?.cancel();matcher?.deactivate();if(activeMedia)activeMedia.pause();if(activeSpeech)window.speechSynthesis?.cancel();activeMedia=null;activeSpeech=null;audioBusy=false;});
+window.addEventListener('pagehide',()=>{generation++;audioEpoch++;audioQueue=[];music?.cancel();matcher?.deactivate();cleanupAudio?.();cleanupAudio=null;if(activeSpeech)window.speechSynthesis?.cancel();activeMedia=null;activeSpeech=null;audioBusy=false;});
 window.addEventListener('pageshow',event=>{if(event.persisted&&phase==='ready'&&activity==='match')matcher?.activate();});
 window.addEventListener('storage',event=>{if(event.key===null||event.key==='asallam_reviews_v1_repaso'){updateStats();if(activity==='explore'&&phase==='ready')explore();}});
 window.Repaso=Object.freeze({setData,load});render();if(SOURCE)load();

@@ -26,7 +26,9 @@
             back:columna.espanol,
             group,
             detail:detail.join('\n'),
-            // Device speech is optional. No recording path or voice is invented.
+            // Recording filenames match the original rōmaji exactly, including case and accents.
+            audioUrl:'data/audios/cortos/' + encodeURIComponent(columna.romaji + '.mp3'),
+            // Keep device speech as a fallback if the recording is missing or cannot play.
             speechText:columna.japones,
             lang:'ja-JP'
           });
