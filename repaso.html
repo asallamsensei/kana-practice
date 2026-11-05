@@ -36,13 +36,13 @@
     <button type="button" id="exploreTab" class="activity-tab" aria-pressed="false">Explorar</button>
   </div>
   <section class="exercise-card" aria-label="Práctica">
-    <div id="exerciseTop" class="exercise-top" hidden><span id="badge" class="badge">Emparejar</span><span id="roundCount" class="round-count"></span></div>
+    <div id="exerciseTop" class="exercise-top" hidden><span id="badge" class="badge">Emparejar</span></div>
     <div class="progress-track" id="progressTrack" role="progressbar" aria-label="Avance del quiz" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" hidden><div id="bar" class="progress-fill"></div></div>
     <div id="empty" class="empty-state"><div class="empty-symbol" aria-hidden="true">↻</div><h2>Tu próximo repaso</h2><p>No hay entradas en este catálogo. Revisa el archivo de contenido para practicar con Quiz, Emparejar y Explorar.</p></div>
     <div id="loading" class="loading-state" role="status" hidden>Cargando el repaso…</div>
     <div id="loadError" class="empty-state" role="alert" hidden><h2>No se pudo cargar el contenido</h2><p id="loadErrorText"></p><button type="button" id="retry" class="button">Reintentar</button></div>
     <div id="practice" hidden>
-      <div class="question-area"><p id="questionLabel" class="question-label"></p><div id="prompt" class="prompt"></div><button type="button" id="listen" class="listen-button" hidden>🔊 Escuchar</button></div>
+      <div class="question-area"><div id="prompt" class="prompt"></div><button type="button" id="listen" class="listen-button" hidden>🔊 Escuchar</button></div>
       <div id="options" class="options" role="group" aria-label="Respuestas"></div>
       <div id="feedback" class="feedback" role="status" hidden></div>
       <div class="controls"><button type="button" id="skip">No lo sé</button><button type="button" id="next" class="primary" disabled>Siguiente →</button></div>
@@ -71,7 +71,31 @@
 <script src="assets/review-history.js?v=repaso-20261105"></script>
 <script src="assets/repaso-fichas.js?v=20261105-audio"></script>
 <script src="assets/match-music.js?v=answer-victory-20261103"></script>
-<script src="assets/language-matching.js?v=matching-length-20261105"></script>
+<script>
+/* Shared matching for language catalogs. One result per pair; no global-only score. */
+(function(root){'use strict';
+function shuffle(list,random=Math.random){const a=[...list];for(let i=a.length-1;i>0;i--){const j=Math.floor(random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function selectPairs(items,conflicts,count=3,random=Math.random){const selected=[];for(const item of shuffle(items,random)){if(!selected.some(x=>x.id===item.id||conflicts(x,item)))selected.push(item);if(selected.length===count)break;}return selected;}
+function create(config){const {host,ledger,app}=config,doc=host.ownerDocument||root.document;let active=false,first=null,locked=false,timer=null,generation=0,tiles=[],pairs=[],round=0,correct=0,wrong=0,finished=false;
+function sessionLength(){const value=Number(typeof config.sessionLength==='function'?config.sessionLength():config.sessionLength);return Number.isSafeInteger(value)&&value>0?value:0;}
+const music=root.MatchMusic?.create({isBusy:()=>Boolean(config.audioBusy?.()||root.speechSynthesis?.speaking||root.speechSynthesis?.pending)});
+const make=(tag,text,cls)=>{const el=doc.createElement(tag);if(text!==undefined)el.textContent=text;if(cls)el.className=cls;return el;};
+const intro=make('p','Une cada elemento con su pareja. Puedes cambiar la selección en el mismo lado. Una pareja incorrecta cuenta como error del primer elemento elegido.','setting-help');
+const counter=make('p','','setting-help'),board=make('div',undefined,'language-match-board'),feedback=make('div','','feedback'),controls=make('div',undefined,'controls'),next=make('button','Otro tablero →','primary'),finish=make('button','Terminar sesión'),restart=make('button','Nueva sesión','primary');counter.hidden=config.showCounter===false;feedback.setAttribute('role','status');board.setAttribute('aria-label','Emparejar');controls.append(next,finish,restart);host.append(intro,counter,board,feedback,controls);
+function cancel(){generation++;if(timer!==null)root.clearTimeout(timer);timer=null;locked=false;first=null;for(const tile of tiles){tile.button.classList.remove('is-selected','is-wrong');tile.button.setAttribute('aria-pressed','false');}}
+function stats(){const length=sessionLength();counter.textContent=`${round} tableros completados · ${correct}${length?' / '+length:''} parejas acertadas · ${wrong} errores`;config.changed();}
+function show(){next.hidden=finished||!pairs.length||tiles.some(x=>!x.matched);finish.hidden=finished;restart.hidden=!finished;}
+function finishSession(complete=false){cancel();if(!complete)music?.cancel?.();finished=true;board.replaceChildren();feedback.textContent=(complete?'Sesión completada: '+correct+' parejas acertadas · '+wrong+' errores.':'Sesión terminada. Las parejas sin responder no se registran.');stats();show();}
+function newBoard(){cancel();music?.reset();const length=sessionLength();if(length&&correct>=length){finishSession(true);return;}finished=false;const pool=config.items();pairs=selectPairs(pool,config.conflicts,length?Math.min(3,length-correct):3);tiles=[];board.replaceChildren();feedback.textContent=pairs.length?(config.initialFeedback??'Elige una tarjeta y su pareja.'):'No hay elementos compatibles en esta selección.';const columns=[shuffle(pairs),shuffle(pairs)];for(let row=0;row<pairs.length;row++)for(let side=0;side<2;side++){const item=columns[side][row],button=make('button',config.labels(item)[side],'language-match-tile');button.type='button';button.lang=config.langs[side];button.setAttribute('aria-pressed','false');button.setAttribute('aria-label',config.sideNames[side]+': '+config.labels(item)[side]);const tile={item,side,button,matched:false};button.onclick=()=>pick(tile);tiles.push(tile);board.append(button);}stats();show();}
+function pick(tile){if(!active||finished||locked||!tiles.includes(tile)||tile.matched||tile===first)return;if(first&&first.side===tile.side){first.button.classList.remove('is-selected');first.button.setAttribute('aria-pressed','false');first=null;}tile.button.classList.add('is-selected');tile.button.setAttribute('aria-pressed','true');if(!first){first=tile;return;}const previous=first;first=null;if(previous.item.id===tile.item.id){for(const t of [previous,tile]){t.matched=true;t.button.disabled=true;t.button.classList.remove('is-selected');t.button.classList.add('is-matched');t.button.setAttribute('aria-pressed','false');}correct++;music?.match({complete:tiles.every(x=>x.matched)});ledger.record(app,tile.item.id,'Emparejar','correct');feedback.textContent='✓ '+config.labels(tile.item).join(' · ');if(tiles.every(x=>x.matched)){round++;feedback.textContent+=' · Tablero completo.';}if(sessionLength()&&correct>=sessionLength()){finishSession(true);return;}stats();show();return;}wrong++;ledger.record(app,previous.item.id,'Emparejar','wrong');stats();feedback.textContent='✕ No son pareja. Inténtalo otra vez.';locked=true;for(const t of [previous,tile])t.button.classList.add('is-wrong');const epoch=generation;timer=root.setTimeout(()=>{if(epoch!==generation||!active)return;for(const t of [previous,tile]){t.button.classList.remove('is-selected','is-wrong');t.button.setAttribute('aria-pressed','false');}locked=false;timer=null;},650);}
+function activate(){active=true;if(!tiles.length)newBoard();else {stats();show();}}
+function deactivate(){active=false;cancel();music?.cancel?.();}
+function reset(){cancel();music?.reset();tiles=[];pairs=[];round=correct=wrong=0;finished=false;if(active)newBoard();}
+next.onclick=()=>{if(active&&!finished&&tiles.every(x=>x.matched))newBoard();};finish.onclick=()=>{if(active)finishSession();};restart.onclick=()=>{if(active){reset();}};
+return {activate,deactivate,reset,getState:()=>({correct,wrong,round,finished,length:sessionLength()})};}
+const api={selectPairs,create};if(typeof module!=='undefined'&&module.exports)module.exports=api;root.AsallamLanguageMatching=api;
+})(typeof window!=='undefined'?window:globalThis);
+</script>
 <script>
 /*
  * Repaso: práctica basada en las fichas transcritas; sin datos de ejemplo.
@@ -102,7 +126,7 @@ let audioBusy = false, audioQueue = [], activeMedia = null, activeSpeech = null,
 const reviews = window.AsallamReviews;
 const music = window.MatchMusic?.create({isBusy:()=>audioBusy});
 const ledger = {record(_app,id,purpose,outcome){visit[outcome]++;if(outcome==='wrong')visit.errors.add(id);if(!reviews?.record('repaso',id,purpose,outcome))notify('No se pudo guardar esta respuesta en el historial. Los datos anteriores no se han modificado.');updateStats();}};
-const matcher = window.AsallamLanguageMatching?.create({host:$('matching'),ledger,app:'repaso',sessionLength:()=>matchLength,items:()=>pool(),labels:item=>[item.front,item.back],langs:model.languages,sideNames:model.sideNames,conflicts:(a,b)=>normalized(a.front)===normalized(b.front)||normalized(a.back)===normalized(b.back),audioBusy:()=>audioBusy,changed:()=>updateStats()});
+const matcher = window.AsallamLanguageMatching?.create({host:$('matching'),ledger,app:'repaso',initialFeedback:'',showCounter:false,sessionLength:()=>matchLength,items:()=>pool(),labels:item=>[item.front,item.back],langs:model.languages,sideNames:model.sideNames,conflicts:(a,b)=>normalized(a.front)===normalized(b.front)||normalized(a.back)===normalized(b.back),audioBusy:()=>audioBusy,changed:()=>updateStats()});
 function notify(message){$('noticeText').textContent=message;$('notice').hidden=false;}
 $('closeNotice').onclick=()=>{$('notice').hidden=true;};
 function theme(value){document.documentElement.dataset.theme=value;$('theme').textContent=value==='light'?'☾':'☀';$('theme').setAttribute('aria-label',value==='light'?'Activar tema oscuro':'Activar tema claro');document.querySelector('meta[name="theme-color"]').content=value==='light'?'#f3f2ef':'#10121b';}
@@ -210,15 +234,15 @@ function updateStats(){
  try{const saved=reviews.summary('repaso');$('historySummary').textContent='Historial guardado: '+saved.seen+' / '+(saved.total??model.items.length)+' entradas practicadas · '+saved.reviews+' repasos · '+saved.correct+' aciertos · '+saved.wrong+' errores · '+saved.skipped+' sin responder.';}catch{$('historySummary').textContent='Historial no disponible. Los datos anteriores no se han modificado.';}
  $('correctCount').textContent=visit.correct;$('wrongCount').textContent=visit.wrong;$('skippedCount').textContent=visit.skipped;
  const matching=activity==='match',done=matching?(matcher?.getState().correct||0):total(),target=matching?matchLength:length;
- const progress=target?Math.min(100,100*done/target):0;$('bar').style.width=progress+'%';$('progressTrack').setAttribute('aria-valuenow',String(progress));$('progressTrack').setAttribute('aria-label',matching?'Avance de Emparejar':'Avance del quiz');$('progressTrack').setAttribute('aria-valuetext',done+(target?' de '+target:'')+(matching?' parejas acertadas':' respuestas'));$('roundCount').textContent=phase==='ready'&&activity==='quiz'?total()+(length?' / '+length:'')+' respuestas':'';
+ const progress=target?Math.min(100,100*done/target):0;$('bar').style.width=progress+'%';$('progressTrack').setAttribute('aria-valuenow',String(progress));$('progressTrack').setAttribute('aria-label',matching?'Avance de Emparejar':'Avance del quiz');$('progressTrack').setAttribute('aria-valuetext',done+(target?' de '+target:'')+(matching?' parejas acertadas':' respuestas'));
 }
 function render(){
  const ready=phase==='ready';$('empty').hidden=phase!=='empty';$('loading').hidden=phase!=='loading';$('loadError').hidden=phase!=='error';$('dataSettings').disabled=!ready;
  $('practice').hidden=!ready||activity!=='quiz'||summaryOpen||!current;$('noQuestion').hidden=!ready||activity!=='quiz'||summaryOpen||!!current;
  $('matching').hidden=!ready||activity!=='match';$('exploring').hidden=!ready||activity!=='explore';$('summary').hidden=!ready||activity!=='quiz'||!summaryOpen;
  $('finish').hidden=!ready||activity!=='quiz'||summaryOpen;$('keyboardHint').hidden=!ready||activity!=='quiz'||summaryOpen||!current;$('progressTrack').hidden=!ready||activity==='explore'||!(activity==='match'?matchLength:length);$('sessionStats').hidden=!ready;$('sourceNotes').hidden=!ready||!(model.references||[]).some(reference=>groups.has(reference.group));
- $('exerciseTop').hidden=activity==='match';$('quizSettings').hidden=activity!=='quiz';$('matchSettings').hidden=activity!=='match';
- $('badge').textContent=activity==='match'?'Emparejar':activity==='explore'?'Explorar':reviewIds?'Repaso de errores':'Quiz';
+ $('exerciseTop').hidden=activity==='match'||(activity==='quiz'&&!reviewIds);$('quizSettings').hidden=activity!=='quiz';$('matchSettings').hidden=activity!=='match';
+ $('badge').textContent=activity==='match'?'Emparejar':activity==='explore'?'Explorar':reviewIds?'Repaso de errores':'';$('badge').hidden=!$('badge').textContent;
  for(const mode of ['quiz','match','explore'])$(mode+'Tab').setAttribute('aria-pressed',String(mode===activity));updateStats();
 }
 function makeQuestion(selected,eligible,reverse){
@@ -240,7 +264,7 @@ function nextQuestion(){
  if(!current){render();return;}
  current.token={};summaryOpen=false;
  const question=current;const front=question.reverse?question.item.back:question.item.front;
- $('prompt').textContent=front;$('prompt').lang=model.languages[question.reverse?1:0];$('questionLabel').textContent='Elige '+model.sideNames[question.reverse?0:1].toLocaleLowerCase('es')+'.';
+ $('prompt').textContent=front;$('prompt').lang=model.languages[question.reverse?1:0];$('options').setAttribute('aria-label','Respuestas en '+model.sideNames[question.reverse?0:1].toLocaleLowerCase('es'));
  // In reverse mode the front-side audio would reveal the answer; expose it only after responding.
  $('listen').hidden=question.reverse||!playable(question.item);$('feedback').hidden=true;$('feedback').replaceChildren();$('skip').disabled=false;$('next').disabled=true;$('options').replaceChildren();
  question.options.forEach((value,index)=>{const button=text('button','', 'option-button');button.type='button';button.lang=model.languages[question.reverse?0:1];button.append(text('span','ABCD'[index],'option-letter'),text('span',value,'option-label'));button.onclick=()=>{if(current===question)respond(value);};$('options').append(button);});
@@ -264,7 +288,7 @@ function renderGroups(){
 }
 function renderReferences(){
  const references=(model.references||[]).filter(reference=>groups.has(reference.group));$('referenceList').replaceChildren();$('sourceNotes').hidden=!references.length;
- for(const reference of references){const section=text('details','');section.append(text('summary',reference.title));if(reference.header)section.append(text('p',reference.header,'reference-header'));for(const paragraph of reference.paragraphs)section.append(text('p',paragraph,'reference-note'));$('referenceList').append(section);}
+ for(const reference of references){const section=text('details','');section.append(text('summary',reference.title));if(reference.header&&reference.header!=='☆ asallamsensei.com ☆')section.append(text('p',reference.header,'reference-header'));for(const paragraph of reference.paragraphs)section.append(text('p',paragraph,'reference-note'));$('referenceList').append(section);}
 }
 function filterChanged(){renderGroups();reviewIds=null;summaryOpen=false;matcher?.reset();nextQuestion();if(activity==='explore')explore();}
 function historyElement(id){const element=text('div','','item-history');if(reviews)element.innerHTML=reviews.render('repaso',id);else element.textContent='Historial no disponible.';return element;}
