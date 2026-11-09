@@ -1,0 +1,3787 @@
+{
+  "level": "N4",
+  "metadata": {
+    "purpose": "Banco ampliado de práctica original. Tres veces el tamaño orientativo de un simulacro.",
+    "forms": 3,
+    "audio": "Síntesis local, no audios oficiales"
+  },
+  "questions": [
+    {
+      "section": "vocabulary",
+      "type": "kanji-reading",
+      "prompt": "「約束」の読み方はどれですか。",
+      "options": [
+        "やくそく",
+        "やっそく",
+        "やくそう",
+        "よくそく"
+      ],
+      "answer": 0,
+      "explanation": "約束 se lee やくそく y significa «promesa» o «cita acordada».",
+      "id": "n4-001"
+    },
+    {
+      "section": "vocabulary",
+      "type": "kanji-reading",
+      "prompt": "「運転」の読み方はどれですか。",
+      "options": [
+        "うんでん",
+        "うんてん",
+        "うんどう",
+        "うんねん"
+      ],
+      "answer": 1,
+      "explanation": "運転 se lee うんてん: conducir un vehículo.",
+      "id": "n4-002"
+    },
+    {
+      "section": "vocabulary",
+      "type": "kanji-reading",
+      "prompt": "「急行」の読み方はどれですか。",
+      "options": [
+        "きゅこう",
+        "きゅうぎょう",
+        "きゅうこう",
+        "きゅぎょう"
+      ],
+      "answer": 2,
+      "explanation": "急行 se lee きゅうこう y designa un servicio expreso.",
+      "id": "n4-003"
+    },
+    {
+      "section": "vocabulary",
+      "type": "kanji-reading",
+      "prompt": "「説明」の読み方はどれですか。",
+      "options": [
+        "せつみょう",
+        "せっめい",
+        "せちめい",
+        "せつめい"
+      ],
+      "answer": 3,
+      "explanation": "説明 se lee せつめい: explicación.",
+      "id": "n4-004"
+    },
+    {
+      "section": "vocabulary",
+      "type": "kanji-reading",
+      "prompt": "「退院」の読み方はどれですか。",
+      "options": [
+        "たいいん",
+        "だいいん",
+        "たいい",
+        "たいえん"
+      ],
+      "answer": 0,
+      "explanation": "退院 se lee たいいん: salir del hospital tras recibir el alta.",
+      "id": "n4-005"
+    },
+    {
+      "section": "vocabulary",
+      "type": "kanji-reading",
+      "prompt": "「研究」の読み方はどれですか。",
+      "options": [
+        "けんきゅ",
+        "けんきゅう",
+        "けんぎゅう",
+        "けんくう"
+      ],
+      "answer": 1,
+      "explanation": "研究 se lee けんきゅう: investigación.",
+      "id": "n4-006"
+    },
+    {
+      "section": "vocabulary",
+      "type": "kanji-reading",
+      "prompt": "「都合」の読み方はどれですか。",
+      "options": [
+        "とあい",
+        "とごう",
+        "つごう",
+        "つあい"
+      ],
+      "answer": 2,
+      "explanation": "都合 se lee つごう: circunstancias o disponibilidad.",
+      "id": "n4-007"
+    },
+    {
+      "section": "vocabulary",
+      "type": "orthography",
+      "prompt": "「かぞく」と旅行に行きました。",
+      "options": [
+        "家旅",
+        "家庭",
+        "家族",
+        "家続"
+      ],
+      "answer": 2,
+      "explanation": "家族 significa familia. 家庭 se refiere al hogar y se lee かてい.",
+      "id": "n4-008"
+    },
+    {
+      "section": "vocabulary",
+      "type": "orthography",
+      "prompt": "「じゅうしょ」をここに書いてください。",
+      "options": [
+        "住近",
+        "住所",
+        "往所",
+        "住初"
+      ],
+      "answer": 1,
+      "explanation": "住所 es la dirección postal; se lee じゅうしょ.",
+      "id": "n4-009"
+    },
+    {
+      "section": "vocabulary",
+      "type": "orthography",
+      "prompt": "来週の「よてい」を教えてください。",
+      "options": [
+        "予走",
+        "余定",
+        "余走",
+        "予定"
+      ],
+      "answer": 3,
+      "explanation": "予定 significa plan o programación. Se lee よてい.",
+      "id": "n4-010"
+    },
+    {
+      "section": "vocabulary",
+      "type": "orthography",
+      "prompt": "母は「こうじょう」で働いています。",
+      "options": [
+        "公場",
+        "工場",
+        "工所",
+        "公所"
+      ],
+      "answer": 1,
+      "explanation": "工場 significa fábrica y se lee こうじょう.",
+      "id": "n4-011"
+    },
+    {
+      "section": "vocabulary",
+      "type": "orthography",
+      "prompt": "駅から学校までは「ちかい」です。",
+      "options": [
+        "近い",
+        "遠い",
+        "低い",
+        "短い"
+      ],
+      "answer": 0,
+      "explanation": "近い significa cerca; 遠い significa lejos.",
+      "id": "n4-012"
+    },
+    {
+      "section": "vocabulary",
+      "type": "context",
+      "prompt": "この道は車が多くて（　）です。気をつけてください。",
+      "options": [
+        "さびしい",
+        "あぶない",
+        "やわらかい",
+        "ねむい"
+      ],
+      "answer": 1,
+      "explanation": "あぶない significa peligroso. La advertencia de tener cuidado y el tráfico apoyan esta opción.",
+      "id": "n4-013"
+    },
+    {
+      "section": "vocabulary",
+      "type": "context",
+      "prompt": "旅行の日に泊まる部屋がなくて困らないように、ホテルを（　）しました。",
+      "options": [
+        "出席",
+        "紹介",
+        "予約",
+        "卒業"
+      ],
+      "answer": 2,
+      "explanation": "ホテルを予約する significa reservar un hotel. La finalidad explícita de asegurar una habitación para el viaje descarta 紹介する, «presentar o recomendar».",
+      "id": "n4-014"
+    },
+    {
+      "section": "vocabulary",
+      "type": "context",
+      "prompt": "駅まで歩くと３０分ですが、自転車なら１０分で（　）。",
+      "options": [
+        "着きます",
+        "開きます",
+        "始まります",
+        "貸します"
+      ],
+      "answer": 0,
+      "explanation": "着く significa llegar. El tiempo se marca aquí con で: llegar en diez minutos.",
+      "id": "n4-015"
+    },
+    {
+      "section": "vocabulary",
+      "type": "context",
+      "prompt": "このスープは味が（　）ですね。塩を少し入れましょう。",
+      "options": [
+        "深い",
+        "固い",
+        "太い",
+        "薄い"
+      ],
+      "answer": 3,
+      "explanation": "味が薄い indica que el sabor es suave o poco intenso. Añadir sal encaja con esa situación.",
+      "id": "n4-016"
+    },
+    {
+      "section": "vocabulary",
+      "type": "context",
+      "prompt": "駅まで走ったので、電車の出発時間に（　）。",
+      "options": [
+        "集まりました",
+        "間に合いました",
+        "比べました",
+        "続きました"
+      ],
+      "answer": 1,
+      "explanation": "出発時間に間に合う significa llegar a tiempo para la salida. Haber corrido hasta la estación explica que consiguiera tomar el tren.",
+      "id": "n4-017"
+    },
+    {
+      "section": "vocabulary",
+      "type": "context",
+      "prompt": "バスを降りるとき、このボタンを（　）ください。",
+      "options": [
+        "引いて",
+        "切って",
+        "押して",
+        "取って"
+      ],
+      "answer": 2,
+      "explanation": "ボタンを押す significa pulsar un botón.",
+      "id": "n4-018"
+    },
+    {
+      "section": "vocabulary",
+      "type": "context",
+      "prompt": "駅に行きたいのですが、道が分かりません。交番で（　）ましょう。",
+      "options": [
+        "拾い",
+        "聞き",
+        "送り",
+        "習い"
+      ],
+      "answer": 1,
+      "explanation": "交番で道を聞く es preguntar el camino en el puesto de policía.",
+      "id": "n4-019"
+    },
+    {
+      "section": "vocabulary",
+      "type": "context",
+      "prompt": "この紙は大切ですから、（　）ください。",
+      "options": [
+        "捨てないで",
+        "洗わないで",
+        "泳がないで",
+        "起きないで"
+      ],
+      "answer": 0,
+      "explanation": "大切な紙 es un documento importante; por eso se pide no tirarlo.",
+      "id": "n4-020"
+    },
+    {
+      "section": "vocabulary",
+      "type": "paraphrase",
+      "prompt": "「電車が込んでいます」と同じ意味の文はどれですか。",
+      "options": [
+        "電車に人が大勢います。",
+        "電車が早く着きます。",
+        "電車が止まっています。",
+        "電車に人がいません。"
+      ],
+      "answer": 0,
+      "explanation": "込んでいる indica que hay mucha gente, en este caso dentro del tren.",
+      "id": "n4-021"
+    },
+    {
+      "section": "vocabulary",
+      "type": "paraphrase",
+      "prompt": "「もう一度説明してください」と同じ意味の文はどれですか。",
+      "options": [
+        "説明をやめてください。",
+        "もっと早く説明してください。",
+        "説明を覚えてください。",
+        "また説明してください。"
+      ],
+      "answer": 3,
+      "explanation": "もう一度 significa una vez más; また expresa aquí la repetición de la explicación.",
+      "id": "n4-022"
+    },
+    {
+      "section": "vocabulary",
+      "type": "paraphrase",
+      "prompt": "「この仕事はもう済みました」と同じ意味の文はどれですか。",
+      "options": [
+        "この仕事はまだ始まっていません。",
+        "この仕事は明日します。",
+        "この仕事はもう終わりました。",
+        "この仕事はできません。"
+      ],
+      "answer": 2,
+      "explanation": "済む significa terminarse o quedar resuelto.",
+      "id": "n4-023"
+    },
+    {
+      "section": "vocabulary",
+      "type": "paraphrase",
+      "prompt": "「ここは車を止めてはいけません」と同じ意味の文はどれですか。",
+      "options": [
+        "ここで車を洗ってください。",
+        "ここに車がありません。",
+        "ここに車を止めてもいいです。",
+        "ここに車を止めないでください。"
+      ],
+      "answer": 3,
+      "explanation": "〜てはいけません expresa prohibición: no aparcar aquí.",
+      "id": "n4-024"
+    },
+    {
+      "section": "vocabulary",
+      "type": "usage",
+      "prompt": "「間に合う」の使い方として正しい文はどれですか。",
+      "options": [
+        "走ったので、電車に間に合いました。",
+        "二つの机の間に合いました。",
+        "この靴は足の大きさに間に合います。",
+        "友達と駅で間に合いました。"
+      ],
+      "answer": 0,
+      "explanation": "電車に間に合う significa llegar a tiempo para coger el tren.",
+      "id": "n4-025"
+    },
+    {
+      "section": "vocabulary",
+      "type": "usage",
+      "prompt": "「見つかる」の使い方として正しい文はどれですか。",
+      "options": [
+        "朝、新聞を見つかりました。",
+        "なくした鍵が見つかりました。",
+        "窓から山を見つかりました。",
+        "映画館で映画を見つかりました。"
+      ],
+      "answer": 1,
+      "explanation": "見つかる es intransitivo: la llave perdida apareció. Su sujeto se marca con が.",
+      "id": "n4-026"
+    },
+    {
+      "section": "vocabulary",
+      "type": "usage",
+      "prompt": "「楽しみ」の使い方として正しい文はどれですか。",
+      "options": [
+        "この机は楽しみですから軽いです。",
+        "昨日、楽しみに転びました。",
+        "来月の旅行が楽しみです。",
+        "急いで楽しみを曲がってください。"
+      ],
+      "answer": 2,
+      "explanation": "旅行が楽しみです expresa ilusión por un viaje futuro.",
+      "id": "n4-027"
+    },
+    {
+      "section": "vocabulary",
+      "type": "usage",
+      "prompt": "「十分」の使い方として正しい文はどれですか。",
+      "options": [
+        "駅は家から十分に近所です。",
+        "十分な眠いので寝ます。",
+        "十分を着て出かけました。",
+        "時間は十分ありますから、急がなくてもいいです。"
+      ],
+      "answer": 3,
+      "explanation": "時間が十分ある significa disponer de tiempo suficiente.",
+      "id": "n4-028"
+    },
+    {
+      "section": "grammar",
+      "type": "grammar-form",
+      "prompt": "日本に来てから、納豆が食べられる（　）なりました。",
+      "options": [
+        "ために",
+        "ことに",
+        "ように",
+        "そうに"
+      ],
+      "answer": 2,
+      "explanation": "Verbo potencial + ようになる expresa adquirir una capacidad: ahora puedo comer nattō.",
+      "id": "n4-029"
+    },
+    {
+      "section": "grammar",
+      "type": "grammar-form",
+      "prompt": "この本は、子ども（　）読めるように、易しい言葉で書いてあります。",
+      "options": [
+        "でも",
+        "しか",
+        "ほど",
+        "ばかり"
+      ],
+      "answer": 0,
+      "explanation": "でも significa «incluso»: está escrito con palabras fáciles para que incluso los niños puedan leerlo.",
+      "id": "n4-030"
+    },
+    {
+      "section": "grammar",
+      "type": "grammar-form",
+      "prompt": "明日は試験なので、今夜は勉強し（　）なりません。",
+      "options": [
+        "なくても",
+        "ないで",
+        "なくては",
+        "なくちゃは"
+      ],
+      "answer": 2,
+      "explanation": "La estructura 〜なくてはなりません expresa obligación: tengo que estudiar.",
+      "id": "n4-031"
+    },
+    {
+      "section": "grammar",
+      "type": "grammar-form",
+      "prompt": "この図書館では、本を２週間借りる（　）ができます。",
+      "options": [
+        "もの",
+        "こと",
+        "ため",
+        "よう"
+      ],
+      "answer": 1,
+      "explanation": "La estructura verbo en forma diccionario + ことができる expresa posibilidad: se pueden tomar libros prestados durante dos semanas.",
+      "id": "n4-032"
+    },
+    {
+      "section": "grammar",
+      "type": "grammar-form",
+      "prompt": "雨が降っている（　）、弟は傘を持たずに出かけました。",
+      "options": [
+        "ので",
+        "から",
+        "ため",
+        "のに"
+      ],
+      "answer": 3,
+      "explanation": "のに expresa contraste: aunque llueve, salió sin llevar paraguas.",
+      "id": "n4-033"
+    },
+    {
+      "section": "grammar",
+      "type": "grammar-form",
+      "prompt": "この店のケーキは、あの店のケーキ（　）安いです。",
+      "options": [
+        "より",
+        "まで",
+        "だけ",
+        "など"
+      ],
+      "answer": 0,
+      "explanation": "より marca el término de comparación: los pasteles de esta tienda son más baratos que los de aquella.",
+      "id": "n4-034"
+    },
+    {
+      "section": "grammar",
+      "type": "grammar-form",
+      "prompt": "寝る前に、歯を（　）ください。",
+      "options": [
+        "磨くて",
+        "磨いて",
+        "磨きて",
+        "磨いたて"
+      ],
+      "answer": 1,
+      "explanation": "La forma て de 磨く es 磨いて. Se usa con ください para pedir que alguien se cepille los dientes.",
+      "id": "n4-035"
+    },
+    {
+      "section": "grammar",
+      "type": "grammar-form",
+      "prompt": "田中さんは、来週大阪へ（　）と言っていました。",
+      "options": [
+        "行こうです",
+        "行きますだ",
+        "行くだ",
+        "行く"
+      ],
+      "answer": 3,
+      "explanation": "Ante と言っていました se usa aquí la forma simple 行く: Tanaka dijo que iría a Osaka la próxima semana.",
+      "id": "n4-036"
+    },
+    {
+      "section": "grammar",
+      "type": "grammar-form",
+      "prompt": "この問題は難しくて、何回考えて（　）分かりません。",
+      "options": [
+        "は",
+        "を",
+        "も",
+        "で"
+      ],
+      "answer": 2,
+      "explanation": "何回考えても significa «por muchas veces que lo piense». La estructura 〜ても expresa concesión.",
+      "id": "n4-037"
+    },
+    {
+      "section": "grammar",
+      "type": "grammar-form",
+      "prompt": "財布を家に忘れて（　）ので、お金がありません。",
+      "options": [
+        "しまった",
+        "みた",
+        "おいた",
+        "あった"
+      ],
+      "answer": 0,
+      "explanation": "忘れてしまった expresa una acción completada que se lamenta: me dejé la cartera en casa.",
+      "id": "n4-038"
+    },
+    {
+      "section": "grammar",
+      "type": "grammar-form",
+      "prompt": "Ａ「お茶、もう一杯どうですか。」Ｂ「いいえ、今飲んだ（　）ですから。」",
+      "options": [
+        "まで",
+        "ばかり",
+        "しか",
+        "ほど"
+      ],
+      "answer": 1,
+      "explanation": "Forma pasada + ばかり indica que la acción acaba de realizarse: acabo de tomarlo.",
+      "id": "n4-039"
+    },
+    {
+      "section": "grammar",
+      "type": "grammar-form",
+      "prompt": "明日の旅行のために、さっき荷物を準備して（　）ました。",
+      "options": [
+        "おく",
+        "おいて",
+        "おこう",
+        "おき"
+      ],
+      "answer": 3,
+      "explanation": "〜ておく expresa preparar algo con antelación. Ante ました se necesita la raíz おき: 準備しておきました, dejé preparado el equipaje.",
+      "id": "n4-040"
+    },
+    {
+      "section": "grammar",
+      "type": "grammar-form",
+      "prompt": "このかばんは軽いので、持ち（　）です。",
+      "options": [
+        "やすい",
+        "ほしい",
+        "らしい",
+        "そうに"
+      ],
+      "answer": 0,
+      "explanation": "Raíz verbal + やすい expresa facilidad: es fácil de llevar porque pesa poco.",
+      "id": "n4-041"
+    },
+    {
+      "section": "grammar",
+      "type": "sentence-order",
+      "prompt": "文が自然になるように並べてください。★に入るものはどれですか。\nこれは日本語を ＿＿ ＿＿ ★ ＿＿ 本です。",
+      "options": [
+        "ための",
+        "勉強",
+        "人の",
+        "している"
+      ],
+      "answer": 2,
+      "explanation": "Orden: これは日本語を【勉強】【している】【人の】【ための】本です。La estrella ocupa el tercer hueco, 人の: es un libro para personas que estudian japonés.",
+      "id": "n4-042"
+    },
+    {
+      "section": "grammar",
+      "type": "sentence-order",
+      "prompt": "文が自然になるように並べてください。★に入るものはどれですか。\nこの漢字の ＿＿ ★ ＿＿ ＿＿ ください。",
+      "options": [
+        "教えて",
+        "方を",
+        "読み",
+        "私に"
+      ],
+      "answer": 1,
+      "explanation": "Orden: この漢字の【読み】【方を】【私に】【教えて】ください。La estrella ocupa el segundo hueco, 方を: por favor, enséñame cómo se lee este kanji.",
+      "id": "n4-043"
+    },
+    {
+      "section": "grammar",
+      "type": "sentence-order",
+      "prompt": "文が自然になるように並べてください。★に入るものはどれですか。\n医者は私に、毎日野菜を ＿＿ ＿＿ ★ ＿＿ 言いました。",
+      "options": [
+        "ように",
+        "くださいと",
+        "食べる",
+        "して"
+      ],
+      "answer": 3,
+      "explanation": "Orden: 食べる → ように → して → くださいと。La frase completa es 医者は私に、毎日野菜を食べるようにしてくださいと言いました: el médico me pidió que procurara comer verduras cada día. La estrella ocupa el tercer hueco, して.",
+      "id": "n4-044"
+    },
+    {
+      "section": "grammar",
+      "type": "sentence-order",
+      "prompt": "正しい順番に並べてください。★に入るものはどれですか。\nこの店で ＿＿ ＿＿ ★ ＿＿ 。",
+      "options": [
+        "ことが",
+        "あります",
+        "食べた",
+        "昼ご飯を"
+      ],
+      "answer": 0,
+      "explanation": "Orden: 昼ご飯を → 食べた → ことが → あります. La estrella ocupa el tercer hueco: he comido en este restaurante alguna vez.",
+      "id": "n4-045"
+    },
+    {
+      "section": "grammar",
+      "type": "text-grammar",
+      "prompt": "文章の【１】に入るものはどれですか。",
+      "options": [
+        "それでは",
+        "でも",
+        "例えば",
+        "つまり"
+      ],
+      "answer": 1,
+      "explanation": "でも contrasta la dificultad inicial con la ayuda recibida de los compañeros.",
+      "passage": "私は先月から、近くのパン屋でアルバイトをしています。学校の授業が終わってから店へ行き、６時まで働きます。初めはパンの名前が覚えられなくて、大変でした。【１】、店の人が何度も教えてくれました。毎日練習して、今はお客さんにパンの説明ができる【２】なりました。昨日は、小さい子どもを連れたお客さんが来ました。子どもがパンを落としてしまったので、新しいパンを渡しました。お客さんに「ありがとう」と言われて、うれしかったです。仕事の後は少し疲れますが、学校では勉強できないことを【３】と思います。来月からは土曜日も働く予定です。これからも、この店で仕事を【４】たいです。",
+      "groupId": "n4-text-grammar-01",
+      "id": "n4-046"
+    },
+    {
+      "section": "grammar",
+      "type": "text-grammar",
+      "prompt": "文章の【２】に入るものはどれですか。",
+      "options": [
+        "ことに",
+        "ために",
+        "ように",
+        "そうに"
+      ],
+      "answer": 2,
+      "explanation": "できるようになりました indica que adquirió la capacidad de explicar los panes.",
+      "passage": "私は先月から、近くのパン屋でアルバイトをしています。学校の授業が終わってから店へ行き、６時まで働きます。初めはパンの名前が覚えられなくて、大変でした。【１】、店の人が何度も教えてくれました。毎日練習して、今はお客さんにパンの説明ができる【２】なりました。昨日は、小さい子どもを連れたお客さんが来ました。子どもがパンを落としてしまったので、新しいパンを渡しました。お客さんに「ありがとう」と言われて、うれしかったです。仕事の後は少し疲れますが、学校では勉強できないことを【３】と思います。来月からは土曜日も働く予定です。これからも、この店で仕事を【４】たいです。",
+      "groupId": "n4-text-grammar-01",
+      "id": "n4-047"
+    },
+    {
+      "section": "grammar",
+      "type": "text-grammar",
+      "prompt": "文章の【３】に入るものはどれですか。",
+      "options": [
+        "習っている",
+        "習って",
+        "習います",
+        "習うために"
+      ],
+      "answer": 0,
+      "explanation": "習っていると思います: considera que está aprendiendo cosas que no puede estudiar en la escuela.",
+      "passage": "私は先月から、近くのパン屋でアルバイトをしています。学校の授業が終わってから店へ行き、６時まで働きます。初めはパンの名前が覚えられなくて、大変でした。【１】、店の人が何度も教えてくれました。毎日練習して、今はお客さんにパンの説明ができる【２】なりました。昨日は、小さい子どもを連れたお客さんが来ました。子どもがパンを落としてしまったので、新しいパンを渡しました。お客さんに「ありがとう」と言われて、うれしかったです。仕事の後は少し疲れますが、学校では勉強できないことを【３】と思います。来月からは土曜日も働く予定です。これからも、この店で仕事を【４】たいです。",
+      "groupId": "n4-text-grammar-01",
+      "id": "n4-048"
+    },
+    {
+      "section": "grammar",
+      "type": "text-grammar",
+      "prompt": "文章の【４】に入るものはどれですか。",
+      "options": [
+        "続いて",
+        "続く",
+        "続ける",
+        "続け"
+      ],
+      "answer": 3,
+      "explanation": "続けたい se forma con la raíz de 続ける y たい: quiere seguir trabajando allí.",
+      "passage": "私は先月から、近くのパン屋でアルバイトをしています。学校の授業が終わってから店へ行き、６時まで働きます。初めはパンの名前が覚えられなくて、大変でした。【１】、店の人が何度も教えてくれました。毎日練習して、今はお客さんにパンの説明ができる【２】なりました。昨日は、小さい子どもを連れたお客さんが来ました。子どもがパンを落としてしまったので、新しいパンを渡しました。お客さんに「ありがとう」と言われて、うれしかったです。仕事の後は少し疲れますが、学校では勉強できないことを【３】と思います。来月からは土曜日も働く予定です。これからも、この店で仕事を【４】たいです。",
+      "groupId": "n4-text-grammar-01",
+      "id": "n4-049"
+    },
+    {
+      "section": "reading",
+      "type": "reading-short",
+      "prompt": "図書館は、今週の水曜日は何時に開きますか。",
+      "options": [
+        "午前９時",
+        "午前１０時",
+        "午後１時",
+        "午後６時"
+      ],
+      "answer": 2,
+      "explanation": "El aviso indica que, debido a la limpieza, solo este miércoles la biblioteca abre a la una de la tarde.",
+      "passage": "図書館からのお知らせ\nいつもは午前９時から午後６時まで開いていますが、今週の水曜日は掃除のため、午後１時から開きます。閉まる時間は変わりません。",
+      "id": "n4-050"
+    },
+    {
+      "section": "reading",
+      "type": "reading-short",
+      "prompt": "卵を入れる前に、何をしますか。",
+      "options": [
+        "火を止めます。",
+        "ねぎを切ります。",
+        "５分待ちます。",
+        "野菜を３分煮ます。"
+      ],
+      "answer": 3,
+      "explanation": "Las instrucciones dicen hervir las verduras tres minutos y después añadir el huevo.",
+      "passage": "野菜スープの作り方\n①野菜を小さく切ります。\n②鍋に水と野菜を入れて、火にかけます。\n③沸いたら３分煮て、卵を入れます。\n④さらに１分煮て、火を止めます。",
+      "id": "n4-051"
+    },
+    {
+      "section": "reading",
+      "type": "reading-short",
+      "prompt": "この店で、火曜日にカレーを注文すると、何が無料でもらえますか。",
+      "options": [
+        "サラダ",
+        "コーヒー",
+        "ジュース",
+        "ケーキ"
+      ],
+      "answer": 1,
+      "explanation": "La promoción incluye café gratis con cualquier comida de lunes a viernes; los martes están incluidos.",
+      "passage": "ランチのお知らせ\nカレー：７００円　パスタ：８００円\n平日（月曜日〜金曜日）は、食事を注文した方にコーヒーを無料でお出しします。土曜日と日曜日は、コーヒーは２００円です。サラダは毎日１００円です。",
+      "id": "n4-052"
+    },
+    {
+      "section": "reading",
+      "type": "reading-medium",
+      "prompt": "この人が今の部屋で困っていることは何ですか。",
+      "options": [
+        "駅から遠く、建物が古いこと",
+        "家賃が高く、店が近くにないこと",
+        "車の音が聞こえ、台所が狭いこと",
+        "部屋が暗く、友達を呼べないこと"
+      ],
+      "answer": 2,
+      "explanation": "Los problemas actuales son el ruido del tráfico y la cocina pequeña, no la distancia a la estación.",
+      "passage": "私は来月、今のアパートから引っ越すことにしました。今の部屋は駅に近くて便利ですが、窓の前に大きな道路があり、夜も車の音が聞こえます。それに、台所が狭いので、料理をするときに困ります。先週の日曜日、不動産屋の人と二つの部屋を見に行きました。\n一つ目は駅から歩いて５分の新しいアパートです。部屋は明るく、台所も広かったのですが、家賃が今より１万円高くなります。二つ目は駅まで２０分かかりますが、今と同じ家賃です。建物は古くても、部屋の中はきれいで、広い台所がありました。周りに大きな道がなく、夜は静かだそうです。近くには安いスーパーもあります。\n少し迷いましたが、二つ目に決めました。駅まで遠くなるので、朝は今より早く起きなければなりません。でも、静かな部屋でよく眠れそうですし、休みの日には好きな料理をゆっくり作れます。引っ越したら、友達を呼んで、一緒にご飯を食べたいと思っています。",
+      "groupId": "n4-reading-medium-01",
+      "id": "n4-053"
+    },
+    {
+      "section": "reading",
+      "type": "reading-medium",
+      "prompt": "この人が選んだ部屋について、正しいものはどれですか。",
+      "options": [
+        "駅に近く、家賃は今より高い。",
+        "駅から遠くなるが、家賃は変わらない。",
+        "新しい建物にあり、台所は狭い。",
+        "大きな道路の前にあり、スーパーは遠い。"
+      ],
+      "answer": 1,
+      "explanation": "Elige la segunda vivienda: está a veinte minutos de la estación y cuesta lo mismo que la actual.",
+      "passage": "私は来月、今のアパートから引っ越すことにしました。今の部屋は駅に近くて便利ですが、窓の前に大きな道路があり、夜も車の音が聞こえます。それに、台所が狭いので、料理をするときに困ります。先週の日曜日、不動産屋の人と二つの部屋を見に行きました。\n一つ目は駅から歩いて５分の新しいアパートです。部屋は明るく、台所も広かったのですが、家賃が今より１万円高くなります。二つ目は駅まで２０分かかりますが、今と同じ家賃です。建物は古くても、部屋の中はきれいで、広い台所がありました。周りに大きな道がなく、夜は静かだそうです。近くには安いスーパーもあります。\n少し迷いましたが、二つ目に決めました。駅まで遠くなるので、朝は今より早く起きなければなりません。でも、静かな部屋でよく眠れそうですし、休みの日には好きな料理をゆっくり作れます。引っ越したら、友達を呼んで、一緒にご飯を食べたいと思っています。",
+      "groupId": "n4-reading-medium-01",
+      "id": "n4-054"
+    },
+    {
+      "section": "reading",
+      "type": "reading-medium",
+      "prompt": "引っ越した後、この人の生活はどう変わりますか。",
+      "options": [
+        "今より遅く起きて、料理をしなくなる。",
+        "家賃が高くなるので、友達に会わなくなる。",
+        "駅まで歩かなくてもよくなる。",
+        "朝は早く起きるが、静かな部屋で眠れる。"
+      ],
+      "answer": 3,
+      "explanation": "La distancia a la estación obliga a levantarse antes, pero espera dormir bien gracias al entorno tranquilo.",
+      "passage": "私は来月、今のアパートから引っ越すことにしました。今の部屋は駅に近くて便利ですが、窓の前に大きな道路があり、夜も車の音が聞こえます。それに、台所が狭いので、料理をするときに困ります。先週の日曜日、不動産屋の人と二つの部屋を見に行きました。\n一つ目は駅から歩いて５分の新しいアパートです。部屋は明るく、台所も広かったのですが、家賃が今より１万円高くなります。二つ目は駅まで２０分かかりますが、今と同じ家賃です。建物は古くても、部屋の中はきれいで、広い台所がありました。周りに大きな道がなく、夜は静かだそうです。近くには安いスーパーもあります。\n少し迷いましたが、二つ目に決めました。駅まで遠くなるので、朝は今より早く起きなければなりません。でも、静かな部屋でよく眠れそうですし、休みの日には好きな料理をゆっくり作れます。引っ越したら、友達を呼んで、一緒にご飯を食べたいと思っています。",
+      "groupId": "n4-reading-medium-01",
+      "id": "n4-055"
+    },
+    {
+      "section": "reading",
+      "type": "reading-information",
+      "prompt": "初めて料理教室に参加する人は、何を持っていき、いくら払いますか。",
+      "options": [
+        "エプロンを持っていき、１０００円払う。",
+        "材料を持っていき、１２００円払う。",
+        "エプロンを持っていき、１２００円払う。",
+        "材料を持っていき、１０００円払う。"
+      ],
+      "answer": 0,
+      "explanation": "Debe llevar delantal; los ingredientes están incluidos. El descuento inicial reduce 1200 a 1000 yenes.",
+      "passage": "市民センター　週末の教室\n教室｜曜日・時間｜料金｜持ってくる物\n料理｜土曜日１０時〜１２時｜１２００円｜エプロン\n絵｜土曜日１４時〜１６時｜８００円｜鉛筆\n日本語｜日曜日１０時〜１２時｜５００円｜ノート\n写真｜日曜日１４時〜１６時｜１０００円｜カメラ\n\nどの教室も、参加する週の木曜日までに電話で申し込んでください。料理の材料、絵の紙、日本語の教科書はこちらで用意します。初めて参加する方は、料金が２００円安くなります。カメラやエプロンは貸していません。",
+      "groupId": "n4-reading-information-01",
+      "id": "n4-056"
+    },
+    {
+      "section": "reading",
+      "type": "reading-information",
+      "prompt": "日曜日の午後だけ時間がある人が教室に参加したいです。どうすればいいですか。",
+      "options": [
+        "金曜日に申し込み、ノートを持っていく。",
+        "木曜日までに申し込み、カメラを持っていく。",
+        "木曜日までに申し込み、鉛筆を持っていく。",
+        "日曜日に申し込み、カメラを借りる。"
+      ],
+      "answer": 1,
+      "explanation": "El domingo por la tarde corresponde a fotografía. Hay que inscribirse hasta el jueves y llevar cámara propia; no la prestan.",
+      "passage": "市民センター　週末の教室\n教室｜曜日・時間｜料金｜持ってくる物\n料理｜土曜日１０時〜１２時｜１２００円｜エプロン\n絵｜土曜日１４時〜１６時｜８００円｜鉛筆\n日本語｜日曜日１０時〜１２時｜５００円｜ノート\n写真｜日曜日１４時〜１６時｜１０００円｜カメラ\n\nどの教室も、参加する週の木曜日までに電話で申し込んでください。料理の材料、絵の紙、日本語の教科書はこちらで用意します。初めて参加する方は、料金が２００円安くなります。カメラやエプロンは貸していません。",
+      "groupId": "n4-reading-information-01",
+      "id": "n4-057"
+    },
+    {
+      "section": "listening",
+      "type": "listening-task",
+      "prompt": "女の人は、何を買いますか。",
+      "options": [
+        "牛乳と卵",
+        "パンと牛乳",
+        "卵とパン",
+        "牛乳だけ"
+      ],
+      "answer": 0,
+      "explanation": "Ya queda pan, pero no hay leche ni huevos. El hombre pide añadir huevos a la compra de leche.",
+      "script": "女：買い物に行くけど、何かいる？\n男：牛乳を買ってきて。\n女：パンは？\n男：まだあるよ。でも、卵が一つもないから、卵もお願い。\n女：分かった。\n質問。女の人は、何を買いますか。",
+      "id": "n4-058",
+      "audio": "data/jlpt-simulacro/audios/n4-058.mp3"
+    },
+    {
+      "section": "listening",
+      "type": "listening-task",
+      "prompt": "女の人は、まず何をしますか。",
+      "options": [
+        "いすを並べます。",
+        "窓を開けます。",
+        "机を運びます。",
+        "床を掃除します。"
+      ],
+      "answer": 2,
+      "explanation": "La primera tarea acordada es transportar las mesas. Después la mujer limpiará el suelo.",
+      "script": "男：会議の準備を手伝ってもらえますか。\n女：はい。いすを並べましょうか。\n男：その前に、隣の部屋から机を二つ運びたいんです。一緒にお願いできますか。\n女：分かりました。そのあと、床も掃除しますね。\n質問。女の人は、まず何をしますか。",
+      "id": "n4-059",
+      "audio": "data/jlpt-simulacro/audios/n4-059.mp3"
+    },
+    {
+      "section": "listening",
+      "type": "listening-task",
+      "prompt": "明日、参加者は何をしなければなりませんか。",
+      "options": [
+        "９時までに学校に集まる",
+        "昼ご飯を買ってくる",
+        "傘を用意する",
+        "８時に駅に集まる"
+      ],
+      "answer": 0,
+      "explanation": "Deben reunirse en la escuela antes de las nueve. El almuerzo está preparado y se anuncia buen tiempo.",
+      "script": "明日の遠足について話します。朝９時までに学校の前に集まってください。バスは９時１５分に出ます。昼ご飯はこちらで用意します。明日は晴れるそうなので、傘はいりません。帽子を忘れないでください。\n質問。明日、参加者は何をしなければなりませんか。",
+      "id": "n4-060",
+      "audio": "data/jlpt-simulacro/audios/n4-060.mp3"
+    },
+    {
+      "section": "listening",
+      "type": "listening-task",
+      "prompt": "女の人は、いつレポートを出しますか。",
+      "options": [
+        "今日",
+        "明日の午後",
+        "明日の朝",
+        "来週の月曜日"
+      ],
+      "answer": 1,
+      "explanation": "La fecha final acordada con el profesor es mañana por la tarde.",
+      "script": "女：先生、レポートは今日までですが、あと少し書かなければなりません。明日出してもいいですか。\n男：いいですよ。明日の朝、持ってきてください。\n女：午前中は病院へ行くんですが、午後でもいいでしょうか。\n男：分かりました。では、午後に出してください。\n質問。女の人は、いつレポートを出しますか。",
+      "id": "n4-061",
+      "audio": "data/jlpt-simulacro/audios/n4-061.mp3"
+    },
+    {
+      "section": "listening",
+      "type": "listening-task",
+      "prompt": "男の人は、まず何をしますか。",
+      "options": [
+        "窓を閉める",
+        "机を運ぶ",
+        "箱を開ける",
+        "いすを並べる"
+      ],
+      "answer": 2,
+      "explanation": "Antes de mover los muebles debe abrir la caja y sacar los libros.",
+      "script": "女：部屋の片付けを手伝ってくれる？\n男：机を運ぼうか。\n女：その前に、この箱を開けて、本を出してほしいの。机は二人で運ぼう。\n男：分かった。窓も閉める？\n女：まだ暑いから、そのままでいいよ。\n質問。男の人は、まず何をしますか。",
+      "id": "n4-062",
+      "audio": "data/jlpt-simulacro/audios/n4-062.mp3"
+    },
+    {
+      "section": "listening",
+      "type": "listening-task",
+      "prompt": "女の人は、このあと何をしますか。",
+      "options": [
+        "図書館へ行く",
+        "本を買う",
+        "駅で待つ",
+        "家に帰る"
+      ],
+      "answer": 0,
+      "explanation": "Debe recoger el libro reservado en la biblioteca antes de las cinco.",
+      "script": "女：今日はもう帰ってもいいですか。\n男：あ、図書館に頼んだ本が届いているよ。５時までに取りに行ってもらえる？\n女：はい。今４時なので、間に合いますね。取ってから家に帰ります。\n質問。女の人は、このあと何をしますか。",
+      "id": "n4-063",
+      "audio": "data/jlpt-simulacro/audios/n4-063.mp3"
+    },
+    {
+      "section": "listening",
+      "type": "listening-task",
+      "prompt": "男の人は、どこで待ちますか。",
+      "options": [
+        "店の入口",
+        "駅の西口",
+        "店の中",
+        "駅の東口"
+      ],
+      "answer": 3,
+      "explanation": "El hombre esperará en la salida este de la estación; no conoce el restaurante.",
+      "script": "女：新しいレストラン、駅の西口から近いのよ。直接行ける？\n男：場所がよく分からないんだ。\n女：じゃ、いつもの東口で待っていて。一緒に行こう。\n男：うん、そうする。\n質問。男の人は、どこで待ちますか。",
+      "id": "n4-064",
+      "audio": "data/jlpt-simulacro/audios/n4-064.mp3"
+    },
+    {
+      "section": "listening",
+      "type": "listening-task",
+      "prompt": "学生は、何を出さなければなりませんか。",
+      "options": [
+        "ノートと作文",
+        "作文だけ",
+        "教科書だけ",
+        "ノートだけ"
+      ],
+      "answer": 1,
+      "explanation": "Hoy se entrega solamente la redacción; el cuaderno se revisará la semana próxima.",
+      "script": "先生：今日の授業はここまでです。宿題の作文を前の机に置いてください。\n学生：ノートも出しますか。\n先生：ノートは来週見ますから、今日は持って帰ってください。教科書も持って帰っていいですよ。\n質問。学生は、何を出さなければなりませんか。",
+      "id": "n4-065",
+      "audio": "data/jlpt-simulacro/audios/n4-065.mp3"
+    },
+    {
+      "section": "listening",
+      "type": "listening-point",
+      "prompt": "二人は何時に会いますか。",
+      "options": [
+        "２時",
+        "２時半",
+        "３時",
+        "３時半"
+      ],
+      "answer": 2,
+      "explanation": "Descartan las dos y las dos y media; finalmente acuerdan las tres.",
+      "script": "男：明日、２時に駅でどう？\n女：２時までは授業があるんです。２時半なら行けます。\n男：あ、僕もその時間はまだ仕事中だ。３時は？\n女：大丈夫です。じゃ、３時に。\n質問。二人は何時に会いますか。",
+      "id": "n4-066",
+      "audio": "data/jlpt-simulacro/audios/n4-066.mp3"
+    },
+    {
+      "section": "listening",
+      "type": "listening-point",
+      "prompt": "お客さんは、どこへ行って切符を買いますか。",
+      "options": [
+        "１階の右側",
+        "２階の左側",
+        "１階の左側",
+        "２階の右側"
+      ],
+      "answer": 3,
+      "explanation": "El anuncio indica que la venta de entradas se trasladó al lado derecho de la segunda planta.",
+      "script": "お客様にお知らせします。切符売り場は、先週まで１階の左側にありましたが、今は２階の右側に変わりました。階段を上がって、右へお進みください。\n質問。お客さんは、どこへ行って切符を買いますか。",
+      "id": "n4-067",
+      "audio": "data/jlpt-simulacro/audios/n4-067.mp3"
+    },
+    {
+      "section": "listening",
+      "type": "listening-point",
+      "prompt": "男の人は、どうして昨日のパーティーに来ませんでしたか。",
+      "options": [
+        "仕事が終わらなかったから",
+        "母親を病院へ連れていったから",
+        "自分が病気だったから",
+        "パーティーを忘れたから"
+      ],
+      "answer": 1,
+      "explanation": "No estaba enfermo él; llevó a su madre al hospital porque a ella le dolía la pierna.",
+      "script": "女：昨日のパーティー、来なかったね。仕事が忙しかったの？\n男：ううん。母が「足が痛い」と言ったので、病院へ連れていったんだ。\n女：そうだったの。お母さん、大丈夫？\n男：うん、もうよくなったよ。\n質問。男の人は、どうして昨日のパーティーに来ませんでしたか。",
+      "id": "n4-068",
+      "audio": "data/jlpt-simulacro/audios/n4-068.mp3"
+    },
+    {
+      "section": "listening",
+      "type": "listening-point",
+      "prompt": "男の人は、どのシャツを買いますか。",
+      "options": [
+        "白くて大きいシャツ",
+        "青くて大きいシャツ",
+        "白くて小さいシャツ",
+        "青くて小さいシャツ"
+      ],
+      "answer": 3,
+      "explanation": "Elige azul, pero la primera camisa azul es demasiado grande. Compra la azul pequeña.",
+      "script": "女：こちらの白いシャツはいかがですか。\n男：白より青がいいんですが。\n女：青もあります。これを着てみてください。\n男：ちょっと大きいですね。小さいのはありますか。\n女：はい、こちらです。\n男：これならちょうどいいです。これにします。\n質問。男の人は、どのシャツを買いますか。",
+      "id": "n4-069",
+      "audio": "data/jlpt-simulacro/audios/n4-069.mp3"
+    },
+    {
+      "section": "listening",
+      "type": "listening-point",
+      "prompt": "男の人は、どうして今日歩いて来ましたか。",
+      "options": [
+        "自転車が壊れたから",
+        "バスが来なかったから",
+        "運動したかったから",
+        "電車が止まったから"
+      ],
+      "answer": 2,
+      "explanation": "El motivo expresado es hacer ejercicio; la bicicleta no está averiada.",
+      "script": "女：今日は自転車じゃないんですね。壊れたんですか。\n男：いいえ。最近ずっと運動していないので、今日は歩くことにしたんです。\n女：家からどのくらいですか。\n男：３０分ぐらいです。いい運動になりました。\n質問。男の人は、どうして今日歩いて来ましたか。",
+      "id": "n4-070",
+      "audio": "data/jlpt-simulacro/audios/n4-070.mp3"
+    },
+    {
+      "section": "listening",
+      "type": "listening-point",
+      "prompt": "二人は、いつ山へ行きますか。",
+      "options": [
+        "今週の土曜日",
+        "今週の日曜日",
+        "来週の土曜日",
+        "来週の日曜日"
+      ],
+      "answer": 3,
+      "explanation": "Este sábado él trabaja, este domingo lloverá y el próximo sábado ella tiene una cita. Acuerdan el domingo siguiente.",
+      "script": "女：今週の土曜日、山へ行かない？\n男：土曜日は仕事なんだ。日曜日なら休みだけど。\n女：今週の日曜日は雨だって。じゃ、来週は？ 私は土曜日に約束があるの。\n男：日曜日は大丈夫？\n女：うん。来週の日曜日にしよう。\n質問。二人は、いつ山へ行きますか。",
+      "id": "n4-071",
+      "audio": "data/jlpt-simulacro/audios/n4-071.mp3"
+    },
+    {
+      "section": "listening",
+      "type": "listening-point",
+      "prompt": "女の人は、どこでかばんを見つけましたか。",
+      "options": [
+        "電車の中",
+        "駅の事務所",
+        "会社の受付",
+        "喫茶店"
+      ],
+      "answer": 1,
+      "explanation": "Olvidó el bolso en el tren, pero lo recuperó en la oficina de la estación.",
+      "script": "男：なくしたかばん、あった？\n女：うん。電車の中に忘れたんだけど、誰かが駅の事務所に届けてくれたの。\n男：よかったね。\n女：喫茶店に電話したときはないと言われたから、心配したけど、駅で見つかって安心した。\n質問。女の人は、どこでかばんを見つけましたか。",
+      "id": "n4-072",
+      "audio": "data/jlpt-simulacro/audios/n4-072.mp3"
+    },
+    {
+      "section": "listening",
+      "type": "listening-expression",
+      "prompt": "この場面で、何と言いますか。",
+      "options": [
+        "先生、少し質問してもいいですか。",
+        "先生、質問してはいけません。",
+        "先生、もう質問してしまいました。"
+      ],
+      "answer": 0,
+      "explanation": "Para pedir permiso para hacer una pregunta se usa 質問してもいいですか。",
+      "scene": "授業が終わりました。先生に質問したいです。何と言いますか。",
+      "script": "授業が終わりました。先生に質問したいです。何と言いますか。\n一番。先生、少し質問してもいいですか。\n二番。先生、質問してはいけません。\n三番。先生、もう質問してしまいました。",
+      "id": "n4-073",
+      "audio": "data/jlpt-simulacro/audios/n4-073.mp3"
+    },
+    {
+      "section": "listening",
+      "type": "listening-expression",
+      "prompt": "この場面で、何と言いますか。",
+      "options": [
+        "どうぞお大事に。",
+        "プレゼント、ありがとう。大切にするね。",
+        "すみませんが、もう帰ってください。"
+      ],
+      "answer": 1,
+      "explanation": "Se agradece el regalo y se expresa que se cuidará: 大切にするね。",
+      "scene": "友達からプレゼントをもらいました。お礼を言います。何と言いますか。",
+      "script": "友達からプレゼントをもらいました。お礼を言います。何と言いますか。\n一番。どうぞお大事に。\n二番。プレゼント、ありがとう。大切にするね。\n三番。すみませんが、もう帰ってください。",
+      "id": "n4-074",
+      "audio": "data/jlpt-simulacro/audios/n4-074.mp3"
+    },
+    {
+      "section": "listening",
+      "type": "listening-expression",
+      "prompt": "この場面で、何と言いますか。",
+      "options": [
+        "切符を買ってはいけませんか。",
+        "切符を買ったほうがいいです。",
+        "切符の買い方を教えてください。"
+      ],
+      "answer": 2,
+      "explanation": "買い方を教えてください pide que expliquen cómo comprar el billete.",
+      "scene": "駅で切符を買いたいですが、買い方が分かりません。駅員に何と言いますか。",
+      "script": "駅で切符を買いたいですが、買い方が分かりません。駅員に何と言いますか。\n一番。切符を買ってはいけませんか。\n二番。切符を買ったほうがいいです。\n三番。切符の買い方を教えてください。",
+      "id": "n4-075",
+      "audio": "data/jlpt-simulacro/audios/n4-075.mp3"
+    },
+    {
+      "section": "listening",
+      "type": "listening-expression",
+      "prompt": "この場面で、何と言いますか。",
+      "options": [
+        "荷物を持ちましょうか。",
+        "荷物を持ってもらえませんか。",
+        "荷物を持たないでください。"
+      ],
+      "answer": 0,
+      "explanation": "持ちましょうか ofrece cargar el equipaje. 持ってもらえませんか pediría que lo cargara la otra persona.",
+      "scene": "友達が重い荷物を持っています。手伝いたいです。何と言いますか。",
+      "script": "友達が重い荷物を持っています。手伝いたいです。何と言いますか。\n一番。荷物を持ちましょうか。\n二番。荷物を持ってもらえませんか。\n三番。荷物を持たないでください。",
+      "id": "n4-076",
+      "audio": "data/jlpt-simulacro/audios/n4-076.mp3"
+    },
+    {
+      "section": "listening",
+      "type": "listening-expression",
+      "prompt": "この場面で、何と言いますか。",
+      "options": [
+        "電話を借りてもいいですか。",
+        "では、あとでもう一度かけます。",
+        "さっき電話が鳴りました。"
+      ],
+      "answer": 1,
+      "explanation": "あとでもう一度かけます comunica que volverá a llamar más tarde.",
+      "scene": "電話をかけましたが、話したい人は出かけています。あとでまた電話することを伝えます。何と言いますか。",
+      "script": "電話をかけましたが、話したい人は出かけています。あとでまた電話することを伝えます。何と言いますか。\n一番。電話を借りてもいいですか。\n二番。では、あとでもう一度かけます。\n三番。さっき電話が鳴りました。",
+      "id": "n4-077",
+      "audio": "data/jlpt-simulacro/audios/n4-077.mp3"
+    },
+    {
+      "section": "listening",
+      "type": "listening-response",
+      "prompt": "話を聞いて、最もよい返事を選んでください。",
+      "options": [
+        "いいえ、空を見ていません。",
+        "はい、もう食べました。",
+        "はい、どうぞ。"
+      ],
+      "answer": 2,
+      "explanation": "Se pregunta si el asiento está libre. はい、どうぞ confirma e invita a sentarse.",
+      "script": "話を聞いてください。\nすみません、この席、空いていますか。\n一番。いいえ、空を見ていません。\n二番。はい、もう食べました。\n三番。はい、どうぞ。",
+      "id": "n4-078",
+      "audio": "data/jlpt-simulacro/audios/n4-078.mp3"
+    },
+    {
+      "section": "listening",
+      "type": "listening-response",
+      "prompt": "話を聞いて、最もよい返事を選んでください。",
+      "options": [
+        "いいですね。行きましょう。",
+        "はい、昨日行きました。",
+        "いいえ、今ここにいます。"
+      ],
+      "answer": 0,
+      "explanation": "La invitación 〜ませんか se acepta con 行きましょう。",
+      "script": "話を聞いてください。\n明日のパーティー、一緒に行きませんか。\n一番。いいですね。行きましょう。\n二番。はい、昨日行きました。\n三番。いいえ、今ここにいます。",
+      "id": "n4-079",
+      "audio": "data/jlpt-simulacro/audios/n4-079.mp3"
+    },
+    {
+      "section": "listening",
+      "type": "listening-response",
+      "prompt": "話を聞いて、最もよい返事を選んでください。",
+      "options": [
+        "はい、早く出かけましょう。",
+        "はい、分かりました。",
+        "いいえ、話したことがあります。"
+      ],
+      "answer": 1,
+      "explanation": "Ante una petición de hablar más despacio, はい、分かりました expresa aceptación.",
+      "script": "話を聞いてください。\nすみませんが、もう少しゆっくり話していただけませんか。\n一番。はい、早く出かけましょう。\n二番。はい、分かりました。\n三番。いいえ、話したことがあります。",
+      "id": "n4-080",
+      "audio": "data/jlpt-simulacro/audios/n4-080.mp3"
+    },
+    {
+      "section": "listening",
+      "type": "listening-response",
+      "prompt": "話を聞いて、最もよい返事を選んでください。",
+      "options": [
+        "はい、具合を買いました。",
+        "明日まで貸してください。",
+        "おかげさまで、よくなりました。"
+      ],
+      "answer": 2,
+      "explanation": "La pregunta es sobre el estado de salud. La respuesta natural indica que ha mejorado.",
+      "script": "話を聞いてください。\nお体の具合はいかがですか。\n一番。はい、具合を買いました。\n二番。明日まで貸してください。\n三番。おかげさまで、よくなりました。",
+      "id": "n4-081",
+      "audio": "data/jlpt-simulacro/audios/n4-081.mp3"
+    },
+    {
+      "section": "listening",
+      "type": "listening-response",
+      "prompt": "話を聞いて、最もよい返事を選んでください。",
+      "options": [
+        "ええ、いいですよ。",
+        "ええ、来週読みました。",
+        "ええ、本を借りたいです。"
+      ],
+      "answer": 0,
+      "explanation": "Se concede permiso para mantener prestado el libro hasta la semana próxima.",
+      "script": "話を聞いてください。\nこの本、来週まで借りてもいいですか。\n一番。ええ、いいですよ。\n二番。ええ、来週読みました。\n三番。ええ、本を借りたいです。",
+      "id": "n4-082",
+      "audio": "data/jlpt-simulacro/audios/n4-082.mp3"
+    },
+    {
+      "section": "listening",
+      "type": "listening-response",
+      "prompt": "話を聞いて、最もよい返事を選んでください。",
+      "options": [
+        "いいえ、待たせてください。",
+        "いいえ、私も今来たところです。",
+        "いいえ、まだ帰ったことがありません。"
+      ],
+      "answer": 1,
+      "explanation": "Ante una disculpa por hacer esperar, se tranquiliza al interlocutor diciendo que uno también acaba de llegar.",
+      "script": "話を聞いてください。\nお待たせして、すみません。\n一番。いいえ、待たせてください。\n二番。いいえ、私も今来たところです。\n三番。いいえ、まだ帰ったことがありません。",
+      "id": "n4-083",
+      "audio": "data/jlpt-simulacro/audios/n4-083.mp3"
+    },
+    {
+      "section": "listening",
+      "type": "listening-response",
+      "prompt": "話を聞いて、最もよい返事を選んでください。",
+      "options": [
+        "駅の隣にあります。",
+        "毎日駅へ行きます。",
+        "歩いて１０分ぐらいです。"
+      ],
+      "answer": 2,
+      "explanation": "どのくらいかかりますか pregunta por la duración del trayecto: unos diez minutos andando.",
+      "script": "話を聞いてください。\n駅までどのくらいかかりますか。\n一番。駅の隣にあります。\n二番。毎日駅へ行きます。\n三番。歩いて１０分ぐらいです。",
+      "id": "n4-084",
+      "audio": "data/jlpt-simulacro/audios/n4-084.mp3"
+    },
+    {
+      "section": "listening",
+      "type": "listening-response",
+      "prompt": "話を聞いて、最もよい返事を選んでください。",
+      "options": [
+        "あ、ありがとうございます。",
+        "はい、落としてもいいですよ。",
+        "いいえ、何を落としましょうか。"
+      ],
+      "answer": 0,
+      "explanation": "Cuando alguien avisa de que se ha caído un objeto, la reacción natural es agradecerlo.",
+      "script": "話を聞いてください。\nこれ、落としましたよ。\n一番。あ、ありがとうございます。\n二番。はい、落としてもいいですよ。\n三番。いいえ、何を落としましょうか。",
+      "id": "n4-085",
+      "audio": "data/jlpt-simulacro/audios/n4-085.mp3"
+    },
+    {
+      "id": "n4-b-001",
+      "section": "vocabulary",
+      "type": "kanji-reading",
+      "prompt": "「景色」の読み方はどれですか。",
+      "options": [
+        "けいしき",
+        "けしょく",
+        "けしき",
+        "けいしょく"
+      ],
+      "answer": 2,
+      "explanation": "景色 se lee けしき: paisaje."
+    },
+    {
+      "id": "n4-b-002",
+      "section": "vocabulary",
+      "type": "kanji-reading",
+      "prompt": "「売店」の読み方はどれですか。",
+      "options": [
+        "ばいてん",
+        "うりみせ",
+        "ばいでん",
+        "まいてん"
+      ],
+      "answer": 0,
+      "explanation": "売店 se lee ばいてん: pequeño puesto de venta."
+    },
+    {
+      "id": "n4-b-003",
+      "section": "vocabulary",
+      "type": "kanji-reading",
+      "prompt": "「失敗」の読み方はどれですか。",
+      "options": [
+        "しつはい",
+        "じっぱい",
+        "しつぱい",
+        "しっぱい"
+      ],
+      "answer": 3,
+      "explanation": "失敗 se lee しっぱい: fallo o fracaso."
+    },
+    {
+      "id": "n4-b-004",
+      "section": "vocabulary",
+      "type": "kanji-reading",
+      "prompt": "「反対」の読み方はどれですか。",
+      "options": [
+        "はんだい",
+        "はんたい",
+        "ばんたい",
+        "はたい"
+      ],
+      "answer": 1,
+      "explanation": "反対 se lee はんたい: oposición o sentido contrario."
+    },
+    {
+      "id": "n4-b-005",
+      "section": "vocabulary",
+      "type": "kanji-reading",
+      "prompt": "「石油」の読み方はどれですか。",
+      "options": [
+        "せきゆ",
+        "いしあぶら",
+        "せっゆ",
+        "せきよう"
+      ],
+      "answer": 0,
+      "explanation": "石油 se lee せきゆ: petróleo."
+    },
+    {
+      "id": "n4-b-006",
+      "section": "vocabulary",
+      "type": "kanji-reading",
+      "prompt": "「港」の読み方はどれですか。",
+      "options": [
+        "みなと",
+        "となり",
+        "はやし",
+        "いなか"
+      ],
+      "answer": 0,
+      "explanation": "港 se lee みなと: puerto."
+    },
+    {
+      "id": "n4-b-007",
+      "section": "vocabulary",
+      "type": "kanji-reading",
+      "prompt": "「支度」の読み方はどれですか。",
+      "options": [
+        "しど",
+        "ちたく",
+        "したく",
+        "しだく"
+      ],
+      "answer": 2,
+      "explanation": "支度 se lee したく: preparativos."
+    },
+    {
+      "id": "n4-b-008",
+      "section": "vocabulary",
+      "type": "orthography",
+      "prompt": "この町には「むかし」の建物が残っています。",
+      "options": [
+        "音",
+        "昔",
+        "春",
+        "星"
+      ],
+      "answer": 1,
+      "explanation": "昔 significa antes o el pasado y se lee むかし."
+    },
+    {
+      "id": "n4-b-009",
+      "section": "vocabulary",
+      "type": "orthography",
+      "prompt": "自動車が「こしょう」しました。",
+      "options": [
+        "故障",
+        "古障",
+        "故章",
+        "古章"
+      ],
+      "answer": 0,
+      "explanation": "故障 significa avería."
+    },
+    {
+      "id": "n4-b-010",
+      "section": "vocabulary",
+      "type": "orthography",
+      "prompt": "この店ではカードで「はらう」ことができます。",
+      "options": [
+        "拾う",
+        "扱う",
+        "払う",
+        "折う"
+      ],
+      "answer": 2,
+      "explanation": "払う significa pagar; se lee はらう."
+    },
+    {
+      "id": "n4-b-011",
+      "section": "vocabulary",
+      "type": "orthography",
+      "prompt": "次の角を右に「まがって」ください。",
+      "options": [
+        "回がって",
+        "転がって",
+        "曲がって",
+        "返がって"
+      ],
+      "answer": 2,
+      "explanation": "曲がる significa girar o doblar una esquina."
+    },
+    {
+      "id": "n4-b-012",
+      "section": "vocabulary",
+      "type": "orthography",
+      "prompt": "明日は家に「きゃく」が来ます。",
+      "options": [
+        "各",
+        "容",
+        "答",
+        "客"
+      ],
+      "answer": 3,
+      "explanation": "客 significa visitante o cliente; se lee きゃく."
+    },
+    {
+      "id": "n4-b-013",
+      "section": "vocabulary",
+      "type": "context",
+      "prompt": "食事の前に、テーブルの上の本を（　）ください。",
+      "options": [
+        "片付けて",
+        "乗り換えて",
+        "迎えて",
+        "遅れて"
+      ],
+      "answer": 0,
+      "explanation": "片付ける significa ordenar o retirar lo que estorba."
+    },
+    {
+      "id": "n4-b-014",
+      "section": "vocabulary",
+      "type": "context",
+      "prompt": "歩きすぎて疲れたので、ベンチに（　）。",
+      "options": [
+        "止まりました",
+        "座りました",
+        "寝坊しました",
+        "通いました"
+      ],
+      "answer": 1,
+      "explanation": "ベンチに座る significa sentarse en un banco."
+    },
+    {
+      "id": "n4-b-015",
+      "section": "vocabulary",
+      "type": "context",
+      "prompt": "このシャツは（　）が取れているので、着る前に付けてください。",
+      "options": [
+        "スカート",
+        "カーテン",
+        "ボタン",
+        "タオル"
+      ],
+      "answer": 2,
+      "explanation": "Un botón puede desprenderse y volver a colocarse: ボタンを付ける."
+    },
+    {
+      "id": "n4-b-016",
+      "section": "vocabulary",
+      "type": "context",
+      "prompt": "部屋の電気がついていません。中は（　）です。",
+      "options": [
+        "細かい",
+        "苦い",
+        "厚い",
+        "暗い"
+      ],
+      "answer": 3,
+      "explanation": "暗い significa oscuro. Encaja con una habitación sin luz."
+    },
+    {
+      "id": "n4-b-017",
+      "section": "vocabulary",
+      "type": "context",
+      "prompt": "荷物を送るので、郵便局で（　）を買いました。",
+      "options": [
+        "切手",
+        "手袋",
+        "切符",
+        "定期券"
+      ],
+      "answer": 0,
+      "explanation": "切手 son sellos postales; 切符 y 定期券 son billetes o abonos de transporte."
+    },
+    {
+      "id": "n4-b-018",
+      "section": "vocabulary",
+      "type": "context",
+      "prompt": "弟は料理が（　）で、よく夕食を作ってくれます。",
+      "options": [
+        "残念",
+        "上手",
+        "自由",
+        "必要"
+      ],
+      "answer": 1,
+      "explanation": "料理が上手 significa que cocina bien."
+    },
+    {
+      "id": "n4-b-019",
+      "section": "vocabulary",
+      "type": "context",
+      "prompt": "熱があるので、今日は無理をしないで、（　）休んでください。",
+      "options": [
+        "びっくり",
+        "はっきり",
+        "ゆっくり",
+        "すっかり"
+      ],
+      "answer": 2,
+      "explanation": "ゆっくり休む es descansar con calma y sin prisas."
+    },
+    {
+      "id": "n4-b-020",
+      "section": "vocabulary",
+      "type": "context",
+      "prompt": "今日は水曜日です。（　）は金曜日です。",
+      "options": [
+        "おととい",
+        "きのう",
+        "あした",
+        "あさって"
+      ],
+      "answer": 3,
+      "explanation": "あさって es pasado mañana: dos días después del miércoles es viernes."
+    },
+    {
+      "id": "n4-b-021",
+      "section": "vocabulary",
+      "type": "paraphrase",
+      "prompt": "「その話を聞いて、びっくりしました」と近い意味の文はどれですか。",
+      "options": [
+        "その話を聞いて、おどろきました。",
+        "その話を聞いて、忘れました。",
+        "その話を聞いて、眠りました。",
+        "その話を聞いて、間違えました。"
+      ],
+      "answer": 0,
+      "explanation": "びっくりする y 驚く expresan sorpresa."
+    },
+    {
+      "id": "n4-b-022",
+      "section": "vocabulary",
+      "type": "paraphrase",
+      "prompt": "「もう少し待ってください」と近い意味の文はどれですか。",
+      "options": [
+        "すぐに出てください。",
+        "あと少し待ってください。",
+        "少し前に来てください。",
+        "待たずに帰ってください。"
+      ],
+      "answer": 1,
+      "explanation": "もう少し significa un poco más, equivalente aquí a あと少し."
+    },
+    {
+      "id": "n4-b-023",
+      "section": "vocabulary",
+      "type": "paraphrase",
+      "prompt": "「その店はいつも空いています」と近い意味の文はどれですか。",
+      "options": [
+        "その店には物がありません。",
+        "その店はいつも閉まっています。",
+        "その店にはいつもお客さんが少ないです。",
+        "その店にはいつもお客さんが多いです。"
+      ],
+      "answer": 2,
+      "explanation": "店が空いている indica que hay pocos clientes, no que esté cerrado."
+    },
+    {
+      "id": "n4-b-024",
+      "section": "vocabulary",
+      "type": "paraphrase",
+      "prompt": "「靴を脱いでください」と近い意味の文はどれですか。",
+      "options": [
+        "靴を買ってください。",
+        "靴を洗ってください。",
+        "靴を履いてください。",
+        "靴を足から外してください。"
+      ],
+      "answer": 3,
+      "explanation": "脱ぐ significa quitarse una prenda o el calzado."
+    },
+    {
+      "id": "n4-b-025",
+      "section": "vocabulary",
+      "type": "usage",
+      "prompt": "「手伝う」の使い方として正しい文はどれですか。",
+      "options": [
+        "母の引っ越しを手伝いました。",
+        "駅までの道を手伝いました。",
+        "朝ご飯を手伝って食べました。",
+        "手紙に切手を手伝いました。"
+      ],
+      "answer": 0,
+      "explanation": "引っ越しを手伝う significa ayudar con una mudanza."
+    },
+    {
+      "id": "n4-b-026",
+      "section": "vocabulary",
+      "type": "usage",
+      "prompt": "「滑る」の使い方として正しい文はどれですか。",
+      "options": [
+        "テレビを滑って見ました。",
+        "ぬれた床で足が滑りました。",
+        "ご飯を滑って作りました。",
+        "バスに滑って駅に着きました。"
+      ],
+      "answer": 1,
+      "explanation": "足が滑る significa que el pie resbala."
+    },
+    {
+      "id": "n4-b-027",
+      "section": "vocabulary",
+      "type": "usage",
+      "prompt": "「続く」の使い方として正しい文はどれですか。",
+      "options": [
+        "鉛筆を続いて字を書きます。",
+        "窓を続いたので寒いです。",
+        "この雨は明日まで続くそうです。",
+        "コップに水を続きました。"
+      ],
+      "answer": 2,
+      "explanation": "雨が続く expresa que la lluvia continúa."
+    },
+    {
+      "id": "n4-b-028",
+      "section": "vocabulary",
+      "type": "usage",
+      "prompt": "「特に」の使い方として正しい文はどれですか。",
+      "options": [
+        "特にを着て学校へ行きます。",
+        "この机は特にな形です。",
+        "駅から特にで帰りました。",
+        "果物は何でも好きですが、特にみかんが好きです。"
+      ],
+      "answer": 3,
+      "explanation": "特に significa especialmente y destaca una preferencia dentro de un conjunto."
+    },
+    {
+      "id": "n4-b-029",
+      "section": "grammar",
+      "type": "grammar-form",
+      "prompt": "姉は音楽を聞き（　）、部屋を掃除しています。",
+      "options": [
+        "ながら",
+        "ために",
+        "ところ",
+        "まま"
+      ],
+      "answer": 0,
+      "explanation": "La raíz 聞き + ながら expresa dos acciones simultáneas: escuchar música y limpiar."
+    },
+    {
+      "id": "n4-b-030",
+      "section": "grammar",
+      "type": "grammar-form",
+      "prompt": "雨が（　）、運動会は来週になります。",
+      "options": [
+        "降るときに",
+        "降ったら",
+        "降るのに",
+        "降りながら"
+      ],
+      "answer": 1,
+      "explanation": "降ったら introduce la condición: si llueve, la jornada deportiva pasa a la semana próxima."
+    },
+    {
+      "id": "n4-b-031",
+      "section": "grammar",
+      "type": "grammar-form",
+      "prompt": "このケーキはおいし（　）ですね。食べてみたいです。",
+      "options": [
+        "みたい",
+        "よう",
+        "そう",
+        "らしい"
+      ],
+      "answer": 2,
+      "explanation": "La raíz おいし + そう expresa una impresión por el aspecto: parece delicioso."
+    },
+    {
+      "id": "n4-b-032",
+      "section": "grammar",
+      "type": "grammar-form",
+      "prompt": "私は先生（　）作文を直していただきました。",
+      "options": [
+        "を",
+        "が",
+        "で",
+        "に"
+      ],
+      "answer": 3,
+      "explanation": "〜に直していただく expresa recibir la ayuda del profesor para corregir la redacción."
+    },
+    {
+      "id": "n4-b-033",
+      "section": "grammar",
+      "type": "grammar-form",
+      "prompt": "この部屋では写真を撮って（　）ですか。",
+      "options": [
+        "もいい",
+        "はいけないで",
+        "みたいな",
+        "おくな"
+      ],
+      "answer": 0,
+      "explanation": "〜てもいいですか pide permiso para realizar una acción."
+    },
+    {
+      "id": "n4-b-034",
+      "section": "grammar",
+      "type": "grammar-form",
+      "prompt": "弟が一人で服を（　）ようになりました。",
+      "options": [
+        "着て",
+        "着られる",
+        "着ると",
+        "着ながら"
+      ],
+      "answer": 1,
+      "explanation": "着られる es potencial: el hermano ya puede vestirse solo."
+    },
+    {
+      "id": "n4-b-035",
+      "section": "grammar",
+      "type": "grammar-form",
+      "prompt": "荷物が多いですね。私が一つ持って（　）か。",
+      "options": [
+        "います",
+        "ありました",
+        "あげましょう",
+        "くれました"
+      ],
+      "answer": 2,
+      "explanation": "持ってあげましょうか ofrece ayudar llevando un bulto."
+    },
+    {
+      "id": "n4-b-036",
+      "section": "grammar",
+      "type": "grammar-form",
+      "prompt": "映画が（　）あとで、友達と喫茶店へ行きました。",
+      "options": [
+        "終わる",
+        "終わって",
+        "終わり",
+        "終わった"
+      ],
+      "answer": 3,
+      "explanation": "El verbo pasado + あとで señala que una acción ocurrió después de otra."
+    },
+    {
+      "id": "n4-b-037",
+      "section": "grammar",
+      "type": "grammar-form",
+      "prompt": "明日までに、この紙を先生に（　）なければなりません。",
+      "options": [
+        "渡さ",
+        "渡し",
+        "渡す",
+        "渡せ"
+      ],
+      "answer": 0,
+      "explanation": "La forma negativa 渡さない pierde ない ante なければ: 渡さなければなりません."
+    },
+    {
+      "id": "n4-b-038",
+      "section": "grammar",
+      "type": "grammar-form",
+      "prompt": "ここに名前が（　）ありますから、私の傘です。",
+      "options": [
+        "書く",
+        "書いて",
+        "書いた",
+        "書き"
+      ],
+      "answer": 1,
+      "explanation": "書いてある describe el resultado de escribir algo: el nombre está escrito en el paraguas."
+    },
+    {
+      "id": "n4-b-039",
+      "section": "grammar",
+      "type": "grammar-form",
+      "prompt": "のどが痛いなら、大きな声で（　）ほうがいいですよ。",
+      "options": [
+        "話す",
+        "話して",
+        "話さない",
+        "話しません"
+      ],
+      "answer": 2,
+      "explanation": "La forma negativa + ほうがいい aconseja no hablar alto."
+    },
+    {
+      "id": "n4-b-040",
+      "section": "grammar",
+      "type": "grammar-form",
+      "prompt": "この服は小さすぎて、私には（　）。",
+      "options": [
+        "着ます",
+        "着せます",
+        "着ました",
+        "着られません"
+      ],
+      "answer": 3,
+      "explanation": "La forma potencial negativa 着られません expresa que la prenda es demasiado pequeña para poder ponérsela."
+    },
+    {
+      "id": "n4-b-041",
+      "section": "grammar",
+      "type": "grammar-form",
+      "prompt": "旅行中、写真を撮ったり、買い物を（　）しました。",
+      "options": [
+        "したり",
+        "してから",
+        "するのに",
+        "しないで"
+      ],
+      "answer": 0,
+      "explanation": "〜たり〜たりする enumera actividades representativas: sacar fotos y comprar."
+    },
+    {
+      "id": "n4-b-042",
+      "section": "grammar",
+      "type": "sentence-order",
+      "prompt": "正しい順番に並べてください。★に入るものはどれですか。\nこれは友達から ＿＿ ＿＿ ★ ＿＿ 。",
+      "options": [
+        "大切な",
+        "です",
+        "手紙",
+        "もらった"
+      ],
+      "answer": 2,
+      "explanation": "Orden: もらった → 大切な → 手紙 → です. La estrella es 手紙: esta es una carta importante que recibí de un amigo."
+    },
+    {
+      "id": "n4-b-043",
+      "section": "grammar",
+      "type": "sentence-order",
+      "prompt": "正しい順番に並べてください。★に入るものはどれですか。\n父は健康のため、毎朝 ＿＿ ＿＿ ★ ＿＿ います。",
+      "options": [
+        "ことに",
+        "外を",
+        "歩く",
+        "して"
+      ],
+      "answer": 0,
+      "explanation": "Orden: 外を → 歩く → ことに → して。La estrella es ことに. Mi padre tiene la costumbre de caminar fuera cada mañana por su salud. 毎朝 queda fuera de los huecos para evitar una ordenación alternativa que cambie la estrella."
+    },
+    {
+      "id": "n4-b-044",
+      "section": "grammar",
+      "type": "sentence-order",
+      "prompt": "正しい順番に並べてください。★に入るものはどれですか。\nここは、魚を ＿＿ ＿＿ ★ ＿＿ 場所です。",
+      "options": [
+        "はいけない",
+        "釣って",
+        "と",
+        "決まっている"
+      ],
+      "answer": 2,
+      "explanation": "Orden: 釣って → はいけない → と → 決まっている. La estrella es と: aquí está establecido que no se puede pescar."
+    },
+    {
+      "id": "n4-b-045",
+      "section": "grammar",
+      "type": "sentence-order",
+      "prompt": "正しい順番に並べてください。★に入るものはどれですか。\n私は雪が ＿＿ ＿＿ ★ ＿＿ 。",
+      "options": [
+        "ことが",
+        "ありません",
+        "降るのを",
+        "見た"
+      ],
+      "answer": 0,
+      "explanation": "Orden: 降るのを → 見た → ことが → ありません. La estrella es ことが: nunca he visto nevar."
+    },
+    {
+      "id": "n4-b-046",
+      "section": "grammar",
+      "type": "text-grammar",
+      "prompt": "文章の【1】に入るものはどれですか。",
+      "options": [
+        "くれました",
+        "あげました",
+        "もらいました",
+        "いただきました"
+      ],
+      "answer": 0,
+      "explanation": "先生が教えてくれました indica que el profesor me enseñó; くれる presenta la acción como ayuda recibida.",
+      "passage": "先週、私は初めて市のプールへ行きました。子どものときからずっと泳いでいなかったので、少し心配でした。受付の人に聞くと、土曜日の朝、泳ぐのが苦手な人のための教室があるそうです。私はすぐに申し込みました。\n教室では、先生が私に水の中での息のしかたを教えて【１】。最初は顔を水につけるのも怖かったです。【２】、何度か練習すると、少しずつ慣れてきました。その日は５メートルしか泳げませんでしたが、私には大きな変化でした。先生は「ほかの人と比べ【３】、自分のペースで練習しましょう」と言いました。\n今は毎週土曜日が楽しみです。夏までに２５メートル泳げるように【４】と思っています。",
+      "groupId": "n4-b-text-01"
+    },
+    {
+      "id": "n4-b-047",
+      "section": "grammar",
+      "type": "text-grammar",
+      "prompt": "文章の【2】に入るものはどれですか。",
+      "options": [
+        "それに",
+        "でも",
+        "例えば",
+        "つまり"
+      ],
+      "answer": 1,
+      "explanation": "でも contrasta el miedo inicial con acostumbrarse después de practicar.",
+      "passage": "先週、私は初めて市のプールへ行きました。子どものときからずっと泳いでいなかったので、少し心配でした。受付の人に聞くと、土曜日の朝、泳ぐのが苦手な人のための教室があるそうです。私はすぐに申し込みました。\n教室では、先生が私に水の中での息のしかたを教えて【１】。最初は顔を水につけるのも怖かったです。【２】、何度か練習すると、少しずつ慣れてきました。その日は５メートルしか泳げませんでしたが、私には大きな変化でした。先生は「ほかの人と比べ【３】、自分のペースで練習しましょう」と言いました。\n今は毎週土曜日が楽しみです。夏までに２５メートル泳げるように【４】と思っています。",
+      "groupId": "n4-b-text-01"
+    },
+    {
+      "id": "n4-b-048",
+      "section": "grammar",
+      "type": "text-grammar",
+      "prompt": "文章の【3】に入るものはどれですか。",
+      "options": [
+        "ない",
+        "ません",
+        "ないで",
+        "なかった"
+      ],
+      "answer": 2,
+      "explanation": "比べないで pide practicar sin compararse con otras personas.",
+      "passage": "先週、私は初めて市のプールへ行きました。子どものときからずっと泳いでいなかったので、少し心配でした。受付の人に聞くと、土曜日の朝、泳ぐのが苦手な人のための教室があるそうです。私はすぐに申し込みました。\n教室では、先生が私に水の中での息のしかたを教えて【１】。最初は顔を水につけるのも怖かったです。【２】、何度か練習すると、少しずつ慣れてきました。その日は５メートルしか泳げませんでしたが、私には大きな変化でした。先生は「ほかの人と比べ【３】、自分のペースで練習しましょう」と言いました。\n今は毎週土曜日が楽しみです。夏までに２５メートル泳げるように【４】と思っています。",
+      "groupId": "n4-b-text-01"
+    },
+    {
+      "id": "n4-b-049",
+      "section": "grammar",
+      "type": "text-grammar",
+      "prompt": "文章の【4】に入るものはどれですか。",
+      "options": [
+        "なって",
+        "なれるの",
+        "なった",
+        "なりたい"
+      ],
+      "answer": 3,
+      "explanation": "〜ようになりたいと思っています expresa el deseo de llegar a poder nadar 25 metros.",
+      "passage": "先週、私は初めて市のプールへ行きました。子どものときからずっと泳いでいなかったので、少し心配でした。受付の人に聞くと、土曜日の朝、泳ぐのが苦手な人のための教室があるそうです。私はすぐに申し込みました。\n教室では、先生が私に水の中での息のしかたを教えて【１】。最初は顔を水につけるのも怖かったです。【２】、何度か練習すると、少しずつ慣れてきました。その日は５メートルしか泳げませんでしたが、私には大きな変化でした。先生は「ほかの人と比べ【３】、自分のペースで練習しましょう」と言いました。\n今は毎週土曜日が楽しみです。夏までに２５メートル泳げるように【４】と思っています。",
+      "groupId": "n4-b-text-01"
+    },
+    {
+      "id": "n4-b-050",
+      "section": "reading",
+      "type": "reading-short",
+      "prompt": "金曜日に花に水をあげるのは誰ですか。",
+      "options": [
+        "母",
+        "弟",
+        "このメモを読む人",
+        "母の友達"
+      ],
+      "answer": 1,
+      "explanation": "La madre ha encargado específicamente al hermano regar el viernes; los demás días lo hará quien lea la nota.",
+      "passage": "明日から日曜日まで旅行に行きます。ベランダの花に、水を一日一回あげてください。金曜日だけは弟が来るので、弟に頼んであります。ほかの日はお願いします。お土産を買ってきますね。\n母"
+    },
+    {
+      "id": "n4-b-051",
+      "section": "reading",
+      "type": "reading-short",
+      "prompt": "この店で買ったパンは、どうすれば長く置いておけますか。",
+      "options": [
+        "そのままテーブルに置く",
+        "袋から出して冷蔵庫に入れる",
+        "切って袋に入れ、冷凍する",
+        "温めてから店へ持っていく"
+      ],
+      "answer": 2,
+      "explanation": "Para conservarlo más tiempo se debe cortar, embolsar y congelar; calentarlo es el paso previo a comerlo.",
+      "passage": "パンをおいしく食べていただくために\nこのパンは、今日か明日のうちに食べてください。それより長く置いておきたい場合は、小さく切って袋に入れ、冷凍してください。食べるときは、袋から出してオーブンで温めるとおいしくなります。"
+    },
+    {
+      "id": "n4-b-052",
+      "section": "reading",
+      "type": "reading-short",
+      "prompt": "鈴木さんは、傘をどうすればいいですか。",
+      "options": [
+        "明日、駅で小林さんに渡す",
+        "会社の入口に置く",
+        "家まで届ける",
+        "小林さんの机の横に置く"
+      ],
+      "answer": 3,
+      "explanation": "Kobayashi pide dejar el paraguas junto a su mesa y no en la entrada para evitar confusiones.",
+      "passage": "鈴木さん\n昨日は大雨でしたね。お貸しした傘ですが、私は明日まで出張中です。会社の入口に置くとほかの人が持っていくかもしれないので、私の机の横に立てておいてもらえますか。急いで返さなくても大丈夫です。\n小林"
+    },
+    {
+      "id": "n4-b-053",
+      "section": "reading",
+      "type": "reading-medium",
+      "prompt": "二人が水族館へ行くことにしたのは、どうしてですか。",
+      "options": [
+        "風が強く、海で泳ぐのは危ないから",
+        "海で泳ぐのが好きではないから",
+        "水族館のほうが駅に近いから",
+        "海へ行く電車が止まったから"
+      ],
+      "answer": 0,
+      "explanation": "La previsión de viento fuerte hacía peligroso nadar. Por eso cambiaron a una actividad interior.",
+      "passage": "私は大学の友達と、日曜日に海へ行く計画を立てました。泳ぐつもりでしたが、前の日の天気予報では、日曜日は風が強くなると言っていました。危ないので海へ入るのはやめようと、友達と相談しました。\n友達は「水族館なら天気を気にしなくてもいいよ」と言いました。私も魚を見るのが好きなので、海の近くにある水族館へ行くことにしました。朝９時に駅で会う予定でしたが、開くのが１０時半だと分かったので、待ち合わせを１０時に変えました。\n当日、水族館にはたくさんの人がいました。イルカのショーは１１時と午後２時にありましたが、１１時の席はもういっぱいでした。そこで、先に魚を見て、昼ご飯を食べてから、午後のショーを見ることにしました。ショーのあと、海の前を少し散歩しました。風は強かったですが、海の色がきれいでした。泳げなかったのは残念でも、楽しい一日になりました。帰りの電車で、夏休みにまた海へ来ようと話しました。",
+      "groupId": "n4-b-medium-01"
+    },
+    {
+      "id": "n4-b-054",
+      "section": "reading",
+      "type": "reading-medium",
+      "prompt": "駅で会う時間を変えた理由は何ですか。",
+      "options": [
+        "友達が朝寝坊したから",
+        "水族館が開く時間に合わせるため",
+        "午前のショーが中止になったから",
+        "昼ご飯の店を予約したから"
+      ],
+      "answer": 1,
+      "explanation": "Retrasaron la cita al descubrir que el acuario abría a las diez y media.",
+      "passage": "私は大学の友達と、日曜日に海へ行く計画を立てました。泳ぐつもりでしたが、前の日の天気予報では、日曜日は風が強くなると言っていました。危ないので海へ入るのはやめようと、友達と相談しました。\n友達は「水族館なら天気を気にしなくてもいいよ」と言いました。私も魚を見るのが好きなので、海の近くにある水族館へ行くことにしました。朝９時に駅で会う予定でしたが、開くのが１０時半だと分かったので、待ち合わせを１０時に変えました。\n当日、水族館にはたくさんの人がいました。イルカのショーは１１時と午後２時にありましたが、１１時の席はもういっぱいでした。そこで、先に魚を見て、昼ご飯を食べてから、午後のショーを見ることにしました。ショーのあと、海の前を少し散歩しました。風は強かったですが、海の色がきれいでした。泳げなかったのは残念でも、楽しい一日になりました。帰りの電車で、夏休みにまた海へ来ようと話しました。",
+      "groupId": "n4-b-medium-01"
+    },
+    {
+      "id": "n4-b-055",
+      "section": "reading",
+      "type": "reading-medium",
+      "prompt": "二人は日曜日、どの順番で過ごしましたか。",
+      "options": [
+        "泳ぐ、昼食、ショー",
+        "ショー、魚を見る、昼食",
+        "魚を見る、昼食、ショー",
+        "昼食、ショー、泳ぐ"
+      ],
+      "answer": 2,
+      "explanation": "La sesión de las once estaba llena. Primero vieron peces, almorzaron y luego asistieron al espectáculo de las dos.",
+      "passage": "私は大学の友達と、日曜日に海へ行く計画を立てました。泳ぐつもりでしたが、前の日の天気予報では、日曜日は風が強くなると言っていました。危ないので海へ入るのはやめようと、友達と相談しました。\n友達は「水族館なら天気を気にしなくてもいいよ」と言いました。私も魚を見るのが好きなので、海の近くにある水族館へ行くことにしました。朝９時に駅で会う予定でしたが、開くのが１０時半だと分かったので、待ち合わせを１０時に変えました。\n当日、水族館にはたくさんの人がいました。イルカのショーは１１時と午後２時にありましたが、１１時の席はもういっぱいでした。そこで、先に魚を見て、昼ご飯を食べてから、午後のショーを見ることにしました。ショーのあと、海の前を少し散歩しました。風は強かったですが、海の色がきれいでした。泳げなかったのは残念でも、楽しい一日になりました。帰りの電車で、夏休みにまた海へ来ようと話しました。",
+      "groupId": "n4-b-medium-01"
+    },
+    {
+      "id": "n4-b-056",
+      "section": "reading",
+      "type": "reading-information",
+      "prompt": "１４歳の人が１日借りられる自転車と、その料金はどれですか。",
+      "options": [
+        "子ども用、６００円",
+        "電動自転車、１８００円",
+        "大人用、３００円",
+        "大人用、１０００円"
+      ],
+      "answer": 3,
+      "explanation": "Con catorce años solo puede alquilar la de adulto; la tarifa de un día es de 1000 yenes.",
+      "passage": "町の自転車店　貸し自転車の案内\n種類｜１時間｜１日｜借りられる年齢\n子ども用｜２００円｜６００円｜６歳〜１２歳\n大人用｜３００円｜１０００円｜１３歳以上\n電動自転車｜５００円｜１８００円｜１６歳以上\n\n営業時間：午前９時〜午後６時（水曜日は休み）\n１日で借りた場合も、午後６時までに返してください。\nヘルメットは無料です。自転車はほかの店には返せません。\n電話で予約できますが、当日の予約はできません。",
+      "groupId": "n4-b-info-01"
+    },
+    {
+      "id": "n4-b-057",
+      "section": "reading",
+      "type": "reading-information",
+      "prompt": "木曜日に自転車を借りたいです。正しいものはどれですか。",
+      "options": [
+        "火曜日に電話で予約し、木曜日の午後６時までにこの店へ返す。",
+        "木曜日に電話で予約し、金曜日の朝に返す。",
+        "水曜日に店へ行って借り、ほかの店に返す。",
+        "木曜日に借り、ヘルメットの料金も払う。"
+      ],
+      "answer": 0,
+      "explanation": "El martes puede reservar para el jueves. Debe devolverla en la misma tienda antes del cierre de ese día; el casco es gratis.",
+      "passage": "町の自転車店　貸し自転車の案内\n種類｜１時間｜１日｜借りられる年齢\n子ども用｜２００円｜６００円｜６歳〜１２歳\n大人用｜３００円｜１０００円｜１３歳以上\n電動自転車｜５００円｜１８００円｜１６歳以上\n\n営業時間：午前９時〜午後６時（水曜日は休み）\n１日で借りた場合も、午後６時までに返してください。\nヘルメットは無料です。自転車はほかの店には返せません。\n電話で予約できますが、当日の予約はできません。",
+      "groupId": "n4-b-info-01"
+    },
+    {
+      "id": "n4-b-058",
+      "section": "listening",
+      "type": "listening-task",
+      "prompt": "女の人は、まず何をしますか。",
+      "options": [
+        "材料を買う",
+        "野菜を洗う",
+        "皿を出す",
+        "ご飯を炊く"
+      ],
+      "answer": 1,
+      "explanation": "Primero lavará las verduras; él se ocupa del arroz y los platos pueden esperar.",
+      "script": "女の人は、まず何をしますか。\n女：夕食の準備、何を手伝えばいい？\n男：材料は買ってきたよ。ご飯は僕が炊くから、野菜を洗ってくれる？\n女：お皿も出そうか。\n男：それは料理ができてからでいいよ。\n質問。女の人は、まず何をしますか。",
+      "audio": "data/jlpt-simulacro/audios/n4-b-058.mp3"
+    },
+    {
+      "id": "n4-b-059",
+      "section": "listening",
+      "type": "listening-task",
+      "prompt": "男の人は、何を持っていきますか。",
+      "options": [
+        "カメラ",
+        "ラジオ",
+        "懐中電灯",
+        "時計"
+      ],
+      "answer": 2,
+      "explanation": "Ella ya lleva cámara y pide que él aporte una linterna para la noche.",
+      "script": "男の人は、何を持っていきますか。\n女：キャンプの持ち物、確認しよう。カメラは私が持っていくね。\n男：僕は何を持っていこうか。\n女：夜は暗いから、懐中電灯をお願い。ラジオはなくても大丈夫。\n男：分かった。電池も新しくしておくよ。\n質問。男の人は、何を持っていきますか。",
+      "audio": "data/jlpt-simulacro/audios/n4-b-059.mp3"
+    },
+    {
+      "id": "n4-b-060",
+      "section": "listening",
+      "type": "listening-task",
+      "prompt": "女の人は、どこへ行きますか。",
+      "options": [
+        "本屋",
+        "病院",
+        "市役所",
+        "銀行"
+      ],
+      "answer": 3,
+      "explanation": "Puede pagar en el ayuntamiento o en el banco. Como el banco está cerca, dice que irá allí ahora. No irá al ayuntamiento, que está lejos.",
+      "script": "女の人は、どこへ行きますか。\n女：この紙のお金は、どこで払えばいいですか。\n男：市役所でも払えますが、ここから遠いです。すぐ近くの銀行でも払えますよ。\n女：では、今から銀行へ行きます。\n質問。女の人は、どこへ行きますか。",
+      "audio": "data/jlpt-simulacro/audios/n4-b-060.mp3"
+    },
+    {
+      "id": "n4-b-061",
+      "section": "listening",
+      "type": "listening-task",
+      "prompt": "男の人は、次に何をしますか。",
+      "options": [
+        "名前と電話番号を書く",
+        "写真を撮る",
+        "カードを受け取る",
+        "家に帰る"
+      ],
+      "answer": 0,
+      "explanation": "Antes de recibir la tarjeta debe completar nombre y teléfono; no se necesita fotografía.",
+      "script": "男の人は、次に何をしますか。\n男：図書館のカードを作りたいんですが。\n女：この紙にお名前と電話番号を書いてください。住所はあとで私が確認します。\n男：写真はいりますか。\n女：いいえ、必要ありません。書き終わったら、お持ちください。\n質問。男の人は、次に何をしますか。",
+      "audio": "data/jlpt-simulacro/audios/n4-b-061.mp3"
+    },
+    {
+      "id": "n4-b-062",
+      "section": "listening",
+      "type": "listening-task",
+      "prompt": "女の人は、いつ薬を飲みますか。",
+      "options": [
+        "寝る直前",
+        "食事のあと",
+        "食事の前",
+        "痛くなったときだけ"
+      ],
+      "answer": 1,
+      "explanation": "Debe tomarlo después de las comidas, no únicamente cuando duela la garganta.",
+      "script": "女の人は、いつ薬を飲みますか。\n男：この薬は、一日三回、食事が終わってから飲んでください。\n女：のどが痛いときだけではないんですね。\n男：はい。朝、昼、晩と続けて飲んでください。\n質問。女の人は、いつ薬を飲みますか。",
+      "audio": "data/jlpt-simulacro/audios/n4-b-062.mp3"
+    },
+    {
+      "id": "n4-b-063",
+      "section": "listening",
+      "type": "listening-task",
+      "prompt": "学生は、作文をどうしますか。",
+      "options": [
+        "全部書き直す",
+        "今日メールで送る",
+        "間違いを直して明日出す",
+        "友達に渡す"
+      ],
+      "answer": 2,
+      "explanation": "El profesor pide corregir solo los puntos marcados y entregar mañana.",
+      "script": "学生は、作文をどうしますか。\n先生：作文を返します。赤い線のあるところを直してください。\n学生：もう一度、全部書いたほうがいいですか。\n先生：いいえ、間違いのところだけでいいです。明日の授業で出してください。\n質問。学生は、作文をどうしますか。",
+      "audio": "data/jlpt-simulacro/audios/n4-b-063.mp3"
+    },
+    {
+      "id": "n4-b-064",
+      "section": "listening",
+      "type": "listening-task",
+      "prompt": "男の人は、何番のバスに乗りますか。",
+      "options": [
+        "１番",
+        "２番",
+        "３番",
+        "５番"
+      ],
+      "answer": 3,
+      "explanation": "La línea 3 no funciona por obras; la 5 sí llega al hospital.",
+      "script": "男の人は、何番のバスに乗りますか。\n男：病院へは、３番のバスで行けますか。\n女：いつもはそうですが、今日は工事で３番が走っていません。５番も病院の前に止まりますよ。\n男：分かりました。５番に乗ります。\n質問。男の人は、何番のバスに乗りますか。",
+      "audio": "data/jlpt-simulacro/audios/n4-b-064.mp3"
+    },
+    {
+      "id": "n4-b-065",
+      "section": "listening",
+      "type": "listening-task",
+      "prompt": "女の人は、どこに車を止めますか。",
+      "options": [
+        "建物の裏",
+        "入口の前",
+        "隣の店",
+        "駅の駐車場"
+      ],
+      "answer": 0,
+      "explanation": "El aparcamiento utilizable está detrás del edificio; la entrada debe quedar libre.",
+      "script": "女の人は、どこに車を止めますか。\n女：車は入口の前に止めてもいいですか。\n男：そこには荷物を運ぶ車が来ます。建物の裏に駐車場がありますので、そちらを使ってください。\n女：はい。裏へ回ります。\n質問。女の人は、どこに車を止めますか。",
+      "audio": "data/jlpt-simulacro/audios/n4-b-065.mp3"
+    },
+    {
+      "id": "n4-b-066",
+      "section": "listening",
+      "type": "listening-point",
+      "prompt": "女の人は、どうして仕事を休みましたか。",
+      "options": [
+        "自分が熱を出したから",
+        "子どもが熱を出したから",
+        "電車が止まったから",
+        "病院が休みだったから"
+      ],
+      "answer": 1,
+      "explanation": "Faltó porque su hijo tenía fiebre; ella se encuentra bien.",
+      "script": "女の人は、どうして仕事を休みましたか。\n男：昨日お休みでしたね。風邪ですか。\n女：私は元気なんですが、子どもが熱を出して。病院へ連れていったんです。\n男：そうだったんですか。\n女：今日はよくなって、学校へ行きました。\n質問。女の人は、どうして仕事を休みましたか。",
+      "audio": "data/jlpt-simulacro/audios/n4-b-066.mp3"
+    },
+    {
+      "id": "n4-b-067",
+      "section": "listening",
+      "type": "listening-point",
+      "prompt": "女の人は、いくら払いますか。",
+      "options": [
+        "６００円",
+        "７００円",
+        "９００円",
+        "１２００円"
+      ],
+      "answer": 2,
+      "explanation": "El pan cuesta 600 y la bebida 300; no añade la ensalada.",
+      "script": "女の人は、いくら払いますか。\n女：このパンとジュースをください。\n男：パンが６００円、ジュースが３００円です。サラダも付けますか。３００円です。\n女：いいえ、今日はこの二つだけでお願いします。\n質問。女の人は、いくら払いますか。",
+      "audio": "data/jlpt-simulacro/audios/n4-b-067.mp3"
+    },
+    {
+      "id": "n4-b-068",
+      "section": "listening",
+      "type": "listening-point",
+      "prompt": "男の人は、どの季節が一番好きですか。",
+      "options": [
+        "春",
+        "夏",
+        "冬",
+        "秋"
+      ],
+      "answer": 3,
+      "explanation": "Prefiere otoño porque hace buen tiempo para caminar.",
+      "script": "男の人は、どの季節が一番好きですか。\n女：私は花が咲く春が好きなんです。\n男：僕も春は好きですが、一番好きなのは秋です。暑くも寒くもなくて、長い時間歩けますから。\n女：夏と冬は？\n男：夏は暑すぎるし、冬は外に出るのが嫌になります。\n質問。男の人は、どの季節が一番好きですか。",
+      "audio": "data/jlpt-simulacro/audios/n4-b-068.mp3"
+    },
+    {
+      "id": "n4-b-069",
+      "section": "listening",
+      "type": "listening-point",
+      "prompt": "新しい店は、何曜日が休みですか。",
+      "options": [
+        "月曜日",
+        "火曜日",
+        "水曜日",
+        "日曜日"
+      ],
+      "answer": 0,
+      "explanation": "Al principio descansaba los martes, pero ahora cierra los lunes.",
+      "script": "新しい店は、何曜日が休みですか。\n女：新しい魚屋、火曜日は閉まっているんですよね。\n男：初めは火曜日だったけど、今は月曜日が休みですよ。\n女：じゃあ、明日の火曜日は行けますね。\n男：ええ。朝９時から開いています。\n質問。新しい店は、何曜日が休みですか。",
+      "audio": "data/jlpt-simulacro/audios/n4-b-069.mp3"
+    },
+    {
+      "id": "n4-b-070",
+      "section": "listening",
+      "type": "listening-point",
+      "prompt": "二人は、何で旅行に行きますか。",
+      "options": [
+        "飛行機",
+        "船",
+        "新幹線",
+        "車"
+      ],
+      "answer": 1,
+      "explanation": "El avión y el tren se descartan; comprarán los billetes del barco.",
+      "script": "二人は、何で旅行に行きますか。\n男：島への旅行、飛行機の切符は高かったね。\n女：船なら安いし、夜出て朝着くから便利だよ。\n男：新幹線では行けないしね。じゃ、船にしよう。\n女：うん。切符を予約しておくね。\n質問。二人は、何で旅行に行きますか。",
+      "audio": "data/jlpt-simulacro/audios/n4-b-070.mp3"
+    },
+    {
+      "id": "n4-b-071",
+      "section": "listening",
+      "type": "listening-point",
+      "prompt": "男の人の部屋には、何がありませんか。",
+      "options": [
+        "ベッド",
+        "机",
+        "エアコン",
+        "冷蔵庫"
+      ],
+      "answer": 2,
+      "explanation": "El cuarto ya tiene cama, escritorio y frigorífico, pero no aire acondicionado.",
+      "script": "男の人の部屋には、何がありませんか。\n女：新しい部屋、家具はあるんですか。\n男：ベッドと机は前の人が置いていってくれました。小さい冷蔵庫もあります。\n女：エアコンは？\n男：それだけないんです。夏までに買わないと。\n質問。男の人の部屋には、何がありませんか。",
+      "audio": "data/jlpt-simulacro/audios/n4-b-071.mp3"
+    },
+    {
+      "id": "n4-b-072",
+      "section": "listening",
+      "type": "listening-point",
+      "prompt": "女の人は、何をなくしましたか。",
+      "options": [
+        "財布",
+        "携帯電話",
+        "眼鏡",
+        "定期券"
+      ],
+      "answer": 3,
+      "explanation": "Ha perdido el abono: la cartera y el teléfono sí están en el bolso.",
+      "script": "女の人は、何をなくしましたか。\n女：困ったな。いつものポケットに入っていない。\n男：財布？\n女：ううん、財布も携帯もかばんにある。電車の定期券がないの。\n男：駅で聞いてみたら？\n女：そうする。\n質問。女の人は、何をなくしましたか。",
+      "audio": "data/jlpt-simulacro/audios/n4-b-072.mp3"
+    },
+    {
+      "id": "n4-b-073",
+      "section": "listening",
+      "type": "listening-expression",
+      "prompt": "この場面で、何と言いますか。",
+      "options": [
+        "ごちそうさまでした。とてもおいしかったです。",
+        "いってらっしゃい。お仕事がんばってください。",
+        "いただきます。これから作ります。"
+      ],
+      "answer": 0,
+      "explanation": "Después de ser invitado a comer se agradece con ごちそうさまでした.",
+      "scene": "友達の家で食事をごちそうになりました。帰る前にお礼を言います。何と言いますか。",
+      "script": "友達の家で食事をごちそうになりました。帰る前にお礼を言います。何と言いますか。\n一番。ごちそうさまでした。とてもおいしかったです。\n二番。いってらっしゃい。お仕事がんばってください。\n三番。いただきます。これから作ります。",
+      "audio": "data/jlpt-simulacro/audios/n4-b-073.mp3"
+    },
+    {
+      "id": "n4-b-074",
+      "section": "listening",
+      "type": "listening-expression",
+      "prompt": "この場面で、何と言いますか。",
+      "options": [
+        "これを洗ってもいいですか。",
+        "これをはいてみてもいいですか。",
+        "これを直さなくてもいいですか。"
+      ],
+      "answer": 1,
+      "explanation": "はいてみてもいいですか pide permiso para probarse los pantalones.",
+      "scene": "店でズボンを選んでいます。買う前に、サイズが合うか、はいて確かめたいです。店員に何と言いますか。",
+      "script": "店でズボンを選んでいます。買う前に、サイズが合うか、はいて確かめたいです。店員に何と言いますか。\n一番。これを洗ってもいいですか。\n二番。これをはいてみてもいいですか。\n三番。これを直さなくてもいいですか。",
+      "audio": "data/jlpt-simulacro/audios/n4-b-074.mp3"
+    },
+    {
+      "id": "n4-b-075",
+      "section": "listening",
+      "type": "listening-expression",
+      "prompt": "この場面で、何と言いますか。",
+      "options": [
+        "この財布を売ってください。",
+        "私の財布を拾ってもいいですか。",
+        "道でこの財布を拾いました。"
+      ],
+      "answer": 2,
+      "explanation": "Se comunica que se ha encontrado una cartera en la calle: 財布を拾いました.",
+      "scene": "道で落ちている財布を見つけました。交番で警察の人に渡します。何と言いますか。",
+      "script": "道で落ちている財布を見つけました。交番で警察の人に渡します。何と言いますか。\n一番。この財布を売ってください。\n二番。私の財布を拾ってもいいですか。\n三番。道でこの財布を拾いました。",
+      "audio": "data/jlpt-simulacro/audios/n4-b-075.mp3"
+    },
+    {
+      "id": "n4-b-076",
+      "section": "listening",
+      "type": "listening-expression",
+      "prompt": "この場面で、何と言いますか。",
+      "options": [
+        "もう少し右に寄ってくれる？",
+        "右の写真を撮ってくれる？",
+        "右から写真を見せてくれる？"
+      ],
+      "answer": 0,
+      "explanation": "右に寄ってくれる pide al amigo desplazarse un poco a la derecha.",
+      "scene": "友達の写真を撮ります。少し右に動いてほしいです。何と言いますか。",
+      "script": "友達の写真を撮ります。少し右に動いてほしいです。何と言いますか。\n一番。もう少し右に寄ってくれる？\n二番。右の写真を撮ってくれる？\n三番。右から写真を見せてくれる？",
+      "audio": "data/jlpt-simulacro/audios/n4-b-076.mp3"
+    },
+    {
+      "id": "n4-b-077",
+      "section": "listening",
+      "type": "listening-expression",
+      "prompt": "この場面で、何と言いますか。",
+      "options": [
+        "お先にどうぞ。",
+        "新しい仕事、頑張ってね。",
+        "まだ仕事をやめないでいたんだね。"
+      ],
+      "answer": 1,
+      "explanation": "頑張ってね anima al amigo en su nuevo trabajo.",
+      "scene": "友達が新しい仕事を始めました。応援したいです。何と言いますか。",
+      "script": "友達が新しい仕事を始めました。応援したいです。何と言いますか。\n一番。お先にどうぞ。\n二番。新しい仕事、頑張ってね。\n三番。まだ仕事をやめないでいたんだね。",
+      "audio": "data/jlpt-simulacro/audios/n4-b-077.mp3"
+    },
+    {
+      "id": "n4-b-078",
+      "section": "listening",
+      "type": "listening-response",
+      "prompt": "話を聞いて、最もよい返事を選んでください。",
+      "options": [
+        "はい、まだ窓です。",
+        "いいえ、窓を買いました。",
+        "ええ、どうぞ閉めてください。"
+      ],
+      "answer": 2,
+      "explanation": "La petición de cerrar la ventana se acepta con どうぞ閉めてください.",
+      "script": "話を聞いてください。\n窓を閉めてもかまいませんか。\n一番。はい、まだ窓です。\n二番。いいえ、窓を買いました。\n三番。ええ、どうぞ閉めてください。",
+      "audio": "data/jlpt-simulacro/audios/n4-b-078.mp3"
+    },
+    {
+      "id": "n4-b-079",
+      "section": "listening",
+      "type": "listening-response",
+      "prompt": "話を聞いて、最もよい返事を選んでください。",
+      "options": [
+        "ええ、次は２番線の電車です。",
+        "ええ、昨日降りました。",
+        "ええ、駅を建てています。"
+      ],
+      "answer": 0,
+      "explanation": "Se confirma el transbordo y se indica el andén del siguiente tren.",
+      "script": "話を聞いてください。\nこの駅で乗り換えるんですよね。\n一番。ええ、次は２番線の電車です。\n二番。ええ、昨日降りました。\n三番。ええ、駅を建てています。",
+      "audio": "data/jlpt-simulacro/audios/n4-b-079.mp3"
+    },
+    {
+      "id": "n4-b-080",
+      "section": "listening",
+      "type": "listening-response",
+      "prompt": "話を聞いて、最もよい返事を選んでください。",
+      "options": [
+        "はい、名前が好きです。",
+        "田村と申します。",
+        "いいえ、もう呼びました。"
+      ],
+      "answer": 1,
+      "explanation": "Se pide repetir el nombre: 田村と申します es una presentación cortés.",
+      "script": "話を聞いてください。\nすみません。お名前をもう一度お願いします。\n一番。はい、名前が好きです。\n二番。田村と申します。\n三番。いいえ、もう呼びました。",
+      "audio": "data/jlpt-simulacro/audios/n4-b-080.mp3"
+    },
+    {
+      "id": "n4-b-081",
+      "section": "listening",
+      "type": "listening-response",
+      "prompt": "話を聞いて、最もよい返事を選んでください。",
+      "options": [
+        "どうぞ番号を買ってください。",
+        "いいえ、電話ではありません。",
+        "ありがとうございます。新しい番号を教えてください。"
+      ],
+      "answer": 2,
+      "explanation": "Lo natural es agradecer el aviso y preguntar el nuevo número.",
+      "script": "話を聞いてください。\n電話番号が変わったので、お知らせします。\n一番。どうぞ番号を買ってください。\n二番。いいえ、電話ではありません。\n三番。ありがとうございます。新しい番号を教えてください。",
+      "audio": "data/jlpt-simulacro/audios/n4-b-081.mp3"
+    },
+    {
+      "id": "n4-b-082",
+      "section": "listening",
+      "type": "listening-response",
+      "prompt": "話を聞いて、最もよい返事を選んでください。",
+      "options": [
+        "次の駅で降ります。",
+        "去年、電車を買いました。",
+        "いつも座っています。"
+      ],
+      "answer": 0,
+      "explanation": "どちらで降りる pregunta dónde bajará; se responde con la próxima estación.",
+      "script": "話を聞いてください。\nどちらで降りるんですか。\n一番。次の駅で降ります。\n二番。去年、電車を買いました。\n三番。いつも座っています。",
+      "audio": "data/jlpt-simulacro/audios/n4-b-082.mp3"
+    },
+    {
+      "id": "n4-b-083",
+      "section": "listening",
+      "type": "listening-response",
+      "prompt": "話を聞いて、最もよい返事を選んでください。",
+      "options": [
+        "どういたしまして。また来年です。",
+        "ありがとうございます。覚えていてくれたんですね。",
+        "いいえ、お大事にしてください。"
+      ],
+      "answer": 1,
+      "explanation": "Se agradece la felicitación y que recordaran el cumpleaños.",
+      "script": "話を聞いてください。\nお誕生日、おめでとうございます。\n一番。どういたしまして。また来年です。\n二番。ありがとうございます。覚えていてくれたんですね。\n三番。いいえ、お大事にしてください。",
+      "audio": "data/jlpt-simulacro/audios/n4-b-083.mp3"
+    },
+    {
+      "id": "n4-b-084",
+      "section": "listening",
+      "type": "listening-response",
+      "prompt": "話を聞いて、最もよい返事を選んでください。",
+      "options": [
+        "はい、海が近いです。",
+        "いいえ、今泳いでいます。",
+        "はい、そのまま食べても大丈夫です。"
+      ],
+      "answer": 2,
+      "explanation": "生で significa crudo; se responde confirmando que puede comerse tal cual.",
+      "script": "話を聞いてください。\nこの魚は生で食べられますか。\n一番。はい、海が近いです。\n二番。いいえ、今泳いでいます。\n三番。はい、そのまま食べても大丈夫です。",
+      "audio": "data/jlpt-simulacro/audios/n4-b-084.mp3"
+    },
+    {
+      "id": "n4-b-085",
+      "section": "listening",
+      "type": "listening-response",
+      "prompt": "話を聞いて、最もよい返事を選んでください。",
+      "options": [
+        "ありがとうございます。助かります。",
+        "いいえ、傘が降っています。",
+        "どうぞ、忘れてください。"
+      ],
+      "answer": 0,
+      "explanation": "Ante la oferta de compartir paraguas, se agradece la ayuda.",
+      "script": "話を聞いてください。\n傘を忘れたんですか。私の傘に一緒に入りませんか。\n一番。ありがとうございます。助かります。\n二番。いいえ、傘が降っています。\n三番。どうぞ、忘れてください。",
+      "audio": "data/jlpt-simulacro/audios/n4-b-085.mp3"
+    },
+    {
+      "id": "n4-c-001",
+      "section": "vocabulary",
+      "type": "kanji-reading",
+      "prompt": "「季節」の読み方はどれですか。",
+      "options": [
+        "きせつ",
+        "きぜつ",
+        "きっせつ",
+        "きせい"
+      ],
+      "answer": 0,
+      "explanation": "季節 se lee きせつ: estación del año."
+    },
+    {
+      "id": "n4-c-002",
+      "section": "vocabulary",
+      "type": "kanji-reading",
+      "prompt": "「安心」の読み方はどれですか。",
+      "options": [
+        "あんじん",
+        "あんしん",
+        "あんせん",
+        "あんぜん"
+      ],
+      "answer": 1,
+      "explanation": "安心 se lee あんしん: tranquilidad o alivio. 安全, que se lee あんぜん, significa seguridad."
+    },
+    {
+      "id": "n4-c-003",
+      "section": "vocabulary",
+      "type": "kanji-reading",
+      "prompt": "「工事」の読み方はどれですか。",
+      "options": [
+        "こうじ",
+        "こうし",
+        "くうじ",
+        "くじ"
+      ],
+      "answer": 0,
+      "explanation": "工事 se lee こうじ: obras o trabajos de construcción."
+    },
+    {
+      "id": "n4-c-004",
+      "section": "vocabulary",
+      "type": "kanji-reading",
+      "prompt": "「湖」の読み方はどれですか。",
+      "options": [
+        "みずうめ",
+        "みずみ",
+        "みずうみ",
+        "みなうみ"
+      ],
+      "answer": 2,
+      "explanation": "湖 se lee みずうみ: lago."
+    },
+    {
+      "id": "n4-c-005",
+      "section": "vocabulary",
+      "type": "kanji-reading",
+      "prompt": "「旅館」の読み方はどれですか。",
+      "options": [
+        "りょうかん",
+        "りょがん",
+        "りょかん",
+        "りょうがん"
+      ],
+      "answer": 2,
+      "explanation": "旅館 se lee りょかん: alojamiento tradicional japonés."
+    },
+    {
+      "id": "n4-c-006",
+      "section": "vocabulary",
+      "type": "kanji-reading",
+      "prompt": "「夕方」の読み方はどれですか。",
+      "options": [
+        "ゆかた",
+        "ゆうほう",
+        "ゆうかた",
+        "ゆうがた"
+      ],
+      "answer": 3,
+      "explanation": "夕方 se lee ゆうがた: última parte de la tarde."
+    },
+    {
+      "id": "n4-c-007",
+      "section": "vocabulary",
+      "type": "kanji-reading",
+      "prompt": "「親切」の読み方はどれですか。",
+      "options": [
+        "しんせい",
+        "しんせつ",
+        "しんぜつ",
+        "しんさい"
+      ],
+      "answer": 1,
+      "explanation": "親切 se lee しんせつ: amabilidad."
+    },
+    {
+      "id": "n4-c-008",
+      "section": "vocabulary",
+      "type": "orthography",
+      "prompt": "妹は「かんごし」になりたいと言っています。",
+      "options": [
+        "看後師",
+        "看護師",
+        "観護師",
+        "観後師"
+      ],
+      "answer": 1,
+      "explanation": "看護師 significa profesional de enfermería."
+    },
+    {
+      "id": "n4-c-009",
+      "section": "vocabulary",
+      "type": "orthography",
+      "prompt": "駅で「しんぶん」を買いました。",
+      "options": [
+        "親聞",
+        "新問",
+        "新聞",
+        "親問"
+      ],
+      "answer": 2,
+      "explanation": "新聞 se lee しんぶん y significa periódico."
+    },
+    {
+      "id": "n4-c-010",
+      "section": "vocabulary",
+      "type": "orthography",
+      "prompt": "この道は夜になると「くらい」です。",
+      "options": [
+        "暗い",
+        "黒い",
+        "重い",
+        "弱い"
+      ],
+      "answer": 0,
+      "explanation": "暗い significa oscuro; 黒い describe el color negro."
+    },
+    {
+      "id": "n4-c-011",
+      "section": "vocabulary",
+      "type": "orthography",
+      "prompt": "姉はスーパーで「はたらいて」います。",
+      "options": [
+        "動いて",
+        "働って",
+        "動って",
+        "働いて"
+      ],
+      "answer": 3,
+      "explanation": "働く significa trabajar; su forma て es 働いて."
+    },
+    {
+      "id": "n4-c-012",
+      "section": "vocabulary",
+      "type": "orthography",
+      "prompt": "「えきいん」に出口を聞きました。",
+      "options": [
+        "駅貝",
+        "駅員",
+        "駅買",
+        "駅同"
+      ],
+      "answer": 1,
+      "explanation": "駅員 significa empleado de la estación."
+    },
+    {
+      "id": "n4-c-013",
+      "section": "vocabulary",
+      "type": "context",
+      "prompt": "果物を食べる前に、ナイフで皮を（　）。",
+      "options": [
+        "むきます",
+        "たたみます",
+        "かざります",
+        "むかえます"
+      ],
+      "answer": 0,
+      "explanation": "皮をむく significa pelar una fruta."
+    },
+    {
+      "id": "n4-c-014",
+      "section": "vocabulary",
+      "type": "context",
+      "prompt": "冷蔵庫に入れておいたジュースは、とても（　）です。",
+      "options": [
+        "うすい",
+        "ひくい",
+        "つめたい",
+        "ふかい"
+      ],
+      "answer": 2,
+      "explanation": "つめたい describe una bebida fría al tacto o al tomarla."
+    },
+    {
+      "id": "n4-c-015",
+      "section": "vocabulary",
+      "type": "context",
+      "prompt": "休みの日は、よく音楽を聞いて（　）過ごします。",
+      "options": [
+        "はっきり",
+        "ゆっくり",
+        "びっくり",
+        "すっかり"
+      ],
+      "answer": 1,
+      "explanation": "ゆっくり過ごす significa pasar el tiempo con tranquilidad."
+    },
+    {
+      "id": "n4-c-016",
+      "section": "vocabulary",
+      "type": "context",
+      "prompt": "靴がぬれているので、外で（　）ましょう。",
+      "options": [
+        "こわし",
+        "ならび",
+        "こぼし",
+        "かわかし"
+      ],
+      "answer": 3,
+      "explanation": "乾かす significa secar algo, en este caso unos zapatos mojados."
+    },
+    {
+      "id": "n4-c-017",
+      "section": "vocabulary",
+      "type": "context",
+      "prompt": "友達の結婚式に出るので、新しい服を（　）しました。",
+      "options": [
+        "入学",
+        "用意",
+        "出発",
+        "運動"
+      ],
+      "answer": 1,
+      "explanation": "服を用意する significa preparar ropa para la ocasión."
+    },
+    {
+      "id": "n4-c-018",
+      "section": "vocabulary",
+      "type": "context",
+      "prompt": "道が滑ります。転ばないように（　）歩いてください。",
+      "options": [
+        "気をつけて",
+        "気に入って",
+        "気がついて",
+        "気になって"
+      ],
+      "answer": 0,
+      "explanation": "気をつけて歩く significa caminar con cuidado para no caerse."
+    },
+    {
+      "id": "n4-c-019",
+      "section": "vocabulary",
+      "type": "context",
+      "prompt": "台風で危ないので、今日の試合は（　）になりました。",
+      "options": [
+        "故障",
+        "遠慮",
+        "中止",
+        "反対"
+      ],
+      "answer": 2,
+      "explanation": "試合が中止になる significa que el partido se cancela."
+    },
+    {
+      "id": "n4-c-020",
+      "section": "vocabulary",
+      "type": "context",
+      "prompt": "この紙に名前を書いてから、半分に（　）ください。",
+      "options": [
+        "投げて",
+        "揺れて",
+        "磨いて",
+        "折って"
+      ],
+      "answer": 3,
+      "explanation": "紙を半分に折る significa doblar el papel por la mitad."
+    },
+    {
+      "id": "n4-c-021",
+      "section": "vocabulary",
+      "type": "paraphrase",
+      "prompt": "「この荷物を運んでください」と同じ意味の文はどれですか。",
+      "options": [
+        "この荷物を別の場所へ持っていってください。",
+        "この荷物を開けてください。",
+        "この荷物を捨ててください。",
+        "この荷物を使ってください。"
+      ],
+      "answer": 0,
+      "explanation": "運ぶ es transportar: llevar algo de un lugar a otro."
+    },
+    {
+      "id": "n4-c-022",
+      "section": "vocabulary",
+      "type": "paraphrase",
+      "prompt": "「来週は都合が悪いです」と同じ意味の文はどれですか。",
+      "options": [
+        "来週は天気が悪いです。",
+        "来週は時間が取れません。",
+        "来週は気分が悪いです。",
+        "来週は暇です。"
+      ],
+      "answer": 1,
+      "explanation": "都合が悪い indica que no se tiene disponibilidad para ese momento."
+    },
+    {
+      "id": "n4-c-023",
+      "section": "vocabulary",
+      "type": "paraphrase",
+      "prompt": "「この町には昔から住んでいます」と同じ意味の文はどれですか。",
+      "options": [
+        "この町には昨日来ました。",
+        "この町には住んだことがありません。",
+        "この町には長い間住んでいます。",
+        "この町には来月から住みます。"
+      ],
+      "answer": 2,
+      "explanation": "昔から住む significa llevar mucho tiempo viviendo en ese lugar."
+    },
+    {
+      "id": "n4-c-024",
+      "section": "vocabulary",
+      "type": "paraphrase",
+      "prompt": "「先生にほめられました」と同じ意味の文はどれですか。",
+      "options": [
+        "先生に質問されました。",
+        "先生に名前を聞かれました。",
+        "先生に注意されました。",
+        "先生に「よくできました」と言われました。"
+      ],
+      "answer": 3,
+      "explanation": "ほめる significa elogiar; «lo has hecho bien» es un elogio."
+    },
+    {
+      "id": "n4-c-025",
+      "section": "vocabulary",
+      "type": "usage",
+      "prompt": "「似る」の使い方として正しい文はどれですか。",
+      "options": [
+        "私は父と顔が似ています。",
+        "私は駅を似ています。",
+        "雨が似たので、傘を持ちました。",
+        "この箱を半分に似てください。"
+      ],
+      "answer": 0,
+      "explanation": "顔が似ている significa que dos personas se parecen en la cara."
+    },
+    {
+      "id": "n4-c-026",
+      "section": "vocabulary",
+      "type": "usage",
+      "prompt": "「飾る」の使い方として正しい文はどれですか。",
+      "options": [
+        "今日は雨を飾っています。",
+        "誕生日に部屋に花を飾りました。",
+        "この道を右に飾ってください。",
+        "朝ご飯を早く飾りました。"
+      ],
+      "answer": 1,
+      "explanation": "花を飾る significa decorar con flores."
+    },
+    {
+      "id": "n4-c-027",
+      "section": "vocabulary",
+      "type": "usage",
+      "prompt": "「拾う」の使い方として正しい文はどれですか。",
+      "options": [
+        "バスに拾って学校へ行きます。",
+        "弟の名前を拾いました。",
+        "道に落ちていた財布を拾いました。",
+        "この水は冷たく拾います。"
+      ],
+      "answer": 2,
+      "explanation": "拾う significa recoger algo caído, como una cartera en la calle."
+    },
+    {
+      "id": "n4-c-028",
+      "section": "vocabulary",
+      "type": "usage",
+      "prompt": "「慣れる」の使い方として正しい文はどれですか。",
+      "options": [
+        "切手を封筒に慣れました。",
+        "朝ご飯を三つ慣れました。",
+        "帽子が風で慣れました。",
+        "新しい仕事に少し慣れてきました。"
+      ],
+      "answer": 3,
+      "explanation": "仕事に慣れる significa acostumbrarse al trabajo."
+    },
+    {
+      "id": "n4-c-029",
+      "section": "grammar",
+      "type": "grammar-form",
+      "prompt": "友達の話によると、駅前に新しい店ができる（　）です。",
+      "options": [
+        "そう",
+        "ため",
+        "ながら",
+        "こと"
+      ],
+      "answer": 0,
+      "explanation": "Verbo en forma simple + そうです transmite información recibida de otra persona: dice que abrirá una tienda."
+    },
+    {
+      "id": "n4-c-030",
+      "section": "grammar",
+      "type": "grammar-form",
+      "prompt": "危ないですから、この線から中に（　）はいけません。",
+      "options": [
+        "入る",
+        "入った",
+        "入って",
+        "入り"
+      ],
+      "answer": 2,
+      "explanation": "〜てはいけません expresa prohibición. La forma て de 入る es 入って."
+    },
+    {
+      "id": "n4-c-031",
+      "section": "grammar",
+      "type": "grammar-form",
+      "prompt": "来年、大学を卒業したら、国へ帰る（　）です。",
+      "options": [
+        "まま",
+        "つもり",
+        "ながら",
+        "ところで"
+      ],
+      "answer": 1,
+      "explanation": "Verbo diccionario + つもり expresa intención: piensa volver a su país."
+    },
+    {
+      "id": "n4-c-032",
+      "section": "grammar",
+      "type": "grammar-form",
+      "prompt": "来月の学校の旅行では、工場を見学する（　）です。",
+      "options": [
+        "まま",
+        "ことが",
+        "ところで",
+        "予定"
+      ],
+      "answer": 3,
+      "explanation": "見学する予定です expresa un plan establecido: tienen previsto visitar una fábrica."
+    },
+    {
+      "id": "n4-c-033",
+      "section": "grammar",
+      "type": "grammar-form",
+      "prompt": "弟は、私が作ったケーキを全部食べて（　）。",
+      "options": [
+        "しまいました",
+        "ありました",
+        "しまいでした",
+        "なりました"
+      ],
+      "answer": 0,
+      "explanation": "〜てしまう presenta una acción completada: el hermano se comió toda la tarta."
+    },
+    {
+      "id": "n4-c-034",
+      "section": "grammar",
+      "type": "grammar-form",
+      "prompt": "電車の中で、知らない人（　）足を踏まれてしまいました。",
+      "options": [
+        "を",
+        "に",
+        "で",
+        "が"
+      ],
+      "answer": 1,
+      "explanation": "En la pasiva 踏まれる, に marca a quien realiza la acción: una persona desconocida le pisó el pie."
+    },
+    {
+      "id": "n4-c-035",
+      "section": "grammar",
+      "type": "grammar-form",
+      "prompt": "この映画は、何度見て（　）面白いです。",
+      "options": [
+        "まで",
+        "だけ",
+        "も",
+        "しか"
+      ],
+      "answer": 2,
+      "explanation": "何度見ても significa «por muchas veces que la vea», siempre resulta entretenida."
+    },
+    {
+      "id": "n4-c-036",
+      "section": "grammar",
+      "type": "grammar-form",
+      "prompt": "昨日は仕事が忙しくて、昼ご飯を（　）時間もありませんでした。",
+      "options": [
+        "食べたの",
+        "食べるな",
+        "食べます",
+        "食べる"
+      ],
+      "answer": 3,
+      "explanation": "食べる modifica directamente a 時間: tiempo para comer."
+    },
+    {
+      "id": "n4-c-037",
+      "section": "grammar",
+      "type": "grammar-form",
+      "prompt": "このボタンを（　）と、ふたが開きます。",
+      "options": [
+        "押す",
+        "押し",
+        "押して",
+        "押したの"
+      ],
+      "answer": 0,
+      "explanation": "Verbo en forma diccionario + と expresa aquí un resultado regular: al pulsar el botón se abre la tapa."
+    },
+    {
+      "id": "n4-c-038",
+      "section": "grammar",
+      "type": "grammar-form",
+      "prompt": "新しいパソコンは、前の（　）使いやすいです。",
+      "options": [
+        "まで",
+        "より",
+        "だけ",
+        "しか"
+      ],
+      "answer": 1,
+      "explanation": "より introduce el término de comparación: es más fácil de usar que el anterior."
+    },
+    {
+      "id": "n4-c-039",
+      "section": "grammar",
+      "type": "grammar-form",
+      "prompt": "このお皿をどこで買った（　）、覚えていません。",
+      "options": [
+        "は",
+        "が",
+        "か",
+        "も"
+      ],
+      "answer": 2,
+      "explanation": "Una pregunta indirecta se cierra con か: no recuerda dónde compró ese plato."
+    },
+    {
+      "id": "n4-c-040",
+      "section": "grammar",
+      "type": "grammar-form",
+      "prompt": "電気がついています。部屋に誰か（　）ようです。",
+      "options": [
+        "いて",
+        "いるの",
+        "います",
+        "いる"
+      ],
+      "answer": 3,
+      "explanation": "Forma simple + ようです expresa una inferencia: parece que hay alguien dentro."
+    },
+    {
+      "id": "n4-c-041",
+      "section": "grammar",
+      "type": "grammar-form",
+      "prompt": "このいすは、子どもが（　）のにちょうどいい高さです。",
+      "options": [
+        "座る",
+        "座り",
+        "座って",
+        "座れ"
+      ],
+      "answer": 0,
+      "explanation": "Verbo diccionario + のに indica adecuación para un uso: tiene la altura apropiada para que se siente un niño."
+    },
+    {
+      "id": "n4-c-042",
+      "section": "grammar",
+      "type": "sentence-order",
+      "prompt": "文が自然になるように並べてください。★に入るものはどれですか。\n明日は一日中 ＿＿ ★ ＿＿ ＿＿ です。",
+      "options": [
+        "つもり",
+        "で",
+        "家",
+        "休む"
+      ],
+      "answer": 1,
+      "explanation": "Orden: 家 → で → 休む → つもり. La estrella ocupa el segundo hueco, で. La frase completa acaba con です: piensa descansar en casa todo el día."
+    },
+    {
+      "id": "n4-c-043",
+      "section": "grammar",
+      "type": "sentence-order",
+      "prompt": "文が自然になるように並べてください。★に入るものはどれですか。\nこれは母が ＿＿ ＿＿ ★ ＿＿ です。",
+      "options": [
+        "くれた",
+        "作って",
+        "ケーキ",
+        "私に"
+      ],
+      "answer": 0,
+      "explanation": "Orden: 私に → 作って → くれた → ケーキ. La estrella ocupa el tercer hueco, くれた."
+    },
+    {
+      "id": "n4-c-044",
+      "section": "grammar",
+      "type": "sentence-order",
+      "prompt": "文が自然になるように並べてください。★に入るものはどれですか。\n私は妹に ＿＿ ＿＿ ★ ＿＿ 。",
+      "options": [
+        "もらいました",
+        "手伝って",
+        "料理を",
+        "作るのを"
+      ],
+      "answer": 1,
+      "explanation": "Orden: 料理を → 作るのを → 手伝って → もらいました. La estrella ocupa el tercer hueco, 手伝って."
+    },
+    {
+      "id": "n4-c-045",
+      "section": "grammar",
+      "type": "sentence-order",
+      "prompt": "文が自然になるように並べてください。★に入るものはどれですか。\nこの道を ＿＿ ＿＿ ★ ＿＿ あります。",
+      "options": [
+        "ところに",
+        "右に",
+        "銀行が",
+        "曲がった"
+      ],
+      "answer": 0,
+      "explanation": "Orden: 右に → 曲がった → ところに → 銀行が. La estrella ocupa el tercer hueco, ところに."
+    },
+    {
+      "id": "n4-c-046",
+      "section": "grammar",
+      "type": "text-grammar",
+      "prompt": "文章の【1】に入るものはどれですか。",
+      "options": [
+        "こと",
+        "もの",
+        "ため",
+        "ところ"
+      ],
+      "answer": 0,
+      "explanation": "育てたことがない expresa no haber tenido nunca esa experiencia.",
+      "passage": "今年の春、ベランダでトマトを育て始めました。花屋で小さな苗を二つ買い、店の人に育て方を教えてもらいました。前は植物を育てた【１】がなかったので、うまくできるか心配でした。毎朝、学校へ行く前に水をやりました。初めはなかなか大きくなりませんでした。【２】、六月になると、黄色い花が咲きました。その後、小さい緑色のトマトができました。店の人は、赤く【３】から取るように言っていました。先週、やっと赤くなったトマトを食べました。店で買う物より少し小さかったですが、自分で育てたので、とてもおいしかったです。来年は、もっとたくさん【４】たいと思っています。",
+      "groupId": "n4-c-text-01"
+    },
+    {
+      "id": "n4-c-047",
+      "section": "grammar",
+      "type": "text-grammar",
+      "prompt": "文章の【2】に入るものはどれですか。",
+      "options": [
+        "例えば",
+        "それに",
+        "でも",
+        "つまり"
+      ],
+      "answer": 2,
+      "explanation": "でも contrasta la ausencia inicial de crecimiento con la aparición posterior de flores.",
+      "passage": "今年の春、ベランダでトマトを育て始めました。花屋で小さな苗を二つ買い、店の人に育て方を教えてもらいました。前は植物を育てた【１】がなかったので、うまくできるか心配でした。毎朝、学校へ行く前に水をやりました。初めはなかなか大きくなりませんでした。【２】、六月になると、黄色い花が咲きました。その後、小さい緑色のトマトができました。店の人は、赤く【３】から取るように言っていました。先週、やっと赤くなったトマトを食べました。店で買う物より少し小さかったですが、自分で育てたので、とてもおいしかったです。来年は、もっとたくさん【４】たいと思っています。",
+      "groupId": "n4-c-text-01"
+    },
+    {
+      "id": "n4-c-048",
+      "section": "grammar",
+      "type": "text-grammar",
+      "prompt": "文章の【3】に入るものはどれですか。",
+      "options": [
+        "なって",
+        "なる",
+        "なりたい",
+        "なり"
+      ],
+      "answer": 0,
+      "explanation": "赤くなってから significa después de ponerse rojos.",
+      "passage": "今年の春、ベランダでトマトを育て始めました。花屋で小さな苗を二つ買い、店の人に育て方を教えてもらいました。前は植物を育てた【１】がなかったので、うまくできるか心配でした。毎朝、学校へ行く前に水をやりました。初めはなかなか大きくなりませんでした。【２】、六月になると、黄色い花が咲きました。その後、小さい緑色のトマトができました。店の人は、赤く【３】から取るように言っていました。先週、やっと赤くなったトマトを食べました。店で買う物より少し小さかったですが、自分で育てたので、とてもおいしかったです。来年は、もっとたくさん【４】たいと思っています。",
+      "groupId": "n4-c-text-01"
+    },
+    {
+      "id": "n4-c-049",
+      "section": "grammar",
+      "type": "text-grammar",
+      "prompt": "文章の【4】に入るものはどれですか。",
+      "options": [
+        "育って",
+        "育て",
+        "育つ",
+        "育てる"
+      ],
+      "answer": 1,
+      "explanation": "育てたい se forma con la raíz de 育てる: desea cultivar más tomates.",
+      "passage": "今年の春、ベランダでトマトを育て始めました。花屋で小さな苗を二つ買い、店の人に育て方を教えてもらいました。前は植物を育てた【１】がなかったので、うまくできるか心配でした。毎朝、学校へ行く前に水をやりました。初めはなかなか大きくなりませんでした。【２】、六月になると、黄色い花が咲きました。その後、小さい緑色のトマトができました。店の人は、赤く【３】から取るように言っていました。先週、やっと赤くなったトマトを食べました。店で買う物より少し小さかったですが、自分で育てたので、とてもおいしかったです。来年は、もっとたくさん【４】たいと思っています。",
+      "groupId": "n4-c-text-01"
+    },
+    {
+      "id": "n4-c-050",
+      "section": "reading",
+      "type": "reading-short",
+      "prompt": "このＤＶＤを返すとき、どうすればいいですか。",
+      "options": [
+        "箱を開けて、紙だけ受付に渡す。",
+        "箱に入れて、図書館の受付に渡す。",
+        "本と一緒に、外の返却箱に入れる。",
+        "郵便で図書館に送る。"
+      ],
+      "answer": 1,
+      "explanation": "Los DVD deben devolverse dentro de su caja y entregarse en recepción. El buzón exterior solo sirve para libros porque los DVD podrían romperse.",
+      "passage": "ＤＶＤを借りた方へ\nＤＶＤは必ず借りたときの箱に入れてお返しください。本は図書館の外の返却箱に入れられますが、ＤＶＤは壊れることがあるので、返却箱は使わないでください。開館中に受付へお持ちください。郵便では返せません。"
+    },
+    {
+      "id": "n4-c-051",
+      "section": "reading",
+      "type": "reading-short",
+      "prompt": "この店で靴を直してもらいたい人は、いつ行けばいいですか。",
+      "options": [
+        "月曜日の午前１０時",
+        "木曜日の午後６時",
+        "土曜日の午後３時",
+        "日曜日の午後１時"
+      ],
+      "answer": 2,
+      "explanation": "El sábado abre de 10 a 16. Los lunes y domingos cierra; entre semana cierra a las 17.",
+      "passage": "靴の修理店からのお知らせ\n営業時間：火曜日〜金曜日は午前１０時〜午後５時、土曜日は午前１０時〜午後４時です。日曜日と月曜日は休みます。修理には２日ほどかかります。直した靴を受け取るとき、この紙をお持ちください。"
+    },
+    {
+      "id": "n4-c-052",
+      "section": "reading",
+      "type": "reading-short",
+      "prompt": "山下さんは、どうして集まる場所を変えたいのですか。",
+      "options": [
+        "公園が休みだから",
+        "駅に店がないから",
+        "雨が降りそうだから",
+        "公園に荷物を置けないから"
+      ],
+      "answer": 2,
+      "explanation": "Cambian el lugar de reunión porque se pronostica lluvia por la mañana.",
+      "passage": "みなさんへ\n明日の朝は雨が降るかもしれません。公園の入口で集まる予定でしたが、駅の中のパン屋の前に変えませんか。そこなら雨にぬれずに待てます。時間は９時のままです。雨がやんだら、みんなで公園へ行きましょう。\n山下"
+    },
+    {
+      "id": "n4-c-053",
+      "section": "reading",
+      "type": "reading-medium",
+      "prompt": "この人が初めての練習で楽しく歌えたのは、どうしてですか。",
+      "options": [
+        "友達と二人だけで歌ったから",
+        "自分に合うグループで、隣の人にも助けてもらったから",
+        "人の前で歌った経験がたくさんあったから",
+        "一人ずつ好きな歌を選べたから"
+      ],
+      "answer": 1,
+      "explanation": "El profesor lo situó en el grupo de voces graves, adecuado para su voz, y la persona de al lado le indicó dónde cantar. Ambas ayudas facilitaron su participación.",
+      "passage": "町の新聞で、歌のグループの新しいメンバーを募集しているのを見ました。私は歌うことが好きですが、人の前で歌ったことはありません。記事には、経験がなくても参加できると書いてあったので、友達と二人で練習を見に行きました。\nグループには大学生も、お年寄りもいました。一人ずつ歌うのかと思っていましたが、みんなで声を合わせて歌っていました。私は高い声が出にくかったので、先生が低い声のグループに入れてくれました。隣の人が歌う場所を指で教えてくれて、初めてでも楽しく歌えました。\n練習が終わると、友達は「日曜日は仕事があるから、毎週は来られない」と言いました。私は友達が来ないならやめようかと迷いました。でも、一人で来ても話せる人ができたので、続けることにしました。\n今は月に三回、日曜日の午前中に練習しています。来月、町のお祭りで初めて歌う予定です。家でも練習していますが、大きな声を出すと近所の人に迷惑なので、夜は歌を聞いて、言葉を覚えるようにしています。",
+      "groupId": "n4-c-medium-01"
+    },
+    {
+      "id": "n4-c-054",
+      "section": "reading",
+      "type": "reading-medium",
+      "prompt": "この人は、友達が毎週来られないと聞いて、どうしましたか。",
+      "options": [
+        "一人でも知っている人と話せるので、続けることにした。",
+        "友達と一緒でなければ歌えないので、やめた。",
+        "日曜日に仕事を始めることにした。",
+        "先生に練習の日を変えてもらった。"
+      ],
+      "answer": 0,
+      "explanation": "Dudó si continuar sin su amigo, pero decidió hacerlo porque ya había conocido personas con quienes conversar.",
+      "passage": "町の新聞で、歌のグループの新しいメンバーを募集しているのを見ました。私は歌うことが好きですが、人の前で歌ったことはありません。記事には、経験がなくても参加できると書いてあったので、友達と二人で練習を見に行きました。\nグループには大学生も、お年寄りもいました。一人ずつ歌うのかと思っていましたが、みんなで声を合わせて歌っていました。私は高い声が出にくかったので、先生が低い声のグループに入れてくれました。隣の人が歌う場所を指で教えてくれて、初めてでも楽しく歌えました。\n練習が終わると、友達は「日曜日は仕事があるから、毎週は来られない」と言いました。私は友達が来ないならやめようかと迷いました。でも、一人で来ても話せる人ができたので、続けることにしました。\n今は月に三回、日曜日の午前中に練習しています。来月、町のお祭りで初めて歌う予定です。家でも練習していますが、大きな声を出すと近所の人に迷惑なので、夜は歌を聞いて、言葉を覚えるようにしています。",
+      "groupId": "n4-c-medium-01"
+    },
+    {
+      "id": "n4-c-055",
+      "section": "reading",
+      "type": "reading-medium",
+      "prompt": "この人は、どうして夜は歌を聞いて言葉を覚えていますか。",
+      "options": [
+        "町のお祭りでは歌わないことになったから",
+        "昼間はいつも友達と練習しているから",
+        "夜は高い声が出しやすいから",
+        "お祭りの準備をしながら、近所の人に迷惑をかけないため"
+      ],
+      "answer": 3,
+      "explanation": "Necesita preparar su primera actuación en el festival, pero cantar fuerte por la noche molestaría a los vecinos. Por eso practica memorizando la letra mientras escucha.",
+      "passage": "町の新聞で、歌のグループの新しいメンバーを募集しているのを見ました。私は歌うことが好きですが、人の前で歌ったことはありません。記事には、経験がなくても参加できると書いてあったので、友達と二人で練習を見に行きました。\nグループには大学生も、お年寄りもいました。一人ずつ歌うのかと思っていましたが、みんなで声を合わせて歌っていました。私は高い声が出にくかったので、先生が低い声のグループに入れてくれました。隣の人が歌う場所を指で教えてくれて、初めてでも楽しく歌えました。\n練習が終わると、友達は「日曜日は仕事があるから、毎週は来られない」と言いました。私は友達が来ないならやめようかと迷いました。でも、一人で来ても話せる人ができたので、続けることにしました。\n今は月に三回、日曜日の午前中に練習しています。来月、町のお祭りで初めて歌う予定です。家でも練習していますが、大きな声を出すと近所の人に迷惑なので、夜は歌を聞いて、言葉を覚えるようにしています。",
+      "groupId": "n4-c-medium-01"
+    },
+    {
+      "id": "n4-c-056",
+      "section": "reading",
+      "type": "reading-information",
+      "prompt": "初めてセンターを使う人が、卓球教室に１回参加します。全部でいくら払いますか。",
+      "options": [
+        "５００円",
+        "７００円",
+        "９００円",
+        "１１００円"
+      ],
+      "answer": 2,
+      "explanation": "La clase cuesta 700 yenes y la primera tarjeta 200: en total 900. El material de tenis de mesa es gratuito.",
+      "passage": "青空スポーツセンター　初心者教室\n教室｜時間｜１回の料金｜持ち物\n体操｜月曜日１０時〜１１時｜５００円｜タオル\n卓球｜火曜日１８時〜１９時｜７００円｜室内用の靴\n水泳｜木曜日１９時〜２０時｜９００円｜水着・帽子\nダンス｜土曜日１３時〜１４時｜８００円｜室内用の靴\n\n参加する日の２日前までに、受付で申し込んでください。初めてセンターを使う方は、会員カード代２００円が別に必要です。卓球の道具は無料で借りられますが、靴は借りられません。すべての教室は大人向けです。",
+      "groupId": "n4-c-info-01"
+    },
+    {
+      "id": "n4-c-057",
+      "section": "reading",
+      "type": "reading-information",
+      "prompt": "土曜日のダンス教室に参加したい人は、どうすればいいですか。",
+      "options": [
+        "金曜日までに申し込み、靴を借りる。",
+        "木曜日までに申し込み、室内用の靴を持っていく。",
+        "水曜日までに申し込み、水着を持っていく。",
+        "土曜日に申し込み、タオルだけ持っていく。"
+      ],
+      "answer": 1,
+      "explanation": "Hay que inscribirse dos días antes, es decir, a más tardar el jueves, y llevar calzado de interior porque no lo prestan.",
+      "passage": "青空スポーツセンター　初心者教室\n教室｜時間｜１回の料金｜持ち物\n体操｜月曜日１０時〜１１時｜５００円｜タオル\n卓球｜火曜日１８時〜１９時｜７００円｜室内用の靴\n水泳｜木曜日１９時〜２０時｜９００円｜水着・帽子\nダンス｜土曜日１３時〜１４時｜８００円｜室内用の靴\n\n参加する日の２日前までに、受付で申し込んでください。初めてセンターを使う方は、会員カード代２００円が別に必要です。卓球の道具は無料で借りられますが、靴は借りられません。すべての教室は大人向けです。",
+      "groupId": "n4-c-info-01"
+    },
+    {
+      "id": "n4-c-058",
+      "section": "listening",
+      "type": "listening-task",
+      "prompt": "女の人は、まず何をしますか。",
+      "options": [
+        "お金を入れる",
+        "飲み物を選ぶ",
+        "カードを入れる",
+        "店員を呼ぶ"
+      ],
+      "answer": 1,
+      "explanation": "Primero debe seleccionar la bebida; después la máquina muestra el precio y se paga.",
+      "script": "女の人は、まず何をしますか。\n女：この機械、どうやって使うんですか。先にお金ですか。\n男：いいえ、まず飲みたい物のボタンを押してください。値段が出たら、お金を入れます。\n女：カードも使えますか。\n男：これは現金だけです。\n質問。女の人は、まず何をしますか。",
+      "audio": "data/jlpt-simulacro/audios/n4-c-058.mp3"
+    },
+    {
+      "id": "n4-c-059",
+      "section": "listening",
+      "type": "listening-task",
+      "prompt": "男の人は、何を持っていきますか。",
+      "options": [
+        "お皿とコップ",
+        "コップだけ",
+        "お皿だけ",
+        "はしとスプーン"
+      ],
+      "answer": 2,
+      "explanation": "Los vasos y cubiertos ya están preparados; solo faltan platos.",
+      "script": "男の人は、何を持っていきますか。\n女：ピクニックの準備をしているんだけど、お皿を持ってきてくれる？\n男：いいよ。コップもいる？\n女：コップは買ったから大丈夫。はしとスプーンもあるの。\n男：じゃあ、お皿だけでいいね。\n質問。男の人は、何を持っていきますか。",
+      "audio": "data/jlpt-simulacro/audios/n4-c-059.mp3"
+    },
+    {
+      "id": "n4-c-060",
+      "section": "listening",
+      "type": "listening-task",
+      "prompt": "男の人は、洗濯機を使う前に何をしますか。",
+      "options": [
+        "洗剤を買う",
+        "服を全部ぬらす",
+        "コインを入れる",
+        "ポケットの中を確かめる"
+      ],
+      "answer": 3,
+      "explanation": "Antes de meter la ropa debe revisar los bolsillos y sacar papel u otros objetos. La máquina ya proporciona detergente.",
+      "script": "男の人は、洗濯機を使う前に何をしますか。\n男：この洗濯機、初めて使うんですが、洗剤はどこに入れますか。\n女：洗剤は自動で入るので、いりません。服を入れる前に、ポケットに紙などが残っていないか見てください。\n男：分かりました。それから服を入れて、コインを入れるんですね。\n女：はい、そうです。\n質問。男の人は、洗濯機を使う前に何をしますか。",
+      "audio": "data/jlpt-simulacro/audios/n4-c-060.mp3"
+    },
+    {
+      "id": "n4-c-061",
+      "section": "listening",
+      "type": "listening-task",
+      "prompt": "男の人は、このあと何をしますか。",
+      "options": [
+        "タオルを持ってくる",
+        "床を掃除する",
+        "水を買いに行く",
+        "テーブルを動かす"
+      ],
+      "answer": 0,
+      "explanation": "La mujer pide traer una toalla de la cocina para secar el agua.",
+      "script": "男の人は、このあと何をしますか。\n女：あ、水をこぼしちゃった。\n男：床もぬれた？\n女：テーブルの上だけ。台所からタオルを持ってきてくれる？\n男：分かった。大きいのを持ってくるね。\n質問。男の人は、このあと何をしますか。",
+      "audio": "data/jlpt-simulacro/audios/n4-c-061.mp3"
+    },
+    {
+      "id": "n4-c-062",
+      "section": "listening",
+      "type": "listening-task",
+      "prompt": "女の人は、どうやって家に入りますか。",
+      "options": [
+        "裏の窓から入る",
+        "兄に鍵を借りる",
+        "管理人に開けてもらう",
+        "父に開けてもらう"
+      ],
+      "answer": 2,
+      "explanation": "El padre está fuera y sugiere que la encargada del edificio abra con la llave de repuesto.",
+      "script": "女の人は、どうやって家に入りますか。\n女：お父さん、鍵を忘れて家に入れないの。今、家にいる？\n男：今は買い物中なんだ。兄さんも出かけているよ。管理人さんが予備の鍵を持っているから、頼んでみて。\n女：分かった。管理人さんの部屋へ行ってみる。\n質問。女の人は、どうやって家に入りますか。",
+      "audio": "data/jlpt-simulacro/audios/n4-c-062.mp3"
+    },
+    {
+      "id": "n4-c-063",
+      "section": "listening",
+      "type": "listening-task",
+      "prompt": "学生は、何ページを読みますか。",
+      "options": [
+        "２０ページだけ",
+        "２１ページから２３ページまで",
+        "２０ページから２１ページまで",
+        "２２ページから２４ページまで"
+      ],
+      "answer": 1,
+      "explanation": "Ya leyeron la página veinte; la tarea nueva es de la 21 a la 23.",
+      "script": "学生は、何ページを読みますか。\n先生：今日は２０ページまで読みました。次の授業までに、その次のページから２３ページまで読んできてください。\n学生：問題も全部やりますか。\n先生：問題は授業でしますから、読むだけでいいです。\n質問。学生は、何ページを読みますか。",
+      "audio": "data/jlpt-simulacro/audios/n4-c-063.mp3"
+    },
+    {
+      "id": "n4-c-064",
+      "section": "listening",
+      "type": "listening-task",
+      "prompt": "女の人は、荷物を受け取るために何を見せますか。",
+      "options": [
+        "買い物のレシート",
+        "荷物の写真",
+        "携帯電話に届いた番号",
+        "会員カード"
+      ],
+      "answer": 2,
+      "explanation": "Para recoger el paquete basta mostrar el número recibido en el móvil. La tarjeta de cliente no es necesaria.",
+      "script": "女の人は、荷物を受け取るために何を見せますか。\n女：インターネットで買った荷物を、この店で受け取りたいんですが。\n男：荷物が届いたというメールは来ていますか。\n女：はい。携帯電話にあります。会員カードも出しますか。\n男：カードはいりません。メールに書いてある番号を見せてください。\n女：この番号ですね。お願いします。\n質問。女の人は、荷物を受け取るために何を見せますか。",
+      "audio": "data/jlpt-simulacro/audios/n4-c-064.mp3"
+    },
+    {
+      "id": "n4-c-065",
+      "section": "listening",
+      "type": "listening-task",
+      "prompt": "女の人は、いつ電話をかけ直しますか。",
+      "options": [
+        "１０分後",
+        "３０分後",
+        "今日の夕方",
+        "明日の朝"
+      ],
+      "answer": 1,
+      "explanation": "La persona buscada volverá dentro de media hora y la interlocutora decide llamar entonces.",
+      "script": "女の人は、いつ電話をかけ直しますか。\n女：もしもし、川口さんはいらっしゃいますか。\n男：今、ちょっと席を外しています。３０分ぐらいで戻りますが。\n女：では、そのころまた電話します。\n男：お急ぎでしたら、戻ったらこちらからお電話しましょうか。\n女：いいえ、大丈夫です。私からかけます。\n質問。女の人は、いつ電話をかけ直しますか。",
+      "audio": "data/jlpt-simulacro/audios/n4-c-065.mp3"
+    },
+    {
+      "id": "n4-c-066",
+      "section": "listening",
+      "type": "listening-point",
+      "prompt": "女の人は、どうして旅行の日を変えましたか。",
+      "options": [
+        "ホテルが休みだから",
+        "友達が病気だから",
+        "切符が買えないから",
+        "仕事が入ったから"
+      ],
+      "answer": 3,
+      "explanation": "La causa es que le asignaron trabajo ese día; no hay un problema con el hotel.",
+      "script": "女の人は、どうして旅行の日を変えましたか。\n男：旅行、来週になったんだって？ ホテルが取れなかったの？\n女：ううん、ホテルは大丈夫だったんだけど、急に土曜日も働くことになって。\n男：それは残念だったね。\n女：でも、友達も日を変えてくれたから、一緒に行けるよ。\n質問。女の人は、どうして旅行の日を変えましたか。",
+      "audio": "data/jlpt-simulacro/audios/n4-c-066.mp3"
+    },
+    {
+      "id": "n4-c-067",
+      "section": "listening",
+      "type": "listening-point",
+      "prompt": "男の人は、何をなくしましたか。",
+      "options": [
+        "帽子",
+        "手袋",
+        "傘",
+        "時計"
+      ],
+      "answer": 1,
+      "explanation": "Tiene ambas cosas, gorro y paraguas; lo que falta son los guantes, quizá en el tren.",
+      "script": "男の人は、何をなくしましたか。\n女：何を探しているの？\n男：手袋がないんだ。帽子と一緒にかばんに入れたつもりだったけど。\n女：傘は持っている？\n男：うん。帽子もある。手袋だけ、電車に置いてきたのかな。\n質問。男の人は、何をなくしましたか。",
+      "audio": "data/jlpt-simulacro/audios/n4-c-067.mp3"
+    },
+    {
+      "id": "n4-c-068",
+      "section": "listening",
+      "type": "listening-point",
+      "prompt": "二人は、映画の前に何をしますか。",
+      "options": [
+        "昼ご飯を食べる",
+        "本を買う",
+        "友達に会う",
+        "服を買う"
+      ],
+      "answer": 0,
+      "explanation": "Queda una hora y deciden comer antes; la librería la dejarán para después del cine.",
+      "script": "二人は、映画の前に何をしますか。\n女：映画まで、あと１時間あるね。\n男：お腹がすいたから、何か食べない？\n女：そうだね。本屋にも行きたいけど、それは映画のあとにしよう。\n男：うん。近くにおいしいそば屋があるよ。\n質問。二人は、映画の前に何をしますか。",
+      "audio": "data/jlpt-simulacro/audios/n4-c-068.mp3"
+    },
+    {
+      "id": "n4-c-069",
+      "section": "listening",
+      "type": "listening-point",
+      "prompt": "女の人は、どんな部屋を予約しましたか。",
+      "options": [
+        "海が見える一人用の部屋",
+        "山が見える一人用の部屋",
+        "海が見える二人用の部屋",
+        "山が見える二人用の部屋"
+      ],
+      "answer": 3,
+      "explanation": "Viaja con su madre; no había habitaciones dobles con vistas al mar, así que reservó una con vistas a la montaña.",
+      "script": "女の人は、どんな部屋を予約しましたか。\n男：ホテル、決まった？\n女：うん。母と二人で泊まる部屋を予約したよ。海が見える部屋がよかったけど、二人用はいっぱいだったの。\n男：じゃあ、どうしたの？\n女：山が見えるほうにした。そっちは空いていたから。\n質問。女の人は、どんな部屋を予約しましたか。",
+      "audio": "data/jlpt-simulacro/audios/n4-c-069.mp3"
+    },
+    {
+      "id": "n4-c-070",
+      "section": "listening",
+      "type": "listening-point",
+      "prompt": "男の人が毎朝早く起きるのは、どうしてですか。",
+      "options": [
+        "犬と散歩するため",
+        "新聞を配るため",
+        "料理を練習するため",
+        "遠い会社へ行くため"
+      ],
+      "answer": 0,
+      "explanation": "Ahora se levanta temprano para pasear al perro que empezó a cuidar el mes pasado.",
+      "script": "男の人が毎朝早く起きるのは、どうしてですか。\n女：最近、朝早いですね。会社が変わったんですか。\n男：いいえ、先月から犬を飼っていて、仕事の前に散歩に行くんです。\n女：毎日ですか。\n男：はい。雨の日も外へ行きたがるので、大変ですが楽しいです。\n質問。男の人が毎朝早く起きるのは、どうしてですか。",
+      "audio": "data/jlpt-simulacro/audios/n4-c-070.mp3"
+    },
+    {
+      "id": "n4-c-071",
+      "section": "listening",
+      "type": "listening-point",
+      "prompt": "女の人は、何曜日に休みますか。",
+      "options": [
+        "月曜日と火曜日",
+        "火曜日と水曜日",
+        "土曜日と日曜日",
+        "日曜日と月曜日"
+      ],
+      "answer": 1,
+      "explanation": "La tienda cierra los martes; además ella descansa los miércoles. Los fines de semana trabaja.",
+      "script": "女の人は、何曜日に休みますか。\n男：お店の仕事、土日は休み？\n女：ううん、土日が一番忙しいの。店は火曜日が休みで、私はその次の日も休みをもらっているよ。\n男：水曜日もなんだね。\n女：そう。月曜日は働いているよ。\n質問。女の人は、何曜日に休みますか。",
+      "audio": "data/jlpt-simulacro/audios/n4-c-071.mp3"
+    },
+    {
+      "id": "n4-c-072",
+      "section": "listening",
+      "type": "listening-point",
+      "prompt": "男の人は、コーヒーをどう飲みますか。",
+      "options": [
+        "砂糖だけを入れる",
+        "牛乳だけを入れる",
+        "何も入れない",
+        "砂糖と牛乳を入れる"
+      ],
+      "answer": 2,
+      "explanation": "Hoy quiere probar el café solo para percibir su sabor; no añade ni azúcar ni leche.",
+      "script": "男の人は、コーヒーをどう飲みますか。\n女：コーヒーに砂糖と牛乳を入れますか。\n男：いつもは牛乳を入れますが、今日はどちらもいりません。いい豆を使っていると聞いたので、そのまま飲んでみたいです。\n女：分かりました。どうぞ。\n質問。男の人は、コーヒーをどう飲みますか。",
+      "audio": "data/jlpt-simulacro/audios/n4-c-072.mp3"
+    },
+    {
+      "id": "n4-c-073",
+      "section": "listening",
+      "type": "listening-expression",
+      "prompt": "この場面で何と言いますか。",
+      "options": [
+        "すみません、私たちの写真を撮っていただけますか。",
+        "すみません、カメラを貸してあげましょうか。",
+        "すみません、あなたの写真を見せてください。"
+      ],
+      "answer": 0,
+      "explanation": "Pide cortésmente que otra persona les haga una foto. No ofrece prestar una cámara ni pide ver fotos ajenas.",
+      "script": "一番。すみません、私たちの写真を撮っていただけますか。\n二番。すみません、カメラを貸してあげましょうか。\n三番。すみません、あなたの写真を見せてください。",
+      "scene": "旅行中、二人で写った写真を撮りたいです。近くにいる人にカメラを渡して、お願いをします。何と言いますか。",
+      "audio": "data/jlpt-simulacro/audios/n4-c-073.mp3"
+    },
+    {
+      "id": "n4-c-074",
+      "section": "listening",
+      "type": "listening-expression",
+      "prompt": "この場面で何と言いますか。",
+      "options": [
+        "この本をここに置いてもいいですか。",
+        "この本がどこにあるか教えていただけますか。",
+        "この本を返したことがありますか。"
+      ],
+      "answer": 1,
+      "explanation": "Pregunta cortésmente dónde está el libro, para recibir ayuda para localizarlo.",
+      "script": "一番。この本をここに置いてもいいですか。\n二番。この本がどこにあるか教えていただけますか。\n三番。この本を返したことがありますか。",
+      "scene": "図書館で、探している本が見つかりません。図書館の人に手伝ってほしいです。何と言いますか。",
+      "audio": "data/jlpt-simulacro/audios/n4-c-074.mp3"
+    },
+    {
+      "id": "n4-c-075",
+      "section": "listening",
+      "type": "listening-expression",
+      "prompt": "この場面で何と言いますか。",
+      "options": [
+        "ここに座ってはいけません。",
+        "すみません、その席を私に貸してください。",
+        "よかったら、こちらにどうぞ。"
+      ],
+      "answer": 2,
+      "explanation": "よかったら、こちらにどうぞ ofrece amablemente el asiento a la persona mayor.",
+      "script": "一番。ここに座ってはいけません。\n二番。すみません、その席を私に貸してください。\n三番。よかったら、こちらにどうぞ。",
+      "scene": "電車に座っています。お年寄りが乗ってきたので、自分の席を使ってほしいです。何と言いますか。",
+      "audio": "data/jlpt-simulacro/audios/n4-c-075.mp3"
+    },
+    {
+      "id": "n4-c-076",
+      "section": "listening",
+      "type": "listening-expression",
+      "prompt": "この場面で何と言いますか。",
+      "options": [
+        "すみません。大丈夫ですか。",
+        "どういたしまして。痛いですか。",
+        "おかげさまで、元気です。"
+      ],
+      "answer": 0,
+      "explanation": "Se disculpa por haber pisado a alguien y pregunta si está bien.",
+      "script": "一番。すみません。大丈夫ですか。\n二番。どういたしまして。痛いですか。\n三番。おかげさまで、元気です。",
+      "scene": "道で知らない人の足を踏んでしまいました。謝ります。何と言いますか。",
+      "audio": "data/jlpt-simulacro/audios/n4-c-076.mp3"
+    },
+    {
+      "id": "n4-c-077",
+      "section": "listening",
+      "type": "listening-expression",
+      "prompt": "この場面で何と言いますか。",
+      "options": [
+        "領収書は必要ありません。",
+        "すみません、領収書をいただけますか。",
+        "領収書を出しておきましょうか。"
+      ],
+      "answer": 1,
+      "explanation": "領収書をいただけますか solicita un recibo para justificar la compra en la empresa.",
+      "script": "一番。領収書は必要ありません。\n二番。すみません、領収書をいただけますか。\n三番。領収書を出しておきましょうか。",
+      "scene": "会社で使う物を買って、お金を払いました。会社に出すために領収書が必要です。店員に何と言いますか。",
+      "audio": "data/jlpt-simulacro/audios/n4-c-077.mp3"
+    },
+    {
+      "id": "n4-c-078",
+      "section": "listening",
+      "type": "listening-response",
+      "prompt": "話を聞いて、最もよい返事を選んでください。",
+      "options": [
+        "はい、毎週末です。",
+        "家で部屋の掃除をしていました。",
+        "週末にしてください。"
+      ],
+      "answer": 1,
+      "explanation": "La pregunta pide qué estuvo haciendo el fin de semana: estuvo limpiando su habitación.",
+      "script": "週末は何をしていたんですか。\n一番。はい、毎週末です。\n二番。家で部屋の掃除をしていました。\n三番。週末にしてください。",
+      "audio": "data/jlpt-simulacro/audios/n4-c-078.mp3"
+    },
+    {
+      "id": "n4-c-079",
+      "section": "listening",
+      "type": "listening-response",
+      "prompt": "話を聞いて、最もよい返事を選んでください。",
+      "options": [
+        "もう一つ作ったことがあります。",
+        "いいえ、お菓子ではありません。",
+        "ありがとうございます。いただきます。"
+      ],
+      "answer": 2,
+      "explanation": "Se acepta con agradecimiento la oferta de otro dulce.",
+      "script": "このお菓子、もう一ついかがですか。\n一番。もう一つ作ったことがあります。\n二番。いいえ、お菓子ではありません。\n三番。ありがとうございます。いただきます。",
+      "audio": "data/jlpt-simulacro/audios/n4-c-079.mp3"
+    },
+    {
+      "id": "n4-c-080",
+      "section": "listening",
+      "type": "listening-response",
+      "prompt": "話を聞いて、最もよい返事を選んでください。",
+      "options": [
+        "お疲れさまでした。",
+        "お邪魔します。",
+        "お帰りなさい。"
+      ],
+      "answer": 0,
+      "explanation": "Cuando un compañero anuncia que se marcha antes, お疲れさまでした es una respuesta habitual.",
+      "script": "お先に失礼します。\n一番。お疲れさまでした。\n二番。お邪魔します。\n三番。お帰りなさい。",
+      "audio": "data/jlpt-simulacro/audios/n4-c-080.mp3"
+    },
+    {
+      "id": "n4-c-081",
+      "section": "listening",
+      "type": "listening-response",
+      "prompt": "話を聞いて、最もよい返事を選んでください。",
+      "options": [
+        "ええ、コートを着てきてよかったです。",
+        "はい、昨日は月曜日です。",
+        "いいえ、夏休みを取りました。"
+      ],
+      "answer": 0,
+      "explanation": "La respuesta comenta el frío y expresa alivio por haber llevado abrigo.",
+      "script": "今日はずいぶん寒いですね。\n一番。ええ、コートを着てきてよかったです。\n二番。はい、昨日は月曜日です。\n三番。いいえ、夏休みを取りました。",
+      "audio": "data/jlpt-simulacro/audios/n4-c-081.mp3"
+    },
+    {
+      "id": "n4-c-082",
+      "section": "listening",
+      "type": "listening-response",
+      "prompt": "話を聞いて、最もよい返事を選んでください。",
+      "options": [
+        "はい、自転車に乗れます。",
+        "すみません。ここには置かないでください。",
+        "いいえ、自転車を買いました。"
+      ],
+      "answer": 1,
+      "explanation": "Responde a la petición de permiso indicando cortésmente que no se puede aparcar allí.",
+      "script": "あのう、ここに自転車を置いてもいいですか。\n一番。はい、自転車に乗れます。\n二番。すみません。ここには置かないでください。\n三番。いいえ、自転車を買いました。",
+      "audio": "data/jlpt-simulacro/audios/n4-c-082.mp3"
+    },
+    {
+      "id": "n4-c-083",
+      "section": "listening",
+      "type": "listening-response",
+      "prompt": "話を聞いて、最もよい返事を選んでください。",
+      "options": [
+        "半分はもう昨日でした。",
+        "重さを半分に買います。",
+        "ありがとうございます。助かります。"
+      ],
+      "answer": 2,
+      "explanation": "Acepta agradecida la ayuda ofrecida para cargar algo pesado.",
+      "script": "重くないですか。半分持ちますよ。\n一番。半分はもう昨日でした。\n二番。重さを半分に買います。\n三番。ありがとうございます。助かります。",
+      "audio": "data/jlpt-simulacro/audios/n4-c-083.mp3"
+    },
+    {
+      "id": "n4-c-084",
+      "section": "listening",
+      "type": "listening-response",
+      "prompt": "話を聞いて、最もよい返事を選んでください。",
+      "options": [
+        "「しんぶん」と読みます。",
+        "はい、読むと思います。",
+        "昨日、書いておきました。"
+      ],
+      "answer": 0,
+      "explanation": "La pregunta pide una lectura y se responde proporcionándola directamente.",
+      "script": "この漢字はどう読むんですか。\n一番。「しんぶん」と読みます。\n二番。はい、読むと思います。\n三番。昨日、書いておきました。",
+      "audio": "data/jlpt-simulacro/audios/n4-c-084.mp3"
+    },
+    {
+      "id": "n4-c-085",
+      "section": "listening",
+      "type": "listening-response",
+      "prompt": "話を聞いて、最もよい返事を選んでください。",
+      "options": [
+        "ええ、来月は今年です。",
+        "そうですか。どちらへ引っ越すんですか。",
+        "いいえ、まだ住んでください。"
+      ],
+      "answer": 1,
+      "explanation": "Se muestra interés por la noticia preguntando a dónde se mudará.",
+      "script": "来月、引っ越すことになったんです。\n一番。ええ、来月は今年です。\n二番。そうですか。どちらへ引っ越すんですか。\n三番。いいえ、まだ住んでください。",
+      "audio": "data/jlpt-simulacro/audios/n4-c-085.mp3"
+    }
+  ]
+}

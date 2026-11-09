@@ -1,0 +1,1689 @@
+{
+  "prueba": {
+    "sha256_script": "3e99ca3c9984f5b7aef99203e82360ab140a383fb0473d1de23621e3e54ce19d",
+    "seconds": 7.91,
+    "bytes": 24140,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N4"
+  },
+  "n5-044": {
+    "sha256_script": "c3f823080fbd479aee2288bfb62c744add2f22f4f44bacf4667cea1094ded292",
+    "seconds": 18.565,
+    "bytes": 56108,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N5"
+  },
+  "n5-045": {
+    "sha256_script": "6f2a646433585c52116c274f5c05195fa31322ef4c38b94e64433671fc8c3eb0",
+    "seconds": 21.57,
+    "bytes": 65108,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N5"
+  },
+  "n5-046": {
+    "sha256_script": "3ddec7cabe551e09170d2754eafa43dd03198bb6eb22bcef17eda0add125fc94",
+    "seconds": 22.255,
+    "bytes": 67196,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N5"
+  },
+  "n5-047": {
+    "sha256_script": "fc09f6ace13e0595fab2e7a0c145a4ca54e167307ed7998a5156fa9eca556c80",
+    "seconds": 25.99,
+    "bytes": 78356,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N5"
+  },
+  "n5-048": {
+    "sha256_script": "4947b6c6f05a8244b08b37b4af0138c9e492cce1adc3a76250156c5ff9b9d54a",
+    "seconds": 24.37,
+    "bytes": 73532,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N5"
+  },
+  "n5-049": {
+    "sha256_script": "7890eaa33a14dfcff1db76c831fcb482827f44fa73d3aeec23f5da78dee0ba44",
+    "seconds": 23.99,
+    "bytes": 72380,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N5"
+  },
+  "n5-050": {
+    "sha256_script": "5d9451c2c83c5df0ee3e6cb35a27df46739fced643ffefcdb2293b379abe1e4d",
+    "seconds": 26.065,
+    "bytes": 78644,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N5"
+  },
+  "n5-051": {
+    "sha256_script": "9fc57ba299d9071b9d8d15ba9314d9f99f3aed9d029c3f74d79f53600c2fa827",
+    "seconds": 23.775,
+    "bytes": 71732,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N5"
+  },
+  "n5-052": {
+    "sha256_script": "41e17e89a0dd406702f8517bdf0af0882b89a28bd9e20b73c38dd544865d59be",
+    "seconds": 21.915,
+    "bytes": 66188,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N5"
+  },
+  "n5-053": {
+    "sha256_script": "2ad4f9f5612ee791a30e56b596d621b7850422cc3ca637efd85a5241bcc58614",
+    "seconds": 23.365,
+    "bytes": 70508,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N5"
+  },
+  "n5-054": {
+    "sha256_script": "a03cf2ef0b2635d1f5f4eeb8632c83c3f2f6c5f25f42ec428b87ca7bd8c799a1",
+    "seconds": 24.64,
+    "bytes": 74324,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N5"
+  },
+  "n5-055": {
+    "sha256_script": "951f70ef6a249dc6f18df73688c6421ef1bfdf606c0bdd48e89fe8faa64f9858",
+    "seconds": 25.01,
+    "bytes": 75476,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N5"
+  },
+  "n5-056": {
+    "sha256_script": "380d51b226aa6fee19215f9e0a5b3764a8c8d05ce10034063fad7cc5025d0e3b",
+    "seconds": 22.65,
+    "bytes": 68348,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N5"
+  },
+  "n5-057": {
+    "sha256_script": "5a85c65d6a60aa0a08691b604fecdf0d8b0ec8a28469f67f9cc59f7ea8d2239a",
+    "seconds": 16.385,
+    "bytes": 49556,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N5"
+  },
+  "n5-058": {
+    "sha256_script": "a35fc2d92a8558727bdf7cb6a5a886b4ac6ffd931f2a3c58283a68c112357fff",
+    "seconds": 19.6,
+    "bytes": 59204,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N5"
+  },
+  "n5-059": {
+    "sha256_script": "e9f0e7c1e7d886289886e306344067c1d6a67c7dc870dfe26866e1c55c50dfcc",
+    "seconds": 19.25,
+    "bytes": 58196,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N5"
+  },
+  "n5-060": {
+    "sha256_script": "7d1540decca99d5ea68ad58a044ca7f5581d45d08a5d045381d78c34fbc5f722",
+    "seconds": 16.68,
+    "bytes": 50420,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N5"
+  },
+  "n5-061": {
+    "sha256_script": "3809f0edd874f0dbdc1122d78a3e9b146a08b9426f9aad79c750b772ae94bd73",
+    "seconds": 15.97,
+    "bytes": 48332,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N5"
+  },
+  "n5-062": {
+    "sha256_script": "8207cad95d60c4f5642512974a6bed7ce902426754ea823955e633b42a5ec603",
+    "seconds": 20.48,
+    "bytes": 61868,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N5"
+  },
+  "n5-063": {
+    "sha256_script": "7a5484b77b351193c0233c09390c2feffc5415399287e5febf4df21eb720f97a",
+    "seconds": 21.13,
+    "bytes": 63812,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N5"
+  },
+  "n5-064": {
+    "sha256_script": "19bd3450f78d7e4fcf0ad5f7d447a7234a5f1f6545b07b3994a0374b46ff1364",
+    "seconds": 18.82,
+    "bytes": 56900,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N5"
+  },
+  "n5-065": {
+    "sha256_script": "d0ccb45f8fd80ce4e184cbc5d80de6e952bd5b6156909342fd112be166ca481a",
+    "seconds": 18.53,
+    "bytes": 56036,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N5"
+  },
+  "n5-066": {
+    "sha256_script": "d2be38fa1f5c13998e6833dec6f2c9b143576f5121283470a99ca39188d5cb0b",
+    "seconds": 17.975,
+    "bytes": 54308,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N5"
+  },
+  "n5-067": {
+    "sha256_script": "91efba72f360c68d3ed9b474307a9ee2937cbb1879e91085d309872c1c8180ef",
+    "seconds": 18.66,
+    "bytes": 56396,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N5"
+  },
+  "n4-058": {
+    "sha256_script": "6e40450c6851423f5b278d37f44f8455bf094cf9ea9eaaa8124a17121fec62d2",
+    "seconds": 20.54,
+    "bytes": 62012,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N4"
+  },
+  "n4-059": {
+    "sha256_script": "6db4f74ccce0b0710d5d6ea43d72efe4dce76d8325d1ccdb1e4262d0344982b9",
+    "seconds": 24.935,
+    "bytes": 75188,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N4"
+  },
+  "n4-060": {
+    "sha256_script": "f3a44b73b93a5192c7a367cbacb8b44a5e4fbe36dd7c70a30a44dc3f05f64e12",
+    "seconds": 24.015,
+    "bytes": 72452,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N4"
+  },
+  "n4-061": {
+    "sha256_script": "dc7cf183a35b54b0dd5a23474ac53d06d92a6c291e419ef8520245681f7ff606",
+    "seconds": 28.48,
+    "bytes": 85844,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N4"
+  },
+  "n4-062": {
+    "sha256_script": "85a2694e6eb4a0b18e6a27ba53d299737677e3fcf130f393b5919001646701ac",
+    "seconds": 25.18,
+    "bytes": 75980,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N4"
+  },
+  "n4-063": {
+    "sha256_script": "681858596cab8933482dc09eee0db002ba0726c7eda0d0689cc809bb6b5afd26",
+    "seconds": 21.445,
+    "bytes": 64748,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N4"
+  },
+  "n4-064": {
+    "sha256_script": "7684e9d7c999ad89d9789515cd4ed0a4faa681c86c97f99cd00b6d399dd57744",
+    "seconds": 21.99,
+    "bytes": 66404,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N4"
+  },
+  "n4-065": {
+    "sha256_script": "3ff18284ba8d16639080e7cc861af7e8a4b8448620db1d421ab6167dd8e15364",
+    "seconds": 26.215,
+    "bytes": 79076,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N4"
+  },
+  "n4-066": {
+    "sha256_script": "add5eb229326ab6f5a2c3c04a7892e92b182b587977f93ffb273f18a8ba37eb2",
+    "seconds": 21.42,
+    "bytes": 64676,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N4"
+  },
+  "n4-067": {
+    "sha256_script": "6871f058099b266b697d5c912862c17ea1213adf0b8a27e342297430ada94d77",
+    "seconds": 19.555,
+    "bytes": 59060,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N4"
+  },
+  "n4-068": {
+    "sha256_script": "86bc6eeac15d00950a2c1435d336468bd98b27e82ae0340292005ba2e0581d9f",
+    "seconds": 26.395,
+    "bytes": 79580,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N4"
+  },
+  "n4-069": {
+    "sha256_script": "b3e2645335b788851f84f81728688010027b2d4e25ccbdfdb368d1be0e764848",
+    "seconds": 26.865,
+    "bytes": 81020,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N4"
+  },
+  "n4-070": {
+    "sha256_script": "1d39bc6b0fac6608bbc9c8d1ebf3baab2410f64433afdd340c2d35888264eefd",
+    "seconds": 24.255,
+    "bytes": 73172,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N4"
+  },
+  "n4-071": {
+    "sha256_script": "3568caec7972ba73885a75a017b51a9413e3dc37fb8604763bfac9b9f0ba06a6",
+    "seconds": 27.42,
+    "bytes": 82676,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N4"
+  },
+  "n4-072": {
+    "sha256_script": "aea08e383a62645cf8b98d8f48ccd081570eb962809b485ad1811f5bb4a93b45",
+    "seconds": 25.5,
+    "bytes": 76916,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N4"
+  },
+  "n4-073": {
+    "sha256_script": "6bbce7e0b59744c1de9c1a4673ed77465132c7532a779d5b3b6808e56f7b7932",
+    "seconds": 21.695,
+    "bytes": 65468,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N4"
+  },
+  "n4-074": {
+    "sha256_script": "55177c891cd254034c29ca6b5fed748075e4c34d77a830709245a0edce594063",
+    "seconds": 20.155,
+    "bytes": 60860,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N4"
+  },
+  "n4-075": {
+    "sha256_script": "7e282a6a94f7aec119b6436493fcd88c273832fcdbcd6ddca9059ac011d39934",
+    "seconds": 19.585,
+    "bytes": 59204,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N4"
+  },
+  "n4-076": {
+    "sha256_script": "6df9175617a097bc74898ffa591d33e603086e2e0e498b4dedfa2f480dfcc707",
+    "seconds": 18.325,
+    "bytes": 55388,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N4"
+  },
+  "n4-077": {
+    "sha256_script": "6c74a9b1bbef2a82cbf5aa27226eb5871c1f8f65d4a0e4e3f0065ff41b42f47a",
+    "seconds": 21.63,
+    "bytes": 65324,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N4"
+  },
+  "n4-078": {
+    "sha256_script": "54a58986a673254881eb2d41e70ede79287238e1eb460b25fec9a17181ad3682",
+    "seconds": 18.665,
+    "bytes": 56396,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N4"
+  },
+  "n4-079": {
+    "sha256_script": "996a47ddc80ae59b58f84c74c4639d637db72ab7c8220bdd77d8edffb76bcc42",
+    "seconds": 18.8,
+    "bytes": 56828,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N4"
+  },
+  "n4-080": {
+    "sha256_script": "de2c0bd00edcf43b51cee983b35832c7ee45b0839206289452379bec1d9a113f",
+    "seconds": 20.83,
+    "bytes": 62876,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N4"
+  },
+  "n4-081": {
+    "sha256_script": "fb80ffcac72003877112addfaa39ca09d3762fe0ab6350a4165410193bd9fcda",
+    "seconds": 18.05,
+    "bytes": 54596,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N4"
+  },
+  "n4-082": {
+    "sha256_script": "0c79c97fa8e612004e14f36c49f805fee21a9e3757bc8dc3ec1af2b6c1af49e0",
+    "seconds": 18.545,
+    "bytes": 56036,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N4"
+  },
+  "n4-083": {
+    "sha256_script": "919ad1cc4d0802adcd6b2905a6f03924dfd26b4a197d2a7c2470f8a1052cc852",
+    "seconds": 19.94,
+    "bytes": 60212,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N4"
+  },
+  "n4-084": {
+    "sha256_script": "277b6a9fd6e6affe949c4f29bb416c6fc1b21998f6286397801e2b2f15c98a2e",
+    "seconds": 16.595,
+    "bytes": 50204,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N4"
+  },
+  "n4-085": {
+    "sha256_script": "151550c2e0208b22256e00f448870931bdb763f5a202498a9fb06ad2404e9598",
+    "seconds": 18.42,
+    "bytes": 55676,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N4"
+  },
+  "n3-075": {
+    "sha256_script": "a42fa22c726f0175fc65d3bb3ba5fed5c84f17e2b5846db579d5254e1dd72122",
+    "seconds": 31.445,
+    "bytes": 94772,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N3"
+  },
+  "n3-076": {
+    "sha256_script": "11988eb3c61def68ceeb432206f9c3f1c57efbc70bdf9540d007497be9717ff0",
+    "seconds": 34.31,
+    "bytes": 103340,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N3"
+  },
+  "n3-077": {
+    "sha256_script": "dbe89175c6c51001d70f468c07449fcc1a73d67b7ffefaaf53519f87377b9363",
+    "seconds": 30.955,
+    "bytes": 93260,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N3"
+  },
+  "n3-078": {
+    "sha256_script": "e77562f29e5475ae04cf325b47ec4f66cfed8d8ddc6523a6fcd2f721769c82f1",
+    "seconds": 30.915,
+    "bytes": 93188,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N3"
+  },
+  "n3-079": {
+    "sha256_script": "4a9cc5771ab503f0e420e42db4a63fdf4c67da20f1356724c6323221251b311c",
+    "seconds": 31.22,
+    "bytes": 94052,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N3"
+  },
+  "n3-080": {
+    "sha256_script": "0ddf81cc46063b24121cfa6ce635eb509248528c4b66a9976eadade9e965d33e",
+    "seconds": 32.49,
+    "bytes": 97868,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N3"
+  },
+  "n3-081": {
+    "sha256_script": "f1b53bdf19fcdc709130831f8c2d582b1593aa97454284e97ef20927e654f790",
+    "seconds": 26.105,
+    "bytes": 78716,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N3"
+  },
+  "n3-082": {
+    "sha256_script": "ef9f7483259104767f1d03cd7ab700dd959af20896c37097e51e707b586711e0",
+    "seconds": 31.13,
+    "bytes": 93836,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N3"
+  },
+  "n3-083": {
+    "sha256_script": "7aa8cb599867668db72b0c3b12adcb4a70fc1cf24ee45aad77c23b16466cbb2b",
+    "seconds": 33.16,
+    "bytes": 99884,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N3"
+  },
+  "n3-084": {
+    "sha256_script": "163b55a8e211303eb3f71bcc8944b5d89bfd1f1dceeac8511f3cf8b2b40adc7a",
+    "seconds": 33.745,
+    "bytes": 101684,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N3"
+  },
+  "n3-085": {
+    "sha256_script": "a0600d0ced23078449b50de67c3b4cb7fb9a072ab7ee2cfebacff1197f6197c4",
+    "seconds": 33.795,
+    "bytes": 101828,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N3"
+  },
+  "n3-086": {
+    "sha256_script": "9a01a0ffe131871cb1d7d44ab50fd108bd4ddc7d80b50616732c9fd896ddc8de",
+    "seconds": 28.975,
+    "bytes": 87356,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N3"
+  },
+  "n3-087": {
+    "sha256_script": "21e8a3d99201ac2b32f02a812422a40d4af586772db1c317e717957effb12f13",
+    "seconds": 45.97,
+    "bytes": 138332,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N3"
+  },
+  "n3-088": {
+    "sha256_script": "e13ef6ab1d9491159292df6fd81e06f26895907ec94d20a50712d45baf797430",
+    "seconds": 43.445,
+    "bytes": 130772,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N3"
+  },
+  "n3-089": {
+    "sha256_script": "db567f45c58abcf2f8ee1943a64a5215b9233dc70d51ceb9d174e64159d96019",
+    "seconds": 45.44,
+    "bytes": 136748,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N3"
+  },
+  "n3-090": {
+    "sha256_script": "85b2197dff49bab5b19baee24b1e823ca2d051b2dbff69a1023ad05afb0c6761",
+    "seconds": 27.49,
+    "bytes": 82892,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N3"
+  },
+  "n3-091": {
+    "sha256_script": "dcc73e6e0b1195efedaab520cb2d9f708175b433602cad334296bdf26ece59c1",
+    "seconds": 23.015,
+    "bytes": 69428,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N3"
+  },
+  "n3-092": {
+    "sha256_script": "7ac86f4d5faf77c89348e72414d406e2828cbd2ee9fd85eb859ca0203804b734",
+    "seconds": 20.025,
+    "bytes": 60500,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N3"
+  },
+  "n3-093": {
+    "sha256_script": "200b3ddcb1a0e3ca4a37e28bae4b588b810f8e0472697e0e1745de6065a89f0c",
+    "seconds": 25.4,
+    "bytes": 76628,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N3"
+  },
+  "n3-094": {
+    "sha256_script": "9ffb7e288baba5a84729ff2d4a220c0d287087e9dc0524758c7db3a4dd5ac296",
+    "seconds": 20.6,
+    "bytes": 62228,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N3"
+  },
+  "n3-095": {
+    "sha256_script": "3035d2362877decb8a150b0c3aafd00fe3b3bb71e9777dae4039c16b82fec653",
+    "seconds": 19.675,
+    "bytes": 59420,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N3"
+  },
+  "n3-096": {
+    "sha256_script": "7c545f32917b7cc33dee215274f49bc3f5c04d9aa6d0e8117bceb1dfc8d8e21d",
+    "seconds": 22.645,
+    "bytes": 68348,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N3"
+  },
+  "n3-097": {
+    "sha256_script": "22f3e900c4e83ee576caee56711877df48878b59c218b8651f73734e5dc49a94",
+    "seconds": 21.675,
+    "bytes": 65468,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N3"
+  },
+  "n3-098": {
+    "sha256_script": "d29e6db080720cc27098887963da6b87053d9d0039888fe8cea4f8208ac25b30",
+    "seconds": 20.835,
+    "bytes": 62948,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N3"
+  },
+  "n3-099": {
+    "sha256_script": "17ca3ce7b3e7521863df47a20ab5e81e6d49e124c469177f858909e9fbdc4a24",
+    "seconds": 24.41,
+    "bytes": 73676,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N3"
+  },
+  "n3-100": {
+    "sha256_script": "33199d0c773e4f3423135aa912733608e3bd6b08ab7abe31a2df961df510cc13",
+    "seconds": 21.21,
+    "bytes": 64028,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N3"
+  },
+  "n3-101": {
+    "sha256_script": "ec2fe0b36099a66a3c77f7ed41b38edc44ffb547c013126003feb6ce35dfe46e",
+    "seconds": 22.63,
+    "bytes": 68276,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N3"
+  },
+  "n3-102": {
+    "sha256_script": "bbf98438244af4c44debd1a29e694c502aff03bb4e31298bcc3347c6af4366c9",
+    "seconds": 23.375,
+    "bytes": 70508,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N3"
+  },
+  "n5-b-044": {
+    "sha256_script": "43b13b3fb18b567d251003cecc997d04c7709ef3e29ac0747e394a43ea08862c",
+    "seconds": 22.08,
+    "bytes": 66620,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N5"
+  },
+  "n5-b-045": {
+    "sha256_script": "dba50c51b53792fd9d6dfaf4f00d45ff029a4bd27bb097bcebae7c742b4475c0",
+    "seconds": 21.815,
+    "bytes": 65828,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N5"
+  },
+  "n5-b-046": {
+    "sha256_script": "759100ddcda435cb77bf04f946913b3b4fe53598cbcc297fcff1c2957ead0a31",
+    "seconds": 21.2,
+    "bytes": 64028,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N5"
+  },
+  "n5-b-047": {
+    "sha256_script": "914f7010f4399ddeae7ac4e1a4163d9422298912e8d18c634f476646b79eb05d",
+    "seconds": 27.525,
+    "bytes": 82964,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N5"
+  },
+  "n5-b-048": {
+    "sha256_script": "32f530397b529bcdbbb6e6471efb7c456dbcd93a54eb10e5df321c7178a4e877",
+    "seconds": 23.37,
+    "bytes": 70508,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N5"
+  },
+  "n5-b-049": {
+    "sha256_script": "df1b496c9e4c89b876ea6ee6ae6f9e94bef696f7f6b10b9d3bd4197f87f0ef93",
+    "seconds": 20.295,
+    "bytes": 61292,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N5"
+  },
+  "n5-b-050": {
+    "sha256_script": "1b853de56f3e8c4c127b62715361f96d02db42c16d5ea643589182e8c30abfce",
+    "seconds": 25.135,
+    "bytes": 75836,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N5"
+  },
+  "n5-b-051": {
+    "sha256_script": "ed728ce4ca63f95d057999e4fde407d67fd6548c747b991f324b5a923bcb2dbd",
+    "seconds": 22.2,
+    "bytes": 66980,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N5"
+  },
+  "n5-b-052": {
+    "sha256_script": "f9bdc48883c64c4019e6b8cc490b072a60f1a700f83491bcda03e08720a4ba24",
+    "seconds": 26.035,
+    "bytes": 78500,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N5"
+  },
+  "n5-b-053": {
+    "sha256_script": "5e9b026a03240eb4467acde652bc43ed393ed087c3f33b35b673cdc01233ceba",
+    "seconds": 23.975,
+    "bytes": 72308,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N5"
+  },
+  "n5-b-054": {
+    "sha256_script": "bede52ffca41538e1416c78f884d9f10ab4292ae368a8343de7070325e5920cc",
+    "seconds": 25.09,
+    "bytes": 75692,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N5"
+  },
+  "n5-b-055": {
+    "sha256_script": "0d2151ababfc127aede2d06020c4402396cf8771d2a0290bf8aaf5fdec97af31",
+    "seconds": 26.385,
+    "bytes": 79580,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N5"
+  },
+  "n5-b-056": {
+    "sha256_script": "f6f8de8374d5ae4588f9f59e778dfd1d5754d30f7aefb61e45e1cbee41170d46",
+    "seconds": 26.21,
+    "bytes": 79076,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N5"
+  },
+  "n5-b-057": {
+    "sha256_script": "0bd078b1816334ce31d8b4b3dbc05bf22b9b7078651cb284a95d2b5e41e26433",
+    "seconds": 17.145,
+    "bytes": 51860,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N5"
+  },
+  "n5-b-058": {
+    "sha256_script": "bdb788826208390d4599499409a4115d2f183fcade362776ad6e2f9605513878",
+    "seconds": 15.82,
+    "bytes": 47900,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N5"
+  },
+  "n5-b-059": {
+    "sha256_script": "5004138b663fda0351e1bc934282da1b9ff171a2f6432e2cab8785c7f7b0ebf9",
+    "seconds": 14.27,
+    "bytes": 43220,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N5"
+  },
+  "n5-b-060": {
+    "sha256_script": "2aa68f4451f3f10d38f4259a20315f8c9bc366252ae4b3d8b30621c88bfda579",
+    "seconds": 16.805,
+    "bytes": 50852,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N5"
+  },
+  "n5-b-061": {
+    "sha256_script": "6e322a9281b290eef2b9963f1b429e7909fbbc4212e875d13e1de5040a1579ce",
+    "seconds": 18.205,
+    "bytes": 55028,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N5"
+  },
+  "n5-b-062": {
+    "sha256_script": "7acfb1a64e42d28c72c860a73b6e4530bac3449f0546bd138ed4077dcf94087b",
+    "seconds": 17.235,
+    "bytes": 52148,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N5"
+  },
+  "n5-b-063": {
+    "sha256_script": "4a8c8c2e7bfa8ada05a850215211f4c72e5cb846aa7e83b100b03855d7278350",
+    "seconds": 17.425,
+    "bytes": 52724,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N5"
+  },
+  "n5-b-064": {
+    "sha256_script": "9b3e4afc903f795c6d1c2b44fffdca632475f13ab7e4590677478f3284b47adf",
+    "seconds": 18.615,
+    "bytes": 56252,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N5"
+  },
+  "n5-b-065": {
+    "sha256_script": "b5b354a184a742ce89dd639c1c16fc3ce1e6c0680bbc76288ccc2ef358926a5a",
+    "seconds": 18.63,
+    "bytes": 56324,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N5"
+  },
+  "n5-b-066": {
+    "sha256_script": "cc640459f15526807e4573d9ba00246662b6aee18d33ccdfdf608a5c9c21b0cd",
+    "seconds": 20.015,
+    "bytes": 60428,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N5"
+  },
+  "n5-b-067": {
+    "sha256_script": "334eb8077720f147dc8adf32d6170751611b5e2beed987556a90276070835052",
+    "seconds": 18.885,
+    "bytes": 57044,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N5"
+  },
+  "n5-c-044": {
+    "sha256_script": "f90a435014cf5d792f2a7345ead4c6c838a9e487e87ca2c49f24478157b13ad3",
+    "seconds": 24.485,
+    "bytes": 73892,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N5"
+  },
+  "n5-c-045": {
+    "sha256_script": "9614460e9c8378ae171d36e7821a264c6f6140a437d78acdea8161a467e21a34",
+    "seconds": 25.84,
+    "bytes": 77924,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N5"
+  },
+  "n5-c-046": {
+    "sha256_script": "74a3d45134f84e59c3b759ac6d4124ee399a1843588278822a0e92ee3722cc7a",
+    "seconds": 26.225,
+    "bytes": 79076,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N5"
+  },
+  "n5-c-047": {
+    "sha256_script": "9f96fee58188d151e01a265f01a42d811ec7dd570c01f8d12235f8b4cf92d5b8",
+    "seconds": 27.585,
+    "bytes": 83180,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N5"
+  },
+  "n5-c-048": {
+    "sha256_script": "4bd9855e64c6b0c373eff7784b7313fd13d7973c1f6cd96fb6cb61af583d7ee3",
+    "seconds": 25.785,
+    "bytes": 77780,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N5"
+  },
+  "n5-c-049": {
+    "sha256_script": "7b440ded6830cd12a6d75e21ea1a7bacb1703e39f10f4a74eb830edb634d6767",
+    "seconds": 26.185,
+    "bytes": 79004,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N5"
+  },
+  "n5-c-050": {
+    "sha256_script": "d9523682fbe98a97efa6e2fd1ca1a6a49fdfca7221582959df1705e8239a8c5a",
+    "seconds": 23.55,
+    "bytes": 71084,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N5"
+  },
+  "n5-c-051": {
+    "sha256_script": "d7aa7c712aef0756d457ddf4bddd0412d8798a17dda28286e20d05bbecb917d7",
+    "seconds": 29.54,
+    "bytes": 89012,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N5"
+  },
+  "n5-c-052": {
+    "sha256_script": "f899f9773e99d7e3e729050093946154a333ec5637341db1be22cbcc7d1be132",
+    "seconds": 25.405,
+    "bytes": 76628,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N5"
+  },
+  "n5-c-053": {
+    "sha256_script": "785752411c35d57adbc9ef9eba62c835d2a21888393e3741653949052d40d1d9",
+    "seconds": 31.88,
+    "bytes": 96068,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N5"
+  },
+  "n5-c-054": {
+    "sha256_script": "45207e2727b504144c5a44108f498f23558f621e038f7e9979d72852e1d24046",
+    "seconds": 26.19,
+    "bytes": 79004,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N5"
+  },
+  "n5-c-055": {
+    "sha256_script": "236bd7608fd5b097f3dc12fde9836b02794e8924e2586f6b910214f9ed793a1f",
+    "seconds": 24.275,
+    "bytes": 73244,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N5"
+  },
+  "n5-c-056": {
+    "sha256_script": "3289bd71a286eefa13fbae35cfa7c661c7f4767c51ff8830cf25bae2302e6c18",
+    "seconds": 28.79,
+    "bytes": 86780,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N5"
+  },
+  "n5-c-057": {
+    "sha256_script": "92dbb6606bfec2d1f25875cd36758a973f4cfdb62fa55705b57bdd4025b628d6",
+    "seconds": 15.685,
+    "bytes": 47468,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N5"
+  },
+  "n5-c-058": {
+    "sha256_script": "db2984f085768ccce77a73837bd3e21a689e29c8c4290e36ea666d57cbe45c6b",
+    "seconds": 19.765,
+    "bytes": 59708,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N5"
+  },
+  "n5-c-059": {
+    "sha256_script": "47fea4292f975256188f81e8d73d4056166bd6e73eb53af1ce2d416757b5b029",
+    "seconds": 14.595,
+    "bytes": 44228,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N5"
+  },
+  "n5-c-060": {
+    "sha256_script": "fa3e6d45bf60bbb671709f83035a7c038098e4b8efa1f86db003454d2caea981",
+    "seconds": 18.315,
+    "bytes": 55388,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N5"
+  },
+  "n5-c-061": {
+    "sha256_script": "3afa5d4f21630d966dbd18edb2acde7dd932090c1b97bb6fb0d4c18683b1dbc1",
+    "seconds": 17.95,
+    "bytes": 54236,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N5"
+  },
+  "n5-c-062": {
+    "sha256_script": "7249ed06f7d2a75126edbffb0ceeaa5ac881eb9bf834b3fe8b897fa20e84c32b",
+    "seconds": 19.735,
+    "bytes": 59636,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N5"
+  },
+  "n5-c-063": {
+    "sha256_script": "adac899f37ce6377f2e9383da0be91c1325b956514e9e972ef138edad4c17bed",
+    "seconds": 23.795,
+    "bytes": 71804,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N5"
+  },
+  "n5-c-064": {
+    "sha256_script": "6db4eb83cd30086912eb26a90a2f46c207a0f4de609a9fe38190d6ea13088d98",
+    "seconds": 20.685,
+    "bytes": 62444,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N5"
+  },
+  "n5-c-065": {
+    "sha256_script": "04b92e7b1c752c5ab57682f7285964f69d27a378958cfd8d0da4f4641ee9b09e",
+    "seconds": 19.23,
+    "bytes": 58124,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N5"
+  },
+  "n5-c-066": {
+    "sha256_script": "0627b54f6cc88b06c2d30d6edb4780b8910094a72bbfb9cd417272232921b217",
+    "seconds": 18.74,
+    "bytes": 56612,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N5"
+  },
+  "n5-c-067": {
+    "sha256_script": "59aa2782467441293395ef864df327de1f608d7ddc0c60bf2d05d5de6b983cc1",
+    "seconds": 19.545,
+    "bytes": 59060,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N5"
+  },
+  "n4-b-058": {
+    "sha256_script": "8f567e22a58ab2b7755d09d1a3510772511c27c49e6d7e19b2bf238c29e0739e",
+    "seconds": 25.12,
+    "bytes": 75764,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N4"
+  },
+  "n4-b-059": {
+    "sha256_script": "fe11be8750ea6ef78f268dc9a7517b9ac7c76ef35632a229c3354b046c891587",
+    "seconds": 29.1,
+    "bytes": 87716,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N4"
+  },
+  "n4-b-060": {
+    "sha256_script": "1410edde0903e71513437fe739275a58d978434460e590cb1a623f17e148f107",
+    "seconds": 24.21,
+    "bytes": 73028,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N4"
+  },
+  "n4-b-061": {
+    "sha256_script": "350d2c3ea84237efdeb47a1d3d262f2c7ab63ddfba5f361a3f0bc80a2cae591d",
+    "seconds": 28.62,
+    "bytes": 86276,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N4"
+  },
+  "n4-b-062": {
+    "sha256_script": "884ba0d516a1f0a1dcb7d061e1187dd6dcf3727196478763c39253dc95d0e7ec",
+    "seconds": 24.74,
+    "bytes": 74612,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N4"
+  },
+  "n4-b-063": {
+    "sha256_script": "316a45bc13e0de90237f9a613a7d8e531dc8af7412f8b5c2789baafa6a9b8968",
+    "seconds": 28.93,
+    "bytes": 87212,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N4"
+  },
+  "n4-b-064": {
+    "sha256_script": "44606cd947ea71ceaade4003553339140d4b58747bc04ca6c1c80348c26724fd",
+    "seconds": 25.8,
+    "bytes": 77780,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N4"
+  },
+  "n4-b-065": {
+    "sha256_script": "0b0a152bbf4e0a89430bada6f7287c16dfdbe7ee86993f542d879bdb96bb60a2",
+    "seconds": 25.705,
+    "bytes": 77564,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N4"
+  },
+  "n4-b-066": {
+    "sha256_script": "4b13b47880530ec1904a42627d066fa1731941d7a5431c04e3990969070f4aea",
+    "seconds": 27.325,
+    "bytes": 82388,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N4"
+  },
+  "n4-b-067": {
+    "sha256_script": "16160b120a1471500b53c564651ba67ae60ec393ebb2195a8680efcd8a0b445e",
+    "seconds": 23.79,
+    "bytes": 71804,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N4"
+  },
+  "n4-b-068": {
+    "sha256_script": "2a0b91cbca75d094d7868ee2094989a20b581a332fd8d935d80f570430a7be7e",
+    "seconds": 30.815,
+    "bytes": 92828,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N4"
+  },
+  "n4-b-069": {
+    "sha256_script": "273aa3e66b24448f6e73669dbbb42bf88ce080edac937b34787e065a4f41d871",
+    "seconds": 27.99,
+    "bytes": 84404,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N4"
+  },
+  "n4-b-070": {
+    "sha256_script": "f197a097a7336760ba1b480adf2ac86a614d0a08514dcf9724f20861cba08368",
+    "seconds": 27.265,
+    "bytes": 82244,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N4"
+  },
+  "n4-b-071": {
+    "sha256_script": "63d4cde088ad4f8650ecfb6742e05e215807a18e31d09dba90a38888ecdbf85f",
+    "seconds": 26.73,
+    "bytes": 80588,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N4"
+  },
+  "n4-b-072": {
+    "sha256_script": "ecd875058b2ac43cc58c0c9126dbac82ec38af19f96cc15525fa4ac01169fbdd",
+    "seconds": 25.765,
+    "bytes": 77708,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N4"
+  },
+  "n4-b-073": {
+    "sha256_script": "785edf511e92ed74c93193a60eb487e84c02037b8e60408c5c27f7e9a2573fff",
+    "seconds": 23.135,
+    "bytes": 69788,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N4"
+  },
+  "n4-b-074": {
+    "sha256_script": "f6bb882e64410367fef04407005688449460a00d19e7b75f1254ab71d9fb96da",
+    "seconds": 21.545,
+    "bytes": 65036,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N4"
+  },
+  "n4-b-075": {
+    "sha256_script": "43703a0bd37f79726d9b62f2be39312512304a610a443db9ed3fcfac37c854a1",
+    "seconds": 20.825,
+    "bytes": 62876,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N4"
+  },
+  "n4-b-076": {
+    "sha256_script": "72f0296ec32075b851cac9bc412258067a6a1abd3565851ef355ba2d237952b8",
+    "seconds": 19.125,
+    "bytes": 57764,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N4"
+  },
+  "n4-b-077": {
+    "sha256_script": "f9a91942ee2d2741921193944fdcced9def6fbfe06339a56f83d5e1f5baaf743",
+    "seconds": 18.985,
+    "bytes": 57404,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N4"
+  },
+  "n4-b-078": {
+    "sha256_script": "d2678a04af9515afcb3351e56a980d153af934a4b248d579e4b54666cf851048",
+    "seconds": 17.9,
+    "bytes": 54092,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N4"
+  },
+  "n4-b-079": {
+    "sha256_script": "f1097d6b157fbf79b5befaa8622300aca64d34996d4cf04567babeca7e9a197f",
+    "seconds": 18.475,
+    "bytes": 55820,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N4"
+  },
+  "n4-b-080": {
+    "sha256_script": "e1f7e55f007b081ad71d15391cfc99f3c40db05d274d9de93be78d539231adb2",
+    "seconds": 18.375,
+    "bytes": 55532,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N4"
+  },
+  "n4-b-081": {
+    "sha256_script": "c83cc460f3a32671e2df69a9af3d0df0e7bbc11406b3d359707bcecf344c8615",
+    "seconds": 21.665,
+    "bytes": 65396,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N4"
+  },
+  "n4-b-082": {
+    "sha256_script": "c2d49eefc986b9ebb5a46b32b49e29e41ef59dc646c40aa4d60c74baf30a922a",
+    "seconds": 16.11,
+    "bytes": 48764,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N4"
+  },
+  "n4-b-083": {
+    "sha256_script": "f956f49510c50bc8e3ae12690fa2bc6b3e0eb6a36533b307b3703f8f8464b297",
+    "seconds": 21.34,
+    "bytes": 64460,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N4"
+  },
+  "n4-b-084": {
+    "sha256_script": "b003f222900ecd433f415aeaed14e526d95a6bf265dcd646bac4bb73c7e8d401",
+    "seconds": 19.24,
+    "bytes": 58124,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N4"
+  },
+  "n4-b-085": {
+    "sha256_script": "1da6f176337191c00302339905f93af47d155cae71137e153300524333fa3903",
+    "seconds": 21.64,
+    "bytes": 65324,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N4"
+  },
+  "n4-c-058": {
+    "sha256_script": "755b1a6d298a7cbf91388a00b6b0d182a6af789dea2d5ba1ec17a36e800af72c",
+    "seconds": 27.335,
+    "bytes": 82388,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N4"
+  },
+  "n4-c-059": {
+    "sha256_script": "b57411c9c91cbf52355e5360f4749858e2c6b94d9be8dcf2196a0a7dbc3b85d3",
+    "seconds": 25.87,
+    "bytes": 77996,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N4"
+  },
+  "n4-c-060": {
+    "sha256_script": "4f3e481dbb09662cb10213dfafcc357864ec9ef4377046ad240eef2898585256",
+    "seconds": 35.935,
+    "bytes": 108236,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N4"
+  },
+  "n4-c-061": {
+    "sha256_script": "41d2afbc189e206a25bc48eaf9c7d35a2b9a84203ee675044552a79aff452fd6",
+    "seconds": 23.605,
+    "bytes": 71228,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N4"
+  },
+  "n4-c-062": {
+    "sha256_script": "c81dad862812bb7101a285f49370d60d504d22fff514766e2c4ebacfb960e71c",
+    "seconds": 29.125,
+    "bytes": 87788,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N4"
+  },
+  "n4-c-063": {
+    "sha256_script": "b8df64f7b42674d415b6c8e74932a6ba9128fc85d01790cc351f2a371b621b53",
+    "seconds": 29.365,
+    "bytes": 88508,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N4"
+  },
+  "n4-c-064": {
+    "sha256_script": "5c55f16a02eaaf1570faa1f23d3b35bbfd1d3a0bd888cce787d2b268b70f4773",
+    "seconds": 36.08,
+    "bytes": 108668,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N4"
+  },
+  "n4-c-065": {
+    "sha256_script": "8c2caa6e624fb57fd47f1e8e1812cb5a7614ab12ae96242d84030e39b3c2c443",
+    "seconds": 34.735,
+    "bytes": 104636,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N4"
+  },
+  "n4-c-066": {
+    "sha256_script": "eda4ff336d6868cc53f254f8dcd3ee3580f071e207696b2c1b2dc9bb61394980",
+    "seconds": 31.34,
+    "bytes": 94412,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N4"
+  },
+  "n4-c-067": {
+    "sha256_script": "136d907c7a496c73d504a2d0d376aa268ee20ec99533129c34fe411082a4aa57",
+    "seconds": 25.96,
+    "bytes": 78284,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N4"
+  },
+  "n4-c-068": {
+    "sha256_script": "b5f411b49f5b500c1f15f7bffaa29716ea1f1800ecf2d7a88383e64c866adc55",
+    "seconds": 26.59,
+    "bytes": 80156,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N4"
+  },
+  "n4-c-069": {
+    "sha256_script": "427ae07cf18530c61f48bfc0f7ad918fa95ec86ea98089a5ffb0b16ba342ba7b",
+    "seconds": 29.26,
+    "bytes": 88220,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N4"
+  },
+  "n4-c-070": {
+    "sha256_script": "a0d053c0e30f77432088594b818ecc7f6f999eca693441c019a054c955c25218",
+    "seconds": 31.78,
+    "bytes": 95780,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N4"
+  },
+  "n4-c-071": {
+    "sha256_script": "4f1e93cb3dcc2661d3483097cc522faef720507ce726cd91b5d24ad9281b3cd8",
+    "seconds": 29.17,
+    "bytes": 87932,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N4"
+  },
+  "n4-c-072": {
+    "sha256_script": "3582a13d3a45f026f022510dc7d768f87683065e16dc779fb26315c6ed45c5a0",
+    "seconds": 25.84,
+    "bytes": 77924,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N4"
+  },
+  "n4-c-073": {
+    "sha256_script": "419d6877da11c45030c1cf4bed67c6fa026732012fbec4db11e4594786759430",
+    "seconds": 16.845,
+    "bytes": 50924,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N4"
+  },
+  "n4-c-074": {
+    "sha256_script": "31ea1211f20be20abe59d5992905615629a2ecb816f4e82cec27664b2f6dafea",
+    "seconds": 13.985,
+    "bytes": 42356,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N4"
+  },
+  "n4-c-075": {
+    "sha256_script": "e2128517c6d9464e40958a707b8f3ef5278bbb3ab02cc616c8d2937c3b71187f",
+    "seconds": 14.01,
+    "bytes": 42428,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N4"
+  },
+  "n4-c-076": {
+    "sha256_script": "22a2a11baa1f9a0b714f523c37c2ba3adb8d2d951d569bbd15d5061a7c27c343",
+    "seconds": 13.005,
+    "bytes": 39404,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N4"
+  },
+  "n4-c-077": {
+    "sha256_script": "7bd490aee27abaf0c0b8b8a53a1d3c68c71d60454a472391cfadc037a9778d74",
+    "seconds": 13.29,
+    "bytes": 40268,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N4"
+  },
+  "n4-c-078": {
+    "sha256_script": "52e7e8c1302da72d326e9df0d53a04de54d25e477c00e9c9bcf260bdd9c5f302",
+    "seconds": 15.245,
+    "bytes": 46172,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N4"
+  },
+  "n4-c-079": {
+    "sha256_script": "f81d114c851e14c834835078e2db2803d74bd662991424680347e3d2de492b44",
+    "seconds": 17.27,
+    "bytes": 52220,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N4"
+  },
+  "n4-c-080": {
+    "sha256_script": "b22364874f4af8fe5d554205296ecd3fa4917d7d537f9c86e8ce54e81a23b65f",
+    "seconds": 11.875,
+    "bytes": 36020,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N4"
+  },
+  "n4-c-081": {
+    "sha256_script": "b0cd75c41d781d4f89c40fa59ae4641816e4eacfe490ac10e8e84b6f41d0f704",
+    "seconds": 16.57,
+    "bytes": 50132,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N4"
+  },
+  "n4-c-082": {
+    "sha256_script": "7b4acfeb2f50a58c1fa38715356e89e3eebefe678ca84fe114af7c524e1b2929",
+    "seconds": 18.045,
+    "bytes": 54524,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N4"
+  },
+  "n4-c-083": {
+    "sha256_script": "cbb4802e3046c22d5dcd1eadf8531b6a94775a778c82d36e6aced48e03c17546",
+    "seconds": 16.305,
+    "bytes": 49340,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N4"
+  },
+  "n4-c-084": {
+    "sha256_script": "5d704ace202027ca7922dfaf44bf542c488f27b854604d12e21a33894fa44bf7",
+    "seconds": 14.945,
+    "bytes": 45236,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N4"
+  },
+  "n4-c-085": {
+    "sha256_script": "c1050fe95bb000c1b6e83ddc9284ffa919e1f0ace651cf2a07e187299a4d66d4",
+    "seconds": 17.57,
+    "bytes": 53156,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N4"
+  },
+  "n3-b-075": {
+    "sha256_script": "75074f83a287239b9badda6dfef0aa156f71764b46aaf70fb0b3a3c6b777dd8a",
+    "seconds": 28.235,
+    "bytes": 85124,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N3"
+  },
+  "n3-b-076": {
+    "sha256_script": "00f0c96acac36fcb4e9a5aab16882732f46a54ea693dab552ac0a32489dcd59a",
+    "seconds": 26.12,
+    "bytes": 78788,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N3"
+  },
+  "n3-b-077": {
+    "sha256_script": "c761572e018510e261de53628d0d8e77cce2e7e397be0a147cd7c7a37aad7ff0",
+    "seconds": 28.66,
+    "bytes": 86420,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N3"
+  },
+  "n3-b-078": {
+    "sha256_script": "4e7c517a845c7ae68a9512d335afe5e418429c801ec7bef8fd59c305127ac458",
+    "seconds": 29.18,
+    "bytes": 87932,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N3"
+  },
+  "n3-b-079": {
+    "sha256_script": "31a798ba6a3853d2aa51195ba72670e8c48251db599ccbd1f512a0e6688579a4",
+    "seconds": 25.28,
+    "bytes": 76268,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N3"
+  },
+  "n3-b-080": {
+    "sha256_script": "f87c51fe2643f9921f472237bdca4e7b1dcb3dd7a9a18ce5a90684ad7b5a42ca",
+    "seconds": 28.72,
+    "bytes": 86564,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N3"
+  },
+  "n3-b-081": {
+    "sha256_script": "dcdff3d407cf610b24ad0537bc9cea0c240879f2c6253942547516b4d96cd5bb",
+    "seconds": 31.72,
+    "bytes": 95564,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N3"
+  },
+  "n3-b-082": {
+    "sha256_script": "a439d47e52bb42b598822020af2b272ba5bd74de423c55510db7379da0615c1c",
+    "seconds": 27.0,
+    "bytes": 81380,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N3"
+  },
+  "n3-b-083": {
+    "sha256_script": "e83c86a6dbf5e67cb4b330a5c51c5e0bc0d6cbd012b07bdf2428ab8dd24f3da2",
+    "seconds": 28.25,
+    "bytes": 85196,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N3"
+  },
+  "n3-b-084": {
+    "sha256_script": "a11cd536cbe2eeb6c2974b3ae06cb1a2cfcb80510ac7ce36ce270dc3ebb52e68",
+    "seconds": 27.6,
+    "bytes": 83180,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N3"
+  },
+  "n3-b-085": {
+    "sha256_script": "cf06769c1820a78a3a4dd2862aab1c3f7f054e28a34eb85fa33dff9991c918bf",
+    "seconds": 27.67,
+    "bytes": 83396,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N3"
+  },
+  "n3-b-086": {
+    "sha256_script": "72d132e2698ec2449f92d3d2e242ec5919c887ea1effa8689df802e1c25df28c",
+    "seconds": 33.995,
+    "bytes": 102404,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N3"
+  },
+  "n3-b-087": {
+    "sha256_script": "17093dc909223467c6d6ba3bda60ab20a1a2f3a696d6050e1c1cc6382e55622d",
+    "seconds": 46.39,
+    "bytes": 139556,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N3"
+  },
+  "n3-b-088": {
+    "sha256_script": "bc09ab34887e16ef9dbef5bf6bf960010e0d9b83a036fbff57fa2d759dce60c3",
+    "seconds": 41.795,
+    "bytes": 125804,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N3"
+  },
+  "n3-b-089": {
+    "sha256_script": "cc5cf11b455405a741ae03eb263facaf277cd3f99823d9f586893ffad6d64bd0",
+    "seconds": 43.175,
+    "bytes": 129908,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N3"
+  },
+  "n3-b-090": {
+    "sha256_script": "1848b29104bcbacc142adfe1f39c786db900f925fc79589ecd568ba8fc71b86d",
+    "seconds": 26.65,
+    "bytes": 80372,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N3"
+  },
+  "n3-b-091": {
+    "sha256_script": "f6746d9f680a0f1f867ac6428639d31e2c62f687d85a30d2fb901693edb1137a",
+    "seconds": 24.71,
+    "bytes": 74540,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N3"
+  },
+  "n3-b-092": {
+    "sha256_script": "0fb5314f3e90161f2ba841a09fec77fe380d89ece4cdf99d7bf244237e122d1b",
+    "seconds": 23.0,
+    "bytes": 69428,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N3"
+  },
+  "n3-b-093": {
+    "sha256_script": "9cbc2921352dc9d83ef8377a03ced49d3d211e35d3c5e90526a28f9432b731fc",
+    "seconds": 25.61,
+    "bytes": 77276,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N3"
+  },
+  "n3-b-094": {
+    "sha256_script": "0fc486d3778e7e36a029821937e41f7065edcfb459b938938533753de0afdb19",
+    "seconds": 19.89,
+    "bytes": 60068,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N3"
+  },
+  "n3-b-095": {
+    "sha256_script": "08c4541997ed30e14e1eba7f2f232309b0e15fbafe740385ddb7ee8874b5425f",
+    "seconds": 20.47,
+    "bytes": 61796,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N3"
+  },
+  "n3-b-096": {
+    "sha256_script": "e69664f826559d9f4856936d7626b7f43140c5ed5756f76325a410173b9387ea",
+    "seconds": 19.71,
+    "bytes": 59564,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N3"
+  },
+  "n3-b-097": {
+    "sha256_script": "dd6fd0b8ed15d4a885e23877d57a60f19772f57e9576e8f0c32b47a2eace1f31",
+    "seconds": 19.26,
+    "bytes": 58196,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N3"
+  },
+  "n3-b-098": {
+    "sha256_script": "cca575728e93635877d8cba5217483f31bfec32c9665672d754711243a1ef41d",
+    "seconds": 17.685,
+    "bytes": 53444,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N3"
+  },
+  "n3-b-099": {
+    "sha256_script": "398e8b8a9447dddde21fc0f3ef714c4617b1831e3ca9eb4f5686bc7799fd7f5b",
+    "seconds": 20.83,
+    "bytes": 62876,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N3"
+  },
+  "n3-b-100": {
+    "sha256_script": "0b08229a39599bdf3127fd64e3056a78dd797109d43ab67f349ff0998f0ab5fd",
+    "seconds": 19.725,
+    "bytes": 59564,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N3"
+  },
+  "n3-b-101": {
+    "sha256_script": "74c55c075dacb5cab74c1a89a3c186d7d96f04f57b114a44748b5db817436293",
+    "seconds": 20.86,
+    "bytes": 63020,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N3"
+  },
+  "n3-b-102": {
+    "sha256_script": "6f818ecc9f9c6c986127feaca2943da905cee80e270119a7a0df5985b90f6ea8",
+    "seconds": 19.095,
+    "bytes": 57692,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N3"
+  },
+  "n3-c-075": {
+    "sha256_script": "e5452ecd424e703ddf174b68f2f259e336310fb6e120834a0fb138982c2a6e79",
+    "seconds": 27.66,
+    "bytes": 83396,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N3"
+  },
+  "n3-c-076": {
+    "sha256_script": "1e345a50626e26dbac035813fe9c36e493981324da67c5629088f73875668cea",
+    "seconds": 29.73,
+    "bytes": 89588,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N3"
+  },
+  "n3-c-077": {
+    "sha256_script": "66906c742d09ad26d6bb7f54a31f34f2b335737e75458895c7b7d52c26a6c330",
+    "seconds": 26.375,
+    "bytes": 79508,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N3"
+  },
+  "n3-c-078": {
+    "sha256_script": "7fa910728023c1cb69504c06e256f72823c26b278d9dbf587d4d71e41947105b",
+    "seconds": 29.675,
+    "bytes": 89444,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N3"
+  },
+  "n3-c-079": {
+    "sha256_script": "902c6aee3bdad1d4c49e189003a3ac54b07b71330f77359137c2ebfab71e3cd0",
+    "seconds": 27.725,
+    "bytes": 83612,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N3"
+  },
+  "n3-c-080": {
+    "sha256_script": "2bb28dd1f3e5219db6a8eccbc58d757c0cd2a3d1fbb9e9cba77a8823557b299a",
+    "seconds": 27.75,
+    "bytes": 83684,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N3"
+  },
+  "n3-c-081": {
+    "sha256_script": "b8d4ed718075f3bd92d25b8dae34e1e0c05c96980eaae1ae79a6b3455abe311a",
+    "seconds": 30.68,
+    "bytes": 92468,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N3"
+  },
+  "n3-c-082": {
+    "sha256_script": "ee9a4426563fb6c664c1955432d6e250e52e18d1c98dcbe690751f918c0565d8",
+    "seconds": 27.0,
+    "bytes": 81380,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N3"
+  },
+  "n3-c-083": {
+    "sha256_script": "67a210d38e8247e14045c4ea651169e8e883cc0866684a9105120f18ed06b13d",
+    "seconds": 31.455,
+    "bytes": 94772,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N3"
+  },
+  "n3-c-084": {
+    "sha256_script": "0f0058eac7594ab1537fefb3027d4633a778856da831ec4e61ad2681c9025438",
+    "seconds": 32.175,
+    "bytes": 96932,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N3"
+  },
+  "n3-c-085": {
+    "sha256_script": "e133f4f6976bd43df9d8672cfa2b50f512c56bbefa159f6c1c58cb79060ae434",
+    "seconds": 28.435,
+    "bytes": 85700,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N3"
+  },
+  "n3-c-086": {
+    "sha256_script": "9715b32929d5abe3a12bfebaf4d577273a878da6427828a80aff2da4a157bd20",
+    "seconds": 29.77,
+    "bytes": 89732,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N3"
+  },
+  "n3-c-087": {
+    "sha256_script": "8a4056d4ed6856e16966853d4da7db0d648995fdc9611ddd8a5ad09ec5c8c9a9",
+    "seconds": 44.77,
+    "bytes": 134732,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N3"
+  },
+  "n3-c-088": {
+    "sha256_script": "c22c9aad0d6583b9e9c9841a2ab1340f6d7269b26528f3b16a9009f6ec587890",
+    "seconds": 45.66,
+    "bytes": 137396,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N3"
+  },
+  "n3-c-089": {
+    "sha256_script": "216ccda4d0a6ec18d5922467064aa1851bc74f3d13033e798e8fe58ce8010302",
+    "seconds": 47.96,
+    "bytes": 144308,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N3"
+  },
+  "n3-c-090": {
+    "sha256_script": "5b243884bb52d34457c58d9b8568b14df4c7226d033b17bc57a128db4aac426b",
+    "seconds": 27.43,
+    "bytes": 82676,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N3"
+  },
+  "n3-c-091": {
+    "sha256_script": "e87a9d0e9de3e0bc98154e5337b02465365770135b38ce51e1a5dda2c16b7ffe",
+    "seconds": 25.33,
+    "bytes": 76412,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N3"
+  },
+  "n3-c-092": {
+    "sha256_script": "30814cd761663c057799856d5d89f57e22026ec748ec68300bb5b98821cfcff4",
+    "seconds": 28.175,
+    "bytes": 84908,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N3"
+  },
+  "n3-c-093": {
+    "sha256_script": "885f9ea743451727619135fbfcda48305d5ad929912bb87f64af7b9cfe883409",
+    "seconds": 24.41,
+    "bytes": 73676,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N3"
+  },
+  "n3-c-094": {
+    "sha256_script": "67f8b2a82d0c633fb22ecd65b091b2806495f3d9e3348e989d074bf582e5d273",
+    "seconds": 17.21,
+    "bytes": 52076,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N3"
+  },
+  "n3-c-095": {
+    "sha256_script": "a7c8a6549ba5ce28fd24a9331a17623d7314cc69f3c7636762cdb832c96d3720",
+    "seconds": 20.59,
+    "bytes": 62156,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N3"
+  },
+  "n3-c-096": {
+    "sha256_script": "2eeaf7e9b70c2301e1b9e514e59af979f7c9d794b4dd0fb63754653478c2704c",
+    "seconds": 19.82,
+    "bytes": 59852,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N3"
+  },
+  "n3-c-097": {
+    "sha256_script": "f6fb6d5a8f44b1a7f8413c75a0a56073e7ae8d6c778b8dad1473bfdc4c9e76b9",
+    "seconds": 18.715,
+    "bytes": 56540,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N3"
+  },
+  "n3-c-098": {
+    "sha256_script": "0997773e539a3bd4457ca4d282ef4864b075e16e46214ba3d389ec416904900c",
+    "seconds": 21.47,
+    "bytes": 64820,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N3"
+  },
+  "n3-c-099": {
+    "sha256_script": "bc2c715ba5c38bd1bee13f82eee92942d053967b090db90d51be90d1e5880dc0",
+    "seconds": 20.34,
+    "bytes": 61436,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N3"
+  },
+  "n3-c-100": {
+    "sha256_script": "3b6acfa624dded14db0dcb89b23b96a461b185bf6936de2c0a63a4e2a7a5561a",
+    "seconds": 20.345,
+    "bytes": 61436,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N3"
+  },
+  "n3-c-101": {
+    "sha256_script": "40c515c9aeb4c99d1bb5df8746fdb22558b1efce7ec080a2346fac886f4c93e1",
+    "seconds": 20.5,
+    "bytes": 61940,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N3"
+  },
+  "n3-c-102": {
+    "sha256_script": "99e82655e6a63bb42f61808312321409ac2377fd7bb7d736198b7450bbde065c",
+    "seconds": 20.69,
+    "bytes": 62516,
+    "engine": "Open JTalk / HTS Voice Mei (synthetic)",
+    "level": "N3"
+  }
+}
