@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#10121b">
+<meta name="description" content="Repasa a tu ritmo con quiz, parejas y exploración.">
+<title>Canciones en chino · Asallam Sensei</title>
+<style>
+
+    :root {
+      color-scheme: dark;
+      --bg:#10121b; --surface:#191c29; --raised:#222635; --hover:#292e40;
+      --text:#ffffff; --border:#34394c;
+      --accent:#c3b4ff; --accent-bg:#39304f; --mint:#a4e3ce; --mint-bg:#233e38;
+      --danger:#ffb4b4; --danger-bg:#432c35; --gold:#f2ce88; --shadow:0 20px 60px #00000024;
+      --radius:22px; --jp:"Noto Sans KR","Malgun Gothic",sans-serif;
+    }
+    :root[data-theme="light"] {
+      color-scheme: light;
+      --bg:#f3f2ef; --surface:#ffffff; --raised:#f3f3f8; --hover:#eaeaf2;
+      --text:#000000; --border:#d9dce6;
+      --accent:#6748af; --accent-bg:#eee7fa; --mint:#216750; --mint-bg:#e4f3eb;
+      --danger:#a52841; --danger-bg:#fce8ed; --gold:#936218; --shadow:0 20px 60px #37325109;
+    }
+    * { box-sizing:border-box; }
+    [hidden] { display:none !important; }
+    body { margin:0; font-size:19px; background:var(--bg); color:var(--text); font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; line-height:1.5; -webkit-font-smoothing:antialiased; }
+    body::before { content:""; position:fixed; inset:0; z-index:-1; pointer-events:none; background:radial-gradient(ellipse at 80% 0%,#9c86eb0b,transparent 55%); }
+    button,input,select { font:inherit; }
+    button,a,input,select,summary { -webkit-tap-highlight-color:transparent; }
+    button { cursor:pointer; }
+    button:disabled { cursor:not-allowed; opacity:1; border-style:dashed; }
+    a { color:inherit; text-decoration:none; }
+    a:hover { text-decoration:underline; text-underline-offset:4px; }
+    button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible { outline:3px solid var(--accent); outline-offset:4px; }
+    h1,h2,p { margin:0; }
+    h1 { font-size:clamp(34px,4.13vw,54px); letter-spacing:-1.6px; line-height:1.14; font-weight:720; }
+    h2 { font-size:25px; letter-spacing:-.45px; }
+    .jp { font-family:var(--jp); font-weight:400; }
+    .sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
+    .skip-link { position:fixed; top:-70px; left:16px; z-index:100; padding:12px 18px; background:var(--surface); border:2px solid var(--accent); border-radius:10px; }
+    .skip-link:focus { top:12px; }
+    .container { width:min(1180px,100% - 48px); margin-inline:auto; }
+    .topbar { display:flex; align-items:center; justify-content:space-between; gap:20px; padding:24px 0; border-bottom:1px solid var(--border); }
+    .brand { display:flex; align-items:center; gap:12px; flex-shrink:0; }
+    .brand:hover { text-decoration:none; }
+    .brand-mark { display:grid; place-items:center; width:43px; height:43px; border-radius:13px; color:var(--text); background:var(--accent-bg); font:32px var(--jp); }
+    .brand-name { display:block; font-size:15px; font-weight:750; letter-spacing:1.1px; }
+    .brand-sub { display:block; font-size:14px; color:var(--text); margin-top:2px; }
+    .topnav { display:flex; align-items:center; gap:9px; }
+    .nav-link,.icon-button { display:inline-flex; justify-content:center; align-items:center; gap:7px; min-height:42px; border:1px solid transparent; border-radius:10px; padding:8px 11px; color:var(--text); background:transparent; font-size:15px; font-weight:600; }
+    .nav-link:hover,.icon-button:hover { background:var(--raised); color:var(--text); text-decoration:none; }
+    .donate-nav { color:var(--text); border-color:var(--border); }
+    .icon { width:19px; height:19px; flex-shrink:0; fill:none; stroke:currentColor; stroke-width:1.8; stroke-linecap:round; stroke-linejoin:round; }
+    .hero { padding:34px 0 27px; display:flex; justify-content:space-between; align-items:flex-end; gap:24px; }
+    .notice { position:relative; overflow:hidden; display:flex; gap:12px; align-items:center; justify-content:space-between; border:1px solid var(--border); background:var(--raised); border-radius:14px; margin:0 0 18px; padding:12px 16px; font-size:15px; color:var(--text); }
+    .notice.error { background:var(--danger-bg); border-color:var(--danger); }
+    .notice button { background:none; border:0; color:inherit; padding:6px; min-width:32px; font-size:24px; }
+    .notice-timer { position:absolute; bottom:0; left:0; width:100%; height:3px; background:var(--accent); transform:scaleX(0); transform-origin:left; pointer-events:none; }
+    @keyframes notice-countdown { from { transform:scaleX(0); } to { transform:scaleX(1); } }
+    .workspace { display:grid; grid-template-columns:minmax(0,1fr) 284px; align-items:start; gap:22px; }
+    .main-column { min-width:0; }
+    .scope-row { display:flex; flex-direction:column; align-items:stretch; gap:10px; }
+    .segmented { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:4px; padding:4px; border:1px solid var(--border); background:var(--surface); border-radius:13px; }
+    .segment { border:0; border-radius:9px; background:transparent; color:var(--text); padding:8px 5px; min-height:39px; font-size:15px; font-weight:650; }
+    .segment[data-scope="mixed"] { grid-column:1 / -1; }
+    .segment:hover { color:var(--text); background:var(--raised); }
+    .segment[aria-pressed="true"] { background:var(--accent-bg); color:var(--text); }
+    .segment.is-mixed { background:var(--accent-bg); box-shadow:inset 0 0 0 1px var(--accent); }
+    .scope-count { font-size:14px; color:var(--text); }
+    .activity-tabs { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:6px; padding:6px; background:var(--surface); border:1px solid var(--border); border-radius:16px; margin-bottom:16px; }
+    .activity-tab { display:flex; align-items:center; justify-content:center; gap:8px; padding:12px 8px; border:0; border-radius:10px; background:transparent; color:var(--text); font-size:15px; font-weight:650; min-height:46px; }
+    .activity-tab:hover { background:var(--raised); color:var(--text); }
+    .activity-tab[aria-pressed="true"] { background:var(--accent-bg); color:var(--text); }
+    .exercise-card { position:relative; background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:25px 28px 20px; box-shadow:var(--shadow); overflow:hidden; }
+    .exercise-top { display:flex; justify-content:space-between; align-items:center; gap:10px; }
+    .badge { font-size:14px; font-weight:750; text-transform:uppercase; letter-spacing:1.3px; color:var(--text); background:var(--accent-bg); border-radius:6px; padding:5px 9px; }
+    .round-count { color:var(--text); font-size:14px; font-variant-numeric:tabular-nums; }
+    .progress-track { height:4px; background:var(--raised); border-radius:4px; margin-top:17px; overflow:hidden; }
+    .progress-fill { height:100%; width:0%; background:var(--mint); border-radius:inherit; transition:width .24s ease; }
+    .question-area { text-align:center; padding:25px 0 21px; }
+    .question-label { color:var(--text); font-size:15px; }
+    .prompt { min-height:160px; display:flex; align-items:center; justify-content:center; font-size:clamp(90px,11.8vw,130px); line-height:1.4; margin:5px 0; letter-spacing:4px; }
+    .prompt.romaji { font-family:inherit; font-size:clamp(64px,8.26vw,87px); font-weight:550; letter-spacing:-2px; }
+    .prompt.multi { font-size:clamp(78px,10.62vw,111px); }
+    .listen-button { display:inline-flex; align-items:center; gap:7px; margin-top:18px; padding:7px 12px; min-height:36px; font-size:14px; font-weight:600; border:1px solid var(--border); border-radius:999px; color:var(--text); background:transparent; }
+    .listen-button:hover { background:var(--raised); color:var(--text); }
+    .listen-button.playing { color:var(--text); border-color:var(--mint); }
+    .options { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; }
+    .option-button { position:relative; display:flex; align-items:center; justify-content:center; min-height:67px; padding:12px 35px; border:1px solid var(--border); border-radius:13px; color:var(--text); background:var(--raised); font-size:28px; transition:background .15s,border-color .15s,transform .15s; }
+    .option-button:hover:not(:disabled) { border-color:var(--accent); background:var(--accent-bg); transform:translateY(-1px); }
+    .option-button .answer-mark { position:absolute; right:14px; font-size:20px; }
+    .option-button:disabled { opacity:1; cursor:default; }
+    .option-button.is-correct { background:var(--mint-bg); border-color:var(--mint); color:var(--text); }
+    .option-button.is-wrong { background:var(--danger-bg); border-color:var(--danger); color:var(--text); }
+    .answer-form { display:flex; align-items:stretch; gap:10px; }
+    .answer-input { min-width:0; width:100%; padding:14px 17px; background:var(--raised); color:var(--text); border:1px solid var(--border); border-radius:12px; font-size:27px; text-align:center; }
+    input::placeholder { color:var(--text); opacity:1; }
+    .answer-input::placeholder { color:var(--text); font-size:19px; }
+    .button { display:inline-flex; align-items:center; justify-content:center; gap:8px; min-height:43px; border-radius:11px; padding:10px 16px; border:1px solid var(--border); background:var(--raised); color:var(--text); font-size:15px; font-weight:650; }
+    .button:hover:not(:disabled) { background:var(--hover); text-decoration:none; }
+    .button.primary { color:var(--text); border-color:var(--mint); background:var(--mint-bg); }
+    .button.primary:hover:not(:disabled) { background:var(--raised); }
+    .button.small { font-size:14px; min-height:36px; padding:7px 11px; }
+    .button.ghost { background:transparent; color:var(--text); border-color:transparent; }
+    .feedback { min-height:67px; display:flex; flex-direction:column; justify-content:center; align-items:center; gap:3px; text-align:center; padding:12px 0 8px; }
+    .feedback-title { font-size:18px; font-weight:700; }
+    .feedback-detail { font-size:15px; color:var(--text); }
+    .feedback-tip { font-size:14px; color:var(--text); margin-top:3px; max-width:540px; }
+    .exercise-actions { display:flex; align-items:center; justify-content:space-between; gap:10px; padding-top:13px; border-top:1px solid var(--border); }
+    .keyboard-hint { text-align:left; font-size:14px; color:var(--text); margin:14px 0 0; }
+    kbd { font:inherit; border:1px solid var(--border); border-radius:4px; padding:1px 4px; white-space:nowrap; }
+    .session-stats { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:8px; margin-top:15px; }
+    .stat { padding:13px 8px; background:var(--surface); border:1px solid var(--border); border-radius:13px; text-align:center; min-width:0; }
+    .stat-label { font-size:14px; text-transform:uppercase; letter-spacing:1px; color:var(--text); }
+    .stat strong { display:block; font-weight:600; font-size:26px; letter-spacing:-.5px; margin-top:2px; font-variant-numeric:tabular-nums; }
+    .session-caption { margin:10px 2px 0; font-size:14px; color:var(--text); display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap; }
+    .session-caption .button { min-height:30px; padding:4px 8px; font-size:14px; }
+    .settings { background:var(--surface); border:1px solid var(--border); border-radius:var(--radius); padding:22px 20px; }
+    .settings-heading { display:flex; align-items:center; justify-content:space-between; font-size:17px; font-weight:700; margin-bottom:22px; }
+    .setting-group + .setting-group { margin-top:20px; }
+    .setting-label { display:block; font-size:14px; font-weight:650; color:var(--text); margin-bottom:8px; }
+    .mode-grid { display:grid; grid-template-columns:1fr 1fr; gap:7px; }
+    .mode-button { min-height:43px; padding:9px 5px; border:1px solid var(--border); border-radius:9px; color:var(--text); background:var(--raised); font-size:14px; font-weight:650; }
+    .mode-button[aria-pressed="true"] { border-color:var(--accent); color:var(--text); background:var(--accent-bg); }
+    .mode-button.is-mixed { border-color:var(--accent); background:var(--accent-bg); }
+    .setting-help { margin-top:8px; color:var(--text); font-size:14px; line-height:1.65; }
+    select { width:100%; min-height:41px; border:1px solid var(--border); border-radius:9px; background:var(--raised); color:var(--text); padding:8px 10px; font-size:14px; }
+    .check-row { display:flex; align-items:center; justify-content:space-between; gap:12px; font-size:14px; color:var(--text); cursor:pointer; min-height:34px; }
+    .check-row + .check-row { margin-top:8px; }
+    input[type="checkbox"] { width:17px; height:17px; accent-color:var(--accent); flex-shrink:0; cursor:pointer; }
+    input[type="range"] { width:100%; accent-color:var(--accent); margin:6px 0 0; }
+    .more-options { border-top:1px solid var(--border); margin-top:20px; padding-top:16px; }
+    .more-options > summary { font-size:15px; font-weight:700; }
+    .settings details + details { margin-top:12px; }
+    details summary { cursor:pointer; font-size:14px; font-weight:600; color:var(--text); padding:3px 0; }
+    details[open] > summary { margin-bottom:14px; color:var(--text); }
+    .data-actions { display:flex; flex-wrap:wrap; gap:7px; margin-top:10px; }
+    .data-actions .button { font-size:14px; padding-inline:9px; }
+    .lifetime-row { display:flex; align-items:center; justify-content:space-between; gap:10px; font-size:14px; color:var(--text); margin:8px 0; }
+    .lifetime-row strong { color:var(--text); font-weight:650; }
+    .review-count { display:inline-block; color:var(--text); font-weight:650; }
+    .match-intro { display:flex; justify-content:space-between; align-items:center; gap:12px; margin:24px 0 19px; }
+    .match-board { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:10px; }
+    .match-tile { min-height:106px; border:1px solid var(--border); border-radius:13px; color:var(--text); background:var(--raised); position:relative; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:9px; padding:12px 6px; }
+    .match-tile .tile-content { font-size:30px; line-height:1.5; }
+    .match-tile[data-kind="kana"] .tile-content { font-size:39px; }
+    .match-tile:hover:not(:disabled) { border-color:var(--accent); }
+    .match-tile.is-selected { border-color:var(--accent); color:var(--text); background:var(--accent-bg); box-shadow:inset 0 0 0 1px var(--accent); }
+    .match-tile.is-wrong { border-color:var(--danger); background:var(--danger-bg); }
+    .match-tile.is-matched { border-color:var(--mint); background:var(--mint-bg); color:var(--text); opacity:1; cursor:default; }
+    .match-tile.is-matched::after { content:"✓"; position:absolute; top:6px; right:9px; font-size:14px; }
+    .match-message { font-size:15px; color:var(--text); text-align:center; min-height:51px; padding-top:17px; }
+    .match-actions { display:flex; align-items:center; justify-content:space-between; gap:8px; padding-top:12px; border-top:1px solid var(--border); }
+    .explore-top { display:flex; justify-content:space-between; align-items:flex-start; gap:15px; margin-bottom:19px; }
+    .explore-top p { color:var(--text); font-size:14px; margin-top:6px; }
+    .search-input { width:100%; border:1px solid var(--border); border-radius:11px; background:var(--raised); color:var(--text); padding:12px 14px; font-size:17px; }
+    .explore-grid { display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:9px; margin-top:18px; }
+    .kana-tile { border:1px solid var(--border); border-radius:11px; background:var(--raised); color:var(--text); min-height:92px; padding:10px 4px; display:flex; flex-direction:column; justify-content:center; align-items:center; gap:3px; position:relative; }
+    .kana-tile .jp { font-size:34px; }
+    .kana-tile .tile-romaji { color:var(--text); font-size:14px; }
+    .kana-tile:hover { border-color:var(--accent); background:var(--accent-bg); }
+    .kana-tile.needs-review::after { content:""; width:5px; height:5px; border-radius:50%; background:var(--gold); position:absolute; top:8px; right:8px; }
+    .explore-count { font-size:14px; color:var(--text); margin-top:13px; }
+    .summary { padding:38px 0 24px; text-align:center; }
+    .summary-seal { width:67px; height:67px; border-radius:50%; background:var(--mint-bg); color:var(--text); display:grid; place-items:center; margin:0 auto 20px; font-size:33px; }
+    .summary h2 { font-size:31px; }
+    .summary > p { color:var(--text); font-size:17px; margin-top:9px; }
+    .summary-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px; margin:28px 0; }
+    .summary-grid div { background:var(--raised); border-radius:12px; padding:16px 8px; font-size:14px; color:var(--text); }
+    .summary-grid strong { display:block; font-size:30px; margin-bottom:3px; color:var(--text); font-weight:600; }
+    .summary-actions { display:flex; flex-wrap:wrap; justify-content:center; gap:10px; }
+    .empty-state { padding:55px 10px; text-align:center; }
+    .empty-state .empty-icon { font:61px var(--jp); color:var(--text); margin-bottom:20px; }
+    .empty-state p { color:var(--text); font-size:17px; max-width:440px; margin:12px auto 20px; }
+    .support-section { display:flex; align-items:center; justify-content:space-between; gap:24px; padding:24px 28px; border:1px solid var(--border); background:var(--surface); border-radius:18px; margin:30px 0 0; }
+    .support-copy { display:flex; align-items:center; gap:17px; }
+    .support-symbol { width:44px; height:44px; border-radius:12px; display:grid; place-items:center; background:var(--accent-bg); color:var(--text); flex-shrink:0; }
+    .support-copy h2 { font-size:19px; letter-spacing:-.2px; }
+    .support-copy p { color:var(--text); font-size:14px; margin-top:5px; }
+    .support-section .button { white-space:nowrap; color:var(--text); border-color:var(--accent); background:transparent; }
+    footer { padding:23px 0 30px; display:flex; align-items:center; justify-content:space-between; gap:15px; color:var(--text); font-size:14px; }
+    footer a { color:var(--text); }
+    dialog { width:min(440px,calc(100% - 36px)); border:1px solid var(--border); border-radius:18px; padding:25px; background:var(--surface); color:var(--text); box-shadow:var(--shadow); }
+    dialog::backdrop { background:#070914b3; }
+    dialog p { font-size:15px; color:var(--text); margin:12px 0 23px; }
+    dialog .dialog-actions { display:flex; justify-content:flex-end; gap:9px; }
+    @media (max-width:920px) {
+      .workspace { grid-template-columns:minmax(0,1fr) 250px; gap:16px; }
+      .settings { padding:20px 16px; }
+      .exercise-card { padding:23px 20px 18px; }
+      .match-board { grid-template-columns:repeat(3,minmax(0,1fr)); }
+      .activity-tab { flex-direction:column; gap:5px; font-size:14px; }
+      .activity-tab .icon { width:16px; }
+    }
+    @media (max-width:740px) {
+      .container { width:calc(100% - 28px); }
+      .topbar { gap:10px; padding:17px 0; }
+      .brand-mark { width:37px; height:37px; font-size:28px; border-radius:11px; }
+      .brand { gap:9px; }
+      .brand-name { font-size:14px; letter-spacing:.7px; }
+      .brand-sub { font-size:14px; }
+      .topnav { gap:1px; }
+      .nav-link { padding:8px; font-size:14px; min-height:38px; }
+      .icon-button { padding:8px; min-height:38px; }
+      .home-label { display:none; }
+      .hero { padding:26px 0 23px; gap:8px; }
+      h1 { letter-spacing:-1px; }
+      .workspace { grid-template-columns:1fr; }
+      .segmented { width:100%; }
+      .segment { padding:7px 5px; font-size:14px; }
+      .activity-tabs { gap:4px; padding:5px; border-radius:14px; margin-bottom:13px; }
+      .activity-tab { flex-direction:column; gap:4px; padding:9px 2px; min-height:59px; font-size:14px; }
+      .activity-tab .icon { width:18px; }
+      .exercise-card { padding:20px 16px 17px; border-radius:18px; }
+      .question-area { padding:19px 0 18px; }
+      .prompt { min-height:143px; }
+      .option-button { min-height:61px; font-size:26px; }
+      .settings { padding:21px; }
+      .settings-heading { margin-bottom:16px; }
+      .mode-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+      .setting-group + .setting-group { margin-top:17px; }
+      .match-board { grid-template-columns:repeat(4,minmax(0,1fr)); gap:8px; }
+      .match-tile { min-height:91px; }
+      .match-tile .tile-content { font-size:25px; }
+      .match-tile[data-kind="kana"] .tile-content { font-size:33px; }
+      .match-intro { margin-top:21px; }
+      .support-section { padding:20px; margin-top:22px; }
+      .support-copy { gap:12px; }
+      .support-symbol { display:none; }
+      .support-copy h2 { font-size:17px; }
+      .support-copy p { font-size:14px; }
+      .support-section .button { padding:9px 12px; font-size:14px; }
+      footer { align-items:flex-start; }
+    }
+    @media (max-width:390px) {
+      .container { width:calc(100% - 20px); }
+      .topbar { flex-wrap:wrap; }
+      .brand-sub { display:none; }
+      .session-stats { grid-template-columns:repeat(2,minmax(0,1fr)); }
+      .match-board { grid-template-columns:repeat(2,minmax(0,1fr)); }
+      .match-tile { min-height:91px; }
+      .explore-grid { grid-template-columns:repeat(4,minmax(0,1fr)); }
+      .stat-label { font-size:14px; letter-spacing:.3px; }
+      .option-button { padding-inline:28px; }
+      .answer-form { flex-wrap:wrap; }
+      .answer-form .button { width:100%; }
+      .support-section { flex-direction:column; align-items:flex-start; gap:14px; }
+    }
+    @media (prefers-reduced-motion:reduce) {
+      *,*::before,*::after { animation:none !important; transition:none !important; scroll-behavior:auto !important; }
+    }
+    @media print {
+      .topnav,.settings,.activity-tabs,.support-section,.keyboard-hint { display:none; }
+      .workspace { display:block; }
+      body { background:white; color:black; }
+    }
+
+    /* Ajustes de vocabulario sobre el diseño original de kana. */
+    .levels { grid-template-columns:repeat(3,minmax(0,1fr)); }
+    .segment:disabled { opacity:.48; }
+    .segment.is-mixed { background:var(--accent-bg); box-shadow:inset 0 0 0 1px var(--accent); }
+    .all-modes { grid-column:1 / -1; }
+    .prompt,.prompt.multi { font-size:clamp(36px,6.3vw,70px); letter-spacing:0; line-height:1.9; min-height:160px; overflow-wrap:anywhere; }
+    .prompt.spanish { font-family:inherit; font-size:clamp(27px,4.2vw,46px); line-height:1.35; }
+    .prompt.audio-prompt { font-family:inherit; font-size:30px; letter-spacing:0; }
+    ruby { ruby-position:over; ruby-align:center; }
+    rt { font-size:.38em; font-weight:400; letter-spacing:.04em; line-height:1.3; }
+    .option-button { min-height:88px; font-size:22px; line-height:1.7; padding:15px 28px; overflow-wrap:anywhere; }
+    .option-button.jp { font-size:28px; }
+    .option-key { position:absolute; left:10px; top:7px; font:12px system-ui; }
+    .match-board { grid-template-columns:repeat(4,minmax(0,1fr)); }
+    .match-tile .tile-content { font-size:19px; overflow-wrap:anywhere; line-height:1.8; }
+    .match-tile[data-kind="jp"] .tile-content { font-size:25px; }
+    .match-tile { min-height:120px; padding:14px 9px; }
+    .explore-grid { grid-template-columns:repeat(3,minmax(0,1fr)); }
+    .vocab-tile { min-height:145px; padding:18px 10px 12px; gap:8px; }
+    .vocab-tile .jp { font-size:28px; line-height:1.9; overflow-wrap:anywhere; }
+    .tile-meaning { font-size:15px; overflow-wrap:anywhere; }
+    .tile-level { font-size:11px; align-self:flex-start; background:var(--accent-bg); border-radius:4px; padding:2px 5px; }
+    #explore-more { display:flex; margin:18px auto 0; }
+    #feedback-detail { line-height:2; overflow-wrap:anywhere; }
+    #feedback-detail .jp { font-size:24px; }
+    .word-reveal { display:block; }
+    .notice { align-items:flex-start; }
+    @media(max-width:920px) { .match-board { grid-template-columns:repeat(3,minmax(0,1fr)); } .explore-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+    @media(max-width:740px) { .prompt,.prompt.multi { font-size:clamp(32px,8vw,54px); min-height:140px; } .match-board { grid-template-columns:repeat(3,minmax(0,1fr)); } .levels { grid-template-columns:repeat(5,minmax(0,1fr)); } }
+    @media(max-width:430px) { .match-board { grid-template-columns:repeat(2,minmax(0,1fr)); } .option-button { font-size:18px; padding:16px 22px; } .option-button.jp { font-size:23px; } .answer-form { flex-wrap:wrap; } .answer-form .button { width:100%; } .explore-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+  .topbar{flex-wrap:wrap}.topnav{flex-wrap:wrap}.topnav .nav-link{white-space:nowrap}@media(max-width:600px){.topbar{align-items:flex-start}.topnav{width:100%;gap:3px}.topnav .nav-link{padding:8px 9px;min-height:42px}.topnav .icon-button{margin-left:auto}}
+
+.prompt{min-height:110px;font-family:inherit;font-size:clamp(25px,4vw,42px);font-weight:600;line-height:1.4;letter-spacing:0;overflow-wrap:anywhere}.options{grid-template-columns:1fr}.option-button{font-size:19px;justify-content:flex-start;padding:16px}.option-button small{margin-right:15px;color:var(--accent)}.controls{display:flex;flex-wrap:wrap;gap:9px;margin:18px 0}.controls button,.plain-button{border:1px solid var(--border);border-radius:10px;padding:10px 14px;background:var(--raised);color:var(--text)}.controls .primary{background:var(--accent-bg);border-color:var(--accent)}input,select,textarea{max-width:100%;border:1px solid var(--border);border-radius:9px;background:var(--raised);color:var(--text);padding:9px}#written,#search{width:100%}.muted{font-size:14px}.feedback{padding:16px;border-radius:12px;background:var(--raised);margin-top:16px;white-space:pre-line}.correct{border-color:var(--accent)!important;background:var(--accent-bg)!important}.wrong{border-color:var(--danger)!important;background:var(--danger-bg)!important}.chips{display:flex;flex-wrap:wrap;gap:6px;max-height:240px;overflow:auto}.chip{font-size:13px;border:1px solid var(--border);background:var(--raised);color:var(--text);border-radius:8px;padding:7px}.chip[aria-pressed=true]{background:var(--accent-bg);border-color:var(--accent)}.setting-group{margin:18px 0}.setting-group label{display:block;font-size:14px;margin:8px 0}.explore-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:18px 0}.word-card{border:1px solid var(--border);border-radius:12px;padding:15px;overflow-wrap:anywhere}.word-card h3{font-size:19px;margin:0}.word-card p{font-size:16px;margin:8px 0}.match-board{grid-template-columns:repeat(2,minmax(0,1fr))}.match-tile{font-size:18px;min-height:80px;overflow-wrap:anywhere}.match-tile.is-matched{background:var(--accent-bg);border-color:var(--accent)}.stats-row{display:flex;flex-wrap:wrap;gap:14px;font-size:14px;margin-top:18px}.topnav{flex-wrap:wrap}.topbar{flex-wrap:wrap}#summary h2{margin:18px 0}#notice{white-space:pre-line}.progress-fill{background:var(--accent)}@media(max-width:560px){.explore-grid{grid-template-columns:1fr}.brand-sub{display:none}.topnav{gap:2px}.nav-link{font-size:13px;padding:7px}.activity-tab{font-size:12px;padding:10px 2px}.exercise-card{padding:20px 16px}.container{width:calc(100% - 24px)}}
+
+/* Chinese keeps the shared practice layout, with language-specific reading sizes. */
+.hanzi{font-family:"Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif;font-weight:500}.prompt{overflow-wrap:anywhere}.pinyin{font-size:22px;margin-top:8px;min-height:33px}.explore-card h3{font-size:30px;margin:0 0 5px}.explore-card p{margin:4px 0}.explore-card{overflow-wrap:anywhere}.options button{width:100%;text-align:left;white-space:normal;overflow-wrap:anywhere}.option-letter{display:inline-grid;place-items:center;width:30px;height:30px;border:1px solid currentColor;border-radius:8px;margin-right:12px;flex-shrink:0;font-size:15px}.options button.correct{border-color:var(--mint);background:var(--mint-bg);color:var(--text)}.options button.wrong{border-color:var(--danger);background:var(--danger-bg);color:var(--text)}.options button:disabled{border-style:solid}.option-mark{margin-left:auto;font-size:15px}.topnav{flex-wrap:wrap}.setting-group select{width:100%}#summary .controls{flex-wrap:wrap}.review-history{opacity:1}.empty-state{padding:20px 0}.stats-row{flex-wrap:wrap}#feedback{overflow-wrap:anywhere}.explore-grid{grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr))} @media(max-width:600px){.topbar{align-items:flex-start;flex-direction:column;gap:12px}.topnav{gap:4px}.nav-link{padding:8px}.hero{padding:24px 0}.container{width:calc(100% - 28px)}.options button{padding:14px 12px}.option-mark{font-size:12px}.brand-sub{font-size:13px}}
+.options button.correct{background:var(--mint-bg)!important;border-color:var(--mint)!important}.activity-tab[aria-pressed=true]{background:var(--accent-bg);border-color:var(--accent);color:var(--text)}.word-card.explore-card h3{font-size:30px}.word-card.explore-card p{margin:4px 0}.option-mark{padding-left:8px;white-space:nowrap}.options button>span:nth-child(2){min-width:0}.activity-tabs{grid-template-columns:repeat(2,minmax(0,1fr))}
+
+/* Portuguese uses the shared layout without Chinese typefaces. */
+.word-card.explore-card h3{font-family:inherit;font-size:23px}.prompt{font-family:inherit}.pinyin:empty{display:none}.chip{min-height:42px}
+
+.prompt:lang(ko-KR), .option-button:lang(ko-KR) {font-family:"Noto Sans KR","Malgun Gothic",sans-serif;}
+
+</style>
+<style>
+/* Shared Donar control, matching index.html. Scoped to donation links only. */
+html body a.asallam-donate[href] {
+  --donate-line: rgba(210,196,255,.2);
+  --donate-text: #f8f5ff;
+  --donate-accent: #b7a1ff;
+  --donate-focus: #d4bdff;
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  min-height: 42px;
+  width: auto;
+  padding: 9px 13px;
+  border: 1px solid var(--donate-line);
+  border-radius: 11px;
+  background: transparent;
+  box-shadow: none;
+  color: var(--donate-text);
+  font-family: Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  font-size: 13px;
+  font-weight: 650;
+  line-height: 1.5;
+  letter-spacing: normal;
+  text-decoration: none;
+  white-space: nowrap;
+  flex-shrink: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+html[data-theme="light"] body a.asallam-donate[href] {
+  --donate-line: rgba(93,66,128,.22);
+  --donate-text: #30243f;
+  --donate-accent: #7352bf;
+  --donate-focus: #7352bf;
+}
+html body a.asallam-donate[href]:hover {
+  color: var(--donate-text);
+  background: #b59aef14;
+  border-color: var(--donate-accent);
+  text-decoration: none;
+}
+html body a.asallam-donate[href]:focus-visible {
+  outline: 3px solid var(--donate-focus);
+  outline-offset: 5px;
+}
+html body a.asallam-donate[href] > svg {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  flex-shrink: 0;
+}
+
+</style>
+<style>
+.activity-tabs {grid-template-columns:repeat(3,minmax(0,1fr));}
+.language-match-board {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:20px 0;}
+.language-match-tile {min-width:0;min-height:90px;padding:14px 10px;border:1px solid var(--border);border-radius:13px;background:var(--raised);color:var(--text);font-size:22px;overflow-wrap:anywhere;white-space:normal;}
+.language-match-tile.is-selected {border-color:var(--accent);background:var(--accent-bg);outline:2px solid var(--accent);}
+.language-match-tile.is-matched {border-color:var(--mint);background:var(--mint-bg);}
+.language-match-tile.is-matched::after {content:' ✓';}
+.language-match-tile.is-wrong {border-color:var(--danger);background:var(--danger-bg);}
+@media(max-width:480px){.language-match-tile{font-size:18px;min-height:84px;padding:12px 8px;}.activity-tab{padding-inline:4px;}}
+
+</style>
+<style>
+/* Shared brand footer; page themes and surrounding content stay unchanged. */
+footer.asallam-footer{display:flex;justify-content:center;align-items:center;gap:12px;flex-wrap:wrap;text-align:center;margin:29px auto 0;padding:0 0 28px;font-size:11px;color:var(--muted,var(--text));}
+footer.asallam-footer .footer-star{opacity:.5;}
+footer.asallam-footer a{color:inherit;}
+footer.asallam-footer a:hover{color:var(--violet,var(--accent,currentColor));}
+.asallam-footer-note{margin:20px 0 0;text-align:center;font-size:12px;color:var(--muted,var(--text));}
+
+</style>
+<style>
+.activity-tabs{grid-template-columns:repeat(3,minmax(0,1fr))}.hero p{font-size:16px;margin-top:12px;max-width:700px}.prompt{font-size:clamp(28px,5vw,48px);min-height:130px}.options{grid-template-columns:repeat(2,minmax(0,1fr))}.options button{height:100%;min-height:80px}.option-letter{align-self:flex-start}.option-label{flex:1}.options button.is-correct{border-color:var(--mint)!important;background:var(--mint-bg)!important}.options button.is-wrong{border-color:var(--danger)!important;background:var(--danger-bg)!important}.settings fieldset{border:0;margin:0;padding:0;min-width:0}.settings fieldset:disabled{opacity:.65}.setting-group .check-row{display:flex}.empty-state{padding:40px 12px}.empty-symbol{font-size:42px;margin-bottom:15px}.empty-state p{max-width:420px}.feedback:empty{display:none}.word-card h3{font-size:24px}.word-card .card-detail{font-size:14px}.session-stats{grid-template-columns:repeat(3,minmax(0,1fr))}.stat strong{font-size:25px}.progress-track{margin-bottom:10px}.notice{align-items:center}.notice span{flex:1}.notice button{flex:none}.session-caption{font-size:13px}.keyboard-hint{line-height:1.8}.language-match-tile{overflow-wrap:anywhere;white-space:normal}.loading-state{padding:38px 10px;text-align:center}.group-empty{padding:20px}.setting-label{margin-top:10px}.button:disabled{opacity:.55}.explore-top{display:block}.explore-top h2{font-size:21px}.word-card{background:var(--raised)}.option-label,.word-card p,.reference-note,.reference-header{white-space:pre-line}.reference-note{margin:10px 0;font-size:16px}.reference-header{font-size:14px;margin-bottom:12px}.source-notes{margin-top:18px}.source-notes h2{font-size:21px;margin-bottom:15px}.source-notes details+details{margin-top:14px}.chips .chip{overflow-wrap:anywhere;text-align:left}#summary{padding:25px 0 10px}#summaryText{margin-top:12px}#summary .controls{justify-content:center}.stats-note{font-size:13px;margin-top:10px}#catalogIntro{overflow-wrap:anywhere}@media(max-width:600px){.options{grid-template-columns:1fr}.hero{padding-bottom:22px}.options button{min-height:68px}.option-label{font-size:18px}.session-stats{gap:6px}.stat{padding:10px 5px}.stat-label{font-size:11px}.stat strong{font-size:23px}}
+#matching > p.setting-help:first-child{display:none}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Ir a la práctica</a>
+<div class="container">
+<header class="topbar">
+  <a class="brand" href="https://asallamsensei.com/index.html"><span class="brand-mark" aria-hidden="true">↻</span><span><span class="brand-name">ASALLAM SENSEI</span><span class="brand-sub">Un poco cada día</span></span></a>
+  <nav class="topnav" aria-label="Navegación">
+    <a class="nav-link" href="https://asallamsensei.com/index.html">Inicio</a><a class="nav-link" href="#storageHelp">Mi progreso</a>
+    <a class="nav-link donate-nav asallam-donate" href="https://paypal.me/asallamsensei" target="_blank" rel="noopener noreferrer"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"/></svg>Donar</a>
+    <button type="button" id="theme" class="icon-button" aria-label="Activar tema claro" title="Cambiar tema">☀</button>
+  </nav>
+</header>
+<section class="hero"><div><h1 id="pageTitle">Canciones en chino</h1><p id="catalogIntro">Practica, conecta ideas y vuelve a lo que necesitas.</p></div></section>
+<div id="notice" class="notice" role="status" hidden><span id="noticeText"></span><button type="button" id="closeNotice" aria-label="Cerrar aviso">×</button></div>
+<main id="main" class="workspace">
+<div class="main-column">
+  <div class="activity-tabs" role="group" aria-label="Actividad">
+    <button type="button" id="quizTab" class="activity-tab" aria-pressed="false">Quiz</button>
+    <button type="button" id="matchTab" class="activity-tab" aria-pressed="true">Emparejar</button>
+    <button type="button" id="exploreTab" class="activity-tab" aria-pressed="false">Explorar</button>
+  </div>
+  <section class="exercise-card" aria-label="Práctica">
+    <div id="exerciseTop" class="exercise-top" hidden><span id="badge" class="badge">Emparejar</span></div>
+    <div class="progress-track" id="progressTrack" role="progressbar" aria-label="Avance del quiz" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" hidden><div id="bar" class="progress-fill"></div></div>
+    <div id="empty" class="empty-state"><div class="empty-symbol" aria-hidden="true">↻</div><h2>Tu próximo repaso</h2><p>No hay entradas en este catálogo. Revisa el archivo de contenido para practicar con Quiz, Emparejar y Explorar.</p></div>
+    <div id="loading" class="loading-state" role="status" hidden>Cargando el repaso…</div>
+    <div id="loadError" class="empty-state" role="alert" hidden><h2>No se pudo cargar el contenido</h2><p id="loadErrorText"></p><button type="button" id="retry" class="button">Reintentar</button></div>
+    <div id="practice" hidden>
+      <div class="question-area"><div id="prompt" class="prompt"></div><button type="button" id="listen" class="listen-button" hidden>🔊 Escuchar</button></div>
+      <div id="options" class="options" role="group" aria-label="Respuestas"></div>
+      <div id="feedback" class="feedback" role="status" hidden></div>
+      <div class="controls"><button type="button" id="skip">No lo sé</button><button type="button" id="next" class="primary" disabled>Siguiente →</button></div>
+    </div>
+    <div id="noQuestion" class="group-empty" role="status" hidden><h2>Faltan opciones para este quiz</h2><p class="setting-help">Selecciona más bloques o cambia de dirección. También puedes repasar estas entradas en Explorar.</p></div>
+    <div id="matching" hidden></div>
+    <div id="exploring" hidden><div class="explore-top"><h2>Explora el contenido</h2><p>Abrir o escuchar una entrada no cuenta como respuesta.</p></div><label for="search" class="setting-label">Buscar</label><input id="search" type="search" autocomplete="off" placeholder="Busca una palabra o una idea"><p id="exploreCount" class="setting-help"></p><div id="wordGrid" class="explore-grid"></div><button type="button" id="more" class="plain-button" hidden>Ver más</button></div>
+    <div id="summary" class="summary" hidden><div class="summary-seal" aria-hidden="true">✓</div><h2>Tu sesión</h2><p id="summaryText"></p><div class="controls"><button type="button" id="repeat" class="primary">Otra sesión</button><button type="button" id="reviewSession">Repasar errores</button></div></div>
+    <div class="controls"><button type="button" id="finish" hidden>Terminar sesión</button></div>
+    <p id="keyboardHint" class="keyboard-hint" hidden><kbd>1–4</kbd> / <kbd>A–D</kbd>: responder · <kbd>Enter</kbd>: continuar · <kbd>R</kbd>: escuchar</p>
+  </section>
+  <section id="sessionStats" aria-label="Resultados de esta visita" hidden><div class="session-stats"><div class="stat"><span class="stat-label">Aciertos</span><strong id="correctCount">0</strong></div><div class="stat"><span class="stat-label">Errores</span><strong id="wrongCount">0</strong></div><div class="stat"><span class="stat-label">Sin responder</span><strong id="skippedCount">0</strong></div></div><p id="statsNote" class="stats-note">Resultados de esta visita. «No lo sé» se cuenta aparte de los errores.</p><p id="historySummary" class="stats-note" role="status"></p></section>
+  <section id="sourceNotes" class="settings source-notes" hidden><h2>Notas de las fichas</h2><div id="referenceList"></div></section>
+</div>
+<aside class="settings"><h2 class="settings-heading">A tu ritmo</h2>
+<fieldset id="dataSettings" disabled><legend class="sr-only">Opciones del repaso</legend>
+  <div class="setting-group" id="quizSettings" hidden><label for="direction" class="setting-label">Dirección del quiz</label><select id="direction"><option value="mixed">Mix · ambas direcciones</option><option value="forward">Pregunta → respuesta</option><option value="reverse">Respuesta → pregunta</option></select>
+  <label for="length" class="setting-label">Duración del quiz</label><select id="length"><option value="10">10 respuestas</option><option value="20">20 respuestas</option><option value="40">40 respuestas</option><option value="0">Sin límite</option></select></div>
+  <div class="setting-group" id="matchSettings"><label for="matchLength" class="setting-label">Duración de Emparejar</label><select id="matchLength"><option value="12">12 parejas</option><option value="21">21 parejas</option><option value="39" selected>39 parejas</option><option value="0">Sin límite</option></select><p class="setting-help">La barra avanza con cada pareja acertada. Los errores se cuentan aparte. Cada tablero tiene hasta 3 parejas; las entradas pueden repetirse para completar la sesión. Cambiar la duración inicia una sesión nueva.</p></div>
+  <div class="setting-group" id="groupSettings"><span class="setting-label">Contenido</span><p id="poolCount" class="setting-help">Pendiente de contenido</p><div id="groups" class="chips" role="group" aria-label="Bloques de repaso"></div><p class="setting-help">Cambiar los bloques inicia otra pregunta o tablero. Las tarjetas sin responder no cuentan como errores.</p></div>
+  <details id="moreOptions"><summary>Más opciones</summary><div class="setting-group" id="audioSettings" hidden><label for="rate" class="setting-label">Velocidad de audio</label><select id="rate"><option value="0.7">Lenta · 0,7×</option><option value="0.85">Tranquila · 0,85×</option><option value="1" selected>Normal · 1×</option></select><label class="check-row"><span>Audio al mostrar la pregunta</span><input type="checkbox" id="autoAudio"></label><p class="setting-help">Primero se busca el MP3 en data/audios/chino con los caracteres chinos como nombre. Si falta o no se reproduce, se usa la voz de chino mandarín del dispositivo, cuando está disponible.</p></div><div class="setting-group"><span class="setting-label">Tus resultados</span><p class="setting-help" id="storageHelp">El historial se guarda en este navegador, separado del repaso de japonés. Explorar o escuchar no registra respuestas. Puedes exportar y restaurar una copia aquí.</p><button type="button" class="button small" id="exportHistory">Exportar historial</button><button type="button" class="button small" id="importHistory">Importar historial</button><input type="file" id="historyFile" accept="application/json,.json" hidden><button type="button" class="button small" id="resetVisit">Reiniciar esta visita</button></div></details>
+</fieldset></aside>
+</main>
+<footer class="setting-help asallam-footer"><span>© Asallam Sensei</span><span class="footer-star" aria-hidden="true">☆</span><a href="https://asallamsensei.com/salon-honor.html">Salón de Honor 🏆</a></footer>
+</div>
+<script>
+/* One local, per-item review ledger. Reading/Explorar never records practice. */
+(function(root){'use strict';
+const APPS=['kana','jlpt','kanji','oraciones','ingles','turista','anime','oraciones_ingles','chino','portugues','coreano','vocabulario_extra','canciones_chino'];
+const PREFIX='asallam_reviews_v1_',VERSION=1,MAX_ITEMS=50000;
+const EXTRA='vocabulario_extra',easyId=id=>id.startsWith('easy_japanese:'),virtualSnapshots=new WeakSet();
+const obj=v=>v!==null&&typeof v==='object'&&!Array.isArray(v), own=(o,k)=>Object.prototype.hasOwnProperty.call(o,k), bad=k=>k==='prototype'||Object.prototype.hasOwnProperty.call(Object.prototype,k);
+const count=v=>Number.isSafeInteger(v)&&v>=0, safeId=v=>typeof v==='string'&&v.length>0&&v.length<=3000&&!bad(v);
+const blank=()=>({version:VERSION,items:{},catalogs:{}});
+const clone=v=>JSON.parse(JSON.stringify(v));
+function key(app){if(!APPS.includes(app))throw Error('Aplicativo no compatible.');return PREFIX+app;}
+function counts(v,fields){if(!obj(v))throw Error('Contadores inválidos.');for(const k of fields)if(!count(v[k]))throw Error('Contador inválido.');}
+function validate(app,v){key(app);if(!obj(v)||v.version!==VERSION||!obj(v.items)||!obj(v.catalogs)||Object.keys(v.items).length>MAX_ITEMS)throw Error('Historial de repasos incompatible.');
+for(const k of Object.keys(v))if(!['version','items','catalogs'].includes(k))throw Error('Campo de historial desconocido.');
+let magnitude=0;const add=n=>{magnitude+=n;if(!Number.isSafeInteger(magnitude))throw Error('Totales demasiado grandes.');};
+for(const [id,item]of Object.entries(v.items)){if(!safeId(id)||!obj(item)||!obj(item.purposes)||Object.keys(item.purposes).length>50)throw Error('Elemento de historial inválido.');for(const k of Object.keys(item))if(!['purposes'].includes(k))throw Error('Detalle de historial desconocido.');for(const [purpose,row]of Object.entries(item.purposes)){if(!safeId(purpose)||purpose.length>120)throw Error('Motivo inválido.');counts(row,['correct','wrong','skipped']);add(row.correct);add(row.wrong);add(row.skipped);if(Object.keys(row).some(k=>!['correct','wrong','skipped'].includes(k)))throw Error('Contador desconocido.');}
+}
+if(Object.keys(v.catalogs).length>200)throw Error('Demasiados catálogos.');for(const [scope,ids]of Object.entries(v.catalogs)){if(!safeId(scope)||!Array.isArray(ids)||ids.length>MAX_ITEMS||ids.some(id=>!safeId(id))||new Set(ids).size!==ids.length)throw Error('Catálogo inválido.');}if(new Set(Object.values(v.catalogs).flat()).size>MAX_ITEMS)throw Error('Catálogo combinado demasiado grande.');return true;}
+function read(app,s){const raw=(s||root.localStorage).getItem(key(app));if(raw===null)return blank();const v=JSON.parse(raw);validate(app,v);return v;}
+// Compatibility is a read-only view. Native writes must never persist the virtual sum.
+function view(app,s,native){
+ const v=native||read(app,s);
+ if(app==='turista'){
+  for(const id of Object.keys(v.items))if(easyId(id))delete v.items[id];
+  for(const scope of Object.keys(v.catalogs))v.catalogs[scope]=v.catalogs[scope].filter(id=>!easyId(id));
+ }else if(app===EXTRA){
+  const previous=read('turista',s);
+  for(const [id,item]of Object.entries(previous.items)){
+   if(!easyId(id))continue;
+   const target=v.items[id]||(v.items[id]={purposes:{}});
+   for(const [purpose,row]of Object.entries(item.purposes)){
+    const dest=target.purposes[purpose]||(target.purposes[purpose]={correct:0,wrong:0,skipped:0});
+    for(const field of ['correct','wrong','skipped']){const sum=dest[field]+row[field];if(!Number.isSafeInteger(sum))throw Error('Historial combinado demasiado grande.');dest[field]=sum;}
+   }
+  }
+  // Native catalogs decide which old IDs remain active. Retired records stay stored.
+  validate(app,v);
+ }
+ return v;
+}
+function checkCompatibility(app){if(app===EXTRA)read('turista');}
+function commitRecords(records){
+ const s=root.localStorage,before=records.map(([app,v])=>{validate(app,v);return [key(app),s.getItem(key(app)),JSON.stringify(v)];}),changed=[];
+ try{for(const [k,raw,next]of before){if(s.getItem(k)!==raw)throw Error('El historial cambió en otra pestaña.');if(raw===next)continue;s.setItem(k,next);changed.push([k,raw]);}}
+ catch(error){let failed=false;for(const [k,raw]of changed.reverse())try{if(raw===null)s.removeItem(k);else s.setItem(k,raw);}catch{failed=true;}throw Error(failed?'No se pudo completar ni revertir el restablecimiento. Conserva una copia del avance.':'No se pudo restablecer el historial; se revirtieron los cambios.');}
+ try{root.dispatchEvent?.(new Event('asallam-reviews-change'));}catch{}return true;
+}
+function write(app,v,s){validate(app,v);if(app===EXTRA)view(app,s,clone(v));(s||root.localStorage).setItem(key(app),JSON.stringify(v));try{root.dispatchEvent?.(new Event('asallam-reviews-change'));}catch{}return true;}
+function warning(){try{if(!root.document||root.document.getElementById('review-save-warning'))return;const e=root.document.createElement('p');e.id='review-save-warning';e.setAttribute('role','alert');e.textContent='No se pudo guardar el historial de repasos. Conserva una copia de tu avance y revisa el almacenamiento del navegador.';e.style.cssText='padding:12px;border:1px solid currentColor;border-radius:10px;margin:12px;';root.document.body?.prepend(e);}catch{}}
+function attempt(fn){try{return fn();}catch{warning();return false;}}
+function registerCatalog(app,ids,scope='default'){return attempt(()=>{if(!safeId(scope)||!Array.isArray(ids)||ids.some(id=>!safeId(id)))throw Error('Catálogo inválido.');const all=[...new Set(ids)].sort();if(all.length>MAX_ITEMS)throw Error('Catálogo demasiado grande.');checkCompatibility(app);const v=read(app);if(JSON.stringify(v.catalogs[scope])===JSON.stringify(all))return true;v.catalogs[scope]=all;return write(app,v);});}
+function record(app,id,purpose,outcome){return attempt(()=>{if(!safeId(id)||!safeId(purpose)||purpose.length>120||!['correct','wrong','skipped'].includes(outcome))throw Error('Repaso inválido.');checkCompatibility(app);const v=read(app),item=v.items[id]||(v.items[id]={purposes:{}}),row=item.purposes[purpose]||(item.purposes[purpose]={correct:0,wrong:0,skipped:0});if(row[outcome]>=Number.MAX_SAFE_INTEGER)throw Error('Contador demasiado grande.');row[outcome]++;return write(app,v);});}
+function totals(item){const out={correct:0,wrong:0,skipped:0};for(const p of Object.values(item?.purposes||{}))for(const k of Object.keys(out))out[k]+=p[k];out.reviews=out.correct+out.wrong;out.practiced=out.reviews>0;return out;}
+function summary(app,s){const v=view(app,s),ids=new Set(Object.values(v.catalogs).flat()),hasCatalog=Object.keys(v.catalogs).length>0,out={correct:0,wrong:0,skipped:0,reviews:0,seen:0,total:hasCatalog?ids.size:null,available:true};if(app===EXTRA&&!hasCatalog){out.catalogPending=true;out.percent=null;return out;}for(const [id,item]of Object.entries(v.items)){if(hasCatalog&&!ids.has(id))continue;const t=totals(item);for(const k of ['correct','wrong','skipped','reviews'])out[k]+=t[k];if(t.practiced)out.seen++;}out.percent=out.total?Math.floor(out.seen/out.total*10000)/100:null;return out;}
+function escape(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+function render(app,id){try{const item=view(app).items[id],t=totals(item);let html='<span class="review-history" style="display:block;margin-top:8px;font-size:12px;line-height:1.5;white-space:normal"><span style="display:block;font-weight:700">Repasos registrados: '+t.reviews+'</span>';for(const [purpose,row]of Object.entries(item?.purposes||{}).sort(([a],[b])=>a.localeCompare(b,'es'))){html+='<span style="display:block">'+escape(purpose)+': '+row.correct+' aciertos · '+row.wrong+' errores'+(row.skipped?' · '+row.skipped+' sin responder':'')+'</span>';}
+if(!t.reviews&&!t.skipped)html+='<span style="display:block">Sin respuestas registradas desde esta actualización.</span>';
+return html+'</span>';}catch{return '<span class="review-history" style="display:block">Historial de repasos no disponible; los datos guardados no se han modificado.</span>';}}
+function clear(app){return clearSelected(app,null);}
+function clearItems(app,ids){if(!Array.isArray(ids)||ids.some(id=>!safeId(id)))return attempt(()=>{throw Error('Elementos inválidos.');});return clearSelected(app,new Set(ids));}
+function clearSelected(app,ids){return attempt(()=>{
+ const v=read(app),remove=id=>(!ids||ids.has(id));
+ if(app===EXTRA){
+  const previous=read('turista');
+  for(const id of Object.keys(v.items))if(remove(id))delete v.items[id];
+  for(const id of Object.keys(previous.items))if(easyId(id)&&remove(id))delete previous.items[id];
+  return commitRecords([[app,v],['turista',previous]]);
+ }
+ for(const id of Object.keys(v.items))if(remove(id)&&(app!=='turista'||!easyId(id)))delete v.items[id];
+ return write(app,v);
+});}
+function snapshot(app,s){try{const result=clone(view(app,s));if(app===EXTRA||app==='turista')virtualSnapshots.add(result);return result;}catch(e){warning();throw e;}}
+const api={APPS,PREFIX,key,validate,record,registerCatalog,render,summary,clear,clearItems,snapshot,snapshotRaw:(app,s)=>clone(read(app,s)),replace:(app,data)=>{if(virtualSnapshots.has(data))throw Error('Usa el historial nativo, no una vista combinada, para reemplazar datos.');validate(app,data);checkCompatibility(app);const next=clone(data);if(app==='turista'){const previous=read(app);for(const [id,item]of Object.entries(previous.items))if(easyId(id)&&!own(next.items,id))next.items[id]=item;}return write(app,next);}};
+root.AsallamReviews=api;if(typeof module!=='undefined'&&module.exports)module.exports=api;
+})(typeof window!=='undefined'?window:globalThis);
+
+
+
+
+</script>
+<script>window.CancionesChino={adapt(raw){const items=[],references=[];raw.forEach(f=>{const group=f.title;references.push({group,title:f.title,header:f.credit,paragraphs:[f.instruction,...f.notes]});f.items.forEach((x,i)=>items.push({id:'cancion:'+f.id+':'+(i+1),front:x.hanzi,back:x.es,detail:'Pinyin: '+x.pinyin,group,audioUrl:'data/audios/chino/'+encodeURIComponent(x.hanzi+'.mp3'),speechText:x.hanzi,lang:'zh-CN'}));});return {title:'Canciones en chino',description:items.length+' palabras y expresiones de '+raw.length+' canciones · contenido y notas originales.',sideNames:['Chino','Español'],languages:['zh-CN','es'],items,references};}};</script>
+<script id="songData" type="application/json">[{"id": "1", "title": "Canción: 但愿人长久 (Dànyuàn Rén Chángjiǔ) «Que la vida perdure» ☆ Artista: 邓丽君 (Dèng Lìjūn)", "credit": "Material elaborado por Asallam Sensei ☆ asallamsensei.com", "instruction": "¿En qué momento se escuchan estas palabras y expresiones?", "notes": ["琼楼玉宇 (qióng lóu yù yǔ): expresión poética que evoca palacios de jade, un mundo celestial e idealizado.", "悲欢离合 (bēi huān lí hé): alegría, tristeza, reencuentro y separación. Resume los cambios de la vida.", "婵娟 (chánjuān): nombre poético de la luna. 千里共婵娟 expresa que, aun lejos, podemos compartir su luz."], "items": [{"hanzi": "明月", "pinyin": "míngyuè", "es": "luna brillante"}, {"hanzi": "把酒", "pinyin": "bǎ jiǔ", "es": "sostener una copa"}, {"hanzi": "青天", "pinyin": "qīngtiān", "es": "cielo azul, firmamento"}, {"hanzi": "宫阙", "pinyin": "gōngquè", "es": "palacios celestiales"}, {"hanzi": "今夕", "pinyin": "jīnxī", "es": "esta noche (poético)"}, {"hanzi": "乘风", "pinyin": "chéngfēng", "es": "viajar con el viento"}, {"hanzi": "归去", "pinyin": "guīqù", "es": "regresar, volver"}, {"hanzi": "琼楼", "pinyin": "qiónglóu", "es": "torres de jade"}, {"hanzi": "玉宇", "pinyin": "yùyǔ", "es": "palacios de jade"}, {"hanzi": "清影", "pinyin": "qīngyǐng", "es": "silueta bajo la luna"}, {"hanzi": "无眠", "pinyin": "wúmián", "es": "sin poder dormir,\ndesvelo"}, {"hanzi": "悲欢", "pinyin": "bēihuān", "es": "tristeza y alegría\n(de la vida)"}, {"hanzi": "离合", "pinyin": "líhé", "es": "separación y\nreencuentro"}, {"hanzi": "但愿", "pinyin": "dànyuàn", "es": "ojalá,\ndesear que..."}, {"hanzi": "婵娟", "pinyin": "chánjuān", "es": "la luna hermosa\n(uso poético)"}]}, {"id": "2", "title": "Canción: 燕无歇 (Yàn Wú Xiē) «Golondrina sin descanso» ☆ Artista: 蒋雪儿 (Jiǎng Xuě'ér)", "credit": "Material elaborado por Asallam Sensei ☆ asallamsensei.com", "instruction": "¿En qué momento se escuchan estas expresiones?", "notes": ["望穿秋水 (wàng chuān qiū shuǐ): «esperar con mucha ansia»; 秋水 («agua otoñal») representa los ojos.", "寂寥 (jìliáo): en China continental se pronuncia jìliáo; en Taiwán suele ser jíliáo.", "劳燕分飞 (láo yàn fēn fēi): alude al alcaudón (伯劳) y la golondrina (燕), dos aves que vuelan en direcciones distintas; simboliza la separación de una pareja."], "items": [{"hanzi": "寂寥", "pinyin": "jìliáo", "es": "soledad, desolación"}, {"hanzi": "望穿秋水", "pinyin": "wàng chuān qiū shuǐ", "es": "esperar con muchísimas ansias"}, {"hanzi": "难忘", "pinyin": "nánwàng", "es": "difícil de olvidar"}, {"hanzi": "憔悴", "pinyin": "qiáocuì", "es": "demacrado, abatido"}, {"hanzi": "相思", "pinyin": "xiāngsī", "es": "añoranza amorosa"}, {"hanzi": "凄凉", "pinyin": "qīliáng", "es": "triste, desolado"}, {"hanzi": "苦酒", "pinyin": "kǔjiǔ", "es": "licor amargo"}, {"hanzi": "孤影", "pinyin": "gūyǐng", "es": "figura solitaria"}, {"hanzi": "回眸", "pinyin": "huímóu", "es": "volver la mirada"}, {"hanzi": "天涯", "pinyin": "tiānyá", "es": "muy lejos, confines del mundo"}, {"hanzi": "愚昧", "pinyin": "yúmèi", "es": "ignorante, necio"}, {"hanzi": "遗憾", "pinyin": "yíhàn", "es": "pesar, lamentación"}, {"hanzi": "回味", "pinyin": "huíwèi", "es": "saborear un recuerdo"}, {"hanzi": "劳燕分飞", "pinyin": "láo yàn fēn fēi", "es": "separación de una pareja"}, {"hanzi": "奉陪", "pinyin": "fèngpéi", "es": "acompañar (a alguien)"}]}, {"id": "3", "title": "Canción: 小美满 (Xiǎo Měimǎn) «Pequeñas alegrías» ☆ Artista: 周深 (Zhōu Shēn)", "credit": "Material elaborado por Asallam Sensei ☆ asallamsensei.com", "instruction": "¿En qué momento se escuchan estas palabras y expresiones?", "notes": ["不如 (bùrú): permite sugerir una alternativa: «sería mejor...», «más vale...».", "小美满 (xiǎo měimǎn): evoca las pequeñas satisfacciones de la vida cotidiana; es una expresión poética del título.", "一秒 (yì miǎo): 一 (yī) se pronuncia yì delante de una sílaba de tercer tono, como 秒 (miǎo)."], "items": [{"hanzi": "棉花糖", "pinyin": "miánhuātáng", "es": "algodón de azúcar"}, {"hanzi": "日常", "pinyin": "rìcháng", "es": "vida cotidiana"}, {"hanzi": "眨眼", "pinyin": "zhǎyǎn", "es": "parpadear"}, {"hanzi": "天窗", "pinyin": "tiānchuāng", "es": "tragaluz, claraboya"}, {"hanzi": "呢喃", "pinyin": "nínán", "es": "murmurar en voz baja"}, {"hanzi": "平凡", "pinyin": "píngfán", "es": "común, ordinario"}, {"hanzi": "乌云", "pinyin": "wūyún", "es": "nube oscura"}, {"hanzi": "温暖", "pinyin": "wēnnuǎn", "es": "cálido, calidez"}, {"hanzi": "路口", "pinyin": "lùkǒu", "es": "cruce, intersección"}, {"hanzi": "陪伴", "pinyin": "péibàn", "es": "acompañar, compañía"}, {"hanzi": "不如", "pinyin": "bùrú", "es": "mejor..., más vale..."}, {"hanzi": "灿烂", "pinyin": "cànlàn", "es": "radiante, brillante"}, {"hanzi": "风景", "pinyin": "fēngjǐng", "es": "paisaje"}, {"hanzi": "小美满", "pinyin": "xiǎo měimǎn", "es": "pequeñas alegrías"}, {"hanzi": "疲惫", "pinyin": "píbèi", "es": "agotado, fatigado"}]}, {"id": "4", "title": "Canción: 一剪梅 (Yī Jiǎn Méi) «Una rama de ciruelo» ☆ Artista: 費玉清 (Fèi Yùqīng)", "credit": "Material elaborado por Asallam Sensei ☆ asallamsensei.com", "instruction": "¿En qué momento se escuchan estas palabras y expresiones?", "notes": ["飘飘 (piāopiāo) y 萧萧 (xiāoxiāo): la repetición aporta ritmo e intensidad descriptiva. 萧萧 tiene matiz de melancolía.", "寒梅 (hánméi): el ciruelo de invierno simboliza resistencia y perseverancia en la poesía china.", "一片 (yí piàn): 一 (yī) cambia al segundo tono (yí) antes de una sílaba de cuarto tono, como 片 (piàn)."], "items": [{"hanzi": "雪中", "pinyin": "xuě zhōng", "es": "en medio de la nieve"}, {"hanzi": "飘飘", "pinyin": "piāopiāo", "es": "flotar suavemente, revolotear"}, {"hanzi": "天地", "pinyin": "tiāndì", "es": "cielo y tierra"}, {"hanzi": "雪花", "pinyin": "xuěhuā", "es": "copos de nieve"}, {"hanzi": "寒梅", "pinyin": "hánméi", "es": "ciruelo que florece en invierno"}, {"hanzi": "苍茫", "pinyin": "cāngmáng", "es": "vasto, brumoso"}, {"hanzi": "爱", "pinyin": "ài", "es": "amor, amar"}, {"hanzi": "傲立", "pinyin": "àolì", "es": "erguirse con orgullo"}, {"hanzi": "北风", "pinyin": "běifēng", "es": "viento del norte"}, {"hanzi": "萧萧", "pinyin": "xiāoxiāo", "es": "silbar, susurrar (el viento)"}, {"hanzi": "真情", "pinyin": "zhēnqíng", "es": "sentimiento sincero,\namor verdadero"}, {"hanzi": "伊人", "pinyin": "yīrén", "es": "la persona amada\n(poético, literario)"}, {"hanzi": "一片", "pinyin": "yí piàn", "es": "una porción de,\nuna extensión de"}, {"hanzi": "无悔", "pinyin": "wúhuǐ", "es": "sin arrepentimiento,\nsin remordimientos"}, {"hanzi": "像", "pinyin": "xiàng", "es": "parecerse a,\nser como"}]}]</script>
+<script>
+/* Shared, optional musical feedback for answers and matching boards. No learning data is stored here. */
+(function (root) {
+  'use strict';
+  if (root.MatchMusic) return;
+  // Music has its own preference: unrelated legacy quiz effects must not mute it.
+  // Only an explicit music-button choice of 'off' disables music across pages.
+  const KEY = 'sensei_matching_music_v1';
+  const NOTES = [261.6256,293.6648,329.6276,349.2282,391.9954,440,493.8833];
+  let enabled = true, context = null, queue = [], timer = null, busyUntil = 0, button = null;
+  try { enabled = root.localStorage.getItem(KEY) !== 'off'; } catch (_) {}
+  function contextForGesture() {
+    try {
+      const Constructor = root.AudioContext || root.webkitAudioContext;
+      if (!Constructor || !enabled) return null;
+      if (!context) context = new Constructor();
+      if (context.state === 'suspended') {
+        const resumed = context.resume();
+        if (resumed && resumed.catch) resumed.catch(function () {});
+      }
+      return context;
+    } catch (_) { return null; }
+  }
+  function speaking() {
+    try {
+      if (root.speechSynthesis && (root.speechSynthesis.speaking || root.speechSynthesis.pending)) return true;
+      return !!(root.document && Array.from(root.document.querySelectorAll('audio:not([data-match-music-background]),video:not([data-match-music-background])')).some(function (media) {
+        return !media.paused && !media.ended;
+      }));
+    } catch (_) { return false; }
+  }
+  function allowed(job) {
+    try { return enabled && (job.board.generation === job.generation || job.keepCompletion); }
+    catch (_) { return false; }
+  }
+  function schedulePump(delay) {
+    if (timer !== null) return;
+    timer = root.setTimeout(function () { timer = null; pump(); }, delay);
+  }
+  function tone(frequency, when, duration, gain, onended) {
+    const oscillator = context.createOscillator(), envelope = context.createGain();
+    oscillator.type = 'sine';
+    oscillator.frequency.setValueAtTime(frequency, when);
+    envelope.gain.setValueAtTime(0, when);
+    envelope.gain.linearRampToValueAtTime(gain, when + 0.012);
+    envelope.gain.exponentialRampToValueAtTime(0.0001, when + duration);
+    oscillator.connect(envelope); envelope.connect(context.destination);
+    oscillator.onended = function () { try { oscillator.disconnect(); envelope.disconnect(); } catch (_) {} if (onended) onended(); };
+    oscillator.start(when); oscillator.stop(when + duration + 0.025);
+  }
+  function play(job) {
+    const now = context.currentTime + 0.015;
+    const completed = function () { if (job.after) job.after(); pump(); };
+    if (!job.answer) tone(NOTES[job.index % NOTES.length] * Math.pow(2, Math.floor(job.index / NOTES.length)), now, 0.23, 0.23, completed);
+    let duration = 0.29;
+    if (job.answer) {
+      const offset = job.answer ? -0.30 : 0;
+      // A separate rising flourish followed by a major chord. Chord gain: .33; the brief preceding tail keeps the total below .4.
+      [523.2511,659.2551,783.9909].forEach(function (frequency, index) {
+        tone(frequency, now + offset + 0.30 + index * 0.11, 0.18, 0.18);
+      });
+      [523.2511,659.2551,783.9909].forEach(function (frequency, index) {
+        tone(frequency, now + offset + 0.67, 0.55, 0.11, index === 2 ? completed : null);
+      });
+      duration = 1.27 + offset;
+    }
+    busyUntil = context.currentTime + duration;
+    schedulePump(duration * 1000);
+  }
+  function pump() {
+    // Sentence audio can be long; keep earned answer feedback through it, with a bounded expiry.
+    queue = queue.filter(function (job) { return allowed(job) && Date.now() - job.created < (job.answer ? 120000 : 15000); });
+    if (!queue.length) return;
+    if (!context || context.state === 'closed') { queue = []; return; }
+    if (context.state !== 'running') { schedulePump(120); return; }
+    let engineBusy = false;
+    try { engineBusy = queue[0].board.isBusy(); } catch (_) {}
+    if (speaking() || engineBusy || context.currentTime < busyUntil) { schedulePump(80); return; }
+    const job = queue.shift();
+    try { play(job); } catch (_) { schedulePump(80); }
+  }
+  function updateButton() {
+    if (!button) return;
+    const effective = enabled;
+    button.textContent = effective ? '♫ Música: activada' : '♫ Música: silenciada';
+    button.setAttribute('aria-pressed', String(effective));
+  }
+  function setEnabled(value) {
+    enabled = !!value;
+    if (!enabled) queue = []; // Never cut off a note that has already started.
+    try { root.localStorage.setItem(KEY, enabled ? 'on' : 'off'); } catch (_) {}
+    updateButton();
+    if (enabled) contextForGesture();
+  }
+  function installControl() {
+    if (!root.document || !root.document.body || root.document.getElementById('matchingMusicToggle')) return;
+    const holder = root.document.createElement('div');
+    holder.style.cssText = 'display:flex;justify-content:center;flex-wrap:wrap;margin:12px auto;max-width:100%;padding:0 12px;box-sizing:border-box';
+    button = root.document.createElement('button');
+    button.type = 'button'; button.id = 'matchingMusicToggle';
+    button.style.cssText = 'font:inherit;font-size:13px;color:inherit;background:transparent;border:1px solid currentColor;border-radius:10px;padding:9px 13px;min-height:40px;cursor:pointer';
+    button.setAttribute('aria-label', 'Activar o silenciar la música de aciertos y parejas');
+    button.addEventListener('click', function () { const effective = enabled; setEnabled(!effective); });
+    holder.appendChild(button);
+    const footer = root.document.querySelector('footer');
+    if (footer && footer.parentNode) footer.parentNode.insertBefore(holder, footer); else root.document.body.appendChild(holder);
+    updateButton();
+  }
+  function create(options) {
+    options = options || {};
+    const board = {isBusy:typeof options.isBusy === 'function' ? options.isBusy : function () { return false; },generation:0, index:0, finished:false, answered:new Set()};
+    updateButton();
+    return {
+      cancel: function () { queue = queue.filter(function (job) { return job.board !== board; }); },
+      reset: function (settings) { queue.forEach(function (job) { if (job.board === board) job.keepCompletion = !!(settings && settings.keepCompletion); }); board.generation++; board.index = 0; board.finished = false; board.answered.clear(); queue = queue.filter(function (job) { return job.board !== board || job.keepCompletion; }); },
+      correct: function (token) {
+        // Callers guard answered questions; optional stable tokens also reject duplicate events.
+        if (token !== undefined && token !== null) {
+          if (board.answered.has(token)) return;
+          board.answered.add(token);
+          if (board.answered.size > 512) board.answered.delete(board.answered.values().next().value);
+        }
+        const job = {board:board,generation:board.generation,answer:true,created:Date.now()};
+        if (!allowed(job)) return;
+        contextForGesture();
+        queue.push(job);
+        schedulePump(35);
+      },
+      match: function (result) {
+        if (board.finished) return;
+        const index = board.index++;
+        const complete = !!(result && result.complete);
+        if (complete) board.finished = true;
+        const after = result && typeof result.after === 'function' ? result.after : null;
+        const job = {board:board,generation:board.generation,index:index,complete:complete,created:Date.now(),after:after};
+        if (!allowed(job)) { if (after) after(); return; }
+        if (!contextForGesture()) { if (after) after(); return; }
+        queue.push(job);
+        // Let the same click handler start its spoken feedback before deciding whether to play.
+        schedulePump(35);
+      }
+    };
+  }
+  root.MatchMusic = {create:create,setEnabled:setEnabled,isEnabled:function () { return enabled; },unlock:contextForGesture};
+  if (root.document) {
+    root.document.addEventListener('change', function () { root.setTimeout(updateButton, 0); }, true);
+    root.document.addEventListener('pointerdown', contextForGesture, true);
+    root.document.addEventListener('keydown', function (event) { if (event.key === 'Enter' || event.key === ' ') contextForGesture(); }, true);
+    if (root.document.readyState === 'loading') root.document.addEventListener('DOMContentLoaded', installControl); else installControl();
+  }
+  root.addEventListener && root.addEventListener('pagehide', function () { queue = []; });
+  root.addEventListener && root.addEventListener('storage', function (event) { if (event.key === KEY) { enabled = event.newValue !== 'off'; if (!enabled) queue = []; updateButton(); } });
+})(window);
+
+</script>
+<script>
+/* Shared matching for language catalogs. One result per pair; no global-only score. */
+(function(root){'use strict';
+function shuffle(list,random=Math.random){const a=[...list];for(let i=a.length-1;i>0;i--){const j=Math.floor(random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function selectPairs(items,conflicts,count=3,random=Math.random){const selected=[];for(const item of shuffle(items,random)){if(!selected.some(x=>x.id===item.id||conflicts(x,item)))selected.push(item);if(selected.length===count)break;}return selected;}
+function create(config){const {host,ledger,app}=config,doc=host.ownerDocument||root.document;let active=false,first=null,locked=false,timer=null,generation=0,tiles=[],pairs=[],round=0,correct=0,wrong=0,finished=false,pendingPairs=[];
+function sessionLength(){const value=Number(typeof config.sessionLength==='function'?config.sessionLength():config.sessionLength);return Number.isSafeInteger(value)&&value>0?value:0;}
+const music=root.MatchMusic?.create({isBusy:()=>Boolean(config.audioBusy?.()||root.speechSynthesis?.speaking||root.speechSynthesis?.pending)});
+const make=(tag,text,cls)=>{const el=doc.createElement(tag);if(text!==undefined)el.textContent=text;if(cls)el.className=cls;return el;};
+const intro=make('p','Une cada elemento con su pareja. Puedes cambiar la selección en el mismo lado. Una pareja incorrecta cuenta como error del primer elemento elegido.','setting-help');
+const counter=make('p','','setting-help'),board=make('div',undefined,'language-match-board'),feedback=make('div','','feedback'),controls=make('div',undefined,'controls'),next=make('button','Otro tablero →','primary'),finish=make('button','Terminar sesión'),restart=make('button','Nueva sesión','primary');counter.hidden=config.showCounter===false;feedback.setAttribute('role','status');board.setAttribute('aria-label','Emparejar');controls.append(finish,restart);host.append(intro,counter,board,feedback,controls);
+function cancel(){generation++;pendingPairs=[];if(timer!==null)root.clearTimeout(timer);timer=null;locked=false;first=null;for(const tile of tiles){tile.button.classList.remove('is-selected','is-wrong');tile.button.setAttribute('aria-pressed','false');}}
+function stats(){const length=sessionLength();counter.textContent=`${round} tableros completados · ${correct}${length?' / '+length:''} parejas acertadas · ${wrong} errores`;config.changed();}
+function show(){next.hidden=finished||!pairs.length||tiles.some(x=>!x.matched);finish.hidden=finished;restart.hidden=!finished;}
+function finishSession(complete=false){cancel();if(!complete)music?.cancel?.();finished=true;board.replaceChildren();feedback.textContent=(complete?'Sesión completada: '+correct+' parejas acertadas · '+wrong+' errores.':'Sesión terminada. Las parejas sin responder no se registran.');stats();show();}
+function newBoard(){cancel();music?.reset({keepCompletion:true});const length=sessionLength();if(length&&correct>=length){finishSession(true);return;}finished=false;const pool=config.items();pairs=selectPairs(pool,config.conflicts,length?Math.min(3,length-correct):3);tiles=[];board.replaceChildren();feedback.textContent=pairs.length?(config.initialFeedback??'Elige una tarjeta y su pareja.'):'No hay elementos compatibles en esta selección.';const columns=[shuffle(pairs),shuffle(pairs)];for(let row=0;row<pairs.length;row++)for(let side=0;side<2;side++){const item=columns[side][row],button=make('button',config.labels(item)[side],'language-match-tile');button.type='button';button.lang=config.langs[side];button.setAttribute('aria-pressed','false');button.setAttribute('aria-label',config.sideNames[side]+': '+config.labels(item)[side]);const tile={item,side,button,matched:false};button.onclick=()=>pick(tile);tiles.push(tile);board.append(button);}stats();show();}
+function pick(tile){if(!active||finished||locked||!tiles.includes(tile)||tile.matched||tile===first)return;if(first&&first.side===tile.side){first.button.classList.remove('is-selected');first.button.setAttribute('aria-pressed','false');first=null;}tile.button.classList.add('is-selected');tile.button.setAttribute('aria-pressed','true');if(!first){first=tile;return;}const previous=first;first=null;if(previous.item.id===tile.item.id){for(const t of [previous,tile]){t.matched=true;t.button.disabled=true;t.button.classList.remove('is-selected');t.button.classList.add('is-matched');t.button.setAttribute('aria-pressed','false');}correct++;const matchedItem=tile.item,matchEpoch=generation;let resolvePair;const spoken=new Promise(resolve=>{resolvePair=resolve;});pendingPairs.push(spoken);const speakPair=()=>{if(matchEpoch!==generation||!active){resolvePair();return;}Promise.resolve(config.speak?.(matchedItem)).then(resolvePair,resolvePair);};if(music)music.match({complete:tiles.every(x=>x.matched),after:speakPair});else speakPair();ledger.record(app,tile.item.id,'Emparejar','correct');feedback.textContent='✓ '+config.labels(tile.item).join(' · ');if(tiles.every(x=>x.matched)){round++;feedback.textContent+=' · Tablero completo.';}stats();show();if(tiles.every(x=>x.matched)){const epoch=generation;const audioFinished=Promise.all(pendingPairs);const delayFinished=new Promise(resolve=>{timer=root.setTimeout(()=>{timer=null;resolve();},1000);});Promise.all([audioFinished,delayFinished]).then(()=>{if(epoch!==generation||!active||finished)return;if(sessionLength()&&correct>=sessionLength())finishSession(true);else newBoard();});}return;}wrong++;ledger.record(app,previous.item.id,'Emparejar','wrong');stats();feedback.textContent='✕ No son pareja. Inténtalo otra vez.';locked=true;for(const t of [previous,tile])t.button.classList.add('is-wrong');const epoch=generation;timer=root.setTimeout(()=>{if(epoch!==generation||!active)return;for(const t of [previous,tile]){t.button.classList.remove('is-selected','is-wrong');t.button.setAttribute('aria-pressed','false');}locked=false;timer=null;},650);}
+function activate(){active=true;if(!tiles.length)newBoard();else {stats();show();}}
+function deactivate(){active=false;cancel();music?.cancel?.();}
+function reset(){cancel();music?.reset();tiles=[];pairs=[];round=correct=wrong=0;finished=false;if(active)newBoard();}
+next.onclick=()=>{if(active&&!finished&&tiles.every(x=>x.matched))newBoard();};finish.onclick=()=>{if(active)finishSession();};restart.onclick=()=>{if(active){reset();}};
+return {activate,deactivate,reset,getState:()=>({correct,wrong,round,finished,length:sessionLength()})};}
+const api={selectPairs,create};if(typeof module!=='undefined'&&module.exports)module.exports=api;root.AsallamLanguageMatching=api;
+})(typeof window!=='undefined'?window:globalThis);
+</script>
+<script>
+/*
+ * Repaso: práctica basada en las fichas transcritas; sin datos de ejemplo.
+ * Estos campos pertenecen al modelo interno de la interfaz, no al futuro JSON.
+ * La adaptación del archivo de origen está separada de la interfaz:
+ *   Repaso.setData(jsonReal, adaptadorDelJson);
+ * El adaptador devuelve { items, sideNames?, languages?, title?, description? }.
+ * Cada item interno tiene { id, front, back, group?, detail?, audioUrl?, speechText?, lang? }.
+ * references conserva las notas literales, agrupadas por ficha.
+ * El JSON original se conserva íntegro; su adaptador vive en assets/repaso-fichas.js.
+ * El historial usa AsallamReviews bajo su propia clave: repaso. No migra datos ajenos.
+ */
+(() => {
+'use strict';
+const SOURCE = null;
+const adaptData = window.CancionesChino?.adapt;
+const $ = id => document.getElementById(id);
+const text = (tag, value, className) => { const el = document.createElement(tag); el.textContent = value; if (className) el.className = className; return el; };
+const normalized = value => String(value).normalize('NFC').trim().replace(/\s+/g, ' ');
+const searchText = value => normalized(value).normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLocaleLowerCase('es');
+const shuffle = values => { const result = [...values]; for(let i=result.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[result[i],result[j]]=[result[j],result[i]];} return result; };
+const blankSession = () => ({correct:0,wrong:0,skipped:0,errors:new Set()});
+let model = {items:[],sideNames:['Pregunta','Respuesta'],languages:['','']}, groups = new Set(), activity = 'match', phase = 'empty';
+let current = null, answered = false, summaryOpen = false, quiz = blankSession(), visit = blankSession(), reviewIds = null, pageSize = 24, generation = 0;
+let direction = 'mixed', length = 10, matchLength = 39, rate = 1, autoAudio = false, fetchVersion = 0;
+let lastSource = SOURCE, lastAdapter = adaptData;
+let audioBusy = false, audioQueue = [], activeMedia = null, activeSpeech = null, audioEpoch = 0, cleanupAudio = null;
+const reviews = window.AsallamReviews;
+const music = window.MatchMusic?.create({isBusy:()=>audioBusy});
+const ledger = {record(_app,id,purpose,outcome){visit[outcome]++;if(outcome==='wrong')visit.errors.add(id);if(!reviews?.record('canciones_chino',id,purpose,outcome))notify('No se pudo guardar esta respuesta en el historial. Los datos anteriores no se han modificado.');updateStats();}};
+const matcher = window.AsallamLanguageMatching?.create({host:$('matching'),ledger,app:'canciones_chino',initialFeedback:'',showCounter:false,sessionLength:()=>matchLength,items:()=>pool(),labels:item=>[item.front,item.back],langs:model.languages,sideNames:model.sideNames,conflicts:(a,b)=>normalized(a.front)===normalized(b.front)||normalized(a.back)===normalized(b.back),speak:item=>queueAudio(item),audioBusy:()=>audioBusy,changed:()=>updateStats()});
+function notify(message){$('noticeText').textContent=message;$('notice').hidden=false;}
+$('closeNotice').onclick=()=>{$('notice').hidden=true;};
+function theme(value){document.documentElement.dataset.theme=value;$('theme').textContent=value==='light'?'☾':'☀';$('theme').setAttribute('aria-label',value==='light'?'Activar tema oscuro':'Activar tema claro');document.querySelector('meta[name="theme-color"]').content=value==='light'?'#f3f2ef':'#10121b';}
+try{theme(localStorage.getItem('asallam_ecosystem_theme')==='light'?'light':'dark');}catch{theme('dark');}
+$('theme').onclick=()=>{const value=document.documentElement.dataset.theme==='light'?'dark':'light';theme(value);try{localStorage.setItem('asallam_ecosystem_theme',value);}catch{notify('El tema se ha cambiado, pero no se pudo guardar en este navegador.');}};
+function pool(){return model.items.filter(item=>groups.has(item.group));}
+function canSpeak(item){return Boolean(item?.speechText&&item.lang&&window.speechSynthesis&&window.SpeechSynthesisUtterance);}
+function playable(item){return Boolean(item&&((item.audioUrl&&window.Audio)||canSpeak(item)));}
+function clearPending(){audioQueue=audioQueue.filter(request=>!request.automatic);}
+function queueAudio(item,automatic=false){if(!playable(item))return Promise.resolve();if(audioQueue.length>=5){if(!automatic)notify('Espera a que termine el audio pendiente.');return Promise.resolve();}return new Promise(resolve=>{audioQueue.push({item,automatic,generation,rate,epoch:audioEpoch,resolve});pumpAudio();});}
+function pumpAudio(){
+ if(audioBusy)return;
+ while(audioQueue.length){
+  const request=audioQueue.shift();
+  const stale=()=>request.epoch!==audioEpoch||(request.automatic&&!request.started&&(request.generation!==generation||activity!=='quiz'||!autoAudio));
+  if(stale()){request.resolve?.();continue;}
+  audioBusy=true;
+  let ended=false,usingSpeech=false,media=null,mediaTimer=null,voiceTimer=null,voiceReady=null;
+  const releaseMedia=()=>{
+   clearTimeout(mediaTimer);mediaTimer=null;
+   if(media){media.onended=media.onerror=media.onplaying=media.onwaiting=media.onstalled=null;try{media.pause();}catch{}if(activeMedia===media)activeMedia=null;media=null;}
+  };
+  const releaseVoices=()=>{clearTimeout(voiceTimer);voiceTimer=null;if(voiceReady)window.speechSynthesis?.removeEventListener?.('voiceschanged',voiceReady);voiceReady=null;};
+  const cleanup=()=>{releaseMedia();releaseVoices();};
+  cleanupAudio=cleanup;
+  const done=failed=>{
+   if(ended)return;ended=true;cleanup();request.resolve?.();
+   if(request.epoch!==audioEpoch)return;
+   audioBusy=false;activeSpeech=null;cleanupAudio=null;
+   if(failed)notify('No se pudo reproducir el audio ni la voz de respaldo. Puedes continuar con las preguntas de texto.');
+   pumpAudio();
+  };
+  const fallback=()=>{
+   if(ended||usingSpeech)return;
+   usingSpeech=true;releaseMedia();
+   if(stale()){done(false);return;}
+   if(!canSpeak(request.item)){done(true);return;}
+   const synth=window.speechSynthesis;
+   const speak=()=>{
+    if(ended)return;
+    if(stale()){done(false);return;}
+    try{
+     const language=request.item.lang.toLowerCase(),voices=synth.getVoices(),voice=voices.find(value=>value.lang.toLowerCase()===language)||voices.find(value=>value.lang.toLowerCase().split('-')[0]===language.split('-')[0]);
+     if(!voice){notify('No hay una voz disponible para este idioma en el dispositivo. Puedes continuar con el texto.');done(false);return;}
+     const utterance=new SpeechSynthesisUtterance(request.item.speechText);activeSpeech=utterance;utterance.voice=voice;utterance.lang=voice.lang;utterance.rate=request.rate;
+     utterance.onstart=()=>{if(stale()){synth.cancel();done(false);return;}request.started=true;};utterance.onend=()=>done(false);utterance.onerror=()=>done(true);synth.speak(utterance);
+    }catch{done(true);}
+   };
+   try{
+    if(synth.getVoices().length)speak();
+    else{
+     let ready=false;
+     voiceReady=()=>{if(ready)return;ready=true;releaseVoices();speak();};
+     synth.addEventListener?.('voiceschanged',voiceReady,{once:true});voiceTimer=setTimeout(voiceReady,800);
+    }
+   }catch{done(true);}
+  };
+  if(request.item.audioUrl&&window.Audio){
+   try{
+    media=new Audio(request.item.audioUrl);activeMedia=media;media.preload='auto';media.playbackRate=request.rate;
+    // Give slow or stalled downloads a way to reach the speech fallback without cutting off playing audio.
+    const waitForMedia=()=>{clearTimeout(mediaTimer);mediaTimer=setTimeout(fallback,10000);};
+    media.onended=()=>{if(!usingSpeech)done(false);};media.onerror=fallback;
+    media.onplaying=()=>{if(ended||usingSpeech)return;if(stale()){done(false);return;}request.started=true;clearTimeout(mediaTimer);mediaTimer=null;};
+    media.onwaiting=()=>{if(!ended&&!usingSpeech)waitForMedia();};
+    waitForMedia();const playing=media.play();if(playing&&typeof playing.catch==='function')playing.catch(fallback);
+   }catch{fallback();}
+  }else fallback();
+  return;
+ }
+}
+function validate(raw,adapter){
+ if(typeof adapter!=='function')throw Error('Falta adaptar el JSON a este repaso.');
+ const source=adapter(raw);
+ if(!source||!Array.isArray(source.items)||source.items.length>50000)throw Error('El contenido del repaso no es válido.');
+ const ids=new Set(); const items=source.items.map((item,index)=>{
+  if(!item||typeof item.id!=='string'||!item.id.trim()||item.id.length>1000||ids.has(item.id))throw Error('Cada entrada debe tener un identificador único y estable.');
+  if(['front','back'].some(key=>typeof item[key]!=='string'||!item[key].trim()||item[key].length>10000))throw Error('Hay una entrada sin pregunta o respuesta válida.');
+  ids.add(item.id);const result={id:item.id,front:item.front.trim(),back:item.back.trim(),group:typeof item.group==='string'&&item.group.trim()?item.group.trim():'Todo el contenido',detail:typeof item.detail==='string'?item.detail.slice(0,20000):'',lang:typeof item.lang==='string'?item.lang:'',speechText:typeof item.speechText==='string'?item.speechText:''};
+  if(item.audioUrl){if(typeof item.audioUrl!=='string')throw Error('La ruta de audio no es válida.');const url=new URL(item.audioUrl,document.baseURI);if(!['http:','https:'].includes(url.protocol)||url.origin!==location.origin||url.username||url.password)throw Error('El audio debe usar una ruta segura del mismo sitio.');result.audioUrl=url.href;}
+  return result;
+ });
+ const pair=(values,defaults)=>Array.isArray(values)&&values.length===2&&values.every(value=>typeof value==='string')?[...values]:defaults;
+ const references=(source.references||[]).map(reference=>{if(!reference||typeof reference.group!=='string'||typeof reference.title!=='string'||!Array.isArray(reference.paragraphs)||reference.paragraphs.some(value=>typeof value!=='string'))throw Error('Las notas del contenido no son válidas.');return {group:reference.group,title:reference.title,header:typeof reference.header==='string'?reference.header:'',paragraphs:[...reference.paragraphs]};});
+ return {items,references,title:typeof source.title==='string'?source.title:'Canciones en chino',description:typeof source.description==='string'?source.description:'Practica, conecta ideas y vuelve a lo que necesitas.',sideNames:pair(source.sideNames,['Pregunta','Respuesta']),languages:pair(source.languages,['',''])};
+}
+function setData(raw,adapter){
+ const ready=validate(raw,adapter);fetchVersion++;generation++;clearPending();music?.reset();matcher?.deactivate();
+ // The matching component retains these arrays, so update their contents without replacing them.
+ model.sideNames.splice(0,2,...ready.sideNames);model.languages.splice(0,2,...ready.languages);
+ model={...ready,sideNames:model.sideNames,languages:model.languages};groups=new Set(model.items.map(item=>item.group));quiz=blankSession();visit=blankSession();reviewIds=null;current=null;summaryOpen=false;
+ phase=model.items.length?'ready':'empty';if(model.items.length&&!reviews?.registerCatalog('canciones_chino',model.items.map(item=>item.id)))notify('No se pudo actualizar el catálogo del historial. Puedes practicar, pero revisa el almacenamiento antes de cerrar.');$('pageTitle').textContent=model.title;$('catalogIntro').textContent=model.description;$('audioSettings').hidden=!model.items.some(playable);
+ $('direction').options[1].textContent=model.sideNames.join(' → ');$('direction').options[2].textContent=[...model.sideNames].reverse().join(' → ');
+ renderGroups();matcher?.reset();nextQuestion();if(activity==='match')matcher?.activate();if(activity==='explore')explore();render();return model.items.length;
+}
+async function load(source=lastSource,adapter=lastAdapter){
+ lastSource=source;lastAdapter=adapter;
+ if(!source){fetchVersion++;generation++;clearPending();matcher?.deactivate();music?.cancel();phase='empty';render();return;}
+ const version=++fetchVersion;phase='loading';matcher?.deactivate();generation++;clearPending();music?.cancel();render();
+ try{const url=new URL(source,document.baseURI);if(!['http:','https:'].includes(url.protocol)||url.origin!==location.origin)throw Error('La ruta del catálogo debe pertenecer a este sitio.');const response=await fetch(url.href,{credentials:'same-origin'});if(!response.ok)throw Error('No se pudo descargar el catálogo (HTTP '+response.status+').');const raw=await response.json();if(version!==fetchVersion)return;setData(raw,adapter);}
+ catch(error){if(version!==fetchVersion)return;phase='error';$('loadErrorText').textContent=error instanceof SyntaxError?'El archivo no contiene un JSON válido.':error.message||'No se pudo cargar el contenido.';render();}
+}
+function total(){return quiz.correct+quiz.wrong+quiz.skipped;}
+function updateStats(){
+ try{const saved=reviews.summary('canciones_chino');$('historySummary').textContent='Historial guardado: '+saved.seen+' / '+(saved.total??model.items.length)+' entradas practicadas · '+saved.reviews+' repasos · '+saved.correct+' aciertos · '+saved.wrong+' errores · '+saved.skipped+' sin responder.';}catch{$('historySummary').textContent='Historial no disponible. Los datos anteriores no se han modificado.';}
+ $('correctCount').textContent=visit.correct;$('wrongCount').textContent=visit.wrong;$('skippedCount').textContent=visit.skipped;
+ const matching=activity==='match',done=matching?(matcher?.getState().correct||0):total(),target=matching?matchLength:length;
+ const progress=target?Math.min(100,100*done/target):0;$('bar').style.width=progress+'%';$('progressTrack').setAttribute('aria-valuenow',String(progress));$('progressTrack').setAttribute('aria-label',matching?'Avance de Emparejar':'Avance del quiz');$('progressTrack').setAttribute('aria-valuetext',done+(target?' de '+target:'')+(matching?' parejas acertadas':' respuestas'));
+}
+function render(){
+ const ready=phase==='ready';$('empty').hidden=phase!=='empty';$('loading').hidden=phase!=='loading';$('loadError').hidden=phase!=='error';$('dataSettings').disabled=!ready;
+ $('practice').hidden=!ready||activity!=='quiz'||summaryOpen||!current;$('noQuestion').hidden=!ready||activity!=='quiz'||summaryOpen||!!current;
+ $('matching').hidden=!ready||activity!=='match';$('exploring').hidden=!ready||activity!=='explore';$('summary').hidden=!ready||activity!=='quiz'||!summaryOpen;
+ $('finish').hidden=!ready||activity!=='quiz'||summaryOpen;$('keyboardHint').hidden=!ready||activity!=='quiz'||summaryOpen||!current;$('progressTrack').hidden=!ready||activity==='explore'||!(activity==='match'?matchLength:length);$('sessionStats').hidden=!ready;$('sourceNotes').hidden=!ready||!(model.references||[]).some(reference=>groups.has(reference.group));
+ $('exerciseTop').hidden=activity==='match'||(activity==='quiz'&&!reviewIds);$('quizSettings').hidden=activity!=='quiz';$('matchSettings').hidden=activity!=='match';
+ $('badge').textContent=activity==='match'?'Emparejar':activity==='explore'?'Explorar':reviewIds?'Repaso de errores':'';$('badge').hidden=!$('badge').textContent;
+ for(const mode of ['quiz','match','explore'])$(mode+'Tab').setAttribute('aria-pressed',String(mode===activity));updateStats();
+}
+function makeQuestion(selected,eligible,reverse){
+ const [question,answer]=reverse?['back','front']:['front','back'];
+ const acceptedByPrompt=new Map(), answerLabels=new Map();
+ for(const item of selected){const prompt=normalized(item[question]),value=normalized(item[answer]);if(!acceptedByPrompt.has(prompt))acceptedByPrompt.set(prompt,new Set());acceptedByPrompt.get(prompt).add(value);if(!answerLabels.has(value))answerLabels.set(value,item[answer]);}
+ const candidates=eligible.filter(item=>acceptedByPrompt.get(normalized(item[question])).size<answerLabels.size);
+ if(!candidates.length)return null;
+ const item=candidates[Math.floor(Math.random()*candidates.length)],accepted=acceptedByPrompt.get(normalized(item[question]));
+ const distractors=[...answerLabels].filter(([key])=>!accepted.has(key)).map(([,value])=>value);
+ return {item,reverse,options:shuffle([item[answer],...shuffle(distractors).slice(0,3)])};
+}
+function nextQuestion(){
+ generation++;clearPending();music?.cancel();current=null;answered=false;
+ if(phase!=='ready'){render();return;}if(length&&total()>=length){finishQuiz();return;}
+ const selected=pool(),eligible=reviewIds?selected.filter(item=>reviewIds.has(item.id)):selected;
+ const directions=direction==='mixed'?shuffle([false,true]):[direction==='reverse'];
+ for(const reverse of directions){current=makeQuestion(selected,eligible,reverse);if(current)break;}
+ if(!current){render();return;}
+ current.token={};summaryOpen=false;
+ const question=current;const front=question.reverse?question.item.back:question.item.front;
+ $('prompt').textContent=front;$('prompt').lang=model.languages[question.reverse?1:0];$('options').setAttribute('aria-label','Respuestas en '+model.sideNames[question.reverse?0:1].toLocaleLowerCase('es'));
+ // In reverse mode the front-side audio would reveal the answer; expose it only after responding.
+ $('listen').hidden=question.reverse||!playable(question.item);$('feedback').hidden=true;$('feedback').replaceChildren();$('skip').disabled=false;$('next').disabled=true;$('options').replaceChildren();
+ question.options.forEach((value,index)=>{const button=text('button','', 'option-button');button.type='button';button.lang=model.languages[question.reverse?0:1];button.append(text('span','ABCD'[index],'option-letter'),text('span',value,'option-label'));button.onclick=()=>{if(current===question)respond(value);};$('options').append(button);});
+ render();if(autoAudio&&!question.reverse&&activity==='quiz')queueAudio(question.item,true);
+}
+function respond(value){
+ if(phase!=='ready'||activity!=='quiz'||summaryOpen||!current||answered)return;answered=true;
+ const correct=current.reverse?current.item.front:current.item.back;const outcome=value===null?'skipped':normalized(value)===normalized(correct)?'correct':'wrong';quiz[outcome]++;if(outcome==='wrong')quiz.errors.add(current.item.id);ledger.record('canciones_chino',current.item.id,current.reverse?'Español → chino':'Chino → español',outcome);
+ if(outcome==='correct')music?.correct(current.token);
+ [...$('options').children].forEach((button,index)=>{button.disabled=true;const match=normalized(current.options[index])===normalized(correct);if(match)button.classList.add('is-correct');else if(current.options[index]===value)button.classList.add('is-wrong');if(match||current.options[index]===value)button.append(text('span',match?'✓':'✕','option-mark'));});
+ $('feedback').textContent=(outcome==='correct'?'✓ ¡Correcto!':outcome==='wrong'?'✕ Esta vez no.':'Sin responder · no cuenta como error.')+'\n'+current.item.front+' · '+current.item.back+(current.item.detail?'\n'+current.item.detail:'');$('feedback').append(historyElement(current.item.id));$('feedback').hidden=false;$('skip').disabled=true;$('next').disabled=false;$('listen').hidden=!playable(current.item);updateStats();
+}
+function finishQuiz(){generation++;clearPending();music?.cancel();summaryOpen=true;$('summaryText').textContent=quiz.correct+' aciertos · '+quiz.wrong+' errores · '+quiz.skipped+' sin responder. Las preguntas sin responder al salir no se registran.';$('reviewSession').disabled=!quiz.errors.size;render();}
+function startQuiz(ids=null){matcher?.deactivate();music?.reset();quiz=blankSession();reviewIds=ids;summaryOpen=false;activity='quiz';nextQuestion();}
+function renderGroups(){
+ const values=[...new Set(model.items.map(item=>item.group))];$('groups').replaceChildren();
+ for(const group of values){const button=text('button',group,'chip');button.type='button';button.setAttribute('aria-pressed',String(groups.has(group)));button.onclick=()=>{if(groups.has(group)){if(groups.size===1){notify('Mantén al menos un bloque seleccionado.');return;}groups.delete(group);}else groups.add(group);filterChanged();};$('groups').append(button);}
+ if(values.length>1){const all=text('button','Todos','chip');all.type='button';all.setAttribute('aria-pressed',String(groups.size===values.length));all.onclick=()=>{groups=new Set(values);filterChanged();};$('groups').append(all);}
+ $('poolCount').textContent=model.items.length?pool().length+' de '+model.items.length+' entradas':'Pendiente de contenido';
+ renderReferences();
+}
+function renderReferences(){
+ const references=(model.references||[]).filter(reference=>groups.has(reference.group));$('referenceList').replaceChildren();$('sourceNotes').hidden=!references.length;
+ for(const reference of references){const section=text('details','');section.append(text('summary',reference.title));if(reference.header&&reference.header!=='☆ asallamsensei.com ☆')section.append(text('p',reference.header,'reference-header'));for(const paragraph of reference.paragraphs)section.append(text('p',paragraph,'reference-note'));$('referenceList').append(section);}
+}
+function filterChanged(){renderGroups();reviewIds=null;summaryOpen=false;matcher?.reset();nextQuestion();if(activity==='explore')explore();}
+function historyElement(id){const element=text('div','','item-history');if(reviews)element.innerHTML=reviews.render('canciones_chino',id);else element.textContent='Historial no disponible.';return element;}
+function explore(){
+ if(phase!=='ready')return;const query=searchText($('search').value);const found=pool().filter(item=>searchText([item.front,item.back,item.group,item.detail].join(' ')).includes(query));$('exploreCount').textContent=found.length+' entradas';$('wordGrid').replaceChildren();
+ if(!found.length)$('wordGrid').append(text('p','No hay coincidencias. Prueba otra búsqueda.','setting-help'));
+ for(const item of found.slice(0,pageSize)){const card=text('article','','word-card');const front=text('h3',item.front);front.lang=model.languages[0];const back=text('p',item.back);back.lang=model.languages[1];card.append(front,back);if(item.detail)card.append(text('p',item.detail,'card-detail'));card.append(text('p',item.group,'card-detail'));if(playable(item)){const button=text('button','🔊 Escuchar','listen-button');button.type='button';button.setAttribute('aria-label','Escuchar '+item.front);button.onclick=()=>queueAudio(item);card.append(button);}card.append(historyElement(item.id));$('wordGrid').append(card);}
+ $('more').hidden=found.length<=pageSize;
+}
+function switchActivity(mode){
+ if(mode==='match'&&!matcher){notify('No se pudo cargar Emparejar. Recarga la página para intentarlo de nuevo.');return;}
+ generation++;clearPending();music?.cancel();matcher?.deactivate();activity=mode;if(phase==='ready'){if(mode==='match')matcher?.activate();else if(mode==='explore')explore();}render();
+}
+for(const mode of ['quiz','match','explore'])$(mode+'Tab').onclick=()=>switchActivity(mode);
+$('direction').onchange=()=>{direction=$('direction').value;if(phase==='ready'&&!summaryOpen)nextQuestion();};
+$('length').onchange=()=>{length=Number($('length').value);if(phase==='ready'&&!summaryOpen&&length&&total()>=length)finishQuiz();else render();};
+$('matchLength').onchange=()=>{const value=Number($('matchLength').value);if(![0,12,21,39].includes(value))return;matchLength=value;matcher?.reset();render();};
+$('rate').onchange=()=>{rate=Number($('rate').value);};$('autoAudio').onchange=()=>{autoAudio=$('autoAudio').checked;if(!autoAudio)clearPending();};
+$('search').oninput=()=>{pageSize=24;explore();};$('more').onclick=()=>{pageSize+=24;explore();};$('listen').onclick=()=>{if(current&&(!current.reverse||answered))queueAudio(current.item);};
+$('skip').onclick=()=>respond(null);$('next').onclick=()=>{if(answered)nextQuestion();};$('finish').onclick=finishQuiz;$('repeat').onclick=()=>startQuiz();$('reviewSession').onclick=()=>startQuiz(new Set(quiz.errors));$('retry').onclick=()=>load();
+$('resetVisit').onclick=()=>{if(!confirm('¿Reiniciar los resultados de esta visita? No se modifica el progreso de otras páginas.'))return;visit=blankSession();quiz=blankSession();reviewIds=null;summaryOpen=false;matcher?.reset();nextQuestion();};
+window.addEventListener('keydown',event=>{if(event.altKey||event.ctrlKey||event.metaKey||event.repeat||event.target?.isContentEditable||/INPUT|SELECT|TEXTAREA|BUTTON|A|SUMMARY/.test(event.target?.tagName||'')||phase!=='ready'||activity!=='quiz'||summaryOpen||!current)return;const key=event.key.toLowerCase();const index=/^[1-4]$/.test(key)?Number(key)-1:/^[a-d]$/.test(key)?'abcd'.indexOf(key):-1;if(index>=0&&!answered&&current.options[index]!==undefined){event.preventDefault();respond(current.options[index]);}else if(key==='enter'&&answered){event.preventDefault();nextQuestion();}else if(key==='r'&&(!current.reverse||answered)){event.preventDefault();queueAudio(current.item);}});
+window.addEventListener('pagehide',()=>{generation++;audioEpoch++;audioQueue=[];music?.cancel();matcher?.deactivate();cleanupAudio?.();cleanupAudio=null;if(activeSpeech)window.speechSynthesis?.cancel();activeMedia=null;activeSpeech=null;audioBusy=false;});
+window.addEventListener('pageshow',event=>{if(event.persisted&&phase==='ready'&&activity==='match')matcher?.activate();});
+window.addEventListener('storage',event=>{if(event.key===null||event.key==='asallam_reviews_v1_canciones_chino'){updateStats();if(activity==='explore'&&phase==='ready')explore();}});
+
+$('exportHistory').onclick=()=>{try{const data={app:'canciones_chino',history:reviews.snapshotRaw('canciones_chino')};const a=document.createElement('a'),url=URL.createObjectURL(new Blob([JSON.stringify(data,null,2)],{type:'application/json'}));a.href=url;a.download='canciones-chino-historial.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}catch{notify('No se pudo exportar el historial.');}};
+$('importHistory').onclick=()=>{$('historyFile').value='';$('historyFile').click();};
+$('historyFile').onchange=async()=>{const file=$('historyFile').files[0];if(!file)return;try{const data=JSON.parse(await file.text());if(data.app!=='canciones_chino')throw Error('Esta copia no pertenece a Canciones en chino.');reviews.validate('canciones_chino',data.history);if(!confirm('¿Restaurar esta copia y reemplazar el historial de canciones en chino de este navegador?'))return;reviews.replace('canciones_chino',data.history);reviews.registerCatalog('canciones_chino',model.items.map(x=>x.id));updateStats();if(activity==='explore')explore();notify('Historial restaurado.');}catch(error){notify(error.message||'No se pudo importar. El historial anterior se conserva.');}};
+
+window.Repaso=Object.freeze({setData,load});render();setData(JSON.parse(document.getElementById('songData').textContent),adaptData);
+})();
+</script>
+</body>
+</html>
