@@ -515,7 +515,7 @@ let data, sentenceMap,lexemeMap,mode='quiz',queue=[],index=0,answered=false,scor
 let musicQuestionToken=0, sessionErrors=new Set();
 let matchingErrors=new Set(), matchingRetry=null;
 let ready=false, loadAttempt=0, sessions={}, lastFeedback=null, selection={block:'',kind:'mixto',word:'',length:'40'};
-let prefs={theme:'dark',furigana:false,romaji:true,autoAudio:true,length:'40',matchLength:'39',speed:'0.85',revealDefaultsVersion:1,lengthDefaultsVersion:1};
+let prefs={theme:'dark',furigana:true,romaji:true,autoAudio:true,length:'40',matchLength:'39',speed:'0.85',revealDefaultsVersion:1,lengthDefaultsVersion:1};
 try{
  const saved=JSON.parse(localStorage.getItem('asallam-oraciones-settings')||'{}');
  Object.assign(prefs,saved);
