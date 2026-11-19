@@ -600,7 +600,92 @@ function available(){const w=$('word').value,kind=$('kind').value,ids=new Set(fi
  if(reviewOnly)qs=qs.filter(q=>missed.has(q.id));return qs;
 }
 function start(review=false){if(mode==='match'&&!guided.active){startMatching(true);return;}matchMusic?.cancel();if(guided.active){mode=guided.step.activity;document.querySelectorAll("[data-mode]").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.mode===mode)));renderKinds();$("kind").value=guided.step.mode;$("block").value="";$("block").disabled=true;renderWords(false);$("word").value="";$("length").value="0";review=false;}lastFeedback=null;selection={block:$('block').value,kind:$('kind').value,word:$('word').value,length:$('length').value};reviewOnly=review;settings();queue=shuffle(available());let n=Number($('length').value);if(n)queue=queue.slice(0,n);index=0;score=0;attempts=0;$('summary').hidden=true;$('questionPanel').hidden=false;updateStats();renderQuestion()}
-function japanese(s,q=null,hideAnswer=false,allowRuby=true){let chosen=q?.segmento_id?s.segmentos.find(t=>t.id===q.segmento_id):null,frag=q?.fragmento_id?s.fragmentos.find(f=>f.id===q.fragmento_id):null;return s.segmentos.map(t=>{let active=chosen?.id===t.id||frag&&t.inicio>=frag.inicio&&t.fin<=frag.fin;if(active&&hideAnswer)return '<span class="blank" role="img" aria-label="espacio para completar"></span>';let txt=esc(t.texto);if(prefs.furigana&&allowRuby&&/[一-龯々]/.test(t.texto)&&t.lectura)txt=`<ruby>${txt}<rt>${esc(t.lectura)}</rt></ruby>`;return active?`<mark class="hl">${txt}</mark>`:txt}).join('')}
+// Only independently verified character readings are split within a kanji compound.
+// Match the existing reading as well as the spelling, so imports can use other readings.
+const rubyByCharacter=new Map(Object.entries({
+ '火山':'か|ざん','旅行':'りょ|こう','写真':'しゃ|しん','先生':'せん|せい',
+ '料理':'りょう|り','名前':'な|まえ','電話':'でん|わ','電車':'でん|しゃ',
+ '手紙':'て|がみ','時間':'じ|かん','授業':'じゅ|ぎょう','荷物':'に|もつ',
+ '映画':'えい|が','宿題':'しゅく|だい','公園':'こう|えん','祖父':'そ|ふ',
+ '家族':'か|ぞく','毎日':'まい|にち','財布':'さい|ふ','毎朝':'まい|あさ',
+ '漢字':'かん|じ','質問':'しつ|もん','自転車':'じ|てん|しゃ','言葉':'こと|ば',
+ '図書館':'と|しょ|かん','電気':'でん|き','勉強':'べん|きょう','問題':'もん|だい',
+ '来月':'らい|げつ','午後':'ご|ご','夕飯':'ゆう|はん','玄関':'げん|かん',
+ '銀行':'ぎん|こう','半分':'はん|ぶん','学生':'がく|せい','野菜':'や|さい',
+ '日曜日':'にち|よう|び','辞書':'じ|しょ','誕生日':'たん|じょう|び','元気':'げん|き',
+ '会社':'かい|しゃ','地図':'ち|ず','音楽':'おん|がく','大学':'だい|がく',
+ '入口':'いり|ぐち','祖母':'そ|ぼ','病院':'びょう|いん','医者':'い|しゃ',
+ '砂糖':'さ|とう','食事':'しょく|じ','建物':'たて|もの','階段':'かい|だん',
+ '毎月':'まい|つき','牛乳':'ぎゅう|にゅう','散歩':'さん|ぽ','意味':'い|み',
+ '土曜日':'ど|よう|び','教室':'きょう|しつ','大切':'たい|せつ','冷蔵庫':'れい|ぞう|こ',
+ '交番':'こう|ばん','天気':'てん|き','自分':'じ|ぶん','大変':'たい|へん',
+ '説明':'せつ|めい','来週':'らい|しゅう','全部':'ぜん|ぶ','飛行機':'ひ|こう|き',
+ '帽子':'ぼう|し','月曜日':'げつ|よう|び','気分':'き|ぶん','掃除':'そう|じ',
+ '場所':'ば|しょ','郵便局':'ゆう|びん|きょく','封筒':'ふう|とう','作文':'さく|ぶん',
+ '洗濯':'せん|たく','靴下':'くつ|した','映画館':'えい|が|かん','交差点':'こう|さ|てん',
+ '金曜日':'きん|よう|び','先週':'せん|しゅう','本棚':'ほん|だな','便利':'べん|り',
+ '新鮮':'しん|せん','十分':'じゅう|ぶん','生徒':'せい|と','丈夫':'じょう|ぶ',
+ '練習':'れん|しゅう','試験':'し|けん','外国':'がい|こく','上着':'うわ|ぎ',
+ '来年':'らい|ねん','番号':'ばん|ごう','夕方':'ゆう|がた','予定':'よ|てい',
+ '日本語':'にほん|ご','英語':'えい|ご','病気':'びょう|き','学校':'がっ|こう','一緒':'いっ|しょ','切符':'きっ|ぷ','友達':'とも|だち'
+}));
+const rubyRun=/[\p{Script=Han}々]+|[^\p{Script=Han}々]+/gu;
+const rubyHan=/^[\p{Script=Han}々]+$/u;
+const rubyKana=/^[\p{Script=Hiragana}\p{Script=Katakana}ー]+$/u;
+const rubyCache=new WeakMap();
+const rubyTag=(base,kana)=>'<ruby>'+esc(base)+'<rt>'+esc(kana)+'</rt></ruby>';
+function rubyGroup(base,kana){
+ const parts=rubyByCharacter.get(base)?.split('|');
+ if(!parts||parts.join('')!==kana)return rubyTag(base,kana);
+ const chars=Array.from(base);
+ // 日本 carries a group reading in both 日本 and 日本語.
+ if(base==='日本語')return rubyTag('日本',parts[0])+rubyTag('語',parts[1]);
+ return chars.map((c,i)=>rubyTag(c,parts[i])).join('');
+}
+function alignRubyRuns(runs,kana){
+ const fixed=runs.map(run=>rubyHan.test(run)?null:audioReading(run));
+ if(fixed.some((value,i)=>value!==null&&!rubyKana.test(runs[i])))return null;
+ // Count paths up to two, using kana in the base as fixed anchors.
+ const memo=new Map();
+ function search(i,pos){
+  if(i===runs.length)return pos===kana.length?[[]]:[];
+  const key=i*(kana.length+1)+pos;
+  if(memo.has(key))return memo.get(key);
+  const anchor=fixed[i];let paths=[];
+  if(anchor!==null){
+   if(kana.startsWith(anchor,pos))paths=search(i+1,pos+anchor.length).map(p=>[null,...p]);
+  }else if(i===runs.length-1){
+   if(pos<kana.length)paths=[[kana.slice(pos)]];
+  }else{
+   const next=fixed[i+1];let end=kana.indexOf(next,pos+1);
+   while(end!==-1&&paths.length<2){
+    for(const p of search(i+1,end)){paths.push([kana.slice(pos,end),...p]);if(paths.length===2)break;}
+    end=kana.indexOf(next,end+1);
+   }
+  }
+  memo.set(key,paths);return paths;
+ }
+ const paths=search(0,0);return paths.length===1?paths[0]:null;
+}
+function renderRuby(t){
+ if(rubyCache.has(t))return rubyCache.get(t);
+ const base=t.texto, kana=audioReading(t.lectura);
+ let html=esc(base);
+ if(base.length<=64&&kana.length<=128&&rubyKana.test(kana)){
+  // Keep special counting spellings together; ヶ here is a counter sign, not ordinary kana.
+  if(((base==='１日'||base==='1日')&&kana==='ついたち')||(base==='一ヶ月'&&kana==='いっかげつ'))html=rubyTag(base,kana);
+  else if(rubyHan.test(base))html=rubyGroup(base,kana);
+  else{
+   const runs=base.match(rubyRun);
+   if(runs?.some(run=>rubyHan.test(run))){
+    const reading=alignRubyRuns(runs,kana);
+    if(reading)html=runs.map((run,i)=>reading[i]===null?esc(run):rubyGroup(run,reading[i])).join('');
+   }
+  }
+ }
+ rubyCache.set(t,html);return html;
+}
+function japanese(s,q=null,hideAnswer=false,allowRuby=true){let chosen=q?.segmento_id?s.segmentos.find(t=>t.id===q.segmento_id):null,frag=q?.fragmento_id?s.fragmentos.find(f=>f.id===q.fragmento_id):null;return s.segmentos.map(t=>{let active=chosen?.id===t.id||frag&&t.inicio>=frag.inicio&&t.fin<=frag.fin;if(active&&hideAnswer)return '<span class="blank" role="img" aria-label="espacio para completar"></span>';const txt=prefs.furigana&&allowRuby?renderRuby(t):esc(t.texto);return active?`<mark class="hl">${txt}</mark>`:txt}).join('')}
 function renderQuestion(savedOptions=null){if(guided.done){showSummary();return;}if(guided.active&&index>=queue.length){queue=shuffle(available());index=0;}stopAudio();lastFeedback=null;answered=false;current=queue[index];musicQuestionToken++;$('feedback').innerHTML='';$('feedback').className='feedback';$('romajiCard').hidden=true;$('romajiCard').textContent='';$('answerStatus').textContent='';$('prompt').classList.remove('is-revealed');$('answerInput').classList.remove('is-correct','is-wrong');$('answerInput').setAttribute('aria-invalid','false');$('next').disabled=true;$('skip').disabled=false;$('answerInput').value='';$('next').textContent='Siguiente →';$('answerInput').disabled=false;$('check').disabled=false;$('answerForm').hidden=mode!=='write';$('options').hidden=mode==='write';$('summary').hidden=true;$('questionPanel').hidden=false;
  $('keyboardHint').innerHTML=mode==='quiz'?'<kbd>1</kbd>–<kbd>4</kbd> elegir · <kbd>Enter</kbd> continuar':'Escribe en japonés · <kbd>Enter</kbd> comprobar';if(!current){showSummary();return}const s=sentenceMap.get(current.oracion_id);$('round').textContent=`${index+1} / ${queue.length}`;updatePracticeProgress();guided.paint();$('badge').textContent=({oracion:'Oración',palabra:'Palabra',fragmento:'Fragmento',completar:'Completar',lectura:'Lectura'})[current.tipo];$('label').textContent=current.consigna;$('prompt').innerHTML=japanese(s,current,current.tipo==='completar',current.tipo!=='lectura');$('hint').hidden=current.tipo!=='completar';$('hint').textContent=s.espanol;$('listen').hidden=current.tipo==='completar'||current.tipo==='lectura';
  if(mode==='quiz'){shownOptions=savedOptions||shuffle(current.opciones);$('options').innerHTML=shownOptions.map((o,i)=>`<button class="option-button ${current.tipo==='completar'?'jp-option':''}" data-option="${i}"><span class="key">${i+1}</span><span>${esc(o.texto)}</span></button>`).join('');$('options').querySelectorAll('button').forEach((b,i)=>b.onclick=()=>answer(shownOptions[i].correcta,shownOptions[i].texto,i));}else{$('options').innerHTML='';$('answerInput').placeholder='Kanji, kana o romaji';}
