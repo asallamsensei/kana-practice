@@ -514,7 +514,36 @@ async function copyText(value,doc,navigator){
  }catch(e){return false;}
  finally{field.remove();try{focus?.focus({preventScroll:true});}catch(e){}}
 }
-const api={TZ,FORMATS,THEMES,dateKey,hash,rng,chooseDaily,manifestLists,makeCatalog,compose,stageLayout,placeCast,spriteCrop,cardLabel,rubyTokens,sentenceRuby,rubyRows,wrap,drawCard,socialCopy,copyText};
+// ZIP32, stored entries: PNG already compresses its own image bytes.
+const zipCrcTable=Uint32Array.from({length:256},(_,n)=>{
+ for(let i=0;i<8;i++)n=n&1?(n>>>1)^0xedb88320:n>>>1;
+ return n;
+});
+function makePngZip(entries){
+ const parts=[],directory=[];
+ let offset=0,directorySize=0;
+ for(const {name,bytes} of entries){
+  // Internal filenames use ASCII only.
+  const filename=Uint8Array.from(name,c=>c.charCodeAt(0)),size=bytes.length;
+  let crc=0xffffffff;
+  for(let i=0;i<size;i++)crc=(crc>>>8)^zipCrcTable[(crc^bytes[i])&255];
+  crc=(crc^0xffffffff)>>>0;
+  const local=new DataView(new ArrayBuffer(30));
+  local.setUint32(0,0x04034b50,true);local.setUint16(4,20,true);local.setUint16(12,33,true);
+  local.setUint32(14,crc,true);local.setUint32(18,size,true);local.setUint32(22,size,true);local.setUint16(26,filename.length,true);
+  parts.push(local.buffer,filename,bytes);
+  const central=new DataView(new ArrayBuffer(46));
+  central.setUint32(0,0x02014b50,true);central.setUint16(4,20,true);central.setUint16(6,20,true);central.setUint16(14,33,true);
+  central.setUint32(16,crc,true);central.setUint32(20,size,true);central.setUint32(24,size,true);central.setUint16(28,filename.length,true);central.setUint32(42,offset,true);
+  directory.push(central.buffer,filename);directorySize+=46+filename.length;
+  offset+=30+filename.length+size;
+ }
+ const end=new DataView(new ArrayBuffer(22));
+ end.setUint32(0,0x06054b50,true);end.setUint16(8,entries.length,true);end.setUint16(10,entries.length,true);
+ end.setUint32(12,directorySize,true);end.setUint32(16,offset,true);
+ return new Blob([...parts,...directory,end.buffer],{type:'application/zip'});
+}
+const api={TZ,FORMATS,THEMES,dateKey,hash,rng,chooseDaily,manifestLists,makeCatalog,compose,stageLayout,placeCast,spriteCrop,cardLabel,rubyTokens,sentenceRuby,rubyRows,wrap,drawCard,socialCopy,copyText,makePngZip};
 if(typeof module!=='undefined'&&module.exports){module.exports=api;return;}
 const $=id=>root.document.getElementById(id);
 const canvas=$('card'),images=new Map();
@@ -630,26 +659,44 @@ function choose(item){
  state.item=item;state.revision=0;$('selection').value=item.id;
  syncEditFields();updateSocial(displayedItem(),state.kind);void render();
 }
+const trioFormats=['1-1','3-4','9-16'];
+let preparingTrio=false,initializing=true;
+function syncTrio(){
+ $('downloadThree').disabled=initializing||preparingTrio||!state.item;
+}
+function clickSnapshot(){
+ const item=displayedItem();
+ const {kind,day,revision,lists,palette,scale,furigana,localPortrait}=state;
+ return {item,kind,day,revision,lists,palette,scale,furigana,localPortrait};
+}
+function frameFor(snapshot,format,size){
+ const {item,kind,day,revision,lists,palette,scale,furigana}=snapshot;
+ const [W,H]=size;
+ const design=compose(day,item.id,revision,[1080,H*1080/W],lists,palette,format);
+ return {format:size,item,kind,design,images:{},scale,furigana};
+}
+async function frameImages(design,snapshot,valid=()=>true){
+ const art=name=>loadImage(name&&'data/palabras/'+name);
+ const backgroundReady=art(design.background).then(image=>{
+  if(image||!valid()||design.fallbackBackground===design.background)return image;
+  return art(design.fallbackBackground);
+ });
+ const [background,characters,portrait]=await Promise.all([
+  backgroundReady,Promise.all(design.characters.map(art)),
+  snapshot.localPortrait||art(snapshot.lists.portrait),document.fonts?.ready
+ ]);
+ return {background,characters,portrait};
+}
 async function render(){
- const token=++state.token,item=displayedItem();
+ const token=++state.token,snapshot=clickSnapshot(),{item,kind}=snapshot;
  if(!item)return;
- const [W,H]=state.size,kind=state.kind,day=state.day;
- const design=compose(day,item.id,state.revision,[1080,H*1080/W],state.lists,state.palette,state.format);
- const frame={format:[W,H],item,kind,design,images:{},scale:state.scale,furigana:state.furigana};
+ const [W,H]=state.size,frame=frameFor(snapshot,state.format,state.size);
  $('dimensions').textContent=W+' × '+H+' px';
  $('card-description').textContent=[cardLabel(kind,item),item.jp,item.romaji,item.es,item.extra,item.example].filter(Boolean).join('. ');
  canvas.style.setProperty('--preview-width',H>W?Math.max(420,700*W/H)+'px':'660px');
  drawCard(canvas,frame);$('download').disabled=true;
- const backgroundImage=name=>loadImage(name&&'data/palabras/'+name);
- const backgroundReady=backgroundImage(design.background).then(image=>{
-  if(image||token!==state.token||design.fallbackBackground===design.background)return image;
-  return backgroundImage(design.fallbackBackground);
- });
- const [background,characters,portrait]=await Promise.all([
-  backgroundReady,Promise.all(design.characters.map(name=>loadImage('data/palabras/'+name))),state.localPortrait||loadImage(state.lists.portrait&&'data/palabras/'+state.lists.portrait),document.fonts?.ready
- ]);
+ frame.images=await frameImages(frame.design,snapshot,()=>token===state.token);
  if(token!==state.token)return;
- frame.images={background,characters,portrait};
  drawCard(canvas,frame);$('download').disabled=false;
 }
 function format(key,size=FORMATS[key]){
@@ -733,6 +780,41 @@ $('download').onclick=()=>{
   },'image/png');
  }catch(e){$('status').textContent='No se pudo guardar el PNG en este navegador.';}
 };
+function canvasPng(canvas){
+ return new Promise((resolve,reject)=>canvas.toBlob(blob=>{
+  if(blob)resolve(blob);
+  else reject(Error('No se pudo generar una imagen.'));
+ },'image/png'));
+}
+$('downloadThree').onclick=async()=>{
+ if(preparingTrio||initializing||!state.item)return;
+ const snapshot=clickSnapshot();
+ preparingTrio=true;syncTrio();
+ const button=$('downloadThree'),status=$('status');
+ button.setAttribute('aria-busy','true');status.textContent='Preparando los 3 tamaños…';
+ try{
+  const badge='asallam-'+LABELS[snapshot.kind].toLowerCase()+'-'+snapshot.item.number;
+  const entries=[],scratch=document.createElement('canvas');
+  for(const key of trioFormats){
+   const frame=frameFor(snapshot,key,FORMATS[key]);
+   frame.images=await frameImages(frame.design,snapshot);
+   drawCard(scratch,frame);
+   const blob=await canvasPng(scratch);
+   entries.push({name:badge+'-'+key+'.png',bytes:new Uint8Array(await blob.arrayBuffer())});
+  }
+  const url=URL.createObjectURL(makePngZip(entries)),a=document.createElement('a');
+  try{
+   a.download=badge+'-3-tamanos.zip';a.href=url;document.body.append(a);a.click();
+  }finally{
+   a.remove();setTimeout(()=>URL.revokeObjectURL(url),60000);
+  }
+  status.textContent='ZIP listo con los 3 tamaños.';
+ }catch(e){
+  status.textContent='No se pudo preparar el ZIP. Vuelve a intentarlo.';
+ }finally{
+  preparingTrio=false;button.removeAttribute('aria-busy');syncTrio();
+ }
+};
 async function init(){
  const controls=['kind','selection','today','random','design','cardSpanish','cardNumber','resetCard'].map($);
  controls.forEach(x=>x.disabled=true);$('status').textContent='Cargando tarjetas…';
@@ -742,8 +824,8 @@ async function init(){
  const [curated,words,phrases,kanji,manifest]=values;
  state.catalog=makeCatalog(curated,words,phrases,kanji);state.lists=manifestLists(manifest);state.day=dateKey();
  setOptions();choose(currentDaily());
- controls.forEach(x=>x.disabled=false);
+ controls.forEach(x=>x.disabled=false);initializing=false;syncTrio();
  $('status').textContent=curated||words||phrases||kanji?'':'Mostrando tarjetas básicas mientras el catálogo no está disponible.';
 }
-init().catch(()=>{$('status').textContent='No se pudieron cargar todas las tarjetas. Puedes seguir usando la vista básica.';['kind','selection','today','random','design','cardSpanish','cardNumber','resetCard'].map($).forEach(b=>b.disabled=false);});
+init().catch(()=>{initializing=false;syncTrio();$('status').textContent='No se pudieron cargar todas las tarjetas. Puedes seguir usando la vista básica.';['kind','selection','today','random','design','cardSpanish','cardNumber','resetCard'].map($).forEach(b=>b.disabled=false);});
 })(typeof window!=='undefined'?window:globalThis);
