@@ -283,6 +283,31 @@ function cover(ctx,image,w,h){
 function write(ctx,text,x,y,size,weight,color,font=LATIN_FONT,align='left'){
  ctx.font=Math.round(weight/100)*100+' '+size+'px '+font;ctx.fillStyle=color;ctx.textAlign=align;ctx.textBaseline='middle';ctx.fillText(text,x,y);
 }
+function whatsAppIcon(ctx,x,y,size){
+ ctx.save();ctx.translate(x,y-size/2);ctx.scale(size/24,size/24);
+ ctx.strokeStyle=ctx.fillStyle='#19754d';ctx.lineWidth=1.75;ctx.lineJoin='round';
+ ctx.beginPath();ctx.moveTo(3.9,17.6);ctx.lineTo(2.45,22);ctx.lineTo(6.9,20.7);
+ ctx.bezierCurveTo(13,24.0,21.6,19.8,21.8,12.2);
+ ctx.bezierCurveTo(22.0,6.6,17.5,2.1,11.9,2.1);
+ ctx.bezierCurveTo(6.2,2.1,1.8,6.9,2.0,12.3);
+ ctx.bezierCurveTo(2,14.2,2.6,16.1,3.9,17.6);ctx.closePath();ctx.stroke();
+ ctx.beginPath();ctx.moveTo(7.7,6.5);
+ ctx.bezierCurveTo(6.4,6.8,6.1,8.0,6.6,9.6);
+ ctx.bezierCurveTo(7.7,13.0,10.5,15.8,13.8,17.1);
+ ctx.bezierCurveTo(15.5,17.7,17,17.3,17.5,15.8);
+ ctx.lineTo(17.5,14.9);ctx.lineTo(14.4,13.45);ctx.lineTo(13.15,14.8);
+ ctx.bezierCurveTo(11.4,14.0,9.95,12.55,9.25,10.9);
+ ctx.lineTo(10.35,9.55);ctx.lineTo(9.0,6.6);ctx.closePath();ctx.fill();ctx.restore();
+}
+function globeIcon(ctx,x,y,size,color){
+ ctx.save();ctx.translate(x,y-size/2);ctx.scale(size/24,size/24);
+ ctx.strokeStyle=color;ctx.lineWidth=1.65;ctx.lineCap='round';
+ ctx.beginPath();ctx.arc(12,12,9.2,0,Math.PI*2);ctx.stroke();
+ ctx.beginPath();ctx.ellipse(12,12,4.35,9.2,0,0,Math.PI*2);ctx.stroke();
+ ctx.beginPath();ctx.moveTo(3.1,12);ctx.lineTo(20.9,12);
+ ctx.moveTo(5.05,6.2);ctx.quadraticCurveTo(12,9.0,18.95,6.2);
+ ctx.moveTo(5.05,17.8);ctx.quadraticCurveTo(12,15.0,18.95,17.8);ctx.stroke();ctx.restore();
+}
 function ornament(ctx,x,y,size,accent,seed){
  const r=rng(seed);ctx.save();ctx.translate(x,y);ctx.strokeStyle=accent;ctx.fillStyle=accent;
  ctx.globalAlpha=.67;ctx.lineWidth=2;
@@ -435,7 +460,12 @@ function drawCard(canvas,card){
  const footY=h-128;
  ctx.lineWidth=2;box(ctx,64,footY,w-128,87,26,t.panel,t.doodle+'85');
  write(ctx,'Asallam Sensei',92,footY+29,29,830,t.ink);
- write(ctx,'asallamsensei.com',93,footY+62,24,570,t.accent);
+ const contactY=footY+62,contactSize=24,handle='@asallamsensei';
+ whatsAppIcon(ctx,92,contactY,24);
+ write(ctx,handle,125,contactY,contactSize,570,t.accent);
+ const globeX=125+ctx.measureText(handle).width+28;
+ globeIcon(ctx,globeX,contactY,24,t.accent);
+ write(ctx,'asallamsensei.com',globeX+33,contactY,contactSize,570,t.accent);
  if(images.portrait){
   const px=w-160;photo(ctx,images.portrait,px,footY+8,71);
   write(ctx,'Tu profe',px-22,footY+43,25,750,t.accent,LATIN_FONT,'right');
