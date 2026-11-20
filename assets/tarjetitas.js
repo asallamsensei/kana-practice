@@ -49,19 +49,92 @@ function compose(day,itemId,revision,format,lists,palette,formatKey){
  const r=rng([day,itemId,revision,'diseño-v1'].join('|'));
  const rollTheme=Math.floor(r()*THEMES.length);
  const theme=Number.isInteger(palette)&&palette>=0&&palette<THEMES.length?palette:rollTheme;
- // Reserve an independent art strip; position changes cannot touch body or portrait.
- const [w,h]=format,artY=h*.665,artBottom=h-148,artH=Math.max(h*.09,artBottom-artY);
- const width=w*(.46+.12*r()),height=artH*(.8+.19*r()),side=r()>.5?'right':'left';
  const dedicated=BACKGROUND_FORMATS.includes(formatKey)?lists.backgroundsByFormat?.[formatKey]:null;
  const backgroundPool=dedicated?.length?dedicated:lists.backgrounds;
- // Reuse one seeded draw so adding a dedicated pool doesn't change the character.
+ // Sample the background separately so changing format never changes the cast.
  const roll=backgroundPool.length?r():0;
- const background=pick(backgroundPool,()=>roll),character=pick(lists.characters,r);
+ const background=pick(backgroundPool,()=>roll);
  const fallbackBackground=dedicated?.length?pick(lists.backgrounds,()=>roll):null;
- const offset=r()*w*.046;const x=side==='left'?w*.045+offset:w*.955-width-offset;
- const y=artBottom-height-r()*Math.max(0,artH-height)*.8;
- return {theme,side,box:[x,y,width,height],mark:r()*.15+.72,seed:r(),background,fallbackBackground,character};
+ const castRandom=rng([day,itemId,revision,'elenco-v1'].join('|'));
+ const castPool=[...new Set(lists.characters||[])],characters=[];
+ for(let i=0;i<4&&castPool.length;i++)characters.push(castPool.splice(Math.floor(castRandom()*castPool.length),1)[0]);
+ return {theme,seed:r(),background,fallbackBackground,characters,character:characters[0]||null};
 }
+const alphaCache=new WeakMap(),ART_TOP=.573,ART_BOTTOM=137,BODY_BOTTOM=.561;
+function spriteCrop(image,ctx){
+ if(alphaCache.has(image))return alphaCache.get(image);
+ const width=image.naturalWidth||image.width,height=image.naturalHeight||image.height;
+ const original={x:0,y:0,w:width,h:height};
+ try{
+  // Downsample; a threshold ignores faint matte specks while generous padding
+  // retains the pencil contours. Positions use the visible art, not blank PNGs.
+  const ratio=Math.min(1,128/Math.max(width,height)),w=Math.max(1,Math.ceil(width*ratio)),h=Math.max(1,Math.ceil(height*ratio));
+  const scratch=root.document?.createElement('canvas')||new ctx.canvas.constructor(w,h);
+  scratch.width=w;scratch.height=h;
+  const probe=scratch.getContext('2d');probe.drawImage(image,0,0,w,h);
+  const pixels=probe.getImageData(0,0,w,h).data;
+  let l=w,t=h,r=-1,b=-1;
+  for(let y=0;y<h;y++)for(let x=0;x<w;x++)if(pixels[(y*w+x)*4+3]>=94){
+   l=Math.min(l,x);t=Math.min(t,y);r=Math.max(r,x);b=Math.max(b,y);
+  }
+  if(r>=l&&b>=t){
+   const pad=Math.max(2,Math.ceil(Math.max(r-l+1,b-t+1)*.04));
+   const x=Math.max(0,(l-pad)*width/w),y=Math.max(0,(t-pad)*height/h);
+   const crop={x,y,w:Math.min(width,(r+pad+1)*width/w)-x,h:Math.min(height,(b+pad+1)*height/h)-y};
+   alphaCache.set(image,crop);return crop;
+  }
+ }catch(e){}
+ alphaCache.set(image,original);return original;
+}
+function stageLayout(w,h,cast,seed,cropFor){
+ const r=rng(seed),y=h*ART_TOP,floor=h-ART_BOTTOM,space=floor-y,margin=w*.06;
+ if(!cast.length||space<=0)return [];
+ const sizes=cast.slice(0,3).map((image,index)=>{
+  const width=image.naturalWidth||image.width,height=image.naturalHeight||image.height;
+  const crop=cropFor?.(image)||{x:0,y:0,w:width,h:height};
+  const heightLimit=space*(cast.length===1?.94:index===0?.80:.86+r()*.045);
+  const scale=Math.min(w*.36/crop.w,heightLimit/crop.h,w*.43/crop.h);
+  return {image,crop,w:crop.w*scale,h:crop.h*scale};
+ });
+ const overlap=(a,b)=>Math.min(a.w,b.w)*(.40+r()*.065);
+ const positions=()=>{
+  const [rear,left,right]=sizes;
+  rear.x=-rear.w/2;
+  if(left)left.x=rear.x-left.w+overlap(rear,left);
+  if(right)right.x=rear.x+rear.w-overlap(rear,right);
+  return [Math.min(...sizes.map(b=>b.x)),Math.max(...sizes.map(b=>b.x+b.w))];
+ };
+ let [min,max]=positions();
+ const ratio=Math.min(1,(w-margin*2)/(max-min),w*.79/(max-min));
+ if(ratio<1){for(const b of sizes){b.x*=ratio;b.w*=ratio;b.h*=ratio;}min*=ratio;max*=ratio;}
+ // Deliberate overlap, but leave each face visible above or beside its neighbors.
+ const desired=w*(r()<.5?.34:.66);
+ const shift=Math.min(w-margin-max,Math.max(margin-min,desired-(min+max)/2));
+ const rearTop=y+.015*space;
+ return sizes.map((b,i)=>{
+  let top=rearTop;
+  if(sizes.length===1)top=y+.17*(space-b.h);
+  else if(i>0){
+   const base=floor-b.h-(i===1?.035:.085)*space;
+   // Short or panoramic artwork must still overlap the center sprite.
+   const overlapY=Math.min(b.h,sizes[0].h)*.14;
+   top=Math.max(rearTop+Math.min(.09*space,sizes[0].h*.28),Math.min(base,rearTop+sizes[0].h-overlapY));
+   top=Math.min(top,floor-b.h);
+  }
+  return {...b,x:b.x+shift,y:top};
+ });
+}
+function placeCast(w,h,cast,seed,cropFor){
+ if(cast.length<3)return {top:null,bottom:stageLayout(w,h,cast,seed,cropFor)};
+ const [image,...rest]=cast,r=rng(seed+'|peek');
+ const iw=image.naturalWidth||image.width,ih=image.naturalHeight||image.height;
+ const upper=h*.19-12,marginY=27,maxHeight=Math.min(225,upper-marginY);
+ const crop=cropFor?.(image)||{x:0,y:0,w:iw,h:ih};
+ const scale=Math.min(w*.22/crop.w,maxHeight/crop.h),width=crop.w*scale,height=crop.h*scale;
+ const x=w*.945-width-r()*w*.035,y=marginY+r()*.58*(upper-marginY-height);
+ return {top:{image,crop,x,y,w:width,h:height},bottom:stageLayout(w,h,rest,seed,cropFor)};
+}
+const cardLabel=(kind,item)=>(LABELS[kind]||LABELS.word)+' #'+(item.number||1);
 function makeCatalog(curated,vocab,phraseData,kanjiData){
  const kanjiMap=new Map();
  for(const row of Array.isArray(kanjiData)?kanjiData:[])if(str(row?.kanji)&&str(row?.significado))kanjiMap.set(row.kanji,row.significado);
@@ -85,6 +158,7 @@ function makeCatalog(curated,vocab,phraseData,kanjiData){
    if(seen.has(key)||ids.has(item.id))return false;seen.add(key);ids.add(item.id);return true;
   });
   if(!result[kind].length)result[kind]=DEFAULTS[kind].slice();
+  result[kind]=result[kind].map((item,index)=>({...item,number:index+1}));
  }
  return {cards:result,kanjiMap};
 }
@@ -124,10 +198,6 @@ function cover(ctx,image,w,h){
  const z=Math.max(w/image.naturalWidth,h/image.naturalHeight),iw=image.naturalWidth*z,ih=image.naturalHeight*z;
  ctx.drawImage(image,(w-iw)/2,(h-ih)/2,iw,ih);
 }
-function contain(ctx,image,x,y,w,h,side){
- const z=Math.min(w/image.naturalWidth,h/image.naturalHeight),iw=image.naturalWidth*z,ih=image.naturalHeight*z;
- ctx.drawImage(image,x+(side==='right'?w-iw:0),y+h-ih,iw,ih);
-}
 function write(ctx,text,x,y,size,weight,color,font=LATIN_FONT,align='left'){
  ctx.font=Math.round(weight/100)*100+' '+size+'px '+font;ctx.fillStyle=color;ctx.textAlign=align;ctx.textBaseline='middle';ctx.fillText(text,x,y);
 }
@@ -161,8 +231,8 @@ function handmadePaper(ctx,w,h,t,seed){
   for(let j=0;j<4;j++)star(ctx,x+(r()-.5)*50,y+(r()-.5)*95,7+r()*15,t.doodle,r());
  }
 }
-function writeBody(ctx,w,h,item,kind,t,kanjiMap,scale){
- const x=104,y=h*.19,bottom=h*.641,maxW=w-2*x-84,maxH=bottom-y-78;
+function writeBody(ctx,w,h,item,kind,t,kanjiMap,scale,illustrated){
+ const x=104,y=Math.max(h*.16,h*.19-27),bottom=h*BODY_BOTTOM,maxW=w-2*x-84,maxH=bottom-y-62;
  const extra=item.extra;
  const example=item.example;
  const kanji=kind==='word'?item.kanjis.slice(0,4).map(ch=>kanjiMap.has(ch)?ch+' · '+kanjiMap.get(ch):ch).join('    '):'';
@@ -187,11 +257,26 @@ function writeBody(ctx,w,h,item,kind,t,kanjiMap,scale){
   if(total<=maxH)break;
   fit*=.94;
  }while(fit>.25);
- ctx.save();
- // Main content, always neutral paper panel and high-contrast ink.
- ctx.shadowColor='#48263c1e';ctx.shadowBlur=26;ctx.shadowOffsetY=13;
- box(ctx,x,y,w-2*x,bottom-y,38,t.panel);ctx.restore();
- ctx.lineWidth=2;box(ctx,x,y,w-2*x,bottom-y,38,'#fff0',t.doodle+'86');
+ if(illustrated){
+  // Illustrated frames already provide their own border. Feather the wash
+  // instead of painting a big, visible solid box over the center.
+  let dark=false;
+  try{
+   const fx=ctx.canvas.width/w,fy=ctx.canvas.height/h;
+   for(const u of [.28,.50,.72])for(const v of [.26,.50,.74]){
+    const [r,g,b]=ctx.getImageData(Math.round(w*u*fx),Math.round((y+(bottom-y)*v)*fy),1,1).data;
+    if(.2126*r+.7152*g+.0722*b<177)dark=true;
+   }
+  }catch(e){}
+  const g=ctx.createRadialGradient(w/2,(y+bottom)/2,0,w/2,(y+bottom)/2,w*.52);
+  g.addColorStop(0,dark?'#ffffffe8':'#ffffff55');
+  g.addColorStop(.70,dark?'#ffffffcf':'#ffffff33');g.addColorStop(1,'#ffffff00');
+  ctx.fillStyle=g;ctx.fillRect(0,0,w,h);
+ }else{
+  ctx.save();ctx.shadowColor='#48263c1e';ctx.shadowBlur=26;ctx.shadowOffsetY=13;
+  box(ctx,x,y,w-2*x,bottom-y,38,t.panel);ctx.restore();
+  ctx.lineWidth=2;box(ctx,x,y,w-2*x,bottom-y,38,'#fff0',t.doodle+'86');
+ }
  let yy=y+(bottom-y-total)/2;
  for(const b of layouts){
   for(const line of b.lines){
@@ -202,7 +287,7 @@ function writeBody(ctx,w,h,item,kind,t,kanjiMap,scale){
  }
 }
 function drawCard(canvas,card){
- const {format,item,kind,design,images,day,scale,kanjiMap,isDaily}=card;
+ const {format,item,kind,design,images,scale,kanjiMap}=card;
  const [W,H]=format,w=1080,h=H*1080/W;
  if(canvas.width!==W)canvas.width=W;if(canvas.height!==H)canvas.height=H;
  const ctx=canvas.getContext('2d');if(!ctx)throw Error('Tu navegador no pudo preparar la tarjeta.');
@@ -217,23 +302,22 @@ function drawCard(canvas,card){
   wash.addColorStop(0,'#fdf1dc80');wash.addColorStop(.3,'#fdf1dc20');wash.addColorStop(.69,'#fdf1dc25');wash.addColorStop(1,'#fdf1dc99');
   ctx.fillStyle=wash;ctx.fillRect(0,0,w,h);
  }
- ctx.lineWidth=3;
- box(ctx,32,29,w-64,h-58,46,'#fff0',t.accent+'6f');
- ctx.lineWidth=1.4;box(ctx,43,41,w-86,h-82,39,'#fff0',t.accent+'54');
- const label=(isDaily?LABELS[kind]+' DEL DÍA':LABELS[kind]+' EN JAPONÉS').toLocaleUpperCase('es');
- box(ctx,76,63,440,62,26,t.panel,t.doodle+'a0');
- write(ctx,'✦  '+label,99,95,27,820,t.accent);
- write(ctx,isDaily?day.split('-').reverse().join('.'):'日本語',w-88,95,32,750,t.ink,isDaily?LATIN_FONT:JP_FONT,'right');
- writeBody(ctx,w,h,item,kind,t,kanjiMap,scale);
- const [ax,ay,aw,ah]=design.box;
- const mx=design.side==='right'?w*.23:w*.77,my=ay+ah*.59;
- ornament(ctx,mx,my,Math.min(76,ah*.33)*design.mark,t.doodle,design.seed);
- write(ctx,'日本語',mx,my,Math.min(51,ah*.28),620,t.accent,JP_FONT,'center');
- if(images.character)contain(ctx,images.character,ax,ay,aw,ah,design.side);
- else {
-  const cx=ax+aw*.5;
-  for(let i=0;i<4;i++)star(ctx,cx+(i-1.5)*aw*.18,ay+ah*(.38+.27*(i%2)),Math.min(28,ah*.15),t.doodle,design.seed+i/7);
+ if(!image){
+  ctx.lineWidth=1.6;box(ctx,35,33,w-70,h-66,42,'#fff0',t.doodle+'65');
  }
+ const cast=(images.characters||[images.character]).filter(Boolean);
+ const {top,bottom}=placeCast(w,h,cast,design.seed,image=>spriteCrop(image,ctx));
+ box(ctx,76,63,440,62,26,t.panel,t.doodle+'a0');
+ write(ctx,'✦  '+cardLabel(kind,item),99,95,30,820,t.accent);
+ if(!top)write(ctx,'日本語',w-88,95,32,750,t.ink,JP_FONT,'right');
+ writeBody(ctx,w,h,item,kind,t,kanjiMap,scale,Boolean(image));
+ const r=rng(design.seed),stageMid=h*ART_TOP+(h-ART_BOTTOM-h*ART_TOP)*.54;
+ for(const side of [-1,1]){
+  const x=w*(.5+.37*side),s=Math.min(46,(h-ART_BOTTOM-h*ART_TOP)*.21);
+  ornament(ctx,x,stageMid,s,t.doodle,design.seed+side);
+  for(let i=0;i<3;i++)star(ctx,x+(r()-.5)*75,stageMid+(r()-.5)*s*2,9+r()*9,t.doodle,r());
+ }
+ for(const {image,crop,x,y,w:width,h:height} of top?[top,...bottom]:bottom)ctx.drawImage(image,crop.x,crop.y,crop.w,crop.h,x,y,width,height);
  const footY=h-128;
  ctx.lineWidth=2;box(ctx,64,footY,w-128,87,26,t.panel,t.doodle+'85');
  write(ctx,'Asallam Sensei',92,footY+29,29,830,t.ink);
@@ -244,7 +328,7 @@ function drawCard(canvas,card){
  }
  return canvas;
 }
-const api={TZ,FORMATS,THEMES,dateKey,hash,rng,chooseDaily,manifestLists,makeCatalog,compose,wrap,drawCard};
+const api={TZ,FORMATS,THEMES,dateKey,hash,rng,chooseDaily,manifestLists,makeCatalog,compose,stageLayout,placeCast,spriteCrop,cardLabel,wrap,drawCard};
 if(typeof module!=='undefined'&&module.exports){module.exports=api;return;}
 const $=id=>root.document.getElementById(id);
 const canvas=$('card'),images=new Map();
@@ -281,11 +365,10 @@ async function render(){
  const token=++state.token,item=state.item;
  if(!item)return;
  const [W,H]=state.size,kind=state.kind,day=state.day;
- const isDaily=currentDaily().id===item.id;
  const design=compose(day,item.id,state.revision,[1080,H*1080/W],state.lists,state.palette,state.format);
- const frame={format:[W,H],item,kind,design,images:{},day,scale:state.scale,kanjiMap:state.catalog.kanjiMap,isDaily};
+ const frame={format:[W,H],item,kind,design,images:{},scale:state.scale,kanjiMap:state.catalog.kanjiMap};
  $('dimensions').textContent=W+' × '+H+' px';
- $('card-description').textContent=[isDaily?LABELS[kind]+' del día':LABELS[kind],item.jp,item.romaji,item.es,item.extra,item.example].filter(Boolean).join('. ');
+ $('card-description').textContent=[cardLabel(kind,item),item.jp,item.romaji,item.es,item.extra,item.example].filter(Boolean).join('. ');
  canvas.style.setProperty('--preview-width',H>W?Math.max(420,700*W/H)+'px':'660px');
  drawCard(canvas,frame);$('download').disabled=true;
  const backgroundImage=name=>loadImage(name&&'data/palabras/'+name);
@@ -293,11 +376,11 @@ async function render(){
   if(image||token!==state.token||design.fallbackBackground===design.background)return image;
   return backgroundImage(design.fallbackBackground);
  });
- const [background,character,portrait]=await Promise.all([
-  backgroundReady,loadImage(design.character&&'data/palabras/'+design.character),state.localPortrait||loadImage(state.lists.portrait&&'data/palabras/'+state.lists.portrait),document.fonts?.ready
+ const [background,characters,portrait]=await Promise.all([
+  backgroundReady,Promise.all(design.characters.map(name=>loadImage('data/palabras/'+name))),state.localPortrait||loadImage(state.lists.portrait&&'data/palabras/'+state.lists.portrait),document.fonts?.ready
  ]);
  if(token!==state.token)return;
- frame.images={background,character,portrait};
+ frame.images={background,characters,portrait};
  drawCard(canvas,frame);$('download').disabled=false;
 }
 function format(key,size=FORMATS[key]){
@@ -369,13 +452,13 @@ $('themeToggle').onclick=()=>{
  $('themeToggle').textContent=light?'Modo oscuro':'Modo claro';
 };
 $('download').onclick=()=>{
- const info={item:state.item,day:state.day,format:state.format};
+ const info={item:state.item,kind:state.kind,format:state.format};
  $('status').textContent='';
  try{
   canvas.toBlob(blob=>{
    if(!blob){$('status').textContent='No se pudo guardar el PNG. Vuelve a intentarlo.';return;}
    const url=URL.createObjectURL(blob),a=document.createElement('a');
-   a.download='asallam-'+info.day+'-'+info.item.id.replace(/[^a-z0-9_-]+/gi,'-')+'-'+info.format+'.png';a.href=url;
+   a.download='asallam-'+LABELS[info.kind].toLowerCase()+'-'+info.item.number+'-'+info.format+'.png';a.href=url;
    document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),60000);
   },'image/png');
  }catch(e){$('status').textContent='No se pudo guardar el PNG en este navegador.';}
