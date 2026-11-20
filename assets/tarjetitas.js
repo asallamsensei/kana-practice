@@ -472,7 +472,40 @@ function drawCard(canvas,card){
  }
  return canvas;
 }
-const api={TZ,FORMATS,THEMES,dateKey,hash,rng,chooseDaily,manifestLists,makeCatalog,compose,stageLayout,placeCast,spriteCrop,cardLabel,rubyTokens,sentenceRuby,rubyRows,wrap,drawCard};
+const socialTypes={
+ word:{intro:'Una palabra en japonés',prompt:'¿En qué situación usarías esta palabra?',tags:['#VocabularioJapones','#PalabrasEnJapones']},
+ phrase:{intro:'Una frase en japonés',prompt:'¿En qué situación usarías esta frase?',tags:['#FrasesEnJapones','#JaponesEnContexto']},
+ kanji:{intro:'Un kanji para repasar',prompt:'¿Ya reconocías este kanji?',tags:['#AprendeKanji','#KanjiJapones']}
+};
+function socialCopy(item,kind){
+ const type=Object.hasOwn(socialTypes,kind)?socialTypes[kind]:socialTypes.word;
+ const line=value=>str(value).replace(/\s+/gu,' ');
+ const jp=line(item?.jp),romaji=line(item?.romaji),es=line(item?.es);
+ if(!jp||!es)return {facebook:'',instagram:'',tiktok:'',hashtags:''};
+ const credit='Asallam Sensei · asallamsensei.com';
+ const profile=[jp,romaji,es].filter(Boolean).join('\n');
+ return {
+  facebook:[type.intro+': '+jp+(romaji?' ('+romaji+')':'')+' = '+es,type.prompt,'Más japonés con '+credit].join('\n\n'),
+  instagram:[type.intro+' ✨',profile,'Guárdalo para tu próximo repaso.\n'+credit].join('\n\n'),
+  tiktok:['Reto rápido: ¿qué significa «'+jp+'»?',(romaji?romaji+' → ':'')+es,credit].join('\n'),
+  hashtags:['#AprendeJapones','#JaponesDesdeCero',...type.tags,'#AsallamSensei'].join(' ')
+ };
+}
+async function copyText(value,doc,navigator){
+ if(!value)return false;
+ if(navigator?.clipboard?.writeText){
+  try{await navigator.clipboard.writeText(value);return true;}catch(e){}
+ }
+ const focus=doc.activeElement,field=doc.createElement('textarea');field.value=value;
+ field.setAttribute('readonly','');field.setAttribute('tabindex','-1');field.style.cssText='position:fixed;left:0;top:0;width:1px;height:1px;opacity:0;overflow:hidden';
+ doc.body.append(field);
+ try{
+  field.focus();field.select?.();field.setSelectionRange?.(0,value.length);
+  return doc.execCommand?.('copy')===true;
+ }catch(e){return false;}
+ finally{field.remove();try{focus?.focus({preventScroll:true});}catch(e){}}
+}
+const api={TZ,FORMATS,THEMES,dateKey,hash,rng,chooseDaily,manifestLists,makeCatalog,compose,stageLayout,placeCast,spriteCrop,cardLabel,rubyTokens,sentenceRuby,rubyRows,wrap,drawCard,socialCopy,copyText};
 if(typeof module!=='undefined'&&module.exports){module.exports=api;return;}
 const $=id=>root.document.getElementById(id);
 const canvas=$('card'),images=new Map();
@@ -502,8 +535,26 @@ function setOptions(){
  select.replaceChildren(frag);
 }
 const currentDaily=()=>chooseDaily(state.catalog.cards[state.kind],state.day,state.kind);
+let activeSocial={},copyRun=0;
+const socialFields={facebook:'socialFacebook',instagram:'socialInstagram',tiktok:'socialTikTok',hashtags:'socialTags'};
+function updateSocial(item,kind){
+ activeSocial=socialCopy(item,kind);copyRun++;
+ for(const [key,id] of Object.entries(socialFields))$(id).textContent=activeSocial[key];
+ $('socialManual').hidden=true;$('socialManual').value='';$('socialStatus').textContent='';
+}
+document.querySelectorAll('[data-copy]').forEach(button=>{button.onclick=async()=>{
+ const key=button.dataset.copy,value=activeSocial[key];
+ if(!value)return;
+ const current=++copyRun,manual=$('socialManual'),status=$('socialStatus');
+ manual.hidden=true;status.textContent='';
+ const copied=await copyText(value,document,root.navigator);
+ if(current!==copyRun)return;
+ if(copied){status.textContent=key==='hashtags'?'Hashtags copiados.':'Texto copiado.';return;}
+ manual.value=value;manual.hidden=false;manual.focus();manual.select?.();
+ status.textContent='No se pudo copiar automáticamente. Puedes copiar el texto del cuadro.';
+};});
 function choose(item){
- state.item=item;state.revision=0;$('selection').value=item.id;void render();
+ state.item=item;state.revision=0;$('selection').value=item.id;updateSocial(item,state.kind);void render();
 }
 async function render(){
  const token=++state.token,item=state.item;

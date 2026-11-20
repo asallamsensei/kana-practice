@@ -7,7 +7,15 @@
     "fondo-anime-1-1-burbujas-menta.webp",
     "fondo-anime-1-1-cintas-cereza.webp",
     "fondo-anime-1-1-cometas-limon.webp",
-    "fondo-anime-1-1-constelacion-azul.webp"
+    "fondo-anime-1-1-constelacion-azul.webp",
+    "fondo-anime-1-1-burbujas-lima.webp",
+    "fondo-anime-1-1-confeti-floral-violeta.webp",
+    "fondo-anime-1-1-orbitas-terracota.webp",
+    "fondo-anime-1-1-relampagos-rosa.webp",
+    "fondo-anime-1-1-cafe-nube.webp",
+    "fondo-anime-1-1-mosaico-helado.webp",
+    "fondo-anime-1-1-origami-coral.webp",
+    "fondo-anime-1-1-treboles-perla.webp"
   ],
   "backgroundsByFormat": {
     "1-1": [
@@ -18,7 +26,15 @@
       "fondo-anime-1-1-burbujas-menta.webp",
       "fondo-anime-1-1-cintas-cereza.webp",
       "fondo-anime-1-1-cometas-limon.webp",
-      "fondo-anime-1-1-constelacion-azul.webp"
+      "fondo-anime-1-1-constelacion-azul.webp",
+      "fondo-anime-1-1-burbujas-lima.webp",
+      "fondo-anime-1-1-confeti-floral-violeta.webp",
+      "fondo-anime-1-1-orbitas-terracota.webp",
+      "fondo-anime-1-1-relampagos-rosa.webp",
+      "fondo-anime-1-1-cafe-nube.webp",
+      "fondo-anime-1-1-mosaico-helado.webp",
+      "fondo-anime-1-1-origami-coral.webp",
+      "fondo-anime-1-1-treboles-perla.webp"
     ],
     "3-4": [
       "fondo-anime-3-4-rainbow.webp",
@@ -28,7 +44,15 @@
       "fondo-anime-3-4-limon-y-turquesa.webp",
       "fondo-anime-3-4-lluvia-lila.webp",
       "fondo-anime-3-4-ramitas-malva.webp",
-      "fondo-anime-3-4-viento-coral.webp"
+      "fondo-anime-3-4-viento-coral.webp",
+      "fondo-anime-3-4-bloquecitos-mandarina.webp",
+      "fondo-anime-3-4-espirales-estrella.webp",
+      "fondo-anime-3-4-fresas-onduladas.webp",
+      "fondo-anime-3-4-gotas-de-lapiz.webp",
+      "fondo-anime-3-4-cielo-cometa.webp",
+      "fondo-anime-3-4-diamantes-lila.webp",
+      "fondo-anime-3-4-hojas-marinas.webp",
+      "fondo-anime-3-4-melocoton-cosido.webp"
     ],
     "9-16": [
       "fondo-anime-9-16-rainbow.webp",
@@ -38,7 +62,15 @@
       "fondo-anime-9-16-cometa-durazno.webp",
       "fondo-anime-9-16-luna-menta.webp",
       "fondo-anime-9-16-notas-turquesa.webp",
-      "fondo-anime-9-16-verano-confeti.webp"
+      "fondo-anime-9-16-verano-confeti.webp",
+      "fondo-anime-9-16-avioncitos-indigo.webp",
+      "fondo-anime-9-16-confeti-damas-durazno.webp",
+      "fondo-anime-9-16-molinillos-lila.webp",
+      "fondo-anime-9-16-puntadas-cereza.webp",
+      "fondo-anime-9-16-espirales-gominola.webp",
+      "fondo-anime-9-16-lucioles-amarillas.webp",
+      "fondo-anime-9-16-nave-de-papel.webp",
+      "fondo-anime-9-16-nieve-sorbete.webp"
     ]
   },
   "characters": [
@@ -81,7 +113,47 @@
     "anime-kuroko-tetsuya.png",
     "anime-kaguya-shinomiya.png",
     "anime-saiki-kusuo.png",
-    "anime-reigen-arataka.png"
+    "anime-reigen-arataka.png",
+    "anime-faye-valentine.png",
+    "anime-haruhi-suzumiya.png",
+    "anime-kino.png",
+    "anime-kyon.png",
+    "anime-maka-albarn.png",
+    "anime-meryl-stryfe.png",
+    "anime-nicholas-d-wolfwood.png",
+    "anime-spike-spiegel.png",
+    "anime-vash-the-stampede.png",
+    "anime-yuki-nagato.png",
+    "anime-celty-sturluson.png",
+    "anime-chise-hatori.png",
+    "anime-edward-wong.png",
+    "anime-elias-ainsworth.png",
+    "anime-motoko-kusanagi.png",
+    "anime-nana-komatsu.png",
+    "anime-nana-osaki.png",
+    "anime-shizuo-heiwajima.png",
+    "anime-tatsu.png",
+    "anime-yakumo-yuurakutei.png",
+    "anime-amu-hinamori.png",
+    "anime-cure-black.png",
+    "anime-kyo-sohma.png",
+    "anime-nagisa-furukawa.png",
+    "anime-sakura-chiyo.png",
+    "anime-tohru-honda.png",
+    "anime-tomoya-okazaki.png",
+    "anime-umetarou-nozaki.png",
+    "anime-yona.png",
+    "anime-yuki-sohma.png",
+    "anime-arthur-boyle.png",
+    "anime-dandy.png",
+    "anime-jinshi.png",
+    "anime-laios-touden.png",
+    "anime-mako-mankanshoku.png",
+    "anime-maomao.png",
+    "anime-marcille-donato.png",
+    "anime-ryuko-matoi.png",
+    "anime-shinra-kusakabe.png",
+    "anime-thorfinn.png"
   ],
   "portrait": "retrato-profe.jpg"
 }
