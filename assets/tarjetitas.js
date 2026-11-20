@@ -4,6 +4,7 @@
 const TZ='America/Bogota';
 const FORMATS={'1-1':[1080,1080],'3-4':[1080,1440],'9-16':[1080,1920],'4-5':[1080,1350]};
 const BACKGROUND_FORMATS=['1-1','3-4','9-16'];
+const MAX_CHARACTERS=200,CAST_RELEASE='chicas-20261120';
 const THEMES=[
  {name:'Durazno y lavanda',base:'#fbefd9',top:'#f7e4d4',mid:'#f1e5fb',accent:'#8c4765',doodle:'#df8da6',ink:'#32283f',panel:'#fffaf0f1',soft:'#5e4263'},
  {name:'Laguna menta',base:'#fff2dd',top:'#e2f0dc',mid:'#d5ebf1',accent:'#28695c',doodle:'#86bba7',ink:'#263a38',panel:'#fffff1f3',soft:'#3c625d'},
@@ -37,13 +38,13 @@ const pick=(a,r)=>a.length?a[Math.floor(r()*a.length)]:null;
 const chooseDaily=(cards,day,kind)=>pick(cards,rng(day+'|'+kind+'|contenido-v1'));
 const assetName=(value,types)=>typeof value==='string'&&new RegExp('^[A-Za-z0-9][A-Za-z0-9._-]{0,120}\\.('+types+')$','i').test(value)&&!value.includes('..')?value:null;
 function manifestLists(raw){
- const items=(value,types)=>Array.isArray(value)?[...new Set(value.map(x=>assetName(x,types)).filter(Boolean))].slice(0,100):[];
+ const items=(value,types,limit=100)=>Array.isArray(value)?[...new Set(value.map(x=>assetName(x,types)).filter(Boolean))].slice(0,limit):[];
  const imageTypes='png|webp|jpe?g',backgroundsByFormat={};
  for(const key of BACKGROUND_FORMATS){
   const pool=items(raw?.backgroundsByFormat?.[key],imageTypes);
   if(pool.length)backgroundsByFormat[key]=pool;
  }
- return {backgrounds:items(raw?.backgrounds,imageTypes),backgroundsByFormat,characters:items(raw?.characters,'png'),portrait:assetName(raw?.portrait,imageTypes)};
+ return {backgrounds:items(raw?.backgrounds,imageTypes),backgroundsByFormat,characters:items(raw?.characters,'png',MAX_CHARACTERS),portrait:assetName(raw?.portrait,imageTypes)};
 }
 function compose(day,itemId,revision,format,lists,palette,formatKey){
  const r=rng([day,itemId,revision,'diseño-v1'].join('|'));
@@ -659,10 +660,10 @@ if(typeof module!=='undefined'&&module.exports){module.exports=api;return;}
 const $=id=>root.document.getElementById(id);
 const canvas=$('card'),images=new Map();
 const state={day:dateKey(),kind:'word',revision:0,format:'1-1',size:FORMATS['1-1'],palette:-1,scale:1,furigana:true,lists:manifestLists(null),catalog:makeCatalog(),item:null,token:0,localPortrait:null,portraitRequest:0};
-const files={curated:'data/tarjetas.json',words:'data/Vocabulario_N5.json',phrases:'data/Oraciones_N5_Bloque_01.json',kanji:'data/kanji_n5.json',manifest:'data/palabras/manifest.json'};
+const files={curated:'data/tarjetas.json',words:'data/Vocabulario_N5.json',phrases:'data/Oraciones_N5_Bloque_01.json',kanji:'data/kanji_n5.json',manifest:'data/palabras/manifest.json?v='+CAST_RELEASE};
 function request(url){
  const abort=new AbortController(),timer=setTimeout(()=>abort.abort(),8500);
- return fetch(url,{signal:abort.signal}).then(r=>r.ok?r.json():null).catch(()=>null).finally(()=>clearTimeout(timer));
+ return fetch(url,{signal:abort.signal,...(url===files.manifest?{cache:'no-cache'}:{})}).then(r=>r.ok?r.json():null).catch(()=>null).finally(()=>clearTimeout(timer));
 }
 function loadImage(path){
  if(!path)return Promise.resolve(null);
