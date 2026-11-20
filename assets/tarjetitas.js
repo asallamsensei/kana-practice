@@ -58,7 +58,15 @@ function compose(day,itemId,revision,format,lists,palette,formatKey){
  const castRandom=rng([day,itemId,revision,'elenco-v1'].join('|'));
  const castPool=[...new Set(lists.characters||[])],characters=[];
  for(let i=0;i<4&&castPool.length;i++)characters.push(castPool.splice(Math.floor(castRandom()*castPool.length),1)[0]);
- return {theme,seed:r(),background,fallbackBackground,characters,character:characters[0]||null};
+ const extraCharacter=pick(castPool,castRandom);
+ const extras=castPool.filter(name=>name!==extraCharacter);
+ const groupRandom=rng([day,itemId,revision,'grupitos-v1'].join('|'));
+ const guests=Array.from({length:2},()=>{
+  const count=Math.floor(groupRandom()*3);
+  return Array.from({length:count},()=>extras.splice(Math.floor(groupRandom()*extras.length),1)[0]).filter(Boolean);
+ });
+ const bottomCount=1+Math.floor(groupRandom()*3);
+ return {theme,seed:r(),background,fallbackBackground,characters,character:characters[0]||null,extraCharacter,guests,bottomCount};
 }
 const alphaCache=new WeakMap(),ART_TOP=.573,ART_BOTTOM=160,BODY_BOTTOM=.561;
 function spriteCrop(image,ctx){
@@ -133,6 +141,62 @@ function placeCast(w,h,cast,seed,cropFor){
  const scale=Math.min(w*.22/crop.w,maxHeight/crop.h),width=crop.w*scale,height=crop.h*scale;
  const x=w*.945-width-r()*w*.035,y=marginY+r()*.58*(upper-marginY-height);
  return {top:{image,crop,x,y,w:width,h:height},bottom:stageLayout(w,h,rest,seed,cropFor)};
+}
+// Search the upper-left margin without moving any text or existing sprites.
+function placeLeftCast(w,h,image,crop,obstacles){
+ const left=w*.071,right=w*.323,top=Math.max(146,h*.133),bottom=Math.min(h*.41,h*ART_TOP-22);
+ const aimX=w*.195,aimY=h*.274,shape=crop.w/crop.h;
+ const possibleHeight=Math.min(230,bottom-top,(right-left)/shape);
+ if(!Number.isFinite(possibleHeight))return null;
+ for(let height=possibleHeight;height>=72&&height*shape>=54;height-=4){
+  const width=height*shape;
+  let best=null;
+  for(let y=top;y+height<=bottom+1e-8;y+=5){
+   let edge=right;
+   for(const o of obstacles){
+    if(y<o.y+o.h+12&&y+height>o.y-12&&o.x+o.w+12>left)edge=Math.min(edge,o.x-12);
+   }
+   if(left+width>edge)continue;
+   const x=Math.max(left,Math.min(edge-width,aimX-width/2));
+   const score=Math.abs(y+height/2-aimY)+Math.abs(x+width/2-aimX)*.7;
+   if(!best||score<best.score)best={image,crop,x,y,w:width,h:height,score};
+  }
+  if(best)return best;
+ }
+ return null;
+}
+// Each cluster has a dominant chibi and up to two smaller companions.
+function cluster(image,guests,cropFor){
+ const images=[image,...guests.filter(Boolean)],parts=[];
+ for(const [i,sprite] of images.entries()){
+  const crop=cropFor(sprite),factor=i===0?1:(images.length===2?.78:.68);
+  const z=140*factor/Math.max(crop.h,crop.w*.91),w=crop.w*z,h=crop.h*z;
+  parts.push({image:sprite,crop,w,h,x:0,y:140-h-(i?2:0)});
+ }
+ if(parts.length===2)parts[1].x=parts[0].w-.13*Math.min(parts[0].w,parts[1].w);
+ if(parts.length===3){
+  parts[0].x=parts[1].w-.16*Math.min(parts[0].w,parts[1].w);
+  parts[2].x=parts[0].x+parts[0].w-.16*Math.min(parts[2].w,parts[0].w);
+ }
+ const y=Math.min(...parts.map(p=>p.y)),w=Math.max(...parts.map(p=>p.x+p.w)),h=140-y;
+ for(const p of parts)p.y-=y;
+ return {naturalWidth:w,naturalHeight:h,parts,crop:{x:0,y:0,w,h}};
+}
+function groupFits(place){
+ if(!place||place.image.parts.length<2)return Boolean(place);
+ return place.image.parts.every(p=>p.h*place.h/place.crop.h>=51&&p.w*place.w/place.crop.w>=28);
+}
+function paintGroup(ctx,place){
+ const {image,crop,x,y,w,h}=place;
+ const sx=w/crop.w,sy=h/crop.h;
+ const [main,...guests]=image.parts;
+ for(const p of [...guests,main]){
+  const c=p.crop;
+  ctx.drawImage(p.image,c.x,c.y,c.w,c.h,x+p.x*sx,y+p.y*sy,p.w*sx,p.h*sy);
+ }
+}
+function overlaps(a,b,padding=0){
+ return a.x<b.x+b.w+padding&&a.x+a.w+padding>b.x&&a.y<b.y+b.h+padding&&a.y+a.h+padding>b.y;
 }
 const cardLabel=(kind,item)=>(LABELS[kind]||LABELS.word)+' #'+(item.number||1);
 // Only independently verified character readings are split within a kanji compound.
@@ -247,7 +311,7 @@ function makeCatalog(curated,vocab,phraseData,kanjiData){
 function wrap(ctx,text,width,jp=false){
  const split=jp?s=>[...s]:s=>s.split(/\s+/);
  const sep=jp?'':' ',lines=[];
- for(const block of String(text||'').split(/\r?\n/)){
+ for(const block of String(text||'').trim().split(/\r?\n/)){
   let line='';
   for(const word of split(block.trim())){
    if(!word)continue;
@@ -257,9 +321,9 @@ function wrap(ctx,text,width,jp=false){
     for(const ch of word){if(line&&ctx.measureText(line+ch).width>width){lines.push(line);line='';}line+=ch;}
    }else line+=line?sep+word:word;
   }
-  if(line)lines.push(line);
+  if(line||!block.trim())lines.push(line);
  }
- return lines;
+ return lines.length===1&&!lines[0]?[]:lines;
 }
 function panelPath(ctx,x,y,w,h,r){
  const radius=Math.max(0,Math.min(r,w/2,h/2));
@@ -359,7 +423,7 @@ function rubyRows(ctx,tokens,size,weight,width){
  }
  flush();return rows;
 }
-function writeBody(ctx,w,h,item,kind,t,scale,illustrated,furigana){
+function writeBody(ctx,w,h,item,kind,t,scale,illustrated,furigana,bounds){
  const x=104,y=Math.max(h*.16,h*.19-27),bottom=h*BODY_BOTTOM,maxW=w-2*x-84,maxH=bottom-y-62;
  const extra=item.extra;
  const example=item.example;
@@ -403,6 +467,16 @@ function writeBody(ctx,w,h,item,kind,t,scale,illustrated,furigana){
   box(ctx,x,y,w-2*x,bottom-y,38,t.panel);ctx.restore();
   ctx.lineWidth=2;box(ctx,x,y,w-2*x,bottom-y,38,'#fff0',t.doodle+'86');
  }
+ function ink(text,x,y,size,weight,color,font){
+  write(ctx,text,x,y,size,weight,color,font,'center');
+  if(!bounds)return;
+  const metrics=ctx.measureText(text),half=metrics.width/2;
+  const l=Math.max(half,metrics.actualBoundingBoxLeft||0)+size*.08;
+  const r=Math.max(half,metrics.actualBoundingBoxRight||0)+size*.08;
+  const above=Math.max(size*.61,metrics.actualBoundingBoxAscent||0);
+  const below=Math.max(size*.61,metrics.actualBoundingBoxDescent||0);
+  bounds.push({x:x-l,y:y-above,w:l+r,h:above+below});
+ }
  let yy=y+(bottom-y-total)/2;
  for(const b of layouts){
   if(b.rubyLines){
@@ -410,15 +484,15 @@ function writeBody(ctx,w,h,item,kind,t,scale,illustrated,furigana){
     let xx=(w-row.width)/2;
     for(const unit of row.units){
      const center=xx+unit.width/2;
-     if(unit.ruby)write(ctx,unit.ruby,center,yy+row.small*.61,row.small,500,t.accent,JP_FONT,'center');
-     write(ctx,unit.base,center,yy+row.rubyHeight+b.leading/2,b.size,b.weight,b.color,JP_FONT,'center');
+     if(unit.ruby)ink(unit.ruby,center,yy+row.small*.61,row.small,500,t.accent,JP_FONT);
+     ink(unit.base,center,yy+row.rubyHeight+b.leading/2,b.size,b.weight,b.color,JP_FONT);
      xx+=unit.width;
     }
     yy+=row.rubyHeight+b.leading;
    }
   }else{
    for(const line of b.lines){
-    write(ctx,line,w/2,yy+b.leading/2,b.size,b.weight,b.color,b.font,'center');
+    if(line)ink(line,w/2,yy+b.leading/2,b.size,b.weight,b.color,b.font);
     yy+=b.leading;
    }
   }
@@ -444,19 +518,48 @@ function drawCard(canvas,card){
  if(!image){
   ctx.lineWidth=1.6;box(ctx,35,33,w-70,h-66,42,'#fff0',t.doodle+'65');
  }
+ const cropFor=image=>spriteCrop(image,ctx);
  const cast=(images.characters||[images.character]).filter(Boolean);
- const {top,bottom}=placeCast(w,h,cast,design.seed,image=>spriteCrop(image,ctx));
- box(ctx,76,63,440,62,26,t.panel,t.doodle+'a0');
+ const upper=cast.length>=3?cast[0]:null;
+ const rightGuests=(images.guests?.[0]||[]).filter(Boolean);
+ const rightSlot=group=>placeCast(w,h,[group,group,group],design.seed,x=>x.crop).top;
+ let top=upper?rightSlot(cluster(upper,rightGuests,cropFor)):null;
+ const lower=(upper?cast.slice(1):cast).slice(0,design.bottomCount||3);
+ const bottom=stageLayout(w,h,lower.map(sprite=>cluster(sprite,[],cropFor)),design.seed,x=>x.crop);
+ const title={x:76,y:63,w:440,h:62};
+ box(ctx,title.x,title.y,title.w,title.h,26,t.panel,t.doodle+'a0');
  write(ctx,'✦  '+cardLabel(kind,item),99,95,30,820,t.accent);
  if(!top)write(ctx,'日本語',w-88,95,32,750,t.ink,JP_FONT,'right');
- writeBody(ctx,w,h,item,kind,t,scale,Boolean(image),furigana);
+ const bounds=images.extraCharacter||top?[title]:null;
+ writeBody(ctx,w,h,item,kind,t,scale,Boolean(image),furigana,bounds);
+ if(top){
+  const initial=top;
+  for(let n=rightGuests.length;n>=0;n--){
+   const group=cluster(upper,rightGuests.slice(0,n),cropFor);
+   const p=rightSlot(group);
+   const candidates=[p,{...p,y:27}];
+   const found=candidates.find(slot=>groupFits(slot)&&bounds.every(o=>!overlaps(slot,o,8)));
+   if(found){top=found;break;}
+   if(n===0)top=initial.image.parts.length===1&&bounds.every(o=>!overlaps(initial,o))?initial:null;
+  }
+ }
+ let left=null;
+ if(images.extraCharacter){
+  const guests=(images.guests?.[1]||[]).filter(Boolean);
+  const obstacles=[...(bounds||[]),...(top?[top]:[]),...bottom];
+  for(let n=guests.length;n>=0;n--){
+   const group=cluster(images.extraCharacter,guests.slice(0,n),cropFor);
+   const slot=placeLeftCast(w,h,group,group.crop,obstacles);
+   if(groupFits(slot)){left=slot;break;}
+  }
+ }
  const r=rng(design.seed),stageMid=h*ART_TOP+(h-ART_BOTTOM-h*ART_TOP)*.54;
  for(const side of [-1,1]){
   const x=w*(.5+.37*side),s=Math.min(46,(h-ART_BOTTOM-h*ART_TOP)*.21);
   ornament(ctx,x,stageMid,s,t.doodle,design.seed+side);
   for(let i=0;i<3;i++)star(ctx,x+(r()-.5)*75,stageMid+(r()-.5)*s*2,9+r()*9,t.doodle,r());
  }
- for(const {image,crop,x,y,w:width,h:height} of top?[top,...bottom]:bottom)ctx.drawImage(image,crop.x,crop.y,crop.w,crop.h,x,y,width,height);
+ for(const position of [top,...bottom,left].filter(Boolean))paintGroup(ctx,position);
  const footY=h-151;
  ctx.lineWidth=2;box(ctx,64,footY,w-128,110,26,t.panel,t.doodle+'85');
  write(ctx,'Asallam Sensei',92,footY+29,29,830,t.ink);
@@ -478,6 +581,14 @@ function drawCard(canvas,card){
  if(images.portrait){
   const px=w-160;photo(ctx,images.portrait,px,footY+17,71);
   write(ctx,'Tu profe',px-22,footY+32,25,750,t.accent,LATIN_FONT,'right');
+  const ay=footY+32;
+  ctx.save();
+  ctx.strokeStyle=t.accent;ctx.lineWidth=2.2;
+  ctx.lineCap='round';ctx.lineJoin='round';
+  ctx.beginPath();
+  ctx.moveTo(px-18,ay-1);ctx.quadraticCurveTo(px-12,ay-2,px-5,ay+3);
+  ctx.moveTo(px-9,ay-3);ctx.lineTo(px-5,ay+3);ctx.lineTo(px-12,ay+5);
+  ctx.stroke();ctx.restore();
  }
  return canvas;
 }
@@ -489,7 +600,7 @@ const socialTypes={
 function socialCopy(item,kind){
  const type=Object.hasOwn(socialTypes,kind)?socialTypes[kind]:socialTypes.word;
  const line=value=>str(value).replace(/\s+/gu,' ');
- const jp=line(item?.jp),romaji=line(item?.romaji),es=line(item?.es);
+ const jp=line(item?.jp),romaji=line(item?.romaji),es=str(item?.es);
  if(!jp||!es)return {facebook:'',instagram:'',tiktok:'',hashtags:''};
  const credit='Asallam Sensei · asallamsensei.com';
  const profile=[jp,romaji,es].filter(Boolean).join('\n');
@@ -543,7 +654,7 @@ function makePngZip(entries){
  end.setUint32(12,directorySize,true);end.setUint32(16,offset,true);
  return new Blob([...parts,...directory,end.buffer],{type:'application/zip'});
 }
-const api={TZ,FORMATS,THEMES,dateKey,hash,rng,chooseDaily,manifestLists,makeCatalog,compose,stageLayout,placeCast,spriteCrop,cardLabel,rubyTokens,sentenceRuby,rubyRows,wrap,drawCard,socialCopy,copyText,makePngZip};
+const api={TZ,FORMATS,THEMES,dateKey,hash,rng,chooseDaily,manifestLists,makeCatalog,compose,stageLayout,placeCast,placeLeftCast,spriteCrop,cardLabel,rubyTokens,sentenceRuby,rubyRows,wrap,drawCard,socialCopy,copyText,makePngZip};
 if(typeof module!=='undefined'&&module.exports){module.exports=api;return;}
 const $=id=>root.document.getElementById(id);
 const canvas=$('card'),images=new Map();
@@ -594,7 +705,7 @@ document.querySelectorAll('[data-copy]').forEach(button=>{button.onclick=async()
 // Local presentation overrides are keyed by catalog identity, not displayed number.
 const cardEdits=new Map();
 const editKey=(kind,item)=>'asallam:tarjetitas:edicion:'+kind+':'+item.id;
-const editSpanish=value=>String(value).replace(/\s+/gu,' ').trim().slice(0,500);
+const editSpanish=value=>String(value).replace(/\r\n?/g,'\n').split('\n').map(line=>line.replace(/\s+/gu,' ').trim()).join('\n').trim().slice(0,500);
 const editNumber=value=>/^\d{1,6}$/.test(value)&&Number(value)>0?Number(value):null;
 function getEdit(kind,item){
  const key=editKey(kind,item);
@@ -681,11 +792,11 @@ async function frameImages(design,snapshot,valid=()=>true){
   if(image||!valid()||design.fallbackBackground===design.background)return image;
   return art(design.fallbackBackground);
  });
- const [background,characters,portrait]=await Promise.all([
+ const [background,characters,portrait,extraCharacter,guests]=await Promise.all([
   backgroundReady,Promise.all(design.characters.map(art)),
-  snapshot.localPortrait||art(snapshot.lists.portrait),document.fonts?.ready
+  snapshot.localPortrait||art(snapshot.lists.portrait),art(design.extraCharacter),Promise.all((design.guests||[]).map(group=>Promise.all(group.map(art)))),document.fonts?.ready
  ]);
- return {background,characters,portrait};
+ return {background,characters,portrait,extraCharacter,guests};
 }
 async function render(){
  const token=++state.token,snapshot=clickSnapshot(),{item,kind}=snapshot;

@@ -38,7 +38,8 @@ button{cursor:pointer;line-height:1.2}button:disabled{cursor:wait;opacity:.6}but
 <button id="downloadThree" type="button" disabled>Descargar en 3 tamaños</button>
 <details class="social" id="editCard"><summary>Editar tarjeta</summary>
 <div class="box edit-fields">
-<label for="cardSpanish">Traducción al español</label><textarea id="cardSpanish" rows="2" maxlength="500" disabled></textarea>
+<label for="cardSpanish">Traducción al español</label><textarea id="cardSpanish" rows="3" maxlength="500" aria-describedby="cardSpanishHint" disabled></textarea>
+<p id="cardSpanishHint" class="note">Pulsa Enter donde quieras empezar otro renglón.</p>
 <label for="cardNumber">Número visible</label><input id="cardNumber" type="text" inputmode="numeric" maxlength="6" pattern="[0-9]{1,6}" aria-describedby="cardNumberHelp" disabled>
 <p class="note" id="cardNumberHelp">Del 1 al 999999. No cambia el orden del catálogo.</p>
 <p class="note" id="cardEditStatus" role="status"></p>
@@ -57,4 +58,4 @@ button{cursor:pointer;line-height:1.2}button:disabled{cursor:wait;opacity:.6}but
 <p class="status" id="status" role="status"></p>
 </section></div></main>
 <footer><a href="./">asallamsensei.com</a></footer>
-</div><script src="assets/tarjetitas.js?v=tres-tamanos-20261120" defer></script></body></html>
+</div><script src="assets/tarjetitas.js?v=renglones-grupos-20261120" defer></script></body></html>
