@@ -5,7 +5,8 @@
       {
         "portugues": "oi",
         "espanol": "hola",
-        "extra": ""
+        "extra": "",
+        "grupo_confusion": "saludo-hola"
       },
       {
         "portugues": "bom dia",
@@ -25,22 +26,33 @@
       {
         "portugues": "tudo bem?",
         "espanol": "¿todo bien?",
-        "extra": ""
+        "extra": "",
+        "grupo_confusion": "saludo-bien"
       },
       {
         "portugues": "prazer",
         "espanol": "mucho gusto",
-        "extra": ""
+        "extra": "",
+        "variantes_pt": [
+          "muito prazer",
+          "prazer em conhecer você"
+        ]
       },
       {
         "portugues": "como você está?",
         "espanol": "¿cómo estás?",
-        "extra": ""
+        "extra": "",
+        "variantes_pt": [
+          "como está?",
+          "como vai?"
+        ],
+        "grupo_confusion": "saludo-como"
       },
       {
         "portugues": "até logo",
         "espanol": "hasta luego",
-        "extra": ""
+        "extra": "",
+        "grupo_confusion": "despedida"
       },
       {
         "portugues": "até amanhã",
@@ -50,32 +62,59 @@
       {
         "portugues": "tchau",
         "espanol": "chao",
-        "extra": ""
+        "extra": "",
+        "variantes_pt": [
+          "até mais",
+          "até logo"
+        ],
+        "variantes_es": [
+          "chau",
+          "adiós"
+        ],
+        "grupo_confusion": "despedida"
       },
       {
         "portugues": "olá",
         "espanol": "hola",
-        "extra": ""
+        "extra": "",
+        "grupo_confusion": "saludo-hola"
       },
       {
         "portugues": "beleza?",
         "espanol": "¿todo bien?",
-        "extra": "Saludo informal."
+        "extra": "Saludo informal.",
+        "grupo_confusion": "saludo-bien"
       },
       {
         "portugues": "tudo bom?",
         "espanol": "¿todo bien?",
-        "extra": ""
+        "extra": "",
+        "grupo_confusion": "saludo-bien"
       },
       {
         "portugues": "como vai?",
         "espanol": "¿cómo te va?",
-        "extra": ""
+        "extra": "",
+        "variantes_pt": [
+          "como você vai?",
+          "como você está?"
+        ],
+        "variantes_es": [
+          "¿cómo estás?"
+        ],
+        "grupo_confusion": "saludo-como"
       },
       {
         "portugues": "tudo certo?",
         "espanol": "¿todo en orden?",
-        "extra": ""
+        "extra": "",
+        "variantes_pt": [
+          "tudo em ordem?"
+        ],
+        "variantes_es": [
+          "¿todo bien?"
+        ],
+        "grupo_confusion": "saludo-bien"
       },
       {
         "portugues": "tudo bem! e você?",
@@ -100,22 +139,36 @@
       {
         "portugues": "até mais!",
         "espanol": "¡hasta luego!",
-        "extra": ""
+        "extra": "",
+        "variantes_es": [
+          "hasta más tarde"
+        ],
+        "grupo_confusion": "despedida"
       },
       {
         "portugues": "adeus",
         "espanol": "adiós",
-        "extra": "Despedida más definitiva."
+        "extra": "Despedida más definitiva.",
+        "grupo_confusion": "despedida"
       },
       {
         "portugues": "falou!",
         "espanol": "¡listo, chao!",
-        "extra": "Despedida muy informal."
+        "extra": "Despedida muy informal.",
+        "grupo_confusion": "despedida"
       },
       {
         "portugues": "a gente se vê!",
         "espanol": "¡nos vemos!",
-        "extra": ""
+        "extra": "",
+        "variantes_pt": [
+          "até a próxima",
+          "nos vemos"
+        ],
+        "variantes_es": [
+          "hasta la próxima"
+        ],
+        "grupo_confusion": "despedida"
       },
       {
         "portugues": "boa sorte!",
@@ -155,12 +208,18 @@
       {
         "portugues": "eu quero",
         "espanol": "yo quiero",
-        "extra": ""
+        "extra": "",
+        "variantes_pt": [
+          "quero"
+        ]
       },
       {
         "portugues": "eu preciso",
         "espanol": "yo necesito",
-        "extra": ""
+        "extra": "",
+        "variantes_pt": [
+          "preciso"
+        ]
       },
       {
         "portugues": "vamos",
@@ -175,12 +234,18 @@
       {
         "portugues": "não entendo",
         "espanol": "no entiendo",
-        "extra": ""
+        "extra": "",
+        "variantes_pt": [
+          "eu não entendo"
+        ]
       },
       {
         "portugues": "fala devagar",
         "espanol": "habla despacio",
-        "extra": ""
+        "extra": "",
+        "variantes_pt": [
+          "fale devagar"
+        ]
       },
       {
         "portugues": "que horas são?",
@@ -200,12 +265,16 @@
       {
         "portugues": "eu gosto disso",
         "espanol": "me gusta eso",
-        "extra": ""
+        "extra": "",
+        "variantes_pt": [
+          "gosto disso"
+        ]
       },
       {
         "portugues": "com licença, pode me ajudar?",
         "espanol": "disculpe, ¿me puede ayudar?",
-        "extra": ""
+        "extra": "",
+        "grupo_confusion": "ayuda-cortesia"
       },
       {
         "portugues": "onde fica este lugar?",
@@ -230,7 +299,10 @@
       {
         "portugues": "onde fica o banheiro?",
         "espanol": "¿dónde queda el baño?",
-        "extra": ""
+        "extra": "",
+        "variantes_pt": [
+          "onde é o banheiro?"
+        ]
       },
       {
         "portugues": "banheiro",
@@ -245,22 +317,40 @@
       {
         "portugues": "qual é o seu nome?",
         "espanol": "¿cómo te llamas?",
-        "extra": ""
+        "extra": "",
+        "variantes_pt": [
+          "qual é seu nome?",
+          "como você se chama?"
+        ]
       },
       {
         "portugues": "pode repetir?",
         "espanol": "¿puede repetir?",
-        "extra": ""
+        "extra": "",
+        "variantes_pt": [
+          "você pode repetir?",
+          "poderia repetir?"
+        ]
       },
       {
         "portugues": "pode falar mais devagar?",
         "espanol": "¿puede hablar más despacio?",
-        "extra": ""
+        "extra": "",
+        "variantes_pt": [
+          "você pode falar mais devagar?",
+          "poderia falar mais devagar?"
+        ]
       },
       {
         "portugues": "pode me ajudar?",
         "espanol": "¿me puede ayudar?",
-        "extra": ""
+        "extra": "",
+        "variantes_pt": [
+          "você pode me ajudar?",
+          "poderia me ajudar?",
+          "pode ajudar-me?"
+        ],
+        "grupo_confusion": "ayuda-cortesia"
       },
       {
         "portugues": "não entendi",
@@ -270,12 +360,18 @@
       {
         "portugues": "não sei",
         "espanol": "no sé",
-        "extra": ""
+        "extra": "",
+        "variantes_pt": [
+          "eu não sei"
+        ]
       },
       {
         "portugues": "não posso",
         "espanol": "no puedo",
-        "extra": ""
+        "extra": "",
+        "variantes_pt": [
+          "eu não posso"
+        ]
       },
       {
         "portugues": "não tem",
@@ -295,7 +391,10 @@
       {
         "portugues": "não precisa",
         "espanol": "no hace falta",
-        "extra": ""
+        "extra": "",
+        "variantes_pt": [
+          "não é necessário"
+        ]
       },
       {
         "portugues": "não estou certo disso",
@@ -315,22 +414,35 @@
       {
         "portugues": "tá aberto?",
         "espanol": "¿está abierto?",
-        "extra": "Informal: tá significa está."
+        "extra": "Informal: tá significa está.",
+        "variantes_pt": [
+          "está aberto?"
+        ]
       },
       {
         "portugues": "tá funcionando?",
         "espanol": "¿está funcionando?",
-        "extra": "Informal: tá significa está."
+        "extra": "Informal: tá significa está.",
+        "variantes_pt": [
+          "está funcionando?"
+        ]
       },
       {
         "portugues": "tem banheiro aqui?",
         "espanol": "¿hay baño aquí?",
-        "extra": ""
+        "extra": "",
+        "variantes_pt": [
+          "há banheiro aqui?"
+        ]
       },
       {
         "portugues": "tem wi-fi?",
         "espanol": "¿hay wifi?",
-        "extra": ""
+        "extra": "",
+        "variantes_pt": [
+          "tem wifi?",
+          "há wi-fi?"
+        ]
       },
       {
         "portugues": "tem sim",
@@ -350,12 +462,18 @@
       {
         "portugues": "tá chovendo",
         "espanol": "está lloviendo",
-        "extra": "Forma informal."
+        "extra": "Forma informal.",
+        "variantes_pt": [
+          "está chovendo"
+        ]
       },
       {
         "portugues": "eu vou descansar um pouco",
         "espanol": "voy a descansar un poco",
-        "extra": ""
+        "extra": "",
+        "variantes_pt": [
+          "vou descansar um pouco"
+        ]
       },
       {
         "portugues": "a gente quer descansar",
@@ -485,7 +603,10 @@
       {
         "portugues": "a conta, por favor",
         "espanol": "la cuenta, por favor",
-        "extra": ""
+        "extra": "",
+        "variantes_pt": [
+          "pode trazer a conta, por favor?"
+        ]
       },
       {
         "portugues": "muito gostoso",
@@ -1015,7 +1136,11 @@
       {
         "portugues": "canudo",
         "espanol": "pitillo",
-        "extra": ""
+        "extra": "",
+        "variantes_es": [
+          "pajilla",
+          "sorbete"
+        ]
       },
       {
         "portugues": "açúcar mascavo",
@@ -1230,7 +1355,11 @@
       {
         "portugues": "pipoca",
         "espanol": "crispetas",
-        "extra": ""
+        "extra": "",
+        "variantes_es": [
+          "palomitas",
+          "palomitas de maíz"
+        ]
       },
       {
         "portugues": "picolé",
@@ -1290,7 +1419,10 @@
       {
         "portugues": "posso levar pra viagem?",
         "espanol": "¿me lo puedo llevar?",
-        "extra": ""
+        "extra": "",
+        "variantes_pt": [
+          "posso levar para viagem?"
+        ]
       },
       {
         "portugues": "tem alguma lanchonete aberta agora?",
@@ -1310,12 +1442,14 @@
       {
         "portugues": "estava delicioso!",
         "espanol": "¡estaba delicioso!",
-        "extra": ""
+        "extra": "",
+        "grupo_confusion": "respuesta-satisfaccion"
       },
       {
         "portugues": "uma delícia!",
         "espanol": "¡una delicia!",
-        "extra": ""
+        "extra": "",
+        "grupo_confusion": "respuesta-satisfaccion"
       },
       {
         "portugues": "não é muito do meu gosto",
@@ -1335,17 +1469,26 @@
       {
         "portugues": "está incluso o serviço?",
         "espanol": "¿está incluido el servicio?",
-        "extra": ""
+        "extra": "",
+        "variantes_pt": [
+          "o serviço está incluído?",
+          "o serviço está incluso?",
+          "está incluído o serviço?"
+        ]
       },
       {
         "portugues": "a comida está deliciosa!",
         "espanol": "¡la comida está deliciosa!",
-        "extra": ""
+        "extra": "",
+        "grupo_confusion": "respuesta-satisfaccion"
       },
       {
         "portugues": "eu não como carne",
         "espanol": "no como carne",
-        "extra": ""
+        "extra": "",
+        "variantes_pt": [
+          "não como carne"
+        ]
       },
       {
         "portugues": "pode ser sem açúcar?",
@@ -1360,17 +1503,27 @@
       {
         "portugues": "para viagem, por favor",
         "espanol": "para llevar, por favor",
-        "extra": ""
+        "extra": "",
+        "variantes_pt": [
+          "pra viagem, por favor"
+        ]
       },
       {
         "portugues": "aqui ou para viagem?",
         "espanol": "¿aquí o para llevar?",
-        "extra": ""
+        "extra": "",
+        "variantes_pt": [
+          "aqui ou pra viagem?"
+        ]
       },
       {
         "portugues": "pode trazer o cardápio?",
         "espanol": "¿puede traer el menú?",
-        "extra": ""
+        "extra": "",
+        "variantes_pt": [
+          "você pode trazer o cardápio?",
+          "poderia trazer o cardápio?"
+        ]
       },
       {
         "portugues": "uma mesa para dois, por favor",
@@ -1390,7 +1543,11 @@
       {
         "portugues": "tem mesa pra dois?",
         "espanol": "¿hay mesa para dos?",
-        "extra": ""
+        "extra": "",
+        "variantes_pt": [
+          "tem mesa para dois?",
+          "há mesa para dois?"
+        ]
       },
       {
         "portugues": "tem café sem açúcar?",
@@ -1430,7 +1587,11 @@
       {
         "portugues": "ônibus",
         "espanol": "bus",
-        "extra": ""
+        "extra": "",
+        "variantes_es": [
+          "autobús",
+          "ómnibus"
+        ]
       },
       {
         "portugues": "metrô",
@@ -1485,7 +1646,10 @@
       {
         "portugues": "ponto de ônibus",
         "espanol": "parada de bus",
-        "extra": ""
+        "extra": "",
+        "variantes_es": [
+          "parada de autobús"
+        ]
       },
       {
         "portugues": "rodoviária",
@@ -1530,7 +1694,12 @@
       {
         "portugues": "passagem",
         "espanol": "pasaje",
-        "extra": ""
+        "extra": "",
+        "variantes_es": [
+          "boleto",
+          "tiquete"
+        ],
+        "grupo_confusion": "tiquete"
       },
       {
         "portugues": "cartão de transporte",
@@ -1615,7 +1784,12 @@
       {
         "portugues": "bilhete",
         "espanol": "tiquete",
-        "extra": ""
+        "extra": "",
+        "variantes_es": [
+          "boleto",
+          "billete"
+        ],
+        "grupo_confusion": "tiquete"
       },
       {
         "portugues": "plataforma",
@@ -1705,7 +1879,12 @@
       {
         "portugues": "esse ônibus vai para o centro?",
         "espanol": "¿ese bus va al centro?",
-        "extra": ""
+        "extra": "",
+        "variantes_pt": [
+          "esse ônibus vai pro centro?",
+          "este ônibus vai para o centro?",
+          "este ônibus vai pro centro?"
+        ]
       },
       {
         "portugues": "você pode me avisar quando chegar no meu ponto?",
@@ -1745,12 +1924,21 @@
       {
         "portugues": "dá pra descer no próximo?",
         "espanol": "¿puedo bajarme en la próxima parada?",
-        "extra": ""
+        "extra": "",
+        "variantes_pt": [
+          "dá para descer no próximo?",
+          "posso descer no próximo?"
+        ]
       },
       {
         "portugues": "tá lotado",
         "espanol": "está lleno",
-        "extra": "Forma informal, sobre un transporte."
+        "extra": "Forma informal, sobre un transporte.",
+        "variantes_pt": [
+          "está lotado",
+          "está cheio",
+          "tá cheio"
+        ]
       },
       {
         "portugues": "esse ônibus é o certo?",
@@ -2025,7 +2213,10 @@
       {
         "portugues": "quanto custa despachar a bagagem?",
         "espanol": "¿cuánto cuesta facturar el equipaje?",
-        "extra": ""
+        "extra": "",
+        "variantes_pt": [
+          "quanto custa para despachar a bagagem?"
+        ]
       },
       {
         "portugues": "as malas estão aqui",
@@ -2045,22 +2236,38 @@
       {
         "portugues": "eu tenho reserva",
         "espanol": "tengo una reserva",
-        "extra": ""
+        "extra": "",
+        "variantes_pt": [
+          "tenho reserva",
+          "tenho uma reserva",
+          "eu tenho uma reserva"
+        ]
       },
       {
         "portugues": "o café da manhã está incluído?",
         "espanol": "¿el desayuno está incluido?",
-        "extra": ""
+        "extra": "",
+        "variantes_pt": [
+          "o café da manhã está incluso?"
+        ]
       },
       {
         "portugues": "o wi-fi é gratuito?",
         "espanol": "¿el wifi es gratis?",
-        "extra": ""
+        "extra": "",
+        "variantes_pt": [
+          "o wi-fi é grátis?",
+          "o wifi é grátis?",
+          "o wifi é gratuito?"
+        ]
       },
       {
         "portugues": "qual a senha?",
         "espanol": "¿cuál es la contraseña?",
-        "extra": ""
+        "extra": "",
+        "variantes_pt": [
+          "qual é a senha?"
+        ]
       },
       {
         "portugues": "o quarto tem ar-condicionado?",
@@ -2105,12 +2312,22 @@
       {
         "portugues": "aceita cartão?",
         "espanol": "¿acepta tarjeta?",
-        "extra": ""
+        "extra": "",
+        "variantes_pt": [
+          "você aceita cartão?",
+          "aceitam cartão?"
+        ],
+        "grupo_confusion": "pago-tarjeta"
       },
       {
         "portugues": "tem desconto para turista?",
         "espanol": "¿hay descuento para turistas?",
-        "extra": ""
+        "extra": "",
+        "variantes_pt": [
+          "tem desconto para turistas?",
+          "tem desconto pra turista?",
+          "tem desconto pra turistas?"
+        ]
       },
       {
         "portugues": "posso experimentar?",
@@ -2120,7 +2337,10 @@
       {
         "portugues": "tem desconto?",
         "espanol": "¿hay descuento?",
-        "extra": ""
+        "extra": "",
+        "variantes_pt": [
+          "há desconto?"
+        ]
       },
       {
         "portugues": "faz por menos?",
@@ -2135,12 +2355,21 @@
       {
         "portugues": "vou pagar com cartão",
         "espanol": "voy a pagar con tarjeta",
-        "extra": ""
+        "extra": "",
+        "variantes_pt": [
+          "eu vou pagar com cartão"
+        ]
       },
       {
         "portugues": "dá pra pagar com cartão?",
         "espanol": "¿se puede pagar con tarjeta?",
-        "extra": ""
+        "extra": "",
+        "variantes_pt": [
+          "dá para pagar com cartão?",
+          "posso pagar com cartão?",
+          "pode pagar com cartão?"
+        ],
+        "grupo_confusion": "pago-tarjeta"
       },
       {
         "portugues": "é barato",
@@ -2170,7 +2399,11 @@
       {
         "portugues": "troco",
         "espanol": "vueltas",
-        "extra": ""
+        "extra": "",
+        "variantes_es": [
+          "cambio",
+          "vuelto"
+        ]
       },
       {
         "portugues": "cartão",
@@ -2270,7 +2503,10 @@
       {
         "portugues": "brinco",
         "espanol": "arete",
-        "extra": ""
+        "extra": "",
+        "variantes_es": [
+          "pendiente"
+        ]
       },
       {
         "portugues": "tamanho",
@@ -2300,12 +2536,19 @@
       {
         "portugues": "preciso de um médico",
         "espanol": "necesito un médico",
-        "extra": ""
+        "extra": "",
+        "variantes_pt": [
+          "eu preciso de um médico"
+        ]
       },
       {
         "portugues": "onde tem um hospital?",
         "espanol": "¿dónde hay un hospital?",
-        "extra": ""
+        "extra": "",
+        "variantes_pt": [
+          "onde há um hospital?",
+          "onde fica um hospital?"
+        ]
       },
       {
         "portugues": "socorro! chame a polícia!",
@@ -2380,7 +2623,10 @@
       {
         "portugues": "creme",
         "espanol": "crema",
-        "extra": ""
+        "extra": "",
+        "variantes_es": [
+          "crema"
+        ]
       },
       {
         "portugues": "xarope",
@@ -2470,7 +2716,10 @@
       {
         "portugues": "quatorze",
         "espanol": "catorce",
-        "extra": "También se escribe catorze."
+        "extra": "También se escribe catorze.",
+        "variantes_pt": [
+          "catorze"
+        ]
       },
       {
         "portugues": "quinze",

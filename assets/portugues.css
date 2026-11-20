@@ -299,3 +299,30 @@ main .activity-tabs{grid-template-columns:repeat(4,minmax(0,1fr))}
 #writeInput{text-align:left;font-size:clamp(17px,4vw,24px)}
 #writeResult h2{margin:18px 0 8px}
 @media(max-width:400px){main .activity-tabs{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+/* Compact practice layout, shared visual language with Oraciones. */
+.hero{padding-block:24px 18px;flex-wrap:wrap;gap:8px 16px}
+.hero-description{margin-top:5px}
+.catalog-count{flex:none;align-self:center;border:1px solid var(--border);border-radius:999px;background:var(--surface);padding:7px 12px;font-size:13px}
+#practice .question-area,#writing .question-area{padding:12px 0 13px}
+#practice .question-label,#writing .question-label{margin:0 0 6px}
+#practice .prompt,#writing .prompt{min-height:62px;margin:0;font-size:clamp(22px,3.2vw,36px);line-height:1.25}
+#practice .listen-button,#writing .listen-button{margin-top:9px}
+#practice .options{grid-template-columns:repeat(2,minmax(0,1fr))}
+#practice .option-button{min-height:54px;padding:10px 12px;font-size:16px;flex-wrap:nowrap}
+#practice .option-button:last-child:nth-child(odd){grid-column:1/-1}
+#practice .option-letter{margin-right:8px;width:25px;height:25px;font-size:13px}
+#practice .option-mark{font-size:15px;padding-left:4px}
+#practice .controls,#writeForm .controls{margin:12px 0}
+.settings .block-combine{margin-top:10px}
+.settings .block-combine summary{font-size:13px}
+.settings .block-combine .chips{margin-top:8px}
+#writeAudioStatus{color:var(--gold)}
+@media(max-width:740px){
+ .hero{padding-block:18px 14px}
+ .catalog-count{align-self:flex-start}
+ .activity-tab .icon{width:15px;height:15px}
+ #practice .options{grid-template-columns:1fr;gap:7px}
+ #practice .option-button{min-height:43px}
+ #practice .prompt,#writing .prompt{min-height:52px}
+}

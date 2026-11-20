@@ -3,25 +3,34 @@
 const SETTINGS_KEY='asallam_portugues_settings_v1';
 const BLOCK_LABELS={saludos:'Saludos',cotidiano:'Vida cotidiana',comida:'Comidas y bebidas',transporte:'Transporte y direcciones',social:'Vida social',aeroporto:'Aeropuerto',hospedagem:'Hospedaje',compras:'Compras y dinero',emergencias:'Emergencias',numeros:'Números y cantidades',cores:'Colores',tempo:'Tiempo y horarios',praia:'Playa'};
 const BLOCKS=Object.keys(BLOCK_LABELS);
-const MODES=['pt_es','es_pt','audio_es','audio_pt','dictado'];
+const MODES=['pt_es','es_pt','audio_es','audio_pt'];
 const defaults={direction:'mixed',length:40,matchLength:39,autoAudio:true,rate:1,theme:'dark',blocks:BLOCKS.slice()};
-function settingsValid(v){return v&&typeof v==='object'&&!Array.isArray(v)&&Object.keys(v).every(k=>Object.hasOwn(defaults,k))&&(!Object.hasOwn(v,'direction')||['mixed',...MODES].includes(v.direction))&&(!Object.hasOwn(v,'length')||[0,10,20,40].includes(v.length))&&(!Object.hasOwn(v,'matchLength')||[0,9,21,39].includes(v.matchLength))&&(!Object.hasOwn(v,'autoAudio')||typeof v.autoAudio==='boolean')&&(!Object.hasOwn(v,'rate')||[.7,.85,1].includes(v.rate))&&(!Object.hasOwn(v,'blocks')||(Array.isArray(v.blocks)&&v.blocks.length>0&&new Set(v.blocks).size===v.blocks.length&&v.blocks.every(b=>BLOCKS.includes(b))))&&(!Object.hasOwn(v,'theme')||['dark','light'].includes(v.theme));}
-function normalize(raw){if(!Array.isArray(raw)||!raw.length)throw Error('Catálogo vacío o incompatible.');const map=new Map();for(const group of raw){if(!BLOCKS.includes(group.bloque)||!Array.isArray(group.items))throw Error('Bloque incompatible.');for(const row of group.items){if(!row||['portugues','espanol'].some(k=>typeof row[k]!=='string'||!row[k].trim()))throw Error('Hay una entrada incompleta en el catálogo.');const item={pt:row.portugues.trim(),es:row.espanol.trim(),extra:String(row.extra||'').trim(),audio:safeAudioFile(row.audio),block:group.bloque};item.id=[item.pt,item.es].join('||');if(!map.has(item.id))map.set(item.id,item);}}return [...map.values()];}
+function settingsValid(v){return v&&typeof v==='object'&&!Array.isArray(v)&&Object.keys(v).every(k=>Object.hasOwn(defaults,k))&&(!Object.hasOwn(v,'direction')||['mixed',...MODES,'dictado'].includes(v.direction))&&(!Object.hasOwn(v,'length')||[0,10,20,40].includes(v.length))&&(!Object.hasOwn(v,'matchLength')||[0,9,21,39].includes(v.matchLength))&&(!Object.hasOwn(v,'autoAudio')||typeof v.autoAudio==='boolean')&&(!Object.hasOwn(v,'rate')||[.7,.85,1].includes(v.rate))&&(!Object.hasOwn(v,'blocks')||(Array.isArray(v.blocks)&&v.blocks.length>0&&new Set(v.blocks).size===v.blocks.length&&v.blocks.every(b=>BLOCKS.includes(b))))&&(!Object.hasOwn(v,'theme')||['dark','light'].includes(v.theme));}
+function readVariants(values){return Array.isArray(values)?[...new Set(values.filter(x=>typeof x==='string').map(x=>x.trim()).filter(Boolean))]:[];}
+function normalize(raw){if(!Array.isArray(raw)||!raw.length)throw Error('Catálogo vacío o incompatible.');const map=new Map();for(const group of raw){if(!BLOCKS.includes(group.bloque)||!Array.isArray(group.items))throw Error('Bloque incompatible.');for(const row of group.items){if(!row||['portugues','espanol'].some(k=>typeof row[k]!=='string'||!row[k].trim()))throw Error('Hay una entrada incompleta en el catálogo.');const item={pt:row.portugues.trim(),es:row.espanol.trim(),extra:String(row.extra||'').trim(),audio:safeAudioFile(row.audio),block:group.bloque,ptVariants:readVariants(row.variantes_pt),esVariants:readVariants(row.variantes_es),confusionGroup:typeof row.grupo_confusion==='string'?row.grupo_confusion:''};item.id=[item.pt,item.es].join('||');if(!map.has(item.id))map.set(item.id,item);}}return [...map.values()];}
 const audioMode=d=>['audio_es','audio_pt','dictado'].includes(d);
 const answerField=d=>['pt_es','audio_es'].includes(d)?'es':'pt';
 const purposeFor=d=>({pt_es:'Portugués → español',es_pt:'Español → portugués',audio_es:'Audio → español',audio_pt:'Audio → portugués',dictado:'Audio → portugués'})[d];
 function shuffle(list,random=Math.random){const a=[...list];for(let i=a.length-1;i>0;i--){const j=Math.floor(random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
-function choices(item,direction,catalog,random=Math.random){const prompt=direction==='es_pt'?'es':'pt',answer=answerField(direction);// Exclude valid equivalents and favor distractors from the same topic with similar size.
-const key=s=>searchText(s).replace(/[?!¡¿.,;:…]+/g,'').trim();
-const valid=new Set(catalog.filter(x=>key(x[prompt])===key(item[prompt])).map(x=>key(x[answer])));valid.add(key(item[answer]));
-const samples=new Map(),size=s=>s.trim().split(/\s+/).length;
-for(const x of shuffle(catalog,random)){
- const text=x[answer],k=key(text);if(valid.has(k))continue;
- const score=Math.min(8,Math.abs(size(text)-size(item[answer])))+(x.block===item.block?0:4);
- if(!samples.has(k)||score<samples.get(k).score)samples.set(k,{text,score});
+const choiceKey=s=>searchText(s).replace(/[?!¡¿.,;:…]+/g,'').trim();
+const variants=(item,field)=>[item[field],...(item[field+'Variants']||[])];
+function sameMeaningDomain(a,b){
+ return a===b||Boolean(a.confusionGroup&&a.confusionGroup===b.confusionGroup)||
+  ['pt','es'].some(field=>{const keys=new Set(variants(a,field).map(choiceKey));return variants(b,field).some(value=>keys.has(choiceKey(value)));});
 }
-const distractors=[...samples.values()].sort((a,b)=>a.score-b.score).slice(0,2).map(x=>x.text);
-return shuffle([item[answer],...distractors],random);}
+function choices(item,direction,catalog,random=Math.random){
+ // Keep one scored answer. Never present a curated equivalent or a near
+ // paraphrase as a distractor, even when the display translations differ.
+ const answer=answerField(direction),samples=new Map(),size=s=>s.trim().split(/\s+/).length;
+ for(const x of shuffle(catalog,random)){
+  const text=x[answer],k=choiceKey(text);
+  if(sameMeaningDomain(item,x))continue;
+  const score=Math.min(8,Math.abs(size(text)-size(item[answer])))+(x.block===item.block?0:4);
+  if(!samples.has(k)||score<samples.get(k).score)samples.set(k,{text,score});
+ }
+ const distractors=[...samples.values()].sort((a,b)=>a.score-b.score).slice(0,2).map(x=>x.text);
+ return shuffle([item[answer],...distractors],random);
+}
 const searchText=s=>String(s).normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLocaleLowerCase('es').replace(/\s+/g,' ').trim();
 function safeAudioFile(value){const file=typeof value==='string'?value.trim():'';return /^[\p{L}\p{N}][\p{L}\p{N} _-]*\.mp3$/iu.test(file)?file:'';}
 function audioFiles(item){
@@ -29,15 +38,15 @@ function audioFiles(item){
  const slug=searchText(text||'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
  return [...new Set([slug&&slug+'.mp3',safeAudioFile(item?.audio)].filter(Boolean))];
 }
-const core={normalize,choices,settingsValid,searchText,SETTINGS_KEY,defaults,MODES,BLOCKS,audioMode,answerField,purposeFor,safeAudioFile,audioFiles};
+const core={normalize,choices,settingsValid,searchText,SETTINGS_KEY,defaults,MODES,BLOCKS,audioMode,answerField,purposeFor,sameMeaningDomain,safeAudioFile,audioFiles};
 if(typeof module!=='undefined'&&module.exports)module.exports=core;
 if(!root.document)return;
 const $=id=>document.getElementById(id), ledger=root.AsallamReviews;
 let settings={...defaults},settingsBroken=false;
-try{const raw=localStorage.getItem(SETTINGS_KEY);if(raw!==null){const v=JSON.parse(raw);if(!settingsValid(v))throw Error('Ajustes incompatibles.');settings={...defaults,...v};}else if(localStorage.getItem('asallam_ecosystem_theme')==='light')settings.theme='light';}catch{settingsBroken=true;}
-let catalog=[],current=null,activity='quiz',loaded=false,answered=false,session={correct:0,wrong:0,skipped:0,errors:new Set()},reviewPending=null,reviewSize=0,pageSize=24,noticeTimer,summaryOpen=false;
+try{const raw=localStorage.getItem(SETTINGS_KEY);if(raw!==null){const v=JSON.parse(raw);if(!settingsValid(v))throw Error('Ajustes incompatibles.');settings={...defaults,...v};if(settings.direction==='dictado')settings.direction='audio_pt';}else if(localStorage.getItem('asallam_ecosystem_theme')==='light')settings.theme='light';}catch{settingsBroken=true;}
+let catalog=[],current=null,activity='quiz',loaded=false,answered=false,session={correct:0,wrong:0,skipped:0,errors:new Set()},reviewPending=null,reviewSize=0,pageSize=24,noticeTimer,summaryOpen=false,quizScopeDirty=false;
 const selectedItems=()=>catalog.filter(x=>settings.blocks.includes(x.block));
-const matcher=root.AsallamLanguageMatching?.create({host:$('matching'),ledger,audioBusy:audioBusy,app:'portugues',items:selectedItems,reviewErrors:true,sessionLength:()=>settings.matchLength,mixedTiles:true,concise:true,onAudioStop:stopAudio,onCorrectAudio:(item,options)=>playAudio(item,{...options,automatic:true}),labels:x=>[x.pt,x.es],langs:['pt-BR','es'],sideNames:['Portugués','Español'],conflicts:(a,b)=>searchText(a.pt)===searchText(b.pt)||searchText(a.es)===searchText(b.es),changed:()=>{if(loaded)updateStats();}});
+const matcher=root.AsallamLanguageMatching?.create({host:$('matching'),ledger,audioBusy:audioBusy,app:'portugues',items:selectedItems,reviewErrors:true,waitForCorrectAudio:true,waitForCue,sessionLength:()=>settings.matchLength,mixedTiles:true,concise:true,onAudioStop:stopAudio,onCorrectAudio:(item,options)=>playAudio(item,{...options,automatic:true}),labels:x=>[x.pt,x.es],langs:['pt-BR','es'],sideNames:['Portugués','Español'],conflicts:sameMeaningDomain,changed:()=>{if(loaded)updateStats();}});
 const quizMusic=root.MatchMusic?.create({isBusy:audioBusy});
 function notice(message){clearTimeout(noticeTimer);$('notice').textContent=message;$('notice').hidden=false;noticeTimer=setTimeout(()=>{$('notice').hidden=true;},6000);}
 function saveSettings(){quizMusic?.cancel();if(settingsBroken){notice('Los ajustes guardados no se han modificado porque no se pudieron leer. Puedes continuar sin guardar cambios.');return;}try{localStorage.setItem(SETTINGS_KEY,JSON.stringify(settings));}catch{notice('No se pudieron guardar los ajustes en este navegador.');}}
@@ -47,14 +56,38 @@ $('theme').onclick=()=>{settings.theme=settings.theme==='dark'?'light':'dark';ap
 for(const id of ['direction','length','matchLength','rate'])$(id).onchange=()=>{settings[id]=id==='direction'?$(id).value:Number($(id).value);saveSettings();if(id==='direction'&&loaded&&activity==='quiz'&&!summaryOpen)nextQuestion(true);if(id==='length')writing?.reset();if(id==='matchLength')matcher?.reset();updateStats();};
 $('autoAudio').onchange=()=>{settings.autoAudio=$('autoAudio').checked;if(!settings.autoAudio){discardPendingAutoAudio();quizMusic?.cancel();}saveSettings();};
 // A single cancellable player per page: direct MP3 first, then on-device Portuguese voice.
-const audioBase=new URL('data/portugues/',document.baseURI), unavailableFiles=new Set();
+const audioBase=new URL('data/portugues/',document.baseURI), unavailableFiles=new Set(), confirmedFiles=new Set(), probingFiles=new Set();
+const fileUrl=file=>new URL(encodeURIComponent(file),audioBase).href;
+function probeAudio(item){
+ for(const file of audioFiles(item)){
+  if(confirmedFiles.has(file)||unavailableFiles.has(file)||probingFiles.has(file))continue;
+  probingFiles.add(file);
+  const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),1400);
+  fetch(fileUrl(file),{method:'HEAD',cache:'no-cache',signal:controller.signal}).then(res=>{
+   const type=res.headers?.get('content-type')||'';
+   if(res.ok&&/^(audio\/|application\/octet-stream\b|binary\/octet-stream\b)/i.test(type))confirmedFiles.add(file);
+   else if(res.status===404||res.status===410)unavailableFiles.add(file);
+  }).catch(()=>{}).finally(()=>{clearTimeout(timer);probingFiles.delete(file);});
+ }
+}
+function mixedDirection(item){
+ const direction=MODES[Math.floor(Math.random()*MODES.length)];
+ if(!audioMode(direction)||brazilianVoice()||audioFiles(item).some(file=>confirmedFiles.has(file)))return direction;
+ // Start discovery without holding up the quiz. Unknown audio is not an audible question.
+ probeAudio(item);
+ return Math.random()<.5?'pt_es':'es_pt';
+}
 let playingAudio=null,audioQueue=[],audioGeneration=0,voiceWait=null,winToken=0;
 function audioBusy(){return Boolean(playingAudio||audioQueue.length);}
 function portugueseVoices(){
  try{return (root.speechSynthesis?.getVoices()||[]).filter(v=>/^pt(?:[-_]|$)/i.test(v.lang));}catch{return [];}
 }
+function brazilianVoice(){
+ const voices=portugueseVoices();
+ return voices.find(v=>/^pt[-_]BR$/i.test(v.lang))||voices.find(v=>/^pt$/i.test(v.lang));
+}
 function awaitVoices(){
- if(portugueseVoices().length||!root.speechSynthesis||!root.SpeechSynthesisUtterance)return Promise.resolve();
+ if(brazilianVoice()||!root.speechSynthesis||!root.SpeechSynthesisUtterance)return Promise.resolve();
  if(!voiceWait)voiceWait=new Promise(resolve=>{
   const synth=root.speechSynthesis;let timer;
   const finish=()=>{clearTimeout(timer);synth.removeEventListener?.('voiceschanged',finish);resolve();};
@@ -69,7 +102,7 @@ function playFile(file,req){
   let clip,timer,ended=false;
   const finish=(ok,remember=false)=>{
    if(ended)return;ended=true;clearTimeout(timer);
-   if(remember)unavailableFiles.add(file);
+   if(ok)confirmedFiles.add(file);else if(remember){unavailableFiles.add(file);confirmedFiles.delete(file);}
    if(clip){clip.onplaying=clip.onended=clip.onerror=null;if(!ok){try{clip.pause();clip.removeAttribute('src');clip.load();}catch{}}}
    req.cancel=null;resolve(ok);
   };
@@ -81,7 +114,7 @@ function playFile(file,req){
    clip.onended=()=>finish(true);
    clip.onerror=()=>finish(false,true);
    timer=setTimeout(timeout,2600);
-   clip.src=new URL(encodeURIComponent(file),audioBase).href;
+   clip.src=fileUrl(file);
    const play=clip.play();play?.catch(error=>finish(false,error?.name==='NotSupportedError'));
   }catch{finish(false);}
  });
@@ -89,7 +122,7 @@ function playFile(file,req){
 async function playVoice(text,req){
  await awaitVoices();
  if(!activeAudio(req))return false;
- const voices=portugueseVoices(),voice=voices.find(v=>/^pt[-_]BR$/i.test(v.lang))||voices.find(v=>/^pt$/i.test(v.lang));
+ const voice=brazilianVoice();
  if(!voice)return false;
  return new Promise(resolve=>{
   let timer,ended=false;
@@ -143,12 +176,20 @@ function afterCorrect(item,{valid}={}){
   if(quizMusic)quizMusic.correct(++winToken,after);else after(false);
  });
 }
-root.AsallamPortugueseAudio={play:playAudio,afterCorrect,stop:stopAudio,busy:audioBusy};
+function waitForCue(task,maxMs=4500){
+ if(!task)return Promise.resolve();
+ return new Promise(resolve=>{
+  const timer=setTimeout(resolve,maxMs);
+  Promise.resolve(task).then(()=>{clearTimeout(timer);resolve();},()=>{clearTimeout(timer);resolve();});
+ });
+}
+root.AsallamPortugueseAudio={play:playAudio,afterCorrect,stop:stopAudio,busy:audioBusy,waitForCue};
 function switchActivity(next){
  if(next!==activity){quizMusic?.cancel();stopAudio();if(activity==='match')matcher?.deactivate();}
  activity=next;
  if(loaded&&activity==='match')matcher?.activate();
  if(loaded&&activity==='explore')explore();
+ if(loaded&&activity==='quiz'&&quizScopeDirty&&!reviewPending&&!summaryOpen){nextQuestion(true);return;}
  showPanels();
 }
 const writing=root.AsallamPortugueseWriting?.create({host:$('writing'),items:selectedItems,settings:()=>settings,ledger,changed:()=>updateStats(),notice});
@@ -183,26 +224,31 @@ function updateStats(){
  $('bar').style.width=pct+'%';$('progressTrack').setAttribute('aria-valuenow',String(pct));$('progressTrack').hidden=activity==='explore'||!target;
 }
 function showPanels(){
+ const quizOptions=$('quizOptions'),lengthOptions=$('lengthOptions'),matchOptions=$('matchOptions'),longSession=$('lengthUnlimited');
+ if(quizOptions)quizOptions.hidden=activity!=='quiz';
+ if(lengthOptions)lengthOptions.hidden=activity!=='quiz'&&activity!=='write';
+ if(matchOptions)matchOptions.hidden=activity!=='match';
+ if(longSession)longSession.textContent=activity==='write'?'Toda la selección':'Sin límite';
  $('practice').hidden=!loaded||activity!=='quiz'||summaryOpen;
  $('exploring').hidden=!loaded||activity!=='explore';$('matching').hidden=!loaded||activity!=='match';
  if($('writing'))$('writing').hidden=!loaded||activity!=='write';
  writing?.setActive(loaded&&activity==='write');
  $('summary').hidden=!loaded||activity!=='quiz'||!summaryOpen;
  $('finish').hidden=!loaded||activity!=='quiz'||summaryOpen;$('keyboardHint').hidden=activity!=='quiz'||summaryOpen;
- $('badge').textContent=activity==='explore'?'Explorar':activity==='match'?'Emparejar':activity==='write'?'Escribir':reviewPending?'Repaso de la sesión':'Quiz';
+ $('badge').textContent=activity==='explore'?'Explorar':activity==='match'?'Emparejar':activity==='write'?'Escribir':reviewPending?'Repaso de la sesión':'Practicar';
  for(const [id,active]of [['quizTab',activity==='quiz'],['exploreTab',activity==='explore'],['matchTab',activity==='match'],['writeTab',activity==='write']]){
   const btn=$(id);if(btn){btn.setAttribute('aria-pressed',String(active));btn.classList.toggle('is-active',active);}
  }
  updateStats();
 }
 function nextQuestion(changeDirection=false){
- if(!loaded)return;quizMusic?.cancel();stopAudio();
+ if(!loaded)return;quizScopeDirty=false;quizMusic?.cancel();stopAudio();
  if(reviewPending?!reviewPending.size:settings.length&&sessionTotal()>=settings.length){finishSession();return;}
  const pool=reviewPending?catalog.filter(x=>reviewPending.has(x.id)):selectedItems();
  const candidates=pool.length>1?pool.filter(x=>x.id!==current?.item.id):pool;
  if(!candidates.length){finishSession();return;}
  const item=changeDirection&&!answered&&current&&pool.includes(current.item)?current.item:candidates[Math.floor(Math.random()*candidates.length)];
- const direction=settings.direction==='mixed'?MODES[Math.floor(Math.random()*MODES.length)]:settings.direction;
+ const direction=settings.direction==='mixed'?mixedDirection(item):settings.direction;
  renderQuestion(item,direction);
 }
 function renderQuestion(item,direction,{fallback=false}={}){
@@ -232,16 +278,31 @@ function respond(choice){
  if(outcome==='wrong')session.errors.add(question.item.id);
  reviewPending?.delete(question.item.id);
  ledger.record('portugues',question.item.id,purpose(),outcome);
- if(outcome==='correct')afterCorrect(question.item,{valid:()=>activity==='quiz'&&!summaryOpen&&current===question&&answered});
+ if(outcome==='correct')question.earnedCue=afterCorrect(question.item,{valid:()=>activity==='quiz'&&!summaryOpen&&current===question&&answered});
  for(const [i,b]of [...$('options').children].entries()){
-  const correct=question.options[i]===answerText();b.disabled=true;b.classList.add(correct?'correct':'wrong');
-  const mark=document.createElement('span');mark.className='option-mark';mark.textContent=correct?'✓ Correcta':'✕';b.append(mark);
+  const correct=question.options[i]===answerText();b.disabled=true;
+  if(correct||question.options[i]===choice){
+   b.classList.add(correct?'correct':'wrong');
+   const mark=document.createElement('span');mark.className='option-mark';mark.textContent=correct?'✓':'✕';mark.setAttribute('aria-label',correct?'Correcta':'Incorrecta');b.append(mark);
+  }
  }
  $('listen').hidden=false;$('skip').disabled=true;$('next').disabled=false;
  const item=question.item;
  $('feedback').textContent=(outcome==='correct'?'✓ ¡Correcto!':outcome==='wrong'?'✕ Esta vez no.':'Sin responder · no cuenta como error.')+'\n'+item.pt+(item.extra?' · '+item.extra:'')+'\n'+item.es;
  $('feedback').hidden=false;
  const history=document.createElement('div');history.innerHTML=ledger.render('portugues',item.id);$('feedback').append(history);updateStats();
+}
+async function advanceQuiz(){
+ const question=current;
+ if(!question||!answered||summaryOpen||activity!=='quiz'||question.advancing)return;
+ if(!question.earnedCue){nextQuestion();return;}
+ const epoch=audioGeneration;
+ question.advancing=true;$('next').disabled=true;
+ await waitForCue(question.earnedCue);
+ question.advancing=false;
+ if(current!==question||summaryOpen)return;
+ $('next').disabled=false;
+ if(epoch===audioGeneration&&activity==='quiz')nextQuestion();
 }
 function finishSession(){
  quizMusic?.cancel();stopAudio();summaryOpen=true;
@@ -255,14 +316,45 @@ function startSession(ids=null){
  reviewPending=ids?new Set(ids):null;reviewSize=reviewPending?.size||0;summaryOpen=false;activity='quiz';nextQuestion();
 }
 function explore(){const q=searchText($('search').value);const found=catalog.filter(x=>settings.blocks.includes(x.block)&&searchText([x.pt,x.extra,x.es].join(' ')).includes(q));$('exploreCount').textContent=`${found.length} de ${catalog.length} entradas · abrir y escuchar no registra repasos`;$('wordGrid').replaceChildren();if(!found.length){const p=document.createElement('p');p.className='empty-state';p.textContent='No se encontraron entradas. Prueba con portugués o español.';$('wordGrid').append(p);}for(const item of found.slice(0,pageSize)){const card=document.createElement('article');card.className='word-card explore-card';const title=document.createElement('h3');title.className='';title.lang='pt-BR';title.textContent=item.pt;const pin=document.createElement('p');pin.lang='pt-BR';pin.textContent=item.extra;const es=document.createElement('p');es.textContent=item.es;const button=document.createElement('button');button.className='listen-button';button.textContent='🔊 Escuchar';button.setAttribute('aria-label','Escuchar '+item.pt);button.onclick=()=>{playAudio(item,{valid:()=>activity==='explore'}).then(ok=>{if(!ok&&activity==='explore')notice('No hay audio disponible para esta entrada. Comprueba que tu dispositivo tenga una voz de portugués de Brasil.');});};const history=document.createElement('div');history.innerHTML=ledger.render('portugues',item.id);card.append(title,...(item.extra?[pin]:[]),es,button,history);$('wordGrid').append(card);}$('more').hidden=found.length<=pageSize;}
-function renderBlocks(){ $('blocks').replaceChildren();for(const block of BLOCKS){const b=document.createElement('button');b.className='chip';b.textContent=BLOCK_LABELS[block];b.setAttribute('aria-pressed',String(settings.blocks.includes(block)));b.onclick=()=>{if(settings.blocks.includes(block)){if(settings.blocks.length===1)return;settings.blocks=settings.blocks.filter(x=>x!==block);}else settings.blocks=[...settings.blocks,block];saveSettings();renderBlocks();writing?.reset();if(activity==='match'){matcher?.reset();}if(activity==='explore')explore();};$('blocks').append(b);}const all=document.createElement('button');all.className='chip';all.textContent='Todos';all.setAttribute('aria-pressed',String(settings.blocks.length===BLOCKS.length));all.onclick=()=>{settings.blocks=BLOCKS.slice();saveSettings();renderBlocks();writing?.reset();if(activity==='match'){matcher?.reset();}if(activity==='explore')explore();};$('blocks').append(all);$('poolCount').textContent=catalog.filter(x=>settings.blocks.includes(x.block)).length+' de '+catalog.length+' entradas seleccionadas';}
+function applyBlocks(next){
+ if(next.length===settings.blocks.length&&next.every(b=>settings.blocks.includes(b)))return;
+ settings.blocks=next;
+ saveSettings();renderBlocks();matcher?.reset();writing?.reset();
+ if(activity==='explore'){pageSize=24;explore();}
+ if(!summaryOpen&&!reviewPending&&!answered){
+  quizScopeDirty=true;
+  if(activity==='quiz'&&loaded)nextQuestion(true);
+ }
+}
+function renderBlocks(){
+ const select=$('blockSelect'),counts=new Map(BLOCKS.map(b=>[b,0]));
+ for(const item of catalog)counts.set(item.block,(counts.get(item.block)||0)+1);
+ if(select){
+  const add=(value,label)=>{const opt=document.createElement('option');opt.value=value;opt.textContent=label;select.append(opt);};
+  select.replaceChildren();add('all','Todos los bloques');
+  for(const block of BLOCKS)add(block,BLOCK_LABELS[block]+' · '+counts.get(block));
+  const picked=settings.blocks.length;
+  if(picked>1&&picked<BLOCKS.length)add('custom','Selección personalizada · '+picked);
+  select.value=picked===BLOCKS.length?'all':picked===1?settings.blocks[0]:'custom';
+  select.onchange=()=>{const value=select.value;if(value==='all')applyBlocks(BLOCKS.slice());else if(BLOCKS.includes(value))applyBlocks([value]);};
+ }
+ const chips=$('blocks');chips.replaceChildren();
+ for(const block of BLOCKS){
+  const b=document.createElement('button'),picked=settings.blocks.includes(block);
+  b.type='button';b.className='chip';b.textContent=BLOCK_LABELS[block];b.setAttribute('aria-pressed',String(picked));
+  b.onclick=()=>{if(!picked)applyBlocks([...settings.blocks,block]);else if(settings.blocks.length>1)applyBlocks(settings.blocks.filter(x=>x!==block));};
+  chips.append(b);
+ }
+ const all=document.createElement('button');all.type='button';all.className='chip';all.textContent='Todos';all.setAttribute('aria-pressed',String(settings.blocks.length===BLOCKS.length));all.onclick=()=>applyBlocks(BLOCKS.slice());chips.append(all);
+ $('poolCount').textContent=selectedItems().length+' de '+catalog.length+' entradas seleccionadas';
+}
 $('quizTab').onclick=()=>switchActivity('quiz');
 $('matchTab').onclick=()=>{if(!matcher){notice('No se pudo cargar Emparejar. Recarga la página para intentarlo de nuevo.');return;}switchActivity('match');};
 if($('writeTab'))$('writeTab').onclick=()=>{if(!writing){notice('No se pudo cargar Escribir. Recarga la página para intentarlo de nuevo.');return;}switchActivity('write');};
 $('exploreTab').onclick=()=>switchActivity('explore');
 $('search').oninput=()=>{pageSize=24;explore();};$('more').onclick=()=>{pageSize+=24;explore();};
 $('listen').onclick=()=>playQuestion();$('skip').onclick=()=>respond(null);
-$('next').onclick=()=>{if(answered)nextQuestion();};$('finish').onclick=finishSession;
+$('next').onclick=advanceQuiz;$('finish').onclick=finishSession;
 $('repeat').onclick=()=>startSession();$('reviewSession').onclick=()=>{if(session.errors.size)startSession(session.errors);};
 $('resetReviews').onclick=()=>{
  if(!root.confirm('¿Reiniciar solo los repasos registrados de portugués? No se borrará el progreso de otros aplicativos.'))return;
@@ -275,11 +367,11 @@ document.addEventListener('keydown',e=>{
  if(e.altKey||e.ctrlKey||e.metaKey||e.repeat||e.target?.isContentEditable||/INPUT|SELECT|TEXTAREA|BUTTON|A|SUMMARY/.test(e.target?.tagName||'')||activity!=='quiz'||summaryOpen||!loaded||!current)return;
  const key=e.key.toLowerCase(),index='abc'.indexOf(key);
  if((index>=0&&key.length===1)||/^[1-3]$/.test(key)){const i=index>=0?index:Number(key)-1;if(!answered&&current.options[i]!==undefined){e.preventDefault();respond(current.options[i]);}}
- else if(key==='enter'&&answered){e.preventDefault();nextQuestion();}
+ else if(key==='enter'&&answered){e.preventDefault();advanceQuiz();}
  else if(key==='r'&&(answered||current.direction!=='es_pt')){e.preventDefault();playQuestion();}
 });
 root.addEventListener('pagehide',()=>{quizMusic?.cancel();stopAudio();});
 root.addEventListener('storage',e=>{if(e.key==='asallam_reviews_v1_portugues'||e.key===null){updateStats();if(activity==='explore'&&loaded)explore();}});
-async function load(){loaded=false;$('loading').hidden=false;$('loading').textContent='Cargando vocabulario…';$('retry').hidden=true;showPanels();try{if(!ledger)throw Error('No se pudo cargar el registro de repasos. Recarga la página.');const response=await fetch('data/brasil.json?v=kit-brasil-20261120');if(!response.ok)throw Error('No se pudo descargar el vocabulario.');catalog=normalize(await response.json());ledger.registerCatalog('portugues',catalog.map(x=>x.id));loaded=true;renderBlocks();$('loading').hidden=true;$('catalogIntro').textContent=catalog.length+' palabras y expresiones de Brasil · '+BLOCKS.length+' bloques';nextQuestion();if(activity==='explore')explore();if(activity==='match')matcher?.activate();if(settingsBroken)notice('No se pudieron leer los ajustes guardados. Se usan valores predeterminados sin sobrescribirlos.');}catch(error){$('loading').textContent=error.message||'No se pudo cargar el vocabulario.';$('retry').hidden=false;$('poolCount').textContent='Catálogo no disponible';showPanels();}}
+async function load(){loaded=false;$('loading').hidden=false;$('loading').textContent='Cargando vocabulario…';$('retry').hidden=true;showPanels();try{if(!ledger)throw Error('No se pudo cargar el registro de repasos. Recarga la página.');const response=await fetch('data/brasil.json?v=brasil-afinado-20261120');if(!response.ok)throw Error('No se pudo descargar el vocabulario.');catalog=normalize(await response.json());ledger.registerCatalog('portugues',catalog.map(x=>x.id));loaded=true;renderBlocks();$('loading').hidden=true;$('catalogIntro').textContent=catalog.length+' palabras y expresiones de Brasil · '+BLOCKS.length+' bloques';nextQuestion();if(activity==='explore')explore();if(activity==='match')matcher?.activate();if(settingsBroken)notice('No se pudieron leer los ajustes guardados. Se usan valores predeterminados sin sobrescribirlos.');}catch(error){$('loading').textContent=error.message||'No se pudo cargar el vocabulario.';$('retry').hidden=false;$('poolCount').textContent='Catálogo no disponible';showPanels();}}
 $('retry').onclick=load;load();
 })(typeof window!=='undefined'?window:globalThis);
