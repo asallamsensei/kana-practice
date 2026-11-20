@@ -30,10 +30,10 @@ const choices={direction:['mixed','kr_rom','rom_kr','audio_rom','audio_kr','dict
 if(own(v,'autoAudio')&&typeof v.autoAudio!=='boolean')throw Error('Ajuste de audio de coreano inválido.');
 if(own(v,'blocks')&&(!Array.isArray(v.blocks)||!v.blocks.length||new Set(v.blocks).size!==v.blocks.length||v.blocks.some(x=>!['1'].includes(x))))throw Error('Selección de unidades de coreano inválida.');return true;}
 if(key==='asallam_portugues_settings_v1'){
-const fields=['direction','length','autoAudio','rate','theme','blocks'];if(Object.keys(v).some(k=>!fields.includes(k)))throw Error('Ajuste de portugués desconocido.');
-const choices={direction:['mixed','pt_es','es_pt','audio_es','audio_pt','dictado'],length:[0,10,20,40],rate:[0.7,0.85,1],theme:['dark','light']};for(const [field,values]of Object.entries(choices))if(own(v,field)&&!values.includes(v[field]))throw Error('Ajuste de portugués inválido: '+field);
+const fields=['direction','length','matchLength','autoAudio','rate','theme','blocks'];if(Object.keys(v).some(k=>!fields.includes(k)))throw Error('Ajuste de portugués desconocido.');
+const choices={direction:['mixed','pt_es','es_pt','audio_es','audio_pt','dictado'],length:[0,10,20,40],matchLength:[0,9,21,39],rate:[0.7,0.85,1],theme:['dark','light']};for(const [field,values]of Object.entries(choices))if(own(v,field)&&!values.includes(v[field]))throw Error('Ajuste de portugués inválido: '+field);
 if(own(v,'autoAudio')&&typeof v.autoAudio!=='boolean')throw Error('Ajuste de audio de portugués inválido.');
-if(own(v,'blocks')&&(!Array.isArray(v.blocks)||!v.blocks.length||new Set(v.blocks).size!==v.blocks.length||v.blocks.some(x=>!['saludos','cotidiano','comida','transporte','social'].includes(x))))throw Error('Selección de bloques de portugués inválida.');return true;}
+if(own(v,'blocks')&&(!Array.isArray(v.blocks)||!v.blocks.length||new Set(v.blocks).size!==v.blocks.length||v.blocks.some(x=>!['saludos','cotidiano','comida','transporte','social','aeroporto','hospedagem','compras','emergencias','numeros','cores','tempo','praia'].includes(x))))throw Error('Selección de bloques de portugués inválida.');return true;}
 if(key==='asallam_chino_settings_v1'){
 const fields=['direction','length','autoAudio','rate','theme'];if(Object.keys(v).some(k=>!fields.includes(k)))throw Error('Ajuste de chino desconocido.');
 const choices={direction:['mixed','zh_es','es_zh'],length:[0,10,20,40],rate:[0.7,0.85,1],theme:['dark','light']};for(const [field,values]of Object.entries(choices))if(own(v,field)&&!values.includes(v[field]))throw Error('Ajuste de chino inválido: '+field);

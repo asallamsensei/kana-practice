@@ -6,7 +6,7 @@
   // Only an explicit music-button choice of 'off' disables music across pages.
   const KEY = 'sensei_matching_music_v1';
   const NOTES = [261.6256,293.6648,329.6276,349.2282,391.9954,440,493.8833];
-  let enabled = true, context = null, queue = [], timer = null, busyUntil = 0, button = null;
+  let enabled = true, context = null, queue = [], timer = null, busyUntil = 0, button = null, playing = null;
   try { enabled = root.localStorage.getItem(KEY) !== 'off'; } catch (_) {}
   function contextForGesture() {
     try {
@@ -29,14 +29,25 @@
     } catch (_) { return false; }
   }
   function allowed(job) {
-    try { return enabled && (job.board.generation === job.generation || job.keepCompletion); }
+    try { return (enabled || job.after) && (job.board.generation === job.generation || job.keepCompletion); }
     catch (_) { return false; }
+  }
+  function settle(job, cancelled) {
+    if (!job || !job.after) return;
+    const after = job.after;
+    job.after = null;
+    try { after(Boolean(cancelled)); } catch (_) {}
+  }
+  function keepJobs(keep, cancelled) {
+    const removed = queue.filter(function (job) { return !keep(job); });
+    queue = queue.filter(keep);
+    removed.forEach(function (job) { settle(job, cancelled); });
   }
   function schedulePump(delay) {
     if (timer !== null) return;
     timer = root.setTimeout(function () { timer = null; pump(); }, delay);
   }
-  function tone(frequency, when, duration, gain) {
+  function tone(frequency, when, duration, gain, done) {
     const oscillator = context.createOscillator(), envelope = context.createGain();
     oscillator.type = 'sine';
     oscillator.frequency.setValueAtTime(frequency, when);
@@ -44,12 +55,18 @@
     envelope.gain.linearRampToValueAtTime(gain, when + 0.012);
     envelope.gain.exponentialRampToValueAtTime(0.0001, when + duration);
     oscillator.connect(envelope); envelope.connect(context.destination);
-    oscillator.onended = function () { try { oscillator.disconnect(); envelope.disconnect(); } catch (_) {} };
+    oscillator.onended = function () { try { oscillator.disconnect(); envelope.disconnect(); } catch (_) {} if (done) done(); };
     oscillator.start(when); oscillator.stop(when + duration + 0.025);
   }
   function play(job) {
     const now = context.currentTime + 0.015;
-    if (!job.answer) tone(NOTES[job.index % NOTES.length] * Math.pow(2, Math.floor(job.index / NOTES.length)), now, 0.23, 0.23);
+    const done = job.after ? function () {
+      if (playing === job) playing = null;
+      settle(job, false);
+      pump();
+    } : null;
+    if (done) playing = job;
+    if (!job.answer) tone(NOTES[job.index % NOTES.length] * Math.pow(2, Math.floor(job.index / NOTES.length)), now, 0.23, 0.23, job.complete ? null : done);
     let duration = 0.29;
     if (job.complete || job.answer) {
       const offset = job.answer ? -0.30 : 0;
@@ -57,8 +74,8 @@
       [523.2511,659.2551,783.9909].forEach(function (frequency, index) {
         tone(frequency, now + offset + 0.30 + index * 0.11, 0.18, 0.18);
       });
-      [523.2511,659.2551,783.9909].forEach(function (frequency) {
-        tone(frequency, now + offset + 0.67, 0.55, 0.11);
+      [523.2511,659.2551,783.9909].forEach(function (frequency, index) {
+        tone(frequency, now + offset + 0.67, 0.55, 0.11, index === 2 ? done : null);
       });
       duration = 1.27 + offset;
     }
@@ -67,15 +84,20 @@
   }
   function pump() {
     // Sentence audio can be long; keep earned answer feedback through it, with a bounded expiry.
-    queue = queue.filter(function (job) { return allowed(job) && Date.now() - job.created < (job.answer ? 120000 : 15000); });
+    keepJobs(function (job) { return allowed(job) && Date.now() - job.created < (job.answer ? 120000 : 15000); }, true);
     if (!queue.length) return;
-    if (!context || context.state === 'closed') { queue = []; return; }
-    if (context.state !== 'running') { schedulePump(120); return; }
     let engineBusy = false;
     try { engineBusy = queue[0].board.isBusy(); } catch (_) {}
-    if (speaking() || engineBusy || context.currentTime < busyUntil) { schedulePump(80); return; }
+    if (speaking() || engineBusy || (context?.state === 'running' && context.currentTime < busyUntil)) { schedulePump(80); return; }
+    if (!enabled || !context || context.state === 'closed' || (queue[0].after && context.state !== 'running' && Date.now() - queue[0].created >= 850)) {
+      const job = queue.shift();
+      settle(job, false);
+      if (queue.length) schedulePump(1);
+      return;
+    }
+    if (context.state !== 'running') { schedulePump(120); return; }
     const job = queue.shift();
-    try { play(job); } catch (_) { schedulePump(80); }
+    try { play(job); } catch (_) { if (playing === job) playing = null; settle(job, false); schedulePump(80); }
   }
   function updateButton() {
     if (!button) return;
@@ -85,7 +107,7 @@
   }
   function setEnabled(value) {
     enabled = !!value;
-    if (!enabled) queue = []; // Never cut off a note that has already started.
+    if (!enabled) { keepJobs(function (job) { return Boolean(job.after); }, true); pump(); } // Keep pending pronunciation, not muted tones.
     try { root.localStorage.setItem(KEY, enabled ? 'on' : 'off'); } catch (_) {}
     updateButton();
     if (enabled) contextForGesture();
@@ -109,29 +131,31 @@
     const board = {isBusy:typeof options.isBusy === 'function' ? options.isBusy : function () { return false; },generation:0, index:0, finished:false, answered:new Set()};
     updateButton();
     return {
-      cancel: function () { queue = queue.filter(function (job) { return job.board !== board; }); },
-      reset: function (settings) { queue.forEach(function (job) { if (job.board === board) job.keepCompletion = !!(settings && settings.keepCompletion); }); board.generation++; board.index = 0; board.finished = false; board.answered.clear(); queue = queue.filter(function (job) { return job.board !== board || job.keepCompletion; }); },
-      correct: function (token) {
+      cancel: function () { keepJobs(function (job) { return job.board !== board; }, true); if (playing?.board === board) { settle(playing, true); playing = null; } },
+      reset: function (settings) { queue.forEach(function (job) { if (job.board === board) job.keepCompletion = !!(settings && settings.keepCompletion); }); board.generation++; board.index = 0; board.finished = false; board.answered.clear(); keepJobs(function (job) { return job.board !== board || job.keepCompletion; }, true); if (!settings?.keepCompletion && playing?.board === board) { settle(playing, true); playing = null; } },
+      correct: function (token, after) {
         // Callers guard answered questions; optional stable tokens also reject duplicate events.
         if (token !== undefined && token !== null) {
-          if (board.answered.has(token)) return;
+          if (board.answered.has(token)) { if (after) after(true); return; }
           board.answered.add(token);
           if (board.answered.size > 512) board.answered.delete(board.answered.values().next().value);
         }
-        const job = {board:board,generation:board.generation,answer:true,created:Date.now()};
+        const job = {board:board,generation:board.generation,answer:true,created:Date.now(),after:typeof after === 'function' ? after : null};
         if (!allowed(job)) return;
         contextForGesture();
+        if (job.after && (!enabled || !context)) { settle(job, false); return; }
         queue.push(job);
         schedulePump(35);
       },
       match: function (result) {
-        if (board.finished) return;
+        if (board.finished) { if (result?.after) result.after(true); return; }
         const index = board.index++;
         const complete = !!(result && result.complete);
         if (complete) board.finished = true;
-        const job = {board:board,generation:board.generation,index:index,complete:complete,created:Date.now()};
+        const job = {board:board,generation:board.generation,index:index,complete:complete,created:Date.now(),after:typeof result?.after === 'function' ? result.after : null};
         if (!allowed(job)) return;
         contextForGesture();
+        if (job.after && (!enabled || !context)) { settle(job, false); return; }
         queue.push(job);
         // Let the same click handler start its spoken feedback before deciding whether to play.
         schedulePump(35);
@@ -145,6 +169,6 @@
     root.document.addEventListener('keydown', function (event) { if (event.key === 'Enter' || event.key === ' ') contextForGesture(); }, true);
     if (root.document.readyState === 'loading') root.document.addEventListener('DOMContentLoaded', installControl); else installControl();
   }
-  root.addEventListener && root.addEventListener('pagehide', function () { queue = []; });
-  root.addEventListener && root.addEventListener('storage', function (event) { if (event.key === KEY) { enabled = event.newValue !== 'off'; if (!enabled) queue = []; updateButton(); } });
+  root.addEventListener && root.addEventListener('pagehide', function () { keepJobs(function () { return false; }, true); settle(playing, true); playing = null; });
+  root.addEventListener && root.addEventListener('storage', function (event) { if (event.key === KEY) { enabled = event.newValue !== 'off'; if (!enabled) { keepJobs(function (job) { return Boolean(job.after); }, true); pump(); } updateButton(); } });
 })(window);

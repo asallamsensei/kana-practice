@@ -288,3 +288,14 @@
 
 /* Portuguese uses the shared layout without Chinese typefaces. */
 .word-card.explore-card h3{font-family:inherit;font-size:23px}.prompt{font-family:inherit}.pinyin:empty{display:none}.chip{min-height:42px}
+
+/* Brazilian travel kit uses the same practice components as the language apps. */
+.portuguese-kit{margin:0 0 6px;color:var(--mint);font-size:.85rem;font-weight:700;letter-spacing:.06em}
+main .activity-tabs{grid-template-columns:repeat(4,minmax(0,1fr))}
+.writing-mode{display:flex;align-items:center;gap:8px 12px;flex-wrap:wrap;font-size:.9rem;margin:0 0 8px}
+#writePrompt{display:grid;place-content:center}
+#writeFeedback div{overflow-wrap:anywhere}
+#writeFeedback div[lang="pt-BR"]{font-weight:700;margin-top:6px}
+#writeInput{text-align:left;font-size:clamp(17px,4vw,24px)}
+#writeResult h2{margin:18px 0 8px}
+@media(max-width:400px){main .activity-tabs{grid-template-columns:repeat(2,minmax(0,1fr))}}

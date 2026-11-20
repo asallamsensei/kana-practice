@@ -2,80 +2,2946 @@
   {
     "bloque": "saludos",
     "items": [
-      { "portugues": "oi", "espanol": "hola", "extra": "" },
-      { "portugues": "bom dia", "espanol": "buenos días", "extra": "" },
-      { "portugues": "boa tarde", "espanol": "buenas tardes", "extra": "" },
-      { "portugues": "boa noite", "espanol": "buenas noches", "extra": "" },
-      { "portugues": "tudo bem?", "espanol": "¿todo bien?", "extra": "" },
-      { "portugues": "prazer", "espanol": "mucho gusto", "extra": "" },
-      { "portugues": "como você está?", "espanol": "¿cómo estás?", "extra": "" },
-      { "portugues": "até logo", "espanol": "hasta luego", "extra": "" },
-      { "portugues": "até amanhã", "espanol": "hasta mañana", "extra": "" },
-      { "portugues": "tchau", "espanol": "chao", "extra": "" }
+      {
+        "portugues": "oi",
+        "espanol": "hola",
+        "extra": ""
+      },
+      {
+        "portugues": "bom dia",
+        "espanol": "buenos días",
+        "extra": ""
+      },
+      {
+        "portugues": "boa tarde",
+        "espanol": "buenas tardes",
+        "extra": ""
+      },
+      {
+        "portugues": "boa noite",
+        "espanol": "buenas noches",
+        "extra": ""
+      },
+      {
+        "portugues": "tudo bem?",
+        "espanol": "¿todo bien?",
+        "extra": ""
+      },
+      {
+        "portugues": "prazer",
+        "espanol": "mucho gusto",
+        "extra": ""
+      },
+      {
+        "portugues": "como você está?",
+        "espanol": "¿cómo estás?",
+        "extra": ""
+      },
+      {
+        "portugues": "até logo",
+        "espanol": "hasta luego",
+        "extra": ""
+      },
+      {
+        "portugues": "até amanhã",
+        "espanol": "hasta mañana",
+        "extra": ""
+      },
+      {
+        "portugues": "tchau",
+        "espanol": "chao",
+        "extra": ""
+      },
+      {
+        "portugues": "olá",
+        "espanol": "hola",
+        "extra": ""
+      },
+      {
+        "portugues": "beleza?",
+        "espanol": "¿todo bien?",
+        "extra": "Saludo informal."
+      },
+      {
+        "portugues": "tudo bom?",
+        "espanol": "¿todo bien?",
+        "extra": ""
+      },
+      {
+        "portugues": "como vai?",
+        "espanol": "¿cómo te va?",
+        "extra": ""
+      },
+      {
+        "portugues": "tudo certo?",
+        "espanol": "¿todo en orden?",
+        "extra": ""
+      },
+      {
+        "portugues": "tudo bem! e você?",
+        "espanol": "¡todo bien! ¿y tú?",
+        "extra": ""
+      },
+      {
+        "portugues": "tudo ótimo!",
+        "espanol": "¡todo excelente!",
+        "extra": ""
+      },
+      {
+        "portugues": "mais ou menos",
+        "espanol": "más o menos",
+        "extra": ""
+      },
+      {
+        "portugues": "vou levando",
+        "espanol": "ahí voy",
+        "extra": "Respuesta coloquial sobre cómo te va."
+      },
+      {
+        "portugues": "até mais!",
+        "espanol": "¡hasta luego!",
+        "extra": ""
+      },
+      {
+        "portugues": "adeus",
+        "espanol": "adiós",
+        "extra": "Despedida más definitiva."
+      },
+      {
+        "portugues": "falou!",
+        "espanol": "¡listo, chao!",
+        "extra": "Despedida muy informal."
+      },
+      {
+        "portugues": "a gente se vê!",
+        "espanol": "¡nos vemos!",
+        "extra": ""
+      },
+      {
+        "portugues": "boa sorte!",
+        "espanol": "¡buena suerte!",
+        "extra": ""
+      },
+      {
+        "portugues": "boa viagem!",
+        "espanol": "¡buen viaje!",
+        "extra": ""
+      },
+      {
+        "portugues": "obrigado",
+        "espanol": "gracias",
+        "extra": "Lo dice un hombre."
+      },
+      {
+        "portugues": "obrigada",
+        "espanol": "gracias",
+        "extra": "Lo dice una mujer."
+      },
+      {
+        "portugues": "de nada",
+        "espanol": "de nada",
+        "extra": ""
+      },
+      {
+        "portugues": "com licença",
+        "espanol": "con permiso",
+        "extra": ""
+      }
     ]
   },
-
   {
     "bloque": "cotidiano",
     "items": [
-      { "portugues": "eu quero", "espanol": "yo quiero", "extra": "" },
-      { "portugues": "eu preciso", "espanol": "yo necesito", "extra": "" },
-      { "portugues": "vamos", "espanol": "vamos", "extra": "" },
-      { "portugues": "estou cansado", "espanol": "estoy cansado", "extra": "" },
-      { "portugues": "não entendo", "espanol": "no entiendo", "extra": "" },
-      { "portugues": "fala devagar", "espanol": "habla despacio", "extra": "" },
-      { "portugues": "que horas são?", "espanol": "¿qué hora es?", "extra": "" },
-      { "portugues": "estou com sono", "espanol": "tengo sueño", "extra": "" },
-      { "portugues": "vamos embora", "espanol": "vámonos", "extra": "" },
-      { "portugues": "eu gosto disso", "espanol": "me gusta eso", "extra": "" }
+      {
+        "portugues": "eu quero",
+        "espanol": "yo quiero",
+        "extra": ""
+      },
+      {
+        "portugues": "eu preciso",
+        "espanol": "yo necesito",
+        "extra": ""
+      },
+      {
+        "portugues": "vamos",
+        "espanol": "vamos",
+        "extra": ""
+      },
+      {
+        "portugues": "estou cansado",
+        "espanol": "estoy cansado",
+        "extra": ""
+      },
+      {
+        "portugues": "não entendo",
+        "espanol": "no entiendo",
+        "extra": ""
+      },
+      {
+        "portugues": "fala devagar",
+        "espanol": "habla despacio",
+        "extra": ""
+      },
+      {
+        "portugues": "que horas são?",
+        "espanol": "¿qué hora es?",
+        "extra": ""
+      },
+      {
+        "portugues": "estou com sono",
+        "espanol": "tengo sueño",
+        "extra": ""
+      },
+      {
+        "portugues": "vamos embora",
+        "espanol": "vámonos",
+        "extra": ""
+      },
+      {
+        "portugues": "eu gosto disso",
+        "espanol": "me gusta eso",
+        "extra": ""
+      },
+      {
+        "portugues": "com licença, pode me ajudar?",
+        "espanol": "disculpe, ¿me puede ayudar?",
+        "extra": ""
+      },
+      {
+        "portugues": "onde fica este lugar?",
+        "espanol": "¿dónde queda este lugar?",
+        "extra": ""
+      },
+      {
+        "portugues": "onde tem um supermercado?",
+        "espanol": "¿dónde hay un supermercado?",
+        "extra": ""
+      },
+      {
+        "portugues": "pode me ajudar? estou perdida.",
+        "espanol": "¿me puede ayudar? estoy perdida.",
+        "extra": ""
+      },
+      {
+        "portugues": "tem uma padaria perto daqui?",
+        "espanol": "¿hay una panadería cerca de aquí?",
+        "extra": ""
+      },
+      {
+        "portugues": "onde fica o banheiro?",
+        "espanol": "¿dónde queda el baño?",
+        "extra": ""
+      },
+      {
+        "portugues": "banheiro",
+        "espanol": "baño",
+        "extra": ""
+      },
+      {
+        "portugues": "você fala espanhol?",
+        "espanol": "¿habla español?",
+        "extra": ""
+      },
+      {
+        "portugues": "qual é o seu nome?",
+        "espanol": "¿cómo te llamas?",
+        "extra": ""
+      },
+      {
+        "portugues": "pode repetir?",
+        "espanol": "¿puede repetir?",
+        "extra": ""
+      },
+      {
+        "portugues": "pode falar mais devagar?",
+        "espanol": "¿puede hablar más despacio?",
+        "extra": ""
+      },
+      {
+        "portugues": "pode me ajudar?",
+        "espanol": "¿me puede ayudar?",
+        "extra": ""
+      },
+      {
+        "portugues": "não entendi",
+        "espanol": "no entendí",
+        "extra": ""
+      },
+      {
+        "portugues": "não sei",
+        "espanol": "no sé",
+        "extra": ""
+      },
+      {
+        "portugues": "não posso",
+        "espanol": "no puedo",
+        "extra": ""
+      },
+      {
+        "portugues": "não tem",
+        "espanol": "no hay",
+        "extra": ""
+      },
+      {
+        "portugues": "não funciona",
+        "espanol": "no funciona",
+        "extra": ""
+      },
+      {
+        "portugues": "não lembro agora",
+        "espanol": "no recuerdo ahora",
+        "extra": ""
+      },
+      {
+        "portugues": "não precisa",
+        "espanol": "no hace falta",
+        "extra": ""
+      },
+      {
+        "portugues": "não estou certo disso",
+        "espanol": "no estoy seguro de eso",
+        "extra": ""
+      },
+      {
+        "portugues": "é aqui?",
+        "espanol": "¿es aquí?",
+        "extra": ""
+      },
+      {
+        "portugues": "está fechado",
+        "espanol": "está cerrado",
+        "extra": ""
+      },
+      {
+        "portugues": "tá aberto?",
+        "espanol": "¿está abierto?",
+        "extra": "Informal: tá significa está."
+      },
+      {
+        "portugues": "tá funcionando?",
+        "espanol": "¿está funcionando?",
+        "extra": "Informal: tá significa está."
+      },
+      {
+        "portugues": "tem banheiro aqui?",
+        "espanol": "¿hay baño aquí?",
+        "extra": ""
+      },
+      {
+        "portugues": "tem wi-fi?",
+        "espanol": "¿hay wifi?",
+        "extra": ""
+      },
+      {
+        "portugues": "tem sim",
+        "espanol": "sí hay",
+        "extra": ""
+      },
+      {
+        "portugues": "estou esperando",
+        "espanol": "estoy esperando",
+        "extra": ""
+      },
+      {
+        "portugues": "está muito frio hoje",
+        "espanol": "hace mucho frío hoy",
+        "extra": ""
+      },
+      {
+        "portugues": "tá chovendo",
+        "espanol": "está lloviendo",
+        "extra": "Forma informal."
+      },
+      {
+        "portugues": "eu vou descansar um pouco",
+        "espanol": "voy a descansar un poco",
+        "extra": ""
+      },
+      {
+        "portugues": "a gente quer descansar",
+        "espanol": "queremos descansar",
+        "extra": ""
+      },
+      {
+        "portugues": "vou ficar em casa hoje",
+        "espanol": "me voy a quedar en casa hoy",
+        "extra": ""
+      },
+      {
+        "portugues": "fica aqui um minuto",
+        "espanol": "quédate aquí un minuto",
+        "extra": ""
+      },
+      {
+        "portugues": "posso ficar com isso?",
+        "espanol": "¿puedo quedarme con esto?",
+        "extra": ""
+      },
+      {
+        "portugues": "pode deixar",
+        "espanol": "déjalo en mis manos",
+        "extra": ""
+      },
+      {
+        "portugues": "fica tranquilo",
+        "espanol": "no te preocupes",
+        "extra": ""
+      },
+      {
+        "portugues": "fica à vontade",
+        "espanol": "siéntete a gusto",
+        "extra": ""
+      },
+      {
+        "portugues": "não repara a bagunça",
+        "espanol": "disculpa el desorden",
+        "extra": ""
+      },
+      {
+        "portugues": "deixa eu ver",
+        "espanol": "déjame ver",
+        "extra": ""
+      },
+      {
+        "portugues": "calma aí",
+        "espanol": "espera un momento",
+        "extra": ""
+      },
+      {
+        "portugues": "pode ser",
+        "espanol": "de acuerdo",
+        "extra": ""
+      },
+      {
+        "portugues": "fechou!",
+        "espanol": "¡hecho!",
+        "extra": ""
+      },
+      {
+        "portugues": "sem problemas",
+        "espanol": "sin problemas",
+        "extra": ""
+      },
+      {
+        "portugues": "é pra já",
+        "espanol": "enseguida",
+        "extra": ""
+      },
+      {
+        "portugues": "pois não?",
+        "espanol": "¿en qué puedo ayudarle?",
+        "extra": "Expresión de atención al cliente."
+      },
+      {
+        "portugues": "sou da colômbia",
+        "espanol": "soy de Colombia",
+        "extra": ""
+      }
     ]
   },
-
   {
     "bloque": "comida",
     "items": [
-      { "portugues": "água", "espanol": "agua", "extra": "" },
-      { "portugues": "café", "espanol": "café", "extra": "" },
-      { "portugues": "arroz", "espanol": "arroz", "extra": "" },
-      { "portugues": "feijão", "espanol": "frijoles", "extra": "" },
-      { "portugues": "carne", "espanol": "carne", "extra": "" },
-      { "portugues": "frango", "espanol": "pollo", "extra": "" },
-      { "portugues": "estou com fome", "espanol": "tengo hambre", "extra": "" },
-      { "portugues": "estou com sede", "espanol": "tengo sed", "extra": "" },
-      { "portugues": "a conta, por favor", "espanol": "la cuenta, por favor", "extra": "" },
-      { "portugues": "muito gostoso", "espanol": "muy rico", "extra": "" }
+      {
+        "portugues": "água",
+        "espanol": "agua",
+        "extra": ""
+      },
+      {
+        "portugues": "café",
+        "espanol": "café",
+        "extra": ""
+      },
+      {
+        "portugues": "arroz",
+        "espanol": "arroz",
+        "extra": ""
+      },
+      {
+        "portugues": "feijão",
+        "espanol": "frijoles",
+        "extra": ""
+      },
+      {
+        "portugues": "carne",
+        "espanol": "carne",
+        "extra": ""
+      },
+      {
+        "portugues": "frango",
+        "espanol": "pollo",
+        "extra": ""
+      },
+      {
+        "portugues": "estou com fome",
+        "espanol": "tengo hambre",
+        "extra": ""
+      },
+      {
+        "portugues": "estou com sede",
+        "espanol": "tengo sed",
+        "extra": ""
+      },
+      {
+        "portugues": "a conta, por favor",
+        "espanol": "la cuenta, por favor",
+        "extra": ""
+      },
+      {
+        "portugues": "muito gostoso",
+        "espanol": "muy rico",
+        "extra": ""
+      },
+      {
+        "portugues": "pão",
+        "espanol": "pan",
+        "extra": ""
+      },
+      {
+        "portugues": "leite",
+        "espanol": "leche",
+        "extra": ""
+      },
+      {
+        "portugues": "ovo",
+        "espanol": "huevo",
+        "extra": ""
+      },
+      {
+        "portugues": "peixe",
+        "espanol": "pescado",
+        "extra": ""
+      },
+      {
+        "portugues": "macarrão",
+        "espanol": "pasta",
+        "extra": ""
+      },
+      {
+        "portugues": "manteiga",
+        "espanol": "mantequilla",
+        "extra": ""
+      },
+      {
+        "portugues": "queijo",
+        "espanol": "queso",
+        "extra": ""
+      },
+      {
+        "portugues": "presunto",
+        "espanol": "jamón",
+        "extra": ""
+      },
+      {
+        "portugues": "azeite",
+        "espanol": "aceite de oliva",
+        "extra": ""
+      },
+      {
+        "portugues": "óleo",
+        "espanol": "aceite vegetal",
+        "extra": ""
+      },
+      {
+        "portugues": "sal",
+        "espanol": "sal",
+        "extra": ""
+      },
+      {
+        "portugues": "açúcar",
+        "espanol": "azúcar",
+        "extra": ""
+      },
+      {
+        "portugues": "farinha",
+        "espanol": "harina",
+        "extra": ""
+      },
+      {
+        "portugues": "alface",
+        "espanol": "lechuga",
+        "extra": ""
+      },
+      {
+        "portugues": "tomate",
+        "espanol": "tomate",
+        "extra": ""
+      },
+      {
+        "portugues": "cebola",
+        "espanol": "cebolla",
+        "extra": ""
+      },
+      {
+        "portugues": "cenoura",
+        "espanol": "zanahoria",
+        "extra": ""
+      },
+      {
+        "portugues": "batata",
+        "espanol": "papa",
+        "extra": ""
+      },
+      {
+        "portugues": "batata-doce",
+        "espanol": "batata dulce",
+        "extra": ""
+      },
+      {
+        "portugues": "abobrinha",
+        "espanol": "calabacín",
+        "extra": ""
+      },
+      {
+        "portugues": "berinjela",
+        "espanol": "berenjena",
+        "extra": ""
+      },
+      {
+        "portugues": "milho",
+        "espanol": "maíz",
+        "extra": ""
+      },
+      {
+        "portugues": "pepino",
+        "espanol": "pepino",
+        "extra": ""
+      },
+      {
+        "portugues": "brócolis",
+        "espanol": "brócoli",
+        "extra": ""
+      },
+      {
+        "portugues": "couve-flor",
+        "espanol": "coliflor",
+        "extra": ""
+      },
+      {
+        "portugues": "banana",
+        "espanol": "banano",
+        "extra": ""
+      },
+      {
+        "portugues": "maçã",
+        "espanol": "manzana",
+        "extra": ""
+      },
+      {
+        "portugues": "laranja",
+        "espanol": "naranja",
+        "extra": "Fruta. También significa naranja como color."
+      },
+      {
+        "portugues": "uva",
+        "espanol": "uva",
+        "extra": ""
+      },
+      {
+        "portugues": "melancia",
+        "espanol": "sandía",
+        "extra": ""
+      },
+      {
+        "portugues": "melão",
+        "espanol": "melón",
+        "extra": ""
+      },
+      {
+        "portugues": "abacaxi",
+        "espanol": "piña",
+        "extra": ""
+      },
+      {
+        "portugues": "manga",
+        "espanol": "mango",
+        "extra": ""
+      },
+      {
+        "portugues": "mamão",
+        "espanol": "papaya",
+        "extra": ""
+      },
+      {
+        "portugues": "morango",
+        "espanol": "fresa",
+        "extra": ""
+      },
+      {
+        "portugues": "limão",
+        "espanol": "limón",
+        "extra": ""
+      },
+      {
+        "portugues": "pera",
+        "espanol": "pera",
+        "extra": ""
+      },
+      {
+        "portugues": "kiwi",
+        "espanol": "kiwi",
+        "extra": ""
+      },
+      {
+        "portugues": "coco",
+        "espanol": "coco",
+        "extra": ""
+      },
+      {
+        "portugues": "hambúrguer",
+        "espanol": "hamburguesa",
+        "extra": ""
+      },
+      {
+        "portugues": "cachorro-quente",
+        "espanol": "perro caliente",
+        "extra": ""
+      },
+      {
+        "portugues": "pizza",
+        "espanol": "pizza",
+        "extra": ""
+      },
+      {
+        "portugues": "batata frita",
+        "espanol": "papas fritas",
+        "extra": ""
+      },
+      {
+        "portugues": "sanduíche",
+        "espanol": "sándwich",
+        "extra": ""
+      },
+      {
+        "portugues": "salgadinho",
+        "espanol": "pasabocas",
+        "extra": ""
+      },
+      {
+        "portugues": "mostarda",
+        "espanol": "mostaza",
+        "extra": ""
+      },
+      {
+        "portugues": "maionese",
+        "espanol": "mayonesa",
+        "extra": ""
+      },
+      {
+        "portugues": "garfo",
+        "espanol": "tenedor",
+        "extra": ""
+      },
+      {
+        "portugues": "faca",
+        "espanol": "cuchillo",
+        "extra": ""
+      },
+      {
+        "portugues": "colher",
+        "espanol": "cuchara",
+        "extra": ""
+      },
+      {
+        "portugues": "prato",
+        "espanol": "plato",
+        "extra": ""
+      },
+      {
+        "portugues": "copo",
+        "espanol": "vaso",
+        "extra": ""
+      },
+      {
+        "portugues": "xícara",
+        "espanol": "taza",
+        "extra": ""
+      },
+      {
+        "portugues": "panela",
+        "espanol": "olla",
+        "extra": ""
+      },
+      {
+        "portugues": "frigideira",
+        "espanol": "sartén",
+        "extra": ""
+      },
+      {
+        "portugues": "tigela",
+        "espanol": "tazón",
+        "extra": ""
+      },
+      {
+        "portugues": "talheres",
+        "espanol": "cubiertos",
+        "extra": ""
+      },
+      {
+        "portugues": "guardanapo",
+        "espanol": "servilleta",
+        "extra": ""
+      },
+      {
+        "portugues": "mesa",
+        "espanol": "mesa",
+        "extra": ""
+      },
+      {
+        "portugues": "cadeira",
+        "espanol": "silla",
+        "extra": ""
+      },
+      {
+        "portugues": "toalha de mesa",
+        "espanol": "mantel",
+        "extra": ""
+      },
+      {
+        "portugues": "abridor de garrafa",
+        "espanol": "abrebotellas",
+        "extra": ""
+      },
+      {
+        "portugues": "água com gás",
+        "espanol": "agua con gas",
+        "extra": ""
+      },
+      {
+        "portugues": "água sem gás",
+        "espanol": "agua sin gas",
+        "extra": ""
+      },
+      {
+        "portugues": "água mineral",
+        "espanol": "agua mineral",
+        "extra": ""
+      },
+      {
+        "portugues": "tônica",
+        "espanol": "agua tónica",
+        "extra": ""
+      },
+      {
+        "portugues": "suco",
+        "espanol": "jugo",
+        "extra": ""
+      },
+      {
+        "portugues": "suco de goiaba",
+        "espanol": "jugo de guayaba",
+        "extra": ""
+      },
+      {
+        "portugues": "suco de laranja",
+        "espanol": "jugo de naranja",
+        "extra": ""
+      },
+      {
+        "portugues": "suco de limão",
+        "espanol": "jugo de limón",
+        "extra": ""
+      },
+      {
+        "portugues": "suco de maçã",
+        "espanol": "jugo de manzana",
+        "extra": ""
+      },
+      {
+        "portugues": "suco de maracujá",
+        "espanol": "jugo de maracuyá",
+        "extra": ""
+      },
+      {
+        "portugues": "suco de morango",
+        "espanol": "jugo de fresa",
+        "extra": ""
+      },
+      {
+        "portugues": "suco de manga",
+        "espanol": "jugo de mango",
+        "extra": ""
+      },
+      {
+        "portugues": "suco de pêssego",
+        "espanol": "jugo de durazno",
+        "extra": ""
+      },
+      {
+        "portugues": "suco de tangerina",
+        "espanol": "jugo de mandarina",
+        "extra": ""
+      },
+      {
+        "portugues": "suco de uva",
+        "espanol": "jugo de uva",
+        "extra": ""
+      },
+      {
+        "portugues": "suco de caixinha",
+        "espanol": "jugo en caja",
+        "extra": ""
+      },
+      {
+        "portugues": "suco em pó",
+        "espanol": "jugo en polvo",
+        "extra": ""
+      },
+      {
+        "portugues": "café preto",
+        "espanol": "café negro",
+        "extra": ""
+      },
+      {
+        "portugues": "café com leite",
+        "espanol": "café con leche",
+        "extra": ""
+      },
+      {
+        "portugues": "café expresso",
+        "espanol": "café expreso",
+        "extra": ""
+      },
+      {
+        "portugues": "café descafeinado",
+        "espanol": "café descafeinado",
+        "extra": ""
+      },
+      {
+        "portugues": "capuccino",
+        "espanol": "capuchino",
+        "extra": ""
+      },
+      {
+        "portugues": "achocolatado quente",
+        "espanol": "chocolate caliente",
+        "extra": ""
+      },
+      {
+        "portugues": "leite quente",
+        "espanol": "leche caliente",
+        "extra": ""
+      },
+      {
+        "portugues": "refrigerante",
+        "espanol": "gaseosa",
+        "extra": ""
+      },
+      {
+        "portugues": "refrigerante zero",
+        "espanol": "gaseosa sin azúcar",
+        "extra": ""
+      },
+      {
+        "portugues": "bebida energética",
+        "espanol": "bebida energética",
+        "extra": ""
+      },
+      {
+        "portugues": "chá gelado",
+        "espanol": "té helado",
+        "extra": ""
+      },
+      {
+        "portugues": "chá quente",
+        "espanol": "té caliente",
+        "extra": ""
+      },
+      {
+        "portugues": "chá com limão",
+        "espanol": "té con limón",
+        "extra": ""
+      },
+      {
+        "portugues": "chá verde",
+        "espanol": "té verde",
+        "extra": ""
+      },
+      {
+        "portugues": "chá preto",
+        "espanol": "té negro",
+        "extra": ""
+      },
+      {
+        "portugues": "chá de camomila",
+        "espanol": "té de manzanilla",
+        "extra": ""
+      },
+      {
+        "portugues": "leite desnatado",
+        "espanol": "leche descremada",
+        "extra": ""
+      },
+      {
+        "portugues": "leite com chocolate",
+        "espanol": "leche chocolatada",
+        "extra": ""
+      },
+      {
+        "portugues": "iogurte",
+        "espanol": "yogur",
+        "extra": ""
+      },
+      {
+        "portugues": "iogurte líquido",
+        "espanol": "yogur líquido",
+        "extra": ""
+      },
+      {
+        "portugues": "iogurte grego",
+        "espanol": "yogur griego",
+        "extra": ""
+      },
+      {
+        "portugues": "milk-shake",
+        "espanol": "malteada",
+        "extra": ""
+      },
+      {
+        "portugues": "cerveja",
+        "espanol": "cerveza",
+        "extra": ""
+      },
+      {
+        "portugues": "vinho",
+        "espanol": "vino",
+        "extra": ""
+      },
+      {
+        "portugues": "gelo",
+        "espanol": "hielo",
+        "extra": ""
+      },
+      {
+        "portugues": "canudo",
+        "espanol": "pitillo",
+        "extra": ""
+      },
+      {
+        "portugues": "açúcar mascavo",
+        "espanol": "azúcar morena",
+        "extra": ""
+      },
+      {
+        "portugues": "adoçante",
+        "espanol": "endulzante",
+        "extra": ""
+      },
+      {
+        "portugues": "feijoada",
+        "espanol": "feijoada",
+        "extra": "Plato brasileño de frijoles con carne."
+      },
+      {
+        "portugues": "arroz com feijão",
+        "espanol": "arroz con frijoles",
+        "extra": ""
+      },
+      {
+        "portugues": "farofa",
+        "espanol": "farofa",
+        "extra": "Preparación de harina de yuca tostada."
+      },
+      {
+        "portugues": "pão de queijo",
+        "espanol": "pan de queso",
+        "extra": ""
+      },
+      {
+        "portugues": "coxinha",
+        "espanol": "croqueta brasileña de pollo",
+        "extra": ""
+      },
+      {
+        "portugues": "pastel",
+        "espanol": "empanada frita brasileña",
+        "extra": "No significa torta."
+      },
+      {
+        "portugues": "churrasco",
+        "espanol": "parrillada",
+        "extra": ""
+      },
+      {
+        "portugues": "brigadeiro",
+        "espanol": "dulce brasileño de chocolate",
+        "extra": ""
+      },
+      {
+        "portugues": "pudim",
+        "espanol": "flan",
+        "extra": ""
+      },
+      {
+        "portugues": "mandioca frita",
+        "espanol": "yuca frita",
+        "extra": ""
+      },
+      {
+        "portugues": "açaí",
+        "espanol": "açaí",
+        "extra": "Fruto amazónico."
+      },
+      {
+        "portugues": "goiaba",
+        "espanol": "guayaba",
+        "extra": ""
+      },
+      {
+        "portugues": "maracujá",
+        "espanol": "maracuyá",
+        "extra": ""
+      },
+      {
+        "portugues": "caju",
+        "espanol": "marañón",
+        "extra": ""
+      },
+      {
+        "portugues": "cupuaçu",
+        "espanol": "cupuazú",
+        "extra": ""
+      },
+      {
+        "portugues": "acerola",
+        "espanol": "acerola",
+        "extra": ""
+      },
+      {
+        "portugues": "graviola",
+        "espanol": "guanábana",
+        "extra": ""
+      },
+      {
+        "portugues": "jabuticaba",
+        "espanol": "jaboticaba",
+        "extra": ""
+      },
+      {
+        "portugues": "pitanga",
+        "espanol": "pitanga",
+        "extra": ""
+      },
+      {
+        "portugues": "guaraná",
+        "espanol": "guaraná",
+        "extra": ""
+      },
+      {
+        "portugues": "sorvete",
+        "espanol": "helado",
+        "extra": ""
+      },
+      {
+        "portugues": "caldo de cana",
+        "espanol": "jugo de caña",
+        "extra": ""
+      },
+      {
+        "portugues": "água de coco",
+        "espanol": "agua de coco",
+        "extra": ""
+      },
+      {
+        "portugues": "vitamina de frutas",
+        "espanol": "batido de frutas con leche",
+        "extra": ""
+      },
+      {
+        "portugues": "café coado",
+        "espanol": "café filtrado",
+        "extra": ""
+      },
+      {
+        "portugues": "abacate",
+        "espanol": "aguacate",
+        "extra": ""
+      },
+      {
+        "portugues": "fatia",
+        "espanol": "rebanada",
+        "extra": ""
+      },
+      {
+        "portugues": "bolo",
+        "espanol": "torta",
+        "extra": ""
+      },
+      {
+        "portugues": "torrada",
+        "espanol": "tostada",
+        "extra": ""
+      },
+      {
+        "portugues": "recheio",
+        "espanol": "relleno",
+        "extra": ""
+      },
+      {
+        "portugues": "massa",
+        "espanol": "masa",
+        "extra": ""
+      },
+      {
+        "portugues": "forno",
+        "espanol": "horno",
+        "extra": ""
+      },
+      {
+        "portugues": "bandeja",
+        "espanol": "bandeja",
+        "extra": ""
+      },
+      {
+        "portugues": "garçom",
+        "espanol": "mesero",
+        "extra": ""
+      },
+      {
+        "portugues": "lanche",
+        "espanol": "merienda",
+        "extra": ""
+      },
+      {
+        "portugues": "salgado",
+        "espanol": "bocado salado",
+        "extra": "Como una coxinha o una empada."
+      },
+      {
+        "portugues": "queijo coalho",
+        "espanol": "queso coalho",
+        "extra": "Suele venderse asado en palito."
+      },
+      {
+        "portugues": "milho cozido",
+        "espanol": "mazorca cocida",
+        "extra": ""
+      },
+      {
+        "portugues": "sanduíche natural",
+        "espanol": "sándwich frío",
+        "extra": ""
+      },
+      {
+        "portugues": "misto quente",
+        "espanol": "sándwich caliente de jamón y queso",
+        "extra": ""
+      },
+      {
+        "portugues": "pipoca",
+        "espanol": "crispetas",
+        "extra": ""
+      },
+      {
+        "portugues": "picolé",
+        "espanol": "paleta helada",
+        "extra": ""
+      },
+      {
+        "portugues": "estou morrendo de fome!",
+        "espanol": "¡me muero de hambre!",
+        "extra": ""
+      },
+      {
+        "portugues": "quero isso, por favor",
+        "espanol": "quiero eso, por favor",
+        "extra": ""
+      },
+      {
+        "portugues": "tem feijão?",
+        "espanol": "¿hay frijoles?",
+        "extra": ""
+      },
+      {
+        "portugues": "tem suco de açaí?",
+        "espanol": "¿tienen jugo de açaí?",
+        "extra": ""
+      },
+      {
+        "portugues": "eu queria experimentar a feijoada",
+        "espanol": "quisiera probar la feijoada",
+        "extra": ""
+      },
+      {
+        "portugues": "tem coxinha?",
+        "espanol": "¿tienen coxinha?",
+        "extra": ""
+      },
+      {
+        "portugues": "tem comida vegetariana?",
+        "espanol": "¿tienen comida vegetariana?",
+        "extra": ""
+      },
+      {
+        "portugues": "tem suco natural?",
+        "espanol": "¿tienen jugo natural?",
+        "extra": ""
+      },
+      {
+        "portugues": "é muito apimentado?",
+        "espanol": "¿es muy picante?",
+        "extra": ""
+      },
+      {
+        "portugues": "o suco vem com açúcar?",
+        "espanol": "¿el jugo viene con azúcar?",
+        "extra": ""
+      },
+      {
+        "portugues": "posso levar pra viagem?",
+        "espanol": "¿me lo puedo llevar?",
+        "extra": ""
+      },
+      {
+        "portugues": "tem alguma lanchonete aberta agora?",
+        "espanol": "¿hay algún local de comidas rápidas abierto ahora?",
+        "extra": ""
+      },
+      {
+        "portugues": "gostou da comida?",
+        "espanol": "¿te gustó la comida?",
+        "extra": ""
+      },
+      {
+        "portugues": "gostou da bebida?",
+        "espanol": "¿te gustó la bebida?",
+        "extra": ""
+      },
+      {
+        "portugues": "estava delicioso!",
+        "espanol": "¡estaba delicioso!",
+        "extra": ""
+      },
+      {
+        "portugues": "uma delícia!",
+        "espanol": "¡una delicia!",
+        "extra": ""
+      },
+      {
+        "portugues": "não é muito do meu gosto",
+        "espanol": "no es mucho de mi gusto",
+        "extra": ""
+      },
+      {
+        "portugues": "achei um pouco forte",
+        "espanol": "me pareció un poco fuerte",
+        "extra": ""
+      },
+      {
+        "portugues": "prefiro outra coisa",
+        "espanol": "prefiero otra cosa",
+        "extra": ""
+      },
+      {
+        "portugues": "está incluso o serviço?",
+        "espanol": "¿está incluido el servicio?",
+        "extra": ""
+      },
+      {
+        "portugues": "a comida está deliciosa!",
+        "espanol": "¡la comida está deliciosa!",
+        "extra": ""
+      },
+      {
+        "portugues": "eu não como carne",
+        "espanol": "no como carne",
+        "extra": ""
+      },
+      {
+        "portugues": "pode ser sem açúcar?",
+        "espanol": "¿puede ser sin azúcar?",
+        "extra": ""
+      },
+      {
+        "portugues": "com gelo, por favor",
+        "espanol": "con hielo, por favor",
+        "extra": ""
+      },
+      {
+        "portugues": "para viagem, por favor",
+        "espanol": "para llevar, por favor",
+        "extra": ""
+      },
+      {
+        "portugues": "aqui ou para viagem?",
+        "espanol": "¿aquí o para llevar?",
+        "extra": ""
+      },
+      {
+        "portugues": "pode trazer o cardápio?",
+        "espanol": "¿puede traer el menú?",
+        "extra": ""
+      },
+      {
+        "portugues": "uma mesa para dois, por favor",
+        "espanol": "una mesa para dos, por favor",
+        "extra": ""
+      },
+      {
+        "portugues": "quero meio quilo de queijo",
+        "espanol": "quiero medio kilo de queso",
+        "extra": ""
+      },
+      {
+        "portugues": "a comida está quente",
+        "espanol": "la comida está caliente",
+        "extra": ""
+      },
+      {
+        "portugues": "tem mesa pra dois?",
+        "espanol": "¿hay mesa para dos?",
+        "extra": ""
+      },
+      {
+        "portugues": "tem café sem açúcar?",
+        "espanol": "¿hay café sin azúcar?",
+        "extra": ""
+      },
+      {
+        "portugues": "não quero açúcar",
+        "espanol": "no quiero azúcar",
+        "extra": ""
+      },
+      {
+        "portugues": "o café ficou frio",
+        "espanol": "el café se enfrió",
+        "extra": ""
+      },
+      {
+        "portugues": "quanto custa esse suco?",
+        "espanol": "¿cuánto cuesta este jugo?",
+        "extra": ""
+      }
     ]
   },
-
   {
     "bloque": "transporte",
     "items": [
-      { "portugues": "esquerda", "espanol": "izquierda", "extra": "" },
-      { "portugues": "direita", "espanol": "derecha", "extra": "" },
-      { "portugues": "ônibus", "espanol": "bus", "extra": "" },
-      { "portugues": "metrô", "espanol": "metro", "extra": "" },
-      { "portugues": "aeroporto", "espanol": "aeropuerto", "extra": "" },
-      { "portugues": "quanto custa?", "espanol": "¿cuánto cuesta?", "extra": "" },
-      { "portugues": "onde fica?", "espanol": "¿dónde queda?", "extra": "" },
-      { "portugues": "me leva aqui", "espanol": "llévame aquí", "extra": "" },
-      { "portugues": "está longe?", "espanol": "¿está lejos?", "extra": "" },
-      { "portugues": "vamos de uber", "espanol": "vamos en uber", "extra": "" }
+      {
+        "portugues": "esquerda",
+        "espanol": "izquierda",
+        "extra": ""
+      },
+      {
+        "portugues": "direita",
+        "espanol": "derecha",
+        "extra": ""
+      },
+      {
+        "portugues": "ônibus",
+        "espanol": "bus",
+        "extra": ""
+      },
+      {
+        "portugues": "metrô",
+        "espanol": "metro",
+        "extra": ""
+      },
+      {
+        "portugues": "aeroporto",
+        "espanol": "aeropuerto",
+        "extra": ""
+      },
+      {
+        "portugues": "quanto custa?",
+        "espanol": "¿cuánto cuesta?",
+        "extra": ""
+      },
+      {
+        "portugues": "onde fica?",
+        "espanol": "¿dónde queda?",
+        "extra": ""
+      },
+      {
+        "portugues": "me leva aqui",
+        "espanol": "llévame aquí",
+        "extra": ""
+      },
+      {
+        "portugues": "está longe?",
+        "espanol": "¿está lejos?",
+        "extra": ""
+      },
+      {
+        "portugues": "vamos de uber",
+        "espanol": "vamos en uber",
+        "extra": ""
+      },
+      {
+        "portugues": "trem",
+        "espanol": "tren",
+        "extra": ""
+      },
+      {
+        "portugues": "táxi",
+        "espanol": "taxi",
+        "extra": ""
+      },
+      {
+        "portugues": "aplicativo",
+        "espanol": "aplicación",
+        "extra": ""
+      },
+      {
+        "portugues": "ponto de ônibus",
+        "espanol": "parada de bus",
+        "extra": ""
+      },
+      {
+        "portugues": "rodoviária",
+        "espanol": "terminal de buses",
+        "extra": ""
+      },
+      {
+        "portugues": "estação de metrô",
+        "espanol": "estación de metro",
+        "extra": ""
+      },
+      {
+        "portugues": "estação de trem",
+        "espanol": "estación de tren",
+        "extra": ""
+      },
+      {
+        "portugues": "ponto de táxi",
+        "espanol": "parada de taxis",
+        "extra": ""
+      },
+      {
+        "portugues": "bilheteria",
+        "espanol": "taquilla",
+        "extra": ""
+      },
+      {
+        "portugues": "guichê",
+        "espanol": "ventanilla",
+        "extra": ""
+      },
+      {
+        "portugues": "validador",
+        "espanol": "validador de tarjetas",
+        "extra": ""
+      },
+      {
+        "portugues": "catraca",
+        "espanol": "torniquete",
+        "extra": ""
+      },
+      {
+        "portugues": "passagem",
+        "espanol": "pasaje",
+        "extra": ""
+      },
+      {
+        "portugues": "cartão de transporte",
+        "espanol": "tarjeta de transporte",
+        "extra": ""
+      },
+      {
+        "portugues": "recarregar",
+        "espanol": "recargar",
+        "extra": ""
+      },
+      {
+        "portugues": "saldo",
+        "espanol": "saldo",
+        "extra": ""
+      },
+      {
+        "portugues": "horário",
+        "espanol": "horario",
+        "extra": ""
+      },
+      {
+        "portugues": "assento preferencial",
+        "espanol": "asiento prioritario",
+        "extra": ""
+      },
+      {
+        "portugues": "taxímetro",
+        "espanol": "taxímetro",
+        "extra": ""
+      },
+      {
+        "portugues": "corrida",
+        "espanol": "carrera en taxi",
+        "extra": ""
+      },
+      {
+        "portugues": "livre",
+        "espanol": "libre",
+        "extra": "En un taxi: disponible."
+      },
+      {
+        "portugues": "motorista",
+        "espanol": "conductor",
+        "extra": ""
+      },
+      {
+        "portugues": "endereço",
+        "espanol": "dirección",
+        "extra": ""
+      },
+      {
+        "portugues": "tarifa mínima",
+        "espanol": "tarifa mínima",
+        "extra": ""
+      },
+      {
+        "portugues": "valor fechado",
+        "espanol": "precio fijo",
+        "extra": ""
+      },
+      {
+        "portugues": "itinerário",
+        "espanol": "itinerario",
+        "extra": ""
+      },
+      {
+        "portugues": "linha",
+        "espanol": "línea de transporte",
+        "extra": ""
+      },
+      {
+        "portugues": "terminal",
+        "espanol": "terminal",
+        "extra": ""
+      },
+      {
+        "portugues": "cobrador",
+        "espanol": "cobrador",
+        "extra": ""
+      },
+      {
+        "portugues": "bilhete",
+        "espanol": "tiquete",
+        "extra": ""
+      },
+      {
+        "portugues": "plataforma",
+        "espanol": "plataforma",
+        "extra": ""
+      },
+      {
+        "portugues": "chegada",
+        "espanol": "llegada",
+        "extra": ""
+      },
+      {
+        "portugues": "saída",
+        "espanol": "salida",
+        "extra": ""
+      },
+      {
+        "portugues": "guarda-volumes",
+        "espanol": "consigna de equipaje",
+        "extra": ""
+      },
+      {
+        "portugues": "achados e perdidos",
+        "espanol": "objetos perdidos",
+        "extra": ""
+      },
+      {
+        "portugues": "poltrona",
+        "espanol": "asiento",
+        "extra": ""
+      },
+      {
+        "portugues": "leito",
+        "espanol": "asiento cama",
+        "extra": "Categoría de asiento en buses."
+      },
+      {
+        "portugues": "ponto final",
+        "espanol": "parada final",
+        "extra": ""
+      },
+      {
+        "portugues": "estação",
+        "espanol": "estación",
+        "extra": ""
+      },
+      {
+        "portugues": "cartão recarregável",
+        "espanol": "tarjeta recargable",
+        "extra": ""
+      },
+      {
+        "portugues": "escada rolante",
+        "espanol": "escalera mecánica",
+        "extra": ""
+      },
+      {
+        "portugues": "próxima parada",
+        "espanol": "próxima parada",
+        "extra": ""
+      },
+      {
+        "portugues": "como chego neste endereço?",
+        "espanol": "¿cómo llego a esta dirección?",
+        "extra": ""
+      },
+      {
+        "portugues": "tem um ponto de ônibus aqui perto?",
+        "espanol": "¿hay una parada de bus cerca de aquí?",
+        "extra": ""
+      },
+      {
+        "portugues": "onde fica a estação de metrô mais próxima?",
+        "espanol": "¿dónde queda la estación de metro más cercana?",
+        "extra": ""
+      },
+      {
+        "portugues": "quanto custa a passagem?",
+        "espanol": "¿cuánto cuesta el pasaje?",
+        "extra": ""
+      },
+      {
+        "portugues": "onde eu recarrego o cartão?",
+        "espanol": "¿dónde recargo la tarjeta?",
+        "extra": ""
+      },
+      {
+        "portugues": "esse ônibus vai para o centro?",
+        "espanol": "¿ese bus va al centro?",
+        "extra": ""
+      },
+      {
+        "portugues": "você pode me avisar quando chegar no meu ponto?",
+        "espanol": "¿me puede avisar cuando lleguemos a mi parada?",
+        "extra": ""
+      },
+      {
+        "portugues": "é só de ida ou ida e volta?",
+        "espanol": "¿es solo de ida o ida y vuelta?",
+        "extra": ""
+      },
+      {
+        "portugues": "quero uma passagem para Curitiba, por favor",
+        "espanol": "quiero un pasaje para Curitiba, por favor",
+        "extra": ""
+      },
+      {
+        "portugues": "qual é a plataforma do ônibus para Salvador?",
+        "espanol": "¿cuál es la plataforma del bus para Salvador?",
+        "extra": ""
+      },
+      {
+        "portugues": "o metrô para aqui ou na próxima estação?",
+        "espanol": "¿el metro para aquí o en la próxima estación?",
+        "extra": ""
+      },
+      {
+        "portugues": "vai descer?",
+        "espanol": "¿va a bajar?",
+        "extra": ""
+      },
+      {
+        "portugues": "posso subir pela frente?",
+        "espanol": "¿puedo subir por delante?",
+        "extra": ""
+      },
+      {
+        "portugues": "dá pra descer no próximo?",
+        "espanol": "¿puedo bajarme en la próxima parada?",
+        "extra": ""
+      },
+      {
+        "portugues": "tá lotado",
+        "espanol": "está lleno",
+        "extra": "Forma informal, sobre un transporte."
+      },
+      {
+        "portugues": "esse ônibus é o certo?",
+        "espanol": "¿este bus es el correcto?",
+        "extra": ""
+      },
+      {
+        "portugues": "o metrô está cheio",
+        "espanol": "el metro está lleno",
+        "extra": ""
+      },
+      {
+        "portugues": "não tem ônibus agora",
+        "espanol": "no hay bus ahora",
+        "extra": ""
+      },
+      {
+        "portugues": "os táxis estão ocupados",
+        "espanol": "los taxis están ocupados",
+        "extra": ""
+      },
+      {
+        "portugues": "onde fica o metrô?",
+        "espanol": "¿dónde queda el metro?",
+        "extra": ""
+      }
     ]
   },
-
   {
     "bloque": "social",
     "items": [
-      { "portugues": "você é linda", "espanol": "eres linda", "extra": "" },
-      { "portugues": "gostei de você", "espanol": "me gustaste", "extra": "" },
-      { "portugues": "vamos sair?", "espanol": "¿salimos?", "extra": "" },
-      { "portugues": "me manda mensagem", "espanol": "mándame mensaje", "extra": "" },
-      { "portugues": "saudade", "espanol": "te extraño", "extra": "" },
-      { "portugues": "você é muito legal", "espanol": "eres muy chévere", "extra": "" },
-      { "portugues": "estou feliz", "espanol": "estoy feliz", "extra": "" },
-      { "portugues": "que bonito", "espanol": "qué bonito", "extra": "" },
-      { "portugues": "vamos tirar uma foto?", "espanol": "¿tomamos una foto?", "extra": "" },
-      { "portugues": "adorei te conhecer", "espanol": "me encantó conocerte", "extra": "" }
+      {
+        "portugues": "você é linda",
+        "espanol": "eres linda",
+        "extra": ""
+      },
+      {
+        "portugues": "gostei de você",
+        "espanol": "me gustaste",
+        "extra": ""
+      },
+      {
+        "portugues": "vamos sair?",
+        "espanol": "¿salimos?",
+        "extra": ""
+      },
+      {
+        "portugues": "me manda mensagem",
+        "espanol": "mándame mensaje",
+        "extra": ""
+      },
+      {
+        "portugues": "saudade",
+        "espanol": "añoranza",
+        "extra": "Sensación de extrañar a alguien o algo."
+      },
+      {
+        "portugues": "você é muito legal",
+        "espanol": "eres muy chévere",
+        "extra": ""
+      },
+      {
+        "portugues": "estou feliz",
+        "espanol": "estoy feliz",
+        "extra": ""
+      },
+      {
+        "portugues": "que bonito",
+        "espanol": "qué bonito",
+        "extra": ""
+      },
+      {
+        "portugues": "vamos tirar uma foto?",
+        "espanol": "¿tomamos una foto?",
+        "extra": ""
+      },
+      {
+        "portugues": "adorei te conhecer",
+        "espanol": "me encantó conocerte",
+        "extra": ""
+      },
+      {
+        "portugues": "você gostou?",
+        "espanol": "¿te gustó?",
+        "extra": ""
+      },
+      {
+        "portugues": "gostei!",
+        "espanol": "¡me gustó!",
+        "extra": ""
+      },
+      {
+        "portugues": "gostei demais!",
+        "espanol": "¡me gustó muchísimo!",
+        "extra": ""
+      },
+      {
+        "portugues": "adorei!",
+        "espanol": "¡me encantó!",
+        "extra": ""
+      },
+      {
+        "portugues": "muito bom!",
+        "espanol": "¡muy bueno!",
+        "extra": ""
+      },
+      {
+        "portugues": "acho que não",
+        "espanol": "creo que no",
+        "extra": ""
+      },
+      {
+        "portugues": "são meus amigos",
+        "espanol": "son mis amigos",
+        "extra": ""
+      },
+      {
+        "portugues": "a gente vai sair agora",
+        "espanol": "vamos a salir ahora",
+        "extra": ""
+      },
+      {
+        "portugues": "você vai gostar disso",
+        "espanol": "te va a gustar esto",
+        "extra": ""
+      },
+      {
+        "portugues": "a gente precisa falar",
+        "espanol": "necesitamos hablar",
+        "extra": ""
+      },
+      {
+        "portugues": "a gente mora perto",
+        "espanol": "vivimos cerca",
+        "extra": ""
+      },
+      {
+        "portugues": "a gente volta depois",
+        "espanol": "volvemos después",
+        "extra": ""
+      },
+      {
+        "portugues": "a gente ficou de se encontrar amanhã",
+        "espanol": "quedamos en vernos mañana",
+        "extra": ""
+      },
+      {
+        "portugues": "ficou combinado",
+        "espanol": "quedó acordado",
+        "extra": ""
+      }
+    ]
+  },
+  {
+    "bloque": "aeroporto",
+    "items": [
+      {
+        "portugues": "avião",
+        "espanol": "avión",
+        "extra": ""
+      },
+      {
+        "portugues": "voo",
+        "espanol": "vuelo",
+        "extra": ""
+      },
+      {
+        "portugues": "companhia aérea",
+        "espanol": "aerolínea",
+        "extra": ""
+      },
+      {
+        "portugues": "cartão de embarque",
+        "espanol": "tarjeta de embarque",
+        "extra": ""
+      },
+      {
+        "portugues": "portão de embarque",
+        "espanol": "puerta de embarque",
+        "extra": ""
+      },
+      {
+        "portugues": "embarque",
+        "espanol": "embarque",
+        "extra": ""
+      },
+      {
+        "portugues": "bagagem",
+        "espanol": "equipaje",
+        "extra": ""
+      },
+      {
+        "portugues": "mala",
+        "espanol": "maleta",
+        "extra": ""
+      },
+      {
+        "portugues": "mochila",
+        "espanol": "mochila",
+        "extra": ""
+      },
+      {
+        "portugues": "bagagem de mão",
+        "espanol": "equipaje de mano",
+        "extra": ""
+      },
+      {
+        "portugues": "bagagem despachada",
+        "espanol": "equipaje facturado",
+        "extra": ""
+      },
+      {
+        "portugues": "escala",
+        "espanol": "escala",
+        "extra": ""
+      },
+      {
+        "portugues": "voo direto",
+        "espanol": "vuelo directo",
+        "extra": ""
+      },
+      {
+        "portugues": "passaporte",
+        "espanol": "pasaporte",
+        "extra": ""
+      },
+      {
+        "portugues": "documento de identidade",
+        "espanol": "documento de identidad",
+        "extra": ""
+      },
+      {
+        "portugues": "onde posso pegar minha mala?",
+        "espanol": "¿dónde puedo recoger mi maleta?",
+        "extra": ""
+      },
+      {
+        "portugues": "preciso preencher algum formulário?",
+        "espanol": "¿necesito llenar algún formulario?",
+        "extra": ""
+      },
+      {
+        "portugues": "meu voo foi cancelado, o que posso fazer?",
+        "espanol": "cancelaron mi vuelo, ¿qué puedo hacer?",
+        "extra": ""
+      },
+      {
+        "portugues": "posso levar essa mala como bagagem de mão?",
+        "espanol": "¿puedo llevar esta maleta como equipaje de mano?",
+        "extra": ""
+      },
+      {
+        "portugues": "onde posso pegar um táxi ou Uber?",
+        "espanol": "¿dónde puedo tomar un taxi o Uber?",
+        "extra": ""
+      },
+      {
+        "portugues": "qual é o portão do meu voo?",
+        "espanol": "¿cuál es la puerta de embarque de mi vuelo?",
+        "extra": ""
+      },
+      {
+        "portugues": "qual é o limite de bagagem despachada?",
+        "espanol": "¿cuál es el límite de equipaje facturado?",
+        "extra": ""
+      },
+      {
+        "portugues": "a que horas é o embarque?",
+        "espanol": "¿a qué hora es el embarque?",
+        "extra": ""
+      },
+      {
+        "portugues": "quanto custa despachar a bagagem?",
+        "espanol": "¿cuánto cuesta facturar el equipaje?",
+        "extra": ""
+      },
+      {
+        "portugues": "as malas estão aqui",
+        "espanol": "las maletas están aquí",
+        "extra": ""
+      },
+      {
+        "portugues": "são meus documentos",
+        "espanol": "son mis documentos",
+        "extra": ""
+      }
+    ]
+  },
+  {
+    "bloque": "hospedagem",
+    "items": [
+      {
+        "portugues": "eu tenho reserva",
+        "espanol": "tengo una reserva",
+        "extra": ""
+      },
+      {
+        "portugues": "o café da manhã está incluído?",
+        "espanol": "¿el desayuno está incluido?",
+        "extra": ""
+      },
+      {
+        "portugues": "o wi-fi é gratuito?",
+        "espanol": "¿el wifi es gratis?",
+        "extra": ""
+      },
+      {
+        "portugues": "qual a senha?",
+        "espanol": "¿cuál es la contraseña?",
+        "extra": ""
+      },
+      {
+        "portugues": "o quarto tem ar-condicionado?",
+        "espanol": "¿la habitación tiene aire acondicionado?",
+        "extra": ""
+      },
+      {
+        "portugues": "você pode chamar um táxi para mim, por favor?",
+        "espanol": "¿puede llamarme un taxi, por favor?",
+        "extra": ""
+      },
+      {
+        "portugues": "meu quarto está pronto?",
+        "espanol": "¿mi habitación está lista?",
+        "extra": ""
+      },
+      {
+        "portugues": "o hotel fica perto",
+        "espanol": "el hotel queda cerca",
+        "extra": ""
+      },
+      {
+        "portugues": "o hotel fica a duas quadras daqui",
+        "espanol": "el hotel queda a dos cuadras de aquí",
+        "extra": ""
+      },
+      {
+        "portugues": "recepção",
+        "espanol": "recepción",
+        "extra": ""
+      }
+    ]
+  },
+  {
+    "bloque": "compras",
+    "items": [
+      {
+        "portugues": "quanto custa isso?",
+        "espanol": "¿cuánto cuesta esto?",
+        "extra": ""
+      },
+      {
+        "portugues": "aceita cartão?",
+        "espanol": "¿acepta tarjeta?",
+        "extra": ""
+      },
+      {
+        "portugues": "tem desconto para turista?",
+        "espanol": "¿hay descuento para turistas?",
+        "extra": ""
+      },
+      {
+        "portugues": "posso experimentar?",
+        "espanol": "¿puedo probármelo?",
+        "extra": "Para ropa o accesorios."
+      },
+      {
+        "portugues": "tem desconto?",
+        "espanol": "¿hay descuento?",
+        "extra": ""
+      },
+      {
+        "portugues": "faz por menos?",
+        "espanol": "¿me lo deja más barato?",
+        "extra": ""
+      },
+      {
+        "portugues": "tem troco?",
+        "espanol": "¿tiene cambio?",
+        "extra": ""
+      },
+      {
+        "portugues": "vou pagar com cartão",
+        "espanol": "voy a pagar con tarjeta",
+        "extra": ""
+      },
+      {
+        "portugues": "dá pra pagar com cartão?",
+        "espanol": "¿se puede pagar con tarjeta?",
+        "extra": ""
+      },
+      {
+        "portugues": "é barato",
+        "espanol": "es barato",
+        "extra": ""
+      },
+      {
+        "portugues": "só dinheiro",
+        "espanol": "solo efectivo",
+        "extra": ""
+      },
+      {
+        "portugues": "dinheiro",
+        "espanol": "dinero en efectivo",
+        "extra": ""
+      },
+      {
+        "portugues": "reais",
+        "espanol": "reales brasileños",
+        "extra": ""
+      },
+      {
+        "portugues": "moeda",
+        "espanol": "moneda",
+        "extra": ""
+      },
+      {
+        "portugues": "troco",
+        "espanol": "vueltas",
+        "extra": ""
+      },
+      {
+        "portugues": "cartão",
+        "espanol": "tarjeta",
+        "extra": ""
+      },
+      {
+        "portugues": "preço",
+        "espanol": "precio",
+        "extra": ""
+      },
+      {
+        "portugues": "promoção",
+        "espanol": "oferta",
+        "extra": ""
+      },
+      {
+        "portugues": "sacola",
+        "espanol": "bolsa de compras",
+        "extra": ""
+      },
+      {
+        "portugues": "quilo",
+        "espanol": "kilo",
+        "extra": ""
+      },
+      {
+        "portugues": "balança",
+        "espanol": "báscula",
+        "extra": ""
+      },
+      {
+        "portugues": "pesagem",
+        "espanol": "pesaje",
+        "extra": ""
+      },
+      {
+        "portugues": "fresco",
+        "espanol": "fresco",
+        "extra": ""
+      },
+      {
+        "portugues": "maduro",
+        "espanol": "maduro",
+        "extra": ""
+      },
+      {
+        "portugues": "barraca",
+        "espanol": "puesto de venta",
+        "extra": ""
+      },
+      {
+        "portugues": "balcão",
+        "espanol": "mostrador",
+        "extra": ""
+      },
+      {
+        "portugues": "caixa",
+        "espanol": "caja",
+        "extra": "Punto donde se paga."
+      },
+      {
+        "portugues": "lembrancinha",
+        "espanol": "recuerdo",
+        "extra": ""
+      },
+      {
+        "portugues": "camiseta",
+        "espanol": "camiseta",
+        "extra": ""
+      },
+      {
+        "portugues": "chapéu",
+        "espanol": "sombrero",
+        "extra": ""
+      },
+      {
+        "portugues": "óculos de sol",
+        "espanol": "gafas de sol",
+        "extra": ""
+      },
+      {
+        "portugues": "bijuteria",
+        "espanol": "bisutería",
+        "extra": ""
+      },
+      {
+        "portugues": "pulseira",
+        "espanol": "pulsera",
+        "extra": ""
+      },
+      {
+        "portugues": "colar",
+        "espanol": "collar",
+        "extra": ""
+      },
+      {
+        "portugues": "brinco",
+        "espanol": "arete",
+        "extra": ""
+      },
+      {
+        "portugues": "tamanho",
+        "espanol": "tamaño",
+        "extra": ""
+      },
+      {
+        "portugues": "as lojas estão abertas",
+        "espanol": "las tiendas están abiertas",
+        "extra": ""
+      },
+      {
+        "portugues": "fica com o troco",
+        "espanol": "quédate con las vueltas",
+        "extra": ""
+      }
+    ]
+  },
+  {
+    "bloque": "emergencias",
+    "items": [
+      {
+        "portugues": "perdi meu passaporte. o que eu faço?",
+        "espanol": "perdí mi pasaporte. ¿qué hago?",
+        "extra": ""
+      },
+      {
+        "portugues": "preciso de um médico",
+        "espanol": "necesito un médico",
+        "extra": ""
+      },
+      {
+        "portugues": "onde tem um hospital?",
+        "espanol": "¿dónde hay un hospital?",
+        "extra": ""
+      },
+      {
+        "portugues": "socorro! chame a polícia!",
+        "espanol": "¡socorro! ¡llame a la policía!",
+        "extra": ""
+      },
+      {
+        "portugues": "fui roubada. o que eu faço?",
+        "espanol": "me robaron. ¿qué hago?",
+        "extra": ""
+      },
+      {
+        "portugues": "onde fica a embaixada da Colômbia?",
+        "espanol": "¿dónde queda la embajada de Colombia?",
+        "extra": ""
+      },
+      {
+        "portugues": "farmácia",
+        "espanol": "farmacia",
+        "extra": ""
+      },
+      {
+        "portugues": "farmacêutico",
+        "espanol": "farmacéutico",
+        "extra": ""
+      },
+      {
+        "portugues": "repelente",
+        "espanol": "repelente",
+        "extra": ""
+      },
+      {
+        "portugues": "febre",
+        "espanol": "fiebre",
+        "extra": ""
+      },
+      {
+        "portugues": "receita",
+        "espanol": "receta médica",
+        "extra": ""
+      },
+      {
+        "portugues": "remédio",
+        "espanol": "medicamento",
+        "extra": ""
+      },
+      {
+        "portugues": "comprimido",
+        "espanol": "pastilla",
+        "extra": ""
+      },
+      {
+        "portugues": "curativo",
+        "espanol": "apósito",
+        "extra": "Material para cubrir una herida."
+      },
+      {
+        "portugues": "colírio",
+        "espanol": "gotas para los ojos",
+        "extra": ""
+      },
+      {
+        "portugues": "dor",
+        "espanol": "dolor",
+        "extra": ""
+      },
+      {
+        "portugues": "álcool em gel",
+        "espanol": "alcohol en gel",
+        "extra": ""
+      },
+      {
+        "portugues": "creme",
+        "espanol": "crema",
+        "extra": ""
+      },
+      {
+        "portugues": "xarope",
+        "espanol": "jarabe",
+        "extra": ""
+      },
+      {
+        "portugues": "pomada",
+        "espanol": "pomada",
+        "extra": ""
+      }
+    ]
+  },
+  {
+    "bloque": "numeros",
+    "items": [
+      {
+        "portugues": "zero",
+        "espanol": "cero",
+        "extra": ""
+      },
+      {
+        "portugues": "um",
+        "espanol": "uno",
+        "extra": "Masculino. Femenino: uma."
+      },
+      {
+        "portugues": "dois",
+        "espanol": "dos",
+        "extra": "Masculino. Femenino: duas."
+      },
+      {
+        "portugues": "três",
+        "espanol": "tres",
+        "extra": ""
+      },
+      {
+        "portugues": "quatro",
+        "espanol": "cuatro",
+        "extra": ""
+      },
+      {
+        "portugues": "cinco",
+        "espanol": "cinco",
+        "extra": ""
+      },
+      {
+        "portugues": "seis",
+        "espanol": "seis",
+        "extra": ""
+      },
+      {
+        "portugues": "sete",
+        "espanol": "siete",
+        "extra": ""
+      },
+      {
+        "portugues": "oito",
+        "espanol": "ocho",
+        "extra": ""
+      },
+      {
+        "portugues": "nove",
+        "espanol": "nueve",
+        "extra": ""
+      },
+      {
+        "portugues": "dez",
+        "espanol": "diez",
+        "extra": ""
+      },
+      {
+        "portugues": "onze",
+        "espanol": "once",
+        "extra": ""
+      },
+      {
+        "portugues": "doze",
+        "espanol": "doce",
+        "extra": ""
+      },
+      {
+        "portugues": "treze",
+        "espanol": "trece",
+        "extra": ""
+      },
+      {
+        "portugues": "quatorze",
+        "espanol": "catorce",
+        "extra": "También se escribe catorze."
+      },
+      {
+        "portugues": "quinze",
+        "espanol": "quince",
+        "extra": ""
+      },
+      {
+        "portugues": "dezesseis",
+        "espanol": "dieciséis",
+        "extra": ""
+      },
+      {
+        "portugues": "dezessete",
+        "espanol": "diecisiete",
+        "extra": ""
+      },
+      {
+        "portugues": "dezoito",
+        "espanol": "dieciocho",
+        "extra": ""
+      },
+      {
+        "portugues": "dezenove",
+        "espanol": "diecinueve",
+        "extra": ""
+      },
+      {
+        "portugues": "vinte",
+        "espanol": "veinte",
+        "extra": ""
+      },
+      {
+        "portugues": "trinta",
+        "espanol": "treinta",
+        "extra": ""
+      },
+      {
+        "portugues": "quarenta",
+        "espanol": "cuarenta",
+        "extra": ""
+      },
+      {
+        "portugues": "cinquenta",
+        "espanol": "cincuenta",
+        "extra": ""
+      },
+      {
+        "portugues": "sessenta",
+        "espanol": "sesenta",
+        "extra": ""
+      },
+      {
+        "portugues": "setenta",
+        "espanol": "setenta",
+        "extra": ""
+      },
+      {
+        "portugues": "oitenta",
+        "espanol": "ochenta",
+        "extra": ""
+      },
+      {
+        "portugues": "noventa",
+        "espanol": "noventa",
+        "extra": ""
+      },
+      {
+        "portugues": "cem",
+        "espanol": "cien",
+        "extra": ""
+      },
+      {
+        "portugues": "cento e um",
+        "espanol": "ciento uno",
+        "extra": ""
+      },
+      {
+        "portugues": "duzentos",
+        "espanol": "doscientos",
+        "extra": ""
+      },
+      {
+        "portugues": "trezentos",
+        "espanol": "trescientos",
+        "extra": ""
+      },
+      {
+        "portugues": "quatrocentos",
+        "espanol": "cuatrocientos",
+        "extra": ""
+      },
+      {
+        "portugues": "quinhentos",
+        "espanol": "quinientos",
+        "extra": ""
+      },
+      {
+        "portugues": "seiscentos",
+        "espanol": "seiscientos",
+        "extra": ""
+      },
+      {
+        "portugues": "setecentos",
+        "espanol": "setecientos",
+        "extra": ""
+      },
+      {
+        "portugues": "oitocentos",
+        "espanol": "ochocientos",
+        "extra": ""
+      },
+      {
+        "portugues": "novecentos",
+        "espanol": "novecientos",
+        "extra": ""
+      },
+      {
+        "portugues": "mil",
+        "espanol": "mil",
+        "extra": ""
+      },
+      {
+        "portugues": "dois mil",
+        "espanol": "dos mil",
+        "extra": ""
+      },
+      {
+        "portugues": "dez mil",
+        "espanol": "diez mil",
+        "extra": ""
+      },
+      {
+        "portugues": "cem mil",
+        "espanol": "cien mil",
+        "extra": ""
+      },
+      {
+        "portugues": "um milhão",
+        "espanol": "un millón",
+        "extra": ""
+      },
+      {
+        "portugues": "meio",
+        "espanol": "medio",
+        "extra": "Cantidad. Femenino: meia."
+      },
+      {
+        "portugues": "um terço",
+        "espanol": "un tercio",
+        "extra": ""
+      },
+      {
+        "portugues": "um quarto",
+        "espanol": "un cuarto",
+        "extra": "Fracción."
+      },
+      {
+        "portugues": "um oitavo",
+        "espanol": "un octavo",
+        "extra": ""
+      },
+      {
+        "portugues": "um e meio",
+        "espanol": "uno y medio",
+        "extra": ""
+      },
+      {
+        "portugues": "me dá um, por favor",
+        "espanol": "deme uno, por favor",
+        "extra": ""
+      },
+      {
+        "portugues": "quero dois, por favor",
+        "espanol": "quiero dos, por favor",
+        "extra": ""
+      },
+      {
+        "portugues": "quero três desses",
+        "espanol": "quiero tres de esos",
+        "extra": ""
+      }
+    ]
+  },
+  {
+    "bloque": "cores",
+    "items": [
+      {
+        "portugues": "branco",
+        "espanol": "blanco",
+        "extra": "Femenino: branca."
+      },
+      {
+        "portugues": "preto",
+        "espanol": "negro",
+        "extra": "Femenino: preta."
+      },
+      {
+        "portugues": "vermelho",
+        "espanol": "rojo",
+        "extra": "Femenino: vermelha."
+      },
+      {
+        "portugues": "amarelo",
+        "espanol": "amarillo",
+        "extra": "Femenino: amarela."
+      },
+      {
+        "portugues": "roxo",
+        "espanol": "morado",
+        "extra": "Femenino: roxa."
+      },
+      {
+        "portugues": "azul",
+        "espanol": "azul",
+        "extra": ""
+      },
+      {
+        "portugues": "cinza",
+        "espanol": "gris",
+        "extra": ""
+      },
+      {
+        "portugues": "marrom",
+        "espanol": "marrón",
+        "extra": ""
+      },
+      {
+        "portugues": "rosa",
+        "espanol": "rosado",
+        "extra": ""
+      },
+      {
+        "portugues": "verde",
+        "espanol": "verde",
+        "extra": ""
+      }
+    ]
+  },
+  {
+    "bloque": "tempo",
+    "items": [
+      {
+        "portugues": "segunda-feira",
+        "espanol": "lunes",
+        "extra": ""
+      },
+      {
+        "portugues": "terça-feira",
+        "espanol": "martes",
+        "extra": ""
+      },
+      {
+        "portugues": "quarta-feira",
+        "espanol": "miércoles",
+        "extra": ""
+      },
+      {
+        "portugues": "quinta-feira",
+        "espanol": "jueves",
+        "extra": ""
+      },
+      {
+        "portugues": "sexta-feira",
+        "espanol": "viernes",
+        "extra": ""
+      },
+      {
+        "portugues": "sábado",
+        "espanol": "sábado",
+        "extra": ""
+      },
+      {
+        "portugues": "domingo",
+        "espanol": "domingo",
+        "extra": ""
+      },
+      {
+        "portugues": "janeiro",
+        "espanol": "enero",
+        "extra": ""
+      },
+      {
+        "portugues": "fevereiro",
+        "espanol": "febrero",
+        "extra": ""
+      },
+      {
+        "portugues": "março",
+        "espanol": "marzo",
+        "extra": ""
+      },
+      {
+        "portugues": "abril",
+        "espanol": "abril",
+        "extra": ""
+      },
+      {
+        "portugues": "maio",
+        "espanol": "mayo",
+        "extra": ""
+      },
+      {
+        "portugues": "junho",
+        "espanol": "junio",
+        "extra": ""
+      },
+      {
+        "portugues": "julho",
+        "espanol": "julio",
+        "extra": ""
+      },
+      {
+        "portugues": "agosto",
+        "espanol": "agosto",
+        "extra": ""
+      },
+      {
+        "portugues": "setembro",
+        "espanol": "septiembre",
+        "extra": ""
+      },
+      {
+        "portugues": "outubro",
+        "espanol": "octubre",
+        "extra": ""
+      },
+      {
+        "portugues": "novembro",
+        "espanol": "noviembre",
+        "extra": ""
+      },
+      {
+        "portugues": "dezembro",
+        "espanol": "diciembre",
+        "extra": ""
+      },
+      {
+        "portugues": "meio-dia",
+        "espanol": "mediodía",
+        "extra": ""
+      },
+      {
+        "portugues": "meia-noite",
+        "espanol": "medianoche",
+        "extra": ""
+      },
+      {
+        "portugues": "manhã",
+        "espanol": "mañana",
+        "extra": "Parte del día."
+      },
+      {
+        "portugues": "mês",
+        "espanol": "mes",
+        "extra": ""
+      },
+      {
+        "portugues": "é uma hora",
+        "espanol": "es la una",
+        "extra": ""
+      },
+      {
+        "portugues": "são duas horas",
+        "espanol": "son las dos",
+        "extra": ""
+      },
+      {
+        "portugues": "são três e quinze",
+        "espanol": "son las tres y quince",
+        "extra": ""
+      },
+      {
+        "portugues": "são três e meia",
+        "espanol": "son las tres y media",
+        "extra": ""
+      },
+      {
+        "portugues": "são dez para as quatro",
+        "espanol": "son las cuatro menos diez",
+        "extra": ""
+      },
+      {
+        "portugues": "o ônibus sai às duas",
+        "espanol": "el bus sale a las dos",
+        "extra": ""
+      },
+      {
+        "portugues": "o trem parte ao meio-dia",
+        "espanol": "el tren sale al mediodía",
+        "extra": ""
+      },
+      {
+        "portugues": "a última saída é à meia-noite",
+        "espanol": "la última salida es a medianoche",
+        "extra": ""
+      },
+      {
+        "portugues": "faltam dez minutos para o ônibus sair",
+        "espanol": "faltan diez minutos para que salga el bus",
+        "extra": ""
+      },
+      {
+        "portugues": "a estação fecha às nove da noite",
+        "espanol": "la estación cierra a las nueve de la noche",
+        "extra": ""
+      }
+    ]
+  },
+  {
+    "bloque": "praia",
+    "items": [
+      {
+        "portugues": "praia",
+        "espanol": "playa",
+        "extra": ""
+      },
+      {
+        "portugues": "guarda-sol",
+        "espanol": "sombrilla",
+        "extra": ""
+      },
+      {
+        "portugues": "areia",
+        "espanol": "arena",
+        "extra": ""
+      },
+      {
+        "portugues": "mar",
+        "espanol": "mar",
+        "extra": ""
+      },
+      {
+        "portugues": "onda",
+        "espanol": "ola",
+        "extra": ""
+      },
+      {
+        "portugues": "ambulante",
+        "espanol": "vendedor ambulante",
+        "extra": ""
+      },
+      {
+        "portugues": "quiosque",
+        "espanol": "quiosco",
+        "extra": ""
+      },
+      {
+        "portugues": "protetor solar",
+        "espanol": "bloqueador solar",
+        "extra": ""
+      },
+      {
+        "portugues": "toalha",
+        "espanol": "toalla",
+        "extra": ""
+      },
+      {
+        "portugues": "bronzeador",
+        "espanol": "bronceador",
+        "extra": ""
+      },
+      {
+        "portugues": "canga",
+        "espanol": "pareo",
+        "extra": ""
+      },
+      {
+        "portugues": "a praia fica longe?",
+        "espanol": "¿la playa queda lejos?",
+        "extra": ""
+      }
     ]
   }
 ]
