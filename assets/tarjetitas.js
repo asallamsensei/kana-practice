@@ -60,7 +60,7 @@ function compose(day,itemId,revision,format,lists,palette,formatKey){
  for(let i=0;i<4&&castPool.length;i++)characters.push(castPool.splice(Math.floor(castRandom()*castPool.length),1)[0]);
  return {theme,seed:r(),background,fallbackBackground,characters,character:characters[0]||null};
 }
-const alphaCache=new WeakMap(),ART_TOP=.573,ART_BOTTOM=137,BODY_BOTTOM=.561;
+const alphaCache=new WeakMap(),ART_TOP=.573,ART_BOTTOM=160,BODY_BOTTOM=.561;
 function spriteCrop(image,ctx){
  if(alphaCache.has(image))return alphaCache.get(image);
  const width=image.naturalWidth||image.width,height=image.naturalHeight||image.height;
@@ -457,18 +457,27 @@ function drawCard(canvas,card){
   for(let i=0;i<3;i++)star(ctx,x+(r()-.5)*75,stageMid+(r()-.5)*s*2,9+r()*9,t.doodle,r());
  }
  for(const {image,crop,x,y,w:width,h:height} of top?[top,...bottom]:bottom)ctx.drawImage(image,crop.x,crop.y,crop.w,crop.h,x,y,width,height);
- const footY=h-128;
- ctx.lineWidth=2;box(ctx,64,footY,w-128,87,26,t.panel,t.doodle+'85');
+ const footY=h-151;
+ ctx.lineWidth=2;box(ctx,64,footY,w-128,110,26,t.panel,t.doodle+'85');
  write(ctx,'Asallam Sensei',92,footY+29,29,830,t.ink);
- const contactY=footY+62,contactSize=24,handle='@asallamsensei';
- whatsAppIcon(ctx,92,contactY,24);
- write(ctx,handle,125,contactY,contactSize,570,t.accent);
- const globeX=125+ctx.measureText(handle).width+28;
- globeIcon(ctx,globeX,contactY,24,t.accent);
- write(ctx,'asallamsensei.com',globeX+33,contactY,contactSize,570,t.accent);
+ const contactY=footY+77,handle='@asallamsensei',site='asallamsensei.com';
+ const start=92,limit=images.portrait?w-185:w-91,gap=25,iconGap=10;
+ let contactSize=43,iconSize=44;
+ ctx.font='700 '+contactSize+'px '+LATIN_FONT;
+ const contactWidth=()=>ctx.measureText(handle).width+ctx.measureText(site).width+2*(iconSize+iconGap)+gap;
+ while(contactWidth()>limit-start&&contactSize>27){
+  contactSize--;iconSize--;
+  ctx.font='700 '+contactSize+'px '+LATIN_FONT;
+ }
+ whatsAppIcon(ctx,start,contactY,iconSize);
+ const handleX=start+iconSize+iconGap;
+ write(ctx,handle,handleX,contactY,contactSize,700,t.accent);
+ const globeX=handleX+ctx.measureText(handle).width+gap;
+ globeIcon(ctx,globeX,contactY,iconSize,t.accent);
+ write(ctx,site,globeX+iconSize+iconGap,contactY,contactSize,700,t.accent);
  if(images.portrait){
-  const px=w-160;photo(ctx,images.portrait,px,footY+8,71);
-  write(ctx,'Tu profe',px-22,footY+43,25,750,t.accent,LATIN_FONT,'right');
+  const px=w-160;photo(ctx,images.portrait,px,footY+17,71);
+  write(ctx,'Tu profe',px-22,footY+32,25,750,t.accent,LATIN_FONT,'right');
  }
  return canvas;
 }
@@ -553,11 +562,76 @@ document.querySelectorAll('[data-copy]').forEach(button=>{button.onclick=async()
  manual.value=value;manual.hidden=false;manual.focus();manual.select?.();
  status.textContent='No se pudo copiar automáticamente. Puedes copiar el texto del cuadro.';
 };});
+// Local presentation overrides are keyed by catalog identity, not displayed number.
+const cardEdits=new Map();
+const editKey=(kind,item)=>'asallam:tarjetitas:edicion:'+kind+':'+item.id;
+const editSpanish=value=>String(value).replace(/\s+/gu,' ').trim().slice(0,500);
+const editNumber=value=>/^\d{1,6}$/.test(value)&&Number(value)>0?Number(value):null;
+function getEdit(kind,item){
+ const key=editKey(kind,item);
+ if(!cardEdits.has(key)){
+  let saved=null;
+  try{saved=JSON.parse(root.localStorage?.getItem(key)||'null');}catch(e){}
+  const es=typeof saved?.es==='string'?editSpanish(saved.es):'';
+  const number=editNumber(String(saved?.number??''));
+  cardEdits.set(key,{...(es?{es}:{}),...(number?{number}:{})});
+ }
+ return cardEdits.get(key);
+}
+function saveEdit(edit){
+ const key=editKey(state.kind,state.item);
+ cardEdits.set(key,edit);
+ try{
+  if(Object.keys(edit).length)root.localStorage?.setItem(key,JSON.stringify(edit));
+  else root.localStorage?.removeItem(key);
+ }catch(e){}
+}
+function displayedItem(){
+ return state.item?{...state.item,...getEdit(state.kind,state.item)}:null;
+}
+function syncEditFields(){
+ const item=displayedItem();
+ $('cardSpanish').value=item.es;
+ $('cardNumber').value=String(item.number);
+ $('cardNumber').removeAttribute('aria-invalid');
+ $('cardEditStatus').textContent='';
+}
+function applyEdit(key,value){
+ const edit={...getEdit(state.kind,state.item)};
+ if(value&&value!==state.item[key])edit[key]=value;
+ else delete edit[key];
+ saveEdit(edit);
+ const item=displayedItem();
+ updateSocial(item,state.kind);
+ void render();
+}
+$('cardSpanish').oninput=e=>{if(state.item)applyEdit('es',editSpanish(e.target.value));};
+$('cardSpanish').onblur=e=>{if(state.item)e.target.value=displayedItem().es;};
+$('cardNumber').oninput=e=>{
+ if(!state.item)return;
+ const raw=e.target.value,number=editNumber(raw);
+ const invalid=raw!==''&&!number;
+ if(invalid)$('cardNumber').setAttribute('aria-invalid','true');
+ else $('cardNumber').removeAttribute('aria-invalid');
+ $('cardEditStatus').textContent=invalid?'Escribe un número entero del 1 al 999999.':'';
+ if(number||!raw)applyEdit('number',number);
+};
+$('cardNumber').onblur=e=>{
+ if(!state.item)return;
+ e.target.value=String(displayedItem().number);
+ $('cardNumber').removeAttribute('aria-invalid');
+ $('cardEditStatus').textContent='';
+};
+$('resetCard').onclick=()=>{
+ if(!state.item)return;
+ saveEdit({});syncEditFields();updateSocial(displayedItem(),state.kind);void render();
+};
 function choose(item){
- state.item=item;state.revision=0;$('selection').value=item.id;updateSocial(item,state.kind);void render();
+ state.item=item;state.revision=0;$('selection').value=item.id;
+ syncEditFields();updateSocial(displayedItem(),state.kind);void render();
 }
 async function render(){
- const token=++state.token,item=state.item;
+ const token=++state.token,item=displayedItem();
  if(!item)return;
  const [W,H]=state.size,kind=state.kind,day=state.day;
  const design=compose(day,item.id,state.revision,[1080,H*1080/W],state.lists,state.palette,state.format);
@@ -660,7 +734,7 @@ $('download').onclick=()=>{
  }catch(e){$('status').textContent='No se pudo guardar el PNG en este navegador.';}
 };
 async function init(){
- const controls=[$('kind'),$('selection'),$('today'),$('random'),$('design')];
+ const controls=['kind','selection','today','random','design','cardSpanish','cardNumber','resetCard'].map($);
  controls.forEach(x=>x.disabled=true);$('status').textContent='Cargando tarjetas…';
  // Draw an immediate source-verified fallback, then use the complete selection.
  setOptions();choose(currentDaily());
@@ -671,5 +745,5 @@ async function init(){
  controls.forEach(x=>x.disabled=false);
  $('status').textContent=curated||words||phrases||kanji?'':'Mostrando tarjetas básicas mientras el catálogo no está disponible.';
 }
-init().catch(()=>{$('status').textContent='No se pudieron cargar todas las tarjetas. Puedes seguir usando la vista básica.';[$('kind'),$('selection'),$('today'),$('random'),$('design')].forEach(b=>b.disabled=false);});
+init().catch(()=>{$('status').textContent='No se pudieron cargar todas las tarjetas. Puedes seguir usando la vista básica.';['kind','selection','today','random','design','cardSpanish','cardNumber','resetCard'].map($).forEach(b=>b.disabled=false);});
 })(typeof window!=='undefined'?window:globalThis);
