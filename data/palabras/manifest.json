@@ -3,26 +3,42 @@
     "fondo-anime-1-1-rainbow.webp",
     "fondo-anime-1-1-galaxia.webp",
     "fondo-anime-1-1-confeti.webp",
-    "fondo-anime-1-1-corazones.webp"
+    "fondo-anime-1-1-corazones.webp",
+    "fondo-anime-1-1-burbujas-menta.webp",
+    "fondo-anime-1-1-cintas-cereza.webp",
+    "fondo-anime-1-1-cometas-limon.webp",
+    "fondo-anime-1-1-constelacion-azul.webp"
   ],
   "backgroundsByFormat": {
     "1-1": [
       "fondo-anime-1-1-rainbow.webp",
       "fondo-anime-1-1-galaxia.webp",
       "fondo-anime-1-1-confeti.webp",
-      "fondo-anime-1-1-corazones.webp"
+      "fondo-anime-1-1-corazones.webp",
+      "fondo-anime-1-1-burbujas-menta.webp",
+      "fondo-anime-1-1-cintas-cereza.webp",
+      "fondo-anime-1-1-cometas-limon.webp",
+      "fondo-anime-1-1-constelacion-azul.webp"
     ],
     "3-4": [
       "fondo-anime-3-4-rainbow.webp",
       "fondo-anime-3-4-galaxia.webp",
       "fondo-anime-3-4-confeti.webp",
-      "fondo-anime-3-4-corazones.webp"
+      "fondo-anime-3-4-corazones.webp",
+      "fondo-anime-3-4-limon-y-turquesa.webp",
+      "fondo-anime-3-4-lluvia-lila.webp",
+      "fondo-anime-3-4-ramitas-malva.webp",
+      "fondo-anime-3-4-viento-coral.webp"
     ],
     "9-16": [
       "fondo-anime-9-16-rainbow.webp",
       "fondo-anime-9-16-galaxia.webp",
       "fondo-anime-9-16-confeti.webp",
-      "fondo-anime-9-16-corazones.webp"
+      "fondo-anime-9-16-corazones.webp",
+      "fondo-anime-9-16-cometa-durazno.webp",
+      "fondo-anime-9-16-luna-menta.webp",
+      "fondo-anime-9-16-notas-turquesa.webp",
+      "fondo-anime-9-16-verano-confeti.webp"
     ]
   },
   "characters": [
@@ -45,7 +61,27 @@
     "anime-homura-akemi.png",
     "anime-frieren.png",
     "anime-edward-elric.png",
-    "anime-hinata-hyuga.png"
+    "anime-hinata-hyuga.png",
+    "anime-ranma-saotome.png",
+    "anime-akane-tendo.png",
+    "anime-yugi-muto.png",
+    "anime-lady-oscar.png",
+    "anime-inuyasha.png",
+    "anime-kagome-higurashi.png",
+    "anime-yoh-asakura.png",
+    "anime-lelouch.png",
+    "anime-holo.png",
+    "anime-light-yagami.png",
+    "anime-violet-evergarden.png",
+    "anime-nadeshiko-kagamihara.png",
+    "anime-isagi-yoichi.png",
+    "anime-hinata-shoyo.png",
+    "anime-bocchi.png",
+    "anime-doraemon-nobita.png",
+    "anime-kuroko-tetsuya.png",
+    "anime-kaguya-shinomiya.png",
+    "anime-saiki-kusuo.png",
+    "anime-reigen-arataka.png"
   ],
   "portrait": "retrato-profe.jpg"
 }

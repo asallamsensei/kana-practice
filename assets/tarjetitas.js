@@ -17,8 +17,8 @@ const KANJI_RE=/\p{Script=Han}/u;
 const JP_FONT='"Noto Sans CJK JP", "Noto Sans JP", "Hiragino Sans", "Yu Gothic", Meiryo, sans-serif';
 const LATIN_FONT='system-ui, sans-serif';
 const DEFAULTS={
- word:[{id:'local-jikan',jp:'時間',romaji:'jikan',es:'tiempo, hora',extra:'Se usa para hablar de duración y horas específicas.',kanjis:['時','間']}],
- phrase:[{id:'local-gakkou',jp:'学校へ行きます。',romaji:'gakkou e ikimasu.',es:'Voy a la escuela.'}],
+ word:[{id:'local-jikan',jp:'時間',romaji:'jikan',es:'tiempo, hora',kana:'じかん',extra:'Se usa para hablar de duración y horas específicas.'}],
+ phrase:[{id:'local-gakkou',jp:'学校へ行きます。',romaji:'gakkou e ikimasu.',es:'Voy a la escuela.',segmentos:[{texto:'学校',lectura:'がっこう'},{texto:'へ',lectura:'へ'},{texto:'行きます',lectura:'いきます'},{texto:'。',lectura:''}]}],
  kanji:[{id:'local-hi',jp:'日',romaji:'',es:'día, sol'}]
 };
 const str=x=>typeof x==='string'?x.trim():'';
@@ -135,6 +135,88 @@ function placeCast(w,h,cast,seed,cropFor){
  return {top:{image,crop,x,y,w:width,h:height},bottom:stageLayout(w,h,rest,seed,cropFor)};
 }
 const cardLabel=(kind,item)=>(LABELS[kind]||LABELS.word)+' #'+(item.number||1);
+// Only independently verified character readings are split within a kanji compound.
+// Match the existing reading as well as the spelling, so imports can use other readings.
+const rubyByCharacter=new Map(Object.entries({
+ '火山':'か|ざん','旅行':'りょ|こう','写真':'しゃ|しん','先生':'せん|せい',
+ '料理':'りょう|り','名前':'な|まえ','電話':'でん|わ','電車':'でん|しゃ',
+ '手紙':'て|がみ','時間':'じ|かん','授業':'じゅ|ぎょう','荷物':'に|もつ',
+ '映画':'えい|が','宿題':'しゅく|だい','公園':'こう|えん','祖父':'そ|ふ',
+ '家族':'か|ぞく','毎日':'まい|にち','財布':'さい|ふ','毎朝':'まい|あさ',
+ '漢字':'かん|じ','質問':'しつ|もん','自転車':'じ|てん|しゃ','言葉':'こと|ば',
+ '図書館':'と|しょ|かん','電気':'でん|き','勉強':'べん|きょう','問題':'もん|だい',
+ '来月':'らい|げつ','午後':'ご|ご','夕飯':'ゆう|はん','玄関':'げん|かん',
+ '銀行':'ぎん|こう','半分':'はん|ぶん','学生':'がく|せい','野菜':'や|さい',
+ '日曜日':'にち|よう|び','辞書':'じ|しょ','誕生日':'たん|じょう|び','元気':'げん|き',
+ '会社':'かい|しゃ','地図':'ち|ず','音楽':'おん|がく','大学':'だい|がく',
+ '入口':'いり|ぐち','祖母':'そ|ぼ','病院':'びょう|いん','医者':'い|しゃ',
+ '砂糖':'さ|とう','食事':'しょく|じ','建物':'たて|もの','階段':'かい|だん',
+ '毎月':'まい|つき','牛乳':'ぎゅう|にゅう','散歩':'さん|ぽ','意味':'い|み',
+ '土曜日':'ど|よう|び','教室':'きょう|しつ','大切':'たい|せつ','冷蔵庫':'れい|ぞう|こ',
+ '交番':'こう|ばん','天気':'てん|き','自分':'じ|ぶん','大変':'たい|へん',
+ '説明':'せつ|めい','来週':'らい|しゅう','全部':'ぜん|ぶ','飛行機':'ひ|こう|き',
+ '帽子':'ぼう|し','月曜日':'げつ|よう|び','気分':'き|ぶん','掃除':'そう|じ',
+ '場所':'ば|しょ','郵便局':'ゆう|びん|きょく','封筒':'ふう|とう','作文':'さく|ぶん',
+ '洗濯':'せん|たく','靴下':'くつ|した','映画館':'えい|が|かん','交差点':'こう|さ|てん',
+ '金曜日':'きん|よう|び','先週':'せん|しゅう','本棚':'ほん|だな','便利':'べん|り',
+ '新鮮':'しん|せん','十分':'じゅう|ぶん','生徒':'せい|と','丈夫':'じょう|ぶ',
+ '練習':'れん|しゅう','試験':'し|けん','外国':'がい|こく','上着':'うわ|ぎ',
+ '来年':'らい|ねん','番号':'ばん|ごう','夕方':'ゆう|がた','予定':'よ|てい',
+ '日本語':'にほん|ご'
+}));
+const HAN_RUN=/^[\p{Script=Han}々]+$/u;
+const KANA_RUN=/^[\p{Script=Hiragana}\p{Script=Katakana}ー]+$/u;
+const RUBY_RUNS=/[\p{Script=Han}々]+|[^\p{Script=Han}々]+/gu;
+const toHiragana=text=>Array.from(str(text).normalize('NFKC')).map(ch=>ch>='ァ'&&ch<='ヶ'?String.fromCharCode(ch.charCodeAt(0)-96):ch).join('').replace(/\s/gu,'');
+function rubyGroup(base,kana){
+ const parts=rubyByCharacter.get(base)?.split('|'),chars=Array.from(base);
+ if(!parts||parts.join('')!==kana)return [{base,ruby:kana}];
+ if(base==='日本語')return [{base:'日本',ruby:parts[0]},{base:'語',ruby:parts[1]}];
+ if(parts.length!==chars.length)return [{base,ruby:kana}];
+ return chars.map((base,i)=>({base,ruby:parts[i]}));
+}
+function alignRubyRuns(runs,kana){
+ const fixed=runs.map(run=>HAN_RUN.test(run)?null:toHiragana(run));
+ if(fixed.some((x,i)=>x!==null&&!KANA_RUN.test(runs[i])))return null;
+ const memo=new Map();
+ function search(i,pos){
+  if(i===runs.length)return pos===kana.length?[[]]:[];
+  const key=i*(kana.length+1)+pos;
+  if(memo.has(key))return memo.get(key);
+  const anchor=fixed[i],paths=[];
+  if(anchor!==null){
+   if(kana.startsWith(anchor,pos))for(const path of search(i+1,pos+anchor.length))paths.push([null,...path]);
+  }else if(i===runs.length-1){
+   if(pos<kana.length)paths.push([kana.slice(pos)]);
+  }else{
+   const next=fixed[i+1];
+   for(let end=kana.indexOf(next,pos+1);end!==-1&&paths.length<2;end=kana.indexOf(next,end+1)){
+    for(const path of search(i+1,end)){
+     paths.push([kana.slice(pos,end),...path]);if(paths.length===2)break;
+    }
+   }
+  }
+  memo.set(key,paths);return paths;
+ }
+ const paths=search(0,0);
+ return paths.length===1?paths[0]:null;
+}
+function rubyTokens(base,reading){
+ const plain=[{base}],kana=toHiragana(reading);
+ if(!base||base.length>64||kana.length>128||!KANA_RUN.test(kana)||!KANJI_RE.test(base))return plain;
+ // The source supplies the reading of the whole numeral/counter expression.
+ if(/^\p{Nd}+(?:日|月|歳)$/u.test(base)||(base==='一ヶ月'&&kana==='いっかげつ'))return [{base,ruby:kana}];
+ // This otherwise ambiguous anchor is verified against 黄色 and 声 in the same bank.
+ if(base==='黄色い声'&&kana==='きいろいこえ')return [{base:'黄色',ruby:'きいろ'},{base:'い'},{base:'声',ruby:'こえ'}];
+ if(HAN_RUN.test(base))return rubyGroup(base,kana);
+ const runs=base.match(RUBY_RUNS),aligned=runs&&alignRubyRuns(runs,kana);
+ return aligned?runs.flatMap((run,i)=>aligned[i]===null?[{base:run}]:rubyGroup(run,aligned[i])):plain;
+}
+function sentenceRuby(text,segments){
+ // Match the exact original expression; only annotate verified source tokens.
+ if(!Array.isArray(segments)||segments.some(t=>!t||typeof t.texto!=='string'||!t.texto)||segments.map(t=>t.texto).join('')!==text)return [{base:text}];
+ return segments.flatMap(t=>rubyTokens(t.texto,t.lectura));
+}
 function makeCatalog(curated,vocab,phraseData,kanjiData){
  const kanjiMap=new Map();
  for(const row of Array.isArray(kanjiData)?kanjiData:[])if(str(row?.kanji)&&str(row?.significado))kanjiMap.set(row.kanji,row.significado);
@@ -144,12 +226,12 @@ function makeCatalog(curated,vocab,phraseData,kanjiData){
   if(!str(raw.jp)||!str(raw.es)||kind!=='kanji'&&!str(raw.romaji))return;
   const jp=raw.jp.trim(),es=raw.es.trim(),romaji=str(raw.romaji);
   const id=str(raw.id)||kind+'-'+hash([jp,romaji,es].join('|')).toString(36);
-  const kanjis=[...new Set(Array.isArray(raw.kanjis)?raw.kanjis.filter(x=>typeof x==='string'&&KANJI_RE.test(x)):[...jp].filter(x=>KANJI_RE.test(x)))];
-  result[kind].push({id,jp,es,romaji,kanjis,extra:str(raw.extra),example:str(raw.ejemplo),nivel:str(raw.nivel),tags:Array.isArray(raw.tags)?raw.tags.filter(x=>typeof x==='string'):[]});
+  const ruby=kind==='word'?rubyTokens(jp,raw.kana):kind==='phrase'?sentenceRuby(jp,raw.segmentos):[{base:jp}];
+  result[kind].push({id,jp,es,romaji,ruby,extra:str(raw.extra),example:str(raw.ejemplo),nivel:str(raw.nivel),tags:Array.isArray(raw.tags)?raw.tags.filter(x=>typeof x==='string'):[]});
  }
  for(const row of Array.isArray(curated?.palabras)?curated.palabras:[])if(row)add('word',row);
- for(const row of Array.isArray(vocab)?vocab:[])if(row)add('word',{jp:row.kanji||row.kana,romaji:row.romaji,es:row.significado,nivel:'N5'});
- for(const row of Array.isArray(phraseData?.oraciones)?phraseData.oraciones:[])if(row)add('phrase',{id:row.id,jp:row.japones,romaji:row.romaji,es:row.espanol,nivel:'N5'});
+ for(const row of Array.isArray(vocab)?vocab:[])if(row)add('word',{jp:row.kanji||row.kana,kana:row.kana,romaji:row.romaji,es:row.significado,nivel:'N5'});
+ for(const row of Array.isArray(phraseData?.oraciones)?phraseData.oraciones:[])if(row)add('phrase',{id:row.id,jp:row.japones,segmentos:row.segmentos,romaji:row.romaji,es:row.espanol,nivel:'N5'});
  for(const row of Array.isArray(kanjiData)?kanjiData:[])if(row)add('kanji',{jp:row.kanji,es:row.significado,nivel:'N5'});
  for(const kind of Object.keys(result)){
   const seen=new Set(),ids=new Set();
@@ -157,7 +239,7 @@ function makeCatalog(curated,vocab,phraseData,kanjiData){
    const key=(item.jp+'|'+item.romaji).normalize('NFKC').toLowerCase();
    if(seen.has(key)||ids.has(item.id))return false;seen.add(key);ids.add(item.id);return true;
   });
-  if(!result[kind].length)result[kind]=DEFAULTS[kind].slice();
+  if(!result[kind].length)for(const item of DEFAULTS[kind])add(kind,item);
   result[kind]=result[kind].map((item,index)=>({...item,number:index+1}));
  }
  return {cards:result,kanjiMap};
@@ -231,16 +313,35 @@ function handmadePaper(ctx,w,h,t,seed){
   for(let j=0;j<4;j++)star(ctx,x+(r()-.5)*50,y+(r()-.5)*95,7+r()*15,t.doodle,r());
  }
 }
-function writeBody(ctx,w,h,item,kind,t,kanjiMap,scale,illustrated){
+function rubyRows(ctx,tokens,size,weight,width){
+ const font=Math.round(weight/100)*100+' '+size+'px '+JP_FONT;
+ const small=Math.max(10,Math.round(size*.32)),rubyFont='500 '+small+'px '+JP_FONT;
+ const units=tokens.flatMap(token=>token.ruby?[token]:Array.from(token.base,base=>({base}))).map(token=>{
+  ctx.font=font;const baseWidth=ctx.measureText(token.base).width;
+  if(!token.ruby)return {...token,width:baseWidth};
+  ctx.font=rubyFont;const readingWidth=ctx.measureText(token.ruby).width;
+  return {...token,width:Math.max(baseWidth,readingWidth+size*.065)};
+ });
+ const rows=[];let list=[],used=0;
+ function flush(){if(list.length)rows.push({units:list,width:used,rubyHeight:list.some(x=>x.ruby)?small*1.38:0,small});list=[];used=0;}
+ for(const unit of units){
+  if(list.length&&used+unit.width>width){
+   const last=/^[、。！？）」』】]$/u.test(unit.base)&&list.length>1?list.pop():null;
+   if(last)used-=last.width;
+   flush();if(last){list=[last];used=last.width;}
+  }
+  list.push(unit);used+=unit.width;
+ }
+ flush();return rows;
+}
+function writeBody(ctx,w,h,item,kind,t,scale,illustrated,furigana){
  const x=104,y=Math.max(h*.16,h*.19-27),bottom=h*BODY_BOTTOM,maxW=w-2*x-84,maxH=bottom-y-62;
  const extra=item.extra;
  const example=item.example;
- const kanji=kind==='word'?item.kanjis.slice(0,4).map(ch=>kanjiMap.has(ch)?ch+' · '+kanjiMap.get(ch):ch).join('    '):'';
  const blocks=[
-  {text:item.jp,size:kind==='phrase'?72:kind==='kanji'?170:126,weight:750,font:JP_FONT,color:t.ink,jp:true,gap:10},
+  {text:item.jp,size:kind==='phrase'?72:kind==='kanji'?170:126,weight:750,font:JP_FONT,color:t.ink,jp:true,ruby:furigana&&item.ruby?.some(x=>x.ruby)?item.ruby:null,gap:10},
   {text:item.romaji,size:38,weight:560,font:LATIN_FONT,color:t.accent,gap:20},
   {text:item.es,size:56,weight:780,font:LATIN_FONT,color:t.ink,gap:18},
-  {text:kanji,size:26,weight:580,font:JP_FONT,color:t.soft,gap:13},
   {text:extra,size:26,weight:450,font:LATIN_FONT,color:t.soft,gap:8},
   {text:example,size:25,weight:510,font:JP_FONT,color:t.soft,gap:4}
  ].filter(b=>b.text);
@@ -250,11 +351,11 @@ function writeBody(ctx,w,h,item,kind,t,kanjiMap,scale,illustrated){
   layouts=blocks.map(b=>{
    const size=Math.max(10,Math.round(b.size*fit)),leading=size*(b.jp?1.26:1.13);
    ctx.font=Math.round(b.weight/100)*100+' '+size+'px '+b.font;
-   const lines=wrap(ctx,b.text,maxW,b.jp);
-   total+=lines.length*leading+b.gap*fit;
-   return {...b,size,leading,lines};
+   const rubyLines=b.ruby?rubyRows(ctx,b.ruby,size,b.weight,maxW):null,lines=rubyLines?null:wrap(ctx,b.text,maxW,b.jp);
+   total+=(rubyLines?rubyLines.reduce((n,line)=>n+leading+line.rubyHeight,0):lines.length*leading)+b.gap*fit;
+   return {...b,size,leading,lines,rubyLines};
   });
-  if(total<=maxH)break;
+  if(total<=maxH&&layouts.every(b=>!b.rubyLines||b.rubyLines.every(line=>line.width<=maxW)))break;
   fit*=.94;
  }while(fit>.25);
  if(illustrated){
@@ -279,15 +380,28 @@ function writeBody(ctx,w,h,item,kind,t,kanjiMap,scale,illustrated){
  }
  let yy=y+(bottom-y-total)/2;
  for(const b of layouts){
-  for(const line of b.lines){
-   write(ctx,line,w/2,yy+b.leading/2,b.size,b.weight,b.color,b.font,'center');
-   yy+=b.leading;
+  if(b.rubyLines){
+   for(const row of b.rubyLines){
+    let xx=(w-row.width)/2;
+    for(const unit of row.units){
+     const center=xx+unit.width/2;
+     if(unit.ruby)write(ctx,unit.ruby,center,yy+row.small*.61,row.small,500,t.accent,JP_FONT,'center');
+     write(ctx,unit.base,center,yy+row.rubyHeight+b.leading/2,b.size,b.weight,b.color,JP_FONT,'center');
+     xx+=unit.width;
+    }
+    yy+=row.rubyHeight+b.leading;
+   }
+  }else{
+   for(const line of b.lines){
+    write(ctx,line,w/2,yy+b.leading/2,b.size,b.weight,b.color,b.font,'center');
+    yy+=b.leading;
+   }
   }
   yy+=b.gap*fit;
  }
 }
 function drawCard(canvas,card){
- const {format,item,kind,design,images,scale,kanjiMap}=card;
+ const {format,item,kind,design,images,scale,furigana=true}=card;
  const [W,H]=format,w=1080,h=H*1080/W;
  if(canvas.width!==W)canvas.width=W;if(canvas.height!==H)canvas.height=H;
  const ctx=canvas.getContext('2d');if(!ctx)throw Error('Tu navegador no pudo preparar la tarjeta.');
@@ -310,7 +424,7 @@ function drawCard(canvas,card){
  box(ctx,76,63,440,62,26,t.panel,t.doodle+'a0');
  write(ctx,'✦  '+cardLabel(kind,item),99,95,30,820,t.accent);
  if(!top)write(ctx,'日本語',w-88,95,32,750,t.ink,JP_FONT,'right');
- writeBody(ctx,w,h,item,kind,t,kanjiMap,scale,Boolean(image));
+ writeBody(ctx,w,h,item,kind,t,scale,Boolean(image),furigana);
  const r=rng(design.seed),stageMid=h*ART_TOP+(h-ART_BOTTOM-h*ART_TOP)*.54;
  for(const side of [-1,1]){
   const x=w*(.5+.37*side),s=Math.min(46,(h-ART_BOTTOM-h*ART_TOP)*.21);
@@ -328,11 +442,11 @@ function drawCard(canvas,card){
  }
  return canvas;
 }
-const api={TZ,FORMATS,THEMES,dateKey,hash,rng,chooseDaily,manifestLists,makeCatalog,compose,stageLayout,placeCast,spriteCrop,cardLabel,wrap,drawCard};
+const api={TZ,FORMATS,THEMES,dateKey,hash,rng,chooseDaily,manifestLists,makeCatalog,compose,stageLayout,placeCast,spriteCrop,cardLabel,rubyTokens,sentenceRuby,rubyRows,wrap,drawCard};
 if(typeof module!=='undefined'&&module.exports){module.exports=api;return;}
 const $=id=>root.document.getElementById(id);
 const canvas=$('card'),images=new Map();
-const state={day:dateKey(),kind:'word',revision:0,format:'1-1',size:FORMATS['1-1'],palette:-1,scale:1,lists:manifestLists(null),catalog:makeCatalog(),item:null,token:0,localPortrait:null,portraitRequest:0};
+const state={day:dateKey(),kind:'word',revision:0,format:'1-1',size:FORMATS['1-1'],palette:-1,scale:1,furigana:true,lists:manifestLists(null),catalog:makeCatalog(),item:null,token:0,localPortrait:null,portraitRequest:0};
 const files={curated:'data/tarjetas.json',words:'data/Vocabulario_N5.json',phrases:'data/Oraciones_N5_Bloque_01.json',kanji:'data/kanji_n5.json',manifest:'data/palabras/manifest.json'};
 function request(url){
  const abort=new AbortController(),timer=setTimeout(()=>abort.abort(),8500);
@@ -366,7 +480,7 @@ async function render(){
  if(!item)return;
  const [W,H]=state.size,kind=state.kind,day=state.day;
  const design=compose(day,item.id,state.revision,[1080,H*1080/W],state.lists,state.palette,state.format);
- const frame={format:[W,H],item,kind,design,images:{},scale:state.scale,kanjiMap:state.catalog.kanjiMap};
+ const frame={format:[W,H],item,kind,design,images:{},scale:state.scale,furigana:state.furigana};
  $('dimensions').textContent=W+' × '+H+' px';
  $('card-description').textContent=[cardLabel(kind,item),item.jp,item.romaji,item.es,item.extra,item.example].filter(Boolean).join('. ');
  canvas.style.setProperty('--preview-width',H>W?Math.max(420,700*W/H)+'px':'660px');
@@ -445,6 +559,7 @@ $('removePortrait').onclick=()=>{
 };
 $('palette').append(new Option('Automática (según diseño)','-1'),...THEMES.map((t,i)=>new Option(t.name,String(i))));
 $('palette').onchange=e=>{state.palette=Number(e.target.value);void render();};
+$('furigana').checked=state.furigana;$('furigana').onchange=e=>{state.furigana=e.target.checked;void render();};
 $('textScale').oninput=e=>{state.scale=Number(e.target.value)||1;void render();};
 $('themeToggle').onclick=()=>{
  const html=document.documentElement,light=html.dataset.theme!=='light';
