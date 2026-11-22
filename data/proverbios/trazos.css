@@ -1,0 +1,83 @@
+
+/* Lectura del código · Estilos de caligrafía. La fuente WOFF está en fuentes/. */
+
+/* Primer modelo numerado; modelos grises con la fuente habitual. */
+@font-face{
+  font-family:"BookStrokeOrders";
+  src:url("fuentes/KanjiStrokeOrders.woff") format("woff"),url("KanjiStrokeOrders_v4.005.ttf") format("truetype");
+  font-weight:400;
+  font-style:normal;
+  font-display:swap
+}
+.practice .page-content{
+  gap:10px
+}
+.practice .practice-heading{
+  margin-bottom:6px
+}
+.practice .practice-word{
+  margin-bottom:5.333px
+}
+.practice .practice-word:last-child{
+  margin-bottom:0
+}
+.practice .squares{
+  display:grid;
+  grid-template-columns:repeat(var(--practice-cols),minmax(0,1fr))
+}
+.practice .square{
+  width:100%;
+  container-type:inline-size
+}
+.practice .practice-kanji{
+  gap:6.667px 24px
+}
+.practice .practice-kanji .squares{
+  grid-template-columns:repeat(var(--kanji-cols),minmax(0,1fr))
+}
+.practice .practice-kanji .mini-label{
+  line-height:1.333333;
+  margin-bottom:4px
+}
+.practice .practice-glyph{
+  font-family:var(--jp);
+  font-weight:400;
+  font-size:44px;
+  line-height:1
+}
+.practice .square.model .practice-glyph{
+  font-family:"BookStrokeOrders",var(--jp);
+  font-weight:400;
+  font-synthesis:none;
+  font-size:64px
+}
+.practice .practice-kanji .practice-glyph{
+  font-size:36px
+}
+.practice .practice-kanji .square.model .practice-glyph{
+  font-size:48px
+}
+@supports(font-size:1cqw){
+ .practice .square .practice-glyph{
+    font-size:72cqw
+  }
+ .practice .square.model .practice-glyph{
+    font-size:98cqw
+  }
+}
+@media screen and (max-width:560px){
+ .practice .page-content{
+    gap:22px
+  }
+ .practice .practice-word{
+    overflow-x:auto;
+    padding-bottom:2px
+  }
+ .practice .practice-word>.squares{
+    min-width:calc(var(--practice-cols)*64px)
+  }
+ .practice .practice-kanji{
+    grid-template-columns:1fr;
+    gap:12px
+  }
+}
