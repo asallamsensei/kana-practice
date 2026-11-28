@@ -513,7 +513,7 @@ function drawCard(canvas,card){
   cover(ctx,image,w,h);
   // Decoration edges stay visible, while reading always has its own ink/paper.
   const wash=ctx.createLinearGradient(0,0,0,h);
-  wash.addColorStop(0,'#fdf1dc80');wash.addColorStop(.3,'#fdf1dc20');wash.addColorStop(.69,'#fdf1dc25');wash.addColorStop(1,'#fdf1dc99');
+  wash.addColorStop(0,'#fdf1dc12');wash.addColorStop(.3,'#fdf1dc08');wash.addColorStop(.69,'#fdf1dc0a');wash.addColorStop(1,'#fdf1dc14');
   ctx.fillStyle=wash;ctx.fillRect(0,0,w,h);
  }
  if(!image){
@@ -660,7 +660,8 @@ if(typeof module!=='undefined'&&module.exports){module.exports=api;return;}
 const $=id=>root.document.getElementById(id);
 const canvas=$('card'),images=new Map();
 const state={day:dateKey(),kind:'word',revision:0,format:'1-1',size:FORMATS['1-1'],palette:-1,scale:1,furigana:true,lists:manifestLists(null),catalog:makeCatalog(),item:null,token:0,localPortrait:null,portraitRequest:0};
-const files={curated:'data/tarjetas.json',words:'data/Vocabulario_N5.json',phrases:'data/Oraciones_N5_Bloque_01.json',kanji:'data/kanji_n5.json',manifest:'data/palabras/manifest.json?v='+CAST_RELEASE};
+const activeManifest=root.document.currentScript?.dataset.backgroundManifest||'manifest-fondos-vivos.json';
+const files={curated:'data/tarjetas.json',words:'data/Vocabulario_N5.json',phrases:'data/Oraciones_N5_Bloque_01.json',kanji:'data/kanji_n5.json',manifest:'data/palabras/'+activeManifest+'?v='+CAST_RELEASE};
 function request(url){
  const abort=new AbortController(),timer=setTimeout(()=>abort.abort(),8500);
  return fetch(url,{signal:abort.signal,...(url===files.manifest?{cache:'no-cache'}:{})}).then(r=>r.ok?r.json():null).catch(()=>null).finally(()=>clearTimeout(timer));
