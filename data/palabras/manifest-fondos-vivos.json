@@ -19,7 +19,9 @@
     "fondo-anime-1-1-sakura-caramelo-vivo.webp",
     "fondo-anime-1-1-cerezitas-vainilla-vivo.webp",
     "fondo-anime-1-1-planetas-uva-vivo.webp",
-    "fondo-anime-1-1-olas-cobalto-vivo.webp"
+    "fondo-anime-1-1-olas-cobalto-vivo.webp",
+    "fondo-anime-1-1-rosas-de-tiza-cien.webp",
+    "fondo-anime-1-1-tiza-menta-salmon-cien.webp"
   ],
   "backgroundsByFormat": {
     "1-1": [
@@ -42,7 +44,9 @@
       "fondo-anime-1-1-sakura-caramelo-vivo.webp",
       "fondo-anime-1-1-cerezitas-vainilla-vivo.webp",
       "fondo-anime-1-1-planetas-uva-vivo.webp",
-      "fondo-anime-1-1-olas-cobalto-vivo.webp"
+      "fondo-anime-1-1-olas-cobalto-vivo.webp",
+      "fondo-anime-1-1-rosas-de-tiza-cien.webp",
+      "fondo-anime-1-1-tiza-menta-salmon-cien.webp"
     ],
     "3-4": [
       "fondo-anime-3-4-rainbow-vivo.webp",
@@ -63,7 +67,9 @@
       "fondo-anime-3-4-melocoton-cosido-vivo.webp",
       "fondo-anime-3-4-mandarinas-de-verano-vivo.webp",
       "fondo-anime-3-4-linterna-matsuri-vivo.webp",
-      "fondo-anime-3-4-colibri-nectar-vivo.webp"
+      "fondo-anime-3-4-colibri-nectar-vivo.webp",
+      "fondo-anime-3-4-aurora-de-confeti-cien.webp",
+      "fondo-anime-3-4-cielo-de-chispitas-cien.webp"
     ],
     "9-16": [
       "fondo-anime-9-16-rainbow-vivo.webp",
@@ -84,7 +90,9 @@
       "fondo-anime-9-16-nieve-sorbete-vivo.webp",
       "fondo-anime-9-16-medusas-lavanda-vivo.webp",
       "fondo-anime-9-16-peces-koi-vivo.webp",
-      "fondo-anime-9-16-helados-de-feria-vivo.webp"
+      "fondo-anime-9-16-helados-de-feria-vivo.webp",
+      "fondo-anime-9-16-papel-de-bengalas-cien.webp",
+      "fondo-anime-9-16-lazos-de-vinilo-cien.webp"
     ]
   },
   "characters": [
