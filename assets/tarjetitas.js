@@ -4,7 +4,7 @@
 const TZ='America/Bogota';
 const FORMATS={'1-1':[1080,1080],'3-4':[1080,1440],'9-16':[1080,1920],'4-5':[1080,1350]};
 const BACKGROUND_FORMATS=['1-1','3-4','9-16'];
-const MAX_CHARACTERS=200,CAST_RELEASE='chicas-20261120';
+const MAX_CHARACTERS=300,CAST_RELEASE='chibi-original-20261128';
 const THEMES=[
  {name:'Durazno y lavanda',base:'#fbefd9',top:'#f7e4d4',mid:'#f1e5fb',accent:'#8c4765',doodle:'#df8da6',ink:'#32283f',panel:'#fffaf0f1',soft:'#5e4263'},
  {name:'Laguna menta',base:'#fff2dd',top:'#e2f0dc',mid:'#d5ebf1',accent:'#28695c',doodle:'#86bba7',ink:'#263a38',panel:'#fffff1f3',soft:'#3c625d'},
