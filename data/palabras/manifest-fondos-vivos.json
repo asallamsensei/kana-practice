@@ -21,7 +21,9 @@
     "fondo-anime-1-1-planetas-uva-vivo.webp",
     "fondo-anime-1-1-olas-cobalto-vivo.webp",
     "fondo-anime-1-1-rosas-de-tiza-cien.webp",
-    "fondo-anime-1-1-tiza-menta-salmon-cien.webp"
+    "fondo-anime-1-1-tiza-menta-salmon-cien.webp",
+    "fondo-anime-1-1-estrellitas-de-merengue-cien.webp",
+    "fondo-anime-1-1-cometas-sobre-frambuesa-cien.webp"
   ],
   "backgroundsByFormat": {
     "1-1": [
@@ -46,7 +48,9 @@
       "fondo-anime-1-1-planetas-uva-vivo.webp",
       "fondo-anime-1-1-olas-cobalto-vivo.webp",
       "fondo-anime-1-1-rosas-de-tiza-cien.webp",
-      "fondo-anime-1-1-tiza-menta-salmon-cien.webp"
+      "fondo-anime-1-1-tiza-menta-salmon-cien.webp",
+      "fondo-anime-1-1-estrellitas-de-merengue-cien.webp",
+      "fondo-anime-1-1-cometas-sobre-frambuesa-cien.webp"
     ],
     "3-4": [
       "fondo-anime-3-4-rainbow-vivo.webp",
@@ -69,7 +73,9 @@
       "fondo-anime-3-4-linterna-matsuri-vivo.webp",
       "fondo-anime-3-4-colibri-nectar-vivo.webp",
       "fondo-anime-3-4-aurora-de-confeti-cien.webp",
-      "fondo-anime-3-4-cielo-de-chispitas-cien.webp"
+      "fondo-anime-3-4-cielo-de-chispitas-cien.webp",
+      "fondo-anime-3-4-perlas-de-canela-cien.webp",
+      "fondo-anime-3-4-sello-de-margaritas-cien.webp"
     ],
     "9-16": [
       "fondo-anime-9-16-rainbow-vivo.webp",
@@ -92,7 +98,9 @@
       "fondo-anime-9-16-peces-koi-vivo.webp",
       "fondo-anime-9-16-helados-de-feria-vivo.webp",
       "fondo-anime-9-16-papel-de-bengalas-cien.webp",
-      "fondo-anime-9-16-lazos-de-vinilo-cien.webp"
+      "fondo-anime-9-16-lazos-de-vinilo-cien.webp",
+      "fondo-anime-9-16-cielo-de-caramelos-cien.webp",
+      "fondo-anime-9-16-regalitos-con-lavanda-cien.webp"
     ]
   },
   "characters": [
