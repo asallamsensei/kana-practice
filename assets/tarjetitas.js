@@ -89,111 +89,105 @@ function spriteCrop(image,ctx){
   if(r>=l&&b>=t){
    const pad=Math.max(2,Math.ceil(Math.max(r-l+1,b-t+1)*.04));
    const x=Math.max(0,(l-pad)*width/w),y=Math.max(0,(t-pad)*height/h);
-   const crop={x,y,w:Math.min(width,(r+pad+1)*width/w)-x,h:Math.min(height,(b+pad+1)*height/h)-y};
+   const crop={x,y,w:Math.min(width,(r+pad+1)*width/w)-x,h:Math.min(height,(b+pad+1)*height/h)-y,
+    inkH:(b-t+1)*height/h,inkTop:t*height/h-y};
    alphaCache.set(image,crop);return crop;
   }
  }catch(e){}
  alphaCache.set(image,original);return original;
 }
-function stageLayout(w,h,cast,seed,cropFor){
- const r=rng(seed),y=h*ART_TOP,floor=h-ART_BOTTOM,space=floor-y,margin=w*.06;
- if(!cast.length||space<=0)return [];
- const sizes=cast.slice(0,3).map((image,index)=>{
-  const width=image.naturalWidth||image.width,height=image.naturalHeight||image.height;
-  const crop=cropFor?.(image)||{x:0,y:0,w:width,h:height};
-  const heightLimit=space*(cast.length===1?.94:index===0?.80:.86+r()*.045);
-  const scale=Math.min(w*.36/crop.w,heightLimit/crop.h,w*.43/crop.h);
-  return {image,crop,w:crop.w*scale,h:crop.h*scale};
- });
- const overlap=(a,b)=>Math.min(a.w,b.w)*(.40+r()*.065);
- const positions=()=>{
-  const [rear,left,right]=sizes;
-  rear.x=-rear.w/2;
-  if(left)left.x=rear.x-left.w+overlap(rear,left);
-  if(right)right.x=rear.x+rear.w-overlap(rear,right);
-  return [Math.min(...sizes.map(b=>b.x)),Math.max(...sizes.map(b=>b.x+b.w))];
+// Use the same rendered height of visible ink, not the PNG's dimensions.
+// A wider or more crowded design can go down a step, but all figures go together.
+const CAST_HEIGHT=240;
+function uniformCast(w,h,images,design,cropFor,textBounds){
+ const cast=(images.characters||[images.character]).filter(Boolean);
+ if(!cast.length&&!images.extraCharacter)return [];
+ const upper=cast.length>=3?cast[0]:null;
+ const lower=(upper?cast.slice(1):cast).slice(0,design.bottomCount||3);
+ const rightGuests=(images.guests?.[0]||[]).filter(Boolean).slice(0,2);
+ const leftGuests=(images.guests?.[1]||[]).filter(Boolean).slice(0,2);
+ const lean=rng(design.seed)()<.5;
+ const gap=6,frame=32,floor=h-ART_BOTTOM-8;
+ const clip=(x,lo,hi)=>Math.max(lo,Math.min(hi,x));
+ const step=(a,b,s)=>{
+  if(b<a)return [];
+  const points=[a,b];
+  for(let n=a+s;n<b;n+=s)points.push(n);
+  return points;
  };
- let [min,max]=positions();
- const ratio=Math.min(1,(w-margin*2)/(max-min),w*.79/(max-min));
- if(ratio<1){for(const b of sizes){b.x*=ratio;b.w*=ratio;b.h*=ratio;}min*=ratio;max*=ratio;}
- // Deliberate overlap, but leave each face visible above or beside its neighbors.
- const desired=w*(r()<.5?.34:.66);
- const shift=Math.min(w-margin-max,Math.max(margin-min,desired-(min+max)/2));
- const rearTop=y+.015*space;
- return sizes.map((b,i)=>{
-  let top=rearTop;
-  if(sizes.length===1)top=y+.17*(space-b.h);
-  else if(i>0){
-   const base=floor-b.h-(i===1?.035:.085)*space;
-   // Short or panoramic artwork must still overlap the center sprite.
-   const overlapY=Math.min(b.h,sizes[0].h)*.14;
-   top=Math.max(rearTop+Math.min(.09*space,sizes[0].h*.28),Math.min(base,rearTop+sizes[0].h-overlapY));
-   top=Math.min(top,floor-b.h);
+ function row(sprites,height,anchor){
+  const indexes=sprites.length===3?[1,0,2]:sprites.map((_,i)=>i);
+  const parts=[];
+  let cursor=0;
+  for(const i of indexes){
+   const image=sprites[i],crop=cropFor(image);
+   const scale=height/(crop.inkH||crop.h);
+   const width=crop.w*scale,hh=crop.h*scale;
+   const previous=parts.at(-1),overlap=previous?.w?Math.min(previous.w,width)*(anchor==='bottom'?.20:.15):0;
+   const offset=i===0?0:i===1?height*.035:height*.018;
+   const y=offset-(crop.inkTop||0)*scale;
+   parts.push({image,crop,x:cursor-overlap,y,w:width,h:hh,anchor:i===0,visibleHeight:height});
+   cursor+=width-overlap;
   }
-  return {...b,x:b.x+shift,y:top};
- });
-}
-function placeCast(w,h,cast,seed,cropFor){
- if(cast.length<3)return {top:null,bottom:stageLayout(w,h,cast,seed,cropFor)};
- const [image,...rest]=cast,r=rng(seed+'|peek');
- const iw=image.naturalWidth||image.width,ih=image.naturalHeight||image.height;
- const upper=h*.19-12,marginY=27,maxHeight=Math.min(225,upper-marginY);
- const crop=cropFor?.(image)||{x:0,y:0,w:iw,h:ih};
- const scale=Math.min(w*.22/crop.w,maxHeight/crop.h),width=crop.w*scale,height=crop.h*scale;
- const x=w*.945-width-r()*w*.035,y=marginY+r()*.58*(upper-marginY-height);
- return {top:{image,crop,x,y,w:width,h:height},bottom:stageLayout(w,h,rest,seed,cropFor)};
-}
-// Search the upper-left margin without moving any text or existing sprites.
-function placeLeftCast(w,h,image,crop,obstacles){
- const left=w*.071,right=w*.323,top=Math.max(146,h*.133),bottom=Math.min(h*.41,h*ART_TOP-22);
- const aimX=w*.195,aimY=h*.274,shape=crop.w/crop.h;
- const possibleHeight=Math.min(230,bottom-top,(right-left)/shape);
- if(!Number.isFinite(possibleHeight))return null;
- for(let height=possibleHeight;height>=72&&height*shape>=54;height-=4){
-  const width=height*shape;
+  const minY=Math.min(...parts.map(p=>p.y));
+  for(const p of parts)p.y-=minY;
+  return {parts,w:cursor,h:Math.max(...parts.map(p=>p.y+p.h))};
+ }
+ const fits=(g,x,y,obstacles)=>g.parts.every(p=>obstacles.every(o=>!overlaps({x:x+p.x,y:y+p.y,w:p.w,h:p.h},o,gap)));
+ function spot(group,zone,obstacles){
+  const {w:ww,h:hh}=group;
+  if(zone==='bottom'&&ww>w*.88)return null;
+  const xMax=w-frame-ww;
+  if(xMax<frame)return null;
+  const minY=zone==='top'?23:zone==='left'?132:h*ART_TOP;
+  const maxY=zone==='top'?Math.min(h*.30, floor-hh):zone==='left'?Math.min(floor-hh,h*.59-hh*.5):floor-hh;
+  if(maxY<minY)return null;
+  const aimX=zone==='top'?xMax:zone==='left'?frame:clip(w*(lean?.35:.65)-ww/2,frame,xMax);
+  const aimY=zone==='top'?minY:zone==='left'?clip(h*.31-hh/2,minY,maxY):minY+(maxY-minY)*.58;
+  let x0=frame,x1=xMax;
+  if(zone==='top')x0=Math.max(frame,w*.61-ww/2);
+  if(zone==='left')x1=Math.min(xMax,w*.40-ww*.28);
   let best=null;
-  for(let y=top;y+height<=bottom+1e-8;y+=5){
-   let edge=right;
-   for(const o of obstacles){
-    if(y<o.y+o.h+12&&y+height>o.y-12&&o.x+o.w+12>left)edge=Math.min(edge,o.x-12);
+  const ys=[aimY,...step(minY,maxY,15)], xs=[clip(aimX,x0,x1),...step(x0,x1,24)];
+  if(x0>x1)return null;
+  for(const y of ys)for(const x of xs){
+   const score=Math.abs(x-aimX)+Math.abs(y-aimY)*1.4;
+   if((!best||score<best.score)&&fits(group,x,y,obstacles)){
+    best={x,y,w:ww,h:hh,parts:group.parts,zone,score};
+    if(score===0)return best;
    }
-   if(left+width>edge)continue;
-   const x=Math.max(left,Math.min(edge-width,aimX-width/2));
-   const score=Math.abs(y+height/2-aimY)+Math.abs(x+width/2-aimX)*.7;
-   if(!best||score<best.score)best={image,crop,x,y,w:width,h:height,score};
   }
-  if(best)return best;
+  return best;
  }
- return null;
-}
-// Each cluster has a dominant chibi and up to two smaller companions.
-function cluster(image,guests,cropFor){
- const images=[image,...guests.filter(Boolean)],parts=[];
- for(const [i,sprite] of images.entries()){
-  const crop=cropFor(sprite),factor=i===0?1:(images.length===2?.78:.68);
-  const z=140*factor/Math.max(crop.h,crop.w*.91),w=crop.w*z,h=crop.h*z;
-  parts.push({image:sprite,crop,w,h,x:0,y:140-h-(i?2:0)});
+ let best=null;
+ const maxGuestCount=(upper?rightGuests.length:0)+(images.extraCharacter?leftGuests.length:0);
+ for(const height of [CAST_HEIGHT,230,220,210,200,190,178,164,150]){
+  if(best&&height+maxGuestCount*12<best.score)break;
+  const bottom=lower.length?spot(row(lower,height,'bottom'),'bottom',textBounds):null;
+  if(lower.length&&!bottom)continue;
+  const obstacles=bottom?[...textBounds,bottom]:textBounds;
+  for(let n=upper?rightGuests.length:0;n>=0;n--){
+   const top=upper?spot(row([upper,...rightGuests.slice(0,n)],height,'top'),'top',obstacles):null;
+   if(upper&&!top)continue;
+   const leftBounds=top?[...obstacles,top]:obstacles;
+   for(let k=images.extraCharacter?leftGuests.length:0;k>=0;k--){
+    const left=images.extraCharacter?spot(row([images.extraCharacter,...leftGuests.slice(0,k)],height,'left'),'left',leftBounds):null;
+    if(images.extraCharacter&&!left)continue;
+    const score=height+(n+k)*12;
+    if(!best||score>best.score)best={groups:[top,bottom,left].filter(Boolean),score};
+    break;
+   }
+  }
  }
- if(parts.length===2)parts[1].x=parts[0].w-.13*Math.min(parts[0].w,parts[1].w);
- if(parts.length===3){
-  parts[0].x=parts[1].w-.16*Math.min(parts[0].w,parts[1].w);
-  parts[2].x=parts[0].x+parts[0].w-.16*Math.min(parts[2].w,parts[0].w);
- }
- const y=Math.min(...parts.map(p=>p.y)),w=Math.max(...parts.map(p=>p.x+p.w)),h=140-y;
- for(const p of parts)p.y-=y;
- return {naturalWidth:w,naturalHeight:h,parts,crop:{x:0,y:0,w,h}};
+ if(best)return best.groups;
+ // A highly atypical crop should not squeeze all the normal drawings too far.
+ const fallback=lower.length?spot(row(lower,150,'bottom'),'bottom',textBounds):null;
+ return fallback?[fallback]:[];
 }
-function groupFits(place){
- if(!place||place.image.parts.length<2)return Boolean(place);
- return place.image.parts.every(p=>p.h*place.h/place.crop.h>=51&&p.w*place.w/place.crop.w>=28);
-}
-function paintGroup(ctx,place){
- const {image,crop,x,y,w,h}=place;
- const sx=w/crop.w,sy=h/crop.h;
- const [main,...guests]=image.parts;
- for(const p of [...guests,main]){
+function paintGroup(ctx,{x,y,parts}){
+ for(const p of [...parts.filter(p=>!p.anchor),...parts.filter(p=>p.anchor)]){
   const c=p.crop;
-  ctx.drawImage(p.image,c.x,c.y,c.w,c.h,x+p.x*sx,y+p.y*sy,p.w*sx,p.h*sy);
+  ctx.drawImage(p.image,c.x,c.y,c.w,c.h,x+p.x,y+p.y,p.w,p.h);
  }
 }
 function overlaps(a,b,padding=0){
@@ -519,48 +513,20 @@ function drawCard(canvas,card){
  if(!image){
   ctx.lineWidth=1.6;box(ctx,35,33,w-70,h-66,42,'#fff0',t.doodle+'65');
  }
- const cropFor=image=>spriteCrop(image,ctx);
- const cast=(images.characters||[images.character]).filter(Boolean);
- const upper=cast.length>=3?cast[0]:null;
- const rightGuests=(images.guests?.[0]||[]).filter(Boolean);
- const rightSlot=group=>placeCast(w,h,[group,group,group],design.seed,x=>x.crop).top;
- let top=upper?rightSlot(cluster(upper,rightGuests,cropFor)):null;
- const lower=(upper?cast.slice(1):cast).slice(0,design.bottomCount||3);
- const bottom=stageLayout(w,h,lower.map(sprite=>cluster(sprite,[],cropFor)),design.seed,x=>x.crop);
  const title={x:76,y:63,w:440,h:62};
  box(ctx,title.x,title.y,title.w,title.h,26,t.panel,t.doodle+'a0');
  write(ctx,'✦  '+cardLabel(kind,item),99,95,30,820,t.accent);
- if(!top)write(ctx,'日本語',w-88,95,32,750,t.ink,JP_FONT,'right');
- const bounds=images.extraCharacter||top?[title]:null;
+ const bounds=[title];
  writeBody(ctx,w,h,item,kind,t,scale,Boolean(image),furigana,bounds);
- if(top){
-  const initial=top;
-  for(let n=rightGuests.length;n>=0;n--){
-   const group=cluster(upper,rightGuests.slice(0,n),cropFor);
-   const p=rightSlot(group);
-   const candidates=[p,{...p,y:27}];
-   const found=candidates.find(slot=>groupFits(slot)&&bounds.every(o=>!overlaps(slot,o,8)));
-   if(found){top=found;break;}
-   if(n===0)top=initial.image.parts.length===1&&bounds.every(o=>!overlaps(initial,o))?initial:null;
-  }
- }
- let left=null;
- if(images.extraCharacter){
-  const guests=(images.guests?.[1]||[]).filter(Boolean);
-  const obstacles=[...(bounds||[]),...(top?[top]:[]),...bottom];
-  for(let n=guests.length;n>=0;n--){
-   const group=cluster(images.extraCharacter,guests.slice(0,n),cropFor);
-   const slot=placeLeftCast(w,h,group,group.crop,obstacles);
-   if(groupFits(slot)){left=slot;break;}
-  }
- }
+ const groups=uniformCast(w,h,images,design,asset=>spriteCrop(asset,ctx),bounds);
+ if(!groups.some(group=>group.zone==='top'))write(ctx,'日本語',w-88,95,32,750,t.ink,JP_FONT,'right');
  const r=rng(design.seed),stageMid=h*ART_TOP+(h-ART_BOTTOM-h*ART_TOP)*.54;
  for(const side of [-1,1]){
   const x=w*(.5+.37*side),s=Math.min(46,(h-ART_BOTTOM-h*ART_TOP)*.21);
   ornament(ctx,x,stageMid,s,t.doodle,design.seed+side);
   for(let i=0;i<3;i++)star(ctx,x+(r()-.5)*75,stageMid+(r()-.5)*s*2,9+r()*9,t.doodle,r());
  }
- for(const position of [top,...bottom,left].filter(Boolean))paintGroup(ctx,position);
+ for(const group of groups)paintGroup(ctx,group);
  const footY=h-151;
  ctx.lineWidth=2;box(ctx,64,footY,w-128,110,26,t.panel,t.doodle+'85');
  write(ctx,'Asallam Sensei',92,footY+29,29,830,t.ink);
@@ -655,7 +621,7 @@ function makePngZip(entries){
  end.setUint32(12,directorySize,true);end.setUint32(16,offset,true);
  return new Blob([...parts,...directory,end.buffer],{type:'application/zip'});
 }
-const api={TZ,FORMATS,THEMES,dateKey,hash,rng,chooseDaily,manifestLists,makeCatalog,compose,stageLayout,placeCast,placeLeftCast,spriteCrop,cardLabel,rubyTokens,sentenceRuby,rubyRows,wrap,drawCard,socialCopy,copyText,makePngZip};
+const api={TZ,FORMATS,THEMES,dateKey,hash,rng,chooseDaily,manifestLists,makeCatalog,compose,uniformCast,spriteCrop,cardLabel,rubyTokens,sentenceRuby,rubyRows,wrap,drawCard,socialCopy,copyText,makePngZip};
 if(typeof module!=='undefined'&&module.exports){module.exports=api;return;}
 const $=id=>root.document.getElementById(id);
 const canvas=$('card'),images=new Map();
