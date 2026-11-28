@@ -31,7 +31,9 @@
     "fondo-anime-1-1-gelatina-de-uva-cien.webp",
     "fondo-anime-1-1-olas-de-leche-cien.webp",
     "fondo-anime-1-1-conchas-de-tiza-cien.webp",
-    "fondo-anime-1-1-aroma-de-te-cien.webp"
+    "fondo-anime-1-1-aroma-de-te-cien.webp",
+    "fondo-anime-1-1-joyitas-de-caliza-cien.webp",
+    "fondo-anime-1-1-trenzas-de-colores-cien.webp"
   ],
   "backgroundsByFormat": {
     "1-1": [
@@ -66,7 +68,9 @@
       "fondo-anime-1-1-gelatina-de-uva-cien.webp",
       "fondo-anime-1-1-olas-de-leche-cien.webp",
       "fondo-anime-1-1-conchas-de-tiza-cien.webp",
-      "fondo-anime-1-1-aroma-de-te-cien.webp"
+      "fondo-anime-1-1-aroma-de-te-cien.webp",
+      "fondo-anime-1-1-joyitas-de-caliza-cien.webp",
+      "fondo-anime-1-1-trenzas-de-colores-cien.webp"
     ],
     "3-4": [
       "fondo-anime-3-4-rainbow-vivo.webp",
@@ -99,7 +103,9 @@
       "fondo-anime-3-4-flor-de-amanecer-cien.webp",
       "fondo-anime-3-4-via-lactea-de-tiza-cien.webp",
       "fondo-anime-3-4-rayitas-de-batik-cien.webp",
-      "fondo-anime-3-4-burbujas-de-bizcocho-cien.webp"
+      "fondo-anime-3-4-burbujas-de-bizcocho-cien.webp",
+      "fondo-anime-3-4-lluvia-de-rodajitas-cien.webp",
+      "fondo-anime-3-4-nube-de-bombones-cien.webp"
     ],
     "9-16": [
       "fondo-anime-9-16-rainbow-vivo.webp",
@@ -132,7 +138,9 @@
       "fondo-anime-9-16-notitas-de-cereza-cien.webp",
       "fondo-anime-9-16-rombos-de-mandarina-cien.webp",
       "fondo-anime-9-16-caracolitos-en-menta-cien.webp",
-      "fondo-anime-9-16-lunas-de-frambuesa-cien.webp"
+      "fondo-anime-9-16-lunas-de-frambuesa-cien.webp",
+      "fondo-anime-9-16-chispas-de-sandia-cien.webp",
+      "fondo-anime-9-16-brillos-de-hortensia-cien.webp"
     ]
   },
   "characters": [
